@@ -91,14 +91,9 @@ L48, L54, L120.
 L77 and L132 (cat 200), L57 (people 200, from clinical perimetry), L76 (each cat eye reaches 90 degrees to its own side in perimetry). The second sentence holds once the app's human reference becomes 200 degrees (section 3.3).
 
 ```
-['m', 'Two eyes', 'Both of a cat’s eyes face forward, and their views overlap over 60 to 140 degrees in front, depending on how it is measured. Kittens learn to judge depth much faster with both eyes open than with one.'],
+['m', 'Two eyes and depth', 'Both of a cat’s eyes face forward, and their views overlap over 60 to 140 degrees in front, depending on how it is measured, so a cat can judge distance by comparing them. Its upright slit adds a second cue, because out-of-focus horizontal edges blur more than vertical ones, and small hunters with eyes close to the ground make the most of it.'],
 ```
-L76 (60, by behavioural perimetry), L144 (120 or more, Kahmann's figures as given by Walls 1942), L78 (about 140), L107 (binocular depth learning). **[unfinished]**: the gap between the behavioural and the anatomical figures is not settled.
-
-```
-['m', 'Depth', 'Upright slit pupils are most common in small hunters that ambush prey with their eyes close to the ground. For such an eye, how blurred a horizontal edge looks tells how far away it is.'],
-```
-L23, L24, L125.
+L76 (60, by behavioural perimetry), L144 (120 or more, Kahmann's figures as given by Walls 1942), L78 (about 140), L107 (kittens learn a depth task much faster with both eyes), L23, L24, L125 (the blur cue and short animals). **[unfinished]**: the gap between the behavioural and the anatomical figures for overlap is not settled.
 
 ```
 ['i', 'Distance in this view', 'A phone camera can’t measure distance, so this view assumes that things lower in the picture are closer. Tap the screen to move the focus.'],
@@ -111,9 +106,9 @@ No source: the app's own convention (`docs/SOURCES.md`).
 L80 and L134 (up to 7 times; 6 to 8 times), L81 (tapetum reflects up to 130 times more than the human fundus), L7 (people's threshold).
 
 ```
-['m', 'Movement', 'In bright light a person can spot slow movement about ten times better than a cat can. A cat notices that something moves once it crosses roughly 1 to 10 degrees of its view each second.'],
+['m', 'Movement', 'In bright light a cat notices that something is moving only when it moves about ten times faster than the slowest movement a person can see.'],
 ```
-L83, L136, L26 (the 1 to 10 range covers cats, rats and pigeons together), L15.
+L83, L136, L15; L26 gives 1 to 10 degrees a second for cats, rats and pigeons together, where people manage under 0.1.
 
 ```
 ['m', 'Flicker', 'A cat sees a flickering light as steady once it flickers faster than about 48 times a second, a little below the 60 at which people stop seeing flicker. This view leaves the pace of the picture as it is.'],
@@ -125,7 +120,7 @@ L25, L13.
 ```
 L100, L102, L127.
 
-That is thirteen rows. If the app keeps to twelve, the `Lens` row is the one to drop.
+Twelve rows.
 
 **The picture.**
 
@@ -167,7 +162,7 @@ L49.
 L138 (S cones in the cheetah, the bobcat and the leopard), L97 and L98 (S and M cone maps in lion, tiger, cheetah and lynx), L12.
 
 ```
-['m', 'Cheetah', 'A cheetah sees about a third as much detail as a person, more than twice as much as a house cat. Its cones for yellow-green light crowd into a band along the horizon, a pattern found in animals of open country.'],
+['m', 'Cheetah', 'A cheetah sees about a third as much detail as a person, and about three times as much as a house cat. Its cones for yellow-green light crowd into a band along the horizon, a pattern found in animals of open country.'],
 ```
 L94 (23 cycles per degree), L97.
 
@@ -316,12 +311,12 @@ L110 to L115, L40.
 L41 (note), L39.
 
 ```
-['i', 'Sharpness', 'No measurement of a fox’s sharpness was found. A red fox’s sharpest area holds about as many nerve cells as a dog’s, in a smaller eye, so this view guesses at about a tenth of a person’s sharpness.'],
+['i', 'Sharpness', 'No measurement of a fox’s sharpness was found. A red fox’s sharpest area packs its nerve cells about as densely as a dog’s, so this view guesses that a fox sees about as much detail as a typical dog.'],
 ```
-L39 (7,900 ganglion cells per mm²), L37 (dogs 6,400 to 14,400), L126.
+L39 (7,900 ganglion cells per mm²), L37 (dogs 6,400 to 14,400). Eye size, which also sets acuity (L126), was not found for foxes.
 
 ```
-['x', 'Compass', 'Red foxes hunting mice pounce mostly toward the north-east, and their pounces in that direction succeed far more often. The researchers think the foxes may be using the earth’s magnetic field. This view leaves that sense out.'],
+['x', 'Compass', 'Red foxes hunting mice pounce mostly toward the north-east, and the pounces that succeed cluster toward the north. The researchers think the foxes may be using the earth’s magnetic field. This view leaves that sense out.'],
 ```
 L117.
 
@@ -336,7 +331,7 @@ No source.
 |---|---|---|
 | `chip`, `who`, `cue` | 'Fox', 'a fox', 'Out-of-focus things smear up and down.' | the app's wording |
 | `fov` | unset | no source |
-| `cpd` | 6 | **invented** (the `i` row) |
+| `cpd` | 8 | **invented** (the `i` row): the typical dog's value (L29) |
 | `topoA`, `topoS` | 1 and 0.4 | L39, L42; weights **invented** |
 | `fall` | 1.2 | **invented** |
 | `pupil` | 'v'; *Urocyon* an oval (aspect 0.6, **invented**) | L51; L104 |
@@ -369,7 +364,7 @@ No source.
 | `dof` 26, `gain` 1.7, `sat` 0.8 | | the app's own choices; nothing to confirm |
 | `M` `DEUTAN` | | two cones **confirmed**; the matrix values remain **unsupported** (section 5) |
 
-`docs/SOURCES.md` lists "a central sharp spot in cats" among the entries made from memory; it now rests on Pasternak and Horn (1991, L88). Its second row (the 2013 cat figures) is a popular article whose figures the author says he checked with veterinary ophthalmologists (L132 to L136); the primary papers in this log should replace it.
+Walls (1942) judged cats colour-blind (L147); later recordings found two cone classes (L69, L70, L72), so his verdict is superseded. `docs/SOURCES.md` lists "a central sharp spot in cats" among the entries made from memory; it now rests on Pasternak and Horn (1991, L88). Its second row (the 2013 cat figures) is a popular article whose figures the author says he checked with veterinary ophthalmologists (L132 to L136); the primary papers in this log should replace it.
 
 ### 3.2 `dog` in `src/cam.a.js`
 
@@ -392,7 +387,7 @@ Every row that compares an animal with "people" or "a person" should use these f
 |---|---|---|
 | Sharpness | about 60 cycles per degree at the centre of gaze (a cycle is one dark and one light stripe). Comparisons are fractions of 60 | L1, L6 (retinal sampling about 60), L5 (optical limit about 70 with a 2 mm pupil), L3 (73 in a textbook table) |
 | Sharpness away from the centre | half by about 2.5 degrees, a tenth by about 7 degrees | L60, L2 |
-| Field of view | about 200 degrees side to side with both eyes; about 120 of them seen by both eyes; about 135 top to bottom | L57, L58, L59. Older secondary figures of 180 (L77, L132) and an overlap of 140 (L32 note) disagree with clinical perimetry |
+| Field of view | about 200 degrees side to side with both eyes; about 120 of them seen by both eyes; about 135 top to bottom | L57, L58, L59. Secondary figures of 180 for the whole field (L77, L132) disagree with clinical perimetry; 140 for the overlap is Kahmann's maximum (L145) |
 | Flicker | about 60 times a second at the centre of view in bright light; in very bright light at the edge of view, up to about 90 to 110; fewer in dim light | L13, L61, L62, L63 |
 | Colour | three kinds of cone, most sensitive near 420 (blue-violet), 530 (green) and 560 (yellow-green) nanometres; light from about 400 to 700 nanometres | L128, L129, L130 (M and L also L10, L11, L91, L92), L12, L9 |
 | Dim light | a fully dark-adapted person can just see a white surface at about a millionth of a candela per square metre, about the light of an overcast starry night | L7, L8 |
@@ -418,6 +413,8 @@ Three consequences for the code:
 - **Lion** (*Panthera leo*): round pupil (L103), large tapetum and eye size (L122, L123).
 - **Coyote** (*Canis latrans*): the second most recorded canid in the world and in Alachua, measured only for dim light (L43); everything else is borrowed from dogs and wolves.
 - **Island gray fox** (*Urocyon littoralis*): cone pigments (L114, L115), standing in for the gray fox.
+- **Spanish wildcat** (*Felis silvestris tartessia*): more than twice the domestic cat's cone density in the area centralis and about 70% more ganglion cells (L96). A wildcat setting inside `cat` would be sharper than the house cat once a number is found.
+- **Pallas's cat** (*Otocolobus manul*): a small cat with a round pupil (L124), the one small cat that should not take the slit.
 
 ## 5. Gaps and how to fill them
 
@@ -426,38 +423,40 @@ Three consequences for the code:
 | Acuity of lions, tigers, leopards, pumas | tiger eye 29.4 mm against the cat's 19.75 (L121, L75); lion eyes 27 to 32 mm (L122 note); the cheetah's 23 cycles per degree (L94) | scale the cat's 8 by the eye-length ratio: about 12 (done for `bigcat`, graded `i`). The per-species values in Veilleux and Kirk's online table would replace it |
 | Pupils of pumas, leopards, jaguars, cheetahs, coyotes, gray foxes **[unfinished]** | large carnivores have round pupils (L140); felid and canid trees of pupil shape (L55, L56); the 42 cm shoulder-height pattern (L23); gray fox oval (L104) | the large cats take a round pupil (`g`); the coyote takes the dog's round pupil by analogy; pending Banks et al. 2015 table S1 |
 | Bobcat vision | Eurasian lynx pupil and lens (L50); S cones in the bobcat (L138) | treat *Lynx* as one genus |
-| Cat binocular overlap **[unfinished]** | 60 degrees by perimetry (L76) and about 140 by other means (L78) | the row gives both; the schematic-eye papers would settle the optical figure |
+| Cat binocular overlap **[unfinished]** | 60 degrees by perimetry (L76), 120 or more by Kahmann's figures (L144) and about 140 in a review (L78) | the row gives the range; the schematic-eye papers would settle the optical figure |
 | Field of view of foxes, coyotes and big cats | dogs 240 (L79), cats 200 (L77) | foxes and coyotes have dog-like skulls, so 240 by analogy (`g`); the views leave the field unset until a source appears |
 | Flicker in foxes, coyotes and big cats | dog 75, cat 47.5 (L27, L25); nocturnal animals average lower flicker limits than day-active ones in one compilation (Inger et al. 2014, Results) | nothing better than "like dogs" and "like cats"; no value is drawn |
 | Dim-light acuity of cats and dogs **[unfinished]** | cat threshold up to 7 times lower (L80); dogs' rods in the area centralis (L119) | the night shift can borrow the human curve shifted by a factor of 7 for cats; Pasternak and Merigan (1981; no opened page gives its citation) and Neuhaus and Regenfuss (1967, wanted) measured it |
-| What the tapetum does to sharpness | tapetum present and large (L81, L87, L122) | Land and Nilsson chapter 6 (wanted) |
+| What the tapetum does to sharpness | tapetum present and large (L81, L87, L122); Walls (1942) says its scattered light can blur the dim-light image, less so in large eyes (L149) | a small softening at night, scaled by the light level (`i`); Land and Nilsson chapter 6 (wanted) would give a figure |
 | The colour matrix `DEUTAN` | the app's comment says it was entered from memory from Viénot, Brettel and Mollon (1999) | not checked here; the paper or a library that reproduces its matrices should be compared line by line. A matrix built from the cats' and dogs' own cone curves (L65, L66, L69, L70) and the camera's spectral response would be truer, and the engine track could compute it |
 | A third cone in cats | 500 nm photopic mechanism (L72), a midspectral input in dark-adapted cells (L71 note) | treated as unsettled; nothing drawn |
-| Fox acuity | red fox ganglion cells 7,900 per mm² (L39), dogs 6,400 to 14,400 (L37) | the `fox` view guesses 6 (`i`); Malkemper and Peichl (2018) estimated acuity in the full text (wanted) |
+| Fox acuity | red fox ganglion cells 7,900 per mm² (L39), dogs 6,400 to 14,400 (L37) | the `fox` view takes the typical dog's 8 (`i`); Malkemper and Peichl (2018) estimated acuity in the full text (wanted) |
 
 ## 6. Closed sources wanted
 
 The same list as `docs/views/wanted/cat-dog.jsonl`, most useful first.
 
-1. Banks MS et al. 2015, *Science Advances* 1: e1500391, supplementary table S1 (species and pupil shapes). Priority 1: sets the pupil for pumas, cheetahs, leopards, jaguars, coyotes and gray foxes.
+1. Banks MS, Sprague WW, Schmoll J, Parnell JAQ, Love GD 2015, *Science Advances* 1: e1500391, supplementary table S1 (species and pupil shapes). Priority 1: the pupil for pumas, cheetahs, leopards, jaguars, bobcats, coyotes and gray foxes.
 2. Neuhaus W, Regenfuss E 1967, Über die Sehschärfe des Haushundes bei verschiedenen Helligkeiten, cited by Beltran et al. 2014 as *Zentralbl Vergleich Physiol* 57: 137 to 146. Priority 1: dog acuity across light levels, for the night shift.
 3. Malkemper EP, Peichl L 2018, *Journal of Comparative Neurology*, doi 10.1002/cne.24493. Priority 1: acuity estimates for red and Arctic foxes, for `fox`.
-4. Veilleux CC, Kirk EC 2014, *Brain, Behavior and Evolution* 83: 43 to 53, online supplementary table 1. Priority 1: anatomical and behavioural acuity for the felids and canids in one list.
-5. Coile DC, Pollitz CH, Smith JC 1989, *Physiology & Behavior* 45: 1087 to 1092, doi 10.1016/0031-9384(89)90092-9. Priority 2: the dog's flicker limit and its light level.
-6. Loop MS, Berkley MA 1975, *Vision Research* 15: 555 to 561. Priority 2: the cat's flicker limit and method.
-7. Pasternak T, Merigan WH 1980, *Journal of Comparative and Physiological Psychology* 94: 943 to 952. Priority 2: the cat's motion threshold.
+4. Veilleux CC, Kirk EC 2014, *Brain, Behavior and Evolution* 83: 43 to 53, online supplementary table 1. Priority 1: acuity by species and method for the felids and canids.
+5. Coile DC, Pollitz CH, Smith JC 1989, *Physiology & Behavior* 45(6): 1087 to 1092, doi 10.1016/0031-9384(89)90092-9. Priority 2: the dog's flicker limit and its light level.
+6. Loop MS, Berkley MA 1975, *Vision Research* 15: 555 to 561 (cited by Inger et al. 2014, which prints the second author as Berkeley MS). Priority 2: the cat's flicker limit and method.
+7. Pasternak T, Merigan WH 1980, *Journal of Comparative and Physiological Psychology* 94: 943 to 952. Priority 2: the cat's own motion threshold.
 8. Clark DL, Clark RA 2013, *Experimental Eye Research* 116: 75 to 78, doi 10.1016/j.exer.2013.08.004. Priority 2: cat grating acuity against luminance.
 9. Clark DL, Clark RA 2016, *Experimental Eye Research* 153: 23 to 26, doi 10.1016/j.exer.2016.10.002. Priority 2: the cat's neutral point, for the colour matrix.
 10. Peichl L 1992, *Journal of Comparative Neurology*, doi 10.1002/cne.903240412. Priority 2: streak shapes by breed, for the weights of the nose setting.
 11. McGreevy P, Grassi TD, Harman AM 2003, *Brain, Behavior and Evolution*, doi 10.1159/000073756. Priority 2: the breed-by-breed table.
-12. Miller PE, Murphy CJ 1995, *Journal of the American Veterinary Medical Association* 207: 1623 to 1634, as cited by Byosiere et al. 2018 (the title was not shown in the part of the review that opened). Priority 2: the primary review behind the field and acuity figures.
-13. Odom JV, Bromberg NM, Dawson WW 1983, *American Journal of Physiology* 245: R637 to R641. Priority 2: the 12.6 cycles per degree.
-14. Murphy CJ, Mutti DO, Zadnik K, Ver Hoeve J 1997, *American Journal of Veterinary Research* 58: 414 to 418. Priority 2: behavioural dog acuity and defocus.
-15. Ahnelt PK et al. 2006, *Visual Neuroscience*, doi 10.1017/s095252380623342x. Priority 2: cone maps of lion, tiger, cheetah and lynx, for `bigcat` topography.
-16. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 5, doi 10.1093/acprof:oso/9780199581139.003.0005, and chapter 9, doi 10.1093/acprof:oso/9780199581139.003.0009; chapter 6 (mirrors in eyes) under the book's doi. Priority 2: slit-pupil and multifocal optics, the tapetum, eye movements.
-17. Gunter R, Harding HGW, Stiles WS 1951, *Nature* 168: 293, doi 10.1038/168293a0. Priority 3: the tapetum's reflectance spectrum, for the tint of eyeshine.
+12. Miller PE, Murphy CJ 1995, *Journal of the American Veterinary Medical Association* 207: 1623 to 1634, as cited by Byosiere et al. 2018 (the title was not shown in the part of the review that opened). Priority 2: the primary review behind the dog's field and acuity figures.
+13. Odom JV, Bromberg NM, Dawson WW 1983, Canine visual acuity: retinal and cortical field potentials evoked by pattern stimulation, *American Journal of Physiology* 245: R637 to R641 (cited by Beltran et al. 2014). Priority 2: the 12.6 cycles per degree.
+14. Murphy CJ, Mutti DO, Zadnik K, Ver Hoeve J 1997, Effect of optical defocus on visual acuity in dogs, *American Journal of Veterinary Research* 58: 414 to 418 (cited by Beltran et al. 2014). Priority 2: behavioural dog acuity and the cost of defocus.
+15. Ahnelt PK, Schubert C, Kübber-Heiss A, Schiviz AN, Anger E 2006, *Visual Neuroscience*, doi 10.1017/s095252380623342x. Priority 2: cone maps of lion, tiger, cheetah and lynx.
+16. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 5, Lens eyes on land, doi 10.1093/acprof:oso/9780199581139.003.0005. Priority 2: pupils and lenses of land vertebrates.
+17. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 6, Mirrors in animals (the tapetum), under the book's doi 10.1093/acprof:oso/9780199581139.001.0001. Priority 2: whether a tapetum costs sharpness.
+18. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 9, Movements of the eyes, doi 10.1093/acprof:oso/9780199581139.003.0009. Priority 3: background for a gaze effect.
+19. Gunter R, Harding HGW, Stiles WS 1951, Spectral reflexion factor of the cat's tapetum, *Nature*, doi 10.1038/168293a0. Priority 3: the tint of eyeshine.
 
-Not on the list because no opened page gave an exact citation: Gunter's 1951 paper on the cat's absolute threshold, Vakkur and Bishop's and Hughes's schematic eyes of the cat, Pasternak and Merigan's 1981 paper on luminance and spatial vision, and Bowmaker and Dartnall (1980), which Webvision cites (L128). They are worth finding.
+Not on the list because no opened page gave an exact citation: Gunter's 1951 paper on the cat's absolute threshold, Vakkur and Bishop's and Hughes's schematic eyes of the cat, Pasternak and Merigan's 1981 paper on luminance and spatial vision, Hughes's and Stone's maps of ganglion cells in the cat, and Bowmaker and Dartnall (1980), which Webvision cites (L128). They are worth finding.
 
 ## 7. Sources
 
@@ -502,8 +501,10 @@ Not on the list because no opened page gave an exact citation: Gunter's 1951 pap
 - Spector RH 1990. Visual fields. In Walker HK, Hall WD, Hurst JW (eds), *Clinical Methods*, 3rd edition, chapter 116. https://www.ncbi.nlm.nih.gov/books/NBK220/. **opened**.
 - Strasburger H, Rentschler I, Jüttner M 2011. Peripheral vision and pattern recognition: a review. *Journal of Vision* 11(5): 13. doi 10.1167/11.5.13. **opened** (Aston repository PDF).
 - Timney B 1990. Effects of brief monocular deprivation on binocular depth perception in the cat. *Visual Neuroscience* 5(3): 273 to 280. doi 10.1017/S0952523800000341. **opened** (Cambridge abstract).
+- Siniscalchi M, D'Ingeo S, Fornelli S, Quaranta A 2017. Are dogs red-green colour blind? doi 10.1098/rsos.170869 (the repository page does not name the journal; the DOI is a Royal Society Open Science one). **opened** (abstract, University of Bari repository).
 - Vasas V and 14 others 2024. Recording animal-view videos of the natural world using a novel camera system and software package. *PLOS Biology* 22(1): e3002444. doi 10.1371/journal.pbio.3002444. **opened**.
 - Veilleux CC, Kirk EC 2014. Visual acuity in mammals: effects of eye size and ecology. *Brain, Behavior and Evolution* 83: 43 to 53. doi 10.1159/000357830. **opened** (Karger PDF, main text).
+- Walls GL 1942. *The vertebrate eye and its adaptive radiation*. Bloomfield Hills, Michigan: Cranbrook Institute of Science. https://archive.org/details/vertebrateeyeits00wall (Biodiversity Heritage Library scan, no known copyright restrictions). **opened** in part, through the archive's search-inside service (scan pages 194, 249, 253 to 267, 318 to 319, 529); its colour-vision verdict on cats is out of date (L147).
 - Wikipedia, Gray fox (citing Alderton 1998). https://en.wikipedia.org/wiki/Gray_fox. **opened** (weak; used for one pupil line).
 - Williams RW, Cavada C, Reinoso-Suárez F 1993. Rapid evolution of the visual system: the Spanish wildcat and the domestic cat. *Journal of Neuroscience*. doi 10.1523/jneurosci.13-01-00208.1993. **opened** (abstract in the collection index).
 - Yang S 2015. Pupil shape linked to ecological niche. Berkeley News, 7 August 2015. https://news.berkeley.edu/2015/08/07/pupil-shape-and-ecological-niche/. **opened** (press release quoting the authors of Banks et al. 2015).
