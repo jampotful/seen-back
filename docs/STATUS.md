@@ -21,13 +21,13 @@ Updated 12 October 2026, 23:30 US Eastern. Whoever works on Regards updates this
 | The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | The trials so far are in `tools/world/EXPERIMENTS.md`. | A burst of its own, mostly on build machines. |
 | The full database for the world | `docs/tracks/worlddb.md` | none yet | Not started. | A burst of its own, mostly on build machines. |
 
-## Bursts proposed (revised 12 October, 23:55)
+## The shape of the work (settled 13 October, 00:00)
 
-One view at a time, end to end, starting with the jumping spider: research only what the next view needs, build it behind `?try=<view>`, and let the owner judge it on a phone before the next. Each view adds its mechanism to the engine for the views after it.
+Views are modules times specs. The engine gains about ten sensing mechanisms as general modules; a view is then one spec file (modules, parameters, rows), which is cheap to add once the modules exist. Three resources, each for what it does best: the plan's allowance for engine modules, view design and verification research, every five-hour window; the API from build machines for a one-time extraction pipeline over the literature collection (Haiku through the Batch API, every quote checked by script), whose table the research agents search instead of reading papers; and people, since the owner judges each view on a phone through `?try=<view>` with a tuning panel, and a specialist reviews the jumping spider view. Design comes before building: the atlas gives two or three ways to draw each mechanism and the owner picks.
 
-1. 00:30, 13 October, two agents: the engine (Opus; `docs/tracks/prompts/burst1-engine.md`) and the jumping spider research (Sonnet; `docs/tracks/prompts/burst1-jumper.md`). The owner reads the usage meter before and after, so that later bursts can be sized.
-2. The owner tries `?try=jumper` on a phone and decides on the three finished units' proposals; the engine takes the research values; a targeted audit of the records behind the proposed corrections, which are then applied.
-3. Onward: the next view by reach and by how distinct its mechanism is (candidates: birds' colour by family, web spiders' vibration, bats' echolocation, ticks' heat), each as research, engine, phone, then ship.
+- **Burst 1** (the first window after 00:30, 13 October): the engine with the attention module, the jumper view and the tuning panel (`docs/tracks/prompts/burst1-engine.md`); the jumping spider research (`docs/tracks/prompts/burst1-jumper.md`); the pipeline writer.
+- **Burst 2:** the atlas; the owner's phone verdict fed back; the three finished units' proposals decided, audited and applied.
+- **Onward:** one module per window or two, then the views it unlocks as specs; the gallery when there are enough views to compare; one pass over all the rows at the end; the recognizer's group head and the world database on build machines overnight.
 
 ## Known limits
 

@@ -9,8 +9,9 @@ Read `docs/tracks/engine.md` for the code, the checks and the rules. This file n
 
    Read the map back asynchronously, so the frame never waits.
 2. **The `jumper` view**, reached only with `?try=jumper`, following `docs/views/drafts/jumper.md` and `docs/views/evidence/jumper.jsonl`. The research agent working at the same time pushes better values to `research/jumper`; fetch it once near the end. Its rows are placeholders graded `i`.
-3. **Checks.** Every existing check still passes. Add a check that `?try=jumper` draws with no GL errors and that the gaze moves to a moving target in a test clip.
-4. **Report** frame times from the About block for today's views and for `jumper` in headless Chromium. These numbers are only for comparing views with each other.
+3. **A tuning panel**, shown only with `?try=<view>&tune=1`: sliders for the view's parameters (the attention module's and the existing fields'), applied live, with a button that copies the current values as JSON. The owner tunes on a phone and sends the values back; most iteration then costs no agent time.
+4. **Checks.** Every existing check still passes. Add a check that `?try=jumper` draws with no GL errors and that the gaze moves to a moving target in a test clip.
+5. **Report** frame times from the About block for today's views and for `jumper` in headless Chromium. These numbers are only for comparing views with each other.
 
 Not in this burst: the render gallery, new sensor inputs (microphone, motion sensors), other views.
 
