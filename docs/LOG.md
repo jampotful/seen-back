@@ -4,7 +4,7 @@ Newest first. Times are US Eastern.
 
 ## 13 October 2026
 
-- **11:00** Build 24 (the engine track, burst 2): views are data, and today's fourteen views draw exactly as in build 23. Every view is a spec in `views/<key>.json`, checked by `tools/views/check_spec.py` and inlined by `build.py`; the fourteen offered views were converted by script and match build 23 field by field and pixel by pixel on a still photo. Everything new is reached only with `?try=`: the jumping spider view (`?try=jumper`, every parameter graded from the jumper parameter table), the reef, shark and spider prototypes, and the specs track's fish, fungus, sea life, slime mould and snail. `&tune=1` adds the tuning panel and the compare slider, and `&draw=` switches the jumper's drawing options (stamps, strip, face; palm; pond). The light module reads the picture's mean light without waiting. `docs/ENGINE.md` describes it all.
+- **11:25** Build 25 (the engine track, burst 2): views are data, and today's fourteen views draw exactly as in build 23. Every view is a spec in `views/<key>.json`, checked by `tools/views/check_spec.py` and inlined by `build.py`; the fourteen offered views were converted by script and match build 23 field by field and pixel by pixel on a still photo. Everything new is reached only with `?try=`: the jumping spider view (`?try=jumper`, every parameter graded from the jumper parameter table), the reef, shark and spider prototypes, and the specs track's fish, fungus, sea life, slime mould and snail. `&tune=1` adds the tuning panel and the compare slider, and `&draw=` switches the jumper's drawing options (stamps, strip, face; palm; pond). The light module reads the picture's mean light without waiting. `docs/ENGINE.md` describes it all.
 
 ## 12 October 2026
 
