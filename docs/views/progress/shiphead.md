@@ -14,3 +14,5 @@ Update 13:28 (stopped at 90 minutes; NOT merged to main)
 - Build 28: `tools/fusion/parity.py` ok (3,337 cases, 0 differ; 9 photos). `check_rec.js` (SLOW=3): ok for all sections except `service` and `away` (did not finish, machine load 5 on two cores) and `zone` (FAILED; its five readings look as designed, so a further condition in the check failed; the detail was not read).
 - Still to do: rerun `check_rec.js service away zone` alone on a quiet machine, read why `zone` fails, rerun check4 `record`/`typed` on build 28, then merge.
 - Fresh Alachua photos: none can be made here.
+
+Burst 4 (13 October 2026): done. Merged main (build 29) into the branch, numbered build 30, fixed `known` shadowing (renamed `knownKind` in src/cam.rec.js), fixed the stale `zone` check (names are lowercase since build 16), `lent` check waits for the look. All check_rec sections ok, check4 typed/record/lent/viewer/edge/lex/sweep/film ok (lent needs SLOW=10 under load), parity ok (3,337 cases, 0 differ). Merged to main.
