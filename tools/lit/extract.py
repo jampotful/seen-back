@@ -395,7 +395,6 @@ def request_params(p):
     return {
         "model": MODEL,
         "max_tokens": MAX_TOKENS,
-        "temperature": 0,
         "system": [{"type": "text", "text": SYSTEM_PROMPT,
                     "cache_control": ({"type": "ephemeral", "ttl": CACHE_TTL} if CACHE_TTL != "5m" else {"type": "ephemeral"})}],
         "messages": [{"role": "user", "content": p["header"] + p["text"]}],
