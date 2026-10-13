@@ -21,13 +21,13 @@ Updated 12 October 2026, 23:30 US Eastern. Whoever works on Regards updates this
 | The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | The trials so far are in `tools/world/EXPERIMENTS.md`. | A burst of its own, mostly on build machines. |
 | The full database for the world | `docs/tracks/worlddb.md` | none yet | Not started. | A burst of its own, mostly on build machines. |
 
-## Bursts proposed (revised 12 October, 23:40)
+## Bursts proposed (revised 12 October, 23:55)
 
-Spend first where the outcome is decided, push mechanical work onto build machines, keep every context small, and use a model fitted to each job (Haiku for extraction and quote checks, Sonnet for research, Opus for design, engine and audits).
+One view at a time, end to end, starting with the jumping spider: research only what the next view needs, build it behind `?try=<view>`, and let the owner judge it on a phone before the next. Each view adds its mechanism to the engine for the views after it.
 
-1. 00:31, 13 October: the senses atlas (Opus); the engine's render gallery and attention module, starting the jumping spider view from the draft and log on `main` (Opus); and the build-machine jobs (Sonnet): a measurement index over `pub/lit-t1` (every sentence with a value and a unit, with its source), the published cross-species compilations, and record shares from `pub/data-world`.
-2. The jumping spider and other spider research, searching the measurement index first; more engine modules.
-3. Onward, one burst at each five-hour reset: research filled in just in time for each engine module, then audits by agents that did not write the work, a gallery review by the owner, one pass over all the rows, and builds.
+1. 00:30, 13 October, two agents: the engine (Opus; `docs/tracks/prompts/burst1-engine.md`) and the jumping spider research (Sonnet; `docs/tracks/prompts/burst1-jumper.md`). The owner reads the usage meter before and after, so that later bursts can be sized.
+2. The owner tries `?try=jumper` on a phone and decides on the three finished units' proposals; the engine takes the research values; a targeted audit of the records behind the proposed corrections, which are then applied.
+3. Onward: the next view by reach and by how distinct its mechanism is (candidates: birds' colour by family, web spiders' vibration, bats' echolocation, ticks' heat), each as research, engine, phone, then ship.
 
 ## Known limits
 
