@@ -56,11 +56,11 @@ Nothing measured about the anhinga. A great cormorant sees underwater about as w
 
 - `['m', 'Field of view', 'A red-tailed hawk sees 278 degrees around its head with 33 degrees of overlap, a Cooper\'s hawk 300 with 36.']` O'Rourke et al. 2010. A red-shouldered hawk borrows the red-tailed hawk's at `g` (same genus, rule 3), naming the relative.
 - `['m', 'Looking sideways', 'You glance about every few seconds. A Cooper\'s hawk turns its head most often, a red-tailed hawk waits longest between turns, and a kestrel bobs its head forward and back most.']` O'Rourke et al. 2010 Hawk Eyes II (eye_movement; three records, rates in the paper's Figure 1 only).
-- `['m', 'Colour', 'You have a violet-sensitive short-wave cell, not an ultraviolet one.']` Lind et al. 2013 (buzzard, sparrowhawk, red kite, kestrel), Odeen and Hastad 2013 (Mississippi kite, Pacific baza). Carry to the osprey needs the exception in `carry.jsonl`.
+- `['m', 'Colour', 'You have a violet-sensitive short-wave cell. Ultraviolet adds little to what you see.']` Lind et al. 2013 (buzzard, sparrowhawk, red kite, kestrel), Odeen and Hastad 2013 (Mississippi kite, Pacific baza). Carry to the osprey needs the exception in `carry.jsonl`.
 
 ### `hawk`, kites, osprey and eagles
 
-- Kites. The row on two sharp spots is blocked: a black kite has one fovea (round 1, Potier et al. 2016). Replace with "you have one sharp spot per eye" for Milvus only and nothing for snail or swallow-tailed kites (`i`).
+- Kites. The row on two sharp spots is blocked: a black kite has one fovea (round 1, Potier et al. 2016). Replace with "you have one sharp spot per eye" for Milvus only and a guess (`i`) for snail and swallow-tailed kites.
 - Osprey and bald eagle: no measurement of any visual trait was found in the collection. The bald eagle appears only in a head-movement comparison (Tucker 2000, round 1: long intervals between head movements) and in eye-measurement and ERG papers that are on the wanted list.
 
 ### `wader`, herons and egrets
@@ -71,7 +71,7 @@ Nothing measured about the anhinga. A great cormorant sees underwater about as w
 
 ### `wader`, ibises, storks, limpkin, cranes
 
-- Ibises: violet type by sequence (glossy ibis, roseate spoonbill). A white ibis is `g` by genus-level carry from Plegadis? No: Eudocimus is a different genus, so this is an exception proposal, listed as open in `carry.jsonl` ... not yet proposed; status `i`.
+- Ibises: violet type by sequence (glossy ibis, roseate spoonbill). A white ibis (genus Eudocimus) is a different genus from both, so its colour row stays `i` until an exception from the Threskiornithidae sequences is accepted; the owner may add one.
 - Head movement: no evidence for ibises, storks or limpkins. Replace the row with a sentence about what the view does for those species.
 - Cranes: whooping crane pigments are on the wanted list; blue crane binocular field is 21.5 degrees (round 1, Portugal et al. 2026). Sandhill crane `i`.
 
