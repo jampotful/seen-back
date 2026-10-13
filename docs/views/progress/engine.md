@@ -11,6 +11,11 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 - The floor harness (`node test/check4.js floor`, `tools/views/delta_e.py`), on a build machine through `run/engines/linux-floor-jumper1`; results return on the `ci` branch.
 - Specs from `agent/specs` for fish, fungus, sealife, slime and snail included behind `?try=`. Its shark and spider are not taken: the prototypes' specs here keep their effects (salience, shimmer, sweep, ripples), which the specs track's drafts leave out.
 
+- Build 25 merged to `main` (13 Oct, about 11:50): every check in `test/check4.js` (typed, lex, record, lent, viewer, edge, sweep, film, try, still) and every section of `test/rec/check_rec.js` passed on the merged build. `lent` failed three times and passed three times on the same page: it waits a fixed 1.2 s after a tap, which is short on a loaded machine.
+- `docs/views/floor.json` holds the first floor run (engines run 72, 21 parameters of the jumper view, three values each).
+
 ## Next
-1. Copy the floor results from the `ci` branch into `docs/views/floor.json` when the run finishes.
-2. Merge to `main` as build 24 once the try checks pass.
+1. A second floor run is on `run/engines/linux-floor-jumper2` (it skips the parameters already measured). Copy its `floor.json` from the `ci` branch (`runs/engines/<run>-linux-chromium/floor.json`) into `docs/views/floor.json` under `floor.jumper`, adding to what is there, and record the run in `runs`.
+2. Parameters that act only on movement read as invisible on the still harness; a moving-clip version of the floor is the next step for them.
+3. The specs track's shark and spider were not taken (the prototypes' specs keep their effects); reconcile the two when that track finishes.
+4. Modules not built: `spectrum` (matrices from pigment peaks), the clock, sun and moon of `light`, and everything after `gaze` in the design's order.
