@@ -236,9 +236,9 @@ L79, L157, L32, L33, L57, L58.
 L27, L28, L85, L13. As `docs/SOURCES.md` says of the other views, a higher flicker limit does not show that time feels slower; the slowed picture is a way of drawing.
 
 ```
-['m', 'Slow movement', 'A dog notices that something moves once it crosses about three-quarters of a degree of its view each second, about the speed of a person walking 75 metres away. People notice movement more than seven times slower.'],
+['m', 'Slow movement', 'A dog notices that something moves once it crosses about three-quarters of a degree of its view each second, about the speed of a person walking 75 metres away, and people notice movement more than seven times slower. Movement still helps a dog pick out distant things: police dogs recognised a moving object 810 to 900 metres away, and a still one only within 585.'],
 ```
-L34, L15. A walker at 1 metre a second, 75 metres away, crosses 0.76 degrees a second (my arithmetic).
+L34, L15, L152 (Schmid's police dogs, as reported by Walls 1942; repeated in L84). A walker at 1 metre a second, 75 metres away, crosses 0.76 degrees a second (my arithmetic).
 
 ```
 ['m', 'Dim light', 'A dog’s retina holds more rods than a person’s, even in its sharpest area, and most dogs have a mirror-like tapetum behind the retina that gives light a second pass. In a study of 539 dogs, the tapetum was full-sized in seven dogs in ten and missing in about two in a hundred. This view brightens the shadows a little.'],
@@ -251,9 +251,9 @@ L119, L87, L43 (coyotes see by the natural light of many nights). The dog's adva
 L106, L105.
 
 ```
-['m', 'Movement at a distance', 'In a study of fourteen police dogs, the best recognised a moving object 810 to 900 metres away, and the same object standing still only within 585 metres.'],
+['x', 'Magnets', 'Most dogs in one study learned to find a magnet hidden in a sealed jar, and dogs’ blue-sensitive cones carry cryptochrome, a molecule that birds may use to sense the earth’s magnetic field. A cat’s cones lack it. This view leaves magnetism out.'],
 ```
-L152 (Schmid's study as reported by Walls 1942; Miller 2001 repeats it, L84). Movement makes a distant object easier to pick out, for people as for dogs; the dog's threshold for slow movement is still higher than a person's (row "Slow movement").
+L176 (13 of 16 dogs above chance), L177 (cryptochrome in the S cones of all canids studied; felids negative).
 
 ```
 ['i', 'Distance in this view', 'A phone camera can’t measure distance, so this view assumes that things lower in the picture are closer. Tap the screen to move the focus.'],
@@ -311,14 +311,19 @@ L110 to L115, L40.
 L41 (note), L39.
 
 ```
-['i', 'Sharpness', 'No measurement of a fox’s sharpness was found. A red fox’s sharpest area packs its nerve cells about as densely as a dog’s, so this view guesses that a fox sees about as much detail as a typical dog.'],
+['m', 'Sharpness', 'Maps of the nerve cells in a red fox’s retina suggest that it sees about a tenth as much detail as a person. This view is blurred to match.'],
 ```
-L39 (7,900 ganglion cells per mm²), L37 (dogs 6,400 to 14,400), L162 (foxes have rather large eyes yet low acuity, like other rod-rich carnivores of dog size). No measured eye size for foxes was found.
+L173 (6.3 cycles per degree from ganglion-cell maps), L39, L162 (rather large eyes, low acuity, like other rod-rich carnivores of dog size). An anatomical estimate; no behavioural measurement was found.
 
 ```
-['x', 'Compass', 'Red foxes hunting mice pounce mostly toward the north-east, and the pounces that succeed cluster toward the north. The researchers think the foxes may be using the earth’s magnetic field. This view leaves that sense out.'],
+['x', 'Compass', 'Red foxes hunting mice pounce mostly toward the north-east, and the pounces that succeed cluster toward the north. A fox’s blue-sensitive cones carry cryptochrome, a molecule that birds may use to sense the earth’s magnetic field. This view leaves that sense out.'],
 ```
-L117.
+L117, L175, L177.
+
+```
+['x', 'Hearing', 'A red fox hears sounds from about 51 to 48,000 vibrations a second, and at 4,000 a second its hearing is keener than a house cat’s. This view leaves sound out.'],
+```
+L174.
 
 ```
 ['i', 'Field of view, flicker and depth', 'No measurement was found for foxes. This view keeps the field your camera gives and assumes that things lower in the picture are closer.'],
@@ -331,7 +336,7 @@ No source.
 |---|---|---|
 | `chip`, `who`, `cue` | 'Fox', 'a fox', 'Out-of-focus things smear up and down.' | the app's wording |
 | `fov` | unset | no source |
-| `cpd` | 8 | **invented** (the `i` row): the typical dog's value (L29) |
+| `cpd` | 6 | L173 (6.3, anatomical) |
 | `topoA`, `topoS` | 1 and 0.4 | L39, L42; weights **invented** |
 | `fall` | 1.2 | **invented** |
 | `pupil` | 'v'; *Urocyon* an oval (aspect 0.6, **invented**) | L51; L104 |
@@ -460,7 +465,7 @@ Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best
 
 - **Domestic cat** (*Felis catus*): acuity by several methods (L17, L18, L19, L88, L89), cone and rod peaks (L69 to L72), pupil range and shape (L20, L21), lens (L48), refraction and eye length (L75), flicker (L25), lens transmission of ultraviolet (L100). Enough for the `cat` view as written.
 - **Domestic dog** (*Canis lupus familiaris*): acuity in bright and dim light, with a pug and whippets compared (L166 to L169), earlier acuity estimates (L29 to L31, L46), cone and rod peaks (L65, L66, L108, L109, L116), ganglion-cell topography by breed (L36, L37), fovea-like patch (L44, L47), flicker (L27), motion thresholds (L34, L35), tapetum by breed (L87), lens ultraviolet (L101). A profile with the nose setting is ready.
-- **Red fox** (*Vulpes vulpes*): pupil and lens (L51), cones (L40, L110, L111), topography (L39, L41), compass-aligned pouncing (L117). The `fox` view rests on it.
+- **Red fox** (*Vulpes vulpes*): pupil and lens (L51), cones (L40, L110, L111), topography and an anatomical acuity of 6.3 cycles per degree (L39, L41, L173), hearing from 51 Hz to 48 kHz (L174), compass-aligned pouncing and cryptochrome in its S cones (L117, L175). The `fox` view rests on it.
 - **Arctic fox** (*Vulpes lagopus*): stronger streak and twice the red fox's central cone density (L42, L112, L113). A profile with `topoS` near 1 would follow from L42 once its acuity is read (wanted: Malkemper and Peichl 2018).
 - **Wolf** (*Canis lupus*): pronounced streak and about 200,000 ganglion cells (L38), round pupil (L52). It fits `dog` with the long-nose setting fixed.
 - **Cheetah** (*Acinonyx jubatus*): 23 cycles per degree (L94) and a horizontal cone streak (L97). It deserves its own setting inside `bigcat`.
@@ -485,7 +490,7 @@ Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best
 | What the tapetum does to sharpness | tapetum present and large (L81, L87, L122); Walls (1942) says its scattered light can blur the dim-light image, less so in large eyes (L149) | a small softening at night, scaled by the light level (`i`); Land and Nilsson chapter 6 (wanted) would give a figure |
 | The colour matrix `DEUTAN` | the app's comment says it was entered from memory from Viénot, Brettel and Mollon (1999) | not checked here; the paper or a library that reproduces its matrices should be compared line by line. A matrix built from the cats' and dogs' own cone curves (L65, L66, L69, L70) and the camera's spectral response would be truer, and the engine track could compute it |
 | A third cone in cats | 500 nm photopic mechanism (L72), a midspectral input in dark-adapted cells (L71 note) | treated as unsettled; nothing drawn |
-| Fox acuity | red fox ganglion cells 7,900 per mm² (L39), dogs 6,400 to 14,400 (L37) | the `fox` view takes the typical dog's 8 (`i`); Malkemper and Peichl (2018) estimated acuity in the full text (wanted) |
+| Fox acuity | an anatomical estimate of 6.3 cycles per degree for the red fox (L173) | no behavioural value; the Arctic fox's figure is in Malkemper and Peichl (2018, wanted) |
 
 ## 6. Closed sources wanted
 
@@ -524,6 +529,7 @@ Not on the list because no opened page gave an exact citation: Vakkur and Bishop
 - Banks MS, Sprague WW, Schmoll J, Parnell JAQ, Love GD 2015. Why do animal eyes have pupils of different shapes? *Science Advances* 1: e1500391. doi 10.1126/sciadv.1500391. **opened** (eScholarship PDF and the Durham repository copy).
 - Beltran WA and 13 others 2014. Canine retina has a primate fovea-like bouquet of cone photoreceptors. *PLoS ONE* 9(3): e90390. doi 10.1371/journal.pone.0090390. **opened**.
 - Bognár Z, Szabó D, Deés A, Kubinyi E 2021. Shorter headed dogs ... form eye contact faster. *Scientific Reports* 11. doi 10.1038/s41598-021-88702-w. **opened** (DOAJ record with abstract).
+- Bräuer J, Mann V, Erlacher J 2025. Eyes or nose: domestic dogs prefer vision over olfaction when searching for food. *Journal of Comparative Psychology*. doi 10.1037/com0000415. **opened** (abstract in the collection index).
 - Byosiere S-E, Chouinard PA, Howell TJ, Bennett PC 2018. What do dogs (*Canis familiaris*) see? *Psychonomic Bulletin & Review* 25(5): 1798 to 1813. doi 10.3758/s13423-017-1404-7. **opened**; its figures from Miller and Murphy (1995), Murphy et al. (1997), Tanaka et al. (2000), Healy et al. (2013), Duke-Elder (1958) and Walls (1942) are **secondary**.
 - Caves EM, Brandley NC, Johnsen S 2018. Visual acuity and the evolution of signals. *Trends in Ecology & Evolution* 33(5): 358 to 372. doi 10.1016/j.tree.2018.03.001. **opened** (owner's Drive; main text only).
 - Červený J, Begall S, Koubek P, Nováková P, Burda H 2011. Directional preference may enhance hunting accuracy in foraging foxes. *Biology Letters* 7(3): 355 to 357. doi 10.1098/rsbl.2010.1145. **opened** (abstract at the Czech Academy of Sciences repository).
@@ -546,11 +552,14 @@ Not on the list because no opened page gave an exact citation: Vakkur and Bishop
 - Lind O, Milton I, Andersson E, Jensen P, Roth LSV 2017. High visual acuity revealed in dogs. *PLoS ONE* 12(12): e0188557. doi 10.1371/journal.pone.0188557. **opened**.
 - Lõoke M, Kanizsár O, Battaglini L, Guerineau C, Mongillo P, Marinelli L 2020. Are dogs good at spotting movement? *Current Zoology* 66(6): 699 to 701. doi 10.1093/cz/zoaa044. **opened**; its cat and human figures are **secondary**.
 - Malkemper EP, Peichl L 2018. Retinal photoreceptor and ganglion cell types and topographies in the red fox and Arctic fox. *Journal of Comparative Neurology*. doi 10.1002/cne.24493. **opened** (abstract in the collection index).
+- Malkemper EP 2017. The sensory biology of the red fox: hearing, vision, magnetoreception. Doctoral thesis, University of Duisburg-Essen (DuEPublico). **opened** (abstract in the collection index).
 - Malmström T, Kröger RHH 2006. Pupil shapes and lens optics in the eyes of terrestrial vertebrates. *Journal of Experimental Biology* 209: 18 to 25. doi 10.1242/jeb.01959. **opened**.
 - McGreevy P, Grassi TD, Harman AM 2003. A strong correlation exists between the distribution of retinal ganglion cells and nose length in the dog. *Brain, Behavior and Evolution*. doi 10.1159/000073756. **opened** (abstract in the collection index).
+- Martini S, Begall S, Findeklee T, Schmitt M, Malkemper EP, Burda H 2018. Dogs can be trained to find a bar magnet. *PeerJ*. doi 10.7717/peerj.6117. **opened** (full text on disk).
 - Meshida K and 4 others 2025. Split insertions of the oblique extraocular muscles in Carnivora. *The Anatomical Record*. doi 10.1002/ar.70016. **opened** (abstract in the collection index).
 - Miller PE 2001. Vision in animals: what do dogs and cats see? Waltham/OSU Symposium, Small Animal Ophthalmology. https://www.vin.com/doc/?id=3844144. **opened** (proceedings by a veterinary ophthalmologist; used as a review).
 - Mowat FM and 6 others 2008. Topographical characterization of cone photoreceptors and the area centralis of the canine retina. *Molecular Vision* 14: 2518 to 2527. **opened** (abstract on the University of Wisconsin ophthalmology page).
+- Nießner C, Denzau S, Malkemper EP, Gross JC, Burda H, Winklhofer M, Peichl L 2016. Cryptochrome 1 in retinal cone photoreceptors suggests a novel functional role in mammals. *Scientific Reports*. doi 10.1038/srep21848. **opened** (full text on disk).
 - Neitz J, Geist T, Jacobs GH 1989. Color vision in the dog. *Visual Neuroscience* 3(2): 119 to 125. doi 10.1017/S0952523800004430. **opened** (Cambridge abstract).
 - Owens CD and 4 others 2021. Keratometry, biometry, and prediction of intraocular lens power in adult tigers. *American Journal of Veterinary Research*. doi 10.2460/ajvr.21.04.0060. **opened** (abstract in the collection index).
 - Pasternak T, Horn K 1991. Spatial vision of the cat: variation with eccentricity. *Visual Neuroscience* 6(2): 151 to 158. doi 10.1017/S0952523800010531. **opened** (Cambridge abstract).
