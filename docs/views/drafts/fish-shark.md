@@ -2,7 +2,7 @@
 
 Started 13 October 2026 at 01:47 UTC (21:47 EDT on 12 October). The evidence log is `docs/views/evidence/fish-shark.jsonl`, cited below as "log N" for its line N, and the wanted list is `docs/views/wanted/fish-shark.jsonl`. This sheet builds on `docs/views/sheets/fish.md` and its audit, and goes further where the two disagree.
 
-**Where the reading came from.** The literature collection (`pub/lit-t1`, topics `fish` and `sharks-rays`: 8,034 works, 677 full texts) was read on disk first. From the owner's library, Land and Nilsson's *Animal Eyes* (2nd edition, 2012) came through only in part: the front matter, chapters 1 and 2 (light and vision, including light in water, colour and polarization) and chapter 3 up to p. 66. Chapters 4 to 9, among them "Aquatic eyes: the evolution of the lens", did not come through. On the web, Europe PMC refused with HTTP 429 at 01:53 UTC and was not used again; PubMed failed to fetch; the Journal of Experimental Biology's pages asked for a robot check; GBIF's API and Crossref were refused by this machine's network policy for direct requests, and GBIF answered through the fetch tool for six family lookups. Abstracts quoted as "collection index" are the OpenAlex abstracts stored in the collection, which the brief counts as opened.
+**Where the reading came from.** The literature collection (`pub/lit-t1`, topics `fish` and `sharks-rays`: 8,034 works, 677 full texts) was read on disk first. From the owner's library, Land and Nilsson's *Animal Eyes* (2nd edition, 2012) came through only in part: the front matter, chapters 1 and 2 (light and vision, including light in water, colour and polarization) and chapter 3 up to p. 66. Chapters 4 to 9, among them "Aquatic eyes: the evolution of the lens", did not come through. On the web, Europe PMC refused with HTTP 429 at 01:53 UTC and was not used again; PubMed failed to fetch; the Journal of Experimental Biology's pages asked for a robot check; GBIF's API and Crossref were refused by this machine's network policy for direct requests, and GBIF answered through the fetch tool for the family lookups and facets described in section 1; PubMed Central article pages opened through the same tool late in the session (its search page is barred to robots). Abstracts quoted as "collection index" are the OpenAlex abstracts stored in the collection, which the brief counts as opened.
 
 ## 1. Scope
 
@@ -17,7 +17,7 @@ Started 13 October 2026 at 01:47 UTC (21:47 EDT on 12 October). The evidence log
 **Where the views should split.** One picture would be false for large shares of these records along three lines.
 
 1. **Sharks against rays.** Every shark studied has one kind of cone, so a shark sees no colour (logs 19, 20). Most rays have two cone classes and some have told colours apart in tests (logs 18, 26, 139), while skates have rods only (log 27). The eyes also face differently: rays share a view overhead and some see the whole circle (logs 94, 95), and their electric sense crowds the underside around the mouth (logs 46, 131). Rays flicker slower than sharks (logs 122 to 125). **Line: by order.** `shark` takes the eight shark orders (60,349 records, 2.2% of fish records). `ray` takes the rays, skates and chimaeras (72,046 records, 2.6%).
-2. **Fresh water against the sea.** The light differs more than any eye does. Tea-coloured lakes soak up blue and leave red light, and the darkest leave only a small patch of red light overhead (logs 71, 72); clear water turns blue with depth, and sea water removes red within 10 to 20 metres (logs 4, 72, 132). The eyes follow the water: freshwater fish shift their pigments toward red, often with vitamin A2 (logs 79, 114, 142), while reef fish carry ultraviolet and blue cones and little red sensitivity (logs 62, 108, 110). Reef fish also include the families whose two eyes move independently, each with a fovea (logs 74, 75), which no freshwater minnow, catfish, gar or salmon has. **Line: by family, by the habitat where the family's records are made.** With the families and orders classified as below, `fish` takes 747,083 records (27.0% of fish records) and the new view `reef` takes 1,677,618 (60.7%). Groups with members in both waters hold 160,480 records (5.8%: scorpionfish and sculpins, temperate basses, sticklebacks, silversides, smelts, milkfish, sleepers, grunters), and small perch-order families not yet looked up hold 45,833 (1.7%); both need a species-level habitat flag, which the full database can carry. In Alachua the rule puts 997 records (97.0%) with `fish` and 27 with `reef`, and 18 of those 27 are wrong: the gizzard and threadfin shads live in Florida's fresh water, so the herring family needs that flag too. The other nine (six Hogchokers, a mullet, a needlefish and a burrfish) are coastal fish that enter rivers.
+2. **Fresh water against the sea.** The light differs more than any eye does. Tea-coloured lakes soak up blue and leave red light, and the darkest leave only a small patch of red light overhead (logs 71, 72); clear water turns blue with depth, and sea water removes red within 10 to 20 metres (logs 4, 72, 132). The eyes follow the water: freshwater fish shift their pigments toward red, often with vitamin A2 (logs 79, 114, 142), while many reef fish carry ultraviolet or violet and blue cones and little red sensitivity (logs 62, 108, 110, 171). Reef fish also include the families whose two eyes move independently, each with a fovea (logs 74, 75), which no freshwater minnow, catfish, gar or salmon has. **Line: by family, by the habitat where the family's records are made.** With the families and orders classified as below, `fish` takes 747,083 records (27.0% of fish records) and the new view `reef` takes 1,677,618 (60.7%). Groups with members in both waters hold 160,480 records (5.8%: scorpionfish and sculpins, temperate basses, sticklebacks, silversides, smelts, milkfish, sleepers, grunters), and small perch-order families not yet looked up hold 45,833 (1.7%); both need a species-level habitat flag, which the full database can carry. In Alachua the rule puts 997 records (97.0%) with `fish` and 27 with `reef`, and 18 of those 27 are wrong: the gizzard and threadfin shads live in Florida's fresh water, so the herring family needs that flag too. The other nine (six Hogchokers, a mullet, a needlefish and a burrfish) are coastal fish that enter rivers.
 3. **Colour inside `fish`.** Sunfish and bass see colour through green and red cones only: the largemouth bass has two cone types and none for blue or ultraviolet (logs 80 to 83), and six sunfish species, the Bluegill among them, express green and red cone opsins with a blue opsin at 0.05% of cone opsin and no ultraviolet opsin, alike in a clear and a dark lake (logs 150, 151). Minnows, carp, livebearers and gars have four or more cone classes including ultraviolet (logs 31 to 35, 76, 77, 112, 114, 153). Sunfish hold 25.2% of `fish` records worldwide and 31.0% in Alachua, and the livebearers alone hold 30.1% in Alachua, so one colour setting would be false for a third of the county's fish either way. **Line: a colour setting per family**, chosen when the recognizer or the full database names the fish: `sunfish` for Centrarchidae (188,208 records), and the four-colour default for the rest.
 
 The classification used for the shares: freshwater orders Cypriniformes, Salmoniformes, Cyprinodontiformes, Esociformes, Lepisosteiformes, Characiformes, Amiiformes, Acipenseriformes, Osteoglossiformes, Percopsiformes, Synbranchiformes, Gymnotiformes, Polypteriformes, the lampreys and the lungfish; the catfish except the sea catfish (Ariidae) and eel catfish (Plotosidae); the freshwater eels (Anguillidae); and the perch-order families Centrarchidae, Percidae, Cichlidae, Channidae and Elassomatidae. Everything else that was classified is marine, chiefly 58 perch-order families of reefs and coasts (among them triplefins, hawkfish, emperors, mackerels and tunas, fusiliers, morwongs and sandperches) and the orders of pufferfish, seahorses, flatfish, morays, squirrelfish and herrings. Salmon, trout and sturgeon are counted as freshwater although many spend years at sea, and the killifish family includes salt-marsh species. The family counts come from the facet saved on `ci`, joined to its names file, which covers only the first 3,000 of 17,449 animal families; nine more family keys were read from GBIF's name matcher on 13 October, the sunfish key came from the earlier sheet, four more were matched by their record counts, and the names of the twelve largest remaining perch-order families were read from GBIF's species pages on 13 October (the perch-order family facet was read the same day).
@@ -32,7 +32,7 @@ The classification used for the shares: freshwater orders Cypriniformes, Salmoni
 | `shark` | sharks | 60,349 | 2.2% |
 | `ray` | rays, skates, chimaeras; setting `skate` | 72,046 | 2.6% |
 
-The keys `fish` and `shark` already exist in `GROUPS` in `src/cam.a.js`. `reef` and `ray` would be new groups for the recognizer; until the group head learns them, `reef` can be chosen from the named family and `ray` from the named order. The boring alternative, one `fish` view and one `shark` view as in the earlier sheet, is simpler and would draw a two-colour, tea-tinted picture for every damselfish, and a grey picture for every stingray that has shown colour vision in tests.
+The keys `fish` and `shark` already exist in `GROUPS` in `src/cam.a.js`. `reef` and `ray` would be new groups for the recognizer; until the group head learns them, `reef` can be chosen from the named family and `ray` from the named order. The simpler alternative, one `fish` view and one `shark` view as in the earlier sheet, would draw a two-colour, tea-tinted picture for every damselfish, and a grey picture for every stingray that has shown colour vision in tests.
 
 ## 2. The view `fish` (freshwater fish)
 
@@ -69,7 +69,7 @@ Rows for three later settings:
 
 - `lamprey` (1,863 records): `['m', 'Colour of a lamprey', 'A sea lamprey has two kinds of light-sensing cells, a rod and a single kind of cone, so it probably sees little colour. The southern lamprey has two kinds of cone. This view shows a lamprey fewer colours than other fish.']` Logs 149 (Wang et al. 2024; the inference about colour is the sheet's), 57, 58 (Collin et al. 2003).
 - `catfish` (Siluriformes, 41,655 freshwater records; 93 in Alachua): `['x', 'Taste all over', 'A catfish carries taste buds over its whole skin, so it tastes the water and the lake bottom with its body, and it finds food by touch. The picture leaves taste out.']` Log 148 (Biedenbach 1973). With it: `['g', 'Dim light', 'Many catfish have a reflecting layer behind the retina that gives light a second pass. For a catfish, this view lifts the shadows.']` Log 60 (Ito et al. 1975; bullhead catfish not confirmed). The electric row (row 12) applies too.
-- `salmon` (Salmonidae, 71,568 records): `['m', 'Ultraviolet comes and goes', 'Young salmon and trout see ultraviolet light, lose those cells when they change for life at sea, and grow them back as they mature and return to their home streams. This view gives the violet sheen to young trout and salmon only.']` Logs 145 (Allison et al. 2006), 146 (Coughlin and Hawryshyn 2008).
+- `salmon` (Salmonidae, 71,568 records): `['m', 'Ultraviolet comes and goes', 'Young salmon and trout see ultraviolet light, lose those cells when they change for life at sea, and grow them back as they mature and return to their home streams. This view gives trout and salmon a fainter violet sheen than other fish, since an adult may have lost its ultraviolet cells.']` Logs 145 (Allison et al. 2006), 146 (Coughlin and Hawryshyn 2008).
 
 ### The picture
 
@@ -95,7 +95,7 @@ fish: { chip: 'Freshwater fish', who: 'a freshwater fish', fov: 335, cpd: 4, top
   cue: 'Detail is coarse, the field is wide, and the water is the colour of tea. Tilt the phone up to see the sky as a fish does.', rows: [ /* above */ ] }
 // setting sunfish (Centrarchidae): M: [1, 0, 0, 0, 1, 0, 0, 1, 0], sheen: 0, row 1 in place of row 2
 // setting catfish (Siluriformes): cpd: 2, gain: 1.3, with the taste and dim-light rows
-// setting salmon (Salmonidae): sheen only when the full database says the fish is young (otherwise 0)
+// setting salmon (Salmonidae): sheen: .25 (invented; the app cannot tell a fish's age)
 // setting lamprey (Petromyzontiformes): M: DEUTAN in place of the identity, with the lamprey row
 ```
 
@@ -113,8 +113,8 @@ fish: { chip: 'Freshwater fish', who: 'a freshwater fish', fov: 335, cpd: 4, top
 
 ### Rows
 
-1. `['m', 'Colour', 'Damselfish, the family of the clownfish, have four kinds of colour-sensing cells, one of them for ultraviolet light, and many wear ultraviolet patterns that they show one another. A triggerfish has three kinds, tuned to violet, blue and green. Neither has a cell tuned to red, so this view darkens reds and adds an invented violet sheen for ultraviolet.']`
-   Logs 110 (Ambon damselfish cones at 365, 485, 504 and 526 nm), 62 (all 50-plus damselfish species studied), 108, 109 (Picasso triggerfish, 412, 480 and 528 nm), 64 (an anemonefish in the damselfish family).
+1. `['m', 'Colour', 'Damselfish, the family of the clownfish, have four kinds of colour-sensing cells, one of them for ultraviolet light, and many wear ultraviolet patterns that they show one another. A triggerfish has three kinds, tuned to violet, blue and green. Neither has a cell tuned to red, so this view darkens reds, and for a damselfish it adds an invented violet sheen for ultraviolet.']`
+   Logs 110 (Ambon damselfish cones at 365, 485, 504 and 526 nm), 62 (all 50-plus damselfish species studied), 108, 109 (Picasso triggerfish, 412, 480 and 528 nm), 64 (an anemonefish in the damselfish family), 171 (a surgeonfish expresses violet-blue and green cone opsins and no red or ultraviolet one is named).
 2. `['g', 'Red light fades', 'Sea water swallows red light within the first 10 to 20 metres, so deeper down a red fish looks dark grey and a reef turns blue-green. This view tints the picture blue-green and fades reds with distance.']`
    Logs 132 (Gerlach et al. 2014), 134 (Michiels et al. 2008), 4 (blue light travels farthest).
 3. `['m', 'Sharpness', 'Small reef fish see coarsely. An Ambon damselfish and a dottyback resolved about a fortieth as much detail as you do, though the cells in their eyes are packed tightly enough for about three times more. This view blurs the picture to match.']`
@@ -122,7 +122,7 @@ fish: { chip: 'Freshwater fish', who: 'a freshwater fish', fov: 335, cpd: 4, top
 4. `['m', 'Fine detail without blue', 'A damselfish sees fine patterns only through its cells for longer wavelengths, so a pattern that differs only in blue is a blur to it, even though it can tell the blue from the green. This view blurs the blue part of the picture more than the rest.']`
    Log 111 (Siebeck et al. 2014).
 5. `['m', 'Eyes that move apart', 'Wrasses, blennies, pufferfish, triggerfish and seahorses can turn each eye on its own, and each eye has a small sharp centre, called a fovea. One eye can follow a passing fish while the other searches the reef. This view gives each half of the screen its own sharp spot, and the two wander separately.']`
-   Logs 74, 75 (Hofmann and Gebhardt 2023). These groups hold over 460,000 records (wrasses 176,484, pufferfish and triggerfish 180,531, blennies 54,088, seahorses and pipefish 51,732).
+   Logs 74, 75 (Hofmann and Gebhardt 2023), 169 (a triplefin blenny's highly mobile eyes). These groups hold over 460,000 records (wrasses 176,484, pufferfish and triggerfish 180,531, blennies 54,088, seahorses and pipefish 51,732).
 6. `['m', 'Pace', 'A squirrelfish, a reef fish that hunts at night, follows a flickering light up to 70 flashes a second in bright light, faster than you can, and only about 40 at night. This view runs slightly slow in daylight and then jumps ahead to catch up.']`
    Log 65 (Fogg et al. 2023); log 66 (a cardinalfish, 42 by day).
 7. `['g', 'Looking up', 'Under a calm surface, a fish sees the whole sky squeezed into a bright circle about 97 degrees across, straight overhead. Beyond the circle, the underside of the surface works like a mirror and reflects the water below. When you tilt the phone upward, this view draws the circle.']`
@@ -139,20 +139,21 @@ Row for the `hagfish` setting (110 records): `['m', 'Hagfish', 'A hagfish’s ey
 | Field | Value | Behind it |
 |---|---|---|
 | `fov` | 335 | `invented`, copied from the Golden Shiner (log 86); no reef fish field was opened. |
-| `cpd` | 2 | Logs 90, 91: 1.3 to 1.7 by behaviour in small reef fish, 3.2 to 4.6 by anatomy. Larger reef fish have larger eyes and likely see more (log 140). The value is `invented` within the range. |
+| `cpd` | 2 | Logs 90, 91: 1.3 to 1.7 by behaviour in small reef fish, 3.2 to 4.6 by anatomy; log 168: a triplefin's fovea 6.7 to 9.0 by anatomy. Larger reef fish have larger eyes and likely see more (log 140). The value is `invented` within the range. |
 | `topoA` | 1 | Log 75: foveae in many reef groups; logs 143, 144: a forward-looking area in reef fish generally. |
 | `topoS` | .4 | Log 144: the area often stretches into a horizontal streak in open-water reef fish, and stays a round area in fish that live among coral (log 143). The weight is `invented`. |
 | `fall` | 1.6 | `invented`. A fovea is a sharper, smaller spot than an area. |
 | `pupil` | 'o' | Log 104. Shape `invented`. |
 | `M` | [.35, 0, 0, 0, 1, 0, 0, 0, 1] | Logs 108, 110: no cone beyond about 530 nm, so reds go dark. The matrix is `invented`. |
-| `sheen` | .6 | Logs 62, 110. `invented`. |
+| `sheen` | 0, and .6 in the `damselfish` setting | Logs 62, 110 for damselfish; log 171 shows ultraviolet is not universal on reefs. The sheen itself is `invented`. |
 | `rate` | .86 | Log 65: 60/70. A fish that is fast by day is slow at night; switching `rate` to 1 after dusk by the phone's clock would follow logs 65 and 66. |
 | `field` (`hagfish`) | 1, `sat` .3 | Logs 54, 55. |
 | water | blue-green, see section 2 effect 1 | Logs 4, 132. |
 
 ```
-reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: .4, fall: 1.6, pupil: 'o', M: [.35, 0, 0, 0, 1, 0, 0, 0, 1], sheen: .6, rate: .86,
+reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: .4, fall: 1.6, pupil: 'o', M: [.35, 0, 0, 0, 1, 0, 0, 0, 1], rate: .86,
   cue: 'Reds fade to grey, the water is blue, and each eye looks its own way.', rows: [ /* above */ ] }
+// setting damselfish (Pomacentridae, 155,557 records): sheen: .6
 // setting hagfish (Myxiniformes): field: 1, sat: .3, pupil: 'none', rows: the hagfish row only, with the looking-up and moving-water rows
 ```
 
@@ -161,7 +162,7 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: 
 1. **Two eyes, two gazes.** What the person sees: the left and right halves of the screen each carry a small sharp spot that drifts and jumps on its own, each drawn to movement on its side and each avoiding its last target for a while, so the two halves rarely look at the same thing (logs 74, 75). Phone input: the camera, through the engine's planned salience map and gaze controller, run twice with a separate inhibition mask per half. Cost: moderate, since it reuses the jumping spider's gaze machinery. Beauty: a person sees for the first time what it is to watch two places at once. The pattern of the drifting is `invented`; independence itself is measured.
 2. **Blue loses its detail.** What the person sees: blue patterns soften while light-and-dark edges stay crisp (log 111). Drawing: blur the blue channel by a wider kernel than red and green, or blur the colour difference while keeping luminance sharp. Cost: one extra blur of one channel; low.
 3. **Red fluorescence at depth.** As the water layer removes red with distance, a few reef fish keep a red glow (logs 133, 134). The app cannot know which fish fluoresce, so this stays a proposal for a later species profile, for fairy wrasses first.
-4. **Day and night pace.** The phone's clock switches `rate` from .86 by day to 1 at night, following the squirrelfish's slower night vision (log 65). Trivial.
+4. **Day and night.** The phone's clock switches `rate` from .86 by day to 1 at night, following the squirrelfish's slower night vision (log 65), and raises `dof` at night, since reef fish built for the dark have large round pupils and a shallow depth of focus (log 170). Trivial.
 
 ## 4. The view `shark`
 
@@ -199,7 +200,7 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: 
 | `topoS` | 1 | Logs 98, 102, 103: horizontal streaks. |
 | `fall` | 1.5 | `invented`. |
 | `pupil` | 'o' | Log 105: shark pupils vary in shape. A per-species shape is a later step; the round default is `invented`. |
-| `dof` | 14, scaled by light | Log 157: an f-number of about 2 in dim light and 6 in bright light, so depth of field is shallow in the dark and deep in daylight. The strength is `invented`; the scaling is effect 4 below. |
+| `dof` | 14, scaled by light | Log 157: an f-number of about 2 in dim light and 6 in bright light, so depth of field is shallow in the dark and deep in daylight. The strength is `invented`; the scaling is effect 3 below. |
 | `M` | [0, 1, 0, 0, 1, 0, 0, 1, 0] | Logs 19, 20; log 141 (Ryan et al. 2021 modelled a white shark's view from the camera's green channel alone). Every channel takes green, so the picture is grey. |
 | `gain` | 1.3 | Logs 106, 107. The amount is `invented`. |
 | `persist` | .04 | Log 67: 1/26.1 = 0.038 seconds; the measured range 16 to 31 Hz gives .03 to .06 (logs 122, 123). |
@@ -428,17 +429,26 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 - Bailes HJ, Davies WL, Trezise AEO, Collin SP 2007. BMC Evol Biol 7: 200. doi:10.1186/1471-2148-7-200. `opened`
 - Biedenbach MA 1973. J Comp Physiol 84: 227-250. doi:10.1007/BF00694224. `opened` (abstract)
 - Wang J et al. 2024. Nat Commun. doi:10.1038/s41467-024-55019-x. `opened`
+- Caves EM, Sutton T, Warrant EJ, Johnsen S 2023. J Comp Physiol A. doi:10.1007/s00359-023-01661-7. `opened`
+- Chaumel J, Lauder GV 2025. Proc R Soc B. doi:10.1098/rspb.2024.2192. `opened`
+- Tiarks J, Gray SM, Chapman LJ 2024. J Exp Biol. doi:10.1242/jeb.246708. `opened`
+- Striedter GF 1991. J Comp Neurol. doi:10.1002/cne.903120213. `opened` (abstract)
+- Anderson JM et al. 2017. Sci Rep. doi:10.1038/s41598-017-11459-8. `opened`
+- Fritsch R, Collin SP, Michiels NK 2017. Front Neuroanat. doi:10.3389/fnana.2017.00122. `opened`
+- Schmitz L, Wainwright PC 2011. BMC Evol Biol. doi:10.1186/1471-2148-11-338. `opened`
+- Tettamanti V et al. 2019. J Exp Biol. doi:10.1242/jeb.209916. `opened`
+- Land MF, Nilsson D-E 2012, pp. 28, 32, 36-37, 39-41, 51, 56-57 as read (see the first line).
 - GBIF occurrence facets (iNaturalist research-grade dataset 50c9509d-22c7-4a22-a47d-8c48425ef4a7), saved on `ci` in `runs/fetch/10` (read 11 October 2026), GBIF species matches for nine families, the Perciformes family facet and twelve family pages, read 13 October 2026. `opened`
 
 ## 11. Questions for a specialist
 
 1. The spotted gar expresses two ultraviolet opsins and lacks double cones. Does a gar see colour in four dimensions as a minnow does, and does it use ultraviolet?
 2. Rays show three cone pigments by microspectrophotometry (Hart et al. 2004) but two cone opsin classes by later molecular work (Hart et al. 2025). Which should a picture follow, two colours or three?
-3. Is the order of habitats a fair line for fish vision, or would the tannin and turbidity of the water a fish lives in today predict its eyes better than its family does?
+3. Is fresh water against the sea a fair line for fish vision, or would the tannin and turbidity of the water a fish lives in predict its eyes better than its family does? Sunfish change little between clear and dark lakes (Bertinetti et al. 2025), while the bluefin killifish shifts its opsins (Johnson et al. 2013).
 4. How should tea-coloured water be drawn: what spectral attenuation would a Florida lake at 40 to 100 platinum-cobalt units give per metre, from red to blue?
 5. Do the independent eye movements of wrasses, pufferfish and seahorses come with any measure of how often the two eyes look at different targets, so that the two-gaze effect could follow real timing?
 6. For sharks, which measure of flicker best stands for daylight vision in open water, given values from 16 to 31 Hz across species and strong effects of temperature?
 
 ## Status
 
-Draft written at about 02:40 UTC on 13 October 2026, with 142 log lines. Still to do: the wanted list file, a style check of every row, and further reading where time allows (catfish, lampreys, deep-sea fish, the remaining abstracts in the collection).
+Revised at about 02:50 UTC on 13 October 2026, with 171 log lines. All three files pass `tools/senses/check.py` (the log) and parse as JSON (the wanted list). Reading continues while time allows; anything added later is listed here.
