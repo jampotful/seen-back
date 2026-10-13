@@ -102,7 +102,7 @@ def prior_log(rows, month, floor):
         return np.log(np.maximum(w / whole, floor))
 
 
-def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, species_bias=None):
+def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, species_bias=None, kind_bias_list=None):
     f = manifest["fusion"]
     rule = f.get("rule", "product")
     if rule not in ("product", "mix"):
@@ -115,8 +115,10 @@ def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, s
     p = None
     if head:
         z = f["t_kind"] * np.asarray(kind_dots, dtype=np.float64)
-        if kind_bias is not None:
-            z = z + np.asarray(kind_bias, dtype=np.float64)
+        # a slot may carry a second bias for where the county list is used (kinds.county_bias); away from the list the head alone uses kinds.bias
+        kb_used = kind_bias_list if (kind_bias_list is not None and T is not None) else kind_bias
+        if kb_used is not None:
+            z = z + np.asarray(kb_used, dtype=np.float64)
         p = softmax(z)
         uniq = list(dict.fromkeys(labels))
         if len(uniq) < len(labels):
@@ -186,11 +188,13 @@ def load_slot(where):
     d = mf.parent
     m = json.loads(mf.read_text(encoding="utf-8"))
     w = m["width"]
-    out = {"manifest": m, "table": None, "kinds": None, "species": None, "kind_bias": None, "species_bias": None}
+    out = {"manifest": m, "table": None, "kinds": None, "species": None, "kind_bias": None, "kind_bias_list": None, "species_bias": None}
     if m.get("kinds"):                                                  # a slot without a kinds head has none of these
         out["kinds"] = np.fromfile(d / m["kinds"]["url"], dtype="<f2").astype(np.float64).reshape(-1, w)
         if m["kinds"].get("bias") is not None:
             out["kind_bias"] = np.asarray(m["kinds"]["bias"], dtype=np.float64)
+        if m["kinds"].get("county_bias") is not None:
+            out["kind_bias_list"] = np.asarray(m["kinds"]["county_bias"], dtype=np.float64)
     sp = m.get("species")
     if sp:
         out["species"] = np.fromfile(d / sp["url"], dtype="<f2").astype(np.float64).reshape(-1, w)
