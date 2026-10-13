@@ -1,0 +1,18 @@
+{
+ "models": [
+  "bioclip-b16"
+ ],
+ "wasm_procs": 4,
+ "about": "BioCLIP B/16's int8 file through onnxruntime-web's WASM build on the Alachua evaluation photos, with timings, as the phone would compute them. Publishes after run 43 so that runs never race on the branch.",
+ "data": "pub/data-alachua",
+ "manifest": "eval/alachua-2025/manifest.csv",
+ "shard_mode": "mod",
+ "stages": [
+  "images-wasm-int8-per-channel"
+ ],
+ "shards": {
+  "bioclip-b16": 6
+ },
+ "max_parallel": 6,
+ "publish_after_run": 43
+}
