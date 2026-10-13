@@ -217,7 +217,7 @@ Rows:
 - `['m', 'Ultraviolet', 'Most songbirds and parrots have colour-sensing cells tuned to ultraviolet light, which people cannot see, and their eyes let it through. Crows, jays and tyrant flycatchers have cells tuned to violet light instead. A screen cannot show ultraviolet, so the violet tint in this view stands in for it.']`
   Log: Hart 2001 (lambda_max_nm, Cyanistes caeruleus 371, Sturnus vulgaris 362, Turdus merula 373, Serinus canaria 369, Taeniopygia guttata 360 to 380, Melopsittacus undulatus 371; spectral_range_nm, UVS ocular media 316 to 343); Lind et al. 2013a (spectral_range_nm, 323 against 358); Ödeen and Håstad 2003 (colour_vision, Corvidae and Tyrannidae); Ödeen et al. 2011 (colour_vision, Passeriformes); Smith et al. 2002 (colour_vision, starling and quail).
 - `['m', 'Colour', 'Birds have four kinds of colour-sensing cells, one more than people, and a droplet of coloured oil in each cell narrows the colours it responds to. The droplets help birds tell similar colours apart. This view strengthens colours slightly to suggest it.']`
-  Log: Hart 2001 (receptor_classes; oil_droplets).
+  Log: Hart 2001 (receptor_classes; oil_droplets); Stavenga and Wilts 2014 (oil_droplets, microlenses and narrow bands); Toomey et al. 2016 (filter_pigments, SWS2 shifts with SWS1).
 - `['m', 'Field of view', 'A zebra finch sees about 300 degrees around itself, with a blind area of about 60 degrees behind its head. This view squeezes that sweep onto the screen.']`
   Log: Eckmeier et al. 2013 (fov_h_deg, Taeniopygia guttata 300); Arnold et al. 2022 (fov_h_deg, blind area 60); Martin 2017 (fov_h_deg, one eye 160 to 180).
 - `['g', 'Sharpest spots', 'A small songbird\'s sharpest spot looks forward and out to the side. A finch turns its head so that a seed falls on that spot, about 60 degrees from its beak, and a red-winged blackbird\'s single fovea in each eye points the same way. This view sharpens two spots to the left and right of centre.']`
@@ -440,9 +440,11 @@ Opened means the full text, or the abstract on the collection index, a publisher
 - Ruggeri M et al. 2010, *Invest. Ophthalmol. Vis. Sci.*, OCT of raptor and owl retinas. 10.1167/iovs.10-5633. opened (abstract)
 - Sieradzki A 2022, IntechOpen chapter, owl physiology. 10.5772/intechopen.102397. opened (full text; a review, values secondary)
 - Smith EL, Greenwood VJ, Bennett ATD 2002, *JEB*, ultraviolet colour in starlings and quail. 10.1242/jeb.205.21.3299. opened (abstract)
+- Stavenga DG, Wilts BD 2014, *Phil. Trans. R. Soc. B*, oil droplets as microlenses. 10.1098/rstb.2013.0041. opened (abstract)
 - Stoddard MC et al. 2020, *PNAS*, hummingbird nonspectral colours. 10.1073/pnas.1919377117. opened (abstract)
 - Stone RJ, thesis, University of Massachusetts Amherst (repository date 2023), blue jay acuity. 10.7275/6871623. opened (abstract)
 - Theunissen LM, Troje NF 2017, *Front. Neurosci.*, pigeon head stabilization. 10.3389/fnins.2017.00551. opened (full text)
+- Toomey MB et al. 2016, *eLife*, tuning of the SWS2 cone. 10.7554/elife.15675. opened (abstract; full text on disk)
 - Tucker VA 2000, *JEB* 203: 3745, deep fovea and spiral paths. 10.1242/jeb.203.24.3745. opened (abstract)
 - Tyrrell LP et al. 2013, *Sci. Rep.*, eastern meadowlark vision. 10.1038/srep03231. opened (full text)
 - Tyrrell LP et al. 2018, *Front. Neurosci.*, hummingbird visual space. 10.3389/fnins.2018.00016. opened (full text)
