@@ -445,7 +445,7 @@ def build_request(model, system, user, extra=None):
         msgs += extra
     return {"model": model, "max_tokens": MAX_TOKENS,
             "system": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
-            "tools": [TOOL], "tool_choice": {"type": "tool", "name": "submit_spec"}, "messages": msgs}
+            "tools": [TOOL], "tool_choice": ({"type": "auto"} if "sonnet" in model else {"type": "tool", "name": "submit_spec"}), "messages": msgs}
 
 
 # ---------------------------------------------------------------------------------------------------------------
