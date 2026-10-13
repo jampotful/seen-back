@@ -1,4 +1,4 @@
-# Progress: the engine track, burst 2
+# Progress: the engine track
 
 Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged in (no conflicts).
 
@@ -19,3 +19,13 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 2. Parameters that act only on movement read as invisible on the still harness; a moving-clip version of the floor is the next step for them.
 3. The specs track's shark and spider were not taken (the prototypes' specs keep their effects); reconcile the two when that track finishes.
 4. Modules not built: `spectrum` (matrices from pigment peaks), the clock, sun and moon of `light`, and everything after `gaze` in the design's order.
+
+# Burst 3 (started 13 October 2026, 12:01 US Eastern, from `main` at `d8f981f`; stops by 14:30)
+
+## Plan
+1. Module 2, `spectrum`; the clock, sun and moon of `light`; module 4, `pace`; module 5, `motion`. Each with sliders and `&draw=` options.
+2. The jumper view uses them; specs for the views that wait on them.
+3. The floor's second run recorded in `docs/views/floor.json`.
+
+## Done
+(nothing yet)
