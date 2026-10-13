@@ -21,15 +21,13 @@ Updated 12 October 2026, 23:30 US Eastern. Whoever works on Regards updates this
 | The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | The trials so far are in `tools/world/EXPERIMENTS.md`. | A burst of its own, mostly on build machines. |
 | The full database for the world | `docs/tracks/worlddb.md` | none yet | Not started. | A burst of its own, mostly on build machines. |
 
-## Bursts proposed
+## Bursts proposed (revised 12 October, 23:40)
 
-1. `jumper` and `spider`, once the long books are readable in full (see below).
-2. `squirrel-deer-rabbit`, `herps`, `bee`.
-3. `insect`, `mammal-groups`, `fish-shark`.
-4. `sea-invertebrates`, `plant-fungus-slime`, `methods`.
-5. Audits of every unit by agents that did not write them, then the owner's decisions, then a build.
+Spend first where the outcome is decided, push mechanical work onto build machines, keep every context small, and use a model fitted to each job (Haiku for extraction and quote checks, Sonnet for research, Opus for design, engine and audits).
 
-The engine, the group head and the world database fit between these, as the owner chooses.
+1. 00:31, 13 October: the senses atlas (Opus); the engine's render gallery and attention module, starting the jumping spider view from the draft and log on `main` (Opus); and the build-machine jobs (Sonnet): a measurement index over `pub/lit-t1` (every sentence with a value and a unit, with its source), the published cross-species compilations, and record shares from `pub/data-world`.
+2. The jumping spider and other spider research, searching the measurement index first; more engine modules.
+3. Onward, one burst at each five-hour reset: research filled in just in time for each engine module, then audits by agents that did not write the work, a gallery review by the owner, one pass over all the rows, and builds.
 
 ## Known limits
 
