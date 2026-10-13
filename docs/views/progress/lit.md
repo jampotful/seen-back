@@ -18,9 +18,11 @@ Started 13 October 2026, 18:00 UTC; stops at 120 minutes. Spend allowance $60; C
 | spent | $0.24 | $5.12 | $0.23 |
 Sonnet gains 3 points of strict recovery and 6 with the loose reading at 21 times the cost, under the 10-point bar, so Haiku is used everywhere. Replies cut off: 1 of 505 (was 21), and that one was salvaged.
 
-## Full run (Haiku, pushes fullA, fullB, fullC; each keeps what pub/lit-table already holds)
-Pushed fullA and fullB at 18:46 UTC (ceilings $25 each); fullC (ceiling $28) waits for fullA to finish, so that the queue does not drop fullB.
+## Full run (Haiku 5.5; each push keeps what pub/lit-table already holds)
+- fullA done (run 5 on `ci`, 13 Oct 20:20 UTC): 13 topics, 34,467 requests, $7.71 (estimate $9.95), 22,376 records kept. Per topic spend and records are in `runs/lit-table/5/SUMMARY-fullA-haiku-5-5.md`. 7 replies cut off, all salvaged.
+- fullBC (`run/lit-table/fullBC`, ceiling $45) was queued behind fullA and holds the other 21 topics; it adds to `pub/lit-table` when it ends, and its summary returns to `ci` as the next run number. Expected about $18.
+- Spent so far: $0.24 + $5.12 (calibration) + $7.71 = $13.07.
 
 ## Next
-1. Calibration push `run/lit-table/calib`: Haiku (fixed) and Sonnet on the calibration set only.
-2. Choose the model; full run in pushes of about half the topics each.
+1. When fullBC returns, read its SUMMARY and check that `pub/lit-table` holds 34 topic files.
+2. The batch audit of the table (queue 6).
