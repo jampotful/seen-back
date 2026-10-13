@@ -206,7 +206,7 @@ L100, L127.
 ### 2.3 `dog` (domestic dog, coyote, wolf, jackals and the other canids with round pupils)
 
 ```
-['m', 'Sharpness', 'Dogs see fine detail between about a third and an eighth as well as people do, depending on the dog and the test. When dogs and people were tested side by side, people saw about three times as much detail, by day and at night. This view is blurred to match.'],
+['m', 'Sharpness', 'Dogs see fine detail between about a third and an eighth as well as people do, depending on the dog and the test. When dogs and people were tested side by side, people saw about three times as much detail, in room light and in light about as dim as moonlight. This view is blurred to match.'],
 ```
 L166 to L168 and L170 to L172 (5.5 to 19.5 cycles per degree in bright light; people 32 to 44 in the same set-up; about three times), L29 (typical 20/75), L30, L31, L46 (no better than 12.6 in earlier work), L118, L139, L1.
 
@@ -243,7 +243,7 @@ L34, L15. A walker at 1 metre a second, 75 metres away, crosses 0.76 degrees a s
 ```
 ['m', 'Dim light', 'A dog’s retina holds more rods than a person’s, even in its sharpest area, and most dogs have a mirror-like tapetum behind the retina that gives light a second pass. In a study of 539 dogs, the tapetum was full-sized in seven dogs in ten and missing in about two in a hundred. This view brightens the shadows a little.'],
 ```
-L119, L87, L43 (coyotes see by the natural light of many nights). Dim light helps a dog detect light and movement; it does not make it sharper-sighted than a person: at about moonlight level dogs resolved 1.8 to 3.5 cycles per degree and people 5.9 to 9.9 (L169, L171).
+L119, L87, L43 (coyotes see by the natural light of many nights). The dog's advantage in dim light lies in catching faint light (L119); in sharpness people stay ahead, and at about moonlight level dogs resolved 1.8 to 3.5 cycles per degree where people resolved 5.9 to 9.9 (L169, L171).
 
 ```
 ['m', 'Short noses', 'Short-nosed breeds follow a pointing hand better than long-nosed breeds, and short-headed dogs meet a stranger’s eyes sooner.'],
