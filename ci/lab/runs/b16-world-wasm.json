@@ -3,7 +3,7 @@
   "bioclip-b16"
  ],
  "wasm_procs": 4,
- "about": "BioCLIP B/16's int8 file through onnxruntime-web's WASM build on the world tuning and test photos (split eval), with timings.",
+ "about": "BioCLIP B/16's int8 file through onnxruntime-web's WASM build on the world tuning and test photos (split eval), with timings. Publishes after run 44 so that runs never race on the branch.",
  "data": "pub/data-world",
  "manifest": "lab/world-eval/manifest.csv",
  "shard_mode": "mod",
@@ -14,5 +14,6 @@
   "bioclip-b16": 8
  },
  "wasm_split": "eval",
- "max_parallel": 8
+ "max_parallel": 8,
+ "publish_after_run": 44
 }
