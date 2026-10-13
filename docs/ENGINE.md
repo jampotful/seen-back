@@ -124,7 +124,27 @@ Stamps cost a blit of the strip's rectangle into one of six slots of a 576 by 22
 
 ## Light (module 3, first part)
 
-Four times a second the engine reads the smallest levels of the picture's mip chain (8 by 8 cells or fewer) through a pixel buffer and a fence, never waiting. `LIGHT` holds the mean level (relative to the camera's own exposure, smoothed over about 2.5 s), the mean colour, the place of the brightest cell, a shock value when the picture darkens by half within 0.4 s, and the cells themselves, which `&draw=palm` reads under the gaze. A parameter given as `{ "curve": "lux", "points": [[x, v], ...] }` is interpolated against log10 of that level, and a view with one is recomputed twice a second. Absolute light needs the exposure time from `getSettings()`, which most browsers do not report; the clock, sun and moon terms of the design are not built.
+Four times a second the engine reads the smallest levels of the picture's mip chain (8 by 8 cells or fewer) through a pixel buffer and a fence, never waiting. `LIGHT` holds the mean level (relative to the camera's own exposure, smoothed over about 2.5 s), the mean colour, the place of the brightest cell, a shock value when the picture darkens by half within 0.4 s, and the cells themselves, which `&draw=palm` reads under the gaze. A parameter given as `{ "curve": "lux", "points": [[x, v], ...] }` is interpolated against log10 of that level, and a view with one is recomputed twice a second. Absolute light needs the exposure time from `getSettings()`, which most browsers do not report; the clock, sun and moon follow below.
+
+## Spectrum (module 2, burst 3)
+
+A matrix may now have four columns: screen red, green and blue from the camera's red, green and blue and the shader's invented ultraviolet channel (`uvg`). `tools/views/pigments.py` fills every matrix that gives `from_pigments` (peaks in nanometres) with `rows` (3 by 4) and `q` (the animal's classes from the same four inputs, 4 by 4). It uses the A1 pigment template of Govardovskii and colleagues (2000; constants entered from memory, to check against the paper), camera channels taken as Gaussians at 600, 535 and 460 nm and the ultraviolet guess as one at 365 nm (all invented), white kept white, and the atlas's shifted spectrum for the display (sorted classes: one as grey, two as blue and yellow, three as blue, green and red, four with the shortest as blue). A spec's `spectrum` block takes `q` (a matrix name, for the wheel and the band), `dark` (a dark-adapted matrix, blended in as `LIGHT` falls between the two log10 levels of `adaptAt`) and `neutral` (the band's strength). Drawing options, category `spectrum`: `shift` or `matrix` (the default), `wheel` (a finger dragged across the picture turns which three of four classes are shown, once round for the screen's width), `neutral` (where the animal's colours are grey and a person's are not, a faint shimmer). The colour felt in the palm is the existing `palm`. Everything here runs in the zone program, which the fourteen offered views never use, so their pictures are unchanged.
+
+## The clock, sun and moon (module 3, second part)
+
+`clockNow()` in `src/cam.a.js` gives the hour, the sun's height (declination and hour angle, longitude from the time zone, latitude 35 degrees north as an invented stand-in), `dark` (0 with the sun 6 degrees up to 1 with it 12 degrees down) and `moon` (the lit fraction, counted from the new moon of 6 January 2000, 18:14 UTC). A parameter may be a curve against `dark` or `moon` as well as `lux`. A spec with a `clock` block offers category `clock`: `time` (the default) and `moon` (at night the whole view is as bright as tonight's moon). `&hour=<0-24>` and `&moon=<0-1>` set the clock by hand for checking.
+
+## Pace (module 4, first part)
+
+A spec's `pace` block takes `ratio`. Category `pace`: `lag` (today's) and `replay`: a tap keeps the ring of past frames (12 layers, about three quarters of a second; the design's quarter-resolution ring of 16 layers is not built) and plays it back `ratio` times slower, then returns to live. The strobe waits for a phone to show whether a browser's camera stream records mains flicker at all.
+
+## Motion (module 5, first part)
+
+The senses object (`src/cam.c1.js`) now integrates the rotation rate between snaps and watches for thrusts along the phone's depth. A spec's `motion` block takes `holdMs`, `maxDeg`, `thrust` and `thrustMs`. Category `steady`: `lock` (the picture is shifted against the phone's turn, through `u_stab`, until `holdMs` passes or the turn passes `maxDeg`, then snaps), `held` (today's) and `arm` (the ring is written only for `thrustMs` after each thrust, so the picture moves only when the phone is jerked forward, with a short pulse where the browser vibrates). Motion needs `&sense=motion` and a tap. Which way each axis shifts the picture is untested on a phone. Tilt, heading and the knock's side for `field` and `overlay` are not built yet.
+
+## Trials on offered views
+
+A spec's `trial` block holds changes being tried on a view the app offers. They apply only with `?try=<key>`, so the offered view stays as it was (`node` comparison of every offered view's object against `main`). `dog`, `bee` and `bird` carry trials from pigment peaks in the research logs.
 
 ## The visibility floor
 
