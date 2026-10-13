@@ -58,6 +58,6 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 - Every check passed (typed, lex, record, lent, viewer, edge, sweep, film, try on 24 views, still, and `test/rec/check_rec.js`); `viewer` and `edge` needed `SLOW=3` on the loaded machine and pass on `main` the same way. Build 29 merged to `main` at about 16:05.
 
 ## Next
-1. Copy both relaunched runs' `floor.json` from the `ci` branch into `docs/views/floor.json` (the moving one recorded in `runs` with its noise and threshold; its values replace only entries the still run left `invisible`).
+1. Runs 76 (still: the last eight parameters, all invisible) and 77 (moving: 31 parameters before its time limit) are in `docs/views/floor.json`, the moving results under `moving`, apart from the sliders' floors because the clip's own noise was high (threshold 8.4). A second moving run (push to `run/engines/linux-floor-moving3`) continues after `gaze.twist[1]`; less noise would need a fixed clock in the page.
 2. The owner's phone checks in `docs/STATUS.md`. Which way roll, elevation and heading turn the picture is untested on a phone.
 3. Not built: the field module's blind wedge and panorama ribbon, the lean toward light for fungus and slime, module 4's strobe and quarter-resolution ring.

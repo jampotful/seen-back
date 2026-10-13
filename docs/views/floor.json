@@ -30,6 +30,15 @@
    "values_per_parameter": 3,
    "partial": false,
    "note": "The last 8 of the jumper view's 64 parameters, after gaze.floor. All 8 left the still picture unchanged: the gaze's tracking and sleep timings act through time, spectrum.neutral draws only with &draw=neutral and pace.ratio only during a replay. Runs 74 and 75 (the same request) measured nothing because of a fault in the harness, fixed before this run."
+  },
+  {
+   "run": "engines 77, linux-chromium (ci branch, runs/engines/77-linux-chromium), from run/engines/linux-floor-moving2",
+   "date": "2026-10-13",
+   "view": "jumper",
+   "values_per_parameter": 1,
+   "partial": true,
+   "moving": true,
+   "note": "The first moving-clip run: 31 of the parameters the still picture left invisible before its time limit; recorded under 'moving'. Six stayed invisible even moving: params.cpd, params.glow, zones.front.deg[0], zones.gaze.uvR, zones.fovea.glow and zones.fovea.mag."
   }
  ],
  "floor": {
@@ -1259,6 +1268,206 @@
     "zones.gaze.mag",
     "zones.gaze.tip",
     "zones.gaze.uvR"
+   ]
+  }
+ },
+ "moving": {
+  "about": "Floors on the moving clip (FLOOR_MOVING=1, docs/ENGINE.md, The visibility floor), for the parameters the still picture left invisible, one value each. Kept apart from 'floor' and not used for the sliders' steps: the clip's own noise between two renders at one value reached a delta E p95 of 5.6 in software graphics, so the threshold was 8.4, and the smallest floors (at the first step tried) may still be noise. Treat them as a first look until a run with less noise, or a phone, confirms them.",
+  "threshold": 8.388,
+  "noise": 5.592,
+  "partial": true,
+  "jumper": {
+   "params.cpd": [
+    [
+     0.5,
+     "invisible",
+     6.896
+    ]
+   ],
+   "params.glow": [
+    [
+     0.9,
+     "invisible",
+     5.697
+    ]
+   ],
+   "params.living": [
+    [
+     0,
+     0.176
+    ]
+   ],
+   "params.glowC[0]": [
+    [
+     0.78,
+     0.0547
+    ]
+   ],
+   "params.glowC[1]": [
+    [
+     1,
+     0.0293
+    ]
+   ],
+   "params.glowC[2]": [
+    [
+     0.62,
+     0.188
+    ]
+   ],
+   "zones.front.deg[0]": [
+    [
+     114,
+     "invisible",
+     8.342
+    ]
+   ],
+   "zones.front.deg[1]": [
+    [
+     98,
+     3.83
+    ]
+   ],
+   "zones.front.soft": [
+    [
+     0.2,
+     0.0156
+    ]
+   ],
+   "zones.front.living": [
+    [
+     1.6,
+     0.00391
+    ]
+   ],
+   "zones.gaze.deg[1]": [
+    [
+     21,
+     0.347
+    ]
+   ],
+   "zones.gaze.tip": [
+    [
+     0.45,
+     0.0303
+    ]
+   ],
+   "zones.gaze.uvR": [
+    [
+     0.5,
+     "invisible",
+     7.079
+    ]
+   ],
+   "zones.gaze.glow": [
+    [
+     0,
+     0.0156
+    ]
+   ],
+   "zones.gaze.living": [
+    [
+     0,
+     0.25
+    ]
+   ],
+   "zones.gaze.mag": [
+    [
+     1.25,
+     0.242
+    ]
+   ],
+   "zones.fovea.deg[0]": [
+    [
+     5,
+     0.186
+    ]
+   ],
+   "zones.fovea.deg[1]": [
+    [
+     4,
+     0.668
+    ]
+   ],
+   "zones.fovea.cpd": [
+    [
+     3.6,
+     0.113
+    ]
+   ],
+   "zones.fovea.uvR": [
+    [
+     0.5,
+     0.0156
+    ]
+   ],
+   "zones.fovea.glow": [
+    [
+     0,
+     "invisible",
+     7.631
+    ]
+   ],
+   "zones.fovea.living": [
+    [
+     0,
+     0.133
+    ]
+   ],
+   "zones.fovea.mag": [
+    [
+     1.25,
+     "invisible",
+     4.809
+    ]
+   ],
+   "gaze.saccade[0]": [
+    [
+     40,
+     4.3
+    ]
+   ],
+   "gaze.saccade[1]": [
+    [
+     4,
+     3.13
+    ]
+   ],
+   "gaze.sweep[0]": [
+    [
+     2,
+     0.0977
+    ]
+   ],
+   "gaze.sweep[1]": [
+    [
+     1.2,
+     0.293
+    ]
+   ],
+   "gaze.twist[0]": [
+    [
+     25,
+     54.7
+    ]
+   ],
+   "gaze.twist[1]": [
+    [
+     2000,
+     3750
+    ]
+   ],
+   "gaze.twist[2]": [
+    [
+     3500,
+     500
+    ]
+   ],
+   "gaze.examine[0]": [
+    [
+     4000,
+     523
+    ]
    ]
   }
  }
