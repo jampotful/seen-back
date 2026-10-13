@@ -126,7 +126,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await shot(page, 'L1-lent');
     await page.evaluate(() => window.__seenBack.lookAgain && window.__seenBack.lookAgain(window.__seenBack.record()[1])); await page.waitForTimeout(600);
     r.goneStays = await page.evaluate(() => !document.getElementById('record').hidden && window.__seenBack.S.screen);
-    await page.locator('#metList li .ico').first().tap(); await page.waitForTimeout(1200); r.lentOpens = (await st(page)).eyes;
+    await page.locator('#metList li .ico').first().tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 4000 }).catch(() => {}); r.lentOpens = (await st(page)).eyes;
     r.errors = errors; out.lent = r;
     const ok = r.sub === '' && r.rings === 1 && r.days.join() === '1d'
       && r.eyes.length === 2 && r.eyes.some((e) => /^1p:Look as/.test(e)) && r.eyes.some((e) => /^0p:A creature you’ve already viewed the world as$/.test(e))
