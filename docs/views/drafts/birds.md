@@ -52,8 +52,8 @@ Rows:
   Log: Potier et al. 2020 (cff_hz, Falco peregrinus, Falco cherrug, Parabuteo unicinctus); Lund University news (cff_hz, the superseded 77).
 - `['m', 'Field of view', 'A red-tailed hawk sees about 280 degrees around itself and a Cooper\'s hawk about 300. The two eyes overlap across about 35 degrees in front. This view squeezes that wider sweep onto the screen and bends its edges.']`
   Log: O'Rourke et al. 2010 (fov_h_deg and binocular_deg, Buteo jamaicensis, Accipiter cooperii, Falco sparverius); Potier et al. 2023 (binocular_deg, diurnal raptors 37.4).
-- `['g', 'Steady head', 'A hawk\'s eyes hardly turn in their sockets, so it moves its whole head in quick jumps and holds it still in between. A kestrel\'s eyes move only about one degree. This view holds the picture still against small turns of your phone, then jumps to catch up.']`
-  Log: Tucker 2000 (eye_movement, eyes not rotated noticeably); O'Rourke et al. 2010 (eye_movement, Falco sparverius 0.88); Theunissen and Troje 2017 (eye_movement, Aves).
+- `['m', 'Steady head', 'A hawk\'s eyes hardly turn in their sockets, so it moves its whole head in quick jumps and holds it still in between. A hunting kestrel keeps its eyes fixed in place over the ground while its body works against the wind. This view holds the picture still against small movements of your phone, then jumps to catch up.']`
+  Log: Tucker 2000 (eye_movement, eyes not rotated noticeably); O'Rourke et al. 2010 (eye_movement, Falco sparverius 0.88); Videler et al. 1983 (eye_movement, Falco tinnunculus); Theunissen and Troje 2017 (eye_movement, Aves).
 - `['g', 'Colour', 'Hawks and falcons have four kinds of colour-sensing cells, one more than people. The fourth responds to violet light, and hawks make little use of ultraviolet. This view keeps colours close to your camera\'s and adds only a faint violet tint.']`
   Log: Hart 2001 (receptor_classes, Aves); Ödeen and Håstad 2003 (colour_vision, raptors violet type); Lind et al. 2013b (colour_vision, buzzard, sparrowhawk, red kite, kestrel); Mitkus et al. 2017 (fovea, violet and green cones in the central fovea).
 - `['m', 'Vole trails', 'Kestrels were once thought to find voles by the ultraviolet glow of their urine. Measurements of raptor eyes and of vole urine show that the glow is too weak to guide them, so this view draws no such trails.']`
@@ -81,7 +81,7 @@ The picture:
 New effects:
 
 1. **Far and near looking.** In the far mode the frame centre is the deep fovea, sharp and full colour, with the head's straight-ahead direction 45 degrees to one side; the shallow fovea of the same eye is a second, softer sharp spot 30 degrees toward that side. In the near mode (a tap on something close, or a depth estimate under about 8 metres) the view turns, with a short swing of the picture, to face the object: the binocular centre is moderately sharp and the two shallow foveae sit at 15 degrees either side. Shader regions plus a tap; easy. A depth estimate would make it automatic at a cost. The beauty is in the turn itself: the person feels the hawk choose between its two ways of looking.
-2. **Head jumps.** Between jumps the picture is held still in the world against the phone's rotation (gyroscope), then it snaps to catch up; for a perched hawk the hold is up to about 2 seconds (Tucker 2000). Medium: device orientation needs a permission tap on iOS.
+2. **Head jumps and hovering.** Between jumps the picture is held still in the world against the phone's rotation (gyroscope) and small shifts (accelerometer), then it snaps to catch up; for a perched hawk the hold is up to about 2 seconds (Tucker 2000), and a hunting kestrel holds its eyes fixed over the ground (Videler et al. 1983). Medium: device motion needs a permission tap on iOS. Beautiful when the person tries to hold the phone still over a lawn and the picture locks, as a kestrel's does.
 3. **Locked pursuit.** When something moves across the frame, the deep fovea's sharp spot follows it at a fixed angle, the goshawk's way of pursuing (Kane et al. 2015). Uses the motion-salience map; medium.
 
 ### 2.2 `owl`: owls (new)
@@ -90,8 +90,8 @@ Rows:
 
 - `['m', 'Eyes that face forward', 'An owl\'s eyes face forward, so their views overlap across about 45 degrees in front, more than in most birds. Its whole view spans about 200 degrees. This view keeps a wide overlapping centre and squeezes the sides.']`
   Log: Potier et al. 2023 (binocular_deg, Strigiformes 34 to 54.5, mean 45.4; fov_h_deg, Strix aluco 200); Martin 2017 (binocular_deg, Aves 20 to 30 typical).
-- `['m', 'Fixed eyes', 'An owl\'s eyes barely move in their sockets, by less than one degree, so the owl turns its whole head to look. This view holds still and then jumps when you turn the phone, as an owl\'s head turns.']`
-  Log: Potier et al. 2023 (eye_movement, under 1 degree); Theunissen and Troje 2017 (eye_movement, Aves).
+- `['m', 'Fixed eyes', 'An owl\'s eyes barely move in their sockets, by less than one degree, so the owl turns its whole head to look, as far as about 270 degrees. This view holds still and then jumps when you turn the phone, as an owl\'s head turns.']`
+  Log: Potier et al. 2023 (eye_movement, under 1 degree); Sieradzki 2022, a review (eye_movement, 270 degrees); Theunissen and Troje 2017 (eye_movement, Aves).
 - `['m', 'Sharpness', 'A barn owl sees only a fifteenth to a twentieth as much detail as a person does, among the lowest values measured in any bird, and other owls measured average about a third. This view is blurred to about a sixth of a person\'s sharpness, between the two.']`
   Log: Harmening et al. 2009 (acuity_cpd, Tyto alba pratincola 2.6 to 4.0); Caves et al. 2018 (acuity_cpd, barn owl 4); Caves et al. 2023 (acuity_cpd, Strigiformes 21.9).
 - `['m', 'Night vision', 'A tawny owl\'s eye works close to the limit that any vertebrate eye can reach in dim light. A barn owl sees most sharply in twilight and keeps a quarter of its sharpness when the light falls to a three-hundred-thousandth. This view brightens the shadows and keeps detail as the light fades.']`
@@ -310,6 +310,7 @@ New effects:
 - **Mallard**: pigments 415, 452, 506, 567 nm, eye media 370 to 380 nm, binocular strip 22 degrees wide and 210 long. **Northern shoveler**: 20 degrees wide, 220 long. Log: Hart 2001; Cantlay et al. 2023; Guillemain et al. 2002.
 - **Black-crowned night heron**: field 320 degrees, binocular 22. **Common gallinule** (as common moorhen): field 300 degrees, binocular 34, bobs walking and swimming. Log: Katzir and Martin 1998; Portugal et al. 2026; Necker 2007.
 - **Blue tit** 131 Hz and pigments 371, 448, 503, 563 nm; **pied** and **collared flycatchers** 146 and 141 Hz. Log: Boström et al. 2016; Hart 2001.
+- **Eastern meadowlark**: one fovea that looks above the horizon with the head at rest, binocular field reaching the bill tip. Log: Tyrrell et al. 2013.
 - **Zebra finch**: field 300 degrees, head saccades. **House sparrow** 4.9, **house finch** 4.7, **white-throated sparrow** 7.7, **black phoebe** 8.9 cycles per degree. Log: Eckmeier et al. 2008, 2013; Arnold et al. 2022; Caves et al. 2023.
 - **Anna's hummingbird**: 5 to 6 cycles per degree, 70 to 80 Hz. Log: Goller et al. 2019.
 - **Blue jay**: 3.4 minutes of arc, about 8.8 cycles per degree. **Red-winged blackbird**: ultraviolet-sensitive, one fronto-lateral fovea per eye, a wide binocular field without foveal input (numbers in the full paper). **Great blue heron**: rods, single and double cones about 2:1:1, with oil droplets. Log: Stone; Fernández-Juricic et al. 2019; Braekevelt 1994.
@@ -412,6 +413,7 @@ Opened means the full text, or the abstract on the collection index, a publisher
 - Martin GR, Katzir G, *Brain Behav. Evol.* (2008 online), heron fields. 10.1159/000113571. opened (abstract)
 - Martin GR, Portugal SJ, Murn CP 2012, *Ibis*, *Gyps* vulture fields. 10.1111/j.1474-919x.2012.01227.x. opened (abstract)
 - Mitkus M et al. 2017, *J. Comp. Neurol.*, raptor fovea photoreceptors. 10.1002/cne.24190. opened (abstract)
+- Moore BA et al. 2017, *Sci. Rep.*, fovea position and head and eye movement in 29 species. 10.1038/srep38406. opened (full text)
 - Necker R 2007, *J. Comp. Physiol. A* 193: 1177-1183, head-bobbing. 10.1007/s00359-007-0281-3. opened (author's copy)
 - Nießner C et al. 2011, *PLoS ONE*, cryptochrome in UV/V cones. 10.1371/journal.pone.0020091. opened (abstract)
 - O'Rourke CT et al. 2010, *PLoS ONE*, hawk eyes I. 10.1371/journal.pone.0012802. opened (full text)
@@ -433,13 +435,16 @@ Opened means the full text, or the abstract on the collection index, a publisher
 - Potier S, Mitkus M, Kelber A 2020, *Semin. Cell Dev. Biol.* 106: 116-126, raptor and owl vision. 10.1016/j.semcdb.2020.05.004. opened (abstract, Lund portal)
 - Rojas LM et al. 1998, *Brain Behav. Evol.*, shorebird night vision. 10.1159/000006580. opened (abstract)
 - Ruggeri M et al. 2010, *Invest. Ophthalmol. Vis. Sci.*, OCT of raptor and owl retinas. 10.1167/iovs.10-5633. opened (abstract)
+- Sieradzki A 2022, IntechOpen chapter, owl physiology. 10.5772/intechopen.102397. opened (full text; a review, values secondary)
 - Smith EL, Greenwood VJ, Bennett ATD 2002, *JEB*, ultraviolet colour in starlings and quail. 10.1242/jeb.205.21.3299. opened (abstract)
 - Stoddard MC et al. 2020, *PNAS*, hummingbird nonspectral colours. 10.1073/pnas.1919377117. opened (abstract)
 - Stone RJ, thesis, University of Massachusetts Amherst (repository date 2023), blue jay acuity. 10.7275/6871623. opened (abstract)
 - Theunissen LM, Troje NF 2017, *Front. Neurosci.*, pigeon head stabilization. 10.3389/fnins.2017.00551. opened (full text)
 - Tucker VA 2000, *JEB* 203: 3745, deep fovea and spiral paths. 10.1242/jeb.203.24.3745. opened (abstract)
+- Tyrrell LP et al. 2013, *Sci. Rep.*, eastern meadowlark vision. 10.1038/srep03231. opened (full text)
 - Tyrrell LP et al. 2018, *Front. Neurosci.*, hummingbird visual space. 10.3389/fnins.2018.00016. opened (full text)
 - Tyrrell LP, Fernández-Juricic E 2017, *Am. Nat.*, swallow eyes. 10.1086/691404. opened (abstract)
+- Videler JJ, Weihs D, Daan S 1983, *JEB* 102: 1, kestrel hunting flight. 10.1242/jeb.102.1.1. opened (abstract)
 - White CR et al. 2007, *PLoS ONE* 2: e639, cormorant vision. 10.1371/journal.pone.0000639. opened (full text)
 - Wiltschko R, Nießner C, Wiltschko W 2021, *Front. Physiol.*, the magnetic compass. 10.3389/fphys.2021.667000. opened (full text; a review, values secondary)
 - Wu Y et al. 2016, *Sci. Rep.*, owl and raptor retinal transcriptomes. 10.1038/srep33578. opened (full text)
