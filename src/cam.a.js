@@ -161,6 +161,7 @@
         ['x', 'Hearing', 'A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out.']] }
   };
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
+  if (/[?&]selftest=1(?:&|$)/.test(location.search || '') && !TRY_KEYS.length) TRY_KEYS = Object.keys(TRY);   // the self-test draws them all
   TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; });
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }

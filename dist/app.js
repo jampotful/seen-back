@@ -162,6 +162,7 @@
         ['x', 'Hearing', 'A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out.']] }
   };
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
+  if (/[?&]selftest=1(?:&|$)/.test(location.search || '') && !TRY_KEYS.length) TRY_KEYS = Object.keys(TRY);   // the self-test draws them all
   TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; });
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
@@ -410,8 +411,9 @@
     '  m = mix(vec3(dot(m, vec3(0.2126, 0.7152, 0.0722))), m, sat);',
     '#if ZONES',   // movement glows, where the view asks for it, except at the places the side eyes are ignoring
     '  if (u_salOn > 0.001) {',
-    '    vec4 sl = texture(u_sal, uv0);',
-    '    float g = (sl.r + gl0.y * sl.g) * gl0.x * u_salOn, ig = 0.0;',
+    '    vec2 st = 0.6 / vec2(textureSize(u_sal, 0));',   // four samples a little apart, so the coarse map glows as soft light
+    '    vec4 sl = 0.25 * (texture(u_sal, uv0 + st) + texture(u_sal, uv0 - st) + texture(u_sal, uv0 + vec2(st.x, -st.y)) + texture(u_sal, uv0 + vec2(-st.x, st.y)));',
+    '    float g = gl0.x * (1.0 - exp(-1.8 * (sl.r + gl0.y * sl.g))) * u_salOn, ig = 0.0;',
     '    for (int j = 0; j < 6; j++) { vec4 I = u_ior[j]; if (I.w > 0.0) { vec2 dd = (uv0 - I.xy) * u_zScale; ig = max(ig, I.w * exp(-dot(dd, dd) / (I.z * I.z))); } }',
     '    m += u_glowC * (g * (1.0 - ig) * edge * u_expo);',
     '  }',
@@ -483,7 +485,7 @@
     '    float gx = 0.5 * (L(u_a, q + vec2(u_cell.x, 0.0)) - L(u_a, q - vec2(u_cell.x, 0.0)));',
     '    float gy = 0.5 * (L(u_a, q + vec2(0.0, u_cell.y)) - L(u_a, q - vec2(0.0, u_cell.y)));',
     '    float it = a - b, g2 = gx * gx + gy * gy;',
-    '    float d = max(abs(it) - 0.02 - (0.3 + 0.2 * sl) * sqrt(g2), 0.0);',
+    '    float d = max(abs(it) - 0.02 - (0.45 + 0.2 * sl) * sqrt(g2), 0.0);',
     '    if (qb.x < 0.0 || qb.y < 0.0 || qb.x > 1.0 || qb.y > 1.0) d = 0.0;',
     '    vec2 fl = -it * vec2(gx, gy) / (g2 + 0.0004);',
     '    F += fl * d; Fm += length(fl) * d; Fw += d;',
@@ -860,7 +862,7 @@
       newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; },
       state: function () { return { sw: sw, sh: sh, writes: writes, stepMs: stepMs, moving: moving, floatOK: floatOK, err: gl.getError() }; },
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
-      probe: function () { return { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr }; },
+      probe: function (clear) { var r = { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr }; if (clear) { cpuMs = []; gpuMs = []; } return r; },
       // for the checks: the gaze, the movement map's last read, and a way to hold the gaze in one place
       gazeState: function () { var G = gaze.G; return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync, log: G.log.slice() }; },
       pinGaze: function (x, y) { gaze.pin(x === undefined ? null : x, y); },
