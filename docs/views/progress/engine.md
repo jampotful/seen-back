@@ -61,3 +61,13 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 1. Runs 76 (still: the last eight parameters, all invisible) and 77 (moving: 31 parameters before its time limit) are in `docs/views/floor.json`, the moving results under `moving`, apart from the sliders' floors because the clip's own noise was high (threshold 8.4). A second moving run (push to `run/engines/linux-floor-moving3`) continues after `gaze.twist[1]`; less noise would need a fixed clock in the page.
 2. The owner's phone checks in `docs/STATUS.md`. Which way roll, elevation and heading turn the picture is untested on a phone.
 3. Not built: the field module's blind wedge and panorama ribbon, the lean toward light for fungus and slime, module 4's strobe and quarter-resolution ring.
+
+# Burst 5 (started 13 October 2026, 16:41 US Eastern, from `main` at `0fa1f5b`; stops by 19:10)
+
+## Plan
+1. Modules 8 to 11: `field`, `overlay`, `sound`, `haptic`, each with sliders and `&draw=` options.
+2. Specs behind `?try=` for owl, duck, bigcat, fox, woodlouse, millipede, centipede and harvestman, from the research branches.
+3. `docs/views/COMPILER.md`, the spec compiler's input.
+
+## Done (pushed to `agent/engine`)
+- Nothing yet.
