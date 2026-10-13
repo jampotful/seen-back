@@ -206,9 +206,9 @@ L100, L127.
 ### 2.3 `dog` (domestic dog, coyote, wolf, jackals and the other canids with round pupils)
 
 ```
-['m', 'Sharpness', 'A typical dog sees fine detail about an eighth as well as a person does, and the sharpest-sighted dogs about a fifth. This view is blurred to match.'],
+['m', 'Sharpness', 'Dogs see fine detail between about a third and an eighth as well as people do, depending on the dog and the test. When dogs and people were tested side by side, people saw about three times as much detail, by day and at night. This view is blurred to match.'],
 ```
-L29 (typical 20/75), L30 (20/45 to 20/85), L31, L46 (no better than 12.6 cycles per degree), L118 (four to seven times lower), L139, L1.
+L166 to L168 and L170 to L172 (5.5 to 19.5 cycles per degree in bright light; people 32 to 44 in the same set-up; about three times), L29 (typical 20/75), L30, L31, L46 (no better than 12.6 in earlier work), L118, L139, L1.
 
 ```
 ['m', 'Sharpest spot', 'Wolves and long-nosed dogs see most sharply along a band level with the horizon. Short-nosed dogs such as pugs see most sharply in one central spot, and most breeds fall in between. This view shows the band.'],
@@ -243,7 +243,7 @@ L34, L15. A walker at 1 metre a second, 75 metres away, crosses 0.76 degrees a s
 ```
 ['m', 'Dim light', 'A dog’s retina holds more rods than a person’s, even in its sharpest area, and most dogs have a mirror-like tapetum behind the retina that gives light a second pass. In a study of 539 dogs, the tapetum was full-sized in seven dogs in ten and missing in about two in a hundred. This view brightens the shadows a little.'],
 ```
-L119, L87, L43 (coyotes see by the natural light of many nights).
+L119, L87, L43 (coyotes see by the natural light of many nights). Dim light helps a dog detect light and movement; it does not make it sharper-sighted than a person: at about moonlight level dogs resolved 1.8 to 3.5 cycles per degree and people 5.9 to 9.9 (L169, L171).
 
 ```
 ['m', 'Short noses', 'Short-nosed breeds follow a pointing hand better than long-nosed breeds, and short-headed dogs meet a stranger’s eyes sooner.'],
@@ -271,7 +271,7 @@ L101, L102, L127.
 |---|---|---|
 | `chip`, `who`, `cue` | 'Dog, coyote, wolf', 'a dog', 'The sharpest part is a band along the horizon. Tap the screen to move the focus.' | the app's wording |
 | `fov` | 240 | L79, L157 (confirmed: 240 and 250) |
-| `cpd` | 9 (was 11) | L29 to L31, L46: measured values run from about 7 to 12.6 cycles per degree with a typical dog near 8; 9 is my pick within them |
+| `cpd` | 9 (was 11) | L166, L29 to L31, L46: measured values run from about 5.5 to 19.5 cycles per degree, most between 6 and 13, with a typical dog near 8 to 10; 9 is my pick within them |
 | `topoS`, `topoA` | 1 and 0.5 (was `topoS` 1 alone); short-nose setting 0.2 and 1 | L36, L37, L44; the weights are **invented** |
 | `fall` | 1.6 | **invented** (unchanged) |
 | `pupil` | 'o' | L53 |
@@ -285,7 +285,7 @@ L101, L102, L127.
 
 1. **A nose setting.** A chip under the dog's name, "Long nose" or "Short nose", moves the sharpness from the horizon band to one central spot (L36). Easy. True to McGreevy and colleagues, and the person sees at once why a pug and a greyhound watch different parts of a room.
 2. **Slow movement stands still.** Parts of the scene moving slower than about 0.8 degrees a second (L34) stay held on an earlier frame until they have moved far enough to register, then jump into place. Input: the salience map the engine track is building, with the phone's own movement removed through the gyroscope. Difficulty: medium. What the person sees: a distant walker seems to freeze and step, while anything close and quick moves as usual. The threshold needs the screen's degrees per pixel, which `VIEW_DEG` already sets. It needs a row once built.
-3. **The night shift** (2.1, effect 1), with the dog's rods peaking near 508 nm (L116).
+3. **The night shift** (2.1, effect 1), with the dog's rods peaking near 508 nm (L116). For dogs the shift can follow measurements: sharpness falls from about 9 cycles per degree in room light (43 cd/m²) to about 2.6 near moonlight (0.0087 cd/m²), the middle of 1.8 to 3.5, while people fall from 32 to 44 to 6 to 10 in the same set-up (L166, L169 to L171). The ratio of dog to person stays near a third, so the view's blur should grow in the dark by the same factor as the person's own.
 4. **The near point** (2.1, effect 2), at 0.33 to 0.5 m (L82).
 
 ### 2.4 `fox` (red fox, Arctic fox, gray fox and their relatives)
@@ -387,7 +387,7 @@ Walls (1942) judged cats colour-blind (L147); later recordings found two cone cl
 
 | Row or field | Today | Check |
 |---|---|---|
-| Sharpness (`m`) | "about a quarter to a seventh" | **corrected** to a fifth to an eighth: measured dog acuity runs from about 7 to 12.6 cycles per degree (L29 to L31, L46), and the press summary's four to seven times (L139) rests on a table not opened |
+| Sharpness (`m`) | "about a quarter to a seventh" | **corrected** to a third to an eighth: measured dog acuity runs from about 5.5 to 19.5 cycles per degree (L166 to L168, L29 to L31, L46), people saw about three times as much in a side-by-side test (L172), and the press summary's four to seven times (L139) rests on a table not opened |
 | `cpd` 11 | | **corrected** to 9 |
 | Sharpest spot (`m`) | long noses a band, short noses a spot | **confirmed** (L36, L37, L38); the fovea-like patch is new (L44) |
 | `topoS` 1, `fall` 1.6 | | `topoS` **confirmed**; add `topoA` 0.5; `fall` stays an invented value |
@@ -404,6 +404,7 @@ Every row that compares an animal with "people" or "a person" should use these f
 |---|---|---|
 | Sharpness | about 60 cycles per degree at the centre of gaze (a cycle is one dark and one light stripe). Comparisons are fractions of 60 | L1, L6 (retinal sampling about 60), L5 (optical limit about 70 with a 2 mm pupil), L3 (73 in a textbook table) |
 | Sharpness away from the centre | half by about 2.5 degrees, a tenth by about 7 degrees | L60, L2 |
+| Sharpness in dim light | about 32 to 44 cycles per degree in room light and 6 to 10 near moonlight, in a test built for dogs | L170, L171 |
 | Field of view | about 200 degrees side to side with both eyes; about 120 of them seen by both eyes; about 135 top to bottom | L57, L58, L59. The older round figure of 180 (L158, with the eyes at rest; repeated in L77 and L132) is smaller than clinical perimetry finds; 140 for the overlap is Kahmann's maximum (L145) |
 | Flicker | about 60 times a second at the centre of view in bright light; in very bright light at the edge of view, up to about 90 to 110; fewer in dim light | L13, L61, L62, L63, L164 (rises with the logarithm of intensity) |
 | Colour | three kinds of cone, most sensitive near 420 (blue-violet), 530 (green) and 560 (yellow-green) nanometres; light from about 400 to 700 nanometres | L128, L129, L130 (M and L also L10, L11, L91, L92), L12, L9 |
@@ -429,11 +430,13 @@ Three consequences for the code:
 | domestic cat | behavioural gratings across the field | 3.5 at the centre; half an octave lower at 4 degrees, 1.3 octaves lower at 16 | L88, L89 |
 | domestic cat | letter (optotype) recognition, two cats | 20/33 (young cat) and 20/74 (older cat, +2 D) | L19 |
 | domestic cat | press summary of a 600-species compilation | about a seventh of a person's | L95 |
-| domestic dog | behavioural (Snellen-equivalent) | 20/45 to 20/85; 20/60 to 20/85 in Shiba dogs; typical 20/75 | L29 to L31 |
+| domestic dog | behavioural (Snellen-equivalent), from a review | 20/45 to 20/85; 20/60 to 20/85 in Shiba dogs; typical 20/75 | L29 to L31 |
 | domestic dog | evoked potentials and other methods, summarised | no better than 12.6 cycles per degree | L46 |
 | domestic dog | cone density in the fovea-like patch | 25 to 46 (an upper bound, ignoring optics and convergence) | L45 |
+| domestic dog | two-choice gratings, four whippets, a pug, a sheepdog | 5.5 to 19.5 in room light (pug 19.5, whippets 6.7 to 15.8); 1.8 to 3.5 near moonlight | L166 to L169 |
 | cheetah | compiled value, method not stated | 23 | L94 |
 | person | foveal gratings; retinal sampling; optical limit | about 60; about 60; about 70 with a 2 mm pupil | L1, L6, L5 |
+| person | the dogs' two-choice gratings | 32.1 to 44.2 in room light; 5.9 to 9.9 near moonlight | L170, L171 |
 
 Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best human eyes (60) near 20/10. The app compares animals with 60, so "a tenth as well as a person" means about 6 cycles per degree.
 
@@ -537,6 +540,7 @@ Not on the list because no opened page gave an exact citation: Gunter's 1951 pap
 - Konrade KA and 4 others 2012. Refractive states of eyes ... in domestic cats. *American Journal of Veterinary Research*. doi 10.2460/ajvr.73.2.279. **opened** (abstract in the collection index).
 - Lamm N 2013. What do cats see? https://nickolaylamm.com/art-for-clients/what-do-cats-see/. **opened** (popular article; the source of the current cat rows).
 - Land MF, Nilsson D-E 2012. *Animal Eyes*, 2nd edition. Oxford University Press. doi 10.1093/acprof:oso/9780199581139.001.0001. **opened** in part (owner's Drive: chapters 1 and 2, chapter 3 to p. 65).
+- Lind O, Milton I, Andersson E, Jensen P, Roth LSV 2017. High visual acuity revealed in dogs. *PLoS ONE* 12(12): e0188557. doi 10.1371/journal.pone.0188557. **opened**.
 - Lõoke M, Kanizsár O, Battaglini L, Guerineau C, Mongillo P, Marinelli L 2020. Are dogs good at spotting movement? *Current Zoology* 66(6): 699 to 701. doi 10.1093/cz/zoaa044. **opened**; its cat and human figures are **secondary**.
 - Malkemper EP, Peichl L 2018. Retinal photoreceptor and ganglion cell types and topographies in the red fox and Arctic fox. *Journal of Comparative Neurology*. doi 10.1002/cne.24493. **opened** (abstract in the collection index).
 - Malmström T, Kröger RHH 2006. Pupil shapes and lens optics in the eyes of terrestrial vertebrates. *Journal of Experimental Biology* 209: 18 to 25. doi 10.1242/jeb.01959. **opened**.
