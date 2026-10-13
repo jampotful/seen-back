@@ -369,9 +369,10 @@
   }
   $('btnBegin').addEventListener('click', function () {
     armBack();
+    if (tryStart()) return;                        // a view being tried opens at once (?try=, src/cam.c1.js)
     if (!hasCamera || S.camRefused) { toAskAnimal(); return; }
     var btn = $('btnBegin'); btn.disabled = true;
-    openCamera('environment').then(function () {
+    openCamera(TUNE.draw === 'face' ? 'user' : 'environment').then(function () {
       btn.disabled = false; setEyes(null); go('finder'); msg('That didn’t work. Try again or upload a photo of a species.', 4500);
     }, function () { btn.disabled = false; toAskAnimal(); });
   });
@@ -767,7 +768,9 @@
   requestAnimationFrame(loop);
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
-    pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
+    pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; },   // hold the change of eyes at one instant, for checking
+    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; }, params: function (k) { return k && EYES[k] ? paramsOf(EYES[k]) : HUMAN; },
+    look: function (k) { if (!EYES[k]) return false; closeSheets(); setEyes(k, { common: EYES[k].chip || k, scientific: '', by: 'you' }); go('animal'); S.k = S.kGoal = 1; return true; } };   // straight into a view, keeping no encounter, for checking          // the picture engine's probe, gaze and movement map, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
   var frameMs = [], frameLast = 0;
@@ -789,9 +792,12 @@
     var b = large.about();
     if (b.have) L.push('Larger model: ' + (b.model || 'unnamed') + ', ' + (b.have === 'kept' ? 'on this device' : b.have === 'getting' ? 'being fetched' : b.have === 'partial' ? 'partly on this device' : 'not on this device') + ', ' + Math.round(b.keptBytes / 1e6) + ' of ' + Math.round(b.bytes / 1e6) + ' MB' +
       (b.last ? '; last photo ' + b.last.kind + ' ' + b.last.kindP.toFixed(2) + (b.last.species[0] ? ', ' + b.last.species[0].sci + ' ' + b.last.species[0].p.toFixed(2) : '') + ', in ' + (b.last.ms.run / 1000).toFixed(1) + ' s' + (b.last.ms.load ? ' after ' + (b.last.ms.load / 1000).toFixed(1) + ' s to start' : '') : '') +
+      (b.place ? '; place from ' + (b.place.known ? 'the time zone ' + b.place.zone : 'no known time zone') + ' and ' + b.place.met + (b.place.met === 1 ? ' creature' : ' creatures') + ' met' : '') +
       (b.state === 'failed' && b.fail ? '; ' + b.fail : '') + '.');
     L.push('Picture: ' + canvas.width + ' by ' + canvas.height + (st && st.sw ? ', source ' + st.sw + ' by ' + st.sh : '') + (engine ? ', limit ' + engine.side() : ', no engine') +
       (avg ? ', ' + avg.toFixed(1) + ' ms a frame over the last ' + frameMs.length + '.' : '.'));
+    var pr = engine && engine.probe ? engine.probe() : null;   // the engine's own probe (src/cam.b.js): its script time, and the graphics chip's where a timer query is offered
+    if (pr && pr.n) L.push('Engine: ' + pr.cpu.toFixed(2) + ' ms of script a frame' + (pr.gpu !== null ? ', ' + pr.gpu.toFixed(2) + ' ms on the graphics chip (timer query, ' + pr.gpuN + ' frames)' : pr.timer ? ', no timer answer yet' : ', no timer query here') + '.');
     L.push('Screen: ' + window.innerWidth + ' by ' + window.innerHeight + ' at ' + (window.devicePixelRatio || 1) + '. ' + (coarse ? 'Touch.' : 'Pointer.') + (S.camOK ? ' Camera open.' : S.camRefused ? ' Camera refused.' : ''));
     L.push(String(navigator.userAgent || '').slice(0, 200));
     return L.join('\n');

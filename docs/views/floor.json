@@ -1,0 +1,363 @@
+{
+ "about": "The visibility floor (docs/ENGINE-DESIGN.md, section 5): for each parameter of a view, at each value measured, the smallest change whose renders differ by more than the threshold in the 95th percentile of delta E*ab, on a still picture at 390 by 844 CSS pixels and a device pixel ratio of 2. Entries are [value, smallest visible change], or [value, 'invisible', the largest delta E found]. Made by test/check4.js floor; the tuning panel steps by these.",
+ "threshold": {
+  "value": 2.3,
+  "verified": false,
+  "note": "2.3 is the JND_CIE1976 constant of the colour-science Python library (colour/difference/delta_e.py, read 13 October 2026), which cites Mokrzycki and Tatol 2011; the design cites Mahy, Van Eycken and Oosterlinck 1994. Neither paper was opened, so the figure is unverified at its primary source. Calibration on the owner's phone (section 5) rescales it in any case."
+ },
+ "eye_model": "a Gaussian blur of one device pixel before the comparison, the app's own simplification in place of a contrast sensitivity model",
+ "runs": [
+  {
+   "run": "engines 72, linux-chromium (ci branch, runs/engines/72-linux-chromium)",
+   "date": "2026-10-13",
+   "view": "jumper",
+   "values_per_parameter": 3,
+   "partial": true,
+   "note": "Stopped at its time limit after 21 of the jumper view's parameters; the rest wait for another run. Measured on a still frame with the gaze pinned at the centre and the strip drawing, so every parameter that acts only on movement (glow, living, glowC, and the front zone's living weight) shows 'invisible' with a delta E of 0 here: invisible on a still picture, not measured on a moving one."
+  }
+ ],
+ "floor": {
+  "jumper": {
+   "params.fov": [
+    [
+     210,
+     4.22
+    ],
+    [
+     270,
+     8.09
+    ],
+    [
+     330,
+     10.2
+    ]
+   ],
+   "params.cpd": [
+    [
+     0.75,
+     "invisible",
+     2.159
+    ],
+    [
+     2.05,
+     "invisible",
+     0.845
+    ],
+    [
+     3.35,
+     "invisible",
+     0.613
+    ]
+   ],
+   "params.glow": [
+    [
+     0.3333,
+     "invisible",
+     0
+    ],
+    [
+     1,
+     "invisible",
+     0
+    ],
+    [
+     1.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "params.living": [
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     1.5,
+     "invisible",
+     0
+    ],
+    [
+     2.5,
+     "invisible",
+     0
+    ]
+   ],
+   "params.glowC[0]": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "params.glowC[1]": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "params.glowC[2]": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.deg[0]": [
+    [
+     63.3333,
+     "invisible",
+     0.845
+    ],
+    [
+     110,
+     "invisible",
+     0.585
+    ],
+    [
+     156.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.deg[1]": [
+    [
+     63.3333,
+     "invisible",
+     2.26
+    ],
+    [
+     110,
+     "invisible",
+     1.245
+    ],
+    [
+     156.6667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.soft": [
+    [
+     0.0833,
+     "invisible",
+     0
+    ],
+    [
+     0.25,
+     "invisible",
+     0.389
+    ],
+    [
+     0.4167,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.front.cpd": [
+    [
+     0.8333,
+     0.371
+    ],
+    [
+     2.1,
+     "invisible",
+     2.073
+    ],
+    [
+     3.3667,
+     "invisible",
+     0.801
+    ]
+   ],
+   "zones.front.living": [
+    [
+     0.6667,
+     "invisible",
+     0
+    ],
+    [
+     2,
+     "invisible",
+     0
+    ],
+    [
+     3.3333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.deg[0]": [
+    [
+     7.083,
+     4.63
+    ],
+    [
+     20.25,
+     2.24
+    ],
+    [
+     33.4167,
+     "invisible",
+     1.853
+    ]
+   ],
+   "zones.gaze.deg[1]": [
+    [
+     7.0833,
+     "invisible",
+     0
+    ],
+    [
+     20.25,
+     "invisible",
+     0.292
+    ],
+    [
+     33.4167,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.tilt[0]": [
+    [
+     7.5,
+     18.3
+    ],
+    [
+     22.5,
+     14.8
+    ],
+    [
+     37.5,
+     "invisible",
+     0.269
+    ]
+   ],
+   "zones.gaze.tilt[1]": [
+    [
+     7.5,
+     16.2
+    ],
+    [
+     22.5,
+     "invisible",
+     1.964
+    ],
+    [
+     37.5,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.gap": [
+    [
+     0.8333,
+     1.64
+    ],
+    [
+     2.5,
+     1.72
+    ],
+    [
+     4.1667,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.tip": [
+    [
+     0.1667,
+     "invisible",
+     0
+    ],
+    [
+     0.5,
+     "invisible",
+     0
+    ],
+    [
+     0.8333,
+     "invisible",
+     0
+    ]
+   ],
+   "zones.gaze.soft": [
+    [
+     0.0167,
+     0.0141
+    ],
+    [
+     0.05,
+     0.0133
+    ],
+    [
+     0.0833,
+     "invisible",
+     1.737
+    ]
+   ],
+   "zones.gaze.cpd": [
+    [
+     2.917,
+     2.27
+    ],
+    [
+     7.75,
+     "invisible",
+     1.209
+    ],
+    [
+     12.5833,
+     "invisible",
+     0.527
+    ]
+   ],
+   "zones.gaze.uv": [
+    [
+     0.3333,
+     0.0332
+    ],
+    [
+     1,
+     0.0605
+    ],
+    [
+     1.667,
+     0.0977
+    ]
+   ]
+  }
+ }
+}

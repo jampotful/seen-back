@@ -1,0 +1,166 @@
+name: worlddb
+# The full database for the whole world (docs/tracks/worlddb.md). Start it by pushing a commit to run/worlddb/<label>:
+#   rows-<anything>   GBIF's names for every species of the world list (tools/world/names.py), BioCLIP 2's text rows in
+#                     shards (tools/coverage/text.py), packed at one byte a number in parts under 95 MB with a table of
+#                     names and a manifest of checksums (tools/world/pack.py), published to pub/naturalist-world.
+#   grid-<anything>   the records of every row in each quarter-degree cell, the countries of the cells, the world test
+#                     photos' places and time zones and the creatures their observers met (ci/worlddb/grid.sh,
+#                     tools/world/grid.py), published to pub/world-place.
+#   test-<anything>   the place files at 1 and 2 degrees (tools/world/prior.py) and the world test (tools/world/worldtest.py);
+#                     the 1-degree place files are added to pub/naturalist-world.
+#   place-<anything>  the place files at 2 degrees, the grid the world test chose (no accuracy lost against 1 degree, 60% of the size),
+#                     added to pub/naturalist-world in place of the 1-degree ones; no test.
+# Results come back on ci as runs/worlddb/<run>-<job>.
+on:
+  push:
+    branches: ['run/worlddb/**']
+permissions:
+  contents: write
+concurrency:
+  group: worlddb-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  names:
+    if: startsWith(github.ref_name, 'run/worlddb/rows')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: names
+        run: bash ci/worlddb/names.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: names
+          path: names/
+          retention-days: 5
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worlddb out names
+
+  text:
+    needs: names
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: names
+          path: names
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: rows
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          set -o pipefail
+          mkdir -p ret rows
+          python3 tools/coverage/text.py --names names/names.txt --shard "${{ matrix.shard }}/8" --out rows --templates one 2>&1 | tee ret/log.txt
+          cp rows/*.json ret/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rows-${{ matrix.shard }}
+          path: rows/
+          retention-days: 5
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worlddb ret "text-${{ matrix.shard }}"
+
+  pack:
+    needs: [names, text]
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: names
+          path: names
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: rows-*
+          path: rows
+          merge-multiple: true
+      - name: pack and publish
+        run: |
+          set -o pipefail
+          mkdir -p out
+          python3 -m pip install --quiet numpy
+          python3 -I tools/world/pack.py --names names --rows rows --out stage 2>&1 | tee out/log.txt
+          cp names/rows.tsv names/inat_rows.tsv names/summary.json stage/
+          cp stage/parts.json stage/check.json out/
+          cat > stage/README.md <<EOF
+          # The full database's world rows
+
+          BioCLIP 2's text rows for every species with a research-grade iNaturalist record through 2024, under GBIF's
+          names, one sentence a species ("a photo of <name>."), at one byte a number with a scale a row; made by
+          .github/workflows/worlddb.yml (tools/world/names.py, tools/coverage/text.py, tools/world/pack.py).
+          parts.json gives every file with its length and SHA-256. rows.tsv says where each name came from.
+          EOF
+          ls -la stage
+          bash ci/put_branch.sh pub/naturalist-world stage "world rows for the full database" 2>&1 | tee -a out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worlddb out pack
+
+  grid:
+    if: startsWith(github.ref_name, 'run/worlddb/grid')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: cells, places and zones
+        run: bash ci/worlddb/grid.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worlddb out grid
+
+  test:
+    if: startsWith(github.ref_name, 'run/worlddb/test') || startsWith(github.ref_name, 'run/worlddb/place')
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: place files and the world test
+        env:
+          PUBLISH_GRID: ${{ startsWith(github.ref_name, 'run/worlddb/place') && '2' || '1' }}
+          ONLY_PUBLISH: ${{ startsWith(github.ref_name, 'run/worlddb/place') && '1' || '' }}
+          GRIDS: ${{ startsWith(github.ref_name, 'run/worlddb/place') && '2' || '1,2' }}
+        run: bash ci/worlddb/test.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worlddb out test

@@ -1,65 +1,145 @@
 #!/usr/bin/env python3
-"""Checks views/*.json against docs/ENGINE-DESIGN.md section 3. Usage: python3 tools/views/check_spec.py [file ...]
-Refuses: a row graded m whose every linked parameter is graded i; a parameter graded m or g with no src; a value outside its range;
-an invented parameter that no row graded i or g names; a row of the wrong shape; a parameter name the engine has no field for;
-a matrix that is not 3 by 3 or a matrix name that does not exist. A row links to a parameter by listing "param:<name>" among its
-sources, or by listing a source string that the parameter also lists."""
-import json, sys, glob, os
-FIELDS = {"fov", "cpd", "fovea", "fall", "topoA", "topoS", "pupil", "dof", "M", "uvBlue", "sheen", "gain", "sat", "noGreen", "gate", "field", "persist", "hold", "thrust", "rate"}
-GRADES = {"m", "g", "i"}; ROWG = {"m", "g", "i", "x"}
-def is_param(d): return isinstance(d, dict) and "grade" in d
-def check_param(name, d, where, errs):
-    if d.get("grade") not in GRADES: errs.append("%s: grade of %s must be m, g or i" % (where, name))
-    if not isinstance(d.get("invented"), bool): errs.append("%s: %s needs a true or false 'invented'" % (where, name))
-    if d.get("grade") in ("m", "g") and not d.get("src"): errs.append("%s: %s is graded %s and has no src" % (where, name, d.get("grade")))
-    v, r = d.get("value"), d.get("range")
-    if r is not None and isinstance(v, (int, float)) and not (r[0] <= v <= r[1]): errs.append("%s: %s = %s is outside its range %s" % (where, name, v, r))
-    if r is not None and r[0] > r[1]: errs.append("%s: range of %s is reversed" % (where, name))
+"""The spec checker (docs/ENGINE-DESIGN.md, section 3). Usage: python3 -I tools/views/check_spec.py [--quiet] [views/<key>.json ...]
+
+With no files it checks every views/*.json. It refuses a spec (and exits with 1) where:
+  - a parameter's grade is not m, g, i or ? (? means not yet graded: the views converted from build 23 carry it until graded);
+  - a parameter graded m has no source;
+  - a value lies outside the parameter's range;
+  - invented is not true or false on a graded parameter;
+  - a row's grade is not m, g, i or x, or a row is not [grade, title, text] with optional [sources] and [parameters it describes];
+  - a row graded m names parameters (its fifth element) and every one of them is graded i;
+  - an invented parameter has no row graded i or g that says so: the row names it in its fifth element, or, where no row of
+    the spec names parameters, the spec has at least one row graded i or g;
+  - a matrix or an @reference names nothing.
+The build (build.py) runs it and stops on a refusal.
+"""
+import json, pathlib, sys
+
+root = pathlib.Path(__file__).resolve().parents[2]
+GRADES = {"m", "g", "i", "?"}
+
+
+def walk(x, path, out):
+    """Every parameter object under x, with its dotted path."""
+    if isinstance(x, dict):
+        if "grade" in x and ("value" in x or "curve" in x):
+            out.append((path, x))
+            return
+        for k, v in x.items():
+            walk(v, path + "." + k if path else k, out)
+    elif isinstance(x, list):
+        for i, v in enumerate(x):
+            walk(v, "%s[%d]" % (path, i), out)
+
+
+def refs(x, out):
+    if isinstance(x, str) and x.startswith("@"):
+        out.append(x[1:])
+    elif isinstance(x, dict):
+        for k, v in x.items():
+            if k == "M" and isinstance(v, str):
+                out.append(("M", v))
+            else:
+                refs(v, out)
+    elif isinstance(x, list):
+        for v in x:
+            refs(v, out)
+
+
+def inside(v, rng):
+    lo, hi = rng
+    vals = v if isinstance(v, list) else [v]
+    return all(not isinstance(n, (int, float)) or lo <= n <= hi for n in vals)
+
+
 def check(path):
-    errs = []; spec = json.load(open(path)); k = spec.get("key", "?")
-    for f in ("key", "version", "chip", "who", "modules", "params", "rows", "cue"):
-        if f not in spec: errs.append("missing %s" % f)
-    if errs: return errs
-    if os.path.splitext(os.path.basename(path))[0] != k: errs.append("file name and key differ")
-    P = spec["params"]; mats = spec.get("matrices", {})
-    for n, d in P.items():
-        if n not in FIELDS: errs.append("params: %s is not a field today's engine has" % n); continue
-        if not is_param(d): errs.append("params: %s must be a parameter object" % n); continue
-        check_param(n, d, "params", errs)
-        if n == "M" and d.get("value") not in mats: errs.append("params: M names a matrix that does not exist: %s" % d.get("value"))
-    for mn, m in mats.items():
-        rows = m.get("rows")
-        if not (isinstance(rows, list) and len(rows) == 3 and all(isinstance(r, list) and len(r) == 3 for r in rows)): errs.append("matrix %s is not 3 by 3" % mn)
-        if m.get("grade") in ("m", "g") and not m.get("src"): errs.append("matrix %s is graded %s and has no src" % (mn, m.get("grade")))
-    for sect, label in (("by", None), ("variants", None)):
-        for grp, ents in spec.get(sect, {}).items():
-            items = ents.items() if sect == "by" else [(grp, ents)]
-            for nm, e in items:
-                for n, d in e.get("params", {}).items():
-                    if n not in FIELDS: errs.append("%s %s: %s is not a field today's engine has" % (sect, nm, n))
-                    elif is_param(d): check_param(n, d, "%s %s" % (sect, nm), errs)
-    rows = spec["rows"]; links = {n: [] for n in P}
-    for i, r in enumerate(rows):
-        if not (isinstance(r, list) and len(r) == 4 and r[0] in ROWG and isinstance(r[1], str) and isinstance(r[2], str) and isinstance(r[3], list)):
-            errs.append("row %d has the wrong shape" % i); continue
-        if r[0] in ("m", "g") and not [s for s in r[3] if not s.startswith("param:")]: errs.append("row %d (%s) is graded %s and names no source" % (i, r[1], r[0]))
-        for n, d in P.items():
-            if not is_param(d): continue
-            if ("param:" + n) in r[3] or (set(r[3]) & set(d.get("src", []))): links[n].append(r[0])
-        for s in r[3]:
-            if s.startswith("param:") and s[6:] not in P: errs.append("row %d (%s) links to %s, which is not a parameter" % (i, r[1], s[6:]))
-        if "—" in r[2] or "–" in r[2]: errs.append("row %d (%s) has a dash" % (i, r[1]))
-    for i, r in enumerate(rows):
-        if isinstance(r, list) and len(r) == 4 and r[0] == "m":
-            lk = [n for n, d in P.items() if is_param(d) and (("param:" + n) in r[3] or (set(r[3]) & set(d.get("src", []))))]
-            if lk and all(P[n]["grade"] == "i" for n in lk): errs.append("row %d (%s) is graded m and every parameter it describes (%s) is graded i" % (i, r[1], ", ".join(lk)))
-    for n, d in P.items():
-        if is_param(d) and d.get("invented") and not any(g in ("i", "g") for g in links[n]): errs.append("params: %s is invented and no row graded i or g says so" % n)
-    return errs
-if __name__ == "__main__":
-    files = sys.argv[1:] or sorted(glob.glob("views/*.json")); bad = 0
+    errs, notes = [], []
+    try:
+        s = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as e:
+        return ["not JSON: %s" % e], notes
+    if s.get("key") != path.stem:
+        errs.append("key %r is not the file's name" % s.get("key"))
+    for f in ("who", "rows", "params"):
+        if f not in s:
+            errs.append("no %s" % f)
+    blocks = {k: s.get(k) for k in ("params", "zones", "gaze", "by", "inputs")}
+    params = []
+    walk(blocks, "", params)
+    for m in (s.get("matrices") or {}).values():
+        if "rows" not in m and "from_pigments" not in m:
+            errs.append("a matrix has neither rows nor from_pigments")
+    walk({"matrices": s.get("matrices") or {}}, "", params)
+    for name, mat in (s.get("matrices") or {}).items():
+        if "grade" in mat:
+            params.append(("matrices." + name, dict(mat, value=mat.get("rows"))))
+    ungraded = 0
+    for p, o in params:
+        g = o.get("grade")
+        if g not in GRADES:
+            errs.append("%s: grade %r" % (p, g))
+        if g == "?":
+            ungraded += 1
+            continue
+        if g == "m" and not o.get("src"):
+            errs.append("%s: graded m with no source" % p)
+        if not isinstance(o.get("invented"), bool):
+            errs.append("%s: invented is neither true nor false" % p)
+        if o.get("range") and "value" in o and not inside(o["value"], o["range"]):
+            errs.append("%s: %r outside %r" % (p, o["value"], o["range"]))
+    rows = s.get("rows") or []
+    named_rows = [r for r in rows if len(r) >= 5]
+    grade_of = {p.split(".")[-1]: o.get("grade") for p, o in params}
+    grade_of.update({p: o.get("grade") for p, o in params})
+    for r in rows:
+        if not isinstance(r, list) or len(r) < 3 or r[0] not in ("m", "g", "i", "x") or not all(isinstance(t, str) for t in r[1:3]):
+            errs.append("row %r is malformed" % (r[:2] if isinstance(r, list) else r))
+            continue
+        if len(r) >= 4 and not isinstance(r[3], list):
+            errs.append("row %r: sources are not a list" % r[1])
+        if len(r) >= 5 and r[0] == "m" and r[4] and all(grade_of.get(n) == "i" for n in r[4]):
+            errs.append("row %r says m and every parameter it describes is graded i" % r[1])
+    for p, o in params:
+        if o.get("invented") is True:
+            short = p.split(".")[-1]
+            if named_rows:
+                if not any(r[0] in ("i", "g") and (p in r[4] or short in r[4]) for r in named_rows):
+                    errs.append("%s: invented, and no row graded i or g names it" % p)
+            elif not any(r[0] in ("i", "g") for r in rows if isinstance(r, list) and r):
+                errs.append("%s: invented, and the spec has no row graded i or g" % p)
+    rs = []
+    refs(blocks, rs)
+    mats = set((s.get("matrices") or {}).keys())
+    for g in ((s.get("by") or {}).get("genus") or {}).values():
+        mats |= set((g.get("matrices") or {}).keys())
+    for r in rs:
+        if isinstance(r, tuple):
+            if r[1] not in mats:
+                errs.append("matrix %r is not in matrices" % r[1])
+        elif r not in (s.get("params") or {}):
+            errs.append("@%s names no parameter" % r)
+    if ungraded:
+        notes.append("%d parameters not yet graded (?)" % ungraded)
+    return errs, notes
+
+
+def main(argv):
+    quiet = "--quiet" in argv
+    files = [pathlib.Path(a) for a in argv if not a.startswith("--")] or sorted(p for p in (root / "views").glob("*.json") if p.stem != "index")
+    bad = 0
     for f in files:
-        e = check(f); print(("FAIL " if e else "ok   ") + f)
-        for x in e: print("     " + x)
-        bad += bool(e)
-    sys.exit(1 if bad else 0)
+        errs, notes = check(f)
+        if errs:
+            bad += 1
+            print("REFUSED %s" % f.name)
+            for e in errs:
+                print("  " + e)
+        elif not quiet:
+            print("ok %s%s" % (f.name, ("  (" + "; ".join(notes) + ")") if notes else ""))
+    if not quiet or bad:
+        print("%d of %d specs refused" % (bad, len(files)))
+    return 1 if bad else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

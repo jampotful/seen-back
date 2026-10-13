@@ -1,4 +1,4 @@
-// Seen Back self-test, build 23: fetched by the page only for ?selftest=1. Made by build.py from src/cam.selftest.js.
+// Seen Back self-test, build 26: fetched by the page only for ?selftest=1. Made by build.py from src/cam.selftest.js.
 (function (I) {
   if (!I) return;
   var $ = I['$'], BUILD = I['BUILD'], EYES = I['EYES'], Engine = I['Engine'], HUMAN = I['HUMAN'], HUMAN_CPD = I['HUMAN_CPD'], ORDER = I['ORDER'], S = I['S'], calm = I['calm'], canvas = I['canvas'], clamp = I['clamp'], coarse = I['coarse'], decode = I['decode'], engine = I['engine'], fxNow = I['fxNow'], go = I['go'], hasCamera = I['hasCamera'], lerp = I['lerp'], makeCanvas = I['makeCanvas'], mix = I['mix'], paramsOf = I['paramsOf'], pocket = I['pocket'], setEyes = I['setEyes'], showStill = I['showStill'], vid = I['vid'];
@@ -19,7 +19,7 @@
     if (!/^\/(?!\/)[\w\-\/.]*$/.test(reportPath)) reportPath = '';
     var T = window.__selftest = { v: 1, build: BUILD, done: false, ok: null, fails: [], checks: 0, phase: 'start', env: {}, still: {}, motion: {}, pose: [], ms: {} };
     var tStart = performance.now(), STEADY = { ap: 1, shape: 0, mosaic: 0, soft: 0, expo: 1, focus: .5, mirror: false, camZoom: 1 };
-    var EYELIST = ['person'].concat(ORDER), TWO_CONE = ['cat', 'dog', 'deer', 'rabbit', 'squirrel'], MOVERS = ['frog', 'wader', 'squirrel', 'plant'];
+    var EYELIST = ['person'].concat(ORDER, EYES.other && ORDER.indexOf('other') < 0 ? ['other'] : []), TWO_CONE = ['cat', 'dog', 'deer', 'rabbit', 'squirrel'], MOVERS = ['frog', 'wader', 'squirrel', 'plant'];
     var LIN = []; for (var i = 0; i < 256; i++) { var c = i / 255; LIN.push(c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4)); }
 
     function el(tag, css, text, parent) { var e = document.createElement(tag); if (css) e.style.cssText = css; if (text !== undefined) e.textContent = text; if (parent) parent.appendChild(e); return e; }
@@ -320,8 +320,41 @@
         var f = (E[k].grat.v2 + E[k].grat.h2) / 2;
         check('still ' + k + ': finest grating keeps less contrast than for a person', f < .9 * fineP, 'contrast ' + r2(f) + ' against ' + r2(fineP));
       });
+      await triedStill(card, rc, rx, W, H);
       T.ms.still = since();
       post();
+    }
+    // ---- 2b. the views being tried (TRY in src/cam.a.js, all of them here): zones, with the gaze held still on the test card. Where a view
+    // moves a zone by its gaze, the zone is held over one grating and then away from it: the grating must keep more contrast inside it.
+    var TRIED = Object.keys(EYES).filter(function (k) { return ORDER.indexOf(k) < 0 && k !== 'person' && k !== 'other'; });
+    async function triedStill(card, rc, rx, W, H) {
+      var L = card.L, R = T.tried = {};
+      function drawRead(P) {
+        return new Promise(function (done) {
+          requestAnimationFrame(function () {
+            engine.draw(P, STEADY, performance.now(), 16); var err = engine.state().err;
+            rx.drawImage(canvas, 0, 0); done({ err: err, img: rx.getImageData(0, 0, W, H) });
+          });
+        });
+      }
+      for (var i = 0; i < TRIED.length; i++) {
+        var key = TRIED[i], P = paramsOf(EYES[key]), g = L.grat.filter(function (x) { return x.name === 'v16'; })[0], r = R[key] = {};
+        stLine.textContent = 'Views being tried: ' + key + '.';
+        engine.newView();
+        var gx = (g.x + g.w / 2) / W, gy = 1 - (g.y + g.h / 2) / H;      // the grating's centre, in the picture's own coordinates (drawn upside down)
+        engine.pinGaze(gx, gy); var on = await drawRead(P);
+        engine.pinGaze(.9, .9); var off = await drawRead(P);
+        engine.pinGaze();
+        var box = screenBox(P, W, H, g, .18), cOn = stats(on.img, W, box).contrast, cOff = stats(off.img, W, box).contrast, wh = whole(on.img, W, H);
+        r.err = on.err || off.err; r.mean = Math.round(wh.mean); r.std = r2(wh.std); r.inside = r2(cOn); r.away = r2(cOff);
+        var bad = !check('tried ' + key + ': picture not blank', wh.std > 1.5 && wh.mean > 2, 'mean ' + r.mean + ', spread ' + r.std);
+        bad = !check('tried ' + key + ': no GL error', r.err === 0, 'error 0x' + (r.err || 0).toString(16)) || bad;
+        if (P.zones && P.zones.some(function (z) { return z.gaze; })) bad = !check('tried ' + key + ': the grating keeps more contrast inside the gaze zone', cOn > 1.3 * cOff + .01, 'inside ' + r.inside + ', away ' + r.away) || bad;
+        var t2 = makeCanvas(160, 120), c2 = makeCanvas(W, H); c2.getContext('2d').putImageData(on.img, 0, 0); t2.getContext('2d').drawImage(c2, 0, 0, 160, 120);
+        var fig = el('figure', '', undefined, sheet); fig.appendChild(t2); fig.dataset.key = key; el('figcaption', '', key + ' (tried)', fig);
+        if (bad) markTile(key);
+        await frame();
+      }
     }
     function markTile(k) { var f = sheet.querySelector('figure[data-key="' + k + '"] figcaption'); if (f) f.className = 'no'; }
 
@@ -439,6 +472,22 @@
         requestAnimationFrame(step);
       });
     }
+    // a view being tried, on the moving canvas, until its movement map has been read back once (or the time runs out)
+    function runTried(eye, ms) {
+      return new Promise(function (done) {
+        var P = paramsOf(EYES[eye]), t0 = null, n = 0, w0 = null, err = 0, last = 0;
+        function step(now) {
+          if (t0 === null) t0 = now;
+          paintMotion(now); engine.setFrame(mcv, mcv.width, mcv.height, now);
+          if (w0 === null) { var s0 = engine.state(); w0 = s0.writes; err = s0.err; }
+          engine.draw(P, STEADY, now, last ? Math.min(100, now - last) : 16); last = now; n++;
+          if ((engine.gazeState().map.reads < 1 || n < 6) && now - t0 < ms && (n < 20 || EYES[eye].salience)) { requestAnimationFrame(step); return; }
+          var st = engine.state();
+          done({ frames: n, writes: st.writes - w0, fresh: n, err: err || st.err, ms: Math.round(now - t0), size: canvas.width + 'x' + canvas.height });
+        }
+        requestAnimationFrame(step);
+      });
+    }
     async function motionPhase() {
       phase('motion', 'Moving pictures.');
       var side0 = engine.side(), sizes = [['default', side0], ['540', 540]];
@@ -462,7 +511,27 @@
           }
         }
       }
-      engine.setSide(side0);
+      engine.setSide(side0); fullSize();
+      // the views being tried, on the moving canvas: frames advance, no GL error, and the movement map is read back
+      for (var q = 0; q < TRIED.length; q++) {
+        stLine.textContent = 'Moving pictures: ' + TRIED[q] + ' (being tried) from a canvas.';
+        engine.newView();
+        var rt = T.motion.runs['tried ' + TRIED[q] + ' canvas'] = await runTried(TRIED[q], 12000), gs = engine.gazeState();
+        rt.reads = gs.map.reads; rt.jumps = gs.jumps; rt.sal = gs.sal.join('x'); rt.maxE = r2(gs.map.maxE);
+        if (rt.frames >= 20 && EYES[TRIED[q]].salience) check('motion tried ' + TRIED[q] + ': the movement map is read back without waiting', gs.map.reads > 0, 'no read in ' + rt.ms + ' ms (' + rt.frames + ' frames)');   // judged only where the engine drew enough frames for a fence to come back
+        check('motion tried ' + TRIED[q] + ': frames advance', rt.writes > 0, rt.writes + ' ring writes from ' + rt.fresh + ' new frames');
+        check('motion tried ' + TRIED[q] + ': no GL error', rt.err === 0, 'error 0x' + (rt.err || 0).toString(16));
+        var pz = engine.probe(); check('motion tried ' + TRIED[q] + ': zone programs compiled', pz.zones && !pz.zErr, pz.zErr);
+      }
+      // every view's frame time on the moving canvas, with the engine's own probe (script time, and the chip's where a timer query is offered)
+      T.views = {};
+      var all = EYELIST.concat(TRIED);
+      for (var a = 0; a < all.length; a++) {
+        stLine.textContent = 'Frame times: ' + all[a] + ' (' + (a + 1) + ' of ' + all.length + ').';
+        engine.newView(); engine.probe(true);
+        var rv = await run(all[a], 'canvas', 900), pv = engine.probe();
+        T.views[all[a]] = { ms: rv.ms, worst: rv.worst, cpu: pv.cpu === null ? null : r2(pv.cpu), gpu: pv.gpu === null ? null : r2(pv.gpu), gpuN: pv.gpuN, err: rv.err };
+      }
       try { vid.pause(); } catch (e) {}
       T.ms.motion = since();
       post();
@@ -527,6 +596,11 @@
         var mt = el('table', '', undefined, details), hr = el('tr', '', undefined, mt);
         ['moving picture', 'ms per frame', 'worst', 'ring writes', 'size'].forEach(function (h) { el('th', '', h, hr); });
         Object.keys(T.motion.runs).forEach(function (k) { var r = T.motion.runs[k], tr = el('tr', '', undefined, mt); [k, r.ms, r.worst, r.writes, r.size].forEach(function (v) { el('td', '', String(v), tr); }); });
+      }
+      if (T.views) {
+        var vt = el('table', '', undefined, details), vh = el('tr', '', undefined, vt);
+        ['view', 'ms per frame', 'worst', 'script ms', 'chip ms'].forEach(function (h) { el('th', '', h, vh); });
+        Object.keys(T.views).forEach(function (k) { var r = T.views[k], tr = el('tr', '', undefined, vt); [k, r.ms, r.worst, r.cpu, r.gpu === null ? 'no timer' : r.gpu].forEach(function (v) { el('td', '', String(v), tr); }); });
       }
       if (T.rec) {
         var rt = el('table', '', undefined, details), rh = el('tr', '', undefined, rt);

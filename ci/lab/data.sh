@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 # Put the species list and evaluation manifest in data_in/: from pub/data-alachua when it exists (or when asked),
-# otherwise a stand-in made from GBIF by tools/lab/standin.py. Usage: bash ci/lab/data.sh <auto|pub/data-alachua|standin>
+# otherwise a stand-in made from GBIF by tools/lab/standin.py. Usage: bash ci/lab/data.sh <auto|pub/data-alachua|pub/data-world|standin>
+# With pub/data-world the manifest comes from that branch (the world photos, tools/world/) and the species list from
+# pub/data-alachua.
 set -uo pipefail
 want="${1:-auto}"; manpath="${2:-}"; waitmin="${3:-0}"; waitfile="${4:-}"
+mbranch=pub/data-alachua
+if [ "$want" = pub/data-world ]; then mbranch=pub/data-world; want=pub/data-alachua; fi
 # Optionally wait (up to waitmin minutes) for the manifest to appear on pub/data-alachua, and for a file on another
 # branch (waitfile: JSON ["<branch>", "<path>"]), e.g. an earlier run's published vectors.
 t0=$(date +%s)
 if [ -n "$manpath" ] && [ "${waitmin:-0}" -gt 0 ]; then
-  until git fetch -q --depth 1 origin pub/data-alachua 2>/dev/null && git cat-file -e "FETCH_HEAD:$manpath" 2>/dev/null; do
+  until git fetch -q --depth 1 origin "$mbranch" 2>/dev/null && git cat-file -e "FETCH_HEAD:$manpath" 2>/dev/null; do
     [ $(( $(date +%s) - t0 )) -ge $(( waitmin * 60 )) ] && { echo "waited $waitmin minutes; $manpath never appeared"; exit 1; }
-    echo "[$(date -u +%T)] waiting for $manpath on pub/data-alachua"; sleep 60
+    echo "[$(date -u +%T)] waiting for $manpath on $mbranch"; sleep 60
   done
 fi
 if [ -n "$waitfile" ] && [ "$waitfile" != '""' ]; then
@@ -30,7 +34,13 @@ if [ "$src" = pub/data-alachua ]; then
   git show FETCH_HEAD:regions/us-fl-alachua/species.json > data_in/species.json
   git show FETCH_HEAD:_made.txt > data_in/data_made.txt 2>/dev/null || true
   [ -n "$(git ls-tree --name-only FETCH_HEAD tools/species/fetch_photos.py)" ] && git show FETCH_HEAD:tools/species/fetch_photos.py > data_in/fetch_photos_species.py || true
-  if [ -n "$manpath" ]; then man="$manpath"; git cat-file -e "FETCH_HEAD:$man" 2>/dev/null || { echo "$man is not on pub/data-alachua"; exit 1; }
+  if [ "$mbranch" != pub/data-alachua ]; then
+    [ -n "$manpath" ] || { echo "a manifest path is needed with $mbranch"; exit 1; }
+    git fetch -q --depth 1 origin "$mbranch" || { echo "$mbranch does not exist"; exit 1; }
+    sha="$sha, $mbranch@$(git rev-parse FETCH_HEAD)"
+    src="pub/data-alachua (species) + $mbranch (manifest)"
+  fi
+  if [ -n "$manpath" ]; then man="$manpath"; git cat-file -e "FETCH_HEAD:$man" 2>/dev/null || { echo "$man is not on $mbranch"; exit 1; }
   else man=$(git ls-tree -r --name-only FETCH_HEAD | grep -E '^eval/[^/]+/manifest\.csv$' | head -1); fi
   if [ -n "$man" ]; then
     git show "FETCH_HEAD:$man" > data_in/manifest.csv

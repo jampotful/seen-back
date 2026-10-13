@@ -1,169 +1,55 @@
 {
   "key": "spider",
+  "version": 1,
+  "offered": false,
   "chip": "Spider",
   "who": "a spider",
-  "falls_back_to": null,
-  "applies_to": {
-    "order": [
-      "Araneae"
-    ]
-  },
   "cue": "Hold still, as a spider holds its web. Only what moves reaches you.",
-  "modules": [
-    "motion",
-    "sound"
-  ],
-  "inputs": {
-    "motion": "optional",
-    "sound": "optional",
-    "haptic": "none"
-  },
   "params": {
-    "fov": {
-      "value": 300,
-      "grade": "i",
-      "invented": true,
-      "src": [
-        "docs/views/sheets/spider.md#3 fov: Land and Barth 1992"
-      ],
-      "range": [
-        180,
-        360
-      ],
-      "floor": null
-    },
-    "cpd": {
-      "value": 0.5,
-      "grade": "g",
-      "invented": false,
-      "src": [
-        "docs/views/sheets/spider.md#2 Sharpness: Land and Barth 1992 (Cupiennius salei)"
-      ],
-      "range": [
-        0.1,
-        5
-      ],
-      "floor": null
-    },
-    "pupil": {
-      "value": "o",
-      "grade": "i",
-      "invented": true,
-      "src": [],
-      "floor": null
-    },
-    "gate": {
-      "value": 1,
-      "grade": "i",
-      "invented": true,
-      "src": [],
-      "range": [
-        0,
-        1
-      ],
-      "floor": null,
-      "note": "stands in for the web, which the engine cannot draw"
-    },
-    "persist": {
-      "value": 0.15,
-      "grade": "g",
-      "invented": false,
-      "src": [
-        "docs/views/sheets/spider.md#2 Pace: Fenk and Schmid 2011"
-      ],
-      "range": [
-        0,
-        0.5
-      ],
-      "floor": null,
-      "note": "seconds; between 1/8.6 and 1/4.3"
-    }
+    "fov": {"value":300,"grade":"?","invented":null,"src":[]},
+    "cpd": {"value":0.5,"grade":"?","invented":null,"src":[]},
+    "pupil": "o",
+    "gate": {"value":1,"grade":"?","invented":null,"src":[]},
+    "persist": {"value":0.15,"grade":"?","invented":null,"src":[]},
+    "ripple": {"value":1,"grade":"?","invented":null,"src":[]}
   },
-  "notes": [
-    {
-      "need": "motion",
-      "why": "The web's shaking is the main sense of the commonest spiders (Landolfa and Barth 1996). A knock on the phone, read from the accelerometer at 60 a second or more, could send ripples from the side it came from. TRY.spider has a prototype (ripple, senses.jolt)."
-    },
-    {
-      "need": "sound",
-      "why": "A bridge spider's web works as a listening surface (Zhou 2022); a low sound band from the microphone could stand in. TRY.spider has senses.mic."
-    }
-  ],
+  "inputs": {"senses":{"motion":1,"jolt":1,"mic":[60,400]}},
+  "matrices": {},
   "rows": [
     [
       "m",
       "The web",
-      "A Golden Silk Spider feels its prey through the silk, and a trapped insect shakes the web 5 to 30 times a second. The shaking arrives ten to thirty times stronger on some legs than on others, which gives the direction.",
-      [
-        "Landolfa and Barth 1996"
-      ]
+      "A Golden Silk Spider feels its prey through the silk, and a trapped insect shakes the web 5 to 30 times a second. The shaking arrives ten to thirty times stronger on some legs than on others, which gives the direction."
     ],
     [
       "g",
       "Eyes",
-      "Most spiders have eight eyes and few see well. Most register little more than changes between light and dark, and spiders that build webs lean on the shaking of the silk.",
-      [
-        "Australian Museum",
-        "Stafstrom and Hebets 2016",
-        "Clemente 2005"
-      ]
+      "Most spiders have eight eyes and few see well. Most register little more than changes between light and dark, and spiders that build webs lean on the shaking of the silk."
     ],
     [
       "g",
       "Sharpness",
-      "A wandering spider resolves nothing finer than about 2 degrees, under a hundredth of your sharpness. The picture borrows that figure for web builders.",
-      [
-        "Land and Barth 1992",
-        "param:cpd"
-      ]
+      "A wandering spider resolves nothing finer than about 2 degrees, under a hundredth of your sharpness. The picture borrows that figure for web builders."
     ],
     [
       "g",
       "Pace",
-      "A wandering spider stops following flicker between 4.3 and 8.6 times a second, a seventh of your rate or less, so movement smears into trails.",
-      [
-        "Fenk and Schmid 2011",
-        "param:persist"
-      ]
-    ],
-    [
-      "g",
-      "Colour",
-      "Orb weavers of the yellow garden spider's genus carry ultraviolet, blue and green receptors in some of their eyes. Colour is left as the camera gives it, and their ultraviolet is not drawn.",
-      [
-        "Morehouse 2020"
-      ]
+      "A wandering spider stops following flicker between 4.3 and 8.6 times a second, a seventh of your rate or less, so movement smears into trails."
     ],
     [
       "i",
-      "Drawn as",
-      "The picture cannot draw the shaking of the web. Only what moves is shown in its place, so hold the phone as still as a spider holds its web. The field of view and the round pupil are the app's own.",
-      [
-        "param:gate",
-        "param:fov",
-        "param:pupil"
-      ]
+      "Knocks and low sounds",
+      "Where the phone’s motion sensors or its microphone are switched on, a knock on the phone or on the table it lies on, or a low sound, sends ripples across the picture. They stand in for a shaking web, and the ripples are the app’s own drawing."
     ],
     [
       "x",
       "Hearing through silk",
-      "A bridge spider turns toward a loudspeaker three metres away, because its web moves with the air and works as a listening surface up to 10,000 times larger than its body. The picture has no sound.",
-      [
-        "Zhou 2022"
-      ]
+      "A bridge spider turns toward a loudspeaker three metres away, because its web moves with the air and works as a listening surface up to 10,000 times larger than its body."
     ],
     [
       "x",
       "Wolf spiders",
-      "Wolf spiders have four large rear eyes backed by a mirror layer, which shines back in a flashlight beam and helps them spot movement in dim light. This picture leaves that out.",
-      [
-        "Australian Museum"
-      ]
+      "Wolf spiders have four large rear eyes backed by a mirror layer, which shines back in a flashlight beam and helps them spot movement in dim light. This picture leaves that out."
     ]
-  ],
-  "version": 1,
-  "zones": [],
-  "matrices": {},
-  "by": {},
-  "draft": true
+  ]
 }

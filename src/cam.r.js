@@ -126,7 +126,7 @@
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
     if (typeof v.common === 'string' && !v.sci && (v.common.toLowerCase() === handName(key).toLowerCase() || /^(a person|something alive)$/i.test(v.common))) v.common = v.common.toLowerCase();   // a group's name kept from an older build loses its capital
-    if (typeof v.common === 'string' && v.sci) v.common = nameCase(v.common);   // a species' name kept from an older build is set in sentence case
+    if (typeof v.common === 'string' && v.sci) v.common = nameCase(v.common);   // a species' name kept from an older build is set in lower case, proper names apart
     return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: byOf(v.by), at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
@@ -162,6 +162,8 @@
     }
     m.key = key; m.common = named.common; m.sci = named.scientific || ''; m.by = byOf(named.by);
     m.loc = named.local ? 1 : 0;                   // the species was chosen from the list of one place
+    // the full database's place (placeOf in cam.rec.js) learns from a creature it named with confidence; a name corrected later is taken back
+    if (typeof large !== 'undefined' && large.met) large.met(m.id, m.by === 'device-large' ? m.sci : '');
     saveLocal(); pushUp(m); paintRecordBits();
   }
   function forgetMeeting(id) {
