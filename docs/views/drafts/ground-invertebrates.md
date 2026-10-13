@@ -1,6 +1,6 @@
 # Sensing sheet: ground invertebrates (snail, worm, scorpion, tick)
 
-Research round 3, unit `ground-invertebrates`, written on 13 October 2026 from 01:47 to about 03:30 UTC. The evidence log is `docs/views/evidence/ground-invertebrates.jsonl` (lines are cited below as L1, L2 and so on, in file order) and the wanted list is `docs/views/wanted/ground-invertebrates.jsonl`. It builds on the checked sheets `docs/views/sheets/snail.md` and `docs/views/sheets/tick.md`, and every source behind a row was opened again in this session.
+Research round 3, unit `ground-invertebrates`, written on 13 October 2026 from 01:47 to about 03:10 UTC. The evidence log is `docs/views/evidence/ground-invertebrates.jsonl` (lines are cited below as L1, L2 and so on, in file order) and the wanted list is `docs/views/wanted/ground-invertebrates.jsonl`. It builds on the checked sheets `docs/views/sheets/snail.md` and `docs/views/sheets/tick.md`, and every source behind a row was opened again in this session.
 
 **What came through and what did not.** Of the two books in the owner's library, *Neurobiology of Arachnids* (Barth, ed., 1985) came through only as its front matter, chapters I to III and chapter IV to about page 73. The scorpion chapters (XVII, Root, on locomotion, and XVIII, Fleissner and Fleissner, on the clock in the visual system) and the chapters on sensilla, trichobothria and slit organs (VII to IX) were not in the copy. *Animal Eyes* (Land and Nilsson, 2nd edition, 2012) came through as chapters 1 and 2 and chapter 3 to about page 65, which holds its Table 3.1 of resolution. During the session these sites refused with HTTP 429 and I stopped fetching from them: Europe PMC (www.ebi.ac.uk), Zenodo's file store, doi.org for an Oxford title, and link.springer.com. The Biodiversity Heritage Library and J-STAGE refused automated reading under their robots rules, PubMed Central answered with a reCAPTCHA page, and the PDFs of two theses (Pulido Forero's at the Universidad Distrital and Kirwan's at Lund) failed to load, so only their abstracts and record pages were read. The shell could reach only GitHub, so every page was read through the web tool.
 
@@ -49,7 +49,7 @@ The four GROUPS labels cut across very different ways of meeting the world. Foll
 
 1. **The scorpion group splits into scorpions and harvestmen.** Scorpions carry two eye systems, a pair of median eyes and up to five lateral eyes on each side, that answer to different tasks and grow about a thousand times more sensitive at night (L10, L11, L26, L27, L43, L44). Harvestmen carry one pair of eyes on a turret looking sideways and live largely by touch and taste through their first legs and palps (L52, L53, L57, L58). Whip spiders and whip scorpions share the scorpion's layout of median and lateral eyes (L37, L70) and go with scorpions. The line falls between Opiliones (124,524, 53.0%) and the rest (110,598, 47.0%).
 2. **The worm group splits three ways: millipedes, centipedes and soft-bodied worms.** Millipedes have at most low-resolution eyes and half of them have none (L77, L79, L89, L92, L93). Centipedes are fast predators whose eyes range from a compound eye of 150 to 200 facets in the house centipede to none at all in soil centipedes (L97 to L101), and some sense sunlight as heat in their antennae (L104). The soft-bodied worms (earthworms, leeches, flatworms, fan worms, ribbon worms) sense light through the skin or through eyecups that give direction without an image (L106, L107, L114, L119 to L124). The shares are millipedes 170,907 (46.2%, counting the 26 records of Pauropoda with them), centipedes 82,474 (22.3%) and soft-bodied worms 116,851 (31.6%).
-3. **Within millipedes the line between eyed and eyeless orders is real, and I recommend one view for now.** The flat-backed millipedes (Polydesmida) and Platydesmida have no eyes (L89, L92, L93) and hold 84,181 records (49.3% of millipedes), including the most recorded species. The rest, 86,700 (50.7%), are mostly eyed orders, though some of their members are blind. At the measured sharpness of an eyed millipede, 56 degrees a cycle (L77), the picture is so coarse that it differs from no picture at all only in showing which side is darker. The eyeless half would get that faint cue too, and a row says so. When the full database names a species in Polydesmida or Platydesmida, the same view should drop to `field: 1`.
+3. **Within millipedes the line between eyed and eyeless orders is real, and I recommend one view for now.** The flat-backed millipedes (Polydesmida) and Platydesmida have no eyes (L89, L92, L93) and hold 84,172 records (49.3% of millipedes), including the most recorded species. The rest, 86,735 (50.7%), are mostly eyed orders, though some of their members are blind. At the measured sharpness of an eyed millipede, 56 degrees a cycle (L77), the picture is so coarse that it differs from no picture at all only in showing which side is darker. The eyeless half would get that faint cue too, and a row says so. When the full database names a species in Polydesmida or Platydesmida, the same view should drop to `field: 1`.
 4. **Within centipedes, one view for now, with the house centipede as the first split later.** Scutigeromorpha (30,822, 37.4%) have compound eyes and two colour classes (L94 to L98); Scolopendridae (34,892, 42.3%) have four simple eyes on each side (L99); Lithobiomorpha hold 8.1%; and the blind families (Cryptopidae, Scolopocryptopidae and Geophilomorpha) hold 10,093 (12.2%) (L100, L101). No centipede's sharpness has been measured in any source I opened, so a split cannot yet be drawn from numbers.
 5. **Within soft-bodied worms, one view.** Fan worms (Serpulidae and Sabellidae, 23,534, 20.1% of soft worms) and leeches (8,014, 6.9%) have eyes that catch shadows (L111, L114, L124). Earthworms (11,121, 9.5%) have no eyes and sense light through the skin (L106, L107). Land planarians (22,813, 19.5%) have many tiny eyes (L169). The remaining polychaetes (23,177, 19.8%), led by fireworms and honeycomb worms, were not measured in any source I opened. All of them meet light as amount and direction, and none is shown to resolve an image, so one view without a picture is true for all. Gall nematodes (most of the 8,445 roundworm records, in Anguinidae 8,245) are photographed as galls on plants, as gall mites are, and should go to `other`.
 6. **The snail group keeps one view, as `snail.md` proposed.** The sea snails with large camera eyes are the exception: the strombid conchs resolve about 1 degree (L130, L131) and the periwinkle about 4.5 degrees between receptors (L1). Strombidae hold 12,703 records (0.57% of the group) and Littorinidae 45,606 (2.05%), together 2.6%. The land snails, slugs and sea slugs measured see at most coarse patches of light and dark (L125, L126, L133, L134, L181), the chitons with shell eyes resolve shapes about 9 to 12 degrees across (L146), and pond snails focus an image under water, though no source I opened measures how sharp it is (L136, L137). A `conch` view for Strombidae is the first split to make when the full database names species.
@@ -125,7 +125,7 @@ Log: L146 (Speiser, Eernisse and Johnsen 2011, acuity_cpd), L147 (Liu, Sigwart a
 ```
 Log: L148 (Gelperin 1974, sense_chemical).
 
-**The picture.** A grey field of one or two broad soft patches, brighter where the sky or a lamp is and darker toward cover, weighted to blue-green, with bright light compressed. As the scene brightens the grey slides toward blue. Still things stay, since chitons orient to still shapes (L145) and slugs steer by where the dark lies (L126).
+**The picture.** The frame becomes a grey field of one or two broad soft patches, brighter where the sky or a lamp is and darker toward cover, weighted to blue-green and with bright light compressed. As the scene brightens the grey slides toward blue. Still things stay, since chitons orient to still shapes (L145) and slugs steer by where the dark lies (L126).
 
 | Field | Value | Behind it |
 |---|---|---|
@@ -193,7 +193,7 @@ Log: L83 (Meyer-Rochow and Yamahama 2022, diel).
 ```
 Log: L86 (Cloudsley-Thompson 1951, sense_touch; the summary links the spiral reflex to vibration).
 
-**The picture.** Almost no picture: the whole frame is one soft gradient, darker on the side where the dark lies, in grey. It is the plant's `field: 1` with one difference, which side is darker, because eyed millipedes steer to dark targets (L80).
+**The picture.** There is almost no picture: the whole frame is one soft grey gradient, darker on the side where the dark lies. It is the plant's `field: 1` with one difference, which side is darker, because eyed millipedes steer to dark targets (L80).
 
 | Field | Value | Behind it |
 |---|---|---|
@@ -256,7 +256,7 @@ Log: L101 (Roberts 2014, eyes_count).
 ```
 Log: L186, L187.
 
-**The picture.** Coarse and grey-blue, with large dark shapes standing out, a little sharper than the millipede's. A slow warm glow builds at the top edge when the phone stays pointed into bright light (see effects).
+**The picture.** It is coarse and grey-blue, a little sharper than the millipede's, and large dark shapes stand out in it. A slow warm glow builds at the top edge when the phone stays pointed into bright light (see effects).
 
 | Field | Value | Behind it |
 |---|---|---|
@@ -316,7 +316,7 @@ Log: L118 (Laverack 1969, sense_touch), L170 (Bertone 2020, sense_chemical), L12
 ```
 Log: L119 (planarian hierarchy), L115 (leech sensilla).
 
-**The picture.** No image. The frame is a soft field whose brightness follows the scene, brighter on the side the light comes from, in grey drawn from the camera's blue more than its red. A sudden shadow makes it flinch shut.
+**The picture.** There is no image. The frame is a soft field whose brightness follows the scene, brighter on the side the light comes from, in grey drawn from the camera's blue more than its red. A sudden shadow makes it flinch shut.
 
 | Field | Value | Behind it |
 |---|---|---|
@@ -345,7 +345,7 @@ Log: L119 (planarian hierarchy), L115 (leech sensilla).
 Log: L10, L11 (Prévost and Stemme 2020, eyes_count, eye_role), L43, L44 (Lehmann and Melzer 2013, eye_role), L49 (Loria and Prendini 2014, eyes_count), L46 (Yang and colleagues 2013, eyes_count).
 
 ```
-['m', 'Night sight', 'A scorpion's middle eyes grow about a thousand times more sensitive at night under a daily clock, and its side eyes are about ten times more sensitive than that. This view lifts the shadows after dark by the phone's own clock.'],
+['m', 'Night sight', 'A scorpion's middle eyes grow about a thousand times more sensitive at night under a daily clock. At night its side eyes are about ten times more sensitive than the middle ones. This view lifts the shadows after dark by the phone's own clock.'],
 ```
 Log: L26, L27, L28 (Fleissner 1977, absolute_sensitivity and diel, in *Androctonus australis*), L15 (Prévost and Stemme 2020). Loria and Prendini (L50) give ten log units for the side eyes' margin, which conflicts with Fleissner's own one log unit; the row follows Fleissner.
 
@@ -355,7 +355,7 @@ Log: L26, L27, L28 (Fleissner 1977, absolute_sensitivity and diel, in *Androcton
 Log: L12, L13, L14 (Prévost and Stemme 2020), L23, L24 (Machan 1968, receptor_classes), L34 (Rivera Roldan and Gaffin 2018, behaviour_vision), L41 (Pulido Forero 2026, lambda_max_nm in *Centruroides*).
 
 ```
-['m', 'A glowing body', 'Under ultraviolet light a scorpion's outer skeleton glows blue-green, though the lenses of its eyes do not. Scorpions with their eyes covered still reacted to ultraviolet light, which suggests the whole body helps to catch it. They react most strongly to ultraviolet at the light level of sunset.'],
+['m', 'A glowing body', 'Under ultraviolet light a scorpion's outer skeleton glows blue-green, though the lenses of its side eyes do not. Scorpions with their eyes covered still reacted to ultraviolet light, which suggests the whole body helps to catch it. They react most strongly to ultraviolet at the light level of sunset.'],
 ```
 Log: L35, L36 (Yong 2011, reporting Gaffin and colleagues 2012), L33 (Kloock, Kubli and Reynolds 2010), L17 (Prévost and Stemme 2020), L48 (Yang and colleagues 2013, filter_pigments), L193, L194 (Gaffin and Barker 2014).
 
@@ -394,7 +394,7 @@ Log: L22 (Prévost and Stemme 2020, *Mesobuthus eupeus*), L180 (Locket 2001), L3
 ```
 Log: L38, L11. The arithmetic is under the picture.
 
-**The picture.** A wide view squeezed into the screen. The middle holds rough shapes in green-weighted grey; the edges hold soft, brighter patches that gather light. After dark by the phone's clock the shadows lift strongly. Red objects fall dark.
+**The picture.** A wide view is squeezed into the screen. The middle holds rough shapes in green-weighted grey; the edges hold soft, brighter patches that gather light. After dark by the phone's clock the shadows lift strongly. Red objects fall dark.
 
 | Field | Value | Behind it |
 |---|---|---|
@@ -411,7 +411,7 @@ Log: L38, L11. The arithmetic is under the picture.
 | Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
 |---|---|---|---|---|
 | Night by the clock | Toward evening the shadows lift and the side patches brighten; by morning they settle. | the phone's clock and time zone | easy | L26 to L28. The view changes with the hour, as the scorpion's eyes do. |
-| Glowing rim | At dusk by the phone's clock, and more where the scene holds strong blue and violet, a cyan-green glow rises around the edge of the frame, with small dark spots where the eyes would be, because the lenses do not glow. | the phone's clock and the camera's blue level, standing in for ultraviolet | medium (an overlay pass) | L35, L36, L48; the dusk peak follows L193, and the collector idea is a hypothesis (L194). The trigger is **invented** and must carry an `i` row if added. The glow with dark eye-spots is a striking and true image. |
+| Glowing rim | At dusk by the phone's clock, and more where the scene holds strong blue and violet, a cyan-green glow rises around the edge of the frame, with small dark spots where the side eyes would be, because their lenses do not glow. | the phone's clock and the camera's blue level, standing in for ultraviolet | medium (an overlay pass) | L35, L36, L48; the dusk peak follows L193, and the collector idea is a hypothesis (L194). The trigger is **invented** and must carry an `i` row if added. The glow with dark eye-spots is a striking and true image. |
 | Ripples in sand | Knocks felt through the phone send rings across the picture from the side the knock came from. | device motion (the sign of the first jolt) | medium | L31. A phone cannot time a wave across eight legs, so the direction is **invented**. |
 | Air on the pincers | Wind on the microphone makes the edge patches shimmer. | microphone, with consent | medium | L21, L174; **invented** in form |
 
@@ -464,7 +464,7 @@ Log: L57, L58.
 ```
 Log: L53.
 
-**The picture.** Two soft windows, one on each side of the screen, with large dark shapes in grey; the middle of the screen, straight ahead, is dim.
+**The picture.** Two soft windows, one on each side of the screen, show large dark shapes in grey, and the middle of the screen, straight ahead, is dim.
 
 | Field | Value | Behind it |
 |---|---|---|
@@ -512,7 +512,7 @@ Log: L153.
 Log: L159, L158 (Perret and colleagues 2003).
 
 ```
-['m', 'Heat', 'A Lone Star Tick senses the warmth of a body through a covered pit on each front leg. At least seven in ten adult females found a warm square 10 centimetres across from a metre away, and the pit looks along a narrow line at most 5.7 degrees wide.'],
+['m', 'Heat', 'A Lone Star Tick senses the warmth of a body through a covered pit on each front leg. At least seven in ten adult females detected a warm square 10 centimetres across from a metre away, and the pit looks along a narrow line at most 5.7 degrees wide.'],
 ```
 Log: L161, L162 (Carr and Salgado 2019).
 
@@ -531,7 +531,7 @@ Log: L160 (Perret and colleagues 2003).
 ```
 Log: L161, L163, L164.
 
-**The picture.** As `tick.md` describes it: a grey field of large soft patches from blue and green light, in which a passing shadow registers at once. Two changes follow from the evidence above: a coarser `cpd`, and, once zones exist, two windows aimed up and out.
+**The picture.** It is the picture `tick.md` describes: a grey field of large soft patches from blue and green light, in which a passing shadow registers at once. Two changes follow from the evidence above: a coarser `cpd`, and, once zones exist, two windows aimed up and out.
 
 | Field | Value | Behind it |
 |---|---|---|
