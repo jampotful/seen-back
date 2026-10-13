@@ -338,7 +338,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       // clip's frames after the last, as a phone's camera delivers them. The movement map keeps to the clip's own clock.
       await page.evaluate((x) => { document.getElementById('vid').playbackRate = x; }, +(process.env.PLAYBACK || .15));
       await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
-      const P = await page.evaluate((k) => { const p = window.__seenBack.params(k); return { sal: p.sal, gaze: !!p.gz, zoned: !!(p.zones && p.zones.length) }; }, key);   // a view with no zones (zones: []) need not compile the zone programs
+      const P = await page.evaluate((k) => { const p = window.__seenBack.params(k); return { sal: p.sal, gaze: !!p.gz, zoned: !!(p.zones && p.zones.length), slow: p.slowMode || '' }; }, key);   // a view with no zones (zones: []) need not compile the zone programs
       const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 30);
       let n = 0;
       while (Date.now() - t0 < SECS * 1000) {
@@ -361,6 +361,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       const last = trace[trace.length - 1], gs = await page.evaluate(() => window.__seenBack.engine.gazeState());
       r.eyes = (await st(page)).eyes; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
       r.jumps = (gs.gazes || []).map((g) => g[3]); r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
+      r.slow = await page.evaluate(() => window.__seenBack.engine.slowState && window.__seenBack.engine.slowState());   // module 12: frames kept in the store
       const scene = (process.env.CLIP || 'scene.webm') === 'scene.webm' ? JSON.parse(fs.readFileSync(path.join(here, 'assets', 'scene.json'), 'utf8')) : null;
       r.landed = {};
       if (scene) gs.log.forEach(([x, y, at, media]) => {   // the first gaze's fixations, against where test/make_scene.py drew everything at that clip time
@@ -378,7 +379,8 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       if (r.probe.glErr) errors.push('GL error ' + r.probe.glErr);
       if (/draw=palm|draw=pond|draw=strip|draw=face/.test(process.env.EXTRA || '') === false && key === 'jumper' && process.env.STAMPS && !(r.probe.stamps > 0)) errors.push('no stamp of attention was left');
       if (key === 'jumper' && !(r.probe.light > 0)) errors.push('the light module read nothing');
-      const ok = r.eyes === key && r.rows >= 6 && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)));
+      const ok = r.eyes === key && r.rows >= 6 && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)))
+        && (!/^(hour|exposure)$/.test(P.slow) || (r.slow && r.slow.mode === P.slow && r.slow.n > 1)) && (!P.slow || r.probe.zones);
       if (!ok) bad.push(key);
     }
     if (bad.length) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: these views being tried did not behave as they should: ' + bad.join(', ')); }

@@ -80,7 +80,7 @@ def check_obj(s):
     for f in ("who", "rows", "params"):
         if f not in s:
             errs.append("no %s" % f)
-    blocks = {k: s.get(k) for k in ("params", "zones", "gaze", "by", "inputs", "spectrum", "clock", "pace", "motion")}
+    blocks = {k: s.get(k) for k in ("params", "zones", "gaze", "by", "inputs", "spectrum", "clock", "pace", "motion", "slow", "tilt", "magnet")}
     params = []
     walk(blocks, "", params)
     for m in (s.get("matrices") or {}).values():
