@@ -125,24 +125,40 @@
   var UV_GREEN = [.16, .62, .02, .2, .78, .02, 0, 0, 0];                     // INVENTED: a green receptor drawn yellow-green; blue is replaced by the guessed ultraviolet
   var UV_GREEN_RED = [1, 0, 0, .2, .78, .02, 0, 0, 0];                       // INVENTED: the same with the red-filtered class kept as red
   var TRY = {
-    jumper: { chip: 'Jumping spider', who: 'a jumping spider', fov: 350, cpd: 1, pupil: 'o', M: SIDE_GREEN, sat: 1, glow: .9, living: 0, glowC: [.78, 1, .62],
-      salience: 1, cue: 'Movement glows. The sharp strip jumps to it, looks it over, and then lets that place go for a while.',
+    // Jumping spiders (family Salticidae), from docs/views/drafts/jumper.md and its log, docs/views/evidence/jumper.jsonl, on research/jumper.
+    // The surround is the side eyes: the rear pair (PLE) at 0.5 cycles a degree, the front pair (ALE) at 1.1, both green only (Land 1969;
+    // Gote and colleagues 2019; Yamashita and Tateda 1976). The cross is the two principal retinae at rest (Land 1969), at the acuity of
+    // Phidippus (3.3 to 3.8 cycles a degree: Land 1969; Harland and colleagues 2012). docs/ENGINE.md gives every value and its source.
+    jumper: { chip: 'Jumping spider', who: 'a jumping spider', fov: 350, cpd: .5, pupil: 'o', M: SIDE_GREEN, glow: .9, living: 0, glowC: [.78, 1, .62],
+      salience: 1, senses: { motion: 1 },
+      cue: 'Things that move glow. The sharp cross jumps to them, looks them over, and then leaves that place alone for a few seconds.',
       zones: [
-        // the front side eyes (ALEs), about 100 degrees across, where the jointed movement of living things glows brighter
-        { id: 'front', shape: 'ellipse', at: [.5, .5], size: [.95, 1.1], soft: .22, cpd: 1.25, living: 1.6 },
-        // the principal eyes: a narrow upright strip, sharp, in the spider's colours, moved by the gaze
-        { id: 'gaze', shape: 'strip', size: [.045, .17], soft: .025, cpd: 10, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.3, gaze: 1 }],
-      gaze: { zone: 'gaze', jump: 80, dwell: [700, 1700], follow: .14, scan: [.012, 1.4, 14], ior: 5000, iorR: .085, floor: .07, sleep: 1 },
-      byGenus: { Habronattus: { zones: { gaze: { M: UV_GREEN_RED } } } },
+        // both front side eyes: each about 70 degrees across and 98 high, overlapping by 25 in front (Gote 2019; Land 1969; Blest 1981)
+        { id: 'front', shape: 'ellipse', deg: [114, 98], soft: .2, cpd: 1.1, living: 1.6 },
+        // the principal retinae: each a strip about 2 degrees wide and 21 high, bent 30 degrees at its centre; the upper arms 40 to 45
+        // degrees apart, the lower 15 to 20, the inner edges 1 to 2 degrees apart (Land 1969); the arms see less sharply toward their ends
+        // (Williams and McIntyre 1980). Drawn 2.5 degrees wide (invented, for the screen) and magnified a little (invented).
+        { id: 'gaze', shape: 'cross', deg: [2.5, 21], tilt: [21, 8.5], gap: .75, tip: .45, soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.25, gaze: 1 },
+        // the centre of each principal retina, where Habronattus has its red-filtered receptors (Zurek and colleagues 2015); dichromatic elsewhere
+        { id: 'fovea', shape: 'ellipse', deg: [5, 4], soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.25, gaze: 1 }],
+      gaze: { saccade: [40, 4], sweep: [2, 1.2], twist: [25, 2000, 3500], examine: [4000, 12000], hold: 1500, back: .8, pursuit: 10,
+        ior: 5000, iorDeg: 6, habit: .75, surround: .6, any: .6, living: 1.8, distract: 1.5, wander: [8000, 20000], floor: .06, trackDeg: 9,
+        sleep: { after: 3500, bout: [6000, 12000], gap: [20000, 40000] } },
+      byGenus: {
+        Habronattus: { zones: { fovea: { M: UV_GREEN_RED } } },
+        Portia: { zones: { gaze: { cpd: 12.5, deg: [1.5, 21] }, fovea: { cpd: 12.5 } } } },   // Portia fimbriata: 12.4 cycles a degree (Williams and McIntyre 1980)
       rows: [
-        ['m', 'Eight eyes, one picture', 'Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely.'],
-        ['m', 'Living things stand out', 'The front side eyes pick out the jointed, rhythmic movement of living things, and the rear side eyes answer to anything that moves.'],
-        ['m', 'Looking away on purpose', 'Once the front eyes lock on, the side eyes ignore that spot for about five seconds so that something new can catch them.'],
-        ['m', 'Colour', 'Most jumping spiders see ultraviolet and green. Some, like Habronattus, also see red through a filter in the eye.'],
-        ['m', 'Sleep', 'At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. This view twitches its sharp strip in bouts when the phone lies still in the dark.'],
-        ['i', 'How the picture is drawn', 'No one knows how a jumping spider joins what its eyes report. This view draws one picture, with a coarse green surround for the six side eyes and a narrow sharp strip for the two front eyes. That way of drawing it is the app’s own.'],
-        ['i', 'Living movement', 'This view treats movement that holds together over a small patch and pulses, as walking legs do, as the movement of something alive. That test is the app’s own approximation.'],
-        ['i', 'Ultraviolet', 'Phone cameras record very little ultraviolet light. Inside the strip, a blue guessed from bluish and bright surfaces stands in for it.'],
+        ['m', 'Eight eyes, one picture', 'Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely. This view draws all eight as one picture.'],
+        ['m', 'The side eyes', 'The six side eyes see in green only, and with little detail: under a hundredth of yours at the back and about a fiftieth in front. They answer only to movement, so here the surround is a dim green and whatever moves in it glows.'],
+        ['m', 'Living things stand out', 'The front side eyes pick out the jointed, rhythmic movement of living things, and the rear side eyes answer to anything that moves. In front, this view makes living movement glow brighter.'],
+        ['m', 'The front eyes', 'Each large front eye sees a narrow upright strip about 2 degrees wide and 21 high, bent in the middle, and the two strips cross like an X. In Phidippus they see about a sixteenth of the detail you do, and in Portia about a fifth.'],
+        ['m', 'Jumps and scans', 'The front eyes jump to a new target in about a tenth of a second and follow it if it moves. While they look, they sweep side to side across it and slowly twist back and forth, and this view does the same.'],
+        ['m', 'Looking away on purpose', 'Once the front eyes lock on, the side eyes ignore that spot and watch elsewhere, and their interest in it returns over about five seconds. Here the glow fades from a place just looked at and comes back as slowly.'],
+        ['m', 'Colour', 'Most jumping spiders, Phidippus among them, see ultraviolet and green. Habronattus also sees red, in a small patch at the centre of each front eye, and this view adds red there when it knows the genus.'],
+        ['m', 'Sleep', 'At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. When the phone lies still in the dark, this view twitches its cross in bouts, closer together than a spider’s.'],
+        ['i', 'How the picture is drawn', 'No one knows how a jumping spider joins what its eyes report. Drawing the front eyes’ cross inside the side eyes’ surround, as one picture, is the app’s own choice.'],
+        ['i', 'Living movement', 'This view treats movement that holds together over a small patch and swings back and forth, as walking legs do, as the movement of something alive. That test is the app’s own approximation.'],
+        ['i', 'Ultraviolet', 'Phone cameras record very little ultraviolet light. Inside the cross, a blue guessed from bluish and bright surfaces stands in for it.'],
         ['x', 'Hearing', 'A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out.']] }
   };
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
@@ -151,12 +167,16 @@
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function ease(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
-  var SHAPES = { whole: 0, strip: 1, ellipse: 2, annulus: 3, band: 4 };
+  var SHAPES = { whole: 0, strip: 1, ellipse: 2, annulus: 3, band: 4, cross: 5 };
+  // A zone's size is a fraction of the camera picture's long side (size: [half width, half height]), or degrees of the world (deg: [width,
+  // height]), taking the long side of a phone camera's picture to span CAM_DEG degrees. An assumption: main cameras span about 60 to 70.
+  var CAM_DEG = 64;
   // A zone states only what differs from its view; everything it leaves out is the view's own value (docs/ENGINE.md).
   function zoneOf(z, P) {
-    var at = z.at || [.5, .5], size = z.size || [.5, .5];
+    var at = z.at || [.5, .5], size = z.deg ? [z.deg[0] / 2 / CAM_DEG, z.deg[1] / 2 / CAM_DEG] : z.size || [.5, .5];
+    var tilt = z.tilt || [0, 0];
     return { id: z.id || '', shape: SHAPES[z.shape] || 0, cx: at[0], cy: at[1], hw: size[0], hh: size[1], inner: z.inner || 0, soft: z.soft === undefined ? .04 : z.soft,
-      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? 1 : 0,
+      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? 1 : 0, tiltU: tilt[0] * Math.PI / 180, tiltD: tilt[1] * Math.PI / 180, gap: (z.gap || 0) / CAM_DEG, tip: z.tip === undefined ? 1 : z.tip,
       inv: z.cpd ? 1 / z.cpd : P.inv, M: z.M || P.M, sat: z.sat === undefined ? P.sat : z.sat, gain: z.gain || P.gain, gate: z.gate === undefined ? P.gate : z.gate,
       rate: z.rate || P.rate, glow: z.glow === undefined ? P.glow : z.glow, living: z.living === undefined ? P.living : z.living,
       uv: z.uv === undefined ? P.uvBlue : z.uv, sheen: z.sheen === undefined ? P.sheen : z.sheen, mag: z.mag || 1 };
@@ -230,17 +250,32 @@
   var FS_COPY = '#version 300 es\nprecision highp float; in vec2 v; out vec4 o; uniform sampler2D u_src; void main(){ o = vec4(texture(u_src, v).rgb, 1.0); }';
   // Where a zone lies, in the camera picture's own coordinates (as the time and view passes both sample it), with soft edges.
   var ZONE_GLSL = [
-    'uniform vec4 u_zG[4];',   // centre x, y; half width, half height, in units of the picture's height
-    'uniform vec4 u_zH[4];',   // shape (1 strip, 2 ellipse, 3 annulus, 4 band, 0 the whole field), soft edge, inner edge of an annulus
+    'uniform vec4 u_zG[4];',   // centre x, y; half width, half height, as fractions of the picture's long side
+    'uniform vec4 u_zH[4];',   // shape (1 strip, 2 ellipse, 3 annulus, 4 band, 5 cross, 0 the whole field), soft edge, inner edge of an annulus
     'uniform vec4 u_zR[4];',   // cos and sin of the zone's turn
+    'uniform vec4 u_zX[4];',   // a cross: the tilt of its upper and of its lower arms (radians from upright), half the gap between its two halves, weight kept at an arm's tip
+    'uniform vec2 u_zScale;',  // the picture's width and height as fractions of its long side
     'uniform int u_nz;',
+    'float armW(vec2 d, vec2 dir, float hw, float len, float s, float tip){',   // one arm of a cross, from its root along dir
+    '  float t = dot(d, dir), n = abs(dot(d, vec2(-dir.y, dir.x)));',
+    '  return (1.0 - smoothstep(-s, s, n - hw)) * (1.0 - smoothstep(-s, s, t - len)) * smoothstep(-s, s, t + hw) * mix(1.0, tip, clamp(t / len, 0.0, 1.0));',
+    '}',
     'float zoneW(int i, vec2 uv){',
     '  vec4 g = u_zG[i], h = u_zH[i], r = u_zR[i];',
     '  if (h.x < 0.5) return 1.0;',
-    '  vec2 d = (uv - g.xy) * vec2(u_srcAspect, 1.0);',
+    '  vec2 d = (uv - g.xy) * u_zScale;',
     '  d = vec2(r.x * d.x + r.y * d.y, -r.y * d.x + r.x * d.y);',
     '  float s = max(h.y, 1e-4);',
     '  if (h.x < 1.5) { vec2 e = abs(d) - g.zw; return (1.0 - smoothstep(-s, s, e.x)) * (1.0 - smoothstep(-s, s, e.y)); }',
+    '  if (h.x > 4.5) {',   // two narrow fields, each bent in the middle, that cross like an X without touching (a jumping spider's principal retinae at rest)
+    '    vec4 x = u_zX[i]; float w = 0.0, gap = x.z + g.z;',
+    '    for (int k = 0; k < 2; k++) {',
+    '      float sx = k == 0 ? -1.0 : 1.0; vec2 q = d - vec2(sx * gap, 0.0);',
+    '      w = max(w, armW(q, vec2(sx * sin(x.x), cos(x.x)), g.z, g.w, s, x.w));',
+    '      w = max(w, armW(q, vec2(sx * sin(x.y), -cos(x.y)), g.z, g.w, s, x.w));',
+    '    }',
+    '    return w;',
+    '  }',
     '  if (h.x > 3.5) return 1.0 - smoothstep(-s, s, abs(d.y) - g.w);',
     '  vec2 sz = max(g.zw, vec2(1e-4)); float q = length(d / sz), sr = s / min(sz.x, sz.y);',
     '  float w = 1.0 - smoothstep(1.0 - sr, 1.0 + sr, q);',
@@ -252,7 +287,7 @@
     '#version 300 es', 'precision highp float; precision highp sampler2DArray;', 'in vec2 v; out vec4 o;',
     'uniform sampler2D u_src, u_prev; uniform sampler2DArray u_ring; uniform vec2 u_px;',
     'uniform float u_n, u_head, u_lag, u_useRing, u_now, u_a, u_gate, u_decay, u_enc, u_reset;',
-    '#if ZONES', 'uniform float u_srcAspect; uniform vec4 u_zT[4];', ZONE_GLSL, '#endif',
+    '#if ZONES', 'uniform vec4 u_zT[4];', ZONE_GLSL, '#endif',
     'float lum(vec3 c){ return dot(c, vec3(0.2126, 0.7152, 0.0722)); }',
     'vec3 layer(vec2 uv, float i){ return texture(u_ring, vec3(uv, mod(u_head - i + 2.0 * u_n, u_n))).rgb; }',
     'vec3 ring(float back){',
@@ -377,7 +412,7 @@
     '  if (u_salOn > 0.001) {',
     '    vec4 sl = texture(u_sal, uv0);',
     '    float g = (sl.r + gl0.y * sl.g) * gl0.x * u_salOn, ig = 0.0;',
-    '    for (int j = 0; j < 6; j++) { vec4 I = u_ior[j]; if (I.w > 0.0) { vec2 dd = (uv0 - I.xy) * vec2(u_srcAspect, 1.0); ig = max(ig, I.w * exp(-dot(dd, dd) / (I.z * I.z))); } }',
+    '    for (int j = 0; j < 6; j++) { vec4 I = u_ior[j]; if (I.w > 0.0) { vec2 dd = (uv0 - I.xy) * u_zScale; ig = max(ig, I.w * exp(-dot(dd, dd) / (I.z * I.z))); } }',
     '    m += u_glowC * (g * (1.0 - ig) * edge * u_expo);',
     '  }',
     '#endif',
@@ -430,36 +465,44 @@
     '    o = vec4(acc / max(n, 1.0), 0.0, 0.0, 1.0);',
     '  } else o = vec4(0.0);',
     '}'].join('\n');
-  // 4. the movement map: (energy, living, slow energy, rhythm). Energy is the change from the last frame once the phone's own shift is
-  // taken out, above the noise and above what a slightly wrong shift leaves at an edge. Living is the app's own cue for the movement of
-  // living things (INVENTED): local movement that keeps one direction over the 3 by 3 patch (coherence of normal flow) and pulses
-  // (energy that changes from frame to frame more than its slow average would), as walking legs do.
-  var FS_SAL = ['#version 300 es', 'precision highp float; in vec2 v; out vec4 o;',
-    'uniform sampler2D u_a, u_b, u_res, u_prev; uniform vec2 u_cell; uniform vec4 u_k; uniform float u_damp, u_fresh;',
+  // 4. the movement map, two outputs: (energy, living, slow energy, pulse) and (the patch's recent direction of movement, reversals).
+  // Energy is the change from the last frame once the phone's own shift is taken out, above the noise and above what a slightly wrong
+  // shift leaves at an edge. Living is the app's own cue for the movement of living things (INVENTED): movement that holds one direction
+  // across the 3 by 3 patch at each moment (coherence of normal flow) and swings back and forth over time (reversals of that direction,
+  // with some weight on energy that pulses), as walking legs and beating wings do, where a rolling ball keeps one direction.
+  var FS_SAL = ['#version 300 es', 'precision highp float; in vec2 v;', 'layout(location = 0) out vec4 o; layout(location = 1) out vec4 o2;',
+    'uniform sampler2D u_a, u_b, u_res, u_prev, u_flow; uniform vec2 u_cell; uniform vec4 u_k; uniform float u_damp, u_fresh;',
     'float L(sampler2D t, vec2 q){ return texture(t, q).r; }',
     'void main(){',
     '  vec4 rs = texelFetch(u_res, ivec2(0, 0), 0);',
-    '  vec2 sc = (rs.xy - 0.5) * 16.0, s = sc * u_cell;',
-    '  vec2 F = vec2(0.0); float Fm = 0.0, dc = 0.0;',
+    '  vec2 sc = (rs.xy - 0.5) * 16.0, s = sc * u_cell; float sl = length(sc);',
+    '  vec2 F = vec2(0.0); float Fm = 0.0, Fw = 0.0, dc = 0.0;',
     '  for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {',
     '    vec2 q = v + vec2(float(i), float(j)) * u_cell, qb = q + s;',
     '    float a = L(u_a, q), b = L(u_b, qb);',
     '    float gx = 0.5 * (L(u_a, q + vec2(u_cell.x, 0.0)) - L(u_a, q - vec2(u_cell.x, 0.0)));',
     '    float gy = 0.5 * (L(u_a, q + vec2(0.0, u_cell.y)) - L(u_a, q - vec2(0.0, u_cell.y)));',
     '    float it = a - b, g2 = gx * gx + gy * gy;',
-    '    float d = max(abs(it) - 0.02 - 0.4 * sqrt(g2), 0.0);',
+    '    float d = max(abs(it) - 0.02 - (0.3 + 0.2 * sl) * sqrt(g2), 0.0);',
     '    if (qb.x < 0.0 || qb.y < 0.0 || qb.x > 1.0 || qb.y > 1.0) d = 0.0;',
     '    vec2 fl = -it * vec2(gx, gy) / (g2 + 0.0004);',
-    '    F += fl * d; Fm += length(fl) * d;',
+    '    F += fl * d; Fm += length(fl) * d; Fw += d;',
     '    if (i == 0 && j == 0) dc = d;',
     '  }',
     '  float coh = Fm > 1e-5 ? length(F) / Fm : 0.0;',
-    '  vec4 P = texture(u_prev, v);',
-    '  float e = clamp(dc * 6.0, 0.0, 1.0) * u_damp * (1.0 - smoothstep(2.2, 4.0, length(sc))) * u_fresh;',   // a phone turned fast: its movement is not trusted to be gone
+    '  vec4 P = texture(u_prev, v), Q = texture(u_flow, v);',
+    '  float e = clamp(dc * 6.0, 0.0, 1.0) * u_damp * (1.0 - smoothstep(2.2, 4.0, sl)) * u_fresh;',   // a phone turned fast: its movement is not trusted to be gone
     '  float E = mix(P.r, e, u_k.x), Es = mix(P.b, e, u_k.y), Rh = mix(P.a, abs(e - P.r), u_k.z);',
-    '  float liv = coh * clamp(Rh * 3.0 / (Es + 0.08), 0.0, 1.0) * clamp(E * 3.0, 0.0, 1.0);',
+    '  vec2 fn = Fw > 1e-5 ? F / Fw : vec2(0.0), pv = Q.xy * 2.0 - 1.0;',
+    '  float mn = length(fn), mp = length(pv), rev = 0.0;',
+    '  if (mn > 0.04 && mp > 0.2 && e > 0.03) rev = max(0.0, -dot(fn / mn, pv / mp));',   // this moment\'s direction against the recent one
+    '  float Rv = mix(Q.z, rev, u_k.z);',
+    '  vec2 nv = mn > 0.04 && e > 0.03 ? mix(pv, fn / mn, 0.5) : pv * 0.92;',
+    '  float pulse = clamp(Rh * 3.0 / (Es + 0.08), 0.0, 1.0);',
+    '  float liv = coh * clamp(2.6 * Rv + 0.35 * pulse, 0.0, 1.0) * clamp(E * 3.0, 0.0, 1.0);',
     '  float Lv = mix(P.g, liv, u_k.w);',
     '  o = vec4(max(E - 0.004, 0.0), max(Lv - 0.004, 0.0), Es, Rh);',   // at least one step of decay, so that nothing sticks in eight bits
+    '  o2 = vec4(clamp(nv * 0.5 + 0.5, 0.0, 1.0), max(Rv - 0.004, 0.0), 1.0);',
     '}'].join('\n');
 
   function Engine(canvas) {
@@ -510,7 +553,7 @@
     var N = 12, STRIDE = 2, MAXSIDE = 1280;
     var texSrc = gl.createTexture(), ring = null, tA = null, tB = null, fbT = gl.createFramebuffer(), fbR = gl.createFramebuffer();
     var sw = 0, sh = 0, levels = 1, head = 0, frames = 0, writes = 0, tHead = 0, stepMs = 66, reset = true;
-    var lag = 0, holdT0 = 0, holdAt = -1, hasFrame = false, moving = false, fresh = false, freshAt = 0;
+    var lag = 0, holdT0 = 0, holdAt = -1, hasFrame = false, moving = false, fresh = false, freshMedia = -1;
     gl.bindTexture(gl.TEXTURE_2D, texSrc);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -558,8 +601,8 @@
     }
 
     // ---- the movement map and its read-back (salience)
-    var SAL_SIDES = [64, 48, 32], salStep = 0, ws = 0, hs = 0, lowT = [null, null], lowN = 0, lowAt = 0, shiftT = null, resT = null, salT = [null, null], salAt = 0;
-    var fbS = gl.createFramebuffer(), pbo = null, map = null, sync = null, readAt = 0, readMs = 160, salFrames = 0, lastFreshAt = 0;
+    var SAL_SIDES = [64, 48, 32], salStep = 0, ws = 0, hs = 0, lowT = [null, null], lowN = 0, shiftT = null, resT = null, salT = [null, null], flowT = [null, null], salAt = 0;
+    var fbS = gl.createFramebuffer(), fbM = gl.createFramebuffer(), pbo = null, map = null, sync = null, readAt = 0, readMs = 160, salFrames = 0, lastFreshAt = 0, lastMedia = -1;
     var mapInfo = { at: 0, maxE: 0, maxL: 0, meanE: 0, lum: 0, shift: [0, 0], fit: 0, still: 0, reads: 0 };
     function tex2(w, h, fmt, filt) {
       var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t); gl.texStorage2D(gl.TEXTURE_2D, 1, fmt, w, h);
@@ -570,11 +613,12 @@
     function salAlloc() {
       var side = SAL_SIDES[salStep], w = sw >= sh ? side : Math.max(8, Math.round(side * sw / sh)), h = sw >= sh ? Math.max(8, Math.round(side * sh / sw)) : side;
       if (w === ws && h === hs && salT[0]) return;
-      [lowT[0], lowT[1], shiftT, resT, salT[0], salT[1]].forEach(function (t) { if (t) gl.deleteTexture(t); });
+      [lowT[0], lowT[1], shiftT, resT, salT[0], salT[1], flowT[0], flowT[1]].forEach(function (t) { if (t) gl.deleteTexture(t); });
       ws = w; hs = h;
       lowT = [tex2(ws, hs, gl.R8, gl.LINEAR), tex2(ws, hs, gl.R8, gl.LINEAR)];
       shiftT = tex2(7, 7, floatOK ? gl.RGBA16F : gl.RGBA8, gl.NEAREST); resT = tex2(4, 1, gl.RGBA8, gl.NEAREST);
       salT = [tex2(ws, hs, gl.RGBA8, gl.LINEAR), tex2(ws, hs, gl.RGBA8, gl.LINEAR)];
+      flowT = [tex2(ws, hs, gl.RGBA8, gl.NEAREST), tex2(ws, hs, gl.RGBA8, gl.NEAREST)];
       gl.bindTexture(gl.TEXTURE_2D, salT[0]); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);
       gl.bindTexture(gl.TEXTURE_2D, salT[1]); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);
       if (pbo) gl.deleteBuffer(pbo);
@@ -583,14 +627,19 @@
       if (sync) { gl.deleteSync(sync); sync = null; }
       salReset();
     }
-    function clearTex(t) { gl.bindFramebuffer(gl.FRAMEBUFFER, fbS); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); }
-    function salReset() { lowN = 0; salFrames = 0; if (salT[0]) { clearTex(salT[0]); clearTex(salT[1]); clearTex(resT); gl.bindFramebuffer(gl.FRAMEBUFFER, null); } mapInfo.maxE = mapInfo.maxL = mapInfo.meanE = 0; }
+    function clearTex(t, c) { gl.bindFramebuffer(gl.FRAMEBUFFER, fbS); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); gl.clearColor(c || 0, c || 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); }
+    function salReset() {
+      lowN = 0; salFrames = 0; lastMedia = -1;
+      if (salT[0]) { clearTex(salT[0]); clearTex(salT[1]); clearTex(flowT[0], .5); clearTex(flowT[1], .5); clearTex(resT); gl.bindFramebuffer(gl.FRAMEBUFFER, null); }
+      mapInfo.maxE = mapInfo.maxL = mapInfo.meanE = 0;
+    }
     function target(t, w, h) { gl.bindFramebuffer(gl.FRAMEBUFFER, fbS); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); gl.viewport(0, 0, w, h); }
     function bindT(unit, t, loc) { gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t); gl.uniform1i(loc, unit); }
-    function salience(now, damp, prior) {
+    function salience(now, damp, prior, media) {
       salAlloc();
-      var cur = lowN % 2, prev = 1 - cur, frameMs = lastFreshAt ? clamp(now - lastFreshAt, 8, 200) : 33;
-      lastFreshAt = now;
+      // the time between the two frames compared: the clip's own clock where there is one (a clip played slowly is still a clip), else the page's
+      var cur = lowN % 2, prev = 1 - cur, frameMs = media >= 0 && lastMedia >= 0 && media > lastMedia ? media - lastMedia : lastFreshAt ? now - lastFreshAt : 33;
+      frameMs = clamp(frameMs, 8, 200); lastFreshAt = now; lastMedia = media;
       gl.bindVertexArray(vao);
       target(lowT[cur], ws, hs); gl.useProgram(pLow.p); bindT(0, texSrc, pLow.u.u_src); gl.uniform2f(pLow.u.u_cell, 1 / ws, 1 / hs); gl.drawArrays(gl.TRIANGLES, 0, 3);
       lowN++;
@@ -600,7 +649,10 @@
       target(resT, 4, 1); gl.useProgram(pRes.p); bindT(0, shiftT, pRes.u.u_shift); bindT(1, lowT[cur], pRes.u.u_a);
       gl.uniform2i(pRes.u.u_n, ws, hs); gl.uniform2f(pRes.u.u_prior, prior[0], prior[1]); gl.drawArrays(gl.TRIANGLES, 0, 3);
       var sIn = salT[salAt], sOut = salT[1 - salAt];
-      target(sOut, ws, hs); gl.useProgram(pSal.p); bindT(0, lowT[cur], pSal.u.u_a); bindT(1, lowT[prev], pSal.u.u_b); bindT(2, resT, pSal.u.u_res); bindT(3, sIn, pSal.u.u_prev);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbM);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, sOut, 0); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT1, gl.TEXTURE_2D, flowT[1 - salAt], 0);
+      gl.drawBuffers([gl.COLOR_ATTACHMENT0, gl.COLOR_ATTACHMENT1]); gl.viewport(0, 0, ws, hs);
+      gl.useProgram(pSal.p); bindT(0, lowT[cur], pSal.u.u_a); bindT(1, lowT[prev], pSal.u.u_b); bindT(2, resT, pSal.u.u_res); bindT(3, sIn, pSal.u.u_prev); bindT(4, flowT[salAt], pSal.u.u_flow);
       var f = function (tau) { return 1 - Math.exp(-frameMs / tau); };
       gl.uniform2f(pSal.u.u_cell, 1 / ws, 1 / hs); gl.uniform4f(pSal.u.u_k, f(70), f(650), f(240), f(260)); gl.uniform1f(pSal.u.u_damp, damp); gl.uniform1f(pSal.u.u_fresh, salFrames > 1 ? 1 : 0);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -608,6 +660,7 @@
       if (!sync && now - readAt >= readMs) {          // a few reads a second, into a buffer the chip fills when it gets there; nothing waits
         readAt = now;
         gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
+        gl.readBuffer(gl.COLOR_ATTACHMENT0);
         gl.readPixels(0, 0, ws, hs, gl.RGBA, gl.UNSIGNED_BYTE, 0);
         target(resT, 4, 1); gl.readPixels(0, 0, 4, 1, gl.RGBA, gl.UNSIGNED_BYTE, ws * hs * 4);
         gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
@@ -628,111 +681,151 @@
       gaze.onMap(map, ws, hs, now);
     }
 
-    // ---- the gaze: a zone moved to the most salient place outside the places it has just looked at
-    // It jumps fast, dwells, sweeps a little while it dwells (jumping spider retinas scan), and leaves an inhibition of return at
-    // each place it looked, fading over gz.ior milliseconds (about five seconds: Ferrante and colleagues 2024). When the picture is dark
-    // and still for a while, it twitches in bouts (Rossler and colleagues 2022). docs/ENGINE.md gives the fields.
+    // ---- the gaze: a zone moved by the movement map, as a jumping spider's principal eyes are moved by what its side eyes report
+    // Every figure comes from the view's `gaze` block, and docs/ENGINE.md names the measurement behind each. In outline (Land 1969 and
+    // 1971, Ferrante and colleagues 2024, Zurek and colleagues 2010, Bruce and colleagues 2021, Rossler and colleagues 2022): only movement
+    // starts a jump; movement that goes on at one place loses its pull, and a small mover counts for more than movement over a wide field;
+    // a jump is fast and direct; on arrival the eyes sweep side to side across the target and twist slowly back and forth, and follow it
+    // if it moves; the place just looked at is left alone and its pull comes back steadily over about five seconds; with nothing there the
+    // eyes hold, then drift back; with nothing moving at all they sweep on their own now and then; in the dark and still, they twitch in bouts.
     var gaze = (function () {
-      var G = { x: .5, y: .5, mode: 'rest', t0: 0, fx: .5, fy: .5, tx: .5, ty: .5, until: 0, jumps: 0, ior: [], cfg: null, pinned: null, rot: 0, sx: 0,
-        dark: 0, sleep: false, bout: 0, boutEnd: 0, nextBout: 0, twitchAt: 0, jx: 0, jy: 0, jr: 0, lastMap: 0, aspect: 1, best: 0 };
+      var G = { x: .5, y: .5, mode: 'rest', t0: 0, dur: 1, fx: .5, fy: .5, tx: .5, ty: .5, until: 0, jumps: 0, ior: [], log: [], cfg: null, pinned: null,
+        dark: 0, sleep: false, bout: 0, boutEnd: 0, nextBout: 0, twitchAt: 0, jx: 0, jy: 0, jr: 0, lastMap: 0, ax: 1, ay: 1, best: 0, held: 0,
+        wander: 0, wanderEnd: 0, nextWander: 0, wa: 0, wf: .3, lookT0: 0, pri: null, tl: 0 };
+      function deg(d) { return d / CAM_DEG; }
       function cfgOf(gz) {
-        return { jump: gz.jump || 80, dwell: gz.dwell || [700, 1600], follow: gz.follow || .14, scan: gz.scan || [.01, 1.2, 10], ior: gz.ior || 5000, iorR: gz.iorR || .08,
-          floor: gz.floor || .07, living: gz.living === undefined ? 1.5 : gz.living, sleep: !!gz.sleep, margin: gz.margin || [.05, .06] };
+        function or(v, d) { return v === undefined ? d : v; }
+        return { saccade: or(gz.saccade, [40, 4]), sweep: or(gz.sweep, [2, 1.2]), twist: or(gz.twist, [25, 2000, 3500]), examine: or(gz.examine, [4000, 12000]),
+          hold: or(gz.hold, 1500), back: or(gz.back, .8), pursuit: or(gz.pursuit, 10), ior: or(gz.ior, 5000), iorR: deg(or(gz.iorDeg, 6)), habit: or(gz.habit, .75),
+          surround: or(gz.surround, .6), any: or(gz.any, .6), living: or(gz.living, 1.8), distract: or(gz.distract, 1.5), wander: or(gz.wander, [8000, 20000]),
+          floor: or(gz.floor, .06), sleep: gz.sleep || null, margin: or(gz.margin, [.05, .06]), track: deg(or(gz.trackDeg, 9)) };
       }
+      function iorK(age, c) { return age < 0 || age >= c.ior ? 0 : age < 200 ? age / 200 : 1 - (age - 200) / (c.ior - 200); }   // poor at once, recovering steadily (Ferrante 2024)
       function iorAt(x, y, now) {
         var k = 0, c = G.cfg;
         for (var i = 0; i < G.ior.length; i++) {
-          var I = G.ior[i], age = (now - I.t) / c.ior; if (age >= 1) continue;
-          var dx = (x - I.x) * G.aspect, dy = y - I.y, s = 1 - ease(clamp((age - .55) / .45, 0, 1));
+          var I = G.ior[i], s = iorK(now - I.t, c); if (s <= 0) continue;
+          var dx = (x - I.x) * G.ax, dy = (y - I.y) * G.ay;
           k = Math.max(k, s * Math.exp(-(dx * dx + dy * dy) / (c.iorR * c.iorR)));
         }
         return k;
       }
-      function jumpTo(x, y, now) { G.mode = 'jump'; G.t0 = now; G.fx = G.x; G.fy = G.y; G.tx = x; G.ty = y; G.jumps++; }
+      function saccade(x, y, now) {
+        var c = G.cfg, d = Math.sqrt(Math.pow((x - G.x) * G.ax, 2) + Math.pow((y - G.y) * G.ay, 2)) * CAM_DEG;
+        G.mode = 'saccade'; G.t0 = now; G.dur = calm ? 450 : c.saccade[0] + c.saccade[1] * d; G.fx = G.x; G.fy = G.y; G.tx = x; G.ty = y; G.jumps++;
+      }
+      // what calls the gaze, cell by cell: movement that is new at its place, and living movement, above the movement around it
+      function priority(m, w, h) {
+        var c = G.cfg, n = w * h, P = G.pri && G.pri.length === n ? G.pri : (G.pri = new Float32Array(n)), I = G.integ && G.integ.length === (w + 1) * (h + 1) ? G.integ : (G.integ = new Float32Array((w + 1) * (h + 1)));
+        for (var i = 0; i < n; i++) { var e = m[i * 4] / 255, l = m[i * 4 + 1] / 255, es = m[i * 4 + 2] / 255; P[i] = c.any * Math.max(e - c.habit * es, 0) + c.living * l; }
+        for (var y = 0; y < h; y++) { var row = 0; for (var x = 0; x < w; x++) { row += P[y * w + x]; I[(y + 1) * (w + 1) + x + 1] = I[y * (w + 1) + x + 1] + row; } }
+        var r = 3, out = G.pri2 && G.pri2.length === n ? G.pri2 : (G.pri2 = new Float32Array(n));
+        for (y = 0; y < h; y++) for (x = 0; x < w; x++) {
+          var x0 = Math.max(0, x - r), x1 = Math.min(w, x + r + 1), y0 = Math.max(0, y - r), y1 = Math.min(h, y + r + 1);
+          var box = (I[y1 * (w + 1) + x1] - I[y0 * (w + 1) + x1] - I[y1 * (w + 1) + x0] + I[y0 * (w + 1) + x0]) / ((x1 - x0) * (y1 - y0));
+          out[y * w + x] = Math.max(P[y * w + x] - c.surround * box, 0);
+        }
+        return out;
+      }
       return {
         G: G,
-        reset: function () { G.x = G.y = G.fx = G.fy = G.tx = G.ty = .5; G.mode = 'rest'; G.ior = []; G.jumps = 0; G.sleep = false; G.dark = 0; G.lastMap = 0; G.pinned = null; G.best = 0; },
+        reset: function () { G.x = G.y = G.fx = G.fy = G.tx = G.ty = .5; G.mode = 'rest'; G.ior = []; G.log = []; G.jumps = 0; G.sleep = false; G.dark = 0; G.lastMap = 0; G.pinned = null; G.best = 0; G.wander = 0; G.nextWander = 0; G.bout = 0; },
         pin: function (x, y) { G.pinned = x === null ? null : [x, y]; },
         onMap: function (m, w, h, now) {
           var c = G.cfg; if (!c) return;
-          G.aspect = sw / Math.max(1, sh);
-          var dtm = G.lastMap ? now - G.lastMap : 0; G.lastMap = now;
+          G.ax = sw / Math.max(sw, sh, 1); G.ay = sh / Math.max(sw, sh, 1);
+          var dtm = G.lastMap ? Math.min(now - G.lastMap, 1000) : 0; G.lastMap = now;
           var o = w * h * 4, sx = (m[o] / 255 - .5) * 16, sy = (m[o + 1] / 255 - .5) * 16, lum = m[o + 4] / 255;
           var still = Math.abs(sx) < .35 && Math.abs(sy) < .35 && mapInfo.meanE < .02 && senses.still();
           G.dark = lum < .17 && still ? G.dark + dtm : 0;
-          var wasSleep = G.sleep; G.sleep = c.sleep && G.dark > 3500;
-          if (G.sleep && !wasSleep) { G.nextBout = now + 1500 + Math.random() * 3000; G.mode = 'rest'; }
+          var wasSleep = G.sleep; G.sleep = !!c.sleep && G.dark > (c.sleep.after || 3500);
+          if (G.sleep && !wasSleep) { G.nextBout = now + 1500 + Math.random() * 2500; G.mode = 'rest'; G.bout = 0; }
           if (G.sleep || G.pinned) return;
-          // the most salient place outside the places just looked at, inside the camera's own picture
-          var best = 0, bx = 0, by = 0, near = 0, nx = 0, ny = 0, mx = c.margin[0], my = c.margin[1], R = .14;
+          var P = priority(m, w, h), best = 0, bx = .5, by = .5, near = 0, nx = G.tx, ny = G.ty, sum = 0, cnt = 0, mx = c.margin[0], my = c.margin[1];
           for (var y = 0; y < h; y++) {
             var v = (y + .5) / h; if (v < my || v > 1 - my) continue;
             for (var x = 0; x < w; x++) {
               var u = (x + .5) / w; if (u < mx || u > 1 - mx) continue;
-              var i = (y * w + x) * 4, s = (m[i] + c.living * m[i + 1]) / 255;
+              var s = P[y * w + x]; sum += s; cnt++;
               if (s <= c.floor * .5) continue;
-              var dx = (u - G.x) * G.aspect, dy = v - G.y, d2 = dx * dx + dy * dy;
-              if (d2 < R * R && s > near) { near = s; nx = u; ny = v; }
+              var dx = (u - G.tx) * G.ax, dy = (v - G.ty) * G.ay;
+              if (dx * dx + dy * dy < c.track * c.track) { if (s > near) { near = s; nx = u; ny = v; } continue; }   // the target itself, wherever it has moved
               s *= 1 - iorAt(u, v, now);
               if (s > best) { best = s; bx = u; by = v; }
             }
           }
+          var mean = cnt ? sum / cnt : 0, calls = best > c.floor && best > mean * 4;
           G.best = best;
-          if (G.mode === 'dwell') {
-            if (near > c.floor) { G.tx = nx; G.ty = ny; }                    // the target moved: the gaze follows it while it dwells
-            if (now < G.until) return;
+          if (G.mode === 'saccade') return;
+          if (G.mode === 'look') {
+            if (near > c.floor * .6) { G.tx = nx; G.ty = ny; G.held = now; }   // the target moved: the eyes follow it
+            else if (now - G.held > 300) { G.mode = 'hold'; G.until = now + c.hold; }
+            if (G.mode === 'look' && calls && (now > G.until || best > Math.max(near, c.floor) * (G.tl > .5 ? c.distract : 1.15))) { saccade(bx, by, now); return; }   // a distraction, or done looking
+            return;
           }
-          if (G.mode === 'jump') return;
-          var ddx = (bx - G.x) * G.aspect, ddy = by - G.y;
-          if (best > c.floor && best > mapInfo.meanE * 3 && ddx * ddx + ddy * ddy > .0025) jumpTo(bx, by, now);
-          else if (G.mode === 'dwell') G.mode = 'rest';
+          if (calls) { saccade(bx, by, now); return; }
+          if (G.mode === 'hold' && now > G.until) G.mode = 'rest';
         },
-        // where the gaze zone is now: centre and turn, moved a little every frame
+        // where the gaze zone is now, and its turn: moved a little every frame
         at: function (gz, now, dt) {
           if (!gz) return null;
           if (!G.cfg || G.cfg.src !== gz) { G.cfg = cfgOf(gz); G.cfg.src = gz; }
-          var c = G.cfg, t = now / 1000, j = calm ? 450 : c.jump;
+          var c = G.cfg, t = now / 1000, ddt = Math.min(dt || 16, 100);
           if (G.pinned) { G.x = G.pinned[0]; G.y = G.pinned[1]; return { x: G.x, y: G.y, rot: 0 }; }
-          if (G.mode === 'jump') {
-            var p = clamp((now - G.t0) / j, 0, 1), e = calm ? ease(p) : 1 - Math.pow(1 - p, 3);
+          if (G.mode === 'saccade') {
+            var p = clamp((now - G.t0) / G.dur, 0, 1), e = calm ? ease(p) : 1 - Math.pow(1 - p, 3);   // direct, and it does not overshoot
             G.x = lerp(G.fx, G.tx, e); G.y = lerp(G.fy, G.ty, e);
             if (p >= 1) {
-              G.mode = 'dwell'; G.until = now + c.dwell[0] + Math.random() * (c.dwell[1] - c.dwell[0]);
+              G.mode = 'look'; G.lookT0 = now; G.held = now; G.until = now + c.examine[0] + Math.random() * (c.examine[1] - c.examine[0]);
+              var li = G.pri ? Math.min(G.pri.length - 1, Math.floor(G.ty * hs) * ws + Math.floor(G.tx * ws)) : -1; G.tl = li >= 0 && map ? map[li * 4 + 1] / 255 : 0;
               G.ior.push({ x: G.tx, y: G.ty, t: now }); if (G.ior.length > 6) G.ior.shift();
+              G.log.push([+G.tx.toFixed(3), +G.ty.toFixed(3), Math.round(now), Math.round(freshMedia)]); if (G.log.length > 40) G.log.shift();
             }
-          } else if (G.mode === 'dwell') {
-            var a = 1 - Math.exp(-(dt || 16) / (c.follow * 1000));
-            G.x = lerp(G.x, G.tx, a); G.y = lerp(G.y, G.ty, a);
-          } else if (!G.sleep) {
-            var b = 1 - Math.exp(-(dt || 16) / 2500);                    // nothing calls: the gaze settles slowly back toward the front
-            G.x = lerp(G.x, .5, b); G.y = lerp(G.y, .5, b);
+          } else if (G.mode === 'look') {                                 // smooth pursuit, up to c.pursuit degrees a second
+            var dx = (G.tx - G.x) * G.ax, dy = (G.ty - G.y) * G.ay, d = Math.sqrt(dx * dx + dy * dy), step = c.pursuit / CAM_DEG * ddt / 1000;
+            if (d > 1e-6) { var k = Math.min(1, step / d, 1 - Math.exp(-ddt / 120)); G.x += (G.tx - G.x) * k; G.y += (G.ty - G.y) * k; }
+          } else if (G.mode === 'rest' && !G.sleep) {                     // nothing calls: the eyes drift back to rest at c.back degrees a second
+            var bx = (.5 - G.x) * G.ax, by = (.5 - G.y) * G.ay, bd = Math.sqrt(bx * bx + by * by), bs = c.back / CAM_DEG * ddt / 1000;
+            if (bd > 1e-6) { var kb = Math.min(1, bs / bd); G.x += (.5 - G.x) * kb; G.y += (.5 - G.y) * kb; }
           }
-          var sx = 0, rot = 0;
-          if (!calm && !G.sleep && G.mode !== 'jump') {                  // the small sweeps of a scanning retina
-            sx = c.scan[0] * Math.sin(2 * Math.PI * c.scan[1] * t) * (G.mode === 'dwell' ? 1 : .5);
-            rot = c.scan[2] * Math.sin(2 * Math.PI * c.scan[1] * .53 * t + 1.1) * Math.PI / 180;
+          var ox = 0, rot = 0;
+          if (!calm && G.mode === 'look') {                               // scanning: side-to-side sweeps, and a slow twist that holds at each end
+            ox = deg(c.sweep[0] / 2) / G.ax * Math.sin(2 * Math.PI * (now - G.lookT0) / 1000 / c.sweep[1]);
+            var turn = c.twist[1], holdT = c.twist[2], per = 2 * (turn + holdT), half = turn / (turn + holdT), ph = (((now - G.lookT0) / per * 2) + half / 2) % 2;   // it starts upright, half way through a turn
+            var side = ph < 1 ? ph : ph - 1, sign = ph < 1 ? 1 : -1, tw = side < half ? -1 + 2 * ease(side / half) : 1;   // from one end to the other, then a hold
+            rot = sign * tw * c.twist[0] * Math.PI / 180;
           }
-          if (G.sleep) {                                                 // in the dark and still: bouts of twitching
-            if (!G.bout && now >= G.nextBout) { G.bout = 1; G.boutEnd = now + 1500 + Math.random() * 2500; G.twitchAt = 0; }
+          if (!calm && G.mode === 'rest' && !G.sleep && c.wander) {        // with nothing moving, a bout of sweeps now and then
+            if (!G.nextWander) G.nextWander = now + c.wander[0] + Math.random() * (c.wander[1] - c.wander[0]);
+            if (!G.wander && now > G.nextWander) { G.wander = now; G.wanderEnd = now + 3000 + Math.random() * 5000; G.wa = deg(6 + Math.random() * 8) / G.ax; G.wf = .15 + Math.random() * .35; }
+            if (G.wander) {
+              var wt = (now - G.wander) / 1000, env = Math.sin(Math.PI * clamp((now - G.wander) / (G.wanderEnd - G.wander), 0, 1));
+              ox += G.wa * env * Math.sin(2 * Math.PI * G.wf * wt);
+              if (now > G.wanderEnd) { G.wander = 0; G.nextWander = now + c.wander[0] + Math.random() * (c.wander[1] - c.wander[0]); }
+            }
+          } else if (G.mode !== 'rest') { G.wander = 0; G.nextWander = 0; }
+          if (G.sleep) {                                                  // in the dark and still: bouts of twitching, closer together than a spider's
+            var sl = c.sleep, bl = sl.bout || [6000, 12000], gp = sl.gap || [20000, 40000];
+            if (!G.bout && now >= G.nextBout) { G.bout = 1; G.boutEnd = now + bl[0] + Math.random() * (bl[1] - bl[0]); G.twitchAt = 0; }
             if (G.bout) {
-              if (now >= G.twitchAt) { G.twitchAt = now + 70 + Math.random() * 160; G.jx = (Math.random() - .5) * .05; G.jy = (Math.random() - .5) * .06; G.jr = (Math.random() - .5) * .5; }
-              if (now >= G.boutEnd) { G.bout = 0; G.nextBout = now + 6000 + Math.random() * 9000; G.jx = G.jy = G.jr = 0; }
+              if (now >= G.twitchAt) { G.twitchAt = now + 70 + Math.random() * 180; G.jx = deg((Math.random() - .5) * 5) / G.ax; G.jy = deg((Math.random() - .5) * 5) / G.ay; G.jr = (Math.random() - .5) * .6; }
+              if (now >= G.boutEnd) { G.bout = 0; G.nextBout = now + gp[0] + Math.random() * (gp[1] - gp[0]); G.jx = G.jy = G.jr = 0; }
             }
-            if (calm) { G.jx *= .2; G.jy *= .2; G.jr *= .2; }
-            sx += G.jx; rot += G.jr;
+            var q = calm ? .15 : 1; ox += G.jx * q; rot += G.jr * q;
+            return { x: G.x + ox, y: G.y + G.jy * q, rot: rot };
           }
-          return { x: G.x + sx, y: G.y + (G.sleep ? G.jy : 0), rot: rot };
+          return { x: G.x + ox, y: G.y, rot: rot };
         },
         iorList: function (now) {
           var c = G.cfg, out = []; if (!c) return out;
-          for (var i = 0; i < G.ior.length; i++) { var I = G.ior[i], age = (now - I.t) / c.ior; if (age < 1) out.push([I.x, I.y, c.iorR, 1 - ease(clamp((age - .55) / .45, 0, 1))]); }
+          for (var i = 0; i < G.ior.length; i++) { var I = G.ior[i], k = iorK(now - I.t, c); if (k > 0) out.push([I.x, I.y, c.iorR, k]); }
           return out;
         }
       };
     })();
 
     // ---- uniforms for the zones, reused frame after frame
-    var zG = new Float32Array(16), zH = new Float32Array(16), zR = new Float32Array(16), zP = new Float32Array(16), zQ = new Float32Array(16), zS = new Float32Array(16), zM = new Float32Array(36), zT = new Float32Array(16);
+    var zG = new Float32Array(16), zH = new Float32Array(16), zR = new Float32Array(16), zX = new Float32Array(16), zP = new Float32Array(16), zQ = new Float32Array(16), zS = new Float32Array(16), zM = new Float32Array(36), zT = new Float32Array(16);
     var iorU = new Float32Array(24), ripU = new Float32Array(16), zLag = [0, 0, 0, 0], lastG = null;
     function blurOf(inv, longPx) { return inv > 1 / (HUMAN_CPD - 1) ? .6 * (longPx / VIEW_DEG) * inv : 0; }   // 0.6 of one cycle at that eye's limit
     function zoneUniforms(Z, P, now, dt, longPx) {
@@ -743,6 +836,7 @@
         zG[i * 4] = cx; zG[i * 4 + 1] = cy; zG[i * 4 + 2] = z.hw; zG[i * 4 + 3] = z.hh;
         zH[i * 4] = z.shape; zH[i * 4 + 1] = z.soft; zH[i * 4 + 2] = z.inner; zH[i * 4 + 3] = 0;
         zR[i * 4] = Math.cos(rot); zR[i * 4 + 1] = Math.sin(rot);
+        zX[i * 4] = z.tiltU; zX[i * 4 + 1] = z.tiltD; zX[i * 4 + 2] = z.gap; zX[i * 4 + 3] = z.tip;
         zP[i * 4] = blurOf(z.inv, longPx); zP[i * 4 + 1] = z.sat; zP[i * 4 + 2] = z.gain; zP[i * 4 + 3] = moving ? z.gate : 0;
         zQ[i * 4] = z.glow; zQ[i * 4 + 1] = z.living; zQ[i * 4 + 2] = z.uv; zQ[i * 4 + 3] = z.mag;
         zS[i * 4] = z.sheen;
@@ -754,7 +848,8 @@
     var api = {
       floatOK: floatOK,
       setImage: function (cv) { moving = false; if (upload(cv, cv.width, cv.height)) reset = true; },
-      setFrame: function (source, w, h, now) { if (!moving) { moving = true; resetTime(); } if (upload(source, w, h)) { pushRing(now); fresh = true; freshAt = now; } },
+      // media: the frame's own time in ms where it has one (a clip's), so that the movement map's time constants follow the clip's clock
+      setFrame: function (source, w, h, now, media) { if (!moving) { moving = true; resetTime(); } if (upload(source, w, h)) { pushRing(now); fresh = true; freshMedia = media === undefined ? -1 : media; } },
       resetTime: resetTime,
       setSide: function (n) { MAXSIDE = Math.max(240, Math.round(n)); },
       side: function () { return MAXSIDE; },
@@ -767,7 +862,7 @@
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
       probe: function () { return { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr }; },
       // for the checks: the gaze, the movement map's last read, and a way to hold the gaze in one place
-      gazeState: function () { var G = gaze.G; return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync }; },
+      gazeState: function () { var G = gaze.G; return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync, log: G.log.slice() }; },
       pinGaze: function (x, y) { gaze.pin(x === undefined ? null : x, y); },
       resize: function () {
         var dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr, k = Math.min(1, MAXSIDE / Math.max(w, h, 1));
@@ -817,7 +912,7 @@
         // the movement map, once for each new camera frame
         if (zoned && P.sal > .001 && moving && fresh) {
           var sp = senses.turning();
-          salience(now, 1 - clamp((sp - 25) / 70, 0, .85), [0, 0]);
+          salience(now, 1 - clamp((sp - 25) / 70, 0, .85), [0, 0], freshMedia);
         }
         fresh = false;
         var gateAny = P.gate > .5 || (Z && Z.some(function (z) { return z.gate > .01; }));
@@ -837,8 +932,8 @@
         if (zoned && Z) nz = zoneUniforms(Z, P, now, dt, longPx);
         else if (zoned && P.gz) lastG = gaze.at(P.gz, now, dt);
         if (tp === pTimeZ) {
-          gl.uniform1f(ut.u_srcAspect, sw / sh); gl.uniform1i(ut.u_nz, nz);
-          gl.uniform4fv(ut['u_zG[0]'], zG); gl.uniform4fv(ut['u_zH[0]'], zH); gl.uniform4fv(ut['u_zR[0]'], zR); gl.uniform4fv(ut['u_zT[0]'], zT);
+          gl.uniform2f(ut.u_zScale, sw / Math.max(sw, sh), sh / Math.max(sw, sh)); gl.uniform1i(ut.u_nz, nz);
+          gl.uniform4fv(ut['u_zG[0]'], zG); gl.uniform4fv(ut['u_zH[0]'], zH); gl.uniform4fv(ut['u_zR[0]'], zR); gl.uniform4fv(ut['u_zX[0]'], zX); gl.uniform4fv(ut['u_zT[0]'], zT);
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
         reset = false;
@@ -863,8 +958,8 @@
         gl.uniform1f(u.u_expo, fx.expo === undefined ? 1 : fx.expo);
         gl.uniform1f(u.u_ap, fx.ap === undefined ? 1 : fx.ap); gl.uniform1i(u.u_shape, fx.shape || 0); gl.uniform1f(u.u_mosaic, fx.mosaic || 0);
         if (zoned) {
-          gl.uniform1i(u.u_nz, nz);
-          gl.uniform4fv(u['u_zG[0]'], zG); gl.uniform4fv(u['u_zH[0]'], zH); gl.uniform4fv(u['u_zR[0]'], zR);
+          gl.uniform1i(u.u_nz, nz); gl.uniform2f(u.u_zScale, sw / Math.max(sw, sh), sh / Math.max(sw, sh));
+          gl.uniform4fv(u['u_zG[0]'], zG); gl.uniform4fv(u['u_zH[0]'], zH); gl.uniform4fv(u['u_zR[0]'], zR); gl.uniform4fv(u['u_zX[0]'], zX);
           gl.uniform4fv(u['u_zP[0]'], zP); gl.uniform4fv(u['u_zQ[0]'], zQ); gl.uniform4fv(u['u_zS[0]'], zS); gl.uniformMatrix3fv(u['u_zM[0]'], true, zM);
           var salOn = moving && salT[0] && salFrames > 1 ? P.sal : 0;
           gl.uniform1f(u.u_salOn, salOn); gl.uniform2f(u.u_base, P.glow, P.living); gl.uniform3f(u.u_glowC, P.glowC[0], P.glowC[1], P.glowC[2]);
@@ -1229,7 +1324,7 @@
     if (s === 'intro' || s === 'askAnimal') { drawIntro(now, dt, s === 'askAnimal'); return; }
     if (isMoving() && !S.freeze && vid.readyState >= 2 && vid.videoWidth) {
       var fresh = vid.requestVideoFrameCallback ? S.newFrame : vid.currentTime !== S.lastVideoTime;
-      if (fresh) { S.newFrame = false; S.lastVideoTime = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now); }
+      if (fresh) { S.newFrame = false; S.lastVideoTime = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now, S.src === 'clip' ? vid.currentTime * 1000 : undefined); }
     }
     var fx = fxNow(now, dt), P = S.eyes ? mix(HUMAN, eyeP, S.k) : HUMAN;
     if (s === 'askView') fx.expo = .5;                       // the animal's photo sits dimmed behind the prompt
@@ -3117,7 +3212,7 @@
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; },   // hold the change of eyes at one instant, for checking
-    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; } };          // the picture engine's probe, gaze and movement map, for checking
+    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; }, params: function (k) { return k && EYES[k] ? paramsOf(EYES[k]) : HUMAN; } };          // the picture engine's probe, gaze and movement map, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
   var frameMs = [], frameLast = 0;

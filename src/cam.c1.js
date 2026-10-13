@@ -347,7 +347,7 @@
     if (s === 'intro' || s === 'askAnimal') { drawIntro(now, dt, s === 'askAnimal'); return; }
     if (isMoving() && !S.freeze && vid.readyState >= 2 && vid.videoWidth) {
       var fresh = vid.requestVideoFrameCallback ? S.newFrame : vid.currentTime !== S.lastVideoTime;
-      if (fresh) { S.newFrame = false; S.lastVideoTime = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now); }
+      if (fresh) { S.newFrame = false; S.lastVideoTime = vid.currentTime; engine.setFrame(vid, vid.videoWidth, vid.videoHeight, now, S.src === 'clip' ? vid.currentTime * 1000 : undefined); }
     }
     var fx = fxNow(now, dt), P = S.eyes ? mix(HUMAN, eyeP, S.k) : HUMAN;
     if (s === 'askView') fx.expo = .5;                       // the animal's photo sits dimmed behind the prompt

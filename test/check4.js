@@ -328,6 +328,9 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.prompt = await text(page, 'askViewH');
     await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
     await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+    // Software graphics draw a few frames a second, so the clip is slowed (PLAYBACK, 0.15) until each drawn frame is about one of the
+    // clip's frames after the last, as a phone's camera delivers them. The movement map keeps to the clip's own clock.
+    await page.evaluate((r) => { document.getElementById('vid').playbackRate = r; }, +(process.env.PLAYBACK || .15));
     await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
     const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 14);
     let n = 0;
@@ -339,7 +342,15 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     }
     const last = trace[trace.length - 1];
     r.eyes = (await st(page)).eyes; r.jumps = last.jumps; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
-    r.places = trace.filter((x, i) => i && x.jumps !== trace[i - 1].jumps).map((x) => [x.x, x.y]);
+    // what each fixation landed on, from where test/make_scene.py drew everything at the clip time of the frame it was chosen from
+    const log = await page.evaluate(() => window.__seenBack.engine.gazeState().log), scene = (process.env.CLIP || 'scene.webm') === 'scene.webm' ? JSON.parse(fs.readFileSync(path.join(here, 'assets', 'scene.json'), 'utf8')) : null;
+    r.landed = {};
+    if (scene) log.forEach(([x, y, at, media]) => {
+      const n = scene.where.beetle.length, f = ((Math.round(media / 1000 * scene.fps) % n) + n) % n, A = scene.size[0] / scene.size[1];
+      let best = 'nothing', bd = .1;
+      Object.keys(scene.where).forEach((k) => { const p = scene.where[k][f], d = Math.hypot((x - p[0]) * A, (1 - y) - p[1]); if (d < bd) { bd = d; best = k; } });
+      r.landed[best] = (r.landed[best] || 0) + 1;
+    });
     r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
     await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); await page.waitForTimeout(300);
     r.rows = await page.evaluate(() => [...document.querySelectorAll('#rows li')].length);

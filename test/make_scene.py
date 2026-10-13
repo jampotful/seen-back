@@ -8,8 +8,10 @@ Four seconds at 30 frames a second, 540 by 960 (a phone held upright), cut from 
   - an orange ball that slides at one speed in a straight line (moving, coherent, not rhythmic);
   - a patch of glints that change at random every frame (flicker with no coherent motion).
 Everything moves with the background, so the pan moves the whole scene. Needs numpy, Pillow and ffmpeg with libvpx.
+test/assets/scene.json gives where each of the four is in every frame, as fractions of the width and of the height from the top,
+so that a check can tell what the gaze looked at.
 """
-import math, pathlib, random, subprocess
+import json, math, pathlib, random, subprocess
 import numpy as np
 from PIL import Image, ImageDraw
 
@@ -50,6 +52,7 @@ def beetle(d, t, ox, oy):
     for u, r in ((-12, 8), (1, 7), (12, 5)):
         cx, cy = P(u, 0)
         d.ellipse([cx - r, cy - r * 0.8, cx + r, cy + r * 0.8], fill=(28, 20, 14))
+    return P(0, 0)
 
 
 def fly(d, t, ox, oy):
@@ -69,6 +72,7 @@ def fly(d, t, ox, oy):
         cx += jx
     d.ellipse([cx - 6, cy - 4, cx + 6, cy + 5], fill=(18, 18, 22))
     d.ellipse([cx - 3, cy - 8, cx + 3, cy - 3], fill=(120, 20, 20))
+    return cx, cy
 
 
 def ball(d, t, ox, oy):
@@ -76,6 +80,7 @@ def ball(d, t, ox, oy):
     cx, cy = x0 - ox + MARGIN, y0 - oy + MARGIN
     d.ellipse([cx - 16, cy - 16, cx + 16, cy + 16], fill=(240, 138, 28))
     d.ellipse([cx - 7, cy - 10, cx - 1, cy - 4], fill=(255, 210, 160))
+    return cx, cy
 
 
 def glints(arr, ox, oy):
@@ -84,20 +89,25 @@ def glints(arr, ox, oy):
         m = rng.random((40, 60)) > 0.82
         patch = arr[y0:y0 + 40, x0:x0 + 60]
         patch[m] = (250, 250, 235)
+    return 300 - ox + MARGIN + 30, 560 - oy + MARGIN + 20
 
 
 proc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', '%dx%d' % (W, H), '-r', str(FPS), '-i', '-',
                          '-c:v', 'libvpx', '-b:v', '900k', '-crf', '12', '-auto-alt-ref', '0', '-g', '30', '-an', str(here / 'assets' / 'scene.webm')],
                         stdin=subprocess.PIPE)
+where = {'beetle': [], 'fly': [], 'ball': [], 'glints': []}
 for i in range(FPS * SECONDS):
     t = i / FPS
     ox, oy = offset(t)
     fr = bg.crop((round(ox), round(oy), round(ox) + W, round(oy) + H)).copy()
     d = ImageDraw.Draw(fr)
-    beetle(d, t, ox, oy); fly(d, t, ox, oy); ball(d, t, ox, oy)
+    at = {'beetle': beetle(d, t, ox, oy), 'fly': fly(d, t, ox, oy), 'ball': ball(d, t, ox, oy)}
     arr = np.asarray(fr).copy()
-    glints(arr, ox, oy)
+    at['glints'] = glints(arr, ox, oy)
+    for k, (x, y) in at.items():
+        where[k].append([round(x / W, 4), round(y / H, 4)])
     proc.stdin.write(arr.astype(np.uint8).tobytes())
 proc.stdin.close()
 proc.wait()
-print('wrote', here / 'assets' / 'scene.webm', (here / 'assets' / 'scene.webm').stat().st_size, 'bytes')
+(here / 'assets' / 'scene.json').write_text(json.dumps({'fps': FPS, 'size': [W, H], 'living': ['beetle', 'fly'], 'where': where}, separators=(',', ':')))
+print('wrote', here / 'assets' / 'scene.webm', (here / 'assets' / 'scene.webm').stat().st_size, 'bytes, and scene.json')

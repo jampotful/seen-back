@@ -124,24 +124,40 @@
   var UV_GREEN = [.16, .62, .02, .2, .78, .02, 0, 0, 0];                     // INVENTED: a green receptor drawn yellow-green; blue is replaced by the guessed ultraviolet
   var UV_GREEN_RED = [1, 0, 0, .2, .78, .02, 0, 0, 0];                       // INVENTED: the same with the red-filtered class kept as red
   var TRY = {
-    jumper: { chip: 'Jumping spider', who: 'a jumping spider', fov: 350, cpd: 1, pupil: 'o', M: SIDE_GREEN, sat: 1, glow: .9, living: 0, glowC: [.78, 1, .62],
-      salience: 1, cue: 'Movement glows. The sharp strip jumps to it, looks it over, and then lets that place go for a while.',
+    // Jumping spiders (family Salticidae), from docs/views/drafts/jumper.md and its log, docs/views/evidence/jumper.jsonl, on research/jumper.
+    // The surround is the side eyes: the rear pair (PLE) at 0.5 cycles a degree, the front pair (ALE) at 1.1, both green only (Land 1969;
+    // Gote and colleagues 2019; Yamashita and Tateda 1976). The cross is the two principal retinae at rest (Land 1969), at the acuity of
+    // Phidippus (3.3 to 3.8 cycles a degree: Land 1969; Harland and colleagues 2012). docs/ENGINE.md gives every value and its source.
+    jumper: { chip: 'Jumping spider', who: 'a jumping spider', fov: 350, cpd: .5, pupil: 'o', M: SIDE_GREEN, glow: .9, living: 0, glowC: [.78, 1, .62],
+      salience: 1, senses: { motion: 1 },
+      cue: 'Things that move glow. The sharp cross jumps to them, looks them over, and then leaves that place alone for a few seconds.',
       zones: [
-        // the front side eyes (ALEs), about 100 degrees across, where the jointed movement of living things glows brighter
-        { id: 'front', shape: 'ellipse', at: [.5, .5], size: [.95, 1.1], soft: .22, cpd: 1.25, living: 1.6 },
-        // the principal eyes: a narrow upright strip, sharp, in the spider's colours, moved by the gaze
-        { id: 'gaze', shape: 'strip', size: [.045, .17], soft: .025, cpd: 10, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.3, gaze: 1 }],
-      gaze: { zone: 'gaze', jump: 80, dwell: [700, 1700], follow: .14, scan: [.012, 1.4, 14], ior: 5000, iorR: .085, floor: .07, sleep: 1 },
-      byGenus: { Habronattus: { zones: { gaze: { M: UV_GREEN_RED } } } },
+        // both front side eyes: each about 70 degrees across and 98 high, overlapping by 25 in front (Gote 2019; Land 1969; Blest 1981)
+        { id: 'front', shape: 'ellipse', deg: [114, 98], soft: .2, cpd: 1.1, living: 1.6 },
+        // the principal retinae: each a strip about 2 degrees wide and 21 high, bent 30 degrees at its centre; the upper arms 40 to 45
+        // degrees apart, the lower 15 to 20, the inner edges 1 to 2 degrees apart (Land 1969); the arms see less sharply toward their ends
+        // (Williams and McIntyre 1980). Drawn 2.5 degrees wide (invented, for the screen) and magnified a little (invented).
+        { id: 'gaze', shape: 'cross', deg: [2.5, 21], tilt: [21, 8.5], gap: .75, tip: .45, soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.25, gaze: 1 },
+        // the centre of each principal retina, where Habronattus has its red-filtered receptors (Zurek and colleagues 2015); dichromatic elsewhere
+        { id: 'fovea', shape: 'ellipse', deg: [5, 4], soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.25, gaze: 1 }],
+      gaze: { saccade: [40, 4], sweep: [2, 1.2], twist: [25, 2000, 3500], examine: [4000, 12000], hold: 1500, back: .8, pursuit: 10,
+        ior: 5000, iorDeg: 6, habit: .75, surround: .6, any: .6, living: 1.8, distract: 1.5, wander: [8000, 20000], floor: .06, trackDeg: 9,
+        sleep: { after: 3500, bout: [6000, 12000], gap: [20000, 40000] } },
+      byGenus: {
+        Habronattus: { zones: { fovea: { M: UV_GREEN_RED } } },
+        Portia: { zones: { gaze: { cpd: 12.5, deg: [1.5, 21] }, fovea: { cpd: 12.5 } } } },   // Portia fimbriata: 12.4 cycles a degree (Williams and McIntyre 1980)
       rows: [
-        ['m', 'Eight eyes, one picture', 'Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely.'],
-        ['m', 'Living things stand out', 'The front side eyes pick out the jointed, rhythmic movement of living things, and the rear side eyes answer to anything that moves.'],
-        ['m', 'Looking away on purpose', 'Once the front eyes lock on, the side eyes ignore that spot for about five seconds so that something new can catch them.'],
-        ['m', 'Colour', 'Most jumping spiders see ultraviolet and green. Some, like Habronattus, also see red through a filter in the eye.'],
-        ['m', 'Sleep', 'At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. This view twitches its sharp strip in bouts when the phone lies still in the dark.'],
-        ['i', 'How the picture is drawn', 'No one knows how a jumping spider joins what its eyes report. This view draws one picture, with a coarse green surround for the six side eyes and a narrow sharp strip for the two front eyes. That way of drawing it is the app’s own.'],
-        ['i', 'Living movement', 'This view treats movement that holds together over a small patch and pulses, as walking legs do, as the movement of something alive. That test is the app’s own approximation.'],
-        ['i', 'Ultraviolet', 'Phone cameras record very little ultraviolet light. Inside the strip, a blue guessed from bluish and bright surfaces stands in for it.'],
+        ['m', 'Eight eyes, one picture', 'Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely. This view draws all eight as one picture.'],
+        ['m', 'The side eyes', 'The six side eyes see in green only, and with little detail: under a hundredth of yours at the back and about a fiftieth in front. They answer only to movement, so here the surround is a dim green and whatever moves in it glows.'],
+        ['m', 'Living things stand out', 'The front side eyes pick out the jointed, rhythmic movement of living things, and the rear side eyes answer to anything that moves. In front, this view makes living movement glow brighter.'],
+        ['m', 'The front eyes', 'Each large front eye sees a narrow upright strip about 2 degrees wide and 21 high, bent in the middle, and the two strips cross like an X. In Phidippus they see about a sixteenth of the detail you do, and in Portia about a fifth.'],
+        ['m', 'Jumps and scans', 'The front eyes jump to a new target in about a tenth of a second and follow it if it moves. While they look, they sweep side to side across it and slowly twist back and forth, and this view does the same.'],
+        ['m', 'Looking away on purpose', 'Once the front eyes lock on, the side eyes ignore that spot and watch elsewhere, and their interest in it returns over about five seconds. Here the glow fades from a place just looked at and comes back as slowly.'],
+        ['m', 'Colour', 'Most jumping spiders, Phidippus among them, see ultraviolet and green. Habronattus also sees red, in a small patch at the centre of each front eye, and this view adds red there when it knows the genus.'],
+        ['m', 'Sleep', 'At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. When the phone lies still in the dark, this view twitches its cross in bouts, closer together than a spider’s.'],
+        ['i', 'How the picture is drawn', 'No one knows how a jumping spider joins what its eyes report. Drawing the front eyes’ cross inside the side eyes’ surround, as one picture, is the app’s own choice.'],
+        ['i', 'Living movement', 'This view treats movement that holds together over a small patch and swings back and forth, as walking legs do, as the movement of something alive. That test is the app’s own approximation.'],
+        ['i', 'Ultraviolet', 'Phone cameras record very little ultraviolet light. Inside the cross, a blue guessed from bluish and bright surfaces stands in for it.'],
         ['x', 'Hearing', 'A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out.']] }
   };
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
@@ -150,12 +166,16 @@
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function ease(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
-  var SHAPES = { whole: 0, strip: 1, ellipse: 2, annulus: 3, band: 4 };
+  var SHAPES = { whole: 0, strip: 1, ellipse: 2, annulus: 3, band: 4, cross: 5 };
+  // A zone's size is a fraction of the camera picture's long side (size: [half width, half height]), or degrees of the world (deg: [width,
+  // height]), taking the long side of a phone camera's picture to span CAM_DEG degrees. An assumption: main cameras span about 60 to 70.
+  var CAM_DEG = 64;
   // A zone states only what differs from its view; everything it leaves out is the view's own value (docs/ENGINE.md).
   function zoneOf(z, P) {
-    var at = z.at || [.5, .5], size = z.size || [.5, .5];
+    var at = z.at || [.5, .5], size = z.deg ? [z.deg[0] / 2 / CAM_DEG, z.deg[1] / 2 / CAM_DEG] : z.size || [.5, .5];
+    var tilt = z.tilt || [0, 0];
     return { id: z.id || '', shape: SHAPES[z.shape] || 0, cx: at[0], cy: at[1], hw: size[0], hh: size[1], inner: z.inner || 0, soft: z.soft === undefined ? .04 : z.soft,
-      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? 1 : 0,
+      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? 1 : 0, tiltU: tilt[0] * Math.PI / 180, tiltD: tilt[1] * Math.PI / 180, gap: (z.gap || 0) / CAM_DEG, tip: z.tip === undefined ? 1 : z.tip,
       inv: z.cpd ? 1 / z.cpd : P.inv, M: z.M || P.M, sat: z.sat === undefined ? P.sat : z.sat, gain: z.gain || P.gain, gate: z.gate === undefined ? P.gate : z.gate,
       rate: z.rate || P.rate, glow: z.glow === undefined ? P.glow : z.glow, living: z.living === undefined ? P.living : z.living,
       uv: z.uv === undefined ? P.uvBlue : z.uv, sheen: z.sheen === undefined ? P.sheen : z.sheen, mag: z.mag || 1 };
