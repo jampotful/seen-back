@@ -44,6 +44,16 @@ case "${GITHUB_REF_NAME:-}" in run/engines/linux-perf*)    # only test/check4.js
   done
   exit 0 ;;
 esac
+case "${GITHUB_REF_NAME:-}" in run/engines/linux-floor*)   # only test/check4.js floor (docs/ENGINE-DESIGN.md section 5): the jumper view's visibility floor
+  [ "$PART" = chromium ] || { echo "floor run: nothing for the $PART part"; exit 0; }
+  /tmp/venv/bin/pip install -q numpy
+  python3 -m http.server 8790 --bind 127.0.0.1 --directory "$ROOT" > /dev/null 2>&1 &
+  sleep 1
+  step "floor: ${FLOOR_VIEW:-jumper}, ${FLOOR_VALUES:-5} values a parameter"
+  PORT=8790 FLOOR_PY=/tmp/venv/bin/python3 FLOOR_VALUES="${FLOOR_VALUES:-5}" FLOOR_OUT="$OUT/floor.json" timeout 3000 node test/check4.js floor > "$OUT/floor.txt" 2>&1
+  echo "exit $?"; tail -60 "$OUT/floor.txt"
+  exit 0 ;;
+esac
 case "${GITHUB_REF_NAME:-}" in run/engines/linux-sw5*) ENGINES="$BROWSERS" OUT="$OUT" bash ci/engines/sw5xx.sh; exit 0 ;; esac   # only ci/engines/patches/sw-5xx-kept.patch, proven
 if [ "$PROBE_ONLY" = 1 ]; then
   PORT=8782 node test/rec/serve.js 8782 > "$OUT/rec-serve-log.txt" 2>&1 &

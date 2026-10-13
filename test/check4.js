@@ -439,7 +439,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]); await page.waitForTimeout(+(process.env.FLOOR_WAIT || 1800));
       const f = path.join(tmp, (n++) + '.png'); await page.locator('canvas').first().screenshot({ path: f }); return f;
     }
-    const de = (a, b) => JSON.parse(require('child_process').execFileSync('python3', ['-I', path.join(here, '..', 'tools', 'views', 'delta_e.py'), a, b]).toString());
+    const de = (a, b) => JSON.parse(require('child_process').execFileSync(process.env.FLOOR_PY || 'python3', ['-I', path.join(here, '..', 'tools', 'views', 'delta_e.py'), a, b]).toString());
     const res = {}, NV = +(process.env.FLOOR_VALUES || 1);
     for (const lab of want) {
       const meta = info && info[lab]; if (!meta) { res[lab] = 'no such parameter'; continue; }

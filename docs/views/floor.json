@@ -1,0 +1,11 @@
+{
+ "about": "The visibility floor (docs/ENGINE-DESIGN.md, section 5): for each parameter of a view, at each value measured, the smallest change whose renders differ by more than the threshold in the 95th percentile of delta E*ab, on a still picture at 390 by 844 CSS pixels and a device pixel ratio of 2. Entries are [value, smallest visible change], or [value, 'invisible', the largest delta E found]. Made by test/check4.js floor; the tuning panel steps by these.",
+ "threshold": {
+  "value": 2.3,
+  "verified": false,
+  "note": "2.3 is the JND_CIE1976 constant of the colour-science Python library (colour/difference/delta_e.py, read 13 October 2026), which cites Mokrzycki and Tatol 2011; the design cites Mahy, Van Eycken and Oosterlinck 1994. Neither paper was opened, so the figure is unverified at its primary source. Calibration on the owner's phone (section 5) rescales it in any case."
+ },
+ "eye_model": "a Gaussian blur of one device pixel before the comparison, the app's own simplification in place of a contrast sensitivity model",
+ "runs": [],
+ "floor": {}
+}
