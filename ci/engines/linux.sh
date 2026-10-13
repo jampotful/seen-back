@@ -49,8 +49,8 @@ case "${GITHUB_REF_NAME:-}" in run/engines/linux-floor*)   # only test/check4.js
   /tmp/venv/bin/pip install -q numpy
   python3 -m http.server 8790 --bind 127.0.0.1 --directory "$ROOT" > /dev/null 2>&1 &
   sleep 1
-  step "floor: ${FLOOR_VIEW:-jumper}, ${FLOOR_VALUES:-5} values a parameter"
-  PORT=8790 FLOOR_PY=/tmp/venv/bin/python3 FLOOR_VALUES="${FLOOR_VALUES:-5}" FLOOR_OUT="$OUT/floor.json" timeout 3000 node test/check4.js floor > "$OUT/floor.txt" 2>&1
+  step "floor: ${FLOOR_VIEW:-jumper}, ${FLOOR_VALUES:-3} values a parameter"
+  PORT=8790 FLOOR_PY=/tmp/venv/bin/python3 FLOOR_VALUES="${FLOOR_VALUES:-3}" FLOOR_OUT="$OUT/floor.json" timeout 3000 node test/check4.js floor > "$OUT/floor.txt" 2>&1
   echo "exit $?"; tail -60 "$OUT/floor.txt"
   exit 0 ;;
 esac

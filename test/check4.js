@@ -459,6 +459,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
         await render(lab, v0);
       }
       console.log(lab, JSON.stringify(res[lab]));
+      if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify({ view: view, threshold: DE, partial: true, floor: res }, null, 1));
     }
     out.floor = { view: view, threshold: DE, errors: errors, floor: res };
     if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify(out.floor, null, 1));
