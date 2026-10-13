@@ -374,7 +374,7 @@ In `paramsOf`, `180 / (m.fov || 180)` would become `200 / (m.fov || 200)` if the
 | Pupil (`m`) | slit, ambush hunters, smears up and down | **confirmed** (L20, L23, L24, L48) |
 | Field of view (`m`) | cat about 200, "a person about 180" | the cat's 200 is **confirmed** from secondary sources (L77, L132), and an optical figure is wider, 287 (L154); the person's 180 is the older figure for eyes at rest (L158), **corrected** to about 200 from clinical perimetry (L57) |
 | `fov` 200 | | **confirmed**; see 3.3 for the human reference |
-| Dim light (`m`) | "six to eight times dimmer than people need" | **confirmed** from secondary sources only (L134; L80 says up to 7). The primary measurement, Gunter (1951), was not opened |
+| Dim light (`m`) | "six to eight times dimmer than people need" | **confirmed** from secondary sources only (L134; L80 says up to 7). The primary measurement, Gunter (1951), was not opened (wanted) |
 | Depth (`i`) | height in the frame stands for distance | **confirmed** as a guess; the slit pupil's blur cue is now an `m` row (L23, L24, L125) |
 | Sharpest spot (`i`) | "assumes that a cat sees most sharply straight ahead" | **measured** now (L88, L89): upgrade to `m` |
 | `topoA` 1, `fall` 2.0 | | `topoA` **confirmed**; `fall` **corrected** to 1.0 (L89) |
@@ -496,25 +496,26 @@ The same list as `docs/views/wanted/cat-dog.jsonl`, most useful first.
 3. Malkemper EP, Peichl L 2018, *Journal of Comparative Neurology*, doi 10.1002/cne.24493. Priority 1: acuity estimates for red and Arctic foxes, for `fox`.
 4. Veilleux CC, Kirk EC 2014, *Brain, Behavior and Evolution* 83: 43 to 53, online supplementary table 1. Priority 1: acuity by species and method for the felids and canids.
 5. Pasternak T 1981, The luminance dependence of spatial vision in the cat, *Vision Research* 21(9): 1333 to 1339 (from the issue's table of contents at the Dutch national library). Priority 1: cat acuity across light levels, for the night shift.
-6. Coile DC, Pollitz CH, Smith JC 1989, *Physiology & Behavior* 45(6): 1087 to 1092, doi 10.1016/0031-9384(89)90092-9. Priority 2: the dog's flicker limit and its light level.
-7. Loop MS (with Berkley MA, as Inger et al. 2014 cite it) 1975, Temporal modulation sensitivity of the cat: I. Behavioral methods, *Vision Research* 15(5): 555 to 561. Priority 2: the cat's flicker limit and method.
-8. Berkley MA 1975, Temporal modulation sensitivity of the cat. II: evoked potential estimates, *Vision Research* 15(5): 563 to 568 (both from the issue's table of contents at the Dutch national library). Priority 2: the electrical companion to Part I.
-9. Pasternak T, Merigan WH 1980, *Journal of Comparative and Physiological Psychology* 94: 943 to 952. Priority 2: the cat's own motion threshold.
-10. Clark DL, Clark RA 2013, *Experimental Eye Research* 116: 75 to 78, doi 10.1016/j.exer.2013.08.004. Priority 2: cat grating acuity against luminance.
-11. Clark DL, Clark RA 2016, *Experimental Eye Research* 153: 23 to 26, doi 10.1016/j.exer.2016.10.002. Priority 2: the cat's neutral point, for the colour matrix.
-12. Peichl L 1992, *Journal of Comparative Neurology*, doi 10.1002/cne.903240412. Priority 2: streak shapes by breed, for the weights of the nose setting.
-13. McGreevy P, Grassi TD, Harman AM 2003, *Brain, Behavior and Evolution*, doi 10.1159/000073756. Priority 2: the breed-by-breed table.
-14. Miller PE, Murphy CJ 1995, *Journal of the American Veterinary Medical Association* 207: 1623 to 1634, as cited by Byosiere et al. 2018 (the title was not shown in the part of the review that opened). Priority 2: the primary review behind the dog's field and acuity figures.
-15. Odom JV, Bromberg NM, Dawson WW 1983, Canine visual acuity: retinal and cortical field potentials evoked by pattern stimulation, *American Journal of Physiology* 245: R637 to R641 (cited by Beltran et al. 2014). Priority 2: the 12.6 cycles per degree.
-16. Murphy CJ, Mutti DO, Zadnik K, Ver Hoeve J 1997, Effect of optical defocus on visual acuity in dogs, *American Journal of Veterinary Research* 58: 414 to 418 (cited by Beltran et al. 2014). Priority 2: behavioural dog acuity and the cost of defocus.
-17. Ahnelt PK, Schubert C, Kübber-Heiss A, Schiviz AN, Anger E 2006, *Visual Neuroscience*, doi 10.1017/s095252380623342x. Priority 2: cone maps of lion, tiger, cheetah and lynx.
-18. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 5, Lens eyes on land, doi 10.1093/acprof:oso/9780199581139.003.0005. Priority 2: pupils and lenses of land vertebrates.
-19. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 6, Mirrors in animals (the tapetum), under the book's doi 10.1093/acprof:oso/9780199581139.001.0001. Priority 2: whether a tapetum costs sharpness.
-20. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 9, Movements of the eyes, doi 10.1093/acprof:oso/9780199581139.003.0009. Priority 3: background for a gaze effect.
-21. Gunter R, Harding HGW, Stiles WS 1951, Spectral reflexion factor of the cat's tapetum, *Nature*, doi 10.1038/168293a0. Priority 3: the tint of eyeshine.
-22. Wells MC, Lehner PN 1978, The relative importance of the distance senses in coyote predatory behaviour, *Animal Behaviour* 26: 251 to 258, doi 10.1016/0003-3472(78)90025-8. Priority 3: how much coyotes hunt by sight.
+6. Gunter R 1951, The absolute threshold for vision in the cat, *The Journal of Physiology* (volume and pages not on the bibliographic record that opened; open in PubMed Central, which refused this machine). Priority 1: the primary behind the cat's dim-light row.
+7. Coile DC, Pollitz CH, Smith JC 1989, *Physiology & Behavior* 45(6): 1087 to 1092, doi 10.1016/0031-9384(89)90092-9. Priority 2: the dog's flicker limit and its light level.
+8. Loop MS (with Berkley MA, as Inger et al. 2014 cite it) 1975, Temporal modulation sensitivity of the cat: I. Behavioral methods, *Vision Research* 15(5): 555 to 561. Priority 2: the cat's flicker limit and method.
+9. Berkley MA 1975, Temporal modulation sensitivity of the cat. II: evoked potential estimates, *Vision Research* 15(5): 563 to 568 (both from the issue's table of contents at the Dutch national library). Priority 2: the electrical companion to Part I.
+10. Pasternak T, Merigan WH 1980, *Journal of Comparative and Physiological Psychology* 94: 943 to 952. Priority 2: the cat's own motion threshold.
+11. Clark DL, Clark RA 2013, *Experimental Eye Research* 116: 75 to 78, doi 10.1016/j.exer.2013.08.004. Priority 2: cat grating acuity against luminance.
+12. Clark DL, Clark RA 2016, *Experimental Eye Research* 153: 23 to 26, doi 10.1016/j.exer.2016.10.002. Priority 2: the cat's neutral point, for the colour matrix.
+13. Peichl L 1992, *Journal of Comparative Neurology*, doi 10.1002/cne.903240412. Priority 2: streak shapes by breed, for the weights of the nose setting.
+14. McGreevy P, Grassi TD, Harman AM 2003, *Brain, Behavior and Evolution*, doi 10.1159/000073756. Priority 2: the breed-by-breed table.
+15. Miller PE, Murphy CJ 1995, *Journal of the American Veterinary Medical Association* 207: 1623 to 1634, as cited by Byosiere et al. 2018 (the title was not shown in the part of the review that opened). Priority 2: the primary review behind the dog's field and acuity figures.
+16. Odom JV, Bromberg NM, Dawson WW 1983, Canine visual acuity: retinal and cortical field potentials evoked by pattern stimulation, *American Journal of Physiology* 245: R637 to R641 (cited by Beltran et al. 2014). Priority 2: the 12.6 cycles per degree.
+17. Murphy CJ, Mutti DO, Zadnik K, Ver Hoeve J 1997, Effect of optical defocus on visual acuity in dogs, *American Journal of Veterinary Research* 58: 414 to 418 (cited by Beltran et al. 2014). Priority 2: behavioural dog acuity and the cost of defocus.
+18. Ahnelt PK, Schubert C, Kübber-Heiss A, Schiviz AN, Anger E 2006, *Visual Neuroscience*, doi 10.1017/s095252380623342x. Priority 2: cone maps of lion, tiger, cheetah and lynx.
+19. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 5, Lens eyes on land, doi 10.1093/acprof:oso/9780199581139.003.0005. Priority 2: pupils and lenses of land vertebrates.
+20. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 6, Mirrors in animals (the tapetum), under the book's doi 10.1093/acprof:oso/9780199581139.001.0001. Priority 2: whether a tapetum costs sharpness.
+21. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 9, Movements of the eyes, doi 10.1093/acprof:oso/9780199581139.003.0009. Priority 3: background for a gaze effect.
+22. Gunter R, Harding HGW, Stiles WS 1951, Spectral reflexion factor of the cat's tapetum, *Nature*, doi 10.1038/168293a0. Priority 3: the tint of eyeshine.
+23. Wells MC, Lehner PN 1978, The relative importance of the distance senses in coyote predatory behaviour, *Animal Behaviour* 26: 251 to 258, doi 10.1016/0003-3472(78)90025-8. Priority 3: how much coyotes hunt by sight.
 
-Not on the list because no opened page gave an exact citation: Gunter's 1951 paper on the cat's absolute threshold, Vakkur and Bishop's and Hughes's schematic eyes of the cat, Hughes's and Stone's maps of ganglion cells in the cat, and Bowmaker and Dartnall (1980), which Webvision cites (L128). They are worth finding.
+Not on the list because no opened page gave an exact citation: Vakkur and Bishop's and Hughes's schematic eyes of the cat, Hughes's and Stone's maps of ganglion cells in the cat, and Bowmaker and Dartnall (1980), which Webvision cites (L128). They are worth finding.
 
 ## 7. Sources
 
