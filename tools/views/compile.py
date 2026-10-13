@@ -493,6 +493,20 @@ def plain_errors(text, where):
     return errs
 
 
+def normalize_reply(reply):
+    """The model sometimes returns an object-valued field as a JSON string; read it back."""
+    if not isinstance(reply, dict):
+        return reply
+    out = dict(reply)
+    for k in ("spec", "claims", "quotes"):
+        if isinstance(out.get(k), str):
+            try:
+                out[k] = json.loads(out[k])
+            except ValueError:
+                pass
+    return out
+
+
 def param_name(path):
     p = re.sub(r"\[\d+\]", "", path).split(".")
     return p[-1]
@@ -522,11 +536,21 @@ def get_path(spec, path):
 def check_reply(job, F, records, reply, like_spec, floor):
     """The errors and warnings for one reply. `records` is {id: record}."""
     errs, warns = [], []
+    reply = normalize_reply(reply)
     if not isinstance(reply, dict) or not isinstance(reply.get("spec"), dict):
         return ["the reply has no spec object"], warns
     spec = reply["spec"]
-    claims = reply.get("claims") or []
-    quotes = reply.get("quotes") or []
+    claims = [c for c in (reply.get("claims") or []) if isinstance(c, dict)]
+    quotes = [q for q in (reply.get("quotes") or []) if isinstance(q, dict)]
+    if not isinstance(spec.get("matrices"), dict):
+        spec["matrices"] = {}
+    for mk in [k for k, v in spec["matrices"].items() if not isinstance(v, dict)]:
+        errs.append("matrices.%s must be an object with rows or from_pigments" % mk)
+        del spec["matrices"][mk]
+    if not isinstance(spec.get("params"), dict):
+        return ["the spec has no params object"], warns
+    if not isinstance(spec.get("rows"), list):
+        return ["the spec has no rows list"], warns
     # script-set fields
     spec["key"] = job["key"]
     spec["chip"] = job.get("chip") or spec.get("chip")
@@ -781,7 +805,11 @@ def floor_of():
 def finish(key, model, P, reply, F, specs, floor, out):
     job = P["job"]
     like = specs.get(P["example"])
-    res = check_reply(job, F, P["records"], copy.deepcopy(reply), like, floor)
+    try:
+        res = check_reply(job, F, P["records"], copy.deepcopy(reply), like, floor)
+    except Exception as e:              # a malformed reply must become an error to send back, not a crash
+        import traceback
+        return ["the checker could not read the reply: %s: %s (%s)" % (type(e).__name__, e, traceback.format_exc().strip().splitlines()[-3].strip())], [], None, None
     if len(res) == 2:
         return res[0], res[1], None, None
     errs, warns, spec, cby = res
@@ -885,6 +913,8 @@ def cmd_run(a):
             else:
                 errs, warns, spec, cby = finish(k, m, P, reply, F, specs, floor, a.out)
             log.append("%s %s attempt %d: %s" % (k, m, attempt, "ok" if not errs else "%d errors" % len(errs)))
+            if errs:
+                open(os.path.join(a.out, "%s.%s.attempt%d.errors.txt" % (k, tag, attempt)), "w").write("\n".join(errs) + "\n")
             if not errs:
                 write_outputs(a.out, k, tag, P["job"], P, spec, cby, warns, reply, m)
             elif attempt == 1:
