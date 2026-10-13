@@ -7,3 +7,10 @@ Done and pushed
 Next
 - Every mode of `test/check4.js`, every section of `test/rec/check_rec.js`, `tools/fusion/parity.py`, one at a time.
 - Fresh Alachua photos: none can be made from this machine (GBIF and the iNaturalist photo host refuse the proxy; `pub/data-alachua` holds manifests only). Decision is by the tuning photos (+0.24 points, mark above -2).
+
+Update 13:28 (stopped at 90 minutes; NOT merged to main)
+- Branch `agent/head-ship` now has `main` (build 27) merged in and is numbered build 28.
+- Passed on build 27 pre-merge (own server): check4 typed, record, viewer, edge, lex, sweep, film. `lent` fails here and on unmodified `main` (build 27) under load: its fixed 1200 ms wait ends before the look opens. Not caused by the merge.
+- Build 28: `tools/fusion/parity.py` ok (3,337 cases, 0 differ; 9 photos). `check_rec.js` (SLOW=3): ok for all sections except `service` and `away` (did not finish, machine load 5 on two cores) and `zone` (FAILED; its five readings look as designed, so a further condition in the check failed; the detail was not read).
+- Still to do: rerun `check_rec.js service away zone` alone on a quiet machine, read why `zone` fails, rerun check4 `record`/`typed` on build 28, then merge.
+- Fresh Alachua photos: none can be made here.
