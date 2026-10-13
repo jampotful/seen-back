@@ -1,4 +1,4 @@
-# Progress: the engine track, burst 2
+# Progress: the engine track
 
 Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged in (no conflicts).
 
@@ -19,3 +19,23 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 2. Parameters that act only on movement read as invisible on the still harness; a moving-clip version of the floor is the next step for them.
 3. The specs track's shark and spider were not taken (the prototypes' specs keep their effects); reconcile the two when that track finishes.
 4. Modules not built: `spectrum` (matrices from pigment peaks), the clock, sun and moon of `light`, and everything after `gaze` in the design's order.
+
+# Burst 3 (started 13 October 2026, 12:01 US Eastern, from `main` at `d8f981f`; stops by 14:30)
+
+## Plan
+1. Module 2, `spectrum`; the clock, sun and moon of `light`; module 4, `pace`; module 5, `motion`. Each with sliders and `&draw=` options.
+2. The jumper view uses them; specs for the views that wait on them.
+3. The floor's second run recorded in `docs/views/floor.json`.
+
+## Done (pushed to `agent/engine`)
+- The floor: run 73 (from `run/engines/linux-floor-jumper2`) recorded in `docs/views/floor.json`; 56 jumper parameters in all. Its browser closed after `gaze.floor`, so parameters after that wait for a third run. A `verdict` block says which parameters research may stop refining for the jumper view (invisible on the still picture while still changing it): `params.cpd`, `zones.front.deg` (both), `zones.front.soft`, `zones.gaze.deg[1]`, `zones.fovea.cpd`, `zones.fovea.mag`. Eleven have a floor; 38 never changed the still render and wait for a moving clip.
+- Module 2, `spectrum`: 3 by 4 matrices, `tools/views/pigments.py`, the wheel, the neutral band, dark adaptation (`docs/ENGINE.md`).
+- Module 3's clock, sun and moon; module 4's replayed second; module 5's locked world and arm as the neck.
+- Specs: jumper (neutral band, replay), snail (420 and 480 nm, dark adaptation), sealife (tonight's moon), and `trial` blocks on dog, bee and bird. The fourteen offered views are the same objects as on `main`.
+- The tuning panel lists the new blocks' parameters.
+
+## Next
+1. Build 28 merged to `main` at about 14:15 after every check passed (see `docs/LOG.md`). The owner's phone checks are listed in `docs/STATUS.md`. The `try` check fails for the specs track's views on build 27 as on build 28; that track owns it.
+2. Fungus waits on `slow` (module 12), not built. Cat, deer, rabbit, squirrel and insect have no pigment peaks in the logs yet; they get trials once research supplies them. No sheet gives a graded value for any of the fourteen offered views, so none was converted from `?`.
+3. A third floor run for the parameters after `gaze.floor`, and a moving-clip floor.
+4. Module 4's strobe and quarter-resolution ring; module 5's tilt, heading and knock side for `field` and `overlay`.

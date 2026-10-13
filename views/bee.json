@@ -40,5 +40,80 @@
       "How the colours are shown",
       "A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue."
     ]
-  ]
+  ],
+  "trial": {
+    "matrices": {
+      "BEE4": {
+        "from_pigments": [344,436,544],
+        "grade": "m",
+        "invented": true,
+        "src": [
+          "research/bee drafts/bee.md L221: Hempel de Ibarra and colleagues 2014 (344, 436 and 544 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [[0.24648,0.49787,0.18056,0.07508],[0.00084,0.11082,0.65545,0.2329],[0.0,8e-05,0.00877,0.99115]],
+        "q": [[0.0,8e-05,0.00877,0.99115],[0.00084,0.11082,0.65545,0.2329],[0.24648,0.49787,0.18056,0.07508],[0,0,0,0]]
+      }
+    },
+    "spectrum": {"q":"BEE4","neutral":{"value":1,"grade":"i","invented":true,"src":[],"range":[0,2]}},
+    "draw": {
+      "spectrum": [
+        {
+          "name": "shift",
+          "invented": true,
+          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+        },
+        {
+          "name": "neutral",
+          "invented": true,
+          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+        }
+      ],
+      "pace": [
+        {"name":"lag","invented":true,"note":"today's pace"},
+        {"name":"replay","invented":true,"note":"a tap replays the last moment three times slower"}
+      ]
+    },
+    "rows": [
+      ["g","Sharpness","Most insects see less than a sixtieth as much detail as people do."],
+      ["m","Red","Bees have no colour-sensing cells for red, so red flowers and objects look dark to them."],
+      [
+        "m",
+        "Speed",
+        "In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
+      ],
+      [
+        "i",
+        "Ultraviolet",
+        "Bees can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the blue in this view stands in for it."
+      ],
+      [
+        "i",
+        "How the colours are shown",
+        "A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue."
+      ],
+      [
+        "i",
+        "Being tried: colour from pigments",
+        "On this trial the colours come from the honeybee's three measured receptor classes, ultraviolet in the bluest slot. The camera's colours and the ultraviolet guess are the app's.",
+        ["Hempel de Ibarra 2014","param:spectrum.neutral","param:matrices.BEE4","param:M","param:uvBlue"]
+      ],
+      [
+        "i",
+        "Being tried: a moment slowed",
+        "A tap keeps the last moment and plays it three times slower, as a faster eye might have time for it. The ratio is the app's guess.",
+        ["param:pace.ratio"]
+      ]
+    ],
+    "params": {
+      "M": {
+        "value": "BEE4",
+        "grade": "m",
+        "invented": true,
+        "src": ["research/bee drafts/bee.md L221: Hempel de Ibarra and colleagues 2014 (344, 436 and 544 nm)"]
+      },
+      "uvBlue": {"value":0,"grade":"i","invented":true,"src":[],"note":"the matrix's fourth column carries the ultraviolet"}
+    },
+    "pace": {"ratio":{"value":3,"grade":"i","invented":true,"src":[],"range":[1,6]}}
+  }
 }

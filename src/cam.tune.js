@@ -11,6 +11,19 @@
     canvas.addEventListener('pointerdown', function (e) { if (!paints()) return; held = e.pointerId; pinAt(e); });
     canvas.addEventListener('pointermove', function (e) { if (held === e.pointerId && paints()) pinAt(e); });
     ['pointerup', 'pointercancel'].forEach(function (ev) { canvas.addEventListener(ev, function (e) { if (held !== e.pointerId) return; held = null; if (engine && engine.pinGaze) engine.pinGaze(); }); });
+    // The colour wheel (&draw=wheel): a finger dragged across the picture turns which three of a tetrachromat's four classes are shown,
+    // once round the four for the screen's width. The replayed second (&draw=replay): a tap keeps the last moment and replays it slowly.
+    var wheelAt = null;
+    function wheels() { return S.screen === 'animal' && !S.tr && eyeP && eyeP.rot4 >= 0 && eyeP.Q; }
+    canvas.addEventListener('pointerdown', function (e) {
+      if (wheels()) wheelAt = { id: e.pointerId, x: e.clientX, turn: WHEEL.turn };
+      if (S.screen === 'animal' && !S.tr && eyeP && eyeP.replay && engine && engine.replay && !engine.replaying()) engine.replay(eyeP.replay);
+    });
+    canvas.addEventListener('pointermove', function (e) {
+      if (!wheelAt || wheelAt.id !== e.pointerId || !wheels()) return;
+      var w = canvas.getBoundingClientRect().width || 1; WHEEL.turn = ((wheelAt.turn + 4 * (e.clientX - wheelAt.x) / w) % 4 + 4) % 4;
+    });
+    ['pointerup', 'pointercancel'].forEach(function (ev) { canvas.addEventListener(ev, function () { wheelAt = null; }); });
     var buzz = 0, curveAt = 0;
     setInterval(function () {
       var now = performance.now();
@@ -48,7 +61,7 @@
       if (f && f.length) { var best = f[0]; f.forEach(function (q) { if (Math.abs(q[0] - v) < Math.abs(best[0] - v)) best = q; }); if (typeof best[1] === 'number' && best[1] > 0) return best[1]; }
       return (hi - lo) / 200;
     }
-    var list = []; walk({ params: work.params, zones: work.zones, gaze: work.gaze }, [], list, '');
+    var list = []; walk({ params: work.params, zones: work.zones, gaze: work.gaze, spectrum: work.spectrum, clock: work.clock, pace: work.pace, motion: work.motion }, [], list, '');
     var box = el('div', 'position:fixed;left:0;right:0;bottom:0;max-height:33vh;overflow:auto;background:rgba(0,0,0,.82);color:#eee;font:12px/1.3 system-ui,sans-serif;z-index:60;padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));-webkit-overflow-scrolling:touch');
     box.id = 'tunePanel';
     var head = el('div', 'display:flex;gap:6px;align-items:center;flex-wrap:wrap;position:sticky;top:0;background:rgba(0,0,0,.9);padding:2px 0 6px');
