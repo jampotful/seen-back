@@ -964,7 +964,7 @@ async function meet(page, name) {
     const base = 'Regards identifies species by comparing with iNaturalist and Flickr photos made available under Creative Commons licenses or in the public domain.';
     done('about', r, /^v1\.\d+$/.test(r.fitted.none) && r.fitted.full === r.fitted.none + base
       && r.fitted.bare === r.fitted.none + base && !r.fitted.fullErrors.length && !r.fitted.bareErrors.length && /^Regards, build \d+\.$/.test(r.block[0]) && /^Recognizer: standin-random-conv, wasm, 1 thread, ready in [\d.]+ s\.$/.test(r.block[1]) && /^Last photo: wader 1\.00, Ardea herodias 1\.00; .*prepared in \d+ ms from 900x1200, recognized in \d+ ms\.$/.test(r.block[2])
-      && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && /^Screen: /.test(r.block[4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
+      && /^Picture: \d+ by \d+.* limit 420, [\d.]+ ms a frame over the last \d+\.$/.test(r.block[3]) && (!/^Engine: /.test(r.block[4]) || /^Engine: [\d.]+ ms of script a frame, /.test(r.block[4])) && /^Screen: /.test(r.block[/^Engine: /.test(r.block[4]) ? 5 : 4]) && (r.note === 'Copied.' || !isChromium) && r.clip === r.block.length && r.overflow <= 0 && !errors.length);
     await ctx.close();
   });
 
