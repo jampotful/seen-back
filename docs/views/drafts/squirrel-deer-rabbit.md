@@ -243,7 +243,7 @@ Chip: "Deer, cattle, antelope". Who: "a deer". Cue: "A wide band along the groun
 - `['m', 'Night eyes', 'Behind a deer's retina lies a mirror-like layer, the tapetum, which sends light back through the retina for a second chance to be caught. With its pupil wide open, a deer's eye gathers light as well as a fast camera lens. This view brightens the shadows in dim light and adds a soft glow.']`
   Log: L98, L99 (f/1.4 at a 12 mm pupil); L112. The glow is *invented*.
 - `['m', 'Seasons in the eye', 'A reindeer's tapetum changes colour with the seasons, from gold in summer to deep blue in winter. The blue layer makes the eye more sensitive in the long Arctic twilight at some cost to sharpness. White-tailed deer in the northern United States have bluer tapeta than deer in Georgia.']`
-  Log: L112, L114, L115.
+  Log: L112, L114, L170 (reindeer; the two sources differ on the summer peak, 541 against about 640 nm, and agree on the winter blue); L115.
 - `['g', 'Ultraviolet', 'The lenses of deer, cattle and sheep let through a sixth to a quarter of the ultraviolet light that reaches them, and white-tailed deer respond to some ultraviolet in tests. A faint violet tint in this view stands in for it, and the tint is the app's own choice.']`
   Log: L25 to L28; L101; L34, L107 (reindeer retinas respond to ultraviolet). L122 records the contrary claim of the present source, which gives no evidence.
 - `['i', 'Field of view', 'This view assumes that a deer takes in about 310 degrees around itself, the figure a natural-history book gives. The view bends the picture at its edges to suggest it.']`
@@ -329,7 +329,7 @@ Chip: "Horse, zebra, giraffe, camel". Who: "a horse". Cue: "A narrow band along 
 | `sheen`, `uvBlue` | 0, 0 | L31 |
 | `rate` | 1 | *invented*; L154 (not measured) |
 
-Giraffe profile: a temporal sharp area ahead (25 to 27) on top of the streak, and a sharper lower field from the dorsal arch (L104). Camel profile: two sharp spots, one ahead and one behind, with a much blurrier middle (2 to 3) and no continuous streak (L105).
+Giraffe profile: a temporal sharp area ahead (25 to 27) on top of the streak, a sharper lower field from the dorsal arch (L104), and colour mixed as for cattle (w about 0.9), since its long-wave opsin is predicted to sit at least 5 nm beyond other ruminants' (L171). Camel profile: two sharp spots, one ahead and one behind, with a much blurrier middle (2 to 3) and no continuous streak (L105).
 
 **New effects**
 
@@ -404,11 +404,11 @@ Each could get its own profile when the full database names it. Values a profile
 - **Degu** (*Octodon degus*): ultraviolet cone 360 nm, green 500 (L57, L58); binocular overlap 50 degrees (L65).
 - **European rabbit** (*Oryctolagus cuniculus*; 38,839): cones at **425 and 523 nm**, rods 498 (L79 to L81); full circle with **24 degrees** of overlap (L73, L74); streak with a tenfold fall (L75); **blue-only strip of retina** (L76); hears to 49 kHz, localizes to 16.8 degrees (L136, L139).
 - **White-tailed deer** (*Odocoileus virginianus*; 310,997; 799 in Alachua): cones at **450 to 460 and 537 nm**, rods 497 (L117, L118, L120); **4 to 6 cycles per degree** (L100); green cones in a horizontal streak (L97); tapetum over the upper eye (L98), **golden in Georgia, bluer in the north** (L115); f/1.4 to 5.6 (L99); slit pupil (L116); some ultraviolet sensitivity (L101).
-- **Reindeer** (*Rangifer tarandus*): lens passes 26.5% of ultraviolet A (L25) and the retina responds to 372 nm (L34, L107); **tapetum gold in summer (541 nm), deep blue in winter (444 nm)** (L112, L114); pupil 25 mm² and horizontal when constricted, 336 mm² and round when dilated (L113).
+- **Reindeer** (*Rangifer tarandus*): lens passes 26.5% of ultraviolet A (L25) and the retina responds to 372 nm (L34, L107); **tapetum gold in summer (541 nm, or about 640 by a later review), deep blue in winter (444 to 450 nm)** (L112, L114, L170); pupil 25 mm² and horizontal when constricted, 336 mm² and round when dilated (L113).
 - **Fallow deer** (*Dama dama*): green cone at 542 nm (L119). **Sika deer** (*Cervus nippon*): about 4.8 cycles per degree (L103). **Red deer** (*Cervus elaphus*): under 6 (L142). **Roe deer** (*Capreolus capreolus*; 58,711): **S cones concentrated in the ventral retina**, which views the sky (L144), so it gets the sky band.
 - **Cattle, goats and sheep**: S cones 444 to 455 nm, long-wave cones **552 to 555** (L95, L96); lenses pass 22% (cattle) and 15% (sheep) of ultraviolet A (L27, L28); **cattle 2.6 to 5 cycles per degree** (L151); sheep acuity scores 0.085 to 0.19 (L135) against a stated 14 (L147); cattle localize sound to 30 degrees, goats 18 (L138).
 - **Horse** (*Equus caballus*; 11,576 research-grade and 18,869 casual; 236 in Alachua): cones at **428 and 539 nm** (L90, L91); **about 20 cycles per degree behaviourally, best 23.3** (L150, L155), 16.5 in the streak and 2.7 elsewhere by anatomy (L92); peak of 4,000 ganglion cells per mm² (L94); colour to 0.02 cd/m² and shapes below 6.81 × 10⁻⁵ cd/m² (L110, L153); rods dominate the streak (L111); **65 to 80 degrees of overlap** down the nose and blind areas only behind the head and before the forehead (L93, L148, L149); pupil an oval in daylight and a near-circle of about 30 mm in the dark (L152); lens passes 4.6% of ultraviolet A (L31). Plains zebras (17,579 records) take the horse's values, as Melin and colleagues assume (L155).
-- **Giraffe** (*Giraffa*; about 19,000): **25 to 27 cycles per degree**, horizontal streak, temporal area and dorsal arch (L104). **Dromedary camel**: **9.5 to 10**, two separate sharp areas (L105). **Alpaca**: **12.5 to 13.4** (L106), lens passes 6% of ultraviolet A (L30).
+- **Giraffe** (*Giraffa*; about 19,000): **25 to 27 cycles per degree**, horizontal streak, temporal area and dorsal arch (L104); long-wave opsin predicted red-shifted (L171). **Dromedary camel**: **9.5 to 10**, two separate sharp areas (L105). **Alpaca**: **12.5 to 13.4** (L106), lens passes 6% of ultraviolet A (L30).
 
 ## 5. Gaps and how to fill them
 
@@ -497,6 +497,7 @@ Opened in this session unless marked **secondary**.
 - Jacobs, Neitz and Crognale 1985, J Comp Physiol A 156: 503 to 509, doi:10.1007/BF00613974. **opened** (abstract, Springer).
 - Jacobs, Neitz and Deegan 1991, Nature 353: 655 to 656, doi:10.1038/353655a0. **opened** (abstract page; no species named).
 - Jacobs and Silverman 1976, J Comp Physiol 109: 1 to 16, doi:10.1007/BF00663431. **opened** (abstract, Springer).
+- Ishengoma, Agaba and Cavener 2017, PeerJ 5: e3145, doi:10.7717/peerj.3145. **opened** (full text).
 - Jacobs and Tootell 1977, Can J Zool, doi:10.1139/z77-188. **opened** (abstract).
 - Juliusson and colleagues 1994, *Complementary cone fields of the rabbit retina*, PubMed 8125743. **opened** (abstract in the collection index).
 - Kopania and Clark 2024, Evolution Letters, doi:10.1093/evlett/qrae072. **opened** (full text).
@@ -527,6 +528,7 @@ Opened in this session unless marked **secondary**.
 - Tamura and colleagues 2015, J Trop Ecol, doi:10.1017/s0266467415000310. **opened** (abstract).
 - Tanaka and colleagues 1995, J Ethol 13(1): 69 to 75, doi:10.1007/BF02352565. **opened** (abstract, Springer).
 - Van Hooser and Nelson 2006, Visual Neuroscience 23, doi:10.1017/s0952523806230098. **opened** (abstract).
+- Tyler, Fosbury, Hazlerigg and colleagues 2024, Functional Ecology, doi:10.1111/1365-2435.14669. **opened** (abstract).
 - Vaney 1980, J Comp Neurol 189(2), doi:10.1002/cne.901890202. **opened** (abstract).
 - Vega-Zuniga and colleagues 2013, PLoS ONE, doi:10.1371/journal.pone.0084199. **opened** (abstract).
 - Wang and colleagues 2013, Vet Ophthalmol, doi:10.1111/vop.12131. **opened** (abstract).
