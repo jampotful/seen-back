@@ -183,7 +183,7 @@ GRADES_TEXT = """GRADES
 
 RULES_TEXT = """WHAT TO INCLUDE
 - The example shows the form of a spec; its numbers belong to another animal. Copy none of them.
-- Include a parameter only when a record gives its value (grade m or g), or when the view needs it to show something that the records describe (grade i, invented true). Leave out every other parameter and every block the records do not call for; the engine then uses a person's value. A short spec of grounded parameters is better than a long one of guesses.
+- Include a parameter when a record gives its value (grade m or g), or when the view needs it to show something that the records describe (grade i, invented true). Use the blocks the schema lists where the records describe them: zones for a region with its own sharpness or colour (a fovea, a sharp strip, a blind spot), gaze for scanning, dwell and saccade timings, spectrum and matrices for colour, pace for flicker, and so on. Leave out a parameter or a block about which the records say nothing; the engine then uses a person's value. Do not fill the spec with guesses.
 - A number graded m or g must be a number that a cited record states, or lie between two cited records. When you work a number out, say so with kind calculation and grade it at most g.
 - Write two or three rows that say plainly what the animal's view is like, each citing records, and one row graded i for the app's own choices, naming those parameters in its fifth element.
 - Colour. params.M names a key of matrices, so define every matrix you name. Give a matrix either from_pigments (a list of peak wavelengths in nm, each within 2 nm of a cited record graded for lambda_max_nm, with that record in the matrix's src) or the rows of a matrix in the example when its mapping suits your animal (then grade it i). When no record gives pigment peaks and the example's mapping does not suit, leave out M and matrices.
@@ -520,6 +520,12 @@ def normalize_reply(reply):
                 out[k], end = json.JSONDecoder().raw_decode(txt)         # the first JSON value; the model sometimes runs on
             except ValueError:
                 continue
+            if k == "spec" and isinstance(out[k], dict):             # claims and quotes written inside the spec belong beside it
+                for kk in ("claims", "quotes"):
+                    if kk in out[k]:
+                        moved = out[k].pop(kk)
+                        if not out.get(kk) and isinstance(moved, list):
+                            out[kk] = moved
             rest = txt[end:].lstrip(" ,\n")
             if k == "spec" and rest.startswith('"claims"') and not out.get("claims"):
                 try:
@@ -614,6 +620,15 @@ def check_reply(job, F, records, reply, like_spec, floor):
     spec.setdefault("falls_back_to", job.get("like"))
     for k in ("offered", "trial", "draft"):
         spec.pop(k, None)
+    for kk in ("claims", "quotes"):                      # written inside the spec by mistake
+        if isinstance(spec.get(kk), list):
+            moved = spec.pop(kk)
+            if not reply.get(kk):
+                reply[kk] = moved
+                claims = [c for c in moved if isinstance(c, dict)] if kk == "claims" else claims
+                quotes = [q for q in moved if isinstance(q, dict)] if kk == "quotes" else quotes
+    have = set(F["blocks"]) | {"zones", "gaze"}
+    spec["modules"] = sorted({b for b in have if spec.get(b)} | ({"salience"} if (spec.get("params") or {}).get("salience") else set()))
     # 8. only known options
     for k in spec:
         if k not in F["top"] and k not in ("applies_to", "falls_back_to", "version"):
