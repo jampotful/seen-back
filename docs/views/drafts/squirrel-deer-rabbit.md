@@ -221,7 +221,8 @@ Chip: "Rabbit, hare". Who: "a rabbit". Cue: "You see the whole circle at once. A
 **New effects**
 
 - **A one-colour sky.** The same mask as the mouse's sky band, narrower and drawn in blue only: the top of the picture loses its colours and keeps its brightness. It is cheap, and together with the full circle squeezed into the screen it makes the rabbit's view legible at a glance.
-- **Two postures.** While the phone is still, the full circle; when the motion sensors show steady forward walking, the view eases the sweep a little narrower and sharpens the front 42 degrees. Medium effort: it needs a smoothed walking detector and a blend between two `fov` and `binoc` states.
+- **Two postures.** While the phone is still, the view shows the full circle; when the motion sensors show steady forward walking, the view eases the sweep a little narrower and sharpens the front 42 degrees. Medium effort: it needs a smoothed walking detector and a blend between two `fov` and `binoc` states.
+- **Freeze at a sound.** The rabbit's full circle belongs to its freeze posture (L73). When the microphone hears a sudden loud sound, the view snaps back to the freeze state and holds the picture still for about a second. Low cost (a level threshold on the microphone and a state switch); the trigger and its length are *invented*, and the view would need the microphone permission, which the page should ask for only when this view is open.
 
 ### 2.4 `deer`: deer, cattle, bison, sheep, goats, antelope and pronghorn
 
@@ -281,6 +282,7 @@ Chip: "Deer, cattle, antelope". Who: "a deer". Cue: "A wide band along the groun
 - **A level smear.** The out-of-focus smear runs along a direction the shader reads from the phone's gravity vector, so when the phone rolls, the smear stays horizontal in the world. A person who tilts the phone sees the blur refuse to tilt with it, which is exactly what a grazing animal's rolling eye does. Low cost: one rotation of the blur kernel per frame.
 - **A pupil that rounds in the dark.** The smear's shape blends from a horizontal bar toward a circle as the scene darkens, using the camera's exposure or the frame's mean brightness. Low cost.
 - **Tapetum glow.** In dim scenes the view lifts shadows, adds a soft halo around lights, softens detail a little and tints the lift toward the tapetum's colour. The tint can follow the phone's time zone (northern and southern deer) and, for reindeer, the month. Medium cost (one extra blur pass at low resolution). It is the deer's most beautiful true feature.
+- **Movement stands out.** Deer combine coarse detail with fast vision, which suits them to catching movement anywhere around them (L168, L169, L141). With the engine's planned motion-salience map, anything that moves in the wide field keeps its edges crisp and slightly brighter for half a second while the still scene stays soft. A person holding the phone still sees a walking dog flare into view across the blurred meadow. Medium cost (the map is being built for other views); the half-second and the brightening are *invented*.
 
 ### 2.5 `horse` (new): horses, zebras, asses, giraffes, camels and llamas
 
