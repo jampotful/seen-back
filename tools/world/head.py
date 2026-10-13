@@ -98,6 +98,12 @@ RECIPES = {
                     "groups": "merge", "t_kinds": "0.5,1,2", "w_kinds": "0.5,0.7,0.9,1.0", "settle_on": "old", "other_view": 0.09},
 }
 RECIPES["fold"]["other_view"] = None
+for _k in ("fold", "merge", "merge-other"):
+    RECIPES[_k]["county_lambda"] = 0.0
+# merge-other, and in the county (where the page uses the list) each row's bias moved by county_lambda times the log of the
+# ratio of its label's share among the Alachua fitting photos to its weighted share among all the fitting photos
+# (tools/world/county.py measured this on tuning photos only; lambda 0.5 is the middle of its flat stretch)
+RECIPES["merge-county"] = dict(RECIPES["merge-other"], county_lambda=0.5)
 
 
 def log(*a):
@@ -587,6 +593,7 @@ def main():
     ap.add_argument("--settle-on", choices=("old", "all"), help="the Alachua tuning photos the settings are chosen on: those of the old kinds, or all")
     ap.add_argument("--other-view", type=float, help="merge only: raise other's bias, in steps of 0.05, until at most this share of the world tuning photos in other is given a view; then fold and settle again")
     ap.add_argument("--max-fit", type=int, default=0, help="fit on an even sample of at most this many photos of each set (0: all; for trying the code)")
+    ap.add_argument("--county-lambda", type=float, help="merge only: a second bias for the county, lambda times the shift of the classes' prior from the fitting photos' to the county's")
     ap.add_argument("--tune-only", action="store_true", help="stop before the test photos are loaded")
     ap.add_argument("--dump", action="store_true", help="also write OUT/head.npz: the head's rows, biases, labels and settings, fixed before the test photos are loaded")
     a = ap.parse_args()
@@ -660,6 +667,28 @@ def main():
     today_alachua_old = float(np.mean(old_answers(A["tune"])[0][sel_old_a] == A["tune"]["y"][sel_old_a]))
     t_grid, w_grid = floats(R["t_kinds"]), floats(R["w_kinds"])
 
+    def county_delta():
+        """lambda * (log share of each label among the Alachua fitting photos - log of its weighted share among all fitting photos);
+        zero for the kinds whose photos come from the COCO set (person, none, cat, dog, deer)."""
+        lam = float(R.get("county_lambda") or 0.0)
+        if lam == 0.0:
+            return np.zeros(len(LABELS))
+
+        def shares(ys, ws):
+            s_ = np.zeros(len(LABELS))
+            for y_, w_ in zip(ys, ws):
+                for k_, c_ in zip(*np.unique(y_, return_counts=True)):
+                    s_[LABELS.index(k_)] += w_ * c_
+            return s_ / s_.sum()
+        pfit = shares([W["fit"]["y"], X3["fit"]["y"], A["fit"]["y"]], [1.0, float(R["coco_weight"]), float(R["alachua_weight"])])
+        pA = shares([A["fit"]["y"]], [1.0])
+        d_ = lam * (np.log(np.maximum(pA, 1e-4)) - np.log(np.maximum(pfit, 1e-4)))
+        for k_ in COCO_KEYS:
+            d_[LABELS.index(k_)] = 0.0
+        return d_
+    cdelta = county_delta()
+    rep["county_delta"] = {l: round(float(v), 3) for l, v in zip(LABELS, cdelta) if v != 0}
+
     def settle(Wk, bk, labels, T, ya):
         """t_kind and w_kind for the page in the county, on the Alachua and COCO tuning photos combined with the list:
         the most Alachua photos right (of the old kinds, or all of them) with the COCO photos within 1 point of
@@ -669,8 +698,8 @@ def main():
         for t_kind in t_grid:
             for w_kind in w_grid:
                 fu = dict(fusion0, t_kind=t_kind, w_kind=w_kind, rule="mix")
-                ka, _ = answer(A["tune"]["X"], A["tune"]["month"], Wk, t_kind * bk, labels, fu, T)
-                kc, _ = answer(X3["tune"]["X"], X3["tune"]["month"], Wk, t_kind * bk, labels, fu, T)
+                ka, _ = answer(A["tune"]["X"], A["tune"]["month"], Wk, t_kind * (bk + cdelta), labels, fu, T)
+                kc, _ = answer(X3["tune"]["X"], X3["tune"]["month"], Wk, t_kind * (bk + cdelta), labels, fu, T)
                 sa = float(np.mean(ka[sel] == ya[sel])); sc = balanced_share(kc, X3["tune"]["y"], COCO_KEYS)
                 ok = round(sc - today_coco_tune, 4) >= -0.01
                 rows.append({"t_kind": t_kind, "w_kind": w_kind, "alachua": round(sa, 4), "coco": round(sc, 4), "coco_ok": ok})
@@ -834,7 +863,7 @@ def main():
         labels = labels_of(carried)
         _, T_new = table_for(carried)
         fu = dict(fusion0, t_kind=st["t_kind"], w_kind=st["w_kind"], rule="mix")
-        kb = st["t_kind"] * brows
+        kb = st["t_kind"] * (brows + cdelta)          # with the list: the county's bias
         kw, pw_ = head_alone(W["tune"], Wk, brows, labels, st["t_kind"])
         ka, pa = answer(A["tune"]["X"], A["tune"]["month"], Wk, kb, labels, fu, T_new)
         kc, pc = answer(X3["tune"]["X"], X3["tune"]["month"], Wk, kb, labels, fu, T_new)
@@ -866,15 +895,18 @@ def main():
     rep["fitted"] = info
     rep["recipe_chosen"] = recipe
 
-    def write_slot(carried, Wk, kb, fu, table_new, tag):
+    def write_slot(carried, Wk, kb, fu, table_new, tag, brows_w):
         sd = os.path.join(a.out, "slot")
         os.makedirs(sd, exist_ok=True)
         labels = labels_of(carried)
         Wk.astype("<f2").tofile(os.path.join(sd, "kinds.f16.bin"))
         man = json.loads(json.dumps(m_old))
-        man["kinds"] = dict(man["kinds"], labels=labels, bias=[round(float(v), 5) for v in kb],
+        man["kinds"] = dict(man["kinds"], labels=labels, bias=[round(float(v), 5) for v in (fu["t_kind"] * brows_w)],
                             made_from="tools/world/head.py (recipe %s, encoder %s), world photos of pub/data-world%s" % (
                                 a.recipe, MODEL, " and the Alachua training photos" if recipe["with_alachua"] else ""))
+        if float(R.get("county_lambda") or 0.0):
+            man["kinds"]["county_bias"] = [round(float(v), 5) for v in kb]
+            man["kinds"]["county_bias_note"] = "the bias to use with the county list in the county's time zone; away from it the head alone uses bias"
         if R["groups"] == "merge":
             man["kinds"]["rows_fitted_as"] = LABELS
             man["kinds"]["same_label"] = "rows that share a label are one kind: their probabilities are added before the rule combines them"
@@ -1023,7 +1055,7 @@ def main():
     rep["settings"] = settings
     rep["tuning"] = tune_marks
     rep["test"] = test
-    write_slot(carried, Wk, kb, fu, table_new, "second" if rep.get("failed_on_test") else "first")
+    write_slot(carried, Wk, kb, fu, table_new, "second" if rep.get("failed_on_test") else "first", bias_rows)
     json.dump(rep, open(os.path.join(a.out, "report.json"), "w"), indent=1)
     write_md(rep, os.path.join(a.out, "REPORT.md"))
     log("written", a.out)
