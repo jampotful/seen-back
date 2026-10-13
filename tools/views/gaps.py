@@ -264,7 +264,12 @@ def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
     # closest evidence that no rule allows
     for lvl in LEVELS:
         if lvl in found and out["rec"] is None:
-            out.update(level=lvl, rec=best(found[lvl]), note="no carry rule allows %s level for this trait" % lvl)
+            b = best(found[lvl])
+            permitted = (lvl == "genus" and cls in ("genus", "order")) or (lvl == "order" and cls == "order")
+            if permitted:
+                out.update(level=lvl, rec=b, note="the %s record is grade %s, not a measurement" % (lvl, b.get("grade")))
+            else:
+                out.update(level=lvl, rec=b, note="no carry rule allows %s level for this trait" % lvl)
     if sr and out["rec"] is None:
         out.update(level="species", rec=best(sr), note="species record is not a measurement (grade %s)" % best(sr).get("grade"))
     if out["level"] == "none":
