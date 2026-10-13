@@ -16,7 +16,7 @@ go to out/ and, from the build machine, to the branch pub/views-draft.
 
 Only the standard library is used. The key is read from ANTHROPIC_API_KEY; the spend ceiling from COMPILE_MAX_USD.
 """
-import argparse, collections, copy, importlib.util, json, os, re, subprocess, sys, time
+import argparse, collections, copy, importlib.util, json, os, re, subprocess, sys, time, unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -472,22 +472,29 @@ def close(a, b):
     return abs(a - b) <= max(1e-6, 0.01 * max(abs(a), abs(b)))
 
 
+def quote_numbers(r):
+    q = unicodedata.normalize("NFKC", str(r.get("quote", ""))).replace("\u2212", "-")
+    return [float(x.replace(",", "")) for x in re.findall(r"\d[\d,]*\.?\d*", q) if re.match(r"^\d[\d,]*\.?\d*$", x) and x.replace(",", "").replace(".", "", 1).isdigit()]
+
+
 def value_supported(v, recs):
-    """True if v equals a record's value or lies between two records' values (a range counts as two)."""
+    """True if v equals a record's value or lies between two records' values (a range counts as two). Where a record's
+    value is words, or a pair worked from one sentence, the numbers written in its quote count as its values."""
     nv = flat_numbers(v)
     if not nv:
         return None
     pool = [flat_numbers(r.get("value")) for r in recs]
     pool = [p for p in pool if p]
-    if not pool:
-        return False
     allv = [x for p in pool for x in p]
+    written = [x for r in recs for x in quote_numbers(r)]
+    if not allv and not written:
+        return False
     for p in pool:
         if len(p) == len(nv) and all(close(a, b) for a, b in zip(p, nv)):
             return True
     if len(nv) == 1 and len(allv) >= 2 and min(allv) - 1e-9 <= nv[0] <= max(allv) + 1e-9:
         return True
-    if len(nv) > 1 and all(any(close(a, b) for b in allv) for a in nv):
+    if all(any(close(a, b) for b in allv + written) for a in nv):
         return True
     return False
 

@@ -132,5 +132,8 @@ bad["spec"]["matrices"]["X"]["from_pigments"] = [344]
 out = C.rewrite_ids(copy.deepcopy(bad["spec"]), records); C.PG.fill(out["matrices"])
 ok(len(out["matrices"]["X"]["rows"]) == 3, "rows are computed for a matrix given by pigment peaks")
 
+pairq = {"value": "sweeps of 2 degrees", "quote": "sweeps with an amplitude of 2 degrees and a period of 1.2 s"}
+ok(C.value_supported([2, 1.2], [pairq]) is True and C.value_supported([3, 1.2], [pairq]) is False, "numbers written in a record's quote support a pair worked from one sentence")
+
 print("%d failed" % len(fails))
 sys.exit(1 if fails else 0)
