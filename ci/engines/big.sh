@@ -9,7 +9,9 @@ ROOT="$PWD"; OUT="$ROOT/out"; mkdir -p "$OUT"
 exec > >(tee -a "$OUT/log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
 limit() { local s=$1; shift; "$@" & local p=$!; ( sleep "$s"; kill "$p" 2>/dev/null ) & local w=$!; wait "$p"; local rc=$?; kill "$w" 2>/dev/null; return $rc; }
-SITE="${SITE:-https://jampotful.github.io/seen-back/}"; PW=/tmp/pw; PWV=1.56.0; PART="${PART:-linux}"
+# this run (track A2, docs/tracks/worlddb.md): the branch's own page, served here, with the full database for the world
+python3 -I ci/engines/serve.py 8770 . "$OUT/reports" > "$OUT/serve-log.txt" 2>&1 & sleep 2
+SITE="${SITE:-http://127.0.0.1:8770/}"; PW=/tmp/pw; PWV=1.56.0; PART="${PART:-linux}"
 # run/engines/big-wk*: only WebKit (Linux, and macOS through Playwright), after run engines/35
 case "${GITHUB_REF_NAME:-}" in run/engines/big-wk*) ONLY_WK=1 ;; *) ONLY_WK=0 ;; esac
 # run/engines/big-lx-<browser>-*: only that browser, on Linux (the macOS jobs do not start)
@@ -22,7 +24,9 @@ python3 -I -c "
 import json,sys
 m=json.load(open(sys.argv[1])); v=m['vision']
 print('whole', v.get('bytes'), v.get('sha256'))
-for p in v.get('parts',[]): print('part', p['url'], p['bytes'], p['sha256'])" "$OUT/naturalist-manifest.json" | tee /tmp/parts.txt
+for p in v.get('parts',[]): print('part', p['url'], p['bytes'], p['sha256'])
+sp=m.get('species',{}); pl=m.get('place',{})
+print('world', m.get('id'), 'rows', sp.get('count'), sp.get('bytes'), 'table', (sp.get('table') or {}).get('bytes'), 'place', pl.get('bytes'), 'zones', (pl.get('zones') or {}).get('bytes'))" "$OUT/naturalist-manifest.json" | tee /tmp/parts.txt
 mkdir -p /tmp/parts; : > /tmp/parts/list
 grep '^part ' /tmp/parts.txt | while read -r _ u b h; do
   f=/tmp/parts/$(basename "$u"); echo "--- $(basename "$u") (manifest: $b bytes)"
