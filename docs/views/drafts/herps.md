@@ -41,7 +41,7 @@ The reptile view cannot be one picture. The groups inside it differ in the numbe
 8. **Frogs stay one view.** Toads, ranid frogs and treefrogs share two rod types (L126, L130), a movement-led prey response with stationary vision kept (L118 to L123) and acuity near 1 to 4 cycles per degree (L114 to L116). Diurnal poison frogs (Dendrobatidae, 1.1% of frog records) are the first candidates for a split later.
 9. **Salamanders and newts as one view; caecilians and the olm to `other`.** This is the earlier sheet's split, now with a measured acuity and evidence on still prey (L140, L141, L149, L161). Caecilians: L157. The olm (L152, L153) is outside the view.
 
-Record shares of the present reptile view after the split. Pit vipers are counted from twelve resolved genera (*Crotalus*, *Agkistrodon*, *Trimeresurus*, *Bothrops*, *Sistrurus*, *Bothriechis*, *Tropidolaemus*, *Protobothrops*, *Gloydius*, *Craspedocephalus*, *Porthidium*, *Ovophis*: 205,014 of the 245,739 viperid records); six true-viper genera hold 35,900, and 4,825 viperid records in small genera were not resolved and stay with `snake`. The sorting of genera into pit vipers and true vipers is my general knowledge; I opened no taxonomic source for it. Day geckos are *Phelsuma* (15,648) and *Lygodactylus* (9,434) of the 206,629 Gekkonidae records; Sphaerodactylidae (16,462) were not resolved by genus and stay with `gecko`.
+Record shares of the present reptile view after the split. Pit vipers are counted from twelve resolved genera (*Crotalus*, *Agkistrodon*, *Trimeresurus*, *Bothrops*, *Sistrurus*, *Bothriechis*, *Tropidolaemus*, *Protobothrops*, *Gloydius*, *Craspedocephalus*, *Porthidium*, *Ovophis*: 205,014 of the 245,739 viperid records); six genera without pits hold 35,900 (*Vipera*, *Bitis*, *Echis*, *Daboia* and *Cerastes*, the true vipers, and *Causus*, the night adders), and 4,825 viperid records in small genera were not resolved and stay with `snake`. The sorting follows Wikipedia, read on 13 October 2026: its list of crotaline species names eleven of the twelve pit-viper genera, and its *Craspedocephalus* page places that genus in Crotalinae; its Viperinae page lists five of the six genera without pits, says true vipers lack "the heat-sensing pit organs that characterize their sister group", and puts *Causus* in a subfamily of its own, Causinae. Day geckos are *Phelsuma* (15,648) and *Lygodactylus* (9,434) of the 206,629 Gekkonidae records; Sphaerodactylidae (16,462) were not resolved by genus and stay with `gecko`.
 
 | Proposed view | Taxa | World records | Share of the reptile view | Alachua records | Share in Alachua |
 |---|---|---:|---:|---:|---:|
@@ -492,9 +492,9 @@ L214, L205. The copies are my working of the optics: an out-of-focus point is dr
 L65 (Roth and colleagues 2009), L216, L217 (Malmström and Kröger 2006).
 
 ```
-['g', 'Slow at night', 'To see colour in near darkness, nocturnal geckos give up some sharpness and speed. This view leaves trails behind things that move in dim light.'],
+['g', 'Slow at night', 'To see colour in near darkness, nocturnal geckos give up some sharpness and speed. In a test of flickering light in 1939, a dwarf gecko stopped seeing flicker at lower rates than the other animals then measured. This view leaves trails behind things that move in dim light.'],
 ```
-L136 (Kelber 2010).
+L136 (Kelber 2010), L220 (Crozier and Wolf 1939, *Sphaerodactylus*; the abstract gives no figure).
 
 ```
 ['i', 'Field and sharpness', 'No one has measured how wide a house gecko’s view is or how much detail it sees. The field here follows a measured lizard, about 320 degrees, and the sharpness is a guess.'],
@@ -804,6 +804,7 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Christensen-Dalsgaard J, Brandt C, Willis K, Christensen C, Ketten D, Edds-Walton P, Fay R, Madsen P, Carr C (2012), *Proceedings of the Royal Society B* 279: 2816 to 2824. Opened (Curtin University repository abstract; no DOI on that page). L191.
 - Clark RW, Bakken GS, Reed EJ, Soni A (2022), *Journal of Experimental Biology*, doi:10.1242/jeb.244478. Opened. L28, L29.
 - Cooper WE (1989), *Copeia*, doi:10.2307/1445446. Opened. L95.
+- Crozier WJ, Wolf E (1939), *Journal of General Physiology* 22(5): 555 to 566, doi:10.1085/jgp.22.5.555. Opened (abstract on the publisher's page). L220.
 - David RS, Jaeger RG (1981), *Copeia*, doi:10.2307/1444234. Opened. L149.
 - Davies WIL and colleagues (2009), *Journal of Neuroscience*, doi:10.1523/jneurosci.0517-09.2009. Opened. L77, L78.
 - Emerling CA (2016), *Molecular Biology and Evolution* 34(3): 666, doi:10.1093/molbev/msw265. Opened. L15, L16.
@@ -916,6 +917,7 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Underwood G (1951), *Copeia*, doi:10.2307/1439099. Opened (the opening paragraph, in the collection). L215.
 - Vanderbilt University News (8 November 2012), on Leitch D and Catania K (2012) in the *Journal of Experimental Biology*. Opened; secondary for the primary study. L164, L165.
 - Ventura DF, Zana Y, de Souza JM, DeVoe RD (2001), *Journal of Experimental Biology*, doi:10.1242/jeb.204.14.2527. Opened. L109.
+- Wikipedia (read 13 October 2026), "List of crotaline species and subspecies", "Craspedocephalus" and "Viperinae". Opened; secondary, for the sorting of viper genera in section 1.
 - Wada S and colleagues (2012), *PLoS ONE*, doi:10.1371/journal.pone.0039003. Opened. L71.
 - Wald G, Brown PK, Kennedy D (1957), *Journal of General Physiology*, doi:10.1085/jgp.40.5.703. Opened. L17, L18.
 - Werner C, Himstedt W (1984), *Behavioural Brain Research* 12(1): 69 to 73, doi:10.1016/0166-4328(84)90204-3. Opened (EurekaMag record). L187.
