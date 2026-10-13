@@ -1,0 +1,19 @@
+{
+ "models": [
+  "bioclip-b16"
+ ],
+ "wasm_procs": 4,
+ "about": "BioCLIP B/16 vectors for the COCO extra set (people, pets, livestock, nothing alive): the original model and the int8 file through onnxruntime-web's WASM build, as the phone would compute them. Publishes after run 42 so that runs never race on the branch.",
+ "data": "pub/data-alachua",
+ "manifest": "extra/coco-kinds/manifest.csv",
+ "shard_mode": "mod",
+ "stages": [
+  "images",
+  "images-wasm-int8-per-channel"
+ ],
+ "shards": {
+  "bioclip-b16": 4
+ },
+ "max_parallel": 4,
+ "publish_after_run": 42
+}
