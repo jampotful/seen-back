@@ -1,0 +1,39 @@
+name: lit-audit
+# The audit of the evidence logs: Claude Haiku through the Message Batches API reads each record and its quote (never a
+# paper) and says whether the quote supports the record (tools/lit/audit.py). Flagged records can be settled from the
+# source passages in pub/lit-t1 by a stronger model. Push a commit to run/lit-audit/<label>; ci/lit/audit.env names the
+# units, the spend ceilings and whether to plan only. Results come back on ci as runs/lit-audit/<run>; the verdicts and
+# flagged records go to the branch pub/lit-audit. The key is the repository secret ANTHROPIC_API_KEY.
+on:
+  push:
+    branches: ['run/lit-audit/**']
+permissions:
+  contents: write
+concurrency:
+  group: lit-audit
+  cancel-in-progress: false      # a cancelled run would leave paid batches uncollected
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: tests
+        run: python3 -I tools/lit/audit.py test && python3 -I tools/lit/test_extract.py
+      - name: audit
+        run: bash ci/lit/audit.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lit-audit
+          path: |
+            audit-out/
+            out/
+          retention-days: 7
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh lit-audit out
