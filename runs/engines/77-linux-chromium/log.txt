@@ -1,0 +1,69 @@
+
+=== 19:57:30 machine
+Linux runnervmmprz5 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+4
+               total        used        free      shared  buff/cache   available
+Mem:           15988        1099       12596          42        2655       14889
+v22.23.3
+Python 3.12.15
+Model name:                              Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz
+Flags: avx2 avx512_vnni avx512bw avx512f 
+
+=== 19:57:32 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 28 | index.html 529552 bytes | artifact 525654 bytes | selftest.js 50303 bytes
+build ok
+529783 index.html
+50303 selftest.js
+
+=== 19:57:34 playwright 1.56.0: chromium
+added 2 packages in 2s
+Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip
+Chromium 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium-1194
+Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+Downloading Chromium Headless Shell 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-headless-shell-linux.zip
+Chromium Headless Shell 141.0.7390.37 (playwright build v1194) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1194
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3 -m pip install --upgrade pip
+
+=== 19:58:21 floor: jumper, 1 values a parameter, moving 1
+exit 124
+noise 5.592 threshold 8.388
+params.cpd [[0.5,"invisible",6.896]]
+params.glow [[0.9,"invisible",5.697]]
+params.living [[0,0.176]]
+params.glowC[0] [[0.78,0.0547]]
+params.glowC[1] [[1,0.0293]]
+params.glowC[2] [[0.62,0.188]]
+zones.front.deg[0] [[114,"invisible",8.342]]
+zones.front.deg[1] [[98,3.83]]
+zones.front.soft [[0.2,0.0156]]
+zones.front.living [[1.6,0.00391]]
+zones.gaze.deg[1] [[21,0.347]]
+zones.gaze.tip [[0.45,0.0303]]
+zones.gaze.uvR [[0.5,"invisible",7.079]]
+zones.gaze.glow [[0,0.0156]]
+zones.gaze.living [[0,0.25]]
+zones.gaze.mag [[1.25,0.242]]
+zones.fovea.deg[0] [[5,0.186]]
+zones.fovea.deg[1] [[4,0.668]]
+zones.fovea.cpd [[3.6,0.113]]
+zones.fovea.uvR [[0.5,0.0156]]
+zones.fovea.glow [[0,"invisible",7.631]]
+zones.fovea.living [[0,0.133]]
+zones.fovea.mag [[1.25,"invisible",4.809]]
+gaze.saccade[0] [[40,4.3]]
+gaze.saccade[1] [[4,3.13]]
+gaze.sweep[0] [[2,0.0977]]
+gaze.sweep[1] [[1.2,0.293]]
+gaze.twist[0] [[25,54.7]]
+gaze.twist[1] [[2000,3750]]
+gaze.twist[2] [[3500,500]]
+gaze.examine[0] [[4000,523]]
+FAILED page.waitForFunction: Target page, context or browser has been closed
+    at render (/home/runner/work/seen-back/seen-back/test/check4.js:458:20)
+    at async /home/runner/work/seen-back/seen-back/test/check4.js:483:66
