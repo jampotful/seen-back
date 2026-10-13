@@ -86,14 +86,14 @@ L20, L21, L22, L24, L48. For *Lynx* the row reads: `'A bobcat’s or lynx’s pu
 L48, L54, L120.
 
 ```
-['m', 'Field of view', 'A cat takes in about 200 degrees around itself, about as much as a person does with both eyes open. This view keeps the field your camera gives.'],
+['m', 'Field of view', 'A cat takes in at least 200 degrees around itself, and an early optical measurement put the limit at 287, thanks to its large, strongly curved cornea. A person takes in about 200. This view draws the lower figure, so it keeps the field your camera gives.'],
 ```
-L77 and L132 (cat 200), L57 (people 200, from clinical perimetry), L76 (each cat eye reaches 90 degrees to its own side in perimetry). The second sentence holds once the app's human reference becomes 200 degrees (section 3.3).
+L77 and L132 (cat 200, secondary), L154 and L156 (287 in all, about 200 for one eye, optical), L57 (people 200, from clinical perimetry), L76 (each cat eye reaches at least 90 degrees to its own side in perimetry). The last sentence holds once the app's human reference becomes 200 degrees (section 3.3). **[unfinished]**: which figure describes the field a cat uses.
 
 ```
 ['m', 'Two eyes and depth', 'Both of a cat’s eyes face forward, and their views overlap over 60 to 140 degrees in front, depending on how it is measured, so a cat can judge distance by comparing them. Its upright slit adds a second cue, because out-of-focus horizontal edges blur more than vertical ones, and small hunters with eyes close to the ground make the most of it.'],
 ```
-L76 (60, by behavioural perimetry), L144 (120 or more, Kahmann's figures as given by Walls 1942), L78 (about 140), L107 (kittens learn a depth task much faster with both eyes), L23, L24, L125 (the blur cue and short animals). **[unfinished]**: the gap between the behavioural and the anatomical figures for overlap is not settled.
+L76 (60, by behavioural perimetry), L144 (120 or more, Kahmann's figures as given by Walls 1942), L155 (130, Thieulin's optical figure), L78 (about 140), L107 (kittens learn a depth task much faster with both eyes), L23, L24, L125 (the blur cue and short animals). **[unfinished]**: the gap between the behavioural and the anatomical figures for overlap is not settled.
 
 ```
 ['i', 'Distance in this view', 'A phone camera can’t measure distance, so this view assumes that things lower in the picture are closer. Tap the screen to move the focus.'],
@@ -226,9 +226,9 @@ L44, L45, L46, L118.
 L64 to L67, L108, L109, L68 (neutral point near 480 nm, secondary), L151 (dogs answer a deuteranopia test the way red-green colour-blind people do).
 
 ```
-['m', 'Field of view', 'A dog takes in about 240 degrees around itself, where a person takes in about 200, and the figure varies by breed. Only 30 to 60 degrees straight ahead are seen by both eyes, against about 120 for a person. This view widens the picture at its edges to suggest the wider sweep.'],
+['m', 'Field of view', 'A dog takes in about 240 to 250 degrees around itself, where a person takes in about 200, and the figure varies by breed. Only 30 to 60 degrees straight ahead are seen by both eyes, against about 120 for a person. This view widens the picture at its edges to suggest the wider sweep.'],
 ```
-L79, L32, L33, L57, L58.
+L79, L157, L32, L33, L57, L58.
 
 ```
 ['m', 'Flicker', 'A dog can see a light flicker up to about 75 times a second, where a person stops at about 60, so some lamps and screens that look steady to people may flicker for a dog. This view runs slightly slowly and then jumps ahead to suggest the difference.'],
@@ -251,9 +251,9 @@ L119, L87, L43 (coyotes see by the natural light of many nights).
 L106, L105.
 
 ```
-['m', 'Near focus', 'A dog’s eye probably can’t focus on anything closer than about a third to half a metre.'],
+['m', 'Movement at a distance', 'In a study of fourteen police dogs, the best recognised a moving object 810 to 900 metres away, and the same object standing still only within 585 metres.'],
 ```
-L82 (secondary).
+L152 (Schmid's study as reported by Walls 1942; Miller 2001 repeats it, L84). Movement makes a distant object easier to pick out, for people as for dogs; the dog's threshold for slow movement is still higher than a person's (row "Slow movement").
 
 ```
 ['i', 'Distance in this view', 'A phone camera can’t measure distance, so this view assumes that things lower in the picture are closer. Tap the screen to move the focus.'],
@@ -270,7 +270,7 @@ L101, L102, L127.
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who`, `cue` | 'Dog, coyote, wolf', 'a dog', 'The sharpest part is a band along the horizon. Tap the screen to move the focus.' | the app's wording |
-| `fov` | 240 | L79 (confirmed, secondary) |
+| `fov` | 240 | L79, L157 (confirmed: 240 and 250) |
 | `cpd` | 9 (was 11) | L29 to L31, L46: measured values run from about 7 to 12.6 cycles per degree with a typical dog near 8; 9 is my pick within them |
 | `topoS`, `topoA` | 1 and 0.5 (was `topoS` 1 alone); short-nose setting 0.2 and 1 | L36, L37, L44; the weights are **invented** |
 | `fall` | 1.6 | **invented** (unchanged) |
@@ -387,7 +387,7 @@ Every row that compares an animal with "people" or "a person" should use these f
 |---|---|---|
 | Sharpness | about 60 cycles per degree at the centre of gaze (a cycle is one dark and one light stripe). Comparisons are fractions of 60 | L1, L6 (retinal sampling about 60), L5 (optical limit about 70 with a 2 mm pupil), L3 (73 in a textbook table) |
 | Sharpness away from the centre | half by about 2.5 degrees, a tenth by about 7 degrees | L60, L2 |
-| Field of view | about 200 degrees side to side with both eyes; about 120 of them seen by both eyes; about 135 top to bottom | L57, L58, L59. Secondary figures of 180 for the whole field (L77, L132) disagree with clinical perimetry; 140 for the overlap is Kahmann's maximum (L145) |
+| Field of view | about 200 degrees side to side with both eyes; about 120 of them seen by both eyes; about 135 top to bottom | L57, L58, L59. The older round figure of 180 (L158, with the eyes at rest; repeated in L77 and L132) is smaller than clinical perimetry finds; 140 for the overlap is Kahmann's maximum (L145) |
 | Flicker | about 60 times a second at the centre of view in bright light; in very bright light at the edge of view, up to about 90 to 110; fewer in dim light | L13, L61, L62, L63 |
 | Colour | three kinds of cone, most sensitive near 420 (blue-violet), 530 (green) and 560 (yellow-green) nanometres; light from about 400 to 700 nanometres | L128, L129, L130 (M and L also L10, L11, L91, L92), L12, L9 |
 | Dim light | a fully dark-adapted person can just see a white surface at about a millionth of a candela per square metre, about the light of an overcast starry night | L7, L8 |
@@ -430,7 +430,7 @@ Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best
 
 **Motion.** Dogs need about 0.76 degrees a second to see motion and 42% coherent dots to see a direction (L34, L35); people under 0.1 and about 5% (L15, L16); cats roughly ten times worse than people at slow motion (L83, L136).
 
-**Field and overlap.** Dog 240 degrees, overlap 30 to 60 by behaviour and 80 to 116 by optics (L79, L32, L33); cat 200, overlap 60 to 140 by method (L76, L77, L78, L144); people 200 and 120 (L57, L58).
+**Field and overlap.** Dog 240 to 250 degrees, overlap 30 to 60 by behaviour and 80 to 116 by optics (L79, L157, L32, L33); cat at least 200 and 287 by an optical measurement, with one eye seeing about 200 and the overlap 60 to 140 by method (L76, L77, L78, L144, L154 to L156); people 200 and 120, or 180 in the older figure (L57, L58, L158). On the optical figures, the cat's whole field is wider than the dog's, which reverses the popular comparison.
 
 **The slit pupil's optics.** A slit lets a multifocal lens work at full diameter in bright light (L54), closes almost completely (L142), changes area about 135-fold against a person's 15 (L21, L22), and blurs horizontal contours more than vertical ones (L24), a distance cue that suits short ambush hunters (L23, L125).
 
@@ -458,7 +458,7 @@ Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best
 | Acuity of lions, tigers, leopards, pumas | tiger eye 29.4 mm against the cat's 19.75 (L121, L75); lion eyes 27 to 32 mm (L122 note); the cheetah's 23 cycles per degree (L94) | scale the cat's 8 by the eye-length ratio: about 12 (done for `bigcat`, graded `i`). The per-species values in Veilleux and Kirk's online table would replace it |
 | Pupils of pumas, leopards, jaguars, cheetahs, coyotes, gray foxes **[unfinished]** | large carnivores have round pupils (L140); felid and canid trees of pupil shape (L55, L56); the 42 cm shoulder-height pattern (L23); gray fox oval (L104) | the large cats take a round pupil (`g`); the coyote takes the dog's round pupil by analogy; pending Banks et al. 2015 table S1 |
 | Bobcat vision | Eurasian lynx pupil and lens (L50); S cones in the bobcat (L138) | treat *Lynx* as one genus |
-| Cat binocular overlap **[unfinished]** | 60 degrees by perimetry (L76), 120 or more by Kahmann's figures (L144) and about 140 in a review (L78) | the row gives the range; the schematic-eye papers would settle the optical figure |
+| Cat field and binocular overlap **[unfinished]** | whole field 200 (L77) or 287 by optics (L154); overlap 60 by perimetry (L76), 120 or more (L144), 130 (L155) and about 140 (L78) | the rows give the ranges and the picture draws 200; the schematic-eye papers would settle the optical figures |
 | Field of view of foxes, coyotes and big cats | dogs 240 (L79), cats 200 (L77) | foxes and coyotes have dog-like skulls, so 240 by analogy (`g`); the views leave the field unset until a source appears |
 | Flicker in foxes, coyotes and big cats | dog 75, cat 47.5 (L27, L25); nocturnal animals average lower flicker limits than day-active ones in one compilation (Inger et al. 2014, Results) | nothing better than "like dogs" and "like cats"; no value is drawn |
 | Dim-light acuity of cats and dogs **[unfinished]** | cat threshold up to 7 times lower (L80); dogs' rods in the area centralis (L119) | the night shift can borrow the human curve shifted by a factor of 7 for cats; Pasternak and Merigan (1981; no opened page gives its citation) and Neuhaus and Regenfuss (1967, wanted) measured it |
