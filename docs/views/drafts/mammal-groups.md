@@ -433,3 +433,111 @@ This view changes almost nothing, and that is the finding. Its interest lies bes
 | `gain` | 1.6 | **Invented**; riboflavin tapetum (log 165). |
 | `pupil` | 'o' | **Invented**. |
 | Variant for Aotidae, Lorisidae, Galagidae, Tarsiidae | `M`: GREY545 = [.3, .6, .1, .3, .6, .1, .3, .6, .1], `sat` 0 | One cone (log 109); the weights are **invented**, since these animals' cone peaks were not found. Tarsiers have no reflecting layer in the sources read here, so the variant keeps `gain` at 1.6 only for lorises and galagos; that split is a gap (section 5). |
+
+### `mammal` (two kinds of cone: bears, otters, weasels, skunks, mongooses, coatis, kangaroos, koalas, possums, pigs, hippos, rhinos, elephants, hedgehogs, shrews, platypus, echidnas and others)
+
+**Rows.**
+
+1. `['m', 'Colour', 'Most mammals have two kinds of colour-sensing cells, where people have three. A pig's are most sensitive near 439 and 556 nanometres and an elephant's near 419 and 552, the same pair as a person who confuses reds and greens. This view shows colours that way.']`
+   Log 124 (Jacobs 2013), 125, 126 (Neitz and Jacobs 1989), 134 (Yokoyama and colleagues 2005).
+2. `['m', 'Bears, otters and kangaroos', 'American black bears, European otters and tammar wallabies have the same two kinds. In black bears the longer-wave cells outnumber the blue-sensitive ones by at least three to one.']`
+   Log 127 (Heyward and colleagues 2020), 7 (Peichl and colleagues 2001), 139 (Ebeling, Natoli and Hemmi 2010).
+3. `['g', 'Some marsupials differ', 'A few small Australian marsupials, among them the fat-tailed dunnart, may have a third kind of colour cell. No measurement was found for koalas or possums.']`
+   Log 139.
+4. `['m', 'Sharpness', 'Sharpness varies widely in this group. A tammar wallaby resolves about 5 cycles per degree, a numbat 5 to 6 and a black rhinoceros about 6, and an African elephant's retina could support about 14. This view is blurred to about 6, a tenth of your sharpness.']`
+   Log 140 (Hemmi and Mark 1998), 137 (Arrese and colleagues 2000), 136 (Pettigrew and Manger 2008), 132 (Pettigrew and colleagues 2010).
+5. `['m', 'Field of view', 'Eyes set on the sides of the head take in a wide view. A ferret sees about 270 degrees around itself and numbats and honey possums about 240, with 60 to 80 degrees seen by both eyes. This view bends the picture at its edges to suggest that sweep.']`
+   Log 144, 145 (Morris and colleagues 2025), 137, 138 (Arrese and colleagues 2000, 2002).
+6. `['m', 'Sharpest band', 'Rhinoceroses and elephants see most sharply along a band level with the horizon, with finer spots at its ends, and a black bear sees most sharply in a spot ahead of it. This view sharpens a band across the middle of the picture.']`
+   Log 136, 132, 128.
+7. `['g', 'Dim light', 'Bears, otters and other carnivores, elephants and some marsupials have a reflecting layer behind the retina, while pigs and red kangaroos have none. The shadows are lifted a little here.']`
+   Log 129 (Ollivier and colleagues 2004), 133.
+8. `['x', 'Electric sense', 'A platypus hunts under water with its eyes and ears shut, finding prey with electric and touch sensors in its bill. The picture leaves this sense out.']`
+   Log 153 (Manger, Calford and Pettigrew 1996).
+9. `['x', 'Rumbles in the ground', 'The footfalls and deep calls of elephants send vibrations through the ground that can travel for kilometres over sand. Whether and how far elephants feel them was not measured in the work read here, and the picture leaves them out.']`
+   Log 157 (Mortimer and colleagues 2018).
+10. `['i', 'Pupil and pace', 'No measurement of pupil shape or of how fast these animals see flicker was found. The view draws a round pupil and keeps your pace.']`
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Bear, otter, kangaroo, pig', 'a mammal', 'Two kinds of colour sensor, a wide view, and less detail than yours.' | The app's wording, after the earlier sheet. |
+| `fov` | 260 | Ferret 271, numbat and honey possum about 240 (log 144, 137, 138). The pick within that span is **invented**. |
+| `cpd` | 6 | Tammar 4.8, numbat 5.2 to 6.3, rhinoceros 6, elephant 13 to 14 anatomical and 0.6 behavioural (log 140, 137, 136, 132, 135). The pick is **invented**, and the commonest members (raccoon aside, mustelids and bears) are unmeasured. |
+| `topoS`, `topoA`, `fall` | 0.7, 0.3 and 1.5 | Streaks in rhinoceros and elephant, a spot in the bear (log 136, 132, 128). The weights are **invented**. |
+| `M` | DEUTAN | Two cones (log 124 to 127, 139); the elephant's pair matches a deuteranope's (log 134). SOURCES.md lists the matrix itself as unchecked. |
+| `sat` | 0.85 | **Invented**, after the dog's 0.85. |
+| `gain` | 1.2 | **Invented**; reflecting layers in carnivores and elephants, none in pigs (log 129, 133). |
+| `pupil` | 'o' | **Invented** (row 10). |
+| `dof`, `rate` | unset | No source. |
+
+### `raccoon` (one kind of cone or none: raccoons, the kinkajou, the Virginia opossum and pangolins; a rods-only variant for armadillos, sloths and anteaters)
+
+**Rows.**
+
+1. `['m', 'Colour', 'A raccoon has only one kind of colour-sensing cell, where you have three, so it sees brightness without hue. The kinkajou, a relative, is the same. This view is grey.']`
+   Log 120 (Jacobs and Deegan 1992).
+2. `['m', 'Virginia opossum', 'The Virginia opossum also has a single kind, most sensitive to yellow-green light near 561 nanometres. Opossums of South America have two kinds.']`
+   Log 122 (Jacobs and Williams 2010), 123 (Ahnelt, Hokoç and Röhlich 1995).
+3. `['m', 'Coatis', 'The coati, a raccoon relative active by day, has a second, blue-sensitive kind of cell, so the app shows a coati's view in two colours.']`
+   Log 121.
+4. `['g', 'Dim light', 'Raccoons, like other carnivores, have a reflecting layer behind the retina. The Virginia opossum has one in the upper half of its retina, which looks at the ground ahead. The shadows are lifted here.']`
+   Log 129, 162 (Braekevelt 1976). Which part of the field the upper retina serves is my inference from the eye's optics.
+5. `['m', 'Rods only', 'Armadillos, sloths and anteaters have lost all their colour-sensing cells and see with rods alone, the cells people use at night. When the app knows one of these animals, the view turns grey.']`
+   Log 141 (Emerling and Springer 2014).
+6. `['g', 'Dazzled by day', 'Eyes that work with rods alone see coarsely in dim light and are dazzled by bright light. For armadillos, sloths and anteaters this view washes out toward white when the scene is bright, and the strength of that glare is the app's guess.']`
+   Log 142 (a general description of rod monochromacy in the same paper).
+7. `['i', 'Sharpness and field', 'No measurement of sharpness or field of view was found for raccoons, opossums or armadillos. These parts of the view are guesses.']`
+8. `['i', 'Drawn as', 'The grey is weighted toward yellow-green, where the opossum's single colour cell is most sensitive, and toward blue-green for the rods-only animals. The weights are the app's own.']`
+   Log 122 (561 nm; opossum rods near 493 nm in the same paper's introduction).
+9. `['x', 'Hands', 'A raccoon's brain gives its front paws an unusually large share of the area that handles touch. The picture leaves touch out.']`
+   Log 166 (Herron 1978).
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Raccoon, opossum, armadillo', 'a raccoon', 'One kind of colour sensor, or none. The world in greys, with the shadows lifted.' | The earlier sheet's wording. |
+| `cpd` | 4 | **Invented** (row 7). |
+| `M` | GREY561 = [.4, .55, .05, .4, .55, .05, .4, .55, .05] | One cone near 561 nm (log 122); the earlier sheet's weights, **invented**. |
+| `sat` | 0 | Log 120, 122. |
+| `gain` | 1.6 | **Invented**; reflecting layers (log 129, 162). |
+| `pupil` | 'o' | **Invented**; a sloth's pupil was round after death (log 167). |
+| Rods-only variant (Cingulata, Pilosa) | `M`: GREYROD = [.1, .6, .3, .1, .6, .3, .1, .6, .3]; `cpd` 2; `glare` 1.0 (new) | Log 141, 142. All three values are **invented**; no xenarthran rod peak or acuity was found. |
+
+### `mole` (family Talpidae)
+
+**Rows.**
+
+1. `['m', 'Eyes under skin', 'An eastern mole's eyes are covered by a layer of skin, and they probably do little more than tell light from dark.']`
+   Log 169 (Townsend 2023, Animal Diversity Web).
+2. `['m', 'A tiny working eye', 'A European mole's eye is tiny, with a retina smaller than a square millimetre, yet it holds blue-sensitive and green-sensitive colour cells, and light reaches them down into the ultraviolet.']`
+   Log 130, 131 (Glösmann, Steiner, Peichl and Ahnelt 2008). The European mole holds 60.6% of mole records.
+3. `['m', 'Ultraviolet', 'The blue-sensitive cell of the European mole is probably tuned to ultraviolet, as it is in mice and other mammals that see ultraviolet.']`
+   Log 130, 131.
+4. `['i', 'Light, not shapes', 'With so small an eye, a mole probably senses light, its colour and where it comes from more than it sees shapes. This view shows only that, and the reading is the app's own.']`
+   Log 130 (retina of 0.75 square millimetres with about 100,000 photoreceptors).
+5. `['x', 'Star-nosed mole', 'A star-nosed mole feels its way with 22 fleshy fingers around its nostrils, touching the ground about 13 times a second. It swings the centre of the star onto anything interesting, much as your eyes jump to what catches them. The picture leaves this sense out.']`
+   Log 154 (Catania 2011), 155, 156 (Catania and Remple 2003).
+6. `['x', 'Nose', 'An eastern mole has a touch-sensitive patch at the tip of its nose and can tell which way a smell comes from. The picture leaves these senses out.']`
+   Log 169.
+
+**The picture.**
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who`, `cue` | 'Mole', 'a mole', '' | The app's wording. |
+| `pupil`, `field` | 'none', 1 | Rows 1 and 4; the drawing the `plant` and `other` entries use. |
+| `M`, `sat` | DEUTAN, 0.4 | The colour of light as an animal with two cones would sense it (log 130). Both are **invented**; the earlier sheet's `sat` of 0 is corrected for European moles. |
+
+**New effect.** *The touch star* (for the star-nosed mole, reached by species). A tap lights a small star-shaped patch of the camera image under the finger for a fraction of a second, uncoloured and fine-grained, flickering about 13 times a second while the finger stays down; the rest of the screen stays a field of light. The flicker rate rests on log 155; the drawing is **invented** and needs an `i` row. Easy.
+
+### New effects for the mammal group
+
+| Effect | What the person would see | Phone input | How hard | Evidence |
+|---|---|---|---|---|
+| Glare (rods-only variant of `raccoon`) | Bright skies and sunlit surfaces bloom and wash toward white; shade looks clear. | The frame's brightness. | Easy (shared with the `whale` glare). | Log 142 |
+| A lower field brightened (Virginia opossum) | The lower half of the picture, where the opossum's reflecting layer looks, is lifted more than the upper half. | None. | Easy: a vertical ramp on `gain`. The mapping is my inference. | Log 162 |
+| Ground ripples (`mammal`, elephants only, optional) | When the phone senses a footstep or a thud, rings spread from the bottom of the screen. | The accelerometer. | Easy. It stands in for a sense the work read here did not measure, so it carries an `i` row and waits for a source on elephants' own detection. | Log 157 |
+| Electric sparks (`mammal`, platypus only) | Nothing honest: no phone senses fields of a few microvolts per centimetre. | None. | Not possible as measurement. | Log 153 |
