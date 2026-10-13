@@ -1,0 +1,179 @@
+{
+ "key": "jumper",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "params.uvBlue: value 1 is not a cited record's value and does not lie between two of them (R40)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "version": 1,
+   "chip": "Jumping spider",
+   "who": "a jumping spider",
+   "cue": "Look where it looks. Its two front eyes are sharp in a narrow strip, and it turns them to scan.",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "modules": [],
+   "inputs": {
+    "motion": "optional"
+   },
+   "params": {
+    "fov": {
+     "value": 130,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R15",
+      "R23"
+     ],
+     "note": "the wide side eye's span; the whole animal sees nearly all round"
+    },
+    "cpd": {
+     "value": 12.5,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R12"
+     ]
+    },
+    "fovea": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "pupil": "o",
+    "gate": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "persist": {
+     "value": 0.1,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "sat": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "uvBlue": {
+     "value": 1,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R40"
+     ]
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Two sharp eyes",
+     "The two large front eyes see fine detail, about as sharp as a bird's, and they see it in a narrow strip. In the picture, the sharp middle is a thin upright band.",
+     [
+      "R12",
+      "R14",
+      "R17"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "g",
+     "A narrow strip and a wide sweep",
+     "The front eyes each see only a narrow upright strip, about 2 degrees wide and 21 degrees high. The side eyes see a wide span, and only movement draws their attention.",
+     [
+      "R14",
+      "R15",
+      "R23",
+      "R29"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "g",
+     "Colour",
+     "Jumping spiders have green-sensitive and ultraviolet-sensitive receptors in their front eyes, so the picture uses green and ultraviolet where a person sees blue.",
+     [
+      "R36",
+      "R38",
+      "R40",
+      "R51"
+     ],
+     [
+      "params.uvBlue",
+      "params.sat"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The fovea, the gate on still things, the short memory of the picture, and the colour strength are the app's choices. The records do not give these numbers.",
+     [],
+     [
+      "params.fovea",
+      "params.gate",
+      "params.persist",
+      "params.sat"
+     ]
+    ]
+   ]
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R12"
+    ],
+    "kind": "value",
+    "how": "The record gives 12.5 cycles per degree for the principal eyes of Portia fimbriata."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R15",
+     "R23"
+    ],
+    "kind": "range_middle",
+    "how": "The side eye field is given as 130 degrees for Metaphidippus aeneolus, and the whole animal's field is given as 360 degrees for salticids in general, so 130 is a relative figure taken from the side eye alone."
+   },
+   {
+    "path": "params.uvBlue",
+    "records": [
+     "R40"
+    ],
+    "kind": "value",
+    "how": "UV-sensitive cells with peaks at 330 to 380 nm are recorded for the family, a wider group than the species."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R12",
+    "quote": "The highest value of the spatial resolving power (Nyquist frequency) of the principle eyes of jumping spiders, such as Portia fimbriata Doleschell, 1859, is 12.5 cycles/degree"
+   },
+   {
+    "record": "R15",
+    "quote": "This eye covers a very wide angle (1300), and second-surface refraction is of relatively much greater importance than in the other eye3"
+   },
+   {
+    "record": "R23",
+    "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+   },
+   {
+    "record": "R40",
+    "quote": "UV-sensitive cells in Layer IV having peak sensitivity at 330–380 nm"
+   }
+  ]
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "key": "jumper",
+ "version": 1,
+ "chip": "Jumping spider",
+ "who": "a jumping spider",
+ "cue": "Hold your phone steady. A small sharp spot hunts across a wide, soft picture where only movement stands out.",
+ "applies_to": {
+  "family": [
+   "Salticidae"
+  ]
+ },
+ "params": {
+  "fov": {
+   "value": 360,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "spider-day.jsonl:Lauren 2018"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the four pairs of eyes together cover the whole circle"
+  },
+  "cpd": {
+   "value": 1.3,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the best measured sharpness of the side eyes, applied to the whole wide picture"
+  },
+  "gate": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the side eyes answer only to movement, so still things fade away in the wide picture"
+  },
+  "sat": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "the side eyes tested hold one receptor type, so the wide picture is drawn in grey"
+  }
+ },
+ "matrices": {
+  "SALTICID": {
+   "from_pigments": [
+    370,
+    530
+   ],
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:DeVoe 1975",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   "note": "an ultraviolet pigment near 370 nm and a green pigment near 530 nm"
+  }
+ },
+ "zones": [
+  {
+   "id": "principal",
+   "shape": "ellipse",
+   "deg": {
+    "value": 5,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:De Agrò 2024"
+    ],
+    "range": [
+     1,
+     30
+    ],
+    "note": "the field of one principal eye"
+   },
+   "cpd": {
+    "value": 3.8,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "jumper.jsonl:Harland 2012"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "worked out from 0.13 degrees between receptors in a typical species"
+   },
+   "gate": 0,
+   "sat": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "colour is drawn in full inside the sharp spot"
+   },
+   "M": "SALTICID"
+  }
+ ],
+ "gaze": {
+  "sweep": {
+   "value": [
+    2,
+    1.5
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    10
+   ],
+   "note": "the sharp spot sweeps side to side across what it inspects"
+  }
+ },
+ "draw": {
+  "colour": [
+   {
+    "name": "two",
+    "invented": true,
+    "note": "two colour channels, one ultraviolet and one green, in the sharp spot"
+   }
+  ],
+  "gaze": [
+   {
+    "name": "strip",
+    "invented": true,
+    "note": "the sharp spot drawn as a small window that scans across the picture"
+   },
+   {
+    "name": "stamps",
+    "invented": true,
+    "note": "the sharp spot left as separate glimpses"
+   }
+  ],
+  "sharpness": [
+   {
+    "name": "paint",
+    "invented": true,
+    "note": "sharpness painted by zone, soft outside and sharper in the spot"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "A wide, soft picture",
+   "The three pairs of side eyes together cover almost the whole circle round the spider, about 360 degrees, with a small overlap in front. Their sharpness is modest. The best measured, in Evarcha, is 1.3 cycles per degree, and other species fall as low as 0.3, so the wide picture is soft.",
+   [
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Shepeleva 2022",
+    "spider-day.jsonl:Lauren 2018",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "params.fov",
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "A small sharp spot",
+   "Two large forward-facing eyes give the sharp picture, and each looks at a field only about 5 degrees wide. A typical species such as Phidippus johnsoni resolves about 3.8 cycles per degree. Portia reaches 12.5, an exceptional figure for a spider.",
+   [
+    "jumper.jsonl:De Agrò 2024",
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "zones[0].cpd",
+    "zones[0].deg"
+   ]
+  ],
+  [
+   "m",
+   "Only movement reaches the side eyes",
+   "The side eyes behave as though completely blind to stationary things. A target already in view starts a turn only when it moves, and a light that only switches on and off starts none. A target has to be wider than about 0.7 degrees and move about 1 degree to be seen.",
+   [
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Land 1971"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Colour in the middle only",
+   "The side eyes of the species tested hold a single type of receptor, peaking near 535 nm, so they cannot tell colours apart. The principal eyes of most jumping spiders hold two types, an ultraviolet one near 370 nm and a green one near 530 nm. Colour therefore reaches the small sharp spot and the wide picture stays grey. A few species, such as Habronattus, add a third type in the centre of the retina, and this view draws the common two.",
+   [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:DeVoe 1975",
+    "jumper.jsonl:Echeverri 2017",
+    "jumper.jsonl:Yamashita 1976",
+    "jumper.jsonl:Zurek 2015",
+    "spider-day.jsonl:unknown 1990"
+   ],
+   [
+    "matrices.SALTICID"
+   ]
+  ],
+  [
+   "m",
+   "The sharp spot scans",
+   "The principal eyes have retinas that move behind fixed lenses. They sweep side to side across what they inspect, with a period of 1 to 2 seconds and an amplitude of at least 2 degrees. A large shift of 15 degrees completes within a tenth of a second.",
+   [
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Land 1969",
+    "spider-day.jsonl:McIlwain 1996"
+   ],
+   []
+  ],
+  [
+   "x",
+   "Sound and vibration",
+   "Jumping spiders freeze at low airborne tones near 80 Hz, which their leg hairs pick up, and courting males send vibrations through the ground. This picture leaves both out.",
+   [
+    "jumper.jsonl:Elias 2003",
+    "jumper.jsonl:Shamble 2016",
+    "spider-day.jsonl:Vahaba 2017"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The grey of the wide picture is the app's own choice, drawn from the finding of a single receptor type in the side eyes. The movement gate and the sweep of the sharp spot are the app's own settings, shaped by what the records describe about movement and scanning. The sharp spot is drawn as an ellipse, with a colour matrix standing in for the two pigments. The whole-picture sharpness and the sharpness of the spot apply figures from single species or a worked conversion to the whole family. The drawing options are the app's own.",
+   [],
+   [
+    "params.cpd",
+    "params.gate",
+    "params.sat",
+    "zones[0].cpd",
+    "zones[0].sat",
+    "matrices.SALTICID",
+    "gaze.sweep"
+   ]
+  ]
+ ],
+ "falls_back_to": "spider",
+ "draft": true
+}

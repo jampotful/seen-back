@@ -1,0 +1,150 @@
+{
+ "key": "bee",
+ "version": 1,
+ "chip": "Bee",
+ "who": "a bee",
+ "cue": "The view is wide and soft, and fast flicker is slowed down.",
+ "applies_to": {
+  "family": [
+   "Apidae",
+   "Halictidae",
+   "Megachilidae",
+   "Andrenidae",
+   "Colletidae"
+  ]
+ },
+ "falls_back_to": "insect",
+ "params": {
+  "fov": {
+   "value": 300,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "bees-wasps.jsonl:Paffhausen 2021"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "A figure given for bees in general. A honeybee measurement leaves a blind wedge of about 48 degrees behind."
+  },
+  "cpd": {
+   "value": 0.26,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "bee.jsonl:Land 1997"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "Honeybee workers resolved gratings up to this fineness. Bumblebees give about the same."
+  },
+  "rate": {
+   "value": 0.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0.25,
+    2
+   ],
+   "note": "The app slows time to hint that a bee follows flicker that blurs for a person."
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "wedge",
+    "invented": true,
+    "note": "Draws the view as nearly all round, with a small blind wedge behind."
+   }
+  ],
+  "overlay": [
+   {
+    "name": "polar",
+    "invented": true,
+    "note": "Shows the pattern of polarized skylight that a bee reads for direction."
+   },
+   {
+    "name": "off",
+    "invented": true,
+    "note": "Leaves the sky pattern out."
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "A honeybee resolves a grating only up to about a quarter of a cycle per degree. A person sees roughly a hundred times finer detail, so edges and small things melt into soft shapes. Bumblebees resolve about the same.",
+   [
+    "bee.jsonl:Chakravarthi 2017",
+    "bee.jsonl:Hecht 1929",
+    "bee.jsonl:Land 1997"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "A wide view",
+   "Bees see about 300 degrees around the body on the horizontal plane. The two eyes overlap in front and above, and only a small blind region lies below and behind.",
+   [
+    "bee.jsonl:Kelber 2019",
+    "bee.jsonl:Taylor 2019",
+    "bees-wasps.jsonl:Paffhausen 2021"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Three colours, one of them ultraviolet",
+   "A honeybee has three kinds of colour receptor, peaking near 346 nm in the ultraviolet, 430 nm in the blue and 540 nm in the green. Bees can see ultraviolet light but see no far red.",
+   [
+    "bee.jsonl:German Aerospace Center (DLR) and Bee Sensory and Behavioural Ecology Lab 2026",
+    "bee.jsonl:van der Kooi 2021",
+    "bees-wasps.jsonl:M 2024"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Quick flicker",
+   "In bright light a honeybee still follows flicker at about 200 flashes a second. In dimmer light of 300 lux this falls to about 144.",
+   [
+    "bee.jsonl:Inger 2014",
+    "bee.jsonl:Srinivasan 1984"
+   ],
+   []
+  ],
+  [
+   "m",
+   "A compass in the sky",
+   "Bees read the pattern of polarized light in the sky as a compass. A strip of ultraviolet receptors along the top edge of each compound eye has wide fields of view and strong sensitivity to the direction of polarization.",
+   [
+    "bee.jsonl:Kolyfetis 2025",
+    "bee.jsonl:Land 2012",
+    "bees-wasps.jsonl:Kolyfetis 2025"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The slowed playback, the blind wedge behind and the sky pattern overlay are the app's own ways of drawing what the measurements describe.",
+   [],
+   [
+    "params.rate",
+    "draw.field",
+    "draw.overlay"
+   ]
+  ]
+ ],
+ "matrices": {},
+ "draft": true
+}
