@@ -438,15 +438,14 @@
     }, viaImg);
   }
   function labelDate(d) { var M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return d.getDate() + ' ' + M[d.getMonth()] + ' ' + d.getFullYear(); }   // the month once stood as a Roman numeral, which read as a fault
-  // A species' English name in sentence case: the first letter a capital, the rest small, except words that are names of
-  // places or people ("North American river otter", "Cooper's hawk"). A scientific name passes through unchanged in effect.
-  var PROPER = ' african alaskan american andean antarctic antillean appalachian arabian arctic argentine asian asiatic atlantic australian bahama bahaman baltic bermuda bolivian brazilian british burmese california californian canada canadian caribbean carolina carolinian chilean chinese colombian colorado cuban dutch egyptian english eurasian european florida floridian french georgia german greek guatemalan gulf haitian hawaiian himalayan hispaniolan indian indies indonesian irish italian jamaican japanese javan korean louisiana madagascar malayan mediterranean mexican mississippi new nile norway norwegian pacific panama panamanian persian peruvian philippine polynesian portuguese puerto rican russian scotia scottish siberian spanish sumatran swedish swiss tasmanian texas texan thai turkish virginia virginian world york zealand amazon bolivia china peru lanka keys st. augustine charles sebastian william susan maria lizzie jones hentz caesar hercules jesus venus quaker confederate january february march april june july august september october november december ';
+  // A species' English name in lower case, except words that are names of places or people ("North American river otter",
+  // "Cooper's hawk", "Schaus' swallowtail"). The first word is no exception: "domestic cat" starts small, as the names of groups do.
+  var PROPER = ' african alaskan american andean antarctic antillean appalachian arabian arctic argentine asian asiatic atlantic australian bahama bahaman baltic bermuda bolivian brazilian british burmese california californian canada canadian caribbean carolina carolinian chilean chinese colombian colorado cuban dutch egyptian english eurasian european florida floridian french georgia german greek guatemalan gulf haitian hawaiian himalayan hispaniolan indian indies indonesian irish italian jamaican japanese javan korean louisiana madagascar malayan mediterranean mexican mississippi new nile norway norwegian pacific panama panamanian persian peruvian philippine polynesian portuguese puerto rican russian scotia scottish siberian spanish sumatran swedish swiss tasmanian texas texan thai turkish virginia virginian world york zealand amazon bolivia china peru lanka keys st. augustine charles sebastian william susan maria lizzie jones hentz caesar hercules jesus venus quaker confederate january february march april june july august september october november december acadian alachua alamo allegheny apache apalachicola arkansas baltimore bengal benghal blackburnian bradford brahminy caspian ceylon chickasaw columbian connecticut cretan darlington dixie everglades eustis fakahatchee formosa formosan georgian hebrew hudsonian illinois jerusalem kentucky maryland mascarene nashville nearctic neotropical ocala ohio okefenokee oklahoma ouachita oriental palamedes pandorus paraguayan pennsylvania philadelphia phoenician piedmont pharaoh polydamas polyphemus putnam rio grande santa saratoga savannah seminole shumard siam surinam tahitian taiwan taiwanese tampa tennessee tule yucatan zabulon zarucco julia isabella hermes phaon cassius dorantes eufala nessus dion io atala tokay muscovy bahia christmas halloween agrippina alyce anna delilah esther francesca ivana jair mabel sappho cyrano ';
   function nameCase(name) {
     name = String(name || ''); if (!name) return name;
-    var first = true;
     return name.replace(/[^\s-]+/g, function (w, at) {
-      var keep = /['’]s?$/.test(w) || PROPER.indexOf(' ' + w.toLowerCase() + ' ') >= 0 || (w.length <= 3 && w === w.toUpperCase() && /[A-Z]/.test(w) && at > 0);
-      if (first) { first = false; return w.charAt(0).toUpperCase() + w.slice(1); }
+      if (PROPER.indexOf(' ' + w.toLowerCase() + ' ') >= 0) return w.charAt(0).toUpperCase() + w.slice(1);
+      var keep = /['’]s?$/.test(w) || (w.length <= 3 && w === w.toUpperCase() && /[A-Z]/.test(w) && (at > 0 || w.length === 1));
       return keep ? w : w.toLowerCase();
     });
   }
@@ -763,7 +762,7 @@
     if (!EYES[key] || key === 'person' || !/^[A-Za-z0-9_-]{4,40}$/.test(mid)) return null;
     var thumb = typeof v.thumb === 'string' && v.thumb.length < 24000 && /^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v.thumb) ? v.thumb : '';
     if (typeof v.common === 'string' && !v.sci && (v.common.toLowerCase() === handName(key).toLowerCase() || /^(a person|something alive)$/i.test(v.common))) v.common = v.common.toLowerCase();   // a group's name kept from an older build loses its capital
-    if (typeof v.common === 'string' && v.sci) v.common = nameCase(v.common);   // a species' name kept from an older build is set in sentence case
+    if (typeof v.common === 'string' && v.sci) v.common = nameCase(v.common);   // a species' name kept from an older build is set in lower case, proper names apart
     return { id: mid, key: key, common: clip(v.common, 60) || handName(key), sci: clip(v.sci, 80), by: byOf(v.by), at: +v.at || 0, thumb: thumb, up: v.up ? 1 : 0, loc: v.loc ? 1 : 0 };
   }
   function loadLocal() {
