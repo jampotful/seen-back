@@ -51,9 +51,10 @@ def stats(ids, V, A, G):
 
 def show(name, c):
     pc = lambda x, y: "%.1f%% (%d/%d)" % (100.0 * x / y, x, y) if y else "-"
-    return ("%s: flag status agrees with the second pass %s; hit rate on corrected or retracted %s; false alarms on confirmed %s; "
+    bal = lambda h, hn, f, fn: "%.1f%%" % (50.0 * (h / hn + 1 - f / fn)) if hn and fn else "-"
+    return ("%s: balanced flag accuracy (mean of hit rate and 1 minus false-alarm rate) %s; flag status agrees with the second pass %s; hit rate on corrected or retracted %s; false alarms on confirmed %s; "
             "grade agrees %s; of the records whose grade the second pass changed, grade agrees %s" % (
-                name, pc(c["agree"], c["n"]), pc(c["hit"], c["changed"]), pc(c["false_alarm"], c["confirmed"]),
+                name, bal(c["hit"], c["changed"], c["false_alarm"], c["confirmed"]), pc(c["agree"], c["n"]), pc(c["hit"], c["changed"]), pc(c["false_alarm"], c["confirmed"]),
                 pc(c["grade_agree"], c["grade_n"]), pc(c["gradechg_agree"], c["gradechg_n"])))
 
 

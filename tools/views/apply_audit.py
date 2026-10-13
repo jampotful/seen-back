@@ -37,7 +37,8 @@ def main(argv=None):
     ap.add_argument("--no-mark", action="store_true", help="do not add the audit field to changed or open records")
     ap.add_argument("--force", action="store_true", help="overwrite an existing --out file")
     a = ap.parse_args(argv)
-    unit = a.unit or os.path.basename(a.log)[:-6] if (a.unit or a.log.endswith(".jsonl")) else a.unit
+    base = os.path.basename(a.log)
+    unit = a.unit or (base[:-6] if base.endswith(".jsonl") else "")
     if not unit:
         sys.exit("cannot tell the unit from the file name; pass --unit")
     if os.path.realpath(a.out) == os.path.realpath(a.log):
