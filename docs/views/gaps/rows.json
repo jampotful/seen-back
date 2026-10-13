@@ -1,0 +1,23 @@
+{
+ "_note": "Each row of each offered view (views/<key>.json, rows[i][1] is the title) mapped to the trait keys of the brief's trait table that it rests on. 'carry' names the rule class: 'order' is rule 2 (photopigments and receptor classes), 'genus' is rule 3 (optics, fields, acuity, flicker, tapetum, pupil), 'none' means numbers never travel (rule 1) and only a species measurement counts. Rows with several parts list every trait; the row is settled only where all of them are.",
+ "classes": {
+  "order": ["receptor_classes", "lambda_max_nm", "colour_vision", "spectral_range_nm", "oil_droplets", "filter_pigments"],
+  "genus": ["acuity_cpd", "interreceptor_deg", "fovea", "fov_h_deg", "fov_v_deg", "binocular_deg", "cff_hz", "corner_hz", "tapetum", "pupil_shape", "absolute_sensitivity", "f_number", "diel", "depth_cue", "eye_movement", "eye_type", "interommatidial_deg", "acceptance_deg", "motion", "polarization"]
+ },
+ "views": {
+  "alligator": {"Sharpest spot": ["fovea", "acuity_cpd"], "Colour": ["receptor_classes", "lambda_max_nm"], "Pupil": ["pupil_shape"], "Field of view, sharpness, dim light and depth": ["fov_h_deg", "binocular_deg", "acuity_cpd", "tapetum", "absolute_sensitivity", "depth_cue"]},
+  "bee": {"Sharpness": ["acuity_cpd", "interommatidial_deg"], "Red": ["lambda_max_nm", "receptor_classes"], "Speed": ["cff_hz", "corner_hz"], "Ultraviolet": ["lambda_max_nm", "spectral_range_nm"], "How the colours are shown": ["receptor_classes", "colour_vision"]},
+  "bird": {"Speed": ["cff_hz"], "Sharpness": ["acuity_cpd", "interreceptor_deg"], "Ultraviolet": ["lambda_max_nm", "spectral_range_nm"], "Field of view": ["fov_h_deg", "binocular_deg"]},
+  "cat": {"Sharpness": ["acuity_cpd"], "Colour": ["receptor_classes", "lambda_max_nm"], "Pupil": ["pupil_shape"], "Field of view": ["fov_h_deg", "binocular_deg"], "Dim light": ["tapetum", "absolute_sensitivity"], "Depth": ["depth_cue", "binocular_deg"], "Sharpest spot": ["fovea"]},
+  "deer": {"Colour": ["receptor_classes", "lambda_max_nm"], "Field of view": ["fov_h_deg", "binocular_deg"], "Pupil": ["pupil_shape"], "Sharpness, dim light and depth": ["acuity_cpd", "tapetum", "absolute_sensitivity", "depth_cue"]},
+  "dog": {"Sharpness": ["acuity_cpd"], "Sharpest spot": ["fovea"], "Colour": ["receptor_classes", "lambda_max_nm"], "Field of view, dim light and depth": ["fov_h_deg", "binocular_deg", "tapetum", "absolute_sensitivity", "depth_cue"]},
+  "frog": {"Movement": ["motion"], "Speed": ["cff_hz"], "Field of view, sharpness and pupil": ["fov_h_deg", "acuity_cpd", "pupil_shape"]},
+  "hawk": {"Sharpness": ["acuity_cpd", "interreceptor_deg"], "Speed": ["cff_hz"], "Field of view": ["fov_h_deg", "binocular_deg"]},
+  "insect": {"Sharpness": ["acuity_cpd", "interommatidial_deg"], "Speed": ["cff_hz", "corner_hz"], "Ultraviolet": ["lambda_max_nm", "spectral_range_nm"]},
+  "plant": {"No picture": ["eye_type"], "Neighbours": ["sense_light_nonvisual", "sense_chemical"], "Green and time": ["sense_light_nonvisual", "diel"]},
+  "rabbit": {"The whole view": ["receptor_classes", "lambda_max_nm", "acuity_cpd", "fov_h_deg", "binocular_deg", "pupil_shape", "tapetum"]},
+  "reptile": {"The whole view": ["receptor_classes", "lambda_max_nm", "acuity_cpd", "fov_h_deg", "pupil_shape", "fovea"]},
+  "squirrel": {"Colour": ["receptor_classes", "lambda_max_nm"], "Speed": ["cff_hz"], "Field of view and sharpness": ["fov_h_deg", "binocular_deg", "acuity_cpd", "fovea"]},
+  "wader": {"Head movement": ["eye_movement", "fov_h_deg"], "Speed": ["cff_hz"], "Sharpness": ["acuity_cpd", "interreceptor_deg"], "Ultraviolet": ["lambda_max_nm", "spectral_range_nm"], "Field of view": ["fov_h_deg", "binocular_deg"]}
+ }
+}
