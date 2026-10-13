@@ -50,3 +50,17 @@ today: alachua old 0.8941, world old 0.6662, coco 0.9538
 The port agrees with the trial's lines above to about half a point (bat 0.7967 / 0.8566 against 0.79 / 0.853, `other` 0.1133 against 0.108, Alachua −0.47 against −0.36 points); those lines came from a machine since replaced, and a fit's last digits follow the machine.
 
 Chosen on these numbers, before any test photo was read: `merge-other` is the candidate to ship for TinyCLIP, since `merge` gives a view to more than 10% of `other` on the tuning photos. `merge` is read on the test photos too, as the track's brief asks (runs `m1` and `m2`, `ci/world/runs/`).
+
+## A county bias, on tuning photos only (13 October 2026, after the test readings of `RESULTS.md`)
+
+Both TinyCLIP heads failed only, or also, the Alachua mark on the test photos. `tools/world/county.py ROOT OUT/head.npz` (the `merge-other` head of `head.py --recipe merge-other --tune-only --dump`, fitted in the sandbox) adds, where the page uses the county list, lambda times the log of each label's share among the Alachua training photos over its weighted share among the fitting photos (world 1, COCO 10, Alachua 3) to the row's bias; person, none, cat, dog and deer, whose photos come from the COCO set, keep theirs. Today's page on these photos: Alachua old kinds 0.8941, COCO 0.9538.
+
+| lambda | Alachua old kinds, t_kind 1.0, w_kind 0.7 | COCO with the list |
+|---:|---:|---:|
+| 0 | 0.8846 (−0.96 points) | 0.9567 |
+| 0.25 | 0.8917 (−0.24) | 0.9589 |
+| 0.5 | 0.8977 (+0.36) | 0.9606 |
+| 0.75 | 0.8983 (+0.42) | 0.9606 |
+| 1 | 0.8971 (+0.30) | 0.9606 |
+
+Shifting person, none, cat, dog and deer too costs COCO 0.8 to 3.9 points at lambda 0.5 to 1. The idea came after the test photos were read, so it is to be measured on Alachua photos no recipe has seen: the tuning photos here gave −0.65 points for `merge-other`, which the test photos put at −1.89. The page would need a second bias for the kinds head, used only with the list.

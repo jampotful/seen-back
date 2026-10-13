@@ -16,7 +16,7 @@ For `docs/tracks/head.md` (track A1, which lives on `main`): the merge recipe on
 
 - B/16's tuning and test photos are scored on the original model's vectors: the laboratory made no WASM vectors for it (`tools/lab/lab.py pixels` reproduces only transformers' image processors, and lab runs 43 to 45 stopped there). TinyCLIP's are the phone runtime's. B/16's county list rows were fitted by head.py as the shipped ones were (discriminant, shrinkage 0.3, chosen on the Alachua tuning photos, top-1 there 0.763).
 - B/16's COCO loss is in its vectors: a logistic head fitted on the COCO fitting photos alone gets 0.897 of the five kinds right on the COCO tuning photos (balanced; dogs 0.81), against 0.969 for TinyCLIP's vectors.
-- Settings: TinyCLIP t_kind 1.0, w_kind 0.7, kind_at 0.86 and 0.87; B/16 t_kind 2.0, w_kind 0.7, kind_at 0.99. The world photos set kind_at, so in the county the page would assert a kind for 58% to 67% of photos, against 82% today. `other`'s bias rose 2.25 (m2) and 4.0 (b2).
+- Settings: TinyCLIP t_kind 1.0, w_kind 0.7, kind_at 0.86 and 0.87; B/16 t_kind 2.0, w_kind 0.7, kind_at 0.99. The world photos set kind_at, so in the county the page would assert a kind for 59% to 67% of photos, against 82% today. `other`'s bias rose 2.25 (m2) and 4.0 (b2).
 - On the tuning photos TinyCLIP's Alachua difference was −0.47 (m1) and −0.65 (m2) points; on the test photos −1.63 and −1.89.
 
 Speed (`tools/world/speed.mjs`, `runs/worldspeed/1`): headless Chromium 141, onnxruntime-web 1.30.0 (`vendor/ort`) in a worker, the laboratory's int8-per-channel files, a cross-origin isolated page, a build machine with 4 cores (AMD EPYC 9V74); the median of 90 photos in three rounds.
@@ -27,3 +27,9 @@ Speed (`tools/world/speed.mjs`, `runs/worldspeed/1`): headless Chromium 141, onn
 | BioCLIP B/16 | 89,802,361 bytes | 587 ms | 305 ms |
 
 The page runs one thread, since four need cross-origin isolation, which the static host does not give.
+
+TinyCLIP's original-model vectors give nearly the same tuning numbers as its WASM vectors (`--recipe merge-other --vectors torch --tune-only`: world old kinds 0.691 against 0.6855, Alachua 0.8846 against 0.8846, `other` 0.0898 against 0.0890), so B/16's figures on original-model vectors are probably close to what its phone runtime would give, if its int8 file loses as little.
+
+## What the results say
+
+No head passes every mark, so nothing was prepared on `agent/head-ship`. B/16 finds four times as many groups and gains on creatures everywhere, but loses about 10 points on people, pets and empty rooms, a loss that sits in its vectors, and takes twice as long a photo. TinyCLIP `merge-other` fails only the county's old kinds (−1.89, interval to −2.51). A county bias (`EXPERIMENTS.md`, the last section) wins back about 1.3 points on the tuning photos at no cost to COCO; it wants a second kinds bias in the page, used with the list, and Alachua photos that no recipe has yet been read on.
