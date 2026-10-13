@@ -1,0 +1,416 @@
+{
+ "key": "jumper",
+ "model": "claude-sonnet-5-5",
+ "errors": [
+  "params.cpd: value 0.8 is not a cited record's value and does not lie between two of them (R5, R8)",
+  "gaze.sweep: value [2,1.5] is not a cited record's value and does not lie between two of them (R129, R134)",
+  "gaze.twist: value [25,2000,3500] is not a cited record's value and does not lie between two of them (R142)",
+  "matrices.SALTICID_UV_GREEN: graded g with no claim"
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "version": 1,
+   "chip": "Jumping spider",
+   "who": "a jumping spider",
+   "cue": "Look straight ahead. A small patch in the middle is sharp and coloured. Everything around it is soft, grey and wakes only when something moves.",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "falls_back_to": "spider",
+   "modules": [],
+   "params": {
+    "fov": {
+     "value": 360,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R28"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "the side eyes together cover almost the whole circle"
+    },
+    "cpd": {
+     "value": 0.8,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R5",
+      "R8"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "the side eyes, which see most of the picture, sit between 0.3 and 1.3 cycles per degree"
+    },
+    "M": {
+     "value": "SALTICID_UV_GREEN",
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R54",
+      "R55"
+     ],
+     "note": "two pigments, ultraviolet near 370 nm and green near 530 nm"
+    },
+    "uvBlue": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the phone records no ultraviolet, so its blue channel stands in for it"
+    }
+   },
+   "matrices": {
+    "SALTICID_UV_GREEN": {
+     "from_pigments": [
+      370,
+      530
+     ],
+     "src": [
+      "R55",
+      "R54"
+     ],
+     "grade": "g",
+     "invented": true
+    }
+   },
+   "zones": [
+    {
+     "id": "principal",
+     "shape": "ellipse",
+     "at": [
+      0.5,
+      0.5
+     ],
+     "size": {
+      "value": [
+       0.1,
+       0.3
+      ],
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+       0.03,
+       0.6
+      ],
+      "note": "the app's size for the sharp middle patch"
+     },
+     "cpd": {
+      "value": 3.8,
+      "grade": "m",
+      "invented": false,
+      "src": [
+       "R2"
+      ],
+      "range": [
+       0.005,
+       40
+      ],
+      "note": "a typical species; Portia reaches about 12.5"
+     }
+    },
+    {
+     "id": "side",
+     "shape": "annulus",
+     "inner": {
+      "value": 0.15,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+       0.05,
+       0.5
+      ],
+      "note": "where the side eyes' ring begins"
+     },
+     "gate": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+       0,
+       1
+      ],
+      "note": "the side eyes respond to movement only"
+     },
+     "sat": {
+      "value": 0,
+      "grade": "g",
+      "invented": true,
+      "src": [
+       "R339"
+      ],
+      "range": [
+       0,
+       1.5
+      ],
+      "note": "the side eyes are described as monochromatic"
+     }
+    }
+   ],
+   "gaze": {
+    "sweep": {
+     "value": [
+      2,
+      1.5
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R134",
+      "R129"
+     ],
+     "note": "degrees and seconds of the side to side scan"
+    },
+    "twist": {
+     "value": [
+      25,
+      2000,
+      3500
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R142"
+     ],
+     "note": "degrees of turn, milliseconds to turn, milliseconds held"
+    }
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the picture is squeezed toward the spider's near full circle of sight"
+     }
+    ],
+    "spectrum": [
+     {
+      "name": "matrix",
+      "invented": true,
+      "note": "colour from the two pigments"
+     }
+    ],
+    "gaze": [
+     {
+      "name": "stamps",
+      "invented": true,
+      "note": "the sharp patch moves over the scene in short steps"
+     }
+    ],
+    "sharpness": [
+     {
+      "name": "paint",
+      "invented": true,
+      "note": "the sharp patch is painted over a soft picture"
+     }
+    ]
+   },
+   "rows": [
+    [
+     "m",
+     "Two kinds of eye",
+     "The two big front eyes see only a small patch, but they see it sharply. A typical jumping spider resolves about 3.8 cycles per degree there, and Portia reaches about 12.5, which is close to a bird.",
+     [
+      "R2",
+      "R12",
+      "R14"
+     ],
+     [
+      "zones[0].cpd"
+     ]
+    ],
+    [
+     "g",
+     "A view all the way round",
+     "Three more pairs of small eyes are spaced around the head and together cover almost the whole circle. Their picture is soft, between 0.3 and 1.3 cycles per degree.",
+     [
+      "R5",
+      "R8",
+      "R28",
+      "R37"
+     ],
+     [
+      "params.fov",
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Two colours",
+     "The front eyes carry an ultraviolet pigment near 370 nm and a green pigment near 530 nm. Colour is built from those two, so reds and greens run together and ultraviolet counts as a colour of its own.",
+     [
+      "R54",
+      "R55",
+      "R85"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Still things vanish at the sides",
+     "The side eyes behave as though completely blind to stationary objects. A light that only goes on and off draws no turn, and a target that moves does. They are also described as seeing without colour.",
+     [
+      "R369",
+      "R339"
+     ],
+     [
+      "zones[1].gate",
+      "zones[1].sat"
+     ]
+    ],
+    [
+     "m",
+     "The sharp patch keeps scanning",
+     "The retinas behind the front lenses sweep side to side across what they inspect with a period of 1 to 2 seconds. They also twist about 20 to 30 degrees each way, holding each extreme for several seconds.",
+     [
+      "R129",
+      "R134",
+      "R142"
+     ],
+     [
+      "gaze.sweep",
+      "gaze.twist"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The size and position of the sharp patch, the ring where the side eyes take over, the blue channel standing in for ultraviolet, the whole picture's sharpness drawn from a range, the grey sides and the drawing styles are the app's choices.",
+     [],
+     [
+      "params.cpd",
+      "params.M",
+      "params.uvBlue",
+      "zones[0].size",
+      "zones[1].inner",
+      "zones[1].gate",
+      "zones[1].sat",
+      "draw.field",
+      "draw.spectrum",
+      "draw.gaze",
+      "draw.sharpness"
+     ]
+    ]
+   ]
+  },
+  "claims": [
+   {
+    "path": "params.fov",
+    "records": [
+     "R28"
+    ],
+    "kind": "value",
+    "how": "R28 states the side eyes cover almost the entire 360 degrees around the animal."
+   },
+   {
+    "path": "params.cpd",
+    "records": [
+     "R5",
+     "R8"
+    ],
+    "kind": "range_middle",
+    "how": "The middle of 0.3 and 1.3 cycles per degree for the side eyes is 0.8."
+   },
+   {
+    "path": "params.M",
+    "records": [
+     "R54",
+     "R55"
+    ],
+    "kind": "calculation",
+    "how": "A two pigment matrix built from the 370 nm ultraviolet peak (R55) and the 530 nm green peak (R54); the mapping is the app's."
+   },
+   {
+    "path": "zones[0].cpd",
+    "records": [
+     "R2"
+    ],
+    "kind": "value",
+    "how": "R2 gives 3.8 cycles per degree for the principal eyes of Phidippus johnsoni."
+   },
+   {
+    "path": "zones[1].sat",
+    "records": [
+     "R339"
+    ],
+    "kind": "calculation",
+    "how": "Secondary eyes are described as monochromatic, so saturation is set to 0, which is the app's mapping."
+   },
+   {
+    "path": "gaze.sweep",
+    "records": [
+     "R134",
+     "R129"
+    ],
+    "kind": "range_middle",
+    "how": "Amplitude 2 degrees is the minimum in R134 and 1.5 seconds is the middle of the 1 to 2 second period in R129."
+   },
+   {
+    "path": "gaze.twist",
+    "records": [
+     "R142"
+    ],
+    "kind": "range_middle",
+    "how": "25 degrees is the middle of 20 to 30, 2000 ms is the stated 2 s to turn and 3500 ms is the middle of the 2 to 5 s hold."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R28",
+    "quote": "the side eyes between them cover almost the entire 3600 around the animal in the horizontal plane"
+   },
+   {
+    "record": "R5",
+    "quote": "from 0.3 cycles/degree, as in M. aeneolus [1], to 1.3 cycles/degree, as in Evarcha blancardi Scopoli, 1763 [31]"
+   },
+   {
+    "record": "R8",
+    "quote": "from 0.3 cycles/degree, as in M. aeneolus [1], to 1.3 cycles/degree, as in Evarcha blancardi Scopoli, 1763 [31]"
+   },
+   {
+    "record": "R54",
+    "quote": "one green-sensitive (tiers 1 and 2, λmax = 530 nm)"
+   },
+   {
+    "record": "R55",
+    "quote": "UV cells had peak sensitivities at 370 nm"
+   },
+   {
+    "record": "R2",
+    "quote": "visual angles of around 0.13 degrees"
+   },
+   {
+    "record": "R339",
+    "quote": "offer monochromatic vision at a slightly lower resolution"
+   },
+   {
+    "record": "R134",
+    "quote": "The amplitude of horizontal scanning does not become smaller than 2°"
+   },
+   {
+    "record": "R129",
+    "quote": "with a period of 1-2 sec."
+   },
+   {
+    "record": "R142",
+    "quote": "with the retinae rotating 20-300 clockwise"
+   }
+  ]
+ }
+}

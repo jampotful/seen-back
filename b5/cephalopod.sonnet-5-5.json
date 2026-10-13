@@ -1,0 +1,269 @@
+{
+ "key": "cephalopod",
+ "chip": "Octopus, squid or cuttlefish",
+ "who": "an octopus, squid or cuttlefish",
+ "falls_back_to": null,
+ "applies_to": {
+  "class": [
+   "Cephalopoda"
+  ]
+ },
+ "version": 1,
+ "cue": "Everything is grey and the field is very wide. The pupil is a horizontal slit, and a sharp stripe runs across the middle.",
+ "modules": [],
+ "params": {
+  "cpd": {
+   "value": 8,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Taniguchi 2015"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "one figure for the whole group, set inside the measured 6.6 to 12.2"
+  },
+  "fov": {
+   "value": 291,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Watanuki 2000"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the middle of a cuttlefish eye field and a young squid field"
+  },
+  "pupil": {
+   "value": "h",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Hanke 2020"
+   ],
+   "note": "the slit is recorded in octopus; the same shape is used for squid and cuttlefish"
+  },
+  "M": {
+   "value": "cephalopod_one_pigment",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Chung 2016"
+   ]
+  },
+  "sheen": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "no reflective layer has been found, so the app draws none"
+  },
+  "topoA": {
+   "value": 0.2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "little change along the stripe"
+  },
+  "topoS": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "sharpness falls away above and below the stripe"
+  }
+ },
+ "matrices": {
+  "cephalopod_one_pigment": {
+   "from_pigments": [
+    485
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Chung 2016"
+   ],
+   "note": "one pigment gives one brightness signal and no hue",
+   "rows": [
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ],
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ],
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ]
+   ],
+   "q": [
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the wide field is squeezed toward the camera view"
+   }
+  ]
+ },
+ "zones": [],
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "An octopus resolves about 12 cycles per degree in one test and a squid about 6.6. A cuttlefish is put at about 8. A person manages about 30, so the screen is blurred to 8 cycles per degree.",
+   [
+    "cephalopods.jsonl:Taniguchi 2015",
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "Octopus, squid and cuttlefish carry one visual pigment, and tests find no colour vision. Octopus pigments peak between 475 and 487 nanometres. The picture keeps brightness weighted toward blue-green light and loses hue.",
+   [
+    "cephalopods.jsonl:Chung 2014",
+    "cephalopods.jsonl:Chung 2016",
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Nahmad–Rohen 2020"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Field",
+   "A cuttlefish eye covers 253 degrees on the horizontal plane, and a growing oval squid covers 295 to 329 degrees. A cuttlefish can overlap its two eyes in front by 86 degrees. The picture uses 291 degrees, the middle of 253 and 329.",
+   [
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Watanuki 2000"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Pupil",
+   "An octopus pupil is round in darkness and narrows to a horizontal slit in bright light.",
+   [
+    "cephalopods.jsonl:Hanke 2020"
+   ],
+   [
+    "params.pupil"
+   ]
+  ],
+  [
+   "m",
+   "Sharp stripe",
+   "An octopus retina packs about 55,000 cells per square millimetre into a central horizontal stripe, against 18,000 to 22,000 at the edges. Cuttlefish and squid also have a streak or a centred area.",
+   [
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Talbot 2011",
+    "cephalopods.jsonl:Watanuki 2000"
+   ],
+   []
+  ],
+  [
+   "g",
+   "No eyeshine",
+   "No reflective layer behind the retina has been found in any squid studied, and none in any cephalopod to date. The picture carries no sheen.",
+   [
+    "cephalopods.jsonl:Chung 2017",
+    "cephalopods.jsonl:Vee 2022"
+   ],
+   []
+  ],
+  [
+   "x",
+   "Polarized light",
+   "Octopuses tell vertical from horizontal polarized light, and two species respond to differences of about 1.3 degrees in its angle. The picture leaves it out for now.",
+   [
+    "cephalopods.jsonl:Rowell 1961",
+    "cephalopods.jsonl:Temple 2021"
+   ],
+   []
+  ],
+  [
+   "i",
+   "How it is drawn",
+   "The one figure of 8 cycles per degree for the whole group, the 291 degree field, the horizontal slit for every animal, the one-pigment colour mapping, the absence of sheen and the weights of the sharp stripe are the app's own settings. Squid and cuttlefish pupils are not described in the records, so the octopus slit stands for them.",
+   [],
+   [
+    "params.cpd",
+    "params.fov",
+    "params.pupil",
+    "params.M",
+    "params.sheen",
+    "params.topoA",
+    "params.topoS"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "matrices.cephalopod_one_pigment"
+   ]
+  ]
+ ],
+ "draft": true
+}

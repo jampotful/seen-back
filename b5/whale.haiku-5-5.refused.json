@@ -1,0 +1,246 @@
+{
+ "key": "whale",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Mostly light and dark' says m and every parameter it describes is graded i"
+ ],
+ "reply": {
+  "spec": {
+   "key": "whale",
+   "chip": "Whale, dolphin or seal",
+   "who": "a whale, dolphin or seal",
+   "version": 1,
+   "applies_to": {
+    "order": [
+     "Cetacea",
+     "Carnivora:Pinnipedia",
+     "Sirenia"
+    ]
+   },
+   "cue": "A rod-only eye that sees mostly light and dark, with a blue-green tint and a faint glow from a reflecting layer.",
+   "falls_back_to": "mammal",
+   "modules": [],
+   "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "params": {
+    "M": "whale_rod",
+    "cpd": {
+     "value": 3.3,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R2",
+      "R4",
+      "R10"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "a middle value between the cited records for toothed and baleen whales and porpoises"
+    },
+    "pupil": "o",
+    "gate": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "how far still things fade; the records give no figure"
+    },
+    "sat": {
+     "value": 0.35,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "a guess; the records describe cones or rods only"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "no green channel removal chosen"
+    },
+    "gain": {
+     "value": 1.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "a guess; a reflecting layer is recorded but no dim-light ratio is given"
+    },
+    "sheen": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "strength of the reflecting layer on the phone; the records describe the layer but not its strength"
+    },
+    "fov": {
+     "value": 130,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R19"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "panoramic field of view, the upper end of the dolphin range"
+    },
+    "fovea": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no record gives a sharp centre; kept at a person's value"
+    }
+   },
+   "matrices": {
+    "whale_rod": {
+     "from_pigments": [
+      497,
+      488
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [
+      "R31",
+      "R28"
+     ],
+     "note": "rod pigment peaks in whales and dolphins, used to set the tint"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Mostly light and dark",
+     "Whales, dolphins and seals have only one kind of cone or none, so they see little colour. Most of their seeing is done by rod cells, which give a picture of light and dark. A blue-green tint is the closest a phone can show.",
+     [
+      "R45",
+      "R46",
+      "R186",
+      "R39",
+      "R31",
+      "R28"
+     ],
+     [
+      "params.sat"
+     ]
+    ],
+    [
+     "m",
+     "Sharpness",
+     "A humpback whale resolves about 3.3 cycles per degree and a Bryde's whale about 4.8. Toothed whales and harbour seals reach about 2.6 to 11.5. We blur the picture to about 3.3, which is a tenth of your sharpness or less.",
+     [
+      "R3",
+      "R4",
+      "R2",
+      "R5",
+      "R10"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "A wide view",
+     "Dolphins see a panoramic field of 120 to 130 degrees, and the two eyes overlap only 20 to 30 degrees. We widen the picture to 130 degrees.",
+     [
+      "R19",
+      "R21"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "i",
+     "Choices the app makes",
+     "The colour tint, the gate that fades still things, the gain, the glow of the reflecting layer and the saturation are the app's own choices, since the records give no figures for them. A reflecting layer is recorded in several cetaceans, so the app draws a sheen with its strength chosen by the app.",
+     [
+      "R241",
+      "R242",
+      "R254",
+      "param:gate",
+      "param:gain",
+      "param:sheen",
+      "param:sat",
+      "param:M"
+     ],
+     [
+      "params.gate",
+      "params.gain",
+      "params.sheen",
+      "params.sat",
+      "params.M"
+     ]
+    ]
+   ],
+   "zones": [],
+   "by": {}
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R2",
+     "R4",
+     "R10"
+    ],
+    "kind": "range_middle",
+    "how": "The value 3.3 sits between the cited acuity records for toothed whales and porpoises (2.6 to 3.3) and the humpback whale (3.3), so it is a middle value of those records."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R19"
+    ],
+    "kind": "value",
+    "how": "The value 130 is the upper end of the 120 to 130 degree panoramic field given for dolphins."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R2",
+    "quote": "the retinal resolving power was 2.6-3.3 cycles per degree"
+   },
+   {
+    "record": "R4",
+    "quote": "we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively"
+   },
+   {
+    "record": "R10",
+    "quote": "The resolving power in the right eyes of two individuals was 2.60 and 2.64 cycles per degree."
+   },
+   {
+    "record": "R19",
+    "quote": "allowing a panoramic vision with a 120–130◦ visual field"
+   }
+  ]
+ }
+}

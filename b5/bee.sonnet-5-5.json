@@ -1,0 +1,216 @@
+{
+ "key": "bee",
+ "version": 1,
+ "chip": "Bee",
+ "who": "a bee",
+ "cue": "The view is wide and coarse, the colours are shifted so that ultraviolet shows, and time runs a little slow.",
+ "applies_to": {
+  "family": [
+   "Apidae",
+   "Halictidae",
+   "Megachilidae",
+   "Andrenidae",
+   "Colletidae"
+  ]
+ },
+ "falls_back_to": "insect",
+ "params": {
+  "fov": {
+   "value": 300,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "bees-wasps.jsonl:Paffhausen 2021"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the two compound eyes together cover about 300 degrees"
+  },
+  "cpd": {
+   "value": 0.26,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "bee.jsonl:Land 1997"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "honeybee grating limit in bright light"
+  },
+  "pupil": "none",
+  "M": {
+   "value": "BEE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Lunau 2025",
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   "note": "three receptor peaks shifted onto screen colours"
+  },
+  "rate": {
+   "value": 0.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0.25,
+    2
+   ],
+   "note": "a slowed playback that hints at fast flicker vision"
+  }
+ },
+ "matrices": {
+  "BEE": {
+   "from_pigments": [
+    346,
+    430,
+    540
+   ],
+   "src": [
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   "rows": [
+    [
+     0.22664,
+     0.50311,
+     0.19444,
+     0.07581
+    ],
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ],
+    [
+     0.0,
+     0.0001,
+     0.01023,
+     0.98967
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.0001,
+     0.01023,
+     0.98967
+    ],
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ],
+    [
+     0.22664,
+     0.50311,
+     0.19444,
+     0.07581
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the wide field is squeezed onto the screen"
+   }
+  ],
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "the three receptor peaks are mapped onto screen colours"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "A bee resolves about a quarter of a cycle per degree, so it sees roughly a hundredth to a two-hundredth as much fine detail as a person. Each eye is built from about 5,400 lens facets, and the picture looks coarse and soft.",
+   [
+    "bee.jsonl:Hecht 1929",
+    "bee.jsonl:Kelber 2019",
+    "bee.jsonl:Land 1997"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "Colour",
+   "A bee has three kinds of colour receptor, tuned near 346, 430 and 540 nanometres, which are ultraviolet, blue and green. Red light is out of reach. This view shifts those three onto the screen's blue, green and red so that ultraviolet shows up as a colour a person can see.",
+   [
+    "bee.jsonl:German Aerospace Center (DLR) and Bee Sensory and Behavioural Ecology Lab 2026",
+    "bee.jsonl:Lunau 2025",
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "g",
+   "Wide view",
+   "Together the two compound eyes cover about 300 degrees around the head. Only a small blind patch lies below and behind the bee.",
+   [
+    "bee.jsonl:Kelber 2019",
+    "bee.jsonl:Taylor 2019",
+    "bees-wasps.jsonl:Paffhausen 2021"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "i",
+   "Flicker",
+   "Bees can follow a flicker of about 100 to 200 times a second, which gives them more moments to look at each movement. This view plays time at 0.4 of normal speed as a hint of that. The figure is the app's own choice.",
+   [
+    "bee.jsonl:Inger 2014",
+    "bee.jsonl:Srinivasan 1984",
+    "bees-wasps.jsonl:Ibarra 2014"
+   ],
+   [
+    "params.rate"
+   ]
+  ],
+  [
+   "g",
+   "Flowers in ultraviolet",
+   "About a third of the flower species in one survey carry ultraviolet patterns, and a common one is a dark centre in a reflecting flower. Most of the others absorb ultraviolet all over.",
+   [
+    "bee.jsonl:Lunau 2025",
+    "bee.jsonl:Tunes 2021"
+   ],
+   []
+  ],
+  [
+   "i",
+   "Drawing choices",
+   "The app chose to squeeze the wide field onto the screen and to map the three receptor peaks onto screen colours. Neither choice comes from a measurement.",
+   [],
+   [
+    "draw"
+   ]
+  ]
+ ],
+ "modules": [],
+ "draft": true
+}

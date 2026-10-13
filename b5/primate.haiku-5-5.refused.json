@@ -1,0 +1,240 @@
+{
+ "key": "primate",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Movement' says m and every parameter it describes is graded i",
+  "matrices.primate_trichro: peak 561 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it",
+  "matrices.primate_trichro: peak 539 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it",
+  "matrices.primate_trichro: peak 430 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it"
+ ],
+ "reply": {
+  "spec": {
+   "key": "primate",
+   "who": "a monkey or ape",
+   "chip": "Monkey or ape",
+   "cue": "Three kinds of colour sensor in many species, a sharp middle, and a view that is less sharp at the edge.",
+   "applies_to": {
+    "order": [
+     "Primates"
+    ],
+    "not_family": [
+     "Hominidae:Homo"
+    ]
+   },
+   "falls_back_to": "mammal",
+   "modules": [],
+   "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "version": 1,
+   "draft": true,
+   "params": {
+    "M": "primate_trichro",
+    "cpd": {
+     "value": 10,
+     "grade": "m",
+     "invented": true,
+     "src": [
+      "R3",
+      "R4",
+      "R7"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "a rounded pick inside the measured span for the group"
+    },
+    "pupil": "o",
+    "fovea": {
+     "value": 2.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.5,
+      4
+     ],
+     "note": "the app's choice of a sharp middle; records describe a fovea but give no size of sharp centre"
+    },
+    "fov": {
+     "value": 180,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      100,
+      360
+     ],
+     "note": "no whole-field measure was found for these animals; the value is a person's"
+    },
+    "gain": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no dim-light measure was found for these animals"
+    },
+    "sat": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "the app's choice"
+    },
+    "topoA": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "by analogy with the house cat; the records describe a fovea but not its falloff"
+    },
+    "topoS": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "the app's choice"
+    }
+   },
+   "matrices": {
+    "primate_trichro": {
+     "from_pigments": [
+      561,
+      539,
+      430
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "peak wavelengths 561 nm (marmoset red), 539 nm (owl monkey green) and 430 nm (cynomolgus blue) from the cited records; the mapping of the three pigments to a colour matrix is the app's"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Colour",
+     "Many monkeys and apes have three kinds of colour sensor, with peaks near 430, 539 and 561 nanometres. Some New World monkeys have only two, and the owl monkey has one, so it sees no colour. We show colours the way a person with three kinds of sensor would see them.",
+     [
+      "R23",
+      "R24",
+      "R31",
+      "R40",
+      "R43",
+      "R137",
+      "R146"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Sharpness",
+     "A marmoset's fovea is estimated to resolve about 30 cycles per degree, and a rhesus monkey reached 26.3 cycles per degree on a test. Most monkeys and apes are sharper than a person at the centre. We blur the picture to about 10, which is the middle of the measured figures.",
+     [
+      "R2",
+      "R4",
+      "R7",
+      "R16",
+      "param:cpd"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Movement",
+     "Monkeys show direction selectivity in most of the cells of area MT, and 86% of marmoset MT cells respond to the direction of motion. Movement is a strong part of what they see, so the view stresses it.",
+     [
+      "R152",
+      "R160"
+     ],
+     [
+      "params.fovea"
+     ]
+    ],
+    [
+     "i",
+     "The app's choices",
+     "The width of the sharp middle, the field of view, the gain and the blur at the edge are the app's own picks. No record gives them for these animals, so they are guesses that a person can change in the tuning panel.",
+     [
+      "param:fovea",
+      "param:fov",
+      "param:gain",
+      "param:topoA",
+      "param:topoS"
+     ],
+     [
+      "params.fovea",
+      "params.fov",
+      "params.gain",
+      "params.topoA",
+      "params.topoS"
+     ]
+    ],
+    [
+     "g",
+     "Nocturnal species",
+     "Owl monkeys and bushbabies are active at night, and their retinas are built for dim light. Most other monkeys and apes are day-active.",
+     [
+      "R182",
+      "R183",
+      "R188",
+      "R192"
+     ],
+     []
+    ]
+   ],
+   "zones": []
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R4",
+     "R7"
+    ],
+    "kind": "range_middle",
+    "how": "The value 10 lies between the marmoset's 30 cycles per degree estimate and the rhesus monkey's 26.3 cycles per degree test ceiling, but is set lower by the app as a rounded pick."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R4",
+    "quote": "The spatial resolution of the photoreceptor mosaic in the marmoset is therefore estimated to be close to 30 cycles/degree"
+   },
+   {
+    "record": "R7",
+    "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+   },
+   {
+    "record": "R152",
+    "quote": "the majority of neurons (80–90%) show clear direction selectivity"
+   },
+   {
+    "record": "R160",
+    "quote": "Analysis of single units revealed that 86% of cells in area MT show a strong selectivity for the direction of motion of visual stimuli."
+   }
+  ]
+ }
+}
