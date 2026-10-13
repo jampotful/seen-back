@@ -121,9 +121,15 @@
   // ---------- views being tried (build 23): reached only with ?try=<key> (several with ?try=a,b), offered nowhere else yet
   // An entry here becomes a view in EYES for that visit only, so a photo or a typed name in its group then opens it too. The fields
   // added for these views (zones, salience, gaze, glow, senses) are described in docs/ENGINE.md with the evidence each one serves.
-  var SIDE_GREEN = [.063, .336, .021, .117, .624, .039, .069, .368, .023];   // INVENTED: one green receptor's answer (.15 R + .8 G + .05 B), drawn as a dim green
-  var UV_GREEN = [.16, .62, .02, .2, .78, .02, 0, 0, 0];                     // INVENTED: a green receptor drawn yellow-green; blue is replaced by the guessed ultraviolet
-  var UV_GREEN_RED = [1, 0, 0, .2, .78, .02, 0, 0, 0];                       // INVENTED: the same with the red-filtered class kept as red
+  // A jumping spider's receptors from linear camera RGB, as fitted on open spectra in research/methods (draft section 2.4, its author's own
+  // computation, to be refitted on a larger library before shipping): the green class (531 nm in Habronattus, near the 526 to 540 of other
+  // genera) and Habronattus's red-filtered class (628 nm), each divided by its sum so that white stays white. Ultraviolet cannot be estimated
+  // from a phone picture (same section), so the engine's guess stands in for it, and is invented.
+  var SALT_G = [.017 / .982, .732 / .982, .233 / .982], SALT_L = [.554 / .989, .171 / .989, .264 / .989];
+  function tinted(c, r) { return [c[0] * r[0], c[0] * r[1], c[0] * r[2], c[1] * r[0], c[1] * r[1], c[1] * r[2], c[2] * r[0], c[2] * r[1], c[2] * r[2]]; }
+  var SIDE_GREEN = tinted([.42, .78, .46], SALT_G);                          // the side eyes' one green class, as a dim green (the tint is invented)
+  var UV_GREEN = tinted([.5, 1, 0], SALT_G);                                 // green as green and ultraviolet as blue, with red their mean (uvR .5): the convention of Vasas and colleagues 2024 for two classes, as research/methods gives it
+  var UV_GREEN_RED = SALT_L.concat(SALT_G, [0, 0, 0]);                       // the red-filtered class as red, green as green, ultraviolet as blue
   var TRY = {
     // Jumping spiders (family Salticidae), from docs/views/drafts/jumper.md and its log, docs/views/evidence/jumper.jsonl, on research/jumper.
     // The surround is the side eyes: the rear pair (PLE) at 0.5 cycles a degree, the front pair (ALE) at 1.1, both green only (Land 1969;
@@ -138,14 +144,14 @@
         // the principal retinae: each a strip about 2 degrees wide and 21 high, bent 30 degrees at its centre; the upper arms 40 to 45
         // degrees apart, the lower 15 to 20, the inner edges 1 to 2 degrees apart (Land 1969); the arms see less sharply toward their ends
         // (Williams and McIntyre 1980). Drawn 2.5 degrees wide (invented, for the screen) and magnified a little (invented).
-        { id: 'gaze', shape: 'cross', deg: [2.5, 21], tilt: [21, 8.5], gap: .75, tip: .45, soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.25, gaze: 1 },
+        { id: 'gaze', shape: 'cross', deg: [2.5, 21], tilt: [21, 8.5], gap: .75, tip: .45, soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, uvR: .5, glow: 0, living: 0, mag: 1.25, gaze: 1 },
         // the centre of each principal retina, where Habronattus has its red-filtered receptors (Zurek and colleagues 2015); dichromatic elsewhere
-        { id: 'fovea', shape: 'ellipse', deg: [5, 4], soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.25, gaze: 1 }],
+        { id: 'fovea', shape: 'ellipse', deg: [5, 4], soft: .01, cpd: 3.6, M: UV_GREEN, uv: 1, uvR: .5, glow: 0, living: 0, mag: 1.25, gaze: 1 }],
       gaze: { saccade: [40, 4], sweep: [2, 1.2], twist: [25, 2000, 3500], examine: [4000, 12000], hold: 1500, back: .8, pursuit: 10,
         ior: 5000, iorDeg: 6, habit: .75, surround: .6, any: .6, living: 1.8, distract: 1.5, wander: [8000, 20000], floor: .06, trackDeg: 9,
         sleep: { after: 3500, bout: [6000, 12000], gap: [20000, 40000] } },
       byGenus: {
-        Habronattus: { zones: { fovea: { M: UV_GREEN_RED } } },
+        Habronattus: { zones: { fovea: { M: UV_GREEN_RED, uvR: 0 } } },
         Portia: { zones: { gaze: { cpd: 12.5, deg: [1.5, 21] }, fovea: { cpd: 12.5 } } } },   // Portia fimbriata: 12.4 cycles a degree (Williams and McIntyre 1980)
       rows: [
         ['m', 'Eight eyes, one picture', 'Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely. This view draws all eight as one picture.'],
@@ -158,9 +164,52 @@
         ['m', 'Sleep', 'At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. When the phone lies still in the dark, this view twitches its cross in bouts, closer together than a spider’s.'],
         ['i', 'How the picture is drawn', 'No one knows how a jumping spider joins what its eyes report. Drawing the front eyes’ cross inside the side eyes’ surround, as one picture, is the app’s own choice.'],
         ['i', 'Living movement', 'This view treats movement that holds together over a small patch and swings back and forth, as walking legs do, as the movement of something alive. That test is the app’s own approximation.'],
-        ['i', 'Ultraviolet', 'Phone cameras record very little ultraviolet light. Inside the cross, a blue guessed from bluish and bright surfaces stands in for it.'],
+        ['i', 'How the colours are shown', 'A phone camera records almost no ultraviolet light, so the ultraviolet in this view is a guess made from bluish and bright surfaces. Inside the cross the spider’s green shows as green and the guessed ultraviolet as blue, with red for their mix.'],
         ['x', 'Hearing', 'A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out.']] }
   };
+  // Prototypes of effects the research drafts propose (docs/ENGINE.md, "Prototypes"). Their rows come from the drafts named, with a row of
+  // grade i for each drawing of the app's own; the research threads write the final rows.
+  // Sea fish, from docs/views/drafts/fish-shark.md (research/fish-shark), section 3: two eyes that each look their own way.
+  TRY.reef = { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, pupil: 'o', M: [.35, 0, 0, 0, 1, 0, 0, 0, 1], sheen: .6, rate: .86,
+    salience: 1, glow: .3, living: .5, glowC: [.55, .85, 1], water: [1.5, .45, .25, 1], waterC: [.03, .2, .26],
+    cue: 'Reds fade to grey, the water is blue, and each eye looks its own way.',
+    zones: [{ id: 'left', shape: 'ellipse', deg: [9, 9], soft: .025, cpd: 4, gaze: 1 }, { id: 'right', shape: 'ellipse', deg: [9, 9], soft: .025, cpd: 4, gaze: 2 }],
+    gaze: [{ region: [0, .5], saccade: [40, 3], sweep: [0, 1], twist: [0, 1, 1], examine: [1200, 3500], hold: 600, back: 3, pursuit: 20, ior: 2500, iorDeg: 8, wander: [2000, 6000], floor: .05, distract: 1.2 },
+      { region: [.5, 1], saccade: [40, 3], sweep: [0, 1], twist: [0, 1, 1], examine: [1200, 3500], hold: 600, back: 3, pursuit: 20, ior: 2500, iorDeg: 8, wander: [2000, 6000], floor: .05, distract: 1.2 }],
+    rows: [
+      ['m', 'Colour', 'Damselfish, the family of the clownfish, have four kinds of colour-sensing cells, one of them for ultraviolet light, and many wear ultraviolet patterns that they show one another. A triggerfish has three kinds, tuned to violet, blue and green. Neither has a cell tuned to red, so this view darkens reds and adds an invented violet sheen for ultraviolet.'],
+      ['g', 'Red light fades', 'Sea water swallows red light within the first 10 to 20 metres, so deeper down a red fish looks dark grey and a reef turns blue-green. This view tints the picture blue-green and fades reds with distance.'],
+      ['m', 'Sharpness', 'Small reef fish see coarsely. An Ambon damselfish and a dottyback resolved about a fortieth as much detail as you do, though the cells in their eyes are packed tightly enough for about three times more. This view blurs the picture to match.'],
+      ['m', 'Eyes that move apart', 'Wrasses, blennies, pufferfish, triggerfish and seahorses can turn each eye on its own, and each eye has a small sharp centre, called a fovea. One eye can follow a passing fish while the other searches the reef. This view gives each half of the screen its own sharp spot, and the two wander separately.'],
+      ['m', 'Pace', 'A squirrelfish, a reef fish that hunts at night, follows a flickering light up to 70 flashes a second in bright light, faster than you can, and only about 40 at night. This view runs slightly slow in daylight and then jumps ahead to catch up.'],
+      ['i', 'How the eyes are drawn', 'How fast each eye jumps and how long it stays are the app’s own choices. That the two eyes move independently is measured.'],
+      ['i', 'Distance', 'A phone camera can’t measure distance, so this view takes things higher in the picture to be farther away when it fades their reds.'],
+      ['x', 'Moving water', 'Rows of sensors along a fish’s head and body, called the lateral line, feel the flow and pressure of moving water within one or two body lengths. The picture leaves this sense out.']] };
+  // Sharks, from the same draft, section 4: grey, a band of sharpness, trails, the head's sweep, and an invented glow for the electric sense up close.
+  TRY.shark = { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, pupil: 'o', M: [0, 1, 0, 0, 1, 0, 0, 1, 0], gain: 1.3, persist: .04,
+    salience: 1, glow: 0, living: 0, glowC: [.5, .85, 1], shimmer: .6, sweep: [15, 4.5],
+    cue: 'There is no colour, only light and dark, and movement leaves trails.',
+    zones: [{ id: 'near', shape: 'band', at: [.5, .17], frac: [.5, .17], soft: .06, glow: .9, living: 2.4 }],
+    rows: [
+      ['m', 'Colour', 'Every shark studied so far has only one kind of colour-sensing cell, so sharks are probably colour blind. They can tell apart shades of brightness that differ by less than 2 percent. This view shows the world in shades of grey.'],
+      ['m', 'Sharpness', 'Sharks see between a twentieth and a sixth as much detail as you do. Fast hunters of open water, like the bigeye thresher, are at the sharp end, and bottom-dwelling night hunters, like the Port Jackson shark, are at the coarse end. This view uses the middle of that range.'],
+      ['m', 'Sharpest band', 'Many sharks, such as the lemon shark, see most sharply along a band level with the horizon, which lets them scan the sea floor or the open water without moving their eyes. This view sharpens a band along the horizon.'],
+      ['m', 'Pace', 'Sharks follow a flickering light up to 16 to 31 flashes a second, a quarter to a half of your rate, so quick movement smears for them. This view leaves trails behind anything that moves.'],
+      ['m', 'Two eyes', 'A shark’s eyes sit on the sides of its head, and in a lemon shark the two fields overlap by only about 10 degrees in front. Hammerheads swing their heads from side to side as they swim. This view sweeps slowly from side to side, at a pace the app has chosen, and holds still while you turn the phone.'],
+      ['m', 'Electric sense', 'Sharks feel the faint electric fields around living animals through gel-filled pores on the snout, called the ampullae of Lorenzini. A young hammerhead turns toward a prey-like field from about 30 centimetres away.'],
+      ['i', 'The glow', 'No phone can sense an electric field. In the lower part of this view, where things are taken to be close, living movement shimmers to stand in for one, and that glow is the app’s own invention.'],
+      ['x', 'Smell first', 'A hunting shark usually smells its prey first and follows the scent upstream, then turns to sight, the lateral line, the electric sense and touch as it closes in. The picture leaves smell out.']] };
+  // Web-building spiders, from docs/views/sheets/spider.md (sections 2 and 3), with its proposed stand-ins for the web's shaking and for hearing through silk.
+  TRY.spider = { chip: 'Spider', who: 'a spider', fov: 300, cpd: .5, pupil: 'o', gate: 1, persist: .15, ripple: 1, senses: { motion: 1, jolt: 1, mic: [60, 400] },
+    cue: 'Hold still, as a spider holds its web. Only what moves reaches you.',
+    rows: [
+      ['m', 'The web', 'A Golden Silk Spider feels its prey through the silk, and a trapped insect shakes the web 5 to 30 times a second. The shaking arrives ten to thirty times stronger on some legs than on others, which gives the direction.'],
+      ['g', 'Eyes', 'Most spiders have eight eyes and few see well. Most register little more than changes between light and dark, and spiders that build webs lean on the shaking of the silk.'],
+      ['g', 'Sharpness', 'A wandering spider resolves nothing finer than about 2 degrees, under a hundredth of your sharpness. The picture borrows that figure for web builders.'],
+      ['g', 'Pace', 'A wandering spider stops following flicker between 4.3 and 8.6 times a second, a seventh of your rate or less, so movement smears into trails.'],
+      ['i', 'Knocks and low sounds', 'Where the phone’s motion sensors or its microphone are switched on, a knock on the phone or on the table it lies on, or a low sound, sends ripples across the picture. They stand in for a shaking web, and the ripples are the app’s own drawing.'],
+      ['x', 'Hearing through silk', 'A bridge spider turns toward a loudspeaker three metres away, because its web moves with the air and works as a listening surface up to 10,000 times larger than its body.'],
+      ['x', 'Wolf spiders', 'Wolf spiders have four large rear eyes backed by a mirror layer, which shines back in a flashlight beam and helps them spot movement in dim light. This picture leaves that out.']] };
   var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
   if (/[?&]selftest=1(?:&|$)/.test(location.search || '') && !TRY_KEYS.length) TRY_KEYS = Object.keys(TRY);   // the self-test draws them all
   TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; });
@@ -177,15 +226,15 @@
     var at = z.at || [.5, .5], size = z.deg ? [z.deg[0] / 2 / CAM_DEG, z.deg[1] / 2 / CAM_DEG] : z.size || [.5, .5];
     var tilt = z.tilt || [0, 0];
     return { id: z.id || '', shape: SHAPES[z.shape] || 0, cx: at[0], cy: at[1], hw: size[0], hh: size[1], inner: z.inner || 0, soft: z.soft === undefined ? .04 : z.soft,
-      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? 1 : 0, tiltU: tilt[0] * Math.PI / 180, tiltD: tilt[1] * Math.PI / 180, gap: (z.gap || 0) / CAM_DEG, tip: z.tip === undefined ? 1 : z.tip,
+      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? +z.gaze || 1 : 0, frac: z.frac || null, tiltU: tilt[0] * Math.PI / 180, tiltD: tilt[1] * Math.PI / 180, gap: (z.gap || 0) / CAM_DEG, tip: z.tip === undefined ? 1 : z.tip,
       inv: z.cpd ? 1 / z.cpd : P.inv, M: z.M || P.M, sat: z.sat === undefined ? P.sat : z.sat, gain: z.gain || P.gain, gate: z.gate === undefined ? P.gate : z.gate,
       rate: z.rate || P.rate, glow: z.glow === undefined ? P.glow : z.glow, living: z.living === undefined ? P.living : z.living,
-      uv: z.uv === undefined ? P.uvBlue : z.uv, sheen: z.sheen === undefined ? P.sheen : z.sheen, mag: z.mag || 1 };
+      uv: z.uv === undefined ? P.uvBlue : z.uv, uvR: z.uvR === undefined ? P.uvR : z.uvR, sheen: z.sheen === undefined ? P.sheen : z.sheen, mag: z.mag || 1 };
   }
-  var ZNUM = ['inv', 'sat', 'gain', 'gate', 'glow', 'living', 'uv', 'sheen', 'mag'];
+  var ZNUM = ['inv', 'sat', 'gain', 'gate', 'glow', 'living', 'uv', 'uvR', 'sheen', 'mag'];
   function neutralZone(z, P) {                     // the same place and shape, drawn as the other view would draw it there
     var o = {}, k; for (k in z) o[k] = z[k];
-    o.inv = P.inv; o.M = P.M; o.sat = P.sat; o.gain = P.gain; o.gate = P.gate; o.rate = P.rate; o.glow = P.glow; o.living = P.living; o.uv = P.uvBlue; o.sheen = P.sheen; o.mag = 1;
+    o.inv = P.inv; o.M = P.M; o.sat = P.sat; o.gain = P.gain; o.gate = P.gate; o.rate = P.rate; o.glow = P.glow; o.living = P.living; o.uv = P.uvBlue; o.uvR = P.uvR; o.sheen = P.sheen; o.mag = 1;
     return o;
   }
   function withGenus(m, named) {                  // a view's settings for one genus, where the view lists any (byGenus)
@@ -204,10 +253,11 @@
       dof: m.dof || 0, ax: m.pupil === 'v' ? .3 : 1, ay: m.pupil === 'h' ? .3 : 1, M: m.M || I3, uvBlue: m.uvBlue || 0, sheen: m.sheen || 0,
       gain: m.gain || 1, sat: m.sat === undefined ? 1 : m.sat, noGreen: m.noGreen || 0, gate: m.gate || 0, field: m.field || 0,
       persist: m.persist || 0, hold: m.hold || 0, thrust: m.thrust || 0, rate: m.rate || 1,
-      glow: m.glow || 0, living: m.living || 0, sal: m.salience ? 1 : 0, ripple: m.ripple || 0 };
+      glow: m.glow || 0, living: m.living || 0, uvR: m.uvR || 0, sal: m.salience ? 1 : 0, ripple: m.ripple || 0, shimmer: m.shimmer || 0,
+      pan: m.sweep ? m.sweep[0] : 0, panS: m.sweep ? m.sweep[1] : 1 };
     P.glowC = m.glowC || [1, 1, 1];
     P.zones = m.zones ? m.zones.slice(0, 4).map(function (z) { return zoneOf(z, P); }) : null;
-    P.gz = m.gaze || null; P.senses = m.senses || null;
+    P.gz = m.gaze || null; P.senses = m.senses || null; P.water = m.water || null; P.waterC = m.waterC || null;
     return P;
   }
   var HUMAN = paramsOf(null);
@@ -230,7 +280,8 @@
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
     var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
-    o.glowC = z.glowC; o.gz = z.gz; o.senses = z.senses;
+    o.glowC = z.glowC; o.gz = z.gz; o.senses = z.senses; o.waterC = (b.water ? b : a).waterC;
+    o.water = a.water || b.water ? [0, 1, 2, 3].map(function (i) { return lerp(a.water ? a.water[i] : 0, b.water ? b.water[i] : 0, t); }) : null;
     o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;
     return o;
   }
@@ -333,11 +384,13 @@
     '#if ZONES', ZONE_GLSL,
     'uniform vec4 u_zP[4];',   // blur radius in pixels, saturation, gain, gate
     'uniform vec4 u_zQ[4];',   // glow, living, ultraviolet, magnification
-    'uniform vec4 u_zS[4];',   // sheen
+    'uniform vec4 u_zS[4];',   // sheen, the guessed ultraviolet added to red
     'uniform mat3 u_zM[4];',
-    'uniform sampler2D u_sal; uniform float u_salOn; uniform vec2 u_base; uniform vec3 u_glowC;',   // the movement map; the view\'s own glow and living weight
+    'uniform sampler2D u_sal; uniform float u_salOn; uniform vec4 u_base; uniform vec3 u_glowC;',   // the movement map; the view\'s own glow, living weight and ultraviolet in red
     'uniform vec4 u_ior[6];',  // places the side eyes are ignoring: x, y, reach, strength
     'uniform vec4 u_rip[4]; uniform float u_ripK;',   // ripples on the screen: x, y, age in seconds, strength
+    'uniform float u_pan, u_shimmer, u_time;',        // a sideways sweep of the whole picture (in the picture\'s width), a shimmer on the glow, the clock
+    'uniform vec4 u_water; uniform vec3 u_waterC;',   // light lost in water: per channel, and how far the top of the picture is taken to be (GUESSED from height); the water\'s own colour
     'vec2 ripple(vec2 p){',
     '  vec2 s = vec2(0.0);',
     '  for (int i = 0; i < 4; i++) {',
@@ -368,19 +421,22 @@
     '  vec2 span = vec2(k * u_srcAspect, k);',
     '  vec2 uv = q / span + 0.5;',
     '  uv.x = mix(uv.x, 1.0 - uv.x, u_mirror);',
+    '#if ZONES',
+    '  uv.x += u_pan;',
+    '#endif',
     '  float outside = max(max(max(-uv.x, uv.x - 1.0), max(-uv.y, uv.y - 1.0)), 0.0);',
     '  float topo = u_wA * (r / 0.5) + u_wS * (abs(p.y) / 0.5);',
     '  float ra = u_blur * (1.0 + u_fall * topo * topo) + u_soft;',
     '  float gain = u_gain, sat = u_sat, gateMix = u_gateMix, uvB = u_uvBlue, sheen = u_sheen, zmag = 1.0; mat3 M = u_M;',
     '#if ZONES',   // the zones, layered over the view in order, each blended in by its soft-edged weight at this place
-    '  vec2 uv0 = uv; vec2 gl0 = u_base;',
+    '  vec2 uv0 = uv; vec2 gl0 = u_base.xy; float uvR = u_base.z;',
     '  for (int i = 0; i < 4; i++) {',
     '    if (i >= u_nz) break;',
     '    float w = zoneW(i, uv0);',
     '    if (w > 0.0005) {',
     '      vec4 zp = u_zP[i], zq = u_zQ[i];',
     '      ra = mix(ra, zp.x + u_soft, w); sat = mix(sat, zp.y, w); gain = mix(gain, zp.z, w); gateMix = mix(gateMix, zp.w, w);',
-    '      gl0 = mix(gl0, zq.xy, w); uvB = mix(uvB, zq.z, w); sheen = mix(sheen, u_zS[i].x, w);',
+    '      gl0 = mix(gl0, zq.xy, w); uvB = mix(uvB, zq.z, w); sheen = mix(sheen, u_zS[i].x, w); uvR = mix(uvR, u_zS[i].y, w);',
     '      M = M + (u_zM[i] - M) * w;',
     '      if (zq.w > 1.001) { float zm = mix(1.0, zq.w, w); vec2 c = u_zG[i].xy; uv = c + (uv - c) / zm; zmag *= zm; }',   // a zone that magnifies what it holds
     '    }',
@@ -406,15 +462,20 @@
     '  float uvg = clamp(1.6 * (c.b - 0.5 * (c.r + c.g)) + 2.5 * max(mn - 0.6, 0.0), 0.0, 1.0);',   // INVENTED ultraviolet
     '  vec3 m = M * c;',
     '  m.b = mix(m.b, uvg, uvB);',
+    '#if ZONES',
+    '  m.r += uvR * uvg;',
+    '#endif',
     '  m = mix(m, vec3(0.62, 0.12, 1.0), 0.45 * uvg * sheen);',
     '  m.g *= 1.0 - 0.9 * u_noGreen;',
     '  m = mix(vec3(dot(m, vec3(0.2126, 0.7152, 0.0722))), m, sat);',
-    '#if ZONES',   // movement glows, where the view asks for it, except at the places the side eyes are ignoring
+    '#if ZONES',
+    '  if (u_water.w > 0.0) { vec3 tr = exp(-u_water.rgb * u_water.w * clamp(v.y, 0.0, 1.0)); m = m * tr + u_waterC * (1.0 - tr); }',   // movement glows, where the view asks for it, except at the places the side eyes are ignoring
     '  if (u_salOn > 0.001) {',
     '    vec2 st = 0.6 / vec2(textureSize(u_sal, 0));',   // four samples a little apart, so the coarse map glows as soft light
     '    vec4 sl = 0.25 * (texture(u_sal, uv0 + st) + texture(u_sal, uv0 - st) + texture(u_sal, uv0 + vec2(st.x, -st.y)) + texture(u_sal, uv0 + vec2(-st.x, st.y)));',
     '    float g = gl0.x * (1.0 - exp(-1.8 * (sl.r + gl0.y * sl.g))) * u_salOn, ig = 0.0;',
     '    for (int j = 0; j < 6; j++) { vec4 I = u_ior[j]; if (I.w > 0.0) { vec2 dd = (uv0 - I.xy) * u_zScale; ig = max(ig, I.w * exp(-dot(dd, dd) / (I.z * I.z))); } }',
+    '    if (u_shimmer > 0.0) g *= 1.0 - u_shimmer * (0.5 + 0.5 * sin(u_time * 13.0 + 40.0 * (uv0.x * 1.3 + uv0.y)));',   // a flicker that runs over the glow
     '    m += u_glowC * (g * (1.0 - ig) * edge * u_expo);',
     '  }',
     '#endif',
@@ -690,7 +751,7 @@
     // a jump is fast and direct; on arrival the eyes sweep side to side across the target and twist slowly back and forth, and follow it
     // if it moves; the place just looked at is left alone and its pull comes back steadily over about five seconds; with nothing there the
     // eyes hold, then drift back; with nothing moving at all they sweep on their own now and then; in the dark and still, they twitch in bouts.
-    var gaze = (function () {
+    function makeGaze() {
       var G = { x: .5, y: .5, mode: 'rest', t0: 0, dur: 1, fx: .5, fy: .5, tx: .5, ty: .5, until: 0, jumps: 0, ior: [], log: [], cfg: null, pinned: null,
         dark: 0, sleep: false, bout: 0, boutEnd: 0, nextBout: 0, twitchAt: 0, jx: 0, jy: 0, jr: 0, lastMap: 0, ax: 1, ay: 1, best: 0, held: 0,
         wander: 0, wanderEnd: 0, nextWander: 0, wa: 0, wf: .3, lookT0: 0, pri: null, tl: 0 };
@@ -700,7 +761,7 @@
         return { saccade: or(gz.saccade, [40, 4]), sweep: or(gz.sweep, [2, 1.2]), twist: or(gz.twist, [25, 2000, 3500]), examine: or(gz.examine, [4000, 12000]),
           hold: or(gz.hold, 1500), back: or(gz.back, .8), pursuit: or(gz.pursuit, 10), ior: or(gz.ior, 5000), iorR: deg(or(gz.iorDeg, 6)), habit: or(gz.habit, .75),
           surround: or(gz.surround, .6), any: or(gz.any, .6), living: or(gz.living, 1.8), distract: or(gz.distract, 1.5), wander: or(gz.wander, [8000, 20000]),
-          floor: or(gz.floor, .06), sleep: gz.sleep || null, margin: or(gz.margin, [.05, .06]), track: deg(or(gz.trackDeg, 9)) };
+          floor: or(gz.floor, .06), sleep: gz.sleep || null, margin: or(gz.margin, [.05, .06]), track: deg(or(gz.trackDeg, 9)), region: or(gz.region, [0, 1]) };
       }
       function iorK(age, c) { return age < 0 || age >= c.ior ? 0 : age < 200 ? age / 200 : 1 - (age - 200) / (c.ior - 200); }   // poor at once, recovering steadily (Ferrante 2024)
       function iorAt(x, y, now) {
@@ -731,7 +792,7 @@
       }
       return {
         G: G,
-        reset: function () { G.x = G.y = G.fx = G.fy = G.tx = G.ty = .5; G.mode = 'rest'; G.ior = []; G.log = []; G.jumps = 0; G.sleep = false; G.dark = 0; G.lastMap = 0; G.pinned = null; G.best = 0; G.wander = 0; G.nextWander = 0; G.bout = 0; },
+        reset: function () { var rx = G.cfg ? (G.cfg.region[0] + G.cfg.region[1]) / 2 : .5; G.x = G.fx = G.tx = rx; G.y = G.fy = G.ty = .5; G.mode = 'rest'; G.ior = []; G.log = []; G.jumps = 0; G.sleep = false; G.dark = 0; G.lastMap = 0; G.pinned = null; G.best = 0; G.wander = 0; G.nextWander = 0; G.bout = 0; },
         pin: function (x, y) { G.pinned = x === null ? null : [x, y]; },
         onMap: function (m, w, h, now) {
           var c = G.cfg; if (!c) return;
@@ -747,7 +808,7 @@
           for (var y = 0; y < h; y++) {
             var v = (y + .5) / h; if (v < my || v > 1 - my) continue;
             for (var x = 0; x < w; x++) {
-              var u = (x + .5) / w; if (u < mx || u > 1 - mx) continue;
+              var u = (x + .5) / w; if (u < Math.max(mx, c.region[0]) || u > Math.min(1 - mx, c.region[1])) continue;
               var s = P[y * w + x]; sum += s; cnt++;
               if (s <= c.floor * .5) continue;
               var dx = (u - G.tx) * G.ax, dy = (v - G.ty) * G.ay;
@@ -771,7 +832,7 @@
         // where the gaze zone is now, and its turn: moved a little every frame
         at: function (gz, now, dt) {
           if (!gz) return null;
-          if (!G.cfg || G.cfg.src !== gz) { G.cfg = cfgOf(gz); G.cfg.src = gz; }
+          if (!G.cfg || G.cfg.src !== gz) { var fresh0 = !G.cfg; G.cfg = cfgOf(gz); G.cfg.src = gz; if (fresh0) { G.x = G.fx = G.tx = (G.cfg.region[0] + G.cfg.region[1]) / 2; } }
           var c = G.cfg, t = now / 1000, ddt = Math.min(dt || 16, 100);
           if (G.pinned) { G.x = G.pinned[0]; G.y = G.pinned[1]; return { x: G.x, y: G.y, rot: 0 }; }
           if (G.mode === 'saccade') {
@@ -787,8 +848,8 @@
             var dx = (G.tx - G.x) * G.ax, dy = (G.ty - G.y) * G.ay, d = Math.sqrt(dx * dx + dy * dy), step = c.pursuit / CAM_DEG * ddt / 1000;
             if (d > 1e-6) { var k = Math.min(1, step / d, 1 - Math.exp(-ddt / 120)); G.x += (G.tx - G.x) * k; G.y += (G.ty - G.y) * k; }
           } else if (G.mode === 'rest' && !G.sleep) {                     // nothing calls: the eyes drift back to rest at c.back degrees a second
-            var bx = (.5 - G.x) * G.ax, by = (.5 - G.y) * G.ay, bd = Math.sqrt(bx * bx + by * by), bs = c.back / CAM_DEG * ddt / 1000;
-            if (bd > 1e-6) { var kb = Math.min(1, bs / bd); G.x += (.5 - G.x) * kb; G.y += (.5 - G.y) * kb; }
+            var rx = (c.region[0] + c.region[1]) / 2, bx = (rx - G.x) * G.ax, by = (.5 - G.y) * G.ay, bd = Math.sqrt(bx * bx + by * by), bs = c.back / CAM_DEG * ddt / 1000;
+            if (bd > 1e-6) { var kb = Math.min(1, bs / bd); G.x += (rx - G.x) * kb; G.y += (.5 - G.y) * kb; }
           }
           var ox = 0, rot = 0;
           if (!calm && G.mode === 'look') {                               // scanning: side-to-side sweeps, and a slow twist that holds at each end
@@ -824,24 +885,44 @@
           return out;
         }
       };
-    })();
+    }
+    // A view may move several zones with gazes of their own (`gaze` as a list of blocks, a zone's `gaze` naming its block from 1): two
+    // fish eyes that each watch their own half of the field, say. Each has its own places to leave alone.
+    var gazes = [];
+    function gazeN(i) { return gazes[i] || (gazes[i] = makeGaze()); }
+    var gaze = {
+      onMap: function (m, w, h, now) { for (var i = 0; i < gazes.length; i++) gazes[i].onMap(m, w, h, now); },
+      reset: function () { gazes.forEach(function (g) { g.reset(); }); },
+      pin: function (x, y) { gazeN(0).pin(x, y); for (var i = 1; i < gazes.length; i++) gazes[i].pin(x, y); },
+      iorList: function (now) { var out = []; gazes.forEach(function (g) { out = out.concat(g.iorList(now)); }); return out.slice(-6); },
+      G: function () { return gazeN(0).G; }
+    };
 
     // ---- uniforms for the zones, reused frame after frame
     var zG = new Float32Array(16), zH = new Float32Array(16), zR = new Float32Array(16), zX = new Float32Array(16), zP = new Float32Array(16), zQ = new Float32Array(16), zS = new Float32Array(16), zM = new Float32Array(36), zT = new Float32Array(16);
     var iorU = new Float32Array(24), ripU = new Float32Array(16), zLag = [0, 0, 0, 0], lastG = null;
     function blurOf(inv, longPx) { return inv > 1 / (HUMAN_CPD - 1) ? .6 * (longPx / VIEW_DEG) * inv : 0; }   // 0.6 of one cycle at that eye's limit
+    // a sideways sweep of the whole picture (a shark swinging its head): P.pan degrees each way over P.panS seconds; it waits while the phone turns
+    var panPh = 0;
+    function panOf(P, now, dt) {
+      if (!P.pan || calm) return 0;
+      if (senses.turning() < 20) panPh += (dt || 16) / 1000 / P.panS;
+      return P.pan / CAM_DEG * Math.sin(2 * Math.PI * panPh) * Math.max(sw, sh, 1) / Math.max(sw, 1);
+    }
+    var gzAt = [];
     function zoneUniforms(Z, P, now, dt, longPx) {
-      var nz = Math.min(4, Z.length), i, gz = null;
+      var nz = Math.min(4, Z.length), i; gzAt.length = 0;
       for (i = 0; i < nz; i++) {
         var z = Z[i], cx = z.cx, cy = z.cy, rot = z.rot;
-        if (z.gaze && P.gz) { gz = gz || gaze.at(P.gz, now, dt); if (gz) { cx = gz.x; cy = gz.y; rot += gz.rot; } lastG = gz; }
-        zG[i * 4] = cx; zG[i * 4 + 1] = cy; zG[i * 4 + 2] = z.hw; zG[i * 4 + 3] = z.hh;
+        if (z.gaze && P.gz) { var gi = z.gaze - 1, cf = P.gz.length ? P.gz[gi] : gi ? null : P.gz; if (cf) { if (!gzAt[gi]) gzAt[gi] = gazeN(gi).at(cf, now, dt); var gz = gzAt[gi]; cx = gz.x; cy = gz.y; rot += gz.rot; lastG = gz; } }
+        var L0 = Math.max(sw, sh, 1);
+        zG[i * 4] = cx; zG[i * 4 + 1] = cy; zG[i * 4 + 2] = z.frac ? z.frac[0] * sw / L0 : z.hw; zG[i * 4 + 3] = z.frac ? z.frac[1] * sh / L0 : z.hh;
         zH[i * 4] = z.shape; zH[i * 4 + 1] = z.soft; zH[i * 4 + 2] = z.inner; zH[i * 4 + 3] = 0;
         zR[i * 4] = Math.cos(rot); zR[i * 4 + 1] = Math.sin(rot);
         zX[i * 4] = z.tiltU; zX[i * 4 + 1] = z.tiltD; zX[i * 4 + 2] = z.gap; zX[i * 4 + 3] = z.tip;
         zP[i * 4] = blurOf(z.inv, longPx); zP[i * 4 + 1] = z.sat; zP[i * 4 + 2] = z.gain; zP[i * 4 + 3] = moving ? z.gate : 0;
         zQ[i * 4] = z.glow; zQ[i * 4 + 1] = z.living; zQ[i * 4 + 2] = z.uv; zQ[i * 4 + 3] = z.mag;
-        zS[i * 4] = z.sheen;
+        zS[i * 4] = z.sheen; zS[i * 4 + 1] = z.uvR;
         for (var j = 0; j < 9; j++) zM[i * 9 + j] = z.M[j];
       }
       return nz;
@@ -864,7 +945,7 @@
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
       probe: function (clear) { var r = { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr }; if (clear) { cpuMs = []; gpuMs = []; } return r; },
       // for the checks: the gaze, the movement map's last read, and a way to hold the gaze in one place
-      gazeState: function () { var G = gaze.G; return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync, log: G.log.slice() }; },
+      gazeState: function () { var G = gaze.G(); return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync, log: G.log.slice(), gazes: gazes.map(function (g) { return [+g.G.x.toFixed(3), +g.G.y.toFixed(3), g.G.mode, g.G.jumps]; }) }; },
       pinGaze: function (x, y) { gaze.pin(x === undefined ? null : x, y); },
       resize: function () {
         var dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr, k = Math.min(1, MAXSIDE / Math.max(w, h, 1));
@@ -883,7 +964,7 @@
     function drawFrame(P, fx, now, dt) {
         gl.bindVertexArray(vao);
         if (!hasFrame) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); return; }
-        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001) && zonePrograms();
+        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001 || P.ripple > .001 || P.pan || P.water) && zonePrograms();
         if (zoned) readPoll(now);
         var useRing = 0, back = 0, nowMix = 0, a = 1, zPace = false;
         if (moving && writes > N) {
@@ -932,7 +1013,7 @@
         gl.uniform1f(ut.u_enc, floatOK ? 0 : 1); gl.uniform1f(ut.u_reset, reset ? 1 : 0);
         var longPx = Math.max(canvas.width, canvas.height), sc = longPx / 1280, nz = 0;
         if (zoned && Z) nz = zoneUniforms(Z, P, now, dt, longPx);
-        else if (zoned && P.gz) lastG = gaze.at(P.gz, now, dt);
+
         if (tp === pTimeZ) {
           gl.uniform2f(ut.u_zScale, sw / Math.max(sw, sh), sh / Math.max(sw, sh)); gl.uniform1i(ut.u_nz, nz);
           gl.uniform4fv(ut['u_zG[0]'], zG); gl.uniform4fv(ut['u_zH[0]'], zH); gl.uniform4fv(ut['u_zR[0]'], zR); gl.uniform4fv(ut['u_zX[0]'], zX); gl.uniform4fv(ut['u_zT[0]'], zT);
@@ -964,7 +1045,7 @@
           gl.uniform4fv(u['u_zG[0]'], zG); gl.uniform4fv(u['u_zH[0]'], zH); gl.uniform4fv(u['u_zR[0]'], zR); gl.uniform4fv(u['u_zX[0]'], zX);
           gl.uniform4fv(u['u_zP[0]'], zP); gl.uniform4fv(u['u_zQ[0]'], zQ); gl.uniform4fv(u['u_zS[0]'], zS); gl.uniformMatrix3fv(u['u_zM[0]'], true, zM);
           var salOn = moving && salT[0] && salFrames > 1 ? P.sal : 0;
-          gl.uniform1f(u.u_salOn, salOn); gl.uniform2f(u.u_base, P.glow, P.living); gl.uniform3f(u.u_glowC, P.glowC[0], P.glowC[1], P.glowC[2]);
+          gl.uniform1f(u.u_salOn, salOn); gl.uniform4f(u.u_base, P.glow, P.living, P.uvR, 0); gl.uniform3f(u.u_glowC, P.glowC[0], P.glowC[1], P.glowC[2]);
           gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, salT[salAt] || tA); gl.uniform1i(u.u_sal, 1);
           var L = P.gz ? gaze.iorList(now) : [];
           for (var ii = 0; ii < 6; ii++) { var I = L[ii]; iorU[ii * 4] = I ? I[0] : 0; iorU[ii * 4 + 1] = I ? I[1] : 0; iorU[ii * 4 + 2] = I ? I[2] : 1; iorU[ii * 4 + 3] = I ? I[3] * salOn : 0; }
@@ -972,6 +1053,9 @@
           var R = fx.rip || [];
           for (var ri = 0; ri < 4; ri++) { var rr = R[ri]; ripU[ri * 4] = rr ? rr[0] : 0; ripU[ri * 4 + 1] = rr ? rr[1] : 0; ripU[ri * 4 + 2] = rr ? rr[2] : 0; ripU[ri * 4 + 3] = rr ? rr[3] : 0; }
           gl.uniform4fv(u['u_rip[0]'], ripU); gl.uniform1f(u.u_ripK, (fx.ripK || 0) * P.ripple);
+          gl.uniform1f(u.u_shimmer, calm ? P.shimmer * .3 : P.shimmer); gl.uniform1f(u.u_time, (now / 1000) % 1000);
+          gl.uniform1f(u.u_pan, panOf(P, now, dt));
+          var W4 = P.water || [0, 0, 0, 0], WC = P.waterC || [0, 0, 0]; gl.uniform4f(u.u_water, W4[0], W4[1], W4[2], W4[3]); gl.uniform3f(u.u_waterC, WC[0], WC[1], WC[2]);
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
         if (zoned) gl.activeTexture(gl.TEXTURE0);
@@ -3214,7 +3298,8 @@
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; },   // hold the change of eyes at one instant, for checking
-    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; }, params: function (k) { return k && EYES[k] ? paramsOf(EYES[k]) : HUMAN; } };          // the picture engine's probe, gaze and movement map, for checking
+    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; }, params: function (k) { return k && EYES[k] ? paramsOf(EYES[k]) : HUMAN; },
+    look: function (k) { if (!EYES[k]) return false; closeSheets(); setEyes(k, { common: EYES[k].chip || k, scientific: '', by: 'you' }); go('animal'); S.k = S.kGoal = 1; return true; } };   // straight into a view, keeping no encounter, for checking          // the picture engine's probe, gaze and movement map, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
   var frameMs = [], frameLast = 0;

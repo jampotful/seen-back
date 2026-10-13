@@ -315,51 +315,57 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
   }
 
   if (mode === 'try') {
-    // The jumping spider view (?try=jumper) on the scene clip: the movement map is read, the gaze jumps, dwells and moves on, the
-    // places it looked at are left alone for a while, and nothing errs. Small screenshots go to test/shots/engine/.
+    // The views being tried (?try=, TRY lists them; jumper, reef, shark and spider by default), each on the scene clip: no errors, the rows
+    // are there, the movement map is read where the view has one, and the gaze jumps where the view has one, with what each fixation landed
+    // on (test/assets/scene.json says where everything is). Small screenshots go to test/shots/engine/.
     const dir = path.join(here, 'shots', 'engine'); fs.mkdirSync(dir, { recursive: true });
-    const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
-    page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
-    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
-    await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
-    await page.goto(HTTP + '&try=' + (process.env.TRY || 'jumper') + (process.env.GENUS ? '&genus=' + process.env.GENUS : '')); await page.waitForTimeout(500);
-    const r = {};
-    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
-    r.prompt = await text(page, 'askViewH');
-    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
-    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
-    // Software graphics draw a few frames a second, so the clip is slowed (PLAYBACK, 0.15) until each drawn frame is about one of the
-    // clip's frames after the last, as a phone's camera delivers them. The movement map keeps to the clip's own clock.
-    await page.evaluate((r) => { document.getElementById('vid').playbackRate = r; }, +(process.env.PLAYBACK || .15));
-    await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
-    const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 14);
-    let n = 0;
-    while (Date.now() - t0 < SECS * 1000) {
-      await page.waitForTimeout(400);
-      const g = await page.evaluate(() => { const e = window.__seenBack.engine; return e ? e.gazeState() : null; });
-      trace.push({ t: Date.now() - t0, x: +g.x.toFixed(3), y: +g.y.toFixed(3), mode: g.mode, jumps: g.jumps, ior: g.ior, best: +g.best.toFixed(3), maxE: +g.map.maxE.toFixed(3), maxL: +g.map.maxL.toFixed(3), meanE: +g.map.meanE.toFixed(4), lum: +g.map.lum.toFixed(3), shift: g.map.shift.map((v) => +v.toFixed(2)), reads: g.map.reads, salFrames: g.salFrames, pending: g.pending, sleep: g.sleep });
-      if (n < 4 && Date.now() - t0 > 2500 + n * 3000) { await page.screenshot({ path: path.join(dir, (process.env.SHOT || 'jumper') + '-' + n + '.png'), scale: 'css' }); n++; }
+    const keys = (process.env.TRY || 'jumper,reef,shark,spider').split(',');
+    out.try = {}; const bad = [];
+    for (const key of keys) {
+      const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+      page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
+      await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+      await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+      await page.goto(HTTP + '&try=' + key + (process.env.GENUS ? '&genus=' + process.env.GENUS : '')); await page.waitForTimeout(500);
+      const r = out.try[key] = {};
+      await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+      r.prompt = await text(page, 'askViewH');
+      await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
+      await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+      // Software graphics draw a few frames a second, so the clip is slowed (PLAYBACK, 0.15) until each drawn frame is about one of the
+      // clip's frames after the last, as a phone's camera delivers them. The movement map keeps to the clip's own clock.
+      await page.evaluate((x) => { document.getElementById('vid').playbackRate = x; }, +(process.env.PLAYBACK || .15));
+      await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
+      const P = await page.evaluate((k) => { const p = window.__seenBack.params(k); return { sal: p.sal, gaze: !!p.gz }; }, key);
+      const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 30);
+      let n = 0;
+      while (Date.now() - t0 < SECS * 1000) {
+        await page.waitForTimeout(500);
+        const g = await page.evaluate(() => window.__seenBack.engine.gazeState());
+        trace.push({ t: Date.now() - t0, x: +g.x.toFixed(3), y: +g.y.toFixed(3), mode: g.mode, jumps: g.jumps, gazes: g.gazes, maxE: +g.map.maxE.toFixed(3), maxL: +g.map.maxL.toFixed(3), shift: g.map.shift.map((v) => +v.toFixed(2)), reads: g.map.reads, salFrames: g.salFrames });
+        if (n < 2 && Date.now() - t0 > (SECS * 1000) * (n + 1) / 3) { await page.screenshot({ path: path.join(dir, key + '-' + n + '.png'), scale: 'css' }); n++; }
+      }
+      const last = trace[trace.length - 1], gs = await page.evaluate(() => window.__seenBack.engine.gazeState());
+      r.eyes = (await st(page)).eyes; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
+      r.jumps = (gs.gazes || []).map((g) => g[3]); r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
+      const scene = (process.env.CLIP || 'scene.webm') === 'scene.webm' ? JSON.parse(fs.readFileSync(path.join(here, 'assets', 'scene.json'), 'utf8')) : null;
+      r.landed = {};
+      if (scene) gs.log.forEach(([x, y, at, media]) => {   // the first gaze's fixations, against where test/make_scene.py drew everything at that clip time
+        const nn = scene.where.beetle.length, f = ((Math.round(media / 1000 * scene.fps) % nn) + nn) % nn, A = scene.size[0] / scene.size[1];
+        let best = 'nothing', bd = .1;
+        Object.keys(scene.where).forEach((k) => { const p = scene.where[k][f], d = Math.hypot((x - p[0]) * A, (1 - y) - p[1]); if (d < bd) { bd = d; best = k; } });
+        r.landed[best] = (r.landed[best] || 0) + 1;
+      });
+      await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); await page.waitForTimeout(300);
+      r.rows = await page.evaluate(() => [...document.querySelectorAll('#rows li')].length);
+      await page.screenshot({ path: path.join(dir, key + '-rows.png'), scale: 'css' });
+      r.errors = errors;
+      if (process.env.TRACE) fs.writeFileSync(process.env.TRACE.replace(/(\.json)?$/, '-' + key + '.json'), JSON.stringify(trace, null, 1));
+      await ctx.close();
+      const ok = r.eyes === key && r.rows >= 6 && !errors.length && r.probe.zones && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)));
+      if (!ok) bad.push(key);
     }
-    const last = trace[trace.length - 1];
-    r.eyes = (await st(page)).eyes; r.jumps = last.jumps; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
-    // what each fixation landed on, from where test/make_scene.py drew everything at the clip time of the frame it was chosen from
-    const log = await page.evaluate(() => window.__seenBack.engine.gazeState().log), scene = (process.env.CLIP || 'scene.webm') === 'scene.webm' ? JSON.parse(fs.readFileSync(path.join(here, 'assets', 'scene.json'), 'utf8')) : null;
-    r.landed = {};
-    if (scene) log.forEach(([x, y, at, media]) => {
-      const n = scene.where.beetle.length, f = ((Math.round(media / 1000 * scene.fps) % n) + n) % n, A = scene.size[0] / scene.size[1];
-      let best = 'nothing', bd = .1;
-      Object.keys(scene.where).forEach((k) => { const p = scene.where[k][f], d = Math.hypot((x - p[0]) * A, (1 - y) - p[1]); if (d < bd) { bd = d; best = k; } });
-      r.landed[best] = (r.landed[best] || 0) + 1;
-    });
-    r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
-    await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); await page.waitForTimeout(300);
-    r.rows = await page.evaluate(() => [...document.querySelectorAll('#rows li')].length);
-    await page.screenshot({ path: path.join(dir, (process.env.SHOT || 'jumper') + '-rows.png'), scale: 'css' });
-    r.errors = errors; out.try = r;
-    if (process.env.TRACE) fs.writeFileSync(process.env.TRACE, JSON.stringify(trace, null, 1));
-    await ctx.close();
-    const ok = r.eyes === (process.env.TRY || 'jumper') && r.reads > 5 && r.maxE > 0 && r.jumps >= (+process.env.MIN_JUMPS || 2) && r.rows >= 6 && !errors.length && r.probe.zones && !r.probe.zErr;
-    if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: the view being tried did not behave as it should'); }
+    if (bad.length) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: these views being tried did not behave as they should: ' + bad.join(', ')); }
   }
 
   if (mode === 'perf') {
@@ -369,7 +375,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     // (gl.finish() returns at once in Chromium, so it measures nothing). Headless software graphics are slow and share the machine's
     // processors, so the numbers only compare views and builds with each other, on one machine.
     // PERF_FRAMES (60) sets the frames a view, TRY (jumper) the views reached with ?try=, PERF_OUT a file for the JSON.
-    const FRAMES = +(process.env.PERF_FRAMES || 60), TRY = process.env.TRY === undefined ? 'jumper' : process.env.TRY;
+    const FRAMES = +(process.env.PERF_FRAMES || 60), TRY = process.env.TRY === undefined ? 'jumper,reef,shark,spider' : process.env.TRY;
     const measure = () => {
       const W = window, pf = W.__pf = { gl: null, rec: false, frames: [] };
       const gc = HTMLCanvasElement.prototype.getContext;
@@ -404,14 +410,15 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     const names = { cat: 'cat', dog: 'dog', squirrel: 'squirrel', deer: 'deer', rabbit: 'rabbit', wader: 'heron', bird: 'cardinal', hawk: 'hawk', alligator: 'alligator', reptile: 'anole', frog: 'treefrog', bee: 'bee', insect: 'butterfly', plant: 'oak',
       jumper: 'jumping spider', spider: 'wolf spider', fish: 'bass', snail: 'garden snail', crab: 'blue crab', bat: 'big brown bat', tick: 'deer tick', salamander: 'red eft', fungus: 'mushroom', mammal: 'raccoon', sealife: 'jellyfish' };
     const have = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person' && k !== 'other'));
-    const views = ['human'].concat(have.filter((k) => names[k]));
+    const hook = await page.evaluate(() => !!window.__seenBack.look), views = ['human'].concat(have.filter((k) => hook || names[k]));
     const rows = [];
     const stat = (a) => { if (!a.length) return null; const s = a.slice().sort((x, y) => x - y), m = a.reduce((x, y) => x + y, 0) / a.length; return { mean: +m.toFixed(2), median: +s[s.length >> 1].toFixed(2), p90: +s[Math.min(s.length - 1, Math.floor(s.length * .9))].toFixed(2) }; };
     for (const key of views) {
       if (key === 'human') { await page.evaluate(() => { window.__seenBack.S.holding = true; }); await page.waitForTimeout(600); }
       else {
         await page.evaluate(() => { window.__seenBack.S.holding = false; window.__seenBack.pose(null); });
-        if (await page.evaluate((k) => window.__seenBack.S.eyes !== k, key)) {
+        if (await page.evaluate((k) => window.__seenBack.look ? window.__seenBack.look(k) : false, key)) await page.waitForTimeout(600);   // a build with the hook goes straight in
+        else if (await page.evaluate((k) => window.__seenBack.S.eyes !== k, key)) {
           await page.locator('#btnWho').tap(); await page.locator('#infoChange').tap(); await say(page, names[key]);
           await page.waitForFunction((k) => window.__seenBack.S.eyes === k && window.__seenBack.S.screen === 'animal', key, { timeout: 12000 });
           await page.waitForTimeout(900);

@@ -769,7 +769,8 @@
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
     pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; },   // hold the change of eyes at one instant, for checking
-    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; }, params: function (k) { return k && EYES[k] ? paramsOf(EYES[k]) : HUMAN; } };          // the picture engine's probe, gaze and movement map, for checking
+    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; }, params: function (k) { return k && EYES[k] ? paramsOf(EYES[k]) : HUMAN; },
+    look: function (k) { if (!EYES[k]) return false; closeSheets(); setEyes(k, { common: EYES[k].chip || k, scientific: '', by: 'you' }); go('animal'); S.k = S.kGoal = 1; return true; } };   // straight into a view, keeping no encounter, for checking          // the picture engine's probe, gaze and movement map, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
   var frameMs = [], frameLast = 0;

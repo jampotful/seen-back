@@ -92,11 +92,13 @@
     '#if ZONES', ZONE_GLSL,
     'uniform vec4 u_zP[4];',   // blur radius in pixels, saturation, gain, gate
     'uniform vec4 u_zQ[4];',   // glow, living, ultraviolet, magnification
-    'uniform vec4 u_zS[4];',   // sheen
+    'uniform vec4 u_zS[4];',   // sheen, the guessed ultraviolet added to red
     'uniform mat3 u_zM[4];',
-    'uniform sampler2D u_sal; uniform float u_salOn; uniform vec2 u_base; uniform vec3 u_glowC;',   // the movement map; the view\'s own glow and living weight
+    'uniform sampler2D u_sal; uniform float u_salOn; uniform vec4 u_base; uniform vec3 u_glowC;',   // the movement map; the view\'s own glow, living weight and ultraviolet in red
     'uniform vec4 u_ior[6];',  // places the side eyes are ignoring: x, y, reach, strength
     'uniform vec4 u_rip[4]; uniform float u_ripK;',   // ripples on the screen: x, y, age in seconds, strength
+    'uniform float u_pan, u_shimmer, u_time;',        // a sideways sweep of the whole picture (in the picture\'s width), a shimmer on the glow, the clock
+    'uniform vec4 u_water; uniform vec3 u_waterC;',   // light lost in water: per channel, and how far the top of the picture is taken to be (GUESSED from height); the water\'s own colour
     'vec2 ripple(vec2 p){',
     '  vec2 s = vec2(0.0);',
     '  for (int i = 0; i < 4; i++) {',
@@ -127,19 +129,22 @@
     '  vec2 span = vec2(k * u_srcAspect, k);',
     '  vec2 uv = q / span + 0.5;',
     '  uv.x = mix(uv.x, 1.0 - uv.x, u_mirror);',
+    '#if ZONES',
+    '  uv.x += u_pan;',
+    '#endif',
     '  float outside = max(max(max(-uv.x, uv.x - 1.0), max(-uv.y, uv.y - 1.0)), 0.0);',
     '  float topo = u_wA * (r / 0.5) + u_wS * (abs(p.y) / 0.5);',
     '  float ra = u_blur * (1.0 + u_fall * topo * topo) + u_soft;',
     '  float gain = u_gain, sat = u_sat, gateMix = u_gateMix, uvB = u_uvBlue, sheen = u_sheen, zmag = 1.0; mat3 M = u_M;',
     '#if ZONES',   // the zones, layered over the view in order, each blended in by its soft-edged weight at this place
-    '  vec2 uv0 = uv; vec2 gl0 = u_base;',
+    '  vec2 uv0 = uv; vec2 gl0 = u_base.xy; float uvR = u_base.z;',
     '  for (int i = 0; i < 4; i++) {',
     '    if (i >= u_nz) break;',
     '    float w = zoneW(i, uv0);',
     '    if (w > 0.0005) {',
     '      vec4 zp = u_zP[i], zq = u_zQ[i];',
     '      ra = mix(ra, zp.x + u_soft, w); sat = mix(sat, zp.y, w); gain = mix(gain, zp.z, w); gateMix = mix(gateMix, zp.w, w);',
-    '      gl0 = mix(gl0, zq.xy, w); uvB = mix(uvB, zq.z, w); sheen = mix(sheen, u_zS[i].x, w);',
+    '      gl0 = mix(gl0, zq.xy, w); uvB = mix(uvB, zq.z, w); sheen = mix(sheen, u_zS[i].x, w); uvR = mix(uvR, u_zS[i].y, w);',
     '      M = M + (u_zM[i] - M) * w;',
     '      if (zq.w > 1.001) { float zm = mix(1.0, zq.w, w); vec2 c = u_zG[i].xy; uv = c + (uv - c) / zm; zmag *= zm; }',   // a zone that magnifies what it holds
     '    }',
@@ -165,15 +170,20 @@
     '  float uvg = clamp(1.6 * (c.b - 0.5 * (c.r + c.g)) + 2.5 * max(mn - 0.6, 0.0), 0.0, 1.0);',   // INVENTED ultraviolet
     '  vec3 m = M * c;',
     '  m.b = mix(m.b, uvg, uvB);',
+    '#if ZONES',
+    '  m.r += uvR * uvg;',
+    '#endif',
     '  m = mix(m, vec3(0.62, 0.12, 1.0), 0.45 * uvg * sheen);',
     '  m.g *= 1.0 - 0.9 * u_noGreen;',
     '  m = mix(vec3(dot(m, vec3(0.2126, 0.7152, 0.0722))), m, sat);',
-    '#if ZONES',   // movement glows, where the view asks for it, except at the places the side eyes are ignoring
+    '#if ZONES',
+    '  if (u_water.w > 0.0) { vec3 tr = exp(-u_water.rgb * u_water.w * clamp(v.y, 0.0, 1.0)); m = m * tr + u_waterC * (1.0 - tr); }',   // movement glows, where the view asks for it, except at the places the side eyes are ignoring
     '  if (u_salOn > 0.001) {',
     '    vec2 st = 0.6 / vec2(textureSize(u_sal, 0));',   // four samples a little apart, so the coarse map glows as soft light
     '    vec4 sl = 0.25 * (texture(u_sal, uv0 + st) + texture(u_sal, uv0 - st) + texture(u_sal, uv0 + vec2(st.x, -st.y)) + texture(u_sal, uv0 + vec2(-st.x, st.y)));',
     '    float g = gl0.x * (1.0 - exp(-1.8 * (sl.r + gl0.y * sl.g))) * u_salOn, ig = 0.0;',
     '    for (int j = 0; j < 6; j++) { vec4 I = u_ior[j]; if (I.w > 0.0) { vec2 dd = (uv0 - I.xy) * u_zScale; ig = max(ig, I.w * exp(-dot(dd, dd) / (I.z * I.z))); } }',
+    '    if (u_shimmer > 0.0) g *= 1.0 - u_shimmer * (0.5 + 0.5 * sin(u_time * 13.0 + 40.0 * (uv0.x * 1.3 + uv0.y)));',   // a flicker that runs over the glow
     '    m += u_glowC * (g * (1.0 - ig) * edge * u_expo);',
     '  }',
     '#endif',
@@ -449,7 +459,7 @@
     // a jump is fast and direct; on arrival the eyes sweep side to side across the target and twist slowly back and forth, and follow it
     // if it moves; the place just looked at is left alone and its pull comes back steadily over about five seconds; with nothing there the
     // eyes hold, then drift back; with nothing moving at all they sweep on their own now and then; in the dark and still, they twitch in bouts.
-    var gaze = (function () {
+    function makeGaze() {
       var G = { x: .5, y: .5, mode: 'rest', t0: 0, dur: 1, fx: .5, fy: .5, tx: .5, ty: .5, until: 0, jumps: 0, ior: [], log: [], cfg: null, pinned: null,
         dark: 0, sleep: false, bout: 0, boutEnd: 0, nextBout: 0, twitchAt: 0, jx: 0, jy: 0, jr: 0, lastMap: 0, ax: 1, ay: 1, best: 0, held: 0,
         wander: 0, wanderEnd: 0, nextWander: 0, wa: 0, wf: .3, lookT0: 0, pri: null, tl: 0 };
@@ -459,7 +469,7 @@
         return { saccade: or(gz.saccade, [40, 4]), sweep: or(gz.sweep, [2, 1.2]), twist: or(gz.twist, [25, 2000, 3500]), examine: or(gz.examine, [4000, 12000]),
           hold: or(gz.hold, 1500), back: or(gz.back, .8), pursuit: or(gz.pursuit, 10), ior: or(gz.ior, 5000), iorR: deg(or(gz.iorDeg, 6)), habit: or(gz.habit, .75),
           surround: or(gz.surround, .6), any: or(gz.any, .6), living: or(gz.living, 1.8), distract: or(gz.distract, 1.5), wander: or(gz.wander, [8000, 20000]),
-          floor: or(gz.floor, .06), sleep: gz.sleep || null, margin: or(gz.margin, [.05, .06]), track: deg(or(gz.trackDeg, 9)) };
+          floor: or(gz.floor, .06), sleep: gz.sleep || null, margin: or(gz.margin, [.05, .06]), track: deg(or(gz.trackDeg, 9)), region: or(gz.region, [0, 1]) };
       }
       function iorK(age, c) { return age < 0 || age >= c.ior ? 0 : age < 200 ? age / 200 : 1 - (age - 200) / (c.ior - 200); }   // poor at once, recovering steadily (Ferrante 2024)
       function iorAt(x, y, now) {
@@ -490,7 +500,7 @@
       }
       return {
         G: G,
-        reset: function () { G.x = G.y = G.fx = G.fy = G.tx = G.ty = .5; G.mode = 'rest'; G.ior = []; G.log = []; G.jumps = 0; G.sleep = false; G.dark = 0; G.lastMap = 0; G.pinned = null; G.best = 0; G.wander = 0; G.nextWander = 0; G.bout = 0; },
+        reset: function () { var rx = G.cfg ? (G.cfg.region[0] + G.cfg.region[1]) / 2 : .5; G.x = G.fx = G.tx = rx; G.y = G.fy = G.ty = .5; G.mode = 'rest'; G.ior = []; G.log = []; G.jumps = 0; G.sleep = false; G.dark = 0; G.lastMap = 0; G.pinned = null; G.best = 0; G.wander = 0; G.nextWander = 0; G.bout = 0; },
         pin: function (x, y) { G.pinned = x === null ? null : [x, y]; },
         onMap: function (m, w, h, now) {
           var c = G.cfg; if (!c) return;
@@ -506,7 +516,7 @@
           for (var y = 0; y < h; y++) {
             var v = (y + .5) / h; if (v < my || v > 1 - my) continue;
             for (var x = 0; x < w; x++) {
-              var u = (x + .5) / w; if (u < mx || u > 1 - mx) continue;
+              var u = (x + .5) / w; if (u < Math.max(mx, c.region[0]) || u > Math.min(1 - mx, c.region[1])) continue;
               var s = P[y * w + x]; sum += s; cnt++;
               if (s <= c.floor * .5) continue;
               var dx = (u - G.tx) * G.ax, dy = (v - G.ty) * G.ay;
@@ -530,7 +540,7 @@
         // where the gaze zone is now, and its turn: moved a little every frame
         at: function (gz, now, dt) {
           if (!gz) return null;
-          if (!G.cfg || G.cfg.src !== gz) { G.cfg = cfgOf(gz); G.cfg.src = gz; }
+          if (!G.cfg || G.cfg.src !== gz) { var fresh0 = !G.cfg; G.cfg = cfgOf(gz); G.cfg.src = gz; if (fresh0) { G.x = G.fx = G.tx = (G.cfg.region[0] + G.cfg.region[1]) / 2; } }
           var c = G.cfg, t = now / 1000, ddt = Math.min(dt || 16, 100);
           if (G.pinned) { G.x = G.pinned[0]; G.y = G.pinned[1]; return { x: G.x, y: G.y, rot: 0 }; }
           if (G.mode === 'saccade') {
@@ -546,8 +556,8 @@
             var dx = (G.tx - G.x) * G.ax, dy = (G.ty - G.y) * G.ay, d = Math.sqrt(dx * dx + dy * dy), step = c.pursuit / CAM_DEG * ddt / 1000;
             if (d > 1e-6) { var k = Math.min(1, step / d, 1 - Math.exp(-ddt / 120)); G.x += (G.tx - G.x) * k; G.y += (G.ty - G.y) * k; }
           } else if (G.mode === 'rest' && !G.sleep) {                     // nothing calls: the eyes drift back to rest at c.back degrees a second
-            var bx = (.5 - G.x) * G.ax, by = (.5 - G.y) * G.ay, bd = Math.sqrt(bx * bx + by * by), bs = c.back / CAM_DEG * ddt / 1000;
-            if (bd > 1e-6) { var kb = Math.min(1, bs / bd); G.x += (.5 - G.x) * kb; G.y += (.5 - G.y) * kb; }
+            var rx = (c.region[0] + c.region[1]) / 2, bx = (rx - G.x) * G.ax, by = (.5 - G.y) * G.ay, bd = Math.sqrt(bx * bx + by * by), bs = c.back / CAM_DEG * ddt / 1000;
+            if (bd > 1e-6) { var kb = Math.min(1, bs / bd); G.x += (rx - G.x) * kb; G.y += (.5 - G.y) * kb; }
           }
           var ox = 0, rot = 0;
           if (!calm && G.mode === 'look') {                               // scanning: side-to-side sweeps, and a slow twist that holds at each end
@@ -583,24 +593,44 @@
           return out;
         }
       };
-    })();
+    }
+    // A view may move several zones with gazes of their own (`gaze` as a list of blocks, a zone's `gaze` naming its block from 1): two
+    // fish eyes that each watch their own half of the field, say. Each has its own places to leave alone.
+    var gazes = [];
+    function gazeN(i) { return gazes[i] || (gazes[i] = makeGaze()); }
+    var gaze = {
+      onMap: function (m, w, h, now) { for (var i = 0; i < gazes.length; i++) gazes[i].onMap(m, w, h, now); },
+      reset: function () { gazes.forEach(function (g) { g.reset(); }); },
+      pin: function (x, y) { gazeN(0).pin(x, y); for (var i = 1; i < gazes.length; i++) gazes[i].pin(x, y); },
+      iorList: function (now) { var out = []; gazes.forEach(function (g) { out = out.concat(g.iorList(now)); }); return out.slice(-6); },
+      G: function () { return gazeN(0).G; }
+    };
 
     // ---- uniforms for the zones, reused frame after frame
     var zG = new Float32Array(16), zH = new Float32Array(16), zR = new Float32Array(16), zX = new Float32Array(16), zP = new Float32Array(16), zQ = new Float32Array(16), zS = new Float32Array(16), zM = new Float32Array(36), zT = new Float32Array(16);
     var iorU = new Float32Array(24), ripU = new Float32Array(16), zLag = [0, 0, 0, 0], lastG = null;
     function blurOf(inv, longPx) { return inv > 1 / (HUMAN_CPD - 1) ? .6 * (longPx / VIEW_DEG) * inv : 0; }   // 0.6 of one cycle at that eye's limit
+    // a sideways sweep of the whole picture (a shark swinging its head): P.pan degrees each way over P.panS seconds; it waits while the phone turns
+    var panPh = 0;
+    function panOf(P, now, dt) {
+      if (!P.pan || calm) return 0;
+      if (senses.turning() < 20) panPh += (dt || 16) / 1000 / P.panS;
+      return P.pan / CAM_DEG * Math.sin(2 * Math.PI * panPh) * Math.max(sw, sh, 1) / Math.max(sw, 1);
+    }
+    var gzAt = [];
     function zoneUniforms(Z, P, now, dt, longPx) {
-      var nz = Math.min(4, Z.length), i, gz = null;
+      var nz = Math.min(4, Z.length), i; gzAt.length = 0;
       for (i = 0; i < nz; i++) {
         var z = Z[i], cx = z.cx, cy = z.cy, rot = z.rot;
-        if (z.gaze && P.gz) { gz = gz || gaze.at(P.gz, now, dt); if (gz) { cx = gz.x; cy = gz.y; rot += gz.rot; } lastG = gz; }
-        zG[i * 4] = cx; zG[i * 4 + 1] = cy; zG[i * 4 + 2] = z.hw; zG[i * 4 + 3] = z.hh;
+        if (z.gaze && P.gz) { var gi = z.gaze - 1, cf = P.gz.length ? P.gz[gi] : gi ? null : P.gz; if (cf) { if (!gzAt[gi]) gzAt[gi] = gazeN(gi).at(cf, now, dt); var gz = gzAt[gi]; cx = gz.x; cy = gz.y; rot += gz.rot; lastG = gz; } }
+        var L0 = Math.max(sw, sh, 1);
+        zG[i * 4] = cx; zG[i * 4 + 1] = cy; zG[i * 4 + 2] = z.frac ? z.frac[0] * sw / L0 : z.hw; zG[i * 4 + 3] = z.frac ? z.frac[1] * sh / L0 : z.hh;
         zH[i * 4] = z.shape; zH[i * 4 + 1] = z.soft; zH[i * 4 + 2] = z.inner; zH[i * 4 + 3] = 0;
         zR[i * 4] = Math.cos(rot); zR[i * 4 + 1] = Math.sin(rot);
         zX[i * 4] = z.tiltU; zX[i * 4 + 1] = z.tiltD; zX[i * 4 + 2] = z.gap; zX[i * 4 + 3] = z.tip;
         zP[i * 4] = blurOf(z.inv, longPx); zP[i * 4 + 1] = z.sat; zP[i * 4 + 2] = z.gain; zP[i * 4 + 3] = moving ? z.gate : 0;
         zQ[i * 4] = z.glow; zQ[i * 4 + 1] = z.living; zQ[i * 4 + 2] = z.uv; zQ[i * 4 + 3] = z.mag;
-        zS[i * 4] = z.sheen;
+        zS[i * 4] = z.sheen; zS[i * 4 + 1] = z.uvR;
         for (var j = 0; j < 9; j++) zM[i * 9 + j] = z.M[j];
       }
       return nz;
@@ -623,7 +653,7 @@
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
       probe: function (clear) { var r = { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr }; if (clear) { cpuMs = []; gpuMs = []; } return r; },
       // for the checks: the gaze, the movement map's last read, and a way to hold the gaze in one place
-      gazeState: function () { var G = gaze.G; return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync, log: G.log.slice() }; },
+      gazeState: function () { var G = gaze.G(); return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync, log: G.log.slice(), gazes: gazes.map(function (g) { return [+g.G.x.toFixed(3), +g.G.y.toFixed(3), g.G.mode, g.G.jumps]; }) }; },
       pinGaze: function (x, y) { gaze.pin(x === undefined ? null : x, y); },
       resize: function () {
         var dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr, k = Math.min(1, MAXSIDE / Math.max(w, h, 1));
@@ -642,7 +672,7 @@
     function drawFrame(P, fx, now, dt) {
         gl.bindVertexArray(vao);
         if (!hasFrame) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); return; }
-        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001) && zonePrograms();
+        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001 || P.ripple > .001 || P.pan || P.water) && zonePrograms();
         if (zoned) readPoll(now);
         var useRing = 0, back = 0, nowMix = 0, a = 1, zPace = false;
         if (moving && writes > N) {
@@ -691,7 +721,7 @@
         gl.uniform1f(ut.u_enc, floatOK ? 0 : 1); gl.uniform1f(ut.u_reset, reset ? 1 : 0);
         var longPx = Math.max(canvas.width, canvas.height), sc = longPx / 1280, nz = 0;
         if (zoned && Z) nz = zoneUniforms(Z, P, now, dt, longPx);
-        else if (zoned && P.gz) lastG = gaze.at(P.gz, now, dt);
+
         if (tp === pTimeZ) {
           gl.uniform2f(ut.u_zScale, sw / Math.max(sw, sh), sh / Math.max(sw, sh)); gl.uniform1i(ut.u_nz, nz);
           gl.uniform4fv(ut['u_zG[0]'], zG); gl.uniform4fv(ut['u_zH[0]'], zH); gl.uniform4fv(ut['u_zR[0]'], zR); gl.uniform4fv(ut['u_zX[0]'], zX); gl.uniform4fv(ut['u_zT[0]'], zT);
@@ -723,7 +753,7 @@
           gl.uniform4fv(u['u_zG[0]'], zG); gl.uniform4fv(u['u_zH[0]'], zH); gl.uniform4fv(u['u_zR[0]'], zR); gl.uniform4fv(u['u_zX[0]'], zX);
           gl.uniform4fv(u['u_zP[0]'], zP); gl.uniform4fv(u['u_zQ[0]'], zQ); gl.uniform4fv(u['u_zS[0]'], zS); gl.uniformMatrix3fv(u['u_zM[0]'], true, zM);
           var salOn = moving && salT[0] && salFrames > 1 ? P.sal : 0;
-          gl.uniform1f(u.u_salOn, salOn); gl.uniform2f(u.u_base, P.glow, P.living); gl.uniform3f(u.u_glowC, P.glowC[0], P.glowC[1], P.glowC[2]);
+          gl.uniform1f(u.u_salOn, salOn); gl.uniform4f(u.u_base, P.glow, P.living, P.uvR, 0); gl.uniform3f(u.u_glowC, P.glowC[0], P.glowC[1], P.glowC[2]);
           gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, salT[salAt] || tA); gl.uniform1i(u.u_sal, 1);
           var L = P.gz ? gaze.iorList(now) : [];
           for (var ii = 0; ii < 6; ii++) { var I = L[ii]; iorU[ii * 4] = I ? I[0] : 0; iorU[ii * 4 + 1] = I ? I[1] : 0; iorU[ii * 4 + 2] = I ? I[2] : 1; iorU[ii * 4 + 3] = I ? I[3] * salOn : 0; }
@@ -731,6 +761,9 @@
           var R = fx.rip || [];
           for (var ri = 0; ri < 4; ri++) { var rr = R[ri]; ripU[ri * 4] = rr ? rr[0] : 0; ripU[ri * 4 + 1] = rr ? rr[1] : 0; ripU[ri * 4 + 2] = rr ? rr[2] : 0; ripU[ri * 4 + 3] = rr ? rr[3] : 0; }
           gl.uniform4fv(u['u_rip[0]'], ripU); gl.uniform1f(u.u_ripK, (fx.ripK || 0) * P.ripple);
+          gl.uniform1f(u.u_shimmer, calm ? P.shimmer * .3 : P.shimmer); gl.uniform1f(u.u_time, (now / 1000) % 1000);
+          gl.uniform1f(u.u_pan, panOf(P, now, dt));
+          var W4 = P.water || [0, 0, 0, 0], WC = P.waterC || [0, 0, 0]; gl.uniform4f(u.u_water, W4[0], W4[1], W4[2], W4[3]); gl.uniform3f(u.u_waterC, WC[0], WC[1], WC[2]);
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
         if (zoned) gl.activeTexture(gl.TEXTURE0);
