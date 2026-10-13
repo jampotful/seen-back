@@ -33,6 +33,7 @@ The engine, the group head and the world database fit between these, as the owne
 
 ## Known limits
 
-- Long PDFs read from Drive come through only in part: *Animal Eyes* stops at page 65 and *Neurobiology of Arachnids* at about page 73, and *Spider Biology* is larger still. Chapter-length files would get round it.
+- PDFs from Drive now read in full through `download_file_content` and `pdftotext` (the brief says how), for files up to 10 MB; *Animal Eyes* gives all 291 pages. *Neurobiology of Arachnids* (18 MB) and *Spider Biology* (159 MB) are over the limit and wait for the owner to split them into parts.
+- The papers the finished units want are in a sheet in the owner's Drive, beside the papers (71 from the first three units, 22 of them priority 1). Units add to it as they finish.
 - From the cloud machines, PubMed, PubMed Central, Europe PMC, Crossref, doi.org, GBIF and iNaturalist mostly refuse or rate-limit. The research rests on the collection on `pub/lit-t1` and the owner's papers.
 - The branch `probe/remote-push` holds one empty commit from a test; agents cannot delete branches, so it waits for the owner or a person with access.
