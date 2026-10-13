@@ -401,6 +401,41 @@ Three consequences for the code:
 - `paramsOf` scales the picture by `180 / fov`, taking a person's field as 180 degrees. With 200, the cat (200) would draw no bending and the dog (240) less than today; the deer, rabbit and squirrel would change in proportion. I recommend 200 and leave the change to the app thread, since it touches every view.
 - The hawk row says "People see flicker up to 50 or 60 times a second", where the others say "about 60"; `docs/SOURCES.md` already notes the mismatch. "About 60" is the figure to use (L13, L61). No other row in `EYES` departs from the table above, apart from the cat's 180 degrees.
 
+### 3.4 The deeper evidence, topic by topic
+
+**Acuity by method.** Methods disagree, and the spread is part of the evidence (Caves et al. 2018, Box 4: anatomy gives an upper limit; optomotor tests underestimate; behaviour depends on light, motion and motivation).
+
+| Animal | Method | Value | Log |
+|---|---|---|---|
+| domestic cat | behavioural gratings (several studies, summarised) | 3 to 9 cycles per degree | L18 |
+| domestic cat | behavioural, textbook table (Charman 1991) | 10 | L17 |
+| domestic cat | behavioural gratings across the field | 3.5 at the centre; half an octave lower at 4 degrees, 1.3 octaves lower at 16 | L88, L89 |
+| domestic cat | letter (optotype) recognition, two cats | 20/33 (young cat) and 20/74 (older cat, +2 D) | L19 |
+| domestic cat | press summary of a 600-species compilation | about a seventh of a person's | L95 |
+| domestic dog | behavioural (Snellen-equivalent) | 20/45 to 20/85; 20/60 to 20/85 in Shiba dogs; typical 20/75 | L29 to L31 |
+| domestic dog | evoked potentials and other methods, summarised | no better than 12.6 cycles per degree | L46 |
+| domestic dog | cone density in the fovea-like patch | 25 to 46 (an upper bound, ignoring optics and convergence) | L45 |
+| cheetah | compiled value, method not stated | 23 | L94 |
+| person | foveal gratings; retinal sampling; optical limit | about 60; about 60; about 70 with a 2 mm pupil | L1, L6, L5 |
+
+Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best human eyes (60) near 20/10. The app compares animals with 60, so "a tenth as well as a person" means about 6 cycles per degree.
+
+**Streak and area centralis.** Cat: a central area with a gentle fall-off (L88, L89), S cones peaking below it (L98); the wildcat's centre is twice as rich in cones (L96). Dog: from a pronounced streak (wolf, long skulls) to a strong central area (pug), correlated with skull length and cephalic index (L36 to L38), with a cone bouquet inside the central area (L44, L47). Red fox: a central area and a moderate streak; Arctic fox: a prominent streak (L39, L42). Cheetah: a horizontal cone streak (L97). In large carnivores the central area lies within the tapetum (L150).
+
+**Tapetum and dim light.** Cat: threshold up to about seven times lower than a person's (L80, L134), a cellular tapetum up to 15 layers thick reflecting up to 130 times more light than the human fundus (L81, L148), dark adaptation that goes on for up to an hour (L80 note), 92% of ganglion cells rod-driven in the dark (L71). Dog: tapetum full-sized in 70% of 539 dogs and absent in 2%, smaller in small breeds (L87); rods even in the central area (L119). Coyote: threshold below natural night light (L43). Lion: the largest tapetum of three felids examined (L122). The scattered light of a tapetum can soften the dim-light image (L149). People: a white surface at about a millionth of a candela per square metre (L7).
+
+**Colour.** Cat: S near 450 and L near 550 to 556 nm, rods 501 (L69 to L72), with an unsettled 500 nm photopic mechanism; Walls's 1942 verdict of colour blindness is superseded (L147). Dog: 429 to 435 and 555 nm, rods 508 (L64 to L66, L108, L109, L116); a neutral point near 480 nm (L68); dogs answer a deuteranopia test as red-green colour-blind people do (L151). Foxes share the dog's pigments (L110 to L115). Both cats' and dogs' lenses pass ultraviolet (L100, L101).
+
+**Flicker.** Cat 47.5 a second (L25), dog 75 to 80 (L27, L28, L85), people about 60 centrally (L13, L61) and up to about 100 at the far edge of view in very bright light (L62, L63).
+
+**Motion.** Dogs need about 0.76 degrees a second to see motion and 42% coherent dots to see a direction (L34, L35); people under 0.1 and about 5% (L15, L16); cats roughly ten times worse than people at slow motion (L83, L136).
+
+**Field and overlap.** Dog 240 degrees, overlap 30 to 60 by behaviour and 80 to 116 by optics (L79, L32, L33); cat 200, overlap 60 to 140 by method (L76, L77, L78, L144); people 200 and 120 (L57, L58).
+
+**The slit pupil's optics.** A slit lets a multifocal lens work at full diameter in bright light (L54), closes almost completely (L142), changes area about 135-fold against a person's 15 (L21, L22), and blurs horizontal contours more than vertical ones (L24), a distance cue that suits short ambush hunters (L23, L125).
+
+**Breed differences in dogs.** Skull length sets the balance of streak and central area (L36), the central density varies 6,400 to 14,400 ganglion cells per mm² between dogs (L37), short-nosed dogs follow pointing better and make eye contact sooner (L105, L106), small breeds have smaller tapeta (L87), and the eyelid opening turns more frontal as the skull shortens (L36 note).
+
 ## 4. Species with their own measurements
 
 - **Domestic cat** (*Felis catus*): acuity by several methods (L17, L18, L19, L88, L89), cone and rod peaks (L69 to L72), pupil range and shape (L20, L21), lens (L48), refraction and eye length (L75), flicker (L25), lens transmission of ultraviolet (L100). Enough for the `cat` view as written.
@@ -455,6 +490,7 @@ The same list as `docs/views/wanted/cat-dog.jsonl`, most useful first.
 17. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 6, Mirrors in animals (the tapetum), under the book's doi 10.1093/acprof:oso/9780199581139.001.0001. Priority 2: whether a tapetum costs sharpness.
 18. Land MF, Nilsson D-E 2012, *Animal Eyes*, chapter 9, Movements of the eyes, doi 10.1093/acprof:oso/9780199581139.003.0009. Priority 3: background for a gaze effect.
 19. Gunter R, Harding HGW, Stiles WS 1951, Spectral reflexion factor of the cat's tapetum, *Nature*, doi 10.1038/168293a0. Priority 3: the tint of eyeshine.
+20. Wells MC, Lehner PN 1978, The relative importance of the distance senses in coyote predatory behaviour, *Animal Behaviour* 26: 251 to 258, doi 10.1016/0003-3472(78)90025-8. Priority 3: how much coyotes hunt by sight.
 
 Not on the list because no opened page gave an exact citation: Gunter's 1951 paper on the cat's absolute threshold, Vakkur and Bishop's and Hughes's schematic eyes of the cat, Pasternak and Merigan's 1981 paper on luminance and spatial vision, Hughes's and Stone's maps of ganglion cells in the cat, and Bowmaker and Dartnall (1980), which Webvision cites (L128). They are worth finding.
 
