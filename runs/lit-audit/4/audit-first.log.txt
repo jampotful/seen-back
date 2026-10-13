@@ -1,0 +1,134 @@
+103884 works in the index; prompt v2
+4622 records in the logs, 4166 to send, 456 unseen; estimate expected $0.272, ceiling $1.254 (cap $2.00)
+smoke test (claude-haiku-5-5): reply '{"supports": "yes", "units_ok": "yes", "grade_ok": "no", "better_grade": "g", "taxon_ok": "yes", "kind": "grade", "problem": "The record grades the value \'m\' as a measurement on Apis mellifera, but the note says it is a review compilation whose Hymenoptera values were taken from Peitsch et al. 1992 '; usage {"input_tokens": 523, "cache_creation_input_tokens": 3677, "cache_read_input_tokens": 0, "cache_creation": {"ephemeral_5m_input_tokens": 0, "ephemeral_1h_input_tokens": 3677}, "output_tokens": 163, "output_tokens_details": {"thinking_tokens": 0}, "service_tier": "standard", "inference_geo": "global"}
+submitted batch msgbatch_01TfsRiZnEVYde1Ctn9JRpe3 with 4166 requests
+[22:28:37] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:29:37] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:30:37] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:31:37] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:32:38] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:33:38] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:34:38] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:35:39] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:36:39] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:37:39] batches processing; {'processing': 4166, 'succeeded': 0, 'errored': 0, 'canceled': 0, 'expired': 0}
+[22:38:40] batches ended; {'processing': 0, 'succeeded': 4166, 'errored': 0, 'canceled': 0, 'expired': 0}
+fetched 4166 results
+# Audit of the evidence logs, first pass
+
+
+Records: 4622 in the logs, 4166 sent, 456 unseen (empty quote or book source). Estimate expected $0.27, ceiling $1.25; spent $0.3093.
+
+Replies with no usable verdict: no JSON object x2
+
+## Share flagged by unit
+
+| unit | sent | unseen | flagged | no | partly | units | grade | taxon | number not in quote |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| bee | 262 | 5 | 203 (77.5%) | 6 | 82 | 9 | 145 | 30 | 2 |
+| birds | 217 | 1 | 143 (65.9%) | 4 | 78 | 8 | 85 | 25 | 3 |
+| birds-met | 77 | 0 | 63 (81.8%) | 0 | 10 | 1 | 56 | 3 | 0 |
+| cat-dog | 142 | 36 | 99 (69.7%) | 3 | 44 | 15 | 72 | 22 | 2 |
+| fish-shark | 176 | 11 | 112 (63.6%) | 4 | 79 | 13 | 45 | 30 | 6 |
+| ground-invertebrates | 188 | 9 | 124 (66.0%) | 1 | 81 | 9 | 61 | 35 | 1 |
+| herps | 201 | 19 | 108 (53.7%) | 3 | 66 | 13 | 43 | 30 | 5 |
+| herps-met | 38 | 0 | 36 (94.7%) | 2 | 19 | 2 | 30 | 7 | 3 |
+| insect | 493 | 30 | 403 (81.7%) | 5 | 134 | 20 | 337 | 44 | 19 |
+| insects-met | 52 | 0 | 17 (32.7%) | 0 | 15 | 1 | 6 | 2 | 0 |
+| jumper | 242 | 40 | 156 (64.5%) | 3 | 119 | 21 | 57 | 34 | 6 |
+| mammal-groups | 205 | 4 | 105 (51.2%) | 4 | 71 | 17 | 33 | 21 | 4 |
+| mammals-met | 15 | 0 | 7 (46.7%) | 0 | 6 | 1 | 2 | 2 | 0 |
+| methods | 954 | 205 | 863 (90.5%) | 0 | 245 | 16 | 772 | 21 | 1 |
+| plant-fungus-slime | 184 | 18 | 132 (71.7%) | 5 | 100 | 11 | 55 | 37 | 3 |
+| sea-invertebrates | 271 | 36 | 150 (55.4%) | 2 | 93 | 23 | 63 | 33 | 6 |
+| spider | 280 | 40 | 171 (61.1%) | 6 | 139 | 19 | 43 | 25 | 4 |
+| squirrel-deer-rabbit | 169 | 2 | 91 (53.8%) | 2 | 54 | 14 | 47 | 19 | 3 |
+| **all** | 4166 | 456 | 2983 (71.6%) | 50 | 1435 | 213 | 1952 | 420 | 68 |
+
+## Share flagged by trait
+
+| trait | sent | flagged | share |
+|---|---:|---:|---:|
+| lambda_max_nm | 1346 | 1165 | 86.6% |
+| acuity_cpd | 267 | 183 | 68.5% |
+| behaviour_vision | 257 | 173 | 67.3% |
+| interommatidial_deg | 134 | 115 | 85.8% |
+| receptor_classes | 153 | 107 | 69.9% |
+| colour_vision | 176 | 106 | 60.2% |
+| sense_light_nonvisual | 113 | 76 | 67.3% |
+| cff_hz | 149 | 73 | 49.0% |
+| fovea | 127 | 71 | 55.9% |
+| sense_vibration | 93 | 59 | 63.4% |
+| motion | 87 | 55 | 63.2% |
+| eye_type | 69 | 52 | 75.4% |
+| absolute_sensitivity | 74 | 49 | 66.2% |
+| eye_movement | 71 | 49 | 69.0% |
+| fov_h_deg | 72 | 46 | 63.9% |
+| eye_role | 62 | 38 | 61.3% |
+| sense_chemical | 61 | 38 | 62.3% |
+| spectral_range_nm | 44 | 35 | 79.5% |
+| polarization | 63 | 34 | 54.0% |
+| sense_hearing | 49 | 34 | 69.4% |
+| binocular_deg | 55 | 33 | 60.0% |
+| eyes_count | 58 | 32 | 55.2% |
+| acceptance_deg | 41 | 29 | 70.7% |
+| filter_pigments | 48 | 26 | 54.2% |
+| sense_touch | 36 | 25 | 69.4% |
+| sense_airflow | 30 | 22 | 73.3% |
+| tapetum | 44 | 21 | 47.7% |
+| interreceptor_deg | 27 | 21 | 77.8% |
+| sense_electric | 32 | 18 | 56.2% |
+| depth_cue | 38 | 18 | 47.4% |
+| diel | 23 | 17 | 73.9% |
+| sense_echolocation | 24 | 17 | 70.8% |
+| ocular_media_t50_nm | 49 | 15 | 30.6% |
+| fov_v_deg | 16 | 14 | 87.5% |
+| pupil | 18 | 14 | 77.8% |
+| oil_droplets | 14 | 10 | 71.4% |
+| light_environment | 10 | 10 | 100.0% |
+| sense_gravity | 14 | 10 | 71.4% |
+| sense_magnetic | 21 | 9 | 42.9% |
+| sense_infrared | 15 | 9 | 60.0% |
+| circadian | 11 | 9 | 81.8% |
+| corner_hz | 10 | 8 | 80.0% |
+| f_number | 18 | 7 | 38.9% |
+| rhabdom_um | 11 | 7 | 63.6% |
+| pupil_shape | 8 | 3 | 37.5% |
+
+## Share flagged by grade the researcher gave
+
+| grade | sent | flagged | share |
+|---|---:|---:|---:|
+| m | 3499 | 2532 | 72.4% |
+| g | 638 | 430 | 67.4% |
+| i | 17 | 11 | 64.7% |
+| x | 12 | 10 | 83.3% |
+
+## Main problem named by the reviewer (flagged records)
+
+| kind | count |
+|---|---:|
+| grade | 1817 |
+| quote_loose | 583 |
+| wrong_taxon | 154 |
+| context_needed | 141 |
+| value_absent | 98 |
+| wrong_trait | 70 |
+| conversion | 52 |
+| units | 44 |
+| none | 16 |
+| wrong_eye | 6 |
+
+## Grade changes the reviewer suggests (given grade, suggested)
+
+| given | suggested | count |
+|---|---|---:|
+| m | g | 1752 |
+| g | m | 67 |
+| g | i | 18 |
+| m | i | 9 |
+| x | g | 4 |
+| x | m | 3 |
+| i | g | 3 |
+| x | i | 2 |
+
