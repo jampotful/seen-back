@@ -115,8 +115,8 @@ ERG's to spectral lights were recorded from all eyes of intact wolf spiders. Sec
 
 Correct reply (the abstract names no species, only "wolf spiders", so the grade is g):
 [
- {"taxon": "wolf spiders (Lycosidae)", "trait": "lambda_max_nm", "value": [505, 510], "units": "nm", "eye": "secondary eyes", "method": "electroretinogram", "conditions": "", "where": "abstract", "quote": "Secondary eyes have maximum relative sensitivities at 505-510 nm", "grade": "g", "note": "species not named in the passage"},
- {"taxon": "wolf spiders (Lycosidae)", "trait": "lambda_max_nm", "value": [505, 510], "units": "nm", "eye": "principal and secondary eyes", "method": "electroretinogram", "conditions": "", "where": "abstract", "quote": "both principal and secondary eyes contain cells with a visual pigment absorbing maximally at 505-510 nm", "grade": "g", "note": "inferred pigment peak; species not named in the passage"}
+ {"taxon": "wolf spiders", "trait": "lambda_max_nm", "value": [505, 510], "units": "nm", "eye": "secondary eyes", "method": "electroretinogram", "conditions": "", "where": "abstract", "quote": "Secondary eyes have maximum relative sensitivities at 505-510 nm", "grade": "g", "note": "species not named in the passage"},
+ {"taxon": "wolf spiders", "trait": "lambda_max_nm", "value": [505, 510], "units": "nm", "eye": "principal and secondary eyes", "method": "electroretinogram", "conditions": "", "where": "abstract", "quote": "both principal and secondary eyes contain cells with a visual pigment absorbing maximally at 505-510 nm", "grade": "g", "note": "inferred pigment peak; species not named in the passage"}
 ]
 
 EXAMPLE 3
@@ -404,8 +404,17 @@ def request_params(p):
 
 def smoke(passages):
     """One ordinary request before any batch: proves the key, the model name and the reply format for a few cents."""
+    global CACHE_TTL
     p = max(passages[:50], key=lambda x: x["words"])
-    r = call("POST", "/v1/messages", request_params(p))
+    try:
+        r = call("POST", "/v1/messages", request_params(p))
+    except SystemExit as e:
+        if CACHE_TTL != "5m" and "ttl" in str(e).lower():       # the one-hour cache is not offered: use the default
+            print("one-hour cache refused; using the 5 minute cache")
+            CACHE_TTL = "5m"
+            r = call("POST", "/v1/messages", request_params(p))
+        else:
+            raise
     txt = "".join(b.get("text", "") for b in r.get("content", []) if b.get("type") == "text")
     recs, err = parse_reply(txt)
     print("smoke test: model %s replied with %s; usage %s" % (MODEL, "%d records" % len(recs) if err is None else "unparseable: " + err,
