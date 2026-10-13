@@ -627,6 +627,14 @@ def check_reply(job, F, records, reply, like_spec, floor):
                 reply[kk] = moved
                 claims = [c for c in moved if isinstance(c, dict)] if kk == "claims" else claims
                 quotes = [q for q in moved if isinstance(q, dict)] if kk == "quotes" else quotes
+    for r in spec.get("rows") or []:                     # parameter names written among the record ids move to the fifth element
+        if isinstance(r, list) and len(r) >= 4 and isinstance(r[3], list):
+            names = [x for x in r[3] if isinstance(x, str) and not re.match(r"^R\d+$", x)]
+            if names:
+                r[3] = [x for x in r[3] if x not in names]
+                while len(r) < 5:
+                    r.append([])
+                r[4] = list(r[4] or []) + [re.sub(r"^param:", "", x) for x in names]
     have = set(F["blocks"]) | {"zones", "gaze"}
     spec["modules"] = sorted({b for b in have if spec.get(b)} | ({"salience"} if (spec.get("params") or {}).get("salience") else set()))
     # 8. only known options
