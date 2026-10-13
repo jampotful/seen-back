@@ -2,7 +2,7 @@
 
 Started 13 October 2026 at 01:47 UTC (21:47 EDT on 12 October). The evidence log is `docs/views/evidence/fish-shark.jsonl`, cited below as "log N" for its line N, and the wanted list is `docs/views/wanted/fish-shark.jsonl`. This sheet builds on `docs/views/sheets/fish.md` and its audit, and goes further where the two disagree.
 
-**Where the reading came from.** The literature collection (`pub/lit-t1`, topics `fish` and `sharks-rays`: 8,034 works, 677 full texts) was read on disk first. From the owner's library, Land and Nilsson's *Animal Eyes* (2nd edition, 2012) came through only in part: the front matter, chapters 1 and 2 (light and vision, including light in water, colour and polarization) and chapter 3 up to p. 66. Chapters 4 to 9, among them "Aquatic eyes: the evolution of the lens", did not come through. On the web, Europe PMC refused with HTTP 429 at 01:53 UTC and was not used again; PubMed failed to fetch; the Journal of Experimental Biology's pages asked for a robot check; GBIF's API and Crossref were refused by this machine's network policy for direct requests, and GBIF answered through the fetch tool for the family lookups and facets described in section 1; PubMed Central article pages opened through the same tool late in the session (its search page is barred to robots) until it refused with HTTP 429 at 02:50 UTC, after which it was not used again. Abstracts quoted as "collection index" are the OpenAlex abstracts stored in the collection, which the brief counts as opened.
+**Where the reading came from.** The literature collection (`pub/lit-t1`, topics `fish` and `sharks-rays`: 8,034 works, 677 full texts) was read on disk first. From the owner's library, Land and Nilsson's *Animal Eyes* (2nd edition, 2012) came through only in part: the front matter, chapters 1 and 2 (light and vision, including light in water, colour and polarization) and chapter 3 up to p. 66. Chapters 4 to 9, among them "Aquatic eyes: the evolution of the lens", did not come through. On the web, Europe PMC refused with HTTP 429 at 01:53 UTC and was not used again; PubMed failed to fetch; the Journal of Experimental Biology's pages asked for a robot check; GBIF's API and Crossref were refused by this machine's network policy for direct requests, and GBIF answered through the fetch tool for the family lookups and facets described in section 1; PubMed Central article pages opened through the same tool late in the session (its search page is barred to robots) until it refused with HTTP 429 at 02:50 UTC, after which it was not used again. At 03:01 UTC Semantic Scholar's and Crossref's APIs failed to fetch through the same tool, and at 03:02 UTC OpenAlex's API refused with HTTP 429 and was not used again. The owner's library was searched again for new arrivals at about 03:00 UTC; nothing on fish had arrived, and one general review there (Caves et al. 2018, log 187) was read in full. Abstracts quoted as "collection index" are the OpenAlex abstracts stored in the collection, which the brief counts as opened.
 
 ## 1. Scope
 
@@ -30,7 +30,7 @@ The classification used for the shares: freshwater orders Cypriniformes, Salmoni
 | `reef` (sea fish) | ray-finned fish of the sea, hagfish, the coelacanth; setting `hagfish` | 1,677,618 | 60.7% |
 | mixed and unassigned | assigned by species habitat once named | 206,313 | 7.5% |
 | `shark` | sharks | 60,349 | 2.2% |
-| `ray` | rays, skates, chimaeras; setting `skate` | 72,046 | 2.6% |
+| `ray` | rays, skates, chimaeras; settings `skate` and `chimaera` | 72,046 | 2.6% |
 
 The keys `fish` and `shark` already exist in `GROUPS` in `src/cam.a.js`. `reef` and `ray` would be new groups for the recognizer; until the group head learns them, `reef` can be chosen from the named family and `ray` from the named order. The simpler alternative, one `fish` view and one `shark` view as in the earlier sheet, would draw a two-colour, tea-tinted picture for every damselfish, and a grey picture for every stingray that has shown colour vision in tests.
 
@@ -78,7 +78,7 @@ Rows for three later settings:
 | Field | Value | Behind it |
 |---|---|---|
 | `fov` | 335 | Log 86. The engine shrinks the camera picture to 180/335 = 0.54 and bends the edges for the rest. |
-| `cpd` | 4 | Logs 84 (5), 38 (3.0), 88 (2.86, Golden Shiner, anatomical), 154 (3, green swordtail). The value inside the range is `invented`. Acuity follows eye size (log 140), so a later version could scale `cpd` with the fish's size where the full database knows it, and the `catfish` setting could drop to 2 (`invented`). |
+| `cpd` | 4 | Logs 84 (5), 38 (3.0), 88 (2.86, Golden Shiner, anatomical), 154 (3, green swordtail). The value inside the range is `invented`. Acuity follows eye size (log 140), so a later version could scale `cpd` with the fish's size where the full database knows it, and the `catfish` setting could drop to 2 (`invented`). A review gives the rock bass, another sunfish, 40 cycles per degree from a study of its retina (log 187), eight times the Bluegill's value; until the original is read, no sunfish is drawn sharper. |
 | `topoA` | 1 | Logs 40, 89: a forward-looking area. |
 | `topoS` | .5 | Log 40: the crappie's area is drawn out along the horizontal meridian. The mix of the two weights is `invented`. |
 | `fall` | 1.4 | Log 88: the shiner's edge is 2.86/1.18 = 2.4 times coarser than its peak, which is `fall` 1.4 in the engine's convention (blur times 1 + `fall` at half the frame height). |
@@ -145,7 +145,7 @@ Row for the `hagfish` setting (110 records): `['m', 'Hagfish', 'A hagfish’s ey
 | `topoA` | 1 | Log 75: foveae in many reef groups; logs 143, 144: a forward-looking area in reef fish generally. |
 | `topoS` | .4 | Log 144: the area often stretches into a horizontal streak in open-water reef fish, and stays a round area in fish that live among coral (log 143). The weight is `invented`. |
 | `fall` | 1.6 | `invented`. A fovea is a sharper, smaller spot than an area. |
-| `pupil` | 'o' | Log 104. Shape `invented`. |
+| `pupil` | 'o' | Log 104: an iris that does not move. Log 185: across 21 wrasses, the largest reef family, the pupil's longest diameter is only 1.03 to 1.35 times its shortest (median 1.13), so a round shape is close; other reef families are `invented`. |
 | `M` | [.35, 0, 0, 0, 1, 0, 0, 0, 1] | Logs 108, 110: no cone beyond about 530 nm, so reds go dark; log 172: three temperate reef fish respond from 400 to 610 nm, probably with two cone types. The matrix is `invented`. |
 | `sheen` | 0, and .6 in the `damselfish` setting | Logs 62, 110 for damselfish; log 171 shows ultraviolet is not universal on reefs. The sheen itself is `invented`. |
 | `rate` | .86 | Log 65: 60/70. A fish that is fast by day is slow at night; switching `rate` to 1 after dusk by the phone's clock would follow logs 65 and 66. |
@@ -194,6 +194,11 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: 
 10. `['x', 'Magnetic sense', 'Sandbar sharks learned to respond when a magnetic field around them changed, and lost the skill when their magnetic sense was blocked, which suggests that sharks feel the Earth’s magnetic field. The picture leaves this sense out.']`
     Log 164 (Anderson et al. 2017).
 
+Rows for two settings:
+
+- `third eyelid` (requiem sharks and hammerheads, Carcharhinidae and Sphyrnidae: 22,456 records, 37.2% of shark records): `['m', 'Third eyelid', 'Requiem sharks and hammerheads cover each eye completely with a third eyelid while they feed, and a bonnethead, a small hammerhead, makes the final catch with its electric sense. When you thrust the phone forward, this view closes over for a moment.']` Logs 184 (Tomita et al. 2020, from its introduction), 117 (Gardiner et al. 2014). With effect 6.
+- `whale shark` (Rhincodontidae, 1,835 records): `['m', 'Eyes that pull back', 'A whale shark’s eyes are armoured with about 2,900 tiny tooth-like scales, and when a diver comes close the shark pulls each eye into its socket, by half the eye’s width, in under a second. For a whale shark, this view shrinks back and darkens for a moment when something comes close fast.']` Log 183 (Tomita et al. 2020). With effect 7.
+
 ### The picture
 
 | Field | Value | Behind it |
@@ -211,6 +216,8 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: 
 ```
 shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, pupil: 'o', dof: 14, M: [0, 1, 0, 0, 1, 0, 0, 1, 0], gain: 1.3, persist: .04,
   cue: 'There is no colour, only light and dark, and movement leaves trails.', rows: [ /* above */ ] }
+// setting third eyelid (Carcharhinidae, Sphyrnidae): effect 6, with the third-eyelid row
+// setting whale shark (Rhincodontidae): effect 7, with the whale shark row
 ```
 
 ### New effects the evidence calls for
@@ -220,6 +227,8 @@ shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, p
 3. **A pupil that follows the light.** What the person sees: in a bright scene the background comes into focus over about a minute, and in a dim one it softens, as the sandbar shark's pupil closes to under a third of its open size within a minute of bright light and opens in the dark (log 157). Phone input: the camera's own exposure or the mean brightness of the frame. Cost: one smoothed number driving `dof`; trivial. Beauty: the picture breathes with the light, slowly, the way a shark's eye does.
 4. **Smell first.** The view could open on a blank, slowly moving field that resolves into the picture as the person approaches something, following the hunting order in log 117. This is a way of arriving at the view, and it needs the owner's word on whether a view may change over time like this.
 5. **The one sense a phone shares with a shark.** A phone's magnetometer feels the same field of the Earth that sandbar sharks respond to (log 164). What the person sees: a faint, slow banding across the picture whose angle follows magnetic north as the phone turns, as if the field lines were visible in the water. Cost: a compass reading and one overlay; low. The banding is the app's invention and needs an `i` row of its own; the sense behind it is measured. This is the strongest stand-in in the unit, because the phone measures the very quantity the shark senses.
+6. **The third eyelid (setting `third eyelid`).** What the person sees: when the phone is pushed forward quickly, as in a strike, a pale membrane rises across the picture from below, holds for about half a second and draws back; while it is closed, only the electric glow of effect 1, if drawn, remains (logs 184, 117). Phone input: the accelerometer, which the heron's `thrust` already reads. Cost: low, one overlay with a timed mask. Beauty: the moment of greatest commitment is the moment of least sight, and the person feels it in the hand. The membrane's look, direction and timing are `invented`.
+7. **The eye that pulls back (setting `whale shark`).** What the person sees: when something comes close fast, the picture shrinks toward its centre, tips downward and darkens within a fraction of a second, then returns, as the whale shark pulls its eye half its width into the socket and turns it downward in under a second (log 183). Phone input: a looming cue from the planned salience map (a region that grows fast), or the camera's focus distance where it is reported. Cost: low once the salience map exists. Beauty: the person sees a giant flinch. The drawing is `invented`; the speed and depth of the movement are measured.
 
 ## 5. The view `ray` (rays, skates and chimaeras)
 
@@ -244,6 +253,11 @@ shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, p
 8. `['x', 'A tail that feels', 'A cownose ray’s long, thin tail carries lateral line canals along its whole length, so it may trail behind the ray like an antenna that feels the water. The picture leaves this sense out.']`
    Log 161 (Chaumel and Lauder 2025).
 
+Rows for the `chimaera` setting (Chimaeriformes, 1,769 records), in place of rows 1 and 6:
+
+- `['m', 'Colour of a chimaera', 'The elephant shark, which is a chimaera of shallow water and no true shark, makes three kinds of cone pigment in its eyes. The silver chimaera, which lives 200 to 500 metres down, has lost the genes for them and keeps only the pigment of its rods. This view gives the elephant shark two colours, as for a ray, and other chimaeras grey.']` Logs 28 (Hart et al. 2025, citing Davies et al. 2009), 179, 180 (Teramura et al. 2026).
+- `['x', 'Electric snout', 'A chimaera’s head carries about 600 to 1,250 pores of the electric sense, eight or nine in every ten of them on the underside of the head, and a spookfish’s long snout probably serves as a probe for prey beneath it. The picture leaves this sense out.']` Logs 181 (Solon et al. 2025), 138 (about 700 in *Chimaera monstrosa*).
+
 ### The picture
 
 | Field | Value | Behind it |
@@ -256,12 +270,13 @@ shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, p
 | `M` | the existing `DEUTAN` matrix | Logs 26, 139: two cone classes. Using a two-cone human simulation as a stand-in is `invented`, and its colour axis is a guess. |
 | `persist` | .08 | Log 124: 1/12 = 0.083 seconds. |
 | `skate` setting | `sat` 0, `persist` .2 | Logs 27, 125 (5 Hz in dim light). |
-| chimaeras | the ray settings | Log 28: the elephant shark expresses three cone opsins; chimaeras ride with rays, `invented`. |
+| `chimaera` setting | the ray settings for Callorhinchidae (1,022 records); `sat` 0 for the other 747 (Chimaeridae 734, the rest spookfish) | Log 28: the elephant shark, a plough-nose chimaera of shallow water (log 180), expresses three cone opsins. Log 179: the silver chimaera of 200 to 500 m has no intact gene for them. Extending one species' genome to its whole family is `invented`. |
 
 ```
 ray: { chip: 'Ray, skate', who: 'a ray', fov: 360, cpd: .2, topoS: 1, fall: 1, pupil: 'o', M: DEUTAN, persist: .08,
   cue: 'You see almost the whole circle, softly, and movement leaves long trails.', rows: [ /* above */ ] }
 // setting skate (Rajiformes): sat: 0, persist: .2
+// setting chimaera (Chimaeriformes): Callorhinchidae keep the ray settings; Chimaeridae and Rhinochimaeridae sat: 0; the two chimaera rows in place of rows 1 and 6
 ```
 
 ### New effects the evidence calls for
@@ -306,12 +321,16 @@ The views proposed here are new, and no `EYES` entry exists for fish, so this se
 - **Port Jackson Shark**: streak, acuity, rod-dominated retina (logs 101, 102).
 - **Sandbar Shark**: pupil, f-number, covered tapetum, electric threshold (logs 127, 157, 158).
 - **Yellow Stingray**: full horizontal field, flicker with temperature (logs 94, 124).
-- **Little Skate**: streak, electric cells (logs 100, 118).
+- **Little Skate**: streak, electric cells, a retina with one kind of light-sensing cell (logs 100, 118, 186).
 - **Greenland Shark**: rods only (log 137).
+- **Whale Shark**: armoured eyes that pull back in under a second (log 183).
+- **Elephant Shark** and **Silver Chimaera**: cone opsins kept in shallow water and lost in deep water (logs 28, 179, 180).
+- **Wrasses** (21 species, among them the Slippery Dick, *Halichoeres bivittatus*, 29 fish): pupil shape (log 185).
 
 ## 8. Gaps and how to fill them
 
 - **Bluegill cone peaks.** The opsins are measured (log 150) and the peaks are not; the bass's 535 and 614 nm (logs 80, 81) stand in.
+- **Sharpness across sunfish.** A review gives the rock bass 40 cycles per degree (log 187), from a 1988 study of the retinas of the rock bass and the Bluegill, against about 5 for the Bluegill by behaviour (log 84) and 3.0 for the largemouth bass by anatomy (log 38). The same paragraph of the review attributes a zebrafish value to the Japanese rice fish, so the figure needs the original (on the wanted list) before the `sunfish` setting takes a value per genus.
 - **Mosquitofish sharpness and field.** None found for the mosquitofish. Nearest: the green swordtail, about 3 cycles per degree by anatomy and 2 to 3 by behaviour in females (log 154). Inference: draw a mosquitofish near 3, slightly below the sunfish.
 - **Florida Gar.** Known through the spotted gar: pigments in a dish (logs 76, 77) and two ultraviolet opsins in a duplex retina with no double cones (log 153). Sharpness and field are unknown.
 - **Catfish sight.** No acuity or cone data for bullhead catfish were opened. They have electroreceptors (log 59) and many catfish have a reflecting tapetum (log 60). Nothing is known here about bullhead vision.
@@ -329,7 +348,7 @@ The views proposed here are new, and no `EYES` entry exists for fish, so this se
 The same list as `docs/views/wanted/fish-shark.jsonl`, most useful first (priority 1 would change a view's picture, 2 would confirm or correct a row, 3 is background).
 
 1. (1) Ryan LA, Hemmi JM, Collin SP, Hart NS 2017. Electrophysiological measures of temporal resolution, contrast sensitivity and spatial resolving power in sharks. Journal of Comparative Physiology A. doi:10.1007/s00359-017-1154-z. Measures flicker, contrast and acuity in the same sharks by one method, which would set the shark view's trails and blur together.
-2. (1) Siebeck UE, Marshall NJ 2001. Ocular media transmission of coral reef fish: can coral reef fish see ultraviolet light?. Vision Research. doi:10.1016/s0042-6989(00)00240-6. Would show which reef families' lenses pass ultraviolet, deciding where the reef view's ultraviolet sheen belongs.
+2. (1) Siebeck UE, Marshall NJ 2001. Ocular media transmission of coral reef fish: can coral reef fish see ultraviolet light? Vision Research. doi:10.1016/s0042-6989(00)00240-6. Would show which reef families' lenses pass ultraviolet, deciding where the reef view's ultraviolet sheen belongs.
 3. (1) Chung W-S, Marshall NJ, Watson S-A, Munday PL, Nilsson GE 2014. Ocean acidification slows retinal function in a damselfish through interference with GABAA receptors. Journal of Experimental Biology 217: 323-326. doi:10.1242/jeb.092478. Holds the damselfish flicker value used by the earlier sheet (89 Hz), which would set the reef view's pace for a diurnal reef fish.
 4. (1) McComb DM, Tricas TC, Kajiura SM 2009. Enhanced visual fields in hammerhead sharks. Journal of Experimental Biology. doi:10.1242/jeb.032615. The full text gives monocular and total visual fields of five sharks, replacing the shark view's invented field of 300 degrees.
 5. (2) McComb DM, Kajiura SM 2008. Visual fields of four batoid fishes: a comparative study. Journal of Experimental Biology. doi:10.1242/jeb.014506. The full text gives the vertical fields and blind areas of four rays, for placing the ray view's sharp band and dark underside.
@@ -337,12 +356,15 @@ The same list as `docs/views/wanted/fish-shark.jsonl`, most useful first (priori
 7. (2) Horváth G, Varjú D 1995. Underwater refraction-polarization patterns of skylight perceived by aquatic animals through Snell's window of the flat water surface. Vision Research. doi:10.1016/0042-6989(94)00254-j. Would give the geometry and appearance of Snell's window and the surface outside it as an aquatic animal sees them, for drawing the looking-up effect.
 8. (2) Jinson ST, Liebich J, Senft SL, Mäthger LM 2018. Retinal specializations and visual ecology in an animal with an extremely elaborate pupil shape: the little skate Leucoraja (Raja) erinacea. Journal of Comparative Neurology. doi:10.1002/cne.24465. Would give the skate's pupil shape and how it shapes blur, for the ray view's pupil.
 9. (2) Kalinoski M, Hirons A, Horodysky AZ, Brill RW 2014. Spectral sensitivity, luminous sensitivity, and temporal resolution of the visual systems in three sympatric temperate coastal shark species. Journal of Comparative Physiology A. doi:10.1007/s00359-014-0950-y. More shark flicker and dim-light values for the shark view's trails and shadows.
-10. (3) Kamermans M, Hawryshyn CW 2011. Teleost polarization vision: how it might work and what it might be good for. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2010.0211. Review of how fish might read polarized light, for deciding whether any fish view should show it.
-11. (3) Hawryshyn CW, Moyer HD, Allison WT, Haimberger TJ, McFarland WN 2003. Multidimensional polarization sensitivity in damselfishes. Journal of Comparative Physiology A. doi:10.1007/s00359-003-0392-4. Polarization sensitivity in adult damselfish, the largest reef family with measured eyes.
-12. (3) Ladich F 2015. Peripheral hearing structures in fishes: diversity and sensitivity of catfishes and cichlids. Advances in Experimental Medicine and Biology. doi:10.1007/978-3-319-21059-9_15. Hearing ranges of catfish for the freshwater view's hearing row and microphone effect.
-13. (3) Dreyfert T, Holmberg K, Struwe G 1979. Critical flicker fusion frequency of the river lamprey (Lampetra fluviatilis). Vision Research. doi:10.1016/0042-6989(79)90140-8. A lamprey's flicker rate, for a later lamprey setting.
-14. (3) Fernholm B, Holmberg K 1975. The eyes in three genera of hagfish (Eptatretus, Paramyxine and Myxine): a case of degenerative evolution. Vision Research. doi:10.1016/0042-6989(75)90215-1. Confirms what hagfish eyes can detect, for the hagfish setting.
-15. (3) Watt MJ, Evans CS, Joss JMP 1999. Use of electroreception during foraging by the Australian lungfish. Animal Behaviour. doi:10.1006/anbe.1999.1216. Electric sense in lungfish, which ride along with the freshwater view.
+10. (2) Williamson M, Keast A 1988. Retinal structure relative to feeding in the rock bass (Ambloplites rupestris) and bluegill (Lepomis macrochirus). Canadian Journal of Zoology 66: 2840-2846. No DOI could be read from an opened page; the link is the reference link in Caves et al. 2018 (http://refhub.elsevier.com/S0169-5347(18)30052-1/sbref0220). Holds the rock bass value of 40 cycles per degree reported by Caves et al. 2018, beside a study of the Bluegill's retina, which would decide whether the sunfish setting needs a sharpness per genus.
+11. (2) Horodysky AZ, Brill RW, Crawford KC, Seagroves ES, Johnson AK 2013. Comparative visual ecophysiology of mid-Atlantic temperate reef fishes. Biology Open. doi:10.1242/bio.20136825. Gives flicker rates and dim-light sensitivity for the spadefish, tautog and black sea bass, which would set the reef view's pace for temperate reef fish; the journal is open access, but its pages asked for a robot check.
+12. (3) Kamermans M, Hawryshyn CW 2011. Teleost polarization vision: how it might work and what it might be good for. Philosophical Transactions of the Royal Society B. doi:10.1098/rstb.2010.0211. Review of how fish might read polarized light, for deciding whether any fish view should show it.
+13. (3) Hawryshyn CW, Moyer HD, Allison WT, Haimberger TJ, McFarland WN 2003. Multidimensional polarization sensitivity in damselfishes. Journal of Comparative Physiology A. doi:10.1007/s00359-003-0392-4. Polarization sensitivity in adult damselfish, the largest reef family with measured eyes.
+14. (3) Ladich F 2015. Peripheral hearing structures in fishes: diversity and sensitivity of catfishes and cichlids. Advances in Experimental Medicine and Biology. doi:10.1007/978-3-319-21059-9_15. Hearing ranges of catfish for the freshwater view's hearing row and microphone effect.
+15. (3) Dreyfert T, Holmberg K, Struwe G 1979. Critical flicker fusion frequency of the river lamprey (Lampetra fluviatilis). Vision Research. doi:10.1016/0042-6989(79)90140-8. A lamprey's flicker rate, for a later lamprey setting.
+16. (3) Fernholm B, Holmberg K 1975. The eyes in three genera of hagfish (Eptatretus, Paramyxine and Myxine): a case of degenerative evolution. Vision Research. doi:10.1016/0042-6989(75)90215-1. Confirms what hagfish eyes can detect, for the hagfish setting.
+17. (3) Watt MJ, Evans CS, Joss JMP 1999. Use of electroreception during foraging by the Australian lungfish. Animal Behaviour. doi:10.1006/anbe.1999.1216. Electric sense in lungfish, which ride along with the freshwater view.
+18. (3) Warrington RE, Hart NS, Potter IC, Collin SP, Hemmi JM 2017. Retinal temporal resolution and contrast sensitivity in the parasitic lamprey Mordacia mordax and its non-parasitic derivative Mordacia praecox. Journal of Experimental Biology. doi:10.1242/jeb.150383. A lamprey's flicker rate and contrast sensitivity by electroretinogram, for the lamprey setting's pace and contrast.
 
 ## 10. Sources
 
@@ -448,6 +470,12 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 - Horodysky AZ et al. 2013. Biol Open. doi:10.1242/bio.20136825. `opened` (abstract)
 - Fritsches KA, Marshall NJ 2002. J Exp Biol. doi:10.1242/jeb.205.9.1241. `opened` (abstract)
 - Landgren E et al. 2014. Phil Trans R Soc B. doi:10.1098/rstb.2013.0039. `opened` (abstract)
+- Teramura A, Kadota M, Hirase S, Kuraku S, Kikuchi K 2026. DNA Research. doi:10.1093/dnares/dsag003. `opened`
+- Solon LAO et al. 2025. Sci Rep. doi:10.1038/s41598-025-87499-2. `opened`
+- Tomita T et al. 2020. PLoS ONE. doi:10.1371/journal.pone.0235342. `opened`
+- Schmitz L, Wainwright PC 2011. Coral Reefs 30: 415-428. doi:10.1007/s00338-010-0714-2. `opened`
+- Magaña-Hernández L et al. 2023. eNeuro. doi:10.1523/eneuro.0226-23.2023. `opened` (abstract)
+- Caves EM, Brandley NC, Johnsen S 2018. Trends Ecol Evol 33(5). doi:10.1016/j.tree.2018.03.001. `opened` (owner's library); the rock bass value is `secondary`, from this review
 - Land MF, Nilsson D-E 2012, pp. 28, 32, 36-37, 39-41, 51, 56-57 as read (see the first line).
 - GBIF occurrence facets (iNaturalist research-grade dataset 50c9509d-22c7-4a22-a47d-8c48425ef4a7), saved on `ci` in `runs/fetch/10` (read 11 October 2026), GBIF species matches for nine families, the Perciformes family facet and twelve family pages, read 13 October 2026. `opened`
 
@@ -462,4 +490,4 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 
 ## Status
 
-Revised at about 02:50 UTC on 13 October 2026, with 178 log lines. All three files pass `tools/senses/check.py` (the log) and parse as JSON (the wanted list). Reading continues while time allows; anything added later is listed here.
+Revised at about 03:20 UTC on 13 October 2026, with 187 log lines and 18 wanted entries. All three files pass `tools/senses/check.py` (the log) and parse as JSON (the wanted list). Reading continues while time allows; anything added later is listed here.
