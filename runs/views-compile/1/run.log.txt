@@ -1,0 +1,21 @@
+direct jumper__haiku55__1: ok
+direct bee__haiku55__1: ok
+direct jumper__haiku55__2: ok
+direct bee__haiku55__2: ok
+Traceback (most recent call last):
+  File "/home/runner/work/seen-back/seen-back/tools/views/compile.py", line 993, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/views/compile.py", line 989, in main
+    return {"plan": cmd_plan, "run": cmd_run, "check": cmd_check, "compare": cmd_compare}[a.cmd](a)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/views/compile.py", line 886, in cmd_run
+    errs, warns, spec, cby = finish(k, m, P, reply, F, specs, floor, a.out)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/views/compile.py", line 784, in finish
+    res = check_reply(job, F, P["records"], copy.deepcopy(reply), like, floor)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/seen-back/seen-back/tools/views/compile.py", line 657, in check_reply
+    peaks = mat.get("from_pigments")
+            ^^^^^^^
+AttributeError: 'str' object has no attribute 'get'

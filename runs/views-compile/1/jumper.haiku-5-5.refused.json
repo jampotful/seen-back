@@ -1,0 +1,67 @@
+{
+ "key": "jumper",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "the reply has no spec object"
+ ],
+ "reply": {
+  "spec": "{\"key\": \"jumper\", \"version\": 1, \"offered\": false, \"chip\": \"Jumping spider\", \"who\": \"a jumping spider\", \"applies_to\": {\"family\": [\"Salticidae\"]}, \"cue\": \"Look for what a jumping spider looks for. Its front eyes are sharp and small, and it sees a narrow strip at a time.\", \"params\": {\"pupil\": \"none\", \"cpd\": {\"value\": 12.4, \"grade\": \"m\", \"invented\": false, \"src\": [\"R1\"], \"range\": [0.005, 40], \"note\": \"sharpness of the front eyes in one measured salticid\"}, \"fov\": {\"value\": 280, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [100, 360], \"note\": \"the whole animal's field, chosen by the app; eight eyes together cover almost all round\"}, \"fovea\": {\"value\": 2.2, \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"the sharp middle is drawn larger than a person's\"}, \"fall\": {\"value\": 2.6, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 3], \"note\": \"how fast sharpness falls with light; no record gives it\"}, \"gate\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"still things fade; no record gives the strength\"}, \"persist\": {\"value\": 0.15, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 60], \"note\": \"how long the picture lingers\"}, \"rate\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0.25, 2], \"note\": \"playback rate of time; no record gives a jumping spider's flicker rate that changes the picture\"}, \"gain\": {\"value\": 1.6, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [1, 4], \"note\": \"brightness gain of the picture\"}, \"sat\": {\"value\": 0.9, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1.5], \"note\": \"colour saturation\"}, \"noGreen\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"green is kept\"}, \"uvBlue\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"blue channel read as ultraviolet\"}, \"M\": \"BEE\", \"field\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"reshapes the field as a narrow strip\"}, \"topoA\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"by analogy with the house cat\"}, \"topoS\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"how much sharper the middle is than the edge, across\"}, \"sheen\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"no reflective layer\"}, \"living\": {\"value\": 2, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 3], \"note\": \"extra weight for living movement\"}, \"glow\": {\"value\": 0.9, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"how brightly movement glows\"}, \"glowC\": {\"value\": [0.78, 1, 0.62], \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"the glow's colour\"}, \"hold\": {\"value\": 110, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 300], \"note\": \"how long a moment is held, in frames\"}}, \"matrices\": {\"BEE\": {\"note\": \"placeholder matrix name, see the engine\"}}, \"inputs\": {\"motion\": \"optional\"}, \"modules\": [], \"draw\": {\"field\": [{\"name\": \"strip\", \"invented\": true, \"note\": \"the narrow strip the front eyes see, drawn across the picture\"}, {\"name\": \"wedge\", \"invented\": true, \"note\": \"a wedge of sharp view\"}], \"overlay\": [{\"name\": \"off\", \"invented\": true, \"note\": \"no overlay\"}, {\"name\": \"rings\", \"invented\": true, \"note\": \"rings drawn around the picture\"}], \"gaze\": [{\"name\": \"strip\", \"invented\": true, \"note\": \"the sharp strip sweeps across the picture\"}, {\"name\": \"stamps\", \"invented\": true, \"note\": \"still sharp patches\"}], \"colour\": [{\"name\": \"palm\", \"invented\": true, \"note\": \"colour as the app draws it\"}, {\"name\": \"two\", \"invented\": true, \"note\": \"two colour channels\"}], \"spectrum\": [{\"name\": \"neutral\", \"invented\": true, \"note\": \"no colour shift\"}, {\"name\": \"matrix\", \"invented\": true, \"note\": \"colour from the matrix\"}]}, \"zones\": [{\"id\": \"front\", \"shape\": \"strip\", \"at\": \"centre\", \"deg\": 2, \"cpd\": {\"value\": 3.8, \"grade\": \"m\", \"invented\": false, \"src\": [\"R2\"], \"range\": [0.005, 40], \"note\": \"sharpness of the strip in Phidippus johnsoni\"}, \"mag\": 1, \"gaze\": {\"value\": \"strip\", \"grade\": \"i\", \"invented\": true, \"src\": []}}], \"rows\": [[\"m\", \"Front eyes\", \"A measured jumping spider resolves about 12 cycles to the degree in its principal eyes, close to what a person manages at the centre of the eye. Most other jumping spiders measured resolve about 4.\", [\"R1\", \"R2\"], [\"params.cpd\", \"zones[0].cpd\"]], [\"m\", \"A narrow strip\", \"A jumping spider's principal eyes see a strip about 2 degrees wide and 21 degrees high at any one time, and they move across the picture to scan it.\", [\"R14\", \"R29\"], [\"params.field\", \"draw.field\"]], [\"g\", \"The whole field\", \"Taken together, a jumping spider's eyes cover almost the whole circle around it, though most of that is seen only at low sharpness.\", [\"R23\", \"R28\", \"R21\"], [\"params.fov\"]], [\"m\", \"Still things\", \"A side eye turns a jumping spider toward moving things. Stationary targets never start a turn, so still things fade away in the picture.\", [\"R231\", \"R222\"], [\"params.gate\"]], [\"i\", \"Colour and glow\", \"The picture is drawn with a little colour and a soft glow where things move. These settings are the app's own choices, since no record gives the strength of the colour or the glow.\", [], [\"params.sat\", \"params.glow\", \"params.glowC\", \"params.gain\"]], [\"g\", \"Depth\", \"Jumping spiders judge distance by how blurred an image is across their eye's layers, so the picture softens with distance.\", [\"R254\", \"R262\"], [\"params.fall\"]]]}, \"claims\": [{\"path\": \"params.cpd\", \"records\": [\"R1\"], \"kind\": \"value\", \"how\": \"Portia fimbriata principal eye resolves 12.4 cycles per degree, as calculated in the record.\"}, {\"path\": \"zones[0].cpd\", \"records\": [\"R2\"], \"kind\": \"value\", \"how\": \"Phidippus johnsoni resolves about 3.8 cycles per degree, from an inter-receptor angle of 0.13 degrees.\"}, {\"path\": \"params.field\", \"records\": [\"R14\", \"R29\"], \"kind\": \"range_middle\", \"how\": \"The principal retina's field is about 2 degrees wide and 21 degrees high in Phidippus johnsoni, drawn as a strip.\"}, {\"path\": \"params.gate\", \"records\": [\"R231\"], \"kind\": \"value\", \"how\": \"The side eyes respond only to movement, so still things are blind in the picture; the strength is set to full.\"}]}",
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R1"
+    ],
+    "kind": "value",
+    "how": "Portia fimbriata principal eye resolves 12.4 cycles per degree, as calculated in the record."
+   },
+   {
+    "path": "zones[0].cpd",
+    "records": [
+     "R2"
+    ],
+    "kind": "value",
+    "how": "Phidippus johnsoni resolves about 3.8 cycles per degree, from an inter-receptor angle of 0.13 degrees."
+   },
+   {
+    "path": "params.field",
+    "records": [
+     "R14",
+     "R29"
+    ],
+    "kind": "range_middle",
+    "how": "The principal retina's field is about 2 degrees wide and 21 degrees high in Phidippus johnsoni, drawn as a strip."
+   },
+   {
+    "path": "params.gate",
+    "records": [
+     "R231"
+    ],
+    "kind": "value",
+    "how": "The side eyes respond only to movement, so still things are blind in the picture; the strength is set to full."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "The highest spatial frequency that can be recon- structed by layer 1 with minimum receptor-row spacing 1.4 J..Lm and distance 1,980 J..Lm from the posterior nodal point of the telephoto system is 1,980/2.8 = 710 rad- 1."
+   },
+   {
+    "record": "R2",
+    "quote": "with more typical species (e.g., *Phidippus johnsoni*) having eyes that support visual angles of around 0.13 degrees (Blest, McIntyre, & Carter, 1988 ; Land, 1969)."
+   },
+   {
+    "record": "R14",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   },
+   {
+    "record": "R29",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   },
+   {
+    "record": "R231",
+    "quote": "the system behaves as though it were completely blind to stationary objects."
+   }
+  ]
+ }
+}
