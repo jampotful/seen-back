@@ -169,7 +169,7 @@ L94 (23 cycles per degree), L97.
 ```
 ['i', 'Sharpness', 'No measurement was found for lions, tigers, leopards or pumas. Their eyes are about one and a half times as long as a house cat’s, and longer eyes usually see finer detail, so this view guesses that they see about a fifth as much detail as a person.'],
 ```
-L121 (tiger eye 29.4 mm), L75 (cat 19.75 mm), L122 note (lion 27.4 to 32.2 mm), L126.
+L121 (tiger eye 29.4 mm), L75 (cat 19.75 mm), L122 note (lion 27.4 to 32.2 mm), L126, L143 (Walls: high acuity is found only in large animals such as the great cats).
 
 ```
 ['m', 'Dim light', 'In a study of the eyes of three kinds of wild cat, the lions had the largest tapetum, the mirror-like layer behind the retina that gives light a second pass. This view brightens the shadows to suggest it.'],
@@ -388,7 +388,7 @@ Every row that compares an animal with "people" or "a person" should use these f
 | Sharpness | about 60 cycles per degree at the centre of gaze (a cycle is one dark and one light stripe). Comparisons are fractions of 60 | L1, L6 (retinal sampling about 60), L5 (optical limit about 70 with a 2 mm pupil), L3 (73 in a textbook table) |
 | Sharpness away from the centre | half by about 2.5 degrees, a tenth by about 7 degrees | L60, L2 |
 | Field of view | about 200 degrees side to side with both eyes; about 120 of them seen by both eyes; about 135 top to bottom | L57, L58, L59. The older round figure of 180 (L158, with the eyes at rest; repeated in L77 and L132) is smaller than clinical perimetry finds; 140 for the overlap is Kahmann's maximum (L145) |
-| Flicker | about 60 times a second at the centre of view in bright light; in very bright light at the edge of view, up to about 90 to 110; fewer in dim light | L13, L61, L62, L63 |
+| Flicker | about 60 times a second at the centre of view in bright light; in very bright light at the edge of view, up to about 90 to 110; fewer in dim light | L13, L61, L62, L63, L164 (rises with the logarithm of intensity) |
 | Colour | three kinds of cone, most sensitive near 420 (blue-violet), 530 (green) and 560 (yellow-green) nanometres; light from about 400 to 700 nanometres | L128, L129, L130 (M and L also L10, L11, L91, L92), L12, L9 |
 | Dim light | a fully dark-adapted person can just see a white surface at about a millionth of a candela per square metre, about the light of an overcast starry night | L7, L8 |
 | Pupil | area changes about 15-fold | L22 |
@@ -434,7 +434,7 @@ Snellen fractions convert at 30 cycles per degree for 20/20, which puts the best
 
 **The slit pupil's optics.** A slit lets a multifocal lens work at full diameter in bright light (L54), closes almost completely (L142), changes area about 135-fold against a person's 15 (L21, L22), and blurs horizontal contours more than vertical ones (L24), a distance cue that suits short ambush hunters (L23, L125).
 
-**Breed differences in dogs.** Skull length sets the balance of streak and central area (L36), the central density varies 6,400 to 14,400 ganglion cells per mm² between dogs (L37), short-nosed dogs follow pointing better and make eye contact sooner (L105, L106), small breeds have smaller tapeta (L87), and the eyelid opening turns more frontal as the skull shortens (L36 note).
+**Breed differences in dogs.** Skull length sets the balance of streak and central area (L36), the central density varies 6,400 to 14,400 ganglion cells per mm² between dogs (L37), short-nosed dogs follow pointing better and make eye contact sooner (L105, L106), small breeds have smaller tapeta and a fair share of Labradors have none (L87), the eyelid opening turns more frontal as the skull shortens (L36 note), sighthounds such as the borzoi and greyhound hunt by sight (L153), and some breeds are often short-sighted, toy poodles above all (L165).
 
 ## 4. Species with their own measurements
 
