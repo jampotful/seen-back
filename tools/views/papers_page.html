@@ -43,6 +43,10 @@ ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .why { font-size: 14px; margin-top: 8px; }
 .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .acts .btn { min-height: 36px; font-size: 13px; }
+.acts .btn[aria-pressed=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.acts .sp { flex: 1 1 8px; }
+.st { font-size: 12px; font-weight: 600; border-radius: 4px; padding: 3px 6px; }
+.st.full { color: var(--ok); background: var(--ok-bg); } .st.partial { color: var(--amber); border: 1px solid currentColor; } .st.na { color: var(--muted); border: 1px dashed currentColor; }
 details.more { margin-top: 8px; font-size: 13px; color: var(--muted); }
 details.more summary { cursor: pointer; width: fit-content; }
 details.more p { margin: 6px 0 0; overflow-wrap: anywhere; }
@@ -61,7 +65,7 @@ details.lib input { font: inherit; width: 100%; max-width: 520px; margin-top: 8p
 </style>
 <div class="wrap">
   <h1>Papers wanted</h1>
-  <p class="steps">Open a paper, save the PDF into the UNPROCESSED folder, then tap the circle. The research thread files it from there. Ticked papers leave the list. The list is ranked, so work from the top.</p>
+  <p class="steps">Open a paper, save the PDF into the UNPROCESSED folder, then tap the circle. If the library won't give you the full text, save the printed page with the abstract and references and tap Partial. If you can't get it at all, tap Can't get it. Each choice is passed to the research agents, and the paper leaves your list.</p>
   <div class="top">
     <a class="btn main" href="__DRIVE_URL__" target="_blank" rel="noopener">Open UNPROCESSED in Drive</a>
     <div class="prog"><span id="progText"></span><div class="meter"><i id="meter"></i></div></div>
@@ -76,7 +80,7 @@ details.lib input { font: inherit; width: 100%; max-width: 520px; margin-top: 8p
     </div>
     <input id="q" type="search" placeholder="Search title, author, species" aria-label="Search">
     <select id="folder" aria-label="Folder"><option value="">Any folder</option></select>
-    <label class="t" for="showdone"><input id="showdone" type="checkbox"> Show ticked</label>
+    <label class="t" for="showdone"><input id="showdone" type="checkbox"> Show handled</label>
   </div>
   <p class="count" id="count"></p>
   <ol id="list"></ol>
@@ -103,7 +107,8 @@ function rows() {
   all.sort(function (a, b) { return (a.p - b.p) || (a.n - b.n); });
   return all;
 }
-function isDone(d) { return !!(d.got || ticks[d.id]); }
+function stateOf(d) { var v = ticks[d.id]; return v === true || v === 'full' ? 'full' : (v === 'partial' || v === 'na' ? v : ''); }
+function isDone(d) { return !!(d.got || stateOf(d)); }
 function link(d) { var u = d.u || ('https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t)); return proxy && d.u ? proxy + u : u; }
 function scholar(d) { return 'https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t); }
 function firstSentence(w) { return String(w || '').split(' | ')[0]; }
@@ -111,27 +116,28 @@ function render() {
   var all = rows(), q = (state.q || '').toLowerCase(), out = [], shown = 0, c = { 1: [0, 0], 2: [0, 0], 3: [0, 0] };
   all.forEach(function (d) { var k = c[d.p] || c[3]; k[1]++; if (isDone(d)) k[0]++; });
   all.forEach(function (d) {
-    var done = isDone(d);
+    var done = isDone(d), st = stateOf(d);
     if (state.p && d.p !== state.p) return;
     if (state.folder && d.f !== state.folder) return;
     if (done && !state.done) return;
     if (q && (d.t + ' ' + d.a + ' ' + d.s + ' ' + d.j + ' ' + d.w).toLowerCase().indexOf(q) < 0) return;
     shown++;
     var rest = String(d.w || '').split(' | ').slice(1).join(' ');
-    out.push('<li class="row' + (done ? ' done' : '') + '"><button class="tick" data-id="' + esc(d.id) + '" aria-pressed="' + done + '" aria-label="' + (done ? 'Untick' : 'Tick') + ': I have saved this paper"' + (d.got ? ' disabled' : '') + '>✓</button><div>' +
-      '<div class="head"><span class="pr p' + d.p + '">P' + d.p + '</span><span class="fold">' + esc(d.f) + '</span>' + (d.got ? '<span class="indrive">Already in Drive</span>' : '') + '</div>' +
+    out.push('<li class="row' + (done ? ' done' : '') + '"><button class="tick" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'full' || !!d.got) + '" aria-label="' + (st === 'full' ? 'Untick' : 'Tick') + ': I have saved the full paper"' + (d.got ? ' disabled' : '') + '>✓</button><div>' +
+      '<div class="head"><span class="pr p' + d.p + '">P' + d.p + '</span><span class="fold">' + esc(d.f) + '</span>' + (d.got ? '<span class="indrive">Already in Drive</span>' : '') + (st ? '<span class="st ' + st + '">' + ({ full: 'Saved', partial: 'Partial', na: "Can't get it" })[st] + '</span>' : '') + '</div>' +
       '<div class="t">' + esc(d.t) + '</div>' +
       '<div class="cite">' + esc(d.a) + (d.y ? ' (' + esc(d.y) + ')' : '') + (d.j ? ', ' + esc(d.j) : '') + '</div>' +
       (d.w ? '<div class="why">' + esc(firstSentence(d.w)) + '</div>' : '') +
       '<div class="acts">' + (d.u ? '<a class="btn main" href="' + esc(link(d)) + '" target="_blank" rel="noopener">Open paper</a>' : '') +
-      '<a class="btn" href="' + esc(scholar(d)) + '" target="_blank" rel="noopener">Search Scholar</a></div>' +
+      '<a class="btn" href="' + esc(scholar(d)) + '" target="_blank" rel="noopener">Search Scholar</a>' + (d.got ? '' : '<span class="sp"></span><button class="btn" data-act="partial" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'partial') + '" title="Abstract and references only">Partial</button><button class="btn" data-act="na" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'na') + '" title="I cannot get this paper">Can\'t get it</button>') + '</div>' +
       ((rest || d.h || d.s) ? '<details class="more"><summary>More</summary>' + (d.h ? '<p><em>How to get it:</em> ' + esc(d.h) + '</p>' : '') + (rest ? '<p><em>Also:</em> ' + esc(rest) + '</p>' : '') + (d.s ? '<p><em>Species it would fix:</em> ' + esc(d.s) + '</p>' : '') + (d.by ? '<p><em>Asked for by:</em> ' + esc(d.by) + '</p>' : '') + '</details>' : '') +
       '</div></li>');
   });
   $('list').innerHTML = out.join('') || '<li class="empty">' + (state.p === 1 && !state.q && !state.folder && !state.done ? 'Every priority 1 paper is ticked.' : 'Nothing matches these filters.') + '</li>';
   $('count').textContent = shown + ' ' + (shown === 1 ? 'paper' : 'papers') + ' shown';
   [1, 2, 3].forEach(function (p) { $('n' + p).textContent = (c[p][1] - c[p][0]) + ' left'; });
-  var p1 = c[1]; $('progText').innerHTML = '<b>' + p1[0] + ' of ' + p1[1] + '</b> priority 1 papers saved';
+  var p1 = c[1], sv = 0, pa = 0, nn = 0; all.forEach(function (d) { if (d.p !== 1) return; var s = stateOf(d); if (d.got || s === 'full') sv++; else if (s === 'partial') pa++; else if (s === 'na') nn++; });
+  $('progText').innerHTML = '<b>' + p1[0] + ' of ' + p1[1] + '</b> priority 1 papers handled · ' + sv + ' saved, ' + pa + ' partial, ' + nn + " can't get";
   $('meter').style.width = (p1[1] ? 100 * p1[0] / p1[1] : 0) + '%';
   document.querySelectorAll('.seg .chip').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.p === (state.p || 0))); });
 }
@@ -143,17 +149,20 @@ function populateFolders() {
 }
 function saveFilters() { store.set('rg2.filters', state); render(); }
 function toast(msg, withUndo) { $('toastMsg').textContent = msg; $('undo').hidden = !withUndo; $('toast').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { $('toast').hidden = true; }, 5000); }
-function setTick(id, on) {
-  ticks[id] = on ? true : false; if (!on) delete ticks[id];
+function setTick(id, v) {   // v: true (saved in full), 'partial', 'na', or null to clear
+  if (v) ticks[id] = v; else delete ticks[id];
   store.set('rg2.ticks', ticks); render();
-  if (tickDoc) { var o = {}; o[id] = !!on; tickDoc.update(o).catch(function () { $('sync').textContent = 'Could not save that tick to the shared list. It is kept on this device.'; }); }
+  if (tickDoc) { var o = {}; o[id] = v || false; tickDoc.update(o).catch(function () { $('sync').textContent = 'Could not save that tick to the shared list. It is kept on this device.'; }); }
 }
+var MSG = { full: 'Saved. It has left the list.', partial: 'Marked partial. The agents will use the abstract and references only.', na: "Marked can't get. The agents will stop asking for it." };
 $('list').addEventListener('click', function (e) {
-  var b = e.target.closest && e.target.closest('.tick'); if (!b || b.disabled) return;
-  var id = b.dataset.id, on = !ticks[id]; lastTick = { id: id, on: on }; setTick(id, on);
-  toast(on ? 'Ticked. It has left the list.' : 'Unticked.', true);
+  var b = e.target.closest && e.target.closest('.tick, [data-act]'); if (!b || b.disabled) return;
+  var id = b.dataset.id, want = b.classList.contains('tick') ? true : b.dataset.act, cur = ticks[id] || null;
+  var next = (cur === want || (want === true && cur === 'full')) ? null : want;
+  lastTick = { id: id, prev: cur }; setTick(id, next);
+  toast(next ? MSG[next === true ? 'full' : next] : 'Cleared.', true);
 });
-$('undo').addEventListener('click', function () { if (lastTick) { setTick(lastTick.id, !lastTick.on); lastTick = null; } $('toast').hidden = true; });
+$('undo').addEventListener('click', function () { if (lastTick) { setTick(lastTick.id, lastTick.prev); lastTick = null; } $('toast').hidden = true; });
 $('q').addEventListener('input', function () { state.q = this.value; saveFilters(); });
 $('folder').addEventListener('change', function () { state.folder = this.value; saveFilters(); });
 $('showdone').addEventListener('change', function () { state.done = this.checked; saveFilters(); });
@@ -172,7 +181,7 @@ $('sync').textContent = 'Ticks are kept on this device only until the shared lis
   var migrated = false;
   tickDoc.onSnapshot(function (snap) {
     var d = (snap.data && snap.data()) || {}, t = {};
-    Object.keys(d).forEach(function (k) { if (d[k] === true) t[k] = true; });
+    Object.keys(d).forEach(function (k) { if (d[k] === true || d[k] === 'partial' || d[k] === 'na') t[k] = d[k]; });
     if (!migrated) {   // first time on this device: carry over ticks from the older page and from local storage
       migrated = true; var up = {}, old = store.get('rg.got', {}), n = 0;
       DATA.forEach(function (r) { if ((old[oldKey(r)] || ticks[r.id]) && !t[r.id]) { up[r.id] = true; t[r.id] = true; n++; } });

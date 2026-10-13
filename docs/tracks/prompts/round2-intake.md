@@ -8,3 +8,5 @@ Start with `burst2-common.md`, then `docs/views/research/BRIEF.md` (the evidence
 4. Push after every five files.
 
 Final message, at most 200 words: files read, records logged, files skipped and why, and the last commit.
+
+**Partial files.** A file whose name ends in "(partial)" is a printed web page with the abstract and reference list only. Read both. Log abstract-level evidence with the grade "abstract only", list the reference-list papers that bear on the views as new wanted lines (skipping any marked `n/a` in `docs/views/papers-status.jsonl`), and never ask for that paper again.
