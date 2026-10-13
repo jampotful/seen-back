@@ -25,9 +25,7 @@ Updated 12 October 2026, 23:30 US Eastern. Whoever works on Regards updates this
 
 Views are modules times specs. The engine gains about ten sensing mechanisms as general modules; a view is then one spec file (modules, parameters, rows), which is cheap to add once the modules exist. Three resources, each for what it does best: the plan's allowance for engine modules, view design and verification research, every five-hour window; the API from build machines for a one-time extraction pipeline over the literature collection (Haiku through the Batch API, every quote checked by script), whose table the research agents search instead of reading papers; and people, since the owner judges each view on a phone through `?try=<view>` with a tuning panel, and a specialist reviews the jumping spider view. Design comes before building: the atlas gives two or three ways to draw each mechanism and the owner picks.
 
-- **Burst 1** (the first window after 00:30, 13 October): the engine with the attention module, the jumper view and the tuning panel (`docs/tracks/prompts/burst1-engine.md`); the jumping spider research (`docs/tracks/prompts/burst1-jumper.md`); the pipeline writer.
-- **Burst 2:** the atlas; the owner's phone verdict fed back; the three finished units' proposals decided, audited and applied.
-- **Onward:** one module per window or two, then the views it unlocks as specs; the gallery when there are enough views to compare; one pass over all the rows at the end; the recognizer's group head and the world database on build machines overnight.
+The order of work is `docs/tracks/QUEUE.md`, which the owner approves once and edits to steer. Two rules decide where tokens go: an agent is used only for stateful, tool-using work, and any task that is many independent small judgments (extraction, quote checks, spec drafting, row drafting) goes to the Batch API as a script; and the expensive model writes the design that the cheaper models build from.
 
 ## Known limits
 
