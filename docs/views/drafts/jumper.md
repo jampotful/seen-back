@@ -42,6 +42,34 @@ As far as anyone has looked, the whole family shares one design: two principal e
 
 **The set of views.** One view, `jumper`, for all Salticidae, with one genus setting: in *Habronattus* the centre of the gaze strip takes a three-class colour matrix and the colour row changes (section 2). In `tools/species/eyes.py` this is the family rule `Salticidae` to `jumper` already proposed in `docs/views/sheets/spider.md`, with the genus passed into the view; if the engine prefers separate entries, a genus rule `Habronattus` to `jumper_red`, placed before the family rule, with every field shared except the centre's colour and the colour row.
 
+### Colour by genus
+
+The principal eyes' colour classes, genus by genus, for the 18 most photographed genera and every other genus with evidence. "Two" means ultraviolet and green.
+
+| Genus | World / Alachua share | Colour classes in the principal eyes | Evidence | Status |
+|---|---|---|---|---|
+| *Phidippus* | 21.7% / 21.3% | two, near 370 and 532 nm | intracellular recordings in *P. regius* (L163 to L165); no red filter in the genus (L109); *P. regius* called a presumed dichromat (L182); *P. clarus* answers colour on video, without fixing its dimension (L211) | two, measured |
+| *Menemerus* | 7.1% / 9.8% | disputed | four classes reported from seven cells in *M. confusus* (L80 to L82) and doubted (L32); one green class in its side eyes (L78, L79); a possible blue opsin in the secondary eyes of *M. bivittatus* (L150) | disputed |
+| *Salticus* | 7.1% / 0 | probably two | apparent blue spectra convert to the ultraviolet pigment (note to L14); no red filter (L109) | two, probable |
+| *Platycryptus* | 6.6% / 4.2% | | none found | unmeasured |
+| *Maratus* | 2.8% / 0 | four claimed, with blue at 480 to 500 nm | a conference abstract cited in a review (L191) | claimed, weak |
+| *Eris*, *Paraphidippus* | 2.6% each / 1.0%, 0 | | none found | unmeasured |
+| *Habronattus* | 2.5% / 0.3% | three in a small central patch: 377, 530 and a red-filtered class near 626 nm | *H. pyrrithrix* (L102 to L107); filters in four more species (L108); red used independently of brightness (L126, L155); *H. trimaculatus* called trichromatic (L183); *H. dossenus* learned red from yellow, brightness not ruled out (L221) | three at the centre, measured |
+| *Plexippus* | 2.3% / 2.1% | two in *Plexippus validus*, the name Blest et al. 1981 used | 24 green and 8 ultraviolet cells recorded (L21 to L23); the Pantropical Jumping Spider, *P. paykulli*, is unmeasured | two, measured in one species |
+| *Anasaitis* | 2.2% / 25.7% | | none found | unmeasured |
+| *Marpissa* | 2.2% / 0.2% | | brain anatomy only (L8, L9) | unmeasured |
+| *Evarcha* | 2.1% / 0 | | *E. falcata* chose coloured gratings over every grey (L46); *E. culicivora* prefers red-dyed prey, chromatic or achromatic (L185) | behaviour only |
+| *Lyssomanes* | 1.8% / 21.9% | | perches chosen by brightness, with green no better than a matched grey (L239) | unmeasured |
+| *Attulus*, *Hentzia*, *Colonus*, *Philaeus* | 1.5% to 1.7% each | | none found | unmeasured |
+| *Hasarius* | 1.5% / 0 | two: green Rh1 in layers 1 and 2, ultraviolet Rh3 in layers 3 and 4 | opsin localization (L143); the posterior median eyes hold ultraviolet and blue classes (L192) | two, measured |
+| *Saitis* | under 1.5% | probably two, 359 and 526 nm | microspectrophotometry (L12, L13, L198), a blue peak that is probably the ultraviolet pigment's other state (L14); red not told from black (L176, L197) | two, measured |
+| *Cosmophasis* | under 1.5% | | ultraviolet used as a hue in mate choice (L200) | behaviour only |
+| *Phintella* | under 1.5% | | ultraviolet B signals in courtship (L140) | behaviour only |
+| *Maevia* | under 1.5% / 0.2% | | sensitivity from 330 to 700 nm through a later paper (L179) | range only |
+| *Siler* | under 1.5% | | females watch red-covered males longer (L277) | behaviour only |
+
+The view uses two classes for every genus except *Habronattus*. The grade of the colour row is `m` for *Phidippus*, *Plexippus*, *Hasarius*, *Saitis* and *Salticus*, and it would be `g` for the unmeasured genera if rows are later graded per genus.
+
 ### The account put to this research
 
 The research was asked to test, against the literature, a summary of jumping spider vision: the front two eyes see nearly all, or all, of the spectrum people see, plus ultraviolet; the side eyes lack colour and act like motion detectors that complicate and inform the picture; nobody knows exactly how the eyes' information comes together; the summary never described a split view; and an ordinary scene for a jumping spider is something like Times Square, full of signals calling for attention.
@@ -103,7 +131,7 @@ Log: L20, L168 (*Evarcha arcuata*: spiderlings, bouts of median 77.13 s every 16
 Log: L263 (response time 0.15 degrees / 6.2 degrees per second = 24 ms, an estimate that assumes scanning at the blur limit, *Metaphidippus*), L262, L11 (Tan et al. 2023 citing Clark and Uetz 1990 for about 40 Hz; the original was not seen), L172, L173 (*Xysticus cristatus*, a crab spider, 10 Hz in the principal eyes and 20 to 30 in the others), L210 (*Cupiennius salei*, a wandering spider, 4.3 to 8.6 Hz), L10, L170 (thin, fast stripes vanish for *Menemerus bivittatus*).
 
 `['x', 'Hearing, vibration and smell', 'A Bold Jumping Spider freezes at a low hum of 80 vibrations a second, and its brain answers that hum from more than 3 metres away. Jumping spiders also court through vibrations in the ground, and males follow the scent of females\' silk. The picture shows none of this.']`
-Log: L247, L248 (hearing), L249, L250, L251, L252 (vibration through the ground), L177, L178, L253 (smell of silk and draglines), L222 (smell sharpens the search by sight), L209 (the Twin-flagged Jumping Spider's courtship switches to vibration inside the female's nest).
+Log: L247, L248 (hearing), L249, L250, L251, L252 (vibration through the ground), L177, L178, L253 (smell of silk and draglines), L222 (smell sharpens the search by sight), L209, L279 (courtship switches from sight to vibration inside a nest, in the Twin-flagged Jumping Spider and in Trite).
 
 ### The picture
 
@@ -171,7 +199,7 @@ jumper: {
 | salience `flickerInPlace` | ignore | Lights that only go on and off evoke no turns (L62); the secondary eyes disregard changes repeated at one place (L174). | |
 | salience `loom`, `shrink` | 2, 0 | Looming draws the gaze most and makes the spider back away; shrinking draws no more than stillness (L113, L196). | the weight |
 | salience `living` (front zone) | boost | The front side eyes prefer biological motion (L1, L145, L147). | the weight |
-| salience `habituate` | after 2 repeats, at one place | Turns stop within one or two repeats at one retinal place and return when the target moves a few degrees (L67); faster with closer repeats (L220). | the 3 degree radius |
+| salience `habituate` | after 2 repeats, at one place | Turns stop within one or two repeats at one retinal place and return when the target moves a few degrees (L67); orienting falls below half within 15 repeats (L278); faster with closer repeats (L220). | the 3 degree radius |
 | gaze `latency` | 0.1 to 0.5 s | 80 to 120 ms at the shortest (L64); about 0.5 s in a cueing task (L189). | the spread |
 | gaze `jump` | 300 degrees per second | A 15 degree saccade within 0.1 s (L49), so at least 150 degrees per second; body turns run at 120 to 1,200 (L162). | the value within the range |
 | gaze `sweep` | as wide as the target, 2 to 10 degrees, period 1.1 to 2.4 s | L50; 3 to 10 degrees per second (L261), the slowest scanning of the animals compared in L262. | |
@@ -349,6 +377,7 @@ The same list as `docs/views/wanted/jumper.jsonl`, most useful first. Priority 1
 - Loeffler-Henry K, Kang C, Sherratt TN 2025. Relative size matters: eyespots on large insect prey deter small arthropod predators. *Proceedings of the Royal Society B*. https://doi.org/10.1098/rspb.2025.0324. `opened` (abstract). Log: L226.
 - Long SM, Leonard AS, Carey A, Jakob EM 2015. Vibration as an effective stimulus for aversive conditioning in jumping spiders. *Journal of Arachnology*. https://doi.org/10.1636/s14-49. `opened` (abstract, read at https://www.biodiversitylibrary.org/part/229494). Log: L252.
 - Mannino E, Regolin L, Moretto E, De Agrò M 2023. Study replication: shape discrimination in a conditioning procedure on the jumping spider Phidippus regius. *Animals*. https://doi.org/10.3390/ani13142326. `opened` (open access, full text). Log: L224.
+- Melrose A 2015. Habituation in the jumping spider Trite planiceps. *Thesis, University of Canterbury*. https://doi.org/10.26021/8263. `opened` (open access; quotations from the abstract, read at https://ir.canterbury.ac.nz/bitstreams/59c3d61e-9412-4ae6-bb80-15523b7fbc61/download). Log: L278.
 - Moss R, Jackson RR, Pollard SD 2006. Hiding in the grass: background matching conceals moths (Lepidoptera: Crambidae) from detection by spider eyes (Araneae: Salticidae). *New Zealand Journal of Zoology*. https://doi.org/10.1080/03014223.2006.9518447. `opened` (abstract). Log: L274.
 - Moss R, Jackson RR, Pollard SD 2006. Mask of wax: secretions of wax conceal aphids from detection by spider's eyes. *New Zealand Journal of Zoology*. https://doi.org/10.1080/03014223.2006.9518448. `opened` (abstract). Log: L275.
 - Nagata T, Koyanagi M, Tsukamoto H, Saeki S, Isono K, Shichida Y, Tokunaga F, Kinoshita M, Arikawa K, Terakita A 2012. Depth perception from image defocus in a jumping spider. *Science 335(6067): 469-471*. https://doi.org/10.1126/science.1211667. `opened` (open access, full text, read at https://ir.soken.ac.jp/records/4203). Log: L143, L144.
@@ -379,6 +408,7 @@ The same list as `docs/views/wanted/jumper.jsonl`, most useful first. Priority 1
 - Taylor LA, Maier EB, Byrne KJ, Amin Z, Morehouse NI 2014. Colour use by tiny predators: jumping spiders show colour biases during foraging. *Animal Behaviour 90: 149-157*. https://doi.org/10.1016/j.anbehav.2014.01.025. `opened` (owner's library copy). Log: L123, L124, L125.
 - Taylor LA, Amin Z, Maier EB, Byrne KJ, Morehouse NI 2016. Flexible color learning in an invertebrate predator: Habronattus jumping spiders can learn to prefer or avoid red during foraging. *Behavioral Ecology 27(2): 520-529 (online 1 November 2015)*. https://doi.org/10.1093/beheco/arv182. `opened` (owner's library copy). Log: L126, L127.
 - Taylor LA, Cross FR, Jackson RR 2022. Blood-red colour as a prey choice cue for mosquito specialist predators. *Animal Behaviour*. https://doi.org/10.1016/j.anbehav.2022.04.003. `opened` (abstract). Log: L185.
+- Taylor PW, Jackson RR 1999. Habitat-adapted communication in Trite planiceps, a New Zealand jumping spider (Araneae, Salticidae). *New Zealand Journal of Zoology*. https://doi.org/10.1080/03014223.1999.9518184. `opened` (abstract). Log: L279.
 - Tedore C, Johnsen S 2013. Pheromones exert top-down effects on visual recognition in the jumping spider Lyssomanes viridis. *Journal of Experimental Biology*. https://doi.org/10.1242/jeb.071118. `opened` (abstract). Log: L207.
 - Tedore C, Johnsen S 2014. Visual mutual assessment of size in male Lyssomanes viridis jumping spider contests. *Behavioral Ecology*. https://doi.org/10.1093/beheco/aru222. `opened` (abstract). Log: L208.
 - Tedore C, Johnsen S 2016. Disentangling the visual cues used by a jumping spider to locate its microhabitat. *Journal of Experimental Biology*. https://doi.org/10.1242/jeb.129122. `opened` (abstract). Log: L239.
