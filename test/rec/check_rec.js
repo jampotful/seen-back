@@ -144,8 +144,8 @@ async function meet(page, name) {
     await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
     r.garden = await meet(page, 'garden.jpg');                   // a larger JPEG, brought to 1280 by the browser first
     await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
-    r.person = await meet(page, 'portrait.jpg');
-    await page.waitForSelector('#askView', { state: 'visible', timeout: 6000 });
+    r.person = await meet(page, 'portrait.jpg');                 // a human: a notice, no view, and no encounter kept (build 22)
+    await page.locator('#noticeOk').tap(); await page.waitForTimeout(200);
     r.wall = await meet(page, 'wall.png');                       // nothing alive
     await page.locator('#noticeOk').tap(); await page.waitForTimeout(200);
     // the sheet behind the name says who recognized it; the list of meetings too
@@ -165,7 +165,7 @@ async function meet(page, name) {
       && r.afterOffer.eyes === 'insect' && r.afterOffer.named.common === 'Monarch' && r.afterOffer.named.by === 'you' && /^Monarch\|Danaus plexippus\|you\|insect/.test(r.afterOfferRecord[0])
       && r.dots.eyes === 'frog' && r.dots.shown === 'frog or toad' && !r.dotsOffersShown
       && r.rings.eyes === 'reptile' && r.rings.shown === anole
-      && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && r.person.eyes === 'person' && r.person.shown === 'a human'
+      && r.garden.eyes === 'plant' && r.garden.shown === 'Beggarticks' && !r.person.eyes && r.person.notice === 'That’s a human. You already see the world as one. Try photographing another creature.'
       && !r.wall.claim && !r.wall.eyes && r.wall.notice === 'We can’t find a creature in your photo. Try again.'
       && r.infoSub === 'Ardea herodias' && r.notRightIsThere
       && r.rows.some((x) => /Great blue heron \| Ardea herodias .* named by this app/.test(x)) && r.rows.some((x) => /^Monarch \| /.test(x) && !/named by/.test(x))
@@ -679,11 +679,12 @@ async function meet(page, name) {
       let at = (await bigNow(page)).last.at;
       const s3 = await meet(page, 'small.png'); await largeAfter(page, at); await page.waitForTimeout(150); const a3 = await st(page);
       r.unsure = { state: a3.eyes + '|' + a3.named.common + '|' + a3.named.by, line: await svcLine(page), last: (await bigNow(page)).last, reference: E('small.png') };
-      at = r.unsure.last.at; await meet(page, 'portrait.jpg'); await page.waitForTimeout(900); r.person = { eyes: (await st(page)).eyes, asked: (await bigNow(page)).last.at !== at };
+      at = r.unsure.last.at; await meet(page, 'portrait.jpg'); await page.waitForTimeout(900); const a4 = await st(page); r.person = { eyes: a4.eyes, notice: a4.notice, asked: (await bigNow(page)).last.at !== at };
+      if (a4.notice) { await page.locator('#noticeOk').tap(); await page.waitForTimeout(200); }
       const s5 = await meet(page, 'heron.png'); await byLarge(page); r.heron = { small: await page.evaluate(() => { const l = window.__seenBack.rec.about().last; return l.named && l.named.en; }), after: (await st(page)).named.common + '|' + (await st(page)).named.by };
       r.askedOfServers = { parts: (await partsAsked()).length, photos: (await ctl('log=1')).filter((x) => !/^test\/rec\/photos|^test\/assets/.test(x) && !/^index\.html/.test(x)) };
       all('unsure', r.unsure.state === s3.eyes + '|' + s3.shown + '|page' && r.unsure.line === '' && r.unsure.last.sure === false && r.unsure.last.kindOffers.join() === E('small.png').kindOffers.join());
-      all('person', r.person.eyes === 'person' && !r.person.asked);
+      all('person', !r.person.eyes && r.person.notice === 'That’s a human. You already see the world as one. Try photographing another creature.' && !r.person.asked);   // a human: no view (build 22), and the larger model is not asked
       all('heron', r.heron.small === 'Great Blue Heron' && r.heron.after === 'Great blue heron|device-large');
       all('nothingAsked', r.askedOfServers.parts === 0 && r.askedOfServers.photos.length === 0);
       // a minute with nothing to do (shortened here): its worker is let go, and the next photo starts it again
