@@ -1,0 +1,46 @@
+{
+ "spec": "{\"key\": \"whale\", \"chip\": \"Whale, dolphin or seal\", \"who\": \"a whale, dolphin or seal\", \"version\": 1, \"applies_to\": {\"order\": [\"Cetacea\", \"Carnivora:Pinnipedia\", \"Sirenia\"]}, \"cue\": \"Colour is mostly lost to this animal, and its sharpness is about a tenth of yours.\", \"falls_back_to\": \"mammal\", \"modules\": [], \"inputs\": {\"motion\": \"none\", \"sound\": \"none\", \"haptic\": \"none\"}, \"params\": {\"M\": \"whale_mono\", \"cpd\": {\"value\": 3.3, \"grade\": \"m\", \"invented\": true, \"src\": [\"R4\", \"R2\", \"R10\"], \"range\": [0.005, 40], \"note\": \"a middle value across the records of inside taxa\"}, \"pupil\": \"o\", \"fov\": {\"value\": 125, \"grade\": \"m\", \"invented\": true, \"src\": [\"R19\", \"R21\"], \"range\": [100, 360], \"note\": \"the panoramic field of dolphins, with the eyes set to the side\"}, \"gain\": {\"value\": 1.5, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [1, 4], \"note\": \"the app's choice; the records give only a relative sensitivity\"}}, \"matrices\": {\"whale_mono\": {\"rows\": [[1, 0, 0], [1, 0, 0], [1, 0, 0]], \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"one cone class, so the picture is drawn in one channel\"}}, \"rows\": [[\"m\", \"Colour\", \"Whales and seals have only one kind of cone, so they are essentially colour-blind. We show the picture in one channel, as a grey-level world.\", [\"R46\", \"R185\", \"R45\"], [\"params.M\"]], [\"m\", \"Sharpness\", \"A bottlenose dolphin resolves about 2.4 to 4.8 cycles per degree, and a harbour seal about 8.7 to 11.5. Most of the others sit near 3. We blur the picture to about 3.3, which is a tenth or less of your 30.\", [\"R3\", \"R4\", \"R5\", \"R10\", \"R2\"], [\"params.cpd\"]], [\"m\", \"Field of view\", \"A dolphin sees a panoramic field of 120 to 130 degrees, with the two eyes overlapping by only 20 to 30 degrees. We draw that field as wide, with a narrow overlap in front.\", [\"R19\", \"R21\"], [\"params.fov\"]], [\"i\", \"Dim light and the app's choices\", \"The gain of 1.5 is the app's choice. Dolphins are about half a log unit more sensitive than people in low light, but no record gives a gain figure, so we lift the shadows a little.\", [\"R55\"], [\"params.gain\", \"params.M\"]]], \"zones\": [], \"by\": {}, \"draw\": {\"field\": [{\"name\": \"wedge\", \"invented\": true, \"note\": \"default: the panoramic field of the animal\"}], \"colour\": [{\"name\": \"palm\", \"invented\": true, \"note\": \"one channel, grey-level\"}]}}, \"claims\": [{\"path\": \"params.cpd\", \"records\": [\"R4\", \"R2\", \"R10\"], \"kind\": \"range_middle\", \"how\": \"The value 3.3 is the upper value of the humpback whale resolving power (R4), sits inside the 2.6 to 3.3 range of R2, and matches the upper end of the 2.6 cycles per degree of R10, taken as a middle value across inside taxa.\"}, {\"path\": \"params.fov\", \"records\": [\"R19\", \"R21\"], \"kind\": \"range_middle\", \"how\": \"The value 125 is the middle of the 120 to 130 degree panoramic field stated for dolphins in R19.\"}], \"quotes\": [{\"record\": \"R4\", \"quote\": \"we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively\"}, {\"record\": \"R2\", \"quote\": \"the retinal resolving power was 2.6-3.3 cycles per degree\"}, {\"record\": \"R10\", \"quote\": \"The resolving power in the right eyes of two individuals was 2.60 and 2.64 cycles per degree.\"}, {\"record\": \"R19\", \"quote\": \"allowing a panoramic vision with a 120–130◦ visual field\"}, {\"record\": \"R21\", \"quote\": \"20–30° binocular field\"}, {\"record\": \"R46\", \"quote\": \"we here demonstrate an absence of S-cones in the retinae of all whales and seals studied\"}, {\"record\": \"R185\", \"quote\": \"These marine mammals have only L-cones (cone monochromacy) and hence are essentially colour-blind.\"}, {\"record\": \"R45\", \"quote\": \"only possess long/middle-wavelength-sensitive L-cones but no shortwavelength-sensitive S-cones\"}]}",
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R4",
+    "R2",
+    "R10"
+   ],
+   "kind": "range_middle",
+   "how": "The value 3.3 is the upper value of the humpback whale resolving power (R4), sits inside the 2.6 to 3.3 range of R2, and matches the upper end of the 2.6 cycles per degree of R10, taken as a middle value across inside taxa."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R19",
+    "R21"
+   ],
+   "kind": "range_middle",
+   "how": "The value 125 is the middle of the 120 to 130 degree panoramic field stated for dolphins in R19."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R4",
+   "quote": "we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively"
+  },
+  {
+   "record": "R2",
+   "quote": "the retinal resolving power was 2.6-3.3 cycles per degree"
+  },
+  {
+   "record": "R10",
+   "quote": "The resolving power in the right eyes of two individuals was 2.60 and 2.64 cycles per degree."
+  },
+  {
+   "record": "R19",
+   "quote": "allowing a panoramic vision with a 120–130◦ visual field"
+  },
+  {
+   "record": "R21",
+   "quote": "20–30° binocular field"
+  }
+ ]
+}

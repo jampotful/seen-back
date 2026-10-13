@@ -1,0 +1,283 @@
+{
+ "key": "primate",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Sharpness' says m and every parameter it describes is graded i",
+  "checker: row 'Middle of the eye' says m and every parameter it describes is graded i",
+  "checker: row 'Night and day' says m and every parameter it describes is graded i"
+ ],
+ "reply": {
+  "spec": {
+   "key": "primate",
+   "chip": "Monkey or ape",
+   "who": "a monkey or ape",
+   "applies_to": {
+    "order": [
+     "Primates"
+    ],
+    "not_family": [
+     "Hominidae:Homo"
+    ]
+   },
+   "cue": "Three kinds of colour sensor in many monkeys, and a sharp middle in most.",
+   "modules": [],
+   "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "params": {
+    "cpd": {
+     "value": 12,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "the app's chosen blur; the records give about 21 to 30 cycles per degree for macaques and marmosets, and the app sets a lower figure"
+    },
+    "fov": {
+     "value": 200,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      100,
+      360
+     ],
+     "note": "no record gives the whole field of view of a monkey; the app's guess"
+    },
+    "fovea": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.5,
+      4
+     ],
+     "note": "a sharp centre is in the records, but its size is not given; the app's guess"
+    },
+    "pupil": "o",
+    "M": "PRIMATE_TRI",
+    "gain": {
+     "value": 1.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no dim-light record was found for primates"
+    }
+   },
+   "matrices": {
+    "PRIMATE_TRI": {
+     "rows": [
+      [
+       0.29275,
+       0.70725,
+       0
+      ],
+      [
+       0.29275,
+       0.70725,
+       0
+      ],
+      [
+       -0.02234,
+       0.02234,
+       1
+      ]
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "two-cone stand-in from the mammal view; the records give three cone classes for most Old World and New World monkeys, but the app's matrix here is a guess"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Colour",
+     "Most monkeys and apes have three kinds of cone, as you do, and some New World monkeys have only two or fewer. Owl monkeys and bushbabies have one kind, so they see no colour.",
+     [
+      "R39",
+      "R43",
+      "R52",
+      "R40",
+      "R41",
+      "R137",
+      "R138",
+      "R143"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Sharpness",
+     "A macaque can resolve about 26 cycles per degree in its best test, close to yours. Marmoset foveas are estimated near 30. We blur the picture to a lower figure.",
+     [
+      "R7",
+      "R2",
+      "R4",
+      "R12"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Middle of the eye",
+     "Most monkeys and apes have a clear central fovea. Owl monkeys have only a rudimentary one, and the fovea of a squirrel monkey is clearly seen.",
+     [
+      "R167",
+      "R168",
+      "R172",
+      "R176"
+     ],
+     [
+      "params.fovea"
+     ]
+    ],
+    [
+     "m",
+     "Night and day",
+     "Owl monkeys and bushbabies are active at night, and macaques and marmosets by day. The owl monkey has a fully nocturnal retina.",
+     [
+      "R183",
+      "R186",
+      "R191",
+      "R182"
+     ],
+     [
+      "params.gain"
+     ]
+    ],
+    [
+     "i",
+     "The app's choices",
+     "The field of view, the sharp centre, the dim-light lift and the colour mapping are the app's guesses. No record gave these numbers for a monkey.",
+     [
+      "R17",
+      "R18"
+     ],
+     [
+      "params.fov",
+      "params.fovea",
+      "params.gain",
+      "params.M"
+     ]
+    ]
+   ],
+   "version": 1,
+   "zones": [],
+   "by": {},
+   "draft": true
+  },
+  "claims": [
+   {
+    "path": "params.M",
+    "records": [
+     "R39",
+     "R43",
+     "R52"
+    ],
+    "kind": "value",
+    "how": "The three-cone count for macaques supports a three-class colour model, though the matrix itself is the app's stand-in."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R7",
+    "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+   },
+   {
+    "record": "R2",
+    "quote": "The foveal acuity predicted by the Nyquist limits set by the cone mosaic (30 c/deg) is in agreement with behavioral measures of visual acuity."
+   },
+   {
+    "record": "R12",
+    "quote": "Visual acuity in a normal stumptail macaque is 1.4 minutes of arc-similar to man's."
+   },
+   {
+    "record": "R39",
+    "quote": "to allow effective stimulation of all 3 cone types"
+   },
+   {
+    "record": "R43",
+    "quote": "stimulation of short wavelength-sensitive (S) cones and decreases to stimulation of middle wavelength-sensitive (M) and long wavelength-sensitive (L) cones"
+   },
+   {
+    "record": "R52",
+    "quote": "Macaca monkey and humans have three cone types containing either long-wavelength (L), medium-wavelength (M), or short-wavelength (S)-specific opsin"
+   },
+   {
+    "record": "R40",
+    "quote": "the retinas of these species have only a single type of M/L cone, they lack colour vision"
+   },
+   {
+    "record": "R41",
+    "quote": "the retinas of these species have only a single type of M/L cone, they lack colour vision"
+   },
+   {
+    "record": "R137",
+    "quote": "Because the retinas of these species have only a single type of M/L cone, they lack colour vision."
+   },
+   {
+    "record": "R138",
+    "quote": "Because the retinas of these species have only a single type of M/L cone, they lack colour vision."
+   },
+   {
+    "record": "R143",
+    "quote": "owl monkeys (Aotus), the sole nocturnal anthropoid primates, are the cone monochromacy due to the loss of functional S opsin gene"
+   },
+   {
+    "record": "R167",
+    "quote": "squirrel monkeys had clear structure of the central fovea"
+   },
+   {
+    "record": "R168",
+    "quote": "Aotus has only a rudimentary fovea"
+   },
+   {
+    "record": "R172",
+    "quote": "the fovea and foveola are located along the slopes or in the foveal pit which has the highest cone density"
+   },
+   {
+    "record": "R176",
+    "quote": "All four primates showed a clear foveal specialization"
+   },
+   {
+    "record": "R183",
+    "quote": "The owl monkey, Aotus azarae, has developed a fully nocturnal retina in recent evolution."
+   },
+   {
+    "record": "R186",
+    "quote": "the diurnal Old-World rhesus monkey (Macaca mulatta)"
+   },
+   {
+    "record": "R191",
+    "quote": "a small, diurnal, New World monkey"
+   },
+   {
+    "record": "R182",
+    "quote": "the owl monkeys, the only one nocturnal species in the simian primates"
+   },
+   {
+    "record": "R17",
+    "quote": "to allow 24 degrees or 37 degrees of unrestricted central vision, respectively"
+   },
+   {
+    "record": "R18",
+    "quote": "maximum lateral visual field eccentricity with eyeball abduction ( Pan -like: 115°; human: 136.1°)"
+   }
+  ]
+ }
+}

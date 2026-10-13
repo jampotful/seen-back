@@ -1,0 +1,196 @@
+{
+ "key": "jumper",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Narrow field' says m and every parameter it describes is graded i",
+  "params.fov: value 300 is not a cited record's value and does not lie between two of them (R23, R28)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "version": 1,
+   "chip": "Jumping spider",
+   "who": "a jumping spider",
+   "cue": "Watch for the spider's sharp eyes. Its middle sees fine detail, its edges see movement, and it turns its eyes to scan.",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "modules": [],
+   "inputs": {
+    "motion": "optional"
+   },
+   "params": {
+    "fov": {
+     "value": 300,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R23",
+      "R28"
+     ],
+     "note": "the side eyes cover nearly the whole circle, while the front eyes see a narrow strip; 300 is the app's chosen middle"
+    },
+    "cpd": {
+     "value": 12.5,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R12"
+     ]
+    },
+    "fovea": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's scale for the sharp middle; no record gives a value for the whole picture"
+    },
+    "topoA": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "note": "by analogy with the house cat"
+    },
+    "topoS": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "note": "the app's choice"
+    },
+    "gate": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "note": "the app's choice; how strongly still things fade"
+    },
+    "persist": {
+     "value": 0.15,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "note": "the app's choice"
+    },
+    "pupil": "o"
+   },
+   "rows": [
+    [
+     "m",
+     "Sharp middle",
+     "The principal eyes of Portia fimbriata resolve about 12.5 cycles per degree, close to a person's sharpness. Most jumping spiders are sharp in a far narrower strip.",
+     [
+      "R12",
+      "R1"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Narrow field",
+     "The principal eyes of Phidippus johnsoni and Metaphidippus aeneolus see a strip about 2 degrees wide and 21 degrees high, and they move to scan.",
+     [
+      "R14",
+      "R29",
+      "R89"
+     ],
+     [
+      "params.fovea"
+     ]
+    ],
+    [
+     "g",
+     "Wide edges",
+     "The side eyes cover almost the whole circle around the animal, and the picture is squeezed toward a wide field.",
+     [
+      "R28",
+      "R23"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "g",
+     "Colour",
+     "Most jumping spiders see two colours, ultraviolet and green. The picture leans on these two channels.",
+     [
+      "R61",
+      "R40",
+      "R46"
+     ],
+     []
+    ],
+    [
+     "i",
+     "The app's choices",
+     "The middle, the edge sharpness, the still-thing fade and the afterglow of the picture are the app's own choices, based on how these eyes work and not on a measured value for this animal.",
+     [],
+     [
+      "params.fovea",
+      "params.topoA",
+      "params.topoS",
+      "params.gate",
+      "params.persist"
+     ]
+    ]
+   ],
+   "zones": [],
+   "draw": {
+    "field": [
+     {
+      "name": "wedge",
+      "invented": true,
+      "note": "the default picture, squeezed toward the field"
+     }
+    ]
+   }
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R12"
+    ],
+    "kind": "value",
+    "how": "Portia fimbriata principal eyes reach 12.5 cycles per degree, as R12 states."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R23",
+     "R28"
+    ],
+    "kind": "range_middle",
+    "how": "The whole animal sees about 360 degrees across the side eyes and a front strip; 300 is the app's chosen middle."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R12",
+    "quote": "The highest value of the spatial resolving power (Nyquist frequency) of the principle eyes of jumping spiders, such as Portia fimbriata Doleschell, 1859, is 12.5 cycles/degree"
+   },
+   {
+    "record": "R23",
+    "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+   },
+   {
+    "record": "R28",
+    "quote": "the side eyes between them cover almost the entire 3600 around the animal in the horizontal plane"
+   },
+   {
+    "record": "R14",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   }
+  ]
+ }
+}

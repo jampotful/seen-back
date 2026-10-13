@@ -1,0 +1,315 @@
+{
+ "key": "bee",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "matrices.BEE: peak 540 nm is not within 2 nm of a cited lambda_max_nm record"
+ ],
+ "reply": {
+  "spec": {
+   "key": "bee",
+   "version": 2,
+   "chip": "Bee",
+   "who": "a bee",
+   "applies_to": {
+    "family": [
+     "Apidae",
+     "Halictidae",
+     "Megachilidae",
+     "Andrenidae",
+     "Colletidae"
+    ]
+   },
+   "cue": "The view is wide and soft, with a blue and green palette that brightens and jumps as the bee turns its head.",
+   "modules": [],
+   "inputs": {},
+   "params": {
+    "M": "BEE",
+    "cpd": {
+     "value": 0.26,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R1"
+     ],
+     "note": "honeybee worker grating limit"
+    },
+    "fov": {
+     "value": 280,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R18",
+      "R21",
+      "R22"
+     ],
+     "note": "whole-animal horizontal field, between 270 and 312 degrees"
+    },
+    "fovea": {
+     "value": 1.4,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "sharp middle scaled from the 1.6 to 1.7 degree acceptance angle, against a person"
+    },
+    "sat": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "gain": {
+     "value": 1.4,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "gate": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "still things are not faded in this view"
+    },
+    "glow": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "movement glows"
+    },
+    "glowC": {
+     "value": [
+      0.78,
+      1,
+      0.62
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "persist": {
+     "value": 0.1,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "rate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "fall": {
+     "value": 1.5,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "dof": {
+     "value": 10,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "pupil": "none",
+    "uvR": "",
+    "uvBlue": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "topoA": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "topoS": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "shimmer": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "ripple": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "salience": 1,
+    "living": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": []
+    }
+   },
+   "matrices": {
+    "BEE": {
+     "from_pigments": [
+      346,
+      445,
+      540
+     ],
+     "src": [
+      "R29",
+      "R30",
+      "R31"
+     ],
+     "grade": "m",
+     "invented": false
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Sharpness",
+     "A honeybee worker resolves gratings of about a quarter of a cycle per degree, about 1/230 of a person's detail. Bumblebees and stingless bees resolve a similar amount, so this view is very soft.",
+     [
+      "R1",
+      "R3",
+      "R4"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "g",
+     "Wide view",
+     "A bee sees nearly all the way round, about 270 to 312 degrees across the horizon, with only a small blind patch behind. The view uses a middle figure of 280 degrees.",
+     [
+      "R18",
+      "R21",
+      "R22"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Colours",
+     "A bee's eye has three colour receptors peaking in the ultraviolet, blue and green. The view shows ultraviolet as blue, blue as green and green as red, and drops red, which bees barely see.",
+     [
+      "R29",
+      "R30",
+      "R31",
+      "R175"
+     ],
+     [
+      "matrices.BEE"
+     ]
+    ],
+    [
+     "g",
+     "Movement",
+     "Bees see movement and flicker faster than people do, so the view runs at its normal pace. Honeybees fuse flicker at about 200 Hz in bright light.",
+     [
+      "R77",
+      "R83"
+     ],
+     [
+      "params.rate"
+     ]
+    ],
+    [
+     "i",
+     "Choices of this app",
+     "The fall of sharpness with light, the glow of movement, the sharp middle and the palette strength are the app's own choices. They are named here as guesses, so the picture serves as an illustration.",
+     [],
+     [
+      "params.fall",
+      "params.glow",
+      "params.fovea",
+      "params.sat"
+     ]
+    ]
+   ],
+   "zones": []
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R1"
+    ],
+    "kind": "value",
+    "how": "The honeybee worker's highest resolved grating is 0.26 cycles per degree, as in R1."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R18",
+     "R21",
+     "R22"
+    ],
+    "kind": "range_middle",
+    "how": "The whole-animal horizontal field lies between 270 degrees (R22) and 312 degrees (R18), and the middle of that range is 280 degrees."
+   },
+   {
+    "path": "matrices.BEE",
+    "records": [
+     "R29",
+     "R30",
+     "R31"
+    ],
+    "kind": "value",
+    "how": "The matrix takes its peak wavelengths of 346 nm (R29, honeybee worker UV), 445 nm (R30, drone blue) and 540 nm (R31 green, Bombus impatiens as the closest listed green) from the van der Kooi 2021 table."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "They found that the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1, with no evidence of a difference in acuity between horizontal and vertical gratings."
+   },
+   {
+    "record": "R18",
+    "quote": "Seidl and Kaiser (1981) reported that the honeybee FOV extends down to −90° in elevation and back to −156° in azimuth (at 0° el.)"
+   },
+   {
+    "record": "R21",
+    "quote": "Bees can see ~300° horizontally on the body plane with low spatial resolution for peripheral ommatidia"
+   },
+   {
+    "record": "R22",
+    "quote": "a very coarse representation of the whole 270° bee eye horizontal field of view"
+   },
+   {
+    "record": "R29",
+    "quote": "Apidae Apis mellifera 346 430 540"
+   },
+   {
+    "record": "R30",
+    "quote": "Apidae Apis mellifera 346 445 529"
+   },
+   {
+    "record": "R31",
+    "quote": "Apidae Bombus impatiens 346 424 541"
+   }
+  ]
+ }
+}

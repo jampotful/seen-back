@@ -1,0 +1,259 @@
+{
+ "key": "scorpion",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "params.fov: graded m, and no cited record is graded m on the view's own taxon",
+  "row 'Whole-body view' is graded m and cites no record graded m"
+ ],
+ "reply": {
+  "spec": {
+   "key": "scorpion",
+   "version": 1,
+   "chip": "Scorpion",
+   "who": "a scorpion",
+   "falls_back_to": "spider",
+   "applies_to": {
+    "order": [
+     "Scorpiones",
+     "Uropygi",
+     "Amblypygi",
+     "Pseudoscorpiones"
+    ]
+   },
+   "cue": "The view looks out in every direction at once, and it is dim, with a blue-green tint and a faint glow where things move.",
+   "modules": [
+    "field",
+    "overlay",
+    "haptic"
+   ],
+   "params": {
+    "cpd": {
+     "value": 0.05,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a rough picture of light and dark, since no record gives the sharpness of a scorpion's view"
+    },
+    "sat": {
+     "value": 0.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a faint colour, since the records give peaks in the blue-green but no picture of colour"
+    },
+    "gain": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a brighter picture, chosen by the app; no record gives a gain"
+    },
+    "fov": {
+     "value": 360,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R1",
+      "R2"
+     ],
+     "note": "whole-animal field of view"
+    },
+    "pupil": "none",
+    "gate": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "still things fade, but not out of sight"
+    },
+    "living": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ],
+     "note": "no extra weight for living movement outside the records"
+    }
+   },
+   "zones": [],
+   "remap": {
+    "blindAt": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "range": [
+      0,
+      360
+     ],
+     "note": "no blind seam is recorded; left at the front"
+    },
+    "blindDeg": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "range": [
+      0,
+      120
+     ],
+     "note": "no blind seam"
+    }
+   },
+   "haptic": {
+    "on": "knock",
+    "pattern": {
+     "value": [
+      25
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "note": "the vibration pattern in milliseconds, on and off"
+    },
+    "edge": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "floor": null,
+     "note": "how bright the edge pulses where the phone cannot vibrate",
+     "range": [
+      0,
+      1
+     ]
+    }
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the whole picture squeezed around the animal, as the records give a full 360 degree view"
+     }
+    ],
+    "haptic": [
+     {
+      "name": "buzz",
+      "invented": true,
+      "note": "a short vibration where the browser can vibrate, and a pulse at the picture's edge where it cannot"
+     },
+     {
+      "name": "off",
+      "invented": true,
+      "note": "the view without touch"
+     }
+    ],
+    "overlay": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no overlay"
+     }
+    ]
+   },
+   "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "optional"
+   },
+   "rows": [
+    [
+     "m",
+     "Whole-body view",
+     "A scorpion's median and lateral eyes together look in every direction around it, so the picture wraps all the way round.",
+     [
+      "R1",
+      "R2",
+      "R3"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "g",
+     "Colour",
+     "Scorpion eyes are most sensitive to green and blue-green light, with a smaller peak in the ultraviolet, so the picture has a faint blue-green tint.",
+     [
+      "R6",
+      "R7",
+      "R10",
+      "R11",
+      "R12"
+     ],
+     [
+      "params.sat"
+     ]
+    ],
+    [
+     "g",
+     "Night light",
+     "Scorpions are nocturnal, and their eyes respond to starlight levels of light, so the picture is brightened to show what the animal can make out at night.",
+     [
+      "R97",
+      "R16"
+     ],
+     [
+      "params.gain"
+     ]
+    ],
+    [
+     "i",
+     "Sharpness and choices",
+     "No record gives how sharp a scorpion's view is. This view assumes coarse shapes and light, a faint colour, and a brighter picture. The knock buzz and the edge pulse are the app's.",
+     [
+      "R129"
+     ],
+     [
+      "params.cpd",
+      "params.sat",
+      "params.gain",
+      "params.gate",
+      "params.living",
+      "params.haptic.pattern",
+      "params.haptic.edge"
+     ]
+    ],
+    [
+     "x",
+     "Not in the picture",
+     "Vibrations through the sand, the touch of the legs, and the air movements sensed by hairs on the pedipalps are not shown.",
+     [
+      "R34",
+      "R65",
+      "R55"
+     ],
+     []
+    ]
+   ]
+  },
+  "claims": [
+   {
+    "path": "params.fov",
+    "records": [
+     "R1",
+     "R2"
+    ],
+    "kind": "value",
+    "how": "Both records give a 360 degree field of view for scorpions, and the picture is set to that value."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "scorpions can apparently see 360° around their body"
+   },
+   {
+    "record": "R2",
+    "quote": "Together, the two eyes have a 360 deg field of view"
+   }
+  ]
+ }
+}
