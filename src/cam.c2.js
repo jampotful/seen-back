@@ -816,7 +816,7 @@
     show('fittedOn', true); paintChoices(); }
   // The contact form sends an email to the app's maker through Web3Forms, a form-to-email service (build 22). The service keeps the
   // address; the page holds only the access key, which can send to that one address and nowhere else, so it may sit in public code.
-  var CONTACT_KEY = '', CONTACT_API = 'https://api.web3forms.com/submit';
+  var CONTACT_KEY = 'f191b157-47de-402b-9818-23dc36d5bd70', CONTACT_API = 'https://api.web3forms.com/submit';
   function openContact(about) {
     if (!CONTACT_KEY && !/[?&]contact=demo\b/.test(location.search)) return false;
     closeSheets(); ['contactName', 'contactEmail', 'contactMsg'].forEach(function (id) { $(id).parentNode.classList.remove('bad'); });

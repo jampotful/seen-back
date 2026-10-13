@@ -12,7 +12,7 @@ Updated 12 October 2026, 23:30 US Eastern. Whoever works on Regards updates this
 
 | Track | Brief | Branch | State | Next |
 |---|---|---|---|---|
-| The app | `docs/HANDOFF.md` | `main` | Build 22 is live (`e207805`). The contact form waits for its access key. | Check the live site; set the key; fold in the research corrections the owner approves. |
+| The app | `docs/HANDOFF.md` | `main` | Build 23 is live: build 22 with the contact form switched on. | A first message sent from a phone; fold in the research corrections the owner approves. |
 | Research: birds | `docs/views/research/BRIEF.md` | `research/birds` | Done (`77aac6c`): 218 records, 30 papers wanted. Proposes `owl` and `duck` views and corrects `hawk`. | The owner's decisions; an audit. |
 | Research: cats, dogs and people | same | `research/cat-dog` | Done (`3b18838`): 178 records (about 50 for people), 23 papers wanted. Proposes `bigcat` and `fox` views, and a person's field of 200 degrees in place of 180. | The owner's decisions; an audit. |
 | Research: snails, worms, scorpions, ticks | same | `research/ground-invertebrates` | Done (`9c75995`): 197 records, 22 papers wanted. Proposes seven views, with new groups for millipedes, centipedes and harvestmen. | The owner's decisions; an audit. |
