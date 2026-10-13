@@ -19,3 +19,9 @@ Started 13 October 2026. Branch `agent/specs`, from `main`.
 
 - Only today's fields (`fov cpd fovea fall topoA topoS pupil dof M uvBlue sheen gain sat noGreen gate field persist hold thrust rate`). `M` is the name of a 3 by 3 matrix in `matrices`, row by row as the engine reads it. Mechanisms the engine lacks are listed under `notes` with the module that would draw them; `zones` is empty in every spec.
 - Each spec carries `"draft": true`, since row wording is rewritten later in one pass.
+
+## Burst 3 (13 October)
+
+- Merged `main` into `agent/specs`; the engine track's shark, spider and checker were kept.
+- `tools/views/make_specs_b.py` writes crab (with woodlouse and horseshoe crab as variants), mammal (raccoon and mole as variants), salamander, worm, bat, flyingfox and tick. Rows come from the sheets' own row lines; the worm rows from the ground-invertebrates draft, section 2.4. All pass the build's checker.
+- Next: render each with `?try=<key>`, merge to `main`, then the jumper review sheet and its PDF.

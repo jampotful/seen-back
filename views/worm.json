@@ -1,0 +1,194 @@
+{
+  "key": "worm",
+  "chip": "Worm",
+  "who": "a worm or leech",
+  "falls_back_to": "other",
+  "applies_to": {
+    "phylum": [
+      "Annelida",
+      "Platyhelminthes",
+      "Nemertea"
+    ]
+  },
+  "cue": "Hold still and let a hand pass over the phone. There is no picture, only light, its direction and the shock of a shadow.",
+  "modules": [],
+  "params": {
+    "cpd": {
+      "value": 0.014,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4 cpd: Land and Nilsson 2012 (35 degrees, planarian cup eye); Kirwan 2018 (73 degrees, Schmidtea lugubris)"
+      ],
+      "range": [
+        0.005,
+        0.05
+      ],
+      "floor": null,
+      "note": "1 over 2 times 35 gives .014; earthworms have no eyes and the gradient stands for the directional windows in their skin, which is the draft's reading"
+    },
+    "pupil": {
+      "value": "none",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no eye with a pupil to draw"
+    },
+    "M": {
+      "value": "worm_blue",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4 M: Paskin 2014 (planarians flee ultraviolet most); Stowasser 2019 (leech underside)"
+      ],
+      "floor": null,
+      "note": "blue weighted most because blue is the nearest colour the camera records to ultraviolet; the weights are the app's"
+    }
+  },
+  "matrices": {
+    "worm_blue": {
+      "rows": [
+        [
+          0,
+          0.3,
+          0.7
+        ],
+        [
+          0,
+          0.3,
+          0.7
+        ],
+        [
+          0,
+          0.3,
+          0.7
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4 M"
+      ],
+      "note": "weights invented"
+    }
+  },
+  "notes": [
+    {
+      "need": "adaptM",
+      "why": "Dim light and bright light (Hess 1923): in near darkness the field leans toward the bright side and in ordinary light it leans away. Easy; the draft's thresholds are invented."
+    },
+    {
+      "need": "shadow alarm",
+      "why": "A sudden fall in brightness (a third within a third of a second) closes the field to a point and reopens it over two or three seconds, as a fan worm withdraws (Bok 2017). Needs a brightness trigger the engine lacks."
+    },
+    {
+      "need": "sound",
+      "why": "A mole digging: a low rumble raises and brightens the field, as an earthworm surfaces (Catania 2008). Needs the microphone's low band, with consent."
+    },
+    {
+      "need": "zones",
+      "why": "A leech's body of eyes: with the phone flat and face up, the top half leans green and the bottom half blue (Stowasser 2019). Needs zones and device orientation."
+    },
+    {
+      "need": "split",
+      "why": "The draft proposes separate millipede and centipede views; until they exist the word table sends them here."
+    }
+  ],
+  "rows": [
+    [
+      "m",
+      "No eyes",
+      "An earthworm has no eyes. Light-sensitive cells lie in the skin of every segment, most of them at the head and the tail, and tiny windows in a layer of pigment let light reach them from set directions.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: No eyes",
+        "Hess 1925",
+        "Hess 1923",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Bright and dim",
+      "An earthworm crawls away from ordinary light, but it moves toward light that is very dim.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: Bright and dim",
+        "Hess 1923"
+      ]
+    ],
+    [
+      "m",
+      "A mole digging",
+      "Florida earthworms rush out of their burrows when the ground carries the vibration of a digging mole. Bait collectors copy it by scraping a stake driven into the soil, and worms come up as far as 12 metres away.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: A mole digging",
+        "Catania 2008",
+        "Mitra and colleagues 2008"
+      ]
+    ],
+    [
+      "m",
+      "Leeches",
+      "A medicinal leech has five pairs of eyecups on its head and seven pairs of light-sensing spots in every segment of its body. The spots on its back respond best to green light, and those underneath to ultraviolet.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: Leeches",
+        "Groves and Jellies 2021",
+        "Stowasser and colleagues 2019"
+      ]
+    ],
+    [
+      "g",
+      "Flatworms",
+      "Each cup-shaped eye of a freshwater planarian samples the world about every 35 degrees, and behaviour tests on another planarian give the same coarse sharpness. Planarians flee ultraviolet light most strongly, and worms without eyes, or without heads, still flee near-ultraviolet light. Land planarians, such as the hammerhead worms, have many tiny eyes on the head.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: Flatworms",
+        "Land and Nilsson 2012",
+        "Kirwan 2018",
+        "Paskin and colleagues 2014",
+        "Birkholz and Beane 2017",
+        "Bertone 2020",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Fan worms",
+      "Fan worms and Christmas tree worms have eyes on their feathery tentacles. Their light-sensing pigment peaks at 464 nanometres, close to the blue light of a shallow reef, and a passing shadow makes them pull back into their tubes at once.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: Fan worms",
+        "Bok and colleagues 2017",
+        "Porter and Nilsson 2017"
+      ]
+    ],
+    [
+      "x",
+      "Touch, taste and damp",
+      "Worms meet most of the world through touch, taste and moisture. A leech's skin answers vibration up to about 50 times a second, and land planarians need damp ground to live. None of this reaches a camera.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: Touch, taste and damp",
+        "Laverack 1969",
+        "Bertone 2020",
+        "Ascunce and colleagues 2026"
+      ]
+    ],
+    [
+      "i",
+      "The picture",
+      "This view shows only how much light there is, where it comes from and how it changes. It weights blue light most, because planarians and the underside of a leech answer ultraviolet most strongly and blue is the nearest colour the camera records. The weighting is the app's own choice.",
+      [
+        "research/ground-invertebrates:docs/views/drafts/ground-invertebrates.md#2.4: The picture",
+        "param:M",
+        "param:cpd"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true
+}
