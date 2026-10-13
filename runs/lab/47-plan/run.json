@@ -1,0 +1,17 @@
+{
+ "about": "Lab run 39 again (ci/lab/runs/world-fit-fastvit.json), now that ci/lab/publish.sh keeps a file over 99 MiB in parts (ci/lab/bigfiles.py): the mobile BioCLIP 2.5 (FastViT, 11.6M parameters; a third party's upload, MIT by its card) vectors for the world fitting photos, 192 MiB at width 1024, which GitHub refused whole. A measurement only.",
+ "data": "pub/data-world",
+ "manifest": "lab/world-fit/manifest.csv",
+ "wait_minutes": 0,
+ "shard_mode": "mod",
+ "models": [
+  "bioclip25-mobile-fastvit"
+ ],
+ "stages": [
+  "images"
+ ],
+ "shards": {
+  "bioclip25-mobile-fastvit": 8
+ },
+ "max_parallel": 8
+}
