@@ -54,6 +54,10 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 - Pigment peaks for cat, deer, rabbit, squirrel and insect in `tools/views/pigments.py` (`PEAKS`, all sourced) and trials written from them.
 - The floor: a moving-clip mode. Two runs pushed at 14:58: `run/engines/linux-floor-jumper3` (still, the parameters after `gaze.floor`) and `run/engines/linux-floor-moving1` (moving, what the still picture left invisible). Results return on the `ci` branch under `runs/engines/<run>-linux-chromium/floor.json`.
 
+- The first two floor runs (engines 74 and 75) timed out with nothing measured: an edit had put `lastNo = d; d *= 2;` inside a comment, so the harness rendered one value forever. Fixed and relaunched at 15:57 as `run/engines/linux-floor-jumper4` and `run/engines/linux-floor-moving2`.
+- Every check passed (typed, lex, record, lent, viewer, edge, sweep, film, try on 24 views, still, and `test/rec/check_rec.js`); `viewer` and `edge` needed `SLOW=3` on the loaded machine and pass on `main` the same way. Build 29 merged to `main` at about 16:05.
+
 ## Next
-1. Copy both runs' `floor.json` into `docs/views/floor.json` (the moving one under a `moving` note in `runs`, values under `floor.jumper` only where the still run had `invisible`).
-2. Every check, then merge `main` and push to `main` as build 29.
+1. Copy both relaunched runs' `floor.json` from the `ci` branch into `docs/views/floor.json` (the moving one recorded in `runs` with its noise and threshold; its values replace only entries the still run left `invisible`).
+2. The owner's phone checks in `docs/STATUS.md`. Which way roll, elevation and heading turn the picture is untested on a phone.
+3. Not built: the field module's blind wedge and panorama ribbon, the lean toward light for fungus and slime, module 4's strobe and quarter-resolution ring.
