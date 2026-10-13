@@ -43,7 +43,7 @@ Conventions. "This view squeezes" means the engine's `fov` above 180. "Regions" 
 Rows:
 
 - `['m', 'Two sharp spots', 'Hawks, eagles and falcons have two pits of tightly packed cells in each eye, called foveae. The deep one looks out about 45 degrees to the side and the shallow one about 15 degrees. This view puts the deep fovea where your camera points, the way a hawk turns its head to look at something far away.']`
-  Log: Tucker 2000 (fovea, Accipitridae and Falconidae); Mitkus et al. 2017 (fovea, Buteo buteo and others); Potier et al. 2016 (fovea, Parabuteo unicinctus); Fite and Rosenfield-Wessels (fovea, Buteo jamaicensis); Potier et al. 2017 (fovea, Accipitriformes).
+  Log: Tucker 2000 (fovea, Accipitridae and Falconidae); Mitkus et al. 2017 (fovea, Buteo buteo and others); Potier et al. 2016 (fovea, Parabuteo unicinctus); Fite and Rosenfield-Wessels (fovea, Buteo jamaicensis); Ruggeri et al. 2010 (fovea, Buteo platypterus and Buteo brachyurus); Potier et al. 2017 (fovea, Accipitriformes).
 - `['m', 'Looking sideways', 'A hawk looks at distant things sideways with one eye and at close things straight ahead with both. Raptors watching something 40 metres or more away kept it in the side view at least 80 percent of the time. When you tap something close, this view turns to face it straight on.']`
   Log: Tucker 2000 (behaviour_vision; eye_movement, head moved every 2 s in hawks and falcons, 5 s in bald eagles).
 - `['g', 'Sharpness', 'The sharpest eagles and falcons see about twice as much detail as people do at the centre of the deep fovea. The hawks and kites measured so far average less than half of a person\'s sharpness. This view keeps the foveae as sharp as your camera allows and blurs the rest.']`
@@ -212,16 +212,16 @@ Rows:
 
 - `['m', 'Speed', 'Small songbirds that catch insects, such as flycatchers and tits, can see a light flicker up to 130 to 146 times a second. People stop seeing flicker at 50 to 100 times a second, depending on the size of the light. This view runs slowly and then jumps ahead to suggest the difference.']`
   Log: Boström et al. 2016 (cff_hz, Ficedula hypoleuca 146, Ficedula albicollis 141, Cyanistes caeruleus 131).
-- `['m', 'Sharpness', 'A house sparrow sees about a twelfth as much detail as a person does, and a phoebe about a seventh. Blackbirds and jays see more, a third to a half as much. This view is blurred to the level of a small songbird.']`
-  Log: Caves et al. 2023 (acuity_cpd, Passer domesticus 4.9, Sayornis nigricans 8.9, and other sparrows and finches); Caves et al. 2018 (acuity_cpd, Turdus merula 18, Garrulus glandarius 30).
+- `['m', 'Sharpness', 'A house sparrow sees about a twelfth as much detail as a person does, and a phoebe or a blue jay about a seventh. A few songbirds see more: the Eurasian blackbird, a thrush, sees about a third as much as a person. This view is blurred to the level of a small songbird.']`
+  Log: Caves et al. 2023 (acuity_cpd, Passer domesticus 4.9, Sayornis nigricans 8.9, and other sparrows and finches); Stone (acuity_cpd, Cyanocitta cristata 8.8, reading 3.4 minutes of arc as half a cycle); Caves et al. 2018 (acuity_cpd, Turdus merula 18; Garrulus glandarius 30).
 - `['m', 'Ultraviolet', 'Most songbirds and parrots have colour-sensing cells tuned to ultraviolet light, which people cannot see, and their eyes let it through. Crows, jays and tyrant flycatchers have cells tuned to violet light instead. A screen cannot show ultraviolet, so the violet tint in this view stands in for it.']`
   Log: Hart 2001 (lambda_max_nm, Cyanistes caeruleus 371, Sturnus vulgaris 362, Turdus merula 373, Serinus canaria 369, Taeniopygia guttata 360 to 380, Melopsittacus undulatus 371; spectral_range_nm, UVS ocular media 316 to 343); Lind et al. 2013a (spectral_range_nm, 323 against 358); Ödeen and Håstad 2003 (colour_vision, Corvidae and Tyrannidae); Ödeen et al. 2011 (colour_vision, Passeriformes); Smith et al. 2002 (colour_vision, starling and quail).
 - `['m', 'Colour', 'Birds have four kinds of colour-sensing cells, one more than people, and a droplet of coloured oil in each cell narrows the colours it responds to. The droplets help birds tell similar colours apart. This view strengthens colours slightly to suggest it.']`
   Log: Hart 2001 (receptor_classes; oil_droplets).
 - `['m', 'Field of view', 'A zebra finch sees about 300 degrees around itself, with a blind area of about 60 degrees behind its head. This view squeezes that sweep onto the screen.']`
   Log: Eckmeier et al. 2013 (fov_h_deg, Taeniopygia guttata 300); Arnold et al. 2022 (fov_h_deg, blind area 60); Martin 2017 (fov_h_deg, one eye 160 to 180).
-- `['g', 'Sharpest spots', 'A small songbird\'s sharpest spot looks out to the side. A finch turns its head so that a seed falls on that spot, about 60 degrees from its beak. This view sharpens two spots to the left and right of centre.']`
-  Log: Kano et al. 2022 (behaviour_vision, Fringillidae); Dolan and Fernández-Juricic 2010 (fovea, one area centralis in ground foragers).
+- `['g', 'Sharpest spots', 'A small songbird\'s sharpest spot looks forward and out to the side. A finch turns its head so that a seed falls on that spot, about 60 degrees from its beak, and a red-winged blackbird\'s single fovea in each eye points the same way. This view sharpens two spots to the left and right of centre.']`
+  Log: Kano et al. 2022 (behaviour_vision, Fringillidae); Fernández-Juricic et al. 2019 (fovea, Agelaius phoeniceus); Dolan and Fernández-Juricic 2010 (fovea, one area centralis in ground foragers).
 - `['m', 'Steady head', 'A flying zebra finch turns its head in quick jumps lasting about a sixtieth of a second, and holds it steady for about a tenth of a second between them. This view holds the picture still against small turns of your phone and then jumps to catch up.']`
   Log: Eckmeier et al. 2008 (eye_movement, Taeniopygia guttata); Theunissen and Troje 2017 (eye_movement, Aves).
 - `['i', 'Magnetic sense', 'Many songbirds sense the direction of the Earth\'s magnetic field with their eyes, and lose their bearings in red or yellow light. This view draws the field as a faint shading that turns with your phone\'s compass and fades in red or yellow light. Nobody knows what the sense feels like to a bird, so the shading is a guess.']`
@@ -242,7 +242,7 @@ The picture:
 | `rate` | 0.46 | 60 / 130 (Boström et al. 2016) |
 | magnetic shading | a faint, broad darkening whose position follows the angle between the camera's direction and magnetic north and the phone's tilt; opacity falls to 0 when the frame is dominated by red or yellow | `invented`; grounded in Wiltschko et al. 2021 (light dependence) and Nießner et al. 2011 |
 
-Settings for families that stay in `bird` (applied when the database names the species): violet colour for Corvidae, Tyrannidae and other suboscines, Charadriiformes other than Laridae and Rynchopidae, and non-passerines other than parrots (Ödeen and Håstad 2003, 2013; Ödeen et al. 2009); hummingbirds `cpd` 6 and `rate` 0.8 (Goller et al. 2019); crows and jays `cpd` 30 (Caves et al. 2018); swallows four sharp spots (Tyrrell and Fernández-Juricic 2017); cormorants and anhingas `cpd` lowered in water scenes (White et al. 2007).
+Settings for families that stay in `bird` (applied when the database names the species): violet colour for Corvidae, Tyrannidae and other suboscines, Charadriiformes other than Laridae and Rynchopidae, and non-passerines other than parrots (Ödeen and Håstad 2003, 2013; Ödeen et al. 2009); hummingbirds `cpd` 6 and `rate` 0.8 (Goller et al. 2019); swallows four sharp spots (Tyrrell and Fernández-Juricic 2017); cormorants and anhingas `cpd` lowered in water scenes (White et al. 2007).
 
 New effects:
 
@@ -312,6 +312,7 @@ New effects:
 - **Blue tit** 131 Hz and pigments 371, 448, 503, 563 nm; **pied** and **collared flycatchers** 146 and 141 Hz. Log: Boström et al. 2016; Hart 2001.
 - **Zebra finch**: field 300 degrees, head saccades. **House sparrow** 4.9, **house finch** 4.7, **white-throated sparrow** 7.7, **black phoebe** 8.9 cycles per degree. Log: Eckmeier et al. 2008, 2013; Arnold et al. 2022; Caves et al. 2023.
 - **Anna's hummingbird**: 5 to 6 cycles per degree, 70 to 80 Hz. Log: Goller et al. 2019.
+- **Blue jay**: 3.4 minutes of arc, about 8.8 cycles per degree. **Red-winged blackbird**: ultraviolet-sensitive, one fronto-lateral fovea per eye, a wide binocular field without foveal input (numbers in the full paper). **Great blue heron**: rods, single and double cones about 2:1:1, with oil droplets. Log: Stone; Fernández-Juricic et al. 2019; Braekevelt 1994.
 - **Turkey vulture**: finds hidden food by smell. **Great cormorant**: under water sees about as well as an unaided person under water. Log: Potier et al. 2018; White et al. 2007.
 - **European robin**: magnetic compass in either eye, cryptochrome 1a in the violet-ultraviolet cones. Log: Engels et al. 2012; Nießner et al. 2011.
 
@@ -324,8 +325,8 @@ New effects:
 - **Herons, cranes, ibises, storks and limpkins: sharpness and colour.** Visual fields are measured (above); acuity and pigments are not, in anything read. The pigeon's 12 and the violet class of the other non-passerines stand in. The whooping crane's pigments (Porter et al. 2014) are wanted.
 - **Hold-phase length of head-bobbing.** No duration found; 280 ms stays an invention.
 - **Wood stork and limpkin.** Nothing measured in the sources read. The wood stork forages by touch in common accounts, but no source for that was opened, so no row says it.
-- **Woodpeckers and the anhinga.** No visual measurement in any source read. Woodpeckers take the songbird defaults with the violet setting (non-passerine), the anhinga the cormorant setting.
-- **Corvid sharpness and colour.** Jay 30 cycles per degree (Caves et al. 2018), violet class (Ödeen and Håstad 2003); the American crow and blue jay themselves are unmeasured here.
+- **Woodpeckers and the anhinga.** No measurement on live birds in any source read. A skull model gives the anhinga the narrowest binocular field of five foot-propelled divers (Pecsics and Csörgő 2023, no value in the abstract). Woodpeckers take the songbird defaults with the violet setting (non-passerine), the anhinga the cormorant setting.
+- **Corvid sharpness.** The Eurasian jay's 30 cycles per degree (Caves et al. 2018) and the blue jay's 8.8 (Stone, if 3.4 minutes of arc is half a cycle; 17.6 if it is a whole one) disagree, so corvids get no sharpness setting of their own. Their colour class is violet (Ödeen and Håstad 2003). The American and fish crows are unmeasured here.
 - **The magnetic picture.** Nothing measured says what the sense looks or feels like. The shading is an invention, kept faint, grounded only in what is measured: an inclination compass, light-dependent, in both eyes, in the violet-ultraviolet cones.
 - **Polarization.** Conflicting in vision (Hart 2001); used in orientation tests by migrating songbirds (Cochran et al. 2004). Left out.
 - **Pupils.** No source read on bird pupils; all views keep 'o'.
@@ -373,6 +374,7 @@ Opened means the full text, or the abstract on the collection index, a publisher
 - Bala ADS, Spitzer MW, Takahashi TT 2007, *PLoS ONE*, barn owl auditory spatial acuity. 10.1371/journal.pone.0000675. opened (full text)
 - Blough PM 1971, *J. Exp. Anal. Behav.*, pigeon acuity. 10.1901/jeab.1971.15-57. opened (abstract)
 - Boström JE et al. 2016, *PLoS ONE*, ultra-rapid vision in birds. 10.1371/journal.pone.0151099. opened (full text); its pigeon, chicken and budgerigar values are secondary (cited from earlier studies)
+- Braekevelt CR 1994, *Anat. Histol. Embryol.*, great blue heron photoreceptors. 10.1111/j.1439-0264.1994.tb00477.x. opened (abstract)
 - Cantlay JC et al. 2023, *Proc. R. Soc. B*, binocular vision in Anatidae. 10.1098/rspb.2023.1213. opened (full text)
 - Caves EM, Brandley NC, Johnsen S 2018, *Trends Ecol. Evol.* 33: 358-372, acuity and signals. 10.1016/j.tree.2018.03.001. opened (owner's Drive, main text)
 - Caves EM, Fernández-Juricic E, Kelley LA 2023, *JEB*, acuity in 94 bird species. 10.1242/jeb.246063. opened (full text; supplement not read)
@@ -381,6 +383,7 @@ Opened means the full text, or the abstract on the collection index, a publisher
 - Eckmeier D et al. 2008, *PLoS ONE*, zebra finch gaze in flight. 10.1371/journal.pone.0003956. opened (full text)
 - Eckmeier D et al. 2013, *Front. Integr. Neurosci.*, zebra finch optic flow neurons (visual field cited from Bischof 1988). 10.3389/fnint.2013.00068. opened (full text); the field value is secondary
 - Engels S et al. 2012, *PLoS ONE*, compass in both eyes. 10.1371/journal.pone.0043271. opened (abstract and full text on disk)
+- Fernández-Juricic E et al. 2019, *The Auk*, red-winged blackbird vision. 10.1093/auk/ukz039. opened (abstract)
 - Fite KV, Rosenfield-Wessels S, *Brain Behav. Evol.* (2008 online), deep avian foveas. 10.1159/000124142. opened (abstract)
 - Fox RA, Lehmkuhle SW, Westendorf DH 1976, *Science*, falcon acuity. 10.1126/science.1257767. opened (abstract)
 - Goller B et al. 2019, *Physiol. Biochem. Zool.*, Anna's hummingbird resolution. 10.1086/705124. opened (abstract)
@@ -411,29 +414,32 @@ Opened means the full text, or the abstract on the collection index, a publisher
 - Mitkus M et al. 2017, *J. Comp. Neurol.*, raptor fovea photoreceptors. 10.1002/cne.24190. opened (abstract)
 - Necker R 2007, *J. Comp. Physiol. A* 193: 1177-1183, head-bobbing. 10.1007/s00359-007-0281-3. opened (author's copy)
 - Nießner C et al. 2011, *PLoS ONE*, cryptochrome in UV/V cones. 10.1371/journal.pone.0020091. opened (abstract)
+- O'Rourke CT et al. 2010, *PLoS ONE*, hawk eyes I. 10.1371/journal.pone.0012802. opened (full text)
 - Ödeen A, Håstad O 2003, *Mol. Biol. Evol.*, colour vision classes. 10.1093/molbev/msg108. opened (abstract)
+- Ödeen A, Håstad O 2013, *BMC Evol. Biol.* 13: 36, ultraviolet across birds. 10.1186/1471-2148-13-36. opened (full text)
 - Ödeen A, Håstad O, Alström P 2009, *Biol. Lett.*, shorebird ultraviolet. 10.1098/rsbl.2009.0877. opened (abstract)
 - Ödeen A, Håstad O, Alström P 2011, *BMC Evol. Biol.* 11: 313, passerine ultraviolet. 10.1186/1471-2148-11-313. opened (full text)
-- Ödeen A, Håstad O 2013, *BMC Evol. Biol.* 13: 36, ultraviolet across birds. 10.1186/1471-2148-13-36. opened (full text)
-- O'Rourke CT et al. 2010, *PLoS ONE*, hawk eyes I. 10.1371/journal.pone.0012802. opened (full text)
 - Patrick SC et al. 2021, *Front. Ecol. Evol.*, infrasound. 10.3389/fevo.2021.740027. opened (full text; pigeon value secondary, from Kreithen and Quine 1979)
+- Pecsics T, Csörgő T 2023, *Ornis Hungarica*, visual fields of foot-propelled divers (modelled). 10.2478/orhu-2023-0023. opened (abstract)
 - Pettigrew JD, Frost BJ, *Brain Behav. Evol.* (2008 online), tactile fovea in sandpipers. 10.1159/000118775. opened (abstract)
 - Portugal SJ et al. 2026, *Ecol. Evol.*, common moorhen fields. 10.1002/ece3.74060. opened (full text; blue crane values secondary, from Martin and Shaw 2010)
 - Potier S et al. 2016, *JEB* 219: 2639-2649, two raptors. 10.1242/jeb.142083. opened (abstract, Lund portal)
 - Potier S et al. 2017, *Brain Behav. Evol.*, accipitriform foveae. 10.1159/000479783. opened (abstract)
 - Potier S et al. 2018, *Anim. Cogn.*, sight or smell in vultures. 10.1007/s10071-018-1220-0. opened (full text)
 - Potier S et al. 2018, *JEB*, raptor field shape. 10.1242/jeb.177295. opened (abstract)
-- Potier S, Lieuvin M, Pfaff M, Kelber A 2020, *JEB* 223: jeb209031, raptor flicker. 10.1242/jeb.209031. opened (abstract, Lund portal)
-- Potier S, Mitkus M, Kelber A 2020, *Semin. Cell Dev. Biol.* 106: 116-126, raptor and owl vision. 10.1016/j.semcdb.2020.05.004. opened (abstract, Lund portal)
 - Potier S et al. 2023, *Proc. R. Soc. B*, owl binocular fields. 10.1098/rspb.2023.0664. opened (full text)
 - Potier S et al. 2026, *JEB*, black grouse vision. 10.1242/jeb.250727. opened (full text)
+- Potier S, Lieuvin M, Pfaff M, Kelber A 2020, *JEB* 223: jeb209031, raptor flicker. 10.1242/jeb.209031. opened (abstract, Lund portal)
+- Potier S, Mitkus M, Kelber A 2020, *Semin. Cell Dev. Biol.* 106: 116-126, raptor and owl vision. 10.1016/j.semcdb.2020.05.004. opened (abstract, Lund portal)
 - Rojas LM et al. 1998, *Brain Behav. Evol.*, shorebird night vision. 10.1159/000006580. opened (abstract)
+- Ruggeri M et al. 2010, *Invest. Ophthalmol. Vis. Sci.*, OCT of raptor and owl retinas. 10.1167/iovs.10-5633. opened (abstract)
 - Smith EL, Greenwood VJ, Bennett ATD 2002, *JEB*, ultraviolet colour in starlings and quail. 10.1242/jeb.205.21.3299. opened (abstract)
 - Stoddard MC et al. 2020, *PNAS*, hummingbird nonspectral colours. 10.1073/pnas.1919377117. opened (abstract)
+- Stone RJ, thesis, University of Massachusetts Amherst (repository date 2023), blue jay acuity. 10.7275/6871623. opened (abstract)
 - Theunissen LM, Troje NF 2017, *Front. Neurosci.*, pigeon head stabilization. 10.3389/fnins.2017.00551. opened (full text)
 - Tucker VA 2000, *JEB* 203: 3745, deep fovea and spiral paths. 10.1242/jeb.203.24.3745. opened (abstract)
-- Tyrrell LP, Fernández-Juricic E 2017, *Am. Nat.*, swallow eyes. 10.1086/691404. opened (abstract)
 - Tyrrell LP et al. 2018, *Front. Neurosci.*, hummingbird visual space. 10.3389/fnins.2018.00016. opened (full text)
+- Tyrrell LP, Fernández-Juricic E 2017, *Am. Nat.*, swallow eyes. 10.1086/691404. opened (abstract)
 - White CR et al. 2007, *PLoS ONE* 2: e639, cormorant vision. 10.1371/journal.pone.0000639. opened (full text)
 - Wiltschko R, Nießner C, Wiltschko W 2021, *Front. Physiol.*, the magnetic compass. 10.3389/fphys.2021.667000. opened (full text; a review, values secondary)
 - Wu Y et al. 2016, *Sci. Rep.*, owl and raptor retinal transcriptomes. 10.1038/srep33578. opened (full text)
