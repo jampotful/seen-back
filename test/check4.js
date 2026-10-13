@@ -314,11 +314,49 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.errors = errors; out[mode] = r; await ctx.close();
   }
 
+  if (mode === 'try') {
+    // The jumping spider view (?try=jumper) on the scene clip: the movement map is read, the gaze jumps, dwells and moves on, the
+    // places it looked at are left alone for a while, and nothing errs. Small screenshots go to test/shots/engine/.
+    const dir = path.join(here, 'shots', 'engine'); fs.mkdirSync(dir, { recursive: true });
+    const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+    await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+    await page.goto(HTTP + '&try=' + (process.env.TRY || 'jumper') + (process.env.GENUS ? '&genus=' + process.env.GENUS : '')); await page.waitForTimeout(500);
+    const r = {};
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+    r.prompt = await text(page, 'askViewH');
+    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
+    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+    await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
+    const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 14);
+    let n = 0;
+    while (Date.now() - t0 < SECS * 1000) {
+      await page.waitForTimeout(400);
+      const g = await page.evaluate(() => { const e = window.__seenBack.engine; return e ? e.gazeState() : null; });
+      trace.push({ t: Date.now() - t0, x: +g.x.toFixed(3), y: +g.y.toFixed(3), mode: g.mode, jumps: g.jumps, ior: g.ior, best: +g.best.toFixed(3), maxE: +g.map.maxE.toFixed(3), maxL: +g.map.maxL.toFixed(3), meanE: +g.map.meanE.toFixed(4), lum: +g.map.lum.toFixed(3), shift: g.map.shift.map((v) => +v.toFixed(2)), reads: g.map.reads, salFrames: g.salFrames, pending: g.pending, sleep: g.sleep });
+      if (n < 4 && Date.now() - t0 > 2500 + n * 3000) { await page.screenshot({ path: path.join(dir, (process.env.SHOT || 'jumper') + '-' + n + '.png'), scale: 'css' }); n++; }
+    }
+    const last = trace[trace.length - 1];
+    r.eyes = (await st(page)).eyes; r.jumps = last.jumps; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
+    r.places = trace.filter((x, i) => i && x.jumps !== trace[i - 1].jumps).map((x) => [x.x, x.y]);
+    r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
+    await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); await page.waitForTimeout(300);
+    r.rows = await page.evaluate(() => [...document.querySelectorAll('#rows li')].length);
+    await page.screenshot({ path: path.join(dir, (process.env.SHOT || 'jumper') + '-rows.png'), scale: 'css' });
+    r.errors = errors; out.try = r;
+    if (process.env.TRACE) fs.writeFileSync(process.env.TRACE, JSON.stringify(trace, null, 1));
+    await ctx.close();
+    const ok = r.eyes === (process.env.TRY || 'jumper') && r.reads > 5 && r.maxE > 0 && r.jumps >= (+process.env.MIN_JUMPS || 2) && r.rows >= 6 && !errors.length && r.probe.zones && !r.probe.zErr;
+    if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: the view being tried did not behave as it should'); }
+  }
+
   if (mode === 'perf') {
     // Every view for a fixed number of frames on a fixed clip (test/assets/scene.webm, made by test/make_scene.py), with a table at the end.
     // A frame's cost is measured from outside the page, so the same harness measures any build: the time of the page's own animation
-    // callbacks in that frame plus gl.finish() after the one that drew, which waits for the graphics work to end. Headless software
-    // graphics are slow and share the machine's processors, so the numbers only compare views and builds with each other, on one machine.
+    // callbacks in that frame plus a one-pixel read of the picture after the one that drew, which waits for the graphics work to end
+    // (gl.finish() returns at once in Chromium, so it measures nothing). Headless software graphics are slow and share the machine's
+    // processors, so the numbers only compare views and builds with each other, on one machine.
     // PERF_FRAMES (60) sets the frames a view, TRY (jumper) the views reached with ?try=, PERF_OUT a file for the JSON.
     const FRAMES = +(process.env.PERF_FRAMES || 60), TRY = process.env.TRY === undefined ? 'jumper' : process.env.TRY;
     const measure = () => {
@@ -327,14 +365,14 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       HTMLCanvasElement.prototype.getContext = function (t, o) { const c = gc.call(this, t, o); if (t === 'webgl2' && this.id === 'gl' && c && !pf.gl) pf.gl = c; return c; };
       const da = WebGL2RenderingContext.prototype.drawArrays; let drew = false;
       WebGL2RenderingContext.prototype.drawArrays = function () { if (this === pf.gl) drew = true; return da.apply(this, arguments); };
-      const raf = W.requestAnimationFrame.bind(W); let cur = null;
+      const raf = W.requestAnimationFrame.bind(W); let cur = null; const px = new Uint8Array(4);
       W.requestAnimationFrame = function (cb) {
         return raf(function (ts) {
           if (!cur || cur.ts !== ts) { if (cur && pf.rec && cur.drew) pf.frames.push(cur); cur = { ts, cb: 0, fin: 0, drew: false }; }
           const s = performance.now(); drew = false;
           try { cb(ts); } finally {
             cur.cb += performance.now() - s;
-            if (drew && pf.gl) { const f = performance.now(); pf.gl.finish(); cur.fin += performance.now() - f; cur.drew = true; }
+            if (drew && pf.gl) { const f = performance.now(), g = pf.gl; g.bindFramebuffer(g.FRAMEBUFFER, null); g.readPixels(0, 0, 1, 1, g.RGBA, g.UNSIGNED_BYTE, px); cur.fin += performance.now() - f; cur.drew = true; }
           }
         });
       };
@@ -345,9 +383,11 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
     await page.addInitScript(measure);
     await page.goto(HTTP + (TRY ? '&try=' + TRY : '')); await page.waitForTimeout(500);
-    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
-    await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
-    await say(page, 'cat'); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal:not([hidden]), #askView:not([hidden])', { timeout: 8000 });
+    if (await page.locator('#askAnimal').isVisible()) {   // a build that knows ?try= goes straight to the view being tried
+      await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
+      await say(page, 'cat'); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+    }
     await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'scene.webm'));
     await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 }); await page.waitForTimeout(3500);
     const names = { cat: 'cat', dog: 'dog', squirrel: 'squirrel', deer: 'deer', rabbit: 'rabbit', wader: 'heron', bird: 'cardinal', hawk: 'hawk', alligator: 'alligator', reptile: 'anole', frog: 'treefrog', bee: 'bee', insect: 'butterfly', plant: 'oak',

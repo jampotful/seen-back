@@ -117,23 +117,98 @@
   function noView(key) { return key === 'other' || (!!GROUPS[key] && !EYES[key]); }
   function noViewOrPerson(key) { return key === 'person' || noView(key); }   // neither becomes a view, and neither is kept as an encounter
 
+  // ---------- views being tried (build 23): reached only with ?try=<key> (several with ?try=a,b), offered nowhere else yet
+  // An entry here becomes a view in EYES for that visit only, so a photo or a typed name in its group then opens it too. The fields
+  // added for these views (zones, salience, gaze, glow, senses) are described in docs/ENGINE.md with the evidence each one serves.
+  var SIDE_GREEN = [.063, .336, .021, .117, .624, .039, .069, .368, .023];   // INVENTED: one green receptor's answer (.15 R + .8 G + .05 B), drawn as a dim green
+  var UV_GREEN = [.16, .62, .02, .2, .78, .02, 0, 0, 0];                     // INVENTED: a green receptor drawn yellow-green; blue is replaced by the guessed ultraviolet
+  var UV_GREEN_RED = [1, 0, 0, .2, .78, .02, 0, 0, 0];                       // INVENTED: the same with the red-filtered class kept as red
+  var TRY = {
+    jumper: { chip: 'Jumping spider', who: 'a jumping spider', fov: 350, cpd: 1, pupil: 'o', M: SIDE_GREEN, sat: 1, glow: .9, living: 0, glowC: [.78, 1, .62],
+      salience: 1, cue: 'Movement glows. The sharp strip jumps to it, looks it over, and then lets that place go for a while.',
+      zones: [
+        // the front side eyes (ALEs), about 100 degrees across, where the jointed movement of living things glows brighter
+        { id: 'front', shape: 'ellipse', at: [.5, .5], size: [.95, 1.1], soft: .22, cpd: 1.25, living: 1.6 },
+        // the principal eyes: a narrow upright strip, sharp, in the spider's colours, moved by the gaze
+        { id: 'gaze', shape: 'strip', size: [.045, .17], soft: .025, cpd: 10, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.3, gaze: 1 }],
+      gaze: { zone: 'gaze', jump: 80, dwell: [700, 1700], follow: .14, scan: [.012, 1.4, 14], ior: 5000, iorR: .085, floor: .07, sleep: 1 },
+      byGenus: { Habronattus: { zones: { gaze: { M: UV_GREEN_RED } } } },
+      rows: [
+        ['m', 'Eight eyes, one picture', 'Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely.'],
+        ['m', 'Living things stand out', 'The front side eyes pick out the jointed, rhythmic movement of living things, and the rear side eyes answer to anything that moves.'],
+        ['m', 'Looking away on purpose', 'Once the front eyes lock on, the side eyes ignore that spot for about five seconds so that something new can catch them.'],
+        ['m', 'Colour', 'Most jumping spiders see ultraviolet and green. Some, like Habronattus, also see red through a filter in the eye.'],
+        ['m', 'Sleep', 'At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. This view twitches its sharp strip in bouts when the phone lies still in the dark.'],
+        ['i', 'How the picture is drawn', 'No one knows how a jumping spider joins what its eyes report. This view draws one picture, with a coarse green surround for the six side eyes and a narrow sharp strip for the two front eyes. That way of drawing it is the app’s own.'],
+        ['i', 'Living movement', 'This view treats movement that holds together over a small patch and pulses, as walking legs do, as the movement of something alive. That test is the app’s own approximation.'],
+        ['i', 'Ultraviolet', 'Phone cameras record very little ultraviolet light. Inside the strip, a blue guessed from bluish and bright surfaces stands in for it.'],
+        ['x', 'Hearing', 'A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out.']] }
+  };
+  var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
+  TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; });
+
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function ease(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
-  function paramsOf(m) {
-    m = m || {};
+  var SHAPES = { whole: 0, strip: 1, ellipse: 2, annulus: 3, band: 4 };
+  // A zone states only what differs from its view; everything it leaves out is the view's own value (docs/ENGINE.md).
+  function zoneOf(z, P) {
+    var at = z.at || [.5, .5], size = z.size || [.5, .5];
+    return { id: z.id || '', shape: SHAPES[z.shape] || 0, cx: at[0], cy: at[1], hw: size[0], hh: size[1], inner: z.inner || 0, soft: z.soft === undefined ? .04 : z.soft,
+      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? 1 : 0,
+      inv: z.cpd ? 1 / z.cpd : P.inv, M: z.M || P.M, sat: z.sat === undefined ? P.sat : z.sat, gain: z.gain || P.gain, gate: z.gate === undefined ? P.gate : z.gate,
+      rate: z.rate || P.rate, glow: z.glow === undefined ? P.glow : z.glow, living: z.living === undefined ? P.living : z.living,
+      uv: z.uv === undefined ? P.uvBlue : z.uv, sheen: z.sheen === undefined ? P.sheen : z.sheen, mag: z.mag || 1 };
+  }
+  var ZNUM = ['inv', 'sat', 'gain', 'gate', 'glow', 'living', 'uv', 'sheen', 'mag'];
+  function neutralZone(z, P) {                     // the same place and shape, drawn as the other view would draw it there
+    var o = {}, k; for (k in z) o[k] = z[k];
+    o.inv = P.inv; o.M = P.M; o.sat = P.sat; o.gain = P.gain; o.gate = P.gate; o.rate = P.rate; o.glow = P.glow; o.living = P.living; o.uv = P.uvBlue; o.sheen = P.sheen; o.mag = 1;
+    return o;
+  }
+  function withGenus(m, named) {                  // a view's settings for one genus, where the view lists any (byGenus)
+    var g = named && typeof named.scientific === 'string' ? named.scientific.trim().split(/\s+/)[0] : '';
+    var v = m && m.byGenus && g && m.byGenus.hasOwnProperty(g) ? m.byGenus[g] : null, o, k;
+    if (!v) return m;
+    o = {}; for (k in m) o[k] = m[k];
+    for (k in v) if (k !== 'zones') o[k] = v[k];
+    if (v.zones && m.zones) o.zones = m.zones.map(function (z) { var w = v.zones[z.id], r = {}, j; if (!w) return z; for (j in z) r[j] = z[j]; for (j in w) r[j] = w[j]; return r; });
+    return o;
+  }
+  function paramsOf(m, named) {
+    m = withGenus(m || {}, named);
     var s = clamp(180 / (m.fov || 180), .45, 1);
-    return { zoom: s, barrel: (1 - s) * .9, fovea: m.fovea || 1, inv: 1 / (m.cpd || HUMAN_CPD), fall: m.fall || 0, wA: m.topoA || 0, wS: m.topoS || 0,
+    var P = { zoom: s, barrel: (1 - s) * .9, fovea: m.fovea || 1, inv: 1 / (m.cpd || HUMAN_CPD), fall: m.fall || 0, wA: m.topoA || 0, wS: m.topoS || 0,
       dof: m.dof || 0, ax: m.pupil === 'v' ? .3 : 1, ay: m.pupil === 'h' ? .3 : 1, M: m.M || I3, uvBlue: m.uvBlue || 0, sheen: m.sheen || 0,
       gain: m.gain || 1, sat: m.sat === undefined ? 1 : m.sat, noGreen: m.noGreen || 0, gate: m.gate || 0, field: m.field || 0,
-      persist: m.persist || 0, hold: m.hold || 0, thrust: m.thrust || 0, rate: m.rate || 1 };
+      persist: m.persist || 0, hold: m.hold || 0, thrust: m.thrust || 0, rate: m.rate || 1,
+      glow: m.glow || 0, living: m.living || 0, sal: m.salience ? 1 : 0, ripple: m.ripple || 0 };
+    P.glowC = m.glowC || [1, 1, 1];
+    P.zones = m.zones ? m.zones.slice(0, 4).map(function (z) { return zoneOf(z, P); }) : null;
+    P.gz = m.gaze || null; P.senses = m.senses || null;
+    return P;
   }
   var HUMAN = paramsOf(null);
+  function mixZones(a, b, t) {
+    var za = a.zones || [], zb = b.zones || [], n = Math.max(za.length, zb.length), out = [], i;
+    for (i = 0; i < n; i++) {
+      var A = za[i] || neutralZone(zb[i], a), B = zb[i] || neutralZone(za[i], b), z = {}, k;
+      for (k in B) z[k] = B[k];
+      ZNUM.forEach(function (f) { z[f] = lerp(A[f], B[f], t); });
+      z.M = A.M.map(function (x, j) { return lerp(x, B.M[j], t); });
+      z.rate = t > .5 ? B.rate : A.rate;
+      out.push(z);
+    }
+    return out;
+  }
   function mix(a, b, t) {
     var o = {}, k;
-    for (k in a) if (k !== 'M') o[k] = lerp(a[k], b[k], t);
+    for (k in a) if (typeof a[k] === 'number') o[k] = lerp(a[k], b[k], t);
     o.M = a.M.map(function (x, i) { return lerp(x, b.M[i], t); });
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
+    var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
+    o.glowC = z.glowC; o.gz = z.gz; o.senses = z.senses;
+    o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;
     return o;
   }

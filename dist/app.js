@@ -118,24 +118,99 @@
   function noView(key) { return key === 'other' || (!!GROUPS[key] && !EYES[key]); }
   function noViewOrPerson(key) { return key === 'person' || noView(key); }   // neither becomes a view, and neither is kept as an encounter
 
+  // ---------- views being tried (build 23): reached only with ?try=<key> (several with ?try=a,b), offered nowhere else yet
+  // An entry here becomes a view in EYES for that visit only, so a photo or a typed name in its group then opens it too. The fields
+  // added for these views (zones, salience, gaze, glow, senses) are described in docs/ENGINE.md with the evidence each one serves.
+  var SIDE_GREEN = [.063, .336, .021, .117, .624, .039, .069, .368, .023];   // INVENTED: one green receptor's answer (.15 R + .8 G + .05 B), drawn as a dim green
+  var UV_GREEN = [.16, .62, .02, .2, .78, .02, 0, 0, 0];                     // INVENTED: a green receptor drawn yellow-green; blue is replaced by the guessed ultraviolet
+  var UV_GREEN_RED = [1, 0, 0, .2, .78, .02, 0, 0, 0];                       // INVENTED: the same with the red-filtered class kept as red
+  var TRY = {
+    jumper: { chip: 'Jumping spider', who: 'a jumping spider', fov: 350, cpd: 1, pupil: 'o', M: SIDE_GREEN, sat: 1, glow: .9, living: 0, glowC: [.78, 1, .62],
+      salience: 1, cue: 'Movement glows. The sharp strip jumps to it, looks it over, and then lets that place go for a while.',
+      zones: [
+        // the front side eyes (ALEs), about 100 degrees across, where the jointed movement of living things glows brighter
+        { id: 'front', shape: 'ellipse', at: [.5, .5], size: [.95, 1.1], soft: .22, cpd: 1.25, living: 1.6 },
+        // the principal eyes: a narrow upright strip, sharp, in the spider's colours, moved by the gaze
+        { id: 'gaze', shape: 'strip', size: [.045, .17], soft: .025, cpd: 10, M: UV_GREEN, uv: 1, glow: 0, living: 0, mag: 1.3, gaze: 1 }],
+      gaze: { zone: 'gaze', jump: 80, dwell: [700, 1700], follow: .14, scan: [.012, 1.4, 14], ior: 5000, iorR: .085, floor: .07, sleep: 1 },
+      byGenus: { Habronattus: { zones: { gaze: { M: UV_GREEN_RED } } } },
+      rows: [
+        ['m', 'Eight eyes, one picture', 'Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely.'],
+        ['m', 'Living things stand out', 'The front side eyes pick out the jointed, rhythmic movement of living things, and the rear side eyes answer to anything that moves.'],
+        ['m', 'Looking away on purpose', 'Once the front eyes lock on, the side eyes ignore that spot for about five seconds so that something new can catch them.'],
+        ['m', 'Colour', 'Most jumping spiders see ultraviolet and green. Some, like Habronattus, also see red through a filter in the eye.'],
+        ['m', 'Sleep', 'At night a resting jumping spider’s retinas twitch in bouts, much like the eye movements of a person dreaming. This view twitches its sharp strip in bouts when the phone lies still in the dark.'],
+        ['i', 'How the picture is drawn', 'No one knows how a jumping spider joins what its eyes report. This view draws one picture, with a coarse green surround for the six side eyes and a narrow sharp strip for the two front eyes. That way of drawing it is the app’s own.'],
+        ['i', 'Living movement', 'This view treats movement that holds together over a small patch and pulses, as walking legs do, as the movement of something alive. That test is the app’s own approximation.'],
+        ['i', 'Ultraviolet', 'Phone cameras record very little ultraviolet light. Inside the strip, a blue guessed from bluish and bright surfaces stands in for it.'],
+        ['x', 'Hearing', 'A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out.']] }
+  };
+  var TRY_KEYS = ((/[?&]try=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').filter(function (k) { return TRY.hasOwnProperty(k); });
+  TRY_KEYS.forEach(function (k) { EYES[k] = TRY[k]; });
+
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }
   function ease(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
-  function paramsOf(m) {
-    m = m || {};
+  var SHAPES = { whole: 0, strip: 1, ellipse: 2, annulus: 3, band: 4 };
+  // A zone states only what differs from its view; everything it leaves out is the view's own value (docs/ENGINE.md).
+  function zoneOf(z, P) {
+    var at = z.at || [.5, .5], size = z.size || [.5, .5];
+    return { id: z.id || '', shape: SHAPES[z.shape] || 0, cx: at[0], cy: at[1], hw: size[0], hh: size[1], inner: z.inner || 0, soft: z.soft === undefined ? .04 : z.soft,
+      rot: (z.rot || 0) * Math.PI / 180, gaze: z.gaze ? 1 : 0,
+      inv: z.cpd ? 1 / z.cpd : P.inv, M: z.M || P.M, sat: z.sat === undefined ? P.sat : z.sat, gain: z.gain || P.gain, gate: z.gate === undefined ? P.gate : z.gate,
+      rate: z.rate || P.rate, glow: z.glow === undefined ? P.glow : z.glow, living: z.living === undefined ? P.living : z.living,
+      uv: z.uv === undefined ? P.uvBlue : z.uv, sheen: z.sheen === undefined ? P.sheen : z.sheen, mag: z.mag || 1 };
+  }
+  var ZNUM = ['inv', 'sat', 'gain', 'gate', 'glow', 'living', 'uv', 'sheen', 'mag'];
+  function neutralZone(z, P) {                     // the same place and shape, drawn as the other view would draw it there
+    var o = {}, k; for (k in z) o[k] = z[k];
+    o.inv = P.inv; o.M = P.M; o.sat = P.sat; o.gain = P.gain; o.gate = P.gate; o.rate = P.rate; o.glow = P.glow; o.living = P.living; o.uv = P.uvBlue; o.sheen = P.sheen; o.mag = 1;
+    return o;
+  }
+  function withGenus(m, named) {                  // a view's settings for one genus, where the view lists any (byGenus)
+    var g = named && typeof named.scientific === 'string' ? named.scientific.trim().split(/\s+/)[0] : '';
+    var v = m && m.byGenus && g && m.byGenus.hasOwnProperty(g) ? m.byGenus[g] : null, o, k;
+    if (!v) return m;
+    o = {}; for (k in m) o[k] = m[k];
+    for (k in v) if (k !== 'zones') o[k] = v[k];
+    if (v.zones && m.zones) o.zones = m.zones.map(function (z) { var w = v.zones[z.id], r = {}, j; if (!w) return z; for (j in z) r[j] = z[j]; for (j in w) r[j] = w[j]; return r; });
+    return o;
+  }
+  function paramsOf(m, named) {
+    m = withGenus(m || {}, named);
     var s = clamp(180 / (m.fov || 180), .45, 1);
-    return { zoom: s, barrel: (1 - s) * .9, fovea: m.fovea || 1, inv: 1 / (m.cpd || HUMAN_CPD), fall: m.fall || 0, wA: m.topoA || 0, wS: m.topoS || 0,
+    var P = { zoom: s, barrel: (1 - s) * .9, fovea: m.fovea || 1, inv: 1 / (m.cpd || HUMAN_CPD), fall: m.fall || 0, wA: m.topoA || 0, wS: m.topoS || 0,
       dof: m.dof || 0, ax: m.pupil === 'v' ? .3 : 1, ay: m.pupil === 'h' ? .3 : 1, M: m.M || I3, uvBlue: m.uvBlue || 0, sheen: m.sheen || 0,
       gain: m.gain || 1, sat: m.sat === undefined ? 1 : m.sat, noGreen: m.noGreen || 0, gate: m.gate || 0, field: m.field || 0,
-      persist: m.persist || 0, hold: m.hold || 0, thrust: m.thrust || 0, rate: m.rate || 1 };
+      persist: m.persist || 0, hold: m.hold || 0, thrust: m.thrust || 0, rate: m.rate || 1,
+      glow: m.glow || 0, living: m.living || 0, sal: m.salience ? 1 : 0, ripple: m.ripple || 0 };
+    P.glowC = m.glowC || [1, 1, 1];
+    P.zones = m.zones ? m.zones.slice(0, 4).map(function (z) { return zoneOf(z, P); }) : null;
+    P.gz = m.gaze || null; P.senses = m.senses || null;
+    return P;
   }
   var HUMAN = paramsOf(null);
+  function mixZones(a, b, t) {
+    var za = a.zones || [], zb = b.zones || [], n = Math.max(za.length, zb.length), out = [], i;
+    for (i = 0; i < n; i++) {
+      var A = za[i] || neutralZone(zb[i], a), B = zb[i] || neutralZone(za[i], b), z = {}, k;
+      for (k in B) z[k] = B[k];
+      ZNUM.forEach(function (f) { z[f] = lerp(A[f], B[f], t); });
+      z.M = A.M.map(function (x, j) { return lerp(x, B.M[j], t); });
+      z.rate = t > .5 ? B.rate : A.rate;
+      out.push(z);
+    }
+    return out;
+  }
   function mix(a, b, t) {
     var o = {}, k;
-    for (k in a) if (k !== 'M') o[k] = lerp(a[k], b[k], t);
+    for (k in a) if (typeof a[k] === 'number') o[k] = lerp(a[k], b[k], t);
     o.M = a.M.map(function (x, i) { return lerp(x, b.M[i], t); });
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
+    var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
+    o.glowC = z.glowC; o.gz = z.gz; o.senses = z.senses;
+    o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;
     return o;
   }
 
@@ -144,16 +219,40 @@
   var G60 = [[719,"Alligator mississippiensis","American alligator"],[588,"Ardea herodias","Great blue heron"],[518,"Anhinga anhinga","Anhinga"],[466,"Tillandsia usneoides","Spanish moss"],[437,"Bidens alba","Beggarticks"],[411,"Dione vanillae","Gulf fritillary"],[399,"Anolis sagrei","Brown anole"],[397,"Eudocimus albus","White ibis"],[394,"Ardea alba","Great egret"],[326,"Gallinula chloropus","Gallinule"],[315,"Callicarpa americana","American beautyberry"],[290,"Sciurus carolinensis","Eastern gray squirrel"],[272,"Egretta caerulea","Little blue heron"],[250,"Anolis carolinensis","Green anole"],[242,"Dryophytes cinereus","Green treefrog"],[239,"Buteo lineatus","Red-shouldered hawk"],[238,"Setophaga palmarum","Palm warbler"],[236,"Harmonia axyridis","Asian lady beetle"],[229,"Aramus guarauna","Limpkin"],[222,"Osteopilus septentrionalis","Cuban treefrog"],[193,"Cardinalis cardinalis","Northern cardinal"],[192,"Vitis rotundifolia","Muscadine grape"],[187,"Desarmillaria caespitosa","Ringless honey mushroom"],[184,"Grus canadensis","Sandhill crane"],[183,"Sayornis phoebe","Eastern phoebe"],[180,"Egretta tricolor","Tricolored heron"],[171,"Odocoileus virginianus","White-tailed deer"],[169,"Egretta thula","Snowy egret"],[160,"Sabal palmetto","Cabbage palm"],[156,"Bombus impatiens","Common eastern bumble bee"],[155,"Urbanus proteus","Long-tailed skipper"],[154,"Liquidambar styraciflua","Sweetgum"],[152,"Apis mellifera","Western honey bee"],[150,"Mycteria americana","Wood stork"],[146,"Phalacrocorax auritus","Double-crested cormorant"],[142,"Smilax bona-nox","Catbrier"],[139,"Anaxyrus terrestris","Southern toad"],[136,"Apalone ferox","Florida softshell turtle"],[132,"Verbesina virginica","Frostweed"],[132,"Danaus plexippus","Monarch"],[130,"Quiscalus major","Boat-tailed grackle"],[128,"Anisomorpha buprestoides","Florida stick insect"],[127,"Mimus polyglottos","Northern mockingbird"],[126,"Magnolia grandiflora","Southern magnolia"],[115,"Urena lobata","Caesar weed"],[112,"Parthenocissus quinquefolia","Virginia creeper"],[110,"Coluber constrictor","Black racer"],[109,"Pleopeltis michauxiana","Resurrection fern"],[107,"Junonia coenia","Common buckeye"],[105,"Cathartes aura","Turkey vulture"],[105,"Rhus copallina","Winged sumac"],[104,"Heliconius charithonia","Zebra longwing"],[104,"Arilus cristatus","Wheel bug"],[102,"Phytolacca americana","American pokeweed"],[101,"Indigofera spicata","Creeping indigo"],[98,"Tadarida brasiliensis","Brazilian free-tailed bat"],[98,"Baccharis halimifolia","Groundsel tree"],[97,"Sylvilagus palustris","Marsh rabbit"],[97,"Ardisia crenata","Coral ardisia"],[97,"Agelaius phoeniceus","Red-winged blackbird"]];
   var G60_ALIAS = {"gallinula galeata":10,"hyla cinerea":15,"agraulis vanillae":6,"antigone canadensis":24,"nannopterum auritum":35,"nannopterum auritus":35,"armillaria tabescens":23,"pleopeltis polypodioides":48,"rhus copallinum":51,"bidens pilosa":5,"ardea alba egretta":9};   // later names for the same species, entered from memory
 
-  // ---------- the engine: three passes on the phone's graphics chip
+  // ---------- the engine: passes on the phone's graphics chip
   // 1. every second camera frame is kept in a short ring of past moments
-  // 2. time: trails, held gazes and slowed moments are mixed from that ring
-  // 3. space and colour: field, sharpness, pupil, light, colour, and the aperture
+  // 2. time: trails, held gazes and slowed moments are mixed from that ring (with zones, each zone at its own pace)
+  // 3. space and colour: field, sharpness, pupil, light, colour, and the aperture (with zones, each region its own)
+  // For a view with salience (build 23), each new camera frame also passes through four small steps: a grey copy about 64 cells
+  // on its long side, the phone's own shift between that copy and the last, a map of movement energy with a cue for the movement
+  // of living things, and a few times a second a read of that map which the gaze answers. docs/ENGINE.md describes every field.
   var VS = '#version 300 es\nin vec2 a; out vec2 v; void main(){ v = a * 0.5 + 0.5; gl_Position = vec4(a, 0.0, 1.0); }';
   var FS_COPY = '#version 300 es\nprecision highp float; in vec2 v; out vec4 o; uniform sampler2D u_src; void main(){ o = vec4(texture(u_src, v).rgb, 1.0); }';
+  // Where a zone lies, in the camera picture's own coordinates (as the time and view passes both sample it), with soft edges.
+  var ZONE_GLSL = [
+    'uniform vec4 u_zG[4];',   // centre x, y; half width, half height, in units of the picture's height
+    'uniform vec4 u_zH[4];',   // shape (1 strip, 2 ellipse, 3 annulus, 4 band, 0 the whole field), soft edge, inner edge of an annulus
+    'uniform vec4 u_zR[4];',   // cos and sin of the zone's turn
+    'uniform int u_nz;',
+    'float zoneW(int i, vec2 uv){',
+    '  vec4 g = u_zG[i], h = u_zH[i], r = u_zR[i];',
+    '  if (h.x < 0.5) return 1.0;',
+    '  vec2 d = (uv - g.xy) * vec2(u_srcAspect, 1.0);',
+    '  d = vec2(r.x * d.x + r.y * d.y, -r.y * d.x + r.x * d.y);',
+    '  float s = max(h.y, 1e-4);',
+    '  if (h.x < 1.5) { vec2 e = abs(d) - g.zw; return (1.0 - smoothstep(-s, s, e.x)) * (1.0 - smoothstep(-s, s, e.y)); }',
+    '  if (h.x > 3.5) return 1.0 - smoothstep(-s, s, abs(d.y) - g.w);',
+    '  vec2 sz = max(g.zw, vec2(1e-4)); float q = length(d / sz), sr = s / min(sz.x, sz.y);',
+    '  float w = 1.0 - smoothstep(1.0 - sr, 1.0 + sr, q);',
+    '  if (h.x > 2.5) w *= smoothstep(h.z - sr, h.z + sr, q);',
+    '  return w;',
+    '}'].join('\n');
+  function withZones(src, z) { var i = src.indexOf('\n'); return src.slice(0, i + 1) + '#define ZONES ' + (z ? 1 : 0) + '\n' + src.slice(i + 1); }
   var FS_TIME = [
     '#version 300 es', 'precision highp float; precision highp sampler2DArray;', 'in vec2 v; out vec4 o;',
     'uniform sampler2D u_src, u_prev; uniform sampler2DArray u_ring; uniform vec2 u_px;',
     'uniform float u_n, u_head, u_lag, u_useRing, u_now, u_a, u_gate, u_decay, u_enc, u_reset;',
+    '#if ZONES', 'uniform float u_srcAspect; uniform vec4 u_zT[4];', ZONE_GLSL, '#endif',
     'float lum(vec3 c){ return dot(c, vec3(0.2126, 0.7152, 0.0722)); }',
     'vec3 layer(vec2 uv, float i){ return texture(u_ring, vec3(uv, mod(u_head - i + 2.0 * u_n, u_n))).rgb; }',
     'vec3 ring(float back){',
@@ -167,7 +266,17 @@
     '}',
     'void main(){',
     '  vec3 base = texture(u_src, v).rgb;',
+    '#if ZONES',
+    '  vec3 now0 = base;',
+    '#endif',
     '  if (u_useRing > 0.5) base = mix(ring(u_lag), base, u_now);',
+    '#if ZONES',   // each zone at its own pace: its own place in the ring, layered over the view's own
+    '  for (int i = 0; i < 4; i++) {',
+    '    if (i >= u_nz) break;',
+    '    float w = zoneW(i, v); vec4 zt = u_zT[i];',
+    '    if (w > 0.001) base = mix(base, zt.y > 0.5 ? mix(ring(zt.x), now0, zt.z) : now0, w);',
+    '  }',
+    '#endif',
     '  vec4 pv = texture(u_prev, v);',
     '  vec3 prev = u_enc > 0.5 ? pv.rgb * pv.rgb : pv.rgb;',
     '  vec3 col = mix(prev, base, u_reset > 0.5 ? 1.0 : u_a);',
@@ -185,12 +294,33 @@
     'uniform float u_zoom, u_barrel, u_fovea, u_blur, u_fall, u_wA, u_wS, u_dof, u_focus, u_soft;',
     'uniform mat3 u_M; uniform float u_uvBlue, u_sheen, u_gain, u_sat, u_noGreen, u_gateMix, u_field, u_expo;',
     'uniform float u_ap, u_mosaic; uniform int u_shape;',
+    '#if ZONES', ZONE_GLSL,
+    'uniform vec4 u_zP[4];',   // blur radius in pixels, saturation, gain, gate
+    'uniform vec4 u_zQ[4];',   // glow, living, ultraviolet, magnification
+    'uniform vec4 u_zS[4];',   // sheen
+    'uniform mat3 u_zM[4];',
+    'uniform sampler2D u_sal; uniform float u_salOn; uniform vec2 u_base; uniform vec3 u_glowC;',   // the movement map; the view\'s own glow and living weight
+    'uniform vec4 u_ior[6];',  // places the side eyes are ignoring: x, y, reach, strength
+    'uniform vec4 u_rip[4]; uniform float u_ripK;',   // ripples on the screen: x, y, age in seconds, strength
+    'vec2 ripple(vec2 p){',
+    '  vec2 s = vec2(0.0);',
+    '  for (int i = 0; i < 4; i++) {',
+    '    vec4 R = u_rip[i]; if (R.w <= 0.0) continue;',
+    '    vec2 d = p - R.xy; float r = length(d) + 1e-5, x = r - R.z * 0.55;',   // the ring runs out at about half a screen height a second
+    '    s += d / r * (R.w * 0.016 * exp(-x * x / 0.007 - R.z * 1.4) * sin(x * 64.0));',
+    '  }',
+    '  return s * u_ripK;',
+    '}',
+    '#endif',
     'vec3 dec(vec4 s){ return u_enc > 0.5 ? s.rgb * s.rgb : s.rgb; }',
     'vec3 srgb(vec3 c){ c = clamp(c, 0.0, 1.0); return mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c)); }',
     'vec2 hexC(vec2 p, float s){ vec2 r = vec2(1.0, 1.7320508), h = r * 0.5; vec2 a = mod(p / s, r) - h, b = mod(p / s - h, r) - h; vec2 g = dot(a, a) < dot(b, b) ? a : b; return p - g * s; }',
     'void main(){',
     '  float A = u_res.x / u_res.y, longPx = max(u_res.x, u_res.y);',
     '  vec2 p = (v - 0.5) * vec2(A, 1.0);',
+    '#if ZONES',
+    '  if (u_ripK > 0.0) p += ripple(p);',
+    '#endif',
     '  vec2 pa = p - u_apC;',
     '  float facet = 0.0;',
     '  if (u_mosaic > 0.001) { float cell = mix(0.010, 0.058, u_mosaic); vec2 c = hexC(p, cell); facet = length(p - c) / cell; p = mix(p, c, smoothstep(0.0, 0.25, u_mosaic)); }',
@@ -205,11 +335,26 @@
     '  float outside = max(max(max(-uv.x, uv.x - 1.0), max(-uv.y, uv.y - 1.0)), 0.0);',
     '  float topo = u_wA * (r / 0.5) + u_wS * (abs(p.y) / 0.5);',
     '  float ra = u_blur * (1.0 + u_fall * topo * topo) + u_soft;',
+    '  float gain = u_gain, sat = u_sat, gateMix = u_gateMix, uvB = u_uvBlue, sheen = u_sheen, zmag = 1.0; mat3 M = u_M;',
+    '#if ZONES',   // the zones, layered over the view in order, each blended in by its soft-edged weight at this place
+    '  vec2 uv0 = uv; vec2 gl0 = u_base;',
+    '  for (int i = 0; i < 4; i++) {',
+    '    if (i >= u_nz) break;',
+    '    float w = zoneW(i, uv0);',
+    '    if (w > 0.0005) {',
+    '      vec4 zp = u_zP[i], zq = u_zQ[i];',
+    '      ra = mix(ra, zp.x + u_soft, w); sat = mix(sat, zp.y, w); gain = mix(gain, zp.z, w); gateMix = mix(gateMix, zp.w, w);',
+    '      gl0 = mix(gl0, zq.xy, w); uvB = mix(uvB, zq.z, w); sheen = mix(sheen, u_zS[i].x, w);',
+    '      M = M + (u_zM[i] - M) * w;',
+    '      if (zq.w > 1.001) { float zm = mix(1.0, zq.w, w); vec2 c = u_zG[i].xy; uv = c + (uv - c) / zm; zmag *= zm; }',   // a zone that magnifies what it holds
+    '    }',
+    '  }',
+    '#endif',
     '  float rd = u_dof * min(abs(v.y - u_focus) * 2.0, 1.2);',   // GUESSED depth: height in the frame stands in for distance
     '  vec2 rad = sqrt(vec2(ra * ra) + (rd * u_aniso) * (rd * u_aniso)) + vec2(outside * 0.22 * longPx);',
-    '  float pxTex = u_texLong / (longPx * u_zoom);',
+    '  float pxTex = u_texLong / (longPx * u_zoom * zmag);',
     '  float lod = clamp(log2(max(sqrt(rad.x * rad.y) * pxTex * 0.7, 1.0)), 0.0, u_maxLod);',
-    '  vec2 toUv = 1.0 / (u_res.y * span * u_zoom * mag);',
+    '  vec2 toUv = 1.0 / (u_res.y * span * u_zoom * mag * zmag);',
     '  vec3 acc = vec3(0.0); float trail = 0.0;',
     '  for (int i = 0; i < 16; i++) {',
     '    float fi = float(i), rr = sqrt((fi + 0.5) / 16.0), th = fi * 2.39996323;',
@@ -218,16 +363,25 @@
     '  }',
     '  acc /= 16.0; trail /= 16.0;',
     '  if (u_field > 0.001) acc = mix(acc, dec(textureLod(u_t, uv, max(u_maxLod - 2.0, 0.0))), u_field);',
-    '  acc *= mix(1.0, 0.5, smoothstep(0.0, 0.35, outside)) * u_expo;',
-    '  vec3 c = acc * u_gain / (1.0 + (u_gain - 1.0) * acc);',
+    '  float edge = mix(1.0, 0.5, smoothstep(0.0, 0.35, outside));',
+    '  acc *= edge * u_expo;',
+    '  vec3 c = acc * gain / (1.0 + (gain - 1.0) * acc);',
     '  float mn = min(c.r, min(c.g, c.b));',
     '  float uvg = clamp(1.6 * (c.b - 0.5 * (c.r + c.g)) + 2.5 * max(mn - 0.6, 0.0), 0.0, 1.0);',   // INVENTED ultraviolet
-    '  vec3 m = u_M * c;',
-    '  m.b = mix(m.b, uvg, u_uvBlue);',
-    '  m = mix(m, vec3(0.62, 0.12, 1.0), 0.45 * uvg * u_sheen);',
+    '  vec3 m = M * c;',
+    '  m.b = mix(m.b, uvg, uvB);',
+    '  m = mix(m, vec3(0.62, 0.12, 1.0), 0.45 * uvg * sheen);',
     '  m.g *= 1.0 - 0.9 * u_noGreen;',
-    '  m = mix(vec3(dot(m, vec3(0.2126, 0.7152, 0.0722))), m, u_sat);',
-    '  m *= mix(1.0, 0.035 + 1.7 * trail, u_gateMix);',
+    '  m = mix(vec3(dot(m, vec3(0.2126, 0.7152, 0.0722))), m, sat);',
+    '#if ZONES',   // movement glows, where the view asks for it, except at the places the side eyes are ignoring
+    '  if (u_salOn > 0.001) {',
+    '    vec4 sl = texture(u_sal, uv0);',
+    '    float g = (sl.r + gl0.y * sl.g) * gl0.x * u_salOn, ig = 0.0;',
+    '    for (int j = 0; j < 6; j++) { vec4 I = u_ior[j]; if (I.w > 0.0) { vec2 dd = (uv0 - I.xy) * vec2(u_srcAspect, 1.0); ig = max(ig, I.w * exp(-dot(dd, dd) / (I.z * I.z))); } }',
+    '    m += u_glowC * (g * (1.0 - ig) * edge * u_expo);',
+    '  }',
+    '#endif',
+    '  m *= mix(1.0, 0.035 + 1.7 * trail, gateMix);',
     '  m *= 1.0 - 0.35 * u_mosaic * smoothstep(0.35, 0.5, facet);',
     '  if (u_ap < 0.999) {',
     '    float d; float ra2 = length(pa);',
@@ -237,6 +391,75 @@
     '    m *= 1.0 - smoothstep(0.93, 1.05, d);',
     '  }',
     '  o = vec4(srgb(m), 1.0);',
+    '}'].join('\n');
+
+  // ---- salience: four small passes on each new camera frame, for views that ask for it
+  // 1. a grey copy of the frame, about 64 cells on its long side (square roots of brightness, so that dark noise counts for less)
+  var FS_LOW = ['#version 300 es', 'precision highp float; in vec2 v; out vec4 o;', 'uniform sampler2D u_src; uniform vec2 u_cell;',
+    'void main(){',
+    '  float s = 0.0;',
+    '  for (int j = 0; j < 4; j++) for (int i = 0; i < 4; i++) s += dot(texture(u_src, v + (vec2(float(i), float(j)) - 1.5) * 0.25 * u_cell).rgb, vec3(0.2126, 0.7152, 0.0722));',
+    '  o = vec4(sqrt(s / 16.0), 0.0, 0.0, 1.0);',
+    '}'].join('\n');
+  // 2. how well this copy matches the last one for each of 7 by 7 shifts around the expected one: the phone's own movement
+  var FS_SHIFT = ['#version 300 es', 'precision highp float; out vec4 o;', 'uniform sampler2D u_a, u_b; uniform ivec2 u_n; uniform vec2 u_prior;',
+    'void main(){',
+    '  ivec2 s = ivec2(gl_FragCoord.xy) - 3 + ivec2(floor(u_prior + 0.5));',
+    '  float acc = 0.0, n = 0.0;',
+    '  for (int y = 4; y < u_n.y - 4; y += 2) for (int x = 4; x < u_n.x - 4; x += 2) {',
+    '    ivec2 c = ivec2(x, y);',
+    '    acc += abs(texelFetch(u_a, c, 0).r - texelFetch(u_b, clamp(c + s, ivec2(0), u_n - 1), 0).r); n += 1.0;',
+    '  }',
+    '  o = vec4(acc / max(n, 1.0) * 8.0, 0.0, 0.0, 1.0);',
+    '}'].join('\n');
+  // 3. the best of those shifts, to a fraction of a cell (cell 0), and the frame's mean brightness (cell 1)
+  var FS_RES = ['#version 300 es', 'precision highp float; out vec4 o;', 'uniform sampler2D u_shift, u_a; uniform ivec2 u_n; uniform vec2 u_prior;',
+    'void main(){',
+    '  int px = int(gl_FragCoord.x);',
+    '  if (px == 0) {',
+    '    float best = 1e9; ivec2 b = ivec2(3);',
+    '    for (int j = 0; j < 7; j++) for (int i = 0; i < 7; i++) { float e = texelFetch(u_shift, ivec2(i, j), 0).r; if (e < best) { best = e; b = ivec2(i, j); } }',
+    '    vec2 f = vec2(0.0);',
+    '    if (b.x > 0 && b.x < 6) { float l = texelFetch(u_shift, b - ivec2(1, 0), 0).r, r = texelFetch(u_shift, b + ivec2(1, 0), 0).r, d = l - 2.0 * best + r; if (d > 1e-5) f.x = clamp(0.5 * (l - r) / d, -0.5, 0.5); }',
+    '    if (b.y > 0 && b.y < 6) { float l = texelFetch(u_shift, b - ivec2(0, 1), 0).r, r = texelFetch(u_shift, b + ivec2(0, 1), 0).r, d = l - 2.0 * best + r; if (d > 1e-5) f.y = clamp(0.5 * (l - r) / d, -0.5, 0.5); }',
+    '    vec2 s = vec2(b - 3) + floor(u_prior + 0.5) + f;',
+    '    o = vec4(clamp(0.5 + s / 16.0, 0.0, 1.0), clamp(best, 0.0, 1.0), clamp(texelFetch(u_shift, ivec2(3), 0).r, 0.0, 1.0));',
+    '  } else if (px == 1) {',
+    '    float acc = 0.0, n = 0.0;',
+    '    for (int y = 1; y < u_n.y; y += 3) for (int x = 1; x < u_n.x; x += 3) { acc += texelFetch(u_a, ivec2(x, y), 0).r; n += 1.0; }',
+    '    o = vec4(acc / max(n, 1.0), 0.0, 0.0, 1.0);',
+    '  } else o = vec4(0.0);',
+    '}'].join('\n');
+  // 4. the movement map: (energy, living, slow energy, rhythm). Energy is the change from the last frame once the phone's own shift is
+  // taken out, above the noise and above what a slightly wrong shift leaves at an edge. Living is the app's own cue for the movement of
+  // living things (INVENTED): local movement that keeps one direction over the 3 by 3 patch (coherence of normal flow) and pulses
+  // (energy that changes from frame to frame more than its slow average would), as walking legs do.
+  var FS_SAL = ['#version 300 es', 'precision highp float; in vec2 v; out vec4 o;',
+    'uniform sampler2D u_a, u_b, u_res, u_prev; uniform vec2 u_cell; uniform vec4 u_k; uniform float u_damp, u_fresh;',
+    'float L(sampler2D t, vec2 q){ return texture(t, q).r; }',
+    'void main(){',
+    '  vec4 rs = texelFetch(u_res, ivec2(0, 0), 0);',
+    '  vec2 sc = (rs.xy - 0.5) * 16.0, s = sc * u_cell;',
+    '  vec2 F = vec2(0.0); float Fm = 0.0, dc = 0.0;',
+    '  for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {',
+    '    vec2 q = v + vec2(float(i), float(j)) * u_cell, qb = q + s;',
+    '    float a = L(u_a, q), b = L(u_b, qb);',
+    '    float gx = 0.5 * (L(u_a, q + vec2(u_cell.x, 0.0)) - L(u_a, q - vec2(u_cell.x, 0.0)));',
+    '    float gy = 0.5 * (L(u_a, q + vec2(0.0, u_cell.y)) - L(u_a, q - vec2(0.0, u_cell.y)));',
+    '    float it = a - b, g2 = gx * gx + gy * gy;',
+    '    float d = max(abs(it) - 0.02 - 0.4 * sqrt(g2), 0.0);',
+    '    if (qb.x < 0.0 || qb.y < 0.0 || qb.x > 1.0 || qb.y > 1.0) d = 0.0;',
+    '    vec2 fl = -it * vec2(gx, gy) / (g2 + 0.0004);',
+    '    F += fl * d; Fm += length(fl) * d;',
+    '    if (i == 0 && j == 0) dc = d;',
+    '  }',
+    '  float coh = Fm > 1e-5 ? length(F) / Fm : 0.0;',
+    '  vec4 P = texture(u_prev, v);',
+    '  float e = clamp(dc * 6.0, 0.0, 1.0) * u_damp * (1.0 - smoothstep(2.2, 4.0, length(sc))) * u_fresh;',   // a phone turned fast: its movement is not trusted to be gone
+    '  float E = mix(P.r, e, u_k.x), Es = mix(P.b, e, u_k.y), Rh = mix(P.a, abs(e - P.r), u_k.z);',
+    '  float liv = coh * clamp(Rh * 3.0 / (Es + 0.08), 0.0, 1.0) * clamp(E * 3.0, 0.0, 1.0);',
+    '  float Lv = mix(P.g, liv, u_k.w);',
+    '  o = vec4(max(E - 0.004, 0.0), max(Lv - 0.004, 0.0), Es, Rh);',   // at least one step of decay, so that nothing sticks in eight bits
     '}'].join('\n');
 
   function Engine(canvas) {
@@ -252,7 +475,15 @@
       for (var i = 0; i < n; i++) { var info = gl.getActiveUniform(p, i); u[info.name] = gl.getUniformLocation(p, info.name); }
       return { p: p, u: u };
     }
-    var pCopy = prog(FS_COPY), pTime = prog(FS_TIME), pView = prog(FS_VIEW);
+    var pCopy = prog(FS_COPY), pTime = prog(withZones(FS_TIME, 0)), pView = prog(withZones(FS_VIEW, 0));
+    // The programs for zones and salience are compiled the first time a view needs them, so a phone that never meets one pays nothing.
+    var pTimeZ = null, pViewZ = null, pLow = null, pShift = null, pRes = null, pSal = null, zErr = '';
+    function zonePrograms() {
+      if (pViewZ || zErr) return !!pViewZ;
+      try { pTimeZ = prog(withZones(FS_TIME, 1)); pViewZ = prog(withZones(FS_VIEW, 1)); pLow = prog(FS_LOW); pShift = prog(FS_SHIFT); pRes = prog(FS_RES); pSal = prog(FS_SAL); }
+      catch (e) { zErr = String(e && e.message || e).slice(0, 300); pViewZ = null; if (window.console) console.error(e); }
+      return !!pViewZ;
+    }
     var vao = gl.createVertexArray(); gl.bindVertexArray(vao);
 
     // ---- the frame-time probe: the graphics chip's own time for a frame where the browser offers a timer query
@@ -279,7 +510,7 @@
     var N = 12, STRIDE = 2, MAXSIDE = 1280;
     var texSrc = gl.createTexture(), ring = null, tA = null, tB = null, fbT = gl.createFramebuffer(), fbR = gl.createFramebuffer();
     var sw = 0, sh = 0, levels = 1, head = 0, frames = 0, writes = 0, tHead = 0, stepMs = 66, reset = true;
-    var lag = 0, holdT0 = 0, holdAt = -1, hasFrame = false, moving = false;
+    var lag = 0, holdT0 = 0, holdAt = -1, hasFrame = false, moving = false, fresh = false, freshAt = 0;
     gl.bindTexture(gl.TEXTURE_2D, texSrc);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -291,7 +522,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);
       return t;
     }
-    function resetTime() { head = 0; frames = 0; writes = 0; lag = 0; holdAt = -1; tHead = 0; reset = true; }
+    function resetTime() { head = 0; frames = 0; writes = 0; lag = 0; holdAt = -1; tHead = 0; reset = true; zLag = [0, 0, 0, 0]; salReset(); }
     function alloc(w, h) {
       sw = w; sh = h; levels = Math.floor(Math.log2(Math.max(sw, sh))) + 1;
       [tA, tB, ring].forEach(function (t) { if (t) gl.deleteTexture(t); });
@@ -325,18 +556,219 @@
       gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texSrc); gl.uniform1i(pCopy.u.u_src, 0);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }
-    return {
+
+    // ---- the movement map and its read-back (salience)
+    var SAL_SIDES = [64, 48, 32], salStep = 0, ws = 0, hs = 0, lowT = [null, null], lowN = 0, lowAt = 0, shiftT = null, resT = null, salT = [null, null], salAt = 0;
+    var fbS = gl.createFramebuffer(), pbo = null, map = null, sync = null, readAt = 0, readMs = 160, salFrames = 0, lastFreshAt = 0;
+    var mapInfo = { at: 0, maxE: 0, maxL: 0, meanE: 0, lum: 0, shift: [0, 0], fit: 0, still: 0, reads: 0 };
+    function tex2(w, h, fmt, filt) {
+      var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t); gl.texStorage2D(gl.TEXTURE_2D, 1, fmt, w, h);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filt); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filt);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      return t;
+    }
+    function salAlloc() {
+      var side = SAL_SIDES[salStep], w = sw >= sh ? side : Math.max(8, Math.round(side * sw / sh)), h = sw >= sh ? Math.max(8, Math.round(side * sh / sw)) : side;
+      if (w === ws && h === hs && salT[0]) return;
+      [lowT[0], lowT[1], shiftT, resT, salT[0], salT[1]].forEach(function (t) { if (t) gl.deleteTexture(t); });
+      ws = w; hs = h;
+      lowT = [tex2(ws, hs, gl.R8, gl.LINEAR), tex2(ws, hs, gl.R8, gl.LINEAR)];
+      shiftT = tex2(7, 7, floatOK ? gl.RGBA16F : gl.RGBA8, gl.NEAREST); resT = tex2(4, 1, gl.RGBA8, gl.NEAREST);
+      salT = [tex2(ws, hs, gl.RGBA8, gl.LINEAR), tex2(ws, hs, gl.RGBA8, gl.LINEAR)];
+      gl.bindTexture(gl.TEXTURE_2D, salT[0]); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);
+      gl.bindTexture(gl.TEXTURE_2D, salT[1]); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.MIRRORED_REPEAT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);
+      if (pbo) gl.deleteBuffer(pbo);
+      pbo = gl.createBuffer(); gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo); gl.bufferData(gl.PIXEL_PACK_BUFFER, (ws * hs + 4) * 4, gl.STREAM_READ); gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+      map = new Uint8Array((ws * hs + 4) * 4);
+      if (sync) { gl.deleteSync(sync); sync = null; }
+      salReset();
+    }
+    function clearTex(t) { gl.bindFramebuffer(gl.FRAMEBUFFER, fbS); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); }
+    function salReset() { lowN = 0; salFrames = 0; if (salT[0]) { clearTex(salT[0]); clearTex(salT[1]); clearTex(resT); gl.bindFramebuffer(gl.FRAMEBUFFER, null); } mapInfo.maxE = mapInfo.maxL = mapInfo.meanE = 0; }
+    function target(t, w, h) { gl.bindFramebuffer(gl.FRAMEBUFFER, fbS); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); gl.viewport(0, 0, w, h); }
+    function bindT(unit, t, loc) { gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, t); gl.uniform1i(loc, unit); }
+    function salience(now, damp, prior) {
+      salAlloc();
+      var cur = lowN % 2, prev = 1 - cur, frameMs = lastFreshAt ? clamp(now - lastFreshAt, 8, 200) : 33;
+      lastFreshAt = now;
+      gl.bindVertexArray(vao);
+      target(lowT[cur], ws, hs); gl.useProgram(pLow.p); bindT(0, texSrc, pLow.u.u_src); gl.uniform2f(pLow.u.u_cell, 1 / ws, 1 / hs); gl.drawArrays(gl.TRIANGLES, 0, 3);
+      lowN++;
+      if (lowN < 2) return;
+      target(shiftT, 7, 7); gl.useProgram(pShift.p); bindT(0, lowT[cur], pShift.u.u_a); bindT(1, lowT[prev], pShift.u.u_b);
+      gl.uniform2i(pShift.u.u_n, ws, hs); gl.uniform2f(pShift.u.u_prior, prior[0], prior[1]); gl.drawArrays(gl.TRIANGLES, 0, 3);
+      target(resT, 4, 1); gl.useProgram(pRes.p); bindT(0, shiftT, pRes.u.u_shift); bindT(1, lowT[cur], pRes.u.u_a);
+      gl.uniform2i(pRes.u.u_n, ws, hs); gl.uniform2f(pRes.u.u_prior, prior[0], prior[1]); gl.drawArrays(gl.TRIANGLES, 0, 3);
+      var sIn = salT[salAt], sOut = salT[1 - salAt];
+      target(sOut, ws, hs); gl.useProgram(pSal.p); bindT(0, lowT[cur], pSal.u.u_a); bindT(1, lowT[prev], pSal.u.u_b); bindT(2, resT, pSal.u.u_res); bindT(3, sIn, pSal.u.u_prev);
+      var f = function (tau) { return 1 - Math.exp(-frameMs / tau); };
+      gl.uniform2f(pSal.u.u_cell, 1 / ws, 1 / hs); gl.uniform4f(pSal.u.u_k, f(70), f(650), f(240), f(260)); gl.uniform1f(pSal.u.u_damp, damp); gl.uniform1f(pSal.u.u_fresh, salFrames > 1 ? 1 : 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      salAt = 1 - salAt; salFrames++;
+      if (!sync && now - readAt >= readMs) {          // a few reads a second, into a buffer the chip fills when it gets there; nothing waits
+        readAt = now;
+        gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo);
+        gl.readPixels(0, 0, ws, hs, gl.RGBA, gl.UNSIGNED_BYTE, 0);
+        target(resT, 4, 1); gl.readPixels(0, 0, 4, 1, gl.RGBA, gl.UNSIGNED_BYTE, ws * hs * 4);
+        gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+        sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0); readW = ws; readH = hs;
+      }
+    }
+    var readW = 0, readH = 0;
+    function readPoll(now) {
+      if (!sync) return;
+      if (gl.getSyncParameter(sync, gl.SYNC_STATUS) !== gl.SIGNALED) return;
+      gl.deleteSync(sync); sync = null;
+      if (readW !== ws || readH !== hs) return;        // the map changed size since this read began
+      gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo); gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, map); gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+      var n = ws * hs, o = n * 4, maxE = 0, maxL = 0, sum = 0;
+      for (var i = 0; i < n; i++) { var e = map[i * 4], l = map[i * 4 + 1]; sum += e; if (e > maxE) maxE = e; if (l > maxL) maxL = l; }
+      mapInfo.at = now; mapInfo.reads++; mapInfo.maxE = maxE / 255; mapInfo.maxL = maxL / 255; mapInfo.meanE = sum / n / 255;
+      mapInfo.shift = [(map[o] / 255 - .5) * 16, (map[o + 1] / 255 - .5) * 16]; mapInfo.fit = map[o + 2] / 255; mapInfo.lum = map[o + 4] / 255;
+      gaze.onMap(map, ws, hs, now);
+    }
+
+    // ---- the gaze: a zone moved to the most salient place outside the places it has just looked at
+    // It jumps fast, dwells, sweeps a little while it dwells (jumping spider retinas scan), and leaves an inhibition of return at
+    // each place it looked, fading over gz.ior milliseconds (about five seconds: Ferrante and colleagues 2024). When the picture is dark
+    // and still for a while, it twitches in bouts (Rossler and colleagues 2022). docs/ENGINE.md gives the fields.
+    var gaze = (function () {
+      var G = { x: .5, y: .5, mode: 'rest', t0: 0, fx: .5, fy: .5, tx: .5, ty: .5, until: 0, jumps: 0, ior: [], cfg: null, pinned: null, rot: 0, sx: 0,
+        dark: 0, sleep: false, bout: 0, boutEnd: 0, nextBout: 0, twitchAt: 0, jx: 0, jy: 0, jr: 0, lastMap: 0, aspect: 1, best: 0 };
+      function cfgOf(gz) {
+        return { jump: gz.jump || 80, dwell: gz.dwell || [700, 1600], follow: gz.follow || .14, scan: gz.scan || [.01, 1.2, 10], ior: gz.ior || 5000, iorR: gz.iorR || .08,
+          floor: gz.floor || .07, living: gz.living === undefined ? 1.5 : gz.living, sleep: !!gz.sleep, margin: gz.margin || [.05, .06] };
+      }
+      function iorAt(x, y, now) {
+        var k = 0, c = G.cfg;
+        for (var i = 0; i < G.ior.length; i++) {
+          var I = G.ior[i], age = (now - I.t) / c.ior; if (age >= 1) continue;
+          var dx = (x - I.x) * G.aspect, dy = y - I.y, s = 1 - ease(clamp((age - .55) / .45, 0, 1));
+          k = Math.max(k, s * Math.exp(-(dx * dx + dy * dy) / (c.iorR * c.iorR)));
+        }
+        return k;
+      }
+      function jumpTo(x, y, now) { G.mode = 'jump'; G.t0 = now; G.fx = G.x; G.fy = G.y; G.tx = x; G.ty = y; G.jumps++; }
+      return {
+        G: G,
+        reset: function () { G.x = G.y = G.fx = G.fy = G.tx = G.ty = .5; G.mode = 'rest'; G.ior = []; G.jumps = 0; G.sleep = false; G.dark = 0; G.lastMap = 0; G.pinned = null; G.best = 0; },
+        pin: function (x, y) { G.pinned = x === null ? null : [x, y]; },
+        onMap: function (m, w, h, now) {
+          var c = G.cfg; if (!c) return;
+          G.aspect = sw / Math.max(1, sh);
+          var dtm = G.lastMap ? now - G.lastMap : 0; G.lastMap = now;
+          var o = w * h * 4, sx = (m[o] / 255 - .5) * 16, sy = (m[o + 1] / 255 - .5) * 16, lum = m[o + 4] / 255;
+          var still = Math.abs(sx) < .35 && Math.abs(sy) < .35 && mapInfo.meanE < .02 && senses.still();
+          G.dark = lum < .17 && still ? G.dark + dtm : 0;
+          var wasSleep = G.sleep; G.sleep = c.sleep && G.dark > 3500;
+          if (G.sleep && !wasSleep) { G.nextBout = now + 1500 + Math.random() * 3000; G.mode = 'rest'; }
+          if (G.sleep || G.pinned) return;
+          // the most salient place outside the places just looked at, inside the camera's own picture
+          var best = 0, bx = 0, by = 0, near = 0, nx = 0, ny = 0, mx = c.margin[0], my = c.margin[1], R = .14;
+          for (var y = 0; y < h; y++) {
+            var v = (y + .5) / h; if (v < my || v > 1 - my) continue;
+            for (var x = 0; x < w; x++) {
+              var u = (x + .5) / w; if (u < mx || u > 1 - mx) continue;
+              var i = (y * w + x) * 4, s = (m[i] + c.living * m[i + 1]) / 255;
+              if (s <= c.floor * .5) continue;
+              var dx = (u - G.x) * G.aspect, dy = v - G.y, d2 = dx * dx + dy * dy;
+              if (d2 < R * R && s > near) { near = s; nx = u; ny = v; }
+              s *= 1 - iorAt(u, v, now);
+              if (s > best) { best = s; bx = u; by = v; }
+            }
+          }
+          G.best = best;
+          if (G.mode === 'dwell') {
+            if (near > c.floor) { G.tx = nx; G.ty = ny; }                    // the target moved: the gaze follows it while it dwells
+            if (now < G.until) return;
+          }
+          if (G.mode === 'jump') return;
+          var ddx = (bx - G.x) * G.aspect, ddy = by - G.y;
+          if (best > c.floor && best > mapInfo.meanE * 3 && ddx * ddx + ddy * ddy > .0025) jumpTo(bx, by, now);
+          else if (G.mode === 'dwell') G.mode = 'rest';
+        },
+        // where the gaze zone is now: centre and turn, moved a little every frame
+        at: function (gz, now, dt) {
+          if (!gz) return null;
+          if (!G.cfg || G.cfg.src !== gz) { G.cfg = cfgOf(gz); G.cfg.src = gz; }
+          var c = G.cfg, t = now / 1000, j = calm ? 450 : c.jump;
+          if (G.pinned) { G.x = G.pinned[0]; G.y = G.pinned[1]; return { x: G.x, y: G.y, rot: 0 }; }
+          if (G.mode === 'jump') {
+            var p = clamp((now - G.t0) / j, 0, 1), e = calm ? ease(p) : 1 - Math.pow(1 - p, 3);
+            G.x = lerp(G.fx, G.tx, e); G.y = lerp(G.fy, G.ty, e);
+            if (p >= 1) {
+              G.mode = 'dwell'; G.until = now + c.dwell[0] + Math.random() * (c.dwell[1] - c.dwell[0]);
+              G.ior.push({ x: G.tx, y: G.ty, t: now }); if (G.ior.length > 6) G.ior.shift();
+            }
+          } else if (G.mode === 'dwell') {
+            var a = 1 - Math.exp(-(dt || 16) / (c.follow * 1000));
+            G.x = lerp(G.x, G.tx, a); G.y = lerp(G.y, G.ty, a);
+          } else if (!G.sleep) {
+            var b = 1 - Math.exp(-(dt || 16) / 2500);                    // nothing calls: the gaze settles slowly back toward the front
+            G.x = lerp(G.x, .5, b); G.y = lerp(G.y, .5, b);
+          }
+          var sx = 0, rot = 0;
+          if (!calm && !G.sleep && G.mode !== 'jump') {                  // the small sweeps of a scanning retina
+            sx = c.scan[0] * Math.sin(2 * Math.PI * c.scan[1] * t) * (G.mode === 'dwell' ? 1 : .5);
+            rot = c.scan[2] * Math.sin(2 * Math.PI * c.scan[1] * .53 * t + 1.1) * Math.PI / 180;
+          }
+          if (G.sleep) {                                                 // in the dark and still: bouts of twitching
+            if (!G.bout && now >= G.nextBout) { G.bout = 1; G.boutEnd = now + 1500 + Math.random() * 2500; G.twitchAt = 0; }
+            if (G.bout) {
+              if (now >= G.twitchAt) { G.twitchAt = now + 70 + Math.random() * 160; G.jx = (Math.random() - .5) * .05; G.jy = (Math.random() - .5) * .06; G.jr = (Math.random() - .5) * .5; }
+              if (now >= G.boutEnd) { G.bout = 0; G.nextBout = now + 6000 + Math.random() * 9000; G.jx = G.jy = G.jr = 0; }
+            }
+            if (calm) { G.jx *= .2; G.jy *= .2; G.jr *= .2; }
+            sx += G.jx; rot += G.jr;
+          }
+          return { x: G.x + sx, y: G.y + (G.sleep ? G.jy : 0), rot: rot };
+        },
+        iorList: function (now) {
+          var c = G.cfg, out = []; if (!c) return out;
+          for (var i = 0; i < G.ior.length; i++) { var I = G.ior[i], age = (now - I.t) / c.ior; if (age < 1) out.push([I.x, I.y, c.iorR, 1 - ease(clamp((age - .55) / .45, 0, 1))]); }
+          return out;
+        }
+      };
+    })();
+
+    // ---- uniforms for the zones, reused frame after frame
+    var zG = new Float32Array(16), zH = new Float32Array(16), zR = new Float32Array(16), zP = new Float32Array(16), zQ = new Float32Array(16), zS = new Float32Array(16), zM = new Float32Array(36), zT = new Float32Array(16);
+    var iorU = new Float32Array(24), ripU = new Float32Array(16), zLag = [0, 0, 0, 0], lastG = null;
+    function blurOf(inv, longPx) { return inv > 1 / (HUMAN_CPD - 1) ? .6 * (longPx / VIEW_DEG) * inv : 0; }   // 0.6 of one cycle at that eye's limit
+    function zoneUniforms(Z, P, now, dt, longPx) {
+      var nz = Math.min(4, Z.length), i, gz = null;
+      for (i = 0; i < nz; i++) {
+        var z = Z[i], cx = z.cx, cy = z.cy, rot = z.rot;
+        if (z.gaze && P.gz) { gz = gz || gaze.at(P.gz, now, dt); if (gz) { cx = gz.x; cy = gz.y; rot += gz.rot; } lastG = gz; }
+        zG[i * 4] = cx; zG[i * 4 + 1] = cy; zG[i * 4 + 2] = z.hw; zG[i * 4 + 3] = z.hh;
+        zH[i * 4] = z.shape; zH[i * 4 + 1] = z.soft; zH[i * 4 + 2] = z.inner; zH[i * 4 + 3] = 0;
+        zR[i * 4] = Math.cos(rot); zR[i * 4 + 1] = Math.sin(rot);
+        zP[i * 4] = blurOf(z.inv, longPx); zP[i * 4 + 1] = z.sat; zP[i * 4 + 2] = z.gain; zP[i * 4 + 3] = moving ? z.gate : 0;
+        zQ[i * 4] = z.glow; zQ[i * 4 + 1] = z.living; zQ[i * 4 + 2] = z.uv; zQ[i * 4 + 3] = z.mag;
+        zS[i * 4] = z.sheen;
+        for (var j = 0; j < 9; j++) zM[i * 9 + j] = z.M[j];
+      }
+      return nz;
+    }
+
+    var api = {
       floatOK: floatOK,
       setImage: function (cv) { moving = false; if (upload(cv, cv.width, cv.height)) reset = true; },
-      setFrame: function (source, w, h, now) { if (!moving) { moving = true; resetTime(); } if (upload(source, w, h)) pushRing(now); },
+      setFrame: function (source, w, h, now) { if (!moving) { moving = true; resetTime(); } if (upload(source, w, h)) { pushRing(now); fresh = true; freshAt = now; } },
       resetTime: resetTime,
       setSide: function (n) { MAXSIDE = Math.max(240, Math.round(n)); },
       side: function () { return MAXSIDE; },
+      // a slow phone gives up detail in the movement map before it gives up any of the picture (64, then 48, then 32 cells)
+      lighten: function () { if (pViewZ && salFrames && salStep < SAL_SIDES.length - 1) { salStep++; return true; } return false; },
       clear: function () { hasFrame = false; },
       hasFrame: function () { return hasFrame; },
+      newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; },
       state: function () { return { sw: sw, sh: sh, writes: writes, stepMs: stepMs, moving: moving, floatOK: floatOK, err: gl.getError() }; },
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
-      probe: function () { return { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length }; },
+      probe: function () { return { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr }; },
+      // for the checks: the gaze, the movement map's last read, and a way to hold the gaze in one place
+      gazeState: function () { var G = gaze.G; return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync }; },
+      pinGaze: function (x, y) { gaze.pin(x === undefined ? null : x, y); },
       resize: function () {
         var dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr, k = Math.min(1, MAXSIDE / Math.max(w, h, 1));
         w = Math.max(2, Math.round(w * k)); h = Math.max(2, Math.round(h * k));
@@ -349,10 +781,14 @@
         qEnd(); keep(cpuMs, performance.now() - c0);
       }
     };
+    return api;
+
     function drawFrame(P, fx, now, dt) {
         gl.bindVertexArray(vao);
         if (!hasFrame) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); return; }
-        var useRing = 0, back = 0, nowMix = 0, a = 1;
+        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001) && zonePrograms();
+        if (zoned) readPoll(now);
+        var useRing = 0, back = 0, nowMix = 0, a = 1, zPace = false;
         if (moving && writes > N) {
           if (P.hold > 0) {
             var ph = now - holdT0;
@@ -367,27 +803,52 @@
             nowMix = lag > top - 1.5 ? (lag - (top - 1.5)) / 1.5 : 0;
             back = clamp(lag - (now - tHead) / stepMs, 0, N - 2); useRing = 1;
           } else { lag = 0; holdAt = -1; }
+          if (zoned && Z) for (var zi = 0; zi < Math.min(4, Z.length); zi++) {   // a zone at its own pace keeps its own place in the ring
+            var zr = Z[zi].rate, zt = zi * 4;
+            zT[zt] = 0; zT[zt + 1] = 0; zT[zt + 2] = 0;
+            if (zr < .999 && Math.abs(zr - P.rate) > .001) {
+              var top2 = N - 3; zPace = true;
+              zLag[zi] += (1 - zr) * dt / stepMs; if (zLag[zi] >= top2) zLag[zi] = 0;
+              zT[zt] = clamp(zLag[zi] - (now - tHead) / stepMs, 0, N - 2); zT[zt + 1] = 1; zT[zt + 2] = zLag[zi] > top2 - 1.5 ? (zLag[zi] - (top2 - 1.5)) / 1.5 : 0;
+            } else if (Math.abs(zr - P.rate) <= .001 && useRing) { zT[zt] = back; zT[zt + 1] = 1; zT[zt + 2] = nowMix; }
+          }
         } else { lag = 0; holdAt = -1; }
         if (moving && P.persist > 0) { a = 1 - Math.exp(-(dt / 1000) / P.persist); if (!floatOK) a = Math.max(a, .2); }
+        // the movement map, once for each new camera frame
+        if (zoned && P.sal > .001 && moving && fresh) {
+          var sp = senses.turning();
+          salience(now, 1 - clamp((sp - 25) / 70, 0, .85), [0, 0]);
+        }
+        fresh = false;
+        var gateAny = P.gate > .5 || (Z && Z.some(function (z) { return z.gate > .01; }));
+        var tp = zoned && zPace ? pTimeZ : pTime;
         gl.bindFramebuffer(gl.FRAMEBUFFER, fbT);
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tB, 0);
-        gl.viewport(0, 0, sw, sh); gl.useProgram(pTime.p);
-        var ut = pTime.u;
+        gl.viewport(0, 0, sw, sh); gl.useProgram(tp.p);
+        var ut = tp.u;
         gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texSrc); gl.uniform1i(ut.u_src, 0);
         gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, tA); gl.uniform1i(ut.u_prev, 1);
         gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D_ARRAY, ring); gl.uniform1i(ut.u_ring, 2);
         gl.uniform2f(ut.u_px, 1 / sw, 1 / sh);
         gl.uniform1f(ut.u_n, N); gl.uniform1f(ut.u_head, head); gl.uniform1f(ut.u_lag, back); gl.uniform1f(ut.u_useRing, useRing); gl.uniform1f(ut.u_now, nowMix);
-        gl.uniform1f(ut.u_a, a); gl.uniform1f(ut.u_gate, moving && writes > 2 && P.gate > .5 ? 1 : 0); gl.uniform1f(ut.u_decay, Math.exp(-dt / 420));
+        gl.uniform1f(ut.u_a, a); gl.uniform1f(ut.u_gate, moving && writes > 2 && gateAny ? 1 : 0); gl.uniform1f(ut.u_decay, Math.exp(-dt / 420));
         gl.uniform1f(ut.u_enc, floatOK ? 0 : 1); gl.uniform1f(ut.u_reset, reset ? 1 : 0);
+        var longPx = Math.max(canvas.width, canvas.height), sc = longPx / 1280, nz = 0;
+        if (zoned && Z) nz = zoneUniforms(Z, P, now, dt, longPx);
+        else if (zoned && P.gz) lastG = gaze.at(P.gz, now, dt);
+        if (tp === pTimeZ) {
+          gl.uniform1f(ut.u_srcAspect, sw / sh); gl.uniform1i(ut.u_nz, nz);
+          gl.uniform4fv(ut['u_zG[0]'], zG); gl.uniform4fv(ut['u_zH[0]'], zH); gl.uniform4fv(ut['u_zR[0]'], zR); gl.uniform4fv(ut['u_zT[0]'], zT);
+        }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
         reset = false;
         var t = tA; tA = tB; tB = t;
         gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, tA); gl.generateMipmap(gl.TEXTURE_2D);
         gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-        gl.viewport(0, 0, canvas.width, canvas.height); gl.useProgram(pView.p);
-        var u = pView.u, longPx = Math.max(canvas.width, canvas.height), sc = longPx / 1280;
-        var blur = P.inv > 1 / (HUMAN_CPD - 1) ? .6 * (longPx / VIEW_DEG) * P.inv : 0;   // 0.6 of one cycle at that eye's limit
+        var vp = zoned ? pViewZ : pView;
+        gl.viewport(0, 0, canvas.width, canvas.height); gl.useProgram(vp.p);
+        var u = vp.u;
+        var blur = blurOf(P.inv, longPx);
         gl.uniform1i(u.u_t, 0);
         gl.uniform2f(u.u_res, canvas.width, canvas.height); gl.uniform2f(u.u_aniso, P.ax, P.ay);
         gl.uniform2f(u.u_apC, fx.apX || 0, fx.apY || 0);
@@ -401,7 +862,22 @@
         gl.uniform1f(u.u_noGreen, P.noGreen); gl.uniform1f(u.u_gateMix, moving ? P.gate : 0); gl.uniform1f(u.u_field, P.field);
         gl.uniform1f(u.u_expo, fx.expo === undefined ? 1 : fx.expo);
         gl.uniform1f(u.u_ap, fx.ap === undefined ? 1 : fx.ap); gl.uniform1i(u.u_shape, fx.shape || 0); gl.uniform1f(u.u_mosaic, fx.mosaic || 0);
+        if (zoned) {
+          gl.uniform1i(u.u_nz, nz);
+          gl.uniform4fv(u['u_zG[0]'], zG); gl.uniform4fv(u['u_zH[0]'], zH); gl.uniform4fv(u['u_zR[0]'], zR);
+          gl.uniform4fv(u['u_zP[0]'], zP); gl.uniform4fv(u['u_zQ[0]'], zQ); gl.uniform4fv(u['u_zS[0]'], zS); gl.uniformMatrix3fv(u['u_zM[0]'], true, zM);
+          var salOn = moving && salT[0] && salFrames > 1 ? P.sal : 0;
+          gl.uniform1f(u.u_salOn, salOn); gl.uniform2f(u.u_base, P.glow, P.living); gl.uniform3f(u.u_glowC, P.glowC[0], P.glowC[1], P.glowC[2]);
+          gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, salT[salAt] || tA); gl.uniform1i(u.u_sal, 1);
+          var L = P.gz ? gaze.iorList(now) : [];
+          for (var ii = 0; ii < 6; ii++) { var I = L[ii]; iorU[ii * 4] = I ? I[0] : 0; iorU[ii * 4 + 1] = I ? I[1] : 0; iorU[ii * 4 + 2] = I ? I[2] : 1; iorU[ii * 4 + 3] = I ? I[3] * salOn : 0; }
+          gl.uniform4fv(u['u_ior[0]'], iorU);
+          var R = fx.rip || [];
+          for (var ri = 0; ri < 4; ri++) { var rr = R[ri]; ripU[ri * 4] = rr ? rr[0] : 0; ripU[ri * 4 + 1] = rr ? rr[1] : 0; ripU[ri * 4 + 2] = rr ? rr[2] : 0; ripU[ri * 4 + 3] = rr ? rr[3] : 0; }
+          gl.uniform4fv(u['u_rip[0]'], ripU); gl.uniform1f(u.u_ripK, (fx.ripK || 0) * P.ripple);
+        }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
+        if (zoned) gl.activeTexture(gl.TEXTURE0);
     }
   }
 
@@ -427,6 +903,91 @@
   // picture size: full where the phone keeps up, stepped down where it does not (or fixed with ?side=NNN)
   var sideAsked = /[?&]side=(\d+)/.exec(location.search || ''), perfN = 0, perfSum = 0;
   if (engine && sideAsked) engine.setSide(+sideAsked[1]);
+
+  // ---------- the phone's own senses, for views that ask for them (build 23)
+  // The motion sensors tell the movement map how fast the phone is turning and whether it lies still; the microphone turns low
+  // sounds into ripples for creatures that sense vibration and moving air. Each input stays off behind SENSE_ON until the app's
+  // thread turns it on (a visit with ?try= may turn them on with &sense=motion,mic), and nothing asks for a permission until the
+  // person taps the line that says, in plain words, what the input is for. docs/ENGINE.md describes both.
+  var SENSE_ON = { motion: false, mic: false };
+  if (TRY_KEYS.length) ((/[?&]sense=([a-z,]+)/.exec(location.search || '') || [0, ''])[1]).split(',').forEach(function (k) { if (SENSE_ON.hasOwnProperty(k)) SENSE_ON[k] = true; });
+  var senses = (function () {
+    var want = null, motionOn = false, rotS = 0, accMean = 0, accDev = 0, gotMotion = 0, lastJolt = 0, mic = null, micAsked = false, rips = [], line = null;
+    var SAY = { motion: 'This view can feel the phone move and lie still. Tap to let it use the motion sensors.',
+      mic: 'This view can show low sounds as ripples. Tap to let it listen through the microphone. Nothing is recorded or kept.' };
+    function onMotion(e) {
+      var r = e.rotationRate || {}, a = e.acceleration, g = e.accelerationIncludingGravity, now = performance.now(), am;
+      gotMotion = now;
+      rotS = lerp(rotS, Math.sqrt((r.alpha || 0) * (r.alpha || 0) + (r.beta || 0) * (r.beta || 0) + (r.gamma || 0) * (r.gamma || 0)), .2);   // degrees a second
+      if (a && a.x !== null && a.x !== undefined) am = Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+      else if (g && g.x !== null && g.x !== undefined) { am = Math.sqrt(g.x * g.x + g.y * g.y + g.z * g.z); accMean = lerp(accMean || am, am, .02); am = Math.abs(am - accMean); }
+      else return;
+      accDev = lerp(accDev, am, .1);
+      if (want && want.jolt && am > 2.2 && now - lastJolt > 140) {   // a knock on the phone, or on the table it lies on, starts a ripple from that side
+        lastJolt = now; var dx = a ? -(a.x || 0) : 0, dy = a ? (a.y || 0) : 0, d = Math.sqrt(dx * dx + dy * dy) || 1;
+        rips.push({ x: .32 * dx / d, y: .32 * dy / d, t: now, a: clamp(am / 6, .3, 1) });
+      }
+    }
+    function startMotion() {
+      if (motionOn) return;
+      motionOn = true; window.addEventListener('devicemotion', onMotion);
+    }
+    function startMic() {
+      if (mic || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+      micAsked = true; paint();
+      navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }, video: false }).then(function (st) {
+        var AC = window.AudioContext || window.webkitAudioContext, ctx = new AC(), lo = (want && want.mic && want.mic[0]) || 60, hi = (want && want.mic && want.mic[1]) || 400;
+        var src = ctx.createMediaStreamSource(st), bp = ctx.createBiquadFilter(), an = ctx.createAnalyser(), c = Math.sqrt(lo * hi);
+        bp.type = 'bandpass'; bp.frequency.value = c; bp.Q.value = c / (hi - lo); an.fftSize = 1024;
+        src.connect(bp); bp.connect(an); if (ctx.resume) ctx.resume();
+        mic = { st: st, ctx: ctx, an: an, buf: new Float32Array(an.fftSize), mean: 0, last: 0 };
+        if (!want || !want.mic) stopMic();
+        paint();
+      }, function () { paint(); });
+    }
+    function stopMic() {
+      if (!mic) return;
+      try { mic.st.getTracks().forEach(function (t) { t.stop(); }); mic.ctx.close(); } catch (e) {}
+      mic = null;
+    }
+    function paint() {                              // the one line on the picture that offers an input, while the view wants one that is off
+      var need = want && S.screen === 'animal' ? (want.motion && SENSE_ON.motion && !motionOn ? 'motion' : want.mic && SENSE_ON.mic && !mic && !micAsked ? 'mic' : '') : '';
+      if (!need) { if (line) line.hidden = true; return; }
+      if (!line) {
+        line = document.createElement('button'); line.type = 'button'; line.className = 'line'; line.id = 'senseLine';
+        var at = $('svcHud'); at.parentNode.insertBefore(line, at.nextSibling);
+        line.addEventListener('click', function () {
+          var k = line.dataset.k;
+          if (k === 'motion') {
+            var D = window.DeviceMotionEvent;
+            if (D && typeof D.requestPermission === 'function') D.requestPermission().then(function (s) { if (s === 'granted') startMotion(); paint(); }, function () { paint(); });
+            else { startMotion(); paint(); }
+          } else if (k === 'mic') startMic();
+        });
+      }
+      line.dataset.k = need; line.textContent = SAY[need]; line.hidden = false;
+    }
+    window.addEventListener('pagehide', stopMic);
+    return {
+      want: function (s) { want = s || null; if (!want || !want.mic) { stopMic(); micAsked = false; } paint(); },
+      paint: paint,
+      still: function () { return !motionOn || performance.now() - gotMotion > 1500 || (rotS < 4 && accDev < .08); },   // without the sensors, the picture alone decides
+      turning: function () { return motionOn ? rotS : 0; },
+      // ripples for the view pass: up to four, as [x, y, age in seconds, strength], in the picture's own units from its centre
+      fx: function (fx, now) {
+        if (mic && want && want.mic) {
+          mic.an.getFloatTimeDomainData(mic.buf);
+          var s = 0, b = mic.buf; for (var i = 0; i < b.length; i++) s += b[i] * b[i];
+          var lv = clamp((20 * Math.log10(Math.sqrt(s / b.length) + 1e-6) + 62) / 40, 0, 1);   // -62 dB of full scale is nothing, -22 is the loudest
+          mic.mean = lerp(mic.mean, lv, .02);
+          if (lv > mic.mean + .16 && now - mic.last > 170) { mic.last = now; rips.push({ x: (Math.random() - .5) * .3, y: (Math.random() - .5) * .3, t: now, a: clamp(lv, .3, 1) }); }
+        }
+        while (rips.length && (now - rips[0].t > 2600 || rips.length > 4)) rips.shift();
+        if (!rips.length) return;
+        fx.rip = rips.map(function (r) { return [r.x, r.y, (now - r.t) / 1000, r.a]; }); fx.ripK = calm ? .3 : 1;
+      }
+    };
+  })();
 
   // ---------- small helpers
   function show(id, on) { $(id).hidden = !on; }
@@ -493,9 +1054,14 @@
     show('btnFlip', S.src === 'cam' && (s === 'finder' || s === 'animal') && S.cameras > 1 && !S.freeze);
     $('btnRec').style.visibility = isMoving() && canRecord() ? 'visible' : 'hidden';
     if (S.eyes) { $('whoName').textContent = shownName(); $('whoMark').className = 'mk ' + (guessed(S.eyes) ? 'g' : 'm'); }
+    senses.paint();
   }
   function go(screen) { S.screen = screen; paintUI(); }
-  function setEyes(key, named) { S.eyes = key; S.named = named || null; eyeP = key ? paramsOf(EYES[key]) : HUMAN; S.k = 0; S.kGoal = 0; S.tr = null; S.focus = S.focusGoal = .5; }
+  function setEyes(key, named) {
+    S.eyes = key; S.named = named || null; eyeP = key ? paramsOf(EYES[key], named) : HUMAN; S.k = 0; S.kGoal = 0; S.tr = null; S.focus = S.focusGoal = .5;
+    if (engine && engine.newView) engine.newView();            // a new pair of eyes starts with no memory of where the last one looked
+    senses.want(eyeP.senses);
+  }
 
   // ---------- the opening picture: soft lights, passed through one pair of eyes after another
   var introCv = makeCanvas(160, 300), introX = introCv.getContext('2d');
@@ -630,7 +1196,21 @@
     } else S.k = 0;
     S.focus += (S.focusGoal - S.focus) * (1 - Math.exp(-(dt || 16) / 90));
     fx.focus = S.focus; fx.mirror = S.src === 'cam' && S.mirror; fx.camZoom = S.camZoom;
+    if (key && eyeP.senses) senses.fx(fx, now);
     return fx;
+  }
+
+  // ---------- a view being tried (?try=<key>): Start opens it on the camera at once, with no photograph first, and keeps no
+  // encounter. Where the camera is closed, it asks for a clip or a photo of the person's view, as looking again does.
+  // &genus=<Genus> chooses a genus's own settings (byGenus), as a name from the recognizer would.
+  function tryStart() {
+    var key = TRY_KEYS[0]; if (!key) return false;
+    var g = (/[?&]genus=([A-Z][a-z]+)/.exec(location.search || '') || [0, ''])[1], named = { common: EYES[key].chip, scientific: g, by: 'you' };
+    S.animalPhoto = null; S.meetingId = null; S.nov = ''; S.seq++; S.token++;
+    function live() { thaw(); setEyes(key, named); go('animal'); showName(); later(startChange, calm ? 150 : 750); }
+    function still() { showStill(blankStill(), false); setEyes(key, named); setViewPrompt(key); go('askView'); }
+    openCamera('environment').then(live, still);
+    return true;
   }
   function afterChange() {
     if (S.screen !== 'animal') return;
@@ -656,8 +1236,8 @@
     engine.draw(P, fx, now, dt);
     if (rec && recX) { recX.drawImage(canvas, 0, 0, recCv.width, recCv.height); if (recOver) recX.drawImage(recOver, 0, 0); }
     perfSum += dt;
-    if (++perfN >= 45) {
-      if (!sideAsked && !rec && perfSum / perfN > 42 && engine.side() > 540) engine.setSide(Math.max(540, engine.side() * .75));
+    if (++perfN >= 45) {   // a phone that falls behind gives up detail in the movement map first, and only then in the picture
+      if (!sideAsked && !rec && perfSum / perfN > 42 && !engine.lighten() && engine.side() > 540) engine.setSide(Math.max(540, engine.side() * .75));
       perfN = 0; perfSum = 0;
     }
   }
@@ -2137,6 +2717,7 @@
   }
   $('btnBegin').addEventListener('click', function () {
     armBack();
+    if (tryStart()) return;                        // a view being tried opens at once (?try=, src/cam.c1.js)
     if (!hasCamera || S.camRefused) { toAskAnimal(); return; }
     var btn = $('btnBegin'); btn.disabled = true;
     openCamera('environment').then(function () {
@@ -2535,7 +3116,8 @@
   requestAnimationFrame(loop);
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
-    pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
+    pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; },   // hold the change of eyes at one instant, for checking
+    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; } };          // the picture engine's probe, gaze and movement map, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
   var frameMs = [], frameLast = 0;

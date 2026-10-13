@@ -369,6 +369,7 @@
   }
   $('btnBegin').addEventListener('click', function () {
     armBack();
+    if (tryStart()) return;                        // a view being tried opens at once (?try=, src/cam.c1.js)
     if (!hasCamera || S.camRefused) { toAskAnimal(); return; }
     var btn = $('btnBegin'); btn.disabled = true;
     openCamera('environment').then(function () {
@@ -767,7 +768,8 @@
   requestAnimationFrame(loop);
   window.__seenBack = { S: S, EYES: EYES, state: function () { return engine ? engine.state() : null; }, record: function () { return record; }, kindOfName: kindOfName, offerList: offerList, setViewPrompt: setViewPrompt, lookAgain: lookAgain, openClaim: openClaim,
     rec: pocket, big: large, bigChoice: bigChoice, svc: naturalist, diag: function () { return diagLog; }, about: aboutText,
-    pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; } };   // hold the change of eyes at one instant, for checking
+    pose: function (t) { S.tr = t === null ? null : { t0: 0, dur: 1, fixed: t }; if (t === null) S.k = 1; },   // hold the change of eyes at one instant, for checking
+    engine: engine, probe: function () { return engine && engine.probe ? engine.probe() : null; } };          // the picture engine's probe, gaze and movement map, for checking
 
   // ---------- about this build: one block to copy from a real phone, to say how it ran there
   var frameMs = [], frameLast = 0;
