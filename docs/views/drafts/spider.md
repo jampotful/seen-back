@@ -90,8 +90,8 @@ Log 130, 131, 258 (Zhou and colleagues 2022; 6 of 12 at 68 dB and 11 of 12 at 88
 `['m', 'Noise', 'Traffic noise slows an orb weaver’s answer to its web. In quiet, Banded Garden Spiders responded to a cricket that landed in the web within a third of a second, and with street noise playing, many took 5 to 10 seconds. In a loud place this view’s ripples fade.']`
 Log 240, 241 (De and Blackledge 2026, *Argiope trifasciata*; 0.29 s in quiet, 4.89 s on average under 75 to 85 dB traffic noise, 40% of responders at 5 to 10 s).
 
-`['m', 'Eyes', 'Orb weavers have eight small eyes, and parts of them form no sharp image at all. A mirror layer behind six of the eyes sends light back through the light-sensing cells for a second chance at catching it, and blurs what image there is. This view is coarse and soft.']`
-Log 91 (eight eyes), 67 and 94 (canoe-shaped mirror in Araneidae, about a quarter of the retina in *Araneus*), 70 (blurred, astigmatic line image), 261 (the mirror's job).
+`['m', 'Eyes', 'Orb weavers have eight small eyes, and a mirror layer behind six of them sends light back through the light-sensing cells, which helps in dim light and blurs the image. A funnel weaver still uses the direction of the light to keep track of the way back to its retreat. This view is coarse and soft.']`
+Log 91 (eight eyes), 67 and 94 (canoe-shaped mirror in Araneidae, about a quarter of the retina in *Araneus*), 70 (blurred, astigmatic line image), 261 (the mirror's job), 286 (Moller and Görner 1994, *Agelena labyrinthica*: a 90 degree turn of the light shifted the return direction).
 
 `['g', 'Sharpness', 'The eyes of web builders have hardly been measured. In a funnel weaver the light-sensing cells in most of its eyes sit about 3 degrees apart, which gives under a three-hundredth of your sharpness. This view uses that figure.']`
 Log 92 (web builders' eyes unstudied), 71 (*Tegenaria*, 3 degrees; 1 / (2 × 3) = 0.17 cycles per degree, and 0.17 / 60 is 1/360).
@@ -156,7 +156,7 @@ spider: { chip: 'Spider', who: 'a spider', fov: 340, cpd: .17, pupil: 'o', M: SI
 Log 149 (*Lycosa leuckartii*, 360 degrees), 87 (Land 1985: rear middle fields take the whole front, rear side fields take over from 60 to 80 degrees), 22 (*Cupiennius*), 224 and 254 (*Heteropoda venatoria*).
 
 `['m', 'Sharpness', 'The sharpest eyes of a large wolf spider, the big pair facing forward, have light-sensing cells two-thirds of a degree apart, which gives about an eightieth of your sharpness. Other wolf spiders and their relatives measured so far see more coarsely, and this view uses a middle value.']`
-Log 145 (0.67 degrees; 1 / (2 × 0.67) = 0.75 cycles per degree), 146 to 148, 72 (0.35), 98 (0.28), 19 and 140 (*Cupiennius*, 0.37 to 0.5).
+Log 145 (0.67 degrees; 1 / (2 × 0.67) = 0.75 cycles per degree), 146 to 148, 281 to 284 (*Lycosa tarantula*: 1.3 degrees in the rear middle eyes, 0.38 cycles per degree), 72 (0.35), 98 (0.28), 19 and 140 (*Cupiennius*, 0.37 to 0.5).
 
 `['m', 'Dim light', 'A mirror layer behind the rear eyes sends light back through the light-sensing cells, and it shines green in a flashlight beam at night. A wandering spider still sees by moonlight. This view lifts dim light, more as the scene grows darker.']`
 Log 153 (Benson and Suter 2013, eyeshine in wolf and fishing spiders), 20 and 68 (grate-shaped mirror), 261, 138 (*Cupiennius*, below 0.01 lux), 150 and 21 (F-numbers 0.58 to 0.74).
@@ -200,7 +200,7 @@ hunter: { chip: 'Wolf, fishing or huntsman spider', who: 'a hunting spider', fov
 | Field | Value | Behind it | Invented? |
 |---|---|---|---|
 | `fov` | 360 | Log 149, 87, 22, 254 | |
-| `cpd` | .5 | Log 145 to 148, 72, 98, 19, 140 (measured range 0.28 to 0.75) | the choice within the range is invented |
+| `cpd` | .5 | Log 145 to 148, 281 to 284, 72, 98, 19, 140 (best eyes 0.28 to 0.75) | the choice within the range is invented |
 | `pupil` | 'o' | Log 70 | invented |
 | `M` | `SIDE_GREEN` | Log 151, 137 (*Cupiennius* 520 to 540 nm), 159 (*Leucorchestris* 525 to 540 nm) | the matrix is invented |
 | `sat` | .2 | Log 141, 151 | invented |
@@ -232,8 +232,8 @@ Log 110 to 115 (Fischer and colleagues 2026).
 `['m', 'Sharpness', 'A crab spider’s light-sensing cells sit 2 to 4 degrees apart, so it sees anything clearly only up close. It notices movement up to about 20 centimetres away and grabs prey that comes within a centimetre.']`
 Log 73 to 76 (Land 1985, *Xysticus*: 1.8 to 4.2 degrees, which gives 0.12 to 0.28 cycles per degree), 101 (Foelix 2011, citing Homann 1934).
 
-`['m', 'Colour', 'The Goldenrod Crab Spider has green-sensing and ultraviolet-sensing cells, and two other crab spiders measured so far have a single green-sensing kind. Colour in this view is faint and leans green.']`
-Log 60, 61 (520 and 340 nm), 116, 117 (504 and 511 nm).
+`['m', 'Colour', 'The Goldenrod Crab Spider has green-sensing and ultraviolet-sensing cells in all four pairs of eyes, and two other crab spiders measured so far showed a single green-sensing kind. Colour in this view is faint and leans green.']`
+Log 275 to 280 (Defrize and colleagues 2011, *Misumena vatia*: about 340 and 520 nm), 60, 61, 116, 117 (*Xysticus cristatus* 504 nm and *Ozyptila praticola* 511 nm, all eyes pooled).
 
 `['m', 'Daylight', 'A common European crab spider hunts by day in sunny, open grassland, taking bees and hoverflies, and its front middle eyes need far more light than its other eyes. This view does not lift dim light.']`
 Log 264, 118 (Fischer and colleagues 2026, *Xysticus cristatus*). A ground-dwelling relative of dark places has slower eyes (Log 265, 114, 115).
@@ -245,7 +245,7 @@ Log 187 (England and colleagues 2026, *Sidymella rubrosignata*).
 Log 269, 270 (Sánchez-Solano and colleagues 2026, *Peucetia viridans*), 266, 106, 221 to 223 (Kovoor and Muñoz-Cuevas 1997: structure only; the front side eyes may resolve best, and the rear and front side eyes, with a rudimentary mirror layer, seem suited to movement).
 
 `['x', 'Ultraviolet', 'The Goldenrod Crab Spider also sees ultraviolet light, and the corneas of crab spiders let it through. This view leaves ultraviolet out.']`
-Log 61, 189 (Hu and colleagues 2014).
+Log 61, 280, 189 (Hu and colleagues 2014).
 
 #### The picture
 
@@ -263,7 +263,7 @@ crabspider: { chip: 'Crab or lynx spider', who: 'a crab spider or lynx spider', 
 | front `zone` | an ellipse ahead at .28 cycles per degree | Log 58 (four eyes analyze the space in front), 74 and 120 (the large anterior lateral eyes face forward, 1.8 to 2.6 degrees) | the shape is invented |
 | `persist` | .04 | Log 110 to 112 (20 to 30 Hz; 1/25 s) | |
 | front `slow` **new** | a second picture at 35% that steps 10 times a second | Log 113, 115 (front middle eyes about 10 Hz) | the mix is invented |
-| `M`, `sat` | `SIDE_GREEN`, .3 | Log 60, 116, 117 | invented |
+| `M`, `sat` | `SIDE_GREEN`, .3 | Log 275 to 279, 116, 117 | invented |
 | `gain` | leave out | Log 118, 264 | |
 | `salience`, `glow` | 1, .6 | Log 119 | invented |
 | `pupil` | 'o' | Log 70 | invented |
@@ -357,6 +357,9 @@ Log 67, 70, 104, 191 (Tapia and colleagues 2019), 155, 217.
 `['x', 'Warmth', 'A tarantula has sense cells that answer a rise in temperature, probably too weakly to feel a warm animal at a distance. The picture leaves warmth out.']`
 Log 179.
 
+`['x', 'Polarized light', 'Tarantulas may tell apart patterns of polarized light, on weak evidence from a single test. This view leaves polarized light out.']`
+Log 287 (Henton and Crawford 1966, summary only).
+
 #### The picture
 
 ```
@@ -417,9 +420,10 @@ tarantula: { chip: 'Tarantula or ground spider', who: 'a tarantula or ground spi
 | Six-spotted Fishing Spider, *Dolomedes triton* | 76 | `hunter` | 164, 243 to 248 |
 | Pantropical Huntsman Spider, *Heteropoda venatoria* | 77 | `hunter` | 224 to 227, 253 to 255 |
 | *Cupiennius salei*, the model for Alachua's Florida Wandering Spider (*Ctenus captiosus*, 29) | 29 | `hunter` | 15 to 26, 30 to 32, 36 to 38, 121 to 126, 137 to 144, 176, 177, 205, 206, 228, 257 |
-| Wolf spiders: *Lycosa leuckartii*, *L. tarantula*, *Schizocosa* species | 83 (Lycosidae) | `hunter` | 145 to 150, 156, 157, 51, 52, 199 to 201, 204, 208 |
+| Wolf spiders: *Lycosa leuckartii*, *L. tarantula*, *Schizocosa* species | 83 (Lycosidae) | `hunter` | 145 to 150, 156, 157, 281 to 285, 51, 52, 199 to 201, 204, 208 |
+| Labyrinth spider, *Agelena labyrinthica* (funnel weaver) | 0 | `spider` | 286 |
 | Namib huntsman, *Leucorchestris arenicola* | 0 | `hunter` | 158 to 161 |
-| Goldenrod Crab Spider, *Misumena vatia* | 0 | `crabspider` | 54 to 63 |
+| Goldenrod Crab Spider, *Misumena vatia* | 0 | `crabspider` | 54 to 63, 275 to 280 |
 | *Xysticus cristatus* and *Ozyptila praticola* | 0 | `crabspider` | 110 to 120, 264, 265 (and *Xysticus* sp. 73 to 76, 81) |
 | Ogre-faced Spider, *Deinopis spinosa*, with *Dinopis subrufus* (now *Asianopis subrufa*) for the optics | 88 | `netcaster` | 133, 135, 136, 259, 260; 1 to 14, 262, 263 |
 | Tarantulas: *Aphonopelma chalcodes*, *Sericopelma rubronitens*, *Eupalaestrus weijenberghi*, *Grammostola pulchra*; trapdoor spider *Latouchia typica* | 8 (mygalomorphs) | `tarantula` | 185, 178, 179, 180, 181, 198, 183 |
@@ -464,7 +468,7 @@ The same list as `docs/views/wanted/spider.jsonl`, most useful first. Priority 1
 15. Priority 2. Crawford JD 1984. Orientation in a vertical plane: The use of light cues by an orb-weaving spider, Araneus diadematus clerk. Animal Behaviour. doi 10.1016/s0003-3472(84)80334-6. Would show what an orb weaver uses its eyes for in the web, confirming or correcting the Eyes row. Views: `spider`.
 16. Priority 2. Bleckmann H, Barth FG 1984. Sensory ecology of a semi-aquatic spider (Dolomedes triton). Behavioral Ecology and Sociobiology 14: 303-312. doi 10.1007/BF00299502. The full figures behind the fishing spider row, read so far only in abstract fragments. Views: `hunter`.
 17. Priority 2. Klärner D, Barth FG 1982. Vibratory signals and prey capture in orb-weaving spiders (Zygiella x-notata, Nephila clavipes; Araneidae). Journal of Comparative Physiology 148: 445-455. doi 10.1007/BF00619783. The full threshold curves for the Golden Silk Spider, read so far only in abstract fragments. Views: `spider`.
-18. Priority 2. Henton WW, Crawford FT 1966. The discrimination of polarized light by the tarantula. Journal of Comparative Physiology A (as the collection lists it). doi 10.1007/bf00343655. Would show whether tarantulas read polarized light, which would add an x row to the tarantula view. Views: `tarantula`.
+18. Priority 2. Henton WW, Crawford FT 1966. The discrimination of polarized light by the tarantula. Zeitschrift für vergleichende Physiologie 52: 26-32. doi 10.1007/bf00343655. The summary, read on the publisher page, reports a weak running-time effect of polarization patterns; the full paper would name the species and the eyes and decide whether the tarantula view gains a polarization row. Views: `tarantula`.
 19. Priority 2. Opell BD, Cushing PE 1986. Visual fields of orb web and single line web spiders of the family Uloboridae (Arachnida, Araneida). Zoomorphology 106: 199-204. doi 10.1007/BF00312040. Would give measured fields for hackled orb weavers, including the genus of Alachua's Featherlegged Orbweaver, behind the web view's field. Views: `spider`.
 20. Priority 2. Mortimer B, Soler A, Wilkins L, Vollrath F 2019. Decoding the locational information in the orb web vibrations of Araneus diadematus and Zygiella x-notata. Journal of the Royal Society Interface. doi 10.1098/rsif.2019.0201. Would confirm or correct how direction is carried across the legs in an orb web, behind the web overlay. Views: `spider`.
 21. Priority 2. DeVoe RD 1962. Linear Superposition of Retinal Action Potentials to Predict Electrical Flicker Responses from the Eye of the Wolf Spider, Lycosa baltimoriana (Keyserling). The Journal of General Physiology. doi 10.1085/jgp.46.1.75. May give the flicker range a wolf spider eye follows; the page failed to open in this session. Views: `hunter`.
@@ -473,6 +477,7 @@ The same list as `docs/views/wanted/spider.jsonl`, most useful first. Priority 1
 24. Priority 3. Schröer W-D 1974. Zum mechanismus der analyse polarisierten lichtes bei Agelena gracilens C. L. Koch (Araneae, Agelenidae). Zeitschrift für Morphologie der Tiere. doi 10.1007/bf00394375. Background on polarization in funnel weavers' principal eyes. Views: `spider`.
 25. Priority 3. Robinson MH, Robinson B 1971. The Predatory Behavior of the Ogre-Faced Spider Dinopis longipes F. Cambridge (Araneae: Dinopidae). American Midland Naturalist 85: 85-96. doi 10.2307/2423914. Background on how net-casting spiders hunt, for the net-casting effect. Views: `netcaster`.
 26. Priority 3. Dornfeldt K 1975. [Role of the principal and accessory eyes in the photomenotactic orientation of the funnel spider Agelena labyrinthica (CL.)]. Zeitschrift für Tierpsychologie. doi 10.1111/j.1439-0310.1975.tb01996.x. Background on what each eye pair of a funnel weaver does. Views: `spider`.
+27. Priority 3. Moller P, Görner P 1994. Homing by path integration in the spider Agelena labyrinthica Clerck. Journal of Comparative Physiology A 174(2): 221-229. https://acnpsearch.tweb-dev.unibo.it/singlejournalindex/5552415. Read only in abstract fragments; the full paper would say how much a funnel weaver relies on light direction on its web, which the Eyes row now states briefly; no DOI was found. Views: `spider`.
 
 ## 7. Sources
 
@@ -499,6 +504,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Dacke M, Doan TA, O'Carroll DC 2001. Polarized light detection in spiders. Journal of Experimental Biology 204(14). https://doi.org/10.1242/jeb.204.14.2481. `opened` (abstract). Log 154 to 155.
 - Dahl RD, Granda AM 1989. Spectral sensitivities of photoreceptors in the ocelli of the tarantula Aphonopelma chalcodes (Araneae, Theraphosidae). Journal of Arachnology 17(2): 195-205. https://www.biodiversitylibrary.org/part/226315. `opened` (abstract). Log 185.
 - De P, Blackledge TA 2026. Experimental exposure to anthropogenic noise disrupts early-stage prey localization in the orb-weaving spider Argiope trifasciata. Urban Ecosystems 29: 217. https://doi.org/10.1007/s11252-026-02076-3. `opened` (full text). Log 240 to 241.
+- Defrize J, Lazzari CR, Warrant EJ, Casas J 2011. Spectral sensitivity of a colour changing spider. Journal of Insect Physiology. https://doi.org/10.1016/j.jinsphys.2011.01.016. Read at https://casas-lab.irbi.univ-tours.fr/defrize_2011.pdf. `opened` (full text). Log 275 to 280.
 - DeVoe RD, Small RJW, Zvargulis JE 1969. Spectral sensitivities of wolf spider eyes. Journal of General Physiology 54(1). https://doi.org/10.1085/jgp.54.1.1. `opened` (abstract). Log 151.
 - DeVoe RD 1972. Dual sensitivities of cells in wolf spider eyes at ultraviolet and visible wavelengths of light. Journal of General Physiology 59(3). https://doi.org/10.1085/jgp.59.3.247. `opened` (abstract). Log 152.
 - England SJ, Rose L, Penna-Gonçalves V, Herberstein ME, Sumner-Rooney L 2026. Crab spider vision improves their prey capture despite low visual system investment. Royal Society Open Science. https://doi.org/10.1098/rsos.260045. `opened` (abstract). Log 187.
@@ -515,6 +521,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Han SI, Blackledge TA 2024. Directional web strikes are performed by ray spiders in response to airborne prey vibrations. Journal of Experimental Biology. https://doi.org/10.1242/jeb.249237. `opened` (abstract). Log 175.
 - Hebets EA 2005. Attention-altering signal interactions in the multimodal courtship display of the wolf spider Schizocosa uetzi. Behavioral Ecology 16(1): 75-82. https://doi.org/10.1093/beheco/arh133. `opened` (owner's library copy). Log 51 to 53.
 - Heiling AM, Cheng K, Chittka L, Göth A, Herberstein ME 2005. The role of UV in crab spider signals: effects on perception by prey and predators. Journal of Experimental Biology. https://doi.org/10.1242/jeb.01861. `opened` (abstract). Log 186.
+- Henton WW, Crawford FT 1966. The discrimination of polarized light by the tarantula. Zeitschrift für vergleichende Physiologie 52: 26-32. https://doi.org/10.1007/BF00343655. `opened` (abstract). Log 287.
 - Hu Z, Xu X, Chen Z, Li H, Wang X, Wu L, Liu F, Chen J, Li D 2014. The spectral transmission of non-salticid spider corneas. Journal of Experimental Biology. https://doi.org/10.1242/jeb.099069. `opened` (abstract). Log 189 to 190.
 - Hung H-Y, Corver A, Gordus A 2026. Dynamic vibration-driven feedback shapes predator-prey interactions in an orb-weaving spider. PLoS Computational Biology. https://doi.org/10.1371/journal.pcbi.1014802. `opened` (full text). Log 194 to 195.
 - Insausti TC, Defrize J, Lazzari CR, Casas J 2012. Visual fields and eye morphology support color vision in a color-changing crab-spider. Arthropod Structure & Development 41: 155-163. https://doi.org/10.1016/j.asd.2011.11.003. `opened` (owner's library copy). Log 54 to 65.
@@ -536,6 +543,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Masmeijer T, Slavič J, De P, Blackledge TA, Habtour E 2026. Gyroscopic spiders: web mechanical intelligence facilitates prey sensing (Research Square preprint; published in Scientific Reports, doi 10.1038/s41598-026-66753-1). Research Square. https://doi.org/10.21203/rs.3.rs-9944883/v1. `opened` (full text). Log 196.
 - Masters WM 1984. Vibrations in the orbwebs of Nuctenea sclopetaria (Araneidae). II. Prey and wind signals and the spider's response threshold. Behavioral Ecology and Sociobiology 15: 217-223. https://doi.org/10.1007/BF00292978. `opened` (owner's library copy). Log 39 to 42.
 - Miller TE, Rogers S, Wu JJ, Cicirello A, Taylor GK, Mortimer B 2026. Spider leg biomechanics as an information filter for vibration sensing. Proceedings of the Royal Society B. https://doi.org/10.1098/rspb.2026.0915. `opened` (full text). Log 198.
+- Moller P, Görner P 1994. Homing by path integration in the spider Agelena labyrinthica Clerck. Journal of Comparative Physiology A 174(2): 221-229. https://acnpsearch.tweb-dev.unibo.it/singlejournalindex/5552415. `opened` (abstract). Log 286.
 - Moreau S, Saneeibajgiran S, Korst L, Montiglio P-O 2025. Learn to hear your prey: The role of associative learning on web building and hunting behaviour in black widow spiders (Latrodectus hesperus). bioRxiv (preprint). https://doi.org/10.1101/2025.07.04.663247. `opened` (abstract). Log 238 to 239.
 - Morehouse NI, Buschbeck EK, Zurek DB, Steck M, Porter ML 2017. Molecular evolution of spider vision: new opportunities, familiar players. Biological Bulletin 233: 21-38. https://doi.org/10.1086/693977. `opened` (abstract). Log 193.
 - Morehouse N 2020. Spider vision. Current Biology 30: R975-R980 (pages as printed in the reference list of Pande et al. 2026). https://doi.org/10.1016/j.cub.2020.07.042. Read at https://homepages.uc.edu/~morehonn/wp-content/uploads/2021/02/Morehouse-NI-2020-Curr-Biol.pdf. `opened` (full text). Log 209 to 220, 261.
@@ -551,6 +559,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Pande A, Rose L, England SJ, Rahman IA, Pérez-de la Fuente R, Bodey AJ, Wanelik K, Schlepütz CM, Günther J, Rau C, Blanke A, Sumner-Rooney L 2026. Hunting ecology predicts eye arrangements in the modular visual system of spiders. Current Biology 36: 1-7. https://doi.org/10.1016/j.cub.2026.06.019. `opened` (full text). Log 106 to 109.
 - Quirici V, Costa FG 2005. Seismic communication during courtship in two burrowing tarantula spiders: an experimental study on Eupalaestrus weijenberghi and Acanthoscurria suina. Journal of Arachnology. https://doi.org/10.1636/S03-22. `opened` (abstract). Log 180.
 - Quirici V, Costa FG 2007. Seismic sexual signal design of two sympatric burrowing tarantula spiders from meadows of Uruguay: Eupalaestrus weijenberghi and Acanthoscurria suina (Araneae, Theraphosidae). Journal of Arachnology. https://doi.org/10.1636/ST06-08.1. `opened` (abstract). Log 181.
+- Reyes-Alcubilla C, Ruiz MA, Ortega-Escobar J 2009. Homing in the wolf spider Lycosa tarantula (Araneae, Lycosidae): the role of active locomotion and visual landmarks. Naturwissenschaften 96(4): 485-494. https://doi.org/10.1007/s00114-008-0498-1. `opened` (abstract). Log 281 to 285.
 - Ruhland F, Caudal J-P, Blois-Heulin C, Trabalon M 2016. Male tarantula spiders' reactions to light and odours reveal their motor asymmetry. Journal of Zoology. https://doi.org/10.1111/jzo.12388. `opened` (abstract). Log 182.
 - Schedl A 2017. No evidence for the perception of polarised light in the ctenid spider Cupiennius salei. Thesis, University of Vienna. https://doi.org/10.25365/thesis.49142. `opened` (abstract). Log 257.
 - Schmid A 1998. Different functions of different eye types in the spider Cupiennius salei. Journal of Experimental Biology 201: 221-225. https://doi.org/10.1242/jeb.201.2.221. `opened` (abstract). Log 143.
