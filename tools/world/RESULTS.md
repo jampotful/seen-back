@@ -33,3 +33,7 @@ TinyCLIP's original-model vectors give nearly the same tuning numbers as its WAS
 ## What the results say
 
 No head passes every mark, so nothing was prepared on `agent/head-ship`. B/16 finds four times as many groups and gains on creatures everywhere, but loses about 10 points on people, pets and empty rooms, a loss that sits in its vectors, and takes twice as long a photo. TinyCLIP `merge-other` fails only the county's old kinds (−1.89, interval to −2.51). A county bias (`EXPERIMENTS.md`, the last section) wins back about 1.3 points on the tuning photos at no cost to COCO; it wants a second kinds bias in the page, used with the list, and Alachua photos that no recipe has yet been read on.
+
+## The page with rows that share a label
+
+`src/cam.rec.js` on this branch adds the probabilities of kinds-head rows that share a label, as `tools/fusion/fuse.py` does, so a `merge` slot answers in the page as head.py scored it. In the sandbox, in headless Chromium with software graphics: `tools/fusion/parity.py` with `test/rec/fuse_page.js`, 3,337 cases (with a label set whose rows share labels) and 9 photos, 0 differ; `test/rec/check_rec.js fuse trained parity notsure zone`, every one ok. `fuse_page.js` now opens its pages in the county's time zone: without it, on this branch, the trained stand-in's photos were answered without the list and differed from the reference.
