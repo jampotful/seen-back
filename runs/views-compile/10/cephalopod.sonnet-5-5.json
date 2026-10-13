@@ -1,0 +1,248 @@
+{
+ "key": "cephalopod",
+ "chip": "Octopus, squid or cuttlefish",
+ "who": "an octopus, squid or cuttlefish",
+ "falls_back_to": null,
+ "applies_to": {
+  "class": [
+   "Cephalopoda"
+  ]
+ },
+ "cue": "The world holds one tone and the field is very wide. A horizontal stripe across the middle stays sharpest.",
+ "modules": [
+  "zones"
+ ],
+ "params": {
+  "fov": {
+   "value": 322,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Sugimoto 2026"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "a squid four weeks old; the app chose this animal to stand for the group"
+  },
+  "cpd": {
+   "value": 6.56,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the squid value; an octopus is near 12 and a cuttlefish near 8, and the app chose one value for the group"
+  },
+  "pupil": "h",
+  "sheen": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "no reflective layer has been found in cephalopod eyes, so the app switches the sheen off"
+  },
+  "M": {
+   "value": "single_pigment_485",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Chung 2016"
+   ],
+   "note": "one visual pigment peaking near 485 nanometres gives a single tone; the mapping is the app's"
+  }
+ },
+ "matrices": {
+  "single_pigment_485": {
+   "from_pigments": [
+    485
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Chung 2016"
+   ],
+   "note": "one pigment, so the picture keeps brightness and loses hue",
+   "rows": [
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ],
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ],
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ]
+   ],
+   "q": [
+    [
+     0.03083,
+     0.37707,
+     0.49324,
+     0.09886
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [
+  {
+   "id": "stripe",
+   "shape": "strip",
+   "cpd": {
+    "value": 10.9,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "cephalopods.jsonl:Hanke 2020",
+     "cephalopods.jsonl:Turnbull 2014"
+    ],
+    "range": [
+     6,
+     14
+    ],
+    "note": "worked out from the squid sharpness and the density of receptors in the central stripe of an octopus retina"
+   }
+  }
+ ],
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "A squid resolves about 6.6 cycles per degree, a cuttlefish about 8 and an octopus about 12, against a person's 30. The picture is softened to the squid value.",
+   [
+    "cephalopods.jsonl:Taniguchi 2015",
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "One tone",
+   "These animals hold one visual pigment, with its peak near 480 nanometres in octopus, near 492 in a cuttlefish and near 500 in a squid. Tests found that an octopus cannot tell colours apart. The picture keeps brightness and loses hue.",
+   [
+    "cephalopods.jsonl:Chung 2016",
+    "cephalopods.jsonl:Hubbard 1965",
+    "cephalopods.jsonl:Mäthger 2010",
+    "cephalopods.jsonl:Nahmad–Rohen 2020"
+   ],
+   [
+    "params.M",
+    "matrices.single_pigment_485"
+   ]
+  ],
+  [
+   "m",
+   "A very wide field",
+   "Young oval squid see 295 to 329 degrees around them, and the uniocular field of one cuttlefish eye spans 253 degrees across. The picture is squeezed toward 322 degrees, the field of a squid four weeks old.",
+   [
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Watanuki 2000"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "A sharp stripe",
+   "An octopus packs about 55,000 receptors per square millimetre into a horizontal stripe across the middle of the retina, against 18,000 to 22,000 at the edge. A horizontal band of the picture is kept sharper, by a figure worked out from those densities.",
+   [
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Talbot 2011",
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   [
+    "zones[0].cpd"
+   ]
+  ],
+  [
+   "m",
+   "Pupil",
+   "An octopus pupil is round in darkness and closes to a horizontal slit in bright light. It closes within about a second and shrinks to about a tenth of its dark area.",
+   [
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Soto 2020"
+   ],
+   [
+    "params.pupil"
+   ]
+  ],
+  [
+   "g",
+   "No mirror behind the eye",
+   "No reflective layer behind the retina has been found in any cephalopod, so the eye shows no sheen.",
+   [
+    "cephalopods.jsonl:Chung 2017",
+    "cephalopods.jsonl:Vee 2022"
+   ],
+   [
+    "params.sheen"
+   ]
+  ],
+  [
+   "x",
+   "Polarized light",
+   "Octopuses notice tiny differences in the plane of polarized light, a contrast that a person cannot see at all. The picture leaves it out for now.",
+   [
+    "cephalopods.jsonl:Tasaki 1966",
+    "cephalopods.jsonl:Temple 2021"
+   ],
+   []
+  ],
+  [
+   "i",
+   "How it is drawn",
+   "The squid value of 6.6 cycles per degree, the field of a four week old squid, the single 485 nanometre tone, the horizontal slit pupil, the sharpness of the stripe and the switched off sheen are the app's own settings, placed inside the measured ranges.",
+   [],
+   [
+    "params.cpd",
+    "params.fov",
+    "params.M",
+    "matrices.single_pigment_485",
+    "params.pupil",
+    "params.sheen",
+    "zones[0].cpd"
+   ]
+  ]
+ ],
+ "version": 1,
+ "draft": true
+}

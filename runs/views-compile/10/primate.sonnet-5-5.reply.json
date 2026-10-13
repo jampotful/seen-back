@@ -1,0 +1,204 @@
+{
+ "spec": {
+  "key": "primate",
+  "chip": "Monkey or ape",
+  "who": "a monkey or ape",
+  "falls_back_to": "mammal",
+  "applies_to": {
+   "order": [
+    "Primates"
+   ],
+   "not_family": [
+    "Hominidae:Homo"
+   ]
+  },
+  "cue": "Three kinds of colour sensor and nearly your sharpness, with some notable exceptions in the group.",
+  "modules": [],
+  "params": {
+   "cpd": {
+    "value": 26.3,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R7"
+    ],
+    "range": [
+     4,
+     30
+    ],
+    "note": "a rhesus monkey reached this value, which was the highest the test assessed; other primates run from about 4 to 30"
+   },
+   "M": {
+    "value": "primate_trichromat",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R31",
+     "R32",
+     "R23"
+    ],
+    "note": "three cone types with peaks near 430, 531 and 561 nanometres, as in a macaque"
+   }
+  },
+  "matrices": {
+   "primate_trichromat": {
+    "from_pigments": [
+     430,
+     531,
+     561
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R31",
+     "R32",
+     "R23"
+    ],
+    "note": "peaks from a cynomolgus monkey, checked against howler monkey and marmoset records; the engine builds the matrix"
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colours shifted by the three pigment peaks of a macaque"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Colour",
+    "A macaque has three kinds of cone, most sensitive near 430, 531 and 561 nanometres. That is close to your own three, so colours look much as they do to you.",
+    [
+     "R31",
+     "R52",
+     "R50"
+    ],
+    [
+     "params.M",
+     "matrices.primate_trichromat"
+    ]
+   ],
+   [
+    "m",
+    "Sharpness",
+    "A rhesus monkey reaches about 26 cycles per degree by seven weeks of age, close to a person's 30. A marmoset's cone mosaic could carry about 30 near the fovea. A grey mouse lemur manages only about 4 to 5.",
+    [
+     "R7",
+     "R4",
+     "R5",
+     "R9"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Colour differs across the group",
+    "Owl monkeys have a single cone type, lack colour vision and are active at night. Male marmosets have two cone types. Howler monkeys are fully trichromatic. This view shows the three-cone pattern of macaques.",
+    [
+     "R40",
+     "R137",
+     "R182",
+     "R53",
+     "R44"
+    ],
+    []
+   ],
+   [
+    "m",
+    "A sharp centre",
+    "Macaques, squirrel monkeys and marmosets have a clear fovea, a small pit where vision is sharpest. Owl monkeys have only a rudimentary one. We draw no separate sharp centre.",
+    [
+     "R167",
+     "R181",
+     "R172",
+     "R168"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Depth from two eyes",
+    "Neurons in macaque visual cortex respond to the small difference between the two eyes' images, which supports stereoscopic depth. A phone has one camera, so this view leaves that cue out.",
+    [
+     "R239",
+     "R246"
+    ],
+    []
+   ],
+   [
+    "i",
+    "The app's choices",
+    "The single sharpness of 26 is the app's pick from a wide spread of measured values. The colour matrix is the app's mapping from three pigment peaks. The colour drawing is the app's own.",
+    [],
+    [
+     "params.cpd",
+     "params.M",
+     "matrices.primate_trichromat",
+     "draw.spectrum"
+    ]
+   ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {
+   "motion": "none",
+   "sound": "none",
+   "haptic": "none"
+  },
+  "draft": true
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R7"
+   ],
+   "kind": "value",
+   "how": "The value equals the 26.3 cycles per degree that rhesus monkeys reached, which was the highest level the test assessed."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R31",
+    "R32",
+    "R23"
+   ],
+   "kind": "calculation",
+   "how": "The matrix name stands for a matrix built from the peaks 430, 531 and 561 nm that R31 gives for a cynomolgus monkey, with R32 giving 530 nm and R23 giving 561 nm."
+  },
+  {
+   "path": "matrices.primate_trichromat",
+   "records": [
+    "R31",
+    "R32",
+    "R23"
+   ],
+   "kind": "calculation",
+   "how": "The peaks 430, 531 and 561 nm come from R31, and each lies within 2 nm of a cited peak (430 R31, 530 R32, 561 R23)."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R7",
+   "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+  },
+  {
+   "record": "R31",
+   "quote": "The wave-lengths of maximum sensitivity were approximately 430, 531 and 561 nm, respectively."
+  },
+  {
+   "record": "R32",
+   "quote": "L and M genes encoding pigments with λmax values of 530 and 558 nm, respectively"
+  },
+  {
+   "record": "R23",
+   "quote": "we determined exact peak absorption spectrum (λmax) of all three allelic pigments, red, yellow, and green, of the marmoset, to be 561, 553, and 539nm, respectively"
+  }
+ ]
+}

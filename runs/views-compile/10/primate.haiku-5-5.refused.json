@@ -1,0 +1,229 @@
+{
+ "key": "primate",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Colour' says m and every parameter it describes is graded i",
+  "checker: row 'Night and day' says m and every parameter it describes is graded i",
+  "checker: row 'Detail at the centre' says m and every parameter it describes is graded i"
+ ],
+ "reply": {
+  "spec": {
+   "key": "primate",
+   "chip": "Monkey or ape",
+   "who": "a monkey or ape",
+   "cue": "Most monkeys and apes see colour, but less sharply than you, and the sharp middle is small.",
+   "applies_to": {
+    "order": [
+     "Primates"
+    ],
+    "not_family": [
+     "Hominidae:Homo"
+    ]
+   },
+   "falls_back_to": "mammal",
+   "modules": [],
+   "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "matrices": {
+    "PRIMATE_LM": {
+     "rows": [
+      [
+       0.29275,
+       0.70725,
+       0
+      ],
+      [
+       0.29275,
+       0.70725,
+       0
+      ],
+      [
+       -0.02234,
+       0.02234,
+       1
+      ]
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a two-cone mapping used for the dichromatic and owl monkey cases; the app's reading"
+    }
+   },
+   "params": {
+    "M": {
+     "value": "PRIMATE_LM",
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's two-cone reading; the records show three cone classes in most monkeys and one or two in others"
+    },
+    "cpd": {
+     "value": 12,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R7",
+      "R12",
+      "R16"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "the app's pick, between the cited macaque and marmoset figures; the sharpest cited figure for a monkey is about 26 and the cited figures for many other primates are lower"
+    },
+    "fovea": {
+     "value": 2.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.5,
+      4
+     ],
+     "note": "no record gives the size of the sharp middle in scale terms; the app's guess"
+    },
+    "pupil": "o",
+    "gain": {
+     "value": 1.3,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no dim-light ratio is cited for these animals"
+    },
+    "sat": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "no measure of colour strength is cited; the app's guess"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Colour",
+     "Most monkeys and apes have three kinds of colour sensor. Owl monkeys and bushbabies have only one kind of cone, so they see no colour, and some New World monkeys have two.",
+     [
+      "R45",
+      "R50",
+      "R52",
+      "R40",
+      "R41",
+      "R137",
+      "R138",
+      "R135"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Sharpness",
+     "A rhesus monkey reaches about 26 cycles per degree and a marmoset is estimated near 30, against a person's 60. Mouse lemurs are far less sharp, near 4 to 5.",
+     [
+      "R7",
+      "R2",
+      "R4",
+      "R5",
+      "R9"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Night and day",
+     "Owl monkeys are nocturnal and see without colour. Marmosets, rhesus monkeys, capuchins and chimpanzees are active by day.",
+     [
+      "R183",
+      "R184",
+      "R185",
+      "R191",
+      "R186",
+      "R196",
+      "R197"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Detail at the centre",
+     "Owl monkeys have only a rudimentary fovea, while squirrel monkeys and macaques have a clear fovea with dense cones at its centre.",
+     [
+      "R168",
+      "R167",
+      "R179"
+     ],
+     [
+      "params.fovea"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The picture is blurred to about 12 cycles per degree, a little more than a bushbaby would show and well below the monkeys' best, and the sharp middle is drawn at a scale of 2.2. These are the app's choices and the records give no exact figure.",
+     [
+      "R7",
+      "R5",
+      "R9"
+     ],
+     [
+      "params.cpd",
+      "params.fovea",
+      "params.M"
+     ]
+    ]
+   ],
+   "version": 1,
+   "zones": [],
+   "by": {},
+   "draw": {}
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R7",
+     "R12",
+     "R16"
+    ],
+    "kind": "calculation",
+    "how": "The app picked 12 cycles per degree as a point between the cited macaque figure of 26.3 (R7) and the 21.4 cycles per degree worked from 1.4 arc minutes (R12), with the marmoset's estimate of 30 (R2) as a ceiling; this is worked out and invented, and graded g."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R7",
+    "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+   },
+   {
+    "record": "R12",
+    "quote": "Visual acuity in a normal stumptail macaque is 1.4 minutes of arc-similar to man's."
+   },
+   {
+    "record": "R16",
+    "quote": "up to 30 cycles/deg in monkeys and humans"
+   },
+   {
+    "record": "R2",
+    "quote": "The foveal acuity predicted by the Nyquist limits set by the cone mosaic (30 c/deg) is in agreement with behavioral measures of visual acuity."
+   }
+  ]
+ }
+}

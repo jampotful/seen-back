@@ -1,0 +1,61 @@
+{
+ "key": "bee",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Movement' says m and every parameter it describes is graded i",
+  "params.cpd: graded m, and no cited record is graded m on the view's own taxon"
+ ],
+ "reply": {
+  "spec": "{\"key\": \"bee\", \"version\": 2, \"who\": \"a bee\", \"chip\": \"Bee\", \"cue\": \"The view is blurry at the edge, with a violet tint for ultraviolet and a soft glow on things that move.\", \"applies_to\": {\"family\": [\"Apidae\", \"Halictidae\", \"Megachilidae\", \"Andrenidae\", \"Colletidae\"]}, \"modules\": [], \"params\": {\"M\": \"BEE\", \"cpd\": {\"value\": 0.25, \"grade\": \"m\", \"invented\": false, \"src\": [\"R20\"], \"note\": \"the review gives 0.25 cycles per degree for Apis mellifera\"}, \"fov\": {\"value\": 300, \"grade\": \"g\", \"invented\": false, \"src\": [\"R35\"], \"note\": \"a general bee figure from earlier work\"}, \"pupil\": \"none\", \"fovea\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"no record gives a sharper middle for bees\"}, \"gain\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [1, 4], \"note\": \"no brightness gain is measured\"}, \"gate\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"still things fade away\"}, \"rate\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"time runs at normal speed\"}, \"sat\": {\"value\": 0.9, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1.5], \"note\": \"colour is kept close to a person's\"}, \"topoA\": {\"value\": 0.5, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"floor\": null, \"note\": \"edge is softer than the middle\"}, \"topoS\": {\"value\": 0.5, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"floor\": null, \"note\": \"edge is softer than the middle\"}, \"uvBlue\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"the blue channel stands in for ultraviolet\"}, \"noGreen\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1]}, \"glow\": {\"value\": 0.6, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"movement glows\"}, \"glowC\": {\"value\": [0.78, 1, 0.62], \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"the glow's colour\"}, \"dof\": {\"value\": 12, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 40]}, \"persist\": {\"value\": 0.1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 60]}, \"salience\": 1, \"sheen\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1]}, \"living\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 3], \"note\": \"no extra weight for living movement\"}, \"water\": {\"value\": [1.5, 0.45, 0.25, 1], \"grade\": \"i\", \"invented\": true, \"src\": []}, \"waterC\": {\"value\": [0.03, 0.2, 0.26], \"grade\": \"i\", \"invented\": true, \"src\": []}, \"ripple\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1]}}, \"matrices\": {\"BEE\": {\"from_pigments\": [346, 430, 540], \"src\": [\"R43\", \"R73\", \"R85\"]}}, \"draw\": {\"field\": [{\"name\": \"squeeze\", \"invented\": true, \"note\": \"the picture is squeezed toward the field of view\"}], \"colour\": [{\"name\": \"palm\", \"invented\": true, \"note\": \"ultraviolet shown as blue, blue as green, green as red\"}], \"gaze\": [{\"name\": \"strip\", \"invented\": true, \"note\": \"shows quick head turns\"}], \"steady\": [{\"name\": \"arm\", \"invented\": true, \"note\": \"holds the image steady between turns\"}], \"surround\": [{\"name\": \"glow\", \"invented\": true, \"note\": \"moving things glow\"}]}, \"gaze\": {\"saccade\": {\"value\": [40, 0.09], \"grade\": \"i\", \"invented\": true, \"src\": [], \"note\": \"app's choice within the measured 5 to 60 degree turns that last 45 to 135 ms\"}}, \"rows\": [[\"m\", \"Sharpness\", \"A honeybee resolves about a quarter of a grating cycle per degree, roughly one two-hundredth of a person's detail.\", [\"R20\", \"R1\"], [\"params.cpd\"]], [\"g\", \"Field of view\", \"A bee sees nearly all round itself, about 300 degrees across, with a small blind patch behind and below.\", [\"R35\", \"R31\"], [\"params.fov\"]], [\"m\", \"Colour\", \"Bees have three colour channels, one in the ultraviolet, one blue and one green. The view shows ultraviolet as blue, blue as green and green as red, so a colour a person cannot see is shown on the screen.\", [\"R43\", \"R57\", \"R268\"], [\"params.M\"]], [\"m\", \"Movement\", \"Bees make quick head turns and fly straight between them. The view holds the picture steady between turns, as a bee's eyes do.\", [\"R145\", \"R148\"], [\"gaze.saccade\"]], [\"i\", \"The app's choices\", \"The sharp middle, the softer edge, the glow on moving things and the blur strength are the app's own drawing choices. They are not taken from bee measurements, so treat them as guesses.\", [], [\"params.topoA\", \"params.topoS\", \"params.glow\", \"params.dof\", \"params.gain\", \"params.gate\", \"params.uvBlue\"]]], \"falls_back_to\": \"insect\"}, \"claims\": [{\"path\": \"params.cpd\", \"records\": [\"R20\"], \"kind\": \"value\", \"how\": \"The Kelber review gives 0.25 cycles per degree for Apis mellifera object discrimination, so the value is taken directly from that record.\"}, {\"path\": \"params.fov\", \"records\": [\"R35\"], \"kind\": \"value\", \"how\": \"The Paffhausen passage gives about 300 degrees for the bee field of view, taken directly; it is a general bee figure, so grade g.\"}, {\"path\": \"params.M\", \"records\": [\"R43\", \"R73\", \"R85\"], \"kind\": \"value\", \"how\": \"The BEE matrix takes the honeybee worker peaks of 346, 430 and 540 nm from the van der Kooi compilation, which the three records state.\"}], \"quotes\": [{\"record\": \"R20\", \"quote\": \"Apis mellifera | Gratings | Object discrimination | 0.25\"}, {\"record\": \"R35\", \"quote\": \"Bees can see ~300° horizontally on the body plane with low spatial resolution for peripheral ommatidia\"}, {\"record\": \"R43\", \"quote\": \"Apidae Apis mellifera 346 430 540\"}, {\"record\": \"R73\", \"quote\": \"Apidae Apis mellifera 346 430 540\"}, {\"record\": \"R85\", \"quote\": \"Apidae Apis mellifera 346 430 540\"}, {\"record\": \"R145\", \"quote\": \"‘saccades’, when angular velocities of the head reach up to 1500°/sec (see Fig 2C)\"}, {\"record\": \"R268\", \"quote\": \"using a (bathochromic) shift to longer wavelengths, by which UV is shown as blue, blue as green, green as red and red is discarded\"}, {\"record\": \"R1\", \"quote\": \"They found that the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1\"}, {\"record\": \"R31\", \"quote\": \"Generally, the two compound eyes of bees have large visual fields, with a binocular region frontally and dorsally, and only a small blind region below and behind the animal.\"}, {\"record\": \"R148\", \"quote\": \"These short and fast yaw turns (“saccades”) are usually accompanied by even faster head yaw turns that change gaze direction.\"}]}",
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R20"
+    ],
+    "kind": "value",
+    "how": "The Kelber review gives 0.25 cycles per degree for Apis mellifera object discrimination, taken directly from that record."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R35"
+    ],
+    "kind": "value",
+    "how": "The Paffhausen passage gives about 300 degrees for the bee field of view, taken directly; it is a general bee figure, so grade g."
+   },
+   {
+    "path": "params.M",
+    "records": [
+     "R43",
+     "R73",
+     "R85"
+    ],
+    "kind": "value",
+    "how": "The BEE matrix takes the honeybee worker peaks of 346, 430 and 540 nm from the van der Kooi compilation, which the three records state."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R20",
+    "quote": "Apis mellifera | Gratings | Object discrimination | 0.25"
+   },
+   {
+    "record": "R35",
+    "quote": "Bees can see ~300° horizontally on the body plane with low spatial resolution for peripheral ommatidia"
+   },
+   {
+    "record": "R43",
+    "quote": "Apidae Apis mellifera 346 430 540"
+   },
+   {
+    "record": "R73",
+    "quote": "Apidae Apis mellifera 346 430 540"
+   },
+   {
+    "record": "R85",
+    "quote": "Apidae Apis mellifera 346 430 540"
+   }
+  ]
+ }
+}

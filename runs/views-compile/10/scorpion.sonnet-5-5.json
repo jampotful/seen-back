@@ -1,0 +1,284 @@
+{
+ "key": "scorpion",
+ "version": 1,
+ "chip": "Scorpion",
+ "who": "a scorpion",
+ "falls_back_to": "harvestman",
+ "applies_to": {
+  "order": [
+   "Scorpiones",
+   "Uropygi",
+   "Amblypygi",
+   "Pseudoscorpiones"
+  ]
+ },
+ "cue": "You see all the way round at once, in blues and greens, and the ground carries the news.",
+ "modules": [
+  "haptic"
+ ],
+ "params": {
+  "fov": {
+   "value": 360,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   "note": "scorpions are reported to see all the way round the body",
+   "range": [
+    100,
+    360
+   ]
+  },
+  "M": {
+   "value": "SCORPION",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "arachnids-other.jsonl:Forero 2026"
+   ],
+   "note": "a blue peak and a green peak; how they map to screen colours is the app's choice"
+  },
+  "cpd": {
+   "value": 0.3,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "a coarse picture; no one has measured how much detail a scorpion sees",
+   "range": [
+    0.005,
+    40
+   ]
+  },
+  "gain": {
+   "value": 2.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "a brighter picture for eyes that work at starlight levels",
+   "range": [
+    1,
+    4
+   ]
+  }
+ },
+ "matrices": {
+  "SCORPION": {
+   "from_pigments": [
+    470,
+    525
+   ],
+   "src": [
+    "arachnids-other.jsonl:Forero 2026"
+   ],
+   "rows": [
+    [
+     0.1554,
+     0.50752,
+     0.25771,
+     0.07937
+    ],
+    [
+     0.1554,
+     0.50752,
+     0.25771,
+     0.07937
+    ],
+    [
+     0.01267,
+     0.29043,
+     0.58055,
+     0.11635
+    ]
+   ],
+   "q": [
+    [
+     0.01267,
+     0.29043,
+     0.58055,
+     0.11635
+    ],
+    [
+     0.1554,
+     0.50752,
+     0.25771,
+     0.07937
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "haptic": {
+  "on": "knock",
+  "pattern": {
+   "value": [
+    18,
+    28
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "arachnids-other.jsonl:Briceño 2009"
+   ],
+   "note": "the on and off beat of a male's courtship judder, in milliseconds"
+  },
+  "edge": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how bright the edge pulses where the phone cannot vibrate",
+   "range": [
+    0,
+    1
+   ]
+  }
+ },
+ "inputs": {
+  "motion": "optional",
+  "sound": "none",
+  "haptic": "optional"
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the whole circle around the animal is pressed into the screen"
+   }
+  ],
+  "haptic": [
+   {
+    "name": "buzz",
+    "invented": true,
+    "note": "a short vibration in the rhythm of a scorpion's judder, with a pulse at the picture's edge where the phone cannot vibrate"
+   },
+   {
+    "name": "edge",
+    "invented": true,
+    "note": "the pulse at the picture's edge only"
+   },
+   {
+    "name": "off",
+    "invented": true,
+    "note": "the view without touch"
+   }
+  ],
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colours shifted to the blue and green peaks"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "g",
+   "All the way round",
+   "Scorpions can apparently see 360 degrees around the body. The pair of median eyes in the middle of the carapace is reported to cover the full circle, with about 40 degrees of overlap above the animal where both eyes look at the same place.",
+   [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Prévost 2020"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "Blue and green",
+   "Recordings from the eyes of two scorpions, Tityus macrochirus and Centruroides edwardsii, peak in blue light at 470 nm and in green light at 525 nm. Other work puts the main peak near 500 nm, and the lateral eyes have a smaller peak in ultraviolet between 350 and 400 nm. Earlier studies suggest the receptors form one population most sensitive to green, so the colours here are a loose guide.",
+   [
+    "arachnids-other.jsonl:Forero 2026",
+    "arachnids-other.jsonl:Prévost 2020",
+    "arachnids-other.jsonl:Roldan 2018"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Night eyes",
+   "The scorpion's eyes work at starlight levels, and scorpions are active at night. In Androctonus australis the median eyes are about 3 log units more sensitive at subjective night than by day, and the lateral eyes are about 1 log unit more sensitive than the median eyes at night.",
+   [
+    "arachnids-other.jsonl:B 2025",
+    "arachnids-other.jsonl:Fleissner 1977",
+    "arachnids-other.jsonl:Gaffin 2022"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Sharp and soft",
+   "The median eyes are described as the main eyes, with relatively high acuity and good spatial discrimination. The lateral eyes may only detect changes in light. No one has measured the detail a scorpion sees in cycles per degree.",
+   [
+    "arachnids-other.jsonl:El‐Aziz FEAA 2019",
+    "arachnids-other.jsonl:Lehmann 2013"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Feeling the ground",
+   "The leg sensors of sand-dwelling scorpions respond to waves in the sand made by moving insects as far as 50 centimetres away. A sand scorpion can find a cricket by this feeling alone.",
+   [
+    "arachnids-other.jsonl:Brownell 1977",
+    "arachnids-other.jsonl:Brownell 2001",
+    "arachnids-other.jsonl:Haessig 2020"
+   ],
+   []
+  ],
+  [
+   "g",
+   "The judder beat",
+   "A male Centruroides margaritatus courts a female with a judder through the ground. Each pulse lasts about 0.018 seconds, with gaps of about 0.028 seconds. The phone buzzes in that beat.",
+   [
+    "arachnids-other.jsonl:Briceño 2009"
+   ],
+   [
+    "haptic.pattern"
+   ]
+  ],
+  [
+   "i",
+   "What the app chose",
+   "The sharpness and the brightness of the picture, the strength of the pulse at the screen edge, and the way the two colour peaks become screen colours are the app's own choices. The records give no figure for these.",
+   [
+    "arachnids-other.jsonl:Gaffin 2022",
+    "arachnids-other.jsonl:Lehmann 2013"
+   ],
+   [
+    "params.cpd",
+    "params.gain",
+    "haptic.edge",
+    "params.M",
+    "haptic.pattern"
+   ]
+  ],
+  [
+   "x",
+   "Not in the picture",
+   "A scorpion tastes with its comb-like pectines and feels the direction of wind with fine hairs. The camera records neither.",
+   [
+    "arachnids-other.jsonl:Krapf 1986",
+    "arachnids-other.jsonl:Linsenmair 1972"
+   ],
+   []
+  ]
+ ],
+ "draft": true
+}

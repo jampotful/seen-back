@@ -1,0 +1,283 @@
+{
+ "spec": {
+  "key": "cephalopod",
+  "chip": "Octopus, squid or cuttlefish",
+  "who": "an octopus, squid or cuttlefish",
+  "falls_back_to": null,
+  "applies_to": {
+   "class": [
+    "Cephalopoda"
+   ]
+  },
+  "cue": "The world holds one tone and the field is very wide. A horizontal stripe across the middle stays sharpest.",
+  "modules": [],
+  "params": {
+   "fov": {
+    "value": 322,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R29"
+    ],
+    "range": [
+     180,
+     360
+    ],
+    "note": "a squid four weeks old; the app chose this animal to stand for the group"
+   },
+   "cpd": {
+    "value": 6.56,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R6"
+    ],
+    "range": [
+     0.5,
+     13
+    ],
+    "note": "the squid value; an octopus is near 12 and a cuttlefish near 8, and the app chose one value for the group"
+   },
+   "pupil": "h",
+   "sheen": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "no reflective layer has been found in cephalopod eyes, so the app switches the sheen off"
+   },
+   "M": {
+    "value": "single_pigment_485",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R46",
+     "R47"
+    ],
+    "note": "one visual pigment peaking near 485 nanometres gives a single tone; the mapping is the app's"
+   }
+  },
+  "matrices": {
+   "single_pigment_485": {
+    "from_pigments": [
+     485
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R46",
+     "R47"
+    ],
+    "note": "one pigment, so the picture keeps brightness and loses hue"
+   }
+  },
+  "zones": [
+   {
+    "id": "stripe",
+    "shape": "strip",
+    "cpd": {
+     "value": 10.9,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R6",
+      "R350",
+      "R351"
+     ],
+     "range": [
+      6,
+      14
+     ],
+     "note": "worked out from the squid sharpness and the density of receptors in the central stripe of an octopus retina"
+    }
+   }
+  ],
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "A squid resolves about 6.6 cycles per degree, a cuttlefish about 8 and an octopus about 12, against a person's 30. The picture is softened to the squid value.",
+    [
+     "R6",
+     "R7",
+     "R14"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "One tone",
+    "These animals hold one visual pigment, with its peak near 480 nanometres in octopus, near 492 in a cuttlefish and near 500 in a squid. Tests found that an octopus cannot tell colours apart. The picture keeps brightness and loses hue.",
+    [
+     "R37",
+     "R43",
+     "R42",
+     "R46",
+     "R47",
+     "R204"
+    ],
+    [
+     "params.M",
+     "matrices.single_pigment_485"
+    ]
+   ],
+   [
+    "m",
+    "A very wide field",
+    "Young oval squid see 295 to 329 degrees around them, and the uniocular field of one cuttlefish eye spans 253 degrees across. The picture is squeezed toward 322 degrees, the field of a squid four weeks old.",
+    [
+     "R19",
+     "R31",
+     "R18",
+     "R29"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "A sharp stripe",
+    "An octopus packs about 55,000 receptors per square millimetre into a horizontal stripe across the middle of the retina, against 18,000 to 22,000 at the edge. A horizontal band of the picture is kept sharper, by a figure worked out from those densities.",
+    [
+     "R272",
+     "R277",
+     "R350",
+     "R351",
+     "R6"
+    ],
+    [
+     "zones[0].cpd"
+    ]
+   ],
+   [
+    "m",
+    "Pupil",
+    "An octopus pupil is round in darkness and closes to a horizontal slit in bright light. It closes within about a second and shrinks to about a tenth of its dark area.",
+    [
+     "R70",
+     "R374",
+     "R332"
+    ],
+    [
+     "params.pupil"
+    ]
+   ],
+   [
+    "g",
+    "No mirror behind the eye",
+    "No reflective layer behind the retina has been found in any cephalopod, so the eye shows no sheen.",
+    [
+     "R348",
+     "R349"
+    ],
+    [
+     "params.sheen"
+    ]
+   ],
+   [
+    "x",
+    "Polarized light",
+    "Octopuses notice tiny differences in the plane of polarized light, a contrast that a person cannot see at all. The picture leaves it out for now.",
+    [
+     "R187",
+     "R193"
+    ],
+    []
+   ],
+   [
+    "i",
+    "How it is drawn",
+    "The squid value of 6.6 cycles per degree, the field of a four week old squid, the single 485 nanometre tone, the horizontal slit pupil, the sharpness of the stripe and the switched off sheen are the app's own settings, placed inside the measured ranges.",
+    [],
+    [
+     "params.cpd",
+     "params.fov",
+     "params.M",
+     "matrices.single_pigment_485",
+     "params.pupil",
+     "params.sheen",
+     "zones[0].cpd"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R29"
+   ],
+   "kind": "value",
+   "how": "The field of a squid 28 days old is 322 degrees in the table row."
+  },
+  {
+   "path": "params.cpd",
+   "records": [
+    "R6"
+   ],
+   "kind": "value",
+   "how": "The squid acuity is 6.56 cycles per degree."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R46",
+    "R47"
+   ],
+   "kind": "value",
+   "how": "Names the matrix built from the single 485 nanometre pigment peak that both records give."
+  },
+  {
+   "path": "matrices.single_pigment_485",
+   "records": [
+    "R46",
+    "R47"
+   ],
+   "kind": "value",
+   "how": "The pigment peak of 485 nanometres equals the value in both records."
+  },
+  {
+   "path": "zones[0].cpd",
+   "records": [
+    "R6",
+    "R350",
+    "R351"
+   ],
+   "kind": "calculation",
+   "how": "6.56 times the square root of 55000 over 20000 (the middle of 18000 to 22000) is 6.56 times 1.658, which is about 10.9."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R29",
+   "quote": "28 days old (13.2) | 1.18 | 322"
+  },
+  {
+   "record": "R6",
+   "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD) and the squid (6.56 ± 1.14 CPD)"
+  },
+  {
+   "record": "R46",
+   "quote": "Hapalochlaena maculosa | AY545171 | M485b"
+  },
+  {
+   "record": "R47",
+   "quote": "Octopus australis | — | M485b"
+  },
+  {
+   "record": "R350",
+   "quote": "cell density varying between 18,000–22,000 cells/mm2 in the periphery and approximately 55,000 cells/mm2 in the central stripe"
+  },
+  {
+   "record": "R351",
+   "quote": "cell density varying between 18,000–22,000 cells/mm2 in the periphery and approximately 55,000 cells/mm2 in the central stripe"
+  }
+ ]
+}

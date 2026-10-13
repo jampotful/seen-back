@@ -1,0 +1,186 @@
+{
+ "spec": {
+  "key": "bee",
+  "version": 1,
+  "chip": "Bee",
+  "who": "a bee",
+  "applies_to": {
+   "family": [
+    "Apidae",
+    "Halictidae",
+    "Megachilidae",
+    "Andrenidae",
+    "Colletidae"
+   ]
+  },
+  "cue": "The view is wide and very soft, ultraviolet shows up as colour, and quick flicker stays easy to see.",
+  "falls_back_to": "insect",
+  "params": {
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R35"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "a general figure for bees"
+   },
+   "cpd": {
+    "value": 0.26,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "range": [
+     0.05,
+     0.6
+    ],
+    "note": "honeybee grating limit"
+   },
+   "pupil": "none",
+   "M": {
+    "value": "BEE",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the pigment peaks are measured; the choice of how to show them on a phone screen is the app's"
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     344,
+     436,
+     556
+    ],
+    "src": [
+     "R55",
+     "R84",
+     "R93"
+    ],
+    "note": "ultraviolet, blue and green receptor peaks of the honeybee"
+   }
+  },
+  "pace": {
+   "ratio": {
+    "value": 3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     6
+    ],
+    "note": "a rough stand-in for a bee's fast flicker fusion"
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "shifts ultraviolet to blue, blue to green and green to red"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "A honeybee resolves a grating of about 0.26 cycles per degree, and a bumblebee about a quarter of a cycle. A person resolves about 60, so the bee view is very soft and small things melt away.",
+    [
+     "R1",
+     "R3"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Wide view",
+    "Each compound eye reaches about 156 degrees back from straight ahead, so the two eyes together cover close to 300 degrees around. Only a small blind region lies below and behind the bee.",
+    [
+     "R32",
+     "R35",
+     "R31"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Colour",
+    "A bee has three kinds of colour receptor, with peaks near 344 nm in the ultraviolet, 436 nm in the blue and 556 nm in the green. Far red falls outside what bees see. This view shifts colours so that ultraviolet shows as blue, blue as green and green as red, which is one common way to draw a bee's view.",
+    [
+     "R55",
+     "R84",
+     "R93",
+     "R100",
+     "R268"
+    ],
+    [
+     "params.M",
+     "matrices.BEE"
+    ]
+   ],
+   [
+    "g",
+    "Flicker",
+    "A honeybee can still tell flicker apart at about 200 flashes a second in bright light, and a bumblebee at about 130. At 300 lux the honeybee figure falls to 144.",
+    [
+     "R135",
+     "R139",
+     "R144"
+    ],
+    [
+     "pace.ratio"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The colour shift maps the three bee receptors onto the three colours a phone can show. The flicker speed-up of three times is a rough stand-in for a bee's fast flicker fusion.",
+    [],
+    [
+     "params.M",
+     "pace.ratio"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The honeybee grating limit in R1 is 0.26 cycles per degree, the same value."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R35"
+   ],
+   "kind": "value",
+   "how": "R35 gives about 300 degrees horizontally for bees, which is the value used."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1"
+  },
+  {
+   "record": "R35",
+   "quote": "Bees can see ~300° horizontally on the body plane with low spatial resolution for peripheral ommatidia"
+  }
+ ]
+}

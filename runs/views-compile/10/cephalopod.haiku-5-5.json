@@ -1,0 +1,257 @@
+{
+ "key": "cephalopod",
+ "chip": "Octopus, squid or cuttlefish",
+ "who": "an octopus, squid or cuttlefish",
+ "applies_to": {
+  "class": [
+   "Cephalopoda"
+  ]
+ },
+ "cue": "Edges are sharp and the middle is soft. Pale colours fade, and the picture moves in a way that follows what moves.",
+ "falls_back_to": null,
+ "modules": [],
+ "inputs": {
+  "motion": "optional",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "fov": {
+   "value": 180,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "cephalopods.jsonl:Land 1992"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "a wider group figure for fish and cephalopods"
+  },
+  "cpd": {
+   "value": 5,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Allen 2026",
+    "cephalopods.jsonl:Taniguchi 2015"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "inside the measured range of 0.36 to 12 cycles per degree; the app takes a middle figure"
+  },
+  "fall": {
+   "value": 1.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "the app's own fall with light"
+  },
+  "pupil": "h",
+  "dof": {
+   "value": 10,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    40
+   ],
+   "note": "a slit pupil in bright light gives a deep focus; strength is the app's"
+  },
+  "gain": {
+   "value": 1.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    4
+   ],
+   "note": "the app's own brightness gain"
+  },
+  "sat": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "the app's choice to show no colour, following the colour blindness reports"
+  },
+  "topoA": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "the app's own sharpness gradient along the long axis"
+  },
+  "topoS": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "the app's own sharpness gradient across"
+  },
+  "gate": {
+   "value": 0.3,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "still things fade a little"
+  },
+  "persist": {
+   "value": 0.1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    60
+   ],
+   "note": "the app's own lingering"
+  },
+  "ripple": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the app's own ripple that follows movement"
+  },
+  "sheen": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the app's choice of no sheen, since no tapetum has been reported"
+  }
+ },
+ "matrices": {},
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "An octopus resolves about 3 to 12 cycles per degree in the best measures, a squid about 0.6 to 6.6, and a cuttlefish about 0.4 to 0.9 in one study. The picture is blurred to a middle figure between these.",
+   [
+    "cephalopods.jsonl:Groeger 2004",
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Turnbull 2014",
+    "cephalopods.jsonl:Watanuki 2000"
+   ],
+   [
+    "cpd"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "Octopus studies find no colour sense in behaviour tests, and most cephalopods have one visual pigment. The picture is therefore greyscale.",
+   [
+    "cephalopods.jsonl:A 2016",
+    "cephalopods.jsonl:Bonadè 2020",
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Nahmad–Rohen 2020"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Pupil",
+   "The octopus pupil is round in the dark and narrows to a horizontal slit in bright light, so the picture uses a slit.",
+   [
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Roura Á 2023"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Field",
+   "Coleoid cephalopods see roughly 180 degrees from one side. The squid and cuttlefish records give fields from 117 to 342 degrees, so the picture uses a wide 180 degrees.",
+   [
+    "cephalopods.jsonl:Land 1992",
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Watanuki 2000"
+   ],
+   []
+  ],
+  [
+   "i",
+   "How it is drawn",
+   "The brightness gain, the shallow focus, the soft middle, the faint ripple and the absence of sheen are the app's own settings, set inside the measured limits.",
+   [],
+   [
+    "gain",
+    "dof",
+    "topoA",
+    "topoS",
+    "ripple",
+    "persist",
+    "sat",
+    "sheen"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "params.cpd",
+    "params.fall",
+    "params.gate"
+   ]
+  ]
+ ],
+ "version": 1,
+ "clock": null,
+ "tilt": null,
+ "zones": [],
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the view as it was"
+   }
+  ],
+  "tilt": [
+   {
+    "name": "level",
+    "invented": true,
+    "note": "the view as it was"
+   }
+  ]
+ },
+ "draft": true
+}

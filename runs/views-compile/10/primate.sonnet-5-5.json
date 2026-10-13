@@ -1,0 +1,199 @@
+{
+ "key": "primate",
+ "chip": "Monkey or ape",
+ "who": "a monkey or ape",
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "order": [
+   "Primates"
+  ],
+  "not_family": [
+   "Hominidae:Homo"
+  ]
+ },
+ "cue": "Three kinds of colour sensor and nearly your sharpness, with some notable exceptions in the group.",
+ "modules": [],
+ "params": {
+  "cpd": {
+   "value": 26.3,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Laughlin 2008"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "a rhesus monkey reached this value, which was the highest the test assessed; other primates run from about 4 to 30"
+  },
+  "M": {
+   "value": "primate_trichromat",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:Carvalho 2017",
+    "primates.jsonl:Kawamura 2000"
+   ],
+   "note": "three cone types with peaks near 430, 531 and 561 nanometres, as in a macaque"
+  }
+ },
+ "matrices": {
+  "primate_trichromat": {
+   "from_pigments": [
+    430,
+    531,
+    561
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:Carvalho 2017",
+    "primates.jsonl:Kawamura 2000"
+   ],
+   "note": "peaks from a cynomolgus monkey, checked against howler monkey and marmoset records; the engine builds the matrix",
+   "rows": [
+    [
+     0.32957,
+     0.46264,
+     0.13475,
+     0.07303
+    ],
+    [
+     0.18301,
+     0.50894,
+     0.23027,
+     0.07779
+    ],
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ]
+   ],
+   "q": [
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ],
+    [
+     0.18301,
+     0.50894,
+     0.23027,
+     0.07779
+    ],
+    [
+     0.32957,
+     0.46264,
+     0.13475,
+     0.07303
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "draw": {
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colours shifted by the three pigment peaks of a macaque"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Colour",
+   "A macaque has three kinds of cone, most sensitive near 430, 531 and 561 nanometres. That is close to your own three, so colours look much as they do to you.",
+   [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:O’Brien 1999",
+    "primates.jsonl:Shapley 2019"
+   ],
+   [
+    "params.M",
+    "matrices.primate_trichromat"
+   ]
+  ],
+  [
+   "m",
+   "Sharpness",
+   "A rhesus monkey reaches about 26 cycles per degree by seven weeks of age, close to a person's 30. A marmoset's cone mosaic could carry about 30 near the fovea. A grey mouse lemur manages only about 4 to 5.",
+   [
+    "primates.jsonl:Joly 2014",
+    "primates.jsonl:Laughlin 2008",
+    "primates.jsonl:Melin 2016",
+    "primates.jsonl:Solomon 2014"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Colour differs across the group",
+   "Owl monkeys have a single cone type, lack colour vision and are active at night. Male marmosets have two cone types. Howler monkeys are fully trichromatic. This view shows the three-cone pattern of macaques.",
+   [
+    "primates.jsonl:Derrington 2002",
+    "primates.jsonl:Gilad 2004",
+    "primates.jsonl:Jacobs 1996",
+    "primates.jsonl:KUNIYOSHI 2018"
+   ],
+   []
+  ],
+  [
+   "m",
+   "A sharp centre",
+   "Macaques, squirrel monkeys and marmosets have a clear fovea, a small pit where vision is sharpest. Owl monkeys have only a rudimentary one. We draw no separate sharp centre.",
+   [
+    "primates.jsonl:KUNIYOSHI 2018",
+    "primates.jsonl:Silveira 1993",
+    "primates.jsonl:Solomon 2014",
+    "primates.jsonl:Vandenberghe 2013"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Depth from two eyes",
+   "Neurons in macaque visual cortex respond to the small difference between the two eyes' images, which supports stereoscopic depth. A phone has one camera, so this view leaves that cue out.",
+   [
+    "primates.jsonl:Gf 1995",
+    "primates.jsonl:J 2026"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's choices",
+   "The single sharpness of 26 is the app's pick from a wide spread of measured values. The colour matrix is the app's mapping from three pigment peaks. The colour drawing is the app's own.",
+   [],
+   [
+    "params.cpd",
+    "params.M",
+    "matrices.primate_trichromat",
+    "draw.spectrum"
+   ]
+  ]
+ ],
+ "version": 1,
+ "zones": [],
+ "by": {},
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "draft": true
+}

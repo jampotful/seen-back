@@ -1,0 +1,248 @@
+{
+ "spec": {
+  "key": "whale",
+  "chip": "Whale, dolphin or seal",
+  "who": "a whale, dolphin or seal",
+  "falls_back_to": "mammal",
+  "applies_to": {
+   "order": [
+    "Cetacea",
+    "Carnivora:Pinnipedia",
+    "Sirenia"
+   ]
+  },
+  "cue": "Almost no colour, a soft picture, and eyes built for dim water.",
+  "version": 1,
+  "modules": [],
+  "inputs": {
+   "motion": "none",
+   "sound": "none",
+   "haptic": "none"
+  },
+  "params": {
+   "cpd": {
+    "value": 3.95,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R11"
+    ],
+    "range": [
+     1.6,
+     11.5
+    ],
+    "note": "a humpback whale's estimate; whale and dolphin estimates run from about 2.6 to 4.8 and a harbour seal's from 8.7 to 11.5, and the pick of one value for the whole group is the app's"
+   },
+   "M": {
+    "value": "CONE_L",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R37",
+     "R36"
+    ],
+    "note": "one kind of cone, peaking near 522 nm in dolphins and porpoises; the app applies it to the whole group"
+   },
+   "gain": {
+    "value": 3.16,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R55"
+    ],
+    "range": [
+     1,
+     4
+    ],
+    "note": "a bottlenose dolphin was 0.5 log units more sensitive than a person in dim light; the app turns that into a brightness gain"
+   },
+   "sheen": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "many whales and seals have a reflecting layer behind the retina and manatees have none; the strength is the app's guess"
+   }
+  },
+  "matrices": {
+   "CONE_L": {
+    "from_pigments": [
+     522
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R37",
+     "R36"
+    ],
+    "note": "a single long-wavelength cone kind, with the peak taken from dolphin and porpoise pigments"
+   }
+  },
+  "rows": [
+   [
+    "m",
+    "One kind of cone",
+    "Whales, dolphins and seals tested so far carry only the long-wavelength kind of cone and have lost the blue-sensitive kind. A bottlenose dolphin's cone pigment peaks between 522 and 524 nanometres. We show the picture the way a single kind of cone would, which leaves almost no colour. A few behaviour tests hint that dolphins can tell two wavelengths apart, and manatees have two cone kinds, so this is the usual case for the group and has exceptions.",
+    [
+     "R37",
+     "R36",
+     "R46",
+     "R186",
+     "R185",
+     "R44"
+    ],
+    [
+     "params.M",
+     "matrices.CONE_L"
+    ]
+   ],
+   [
+    "m",
+    "The great whales",
+    "Rorquals, right whales, bowhead whales, sperm whales and beaked whales have lost the genes for both kinds of cone pigment. They see with rods alone, and their rod pigments peak between about 483 and 499 nanometres, in the blue-green part of the spectrum.",
+    [
+     "R39",
+     "R40",
+     "R42",
+     "R23",
+     "R30",
+     "R31",
+     "R32"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Sharpness",
+    "Estimates of how fine a detail these animals resolve run from about 2.6 to 3.3 cycles per degree in several toothed whales and 3.3 to 4.8 in baleen whales. A harbour seal comes in near 11.5 under water and a manatee near 1.6. We blur the picture to 3.95, a humpback whale's estimate, which is far less sharp than your own view.",
+    [
+     "R2",
+     "R3",
+     "R4",
+     "R5",
+     "R11",
+     "R13"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "A wide view with little overlap",
+    "A dolphin's eyes sit on the sides of its head. Together they cover 120 to 130 degrees, and the two eyes overlap by only 20 to 30 degrees. We leave the field as your camera gives it.",
+    [
+     "R17",
+     "R19",
+     "R21"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Dim water",
+    "A bottlenose dolphin was half a log unit more sensitive than a person in dim light and a little less sensitive in bright light. Bottlenose dolphins, many whales and seals have a reflecting layer behind the retina that gives light a second pass. Manatees have none. We lift the shadows strongly and add a modest sheen.",
+    [
+     "R55",
+     "R56",
+     "R241",
+     "R240",
+     "R247"
+    ],
+    [
+     "params.gain",
+     "params.sheen"
+    ]
+   ],
+   [
+    "x",
+    "Sound and touch beyond sight",
+    "A bottlenose dolphin makes clicks between 40 and 150 kilohertz and builds a picture from the echoes. A harbour seal can follow the trail of a fish through the water with its whiskers up to 35 seconds after the fish has passed. A phone cannot give either sense, so they are left out of this view.",
+    [
+     "R73",
+     "R130",
+     "R103"
+    ],
+    []
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "One sharpness of 3.95 stands for the whole group, one dolphin pigment peak stands for every species, the brightness gain is worked out from one dolphin test, and the strength of the reflecting sheen is a guess.",
+    [
+     "R11",
+     "R37",
+     "R55",
+     "R240"
+    ],
+    [
+     "params.cpd",
+     "params.M",
+     "params.gain",
+     "params.sheen",
+     "matrices.CONE_L"
+    ]
+   ]
+  ],
+  "zones": [],
+  "by": {}
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R11"
+   ],
+   "kind": "value",
+   "how": "The value 3.95 cycles per degree is the humpback whale estimate in this record."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R37",
+    "R36"
+   ],
+   "kind": "value",
+   "how": "The single cone pigment peak named by the matrix, 522 nm, is the low end of the published 522 to 524 nm range."
+  },
+  {
+   "path": "matrices.CONE_L",
+   "records": [
+    "R37",
+    "R36"
+   ],
+   "kind": "value",
+   "how": "The one pigment peak, 522 nm, is the low end of the published 522 to 524 nm range for dolphin and porpoise cone pigment."
+  },
+  {
+   "path": "params.gain",
+   "records": [
+    "R55"
+   ],
+   "kind": "calculation",
+   "how": "A sensitivity gain of 0.5 log units is 10 to the power 0.5, which is about 3.16 times."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R11",
+   "quote": "Visual acuity was estimated at 3.95 cycles per degree (CPD)"
+  },
+  {
+   "record": "R37",
+   "quote": "Published λmax values for species from Delphinoidea, such as harbor porpoise (Phocoena phocoena) and bottlenose dolphin (Tursiops truncatus), are 522 to 524 nm"
+  },
+  {
+   "record": "R36",
+   "quote": "Published λmax values for species from Delphinoidea, such as harbor porpoise (Phocoena phocoena) and bottlenose dolphin (Tursiops truncatus), are 522 to 524 nm"
+  },
+  {
+   "record": "R55",
+   "quote": "The dolphin function was 0.5 log units more sensitive than the human function in low intensity light"
+  }
+ ]
+}
