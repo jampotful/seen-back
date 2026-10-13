@@ -1,35 +1,60 @@
 # Sensing sheet: ground invertebrates (snail, worm, scorpion, tick)
 
-Research round 3, unit `ground-invertebrates`, started 13 October 2026 at 01:47 UTC. This sheet is being written now. Every section below is **[unfinished]** until this line is removed.
+Research round 3, unit `ground-invertebrates`, written on 13 October 2026 from 01:47 to about 06:30 UTC. The evidence log is `docs/views/evidence/ground-invertebrates.jsonl` (lines are cited below as L1, L2 and so on, in file order) and the wanted list is `docs/views/wanted/ground-invertebrates.jsonl`. It builds on the checked sheets `docs/views/sheets/snail.md` and `docs/views/sheets/tick.md`, and every source behind a row was opened again in this session.
+
+**What came through and what did not.** Of the two books in the owner's library, *Neurobiology of Arachnids* (Barth, ed., 1985) came through only as its front matter, chapters I to III and chapter IV to about page 73. The scorpion chapters (XVII, Root, on locomotion, and XVIII, Fleissner and Fleissner, on the clock in the visual system) and the chapters on sensilla, trichobothria and slit organs (VII to IX) were not in the copy. *Animal Eyes* (Land and Nilsson, 2nd edition, 2012) came through as chapters 1 and 2 and chapter 3 to about page 65, which holds its Table 3.1 of resolution. During the session these sites refused with HTTP 429 and I stopped fetching from them: Europe PMC (www.ebi.ac.uk), Zenodo's file store, doi.org for an Oxford title, and link.springer.com. The Biodiversity Heritage Library refused automated reading. The shell could reach only GitHub, so every page was read through the web tool.
+
+**[unfinished]** items are marked where they occur. The main ones are these: no source I could open measures what a scorpion, harvestman or centipede resolves, so those three pictures rest on inference; no flicker or time-constant measurement was found for any animal in the unit; and the family counts behind the shares were read once, with no second count.
 
 ## 1. Scope
 
-**[unfinished]**
+### What the four groups hold
 
-## 2. Views
+Records are iNaturalist research-grade observations in GBIF (dataset `50c9509d-22c7-4a22-a47d-8c48425ef4a7`). The class and order totals come from the saved facets of 11 October 2026 (run 10 of `fetch` on the `ci` branch, `runs/fetch/10/`). The family splits were read from the GBIF API through the web tool on 13 October 2026. Species counts come from the iNaturalist open-data snapshot of 27 September 2026 (`runs/coverage/2-lists/world.tsv.gz` on `ci`, research grade, all years), so they differ slightly from GBIF's.
 
-**[unfinished]**
+| Group | GROUPS label | Records | What it holds |
+|---|---|---:|---|
+| snail | a snail or slug | 2,227,162 | Gastropoda 2,155,631; Polyplacophora 71,088; Scaphopoda 376; two small classes 66; Monoplacophora 1 |
+| worm | a worm, millipede or centipede | 370,232 | Diplopoda 170,881; Chilopoda 82,474; Annelida 66,007; Platyhelminthes 37,559; Nematoda 8,445; Nemertea 3,896; seven small phyla 970 |
+| scorpion | a scorpion or harvestman | 235,122 | Opiliones 124,524; Scorpiones 99,357; Amblypygi 3,771; Uropygi 3,003; Pseudoscorpiones 2,399; Solifugae 1,810; Schizomida 222; Ricinulei 18; Palpigradi 18 |
+| tick | a tick | 60,462 | Ixodida |
 
-## 3. Existing views re-checked
+**Two of these totals are larger than `docs/COVERAGE.md` says.** The table of orders (`docs/views/world-orders.csv`) counts only records whose order has a saved name, and that misses two kinds of record.
 
-**[unfinished]**
+- **Earthworms are missing.** GBIF places earthworms in order Crassiclitellata (key 5958860), and its 11,121 records sit in the world facet, but key 5958860 is absent from the saved order names, so the order never reached the table. It is the largest of seven unnamed orders (11,302 records in all). The worm group's 340,371 records therefore leave out every earthworm.
+- **Families with no order are missing.** GBIF gives some families no order at all. Among annelids, Terebellidae (1,393), Arenicolidae (1,154) and Cirratulidae (622) are examples. Among flatworms, the sea flatworm family Pseudocerotidae (8,269) is one: Platyhelminthes hold 37,559 records, of which only about 24,500 carry an order. Among gastropods, the Alachua file itself lists Physidae, Planorbidae and Thiaridae with an empty order column, and Gastropoda hold 141,797 more records than their orders sum to. The corrected worm group is 370,232 (29,861 more than the table) and the corrected snail group 2,227,162 (141,797 more).
 
-## 4. Species with their own measurements
+### Which members people photograph most
 
-**[unfinished]**
+**Snails.** Worldwide the most recorded are the garden snail *Cornu aspersum* (110,204), the grove snail *Cepaea nemoralis* (74,500), the Roman snail *Helix pomatia* (52,599), the banana slug *Ariolimax columbianus* (47,423), the leopard slug *Limax maximus* (47,167) and the giant African land snail *Lissachatina fulica* (29,721); the first sea slug is *Hermissenda opalescens* (17,593) and the first sea snail the periwinkle *Littorina littorea* (16,050). Stylommatophora (land snails and slugs) hold 41.2% of the group, Nudibranchia 19.3% and chitons 3.2%. In Alachua County the most recorded are the manatee treesnail (*Drymaeus dormani*, 216), the Rosy Wolfsnail (*Euglandina rosea*, 198), the Ghost Bulimulus (145), the Florida Leatherleaf Slug (122), the Asian Tramp Snail (111) and the Island Apple Snail (*Pomacea maculata*, 109).
 
-## 5. Gaps and how to fill them
+**Worms, millipedes and centipedes.** Millipedes hold 46.2% of the corrected group, centipedes 22.3%, annelids 17.8%, flatworms 10.1%, roundworms 2.3% and ribbon worms 1.1%.
 
-**[unfinished]**
+- The most recorded millipedes are the Greenhouse Millipede *Oxidus gracilis* (28,389), the Rusty Millipede *Trigoniulus corallinus* (12,888), *Harpaphe haydeniana* (12,680), *Ommatoiulus moreleti* (8,676) and *Apheloria corrugata* (7,410).
+- The most recorded centipedes are the house centipede *Scutigera coleoptrata* (26,123), *Scolopendra cingulata* (5,937), *S. polymorpha* (5,419), *S. heros* (3,811) and the brown centipede *Lithobius forficatus* (3,790).
+- Among soft-bodied worms the leaders are the hammerhead worm *Bipalium kewense* (5,256), the earthworm *Lumbricus terrestris* (3,785), the fireworm *Hermodice carunculata* (3,588), the fan worm *Sabella spallanzanii* (2,999) and the horse leech *Haemopis sanguisuga* (2,305).
+- In Alachua County the group's 414 records are led by the Greenhouse Millipede (65), the Rusty Millipede (59), the Wandering Hammerhead Worm *Bipalium vagum* (42), the Smokey Oak Millipede (41), the Florida Ivory Millipede (35), the Eastern Red Centipede *Scolopocryptops sexspinosus* (32), the Big-leg Centipede *Theatops posticus* (27) and the Shovel-headed Garden Worm *Bipalium kewense* (21). The county's two most recorded centipedes are blind ones.
 
-## 6. Closed sources wanted
+**Scorpions and harvestmen.** Harvestmen hold 53.0% of the group and scorpions 42.3%; the remaining 4.7% are whip spiders, whip scorpions, pseudoscorpions, camel spiders and three tiny orders.
 
-**[unfinished]**
+- Scorpion families: Buthidae 48.0%, Vaejovidae 20.6%, Scorpionidae 9.1%, Chactidae 6.7%, Bothriuridae 4.1%, Hormuridae 3.7%, Hadruridae 2.9%, Euscorpiidae 2.7%. The most recorded species are the striped bark scorpion *Centruroides vittatus* (11,594), *Uroctonus mordax* (4,698), *Vaejovis carolinianus* (2,202), the Arizona bark scorpion *C. sculpturatus* (2,028) and the giant hairy scorpion *Hadrurus arizonensis* (1,958).
+- Harvestman families: Phalangiidae 59.1% and Sclerosomatidae 24.3%, together 83.4%; then Gonyleptidae 4.3%, Cosmetidae 4.0% and Nemastomatidae 2.4%. The most recorded species are *Phalangium opilio* (28,313), *Opilio canestrinii* (13,493) and the Banded Harvestman *Leiobunum vittatum* (8,392).
+- In Alachua County the group's 106 records are the Hentz Striped Scorpion *Centruroides hentzi* (44) and five harvestmen led by *Hadrobunus grandis* (41).
 
-## 7. Sources
+**Ticks.** The American Dog Tick (20,209), the Eastern Black-legged Tick (11,235) and the Lone Star Tick (8,996) lead the world; the Lone Star Tick leads Alachua (121 of 152 tick records). The genus split is in `tick.md` and is not repeated here.
 
-**[unfinished]**
+### Where the views should split
 
-## 8. Questions for a specialist
+The four GROUPS labels cut across very different ways of meeting the world. Following Land and Nilsson's four classes of light-guided behaviour (L3, L4), the members fall into all of the first three: light sensed without direction (earthworm skin, the slug's brain), light with direction but no image (tick eyespots, flatworm cups), and coarse images (millipede and snail eyes, scorpion median eyes). None reaches the fourth class, sharp sight, except the conchs among the sea snails. Each line below says where one picture would be false for some members.
+
+1. **The scorpion group splits into scorpions and harvestmen.** Scorpions carry two eye systems, a pair of median eyes and up to five lateral eyes on each side, that answer to different tasks and grow about a thousand times more sensitive at night (L10, L11, L26, L27, L43, L44). Harvestmen carry one pair of eyes on a turret looking sideways and live largely by touch and taste through their first legs and palps (L52, L53, L57, L58). Whip spiders and whip scorpions share the scorpion's layout of median and lateral eyes (L37, L70) and go with scorpions. The line falls between Opiliones (124,524, 53.0%) and the rest (110,598, 47.0%).
+2. **The worm group splits three ways: millipedes, centipedes and soft-bodied worms.** Millipedes have at most low-resolution eyes and half of them have none (L77, L79, L89, L92, L93). Centipedes are fast predators whose eyes range from a compound eye of 150 to 200 facets in the house centipede to none at all in soil centipedes (L97 to L101), and some sense sunlight as heat in their antennae (L104). The soft-bodied worms (earthworms, leeches, flatworms, fan worms, ribbon worms) sense light through the skin or through eyecups that give direction without an image (L106, L107, L114, L119 to L124). The shares are millipedes 170,907 (46.2%, counting the 26 records of Pauropoda with them), centipedes 82,474 (22.3%) and soft-bodied worms 116,851 (31.6%).
+3. **Within millipedes the line between eyed and eyeless orders is real, and I recommend one view for now.** The flat-backed millipedes (Polydesmida) and Platydesmida have no eyes (L89, L92, L93) and hold 84,181 records (49.3% of millipedes), including the most recorded species. The rest, 86,700 (50.7%), are mostly eyed orders, though some of their members are blind. At the measured sharpness of an eyed millipede, 56 degrees a cycle (L77), the picture is so coarse that it differs from no picture at all only in showing which side is darker. The eyeless half would get that faint cue too, and a row says so. When the full database names a species in Polydesmida or Platydesmida, the same view should drop to `field: 1`.
+4. **Within centipedes, one view for now, with the house centipede as the first split later.** Scutigeromorpha (30,822, 37.4%) have compound eyes and two colour classes (L94 to L98); Scolopendridae (34,892, 42.3%) have four simple eyes on each side (L99); Lithobiomorpha hold 8.1%; and the blind families (Cryptopidae, Scolopocryptopidae and Geophilomorpha) hold 10,093 (12.2%) (L100, L101). No centipede's sharpness has been measured in any source I opened, so a split cannot yet be drawn from numbers.
+5. **Within soft-bodied worms, one view.** Fan worms (Serpulidae and Sabellidae, 23,534, 20.1% of soft worms) and leeches (8,014, 6.9%) have eyes that catch shadows (L111, L114, L124). Earthworms (11,121, 9.5%) have no eyes and sense light through the skin (L106, L107). Land planarians (22,813, 19.5%) have many tiny eyes (L169). The remaining polychaetes (23,177, 19.8%), led by fireworms and honeycomb worms, were not measured in any source I opened. All of them meet light as amount and direction, and none is shown to resolve an image, so one view without a picture is true for all. Gall nematodes (most of the 8,445 roundworm records, in Anguinidae 8,245) are photographed as galls on plants, as gall mites are, and should go to `other`.
+6. **The snail group keeps one view, as `snail.md` proposed.** The sea snails with large camera eyes are the exception: the strombid conchs resolve about 1 degree (L130, L131) and the periwinkle about 4.5 degrees between receptors (L1). Strombidae hold 12,703 records (0.57% of the group) and Littorinidae 45,606 (2.05%), together 2.6%. Every other member measured sees at most large patches of light and dark (L125, L126, L133, L134, L146, L181). A `conch` view for Strombidae is the first split to make when the full database names species.
+7. **Ticks keep one view, as `tick.md` proposed.** The new evidence for the Lone Star Tick's own eye (L151, L152) supports the coarse picture there.
+
+**The set of views I commit to** is seven: `snail`, `millipede`, `centipede`, `worm`, `scorpion`, `harvestman` and `tick`. The base app's group head knows only four labels, so the three new ones (`millipede`, `centipede`, `harvestman`) need the owner's word and a refit of the head on the existing world photos (`docs/COVERAGE.md`, second wave). Until then the full database can route by order. In the word table, "millipede" and "centipede" now go to `worm` and "harvestman" to `scorpion`.
 
 **[unfinished]**
