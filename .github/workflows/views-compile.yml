@@ -1,0 +1,38 @@
+name: views-compile
+# The spec compiler: Claude (Haiku, and Sonnet to compare) through the Message Batches API drafts a view's spec from the
+# literature table and the evidence logs (tools/views/compile.py, docs/views/COMPILER.md); every reply is checked by script.
+# Push a commit to run/views-compile/<label>; ci/views/compile.env names the jobs, the models, the spend ceiling and whether
+# to plan only. The drafts go to the branch pub/views-draft; the summary and the comparison with the hand-made specs come
+# back on ci as runs/views-compile/<run>. Nothing is merged into views/.
+# The key is the repository secret ANTHROPIC_API_KEY; without it the job stops at once and says so.
+on:
+  push:
+    branches: ['run/views-compile/**']
+permissions:
+  contents: write
+concurrency:
+  group: views-compile
+  cancel-in-progress: false      # a cancelled run would leave paid batches uncollected
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: tests
+        run: python3 -I tools/views/test_compile.py && python3 -I tools/lit/test_extract.py
+      - name: compile
+        run: bash ci/views/compile.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: views-compile
+          path: out/
+          retention-days: 7
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh views-compile out
