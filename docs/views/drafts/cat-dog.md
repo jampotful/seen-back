@@ -313,7 +313,7 @@ L41 (note), L39.
 ```
 ['i', 'Sharpness', 'No measurement of a fox’s sharpness was found. A red fox’s sharpest area packs its nerve cells about as densely as a dog’s, so this view guesses that a fox sees about as much detail as a typical dog.'],
 ```
-L39 (7,900 ganglion cells per mm²), L37 (dogs 6,400 to 14,400). Eye size, which also sets acuity (L126), was not found for foxes.
+L39 (7,900 ganglion cells per mm²), L37 (dogs 6,400 to 14,400), L162 (foxes have rather large eyes yet low acuity, like other rod-rich carnivores of dog size). No measured eye size for foxes was found.
 
 ```
 ['x', 'Compass', 'Red foxes hunting mice pounce mostly toward the north-east, and the pounces that succeed cluster toward the north. The researchers think the foxes may be using the earth’s magnetic field. This view leaves that sense out.'],
@@ -355,7 +355,7 @@ No source.
 | `cpd` 8 | | **confirmed** (L17, L18, L95) |
 | Colour (`m`) | two kinds of cell; "reds look olive or grey to a cat" | **confirmed** for two cones (L69, L70, L72, L73). The olive-or-grey clause describes the drawing, and no source tests what a cat sees as red; **corrected** to say that reds and greens are hard to tell apart |
 | Pupil (`m`) | slit, ambush hunters, smears up and down | **confirmed** (L20, L23, L24, L48) |
-| Field of view (`m`) | cat about 200, "a person about 180" | the cat's 200 is **confirmed** from secondary sources (L77, L132); the person's 180 is **corrected** to about 200 (L57) |
+| Field of view (`m`) | cat about 200, "a person about 180" | the cat's 200 is **confirmed** from secondary sources (L77, L132), and an optical figure is wider, 287 (L154); the person's 180 is the older figure for eyes at rest (L158), **corrected** to about 200 from clinical perimetry (L57) |
 | `fov` 200 | | **confirmed**; see 3.3 for the human reference |
 | Dim light (`m`) | "six to eight times dimmer than people need" | **confirmed** from secondary sources only (L134; L80 says up to 7). The primary measurement, Gunter (1951), was not opened |
 | Depth (`i`) | height in the frame stands for distance | **confirmed** as a guess; the slit pupil's blur cue is now an `m` row (L23, L24, L125) |
@@ -376,7 +376,7 @@ Walls (1942) judged cats colour-blind (L147); later recordings found two cone cl
 | `topoS` 1, `fall` 1.6 | | `topoS` **confirmed**; add `topoA` 0.5; `fall` stays an invented value |
 | Colour (`i`) | two kinds of cell | **measured**: upgrade to `m` (L64 to L67, L108, L109). `docs/SOURCES.md` lists two cone types in dogs as made from memory; it now rests on Neitz and colleagues (1989) |
 | Field of view, dim light and depth (`i`) | guesses | field **measured** from secondary sources (L79, L32): upgrade to `m`; dim light **measured** (L87, L119): `m`; depth stays `i` |
-| `fov` 240, `pupil` 'o' | | **confirmed** (L79; L53) |
+| `fov` 240, `pupil` 'o' | | **confirmed** (L79, L157; L53) |
 | `rate` | none | add 0.8 (L27) |
 
 ### 3.3 The human reference values
