@@ -99,9 +99,42 @@ The places just looked at (up to six) also dim the glow there, so the surround i
 | colour in the cross | green drawn yellow-green, the guessed ultraviolet drawn blue | ultraviolet near 359 to 377 nm and green near 526 to 532 nm (Glenszczyk and colleagues 2021; DeVoe 1975; Zurek and colleagues 2015); the matrix and the ultraviolet guess are *invented* |
 | gaze | as in the Gaze table | as in the Gaze table |
 
+## Views as data (module 0, burst 2)
+
+Every view is a spec in `views/<key>.json`, in the form `docs/ENGINE-DESIGN.md` section 3 gives. `build.py` checks every spec with `tools/views/check_spec.py` (a refusal stops the build) and inlines them all into the page, in the order of `views/index.json`, so the page makes no request for them. `viewOf` in `src/cam.a.js` turns a spec into the flat view the engine has always read: it resolves parameter objects to their values, `@name` references, matrices by name, and `curve` values against the light module's reading. Specs with `"offered": true` are the views the app offers; every other spec is reached only with `?try=<key>`, so a spec added by the specs track appears nowhere else.
+
+The fourteen offered views were converted from build 23's hand-written `EYES` by `tools/views/convert_eyes.js`. Their parameters carry the grade `?` (not yet graded) with no source, because the code graded only rows; the research threads grade them when they next touch each view. `tools/views/same_views.js` compares the specs field by field with an older `src/cam.a.js`, and `node test/check4.js still` draws every offered view on one still photo for a pixel comparison between builds: both found no difference from build 23. `views/jumper.json` is graded parameter by parameter from the table in `docs/views/drafts/jumper.md` by `tools/views/grade_jumper.py`.
+
+## The tuning panel and the compare slider
+
+With `?try=<view>&tune=1`, a drawer over the bottom third of the picture lists every number in the view's spec, by module and zone, each with its grade (green m, yellow g, red i, grey ? for not yet graded), an orange dot where the value is invented, a slider over its range, the value and a reset. Holding a row shows its sources. The slider steps by the parameter's visibility floor where `docs/views/floor.json` has one and by a two-hundredth of the range otherwise. **Copy** puts a patch of the changed values on the clipboard (`{ key, version, set: { path: value } }`); **Keep** stores it in this browser, and it comes back on the next visit. **Compare** shows a divider: left of it the person's own view, right of it the creature's, drawn in one frame with the scissor test, sharing the squeeze so the halves meet. A long press on the divider hides it. The left side reads the time pass's picture, which for every view without trails is the live frame.
+
+## Drawing options (`&draw=`)
+
+A spec's `draw` block lists, for each category, the ways a mechanism can be drawn (`docs/views/ATLAS.md`); the first is the default and `&draw=<name>` picks another. All are invented, and the spec says so. The jumper view offers:
+
+| Category | Options | What each draws |
+|---|---|---|
+| gaze | `stamps` (default), `strip`, `face` | the hunting strip, with each past fixation left as a sharp thumbnail where it was taken, fading over the view's ignoring time (`gaze.ior`, about 5 s, Ferrante and colleagues 2024); the strip alone; the front camera, so the person is what the strip hunts |
+| sharpness | `paint` | while a thumb is held on the picture the strip follows it, and when the thumb lifts the movement map leads again |
+| colour | `two` (default), `palm` | the strip carries the principal eyes' two classes and the surround the side eyes' one; `palm` adds the guessed ultraviolet under the strip, felt as short vibrations where the browser can vibrate (Android) and drawn as a fine moving grain in the strip (every phone) |
+| surround | `glow` (default), `pond` | the coarse green picture with movement glowing faintly; still things fade out of the surround and only movement and the strip remain |
+
+Stamps cost a blit of the strip's rectangle into one of six slots of a 576 by 224 texture every 120 ms while the gaze looks a place over, and one small blended draw per visible stamp.
+
+## Light (module 3, first part)
+
+Four times a second the engine reads the smallest levels of the picture's mip chain (8 by 8 cells or fewer) through a pixel buffer and a fence, never waiting. `LIGHT` holds the mean level (relative to the camera's own exposure, smoothed over about 2.5 s), the mean colour, the place of the brightest cell, a shock value when the picture darkens by half within 0.4 s, and the cells themselves, which `&draw=palm` reads under the gaze. A parameter given as `{ "curve": "lux", "points": [[x, v], ...] }` is interpolated against log10 of that level, and a view with one is recomputed twice a second. Absolute light needs the exposure time from `getSettings()`, which most browsers do not report; the clock, sun and moon terms of the design are not built.
+
+## The visibility floor
+
+`node test/check4.js floor` renders a view (`FLOOR_VIEW`, jumper by default) on a still frame of the scene clip at 390 by 844 CSS pixels and a device pixel ratio of 2, with the gaze pinned and the `strip` drawing, and for each scalar parameter finds the smallest change whose renders differ by more than `FLOOR_DE` (2.3) in the 95th percentile of delta E*ab (`tools/views/delta_e.py`), doubling and then bisecting. A push to `run/engines/linux-floor<anything>` runs it on a build machine at three values a parameter; results come back on the `ci` branch and go into `docs/views/floor.json`, whose `threshold` entry says how far the 2.3 was checked. Parameters that act through time (pace, the gaze's timings, glow from movement) need the moving clip and are not measured by this still harness yet.
+
 ## What a real phone must judge
 
 - The frame time of the zone and salience programs on a phone's graphics chip, and whether the map's read-back arrives within a frame or two (in headless software graphics a fence takes seconds to signal, because the chip's queue lags).
 - Whether the phone's own movement is taken out well enough when the phone is held by hand, and how strongly a camera's own noise and exposure changes register as movement.
 - The direction of a knock read from the motion sensors, and whether a phone's microphone records low sounds well enough for ripples.
 - Whether the gaze's pace reads as a spider's on a phone held at arm's length.
+- Each drawing option of the jumper view, side by side: the stamps against the strip alone, the painted map under a thumb, `palm` (whether the vibration reaches the motor in the owner's browser, and whether the grain reads as a sense), and `pond`.
+- The design's four phone checks, still open: whether a browser's camera stream shows mains flicker; how often the accelerometer reports; whether `getSettings()` reports exposure time; whether `navigator.vibrate` reaches the motor.

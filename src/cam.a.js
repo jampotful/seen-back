@@ -25,7 +25,7 @@
   function isParam(x) { return !!x && typeof x === 'object' && !Array.isArray(x) && x.hasOwnProperty('grade') && (x.hasOwnProperty('value') || x.hasOwnProperty('curve')); }
   function specValue(x, spec, mats, key) {
     if (typeof x === 'string' && x.charAt(0) === '@') return specValue(spec.params[x.slice(1)], spec, mats, x.slice(1));
-    if (key === 'M' && typeof x === 'string') { var m = mats[x] || (spec.matrices || {})[x]; return m ? [].concat.apply([], m.rows) : I3.slice(); }
+    if (key === 'M' && typeof x === 'string') { var m = mats[x] || (spec.matrices || {})[x]; return m && m.rows && m.rows.length === 3 ? [].concat.apply([], m.rows).slice(0, 9).length === 9 && m.rows.every(function (r) { return r.length === 3; }) ? [].concat.apply([], m.rows) : m.rows.map(function (r) { return r.slice(0, 3); }).reduce(function (a, r) { return a.concat(r); }, []) : I3.slice(); }
     if (isParam(x)) return x.hasOwnProperty('value') ? specValue(x.value, spec, mats, key) : specCurve(x);
     if (Array.isArray(x)) return x.map(function (v) { return specValue(v, spec, mats, key); });
     if (x && typeof x === 'object') { var o = {}, k; for (k in x) o[k] = specValue(x[k], spec, mats, k); return o; }
