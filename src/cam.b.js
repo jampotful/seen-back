@@ -109,6 +109,24 @@
     }
     var pCopy = prog(FS_COPY), pTime = prog(FS_TIME), pView = prog(FS_VIEW);
     var vao = gl.createVertexArray(); gl.bindVertexArray(vao);
+
+    // ---- the frame-time probe: the graphics chip's own time for a frame where the browser offers a timer query
+    // (EXT_disjoint_timer_query_webgl2), and the script's time inside draw() everywhere. A query's answer arrives a few frames
+    // later and is polled, never waited for; a frame the driver marks as disjoint is dropped.
+    var tq = null; try { tq = gl.getExtension('EXT_disjoint_timer_query_webgl2'); } catch (e) { tq = null; }
+    var qFree = [], qWait = [], qNow = null, gpuMs = [], cpuMs = [];
+    function keep(a, x) { a.push(x); if (a.length > 90) a.shift(); }
+    function avg(a) { if (!a.length) return null; var s = 0; for (var i = 0; i < a.length; i++) s += a[i]; return s / a.length; }
+    function qBegin() { if (!tq || qNow || qWait.length > 6) return; qNow = qFree.pop() || gl.createQuery(); gl.beginQuery(tq.TIME_ELAPSED_EXT, qNow); }
+    function qEnd() { if (!qNow) return; gl.endQuery(tq.TIME_ELAPSED_EXT); qWait.push(qNow); qNow = null; }
+    function qPoll() {
+      if (!tq || !qWait.length) return;
+      var lost = gl.getParameter(tq.GPU_DISJOINT_EXT);
+      while (qWait.length && gl.getQueryParameter(qWait[0], gl.QUERY_RESULT_AVAILABLE)) {
+        var q = qWait.shift(), ns = gl.getQueryParameter(q, gl.QUERY_RESULT); qFree.push(q);
+        if (!lost) keep(gpuMs, ns / 1e6);
+      }
+    }
     var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
@@ -172,12 +190,21 @@
       clear: function () { hasFrame = false; },
       hasFrame: function () { return hasFrame; },
       state: function () { return { sw: sw, sh: sh, writes: writes, stepMs: stepMs, moving: moving, floatOK: floatOK, err: gl.getError() }; },
+      // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
+      probe: function () { return { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length }; },
       resize: function () {
         var dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr, k = Math.min(1, MAXSIDE / Math.max(w, h, 1));
         w = Math.max(2, Math.round(w * k)); h = Math.max(2, Math.round(h * k));
         if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
       },
       draw: function (P, fx, now, dt) {
+        var c0 = performance.now();
+        qPoll(); qBegin();
+        drawFrame(P, fx, now, dt);
+        qEnd(); keep(cpuMs, performance.now() - c0);
+      }
+    };
+    function drawFrame(P, fx, now, dt) {
         gl.bindVertexArray(vao);
         if (!hasFrame) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); return; }
         var useRing = 0, back = 0, nowMix = 0, a = 1;
@@ -230,6 +257,5 @@
         gl.uniform1f(u.u_expo, fx.expo === undefined ? 1 : fx.expo);
         gl.uniform1f(u.u_ap, fx.ap === undefined ? 1 : fx.ap); gl.uniform1i(u.u_shape, fx.shape || 0); gl.uniform1f(u.u_mosaic, fx.mosaic || 0);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
-      }
-    };
+    }
   }

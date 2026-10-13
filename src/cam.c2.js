@@ -792,6 +792,8 @@
       (b.state === 'failed' && b.fail ? '; ' + b.fail : '') + '.');
     L.push('Picture: ' + canvas.width + ' by ' + canvas.height + (st && st.sw ? ', source ' + st.sw + ' by ' + st.sh : '') + (engine ? ', limit ' + engine.side() : ', no engine') +
       (avg ? ', ' + avg.toFixed(1) + ' ms a frame over the last ' + frameMs.length + '.' : '.'));
+    var pr = engine && engine.probe ? engine.probe() : null;   // the engine's own probe (src/cam.b.js): its script time, and the graphics chip's where a timer query is offered
+    if (pr && pr.n) L.push('Engine: ' + pr.cpu.toFixed(2) + ' ms of script a frame' + (pr.gpu !== null ? ', ' + pr.gpu.toFixed(2) + ' ms on the graphics chip (timer query, ' + pr.gpuN + ' frames)' : pr.timer ? ', no timer answer yet' : ', no timer query here') + '.');
     L.push('Screen: ' + window.innerWidth + ' by ' + window.innerHeight + ' at ' + (window.devicePixelRatio || 1) + '. ' + (coarse ? 'Touch.' : 'Pointer.') + (S.camOK ? ' Camera open.' : S.camRefused ? ' Camera refused.' : ''));
     L.push(String(navigator.userAgent || '').slice(0, 200));
     return L.join('\n');

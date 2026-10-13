@@ -314,6 +314,75 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.errors = errors; out[mode] = r; await ctx.close();
   }
 
+  if (mode === 'perf') {
+    // Every view for a fixed number of frames on a fixed clip (test/assets/scene.webm, made by test/make_scene.py), with a table at the end.
+    // A frame's cost is measured from outside the page, so the same harness measures any build: the time of the page's own animation
+    // callbacks in that frame plus gl.finish() after the one that drew, which waits for the graphics work to end. Headless software
+    // graphics are slow and share the machine's processors, so the numbers only compare views and builds with each other, on one machine.
+    // PERF_FRAMES (60) sets the frames a view, TRY (jumper) the views reached with ?try=, PERF_OUT a file for the JSON.
+    const FRAMES = +(process.env.PERF_FRAMES || 60), TRY = process.env.TRY === undefined ? 'jumper' : process.env.TRY;
+    const measure = () => {
+      const W = window, pf = W.__pf = { gl: null, rec: false, frames: [] };
+      const gc = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function (t, o) { const c = gc.call(this, t, o); if (t === 'webgl2' && this.id === 'gl' && c && !pf.gl) pf.gl = c; return c; };
+      const da = WebGL2RenderingContext.prototype.drawArrays; let drew = false;
+      WebGL2RenderingContext.prototype.drawArrays = function () { if (this === pf.gl) drew = true; return da.apply(this, arguments); };
+      const raf = W.requestAnimationFrame.bind(W); let cur = null;
+      W.requestAnimationFrame = function (cb) {
+        return raf(function (ts) {
+          if (!cur || cur.ts !== ts) { if (cur && pf.rec && cur.drew) pf.frames.push(cur); cur = { ts, cb: 0, fin: 0, drew: false }; }
+          const s = performance.now(); drew = false;
+          try { cb(ts); } finally {
+            cur.cb += performance.now() - s;
+            if (drew && pf.gl) { const f = performance.now(); pf.gl.finish(); cur.fin += performance.now() - f; cur.drew = true; }
+          }
+        });
+      };
+      if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError'));
+    };
+    const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+    await page.addInitScript(measure);
+    await page.goto(HTTP + (TRY ? '&try=' + TRY : '')); await page.waitForTimeout(500);
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
+    await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
+    await say(page, 'cat'); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'scene.webm'));
+    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 }); await page.waitForTimeout(3500);
+    const names = { cat: 'cat', dog: 'dog', squirrel: 'squirrel', deer: 'deer', rabbit: 'rabbit', wader: 'heron', bird: 'cardinal', hawk: 'hawk', alligator: 'alligator', reptile: 'anole', frog: 'treefrog', bee: 'bee', insect: 'butterfly', plant: 'oak',
+      jumper: 'jumping spider', spider: 'wolf spider', fish: 'bass', snail: 'garden snail', crab: 'blue crab', bat: 'big brown bat', tick: 'deer tick', salamander: 'red eft', fungus: 'mushroom', mammal: 'raccoon', sealife: 'jellyfish' };
+    const have = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'person' && k !== 'other'));
+    const views = ['human'].concat(have.filter((k) => names[k]));
+    const rows = [];
+    const stat = (a) => { if (!a.length) return null; const s = a.slice().sort((x, y) => x - y), m = a.reduce((x, y) => x + y, 0) / a.length; return { mean: +m.toFixed(2), median: +s[s.length >> 1].toFixed(2), p90: +s[Math.min(s.length - 1, Math.floor(s.length * .9))].toFixed(2) }; };
+    for (const key of views) {
+      if (key === 'human') { await page.evaluate(() => { window.__seenBack.S.holding = true; }); await page.waitForTimeout(600); }
+      else {
+        await page.evaluate(() => { window.__seenBack.S.holding = false; window.__seenBack.pose(null); });
+        if (await page.evaluate((k) => window.__seenBack.S.eyes !== k, key)) {
+          await page.locator('#btnWho').tap(); await page.locator('#infoChange').tap(); await say(page, names[key]);
+          await page.waitForFunction((k) => window.__seenBack.S.eyes === k && window.__seenBack.S.screen === 'animal', key, { timeout: 12000 });
+          await page.waitForTimeout(900);
+        }
+        await page.evaluate(() => window.__seenBack.pose(null)); await page.waitForTimeout(700);
+      }
+      await page.evaluate(() => { window.__pf.frames = []; window.__pf.rec = true; });
+      await page.waitForFunction((n) => window.__pf.frames.length >= n, FRAMES, { timeout: 600000, polling: 250 });
+      const got = await page.evaluate(() => { const f = window.__pf.frames.slice(); window.__pf.rec = false; const b = window.__seenBack; return { f, probe: b.probe ? b.probe() : null, eyes: b.S.eyes, k: b.S.k, err: b.state() && b.state().err, side: b.state() && b.state().sw + 'x' + b.state().sh }; });
+      const f = got.f.slice(0, FRAMES), cost = f.map((x) => x.cb + x.fin), gaps = f.slice(1).map((x, i) => x.ts - f[i].ts);
+      rows.push({ view: key, frames: f.length, cost: stat(cost), interval: stat(gaps), script: stat(f.map((x) => x.cb)), gpu: got.probe && got.probe.gpu !== null ? +got.probe.gpu.toFixed(2) : null, err: got.err, k: +got.k.toFixed(2), ring: got.side });
+    }
+    await page.evaluate(() => { window.__seenBack.S.holding = false; });
+    const table = ['| view | cost, mean ms | median | p90 | frame interval, median ms | script, mean ms | GPU timer, ms |', '|---|---|---|---|---|---|---|']
+      .concat(rows.map((r) => '| ' + [r.view, r.cost.mean, r.cost.median, r.cost.p90, r.interval ? r.interval.median : '', r.script.mean, r.gpu === null ? 'none' : r.gpu].join(' | ') + ' |'));
+    console.log(table.join('\n'));
+    out.perf = { url: HTTP, frames: FRAMES, rows, errors };
+    if (process.env.PERF_OUT) fs.writeFileSync(process.env.PERF_OUT, JSON.stringify(out.perf, null, 1));
+    await ctx.close();
+    if (errors.length || rows.some((r) => r.err)) { console.log(JSON.stringify(out, null, 1)); throw new Error('perf: an error while drawing'); }
+  }
+
   await browser.close();
   console.log(JSON.stringify(out, null, 1));
 })().catch(e => { console.error('FAILED', e); process.exit(1); });
