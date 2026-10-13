@@ -9,7 +9,7 @@
 
 For each job (one view) and model the script sends one request through the Message Batches API: a cached system part
 (the format, the schema read from the code, the grades, the writing rules) and a user part (the job, the nearest existing
-spec as the example of form, and up to 300 numbered records). The reply is one tool call holding the spec, the claims
+spec as the example of form, and up to 400 numbered records). The reply is one tool call holding the spec, the claims
 and the quotes. Every reply is checked by script (COMPILER.md section 4); a failed reply is sent once more with the
 errors appended, and a second failure is written as <key>.<model>.refused.json. Nothing is merged into views/: the drafts
 go to out/ and, from the build machine, to the branch pub/views-draft.
@@ -34,8 +34,9 @@ EX = _load("lit_extract", os.path.join(ROOT, "tools", "lit", "extract.py"))
 CS = _load("check_spec", os.path.join(HERE, "check_spec.py"))
 squash = EX.squash
 
-MAX_RECORDS = 300
-PER_TRAIT = 16
+MAX_RECORDS = 400
+PER_TRAIT = 16               # table records a trait
+PER_TRAIT_LOG = 40           # hand-log records a trait: the logs are audited and richer
 MAX_TOKENS = 16000
 TRAIT_ORDER = ["acuity_cpd", "fov_h_deg", "fov_v_deg", "binocular_deg", "lambda_max_nm", "receptor_classes", "pupil_shape",
                "absolute_sensitivity", "cff_hz", "eye_movement"]
@@ -359,14 +360,19 @@ def choose(cand):
         pool = ins if ins else rs
         pool.sort(key=lambda r: (r["_from"] != "log", r.get("grade") != "m", "value not written" in r["_audit"]))
         seen, per_taxon, out = set(), collections.Counter(), []
-        for round_ in range(4):                           # a spread of taxa: at most round_+1 of each
+        nlog = nlist = 0
+        for round_ in range(6):                           # a spread of taxa: at most round_+1 of each
             for r in pool:
                 k = (r.get("taxon"), r.get("eye"), vkey(r.get("value")))
                 if k in seen or per_taxon[r.get("taxon")] > round_:
                     continue
-                if len(out) >= PER_TRAIT:
-                    break
+                if r["_from"] == "log" and nlog >= PER_TRAIT_LOG or r["_from"] != "log" and nlist >= PER_TRAIT:
+                    continue
                 seen.add(k); per_taxon[r.get("taxon")] += 1; out.append(r)
+                if r["_from"] == "log":
+                    nlog += 1
+                else:
+                    nlist += 1
         picked += out
     picked = picked[:MAX_RECORDS]
     for i, r in enumerate(picked, 1):
