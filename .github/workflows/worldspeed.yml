@@ -1,0 +1,28 @@
+name: worldspeed
+# Image encoders timed in headless Chromium through the page's own runtime, one thread and four (tools/world/speed.mjs,
+# ci/world/speed.sh): TinyCLIP 39M/16 against BioCLIP B/16, each through the laboratory's int8 file. Push a commit to
+# run/worldspeed/<label>. SPEED.md, speed.json and the log come back on ci as runs/worldspeed/<run>.
+on:
+  push:
+    branches: ['run/worldspeed/**']
+permissions:
+  contents: write
+concurrency:
+  group: worldspeed-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  speed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: time
+        run: bash ci/world/speed.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worldspeed out

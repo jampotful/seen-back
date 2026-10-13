@@ -1,0 +1,31 @@
+name: worldhead
+# The pocket model's group head fitted on the world photos (tools/world/head.py, ci/world/head.sh), chosen on the
+# tuning photos and scored against the pass marks of docs/COVERAGE.md. Push a commit to run/worldhead/<label>.
+# The candidate slot goes to pub/heads-world-<label>; REPORT.md, report.json and the log come back on ci as
+# runs/worldhead/<run>.
+on:
+  push:
+    branches: ['run/worldhead/**']
+permissions:
+  contents: write
+concurrency:
+  group: worldhead-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: python3 -m pip install --quiet numpy scikit-learn
+      - name: fit, tune, test and publish
+        run: bash ci/world/head.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh worldhead out

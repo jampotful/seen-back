@@ -60,6 +60,7 @@ def make(path):
     # ---- made-up settings
     full = list(m["kinds"]["labels"])
     few = ["wader", "plant", "bird", "person", "none"]                # the table below has kinds these labels lack
+    shared = full + ["other", "wader", "other"]                       # rows that share a label are one kind (a group head's rows merged into other)
     awkward = [
         ["Ardea herodias", "Great Blue Heron", "wader", M12],
         ["Eudocimus albus", "White Ibis", "wader", [0, 0, 5, 0, 9, 9, 9, 9, 9, 9, 9, 9]],
@@ -77,7 +78,7 @@ def make(path):
     for rule in ("product", "mix"):
         for bias in ("none", "kinds", "species", "both"):
             for tname in ("standin", "awkward", "one", "none"):
-                for labels in (full, few):
+                for labels in (full, few, shared):
                     for rep in range(2):
                         table = tables[tname]
                         f = {"t_kind": pick([1e-4, 1, 30, 100, 1e5]), "t_species": pick([1e-4, 1, 30, 100, 1e5]), "alpha_prior": pick([0, 0.25, 0.5, 2]),

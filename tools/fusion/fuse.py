@@ -30,13 +30,19 @@ Settings read from manifest["fusion"]: t_kind, and with species t_species, alpha
 optional prior_floor (1e-6), offer_any_kind (false), rule ("product", the default, or "mix"), guard (1e-9, product rule only),
 kind_at (absent or null: every answer is sure). Without a kinds head t_kind, w_kind, rule and guard are not read.
 The two rules are described in README.md. Ties are broken by order: the earlier label, the earlier species row.
+A label may stand on more than one row of the kinds head. Those rows are one kind: their probabilities are added in row
+order, and the kind takes the place of the label's first row (tools/world/head.py --recipe merge keeps the row of a
+group it cannot name well and labels it `other`). The page must do the same before such a slot ships.
 The page (build 8 on; build 7 lacks kind_at and slots without a kinds head) computes the same thing in fuseWith, src/cam.rec.js; parity.py holds the two to the same answers.
 A rule the page does not know is refused by both: the page will not load such a slot, and fuse() raises ValueError.
 """
 import json, math, pathlib
 import numpy as np
 
-KINDS = ("cat", "dog", "squirrel", "deer", "rabbit", "hawk", "wader", "bird", "alligator", "reptile", "frog", "bee", "insect", "plant", "other", "person")
+KINDS = ("cat", "dog", "squirrel", "deer", "rabbit", "hawk", "wader", "bird", "alligator", "reptile", "frog", "bee", "insect", "plant", "other", "person",
+         # the groups with no view yet (GROUPS in src/cam.a.js), which a species table or a kinds head may carry since build 22
+         "fungus", "slime", "spider", "jumper", "fish", "shark", "snail", "sealife", "crab", "salamander", "worm", "scorpion", "tick",
+         "mammal", "primate", "whale", "bat", "flyingfox", "cephalopod")
 
 
 def total(x):
@@ -106,13 +112,21 @@ def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, s
     if not head and T is None:
         raise ValueError("a slot without a kinds head needs its species table and their scores")
     labels = list(manifest["kinds"]["labels"]) if head else list(T["kinds"])
-    n = len(labels)
     p = None
     if head:
         z = f["t_kind"] * np.asarray(kind_dots, dtype=np.float64)
         if kind_bias is not None:
             z = z + np.asarray(kind_bias, dtype=np.float64)
         p = softmax(z)
+        uniq = list(dict.fromkeys(labels))
+        if len(uniq) < len(labels):
+            # rows that share a label are one kind (a group whose row is kept but not named is labelled `other`):
+            # their probabilities are added, in row order, and the kind takes the place of the label's first row
+            pu = np.zeros(len(uniq))
+            for i, lab in enumerate(labels):
+                pu[uniq.index(lab)] += float(p[i])
+            p, labels = pu, uniq
+    n = len(labels)
     rows = T["rows"] if T else None
     s, q, order, species, has = None, {}, [], [], set()
     if rows is not None:
