@@ -612,7 +612,7 @@ def run_adjudicate(a):
         o, err, _ = results.get(f["id"], (None, "no result", None))
         how = passages[f["id"]][1]
         base = {"id": f["id"], "unit": f["unit"], "flags": f["flags"], "first_pass": f.get("problem"), "passage": how}
-        if err or not isinstance(o, dict) or o.get("verdict") not in ("confirm", "correct", "retract"):
+        if err or not isinstance(o, dict) or o.get("verdict") not in ("confirm", "correct", "retract", "unverifiable"):
             bad[err or "bad verdict"] += 1
             out_rows.append(dict(base, verdict="unchecked", reason="adjudicator gave no usable verdict (%s)" % (err or "bad verdict")))
             continue

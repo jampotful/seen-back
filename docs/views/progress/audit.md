@@ -8,12 +8,11 @@ Started 13 October 2026, about 16:20 US Eastern. Branch `agent/audit` (it alread
 
 ## Trial 2 (jumper and herps, 120 records): 85% flagged by the first prompt, too strict; prompt loosened, "unverifiable" verdict added, second pass sends worst flags first up to its cap.
 
-## Full run (started 13 Oct 21:44 UTC)
-Push `run/lit-audit/full1` (settings in `ci/lit/audit.env`: all units, first pass cap $2, second pass cap $8, wait 150 min). The first-pass batch of trial 2 (120 requests) took 36 minutes to finish, the second pass 6 minutes, so the full run was still waiting at the time limit. When the job finishes, the results are on `ci` under `runs/lit-audit/<run number>/` (SUMMARY-first.md, SUMMARY-second.md, verdicts.jsonl, flagged.jsonl, adjudicated.jsonl, unseen.jsonl) and on `pub/lit-audit`.
+## Full run (`run/lit-audit/full1`, ci run 3, finished 13 Oct about 22:15 UTC)
+First pass: 4,166 records sent, 456 unseen (empty quote or book), $0.28; 3,223 flagged (77.4%), too many to be a useful list on its own because 1,831 of the flags are a grade suggestion (m to g) from a reviewer that sees only the quote. Second pass (Sonnet 5.5, $6.60): 3,223 flagged, 1,077 settled (310 confirm, 748 correct, 19 retract), 556 left out by the spend cap, 633 with no source text in the collection, and 935 lost to a script bug (the verdict "unverifiable" was rejected; fixed in the commit after this note, the 935 rows say "no usable verdict" in docs/views/audit/<unit>.jsonl).
+
+Decisions are in `docs/views/audit/<unit>.jsonl`. Results: `ci` branch `runs/lit-audit/3/`, and `pub/lit-audit`.
 
 ## Next
-1. Read SUMMARY-first.md from the finished run; check the share flagged (trial 2 flagged 85% with the first prompt, which was too strict; the full run uses the looser prompt).
-2. `python3 -I tools/lit/audit.py decisions --out <dir with adjudicated.jsonl> --dest docs/views/audit` writes `docs/views/audit/<unit>.jsonl`; commit it on `agent/audit`.
-3. If the first prompt's trial-2 pattern repeats (grade 'g' that should be 'm' on original studies, composite values the quote supports only in part), the decisions file carries the corrections.
-
-Trial 2 spend $0.39 ($0.02 first pass, $0.37 second pass).
+1. Rerun the second pass on the 935 and the 556 (about $4 more; total spend so far about $7.3 of the $12), with `AUDIT_ADJ_MAX_USD` set to 4; needs an `--ids` option to select only rows whose verdict is "unchecked" for those two reasons.
+2. A later step applies the 748 corrections (642 of them change the grade, 530 of those m to g, 249 of the settled records are lambda_max_nm).
