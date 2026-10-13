@@ -1,0 +1,228 @@
+{
+  "key": "flyingfox",
+  "chip": "Flying fox, fruit bat",
+  "who": "a flying fox",
+  "falls_back_to": "other",
+  "applies_to": {
+    "family": [
+      "Pteropodidae"
+    ]
+  },
+  "cue": "The picture is coarse and muted, and the shadows are lifted.",
+  "modules": [],
+  "params": {
+    "cpd": {
+      "value": 4,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "docs/views/sheets/bat.md#2 flyingfox Sharpness: Cechetto 2020 (Pteropus poliocephalus, P. alecto, Rousettus aegyptiacus about 4)"
+      ],
+      "range": [
+        1,
+        10
+      ],
+      "floor": null,
+      "note": "Brokaw 2024 gives about 2 for the Indian flying fox"
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source was found"
+    },
+    "M": {
+      "value": "flyingfox_deutan",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#2 flyingfox Colour: Muller 2007 (Pteropus has two cone types)"
+      ],
+      "floor": null,
+      "note": "the engine's two-cone model, following the cat, dog and deer; which human model fits depends on where the long-wave cone peaks (open question 4 in the sheet)"
+    },
+    "sat": {
+      "value": 0.7,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#2 flyingfox Colour: Muller 2007 (cones about one in two hundred receptors)"
+      ],
+      "range": [
+        0,
+        1
+      ],
+      "floor": null,
+      "note": "the amount of drain is the app's"
+    },
+    "gain": {
+      "value": 1.5,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#2 flyingfox Dim light: Brokaw 2024"
+      ],
+      "range": [
+        1,
+        3
+      ],
+      "floor": null,
+      "note": "the amount is the app's"
+    }
+  },
+  "matrices": {
+    "flyingfox_deutan": {
+      "rows": [
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          -0.02234,
+          0.02234,
+          1
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/bat.md#3 flyingfox M"
+      ],
+      "note": "Vienot, Brettel and Mollon 1999, as in the cat and dog views; entered from memory"
+    }
+  },
+  "variants": {
+    "one_cone": {
+      "note": "Rousettus, Eidolon and Epomophorus have only the green cone and no blue (Muller 2007): the picture would be grey. The sheet follows the flying foxes and leaves this for a genus override.",
+      "applies_to": {
+        "genus": [
+          "Rousettus",
+          "Eidolon",
+          "Epomophorus"
+        ]
+      },
+      "params": {
+        "sat": {
+          "value": 0,
+          "grade": "g",
+          "invented": true,
+          "src": [
+            "docs/views/sheets/bat.md#2 flyingfox One cone: Muller 2007"
+          ],
+          "range": [
+            0,
+            1
+          ],
+          "floor": null
+        }
+      }
+    }
+  },
+  "notes": [
+    {
+      "need": "uv",
+      "why": "The Formosan flying fox's blue cone gene points to ultraviolet (Wang 2004). No sheen is drawn: several bat lineages have lost the cone."
+    },
+    {
+      "need": "sound",
+      "why": "Rousettes echolocate with tongue clicks (Yovel 2011); no echoes are drawn."
+    }
+  ],
+  "rows": [
+    [
+      "m",
+      "Sharpness",
+      "Grey-headed and black flying foxes resolve about 4 cycles per degree to your 60, a fifteenth of yours and nearly seven times an insect-eating bat’s.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: Sharpness",
+        "Cechetto and colleagues 2020",
+        "Brokaw 2024",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "No calls",
+      "Flying foxes make no echolocation calls and find their way by sight and smell.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: No calls",
+        "Cechetto and colleagues 2020",
+        "Boonman and colleagues 2013"
+      ]
+    ],
+    [
+      "m",
+      "Colour",
+      "Flying foxes have two cone types, a blue and a green, as most mammals do. Cones are about one in two hundred of their light receptors, so colour is muted here.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: Colour",
+        "Müller and colleagues 2007",
+        "param:M",
+        "param:sat"
+      ]
+    ],
+    [
+      "g",
+      "One cone",
+      "Rousettes, epauletted fruit bats and the genus of the straw-coloured fruit bat have only the green cone and see no colour. The picture follows the flying foxes.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: One cone",
+        "Müller and colleagues 2007"
+      ]
+    ],
+    [
+      "g",
+      "Dim light",
+      "Bats pack 300,000 to 800,000 rods into each square millimetre of retina, two to five times your densest. Shadows are lifted to suggest it.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: Dim light",
+        "Brokaw 2024",
+        "param:gain"
+      ]
+    ],
+    [
+      "i",
+      "Ultraviolet",
+      "The gene for the blue cone of the Formosan flying fox points to ultraviolet. No phone records it, and none is drawn.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: Ultraviolet",
+        "Wang and colleagues 2004"
+      ]
+    ],
+    [
+      "x",
+      "Clicks",
+      "Rousette fruit bats echolocate with tongue clicks and land on targets as well as calling bats do, and the picture draws no echoes.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: Clicks",
+        "Geva-Sagiv and Ulanovsky 2011"
+      ]
+    ],
+    [
+      "i",
+      "Field, focus and pupil",
+      "These are guesses, and the camera’s field is kept.",
+      [
+        "docs/views/sheets/bat.md#2 flyingfox: Field, focus and pupil",
+        "param:pupil"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true
+}

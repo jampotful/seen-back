@@ -1,0 +1,438 @@
+{
+  "key": "mammal",
+  "chip": "Bear, kangaroo, pig",
+  "who": "a mammal",
+  "falls_back_to": "other",
+  "applies_to": {
+    "class": [
+      "Mammalia"
+    ]
+  },
+  "cue": "Two kinds of colour sensor, and less detail than yours.",
+  "modules": [],
+  "params": {
+    "cpd": {
+      "value": 5,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/mammal.md#2 Sharpness: Hemmi and Mark 1998 (4.8, tammar); Veilleux and Kirk 2014 (11.2, western grey kangaroo); Shyan-Norwalt 2010"
+      ],
+      "range": [
+        0.5,
+        12
+      ],
+      "floor": null,
+      "note": "measured values run from about 0.6 (African elephant) to 11.2; the pick of 5 is the app's"
+    },
+    "pupil": {
+      "value": "o",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no measurement of pupil or field was found"
+    },
+    "M": {
+      "value": "mammal_deutan",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/mammal.md#2 Colour: Neitz and Jacobs 1989 (pig); Heyward 2021 (black bear)"
+      ],
+      "floor": null,
+      "note": "two cone types; the engine's two-cone model that keeps the long cone stands in, which is the app's reading"
+    },
+    "gain": {
+      "value": 1.2,
+      "grade": "i",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/mammal.md#2 Dim light: tapetum lucidum 2004"
+      ],
+      "range": [
+        1,
+        3
+      ],
+      "floor": null,
+      "note": "no dim-light ratio was found; lower than the dog's 1.3 and the cat's 1.7"
+    }
+  },
+  "matrices": {
+    "mammal_deutan": {
+      "rows": [
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          0.29275,
+          0.70725,
+          0
+        ],
+        [
+          -0.02234,
+          0.02234,
+          1
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/mammal.md#3 M"
+      ],
+      "note": "Vienot, Brettel and Mollon 1999, as in the cat and dog views; entered from memory"
+    }
+  },
+  "variants": {
+    "raccoon": {
+      "note": "Raccoon, opossum, armadillo, sloth, anteater, pangolin: one kind of cone or none, so a grey picture weighted to yellow-green, with the shadows lifted.",
+      "applies_to": {
+        "family": [
+          "Procyonidae",
+          "Didelphidae",
+          "Dasypodidae",
+          "Bradypodidae",
+          "Megalonychidae",
+          "Myrmecophagidae",
+          "Manidae"
+        ]
+      },
+      "cue": "One kind of colour sensor, or none. The world in greys, with the shadows lifted.",
+      "params": {
+        "cpd": {
+          "value": 4,
+          "grade": "i",
+          "invented": true,
+          "src": [],
+          "range": [
+            0.5,
+            12
+          ],
+          "floor": null,
+          "note": "no acuity was found for any member; below the mammal value because these are night eyes"
+        },
+        "pupil": {
+          "value": "o",
+          "grade": "i",
+          "invented": true,
+          "src": [],
+          "floor": null
+        },
+        "M": {
+          "value": "raccoon_grey561",
+          "grade": "g",
+          "invented": true,
+          "src": [
+            "docs/views/sheets/mammal.md#2 raccoon Colour: Jacobs and Deegan 1992; Jacobs and Williams 2010 (561 nm)"
+          ],
+          "floor": null,
+          "note": "weights toward red and green stand in for one cone near 561 nm; the weights are the app's"
+        },
+        "gain": {
+          "value": 1.6,
+          "grade": "i",
+          "invented": true,
+          "src": [
+            "docs/views/sheets/mammal.md#2 raccoon Dim light"
+          ],
+          "range": [
+            1,
+            3
+          ],
+          "floor": null,
+          "note": "carnivores and marsupials have a reflecting layer; the amount is the app's, just under the cat's 1.7"
+        }
+      },
+      "matrices": {
+        "raccoon_grey561": {
+          "rows": [
+            [
+              0.4,
+              0.55,
+              0.05
+            ],
+            [
+              0.4,
+              0.55,
+              0.05
+            ],
+            [
+              0.4,
+              0.55,
+              0.05
+            ]
+          ],
+          "grade": "g",
+          "invented": true,
+          "src": [
+            "docs/views/sheets/mammal.md#3 raccoon M"
+          ]
+        }
+      },
+      "rows": [
+        [
+          "m",
+          "Colour",
+          "A raccoon has one kind of colour sensor in its eyes, and you have three. It sees brightness without hue, so the picture is grey.",
+          [
+            "docs/views/sheets/mammal.md#2 raccoon: Colour",
+            "Jacobs and Deegan 1992",
+            "param:M"
+          ]
+        ],
+        [
+          "m",
+          "Opossum",
+          "A Virginia opossum also showed only one kind of cone, most sensitive to yellow-green light near 561 nanometres.",
+          [
+            "docs/views/sheets/mammal.md#2 raccoon: Opossum",
+            "Jacobs and Williams 2010"
+          ]
+        ],
+        [
+          "m",
+          "Armadillos and sloths",
+          "The nine-banded armadillo and the sloths have broken copies of genes that every cone needs, so they see with rods alone.",
+          [
+            "docs/views/sheets/mammal.md#2 raccoon: Armadillos and sloths",
+            "Emerling and Springer 2015"
+          ]
+        ],
+        [
+          "m",
+          "Anteaters and pangolins",
+          "Anteaters have lost the blue-sensitive cone. The Chinese pangolin has lost it too and kept its other cone.",
+          [
+            "docs/views/sheets/mammal.md#2 raccoon: Anteaters and pangolins",
+            "Emerling and Springer 2015"
+          ]
+        ],
+        [
+          "g",
+          "Dim light",
+          "Raccoons, like other carnivores, have a reflecting layer behind the retina, and opossums, like many marsupials, have one within it. We brighten the shadows to suggest it.",
+          [
+            "docs/views/sheets/mammal.md#2 raccoon: Dim light",
+            "param:gain"
+          ]
+        ],
+        [
+          "i",
+          "Sharpness, field and pupil",
+          "No measurement was found for raccoons or opossums. These are our guesses.",
+          [
+            "docs/views/sheets/mammal.md#2 raccoon: Sharpness, field and pupil",
+            "param:cpd",
+            "param:pupil"
+          ]
+        ],
+        [
+          "x",
+          "Drawn as",
+          "The picture is grey, weighted toward yellow-green, where the opossum’s single cone is most sensitive. The weights are this app’s own.",
+          [
+            "docs/views/sheets/mammal.md#2 raccoon: Drawn as",
+            "Jacobs and Williams 2010",
+            "param:M"
+          ]
+        ]
+      ]
+    },
+    "mole": {
+      "note": "Mole (Talpidae): eyes under the skin; light from dark and nothing more. The same picture as the other entry.",
+      "applies_to": {
+        "family": [
+          "Talpidae"
+        ]
+      },
+      "cue": "",
+      "params": {
+        "field": {
+          "value": 1,
+          "grade": "g",
+          "invented": true,
+          "src": [
+            "docs/views/sheets/mammal.md#2 mole Light and dark: Slonaker; Animal Diversity Web"
+          ],
+          "range": [
+            0,
+            1
+          ],
+          "floor": null
+        },
+        "sat": {
+          "value": 0,
+          "grade": "g",
+          "invented": true,
+          "src": [
+            "docs/views/sheets/mammal.md#2 mole Light and dark"
+          ],
+          "range": [
+            0,
+            1
+          ],
+          "floor": null
+        },
+        "pupil": {
+          "value": "none",
+          "grade": "i",
+          "invented": true,
+          "src": [],
+          "floor": null
+        }
+      },
+      "rows": [
+        [
+          "m",
+          "Eyes",
+          "An eastern mole’s eyes lie under its skin, and its eyelids almost never part enough to let light in.",
+          [
+            "docs/views/sheets/mammal.md#2 mole: Eyes",
+            "param:pupil"
+          ]
+        ],
+        [
+          "m",
+          "Light and dark",
+          "Its sight goes no further than telling light from dark, so there is no picture here.",
+          [
+            "docs/views/sheets/mammal.md#2 mole: Light and dark",
+            "param:field",
+            "param:sat"
+          ]
+        ],
+        [
+          "x",
+          "Snout",
+          "A mole finds its way and its food with a touch-sensitive patch at the tip of its nose and a keen sense of smell. Neither reaches a camera.",
+          [
+            "docs/views/sheets/mammal.md#2 mole: Snout",
+            "Townsend 2023"
+          ]
+        ],
+        [
+          "i",
+          "The picture",
+          "A grey field of light and shade is the app's way of showing light without an image. The sources give no more than light and dark.",
+          [
+            "param:field",
+            "param:sat",
+            "param:pupil"
+          ]
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "need": "adaptM",
+      "why": "Rod-only eyes (armadillos, sloths) would wash out to white in bright day. A new field that compresses highlights; it waits on a source."
+    },
+    {
+      "need": "topoA",
+      "why": "The black bear has a cone-dense area centralis (Heyward 2021); kangaroos may have a band. A separate bear entry would draw it once kangaroo topography is sourced."
+    },
+    {
+      "need": "touch",
+      "why": "Mole: the touch screen could light a small patch under the finger in a dark field. It would be an invention."
+    }
+  ],
+  "rows": [
+    [
+      "m",
+      "Colour",
+      "A domestic pig has two kinds of colour sensor, most sensitive near 439 and 556 nanometres, and you have three. We show colours the way a person with only two kinds sees them.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Colour",
+        "Neitz and Jacobs 1989",
+        "param:M"
+      ]
+    ],
+    [
+      "m",
+      "Bears and otters",
+      "An American black bear has a blue-sensitive cone and a red-green one, with at least three red-green cones to each blue. Sea otters carry genes for the same pair.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Bears and otters",
+        "Heyward and colleagues 2021",
+        "Levenson and colleagues 2006"
+      ]
+    ],
+    [
+      "m",
+      "Kangaroos",
+      "The tammar wallaby, a small kangaroo, has only two kinds of cone. Some other Australian marsupials have a third.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Kangaroos",
+        "Natoli and Hemmi 2010"
+      ]
+    ],
+    [
+      "g",
+      "Platypus and echidnas",
+      "The platypus and echidnas carry genes for two kinds of cone pigment, as most mammals do.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Platypus and echidnas",
+        "Jacobs 2013"
+      ]
+    ],
+    [
+      "m",
+      "Sharpness",
+      "A tammar wallaby resolves about 4.8 cycles per degree, a twelfth of your 60. A western grey kangaroo’s retina could carry about 11. We blur the picture to about 5.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Sharpness",
+        "Hemmi and Mark 1998",
+        "Veilleux and Kirk 2014",
+        "param:cpd"
+      ]
+    ],
+    [
+      "m",
+      "Elephants",
+      "Asian elephants make out a gap of 8 to 11 minutes of arc near the tip of the trunk, about a tenth of your sharpness. One African elephant managed only 48 minutes.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Elephants",
+        "Shyan-Norwalt and colleagues 2010"
+      ]
+    ],
+    [
+      "g",
+      "Dim light",
+      "Bears, otters and other carnivores have a reflecting layer behind the retina that gives light a second pass. Pigs and red kangaroos have none, so the shadows are lifted only a little.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Dim light",
+        "param:gain"
+      ]
+    ],
+    [
+      "i",
+      "Field of view and pupil",
+      "No measurement was found for these. We leave the field as your camera gives it and draw a round pupil.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Field of view and pupil",
+        "param:pupil"
+      ]
+    ],
+    [
+      "x",
+      "Electric sense",
+      "A platypus senses weak electric fields through its bill, down to about 50 millionths of a volt across a centimetre, and can find and avoid objects by them. No phone senses this, so it is left out.",
+      [
+        "docs/views/sheets/mammal.md#2 mammal: Electric sense",
+        "Scheich and colleagues 1986"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true
+}

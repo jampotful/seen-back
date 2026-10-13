@@ -1,0 +1,182 @@
+{
+  "key": "tick",
+  "chip": "Tick",
+  "who": "a tick",
+  "falls_back_to": "other",
+  "applies_to": {
+    "order": [
+      "Ixodida"
+    ]
+  },
+  "cue": "Hold the phone at the height of the grass tips and tilt it up. Only large shadows remain.",
+  "modules": [],
+  "params": {
+    "cpd": {
+      "value": 0.1,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/tick.md#3 cpd: Kaltenrieder 1990 (Hyalomma dromedarii, 4.8 degree dark disc)"
+      ],
+      "range": [
+        0.03,
+        0.5
+      ],
+      "floor": null,
+      "note": "a detection threshold read as half a cycle; the conversion is the sheet's own step, and the threshold is lower in the camel tick than in the bont tick, so it may flatter the commoner ticks"
+    },
+    "pupil": {
+      "value": "none",
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "floor": null,
+      "note": "no source describes a pupil in tick eyes; gives the same output as o"
+    },
+    "M": {
+      "value": "tick_blue_green",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/tick.md#2 Colour: Kaltenrieder, Labhart and Hess 1989 (single peak near 480 nm, Amblyomma variegatum)"
+      ],
+      "floor": null,
+      "note": "grey from the camera's blue and green; the weights are the app's"
+    }
+  },
+  "matrices": {
+    "tick_blue_green": {
+      "rows": [
+        [
+          0.05,
+          0.45,
+          0.5
+        ],
+        [
+          0.05,
+          0.45,
+          0.5
+        ],
+        [
+          0.05,
+          0.45,
+          0.5
+        ]
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "docs/views/sheets/tick.md#3 M"
+      ],
+      "note": "weights invented"
+    }
+  },
+  "notes": [
+    {
+      "need": "mask",
+      "why": "Two eyes aimed up and out (39 degrees out and 33 up in the bont tick). The aperture mask could take a two-window shape; the outer parts would be invented."
+    },
+    {
+      "need": "heat, breath",
+      "why": "Haller's organ reads radiant heat and carbon dioxide (Carr and Salgado 2019; Steullet and Guerin 1992). No phone input a web page can read stands in. The sheet recommends against painting warmth on skin colours; a body-detector spot is the closer stand-in and would be graded i."
+    },
+    {
+      "need": "persist",
+      "why": "Left unset on purpose: the plant's averaging would erase the passing shadow that ticks respond to."
+    }
+  ],
+  "rows": [
+    [
+      "m",
+      "Eyes",
+      "The Lone Star Tick and the dog ticks have one pair of eyes. The black-legged ticks have none.",
+      [
+        "docs/views/sheets/tick.md#2: Eyes",
+        "Bertone and colleagues 2023"
+      ]
+    ],
+    [
+      "g",
+      "Where they look",
+      "In the tropical bont tick, of the Lone Star Tick’s genus, each eye has one lens and takes in a patch 43 degrees wide and 49 high, aimed 39 degrees out from straight ahead and 33 degrees up. The camera looks straight ahead, as you do.",
+      [
+        "docs/views/sheets/tick.md#2: Where they look",
+        "Labhart and Hess 1989"
+      ]
+    ],
+    [
+      "g",
+      "Shapes",
+      "A camel tick walks toward a dark disc on a pale background once the disc spans about 5 degrees, and toward the outline of a camel as small as a real one 18 metres away. The picture is blurred to match, and that reading is this app’s own.",
+      [
+        "docs/views/sheets/tick.md#2: Shapes",
+        "Kaltenrieder 1990",
+        "param:cpd"
+      ]
+    ],
+    [
+      "g",
+      "Colour",
+      "The tropical bont tick is most sensitive to blue light near 480 nanometres, with a single peak. The picture is drawn in grey from the camera’s blue and green, and that rendering is this app’s invention.",
+      [
+        "docs/views/sheets/tick.md#2: Colour",
+        "Labhart and Hess 1989",
+        "param:M"
+      ]
+    ],
+    [
+      "g",
+      "Without eyes",
+      "The sheep tick, in the same genus as the black-legged ticks, has two rows of about twenty light-sensitive cells along its upper sides. In a laboratory, its nymphs did almost all their walking in the dark.",
+      [
+        "docs/views/sheets/tick.md#2: Without eyes",
+        "Perret and colleagues 2003"
+      ]
+    ],
+    [
+      "m",
+      "Questing",
+      "A questing tick grips a grass tip with its back two pairs of legs and holds the front pair out, ready to climb onto a passing host. Those front legs carry Haller’s organ, which smells and senses heat.",
+      [
+        "docs/views/sheets/tick.md#2: Questing",
+        "Carr and colleagues 2017",
+        "Carr and Salgado 2019"
+      ]
+    ],
+    [
+      "m",
+      "Heat",
+      "Lone Star Ticks steer by radiant heat through a covered pit on each front leg, and at least seven in ten adult females detected a square 10 centimetres across, heated to 40 degrees Celsius, from a metre away. An ordinary phone cannot sense that heat, so it is left out.",
+      [
+        "docs/views/sheets/tick.md#2: Heat",
+        "Carr and Salgado 2019"
+      ]
+    ],
+    [
+      "g",
+      "Breath",
+      "In the tropical bont tick, one receptor cell in that same organ responds most to changes in carbon dioxide of a hundredth of a percent around the level in open air. No phone records carbon dioxide, so it is left out.",
+      [
+        "docs/views/sheets/tick.md#2: Breath",
+        "Steullet and Guerin 1992"
+      ]
+    ],
+    [
+      "x",
+      "Smell, damp and footsteps",
+      "Ticks also find hosts by body odour, moisture and vibration, and none of these reaches a camera.",
+      [
+        "docs/views/sheets/tick.md#2: Smell, damp and footsteps"
+      ]
+    ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+  },
+  "draft": true
+}
