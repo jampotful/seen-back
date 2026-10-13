@@ -182,8 +182,11 @@ Log 243, 244, 245, 246, 247 (Bleckmann and Barth 1984, *Dolomedes triton*: best 
 `['m', 'Huntsman spiders', 'Six of a Pantropical Huntsman Spider’s eight eyes together cover nearly all the space around it, and one pair of them looks up at the sky. In tests it ran toward dark bars only when they were at least 4 to 8 degrees wide.']`
 Log 224, 253, 254, 226 (Lorenz 2012).
 
-`['x', 'Sky compass', 'Wolf spiders read the pattern of polarized light in the sky with their two front middle eyes, and use it to find the way home. This view leaves that sense out.']`
-Log 154 (Dacke and colleagues 2001), 156 (*Lycosa tarantula*), 215.
+`['m', 'Courtship', 'Male wolf spiders court with waving forelegs and with drumming that travels through the leaf litter. In several species the drumming carries the message, and pairs mate nearly as often in the dark as in the light.']`
+Log 298 (Hebets 2008, *Schizocosa stridulans*), 299 (Taylor and colleagues 2006, *S. ocreata*: 62% in the dark, 73% in the light), 304 (*Rabidosa rabida*, the Rabid Wolf Spider), 303 (*S. floridana*), 302 (the female's slit sense organs answer the male's taps and drumming), 51.
+
+`['x', 'Sky compass', 'Wolf spiders read the pattern of polarized light in the sky with their two front middle eyes and use it to find the way home, and in darkness they lose their bearing. This view leaves the sky’s pattern out.']`
+Log 154 (Dacke and colleagues 2001), 156 (*Lycosa tarantula*), 297 (in darkness 71.4% turned at random), 215. Wolf spiders also learn landmarks by sight (Log 300, *Tigrosa helluo*).
 
 #### The picture
 
@@ -422,8 +425,8 @@ tarantula: { chip: 'Tarantula or ground spider', who: 'a tarantula or ground spi
 | Hackled orb weavers, *Uloborus diversus* and *U. glomosus* | 15 | `spider` | 170, 194, 195 |
 | Six-spotted Fishing Spider, *Dolomedes triton* | 76 | `hunter` | 164, 243 to 248 |
 | Pantropical Huntsman Spider, *Heteropoda venatoria* | 77 | `hunter` | 224 to 227, 253 to 255 |
-| *Cupiennius salei*, the model for Alachua's Florida Wandering Spider (*Ctenus captiosus*, 29) | 29 | `hunter` | 15 to 26, 30 to 32, 36 to 38, 121 to 126, 137 to 144, 176, 177, 205, 206, 228, 257 |
-| Wolf spiders: *Lycosa leuckartii*, *L. tarantula*, *Schizocosa* species | 83 (Lycosidae) | `hunter` | 145 to 150, 156, 157, 281 to 285, 51, 52, 199 to 201, 204, 208 |
+| *Cupiennius salei*, the model for Alachua's Florida Wandering Spider (*Ctenus captiosus*, 29) | 29 | `hunter` | 15 to 26, 30 to 32, 36 to 38, 121 to 126, 137 to 144, 176, 177, 205, 206, 228, 257, 295, 296 |
+| Wolf spiders: *Lycosa leuckartii*, *L. tarantula*, *Schizocosa* species, *Tigrosa helluo*, *Rabidosa rabida*, *Pardosa milvina* | 83 (Lycosidae) | `hunter` | 145 to 150, 156, 157, 281 to 285, 297, 51, 52, 199 to 201, 204, 208, 298 to 304 |
 | Labyrinth spider, *Agelena labyrinthica* (funnel weaver) | 0 | `spider` | 286 |
 | Namib huntsman, *Leucorchestris arenicola* | 0 | `hunter` | 158 to 161 |
 | Goldenrod Crab Spider, *Misumena vatia* | 0 | `crabspider` | 54 to 63, 275 to 280 |
@@ -501,6 +504,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Blest AD, Day WA 1978. The rhabdomere organization of some nocturnal pisaurid spiders in light and darkness. Philosophical Transactions of the Royal Society of London B. https://doi.org/10.1098/rstb.1978.0016. `opened` (abstract). Log 163.
 - Campione E, Schmid A 2014. Brightness discrimination in the day- and night-adapted hunting spider Cupiennius salei. Journal of Experimental Biology. https://doi.org/10.1242/jeb.103366. `opened` (abstract). Log 205.
 - Choi N, Miller P, Hebets EA 2024. Vibroscape analysis reveals acoustic niche overlap and plastic alteration of vibratory courtship signals in ground-dwelling wolf spiders. Communications Biology. https://doi.org/10.1038/s42003-023-05700-6. `opened` (abstract). Log 208.
+- Choi N, Wilgers DJ, Hebets EA 2025. Computational analyses of dynamic visual displays reveal diet-dependent male signalling in Rabidosa rabida wolf spiders. Animal Behaviour. https://doi.org/10.1016/j.anbehav.2025.123226. `opened` (abstract). Log 304.
 - Chong KL, Grahn A, Perl CD, Sumner-Rooney L 2024. Allometry and ecology shape eye size evolution in spiders. Current Biology 34: 3178-3188. https://doi.org/10.1016/j.cub.2024.06.020. `opened` (abstract). Log 188.
 - Chuang A 2011. Size and motherhood of the spider Pholcus ancoralis (Araneae: Pholcidae) affects whirling and other defensive behaviors. eScholarship (California Digital Library), student research paper. https://doi.org/10.60950/bgtl.2011.4.chuang.a. `opened` (abstract). Log 242.
 - Clemente CJ, McMaster KA, Fox L, Meldrum L, Main BY, Stewart T 2005. Visual acuity of the sheet-web building spider Badumna insignis (Araneae, Desidae). Journal of Arachnology 33(3): 726-734. https://doi.org/10.1636/S04-35.1. `opened` (abstract). Log 169.
@@ -525,6 +529,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Guadanucci JPL 2012. Trichobothrial morphology of Theraphosidae and Barychelidae spiders (Araneae, Mygalomorphae). Zootaxa 3439. https://doi.org/10.11646/zootaxa.3439.1.1. `opened` (abstract). Log 184.
 - Han SI, Blackledge TA 2024. Directional web strikes are performed by ray spiders in response to airborne prey vibrations. Journal of Experimental Biology. https://doi.org/10.1242/jeb.249237. `opened` (abstract). Log 175.
 - Hebets EA 2005. Attention-altering signal interactions in the multimodal courtship display of the wolf spider Schizocosa uetzi. Behavioral Ecology 16(1): 75-82. https://doi.org/10.1093/beheco/arh133. `opened` (owner's library copy). Log 51 to 53.
+- Hebets EA 2008. Seismic signal dominance in the multimodal courtship display of the wolf spider Schizocosa stridulans Stratton 1991. Behavioral Ecology. https://doi.org/10.1093/beheco/arn080. `opened` (abstract). Log 298.
 - Heiling AM, Cheng K, Chittka L, Göth A, Herberstein ME 2005. The role of UV in crab spider signals: effects on perception by prey and predators. Journal of Experimental Biology. https://doi.org/10.1242/jeb.01861. `opened` (abstract). Log 186.
 - Henton WW, Crawford FT 1966. The discrimination of polarized light by the tarantula. Zeitschrift für vergleichende Physiologie 52: 26-32. https://doi.org/10.1007/BF00343655. `opened` (abstract). Log 287.
 - Hu Z, Xu X, Chen Z, Li H, Wang X, Wu L, Liu F, Chen J, Li D 2014. The spectral transmission of non-salticid spider corneas. Journal of Experimental Biology. https://doi.org/10.1242/jeb.099069. `opened` (abstract). Log 189 to 190.
@@ -534,6 +539,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Kaps F, Schmid A 1996. Mechanism and possible behavioural relevance of retinal movements in the ctenid spider Cupiennius salei. Journal of Experimental Biology 199: 2451-2458. https://doi.org/10.1242/jeb.199.11.2451. `opened` (abstract). Log 144.
 - Klopsch C, Kuhlmann HC, Barth FG 2012. Airflow elicits a spider's jump towards airborne prey. I. Airflow around a flying blowfly. Journal of the Royal Society Interface. https://doi.org/10.1098/rsif.2012.0186. `opened` (abstract). Log 177.
 - Klärner D, Barth FG 1982. Vibratory signals and prey capture in orb-weaving spiders (Zygiella x-notata, Nephila clavipes; Araneidae). Journal of Comparative Physiology 148: 445-455. https://doi.org/10.1007/BF00619783. `opened` (abstract on the publisher's page, quoted in fragments). Log 249 to 252.
+- Knowlton ED, Gaffin DD 2019. Female wolf spider, Schizocosa avida, vibration receptor responses to male courtship. Southwestern Entomologist. https://doi.org/10.3958/059.044.0124. `opened` (abstract). Log 302.
 - Kovoor J, Muñoz-Cuevas A 1997. Comparative structure of the visual system of lynx spiders (Oxyopidae) and its relation to habitat and behaviour. Zoologischer Anzeiger 235(3-4): 133-145. https://acnpsearch.tweb-dev.unibo.it/singlejournalindex/7979075. `opened` (abstract, on an index page that gives it). Log 221 to 223, 266.
 - Krugner R, Espindola C, Justus N, Hatton RL 2023. Web Vibrations in Intraspecific Contests of Female Black Widow Spiders, Latrodectus hesperus. Environmental Entomology. https://doi.org/10.1093/ee/nvad003. `opened` (abstract). Log 237.
 - Kundu P, Choi N, Rundus AS, Santer RD, Hebets EA 2022. Uncovering 'hidden' signals: previously presumed visual signals likely generate air particle movement. Frontiers in Ecology and Evolution. https://doi.org/10.3389/fevo.2022.939133. `opened` (full text). Log 200.
@@ -558,6 +564,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Nørgaard T, Nilsson D-E, Henschel JR, Garm A, Wehner R 2008. Vision in the nocturnal wandering spider Leucorchestris arenicola (Araneae: Sparassidae). Journal of Experimental Biology 211: 816-823. https://doi.org/10.1242/jeb.010546. `opened` (abstract). Log 158 to 160.
 - Opell BD, Ware AD 1987. Changes in visual fields associated with web reduction in the spider family Uloboridae. Journal of Morphology 192: 87-100. https://doi.org/10.1002/jmor.1051920202. `opened` (abstract). Log 170.
 - Orlando E, Schmid A 2011. Colour blindness of the movement-detecting system of the spider Cupiennius salei. Journal of Experimental Biology. https://doi.org/10.1242/jeb.051672. `opened` (abstract). Log 141.
+- Ortega-Escobar J 2002. Evidence that the wolf-spider Lycosa tarentula (Araneae, Lycosidae) needs visual input for path integration. Journal of Arachnology 30. https://doi.org/10.1636/0161-8202(2002)030[0481:ETTWSL]2.0.CO;2. `opened` (abstract). Log 297.
 - Ortega-Escobar J, Ruiz MA 2014. Visual odometry in the wolf spider Lycosa tarantula (Araneae: Lycosidae). Journal of Experimental Biology. https://doi.org/10.1242/jeb.091868. `opened` (abstract). Log 156.
 - Ortega-Escobar J, Ruiz MA 2017. Role of the different eyes in the visual odometry in the wolf spider Lycosa tarantula (Araneae, Lycosidae). Journal of Experimental Biology 220: 259-265. https://doi.org/10.1242/jeb.145763. `opened` (abstract). Log 157.
 - den Otter CJ 1973. Setiform sensilla and prey detection in the bird-spider Sericopelma rubronitens Ausserer (Araneae, Theraphosidae). Netherlands Journal of Zoology. https://doi.org/10.1163/002829674X00048. `opened` (abstract). Log 178 to 179.
@@ -565,20 +572,25 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Quirici V, Costa FG 2005. Seismic communication during courtship in two burrowing tarantula spiders: an experimental study on Eupalaestrus weijenberghi and Acanthoscurria suina. Journal of Arachnology. https://doi.org/10.1636/S03-22. `opened` (abstract). Log 180.
 - Quirici V, Costa FG 2007. Seismic sexual signal design of two sympatric burrowing tarantula spiders from meadows of Uruguay: Eupalaestrus weijenberghi and Acanthoscurria suina (Araneae, Theraphosidae). Journal of Arachnology. https://doi.org/10.1636/ST06-08.1. `opened` (abstract). Log 181.
 - Reyes-Alcubilla C, Ruiz MA, Ortega-Escobar J 2009. Homing in the wolf spider Lycosa tarantula (Araneae, Lycosidae): the role of active locomotion and visual landmarks. Naturwissenschaften 96(4): 485-494. https://doi.org/10.1007/s00114-008-0498-1. `opened` (abstract). Log 281 to 285.
+- Rosenthal MF, Hebets EA, McGinley RH, Raiza C, Starrett J, Yan L, Elias DO 2020. Exploring a novel substrate-borne vibratory signal in the wolf spider Schizocosa floridana. Ethology. https://doi.org/10.1111/eth.13114. `opened` (abstract). Log 303.
 - Ruhland F, Caudal J-P, Blois-Heulin C, Trabalon M 2016. Male tarantula spiders' reactions to light and odours reveal their motor asymmetry. Journal of Zoology. https://doi.org/10.1111/jzo.12388. `opened` (abstract). Log 182, 291 to 292.
 - Schedl A 2017. No evidence for the perception of polarised light in the ctenid spider Cupiennius salei. Thesis, University of Vienna. https://doi.org/10.25365/thesis.49142. `opened` (abstract). Log 257.
 - Schmid A 1998. Different functions of different eye types in the spider Cupiennius salei. Journal of Experimental Biology 201: 221-225. https://doi.org/10.1242/jeb.201.2.221. `opened` (abstract). Log 143.
 - Seo J-H, Kim K-J, Kim H, Moon M-J 2020. Lyriform vibration receptors in the web-building spider, Nephila clavata (Araneidae: Araneae: Arachnida). Entomological Research. https://doi.org/10.1111/1748-5967.12470. `opened` (abstract). Log 174.
+- Sitvarin MI, Gordon SD, Uetz GW, Rypstra AL 2015. The wolf spider Pardosa milvina detects predator threat level using only vibratory cues. Behaviour. https://doi.org/10.1163/1568539X-00003332. `opened` (abstract). Log 301.
 - Stafstrom JA, Hebets EA 2016. Nocturnal foraging enhanced by enlarged secondary eyes in a net-casting spider. Biology Letters. https://doi.org/10.1098/rsbl.2016.0152. `opened` (abstract). Log 259 to 260.
 - Stafstrom JA, Michalik P, Hebets EA 2017. Sensory system plasticity in a visually specialized, nocturnal spider. Scientific Reports 7: 46627. https://doi.org/10.1038/srep46627. `opened` (full text). Log 133 to 134.
 - Suter RB 2003. Trichobothrial mediation of an aquatic escape response: directional jumps by the fishing spider, Dolomedes triton, foil frog attacks. Journal of Insect Science 3: 19. https://doi.org/10.1093/jis/3.1.19. `opened` (abstract). Log 164.
 - Sánchez-Solano K, Robledo-Ospina L, Rao D 2026. Insect perception and flight response to a colourful sit and wait predator. Research Square (preprint). https://doi.org/10.21203/rs.3.rs-9715971/v1. `opened` (preprint page, quoted in fragments). Log 269 to 270.
 - Talukder MB, Müller CHG, Zhang D, Schulz S, Löfstedt C, Wang H, Uhl G 2025. Olfaction with legs: spiders use wall-pore sensilla for pheromone detection. Proceedings of the National Academy of Sciences. https://doi.org/10.1073/pnas.2415468121. `opened` (abstract). Log 203.
 - Tapia F, Olivares J, Schmachtenberg O 2019. The visual spectral sensitivity of the Chilean recluse spider Loxosceles laeta. Journal of Experimental Biology. https://doi.org/10.1242/jeb.217133. `opened` (abstract). Log 191.
+- Taylor PW, Roberts JA, Uetz GW 2006. Mating in the absence of visual cues by Schizocosa ocreata (Hentz 1844) wolf spiders (Araneae, Lycosidae). Journal of Arachnology. https://doi.org/10.1636/S04-98.1. `opened` (abstract). Log 299.
 - Tiedemann KB, Ventura DF, Ades C 1986. Spectral sensitivities of the eyes of the orb web spider Argiope argentata (Fabricius). Journal of Arachnology 14(1): 71-78. https://biostor.org/reference/214396. `opened` (full text, the BioStor PDF hosted on archive.org). Log 271 to 274.
 - Tong C, Fan Z, Wang L-Y, Zhang Z-S 2026. Genomic signature of repeated transitions to diurnality in spiders. Molecular Biology and Evolution. https://doi.org/10.1093/molbev/msag159. `opened` (abstract). Log 192.
 - Vibert S, Scott C, Gries G 2014. A meal or a male: the 'whispers' of black widow males do not trigger a predatory response in females. Frontiers in Zoology 11: 4. https://doi.org/10.1186/1742-9994-11-4. `opened` (full text). Log 231 to 236.
 - Walcott C 1963. The effect of the web on vibration sensitivity in the spider, Achaearanea tepidariorum (Koch). Journal of Experimental Biology 40: 595-611. https://doi.org/10.1242/jeb.40.4.595. `opened` (abstract). Log 171.
+- Walla PJ, Barth FG, Eguchi E 1996. Spectral sensitivity of single photoreceptor cells in the eyes of the ctenid spider Cupiennius salei Keys. Zoological Science 13. https://doi.org/10.2108/zsj.13.199. `opened` (abstract). Log 295 to 296.
+- Weidman R, Persons K, Persons MH 2024. The wolf spider Tigrosa helluo uses visual associative and beacon landmarks during water maze navigation tasks. Ethology. https://doi.org/10.1111/eth.13518. `opened` (abstract). Log 300.
 - Williams DS 1979. The physiological optics of a nocturnal semi-aquatic spider, Dolomedes aquaticus (Pisauridae). Zeitschrift für Naturforschung C. https://doi.org/10.1515/znc-1979-5-625. `opened` (abstract). Log 162.
 - Willmott NJ, Black JR, McNamara KB, Wong BBM, Jones TM 2024. The effects of artificial light at night on spider brains. Biology Letters. https://doi.org/10.1098/rsbl.2024.0202. `opened` (abstract). Log 202.
 - Wilson RJ, Mulrey TEP, Baldrick D, Uetz GW 2024. The effects of differential eye occlusion on prey and mate recognition in the brush-legged wolf spider Schizocosa ocreata (Hentz, 1844). Journal of Arachnology. https://doi.org/10.1636/JOA-S-22-059. `opened` (abstract). Log 201.
