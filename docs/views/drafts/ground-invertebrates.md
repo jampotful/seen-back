@@ -57,4 +57,211 @@ The four GROUPS labels cut across very different ways of meeting the world. Foll
 
 **The set of views I commit to** is seven: `snail`, `millipede`, `centipede`, `worm`, `scorpion`, `harvestman` and `tick`. The base app's group head knows only four labels, so the three new ones (`millipede`, `centipede`, `harvestman`) need the owner's word and a refit of the head on the existing world photos (`docs/COVERAGE.md`, second wave). Until then the full database can route by order. In the word table, "millipede" and "centipede" now go to `worm` and "harvestman" to `scorpion`.
 
-**[unfinished]**
+## 2. The views
+
+Blur radii below use the rule in `src/cam.b.js` (radius = 0.6 × long side ÷ `VIEW_DEG` ÷ `cpd`) with `VIEW_DEG` 24 on a phone and 34 elsewhere. Conversions from degrees to cycles per degree are mine and are given beside each value. Fields marked **invented** are the app's own choice. Several effects use engine features that track C is building now (zones, the motion-salience map and the phone's motion sensors and microphone; `docs/tracks/engine.md`).
+
+### 2.1 `snail`: snails, slugs, sea slugs and chitons
+
+**Rows**
+
+```
+['m', 'Eyes', 'A land snail or slug has a small eye with a lens at the tip of each upper tentacle. The lens cannot bring an image into focus on the shallow retina behind it, so the eye gathers the brightness of a wide patch of the world.'],
+```
+Log: L183 (Matsuo, Kawakami and Matsuo 2024, eye_type), L133 (Zieger and Meyer-Rochow 2008, eye_type), L125 (Zieger and colleagues 2008, eye_type).
+
+```
+['m', 'Sharpness', 'In behaviour tests the red slug told apart shapes about 52 degrees across, the width of a metre-wide shape seen from a metre away. This view is blurred until only the broad lie of light and dark remains.'],
+```
+Log: L128 (Irwin and colleagues 2022, citing Zieger and colleagues, acuity_cpd), L134 (Zieger and Meyer-Rochow 2008, acuity_cpd), L126 (Zieger and colleagues 2008, behaviour_vision). A shape 1 m wide at 1 m spans 2 × atan(0.5) = 53 degrees.
+
+```
+['m', 'Colour', 'In the snail Helix lucorum, of the same genus as the Roman snail, the eye is most sensitive to blue-green light near 496 nanometres, and both of its kinds of light-sensing cell share that peak. A snail therefore cannot tell colours apart, and this view is drawn in grey weighted toward blue-green.'],
+```
+Log: L138 (Chernorizov and colleagues 1993, lambda_max_nm), L139 (Chernorizov and colleagues 2007, receptor_classes).
+
+```
+['m', 'Day and night', 'A slug's eye changes its sensitivity with the light. In the dark it responds best near 480 nanometres, and in daylight near 420, a deeper blue. This view shifts its grey toward blue as the scene grows brighter.'],
+```
+Log: L141, L142, L143 (Matsuo and colleagues 2023, lambda_max_nm dark and light, receptor_classes).
+
+```
+['m', 'Brightness', 'The signal from a snail's eye grows with the logarithm of the light, so each tenfold rise in brightness adds the same small step. This view compresses bright areas in the same way.'],
+```
+Log: L140 (Shekhter, Zimachev and Arakelov 1993, absolute_sensitivity).
+
+```
+['m', 'Finding the dark', 'Slugs use their eyes mainly to find dark places to hide. The red slug and the field slug turn away from light, and they need no sharper picture for that.'],
+```
+Log: L126, L125, L127 (Zieger and colleagues 2008, behaviour_vision, eye_type, polarization).
+
+```
+['m', 'Light without eyes', 'A slug whose eye stalks have been removed still finds the dark end of a chamber, more slowly, because light-sensitive cells in its brain respond to blue light. Some of these brain cells are wired to the eyes.'],
+```
+Log: L144 (Knight 2019, summarising Nishiyama and colleagues 2019, sense_light_nonvisual), L184 (Matsuo, Kawakami and Matsuo 2024, sense_light_nonvisual).
+
+```
+['m', 'Sea slugs', 'A nudibranch's small eyes lie deep inside its body, on top of the brain. They tell light from dark, and the animal smells the water with the pair of horns on its head, called rhinophores.'],
+```
+Log: L181, L182 (Rudman 1999, eye_type, sense_chemical).
+
+```
+['g', 'Water snails', 'Some snails that live in water see more. A conch makes out details about 1 degree across, and a periwinkle's eye samples the world about every 4.5 degrees. Pond snails can focus an image under water in a deep pit of the retina. This view follows the land snails and sea slugs, which make up most of the records.'],
+```
+Log: L130, L131 (Irwin and colleagues 2022, Conomurex), L1 (Land and Nilsson 2012, Littorina), L137 (Gál and colleagues 2004, Lymnaea), L136 (Zieger and Meyer-Rochow 2008, Lymnaeidae).
+
+```
+['m', 'Chitons', 'A few kinds of chiton carry hundreds of tiny eyes in their shell plates, with lenses of the mineral aragonite, and resolve shapes about 9 to 12 degrees across. All chitons also sense light through fine pores in the shell.'],
+```
+Log: L146 (Speiser, Eernisse and Johnsen 2011, acuity_cpd), L147 (Liu, Sigwart and Sun 2023, eyes_count), L145 (Kingston, Chappell and Speiser 2018, behaviour_vision).
+
+```
+['x', 'Smell', 'A leopard slug finds its way home from almost a metre away by smell, walking upwind, and needs neither its slime trail nor its eyes to do it. No phone can sense smell, so it is left out.'],
+```
+Log: L148 (Gelperin 1974, sense_chemical).
+
+**The picture.** A grey field of one or two broad soft patches, brighter where the sky or a lamp is and darker toward cover, weighted to blue-green, with bright light compressed. As the scene brightens the grey slides toward blue. Still things stay, since chitons orient to still shapes (L145) and slugs steer by where the dark lies (L126).
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who` | 'Snail', 'a snail or slug' | `who` is the GROUPS label; `chip` **invented** |
+| `cpd` | .02 | L128 and L134. The red slug's 52 degrees gives 1 / 52 = 0.019 read as a full cycle and 1 / (2 × 52) = 0.0096 read as half a cycle; the review says land snail eyes average light over large angles. Choosing .02 within that range is **invented**. Blur radius 1.25 of the long side at `VIEW_DEG` 24 and 0.88 at 34. `snail.md` used .035 from a garden snail figure of 14.5 degrees whose cited source is a study of *Littorina irrorata* (its title is in the collection index: Hamilton and Winter 1982, "Behavioural responses to visual stimuli by the snail Littorina irrorata"), so .035 is withdrawn. |
+| `M` | [.05, .45, .5] in every row, dark-adapted | L138, L141. One pigment near 480 to 496 nm sits between the camera's blue and green, so blue and green are weighted about equally and red little. The weights are **invented**. |
+| `M` in bright scenes (new, see below) | [.05, .25, .7] | L142. The light-adapted peak near 420 nm moves the weight to blue; weights **invented**. |
+| `sat` | 0 by construction (equal rows) | L139 |
+| `gain` | 1.3 | L135 says land snails see well in dim and bright light. The amount is **invented**. |
+| `pupil` | 'none' | `snail.md` cited a round pupil (Shepeleva 2023); I opened only that paper's abstract, which does not state the shape. With `dof` unset the picture is the same either way. |
+| `field`, `gate`, `persist`, `rate`, `fov` | unset | No flicker or field measurement was found; still things are kept (L145). |
+| `cue` | 'Hold the phone low and turn it slowly. Only the broad lie of light and dark remains, and bright light counts for less than you expect.' | **invented** wording |
+
+**New effects**
+
+| Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
+|---|---|---|---|---|
+| Brightness on a log scale (`logL: 1`, new field) | Bright windows and sky flatten toward the mid-greys while shadows keep their steps. | none, the camera picture | easy, one tone curve in the colour pass | The flattening follows L140. Draw it as a smooth curve, never as clipping. |
+| Day and night colour (`adaptM`, new field) | Over two or three seconds the grey cools toward blue as the scene brightens and warms toward blue-green as it darkens. | mean brightness from the frame ring | easy | L141 and L142. A slow drift reads as an eye adapting, which is what it is. |
+| Light in the brain | When the person covers the lens, a faint even glow follows the room's light. | the front camera's mean brightness, where a browser lets both cameras run; otherwise none | hard, and not available on many phones | L144. I recommend it only if both cameras can run together without cost. |
+| Smell | none | none | impossible | It stays a row. |
+
+### 2.2 `millipede`: millipedes (Diplopoda, with Pauropoda)
+
+**Rows**
+
+```
+['m', 'Eyes', 'Most millipedes have a small cluster of large-faceted eyes on each side of the head. The flat-backed millipedes, among them the greenhouse millipede, which is photographed more than any other, have no eyes at all.'],
+```
+Log: L79 (Kirwan and Nilsson 2019, eye_type), L89 (Fox 2006, eyes_count), L92 (Marek and Bond 2009, eyes_count), L93 (Moritz and colleagues 2021, eyes_count).
+
+```
+['m', 'Sharpness', 'A snake millipede can make out a dark band about 20 degrees wide, enough to find a dark crevice and little more. A person sees detail about three thousand times finer. This view is blurred to match.'],
+```
+Log: L77, L78, L80 (Kirwan and Nilsson 2019, acuity_cpd, acceptance_deg, behaviour_vision). A 56 degree period is 1 / 56 = 0.018 cycles per degree, and 60 / 0.018 = 3,333.
+
+```
+['m', 'Light through the skin', 'The greenhouse millipede senses light through its skin. Light makes it walk more without steering it anywhere, so it keeps moving until it happens upon a dark place.'],
+```
+Log: L84 (Cloudsley-Thompson 1951, sense_light_nonvisual). The species was studied as *Paradesmus gracilis*.
+
+```
+['m', 'Touch', 'A walking millipede taps the ground constantly with the tips of its antennae, and touch shapes most of what it does.'],
+```
+Log: L90 (Fox 2006, sense_touch), L86 (Cloudsley-Thompson 1951, sense_touch).
+
+```
+['m', 'Taste and damp', 'A millipede tastes food by touching it, and in tests it showed no response to smells. Drying out keeps it walking, and once it settles on damp ground it is slow to move again.'],
+```
+Log: L87, L88 (Cloudsley-Thompson 1951, sense_chemical), L91 (Fox 2006, sense_chemical, graded g).
+
+```
+['m', 'Temperature', 'The greenhouse millipede prefers ground near 15 degrees Celsius, and a sudden drop in temperature sets it moving.'],
+```
+Log: L85 (Cloudsley-Thompson 1951, sense_thermal).
+
+```
+['g', 'Night', 'Many millipedes come out only at night. The luminous millipede Paraspirobolus lucifugus avoids light and keeps a daily clock.'],
+```
+Log: L83 (Meyer-Rochow and Yamahama 2022, diel).
+
+```
+['x', 'Shaking ground', 'A millipede curls into a tight spiral when it is disturbed, and very slight vibrations set it walking. The camera records none of this.'],
+```
+Log: L86 (Cloudsley-Thompson 1951, sense_touch; the summary links the spiral reflex to vibration).
+
+**The picture.** Almost no picture: the whole frame is one soft gradient, darker on the side where the dark lies, in grey. It is the plant's `field: 1` with one difference, which side is darker, because eyed millipedes steer to dark targets (L80).
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who` | 'Millipede', 'a millipede' | **invented** |
+| `cpd` | .018 | L77: 1 / 56. Blur radius 1.39 of the long side at `VIEW_DEG` 24. |
+| `sat` | 0 | No millipede spectral measurement was found; grey is **invented**. |
+| `field` | unset; 1 for Polydesmida and Platydesmida when the full database names the species | L89, L92, L93 |
+| `gate`, `persist`, `rate`, `gain` | unset | No measurement found. |
+| `cue` | 'Point the phone at the ground under leaves and turn it slowly. Only the darker side of the scene remains.' | **invented** |
+
+**New effects**
+
+| Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
+|---|---|---|---|---|
+| Curling | A sharp shake of the phone makes the picture wind into a dark spiral, which unwinds after a few seconds. | device motion | medium (a swirl warp and a timer) | L86. The spiral is the animal's own defence, and a slow unwinding makes a fine moment. The timing is **invented**. |
+| Walking faster in light | In bright scenes the faint gradient drifts and searches across the frame; in the dark it settles. | mean brightness | easy | L84 (light changes speed, not direction). |
+| Antennae | Each touch of the screen leaves a soft print that fades, as if tapped out. | the touch screen | easy | L90. It shows the sense that leads; the print's look is **invented**. |
+
+### 2.3 `centipede`: centipedes (Chilopoda)
+
+**Rows**
+
+```
+['m', 'Eyes', 'The house centipede has a compound eye of about 150 to 200 facets on each side of its head. Most large tropical centipedes have four simple eyes on each side, and the soil centipedes have none.'],
+```
+Log: L97 (Müller and colleagues 2011, eyes_count), L98 (Hemenway 1900, eyes_count), L99 (Edgecombe and colleagues 2019, eyes_count), L101 (Roberts 2014, eyes_count), L100 (Edgecombe and Koch 2008, eyes_count).
+
+```
+['m', 'Colour', 'The house centipede's eye is most sensitive to blue light near 448 nanometres and has a second peak in ultraviolet near 350. It probably has two kinds of colour-sensing cell. This view weights its grey toward blue and leaves the ultraviolet out.'],
+```
+Log: L94, L95, L96 (Meyer-Rochow, Müller and Lindström 2006).
+
+```
+['i', 'Sharpness', 'No one has measured how much detail a centipede sees. This view assumes the house centipede sees nearly three times as sharply as a millipede, because its eye has about seven times as many facets.'],
+```
+Log: L77 (millipede sharpness), L81 (about 23 facets in a millipede eye), L97, L98. The arithmetic is under the picture.
+
+```
+['m', 'Dark shapes', 'Centipedes run from light and toward dark shapes. The house centipede, the brown centipede and a large Scolopendra all head for a dark screen at the side of an arena.'],
+```
+Log: L102, L103 (Lewis 1981, behaviour_vision).
+
+```
+['m', 'Sunlight as heat', 'A large Asian centipede feels sunlight as heat in its antennae, which warm by more than 8 degrees Celsius within ten seconds of strong sun. With its antennae covered in foil it was slower to flee the light.'],
+```
+Log: L104, L105 (Yao and colleagues 2023).
+
+```
+['m', 'Smell and touch', 'A centipede's long antennae carry several kinds of sensory hairs and feed large centres for smell and touch in its brain. The brown centipede releases a scent from pores at the bases of its legs that others of its kind respond to.'],
+```
+Log: L186 (Sombke and colleagues 2011, sense_chemical), L187 (Littlewood and Blower 1987, sense_chemical).
+
+```
+['g', 'Soil centipedes', 'Soil centipedes are blind. In one of them every known gene for sensing light is missing, while the house centipede keeps those genes.'],
+```
+Log: L101 (Roberts 2014, eyes_count).
+
+```
+['x', 'Not in the picture', 'A centipede finds prey and mates largely by smell and touch through its antennae, and a camera records neither.'],
+```
+Log: L186, L187.
+
+**The picture.** Coarse and grey-blue, with large dark shapes standing out, a little sharper than the millipede's. A slow warm glow builds at the top edge when the phone stays pointed into bright light (see effects).
+
+| Field | Value | Behind it |
+|---|---|---|
+| `chip`, `who` | 'Centipede', 'a centipede' | **invented** |
+| `cpd` | .05 | **invented** by inference: about 175 facets (L97, L98) against about 23 in one millipede eye (L81) is a ratio of about 7.6; if sharpness grows with the square root of the facet count over a similar field, the house centipede resolves about 2.8 times finer than a millipede's 56 degree period (L77), about 20 degrees, which is 0.05 cycles per degree. Blur radius 0.5 of the long side at `VIEW_DEG` 24. The assumption of a similar field is mine. |
+| `M` | [.05, .25, .7] in every row | L94: one blue peak near 448 nm; weights **invented** |
+| `gate`, `persist`, `rate`, `gain`, `fov` | unset | No measurement found. |
+| `cue` | 'Turn toward a dark gap. Large dark shapes stand out, and bright light slowly warms the top of the view.' | **invented** |
+
+**New effects**
+
+| Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
+|---|---|---|---|---|
+| Sunlit antennae | When the scene stays bright for several seconds, two warm filaments at the top of the frame glow orange and spread, and the picture darkens as if turning away. In shade they cool within seconds. | mean brightness over the last ten seconds | easy | L104 gives the time scale (more than 8 °C within 10 s, fast cooling). The filaments read as antennae and carry a real finding. Their colour and the threshold are **invented**. |
