@@ -1,0 +1,311 @@
+{
+ "key": "cephalopod",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "params.matrices is not a parameter the engine reads",
+  "checker: matrix 'neutral_grey' is not in matrices",
+  "params.cpd: value 6 is not a cited record's value and does not lie between two of them (R6, R7)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "cephalopod",
+   "chip": "Octopus, squid or cuttlefish",
+   "who": "an octopus, squid or cuttlefish",
+   "falls_back_to": "fish",
+   "applies_to": {
+    "class": [
+     "Cephalopoda"
+    ]
+   },
+   "cue": "Colour is mostly missing and the eye is sharp. Tap the screen to move the focus.",
+   "modules": [
+    "tilt"
+   ],
+   "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "params": {
+    "M": "neutral_grey",
+    "matrices": null,
+    "cpd": {
+     "value": 6,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R7",
+      "R6"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "set between the octopus and squid acuity records"
+    },
+    "fov": {
+     "value": 300,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R18",
+      "R19",
+      "R23",
+      "R25",
+      "R27"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "inside the 253 to 323 degree range of the records"
+    },
+    "fovea": {
+     "value": 1.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "by analogy with the streak of the records; the app's choice"
+    },
+    "topoA": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "floor": null,
+     "note": "the streak sits along the horizon; the strength is the app's"
+    },
+    "topoS": {
+     "value": 0.3,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "floor": null,
+     "note": "the app's choice"
+    },
+    "pupil": "h",
+    "gain": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no brightness claim is made"
+    },
+    "sat": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "no colour is seen, so the picture is grey"
+    },
+    "dof": {
+     "value": 6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      40
+     ],
+     "note": "the app's choice"
+    },
+    "fall": {
+     "value": 1.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ],
+     "note": "the app's choice"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Colour",
+     "Octopuses and squid have one visual pigment, so the picture has no colour. A cuttlefish is colour blind too, with one opsin in its eyes.",
+     [
+      "R33",
+      "R34",
+      "R35",
+      "R36",
+      "R37",
+      "R38",
+      "R39",
+      "R40",
+      "R41",
+      "R42",
+      "R43",
+      "R44",
+      "R45",
+      "R46",
+      "R47",
+      "R48",
+      "R198",
+      "R200",
+      "R202"
+     ],
+     []
+    ],
+    [
+     "m",
+     "Sharpness",
+     "An octopus resolves about 12 cycles per degree, and a squid about 6.6. Other records give lower figures, so the picture is set in the middle of these.",
+     [
+      "R7",
+      "R6",
+      "R4",
+      "R12"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "g",
+     "Field",
+     "A squid's horizontal field runs about 300 degrees, and the records for hatchlings and juveniles run from about 250 to 320 degrees.",
+     [
+      "R18",
+      "R19",
+      "R23",
+      "R25",
+      "R27"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Pupil",
+     "An octopus pupil is round in the dark and closes to a horizontal slit in bright light.",
+     [
+      "R66"
+     ],
+     [
+      "params.pupil"
+     ]
+    ],
+    [
+     "i",
+     "How it is drawn",
+     "The strength of the streak, the blur, the gain, the falloff and the grey picture are the app's own settings, set inside the measured ranges.",
+     [
+      "R13"
+     ],
+     [
+      "params.fovea",
+      "params.topoA",
+      "params.topoS",
+      "params.gain",
+      "params.sat",
+      "params.dof",
+      "params.fall"
+     ]
+    ]
+   ],
+   "zones": [],
+   "version": 1,
+   "draft": true,
+   "draw": {
+    "field": [
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the view as it was"
+     }
+    ],
+    "overlay": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no overlay"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the picture as grey"
+     }
+    ]
+   }
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R7",
+     "R6"
+    ],
+    "kind": "range_middle",
+    "how": "Set between the octopus value of 12.23 cycles per degree (R7) and the squid value of 6.56 (R6), with the app choosing 6."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R18",
+     "R19",
+     "R23",
+     "R25",
+     "R27"
+    ],
+    "kind": "range_middle",
+    "how": "Set inside the span of the squid and cuttlefish field records, 253 to 323 degrees."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R7",
+    "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD)"
+   },
+   {
+    "record": "R6",
+    "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD) and the squid (6.56 ± 1.14 CPD)"
+   },
+   {
+    "record": "R18",
+    "quote": "The uniocular visual field was found to be 253° on the horizontal plane"
+   },
+   {
+    "record": "R19",
+    "quote": "Hatchling (6.2) | 0.63 | 295"
+   },
+   {
+    "record": "R23",
+    "quote": "7 days old (5.5) | 0.65 | 311"
+   },
+   {
+    "record": "R25",
+    "quote": "14 days old (9.8) | 0.90 | 312"
+   },
+   {
+    "record": "R27",
+    "quote": "22 days old (11.3) | 1.11 | 323"
+   },
+   {
+    "record": "R66",
+    "quote": "The pupil of octopus is circular in darkness (Figure 1C), while in bright light, it constricts to a horizontal slit (Figures 1A,B)"
+   }
+  ]
+ }
+}

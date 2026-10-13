@@ -1,0 +1,548 @@
+{
+ "key": "scorpion",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Green and ultraviolet' says m and every parameter it describes is graded i",
+  "claim params.uvBlue cites R7 with no quote from it",
+  "claim params.uvBlue cites R10 with no quote from it",
+  "row 'A view all round' is graded m and cites no record graded m"
+ ],
+ "reply": {
+  "spec": {
+   "key": "scorpion",
+   "version": 1,
+   "chip": "Scorpion",
+   "who": "a scorpion",
+   "falls_back_to": "spider",
+   "applies_to": {
+    "order": [
+     "Scorpiones",
+     "Uropygi",
+     "Amblypygi",
+     "Pseudoscorpiones"
+    ]
+   },
+   "cue": "The view looks out in every direction at once. It is dim and soft, with a faint green cast.",
+   "modules": [
+    "field",
+    "haptic"
+   ],
+   "inputs": {
+    "motion": "optional",
+    "sound": "none",
+    "haptic": "optional"
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "squeeze",
+      "invented": true,
+      "note": "the whole ring of view squeezed toward the full 360 degrees"
+     },
+     {
+      "name": "window",
+      "invented": true,
+      "note": "a view that opens out to the sides"
+     }
+    ],
+    "haptic": [
+     {
+      "name": "buzz",
+      "invented": true,
+      "note": "a short vibration where the browser can vibrate, and a pulse at the picture's edge where it cannot"
+     },
+     {
+      "name": "off",
+      "invented": true,
+      "note": "the view without touch"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the colours of the picture pushed toward green"
+     }
+    ]
+   },
+   "params": {
+    "M": "SCORP",
+    "cpd": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a rough picture of large shapes and light; no record gives how much detail a scorpion sees",
+     "range": [
+      0.005,
+      40
+     ]
+    },
+    "fov": {
+     "value": 360,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R1",
+      "R2"
+     ],
+     "note": "the whole field around the body",
+     "range": [
+      100,
+      360
+     ]
+    },
+    "gain": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "brightens the dim picture so that night light reads",
+     "range": [
+      1,
+      4
+     ]
+    },
+    "sat": {
+     "value": 0.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "colour is mostly lost; the records give peaks but no colour picture",
+     "range": [
+      0,
+      1.5
+     ]
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no channel removed",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "pupil": "none",
+    "persist": {
+     "value": 0.15,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a short lingering of the picture",
+     "range": [
+      0,
+      60
+     ]
+    },
+    "gate": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "still things fade, so movement stands out",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "glow": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "moving things glow",
+     "range": [
+      0,
+      2
+     ]
+    },
+    "glowC": {
+     "value": [
+      0.78,
+      1,
+      0.62
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the glow's colour",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "living": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no extra weight for living movement",
+     "range": [
+      0,
+      3
+     ]
+    },
+    "dof": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no depth blur",
+     "range": [
+      0,
+      40
+     ]
+    },
+    "fall": {
+     "value": 2.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how fast sharpness falls in dim light, a guess",
+     "range": [
+      0,
+      3
+     ]
+    },
+    "field": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the field reaches all round, drawn as a full ring",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "topoA": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no sharper middle",
+     "range": [
+      0,
+      2
+     ]
+    },
+    "topoS": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no sharper middle",
+     "range": [
+      0,
+      2
+     ]
+    },
+    "uvBlue": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "ultraviolet is read as the blue channel",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no reflective sheen",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "shimmer": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no heat shimmer",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "salience": 1,
+    "ripple": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no ripples",
+     "range": [
+      0,
+      1
+     ]
+    },
+    "hold": {
+     "value": 60,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how long a moment is held",
+     "range": [
+      0,
+      300
+     ]
+    },
+    "thrust": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no settling move",
+     "range": [
+      0,
+      100
+     ]
+    },
+    "rate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "time runs as it does for a person",
+     "range": [
+      0.25,
+      2
+     ]
+    },
+    "water": {
+     "value": [
+      1.5,
+      0.45,
+      0.25,
+      1
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no water surface"
+    },
+    "waterC": {
+     "value": [
+      0.03,
+      0.2,
+      0.26
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no water colour"
+    }
+   },
+   "matrices": {
+    "SCORP": {
+     "rows": [
+      [
+       0.25,
+       0.6,
+       0.15
+      ],
+      [
+       0.2,
+       0.6,
+       0.2
+      ],
+      [
+       0.3,
+       0.5,
+       0.2
+      ]
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "a rough blue-green mapping, with the ultraviolet folded into blue"
+    }
+   },
+   "remap": {
+    "blindAt": {
+     "value": 180,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no blind seam is recorded for scorpions",
+     "range": [
+      0,
+      360
+     ]
+    },
+    "blindDeg": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no blind seam",
+     "range": [
+      0,
+      120
+     ]
+    },
+    "blindSoft": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no blind seam",
+     "range": [
+      0,
+      60
+     ]
+    }
+   },
+   "haptic": {
+    "on": "knock",
+    "pattern": {
+     "value": [
+      25
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "vibration pattern in milliseconds, on and off"
+    },
+    "edge": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "how bright the edge pulses where the phone cannot vibrate",
+     "range": [
+      0,
+      1
+     ]
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "A view all round",
+     "A scorpion's eyes together see a full 360 degrees around the body. The median eyes take in a 40 degree overlap above the animal.",
+     [
+      "R1",
+      "R2",
+      "R3"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Green and ultraviolet",
+     "Scorpion eyes are most sensitive to green and blue light, with a second peak in the ultraviolet. Heterometrus and Tityus have measured peaks at 470 to 568 nm, and the lateral eyes respond to ultraviolet at 350 to 400 nm.",
+     [
+      "R4",
+      "R5",
+      "R6",
+      "R9",
+      "R10"
+     ],
+     [
+      "params.uvBlue",
+      "params.sat"
+     ]
+    ],
+    [
+     "g",
+     "Dim light",
+     "Scorpion eyes respond to starlight levels of light, and the lateral eyes of Androctonus australis detect differences in brightness at very low intensity. The picture is dim and built for night.",
+     [
+      "R14",
+      "R16",
+      "R98"
+     ],
+     [
+      "params.gain",
+      "params.fall"
+     ]
+    ],
+    [
+     "g",
+     "Touch over the body",
+     "Scorpions sense the world mostly through slit sensilla and hairs on the legs and pedipalps, which pick up vibrations in sand and touch. Sand scorpions detect vibrations from prey as far as 50 cm away.",
+     [
+      "R34",
+      "R35",
+      "R69"
+     ],
+     [
+      "params.gate"
+     ]
+    ],
+    [
+     "i",
+     "Sharpness and colour",
+     "No record gives how much detail a scorpion sees. The app sets a coarse, dim picture with a faint green cast, a glow on movement, and a brightening so that night light reads. These are the app's choices.",
+     [
+      "R12",
+      "R98"
+     ],
+     [
+      "params.cpd",
+      "params.gain",
+      "params.glow",
+      "params.sat",
+      "params.M",
+      "params.fall",
+      "params.field"
+     ]
+    ],
+    [
+     "x",
+     "Not in the picture",
+     "Touch, vibration and airflow carry much of what a scorpion knows, and the camera records none of them.",
+     [
+      "R34",
+      "R55",
+      "R65"
+     ],
+     []
+    ]
+   ],
+   "zones": []
+  },
+  "claims": [
+   {
+    "path": "params.fov",
+    "records": [
+     "R1",
+     "R2"
+    ],
+    "kind": "value",
+    "how": "The field of view is 360 degrees, as both records state."
+   },
+   {
+    "path": "params.uvBlue",
+    "records": [
+     "R7",
+     "R10"
+    ],
+    "kind": "calculation",
+    "how": "Not a record value; graded i and invented, so this claim is only a note."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "scorpions can apparently see 360° around their body"
+   },
+   {
+    "record": "R2",
+    "quote": "Together, the two eyes have a 360 deg field of view"
+   }
+  ]
+ }
+}
