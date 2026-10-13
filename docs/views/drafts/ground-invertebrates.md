@@ -1,10 +1,10 @@
 # Sensing sheet: ground invertebrates (snail, worm, scorpion, tick)
 
-Research round 3, unit `ground-invertebrates`, written on 13 October 2026 from 01:47 to about 06:30 UTC. The evidence log is `docs/views/evidence/ground-invertebrates.jsonl` (lines are cited below as L1, L2 and so on, in file order) and the wanted list is `docs/views/wanted/ground-invertebrates.jsonl`. It builds on the checked sheets `docs/views/sheets/snail.md` and `docs/views/sheets/tick.md`, and every source behind a row was opened again in this session.
+Research round 3, unit `ground-invertebrates`, written on 13 October 2026 from 01:47 to about 03:30 UTC. The evidence log is `docs/views/evidence/ground-invertebrates.jsonl` (lines are cited below as L1, L2 and so on, in file order) and the wanted list is `docs/views/wanted/ground-invertebrates.jsonl`. It builds on the checked sheets `docs/views/sheets/snail.md` and `docs/views/sheets/tick.md`, and every source behind a row was opened again in this session.
 
-**What came through and what did not.** Of the two books in the owner's library, *Neurobiology of Arachnids* (Barth, ed., 1985) came through only as its front matter, chapters I to III and chapter IV to about page 73. The scorpion chapters (XVII, Root, on locomotion, and XVIII, Fleissner and Fleissner, on the clock in the visual system) and the chapters on sensilla, trichobothria and slit organs (VII to IX) were not in the copy. *Animal Eyes* (Land and Nilsson, 2nd edition, 2012) came through as chapters 1 and 2 and chapter 3 to about page 65, which holds its Table 3.1 of resolution. During the session these sites refused with HTTP 429 and I stopped fetching from them: Europe PMC (www.ebi.ac.uk), Zenodo's file store, doi.org for an Oxford title, and link.springer.com. The Biodiversity Heritage Library refused automated reading. The shell could reach only GitHub, so every page was read through the web tool.
+**What came through and what did not.** Of the two books in the owner's library, *Neurobiology of Arachnids* (Barth, ed., 1985) came through only as its front matter, chapters I to III and chapter IV to about page 73. The scorpion chapters (XVII, Root, on locomotion, and XVIII, Fleissner and Fleissner, on the clock in the visual system) and the chapters on sensilla, trichobothria and slit organs (VII to IX) were not in the copy. *Animal Eyes* (Land and Nilsson, 2nd edition, 2012) came through as chapters 1 and 2 and chapter 3 to about page 65, which holds its Table 3.1 of resolution. During the session these sites refused with HTTP 429 and I stopped fetching from them: Europe PMC (www.ebi.ac.uk), Zenodo's file store, doi.org for an Oxford title, and link.springer.com. The Biodiversity Heritage Library and J-STAGE refused automated reading under their robots rules, PubMed Central answered with a reCAPTCHA page, and the PDFs of two theses (Pulido Forero's at the Universidad Distrital and Kirwan's at Lund) failed to load, so only their abstracts and record pages were read. The shell could reach only GitHub, so every page was read through the web tool.
 
-**[unfinished]** items are marked where they occur. The main ones are these: no source I could open measures what a scorpion, harvestman or centipede resolves, so those three pictures rest on inference; no flicker or time-constant measurement was found for any animal in the unit; and the family counts behind the shares were read once, with no second count.
+**What is unfinished.** No source I could open measures what a scorpion, harvestman, centipede or tick resolves, so those four pictures rest on inference; no flicker or time-constant measurement was found for any animal in the unit; and the family counts behind the shares were read once, with no second count.
 
 ## 1. Scope
 
@@ -15,7 +15,7 @@ Records are iNaturalist research-grade observations in GBIF (dataset `50c9509d-2
 | Group | GROUPS label | Records | What it holds |
 |---|---|---:|---|
 | snail | a snail or slug | 2,227,162 | Gastropoda 2,155,631; Polyplacophora 71,088; Scaphopoda 376; two small classes 66; Monoplacophora 1 |
-| worm | a worm, millipede or centipede | 370,232 | Diplopoda 170,881; Chilopoda 82,474; Annelida 66,007; Platyhelminthes 37,559; Nematoda 8,445; Nemertea 3,896; seven small phyla 970 |
+| worm | a worm, millipede or centipede | 370,232 | Diplopoda 170,881; Chilopoda 82,474; Annelida 66,007; Platyhelminthes 37,559; Nematoda 8,445; Nemertea 3,896; Pauropoda 26; six small phyla 944. The 82 records of Symphyla, small myriapods that `tools/world/groups.py` also places here, are left out. |
 | scorpion | a scorpion or harvestman | 235,122 | Opiliones 124,524; Scorpiones 99,357; Amblypygi 3,771; Uropygi 3,003; Pseudoscorpiones 2,399; Solifugae 1,810; Schizomida 222; Ricinulei 18; Palpigradi 18 |
 | tick | a tick | 60,462 | Ixodida |
 
@@ -33,7 +33,7 @@ Records are iNaturalist research-grade observations in GBIF (dataset `50c9509d-2
 - The most recorded millipedes are the Greenhouse Millipede *Oxidus gracilis* (28,389), the Rusty Millipede *Trigoniulus corallinus* (12,888), *Harpaphe haydeniana* (12,680), *Ommatoiulus moreleti* (8,676) and *Apheloria corrugata* (7,410).
 - The most recorded centipedes are the house centipede *Scutigera coleoptrata* (26,123), *Scolopendra cingulata* (5,937), *S. polymorpha* (5,419), *S. heros* (3,811) and the brown centipede *Lithobius forficatus* (3,790).
 - Among soft-bodied worms the leaders are the hammerhead worm *Bipalium kewense* (5,256), the earthworm *Lumbricus terrestris* (3,785), the fireworm *Hermodice carunculata* (3,588), the fan worm *Sabella spallanzanii* (2,999) and the horse leech *Haemopis sanguisuga* (2,305).
-- In Alachua County the group's 414 records are led by the Greenhouse Millipede (65), the Rusty Millipede (59), the Wandering Hammerhead Worm *Bipalium vagum* (42), the Smokey Oak Millipede (41), the Florida Ivory Millipede (35), the Eastern Red Centipede *Scolopocryptops sexspinosus* (32), the Big-leg Centipede *Theatops posticus* (27) and the Shovel-headed Garden Worm *Bipalium kewense* (21). The county's two most recorded centipedes are blind ones.
+- In Alachua County the group's 414 records are led by the Greenhouse Millipede (65), the Rusty Millipede (59), the Wandering Hammerhead Worm *Bipalium vagum* (42), the Smokey Oak Millipede (41), the Florida Ivory Millipede (35), the Eastern Red Centipede *Scolopocryptops sexspinosus* (32), the Big-leg Centipede *Theatops posticus* (27) and the Shovel-headed Garden Worm *Bipalium kewense* (21). The county's two most recorded centipedes are blind ones (L100, L197).
 
 **Scorpions and harvestmen.** Harvestmen hold 53.0% of the group and scorpions 42.3%; the remaining 4.7% are whip spiders, whip scorpions, pseudoscorpions, camel spiders and three tiny orders.
 
@@ -52,7 +52,7 @@ The four GROUPS labels cut across very different ways of meeting the world. Foll
 3. **Within millipedes the line between eyed and eyeless orders is real, and I recommend one view for now.** The flat-backed millipedes (Polydesmida) and Platydesmida have no eyes (L89, L92, L93) and hold 84,181 records (49.3% of millipedes), including the most recorded species. The rest, 86,700 (50.7%), are mostly eyed orders, though some of their members are blind. At the measured sharpness of an eyed millipede, 56 degrees a cycle (L77), the picture is so coarse that it differs from no picture at all only in showing which side is darker. The eyeless half would get that faint cue too, and a row says so. When the full database names a species in Polydesmida or Platydesmida, the same view should drop to `field: 1`.
 4. **Within centipedes, one view for now, with the house centipede as the first split later.** Scutigeromorpha (30,822, 37.4%) have compound eyes and two colour classes (L94 to L98); Scolopendridae (34,892, 42.3%) have four simple eyes on each side (L99); Lithobiomorpha hold 8.1%; and the blind families (Cryptopidae, Scolopocryptopidae and Geophilomorpha) hold 10,093 (12.2%) (L100, L101). No centipede's sharpness has been measured in any source I opened, so a split cannot yet be drawn from numbers.
 5. **Within soft-bodied worms, one view.** Fan worms (Serpulidae and Sabellidae, 23,534, 20.1% of soft worms) and leeches (8,014, 6.9%) have eyes that catch shadows (L111, L114, L124). Earthworms (11,121, 9.5%) have no eyes and sense light through the skin (L106, L107). Land planarians (22,813, 19.5%) have many tiny eyes (L169). The remaining polychaetes (23,177, 19.8%), led by fireworms and honeycomb worms, were not measured in any source I opened. All of them meet light as amount and direction, and none is shown to resolve an image, so one view without a picture is true for all. Gall nematodes (most of the 8,445 roundworm records, in Anguinidae 8,245) are photographed as galls on plants, as gall mites are, and should go to `other`.
-6. **The snail group keeps one view, as `snail.md` proposed.** The sea snails with large camera eyes are the exception: the strombid conchs resolve about 1 degree (L130, L131) and the periwinkle about 4.5 degrees between receptors (L1). Strombidae hold 12,703 records (0.57% of the group) and Littorinidae 45,606 (2.05%), together 2.6%. Every other member measured sees at most large patches of light and dark (L125, L126, L133, L134, L146, L181). A `conch` view for Strombidae is the first split to make when the full database names species.
+6. **The snail group keeps one view, as `snail.md` proposed.** The sea snails with large camera eyes are the exception: the strombid conchs resolve about 1 degree (L130, L131) and the periwinkle about 4.5 degrees between receptors (L1). Strombidae hold 12,703 records (0.57% of the group) and Littorinidae 45,606 (2.05%), together 2.6%. The land snails, slugs and sea slugs measured see at most coarse patches of light and dark (L125, L126, L133, L134, L181), the chitons with shell eyes resolve shapes about 9 to 12 degrees across (L146), and pond snails focus an image under water, though no source I opened measures how sharp it is (L136, L137). A `conch` view for Strombidae is the first split to make when the full database names species.
 7. **Ticks keep one view, as `tick.md` proposed.** The new evidence for the Lone Star Tick's own eye (L151, L152) supports the coarse picture there.
 
 **The set of views I commit to** is seven: `snail`, `millipede`, `centipede`, `worm`, `scorpion`, `harvestman` and `tick`. The base app's group head knows only four labels, so the three new ones (`millipede`, `centipede`, `harvestman`) need the owner's word and a refit of the head on the existing world photos (`docs/COVERAGE.md`, second wave). Until then the full database can route by order. In the word table, "millipede" and "centipede" now go to `worm` and "harvestman" to `scorpion`.
@@ -71,7 +71,7 @@ Blur radii below use the rule in `src/cam.b.js` (radius = 0.6 × long side ÷ `V
 Log: L183 (Matsuo, Kawakami and Matsuo 2024, eye_type), L133 (Zieger and Meyer-Rochow 2008, eye_type), L125 (Zieger and colleagues 2008, eye_type).
 
 ```
-['m', 'Sharpness', 'In behaviour tests the red slug told apart shapes about 52 degrees across, the width of a metre-wide shape seen from a metre away. This view is blurred until only the broad lie of light and dark remains.'],
+['m', 'Sharpness', 'In behaviour tests the red slug made out nothing finer than about 52 degrees, the width of a metre-wide shape seen from a metre away. This view is blurred until only the broad lie of light and dark remains.'],
 ```
 Log: L128 (Irwin and colleagues 2022, citing Zieger and colleagues, acuity_cpd), L134 (Zieger and Meyer-Rochow 2008, acuity_cpd), L126 (Zieger and colleagues 2008, behaviour_vision). A shape 1 m wide at 1 m spans 2 × atan(0.5) = 53 degrees.
 
@@ -111,7 +111,7 @@ Log: L196 (Sunada, Lukowiak and Sakakibara 2012, sense_light_nonvisual).
 Log: L181, L182 (Rudman 1999, eye_type, sense_chemical), L195 (Quinlan, Cho and Katz 2021, behaviour_vision).
 
 ```
-['g', 'Water snails', 'Some snails that live in water see more. A conch makes out details about 1 degree across, and a periwinkle's eye samples the world about every 4.5 degrees. Pond snails can focus an image under water in a deep pit of the retina. This view follows the land snails and sea slugs, which make up most of the records.'],
+['g', 'Water snails', 'Some snails that live in water see more: a conch resolves detail down to about 1 degree, and a periwinkle's eye samples the world about every 4.5 degrees. Pond snails can focus an image under water in a deep pit of the retina. This view follows the land snails and sea slugs, which make up most of the records.'],
 ```
 Log: L130, L131 (Irwin and colleagues 2022, Conomurex), L1 (Land and Nilsson 2012, Littorina), L137 (Gál and colleagues 2004, Lymnaea), L136 (Zieger and Meyer-Rochow 2008, Lymnaeidae).
 
@@ -159,7 +159,7 @@ Log: L148 (Gelperin 1974, sense_chemical).
 Log: L79 (Kirwan and Nilsson 2019, eye_type), L89 (Fox 2006, eyes_count), L92 (Marek and Bond 2009, eyes_count), L93 (Moritz and colleagues 2021, eyes_count).
 
 ```
-['m', 'Sharpness', 'A snake millipede can make out a dark band about 20 degrees wide, enough to find a dark crevice and little more. A person sees detail about three thousand times finer. This view is blurred to match.'],
+['m', 'Sharpness', 'In behaviour tests the millipede Cylindroiulus punctatus made out a dark shape about 20 degrees wide, enough to find shelter and little more. A person sees detail about three thousand times finer. This view is blurred to match.'],
 ```
 Log: L77, L78, L80 (Kirwan and Nilsson 2019, acuity_cpd, acceptance_deg, behaviour_vision). A 56 degree period is 1 / 56 = 0.018 cycles per degree, and 60 / 0.018 = 3,333.
 
@@ -209,7 +209,7 @@ Log: L86 (Cloudsley-Thompson 1951, sense_touch; the summary links the spiral ref
 | Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
 |---|---|---|---|---|
 | Curling | A sharp shake of the phone makes the picture wind into a dark spiral, which unwinds after a few seconds. | device motion | medium (a swirl warp and a timer) | L86. The spiral is the animal's own defence, and a slow unwinding makes a fine moment. The timing is **invented**. |
-| Walking faster in light | In bright scenes the faint gradient drifts and searches across the frame; in the dark it settles. | mean brightness | easy | L84 (light changes speed, not direction). |
+| Walking faster in light | In bright scenes the faint gradient drifts and searches across the frame; in the dark it settles. | mean brightness | easy | L84: light makes the animal walk more and sets no direction. |
 | Antennae | Each touch of the screen leaves a soft print that fades, as if tapped out. | the touch screen | easy | L90. It shows the sense that leads; the print's look is **invented**. |
 
 ### 2.3 `centipede`: centipedes (Chilopoda)
@@ -297,7 +297,7 @@ Log: L176 to L179 (Catania 2008, sense_vibration), L108, L109 (Mitra and colleag
 Log: L114, L115 (Groves and Jellies 2021, eyes_count, lambda_max_nm), L111, L112 (Stowasser and colleagues 2019, eyes_count, receptor_classes).
 
 ```
-['g', 'Flatworms', 'Each cup-shaped eye of a freshwater planarian samples the world about every 35 degrees, and in behaviour tests one planarian made out shapes about 73 degrees across. It flees ultraviolet light most strongly. It still flees near-ultraviolet light after its eyes are removed. Land planarians, such as the hammerhead worms, have many tiny eyes on the head.'],
+['g', 'Flatworms', 'Each cup-shaped eye of a freshwater planarian samples the world about every 35 degrees, and behaviour tests on another planarian give the same coarse sharpness. Planarians flee ultraviolet light most strongly, and worms without eyes, or without heads, still flee near-ultraviolet light. Land planarians, such as the hammerhead worms, have many tiny eyes on the head.'],
 ```
 Log: L2, L5 (Land and Nilsson 2012, interreceptor_deg, eye_type), L190 (Kirwan 2018, acuity_cpd in *Schmidtea lugubris*), L119 (Paskin and colleagues 2014, behaviour_vision), L120, L121 (Birkholz and Beane 2017), L169 (Bertone 2020, eyes_count).
 
@@ -312,7 +312,7 @@ Log: L123, L124 (Bok and colleagues 2017, lambda_max_nm, eye_role), L188, L189 (
 Log: L118 (Laverack 1969, sense_touch), L170 (Bertone 2020, sense_chemical), L122 (Ascunce and colleagues 2026, sense_chemical).
 
 ```
-['i', 'The picture', 'This view shows only how much light there is, where it comes from and how it changes, and it counts ultraviolet and blue light most. That weighting follows the planarians and leeches and is the app's own choice.'],
+['i', 'The picture', 'This view shows only how much light there is, where it comes from and how it changes. It weights blue light most, because planarians and the underside of a leech answer ultraviolet most strongly and blue is the nearest colour the camera records. The weighting is the app's own choice.'],
 ```
 Log: L119 (planarian hierarchy), L115 (leech sensilla).
 
@@ -411,7 +411,7 @@ Log: L38, L11. The arithmetic is under the picture.
 | Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
 |---|---|---|---|---|
 | Night by the clock | Toward evening the shadows lift and the side patches brighten; by morning they settle. | the phone's clock and time zone | easy | L26 to L28. The view changes with the hour, as the scorpion's eyes do. |
-| Glowing rim | At dusk by the phone's clock, and more where the scene is rich in blue and violet, a cyan-green glow rises around the edge of the frame, with small dark spots where the eyes would be, because the lenses do not glow. | the phone's clock and the camera's blue level, standing in for ultraviolet | medium (an overlay pass) | L35, L36, L48; the dusk peak follows L193, and the collector idea is a hypothesis (L194). The trigger is **invented** and must carry an `i` row if added. The glow with dark eye-spots is a striking and true image. |
+| Glowing rim | At dusk by the phone's clock, and more where the scene holds strong blue and violet, a cyan-green glow rises around the edge of the frame, with small dark spots where the eyes would be, because the lenses do not glow. | the phone's clock and the camera's blue level, standing in for ultraviolet | medium (an overlay pass) | L35, L36, L48; the dusk peak follows L193, and the collector idea is a hypothesis (L194). The trigger is **invented** and must carry an `i` row if added. The glow with dark eye-spots is a striking and true image. |
 | Ripples in sand | Knocks felt through the phone send rings across the picture from the side the knock came from. | device motion (the sign of the first jolt) | medium | L31. A phone cannot time a wave across eight legs, so the direction is **invented**. |
 | Air on the pincers | Wind on the microphone makes the edge patches shimmer. | microphone, with consent | medium | L21, L174; **invented** in form |
 
@@ -607,7 +607,7 @@ These are measured well enough for a profile of their own when the full database
 | Medicinal leech, *Hirudo verbana* | worm | 119 | L111 to L117 | A body of eyes, green above and ultraviolet below |
 | Christmas tree worms, *Spirobranchus* | worm | *S. giganteus* 1,993 | L123, L124 | Shadow alarm with a 464 nm pigment |
 | *Androctonus australis* | scorpion | 58 | L26, L27, L28 | The night clock of the eyes |
-| Sand scorpions, *Paruroctonus* and *Smeringurus* | scorpion | *P. utahensis* 144; *Smeringurus mesaensis* 924, the name Kundu and colleagues (2025) use for the sand scorpion of Gaffin and colleagues (1992), which older papers call *Paruroctonus mesaensis* | L29 to L31, L35, L36, L172, L174 | Ripples in sand, fluorescence, pectine walks |
+| Sand scorpions, *Paruroctonus* and *Smeringurus* | scorpion | *P. utahensis* 144; *Smeringurus mesaensis* 924. Brownell's papers name their sand scorpion *Paruroctonus mesaensis*, and Kundu and colleagues (2025) give the sand scorpion of Gaffin and colleagues (1992) as *Smeringurus mesaensis*; reading the two names as one species is mine. | L29 to L31, L35, L36, L172, L174 | Ripples in sand, fluorescence, pectine walks |
 | Striped bark scorpion, *Centruroides vittatus* | scorpion | 11,594 | L171 | Following traces by contact |
 | *Phalangium opilio* | harvestman | 28,313 | L65 | Hidden eyes for the clock |
 | Lone Star Tick, *Amblyomma americanum* | tick | 8,996 | L151, L152, L161, L162, L164 | Its own eye, its heat pit and its breath sense |
@@ -623,7 +623,7 @@ These are measured well enough for a profile of their own when the full database
 | Flicker or time constants for any animal in the unit | nothing found | Nothing is known from the sources opened; `rate` and `persist` stay unset everywhere. |
 | Harvestman sharpness and colour in the common families | nothing found | The cave species (L59 to L63) give fast lenses and ultraviolet-plus-green sensitivity; too far from *Phalangium* and *Leiobunum* to set a colour matrix, so grey is used. |
 | Centipede sharpness | nothing found | Inferred from facet counts against the millipede (L77, L81, L97, L98): about 0.05 cycles per degree in the house centipede. Müller and colleagues (2003) and Sombke and Müller (2023) would test it. |
-| Millipede colour | nothing found | Grey. No inference is possible from the sources opened. |
+| Millipede colour | nothing found | The view uses grey, since the sources opened allow no inference. |
 | Earthworm colour | nothing found | Planarians and the leech's skin sensilla respond most to ultraviolet and blue (L119, L115); the worm view's blue weighting is that inference, graded i in its row. |
 | Land planarian eyes | "numerous tiny eyes" only (L169) | The freshwater planarians' 35 degrees by anatomy (L2) and 73 degrees by behaviour (L190) agree at about 0.014 cycles per degree, which is used for the whole worm view. |
 | Leech and fan worm resolution | not found | Five eyecups of about 50 receptors each (L114) and compound radiolar eyes (L188) suggest directional sight; no number. Bok and Nilsson (2016) is wanted. |
@@ -650,7 +650,7 @@ The same list as `docs/views/wanted/ground-invertebrates.jsonl`, most useful fir
 11. **Priority 2.** Fleissner G, 1977. Scorpion lateral eyes: extremely sensitive receptors of Zeitgeber stimuli. *Journal of Comparative Physiology A*. doi:10.1007/bf00612340. Confirms the lateral eyes' role and sensitivity behind the side zones. Views: `scorpion`.
 12. **Priority 2.** Hamilton PV, Winter MA, 1982. Behavioural responses to visual stimuli by the snail Littorina irrorata. *Animal Behaviour*. doi:10.1016/s0003-3472(82)80147-4. Settles whether the 14.5 degrees attributed to the garden snail belongs to this periwinkle. Views: `snail`.
 13. **Priority 2.** Hamilton PV, Ardizzoni SC, Penn JS, 1983. Eye structure and optics in the intertidal snail, Littorina irrorata. *Journal of Comparative Physiology A*. doi:10.1007/bf00606433. Periwinkle optics for a later conch and periwinkle split of the snail view. Views: `snail`.
-14. **Priority 2.** Von Berg E, Schneider G, 1972. The spectral sensitivity of the dark-adapted eye of Helix pomatia L.. *Vision Research*. doi:10.1016/0042-6989(72)90065-x. Confirms the single blue-green pigment in the Roman snail itself, behind the snail colour row. Views: `snail`.
+14. **Priority 2.** Von Berg E, Schneider G, 1972. The spectral sensitivity of the dark-adapted eye of Helix pomatia L. *Vision Research*. doi:10.1016/0042-6989(72)90065-x. Confirms the single blue-green pigment in the Roman snail itself, behind the snail colour row. Views: `snail`.
 15. **Priority 2.** Kirwan JD, Nilsson D-E, 2019. A millipede compound eye mediating low-resolution vision. *Vision Research*. doi:10.1016/j.visres.2019.09.003. The full text (openly licensed, unreachable here) gives the facet count and field of the julid eye behind the millipede view. Views: `millipede`, `centipede`.
 16. **Priority 2.** Willemart RH, Farine J-P, Gnaspini P, 2008. Sensory biology of Phalangida harvestmen (Arachnida, Opiliones): a review, with new morphological data on 18 species. *Acta Zoologica*. doi:10.1111/j.1463-6395.2008.00341.x. The review's evidence on harvestman eyes and phototaxis would test the harvestman picture's two side windows and coarse sight. Views: `harvestman`.
 17. **Priority 2.** Meyer-Rochow VB, Liddle AR, 1988. Structure and function of the eyes of two species of opilionid from New Zealand glow-worm caves (Megalopsalis tumida: Palpatores, and Hendea myersi cavernicola: Laniatores). *Proceedings of the Royal Society B*. doi:10.1098/rspb.1988.0023. Spectral peaks in nanometres and visual fields for harvestman eyes. Views: `harvestman`.
@@ -673,6 +673,7 @@ The same list as `docs/views/wanted/ground-invertebrates.jsonl`, most useful fir
 - Birkholz TR, Beane WS, 2017. The planarian TRPA1 homolog mediates extraocular behavioral responses to near ultraviolet light. *Journal of Experimental Biology*. doi:10.1242/jeb.152298. **opened**: read as the full text in the collection (`worms-myriapods`). L120 to L121.
 - Bok MJ, Porter ML, Nilsson D-E, 2017. Phototransduction in fan worm radiolar eyes. *Current Biology*. doi:10.1016/j.cub.2017.05.093. **opened**: read at https://research-information.bris.ac.uk/files/159040708/Full_text_PDF_accepted_author_manuscript_.pdf. L188 to L189.
 - Bok MJ, Porter ML, ten Hove HA, Smith RS, Nilsson D-E, 2017. Radiolar eyes of serpulid worms (Annelida, Serpulidae): structures, function, and phototransduction. *Biological Bulletin*. doi:10.1086/694735. **opened**: read as the abstract in the collection (`worms-myriapods`). L123 to L124.
+- Bonato L, Orlando M, Zapparoli M, Fusco G, Bortolin F, 2017. New insights into Plutonium, one of the largest and least known European centipedes (Chilopoda): distribution, evolution and morphology. *Zoological Journal of the Linnean Society*. doi:10.1093/zoolinnean/zlw026. **opened**: read as the abstract in the collection (`worms-myriapods`). L197.
 - Brownell PH, 1977. Compressional and surface waves in sand: used by desert scorpions to locate prey. *Science*. doi:10.1126/science.197.4302.479. **opened**: read as the abstract in the collection (`arachnids-other`). L29 to L30.
 - Brownell PH, van Hemmen JL, 2001. Vibration sensitivity and a computational theory for prey-localizing behavior in sand scorpions. *American Zoologist*. doi:10.1093/icb/41.5.1229. **opened**: read as the abstract in the collection (`arachnids-other`). L31.
 - Carr AL, Mitchell RD III, Dhammi A, Bissinger BW, Sonenshine DE, Roe RM, 2017. Tick Haller's organ, a new paradigm for arthropod olfaction: how ticks differ from insects. *International Journal of Molecular Sciences*. doi:10.3390/ijms18071563. **opened**: read as the full text in the collection (`arachnids-other`). L163.
@@ -731,7 +732,7 @@ The same list as `docs/views/wanted/ground-invertebrates.jsonl`, most useful fir
 - Meyer-Rochow VB, Yamahama Y, 2022. An anatomical and ultrastructural study of the eye of the luminescent millipede Paraspirobolus lucifugus (Gervais 1836) (Diplopoda, Spirobolida, Spiroboleliidae). *Arthropod Structure & Development*. doi:10.1016/j.asd.2022.101171. **opened**: read as the abstract in the collection (`worms-myriapods`). L81 to L83.
 - Mitra O, Callaham MA, Smith ML, Yack JE, 2008. Grunting for worms: seismic vibrations cause Diplocardia earthworms to emerge from the soil. *Biology Letters*. doi:10.1098/rsbl.2008.0456. **opened**: read as the abstract in the collection (`worms-myriapods`). L108 to L109.
 - Moritz L, Blanke A, Hammel JU, Wesener T, 2021. First steps toward suctorial feeding in millipedes: comparative morphology of the head of the Platydesmida (Diplopoda: Colobognatha). *Invertebrate Biology*. doi:10.1111/ivb.12312. **opened**: read as the abstract in the collection (`worms-myriapods`). L93.
-- Murayama GP, Willemart RH, 2019. Are trichobothria used in terrestrial prey capture by the yellow scorpion Tityus serrulatus Lutz & Mello, 1922 (Buthidae)?. *Arachnology*. doi:10.13156/arac.2019.18.3.287. **opened**: read as the abstract in the collection (`arachnids-other`). L175.
+- Murayama GP, Willemart RH, 2019. Are trichobothria used in terrestrial prey capture by the yellow scorpion Tityus serrulatus Lutz & Mello, 1922 (Buthidae)? *Arachnology*. doi:10.13156/arac.2019.18.3.287. **opened**: read as the abstract in the collection (`arachnids-other`). L175.
 - Müller CHG, Sombke A, Hilken G, Rosenberg J, 2011. Chilopoda: sense organs. In: Minelli A (ed.) Treatise on Zoology, The Myriapoda, volume 1. *Brill, Leiden*. doi:10.1163/9789004188266_013. **opened**: read as the abstract in the collection (`worms-myriapods`). L97.
 - Nisani Z, Honaker A, Jenne V, Loya F, Moon H, 2018. Evidence of airborne chemoreception in the scorpion Paruroctonus marksi (Scorpiones: Vaejovidae). *Journal of Arachnology*. doi:10.1636/joa-16-092.1. **opened**: read as the abstract in the collection (`arachnids-other`). L173.
 - Paskin TR, Jellies J, Bacher J, Beane WS, 2014. Planarian phototactic assay reveals differential behavioral responses based on wavelength. *PLoS ONE*. doi:10.1371/journal.pone.0114708. **opened**: read as the full text in the collection (`worms-myriapods`). L119.
@@ -760,7 +761,7 @@ The same list as `docs/views/wanted/ground-invertebrates.jsonl`, most useful fir
 - Yao Z, Yuan L, Chen X, Wang Q, Chai L, Lu X, Yang F, Wang Y, Yang S, 2023. A thermal receptor for nonvisual sunlight detection in myriapods. *Proceedings of the National Academy of Sciences*. doi:10.1073/pnas.2218948120. **opened**: read as the full text in the collection (`worms-myriapods`). L104 to L105.
 - Yong E, 2011. Why do scorpions glow in the dark (and could their whole bodies be one big eye)? (National Geographic, Not Exactly Rocket Science, 23 December 2011). *National Geographic*. https://www.nationalgeographic.com/science/article/why-do-scorpions-glow-in-the-dark-and-could-their-whole-bodies-be-one-big-eye. **opened**: read at https://www.nationalgeographic.com/science/article/why-do-scorpions-glow-in-the-dark-and-could-their-whole-bodies-be-one-big-eye. L35 to L36.
 - Zieger MV, Meyer-Rochow VB, 2008. Understanding the cephalic eyes of pulmonate gastropods: a review. *American Malacological Bulletin*. doi:10.4003/006.026.0206. **opened**: read as the abstract in the collection (`snails-molluscs`). L133 to L136.
-- Zieger MV, Vakoliuk IA, Tuchina OP, Zhukov VV, Meyer-Rochow VB, 2008. Eyes and vision in Arion rufus and Deroceras agreste (Mollusca; Gastropoda; Pulmonata): what role does photoreception play in the orientation of these terrestrial slugs?. *Acta Zoologica*. doi:10.1111/j.1463-6395.2008.00369.x. **opened**: read as the abstract in the collection (`snails-molluscs`). L125 to L127.
+- Zieger MV, Vakoliuk IA, Tuchina OP, Zhukov VV, Meyer-Rochow VB, 2008. Eyes and vision in Arion rufus and Deroceras agreste (Mollusca; Gastropoda; Pulmonata): what role does photoreception play in the orientation of these terrestrial slugs? *Acta Zoologica*. doi:10.1111/j.1463-6395.2008.00369.x. **opened**: read as the abstract in the collection (`snails-molluscs`). L125 to L127.
 
 **Other sources opened.**
 
