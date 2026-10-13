@@ -1754,6 +1754,7 @@
         have: getP ? 'getting' : have, keptBytes: keptBytes + partGot, bytes: M ? (big ? bytesOf(M) : M.vision.bytes || 0) : 0, getFail: getFail, place: cur && cur.place ? cur.place.about() : null }; },
       test: { kill: function (how) { if (worker) worker.postMessage({ op: 'die', how: how }); }, watch: function (ms) { watchMs = ms; }, forget: function () { stop('died', 'forgotten by a check'); state = 'idle'; why = ''; },
         idle: function (ms) { idleMs = ms; tire(); }, netWait: function (ms) { netWaitMs = ms; }, running: function () { return !!worker; },
+        place: function () { return cur && cur.place ? cur.place.test : null; },
         // the scoring with settings given by a check, through the same readers as a real slot (tools/fusion/parity.py)
         world: function (m, rows, sb) { worlds.push(slotOf(readManifest(JSON.stringify(m)), rows ? readTable(new TextEncoder().encode(JSON.stringify({ species: rows })).buffer, rows.length) : null, sb ? Float64Array.from(sb) : null)); return worlds.length - 1; },
         fuseIn: function (w, kd, sd, month) { return fuseWith(worlds[w], kd, sd, month); } }

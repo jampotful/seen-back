@@ -782,6 +782,50 @@ async function meet(page, name) {
       await meet(page, 'stripes.png'); r.both.then = await offered(page); r.both.sentAfter = fake.calls().length;
       all('both', r.both.first === 'Download the full database of species?' && r.both.then === 'The full database on a server can try to name the species. Ask it?' && r.both.sent === 0 && r.both.sentAfter === 0); await ctx.close();
     }
+    { // the full database for the whole world (docs/tracks/worlddb.md): its rows at one byte a number, its names and its place files in parts from the
+      // second origin, and its consent sheet's size of them all; the first guess from the time zone, and the encounter rule (test/rec/make_world_standin.py)
+      const WD = path.join(here, 'models', 'standin-world'), WE = JSON.parse(fs.readFileSync(path.join(WD, 'expect.json'), 'utf8'));
+      let wslot = 'test/rec/models/standin-world';
+      if (BIG_PORT !== 8788) { fs.writeFileSync(path.join(WD, 'manifest.port.json'), fs.readFileSync(path.join(WD, 'manifest.json'), 'utf8').replace(/127\.0\.0\.1:8788/g, '127.0.0.1:' + BIG_PORT)); wslot += '/manifest.port.json'; }
+      const named = async (page) => { const n = (await st(page)).named; return n ? n.common + '|' + n.by : ''; };
+      const worldIn = async (tz) => {
+        await ctl('reset=1'); await bctl('reset=1');
+        const ctx = await browser.newContext(Object.assign({}, phone, { timezoneId: tz }));
+        const o = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + wslot, null, ctx); await ready(o.page); await begin(o.page);
+        const s0 = await meet(o.page, 'stripes.png'); const line = await offered(o.page);
+        const size = await o.page.evaluate(() => window.__seenBack.big.size());
+        await o.page.locator('#svcView').tap(); await o.page.waitForSelector('#big', { state: 'visible' }); await o.page.locator('#bigYes').tap();
+        await bigHave(o.page, 'kept', 60000); await o.page.waitForFunction(() => { const l = window.__seenBack.big.about().last; return !!l && !window.__seenBack.S.svc; }, null, { timeout: 60000 }); await o.page.waitForTimeout(200);
+        return { ctx, page: o.page, errors: o.errors, small: s0.eyes, line, size, parts: (await partsAsked()).sort() };
+      };
+      r.world = {};
+      { const w = await worldIn('UTC'), pg = w.page;
+        const a1 = await bigNow(pg);
+        r.world.utc = { small: w.small, line: w.line, bytes: w.size.bytes, parts: w.parts, first: await named(pg), last: a1.last && a1.last.five.slice(0, 2).join(' / '), place0: await pg.evaluate(() => window.__seenBack.big.about().place) };
+        await meet(pg, 'heron.png'); await byLarge(pg); await pg.waitForTimeout(150);
+        r.world.utc.heron = await named(pg); r.world.utc.kept = await pg.evaluate(() => JSON.parse(localStorage.getItem('seenback.place.v1') || 'null'));
+        r.world.utc.place1 = await pg.evaluate(() => window.__seenBack.big.about().place);
+        const at = (await bigNow(pg)).last.at; await meet(pg, 'stripes.png'); await largeAfter(pg, at); await pg.waitForTimeout(150);
+        r.world.utc.then = await named(pg);
+        r.world.utc.parity = await pg.evaluate((x) => { const t = window.__seenBack.big.test.place(), c = x.cells, d = (P) => [P[c[0]], P[c[1]]];
+          const P = t.update(t.firstGuess('UTC'), x.rows['Great Blue Heron']), L = t.logShare(P);
+          return { first: { UTC: d(t.firstGuess('UTC')), 'America/New_York': d(t.firstGuess('America/New_York')), 'America/Argentina/Buenos_Aires': d(t.firstGuess('America/Argentina/Buenos_Aires')) }, after: d(P), share: Array.from(L) }; }, WE);
+        r.world.utc.about = await pg.evaluate(() => window.__seenBack.about()); r.world.utc.errors = w.errors; await w.ctx.close(); }
+      for (const tz of ['America/Argentina/Buenos_Aires', 'US/Eastern']) {
+        const w = await worldIn(tz); await byLarge(w.page).catch(() => {}); r.world[tz] = { first: await named(w.page), place: await w.page.evaluate(() => window.__seenBack.big.about().place), errors: w.errors }; await w.ctx.close();
+      }
+      const u = r.world.utc, near = (a, b) => a.length === b.length && a.every((x, i) => Math.abs(x - b[i]) < 1e-6 * Math.max(1, Math.abs(b[i])));
+      const sameP = Object.keys(WE.first_guess).every((z) => near(u.parity.first[z], WE.first_guess[z])) && near(u.parity.after, WE.after_heron) && near(u.parity.share, WE.log_share_utc_heron);
+      const wantParts = ['part00', 'part00', 'part01', 'part01', 'part02'];       // the encoder's three parts and the rows' two, each once
+      all('world', u.small === 'insect' && u.line === 'Download the full database of species?' && u.bytes === WE.bytes && u.parts.join() === wantParts.join()
+        && u.first === 'insect|page' && /Monarch/.test(u.last || '') && u.place0 && u.place0.zone === 'UTC' && u.place0.known === false && u.place0.met === 0
+        && u.heron === 'Great blue heron|device-large' && u.kept && u.kept.met.length === 1 && u.kept.met[0].sci === 'Ardea herodias' && u.kept.met[0].zone === 'UTC' && u.place1.met === 1
+        && u.then === 'Monarch|device-large' && sameP && /place from no known time zone and 1 creature met/.test(u.about || '')
+        && r.world['America/Argentina/Buenos_Aires'].first === 'Southern monarch|device-large' && r.world['America/Argentina/Buenos_Aires'].place.known
+        && r.world['US/Eastern'].first === 'Monarch|device-large' && r.world['US/Eastern'].place.zone === 'US/Eastern' && r.world['US/Eastern'].place.known
+        && !quiet(u.errors).length && !quiet(r.world['America/Argentina/Buenos_Aires'].errors).length && !quiet(r.world['US/Eastern'].errors).length);
+      r.world.sameAsPython = sameP;
+    }
     await bctl('reset=1'); await ctl('reset=1');
     done('large', r, ok);
   });
