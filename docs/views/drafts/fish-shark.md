@@ -63,7 +63,7 @@ The keys `fish` and `shark` already exist in `GROUPS` in `src/cam.a.js`. `reef` 
 11. `['x', 'Hearing', 'Minnows, carp and catfish have small bones that link the swim bladder to the inner ear, which gives them keen hearing, and a goldfish hears best between about 350 and 1,500 vibrations a second. The picture leaves sound out.']`
     Log 119 (Ladich and Fay 2013).
 12. `['x', 'Electric fields', 'Catfish and lampreys can sense the faint electric fields that living animals make in water. The picture leaves this sense out.']`
-    Logs 59 (Alves-Gomes 2001), 52 (Bodznick and Northcutt 1981).
+    Logs 59 (Alves-Gomes 2001), 163 (electrosensory pathways in the channel catfish), 52 (Bodznick and Northcutt 1981).
 
 Rows for three later settings:
 
@@ -101,7 +101,7 @@ fish: { chip: 'Freshwater fish', who: 'a freshwater fish', fov: 335, cpd: 4, top
 
 ### New effects the evidence calls for
 
-1. **Water colour by distance (tea-coloured fresh water).** What the person sees: near things keep their colours, and farther things turn amber, then brown, then dark, with the sides and the lower part of the frame darker than the top (log 72: in blackwater the light from the sides and below is absorbed and red light comes from a small patch above). Phone input: the engine's existing guess that lower in the frame is closer, or a depth estimate from the camera where it is affordable. Drawing: the standard picture of light in water, with each colour channel multiplied by exp(−k d) and a little of the water's own colour added back as haze; k is small for red and large for blue in fresh tea-coloured water (log 72), and the opposite in the sea (logs 4, 132). The constants can be set from log 152: in the dark lake half the light lay beyond 640 nm and only 21% of the clear lake's photons reached 1 m, against a halfway point of 582 nm in the clear lake. Per-channel values for a Florida lake are still `invented` until a measured Florida spectrum is found. Cost: one multiply and one mix per pixel with a depth value already at hand; cheap. What makes it beautiful: tea water glows warm near the surface, and the darkening toward the bottom is the real reason a tannic lake looks bottomless.
+1. **Water colour by distance (tea-coloured fresh water).** What the person sees: near things keep their colours, and farther things turn amber, then brown, then dark, with the sides and the lower part of the frame darker than the top (log 72: in blackwater the light from the sides and below is absorbed and red light comes from a small patch above). Phone input: the engine's existing guess that lower in the frame is closer, or a depth estimate from the camera where it is affordable. Drawing: each colour channel multiplied by exp(−k d), a little of the water's own colour added back as haze, and a blur that also grows with distance, since scattering removes fine detail before coarse shapes (log 159); k is small for red and large for blue in fresh tea-coloured water (log 72), and the opposite in the sea (logs 4, 132). The constants can be set from log 152: in the dark lake half the light lay beyond 640 nm and only 21% of the clear lake's photons reached 1 m, against a halfway point of 582 nm in the clear lake. Per-channel values for a Florida lake are still `invented` until a measured Florida spectrum is found. Cost: one multiply and one mix per pixel with a depth value already at hand; cheap. What makes it beautiful: tea water glows warm near the surface, and the darkening toward the bottom is the real reason a tannic lake looks bottomless.
 2. **Snell's window when the phone looks up.** What the person sees: tilting the phone toward the sky squeezes the whole scene above into a bright disc about 97 degrees across, its rim crowded and stretched, and outside the disc the picture shows a mirror image of the lower part of the frame (logs 69, 70). Phone input: the orientation sensor for tilt (behind the engine's permission flag); the camera for the scene. The camera's roughly 70 degree field fills only the central 51 degrees of the disc (arcsin(sin 35° / 1.33) = 25.5°, doubled), so the rim is stretched from the frame's edges, as the wide field is today. Cost: one remapping pass and a tilt reading; moderate. Beauty: the disc is the single most recognizable sight of being under water.
 3. **Seasonal shift for minnows.** What the person sees: the default setting leans slightly toward red in winter months, read from the phone's date (log 142). Cost: one number in the colour matrix per month; trivial. The size of the shift is `invented`; the direction is measured in one minnow.
 4. **Lateral line ripples.** What the person sees: when something moves close to the phone, a soft pressure ripple runs along the edge of the screen on that side, fading with distance, as the lateral line feels flow within one or two body lengths (logs 48, 49). Phone input: the engine's motion-salience map, with large, near motion (big image motion low in the frame) standing in for a nearby swimmer; the phone's own movement removed with the motion sensors. Cost: moderate, since the salience map is already planned. The mapping from image motion to water flow is `invented` and the row stays `x` until it is drawn.
@@ -187,6 +187,8 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: 
    Logs 127 (Kajiura and Holland 2002), 47 (pores around the mouth and snout), 128 (Kalmijn 1971), 131.
 9. `['x', 'Smell first', 'A hunting shark usually smells its prey first and follows the scent upstream, then turns to sight, the lateral line, the electric sense and touch as it closes in. The picture leaves smell out.']`
    Log 117 (Gardiner et al. 2014).
+10. `['x', 'Magnetic sense', 'Sandbar sharks learned to respond when a magnetic field around them changed, and lost the skill when their magnetic sense was blocked, which suggests that sharks feel the Earth’s magnetic field. The picture leaves this sense out.']`
+    Log 164 (Anderson et al. 2017).
 
 ### The picture
 
@@ -213,6 +215,7 @@ shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, p
 2. **The head sweep.** A slow side-to-side drift of the picture of about 15 degrees each way, as hammerheads and other sharks swing their heads while swimming (log 93). Phone input: none needed; the motion sensors could stop the drift while the person turns the phone. Cost: low. The rhythm is `invented`.
 3. **A pupil that follows the light.** What the person sees: in a bright scene the background comes into focus over about a minute, and in a dim one it softens, as the sandbar shark's pupil closes to under a third of its open size within a minute of bright light and opens in the dark (log 157). Phone input: the camera's own exposure or the mean brightness of the frame. Cost: one smoothed number driving `dof`; trivial. Beauty: the picture breathes with the light, slowly, the way a shark's eye does.
 4. **Smell first.** The view could open on a blank, slowly moving field that resolves into the picture as the person approaches something, following the hunting order in log 117. This is a way of arriving at the view, and it needs the owner's word on whether a view may change over time like this.
+5. **The one sense a phone shares with a shark.** A phone's magnetometer feels the same field of the Earth that sandbar sharks respond to (log 164). What the person sees: a faint, slow banding across the picture whose angle follows magnetic north as the phone turns, as if the field lines were visible in the water. Cost: a compass reading and one overlay; low. The banding is the app's invention and needs an `i` row of its own; the sense behind it is measured. This is the strongest stand-in in the unit, because the phone measures the very quantity the shark senses.
 
 ## 5. The view `ray` (rays, skates and chimaeras)
 
@@ -234,6 +237,8 @@ shark: { chip: 'Shark', who: 'a shark', fov: 300, cpd: 5, topoS: 1, fall: 1.5, p
    Logs 46, 131 (Wueringer 2012), 43 (5 to 80 nV/cm), 128 (Kalmijn 1971, a ray finding a buried flatfish).
 7. `['x', 'Hearing', 'Rays and skates hear through the movement of the water itself, since they have no swim bladder, and the little skate hears best at 100 to 200 vibrations a second. The picture leaves sound out.']`
    Log 120 (Ladich and Fay 2013).
+8. `['x', 'A tail that feels', 'A cownose ray’s long, thin tail carries lateral line canals along its whole length, so it may trail behind the ray like an antenna that feels the water. The picture leaves this sense out.']`
+   Log 161 (Chaumel and Lauder 2025).
 
 ### The picture
 
