@@ -9,7 +9,9 @@
     ]
   },
   "cue": "Detail is coarse and the field is wide. Tap the screen to move the focus.",
-  "modules": [],
+  "modules": [
+    "tilt"
+  ],
   "params": {
     "fov": {
       "value": 335,
@@ -358,10 +360,6 @@
       "why": "Reef fish have two eyes that look their own ways, each with a small sharp centre (TRY.reef draws them as two gazing zones)."
     },
     {
-      "need": "field",
-      "why": "Snell's window: looking up, the sky is pressed into a circle about 97 degrees across (Sabbah 2006)."
-    },
-    {
       "need": "light",
       "why": "Water colour by distance and depth: reds fade within 10 to 20 m in the sea; fresh water in Florida is often tea-coloured (logs 71, 72, 132)."
     }
@@ -450,14 +448,68 @@
         "param:cpd",
         "param:topoS"
       ]
+    ],
+    [
+      "g",
+      "Being tried: looking up",
+      "Under water the whole sky above is pressed into a circle about 97 degrees across, because light bends as it enters the water. With &draw=snell and the motion sensors on, point the phone up to see it. A phone camera fills only the middle of that circle, and the dark ring outside it is the app's.",
+      [
+        "docs/views/sheets/fish.md#4",
+        "Sabbah 2006",
+        "param:tilt.fromDeg",
+        "param:tilt.fullDeg"
+      ]
     ]
   ],
   "version": 1,
   "zones": [],
   "inputs": {
-    "motion": "none",
+    "motion": "optional",
     "sound": "none",
-    "haptic": "none"
+    "haptic": "none",
+    "senses": {
+      "motion": 1
+    }
   },
-  "draft": true
+  "draft": true,
+  "tilt": {
+    "fromDeg": {
+      "value": 15,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        60
+      ],
+      "floor": null,
+      "note": "the camera's elevation where the window begins to form"
+    },
+    "fullDeg": {
+      "value": 45,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        20,
+        90
+      ],
+      "floor": null,
+      "note": "the elevation where it is complete"
+    }
+  },
+  "draw": {
+    "tilt": [
+      {
+        "name": "level",
+        "invented": true,
+        "note": "the view as it was"
+      },
+      {
+        "name": "snell",
+        "invented": true,
+        "note": "point the phone up and the scene above is pressed into a disc about 97 degrees across, with a dark ring outside it (atlas 2)"
+      }
+    ]
+  }
 }

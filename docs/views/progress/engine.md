@@ -39,3 +39,25 @@ Started 13 October 2026, 09:31 US Eastern, on `agent/engine` with `main` merged 
 2. Fungus waits on `slow` (module 12), not built. Cat, deer, rabbit, squirrel and insect have no pigment peaks in the logs yet; they get trials once research supplies them. No sheet gives a graded value for any of the fourteen offered views, so none was converted from `?`.
 3. A third floor run for the parameters after `gaze.floor`, and a moving-clip floor.
 4. Module 4's strobe and quarter-resolution ring; module 5's tilt, heading and knock side for `field` and `overlay`.
+
+# Burst 4 (started 13 October 2026, 14:22 US Eastern, from `main` at `cb2e09a`; stops by 16:50)
+
+## Plan
+1. The `try` check passes for views without zones; `lent` waits for the look to open.
+2. Module 12, `slow`, with sliders and `&draw=` options; tilt and heading; pigment peaks for cat, deer, rabbit, squirrel and insect; the third floor run with a moving clip.
+3. Specs for fungus, cat, deer, rabbit, squirrel and insect behind `?try=`.
+
+## Done (pushed to `agent/engine`)
+- `test/check4.js try`: a view with no zones (`zones: []`) passes; module 12's views must keep frames. `lent` waits up to 15 s for the look to open.
+- Module 12, `slow`: `hour`, `patient`, `righting`, `exposure`, `off` (`docs/ENGINE.md`). Fungus and slime specs use it; cat and deer trials offer `exposure`.
+- Tilt and heading: Snell's window on fish (`&draw=snell`), the magnetic tide and grain on salamander and the bird trial; `&roll=`, `&elev=`, `&heading=` for checking.
+- Pigment peaks for cat, deer, rabbit, squirrel and insect in `tools/views/pigments.py` (`PEAKS`, all sourced) and trials written from them.
+- The floor: a moving-clip mode. Two runs pushed at 14:58: `run/engines/linux-floor-jumper3` (still, the parameters after `gaze.floor`) and `run/engines/linux-floor-moving1` (moving, what the still picture left invisible). Results return on the `ci` branch under `runs/engines/<run>-linux-chromium/floor.json`.
+
+- The first two floor runs (engines 74 and 75) timed out with nothing measured: an edit had put `lastNo = d; d *= 2;` inside a comment, so the harness rendered one value forever. Fixed and relaunched at 15:57 as `run/engines/linux-floor-jumper4` and `run/engines/linux-floor-moving2`.
+- Every check passed (typed, lex, record, lent, viewer, edge, sweep, film, try on 24 views, still, and `test/rec/check_rec.js`); `viewer` and `edge` needed `SLOW=3` on the loaded machine and pass on `main` the same way. Build 29 merged to `main` at about 16:05.
+
+## Next
+1. Copy both relaunched runs' `floor.json` from the `ci` branch into `docs/views/floor.json` (the moving one recorded in `runs` with its noise and threshold; its values replace only entries the still run left `invisible`).
+2. The owner's phone checks in `docs/STATUS.md`. Which way roll, elevation and heading turn the picture is untested on a phone.
+3. Not built: the field module's blind wedge and panorama ribbon, the lean toward light for fungus and slime, module 4's strobe and quarter-resolution ring.

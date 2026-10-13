@@ -126,7 +126,9 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await shot(page, 'L1-lent');
     await page.evaluate(() => window.__seenBack.lookAgain && window.__seenBack.lookAgain(window.__seenBack.record()[1])); await page.waitForTimeout(600);
     r.goneStays = await page.evaluate(() => !document.getElementById('record').hidden && window.__seenBack.S.screen);
-    await page.locator('#metList li .ico').first().tap(); await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 4000 }).catch(() => {}); r.lentOpens = (await st(page)).eyes;
+    await page.locator('#metList li .ico').first().tap();
+    // wait for the look to open (the eyes change), up to 15 s, in place of a fixed pause that was short on a loaded machine
+    await page.waitForFunction(() => window.__seenBack.S.eyes === 'wader', null, { timeout: 15000 * SLOW }).catch(() => {}); r.lentOpens = (await st(page)).eyes;
     r.errors = errors; out.lent = r;
     const ok = r.sub === '' && r.rings === 1 && r.days.join() === '1d'
       && r.eyes.length === 2 && r.eyes.some((e) => /^1p:Look as/.test(e)) && r.eyes.some((e) => /^0p:A creature you’ve already viewed the world as$/.test(e))
@@ -336,7 +338,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       // clip's frames after the last, as a phone's camera delivers them. The movement map keeps to the clip's own clock.
       await page.evaluate((x) => { document.getElementById('vid').playbackRate = x; }, +(process.env.PLAYBACK || .15));
       await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
-      const P = await page.evaluate((k) => { const p = window.__seenBack.params(k); return { sal: p.sal, gaze: !!p.gz, zoned: !!p.zones }; }, key);
+      const P = await page.evaluate((k) => { const p = window.__seenBack.params(k); return { sal: p.sal, gaze: !!p.gz, zoned: !!(p.zones && p.zones.length), slow: p.slowMode || '' }; }, key);   // a view with no zones (zones: []) need not compile the zone programs
       const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 30);
       let n = 0;
       while (Date.now() - t0 < SECS * 1000) {
@@ -359,6 +361,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       const last = trace[trace.length - 1], gs = await page.evaluate(() => window.__seenBack.engine.gazeState());
       r.eyes = (await st(page)).eyes; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
       r.jumps = (gs.gazes || []).map((g) => g[3]); r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
+      r.slow = await page.evaluate(() => window.__seenBack.engine.slowState && window.__seenBack.engine.slowState());   // module 12: frames kept in the store
       const scene = (process.env.CLIP || 'scene.webm') === 'scene.webm' ? JSON.parse(fs.readFileSync(path.join(here, 'assets', 'scene.json'), 'utf8')) : null;
       r.landed = {};
       if (scene) gs.log.forEach(([x, y, at, media]) => {   // the first gaze's fixations, against where test/make_scene.py drew everything at that clip time
@@ -376,7 +379,10 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       if (r.probe.glErr) errors.push('GL error ' + r.probe.glErr);
       if (/draw=palm|draw=pond|draw=strip|draw=face/.test(process.env.EXTRA || '') === false && key === 'jumper' && process.env.STAMPS && !(r.probe.stamps > 0)) errors.push('no stamp of attention was left');
       if (key === 'jumper' && !(r.probe.light > 0)) errors.push('the light module read nothing');
-      const ok = r.eyes === key && r.rows >= 6 && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)));
+      const sp = JSON.parse(fs.readFileSync(path.join(here, '..', 'views', key + '.json'), 'utf8')), want = ((sp.trial && sp.trial.rows) || sp.rows || []).length;
+      r.rowsWanted = want;   // every row the spec (or its trial) holds is shown
+      const ok = r.eyes === key && r.rows >= Math.max(3, want) && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)))
+        && (!/^(hour|exposure)$/.test(P.slow) || (r.slow && r.slow.mode === P.slow && r.slow.n > 1)) && (!P.slow || r.probe.zones);
       if (!ok) bad.push(key);
     }
     if (bad.length) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: these views being tried did not behave as they should: ' + bad.join(', ')); }
@@ -418,7 +424,10 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     // d is doubled until the 95th percentile of delta E*ab between the renders passes FLOOR_DE (2.3, see docs/views/floor.json), then
     // bisected four times. FLOOR_PARAMS lists tuning-panel labels (all of the view's scalars by default); FLOOR_VALUES the number of values
     // across each range (1: the spec's value only). Results go to FLOOR_OUT (docs/views/floor.json's form). Temporal parameters need the
-    // moving clip and are not measured here.
+    // moving clip: with FLOOR_MOVING=1 each render plays the clip for FLOOR_RUN seconds (0.6) up to FLOOR_T at FLOOR_RATE (0.3) before the
+    // shot, and the threshold is raised to 1.5 times the largest difference among three renders at the same value (the moving clip's own noise), and a
+    // difference counts only when a second render at the same value shows it too.
+    // FLOOR_REDO=1 measures again the parameters that the still picture left invisible.
     const view = process.env.FLOOR_VIEW || 'jumper', DE = +(process.env.FLOOR_DE || 2.3), tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'floor-'));
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: phone.userAgent });
     const page = patient(await ctx.newPage()); const errors = [];
@@ -434,16 +443,29 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     const specs = await page.evaluate(() => { const t = window.__seenBack.tune; return t.list(); });
     let want = (process.env.FLOOR_PARAMS ? process.env.FLOOR_PARAMS.split(',') : specs);
     if (process.env.FLOOR_SKIP && fs.existsSync(process.env.FLOOR_SKIP)) {   // parameters already measured (docs/views/floor.json) are left out
-      const done = (JSON.parse(fs.readFileSync(process.env.FLOOR_SKIP, 'utf8')).floor || {})[view] || {}; want = want.filter((l) => !done[l]);
+      const done = (JSON.parse(fs.readFileSync(process.env.FLOOR_SKIP, 'utf8')).floor || {})[view] || {};
+      const blind = (x) => Array.isArray(x) && x.length && x.every((r) => r[1] === 'invisible');
+      want = want.filter((l) => process.env.FLOOR_REDO ? !done[l] || blind(done[l]) : !done[l]);
     }
     const info = await page.evaluate((v) => window.__seenBack.tuneInfo ? window.__seenBack.tuneInfo() : null, view);
     let n = 0;
+    const MOVING = !!process.env.FLOOR_MOVING, T = +(process.env.FLOOR_T || 2), RUN = +(process.env.FLOOR_RUN || .6), RATE = +(process.env.FLOOR_RATE || .3);
     async function render(lab, x) {
-      await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]); await page.waitForTimeout(+(process.env.FLOOR_WAIT || 1800));
+      if (process.env.FLOOR_DEBUG) console.log('render', lab, x, new Date().toISOString().slice(11, 19));
+      await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]);
+      if (MOVING) {   // the same stretch of the clip each time, played slowly up to T, then held
+        await page.evaluate(([t0, r]) => { const v = document.getElementById('vid'); v.currentTime = t0; v.playbackRate = r; return v.play(); }, [Math.max(0, T - RUN), RATE]);
+        await page.waitForFunction((t) => document.getElementById('vid').currentTime >= t, T, { timeout: 120000 });
+        await page.evaluate(() => document.getElementById('vid').pause()); await page.waitForTimeout(300);
+      } else await page.waitForTimeout(+(process.env.FLOOR_WAIT || 1800));
       const f = path.join(tmp, (n++) + '.png'); await page.locator('canvas').first().screenshot({ path: f }); return f;
     }
     const de = (a, b) => JSON.parse(require('child_process').execFileSync(process.env.FLOOR_PY || 'python3', ['-I', path.join(here, '..', 'tools', 'views', 'delta_e.py'), a, b]).toString());
     const res = {}, NV = +(process.env.FLOOR_VALUES || 1);
+    let THR = DE, noise = null;
+    if (MOVING && want.length) {   // the moving clip's own noise: two renders at the same value
+      const lab0 = want.find((l) => info && info[l]); if (lab0) { const v0 = info[lab0][2]; const base = await render(lab0, v0); noise = 0; for (let i = 0; i < 3; i++) noise = Math.max(noise, de(base, await render(lab0, v0)).p95); THR = Math.max(DE, noise * 1.5); console.log('noise', noise, 'threshold', THR); }
+    }
     for (const lab of want) {
       const meta = info && info[lab]; if (!meta) { res[lab] = 'no such parameter'; continue; }
       const [lo, hi, v0] = meta, vals = NV <= 1 ? [v0] : Array.from({ length: NV }, (_, i) => lo + (hi - lo) * (i + .5) / NV);
@@ -452,19 +474,20 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
         const a = await render(lab, v); let d = (hi - lo) / 64, up = v + d <= hi ? 1 : -1, seen = null, lastNo = 0, e = null;
         while (Math.abs(d) <= (hi - lo)) {
           const b = await render(lab, v + up * d); e = de(a, b);
-          if (e.p95 > DE) { seen = d; break; } lastNo = d; d *= 2;
+          if (e.p95 > THR && (!MOVING || de(a, await render(lab, v + up * d)).p95 > THR)) { seen = d; break; }   // on the moving clip, seen twice
+          lastNo = d; d *= 2;
           if (v + up * d > hi || v + up * d < lo) break;
         }
         if (seen === null) { res[lab].push([v, 'invisible', e && e.p95]); continue; }
         let A = lastNo, B = seen;
-        for (let i = 0; i < 4; i++) { const m = (A + B) / 2, b = await render(lab, v + up * m); if (de(a, b).p95 > DE) B = m; else A = m; }
+        for (let i = 0; i < 4; i++) { const m = (A + B) / 2, b = await render(lab, v + up * m); if (de(a, b).p95 > THR && (!MOVING || de(a, await render(lab, v + up * m)).p95 > THR)) B = m; else A = m; }
         res[lab].push([+v.toPrecision(4), +B.toPrecision(3)]);
         await render(lab, v0);
       }
       console.log(lab, JSON.stringify(res[lab]));
-      if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify({ view: view, threshold: DE, partial: true, floor: res }, null, 1));
+      if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify({ view: view, threshold: THR, moving: MOVING, noise: noise, partial: true, floor: res }, null, 1));
     }
-    out.floor = { view: view, threshold: DE, errors: errors, floor: res };
+    out.floor = { view: view, threshold: THR, moving: MOVING, noise: noise, errors: errors, floor: res };
     if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify(out.floor, null, 1));
     await ctx.close();
   }

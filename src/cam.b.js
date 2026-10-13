@@ -47,7 +47,9 @@
     '#version 300 es', 'precision highp float; precision highp sampler2DArray;', 'in vec2 v; out vec4 o;',
     'uniform sampler2D u_src, u_prev; uniform sampler2DArray u_ring; uniform vec2 u_px;',
     'uniform float u_n, u_head, u_lag, u_useRing, u_now, u_a, u_gate, u_decay, u_enc, u_reset;',
-    '#if ZONES', 'uniform vec4 u_zT[4];', ZONE_GLSL, '#endif',
+    '#if ZONES', 'uniform vec4 u_zT[4];', ZONE_GLSL,
+    'uniform sampler2D u_store; uniform vec4 u_slow;',   // module 12, slow: the store of frames kept every few seconds, how much of it is shown, and the paper of a print not yet developed
+    '#endif',
     'float lum(vec3 c){ return dot(c, vec3(0.2126, 0.7152, 0.0722)); }',
     'vec3 layer(vec2 uv, float i){ return texture(u_ring, vec3(uv, mod(u_head - i + 2.0 * u_n, u_n))).rgb; }',
     'vec3 ring(float back){',
@@ -71,6 +73,8 @@
     '    float w = zoneW(i, v); vec4 zt = u_zT[i];',
     '    if (w > 0.001) base = mix(base, zt.y > 0.5 ? mix(ring(zt.x), now0, zt.z) : now0, w);',
     '  }',
+    '  if (u_slow.x > 0.0) base = mix(base, texture(u_store, v).rgb, u_slow.x);',
+    '  if (u_slow.y > 0.0) base = mix(base, vec3(0.80, 0.78, 0.73), u_slow.y);',
     '#endif',
     '  vec4 pv = texture(u_prev, v);',
     '  vec3 prev = u_enc > 0.5 ? pv.rgb * pv.rgb : pv.rgb;',
@@ -102,7 +106,10 @@
     // module 2, spectrum (docs/ENGINE-DESIGN.md): the ultraviolet column of the colour matrix, view and zones; the animal's classes from
     // the four inputs (u_Q, for the colour wheel and the neutral band); the wheel's turn (below 0 when off); the neutral band's strength
     'uniform vec3 u_U; uniform vec4 u_zU[4]; uniform mat4 u_Q; uniform float u_rot4, u_neutral;',
-    'uniform vec2 u_stab;',   // module 5, motion: the shift that holds the world still against the hand (the locked world, &draw=lock)
+    'uniform vec2 u_stab;',
+    // module 12, slow: the picture turned back toward true vertical (u_spin, radians); module 5, tilt and heading: Snell\'s window
+    // (strength, the window\'s centre in screen heights from the middle) and the magnetic options (grain, tide, the grain\'s angle)
+    'uniform float u_spin; uniform vec3 u_snell, u_mag;',   // module 5, motion: the shift that holds the world still against the hand (the locked world, &draw=lock)
     'vec3 wheel(vec4 q, float k){ vec4 s = k < 0.5 ? q : k < 1.5 ? q.yzwx : k < 2.5 ? q.zwxy : q.wxyz; return s.zyx; }',   // light lost in water: per channel, and how far the top of the picture is taken to be (GUESSED from height); the water\'s own colour
     'vec2 ripple(vec2 p){',
     '  vec2 s = vec2(0.0);',
@@ -122,6 +129,7 @@
     '  vec2 p = (v - 0.5) * vec2(A, 1.0);',
     '#if ZONES',
     '  if (u_ripK > 0.0) p += ripple(p);',
+    '  if (u_spin != 0.0) { float cs = cos(u_spin), sn = sin(u_spin); p = mat2(cs, sn, -sn, cs) * p; }',
     '#endif',
     '  vec2 pa = p - u_apC;',
     '  float facet = 0.0;',
@@ -136,6 +144,14 @@
     '  uv.x = mix(uv.x, 1.0 - uv.x, u_mirror);',
     '#if ZONES',
     '  uv.x += u_pan; uv += u_stab;',
+    '  float snellDim = 1.0;',
+    '  if (u_snell.x > 0.001) {',   // Snell\'s window: the sky above water squeezed into a disc about 97 degrees across (fish.md section 4, item 1)
+    '    vec2 d = p - vec2(0.0, u_snell.y); float dl = length(d), rw = radians(dl / 0.42 * 48.6), sa = 1.333 * sin(min(rw, 1.5));',
+    '    float inside = 1.0 - smoothstep(0.96, 1.0, sa), ta = asin(min(sa, 1.0));',
+    '    float L = max(u_srcAspect, 1.0), t = tan(min(ta, 1.25)) / tan(radians(32.0));',   // the camera\'s long side taken to span 64 degrees
+    '    vec2 uvS = 0.5 + (d / max(dl, 1e-5)) * t * 0.5 * vec2(L / u_srcAspect, L);',
+    '    uv = mix(uv, uvS, u_snell.x * inside); snellDim = mix(1.0, 0.22, u_snell.x * (1.0 - inside));',
+    '  }',
     '#endif',
     '  float outside = max(max(max(-uv.x, uv.x - 1.0), max(-uv.y, uv.y - 1.0)), 0.0);',
     '  float topo = u_wA * (r / 0.5) + u_wS * (abs(p.y) / 0.5);',
@@ -170,6 +186,9 @@
     '  if (u_field > 0.001) acc = mix(acc, dec(textureLod(u_t, uv, max(u_maxLod - 2.0, 0.0))), u_field);',
     '  float edge = mix(1.0, 0.5, smoothstep(0.0, 0.35, outside));',
     '  acc *= edge * u_expo;',
+    '#if ZONES',
+    '  acc *= snellDim;',
+    '#endif',
     '  vec3 c = acc * gain / (1.0 + (gain - 1.0) * acc);',
     '  float mn = min(c.r, min(c.g, c.b));',
     '  float uvg = clamp(1.6 * (c.b - 0.5 * (c.r + c.g)) + 2.5 * max(mn - 0.6, 0.0), 0.0, 1.0);',   // INVENTED ultraviolet
@@ -192,6 +211,12 @@
     '  m.g *= 1.0 - 0.9 * u_noGreen;',
     '  m = mix(vec3(dot(m, vec3(0.2126, 0.7152, 0.0722))), m, sat);',
     '#if ZONES',
+    '  if (u_mag.x > 0.0) {',   // the grain of the world: fine streaks that run along magnetic north (atlas 21, invented)
+    '    vec2 dg = vec2(cos(u_mag.z), sin(u_mag.z)); float al = dot(gl_FragCoord.xy, dg), ac = floor(dot(gl_FragCoord.xy, vec2(-dg.y, dg.x)) * 0.5);',
+    '    float nz = fract(sin(ac * 12.9898) * 43758.5453), gr = 0.5 + 0.5 * sin(al * 0.015 + nz * 6.283);',
+    '    m *= 1.0 - u_mag.x * 0.3 * nz * gr; m += u_mag.x * 0.08 * (1.0 - nz) * gr;',
+    '  }',
+    '  if (u_mag.y > 0.0) m *= 1.0 - u_mag.y * smoothstep(0.5, 1.0, v.y);',   // the tide of shade across the sky
     '  if (u_water.w > 0.0) { vec3 tr = exp(-u_water.rgb * u_water.w * clamp(v.y, 0.0, 1.0)); m = m * tr + u_waterC * (1.0 - tr); }',   // movement glows, where the view asks for it, except at the places the side eyes are ignoring
     '  if (u_salOn > 0.001) {',
     '    vec2 st = 0.6 / vec2(textureSize(u_sal, 0));',   // four samples a little apart, so the coarse map glows as soft light
@@ -304,6 +329,7 @@
       for (var i = 0; i < n; i++) { var info = gl.getActiveUniform(p, i); u[info.name] = gl.getUniformLocation(p, info.name); }
       return { p: p, u: u };
     }
+    var FS_SLOWP = '#version 300 es\nprecision highp float; in vec2 v; out vec4 o; uniform sampler2D u_src, u_prev; uniform float u_w; void main(){ o = vec4(mix(texture(u_prev, v).rgb, texture(u_src, v).rgb, u_w), 1.0); }';
     var pCopy = prog(FS_COPY), pTime = prog(withZones(FS_TIME, 0)), pView = prog(withZones(FS_VIEW, 0));
     // The programs for zones and salience are compiled the first time a view needs them, so a phone that never meets one pays nothing.
     var pTimeZ = null, pViewZ = null, pLow = null, pShift = null, pRes = null, pSal = null, zErr = '';
@@ -314,6 +340,60 @@
       return !!pViewZ;
     }
     var vao = gl.createVertexArray(); gl.bindVertexArray(vao);
+
+    // ---- module 12, slow (docs/ENGINE.md): a store at half the picture's width and height (a quarter of its pixels) that takes one frame
+    // every few seconds and keeps their running mean, then a mean that forgets over the view's window. It accumulates in a 16-bit float
+    // target where the phone renders to one, so it holds many more frames than the time pass's averaging, which floors at 0.2 without
+    // float textures (fungus.md section 4). The time pass then takes its picture from the store.
+    var pSlow = null, slowT = [null, null], slowW = 0, slowH = 0, slowN = 0, slowAt = -1e12, slowFb = null, slowMode = '', spinS = 0, spinAt = 0;
+    var lastSn = 0, watchAt = 0, develop = 0, lastCells = null, lastCellRead = 0, picMove = 0;
+    window.addEventListener('pointerdown', function () { watchAt = performance.now(); }, { passive: true });
+    function slowReset() { slowN = 0; slowAt = -1e12; develop = 0; watchAt = performance.now(); }
+    function picChange() {                         // how much the picture changed between the light module's reads (0 still, 1 a lot)
+      var C = LIGHT.cells; if (!C || LIGHT.reads === lastCellRead) return picMove;
+      lastCellRead = LIGHT.reads; var d = C.data, n = C.w * C.h, s = 0, i;
+      if (lastCells && lastCells.length === d.length) { for (i = 0; i < n; i++) s += Math.abs((d[i * 4] + d[i * 4 + 1] + d[i * 4 + 2]) - (lastCells[i * 4] + lastCells[i * 4 + 1] + lastCells[i * 4 + 2])); s /= n * 3 * (d instanceof Uint8Array ? 255 : 1); }
+      lastCells = d.slice(0); picMove = lerp(picMove, s, .5); return picMove;
+    }
+    function slowTick(P, now) {                    // returns [how much of the store is shown, how much paper covers it]
+      var S = P.slow, mode = P.slowMode;
+      if (mode !== slowMode) { slowMode = mode; slowReset(); }
+      if (mode === 'righting') {                   // the slow righting (atlas 24): the picture turns back to true vertical
+        var pose = senses.pose(), dts = spinAt ? Math.min((now - spinAt) / 1000, .25) : 0; spinAt = now;
+        spinS += (pose.roll - spinS) * (1 - Math.exp(-dts / Math.max(.1, S.rightS || 20)));
+        return null;
+      }
+      if (!pSlow) pSlow = prog(FS_SLOWP);
+      var w = Math.max(2, sw >> 1), h = Math.max(2, sh >> 1);
+      if (w !== slowW || h !== slowH || !slowT[0]) {
+        slowT.forEach(function (t) { if (t) gl.deleteTexture(t); }); slowW = w; slowH = h; slowN = 0;
+        slowT = [0, 1].map(function () { var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t); gl.texStorage2D(gl.TEXTURE_2D, 1, floatOK ? gl.RGBA16F : gl.RGBA8, w, h);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE); return t; });
+        if (!slowFb) slowFb = gl.createFramebuffer();
+      }
+      var every = mode === 'exposure' ? 0 : Math.max(50, S.everyMs || 3000), win = Math.max(.5, S.windowS || 600), still = true, show = 1, paper = 0;
+      if (mode === 'patient') {                    // the patient view (atlas 24): nothing develops while the person watches
+        var mv = picChange();
+        if (senses.turning() > 6 || mv > (S.moveK || .03)) watchAt = now;
+        var quiet = (now - watchAt) / 1000 - (S.stillS || 8);
+        still = quiet > 0;
+        if (still) develop = Math.max(develop, clamp(quiet / Math.max(1, S.developS || 30), 0, 1));
+        paper = slowN ? 1 - develop : 1;
+      }
+      if (mode === 'exposure') show = clamp(S.mix === undefined ? 1 : S.mix, 0, 1);   // the long exposure (atlas 7): shown as the light falls
+      if (still && fresh && now - slowAt >= every) {
+        slowAt = now; slowN++;
+        var wt = Math.max(1 / slowN, 1 - Math.exp(-(every || stepMs) / 1000 / win)); if (!floatOK) wt = Math.max(wt, 1 / 64);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, slowFb); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, slowT[1], 0);
+        gl.viewport(0, 0, slowW, slowH); gl.useProgram(pSlow.p);
+        gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texSrc); gl.uniform1i(pSlow.u.u_src, 0);
+        gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, slowT[0]); gl.uniform1i(pSlow.u.u_prev, 1);
+        gl.uniform1f(pSlow.u.u_w, wt); gl.drawArrays(gl.TRIANGLES, 0, 3);
+        var t = slowT[0]; slowT[0] = slowT[1]; slowT[1] = t;
+      }
+      return slowN ? [show, paper] : [0, paper];
+    }
 
     // ---- the frame-time probe: the graphics chip's own time for a frame where the browser offers a timer query
     // (EXT_disjoint_timer_query_webgl2), and the script's time inside draw() everywhere. A query's answer arrives a few frames
@@ -670,7 +750,8 @@
       lighten: function () { if (pViewZ && salFrames && salStep < SAL_SIDES.length - 1) { salStep++; return true; } return false; },
       clear: function () { hasFrame = false; },
       hasFrame: function () { return hasFrame; },
-      newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; },
+      newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; slowReset(); },
+      slowState: function () { return { mode: slowMode, n: slowN, develop: +develop.toFixed(3), spin: +spinS.toFixed(2), move: +picMove.toFixed(4), w: slowW, h: slowH, snell: lastSn, loc: !!(pViewZ && pViewZ.u.u_snell) }; },
       state: function () { return { sw: sw, sh: sh, writes: writes, stepMs: stepMs, moving: moving, floatOK: floatOK, err: gl.getError() }; },
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
       probe: function (clear) { var r = { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr, glErr: gl.getError(), stamps: stampSlots.filter(function (q) { return q.got && !q.live; }).length, light: LIGHT.reads, lum: +LIGHT.lum.toFixed(3) }; if (clear) { cpuMs = []; gpuMs = []; } return r; },
@@ -806,7 +887,7 @@
         lastP = P; lastMirror = fx.mirror ? 1 : 0; lastCamZoom = fx.camZoom || 1;
         gl.bindVertexArray(vao);
         if (!hasFrame) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); return; }
-        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001 || P.ripple > .001 || P.pan || P.water || P.spec || P.lock) && zonePrograms();
+        var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001 || P.ripple > .001 || P.pan || P.water || P.spec || P.lock || P.slowMode || P.snell || P.magMode) && zonePrograms();
         var ad = adaptOf(P);
         if (ad > .001) { var M0 = P.M, U0 = P.U, Pa = {}, pk; for (pk in P) Pa[pk] = P[pk]; Pa.M = M0.map(function (x, j) { return lerp(x, P.adapt.M[j], ad); }); Pa.U = U0.map(function (x, j) { return lerp(x, P.adapt.U[j], ad); }); P = Pa; }
         if (zoned) readPoll(now);
@@ -846,9 +927,10 @@
           var sp = senses.turning();
           salience(now, 1 - clamp((sp - 25) / 70, 0, .85), [0, 0], freshMedia);
         }
+        var slowU = zoned && P.slowMode ? slowTick(P, now) : null; if (!(zoned && P.slowMode === 'righting')) spinS = 0;
         fresh = false;
         var gateAny = P.gate > .5 || (Z && Z.some(function (z) { return z.gate > .01; }));
-        var tp = zoned && zPace ? pTimeZ : pTime;
+        var tp = zoned && (zPace || slowU) ? pTimeZ : pTime;
         gl.bindFramebuffer(gl.FRAMEBUFFER, fbT);
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tB, 0);
         gl.viewport(0, 0, sw, sh); gl.useProgram(tp.p);
@@ -866,6 +948,8 @@
         if (tp === pTimeZ) {
           gl.uniform2f(ut.u_zScale, sw / Math.max(sw, sh), sh / Math.max(sw, sh)); gl.uniform1i(ut.u_nz, nz);
           gl.uniform4fv(ut['u_zG[0]'], zG); gl.uniform4fv(ut['u_zH[0]'], zH); gl.uniform4fv(ut['u_zR[0]'], zR); gl.uniform4fv(ut['u_zX[0]'], zX); gl.uniform4fv(ut['u_zT[0]'], zT);
+          gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, slowU && slowT[0] ? slowT[0] : texSrc); gl.uniform1i(ut.u_store, 3); gl.activeTexture(gl.TEXTURE0);
+          gl.uniform4f(ut.u_slow, slowU ? slowU[0] : 0, slowU ? slowU[1] : 0, 0, 0);
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
         reset = false;
@@ -911,6 +995,11 @@
           if (P.Q) gl.uniformMatrix4fv(u.u_Q, true, new Float32Array(P.Q));
           gl.uniform1f(u.u_rot4, P.rot4 >= 0 && P.Q ? WHEEL.turn : -1); gl.uniform1f(u.u_neutral, calm ? (P.neutral || 0) * .3 : P.neutral || 0);
           var st = P.lock ? senses.stab(P.motion, now) : null; gl.uniform2f(u.u_stab, st ? st[0] / CAM_DEG : 0, st ? st[1] / CAM_DEG : 0);
+          gl.uniform1f(u.u_spin, spinS * Math.PI / 180);
+          var pose = P.snell || P.magMode ? senses.pose() : null, sn = P.snell && pose ? clamp((pose.elev - (P.tilt.fromDeg || 15)) / ((P.tilt.fullDeg || 45) - (P.tilt.fromDeg || 15)), 0, 1) : 0;
+          lastSn = sn; gl.uniform3f(u.u_snell, sn, pose ? clamp((90 - pose.elev) / 97, 0, 1) * .5 : 0, 0);   // the disc slides toward the top as the phone levels
+          var mg = P.magMode && pose && pose.heading !== null ? pose.heading : null, red = LIGHT.reads ? clamp(((LIGHT.col[0] - LIGHT.col[2]) / (LIGHT.col[0] + .02) - .3) * 2.5, 0, 1) : 0;   // red or yellow light melts it (birds draft)
+          gl.uniform3f(u.u_mag, mg !== null && P.magMode === 'grain' ? (P.magnet.k || 1) * (1 - red) : 0, mg !== null && P.magMode === 'tide' ? (P.magnet.k || 1) * .3 * (.5 + .5 * Math.cos(mg * Math.PI / 180)) * (1 - red) : 0, mg !== null ? -mg * Math.PI / 180 + Math.PI / 2 : 0);
           var W4 = P.water || [0, 0, 0, 0], WC = P.waterC || [0, 0, 0]; gl.uniform4f(u.u_water, W4[0], W4[1], W4[2], W4[3]); gl.uniform3f(u.u_waterC, WC[0], WC[1], WC[2]);
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);

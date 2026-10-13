@@ -200,6 +200,16 @@
         "param:cpd",
         "param:pupil"
       ]
+    ],
+    [
+      "i",
+      "Being tried: north",
+      "With &draw=grain or &draw=tide and the motion sensors on, the picture carries a texture tied to magnetic north. The eastern newt's compass turns a quarter in light longer than about 500 nanometres, so warm light weakens the drawing. Nobody knows what this sense is like, and the drawing is the app's.",
+      [
+        "docs/views/sheets/salamander.md",
+        "Phillips 2001",
+        "param:magnet.k"
+      ]
     ]
   ],
   "version": 1,
@@ -207,9 +217,45 @@
   "matrices": {},
   "by": {},
   "inputs": {
-    "motion": "none",
+    "motion": "optional",
     "sound": "none",
-    "haptic": "none"
+    "haptic": "none",
+    "senses": {
+      "motion": 1
+    }
   },
-  "draft": true
+  "draft": true,
+  "magnet": {
+    "k": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        2
+      ],
+      "floor": null,
+      "note": "how strongly the compass is drawn; nobody knows what the sense is like"
+    }
+  },
+  "draw": {
+    "magnet": [
+      {
+        "name": "none",
+        "invented": true,
+        "note": "the view as it was"
+      },
+      {
+        "name": "tide",
+        "invented": true,
+        "note": "a faint darkening of the sky that follows the angle between the camera and magnetic north, fading in red or yellow light (atlas 21)"
+      },
+      {
+        "name": "grain",
+        "invented": true,
+        "note": "a fine directional grain, like brushed metal, that runs along magnetic north whichever way the phone turns; red light melts it (atlas 21)"
+      }
+    ]
+  }
 }

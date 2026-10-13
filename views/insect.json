@@ -25,5 +25,69 @@
       "Ultraviolet",
       "Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
     ]
-  ]
+  ],
+  "trial": {
+    "matrices": {
+      "INSECT": {
+        "from_pigments": [360,420,520],
+        "grade": "g",
+        "invented": true,
+        "src": [
+          "research/insect evidence L1 and L190 to L192: van der Kooi and Stavenga 2021 (most insects studied have ultraviolet, blue and green receptors; the peaks are the seven-spot ladybird's, 360, 420 and 520 nm)",
+          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+        ],
+        "rows": [[0.13373,0.50272,0.28269,0.08085],[0.00016,0.05564,0.5761,0.36811],[0.0,0.00042,0.03086,0.96872]],
+        "q": [[0.0,0.00042,0.03086,0.96872],[0.00016,0.05564,0.5761,0.36811],[0.13373,0.50272,0.28269,0.08085],[0,0,0,0]]
+      }
+    },
+    "params": {
+      "M": {
+        "value": "INSECT",
+        "grade": "g",
+        "invented": true,
+        "src": [
+          "research/insect evidence L1 and L190 to L192: van der Kooi and Stavenga 2021 (most insects studied have ultraviolet, blue and green receptors; the peaks are the seven-spot ladybird's, 360, 420 and 520 nm)"
+        ]
+      }
+    },
+    "spectrum": {"q":"INSECT","neutral":{"value":1,"grade":"i","invented":true,"src":[],"range":[0,2]}},
+    "draw": {
+      "spectrum": [
+        {
+          "name": "shift",
+          "invented": true,
+          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+        },
+        {
+          "name": "neutral",
+          "invented": true,
+          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+        },
+        {
+          "name": "wheel",
+          "invented": true,
+          "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
+        }
+      ]
+    },
+    "rows": [
+      ["g","Sharpness","Most insects see less than a sixtieth as much detail as people do."],
+      [
+        "g",
+        "Speed",
+        "Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
+      ],
+      [
+        "i",
+        "Ultraviolet",
+        "Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
+      ],
+      [
+        "i",
+        "Being tried: colour from pigments",
+        "On this trial the colours come from the measured receptor peaks (360, 420, 520 nm). The camera's colours and the display are the app's.",
+        ["van der Kooi and Stavenga 2021","param:spectrum.neutral","param:matrices.INSECT","param:M"]
+      ]
+    ]
+  }
 }
