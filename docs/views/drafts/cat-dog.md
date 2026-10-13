@@ -39,8 +39,8 @@ In **Alachua County** (GBIF `gadmGid=USA.10.1_1`, checked against the records' c
 
 **Where the views should split.** Three differences change what the picture draws on every frame, and each follows a line between genera.
 
-1. **Pupil and lens in cats.** The domestic cat has an upright slit pupil and a multifocal lens (L20, L48). The Siberian tiger has a round pupil and a monofocal lens (L49), and a co-author of the pupil survey says lions and tigers have round pupils, like people and dogs (L103). The lynx pupil is an upright oval (L50, L137). Across the family, slits are ancestral, and round pupils evolved six times and upright ovals two to four times, tracking the time of day a species hunts (L55). One picture that smears blur up and down would be false for the 27.4% of felid records in *Panthera*, *Puma* and *Acinonyx*. The puma's and the cheetah's pupils were not confirmed in an opened source **[unfinished]**; their size puts them with the round-pupilled cats (82% of slit-pupilled species stand under 42 cm at the shoulder, L23).
-2. **Pupil and lens in canids.** The red fox has an upright slit and a multifocal lens, the wolf and the dog round pupils (L51, L52, L53). The gray fox has oval pupils, on a weak source (L104). Slits and round pupils each evolved twice in the family (L56). The dog view's round pupil is false for the 47.4% of canid records in *Vulpes* and *Urocyon*, and for 69% of Alachua's.
+1. **Pupil and lens in cats.** The domestic cat has an upright slit pupil and a multifocal lens (L20, L48). The Siberian tiger has a round pupil and a monofocal lens (L49), and a co-author of the pupil survey says lions and tigers have round pupils, like people and dogs (L103). The lynx pupil is an upright oval (L50, L137). Across the family, slits are ancestral, and round pupils evolved six times and upright ovals two to four times, tracking the time of day a species hunts (L55). One picture that smears blur up and down would be false for the 27.4% of felid records in *Panthera*, *Puma* and *Acinonyx*. Walls (1942) states that large carnivores have round pupils and that only the smaller cats close a slit fully (L140, L142), which places the puma and the cheetah with the lions; species-by-species confirmation is **[unfinished]** (82% of slit-pupilled species stand under 42 cm at the shoulder, L23).
+2. **Pupil and lens in canids.** The red fox has an upright slit, or in Walls's words a vertical ellipse, and a multifocal lens; the wolf and the dog have round pupils (L51, L141, L52, L53). The gray fox has oval pupils, on a weak source (L104). Slits and round pupils each evolved twice in the family (L56). The dog view's round pupil is false for the 47.4% of canid records in *Vulpes* and *Urocyon*, and for 69% of Alachua's.
 3. **Where the eye is sharpest, in dogs.** Wolves have a pronounced horizontal streak (L38). Domestic dogs range from a streak to a strong central spot with almost no streak, in step with skull length (L36, L37). This splits breeds, which the app cannot tell apart from a photograph, so it becomes a setting inside the dog view.
 
 **Commitment: four views.**
@@ -93,7 +93,7 @@ L77 and L132 (cat 200), L57 (people 200, from clinical perimetry), L76 (each cat
 ```
 ['m', 'Two eyes', 'Both of a cat’s eyes face forward, and their views overlap over 60 to 140 degrees in front, depending on how it is measured. Kittens learn to judge depth much faster with both eyes open than with one.'],
 ```
-L76 (60, by behavioural perimetry), L78 (about 140), L107 (binocular depth learning). **[unfinished]**: the two figures should be settled from Vakkur and Bishop (1963) or Hughes (1976), neither opened.
+L76 (60, by behavioural perimetry), L144 (120 or more, Kahmann's figures as given by Walls 1942), L78 (about 140), L107 (binocular depth learning). **[unfinished]**: the gap between the behavioural and the anatomical figures is not settled.
 
 ```
 ['m', 'Depth', 'Upright slit pupils are most common in small hunters that ambush prey with their eyes close to the ground. For such an eye, how blurred a horizontal edge looks tells how far away it is.'],
@@ -147,14 +147,14 @@ That is thirteen rows. If the app keeps to twelve, the `Lens` row is the one to 
 
 1. **A pupil that answers to the light, and a night shift.** In bright light the slit closes and the blur of out-of-focus things stretches into tall, thin streaks; in dim light the pupil opens, the blur evens out, the shadows lift and the colours drain away, because the dark-adapted cat eye signals almost entirely through rods (L21, L71). The person would watch the view breathe with the room. Phone input: the camera frame's mean brightness corrected by the exposure time and ISO that `MediaStreamTrack.getSettings()` reports on browsers that report them (to be checked on a phone), with the frame brightness alone as the fallback. Difficulty: easy to medium, one smoothed light uniform that `mix` uses to move the pupil aspect, `dof`, `sat` and `gain` between a day and a night setting. What makes it beautiful as well as true: a slow change over several seconds, since a cat's dark adaptation goes on for up to an hour (L80 note), and a night palette that leans toward the rods' blue-green peak near 501 nm (L71) in place of plain grey. The row it would add: `['m', 'Colour at night', 'In the dark, almost all of the signals leaving a cat’s eye come from rods, a single kind of light-sensing cell, so colours fade. This view loses its colour as the light fades.']` (L71).
 2. **The near point.** A cat probably cannot focus on anything closer than about 25 cm (L82, secondary). Phone input: `focusDistance` from the camera track's settings, where the browser reports it; below 0.25 m the whole view softens. Difficulty: easy where the setting exists. It needs a row once built.
-3. **Eyeshine.** A soft bloom around bright points at night would stand for the tapetum's second pass of light. The strength would be **invented**, and Land and Nilsson's chapter 6 on mirrors in eyes (not read) should say whether a tapetum blurs the image. Difficulty: easy (one blur-and-add pass, scaled by the light uniform). It needs an `i` row.
+3. **Eyeshine.** A soft bloom around bright points at night would stand for the tapetum's second pass of light, which Walls (1942) says spreads onto neighbouring rods and can blur the image seen in dim light, though the cat is far from badly off (L149; the cat's tapetum is up to 15 cell layers thick, L148). The strength would be **invented**, and Land and Nilsson's chapter 6 (not read) should give a figure. Difficulty: easy (one blur-and-add pass, scaled by the light uniform). It needs an `i` row.
 
 ### 2.2 `bigcat` (lions, tigers, leopards, jaguars, pumas, cheetahs, clouded leopards)
 
 ```
-['m', 'Pupil', 'Lions and tigers have round pupils, like people and dogs, where house cats have upright slits. Out-of-focus things blur evenly in every direction in this view.'],
+['m', 'Pupil', 'Lions, tigers and the other large cats have round pupils, like people and dogs, where house cats have upright slits. Out-of-focus things blur evenly in every direction in this view.'],
 ```
-L103, L49. The puma's, the leopard's, the jaguar's and the cheetah's pupils are **[unfinished]** (wanted: Banks et al. 2015, table S1).
+L103, L49, L140 (large carnivores have round pupils; none approaches a slit). Species by species, the puma's, the leopard's, the jaguar's and the cheetah's pupils rest on that general statement (wanted: Banks et al. 2015, table S1).
 
 ```
 ['m', 'Lens', 'A tiger’s lens focuses every colour at the same depth, where a house cat’s lens has zones for several. Why the large cats lack those zones is unknown.'],
@@ -228,7 +228,7 @@ L44, L45, L46, L118.
 ```
 ['m', 'Colour', 'Dogs have two kinds of colour-sensing cells, most sensitive to violet-blue and to yellow-green light, where people have three. Reds, oranges, yellows and greens look much alike to a dog, and one shade of blue-green looks grey. This view shows colours the way a person with red-green colour blindness sees them.'],
 ```
-L64 to L67, L108, L109, L68 (neutral point near 480 nm, secondary).
+L64 to L67, L108, L109, L68 (neutral point near 480 nm, secondary), L151 (dogs answer a deuteranopia test the way red-green colour-blind people do).
 
 ```
 ['m', 'Field of view', 'A dog takes in about 240 degrees around itself, where a person takes in about 200, and the figure varies by breed. Only 30 to 60 degrees straight ahead are seen by both eyes, against about 120 for a person. This view widens the picture at its edges to suggest the wider sweep.'],
@@ -296,9 +296,9 @@ L101, L102, L127.
 ### 2.4 `fox` (red fox, Arctic fox, gray fox and their relatives)
 
 ```
-['m', 'Pupil', 'A red fox’s pupil closes to an upright slit like a house cat’s, and its lens has zones that bring several colours into focus together. Out-of-focus things smear up and down in this view.'],
+['m', 'Pupil', 'A red fox’s pupil narrows in bright light to a tall, thin oval, close to a house cat’s slit, and its lens has zones that bring several colours into focus together. Out-of-focus things smear up and down in this view.'],
 ```
-L51, L54. For *Urocyon* the row reads: `'A gray fox’s pupils are oval, where red foxes and their relatives have upright slits. Out-of-focus things smear a little more up and down than sideways in this view.'` (L104, a weak source; **[unfinished]**).
+L51, L141 (foxes have vertical ellipses; only the smaller cats close a slit fully, L142), L54. For *Urocyon* the row reads: `'A gray fox’s pupils are oval, where red foxes and their relatives have upright slits. Out-of-focus things smear a little more up and down than sideways in this view.'` (L104, a weak source; **[unfinished]**).
 
 ```
 ['m', 'Sharpest spot', 'A red fox sees most sharply in a small central spot, with a weaker band along the horizon. The Arctic fox, which lives on open tundra, has a stronger band. This view shows a sharp centre and a faint band.'],
@@ -424,7 +424,7 @@ Three consequences for the code:
 | Gap | Nearest evidence | How a value could be inferred |
 |---|---|---|
 | Acuity of lions, tigers, leopards, pumas | tiger eye 29.4 mm against the cat's 19.75 (L121, L75); lion eyes 27 to 32 mm (L122 note); the cheetah's 23 cycles per degree (L94) | scale the cat's 8 by the eye-length ratio: about 12 (done for `bigcat`, graded `i`). The per-species values in Veilleux and Kirk's online table would replace it |
-| Pupils of pumas, leopards, jaguars, cheetahs, coyotes, gray foxes **[unfinished]** | felid and canid trees of pupil shape (L55, L56); the 42 cm shoulder-height pattern (L23) | large, day-active or chasing species have round pupils in both trees; pending Banks et al. 2015 table S1 |
+| Pupils of pumas, leopards, jaguars, cheetahs, coyotes, gray foxes **[unfinished]** | large carnivores have round pupils (L140); felid and canid trees of pupil shape (L55, L56); the 42 cm shoulder-height pattern (L23); gray fox oval (L104) | the large cats take a round pupil (`g`); the coyote takes the dog's round pupil by analogy; pending Banks et al. 2015 table S1 |
 | Bobcat vision | Eurasian lynx pupil and lens (L50); S cones in the bobcat (L138) | treat *Lynx* as one genus |
 | Cat binocular overlap **[unfinished]** | 60 degrees by perimetry (L76) and about 140 by other means (L78) | the row gives both; the schematic-eye papers would settle the optical figure |
 | Field of view of foxes, coyotes and big cats | dogs 240 (L79), cats 200 (L77) | foxes and coyotes have dog-like skulls, so 240 by analogy (`g`); the views leave the field unset until a source appears |
