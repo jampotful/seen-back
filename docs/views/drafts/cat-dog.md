@@ -418,6 +418,14 @@ Every row that compares an animal with "people" or "a person" should use these f
 | Movement | notices motion slower than a tenth of a degree a second; picks out dots moving together when about 5 in 100 do | L15, L16 |
 | Ultraviolet | the adult lens absorbs it | L102 |
 
+Phrasings that carry these figures in rows, for any view:
+
+- "People see fine detail down to about 60 cycles per degree", or a fraction of a person's sharpness taken from 60 ("about a tenth as well as a person" for 6).
+- "People see a light flicker up to about 60 times a second." Where an animal's figure comes from the edge of the eye or from very bright light, add "and up to about 100 at the edge of view in very bright light."
+- "A person takes in about 200 degrees with both eyes open, and about 120 of them with both eyes at once."
+- "People have three kinds of colour-sensing cells."
+- "A fully dark-adapted person can just see by the light of an overcast starry night."
+
 Three consequences for the code:
 
 - `HUMAN_CPD = 60` in `src/cam.a.js` is **confirmed**.
