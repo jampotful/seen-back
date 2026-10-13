@@ -182,12 +182,15 @@
       return out;
     }
     function slotOf(m, rows, sb) {                     // everything the scoring needs: the settings, the labels, the species table, the biases
-      var has = {};
+      var has = {}, uniq = [], rowAt = [];
       if (rows) rows.forEach(function (r) { has[r.kind] = 1; });
       if (sb && (!rows || sb.length !== rows.length)) throw err('unfit', 'species biases do not match the table');
       if (!m.kinds && !rows) throw err('unfit', 'neither kinds nor species');
+      // rows of the kinds head that share a label are one kind, in the place of the label's first row (a group head keeps the row
+      // of a group it cannot yet name well and labels it `other`); their probabilities are added in fuseWith, as in tools/fusion/fuse.py
+      if (m.kinds) m.kinds.labels.forEach(function (l) { var j = uniq.indexOf(l); if (j < 0) { j = uniq.length; uniq.push(l); } rowAt.push(j); });
       // without a kinds head the labels are the kinds the table has, in the one fixed order
-      return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? m.kinds.labels : KIND_ORDER.filter(function (k) { return has[k]; }), table: rows, has: has,
+      return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? uniq : KIND_ORDER.filter(function (k) { return has[k]; }), rowAt: m.kinds ? rowAt : null, table: rows, has: has,
         kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
     }
     function encV(V) { return V && !V.parts && typeof V.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(V.sha256) ? 'sha256-' + V.sha256.toLowerCase() : ''; }   // the encoder's own version, where its checksum is given
@@ -492,9 +495,12 @@
     function fuseWith(c, kd, sd, month) {
       var f = c.f, labels = c.labels, table = c.table, n = labels.length, z, i, p = null, q = {}, s = null, order = [], comb, kinds = [], species = [];
       if (c.head) {
-        z = new Float64Array(n);
-        for (i = 0; i < n; i++) z[i] = f.t_kind * kd[i] + (c.kb ? c.kb[i] : 0);
-        p = softmax(z);
+        var nr = c.rowAt.length, pr;
+        z = new Float64Array(nr);
+        for (i = 0; i < nr; i++) z[i] = f.t_kind * kd[i] + (c.kb ? c.kb[i] : 0);
+        pr = softmax(z);
+        if (nr === n) p = pr;
+        else { p = new Float64Array(n); for (i = 0; i < nr; i++) p[c.rowAt[i]] += pr[i]; }   // rows that share a label are one kind
       }
       if (table && sd) {
         var pr = f.alpha_prior ? priorFor(c, month) : null, zs = new Float64Array(table.length);
