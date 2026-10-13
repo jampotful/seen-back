@@ -8,9 +8,9 @@ Written on 13 October 2026, from 01:46 UTC, by one research agent. The evidence 
 
 **Unfinished, and pages refused.**
 
-- **Not measured anywhere I could open:** flicker fusion for any member of the five groups (one primate study is on the wanted list); field of view for any primate, whale, dolphin, flying fox or insect-eating bat; pupil shape for most of the mammal group; colour vision of koalas, hedgehogs, shrews, skunks, mongooses, ringtails and sea otters; acuity of raccoons, Virginia opossums, bears, otters, pigs and koalas.
+- **Not measured anywhere I could open:** flicker fusion for any member of the five groups (one primate study is on the wanted list); field of view for any primate, whale, dolphin, flying fox or insect-eating bat; pupil shape for most of the mammal group; colour vision of koalas, hedgehogs, skunks, mongooses, ringtails and sea otters; acuity of raccoons, bears, river otters, pigs, koalas and hedgehogs. The Virginia opossum's acuity is known only from a South American opossum of the same genus (log 182), and the sea otter's only from its retina (log 184).
 - **Read only as titles, so no line rests on them:** Simmons and colleagues 1983 and Geberl, Kugler and Wiegrebe 2019 on the sharpness of bat sonar; Hanke and Dehnhardt 2009 and Schusterman and Balliet 1971 on aerial acuity as light falls in seals and sea lions; Griebel and Schmid 1996 and Newman and Robinson 2006 on manatee colour; Ordy and Samorajski 1968 on primate flicker fusion; Mass 2001 on the beluga's visual field. All are on the wanted list.
-- **Refused:** PubMed showed a browser check instead of the record (two requests). Europe PMC's search service answered one query with HTTP 429 (rate limit) at about 02:00 UTC, and I made no further requests to it. ScienceDirect refused Ordy and Samorajski 1968 by its robots rule. The Michigan State University repository refused a thesis on the raccoon's forepaw. The shell could not reach GBIF or Europe PMC directly (HTTP 403 at the session's proxy), so GBIF was read through the web tool.
+- **Refused:** PubMed answered all three requests with a browser check. PMC served one article (Dooley and colleagues 2012) and then showed a browser check for the next. Europe PMC's search service answered one query with HTTP 429 (rate limit) at about 02:00 UTC, and I made no further requests to it. ScienceDirect refused Ordy and Samorajski 1968, and J-STAGE refused the minke whale paper's PDF, both by robots rules; the PNAS page for Kounitsky and colleagues 2015 returned an error. Nature's pages for the two otter acuity papers of 1971 and 1973 showed abstracts without numbers. The Michigan State University repository refused a thesis on the raccoon's forepaw. The shell could not reach GBIF, Europe PMC or J-STAGE directly (HTTP 403 at the session's proxy), so GBIF was read through the web tool.
 
 ## 1. Scope
 
@@ -57,15 +57,17 @@ The default entry is shared by the whole group when the species is unknown, so i
 
 | Entry | Who | Records | Share of `mammal` | Why it differs |
 |---|---|---:|---:|---|
-| `mammal` | everyone below not named in the other two | 739,649 | 72.5% | two cones (log 7, 124 to 127, 134, 139) |
+| `mammal` | everyone below not named in the other two | 717,561 | 70.4% | two cones (log 7, 124 to 127, 134, 139) |
 | `raccoon` | raccoons (*Procyon*), kinkajou, Virginia opossum, pangolins; with a rods-only variant for armadillos, sloths and anteaters | 194,801 and 57,257 | 19.1% and 5.6% | one cone (log 120, 122) or none (log 141) |
-| `mole` | moles (Talpidae) | 28,258 | 2.8% | eyes under skin or tiny; touch and smell lead (log 130, 154, 169) |
+| `mole` | moles (Talpidae) and shrews (Soricidae) | 50,346 | 4.9% | eyes under skin or tiny, optic nerves of a few thousand fibres; touch, smell and echoes lead (log 130, 154, 169, 194, 195) |
 
 The `raccoon` split follows the earlier mammal sheet with three changes. Only the Virginia opossum goes to it, because South American opossums have two cones (log 123); it holds 82.4% of opossum records. Coatis (*Nasua*, 23,197 records) go to `mammal`, as dichromats (log 121). Rods-only animals become a variant of `raccoon` with a glare effect (section 2), because they share its grey picture. Pangolins (1,227 records) follow the earlier sheet's reading of Emerling and Springer 2015 (one cone left), which I did not reopen. The ringtail (*Bassariscus*, 6,418 records) and the olingos are unmeasured, nocturnal procyonids, and stay in `mammal` until someone measures them.
 
-The `mole` split also follows the earlier sheet, with a correction: 60.6% of mole records are European moles, whose tiny eyes carry blue- and green-sensitive cones (log 130), so "no picture at all" is untrue for most mole records. The `mole` view keeps a picture of light only (no image), and now keeps the colour of that light. Eastern moles (11.0%) have skin over their eyes (log 169), and star-nosed moles (6.0%) live by touch (log 154).
+The `mole` split also follows the earlier sheet, with a correction: 60.6% of mole records are European moles, whose tiny eyes carry blue- and green-sensitive cones (log 130), so "no picture at all" is untrue for most mole records. The `mole` view keeps a picture of light only (no image), and now keeps the colour of that light. Eastern moles (11.0% of mole records) have skin over their eyes (log 169), and star-nosed moles (6.0%) live by touch (log 154).
 
-Hedgehogs (European hedgehog 34,345 records, 3.4% of `mammal`) and shrews (22,088, 2.2%) have no source here. They stay in `mammal` by default, and section 5 says how a value could be inferred.
+Shrews (Soricidae, 22,088 records) move from `mammal` into `mole`, which they now share with the moles (43.9% of the view's 50,346 records against 56.1%). Their eyes are open and hold rods with two kinds of cone (log 196), but the optic nerve of a masked shrew carries about 1,500 fibres and a water shrew's about 6,300, as few as a star-nosed mole's 1,600 or a hairy-tailed mole's 2,600, against 45,000 to 59,000 in a lab mouse of similar size (log 194, 195). The authors of those counts conclude that shrews and moles both see little detail and depend very little on sight. Drawing shrews with the `mammal` view's 6 cycles per degree would be false for every shrew; a picture of light, its colour and its direction is close to what so few fibres can carry (section 5 gives the arithmetic).
+
+Hedgehogs (European hedgehog 34,345 records, 3.4% of `mammal`) have no source here. They stay in `mammal` by default, and section 5 says how a value could be inferred.
 
 **Summary of the twelve entries.**
 
@@ -80,9 +82,9 @@ Hedgehogs (European hedgehog 34,345 records, 3.4% of `mammal`) and shrews (22,08
 | `primate` | Monkey, ape | order Primates | 129,432 | 67.1% |
 | `capuchin` | Capuchin, spider monkey, marmoset | families Cebidae, Callitrichidae, Pitheciidae, Atelidae except genus *Alouatta* | 49,844 | 25.8% |
 | `lemur` | Lemur, loris, galago | suborder Strepsirrhini families, Tarsiidae, Aotidae | 13,612 | 7.1% |
-| `mammal` | Bear, otter, kangaroo, pig | the orders in `docs/views/world-orders.csv` for this group | 739,649 | 72.5% |
+| `mammal` | Bear, otter, kangaroo, pig | the orders in `docs/views/world-orders.csv` for this group | 717,561 | 70.4% |
 | `raccoon` | Raccoon, opossum, armadillo | genera *Procyon*, *Potos*; species *Didelphis virginiana*; orders Pholidota, Cingulata, Pilosa | 252,058 | 24.7% |
-| `mole` | Mole | family Talpidae | 28,258 | 2.8% |
+| `mole` | Mole, shrew | families Talpidae, Soricidae | 50,346 | 4.9% |
 
 Sea otters (13,624 records) and polar bears are marine mammals by habit and carnivores by family. They stay in `mammal` with their families, because their cones are the ordinary mammalian pair (log 17; Levenson and colleagues 2006 for the sea otter, in the earlier sheet).
 
@@ -98,10 +100,10 @@ Sea otters (13,624 records) and polar bears are marine mammals by habit and carn
    Log 55, 57 (Moss and Surlykke 2010).
 3. `['g', 'Reach', 'An insect-eating bat hears the echo of a small insect from about 2 to 14 metres away, depending on the bat, the insect and the keenness of its hearing. A forest edge returns echoes from up to about 50 metres away. Beyond that, its calls bring back nothing it can hear.']`
    Log 60 (Boonman and colleagues 2013, calculated for two bats); log 171 (about 50 m for forest edges, Stilz and Schnitzler 2012 as Boonman and colleagues report); log 59 (21 m for large objects in *Eptesicus bottae*).
-4. `['m', 'Sound beam', 'A bat sends each call forward in a cone. In laboratory measurements a big brown bat's cone is 60 to 90 degrees wide, about as wide as this camera's view, and in the wild a Daubenton's bat narrows it to about 30 to 50 degrees. The bat swings the cone from one object to the next, aiming within about 5 degrees.']`
-   Log 58 (Moss and Surlykke 2010); log 66 (Surlykke and colleagues 2008: half-amplitude angles of 14 and 25 degrees, doubled to full widths; see the note on log 66).
-5. `['g', 'Sharpness', 'Insect-eating bats see little detail. A big brown bat makes out about half a cycle to two thirds of a cycle per degree, roughly a hundredth of your sharpness, and Daubenton's bat about the same. This view is blurred to match.']`
-   Log 62 (big brown bat, 0.7 to 1 degree, as Boonman and colleagues report); log 74 (Daubenton's bat 0.6); log 69, 71, 92 (other species 0.1 to 2).
+4. `['m', 'Sound beam', 'A bat sends each call forward in a cone, which in a big brown bat is 60 to 90 degrees wide. Bats narrow the cone in cluttered places and widen it again within a few tens of milliseconds as they fly into the open. The bat swings the cone from one object to the next, aiming within about 5 degrees.']`
+   Log 58 (Moss and Surlykke 2010); log 190 (Kounitsky and colleagues 2015, by changing the gape of the mouth); log 66 (Surlykke and colleagues 2008: in the wild a Daubenton's bat's cone is about 30 to 50 degrees across, from half-amplitude angles of 14 and 25 degrees doubled to full widths; see the note on log 66).
+5. `['m', 'Sharpness', 'Bats that hunt by calling see little detail, about 0.6 cycles per degree in the middle of the species measured, a hundredth of your sharpness. Big brown bats and Daubenton's bats sit near that value, and leaf-nosed fruit bats see up to about 2. This view is blurred to about 0.6.']`
+   Log 191 (Veilleux and Kirk 2014: median 0.6, range 0.1 to 1.9); log 62 (big brown bat, 0.7 to 1 degree, as Boonman and colleagues report); log 74 (Daubenton's bat 0.6); log 176 (*Artibeus*, 1.5 to 1.92); log 69, 71, 92 (other species 0.1 to 2).
 6. `['m', 'Dim light', 'In one test a big brown bat could no longer pick out a white object by sight once the light fell to between nothing and 0.0008 lux. Many bats start hunting at dusk, in light of 1 to 10 lux, and use their eyes and their echoes together. The shadows are lifted here.']`
    Log 63 (Ellins and Masterson 1974, as Boonman and colleagues report); log 61.
 7. `['g', 'Colour', 'Most bats studied have two kinds of colour-sensing cells, and one kind detects ultraviolet light, which people cannot see. These cells make up only 2 to 4 in every hundred light-sensing cells, so colour is drained from this view. Horseshoe bats, roundleaf bats and vampire bats have lost the ultraviolet kind.']`
@@ -122,7 +124,8 @@ Sea otters (13,624 records) and polar bears are marine mammals by habit and carn
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who`, `cue` | 'Bat', 'a bat', 'Each call brings back one snapshot, so the picture holds, then jumps.' | The app's wording, kept from the earlier sheet. |
-| `cpd` | 0.6 | Daubenton's bat 0.6 (log 74); big brown bat 0.5 to 0.7 (log 62). |
+| `cpd` | 0.6 | The median of calling bats (log 191); Daubenton's bat 0.6 (log 74); big brown bat 0.5 to 0.7 (log 62). |
+| Variant for genus *Artibeus* | `cpd` 1.7, `gain` 1.2 | Three *Artibeus* species 1.5 to 1.92, with no reflecting layer (log 176, 178). The Jamaican fruit bat alone has 1,748 records (2.5% of `bat`, from the earlier bat sheet). The variant stops at the genus, because other leaf-nosed bats differ: vampire bats see 0.2 to 0.63 (log 72). The `gain` is **invented**. |
 | `hold`, `thrust` | 200 and 30 ms | A cycle of 230 ms gives 4.3 renewals a second, between the free-tailed bat's 3.7 (log 67) and the big brown bat's 5 to 10 (log 55). The exact pair is **invented**. The earlier sheet's 110 and 30 ms (7 a second) fit the big brown bat and run faster than the bat most recorded in Alachua. |
 | `sat` | 0.2 | **Invented**, after the cone share of 2 to 4% (log 82). |
 | `gain` | 1.6 | **Invented**; dim light (log 63). |
@@ -133,7 +136,7 @@ Sea otters (13,624 records) and polar bears are marine mammals by habit and carn
 
 **New effects.**
 
-*The echo picture (the main proposal).* What the person would see: the camera image fades almost to black, and the scene is drawn again as pale light where surfaces face the phone, brightest for what is near and in the middle, dimming with distance and at the cone's edge, and gone beyond the bat's reach. The picture is a strobe: each call paints one fresh frame, which then darkens until the next call, about four times a second while nothing is near. When something sits close in the middle of the view, the calls quicken to 20 to 80 a second and then to a buzz near 170, so the strobe runs together into a steady image just before the catch (log 55, 56, 65). Distance is drawn in steps, coarse while searching and fine while closing in, so the search picture looks like contour bands and the approach picture smooths out (log 57: about 15 cm against 1.5 cm). The cone is about 60 degrees across in search, about the width of the screen, and widens a little in the buzz (log 58, 65, 66). Small things that move become sparks, because a moving insect's echo changes from call to call; that drawing is **invented** and uses the engine's motion map. In dusk light, a faint, very blurred and nearly colourless camera image sits under the echoes, and it fades out as the scene darkens, so the bat's eyes and ears share the picture at dusk and the echoes take over at night (log 61, 86). The way the image and the echoes are weighted by light is **invented**, and it uses the frame's mean brightness, which the engine already computes for `gain`.
+*The echo picture (the main proposal).* What the person would see: the camera image fades almost to black, and the scene is drawn again as pale light where surfaces face the phone, brightest for what is near and in the middle, dimming with distance and at the cone's edge, and gone beyond the bat's reach. The picture is a strobe: each call paints one fresh frame, which then darkens until the next call, about four times a second while nothing is near. When something sits close in the middle of the view, the calls quicken to 20 to 80 a second and then to a buzz near 170, so the strobe runs together into a steady image just before the catch (log 55, 56, 65). Distance is drawn in steps, coarse while searching and fine while closing in, so the search picture looks like contour bands and the approach picture smooths out (log 57: about 15 cm against 1.5 cm). The cone is about 60 degrees across in search (log 58, 66), drawn across most of the screen; it narrows when surfaces crowd in close, opens out again when the view clears (log 190), and widens a little in the buzz (log 65). Since the phone's depth map already says how near the surfaces are, the cone's width can follow the nearest depth, which the person would see as the beam tightening on entering a doorway or a thicket and opening on reaching open sky. Small things that move become sparks, because a moving insect's echo changes from call to call; that drawing is **invented** and uses the engine's motion map. In dusk light, a faint, very blurred and nearly colourless camera image sits under the echoes, and it fades out as the scene darkens, so the bat's eyes and ears share the picture at dusk and the echoes take over at night (log 61, 86). The way the image and the echoes are weighted by light is **invented**, and it uses the frame's mean brightness, which the engine already computes for `gain`.
 
 Which phone input could stand in. A phone cannot hear bat calls (ecoObs FAQ), so the stand-in must be a sense of distance, and there are four:
 
@@ -192,7 +195,7 @@ What would make it beautiful as well as true: one cold colour on black, like moo
 
 ### Whales, dolphins, seals and manatees: water, air and rods
 
-**How sight under water and in air differ.** A land mammal's cornea does much of its focusing, because light bends where air meets the eye. Under water the cornea adds little, so marine mammals do their focusing with a strong, nearly spherical element inside the eye and are sharp-sighted when submerged (log 19, 161, 170). In air the cornea's extra power then makes the eye short-sighted (log 34). Seals counter this with a centrally flattened cornea and a pupil that closes to a vertical slit and then a pinhole in bright light, and dolphins with a pupil that closes to two small slits (log 25, 34). In bright light, harbour seals and bottlenose dolphins resolve gratings about equally well in air and in water (log 24, 35). In dim light the pupil opens, the correction weakens, and the seal's acuity in air falls with the light; Hanke and Dehnhardt (2009) measured that decline, and only its title was readable here (wanted list). Under water, murk blurs a harbour seal's sight fast (log 40), and depth dims and blues the light: in clear ocean, blue light falls tenfold every 70 m and the sun's light is gone below about 1,000 m, where glowing animals are the only light (log 97). Coastal waters absorb blue instead (log 18, note).
+**How sight under water and in air differ.** A land mammal's cornea does much of its focusing, because light bends where air meets the eye. Under water the cornea adds little, so marine mammals do their focusing with a strong, nearly spherical element inside the eye and are sharp-sighted when submerged (log 19, 161, 170). In air the cornea's extra power then makes the eye short-sighted (log 34). Seals counter this with a centrally flattened cornea and a pupil that closes to a vertical slit and then a pinhole in bright light, and dolphins with a pupil that closes to two small slits (log 25, 34). In bright light, harbour seals, California sea lions and bottlenose dolphins resolve gratings about equally well in air and in water (log 24, 35, 179). The sea otter, which stays in the `mammal` view, has a retina laid out more like a land mammal's and sees slightly less under water than a seal or a sea lion (log 184, 186). In dim light the pupil opens, the correction weakens, and the seal's acuity in air falls with the light; Hanke and Dehnhardt (2009) measured that decline, and only its title was readable here (wanted list). Under water, murk blurs a harbour seal's sight fast (log 40), and depth dims and blues the light: in clear ocean, blue light falls tenfold every 70 m and the sun's light is gone below about 1,000 m, where glowing animals are the only light (log 97). Coastal waters absorb blue instead (log 18, note).
 
 What this means for the picture. A phone is almost always in air, so each of these views shows the animal's sight in air, the way a seal on a beach or a dolphin beside a boat sees the person holding the phone. In bright scenes the view is coarse but evenly sharp, with deep focus from the pinhole; as the scene darkens, the blur and the shallow focus grow. A switch marked "Under water" (the app's own invention) removes the dim-air blur and adds the water's own effect on light: a haze and a blue-green cast that deepen with a depth or murkiness the person chooses (log 40, 97).
 
@@ -208,10 +211,10 @@ What this means for the picture. A phone is almost always in air, so each of the
    Log 5, 6 (Peichl, Behrmann and Kröger 2001: seven toothed whales and five seals and sea lions); log 95 (Land and Nilsson 2012).
 3. `['m', 'Tuned to the sea', 'A humpback whale's eye is most sensitive to blue-green light near 492 nanometres. In clear ocean water, blue light reaches deepest. The grey of this view is weighted toward blue-green.']`
    Log 13 (humpback retina, Dartnall 1962 as reviewed); log 12; log 97.
-4. `['m', 'Sharpness', 'A humpback whale's eye resolves about 4 cycles per degree, a fifteenth of your sharpness. It can make out the outline of a large animal far off, and loses fine detail beyond three or four body lengths.']`
-   Log 29 (Bolin and colleagues 2025).
-5. `['m', 'Two sharp areas', 'A humpback whale sees best in two areas of its view, one ahead of it and one out to the side and behind.']`
-   Log 158 (Lisney and Collin 2018); log 21.
+4. `['m', 'Sharpness', 'The eyes of humpback and minke whales resolve about 4 cycles per degree, a fifteenth of your sharpness. A humpback can make out the outline of a large animal far off, and loses fine detail beyond three or four body lengths.']`
+   Log 29 (Bolin and colleagues 2025); log 188 (Murayama and colleagues 1992, minke whale).
+5. `['m', 'Two sharp areas', 'Humpback and minke whales see best in two areas of their view, one ahead and one out to the side.']`
+   Log 158 (Lisney and Collin 2018); log 189 (minke whale: temporal and rostral areas, which the authors tie to frontal and side vision); log 21.
 6. `['g', 'Built for water', 'The eyes of whales, seals and manatees focus sharply under water. In air most of them would be short-sighted, and most have ways to correct it.']`
    Log 19 (Mass and Supin 2007, a review); log 170.
 7. `['m', 'Mirror behind the eye', 'Whales have a reflecting layer behind the retina that shines blue-green and gives dim light a second pass through the eye. The shadows are lifted here.']`
@@ -224,7 +227,7 @@ What this means for the picture. A phone is almost always in air, so each of the
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who`, `cue` | 'Whale, dolphin, seal', 'a whale', 'The world in greys, coarse, and lifted from the shadows.' | The app's wording. |
-| `cpd` | 4 | Humpback 3.95 (log 29); within the seal and dolphin ranges (log 22, 39). |
+| `cpd` | 4 | Humpback 3.95 (log 29), minke 4 (log 188); within the seal and dolphin ranges (log 22, 39). |
 | `M` | GREY490 = [.05, .6, .35, .05, .6, .35, .05, .6, .35] | Rods near 484 to 493 nm (log 12, 13). The weights are **invented**: equal rows give grey, and the weighting toward the camera's green and blue stands in for a blue-green pigment. |
 | `sat` | 0 | Log 1 to 6. |
 | `gain` | 1.5 | **Invented**; reflecting layers (log 159, 160). |
@@ -241,8 +244,8 @@ What this means for the picture. A phone is almost always in air, so each of the
    Log 5 (Peichl and colleagues 2001); log 15, 16 (Crognale and colleagues 1998).
 2. `['g', 'Colour at dusk', 'In dim light, when its rods and its one kind of colour cell both work, a seal may tell some colours apart by comparing the two. This view keeps a faint tint in dim scenes, and the strength of that tint is the app's guess.']`
    Log 16, 18 (Griebel and Peichl 2003).
-3. `['m', 'Sharpness', 'In tests in clear water, harbour seals resolved stripes between a tenth and a twenty-fifth as fine as you can. Their retinas could support finer sight, about 11 cycles per degree under water and 9 in air.']`
-   Log 39 (Weiffen and colleagues 2006: 5.5 and 12.7 minutes of arc, two seals); log 27 (Hanke, Peichl and Dehnhardt 2009); log 26 (harp seal 9 to 11 under water); log 33 (single targets of about 0.3 degree under water, Sandow and colleagues 2026).
+3. `['m', 'Sharpness', 'In tests in clear water, harbour seals resolved stripes between a tenth and a twenty-fifth as fine as you can. Their retinas could support finer sight, about 11 cycles per degree under water and 9 in air. Two California sea lions made out stripes 5.5 minutes of arc apart, as well in air as under water.']`
+   Log 39 (Weiffen and colleagues 2006: 5.5 and 12.7 minutes of arc, two seals); log 27 (Hanke, Peichl and Dehnhardt 2009); log 26 (harp seal 9 to 11 under water); log 33 (single targets of about 0.3 degree under water, Sandow and colleagues 2026); log 179 (Schusterman and Balliet 1970; whether 5.5 minutes is one stripe or one stripe pair is not stated, so about 5.5 or 11 cycles per degree).
 4. `['m', 'Water and air', 'A seal's eye is built to focus under water. In air its cornea blurs the picture, and in bright light its pupil closes to a slit and then a pinhole that sharpens it again. This view sharpens in bright scenes and blurs as the light fades.']`
    Log 34, 35 (Sandow and colleagues 2026, summarizing earlier work). How fast the blur grows as light falls is **invented** until Hanke and Dehnhardt 2009 is read (wanted list).
 5. `['m', 'Field of view', 'A harbour seal takes in about 208 degrees around itself without moving its eyes, and both eyes see the middle 67 degrees. Its view reaches high overhead, toward the surface of the water.']`
@@ -250,7 +253,7 @@ What this means for the picture. A phone is almost always in air, so each of the
 6. `['m', 'Murky water', 'Cloudy water blurs a harbour seal's sight quickly, and each step of murkiness takes away a large share of what it can make out.']`
    Log 40 (Weiffen and colleagues 2006).
 7. `['m', 'Dim light', 'Harbour seals and California sea lions adjust to darkness faster than people and see in dimmer light. Elephant seals, which hunt deeper, adjust in less than half their time and see in dimmer light still. The shadows are lifted here.']`
-   Log 30, 31 (Levenson and Schusterman 1999); log 32 (pupils); log 20, 161 (reflecting layers).
+   Log 30, 31 (Levenson and Schusterman 1999); log 32 (pupils); log 20, 161, 180 (reflecting layers; in the harbour seal "well-developed and extensive", Jamieson and Fisher 1971).
 8. `['m', 'Hearing in two worlds', 'A harbour seal hears low sounds almost as well in air as under water. A California sea lion hears best in air, and an elephant seal best under water.']`
    Log 47 (Kastak and Schusterman 1998).
 9. `['x', 'Whiskers', 'A seal can follow the invisible trail of water that a swimming fish leaves behind, by its whiskers alone, even when the trail is tens of seconds old. Wild elephant seals hunt this way in the dark of the deep sea. The picture leaves this sense out.']`
@@ -262,7 +265,7 @@ What this means for the picture. A phone is almost always in air, so each of the
 |---|---|---|
 | `chip`, `who`, `cue` | 'Seal, sea lion, walrus', 'a seal', 'Sharper in bright light; softer as the light fades.' | The app's wording. |
 | `fov` | 208 | Log 36. |
-| `cpd` | 5 | Behavioural 2.4 to 5.5 under water (log 39); anatomical 8.7 in air and 11.5 under water (log 27). The pick of 5 within that span is **invented**. |
+| `cpd` | 5 | Harbour seal behavioural 2.4 to 5.5 under water (log 39); anatomical 8.7 in air and 11.5 under water (log 27); California sea lion 5.5 or 11 in both media, depending on how the angle was meant (log 179). The pick of 5 within that span is **invented**. |
 | `topoA`, `topoS`, `fall` | 0.7, 0.3 and 1.2 | An area centralis with a moderate streak running from it (log 28); the weights are **invented**. |
 | `pupil` | 'v' | Log 34. |
 | `dof` | 16, scaled by light (new) | **Invented** strength; the pinhole gives deep focus in bright light and the open pupil shallow focus in dim light (log 34, 98). |
@@ -357,7 +360,7 @@ What this means for the picture. A phone is almost always in air, so each of the
 3. `['m', 'Howler monkeys', 'Howler monkeys are the only monkeys of the Americas in which every animal, male or female, sees three colours.']`
    Log 107 (Carvalho and colleagues 2017); log 108 (Silveira and colleagues 2014).
 4. `['m', 'Sharpness', 'A chimpanzee sees about as much detail as a person, and a rhesus macaque a little less in bright light. Monkeys and apes that are active by day resolve 30 to 75 cycles per degree. This view keeps your sharpness.']`
-   Log 91 (64 cycles per degree, Spence 1934 as Caves and colleagues 2018 report), 118 (Matsuzawa 1990), 119 (Cavonius and Robbins 1973), 114 (Veilleux and Kirk 2009).
+   Log 91 (64 cycles per degree, Spence 1934 as Caves and colleagues 2018 report), 118 (Matsuzawa 1990), 119 (Cavonius and Robbins 1973), 114 (Veilleux and Kirk 2009); log 192 (Veilleux and Kirk 2014: monkeys, apes and tarsiers have the highest acuity of the 91 mammals compiled, median 46, range 8.3 to 64.3; the text read does not say which species gives the low end).
 5. `['m', 'Night sight', 'In very dim light a rhesus macaque makes out finer detail than a person does.']`
    Log 119.
 6. `['g', 'No eye shine', 'Like people, monkeys and apes have no reflecting layer behind the retina, so their eyes do not shine back at a torch at night.']`
@@ -439,22 +442,22 @@ This view changes almost nothing, and that is the finding. Its interest lies bes
 | `pupil` | 'o' | **Invented**. |
 | Variant for Aotidae, Lorisidae, Galagidae, Tarsiidae | `M`: GREY545 = [.3, .6, .1, .3, .6, .1, .3, .6, .1], `sat` 0 | One cone (log 109); the weights are **invented**, since these animals' cone peaks were not found. The sources read here do not say whether tarsiers and owl monkeys have a reflecting layer, so the variant keeps `gain` at 1.6 only for lorises and galagos and sets it to 1.2 for the others; that split is a gap (section 5). |
 
-### `mammal` (two kinds of cone: bears, otters, weasels, skunks, mongooses, coatis, kangaroos, koalas, possums, pigs, hippos, rhinos, elephants, hedgehogs, shrews, platypus, echidnas and others)
+### `mammal` (two kinds of cone: bears, otters, weasels, skunks, mongooses, coatis, kangaroos, koalas, possums, South American opossums, pigs, hippos, rhinos, elephants, hedgehogs, platypus, echidnas and others)
 
 **Rows.**
 
 1. `['m', 'Colour', 'Most mammals have two kinds of colour-sensing cells, where people have three. A pig's are most sensitive near 439 and 556 nanometres and an elephant's near 419 and 552, the same pair as a person who confuses reds and greens. This view shows colours that way.']`
    Log 124 (Jacobs 2013), 125, 126 (Neitz and Jacobs 1989), 134 (Yokoyama and colleagues 2005).
-2. `['m', 'Bears, otters and kangaroos', 'American black bears, European otters and tammar wallabies have the same two kinds. In black bears the longer-wave cells outnumber the blue-sensitive ones by at least three to one.']`
-   Log 127 (Heyward and colleagues 2020), 7 (Peichl and colleagues 2001), 139 (Ebeling, Natoli and Hemmi 2010).
+2. `['m', 'Bears, otters and kangaroos', 'American black bears, European otters and tammar wallabies have the same two kinds. In black bears the longer-wave cells outnumber the blue-sensitive ones by at least three to one, and an Asian small-clawed otter has shown in tests that it can tell colours from greys.']`
+   Log 127 (Heyward and colleagues 2020), 7 (Peichl and colleagues 2001), 139 (Ebeling, Natoli and Hemmi 2010), 187 (Svoke 2022, a thesis: one of two otters reached the criterion).
 3. `['g', 'Some marsupials differ', 'A few small Australian marsupials, among them the fat-tailed dunnart, may have a third kind of colour cell. No measurement was found for koalas or possums.']`
    Log 139.
-4. `['m', 'Sharpness', 'Sharpness varies widely in this group. A tammar wallaby resolves about 5 cycles per degree, a numbat 5 to 6 and a black rhinoceros about 6, and an African elephant's retina could support about 14. This view is blurred to about 6, a tenth of your sharpness.']`
-   Log 140 (Hemmi and Mark 1998), 137 (Arrese and colleagues 2000), 136 (Pettigrew and Manger 2008), 132 (Pettigrew and colleagues 2010).
+4. `['m', 'Sharpness', 'Sharpness varies widely in this group, from about half a cycle per degree in the grey short-tailed opossum to about 11 in the western grey kangaroo. A sea otter's retina resolves about 4 under water, a tammar wallaby about 5 and a black rhinoceros about 6. This view is blurred to about 6, a tenth of your sharpness.']`
+   Log 181 (Dooley and colleagues 2012), 193 (Veilleux and Kirk 2014), 184 (Mass and Supin 2000), 140 (Hemmi and Mark 1998), 136 (Pettigrew and Manger 2008); also 137 (numbat 5 to 6, Arrese and colleagues 2000) and 132 (an African elephant's retina could support about 14, Pettigrew and colleagues 2010).
 5. `['m', 'Field of view', 'Eyes set on the sides of the head take in a wide view. A ferret sees about 270 degrees around itself and numbats and honey possums about 240, with 60 to 80 degrees seen by both eyes. This view bends the picture at its edges to suggest that sweep.']`
    Log 144, 145 (Morris and colleagues 2025), 137, 138 (Arrese and colleagues 2000, 2002).
-6. `['m', 'Sharpest band', 'Rhinoceroses and elephants see most sharply along a band level with the horizon, with finer spots at its ends, and a black bear sees most sharply in a spot ahead of it. This view sharpens a band across the middle of the picture.']`
-   Log 136, 132, 128.
+6. `['m', 'Sharpest band', 'Rhinoceroses, elephants and sea otters see most sharply along a band level with the horizon, with finer spots within it, and a black bear sees most sharply in a spot ahead of it. This view sharpens a band across the middle of the picture.']`
+   Log 136, 132, 185 (sea otter: a streak with a narrow area of highest density inside it), 128.
 7. `['g', 'Dim light', 'Bears, otters and other carnivores, elephants and some marsupials have a reflecting layer behind the retina, while pigs and red kangaroos have none. The shadows are lifted a little here.']`
    Log 129 (Ollivier and colleagues 2004), 133.
 8. `['x', 'Electric sense', 'A platypus hunts under water with its eyes and ears shut, finding prey with electric and touch sensors in its bill. The picture leaves this sense out.']`
@@ -469,7 +472,7 @@ This view changes almost nothing, and that is the finding. Its interest lies bes
 |---|---|---|
 | `chip`, `who`, `cue` | 'Bear, otter, kangaroo, pig', 'a mammal', 'Two kinds of colour sensor, a wide view, and less detail than yours.' | The app's wording, after the earlier sheet. |
 | `fov` | 260 | Ferret 271, numbat and honey possum about 240 (log 144, 137, 138). The pick within that span is **invented**. |
-| `cpd` | 6 | Tammar 4.8, numbat 5.2 to 6.3, rhinoceros 6, elephant 13 to 14 anatomical and 0.6 behavioural (log 140, 137, 136, 132, 135). The pick is **invented**, and the commonest members (raccoon aside, mustelids and bears) are unmeasured. |
+| `cpd` | 6 | Grey short-tailed opossum 0.58 (log 181), sea otter about 4.3 under water (log 184), tammar 4.8, numbat 5.2 to 6.3, rhinoceros 6, western grey kangaroo 11.2 (log 193), elephant 13 to 14 anatomical and 0.6 behavioural (log 140, 137, 136, 132, 135). The pick is **invented**, and the commonest members (the river otter, bears, the koala and the hedgehog) are unmeasured. |
 | `topoS`, `topoA`, `fall` | 0.7, 0.3 and 1.5 | Streaks in rhinoceros and elephant, a spot in the bear (log 136, 132, 128). The weights are **invented**. |
 | `M` | DEUTAN | Two cones (log 124 to 127, 139); the elephant's pair matches a deuteranope's (log 134). SOURCES.md lists the matrix itself as unchecked. |
 | `sat` | 0.85 | **Invented**, after the dog's 0.85. |
@@ -493,7 +496,9 @@ This view changes almost nothing, and that is the finding. Its interest lies bes
    Log 141 (Emerling and Springer 2014).
 6. `['g', 'Dazzled by day', 'Eyes that work with rods alone see coarsely in dim light and are dazzled by bright light. For armadillos, sloths and anteaters this view washes out toward white when the scene is bright, and the strength of that glare is the app's guess.']`
    Log 142 (a general description of rod monochromacy in the same paper).
-7. `['i', 'Sharpness and field', 'No measurement of sharpness or field of view was found for raccoons, opossums or armadillos. These parts of the view are guesses.']`
+7. `['g', 'Sharpness', 'No measurement of a raccoon's sharpness was found. A sea otter, a distant relative, resolves about 4 cycles per degree, and a South American opossum of the Virginia opossum's genus about 1.3 to 2.4. This view is blurred to about 4, and to 2 when the app knows the animal is a Virginia opossum.']`
+   Log 184 (Mass and Supin 2000; the raccoon and the sea otter are both carnivores, in the families Procyonidae and Mustelidae of the GBIF counts in section 1, so the grade is `g` at the level of the order); log 182 (Dooley and colleagues 2012, reporting Silveira and colleagues 1982). The Virginia opossum's sharpest spot sits in the upper temporal retina, which looks down and ahead (log 183, Rapaport and colleagues 1981).
+8. `['i', 'Field of view', 'No measurement of field of view was found for raccoons, opossums or armadillos. The view keeps the camera's field.']`
 8. `['i', 'Drawn as', 'The grey is weighted toward yellow-green, where the opossum's single colour cell is most sensitive, and toward blue-green for the rods-only animals. The weights are the app's own.']`
    Log 122 (561 nm; opossum rods near 493 nm in the same paper's introduction).
 9. `['x', 'Hands', 'A raccoon's brain gives its front paws an unusually large share of the area that handles touch. The picture leaves touch out.']`
@@ -504,39 +509,49 @@ This view changes almost nothing, and that is the finding. Its interest lies bes
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who`, `cue` | 'Raccoon, opossum, armadillo', 'a raccoon', 'One kind of colour sensor, or none. The world in greys, with the shadows lifted.' | The earlier sheet's wording. |
-| `cpd` | 4 | **Invented** (row 7). |
+| `cpd` | 4 | The sea otter's 4.3 under water (log 184), a carnivore of another family; the raccoon itself is unmeasured, so the value stands at `g` and is the nearest measured relative's (row 7). |
+| Variant for *Didelphis virginiana* | `cpd` 2; `topoA` 0.5; the lower-field `gain` ramp (new effect below) | Its genus 1.25 by cortical response and 2.4 from the retina (log 182); an area centralis, a round spot (log 183). The pick of 2 inside that span and the `topoA` weight are **invented**. The spot would sit below centre, since the upper retina looks down; the engine cannot yet move it. |
 | `M` | GREY561 = [.4, .55, .05, .4, .55, .05, .4, .55, .05] | One cone near 561 nm (log 122); the earlier sheet's weights, **invented**. |
 | `sat` | 0 | Log 120, 122. |
 | `gain` | 1.6 | **Invented**; reflecting layers (log 129, 162). |
 | `pupil` | 'o' | **Invented**; a sloth's pupil was round after death (log 167). |
 | Rods-only variant (Cingulata, Pilosa) | `M`: GREYROD = [.1, .6, .3, .1, .6, .3, .1, .6, .3]; `cpd` 2; `glare` 1.0 (new) | Log 141, 142. All three values are **invented**; no xenarthran rod peak or acuity was found. |
 
-### `mole` (family Talpidae)
+### `mole` (families Talpidae and Soricidae: moles and shrews)
 
 **Rows.**
 
 1. `['m', 'Eyes under skin', 'An eastern mole's eyes are covered by a layer of skin, and they serve mainly to tell light from dark.']`
    Log 169 (Townsend 2023, Animal Diversity Web).
 2. `['m', 'A tiny working eye', 'A European mole's eye is tiny, with a retina smaller than a square millimetre, yet it holds blue-sensitive and green-sensitive colour cells, and light reaches them down into the ultraviolet.']`
-   Log 130, 131 (Glösmann, Steiner, Peichl and Ahnelt 2008). The European mole holds 60.6% of mole records.
+   Log 130, 131 (Glösmann, Steiner, Peichl and Ahnelt 2008). The European mole holds 60.6% of mole records and 34.0% of this view's.
 3. `['m', 'Ultraviolet', 'The blue-sensitive cell of the European mole is probably tuned to ultraviolet. The parts of its gene that set its colour match those of mammals known to see ultraviolet light.']`
    Log 130, 131.
-4. `['i', 'Light more than shape', 'With so small an eye, a mole is taken here to sense light, its colour and the direction it comes from more than any shapes. This view shows only that, and the assumption is the app's own.']`
-   Log 130 (retina of 0.75 square millimetres with about 100,000 photoreceptors).
-5. `['x', 'Star-nosed mole', 'A star-nosed mole feels its way with 22 fleshy fingers around its nostrils, touching the ground about 13 times a second. It swings the centre of the star onto anything interesting, much as your eyes jump to what catches them. The picture leaves this sense out.']`
+4. `['m', 'Shrews', 'Shrews have open eyes with rods and two kinds of colour cell, but the nerve from each eye carries only about 1,500 to 6,300 fibres. That is as few as a mole's, and a seventh to a fortieth of a mouse's.']`
+   Log 196 (Peichl, Künzle and Vogel 2000: common shrew and two white-toothed shrews); log 194, 195 (Leitch, Sarko and Catania 2014: masked shrew 1,483, water shrew 6,342, star-nosed mole 1,600, hairy-tailed mole 2,600, lab mice 45,000 to 59,000 as they report).
+5. `['m', 'Blue from above', 'In shrews the blue-sensitive cells are far more common in the lower half of the retina, which receives light from above. This view tints light from above toward blue.']`
+   Log 197 (in the common shrew, 2.5 to 12% of cones in the lower retina against 0.5% in the upper; larger shares in white-toothed shrews). That the lower retina receives light from above follows from the inverted image every camera eye forms; the link is my inference.
+6. `['i', 'Light more than shape', 'With eyes this small and nerves this thin, a mole or a shrew is taken here to sense light, its colour and the direction it comes from more than any shapes. This view shows only that, and the assumption is the app's own.']`
+   Log 130 (retina of 0.75 square millimetres with about 100,000 photoreceptors); log 194, 195 (the authors conclude that both groups see little detail and depend very little on sight); section 5 for the arithmetic.
+7. `['x', 'Star-nosed mole', 'A star-nosed mole feels its way with 22 fleshy fingers around its nostrils, touching the ground about 13 times a second. It swings the centre of the star onto anything interesting, much as your eyes jump to what catches them. The picture leaves this sense out.']`
    Log 154 (Catania 2011), 155, 156 (Catania and Remple 2003).
-6. `['x', 'Nose', 'An eastern mole has a touch-sensitive patch at the tip of its nose and can tell which way a smell comes from. The picture leaves these senses out.']`
+8. `['x', 'Nose', 'An eastern mole has a touch-sensitive patch at the tip of its nose and can tell which way a smell comes from. The picture leaves these senses out.']`
    Log 169.
+9. `['x', 'Echoes', 'Shrews twitter more often when they meet an obstacle or explore, which fits finding their way by echoes. Asian shrew moles click with their tongues at 50 to 100 thousand vibrations a second and use the echoes to find a platform below them. The picture leaves these senses out.']`
+   Log 198 (Sanchez and colleagues 2019, long-clawed shrew); log 200 (Liu and colleagues 2025: four *Uropsilus* species; detection failed when the tongue was tied or the ears blocked).
 
 **The picture.**
 
 | Field | Value | Behind it |
 |---|---|---|
-| `chip`, `who`, `cue` | 'Mole', 'a mole', '' | The app's wording. |
-| `pupil`, `field` | 'none', 1 | Rows 1 and 4; the drawing the `plant` and `other` entries use. |
-| `M`, `sat` | DEUTAN, 0.4 | The colour of light as an animal with two cones would sense it (log 130). Both are **invented**; the earlier sheet's `sat` of 0 is corrected for European moles. |
+| `chip`, `who`, `cue` | 'Mole, shrew', 'a mole or shrew', '' | The app's wording. |
+| `pupil`, `field` | 'none', 1 | Rows 1, 4 and 6; the drawing the `plant` and `other` entries use. Shrews' eyes are open, and the field still fits them, because so few fibres carry little beyond light and shade (section 5). |
+| `M`, `sat` | DEUTAN, 0.4 | The colour of light as an animal with two cones would sense it (log 130, 196). Both are **invented**; the earlier sheet's `sat` of 0 is corrected for European moles. |
+| Variant for Soricidae | the blue row of `M` is weighted from 1 at the bottom of the screen to 1.5 at the top (new) | Log 197. The strength of the ramp is **invented**. |
 
-**New effect.** *The touch star* (for the star-nosed mole, reached by species). A tap lights a small star-shaped patch of the camera image under the finger for a fraction of a second, uncoloured and fine-grained, flickering about 13 times a second while the finger stays down; the rest of the screen stays a field of light. The flicker rate rests on log 155; the drawing is **invented** and needs an `i` row. Easy.
+**New effects.** *The touch star* (for the star-nosed mole, reached by species). A tap lights a small star-shaped patch of the camera image under the finger for a fraction of a second, uncoloured and fine-grained, flickering about 13 times a second while the finger stays down; the rest of the screen stays a field of light. The flicker rate rests on log 155; the drawing is **invented** and needs an `i` row. Easy.
+
+*Blue from above* (shrews). The field of light is cooler at the top of the screen than at the bottom, so a lamp overhead or the open sky reads blue-white while light bouncing off the ground reads warmer. Easy: a vertical ramp on one colour weight before the field is drawn (log 197).
 
 ### New effects for the mammal group
 
@@ -561,7 +576,7 @@ None of this unit's groups has an `EYES` entry yet, so this section checks the t
 | `mammal` Bears and otters | **Confirmed** for the bear (log 127); otters supported by the European otter (log 7) and a review (log 17); the sea otter's genes (Levenson and colleagues 2006) **not reopened** | |
 | `mammal` Kangaroos | **Confirmed**, with the missing DOI found: 10.1371/journal.pone.0014231 | Log 139 (full text on disk). |
 | `mammal` Platypus and echidnas (`g`) | **Confirmed**, and the platypus half can rise to `m` | Log 124 (SWS2 and LWS in monotremes); log 143 (red- and blue-sensitive cones in the platypus retina). |
-| `mammal` Sharpness (blur to 5) | **Corrected** to 6 | Tammar 4.8 confirmed (log 140); added rhinoceros 6 (log 136), numbat 5.2 to 6.3 (log 137), elephant 13 to 14 anatomical (log 132). The western grey kangaroo's 11.2 (Veilleux and Kirk 2014) was **not reopened**. |
+| `mammal` Sharpness (blur to 5) | **Corrected** to 6 | Tammar 4.8 confirmed (log 140); added rhinoceros 6 (log 136), numbat 5.2 to 6.3 (log 137), elephant 13 to 14 anatomical (log 132). The western grey kangaroo's 11.2 is **confirmed** in Veilleux and Kirk 2014 (log 193), and the sea otter (about 4.3 under water, log 184) and the grey short-tailed opossum (0.58, log 181) are added. |
 | `mammal` Elephants ("about a tenth of your sharpness") | **Corrected** | The behavioural figures stand (log 135), but the African elephant's retina predicts 13.2 to 14.4 cycles per degree (log 132), about a quarter of yours, so the one cow tested probably underperformed her eye. The row should give both. |
 | `mammal` Dim light | **Confirmed**, and the authors the earlier sheet could not find are Ollivier, Samuelson, Brooks, Lewis, Kallberg and Komáromy | Log 129. |
 | `mammal` Field of view and pupil (`i`) | **Corrected**: the field is now measured in a ferret and two marsupials | Log 144, 137, 138; the pupil is still unmeasured. |
@@ -572,13 +587,13 @@ None of this unit's groups has an `EYES` entry yet, so this section checks the t
 | `raccoon` Armadillos and sloths | **Confirmed** | Log 141. |
 | `raccoon` Anteaters and pangolins | **Corrected** for anteaters; pangolins **not reopened** | The 2014 abstract places rod monochromacy in the stem pilosan, sloths and anteaters together (log 141), so "their other cone is untested" no longer stands. |
 | `raccoon` Dim light | **Confirmed**, and the opossum's reflecting layer is placed in the upper retina | Log 129, 162. |
-| `raccoon` Sharpness, field and pupil (`i`) | Unchanged | Silveira and colleagues 1982 and Rapaport and colleagues 1981 are on the wanted list. |
+| `raccoon` Sharpness, field and pupil (`i`) | **Partly filled** | Sharpness rises to `g`: the sea otter's 4.3 for the raccoon (log 184), and for the Virginia opossum its genus's 1.25 to 2.4 (log 182, Silveira and colleagues 1982 as Dooley and colleagues 2012 report). The opossum's area centralis is mapped (log 183). Field and pupil stay unmeasured, and Silveira and colleagues 1982 stays on the wanted list for its own figures. |
 | `raccoon` Drawn as (`x`) | **Corrected** to `i` | It describes the app's drawing, which is a guess, and no sense is left out. |
 | `mole` Eyes and Light and dark | **Confirmed** for the eastern mole (log 169); **corrected** for the European mole | Log 130: S and M cones, an eye that passes ultraviolet. European moles hold 60.6% of mole records. |
 | `mole` Snout (`x`) | **Confirmed** | Log 169. |
 | Picture: `mammal` `cpd` 5, `gain` 1.2, DEUTAN | `cpd` **corrected** to 6; `gain` kept (still invented); DEUTAN kept, now sourced for elephants | Section 2. |
 | Picture: `mole` `sat` 0 | **Corrected** to 0.4 | Log 130. |
-| Shrews and hedgehogs left in `other` | **Superseded**: since build 21 they belong to the `mammal` group | `docs/COVERAGE.md`; still unmeasured (wanted: Bridges and Quilliam 1973). |
+| Shrews and hedgehogs left in `other` | **Superseded** twice: since build 21 they belong to the `mammal` group, and this sheet moves shrews on to `mole` | `docs/COVERAGE.md`; shrews' cones and optic nerves (log 194 to 197). Hedgehogs stay in `mammal`, unmeasured (wanted: Bridges and Quilliam 1973). |
 
 ### `docs/views/sheets/bat.md`
 
@@ -589,7 +604,7 @@ None of this unit's groups has an `EYES` entry yet, so this section checks the t
 | `bat` Distance | **Confirmed** | Log 57. |
 | `bat` Reach | **Confirmed** in the audited wording | Log 60. |
 | `bat` Direction | **Confirmed**, with an addition | Log 58. In the wild, Daubenton's bats narrow the beam to about 30 to 50 degrees across (log 66). Half-amplitude angles are measured from the axis and must be doubled for a full width (note on log 66). |
-| `bat` Sharpness | **Confirmed** | Log 74 (0.6); added big brown bat 0.5 to 0.7 (log 62), *Myotis* 0.1 (log 71, 92), six species 0.35 to 2 (log 69). |
+| `bat` Sharpness | **Confirmed** | Log 74 (0.6); the median of calling bats is also 0.6 (log 191, Veilleux and Kirk 2014); added big brown bat 0.5 to 0.7 (log 62), *Myotis* 0.1 (log 71, 92), six species 0.35 to 2 (log 69), and *Artibeus* 1.5 to 1.92 (log 176), which now has a variant. |
 | `bat` Dim light | **Confirmed** | Log 63. |
 | `bat` Colour | **Confirmed** | Log 82, 83, 85, 88 (vampire bats added). |
 | `bat` Echoes (`x`) | **Confirmed** | ecoObs FAQ reopened today. |
@@ -614,6 +629,8 @@ These commonly photographed species are measured well enough for a profile of th
 |---|---:|---|---|
 | Harbour seal (*Phoca vitulina*) | 44,546 | cone 510 nm; acuity in water, air and turbidity; single targets; field 208 and binocular 67 degrees; area centralis and streak; pupil and cornea; whisker trails; hearing in two media | 15, 16, 27, 28, 33 to 40, 42, 47 |
 | Humpback whale (*Megaptera novaeangliae*) | 31,040 | rods only (genes); retina near 492 nm; acuity 3.95; two sharp areas; blue-green tapetum | 1, 13, 29, 158, 159 |
+| California sea lion (*Zalophus californianus*) | 30,683 | acuity equal in air and water; dark adaptation; hearing in two media | 179, 31, 47 |
+| Minke whale (*Balaenoptera acutorostrata*) | in 38,934 Balaenopteridae | acuity 4; two sharp areas | 188, 189 |
 | Common bottlenose dolphin (*Tursiops truncatus*) | 16,874 | rod 488 and cone 524 nm; colour tests; acuity in both media; two sharp areas; double-slit pupil; sonar beam and angular resolution; tapetum | 8, 9, 14, 22 to 25, 48, 53, 54, 160 |
 | Crab-eating macaque (*Macaca fascicularis*) | 15,934 | cones 430, 531, 561 nm | 101 to 103 |
 | Rhesus macaque (*Macaca mulatta*) | 6,991 | rods 502, cones 536 and 565 nm; acuity across luminance | 104, 119 |
@@ -624,11 +641,13 @@ These commonly photographed species are measured well enough for a profile of th
 | Grey-headed and black flying foxes (*Pteropus poliocephalus*, *P. alecto*) | 5,590 and 2,406 (bat sheet) | acuity about 4 | 75 |
 | Egyptian rousette (*Rousettus aegyptiacus*) | in 553 *Rousettus* | acuity; field of best vision; hearing; clicks and vision together | 75, 81, 150, 152 |
 | Common raccoon (*Procyon lotor*) | in 137,710 *Procyon* | one cone; forepaw cortex | 120, 166 |
-| Virginia opossum (*Didelphis virginiana*) | 54,547 | one cone 561 nm; tapetum in the upper retina | 122, 162 |
+| Virginia opossum (*Didelphis virginiana*) | 54,547 | one cone 561 nm; tapetum in the upper retina; area centralis; its genus's acuity | 122, 162, 183, 182 |
+| Sea otter (*Enhydra lutris*) | 13,624 | retinal resolution under water; streak; behaviour under water | 184 to 186 |
 | American black bear (*Ursus americanus*) | in 71,923 Ursidae | two cones, 3:1; area centralis | 127, 128 |
 | African elephant (*Loxodonta africana*) | in 28,818 Proboscidea | pigments; anatomical and behavioural acuity; tapetum; streak | 132 to 135 |
 | Tammar wallaby (*Macropus eugenii*) | in 89,090 Macropodidae | two cones; acuity 4.8 | 139, 140 |
 | European mole (*Talpa europaea*) | 17,116 | S and M cones; ultraviolet | 130, 131 |
+| Common shrew (*Sorex araneus*) | in 22,088 Soricidae | M/L and S cones, with S cones gathered in the lower retina | 196, 197 |
 | Star-nosed mole (*Condylura cristata*) | 1,700 | the star's touch, rate and saccades | 154 to 156 |
 | Platypus (*Ornithorhynchus anatinus*) | in 23,545 Monotremata | retina; electric and touch hunting | 143, 153 |
 | Florida manatee (*Trichechus manatus*) | 7,903 | acuity; touch hairs | 45, 46 |
@@ -639,14 +658,15 @@ These commonly photographed species are measured well enough for a profile of th
 | Trait the views need | Who lacks it | Nearest measured relative, and how a value could be inferred |
 |---|---|---|
 | Flicker fusion (`rate`) | all five groups | Nothing measured opened. The only primate study is wanted (Ordy and Samorajski 1968). Until then every view keeps your pace. An inference from photoreceptor speed is possible only with recordings no source here gives, so for now nothing is known. |
-| Sharpness of the raccoon and the Virginia opossum | `raccoon` | The rule that acuity follows eye length (log 94) and falls in nocturnal species (log 93) points below the dog's 11 but gives no number. The opossum's ganglion cell map (Rapaport and colleagues 1981) and its behavioural acuity (Silveira and colleagues 1982) are both wanted; with eye length and peak ganglion cell density, cycles per degree follow from the same sampling arithmetic the numbat and rhinoceros papers use (log 136, 137). |
-| Sharpness of bears, otters, skunks, pigs and koalas | `mammal` | The black bear's cone-dense area centralis (log 128) promises good acuity without a number. The method above applies to any retina mapped; the hippopotamus is mapped (Coimbra and colleagues 2017, wanted). The view's 6 is a pick inside the measured span (log 136, 137, 140). |
+| Sharpness of the raccoon, and the Virginia opossum's own | `raccoon` | The nearest measured carnivore is the sea otter, about 4.3 cycles per degree under water (log 184), which the view takes at `g`; the rule that acuity follows eye length (log 94) and falls in nocturnal species (log 93) also points below the engine's 11 for the dog. The Virginia opossum borrows its genus's 1.25 to 2.4 (log 182). Its own retina peaks at 2,000 to 2,700 ganglion cells per square millimetre (log 183); with the eye's posterior nodal distance, which that abstract does not give, cycles per degree follow from the sampling arithmetic the numbat and rhinoceros papers use (log 136, 137). A ganglion cell map of the raccoon would do the same for it. |
+| Sharpness of bears, river otters, skunks, pigs, koalas and hedgehogs | `mammal` | The black bear's cone-dense area centralis (log 128) promises good acuity without a number. The sea otter's 4.3 (log 184) is the nearest value for the river otter, the most recorded member of its family. The method above applies to any retina mapped; the hippopotamus is mapped (Coimbra and colleagues 2017, wanted). The view's 6 is a pick inside the measured span (log 136, 137, 140, 181, 184, 193). |
 | Colour of koalas, possums and wombats | `mammal` | The nearest measured diprotodont is the tammar wallaby, a dichromat (log 139); some other marsupials may be trichromats (same line). Drawing koalas as dichromats is an inference from that relative and should stay `g`. |
-| Colour of hedgehogs and shrews | `mammal` | Nothing opened. Bridges and Quilliam 1973 (wanted) measured hedgehog pigments. Until then they take the group's default, which is a guess for them. |
+| Colour of hedgehogs | `mammal` | Nothing opened for hedgehogs. The nearest measured insect-eaters, three shrews and the lesser hedgehog tenrec, have two kinds of cone (log 196), so drawing hedgehogs as dichromats is an inference from them at `g`. Bridges and Quilliam 1973 (wanted) measured hedgehog pigments. |
+| Sharpness of shrews | `mole` | No acuity was found. An inference: if acuity grows with the square root of the number of optic nerve fibres spread over a similar field, a mouse's 0.39 cycles per degree with about 52,000 fibres (the middle of 45,000 to 59,000; log 181 note and log 195, as Dooley and colleagues and Leitch and colleagues report them) gives a masked shrew 0.39 × √(1,483 ÷ 52,000) ≈ 0.07 and a water shrew 0.39 × √(6,342 ÷ 52,000) ≈ 0.14 cycles per degree. A phone screen 24 degrees across would then hold two or three cycles, which the field of light shows more honestly than a blurred picture would. The square-root rule and the shared field are my assumptions. |
 | Rod peak and acuity of armadillos, sloths and anteaters | rods-only variant | Mammalian rods measured here peak at 493 to 502 nm (log 104, 122, 134); the variant's blue-green weighting follows that range. Acuity is unknown. The lesser anteater's eye is small for its skull (log 172), which by the rule that acuity follows eye size (log 94) points to coarse sight; the variant's 2 is a guess. |
 | Field of view of primates | `primate`, `capuchin`, `lemur` | Nothing measured opened. Forward-facing eyes, the primate pathway that flying foxes share (log 151) and a binocular field of 54 degrees in *Pteropus* (log 149) say nothing direct about monkeys, so the views keep the camera's field. |
-| Field of view of whales and dolphins | `whale`, `dolphin` | The beluga's field (Mass 2001) is wanted. The two sharp areas (log 23, 158) imply a wide field reaching behind the eye; a value such as 300 degrees would be an inference from them and the seal's measured 208 (log 36). |
-| How a seal's sight in air worsens as light falls | `seal` | Hanke and Dehnhardt 2009 and Schusterman and Balliet 1971 (both wanted). The dolphin's equal acuity in both media in bright light (log 24) fixes the bright end of the curve; the dim end is a guess. |
+| Field of view of whales and dolphins | `whale`, `dolphin` | The beluga's field (Mass 2001) is wanted. The two sharp areas, now found in a dolphin and two baleen whales (log 23, 158, 189), imply a wide field reaching to the side and behind; a value such as 300 degrees would be an inference from them and the seal's measured 208 (log 36). |
+| How a seal's sight in air worsens as light falls | `seal` | Hanke and Dehnhardt 2009 and Schusterman and Balliet 1971 (both wanted). Equal acuity in both media in good light, in the dolphin, the harbour seal and the California sea lion (log 24, 35, 179), fixes the bright end of the curve; the dim end is a guess. |
 | The manatee's cone peaks | `manatee` | Newman and Robinson 2006 (wanted). The nearest measured large herbivore with two cones in this log is the elephant (log 134); borrowing its peaks would be an inference from a different order, and the view's DEUTAN is that kind of guess. |
 | How sharp and how wide the echo picture is | `bat`, `dolphin` | Geberl and colleagues 2019 and Simmons and colleagues 1983 (wanted) for bats; a dolphin's echo angular resolution of 1.5 degrees (log 48) and a bat's aiming accuracy of 5 degrees (log 58) bracket it. Echo strength falls with distance by the sonar equation, which Boonman and colleagues apply (log 60); the brightness fall-off can follow that equation. |
 | Whether whale rods are dazzled at the surface | `whale` | Nothing opened. A specialist question (section 8). |
@@ -655,32 +675,38 @@ These commonly photographed species are measured well enough for a profile of th
 
 ## 6. Closed sources wanted
 
-The list in `docs/views/wanted/mammal-groups.jsonl`, most useful first:
+The list in `docs/views/wanted/mammal-groups.jsonl`, most useful first (priority 1, then 2, then 3):
 
-1. Hanke and Dehnhardt 2009, aerial acuity of harbour seals as light falls (doi:10.1007/s00359-009-0439-2). Sets the seal view's light-dependent blur.
-2. Schusterman and Balliet 1971, California sea lion acuity in air and water by luminance (doi:10.1111/j.1749-6632.1971.tb13088.x).
-3. Geberl, Kugler and Wiegrebe 2019, the spatial resolution of bat biosonar (doi:10.1016/j.cub.2019.04.046). Sets the sharpness of the echo picture.
-4. Ordy and Samorajski 1968, acuity and ERG flicker fusion in diurnal and nocturnal primates (doi:10.1016/0042-6989(68)90028-x). The only primate flicker source found.
-5. Silveira, Picanço Diniz and Oswaldo-Cruz 1982, contrast sensitivity and acuity of the opossum (doi:10.1016/0042-6989(82)90227-9).
-6. Mass 2001, visual field and resolution of the beluga (doi:10.1023/a:1013326521559).
-7. Newman and Robinson 2006, visual pigments of the West Indian manatee (doi:10.1016/j.visres.2006.03.010).
-8. Graydon, Giorgi and Pettigrew 1987, vision in flying foxes (doi:10.1071/am87021).
-9. Simmons and colleagues 1983, angle discrimination by the big brown bat's sonar (doi:10.1007/bf00612586).
-10. Griebel and Schmid 1996, colour vision in the manatee (doi:10.1016/0042-6989(95)00323-1).
-11. Cowey and Ellis 1967, acuity of rhesus and squirrel monkeys (doi:10.1037/h0024821).
-12. Jacobs and colleagues 1993, photopigments of the owl monkey (doi:10.1016/0042-6989(93)90168-v).
-13. Bridges and Quilliam 1973, visual pigments of moles and hedgehogs (doi:10.1016/0042-6989(73)90239-3).
-14. Melin and colleagues 2014, dichromacy in the Samoan flying fox (doi:10.1007/s00359-014-0951-x).
-15. Danilovich and colleagues 2015, bats regulate biosonar by available visual information (doi:10.1016/j.cub.2015.11.003).
-16. Lemus and colleagues 2026, free-tailed bats use vision and hearing in a maze (doi:10.1007/s00359-026-01813-5).
-17. Rapaport, Wilson and Rowe 1981, ganglion cells of the Virginia opossum (doi:10.1002/cne.901990403).
-18. Strobel and colleagues 2020, amphibious vision in sea otters (doi:10.1007/s00359-020-01436-4).
-19. White and colleagues 1971, acuity of the killer whale (doi:10.1016/0014-4886(71)90066-5).
-20. Chang and colleagues 2026, bat eye movements (doi:10.1016/j.cub.2026.03.013).
-21. Eitan and colleagues 2022, daylight echolocation in visual bats (doi:10.1016/j.cub.2022.02.075).
-22. Winter, López and von Helversen 2003, ultraviolet vision in a bat (doi:10.1038/nature01971).
-23. Coimbra, Bertelsen and Manger 2017, ganglion cells and acuity of the hippopotamus (doi:10.1002/cne.24179).
-24. Kay and Kirk 2000, bones as evidence of activity pattern and acuity in primates (doi:10.1002/1096-8644(200010)113:2<235::aid-ajpa7>3.0.co;2-9).
+1. Hanke and Dehnhardt 2009, *Aerial visual acuity in harbor seals (Phoca vitulina) as a function of luminance* (doi:10.1007/s00359-009-0439-2). Would give the curve by which a seal's sight in air worsens as light falls, which sets the seal view's light-dependent blur.
+2. Schusterman and Balliet 1971, *Aerial and underwater visual acuity in the California sea lion (Zalophus californianus) as a function of luminance* (doi:10.1111/j.1749-6632.1971.tb13088.x). Would give sea lion acuity in air and water across light levels; sea lions hold 26.5% of whale-group records.
+3. Geberl, Kugler and Wiegrebe 2019, *The spatial resolution of bat biosonar quantified with a visual-resolution paradigm* (doi:10.1016/j.cub.2019.04.046). Would set how sharp the bat's echo picture should be, in the same units as visual acuity.
+4. Ordy and Samorajski 1968, *Visual acuity and ERG-CFF in relation to the morphologic organization of the retina among diurnal and nocturnal primates* (doi:10.1016/0042-6989(68)90028-x). The only flicker-fusion measurement found for any primate; it would set `rate` for the three primate views.
+5. Mass 2001, *Visual field organization and retinal resolution in the beluga whale Delphinapterus leucas (Pallas)* (doi:10.1023/a:1013326521559). Would give a toothed whale's field of view, which the dolphin view now leaves unset.
+6. Newman and Robinson 2006, *The visual pigments of the West Indian manatee (Trichechus manatus)* (doi:10.1016/j.visres.2006.03.010). Would give the manatee's cone peaks, and so the colour model of the manatee view.
+7. Silveira, Picanço Diniz and Oswaldo-Cruz 1982, *Contrast sensitivity function and visual acuity of the opossum* (doi:10.1016/0042-6989(82)90227-9). Would give the opossum's own figures, which this log has only as Dooley and colleagues 2012 report them for a South American opossum (1.25 cycles per degree by cortical response, 2.4 from the retina), and its contrast sensitivity.
+8. Graydon, Giorgi and Pettigrew 1987, *Vision in flying foxes (Chiroptera: Pteropodidae)* (doi:10.1071/am87021). Likely holds field, acuity or behaviour for Australian Pteropus, the most recorded bats; it could fill the flying fox view's unset field.
+9. Simmons and colleagues 1983, *Acuity of horizontal angle discrimination by the echolocating bat, Eptesicus fuscus* (doi:10.1007/bf00612586). Would give the big brown bat's angular resolution by sonar, to blur the echo picture sideways.
+10. Griebel and Schmid 1996, *Color vision in the manatee (Trichechus manatus)* (doi:10.1016/0042-6989(95)00323-1). Behavioural test of manatee colour vision; would confirm or correct the manatee colour row, now resting on a review.
+11. Cowey and Ellis 1967, *Visual acuity of rhesus and squirrel monkeys* (doi:10.1037/h0024821). Would give a New World monkey's acuity (squirrel monkey) for the capuchin view, now borrowed from the marmoset.
+12. Jacobs and colleagues 1993, *Photopigments and color vision in the nocturnal monkey, Aotus* (doi:10.1016/0042-6989(93)90168-v). Would give the owl monkey's single cone peak for the lemur view's grey variant.
+13. Bridges and Quilliam 1973, *Visual pigments of men, moles and hedgehogs* (doi:10.1016/0042-6989(73)90239-3). The only source found on hedgehog pigments; hedgehogs hold 4.6% of mammal-group records and have no measured value.
+14. Melin and colleagues 2014, *Dichromatic vision in a fruit bat with diurnal proclivities: the Samoan flying fox (Pteropus samoensis)* (doi:10.1007/s00359-014-0951-x). Would confirm the flying fox colour row in a day-active Pteropus and may give cone peaks.
+15. Danilovich and colleagues 2015, *Bats regulate biosonar based on the availability of visual information* (doi:10.1016/j.cub.2015.11.003). Would set how the echo picture and the eye picture are weighted as light changes.
+16. Lemus and colleagues 2026, *Echolocating free-tailed bats use vision and hearing but not magnetoreception when navigating a maze* (doi:10.1007/s00359-026-01813-5). Vision in the Mexican free-tailed bat, the bat recorded most in Alachua; would ground its rows directly.
+17. Strobel and colleagues 2020, *Adaptations for amphibious vision in sea otters (Enhydra lutris): structural and functional observations* (doi:10.1007/s00359-020-01436-4). Sea otters (13,624 records) sit in the mammal group; this would say whether they need the amphibious treatment of the seal view.
+18. White and colleagues 1971, *Visual acuity of the killer whale (Orcinus orca)* (doi:10.1016/0014-4886(71)90066-5). Behavioural acuity of the orca, the second most recorded dolphin, for the dolphin view's sharpness.
+19. Veilleux and Kirk 2014, *Visual acuity in mammals: effects of eye size and ecology (online supplementary table 1)* (doi:10.1159/000357830). The supplement lists the acuity values of all 91 species, among them anatomical estimates for the Virginia opossum, the pig and the two-toed sloth, which would replace borrowed values in the raccoon and mammal views.
+20. Balliet and Schusterman 1971, *Underwater and aerial visual acuity in the Asian "clawless" otter (Amblonyx cineria cineria)* (doi:10.1038/234305a0). Would give a measured otter acuity in air and under water; otters are the most recorded mustelids and have no behavioural acuity in this log.
+21. Rapaport, Wilson and Rowe 1981, *The distribution of ganglion cells in the retina of the north american opossum (Didelphis virginiana)* (doi:10.1002/cne.901990403). The abstract (log 183) places the Virginia opossum's area centralis and its density; the full paper may give the eye's size, which would turn that density into an anatomical acuity for the raccoon view's opossum variant.
+22. Chang and colleagues 2026, *Bat eye movements resolve a long-standing question in gaze control* (doi:10.1016/j.cub.2026.03.013). Would say whether bats move their eyes, for any gaze effect in the bat view.
+23. Eitan and colleagues 2022, *Functional daylight echolocation in highly visual bats* (doi:10.1016/j.cub.2022.02.075). Rousettes in daylight; background for the flying fox view's clicks row.
+24. Winter, López and von Helversen 2003, *Ultraviolet vision in a bat* (doi:10.1038/nature01971). Behavioural ultraviolet vision in Glossophaga; background for the bat colour row.
+25. Coimbra, Bertelsen and Manger 2017, *Retinal ganglion cell topography and spatial resolving power in the river hippopotamus (Hippopotamus amphibius)* (doi:10.1002/cne.24179). Another large-mammal acuity and streak for the mammal view.
+26. Kay and Kirk 2000, *Osteological evidence for the evolution of activity pattern and visual acuity in primates* (doi:10.1002/1096-8644(200010)113:2<235::aid-ajpa7>3.0.co;2-9). Background on primate acuity by activity pattern.
+27. Schusterman and Barrett 1973, *Amphibious nature of visual acuity in the Asian "clawless" otter* (doi:10.1038/244518a0). The follow-up on the same otter's acuity in both media; the abstract read gives no numbers.
+28. Jensen and colleagues 2018, *Narrow acoustic field of view drives frequency scaling in toothed whale biosonar* (doi:10.1016/j.cub.2018.10.037). Would give sonar beam widths across toothed whales, which set the width of the dolphin view's sonar cone; the publisher's page returned an error.
+29. Bell and Fenton 1986, *Visual acuity, sensitivity and binocularity in a gleaning insectivorous bat, Macrotus californicus (Chiroptera: Phyllostomidae)* (doi:10.1016/s0003-3472(86)80110-5). A leaf-nosed bat's acuity and binocular field, the only binocular measure found for a calling bat; the collection holds the title only.
+30. Oswaldo-Cruz, Hokoç and Sousa 1979, *A schematic eye for the opossum* (doi:10.1016/0042-6989(79)90172-x). The eye's optics would turn the Virginia opossum's mapped ganglion cell density (log 183) into cycles per degree.
 
 ## 7. Sources
 
@@ -689,6 +715,7 @@ Every source behind a log line, one line each, with how it was read. "Opened" me
 - Adachi T, Naito Y, Robinson PW, Costa DP, Hückstädt LA, Holser RR, Iwasaki W, Takahashi A, 2022. Whiskers as hydrodynamic prey sensors in foraging seals. *Proceedings of the National Academy of Sciences of the USA*. doi:10.1073/pnas.2119502119. **opened** (full text on disk in the collection, or an open page). Log 43, 44.
 - Ahnelt PK, Hokoç JN, Röhlich P, 1995. Photoreceptors in a primitive mammal, the South American opossum, Didelphis marsupialis aurita: characterization with anti-opsin immunolabeling. *Visual Neuroscience*. doi:10.1017/s0952523800009366. **opened** (abstract stored in the collection). Log 123.
 - Akamatsu T, Wang D, Wang K, Naito Y, 2005. Biosonar behaviour of free-ranging porpoises. *Proceedings of the Royal Society B*. doi:10.1098/rspb.2004.3024. **opened** (abstract stored in the collection). Log 51.
+- Antonio EA, de Sá FB, dos Santos KRP, de Lima NB, da Silva FR, Aguiar Júnior FCA, Vieira JRC, 2020. Comparative retinal histomorphometry and visual acuity of three bat species of the genus Artibeus (Phyllostomidae: Stenodermatinae). *Pesquisa Veterinária Brasileira*. doi:10.1590/1678-5150-pvb-6701. **opened** (abstract stored in the collection). Log 176 to 178.
 - Arrese CA, Archer M, Runham PB, Dunlop SA, Beazley LD, 2000. Visual system in a diurnal marsupial, the numbat (Myrmecobius fasciatus): retinal organization, visual acuity and visual fields. *Brain, Behavior and Evolution*. doi:10.1159/000006650. **opened** (abstract stored in the collection). Log 137.
 - Arrese CA, Archer M, Beazley LD, 2002. Visual capabilities in a crepuscular marsupial, the honey possum (Tarsipes rostratus): a visual approach to ecology. *Journal of Zoology*. doi:10.1017/s0952836902000183. **opened** (abstract stored in the collection). Log 138.
 - Au WWL, Moore PWB, Pawloski DA, 1986. Echolocation transmitting beam of the Atlantic bottlenose dolphin. *Journal of the Acoustical Society of America*. doi:10.1121/1.394012. **opened** (abstract stored in the collection). Log 53.
@@ -705,21 +732,24 @@ Every source behind a log line, one line each, with how it was read. "Opened" me
 - Caves EM, Brandley NC, Johnsen S, 2018. Visual acuity and the evolution of signals. *Trends in Ecology and Evolution*. doi:10.1016/j.tree.2018.03.001. **opened** (owner's library copy; short quotes only). Log 91, 92, 93, 94.
 - Cavonius CR, Robbins DO, 1973. Relationships between luminance and visual acuity in the rhesus monkey. *Journal of Physiology*. doi:10.1113/jphysiol.1973.sp010267. **opened** (abstract stored in the collection). Log 119.
 - Cechetto C, de Busserolles F, Jakobsen L, Warrant EJ, 2020. Retinal ganglion cell topography and spatial resolving power in echolocating and non-echolocating bats. *Brain, Behavior and Evolution*. doi:10.1159/000508863. **opened** (publisher or repository page, read through the web tool). Log 74, 75.
+- Céchetto C, Jakobsen L, Warrant EJ, 2023. Visual detection threshold in the echolocating Daubenton's bat (Myotis daubentonii). *Journal of Experimental Biology*. doi:10.1242/jeb.244451. **opened** (publisher or repository page, read through the web tool). Log 73.
 - Crognale MA, Levenson D, Ponganis PJ, Deegan JF, Jacobs GH, 1998. Cone spectral sensitivity in the harbor seal (Phoca vitulina) and implications for color vision. *Canadian Journal of Zoology*. doi:10.1139/z98-129. **opened** (abstract stored in the collection). Log 15, 16.
 - Czech-Damal NU, Liebschner A, Miersch L, Klauer G, Hanke FD, Marshall CD, Dehnhardt G, Hanke W, 2011. Electroreception in the Guiana dolphin (Sotalia guianensis). *Proceedings of the Royal Society B*. doi:10.1098/rspb.2011.1127. **opened** (abstract stored in the collection). Log 41.
-- Céchetto C, Jakobsen L, Warrant EJ, 2023. Visual detection threshold in the echolocating Daubenton's bat (Myotis daubentonii). *Journal of Experimental Biology*. doi:10.1242/jeb.244451. **opened** (publisher or repository page, read through the web tool). Log 73.
 - Danilovich S, Yovel Y, 2019. Integrating vision and echolocation for navigation and perception in bats. *Science Advances*. doi:10.1126/sciadv.aaw6503. **opened** (full text on disk in the collection, or an open page). Log 81.
 - Dehnhardt G, Mauck B, Hanke W, Bleckmann H, 2001. Hydrodynamic trail-following in harbor seals (Phoca vitulina). *Science*. doi:10.1126/science.1060514. **opened** (abstract stored in the collection). Log 42.
+- Denzinger A, Schnitzler H-U, 2013. Bat guilds, a concept to classify the highly diverse foraging and echolocation behaviors of microchiropteran bats. *Frontiers in Physiology*. doi:10.3389/fphys.2013.00164. **opened** (full text on disk in the collection). Log 173 to 175.
+- Dooley JC, Nguyen HM, Seelke AMH, Krubitzer L, 2012. Visual acuity in the short-tailed opossum (Monodelphis domestica). *Neuroscience*. doi:10.1016/j.neuroscience.2012.07.065. **opened** (the NIH manuscript on PMC, read through the web tool, which returns short verbatim quotes). Log 181, 182.
 - Dos Santos ELS, Fernandes AV, Dórea Neto FA, Muramoto C, Silva DN, Raposo AC, Faria MMMD, Guerra e Silva RD, Estrela-Lima A, Silva EAAC, Oriá AP, 2026. Morphological and imaging characterization of the eye and adnexa of the lesser anteater (Tamandua tetradactyla). *Anatomia Histologia Embryologia*. doi:10.1111/ahe.70126. **opened** (abstract stored in the collection). Log 172.
 - Ebeling W, Natoli RC, Hemmi JM, 2010. Diversity of color vision: not all Australian marsupials are trichromatic. *PLoS ONE*. doi:10.1371/journal.pone.0014231. **opened** (full text on disk in the collection, or an open page). Log 139.
 - Eklöf J, Šuba J, Petersons G, Rydell J, 2014. Visual acuity and eye size in five European bat species in relation to foraging and migration strategies. *Environmental and Experimental Biology*. https://eeb.lu.lv/EEB/201403/EEB_12_Eklof.shtml. **opened** (abstract stored in the collection; citation from the journal page). Log 71.
 - Emerling CA, Springer MS, 2014. Genomic evidence for rod monochromacy in sloths and armadillos suggests early subterranean history for Xenarthra. *Proceedings of the Royal Society B*. doi:10.1098/rspb.2014.2192. **opened** (abstract stored in the collection). Log 141, 142.
 - Fasick JI, Robinson PR, 2016. Adaptations of cetacean retinal pigments to aquatic environments. *Frontiers in Ecology and Evolution*. doi:10.3389/fevo.2016.00070. **opened** (full text on disk in the collection, or an open page). Log 8 to 170 (8 lines).
+- Gentry RL, Peterson RS, 1967. Underwater vision of the sea otter. *Nature*. doi:10.1038/216435a0. **opened** (abstract on Nature's page, read through the web tool). Log 186.
 - Gilad Y, Wiebe V, Przeworski M, Lancet D, Pääbo S, 2004. Loss of olfactory receptor genes coincides with the acquisition of full trichromatic vision in primates. *PLoS Biology*. doi:10.1371/journal.pbio.0020005. **opened** (full text on disk in the collection, or an open page). Log 164.
 - Glösmann M, Steiner M, Peichl L, Ahnelt PK, 2008. Cone photoreceptors and potential UV vision in a subterranean insectivore, the European mole. *Journal of Vision*. doi:10.1167/8.4.23. **opened** (abstract stored in the collection). Log 130, 131.
 - Griebel U, Peichl L, 2003. Colour vision in aquatic mammals: facts and open questions. *Aquatic Mammals*. doi:10.1578/016754203101024040. **opened** (abstract stored in the collection). Log 17, 18.
-- Hanke FD, Peichl L, Dehnhardt G, 2009. Retinal ganglion cell topography in juvenile harbor seals (Phoca vitulina). *Brain, Behavior and Evolution*. doi:10.1159/000235612. **opened** (abstract stored in the collection). Log 27, 28.
 - Hanke W, Römer R, Dehnhardt G, 2006. Visual fields and eye movements in a harbor seal (Phoca vitulina). *Vision Research*. doi:10.1016/j.visres.2006.02.004. **opened** (publisher or repository page, read through the web tool). Log 36, 37, 38.
+- Hanke FD, Peichl L, Dehnhardt G, 2009. Retinal ganglion cell topography in juvenile harbor seals (Phoca vitulina). *Brain, Behavior and Evolution*. doi:10.1159/000235612. **opened** (abstract stored in the collection). Log 27, 28.
 - Heffner RS, Koay G, Heffner HE, 1999. Sound localization in an Old-World fruit bat (Rousettus aegyptiacus): acuity, use of binaural cues, and relationship to vision. *Journal of Comparative Psychology*. doi:10.1037//0735-7036.113.3.297. **opened** (abstract stored in the collection). Log 150.
 - Hemmi JM, Mark RF, 1998. Visual acuity, contrast sensitivity and retinal magnification in a marsupial, the tammar wallaby (Macropus eugenii). *Journal of Comparative Physiology A*. doi:10.1007/s003590050264. **opened** (publisher or repository page, read through the web tool). Log 140.
 - Herman LM, Peacock MF, Yunker MP, Madsen CJ, 1975. Bottle-nosed dolphin: double-slit pupil yields equivalent aerial and underwater diurnal acuity. *Science*. doi:10.1126/science.1162351. **opened** (abstract stored in the collection). Log 24, 25.
@@ -734,24 +764,30 @@ Every source behind a log line, one line each, with how it was read. "Opened" me
 - Jacobs GH, Williams GA, 2010. Cone pigments in a North American marsupial, the opossum (Didelphis virginiana). *Journal of Comparative Physiology A*. doi:10.1007/s00359-010-0519-3. **opened** (full text on disk in the collection, or an open page). Log 122.
 - Jacobs GH, 2013. Losses of functional opsin genes, short-wavelength cone photopigments, and color vision: a significant trend in the evolution of mammalian vision. *Visual Neuroscience*. doi:10.1017/s0952523812000429. **opened** (abstract stored in the collection). Log 124.
 - Jakobsen L, Brinkløv S, Surlykke A, 2013. Intensity and directionality of bat echolocation signals. *Frontiers in Physiology*. doi:10.3389/fphys.2013.00089. **opened** (full text on disk in the collection, or an open page). Log 64, 65.
+- Jamieson GS, Fisher HD, 1971. The retina of the harbour seal, Phoca vitulina. *Canadian Journal of Zoology*. doi:10.1139/z71-005. **opened** (abstract stored in the collection). Log 180.
 - Jensen FH, Bejder L, Wahlberg M, Madsen PT, 2009. Biosonar adjustments to target range of echolocating bottlenose dolphins (Tursiops sp.) in the wild. *Journal of Experimental Biology*. doi:10.1242/jeb.025619. **opened** (abstract stored in the collection). Log 54.
+- Jones MC, Simpson TR, Manning RW, Forstner MRJ, 2007. Texas shrews (Blarina hylophaga) lacking external eye openings. *Southeastern Naturalist*. doi:10.1656/1528-7092(2007)6[752:tsbhle]2.0.co;2. **opened** (abstract stored in the collection). Log 199.
 - Jones GA, Teeling EC, Rossiter SJ, 2013. From the ultrasonic to the infrared: molecular evolution and the sensory biology of bats. *Frontiers in Physiology*. doi:10.3389/fphys.2013.00117. **opened** (full text on disk in the collection, or an open page). Log 84, 85, 86, 87.
 - Jung K, Molinari J, Kalko EKV, 2014. Driving factors for the evolution of species-specific echolocation call design in New World free-tailed bats (Molossidae). *PLoS ONE*. doi:10.1371/journal.pone.0085279. **opened** (full text on disk in the collection, or an open page). Log 67.
 - Kastak DA, Schusterman RJ, 1998. Low-frequency amphibious hearing in pinnipeds: methods, measurements, noise, and ecology. *Journal of the Acoustical Society of America*. doi:10.1121/1.421367. **opened** (abstract stored in the collection). Log 47.
 - Klećkowska-Nawrot J, Barszcz K, Stegmann KO, Goździewska-Harłajczuk K, 2023. The organ of vision morphology of the southern two-toed sloth (Choloepus didactylus Linnaeus, 1758; Pilosa, Choloepodidae). *Anatomia Histologia Embryologia*. doi:10.1111/ahe.12984. **opened** (abstract stored in the collection). Log 167.
 - Kloepper LN, Tuninetti A, Bentley I, Harding CD, Brighton CH, Izadi MR, Stevenson RL, Taylor GK, 2025. Stereotyped active sensing in fast-diving echolocating bats. *iScience*. doi:10.1016/j.isci.2025.114099. **opened** (full text on disk in the collection, or an open page). Log 68.
 - Koay G, Heffner RS, Heffner HE, 1998. Hearing in a megachiropteran fruit bat (Rousettus aegyptiacus). *Journal of Comparative Psychology*. doi:10.1037//0735-7036.112.4.371. **opened** (abstract stored in the collection). Log 152.
+- Kounitsky P, Rydell J, Amichai E, Boonman A, Eitan O, Weiss AJ, Yovel Y, 2015. Bats adjust their mouth gape to zoom their biosonar field of view. *Proceedings of the National Academy of Sciences*. doi:10.1073/pnas.1422843112. **opened** (abstract stored in the collection). Log 190.
 - Kries K, Barros MAS, Duytschaever G, Orkin JD, Janiak MC, Pessoa DMA, Melin AD, 2018. Colour vision variation in leaf-nosed bats (Phyllostomidae): links to cave roosting and dietary specialization. *Molecular Ecology*. doi:10.1111/mec.14818. **opened** (abstract stored in the collection). Log 88.
 - Kyhn LA, Tougaard J, Beedholm K, Jensen FH, Ashe E, Williams R, Madsen PT, 2013. Clicking in a killer whale habitat: narrow-band, high-frequency biosonar clicks of harbour porpoise (Phocoena phocoena) and Dall's porpoise (Phocoenoides dalli). *PLoS ONE*. doi:10.1371/journal.pone.0063763. **opened** (full text on disk in the collection, or an open page). Log 50.
 - Land MF, Nilsson D-E, 2012. Animal Eyes, 2nd edition (Oxford Animal Biology Series). *Oxford University Press*. doi:10.1093/acprof:oso/9780199581139.001.0001. **opened** in part (owner's library copy: the opening pages, chapters 1 and 2, and chapter 3 to its section on sensitivity). Log 95, 96, 97, 98.
+- Leitch DB, Sarko DK, Catania KC, 2014. Brain mass and cranial nerve size in shrews and moles. *Scientific Reports*. doi:10.1038/srep06241. **opened** (full text on disk in the collection). Log 194, 195.
 - Levenson D, Schusterman RJ, 1997. Pupillometry in seals and sea lions: ecological implications. *Canadian Journal of Zoology*. doi:10.1139/z97-838. **opened** (abstract stored in the collection). Log 32.
 - Levenson D, Schusterman RJ, 1999. Dark adaptation and visual sensitivity in shallow and deep-diving pinnipeds. *Marine Mammal Science*. doi:10.1111/j.1748-7692.1999.tb00892.x. **opened** (abstract stored in the collection). Log 30, 31.
 - Li L, Chi H, Liu H, Xia Y, Irwin DM, Zhang S, Liu Y, 2018. Retention and losses of ultraviolet-sensitive visual pigments in bats. *Scientific Reports*. doi:10.1038/s41598-018-29646-6. **opened** (full text on disk in the collection, or an open page). Log 83.
 - Lisney TJ, Collin SP, 2018. Retinal topography in two species of baleen whale (Cetacea: Mysticeti). *Brain, Behavior and Evolution*. doi:10.1159/000495285. **opened** (abstract stored in the collection). Log 158, 159.
+- Liu Q, Hua Q-Y, He S-W, Shi L, Chen P, Ma Y-S, Zhang Q, Jiang X-L, Shi P, 2025. Evidence for echolocation in Asian shrew moles. *National Science Review*. doi:10.1093/nsr/nwaf591. **opened** (full text on disk in the collection). Log 200.
 - Madsen PT, Johnson MP, Aguilar de Soto N, Zimmer WMX, Tyack PL, 2005. Biosonar performance of foraging beaked whales (Mesoplodon densirostris). *Journal of Experimental Biology*. doi:10.1242/jeb.01327. **opened** (abstract stored in the collection). Log 52.
 - Manger PR, Calford MB, Pettigrew JD, 1996. Properties of electrosensory neurons in the cortex of the platypus (Ornithorhynchus anatinus): implications for processing of electrosensory stimuli. *Proceedings of the Royal Society B*. doi:10.1098/rspb.1996.0092. **opened** (abstract stored in the collection). Log 153.
 - Manske U, Schmidt U, 1976. Visual acuity of the vampire bat, Desmodus rotundus, and its dependence upon light intensity. *Zeitschrift für Tierpsychologie*. doi:10.1111/j.1439-0310.1976.tb00967.x. **opened** (abstract stored in the collection). Log 72.
 - Mass AM, Supin AYa, 1995. Ganglion cell topography of the retina in the bottlenosed dolphin, Tursiops truncatus. *Brain, Behavior and Evolution*. doi:10.1159/000113554. **opened** (abstract stored in the collection). Log 22, 23.
+- Mass AM, Supin AYa, 2000. Ganglion cells density and retinal resolution in the sea otter, Enhydra lutris. *Brain, Behavior and Evolution*. doi:10.1159/000006646. **opened** (abstract stored in the collection). Log 184, 185.
 - Mass AM, Supin AYa, 2003. Retinal topography of the harp seal Pagophilus groenlandicus. *Brain, Behavior and Evolution*. doi:10.1159/000073273. **opened** (abstract stored in the collection). Log 26.
 - Mass AM, Supin AYa, 2007. Adaptive features of aquatic mammals' eye. *The Anatomical Record*. doi:10.1002/ar.20529. **opened** (abstract stored in the collection). Log 19, 20, 21.
 - Matsuzawa T, 1990. Form perception and visual acuity in a chimpanzee. *Folia Primatologica*. doi:10.1159/000156494. **opened** (abstract stored in the collection). Log 118.
@@ -760,11 +796,13 @@ Every source behind a log line, one line each, with how it was read. "Opened" me
 - Morris JM, Fernández-Juricic E, Plummer CE, Moore BA, 2025. Visual field of the ferret (Mustela putorius furo), rat (Rattus norvegicus), and tree shrew (Tupaia belangeri). *Journal of Vision*. doi:10.1167/jov.25.13.8. **opened** (full text on disk in the collection, or an open page). Log 144, 145.
 - Mortimer B, Rees WL, Koelemeijer P, Nissen-Meyer T, 2018. Classifying elephant behaviour through seismic vibrations. *Current Biology*. doi:10.1016/j.cub.2018.03.062. **opened** (abstract stored in the collection). Log 157.
 - Moss CF, Surlykke A, 2010. Probing the natural scene by echolocation in bats. *Frontiers in Behavioral Neuroscience*. doi:10.3389/fnbeh.2010.00033. **opened** (full text on disk in the collection, or an open page). Log 55, 56, 57, 58, 59.
-- Murugavel B, Mitkus M, Somanathan H, Kelber A, 2022. Retinal ganglion cell topography and spatial resolution in three Indian pteropodid bats. *Brain, Behavior and Evolution*. doi:10.1159/000528417. **opened** (abstract stored in the collection). Log 76, 77, 78.
 - Müller B, Goodman SM, Peichl L, 2007. Cone photoreceptor diversity in the retinas of fruit bats (Megachiroptera). *Brain, Behavior and Evolution*. doi:10.1159/000102971. **opened** (abstract stored in the collection). Log 146, 147, 148.
 - Müller B, Glösmann M, Peichl L, Knop GC, Hagemann C, Ammermüller J, 2009. Bat eyes have ultraviolet-sensitive cone photoreceptors. *PLoS ONE*. doi:10.1371/journal.pone.0006390. **opened** (full text on disk in the collection, or an open page). Log 82.
+- Murayama T, Somiya H, Aoki I, Ishii T, 1992. The distribution of ganglion cells in the retina and visual acuity of minke whale. *Nippon Suisan Gakkaishi*. doi:10.2331/suisan.58.1057. **opened** (abstract stored in the collection; the J-STAGE PDF was refused). Log 188, 189.
+- Murugavel B, Mitkus M, Somanathan H, Kelber A, 2022. Retinal ganglion cell topography and spatial resolution in three Indian pteropodid bats. *Brain, Behavior and Evolution*. doi:10.1159/000528417. **opened** (abstract stored in the collection). Log 76, 77, 78.
 - Neitz J, Jacobs GH, 1989. Spectral sensitivity of cones in an ungulate. *Visual Neuroscience*. doi:10.1017/S0952523800011949. **opened** (publisher or repository page, read through the web tool). Log 125, 126.
 - Ollivier FJ, Samuelson DA, Brooks DE, Lewis PA, Kallberg ME, Komáromy AM, 2004. Comparative morphology of the tapetum lucidum (among selected species). *Veterinary Ophthalmology*. doi:10.1111/j.1463-5224.2004.00318.x. **opened** (abstract stored in the collection). Log 129.
+- Peichl L, Künzle H, Vogel P, 2000. Photoreceptor types and distributions in the retinae of insectivores. *Visual Neuroscience*. doi:10.1017/s0952523800176138. **opened** (abstract stored in the collection). Log 196, 197.
 - Peichl L, Behrmann G, Kröger RHH, 2001. For whales and seals the ocean is not blue: a visual pigment loss in marine mammals. *European Journal of Neuroscience*. doi:10.1046/j.0953-816x.2001.01533.x. **opened** (abstract stored in the collection). Log 5, 6, 7.
 - Peter-Ajuzie IK, Nwaogu IC, Majesty-Alukagberie LO, Ajaebili AC, Farrag FA, Kassab M, Morsy KS, Abumandour MMA, 2021. Ocular morphology of the fruit bat, Eidolon helvum, and the optical role of the choroidal papillae in the megachiropteran eye: a novel insight. *Folia Morphologica*. doi:10.5603/fm.a2021.0072. **opened** (full text on disk in the collection, or an open page). Log 79, 80.
 - Pettigrew JD, 1986. Flying primates? Megabats have the advanced pathway from eye to midbrain. *Science*. doi:10.1126/science.3945827. **opened** (abstract stored in the collection). Log 151.
@@ -772,19 +810,24 @@ Every source behind a log line, one line each, with how it was read. "Opened" me
 - Pettigrew JD, Manger PR, 2008. Retinal ganglion cell density of the black rhinoceros (Diceros bicornis): calculating visual resolution. *Visual Neuroscience*. doi:10.1017/s0952523808080498. **opened** (abstract stored in the collection). Log 136.
 - Pettigrew JD, Bhagwandin A, Haagensen M, Manger PR, 2010. Visual acuity and heterogeneities of retinal ganglion cell densities and the tapetum lucidum of the African elephant (Loxodonta africana). *Brain, Behavior and Evolution*. doi:10.1159/000314898. **opened** (abstract stored in the collection). Log 132, 133.
 - Pirie A, 1959. Crystals of riboflavin making up the tapetum lucidum in the eye of a lemur. *Nature*. doi:10.1038/183985a0. **opened** (publisher or repository page, read through the web tool). Log 165.
+- Rapaport DH, Wilson PD, Rowe MH, 1981. The distribution of ganglion cells in the retina of the North American opossum (Didelphis virginiana). *Journal of Comparative Neurology*. doi:10.1002/cne.901990403. **opened** (abstract stored in the collection). Log 183.
 - Reep RL, Marshall CD, Stoll ML, 2002. Tactile hairs on the postcranial body in Florida manatees: a mammalian lateral line?. *Brain, Behavior and Evolution*. doi:10.1159/000064161. **opened** (abstract stored in the collection). Log 46.
 - Rosa MGP, Schmid LM, 1994. Topography and extent of visual-field representation in the superior colliculus of the megachiropteran Pteropus. *Visual Neuroscience*. doi:10.1017/s0952523800006878. **opened** (abstract stored in the collection). Log 149.
+- Sanchez L, Ohdachi SD, Kawahara A, Echenique-Diaz LM, Maruyama S, Kawata M, 2019. Acoustic emissions of Sorex unguiculatus (Mammalia: Soricidae): assessing the echo-based orientation hypothesis. *Ecology and Evolution*. doi:10.1002/ece3.4930. **opened** (the Hokkaido University repository PDF, read through the web tool). Log 198.
 - Sandow LM, Miersch L, Hanke FD, 2026. Underwater visual single target acuity in harbor seals (Phoca vitulina). *Journal of Comparative Physiology A*. doi:10.1007/s00359-026-01837-x. **opened** (full text on disk in the collection, or an open page). Log 33, 34, 35.
+- Schusterman RJ, Balliet RF, 1970. Conditioned vocalizations as a technique for determining visual acuity thresholds in sea lions. *Science*. doi:10.1126/science.169.3944.498. **opened** (abstract stored in the collection). Log 179.
 - Schweikert LE, Fasick JI, Grace MS, 2016. Evolutionary loss of cone photoreception in balaenid whales reveals circuit stability in the mammalian retina. *Journal of Comparative Neurology*. doi:10.1002/cne.23996. **opened** (abstract stored in the collection). Log 4.
 - Shyan-Norwalt MR, Peterson J, Milankow B, Staggs TE, Dale R, 2009. Initial findings on visual acuity thresholds in an African elephant (Loxodonta africana). *Zoo Biology*. doi:10.1002/zoo.20259. **opened** (abstract stored in the collection). Log 135.
 - Silveira LCL, Saito CA, da Silva Filho M, Kremers J, Bowmaker JK, Lee BB, 2014. Alouatta trichromatic color vision: cone spectra and physiological responses studied with microspectrophotometry and single unit retinal electrophysiology. *PLoS ONE*. doi:10.1371/journal.pone.0113321. **opened** (abstract stored in the collection). Log 108.
 - Smodlaka H, Khamas WA, Palmer L, Lui B, Borovac JA, Cohn BA, Schmitz L, 2016. Eye histology and ganglion cell topography of northern elephant seals (Mirounga angustirostris). *The Anatomical Record*. doi:10.1002/ar.23342. **opened** (abstract stored in the collection). Log 161.
 - Surlykke A, Pedersen SB, Jakobsen L, 2008. Echolocating bats emit a highly directional sonar sound beam in the field. *Proceedings of the Royal Society B*. doi:10.1098/rspb.2008.1505. **opened** (full text on disk in the collection, or an open page). Log 66.
+- Svoke JT, 2022. Perception of color vision in the Asian small-clawed otter (Aonyx cinerea). *Master's thesis, Georgia State University*. doi:10.57709/1957686. **opened** (abstract stored in the collection; a master’s thesis). Log 187.
 - Thiagavel J, Céchetto C, Santana SE, Jakobsen L, Warrant EJ, Ratcliffe JM, 2018. Auditory opportunity and visual constraint enabled the evolution of echolocation in bats. *Nature Communications*. doi:10.1038/s41467-017-02532-x. **opened** (full text on disk in the collection, or an open page). Log 90.
 - Townsend S, 2023. Scalopus aquaticus, eastern mole. *Animal Diversity Web*. https://animaldiversity.org/accounts/Scalopus_aquaticus/. **opened** (publisher or repository page, read through the web tool). Log 169.
 - Troilo D, Rowland HC, Judge SJ, 1993. Visual optics and retinal cone topography in the common marmoset (Callithrix jacchus). *Vision Research*. doi:10.1016/0042-6989(93)90038-x. **opened** (abstract stored in the collection). Log 117.
 - Valenta K, Edwards M, Rafaliarison RR, Johnson SE, Holmes SM, Brown KA, Dominy NJ, Lehman SM, Parra EJ, Melin AD, 2015. Visual ecology of true lemurs suggests a cathemeral origin for the primate cone opsin polymorphism. *Functional Ecology*. doi:10.1111/1365-2435.12575. **opened** (abstract stored in the collection). Log 113.
 - Veilleux CC, Kirk EC, 2009. Visual acuity in the cathemeral strepsirrhine Eulemur macaco flavifrons. *American Journal of Primatology*. doi:10.1002/ajp.20665. **opened** (abstract stored in the collection). Log 114, 115, 116.
+- Veilleux CC, Kirk EC, 2014. Visual acuity in mammals: effects of eye size and ecology. *Brain, Behavior and Evolution*. doi:10.1159/000357830. **opened** (the publisher's PDF, read through the web tool; the supplementary table could not be reached). Log 191 to 193.
 - Weiffen M, Möller B, Mauck B, Dehnhardt G, 2006. Effect of water turbidity on the visual acuity of harbor seals (Phoca vitulina). *Vision Research*. doi:10.1016/j.visres.2005.08.015. **opened** (publisher or repository page, read through the web tool). Log 39, 40.
 - Wisniewska DM, Ratcliffe JM, Beedholm K, Christensen CB, Johnson M, Koblitz JC, Wahlberg M, Madsen PT, 2015. Range-dependent flexibility in the acoustic field of view of echolocating porpoises (Phocoena phocoena). *eLife*. doi:10.7554/elife.05651. **opened** (full text on disk in the collection, or an open page). Log 49.
 - Yokoyama S, Takenaka N, Agnew D, Shoshani J, 2005. Elephants and human color-blind deuteranopes have identical sets of visual pigments. *Genetics*. doi:10.1534/genetics.104.039511. **opened** (abstract stored in the collection). Log 134.
@@ -806,7 +849,7 @@ Pages behind the counts, the phone inputs and the citations, all **opened** toda
 - Europe PMC records for PMIDs 7620874 and 3191381: the years of Mass and Supin 1995 and Pettigrew and colleagues 1988, which the collection gives as 2008; and for PMIDs 16564067 and 16197975, the abstracts of Hanke, Römer and Dehnhardt 2006 and of Weiffen and colleagues 2006.
 - Frontiers article pages for Moss and Surlykke 2010 and Boonman and colleagues 2013: the author lists.
 
-Used from the earlier sheets and **not reopened**, so **secondary** here: Levenson and colleagues 2006 (sea otter and polar bear cones); Emerling and Springer 2015 on pangolins (the earlier sheet's reading of the eScholarship PDF); Veilleux and Kirk 2014 (western grey kangaroo 11.2 cycles per degree); Scheich and colleagues 1986 (platypus threshold of about 50 µV per cm); Holland and colleagues 2006 (big brown bat magnetic homing); Wang and colleagues 2004 (ultraviolet opsin in the Formosan flying fox); Slonaker 1899 (eastern mole).
+Used from the earlier sheets and **not reopened**, so **secondary** here: Levenson and colleagues 2006 (sea otter and polar bear cones); Emerling and Springer 2015 on pangolins (the earlier sheet's reading of the eScholarship PDF); Scheich and colleagues 1986 (platypus threshold of about 50 µV per cm); Holland and colleagues 2006 (big brown bat magnetic homing); Wang and colleagues 2004 (ultraviolet opsin in the Formosan flying fox); Slonaker 1899 (eastern mole).
 
 ## 8. Questions for a specialist
 
@@ -815,4 +858,4 @@ Used from the earlier sheets and **not reopened**, so **secondary** here: Levens
 3. How steeply does a harbour seal's or sea lion's sight in air fall as the light dims, and below what light level does the slit and pinhole pupil stop correcting the eye's short sight in air?
 4. Where in the visual field, in degrees from straight ahead, do the sharp areas of insect-eating bats, dolphins, black bears and elephants look?
 5. Which dichromat model fits best, for a camera-colour matrix: a capuchin male with the 563 nm or the 535 nm form of the long-wave pigment, a lemur with its cone near 545 nm, a pig with 556 nm, an elephant with 552 nm? Is a single deutan matrix acceptable for all of them?
-6. Are there measurements, published or not, of cone types or acuity in koalas, European hedgehogs, shrews, ringtails, skunks or sea otters, the most photographed members of these groups that this sheet could not cover?
+6. Are there measurements, published or not, of cone types or acuity in koalas, European hedgehogs, ringtails, skunks or North American river otters, or of acuity in any shrew, the most photographed members of these groups that this sheet could not cover? Is a picture of light alone fair to a shrew whose optic nerve carries 1,500 to 6,300 fibres?
