@@ -588,6 +588,7 @@ def main():
     ap.add_argument("--other-view", type=float, help="merge only: raise other's bias, in steps of 0.05, until at most this share of the world tuning photos in other is given a view; then fold and settle again")
     ap.add_argument("--max-fit", type=int, default=0, help="fit on an even sample of at most this many photos of each set (0: all; for trying the code)")
     ap.add_argument("--tune-only", action="store_true", help="stop before the test photos are loaded")
+    ap.add_argument("--dump", action="store_true", help="also write OUT/head.npz: the head's rows, biases, labels and settings, fixed before the test photos are loaded")
     a = ap.parse_args()
     R = dict(RECIPES[a.recipe])
     for k in R:
@@ -907,6 +908,9 @@ def main():
                 for r, lab in zip(A["fit"]["rows"], folded(A["fit"]["y"], carried if R["groups"] != "merge" else every)):
                     w.writerow([r["id"], lab, r.get("photo_url", ""), r.get("licence", ""), r.get("obs_url", "")])
 
+    if a.dump:
+        np.savez(os.path.join(a.out, "head.npz"), rows=Wk, bias_rows=bias_rows, labels=np.array(labels_of(carried)), carried=np.array(carried),
+                 fusion=json.dumps(fu), species=spec["species"], species_bias=spec["species_bias"])
     if a.tune_only:
         rep["groups"] = {"rule": R["groups"], "history": history, "carried": carried, "left_in_other": [g for g in NEW if g not in carried]}
         rep["settings"] = settings; rep["tuning"] = tune_marks; rep["test"] = None
