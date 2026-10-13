@@ -42,7 +42,7 @@ Conventions. "This view squeezes" means the engine's `fov` above 180. "Regions" 
 
 Rows:
 
-- `['m', 'Two sharp spots', 'Hawks, eagles and falcons have two pits of tightly packed cells in each eye, called foveae. The deep one looks out about 45 degrees to the side and the shallow one about 15 degrees. This view puts the deep fovea where your camera points, the way a hawk turns its head to look at something far away.']`
+- `['m', 'Two sharp spots', 'Most hawks, eagles and falcons have two pits of tightly packed cells in each eye, called foveae. The deep one looks out about 45 degrees to the side and the shallow one about 15 degrees. This view puts the deep fovea where your camera points, the way a hawk turns its head to look at something far away.']`
   Log: Tucker 2000 (fovea, Accipitridae and Falconidae); Mitkus et al. 2017 (fovea, Buteo buteo and others); Potier et al. 2016 (fovea, Parabuteo unicinctus); Fite and Rosenfield-Wessels (fovea, Buteo jamaicensis); Ruggeri et al. 2010 (fovea, Buteo platypterus and Buteo brachyurus); Potier et al. 2017 (fovea, Accipitriformes).
 - `['m', 'Looking sideways', 'A hawk looks at distant things sideways with one eye and at close things straight ahead with both. Raptors watching something 40 metres or more away kept it in the side view at least 80 percent of the time. When you tap something close, this view turns to face it straight on.']`
   Log: Tucker 2000 (behaviour_vision; eye_movement, head moved every 2 s in hawks and falcons, 5 s in bald eagles).
@@ -181,7 +181,7 @@ Rows:
 - `['m', 'Below the bill', 'A dabbling duck cannot see below the level of its bill. Ducks that feed by filtering water find their food by touch instead, with sensitive tips on their bills. This view darkens the bottom edge of the picture.']`
   Log: Martin 2017 (fov_v_deg, duck below the bill); Cantlay et al. 2023 (sense_touch, Anatidae).
 - `['m', 'Geese differ', 'Grazing geese and swans can see their bill tip and keep a blind area behind the head, where dabbling ducks see all around. This view follows the dabbling ducks.']`
-  Log: Cantlay et al. 2023 (binocular_deg, Anatidae 16 to 38); Guillemain et al. 2002 (wigeon 150 degrees, narrow blind area behind).
+  Log: Cantlay et al. 2023 (binocular_deg, Anatidae 16 to 38); Guillemain et al. 2002 (wigeon 150 degrees, narrow blind area behind); Martin et al. 2006 (binocular_deg, blue duck, a visual forager with a large blind area behind).
 - `['m', 'Colour', 'Ducks have four kinds of colour-sensing cells, one more than people, and the fourth responds to violet light. A mallard\'s eye blocks most ultraviolet light before it reaches those cells, so this view adds no ultraviolet tint.']`
   Log: Hart 2001 (lambda_max_nm, Anas platyrhynchos 415, 452, 506, 567; spectral_range_nm, mallard 370 to 380).
 - `['m', 'No bobbing', 'Ducks, geese and swans do not bob their heads when they walk, the way herons and pigeons do. This view keeps its steady head jumps but adds no bobbing.']`
@@ -191,7 +191,7 @@ Rows:
 - `['i', 'Speed', 'This part of the view is a guess. It assumes that a duck sees flicker about as fast as a pigeon or a chicken, 75 to 90 times a second, and runs the picture slightly slow.']`
   Log: Boström et al. 2016 (cff_hz, pigeon and chicken).
 - `['x', 'Touch', 'Many ducks find food by feel, with the many touch-sensing cells at the tip of the bill. This view cannot show touch.']`
-  Log: Cantlay et al. 2023 (sense_touch, Anatidae); Martin 2017 (fov_h_deg note).
+  Log: Cantlay et al. 2023 (sense_touch, Anatidae); Martin et al. 2006 (sense_touch, Malacorhynchus membranaceus); Martin 2017 (fov_h_deg note).
 
 The picture:
 
@@ -227,7 +227,7 @@ Rows:
 - `['i', 'Magnetic sense', 'Many songbirds sense the direction of the Earth\'s magnetic field with their eyes, and lose their bearings in red or yellow light. This view draws the field as a faint shading that turns with your phone\'s compass and fades in red or yellow light. Nobody knows what the sense feels like to a bird, so the shading is a guess.']`
   Log: Wiltschko et al. 2021 (sense_magnetic, inclination compass; light dependence); Engels et al. 2012 (sense_magnetic, both eyes); Nießner et al. 2011 (sense_magnetic, cryptochrome 1a in the violet and ultraviolet cones); Cochran et al. 2004 (sense_magnetic, calibration at twilight); Leberecht et al. 2022, 2023 (sense_magnetic, radio noise).
 - `['x', 'Polarized light', 'Songbirds that migrate at night can use polarized light to find direction, along with the stars, the sun and the magnetic field. This view leaves polarized light out.']`
-  Log: Cochran et al. 2004 (polarization, Passeriformes); Hart 2001 (polarization, conflicting evidence).
+  Log: Cochran et al. 2004 (polarization, Passeriformes); Able 1989 (polarization, white-throated and American tree sparrows); Hart 2001 (polarization, conflicting evidence).
 
 The picture:
 
@@ -287,8 +287,8 @@ New effects:
 
 | Item | Now | Verdict |
 |---|---|---|
-| Row "Speed" (g) | 40 to 140, fastest fliers highest | **Corrected.** Measured behavioural values run from 69 (budgerigar) and 70 to 80 (Anna's hummingbird, a fast flier) to 131 to 146 (tits and flycatchers) (Boström et al. 2016; Goller et al. 2019). No source gives 40. The fastest are small insect-catchers, and the fastest flier measured is not among them. |
-| Row "Sharpness" (g) | half as much or less | **Corrected** to the songbird values: 4.7 to 8.9 cycles per degree in sparrows, finches and flycatchers, 18 in the blackbird, 30 in the jay (Caves et al. 2018, 2023). |
+| Row "Speed" (g) | 40 to 140, fastest fliers highest | **Corrected.** Measured behavioural values in the birds this view covers run from 69 (budgerigar) and 70 to 80 (Anna's hummingbird) to 131 to 146 (tits and flycatchers) (Boström et al. 2016; Goller et al. 2019). No source read gives 40. The highest values belong to small birds that catch insects; the hummingbird, an agile flier, is near the low end. |
+| Row "Sharpness" (g) | half as much or less | **Corrected** to the songbird values: 4.7 to 8.9 cycles per degree in sparrows, finches and flycatchers, 8.8 in the blue jay, 18 in the Eurasian blackbird, 30 in the Eurasian jay (Caves et al. 2018, 2023; Stone). |
 | Row "Ultraviolet" (i) | some birds | **Upgraded** to `m` with the classes named (Hart 2001; Ödeen and Håstad 2003, 2013; Ödeen et al. 2011). The phrase "Phone cameras capture very little of it" rests in `docs/SOURCES.md` on a University of Sussex news page, which describes a four-channel camera and does not say what ordinary cameras record; the new row says only that a screen cannot show ultraviolet. |
 | Row "Field of view" (i) | probably wide | **Now measured**: about 300 degrees in the zebra finch. |
 | `fov` 300 | | **Confirmed.** |
@@ -299,7 +299,7 @@ New effects:
 
 ## 4. Species with their own measurements
 
-- **Barn owl** (*Tyto alba*; Alachua's American barn owl): acuity 2.6 to 4 cycles per degree, peak at twilight, a quarter kept at 5.5 log units dimmer, sound placed within 3 degrees by 7.5 to 9, hearing above 10 kHz, threshold near -20 dB SPL, one forward area for both eyes, RH2 opsin lost. Log: Harmening et al. 2009; Orlowski et al. 2012; Bala et al. 2007; Manley and Köppl 2025; Hazan et al. 2015; Wu et al. 2016.
+- **Barn owl** (*Tyto alba*; Alachua's American barn owl): acuity 2.6 to 4 cycles per degree, peak at twilight, a quarter kept at 5.5 log units dimmer, sound placed within 3 degrees side to side and 7.5 to 9 up and down, hearing above 10 kHz, threshold near -20 dB SPL, one forward area for both eyes, RH2 opsin lost. Log: Harmening et al. 2009; Orlowski et al. 2012; Bala et al. 2007; Manley and Köppl 2025; Hazan et al. 2015; Wu et al. 2016.
 - **Tawny owl** (*Strix aluco*, the barred owl's genus): pigments 463, 503 and 555 nm with rods 503 and no violet cone found; field about 200 degrees. Log: Hart 2001; Potier et al. 2023; Martin 1986.
 - **Peregrine falcon** 129 Hz; **saker falcon** 102 Hz. Log: Potier et al. 2020.
 - **Harris's hawk**: 81 Hz, two foveae, acuity a little above the black kite's. Log: Potier et al. 2020; Potier et al. 2016.
@@ -319,7 +319,7 @@ New effects:
 
 ## 5. Gaps and how to fill them
 
-- **Sharpness of the commonest hawks** (red-shouldered hawk, osprey, bald eagle, snail kite). No value read. The accipitriform mean of 24.9 (Caves et al. 2023) stands in; the species values are in that paper's Table S1 (wanted). The eagle's 140 is the nearest measured *Haliaeetus*-sized eye.
+- **Sharpness of the commonest hawks** (red-shouldered hawk, osprey, bald eagle, snail kite). No value read. The accipitriform mean of 24.9 (Caves et al. 2023) stands in; the species values are in that paper's Table S1 (wanted). For the bald eagle the nearest measured eagle is the wedge-tailed eagle (138 to 143).
 - **Owl sharpness in *Strix* and *Bubo*.** The barn owl (2.6 to 4) and the seven-owl mean (21.9) disagree by a factor of five. The view's 10 is an invention between them until Fite 1973 (great horned owl) and Martin and Gordon 1974 (tawny owl) are read.
 - **Owl flicker fusion.** Only "low temporal resolution" (Potier et al. 2020). The view sets no speed-up, which is the plain reading of that statement.
 - **Duck sharpness and flicker.** Nothing measured in the sources read. The median bird (11 cycles per degree) and the pigeon and chicken flicker (75 to 87 Hz) stand in.
@@ -371,12 +371,14 @@ The same list as `docs/views/wanted/birds.jsonl`, most useful first (30 items).
 
 Opened means the full text, or the abstract on the collection index, a publisher, a repository or an author page, was read this session.
 
+- Able KP 1989, *JEB* 141: 241, skylight polarization and migratory sparrows. 10.1242/jeb.141.1.241. opened (abstract)
 - Arnold F et al. 2022, *Nature Ecology & Evolution*, zebra finch flight coordination. 10.1038/s41559-022-01800-4. opened (full text)
 - Bala ADS, Spitzer MW, Takahashi TT 2007, *PLoS ONE*, barn owl auditory spatial acuity. 10.1371/journal.pone.0000675. opened (full text)
 - Blough PM 1971, *J. Exp. Anal. Behav.*, pigeon acuity. 10.1901/jeab.1971.15-57. opened (abstract)
 - Boström JE et al. 2016, *PLoS ONE*, ultra-rapid vision in birds. 10.1371/journal.pone.0151099. opened (full text); its pigeon, chicken and budgerigar values are secondary (cited from earlier studies)
 - Braekevelt CR 1994, *Anat. Histol. Embryol.*, great blue heron photoreceptors. 10.1111/j.1439-0264.1994.tb00477.x. opened (abstract)
 - Cantlay JC et al. 2023, *Proc. R. Soc. B*, binocular vision in Anatidae. 10.1098/rspb.2023.1213. opened (full text)
+- Cantlay JC, Portugal SJ, Martin GR 2024, *Ibis*, gull and skimmer fields. 10.1111/ibi.13360. opened (abstract)
 - Caves EM, Brandley NC, Johnsen S 2018, *Trends Ecol. Evol.* 33: 358-372, acuity and signals. 10.1016/j.tree.2018.03.001. opened (owner's Drive, main text)
 - Caves EM, Fernández-Juricic E, Kelley LA 2023, *JEB*, acuity in 94 bird species. 10.1242/jeb.246063. opened (full text; supplement not read)
 - Cochran WW, Mouritsen H, Wikelski MC 2004, *Science*, compass calibration at twilight. 10.1126/science.1095844. opened (abstract)
@@ -410,6 +412,7 @@ Opened means the full text, or the abstract on the collection index, a publisher
 - Martin GR 1986, *Ibis*, owl senses. 10.1111/j.1474-919x.1986.tb02674.x. opened (abstract)
 - Martin GR 2014, *Phil. Trans. R. Soc. B*, visual fields. 10.1098/rstb.2013.0040. opened (abstract)
 - Martin GR 2017, *Front. Neurosci.*, what drives bird vision. 10.3389/fnins.2017.00619. opened (full text)
+- Martin GR, Jarrett NS, Williams M 2006, *Ibis*, blue and pink-eared duck fields. 10.1111/j.1474-919x.2006.00611.x. opened (abstract)
 - Martin GR, Katzir G, *Brain Behav. Evol.* (2008 online), heron fields. 10.1159/000113571. opened (abstract)
 - Martin GR, Portugal SJ, Murn CP 2012, *Ibis*, *Gyps* vulture fields. 10.1111/j.1474-919x.2012.01227.x. opened (abstract)
 - Mitkus M et al. 2017, *J. Comp. Neurol.*, raptor fovea photoreceptors. 10.1002/cne.24190. opened (abstract)
