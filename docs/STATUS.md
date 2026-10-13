@@ -1,6 +1,6 @@
 # Status
 
-The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 00:20 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
+The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. Updated 13 October 2026, 00:55 US Eastern. Whoever works on Regards updates this file at every checkpoint, and before and after any long step, so that the work can stop at any moment and pick up where it was.
 
 ## How the work is paced
 
@@ -16,10 +16,14 @@ The plan is `docs/tracks/PLAN.md`; the order of work is `docs/tracks/QUEUE.md`. 
 | Research: birds | `docs/views/research/BRIEF.md` | `research/birds` | Done (`77aac6c`): 218 records, 30 papers wanted. Proposes `owl` and `duck` views and corrects `hawk`. | The owner's decisions; an audit. |
 | Research: cats, dogs and people | same | `research/cat-dog` | Done (`3b18838`): 178 records (about 50 for people), 23 papers wanted. Proposes `bigcat` and `fox` views, and a person's field of 200 degrees in place of 180. | The owner's decisions; an audit. |
 | Research: snails, worms, scorpions, ticks | same | `research/ground-invertebrates` | Done (`9c75995`): 197 records, 22 papers wanted. Proposes seven views, with new groups for millipedes, centipedes and harvestmen. | The owner's decisions; an audit. |
-| Research: the other eleven units | same | `research/<unit>` | Not started. `jumper` has 20 records and a draft on `main`. | Bursts 1 to 4 below. |
-| The engine and new effects | `docs/tracks/engine.md` | `agent/engine` | Not started. | After the jumping spider research. |
+| Research: the other eleven units | same | `research/<unit>` | `jumper` done on `research/jumper` (`f2fcc52`): parameter table, 282 log lines, 28 papers wanted. The other ten units not started. | Bursts 1 to 4 below. |
+| The engine and new effects | `docs/tracks/engine.md` | `agent/engine` | Design done on `agent/design` (`b33aef8`): `docs/views/ATLAS.md` (25 mechanisms) and `docs/ENGINE-DESIGN.md` (modules 0 to 13). Engine not started. | The owner's picks from the atlas, then queue entry 4 in the next window. |
 | The pocket model's group head | `docs/tracks/head.md` | `agent/world-head` | The trials so far are in `tools/world/EXPERIMENTS.md`. | A burst of its own, mostly on build machines. |
 | The full database for the world | `docs/tracks/worlddb.md` | none yet | Not started. | A burst of its own, mostly on build machines. |
+
+## Burst 1 (launched 13 October 00:39, finished 00:53)
+
+Meters at launch: session 0%, weekly 50%, Fable only 5%, credits $89.83 of $750 this month, usage credits switched on. Three agents ran at once: design (Opus), jumper research (Sonnet), pipeline writer (Sonnet). One shared checkout was switched between branches by agents; later prompts tell each agent to work in its own clone or worktree.
 
 ## The shape of the work (settled 13 October, 00:00)
 

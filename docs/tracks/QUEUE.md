@@ -4,10 +4,10 @@ The owner approves this queue and its budget once; a control room or a scheduled
 
 | # | Agent | Model | Prompt | Needs | State |
 |---|---|---|---|---|---|
-| 1 | Design: the atlas and the engine design | Fable if its allowance is separate, else Opus | `docs/tracks/prompts/burst1-design.md` | | queued |
-| 2 | Jumping spider research | Sonnet | `docs/tracks/prompts/burst1-jumper.md` | the spider and book Drive ids, the specialist's account | queued |
-| 3 | Pipeline writer: Haiku Batch extraction over `pub/lit-t1`, quote check, dry run on one topic | Sonnet | `docs/tracks/prompts/burst1-pipeline.md` | a Console API key as the secret `ANTHROPIC_API_KEY` to run in full | queued |
-| 4 | Engine: first modules from `docs/ENGINE-DESIGN.md`, the jumper view, the tuning panel, the compare slider, the visibility floor | Opus | `docs/tracks/prompts/burst1-engine.md`, read with the design | #1 | after #1 |
+| 1 | Design: the atlas and the engine design | Fable if its allowance is separate, else Opus | `docs/tracks/prompts/burst1-design.md` | | done 13 Oct 00:53 (Opus, launched 00:39): `agent/design` `b33aef8`, 25 mechanisms; awaits the owner's pick of one drawing per mechanism |
+| 2 | Jumping spider research | Sonnet | `docs/tracks/prompts/burst1-jumper.md` | the spider and book Drive ids, the specialist's account | done 13 Oct 00:53 (Sonnet, launched 00:39): `research/jumper` `f2fcc52`; awaits the specialist review |
+| 3 | Pipeline writer: Haiku Batch extraction over `pub/lit-t1`, quote check, dry run on one topic | Sonnet | `docs/tracks/prompts/burst1-pipeline.md` | a Console API key as the secret `ANTHROPIC_API_KEY` to run in full | built and tested without the API 13 Oct 00:53 (Sonnet, launched 00:39): `agent/pipeline` `bf8d13d`; the full run waits for the key; `harvest.py` and `ci/lit/*` live only on `run/lit/t1`, so it is not merged to main |
+| 4 | Engine: first modules from `docs/ENGINE-DESIGN.md`, the jumper view, the tuning panel, the compare slider, the visibility floor | Opus | `docs/tracks/prompts/burst1-engine.md`, read with the design | #1 | next window |
 | 5 | Meter tests: the same small task on Opus and on Sonnet, read by the owner | the owner | | | with the owner |
 | 6 | Audit of the three finished units: a batch job that asks whether each quote supports its value; the flagged records to one Sonnet agent | Haiku batch, then Sonnet | to write | #3 | after #3 |
 | 7 | The owner's decisions on the three units' proposals applied | Sonnet | to write | the owner | after #6 |
