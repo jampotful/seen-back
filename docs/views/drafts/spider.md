@@ -333,8 +333,8 @@ netcaster: { chip: 'Net-casting spider', who: 'a net-casting spider', fov: 180, 
 
 #### Rows
 
-`['m', 'Feeling the ground', 'A tarantula finds its prey through the hairs on its legs. Club-shaped sense hairs feel the soil tremble, and fine hairs answer the slightest movement of the air. Lay the phone down, and a knock on the table beside it sends a ripple in from that side.']`
-Log 178 (den Otter 1973, *Sericopelma rubronitens*: trichobothria and club-shaped sensilla detect and locate prey), 184 (club-shaped airflow hairs on the feet of all tarantulas; whether these are den Otter's club-shaped sensilla is not settled by the abstracts read).
+`['m', 'Feeling the ground', 'A tarantula finds its prey by the trembling of the ground and the air, through the hairs on its legs, and ignores what it only sees. Australian tarantulas noticed prey at least 26 centimetres away and seldom attacked beyond 10. Lay the phone down, and a knock on the table beside it sends a ripple in from that side.']`
+Log 316 to 319 (Berge 2003, theraphosids of northern Queensland: no response to visual stimuli; prey found by air- and ground-borne vibration; falling leaves drew attacks, falling sticks seldom), 178 (den Otter 1973, *Sericopelma rubronitens*: trichobothria and club-shaped sensilla detect and locate prey), 184 (club-shaped airflow hairs on the feet of all tarantulas; whether these are den Otter's club-shaped sensilla is not settled by the abstracts read).
 
 `['m', 'Trapdoor spiders', 'A trapdoor spider catches prey as well with its eyes covered, and it catches far fewer when a rubber mat damps the trembling of the ground.']`
 Log 183 (Nakamura and colleagues 2022, *Latouchia typica*).
@@ -352,7 +352,7 @@ Log 105, 102, 182, 185 (Dahl and Granda 1989, *Aphonopelma chalcodes*), 66.
 Log 190, 189 (Hu and colleagues 2014).
 
 `['i', 'Sharpness', 'Nobody has measured how sharply a tarantula sees. This view draws a very coarse picture, a guess based on how small its eyes are and how little it uses them.']`
-Log 183, 188, 102.
+Log 316, 183, 188, 102.
 
 `['g', 'Ground spiders', 'Ground spiders, sac spiders, recluses and spitting spiders also hunt without a web, and their small eyes give coarse pictures. A Chilean recluse has only one kind of light-sensing cell, and some ground spiders have turned two eyes into a compass that reads the sky at dusk.']`
 Log 67, 70, 104, 191 (Tapia and colleagues 2019), 155, 217.
@@ -432,7 +432,7 @@ tarantula: { chip: 'Tarantula or ground spider', who: 'a tarantula or ground spi
 | Goldenrod Crab Spider, *Misumena vatia* | 0 | `crabspider` | 54 to 63, 275 to 280 |
 | *Xysticus cristatus* and *Ozyptila praticola* | 0 | `crabspider` | 110 to 120, 264, 265 (and *Xysticus* sp. 73 to 76, 81) |
 | Ogre-faced Spider, *Deinopis spinosa*, with *Dinopis subrufus* (now *Asianopis subrufa*) for the optics | 88 | `netcaster` | 133, 135, 136, 259, 260; 1 to 14, 262, 263 |
-| Tarantulas: *Aphonopelma chalcodes*, *Sericopelma rubronitens*, *Eupalaestrus weijenberghi*, *Grammostola pulchra*, *G. schulzei*, *Brachypelma albopilosum*; trapdoor spider *Latouchia typica* | 8 (mygalomorphs) | `tarantula` | 185, 178, 179, 180, 181, 294, 198, 293, 182, 291, 292, 183, 287 |
+| Tarantulas: *Aphonopelma chalcodes*, *Sericopelma rubronitens*, *Eupalaestrus weijenberghi*, *Grammostola pulchra*, *G. schulzei*, *Brachypelma albopilosum*; trapdoor spider *Latouchia typica* | 8 (mygalomorphs) | `tarantula` | 185, 178, 179, 180, 181, 294, 198, 293, 182, 291, 292, 183, 287, 316 to 320 (Queensland theraphosids) |
 | Chilean recluse, *Loxosceles laeta* | 0 | `tarantula` | 191 |
 
 The Green Lynx Spider (*Peucetia viridans*, 246 Alachua records, the fourth most recorded spider of this unit) has a field observation of its hunting (Log 269, 270) and no measurement of its eyes; its genus appears only in a histology abstract (Log 222).
@@ -500,6 +500,7 @@ Every source behind a log line, one line each, with the log lines it supports:
 - Barth FG 2020. A spider in motion: facets of sensory guidance. Journal of Comparative Physiology A. https://doi.org/10.1007/s00359-020-01449-z. `opened` (full text). Log 121 to 127.
 - Baruffaldi L, Perafán C, Perdomo C, Montes de Oca L, Pérez-Miles F, Costa FG 2013. Third pair of legs is a key feature for eliciting female receptivity in the road tarantula spider Eupalaestrus weijenberghi (Araneae: Theraphosidae). Journal of Arachnology. https://doi.org/10.1636/hi11-58.1. `opened` (abstract). Log 294.
 - Benson KE, Suter RB 2013. Reflections on the tapetum lucidum and eyeshine in lycosoid spiders. Journal of Arachnology. https://doi.org/10.1636/B12-35.1. `opened` (abstract). Log 153.
+- Berge B 2003. Predatory behaviour of theraphosid spiders in northern Queensland. Masters (Research) thesis, James Cook University. https://researchonline.jcu.edu.au/75/. `opened` (abstract). Log 316 to 320.
 - Bleckmann H, Barth FG 1984. Sensory ecology of a semi-aquatic spider (Dolomedes triton). Behavioral Ecology and Sociobiology 14: 303-312. https://doi.org/10.1007/BF00299502. `opened` (abstract on the publisher's page, quoted in fragments). Log 243 to 248.
 - Blest AD, Land MF 1977. The physiological optics of Dinopis subrufus L. Koch: a fish-lens in a spider. Proceedings of the Royal Society of London B 196: 197-222. https://doi.org/10.1098/rspb.1977.0037. `opened` (owner's library copy). Log 1 to 14, 262 to 263.
 - Blest AD, Day WA 1978. The rhabdomere organization of some nocturnal pisaurid spiders in light and darkness. Philosophical Transactions of the Royal Society of London B. https://doi.org/10.1098/rstb.1978.0016. `opened` (abstract). Log 163.
