@@ -64,6 +64,8 @@ The keys `fish` and `shark` already exist in `GROUPS` in `src/cam.a.js`. `reef` 
     Log 119 (Ladich and Fay 2013).
 12. `['x', 'Electric fields', 'Catfish and lampreys can sense the faint electric fields that living animals make in water. The picture leaves this sense out.']`
     Logs 59 (Alves-Gomes 2001), 163 (electrosensory pathways in the channel catfish), 52 (Bodznick and Northcutt 1981).
+13. `['x', 'Light past red', 'Many freshwater fish respond to light beyond the red end of what you can see: goldfish, guppies and zebrafish to between 750 and 910 nanometres, and Nile tilapia, which live in murky water, past 930. The picture leaves this light out.']`
+    Logs 177 (Matsuo et al. 2021), 175 (Shcherbakov et al. 2013), 176 (murky water carries relatively more red and near-infrared light), 165 (people see to about 700 nm). With two alternative colour rows, any one fish is shown twelve rows.
 
 Rows for three later settings:
 
@@ -172,7 +174,7 @@ reef: { chip: 'Sea fish', who: 'a sea fish', fov: 335, cpd: 2, topoA: 1, topoS: 
 ### Rows
 
 1. `['m', 'Colour', 'Every shark studied so far has only one kind of colour-sensing cell, so sharks are probably colour blind. They can tell apart shades of brightness that differ by less than 2 percent. This view shows the world in shades of grey.']`
-   Logs 19, 20 (Hart et al. 2025), 17 (a bamboo shark told shapes apart by shape and contrast and failed with colour), 25 (brightness steps, from Ryan et al. 2017 as cited).
+   Logs 19, 20 (Hart et al. 2025), 178 (two catsharks with a single pigment near 484 to 488 nm), 17 (a bamboo shark told shapes apart by shape and contrast and failed with colour), 25 (brightness steps, from Ryan et al. 2017 as cited).
 2. `['m', 'Sharpness', 'Sharks see between a twentieth and a sixth as much detail as you do. Fast hunters of open water, like the bigeye thresher, are at the sharp end, and bottom-dwelling night hunters, like the Port Jackson shark, are at the coarse end. This view uses the middle of that range.']`
    Logs 24, 97 (2.0 to 10.6 cycles per degree), 101 (Port Jackson shark, 3.14), 11 (young white shark, about 5).
 3. `['m', 'Sharpest band', 'Many sharks, such as the lemon shark, see most sharply along a band level with the horizon, which lets them scan the sea floor or the open water without moving their eyes. White sharks have a sharp patch that looks up and to the sides, toward prey seen against the bright surface. This view sharpens a band along the horizon.']`
@@ -440,6 +442,12 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 - Fritsch R, Collin SP, Michiels NK 2017. Front Neuroanat. doi:10.3389/fnana.2017.00122. `opened`
 - Schmitz L, Wainwright PC 2011. BMC Evol Biol. doi:10.1186/1471-2148-11-338. `opened`
 - Tettamanti V et al. 2019. J Exp Biol. doi:10.1242/jeb.209916. `opened`
+- Shcherbakov D et al. 2013. PLoS ONE. doi:10.1371/journal.pone.0064429. `opened`
+- Matsuo M, Kamei Y, Fukamachi S 2021. R Soc Open Sci. doi:10.1098/rsos.210415. `opened`
+- Gruber DF et al. 2016. Sci Rep. doi:10.1038/srep24751. `opened`
+- Horodysky AZ et al. 2013. Biol Open. doi:10.1242/bio.20136825. `opened` (abstract)
+- Fritsches KA, Marshall NJ 2002. J Exp Biol. doi:10.1242/jeb.205.9.1241. `opened` (abstract)
+- Landgren E et al. 2014. Phil Trans R Soc B. doi:10.1098/rstb.2013.0039. `opened` (abstract)
 - Land MF, Nilsson D-E 2012, pp. 28, 32, 36-37, 39-41, 51, 56-57 as read (see the first line).
 - GBIF occurrence facets (iNaturalist research-grade dataset 50c9509d-22c7-4a22-a47d-8c48425ef4a7), saved on `ci` in `runs/fetch/10` (read 11 October 2026), GBIF species matches for nine families, the Perciformes family facet and twelve family pages, read 13 October 2026. `opened`
 
@@ -454,4 +462,4 @@ Opened in this session, one line each (`opened` means the paper, its abstract on
 
 ## Status
 
-Revised at about 02:50 UTC on 13 October 2026, with 174 log lines. All three files pass `tools/senses/check.py` (the log) and parse as JSON (the wanted list). Reading continues while time allows; anything added later is listed here.
+Revised at about 02:50 UTC on 13 October 2026, with 178 log lines. All three files pass `tools/senses/check.py` (the log) and parse as JSON (the wanted list). Reading continues while time allows; anything added later is listed here.
