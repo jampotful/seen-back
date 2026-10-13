@@ -298,7 +298,7 @@ Log: L2, L5 (Land and Nilsson 2012, interreceptor_deg, eye_type), L119 (Paskin a
 ```
 ['m', 'Fan worms', 'Fan worms and Christmas tree worms have eyes on their feathery tentacles. Their light-sensing pigment peaks at 464 nanometres, close to the blue light of a shallow reef, and a passing shadow makes them pull back into their tubes at once.'],
 ```
-Log: L123, L124 (Bok and colleagues 2017, lambda_max_nm, eye_role).
+Log: L123, L124 (Bok and colleagues 2017, lambda_max_nm, eye_role), L188, L189 (Bok, Porter and Nilsson 2017, eye_role, motion).
 
 ```
 ['x', 'Touch, taste and damp', 'Worms meet most of the world through touch, taste and moisture. A leech's skin answers vibration up to about 50 times a second, and land planarians need damp ground to live. None of this reaches a camera.'],
@@ -324,7 +324,7 @@ Log: L119 (planarian hierarchy), L115 (leech sensilla).
 
 | Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
 |---|---|---|---|---|
-| Shadow alarm | When the frame darkens sharply (for example by a third within a third of a second), the field contracts to a dark point, as a fan worm pulls in, and opens again over two or three seconds. | the camera's mean brightness | easy | L124 (fan worms), L113 (the leech's whole-body S cell). The fan opening again is the beautiful part. Thresholds and timing are **invented**. |
+| Shadow alarm | When the frame darkens sharply (for example by a third within a third of a second), the field contracts to a dark point, as a fan worm pulls in, and opens again over two or three seconds. | the camera's mean brightness | easy | L124, L188 (fan worms withdraw from encroaching objects), L189 (their receptors answer a fall in light), L113 (the leech's whole-body S cell). The fan opening again is the beautiful part. Thresholds and timing are **invented**. |
 | A mole digging | A low rumble or knocks on the table make the field rise and brighten, as a worm surfaces, and settle when the ground is quiet. | the microphone's energy between about 50 and 300 Hz, with consent, or the motion sensors | medium | L177 (grunting near 80 Hz, a mole near 200 Hz), L176. The band is taken from those peaks; the response is **invented**. |
 | Dim light | In near darkness the bright side draws the field toward it; in ordinary light the field leans away. | mean brightness | easy | L168 |
 | A leech's body of eyes | With the phone held flat and face up, the top half of the frame leans green and the bottom half blue, as the sensilla on the back and belly do. | device orientation, and the zones of track C | medium | L115. It is a true detail; **invented** in its proportions. |
@@ -541,5 +541,90 @@ Log: L161, L163, L164.
 | Effect | What the person sees | Phone input | Difficulty | Beautiful and true |
 |---|---|---|---|---|
 | Waking at dusk | When the scene falls dark and stays dark, the field stirs: its patches drift as if the tick had begun to walk. In bright light it is still. | mean brightness | easy | L159 (activity almost only in darkness, triggered by its onset). The drift is **invented**. |
+
+## 3. The earlier proposals, re-checked
+
+None of the four groups has an entry in `EYES` yet (build 22 lists them only in `GROUPS`). Two earlier sheets proposed entries, and I re-checked each row and number against sources opened in this session. "Unchecked" means I did not reopen that source today; it does not mean the row is wrong.
+
+**`snail.md`**
+
+| Row or field | Verdict | Reason |
+|---|---|---|
+| Eyes (m) | confirmed in its first sentence; the eye size unchecked | L183, L133. The 233 µm eye of *Cepaea hortensis* comes from Shepeleva (2023), whose abstract I opened; it gives no size. |
+| Sharpness (m) | **corrected** | The garden snail's 14.5 degrees is withdrawn: Serb and Eernisse cite it to Hamilton and Winter (1982), and the collection index gives that paper's title as a study of *Littorina irrorata*. The red slug's 52 degrees is confirmed in Irwin and colleagues (L128), and the abstract of its primary paper, now opened, says the slugs' eyes form no sharp image (L125, L126). |
+| Colour (m) | confirmed, and extended | L141, L142, L143. Added: one pigment near 496 nm in *Helix lucorum* (L138), shared by both cell types (L139). |
+| Light without eyes (m) | confirmed through a summary | L144 (Knight 2019, on Nishiyama and colleagues 2019); L184 adds the wiring between eye and brain cells. The primary paper was not reopened. |
+| Shadows (g, pond snail skin) | unchecked | Sunada and colleagues (2012) and the IKBFU abstract were not reopened. My rows leave the pond snail's skin out. |
+| Sea slugs (g) | confirmed, with one change | Rudman's page as I read it today places the eyes "deep inside the body on top of the brain" and says they "cannot see images but are able to distinguish light and dark" (L181). `snail.md` quoted "deep beneath the skin, behind the rhinophores"; both phrasings may be on the page. The *Berghia* stripe result (Quinlan, Cho and Katz 2021) was not reopened. |
+| Chitons (m) | confirmed | L146, L147, L145 |
+| Sea snails (g) | confirmed | L130, L131, L129; Land and Nilsson's Table 3.1 gives the periwinkle 4.5 degrees, citing Land (1981a), which matches the figure `snail.md` took from Serb and Eernisse (L1). |
+| Smell (m, *Achatina*) | unchecked; replaced | Chase and Croll (1981) was not reopened. My smell row uses Gelperin (1974) on the leopard slug (L148). |
+| Smell and damp (x) | half confirmed | The rhinophore half is confirmed (L182); the garden snail after rain (Kwiecien and colleagues 2022) was not reopened. |
+| `cpd` .035 | **corrected to .02** | See the Sharpness row and section 2.1. |
+| `M` [.05, .3, .65] | **corrected to [.05, .45, .5]**, shifting to [.05, .25, .7] in bright scenes | The 496 nm and 480 nm peaks (L138, L141) sit between the camera's blue and green; the 420 nm light-adapted peak (L142) moves the weight to blue. |
+| `pupil` 'o' | unchecked | Same picture with `dof` unset. |
+| `field`, `gate` unset | confirmed | L145, L126 |
+
+**`tick.md`**
+
+| Row or field | Verdict | Reason |
+|---|---|---|
+| Eyes (m) | confirmed by other sources | The NC State guide (Bertone and colleagues 2023) was not reopened. The Lone Star Tick's eye is confirmed in Phillis and Cromroy (L151), the American Dog Tick's eyes in use in Stewart and colleagues (L165), and the eyeless sheep tick in Perret and colleagues (L158). |
+| Where they look (g) | confirmed | L154, L155, L156, read today on the Springer page. |
+| Shapes (g) | unchecked | Kaltenrieder (1990) was not reopened. |
+| Colour (g) | confirmed | L153 |
+| Without eyes (g) | confirmed | L158, L159 |
+| Questing (m) | half confirmed | The organ's place on the first legs is confirmed (L163); the posture (the archived CDC page) was not reopened. |
+| Heat (m) | confirmed | L161, L162 |
+| Breath (g) | unchecked; replaced | Steullet and Guerin (1992) was not reopened. Holscher and colleagues (1980) record carbon dioxide responses in the Lone Star, Gulf Coast and American Dog Ticks themselves (L164), so my row is graded m. |
+| Smell, damp and footsteps (x) | two of three confirmed | Damp (L160) and scent (L166) are confirmed; vibration was not reopened. |
+| `cpd` .1 | **corrected to .07**, both invented | The Lone Star Tick's 30 to 40 receptors (L151) over a bont-tick-sized field (L154, L155) give about 0.07; see section 2.7. |
+| `M`, `pupil`, `fov`, `field`, `gate` | confirmed as `tick.md` set them | L153 for `M`; the rest are unset or equivalent. |
+
+## 4. Species with their own measurements
+
+These are measured well enough for a profile of their own when the full database names them.
+
+| Species | Group | Records | Log lines | What a profile would add |
+|---|---|---:|---|---|
+| Strombid conchs, *Conomurex luhuanus* | snail | Strombidae 12,703; *C. luhuanus* 659 | L130, L131, L132 | A `conch` view at about 0.95 cycles per degree that answers looming shapes |
+| Red slug, *Arion rufus* | snail | not listed under this name in the snapshot | L125 to L128 | The coarsest land-slug picture, with no polarization |
+| *Helix lucorum* and the Roman snail | snail | *H. lucorum* 6,984; *H. pomatia* 52,599 | L138, L139, L140 | Grey from a single 496 nm pigment, log brightness |
+| *Limax valentianus* and the leopard slug | snail | listed as *Ambigolimax valentianus* 1,053; *Limax maximus* 47,167 | L141 to L144, L148, L184 | Day and night colour shift, the brain's light sense, homing by smell |
+| *Acanthopleura granulata* | snail | 2,740 | L146 | A dome of shell eyes at 9 to 12 degrees |
+| Greenhouse Millipede, *Oxidus gracilis* | worm (millipede) | 28,389 | L84 to L88 | No eyes: skin light sense, touch, taste, temperature |
+| *Cylindroiulus punctatus* | worm (millipede) | 1,825 | L77 to L80 | The measured millipede picture, 56 degrees |
+| House centipede, *Scutigera coleoptrata* | worm (centipede) | 26,123 | L94 to L97, L186 | Two colour classes (448 and 350 nm), about 150 facets |
+| *Scolopendra mutilans* | worm (centipede) | 1,648 | L104, L105 | Sunlight felt as heat in the antennae |
+| *Lumbricus terrestris* | worm | 3,785 | L106, L107, L167, L168 | Skin light sense, dim-light approach |
+| *Diplocardia mississippiensis* | worm | not in the snapshot's species list; a Florida species | L176 to L179 | The mole's vibration, 80 to 200 Hz |
+| Medicinal leech, *Hirudo verbana* | worm | 119 | L111 to L117 | A body of eyes, green above and ultraviolet below |
+| Christmas tree worms, *Spirobranchus* | worm | *S. giganteus* 1,993 | L123, L124 | Shadow alarm with a 464 nm pigment |
+| *Androctonus australis* | scorpion | 58 | L26, L27, L28 | The night clock of the eyes |
+| Sand scorpions, *Paruroctonus* and *Smeringurus* | scorpion | *P. utahensis* 144; *Smeringurus mesaensis* 924, the name Kundu and colleagues (2025) use for the sand scorpion of Gaffin and colleagues (1992), which older papers call *Paruroctonus mesaensis* | L29 to L31, L35, L36, L172, L174 | Ripples in sand, fluorescence, pectine walks |
+| Striped bark scorpion, *Centruroides vittatus* | scorpion | 11,594 | L171 | Following traces by contact |
+| *Phalangium opilio* | harvestman | 28,313 | L65 | Hidden eyes for the clock |
+| Lone Star Tick, *Amblyomma americanum* | tick | 8,996 | L151, L152, L161, L162, L164 | Its own eye, its heat pit and its breath sense |
+| American Dog Tick, *Dermacentor variabilis* | tick | 20,209 | L165 | Eyes and heat used together in the field |
+| Eastern Black-legged Tick, *Ixodes scapularis* | tick | 11,235 | L166 | Deer-scent phenols |
+
+## 5. Gaps and how to fill them
+
+| Trait the views need | Status | Nearest measured relative and the inference (the evidence-based invention) |
+|---|---|---|
+| Scorpion sharpness and field per eye | not found in any source opened | Whip scorpion median-eye optics (L38): a 200 µm image distance and rhabdoms up to 20 µm give 2.9 to 5.7 degrees per receptor, 0.09 to 0.17 cycles per degree, used for the middle zone at .1. Locket (2001) and Schliwa and Fleissner (1980) would settle it (wanted). |
+| Scorpion lateral-eye sensitivity margin | two sources disagree (1 against 10 log units) | Fleissner's own abstract (L27) is preferred over Loria and Prendini's citation of it (L50). Fleissner (1977b) is wanted. |
+| Flicker or time constants for any animal in the unit | nothing found | Nothing is known from the sources opened; `rate` and `persist` stay unset everywhere. |
+| Harvestman sharpness and colour in the common families | nothing found | The cave species (L59 to L63) give fast lenses and ultraviolet-plus-green sensitivity; too far from *Phalangium* and *Leiobunum* to set a colour matrix, so grey is used. |
+| Centipede sharpness | nothing found | Inferred from facet counts against the millipede (L77, L81, L97, L98): about 0.05 cycles per degree in the house centipede. Müller and colleagues (2003) and Sombke and Müller (2023) would test it. |
+| Millipede colour | nothing found | Grey. No inference is possible from the sources opened. |
+| Earthworm colour | nothing found | Planarians and the leech's skin sensilla respond most to ultraviolet and blue (L119, L115); the worm view's blue weighting is that inference, graded i in its row. |
+| Land planarian eyes | "numerous tiny eyes" only (L169) | The freshwater planarian's 35 degrees (L2) is used for the whole worm view. |
+| Leech and fan worm resolution | not found | Five eyecups of about 50 receptors each (L114) and compound radiolar eyes (L188) suggest directional sight; no number. Bok and Nilsson (2016) is wanted. |
+| Land snail sharpness beyond the red slug | partly found | 52 degrees in *Arion rufus* (L128) and the review's statement (L134). The review's tables (Zieger and Meyer-Rochow 2008) would give optics for several species (wanted). |
+| Snail and tick responses to motion | not found | Nothing measured; `gate` stays unset. |
+| Tick sharpness | inferred | 30 to 40 receptors (L151) over the bont tick's field (L154, L155): about 0.07 cycles per degree. |
+| Pseudoscorpions and camel spiders | eye counts and one sensillum study only (L75, L76) | They join the scorpion view; nothing more is known from the sources opened. |
+| Gall nematodes | none needed | They are photographed as galls and belong in `other`. |
 
 **[unfinished]**
