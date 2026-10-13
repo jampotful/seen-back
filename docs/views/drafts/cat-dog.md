@@ -361,8 +361,8 @@ bigcat: { chip: 'Lion, tiger, leopard', who: 'a big cat', cpd: 12, topoA: 1, fal
           byGenus: { Acinonyx: { cpd: 23, topoS: 1, topoA: .4 } }, rows: [ /* the eight rows of 2.2 */ ] },
 dog:    { chip: 'Dog, coyote, wolf', who: 'a dog', fov: 240, cpd: 9, topoS: 1, topoA: .5, fall: 1.6, pupil: 'o', dof: 10, M: DEUTAN, gain: 1.3, sat: .85, rate: .8,
           shortNose: { topoS: .2, topoA: 1 }, rows: [ /* the twelve rows of 2.3 */ ] },
-fox:    { chip: 'Fox', who: 'a fox', cpd: 8, topoA: 1, topoS: .4, fall: 1.2, pupil: 'v', dof: 22, M: DEUTAN, gain: 1.6, sat: .8,
-          byGenus: { Urocyon: { ax: .6 } }, rows: [ /* the seven rows of 2.4 */ ] }
+fox:    { chip: 'Fox', who: 'a fox', cpd: 6, topoA: 1, topoS: .4, fall: 1.2, pupil: 'v', dof: 22, M: DEUTAN, gain: 1.6, sat: .8,
+          byGenus: { Urocyon: { ax: .6 } }, rows: [ /* the eight rows of 2.4 */ ] }
 ```
 
 In `paramsOf`, `180 / (m.fov || 180)` would become `200 / (m.fov || 200)` if the app adopts the human field of 200 degrees (section 3.3).
