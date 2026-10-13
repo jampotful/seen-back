@@ -121,3 +121,165 @@ Two limits apply to a phone. First, "a camera with three channels (RGB) can reli
 
 **Cost and beauty.** The engine's anisotropic disc already draws pupil-shaped blur; driving its radius from b·(pixels per radian) with a real depth map would make the cat's vertical smear and the deer's horizontal smear appear only where the scene is out of focus, which is both truer and more striking than height in the frame.
 
+## 2. What an RGB phone camera can and cannot capture
+
+### 2.1 Spectral range
+
+- **Visible only, in the phones measured.** Burggraaff and colleagues 2019 calibrated five smartphones (iPhone SE, 6S and 7 Plus; Samsung Galaxy S6 and S8) and several other consumer cameras with a monochromator scanned over 390 to 700 nm: "This wavelength range was chosen because no significant response was found outside it on any of the test cameras." Consumer cameras' red, green and blue peaks lie at "approximately 600, 520, and 470 nm, respectively", and their responses "differed wildly between camera models", notably in "the locations of secondary peaks and near-infrared (NIR) and ultraviolet (UV) cut-off wavelengths" (read from the arXiv text through the fetch tool; published in Optics Express, doi 10.1364/OE.27.019075, as the project's repository README gives it).
+- **Ultraviolet A reaches the sensor weakly.** In one phone (a Samsung Galaxy 5), "The CMOS image sensor in the camera possesses inherent sensitivity to UVA", the lens's transmission "drops from 18.9% at 390 nm to 1.1% at 340 nm", and in darkness "the green channel still yielded measurable signals" under UV light (Igoe, Parisi and Carter 2012, accepted manuscript). In daylight that UV signal is mixed into the colour channels with visible light thousands of times stronger, so it cannot be separated (my inference, as the crab sheet also says).
+- **Far-red and near-infrared.** Silicon responds far past 700 nm, and converted research cameras are sensitive "often up to around 900 nm", with infrared sensitivity "generally far higher than UV" (Troscianko and Stevens 2015). Stock phones block it: the five phones above showed no significant response past 700 nm. So the plant view's red against far-red comparison (red near 660 nm, far-red near 730 nm) cannot be measured; the camera's red channel sees the red, and the far-red has to be invented. The plant row "Phone cameras capture very little far-red light" is consistent with Burggraaff and colleagues and can cite them.
+- **No polarization** (1.4) and **no distance** (1.9) in an ordinary frame.
+
+### 2.2 What reaches the page
+
+- **Processed, nonlinear pictures.** The page receives video frames that the phone has demosaiced, white-balanced, tone-mapped and denoised. Burggraaff and colleagues found "high linearity in RAW but not JPEG data"; RAW (DNG) exists on iOS and Android "though not on all devices", and EXIF metadata can be wrong enough to cause "photometric errors up to 30%". Decoding sRGB to linear light, as the engine does by uploading frames as `SRGB8_ALPHA8` textures, undoes the standard sRGB curve but not the phone's own tone mapping (my inference).
+- **Auto exposure hides the light level** (1.7). The native shells could read exposure time and gain per frame; a web page cannot (no source opened for either statement).
+- **The field of view varies by phone and lens** (1.1). iOS reports it per camera format; on the web it has to be assumed or calibrated.
+- **Frame rate.** Most pages get 30 frames per second, sometimes 60 (no source opened); temporal effects above that rate cannot be measured from the camera.
+
+### 2.3 Which receptor catches can be estimated from RGB, and with what error
+
+No published study I opened tests a phone picture against animal receptors directly. micaToolbox's authors state the rule ("a camera with three channels (RGB) can reliably map to trichromatic humans, dichromatic mammals or achromatic dogfish cone catch, but it would not be possible to map to species that see into ultraviolet (UV)"), and Tedore 2023 found that maps from cameras lose accuracy for dark colours. To put numbers on the rule for the app's animals, I ran a computation of my own on open data.
+
+**Method (my own computation, not a published result).** Spectra: the 69 natural reflectance spectra shipped with pavo 2.11 (36 flowers, 21 plumage spectra of *Sicalis citrina*, 12 of teal), 300 to 700 nm at 1 nm. Light: CIE D65 (pavo's `bgandilum`). Camera: an ideal colour-correct phone, represented by the CIE 2-degree colour matching functions in pavo (`cie2_X`, `cie2_Y`, `cie2_Z`), which is what a phone's colour pipeline aims to deliver. Receptors: pavo's built-in sensitivity curves (`vissyst`): honeybee, blue tit, average violet-sensitive bird, peafowl, chicken double cone, dog, housefly and its R1-6 receptors, *Drosophila*, the jumping spider *Habronattus pyrrithrix*, the triggerfish *Rhinecanthus aculeatus* and the ornate dragon lizard *Ctenophorus ornatus*. Catches were made relative to a perfect white under D65 (von Kries). For each receptor I fitted the catch from the three camera values, with no intercept (as Vasas et al. 2024), and with a quadratic polynomial (as micaToolbox can), and scored each by leave-one-out cross-validation: R² and the median absolute percentage error. "Share below 400 nm" is the fraction of the receptor's catch from a white surface in D65 that comes from wavelengths the phone does not see.
+
+| Animal | Receptor (pavo name) | Peak (nm) | Share below 400 nm | R², linear | Median error, linear | R², quadratic | Median error, quadratic |
+|---|---|---:|---:|---:|---:|---:|---:|
+| honeybee | UV (`apis.s`) | 345 | 83% | −0.27 | 67% | −0.30 | 53% |
+| honeybee | blue (`apis.m`) | 437 | 15% | 0.98 | 14% | 0.98 | 11% |
+| honeybee | green (`apis.l`) | 557 | 4% | 1.00 | 1% | 1.00 | 1% |
+| blue tit (UV-sensitive bird) | UVS (`bluetit.u`) | 372 | 78% | −0.28 | 69% | −0.28 | 51% |
+| blue tit | SWS (`bluetit.s`) | 454 | 0% | 1.00 | 5% | 1.00 | 4% |
+| blue tit | MWS (`bluetit.m`) | 538 | 0% | 1.00 | 1% | 1.00 | 1% |
+| blue tit | LWS (`bluetit.l`) | 607 | 0% | 1.00 | 2% | 1.00 | 2% |
+| average violet-sensitive bird | VS (`avg.v.u`) | 416 | 24% | 0.90 | 26% | 0.90 | 21% |
+| average violet-sensitive bird | SWS (`avg.v.s`) | 478 | 0% | 0.99 | 11% | 0.99 | 8% |
+| peafowl | VS (`pfowl.u`) | 432 | 14% | 0.97 | 16% | 0.97 | 13% |
+| chicken | double cone (`ch.dc`) | 570 | 0% | 1.00 | 0% | 1.00 | 0% |
+| dog | S (`canis.s`) | 430 | 17% | 0.96 | 17% | 0.97 | 14% |
+| dog | L (`canis.l`) | 555 | 5% | 1.00 | 1% | 1.00 | 1% |
+| housefly | UV (`musca.u`) | 338 | 91% | −0.21 | 81% | −0.28 | 53% |
+| housefly | S (`musca.s`) | 359 | 49% | 0.73 | 34% | 0.74 | 25% |
+| housefly | M (`musca.m`) | 462 | 8% | 1.00 | 5% | 1.00 | 5% |
+| housefly | L (`musca.l`) | 538 | 7% | 1.00 | 3% | 1.00 | 2% |
+| housefly | R1-6 (`md.r1`) | 356 | 15% | 0.99 | 8% | 0.99 | 6% |
+| *Drosophila* | R7 UV (`drosophila.u`) | 325 | 88% | −0.31 | 80% | −0.35 | 55% |
+| *Drosophila* | R7 (`drosophila.s`) | 347 | 69% | 0.02 | 58% | 0.04 | 44% |
+| *Drosophila* | R8 blue (`drosophila.m`) | 423 | 18% | 0.98 | 15% | 0.98 | 11% |
+| *Drosophila* | R8 green (`drosophila.l`) | 600 | 5% | 1.00 | 2% | 1.00 | 2% |
+| jumping spider *Habronattus* | short (`habronattus.s`) | 382 | 63% | 0.08 | 57% | 0.10 | 41% |
+| jumping spider *Habronattus* | middle (`habronattus.m`) | 531 | 3% | 1.00 | 1% | 1.00 | 1% |
+| jumping spider *Habronattus* | long (`habronattus.l`) | 628 | 5% | 0.99 | 4% | 1.00 | 4% |
+| triggerfish | S (`rhinecanthus.s`) | 420 | 0% | 0.98 | 17% | 0.98 | 12% |
+| triggerfish | M (`rhinecanthus.m`) | 480 | 0% | 1.00 | 3% | 1.00 | 3% |
+| triggerfish | L (`rhinecanthus.l`) | 530 | 0% | 1.00 | 1% | 1.00 | 1% |
+| dragon lizard | S (`ctenophorus.s`) | 440 | 13% | 0.99 | 12% | 0.99 | 9% |
+| dragon lizard | M (`ctenophorus.m`) | 493 | 6% | 1.00 | 3% | 1.00 | 4% |
+| dragon lizard | L (`ctenophorus.l`) | 571 | 4% | 1.00 | 1% | 1.00 | 1% |
+
+**Reading the table.**
+- Green, yellow and red receptors and the long-wave double cones that drive brightness and motion (R² 0.99 to 1.00, median errors 0 to 5%) can be computed from the phone picture with confidence.
+- Blue receptors (420 to 480 nm) come out with R² 0.96 to 1.00 and median errors of 3 to 17%: good enough for a picture, with the largest errors in dark and saturated colours.
+- Violet receptors (VS birds near 416 nm, peafowl 432) come out partly (R² 0.90 to 0.97, errors 16 to 26%). A pigeon, chicken or heron view can use the estimate and say that its violet is approximate.
+- True UV receptors (325 to 382 nm) cannot be estimated at all (negative R² means the fit predicts worse than the average). Every UV channel in the app is invented.
+- The quadratic map improves blue and violet errors by a few points and nothing else, so the linear map (a 3 by 3 matrix, free on the graphics chip) is the right choice.
+
+**Limits of this estimate.** The library is small (69 spectra) and lacks leaves, bark, soil, skin, fur, water and sky; flowers and plumage dominate it. Tedore 2023 shows that libraries without dark spectra flatter the fit. The camera is ideal; a real phone's colour errors add to these, and Burggraaff and colleagues found models "differed wildly". The illuminant is D65 only. With FReD's 2,000-odd flower spectra and a library of foliage, soil and fur spectra, the same computation would give firmer numbers; the method is the one Vasas and colleagues used for their camera.
+
+### 2.4 Matrices for the engine
+
+The same fits give each receptor's catch as a linear combination of linear sRGB (R, G, B), for a picture whose white maps to about 1. These are my own computation and should be refitted on a larger library before shipping; the row sums show how each receptor responds to white (a sum far from 1 marks a receptor the camera does not see).
+
+| Animal | Receptor | R | G | B | Sum |
+|---|---|---:|---:|---:|---:|
+| honeybee | blue (437 nm) | 0.013 | 0.098 | 0.675 | 0.79 |
+| honeybee | green (557 nm) | 0.057 | 0.704 | 0.203 | 0.96 |
+| dog | S (430 nm) | 0.024 | 0.069 | 0.655 | 0.75 |
+| dog | L (555 nm) | 0.135 | 0.662 | 0.157 | 0.95 |
+| average VS bird | VS (416 nm), approximate | 0.034 | 0.038 | 0.568 | 0.64 |
+| average VS bird | SWS (478 nm) | −0.168 | 0.546 | 0.717 | 1.09 |
+| average VS bird | MWS (542 nm) | 0.121 | 0.908 | −0.055 | 0.97 |
+| average VS bird | LWS (607 nm) | 0.627 | 0.265 | 0.141 | 1.03 |
+| blue tit (UVS) | SWS (454 nm) | −0.042 | 0.248 | 0.834 | 1.04 |
+| blue tit | MWS (538 nm) | 0.081 | 0.940 | −0.040 | 0.98 |
+| blue tit | LWS (607 nm) | 0.631 | 0.258 | 0.144 | 1.03 |
+| chicken | double cone (570 nm) | 0.238 | 0.654 | 0.116 | 1.01 |
+| housefly | R1-6 | −0.054 | 0.492 | 0.419 | 0.86 |
+| housefly | M (462 nm) | −0.043 | 0.305 | 0.660 | 0.92 |
+| housefly | L (538 nm) | 0.028 | 0.799 | 0.100 | 0.93 |
+| *Habronattus* | middle (531 nm) | 0.017 | 0.732 | 0.233 | 0.98 |
+| *Habronattus* | long (628 nm) | 0.554 | 0.171 | 0.264 | 0.99 |
+| triggerfish | S (420 nm) | 0.067 | −0.027 | 0.800 | 0.84 |
+| triggerfish | M (480 nm) | −0.103 | 0.498 | 0.638 | 1.03 |
+| triggerfish | L (530 nm) | −0.003 | 0.746 | 0.270 | 1.01 |
+| dragon lizard | S (440 nm) | 0.005 | 0.116 | 0.697 | 0.82 |
+| dragon lizard | M (493 nm) | −0.102 | 0.571 | 0.504 | 0.97 |
+| dragon lizard | L (571 nm) | 0.226 | 0.593 | 0.135 | 0.95 |
+
+For display, divide each row by its sum so that white stays white (von Kries), then apply the display convention of 1.2. Two consequences for build 22: the bee's green receptor takes a fifth of its signal from the camera's blue, which `BEE` ignores; and the dog's two cones in this computation peak at 430 and 555 nm (pavo's dog curves, which cite Neitz, Geist and Jacobs 1989), so a matrix built from them can replace `DEUTAN` for dogs, which today models a human deuteranope.
+
+## 3. Cross-taxon compilations
+
+### 3.1 What was found and logged
+
+| Compilation | What it gives | Taxa | Read | Logged |
+|---|---|---|---|---|
+| Caves, Brandley and Johnsen 2018, *Trends Ecol Evol* 33: 358 to 372 | Acuity (cpd) across animals; the review's Tables S1 (acuity and eye size), S2 (93 birds) and S3 (insects) are supplements | about 600 species in the supplements | main text, Boxes 1 to 4 and Figs 1 to 4 (Drive copy); supplements not reached | 37 lines (values in the text and figure labels) |
+| Land 1997, *Annu Rev Entomol* 42: 147 to 177 | Minimum interommatidial angles, acceptance angles and their ratio, behavioural acuity, acute zones; the optics equations used in section 1 | 55 insects | whole paper (Drive copy) | 85 lines |
+| Land and Nilsson 2012, *Animal Eyes*, Table 3.1 | Resolution (cycles per radian, converted to cpd) from flatworm to eagle | 18 animals | chapters 1, 2 and 3 to p. 65 (Drive copy) | 18 lines |
+| Land and Nilsson 2012, Table 2.2 | Photopigment λmax of invertebrates (data from Kelber 2006) and the vertebrate pigment families | 21 invertebrates | as above | 72 lines |
+| Healy and colleagues 2013, *Anim Behav* 86: 685 to 696, Table 1 | Maximum CFF with method (ERG or behaviour) and the compilers' rating of the method; a model of CFF from body mass, metabolic rate and light | 34 vertebrates | whole paper (collection) | 34 lines |
+| Boström and colleagues 2016, *PLoS ONE* 11: e0151099 | Behavioural CFF of three passerines; the Healy model's underprediction | 3 birds | whole paper (collection) | 4 lines |
+| Inger and colleagues 2014, *PLoS ONE* 9: e98631 | CFF across 81 species with light levels (Table 3 and Table S1) | 81 species | text through the fetch tool; the table is an image and the supplement was refused (HTTP 429) | 2 lines |
+| Hart 2001, *Prog Retin Eye Res* 20: 675 to 703, Table 1 | λmax of UVS/VS, SWS, MWS, LWS cones and rods by microspectrophotometry; oil droplets; ocular media; cone ratios | 27 birds | whole paper (Drive copy) | 135 lines |
+| van der Kooi and colleagues 2021, *Annu Rev Entomol* 66: 435 to 461, Table 1 | Peak sensitivities of photoreceptors | 221 insects in 13 orders | whole paper (Drive copy); its Supplemental Material with the original sources was not read | 601 lines |
+| Douglas and Jeffery 2014, *Proc R Soc B* 281: 20132995, Table 1 | Lens wavelength of 50% transmission and share of UVA transmitted | 38 mammals | whole paper (collection) | 38 lines |
+
+Not reached, and on the wanted list where they would change a view: Veilleux and Kirk 2014 (acuity of 91 mammals, open on figshare but unreachable by my tools), Kiltie 2000 (acuity scaling in mammals and birds), Caves and colleagues 2017 (acuity in ray-finned fishes), Bowmaker 2008 (vertebrate visual pigments), Carleton and colleagues 2020 (teleost spectral sensitivity), Laughlin and Weckström 1993 (photoreceptor speed in flies), Potier and colleagues 2020 ("How fast can raptors see?"), Martin 2007 (visual fields of birds), and the supplements of Caves and colleagues 2018 and Inger and colleagues 2014.
+
+**Two conflicts the compilations show.**
+- *Ground squirrel flicker.* Healy and colleagues list *Spermophilus lateralis* at 120 Hz (ERG, Tansley et al. 1961); build 22 says 108 (Inger et al. 2014, as cited in `docs/SOURCES.md`). Healy also lists *Tamias amoenus* at 100 Hz. Both compile older ERG work; the squirrel row should cite one and name the method.
+- *Pigeon flicker.* Healy and colleagues list *Columba livia* at 100 Hz (ERG, suboptimal method, Bornshein and Tansley 1961); build 22's wader row and Boström and colleagues cite about 140 to 143 Hz (Dodt and Wirth's ERG, as Boström and colleagues report it). The higher value comes from the better method by the compilers' own rating, but neither is behavioural.
+- *Honeybee pigments.* van der Kooi and colleagues give 346, 430 and 540 nm for workers; Land and Nilsson's Table 2.2 gives 344, 436 and 556 (Kelber 2006). Both are logged; the bee sheet should pick one study and cite it directly.
+
+### 3.2 What the compilations give each of the app's groups
+
+Counts are log lines (species in brackets). "None" means none of these compilations measures that group; the group's own sheet may have sources. The views and groups are those of `src/cam.a.js` (`EYES` and `GROUPS`) and `docs/COVERAGE.md`; species were assigned by the rules of `tools/species/eyes.py` (note that ants, family Formicidae, go to `insect`, and Columbiformes and Galliformes to `wader`).
+
+| Group | Acuity | Flicker fusion | Receptor peaks | Other |
+|---|---|---|---|---|
+| `cat` | 10 cpd (Land and Nilsson, Table 3.1, behavioural) | 55 Hz (ERG, suboptimal) | none | lens passes UVA: 50% at 345 nm, 58.9% of UVA (Douglas and Jeffery) |
+| `dog` | none here (build 22 cites Caves et al.) | 80 Hz (behavioural) | none (pavo's curves peak at 430 and 555 nm) | lens 50% at 335 nm, 61.3% of UVA |
+| `squirrel` (all rodents) | hooded rat 1.0 cpd | 5 (5): 39 (rat) to 120 (*Spermophilus lateralis*) | none | 9 lenses: mouse and rat pass up to 81% of UVA; grey squirrel, prairie dog and ground squirrel pass none or 0.6% |
+| `deer` (Cervidae, Bovidae, Equidae, Camelidae, Giraffidae) | none | none | none | 9 lenses: reindeer 384 nm (26.5% UVA), cattle 384, sheep 393, horse 416 (4.6%) |
+| `rabbit` | none | none | none | lens 392 nm, 12.7% of UVA |
+| `wader` (pigeons, gamebirds, herons, cranes) | pigeon 12 cpd (Blough 1971) | pigeon 100, chicken 87 | 25 (5): pigeon 409/453/507/567, chicken 419/455/508/570, quail, turkey, peafowl | ocular media 358 to 365 nm (turkey, peafowl) |
+| `bird` (other birds) | 6 (6): barn owl 4, goldfinch 5.4, reed bunting 7.8, blackbird 18, jay 30, kookaburra 41; birds' median 11 | 7 (7): 45 (great horned owl) to 146 (pied flycatcher) | 94 (22): UVS 355 to 380 nm in passerines and parrots; VS 402 to 426 nm in ducks, a shearwater, a penguin and the ostrich | ocular media 316 to 380 nm; double cones for motion; blue tit cone ratios |
+| `hawk` | *Aquila* 138 to 140 cpd | none (build 22 cites Potier and Kelber via a press release) | none (red-tailed hawk rod only, not logged) | none |
+| `alligator` | none | none | none | none |
+| `reptile` | none | 7 (7): leatherback 15, gecko 20, sea turtles 40, tuatara 45.6, anole 70, iguana 80 | none (pavo's dragon lizard curves 440/493/571 used in section 2) | none |
+| `frog` | none | cane toad 6.7 (Inger et al.) | none | none |
+| `bee` (Hymenoptera except ants) | honeybee 0.26 cpd behavioural, 0.52 cpd anatomical; Δφ 0.41 to 1 degree in 5 species | none logged (Inger: 200 Hz at 3000 lux) | 128 (47): UV 324 to 370, blue 424 to 458, green 512 to 556; a fourth, red-sensitive class (592 to 604) in two sawflies, a wood wasp and one bee (*Callonychium petuniae*, 593) | honeybee acceptance angle 2.6 degrees; drones pursue 0.32-degree targets |
+| `insect` (all other insects, ants, springtails) | 7 (6) cpd values, *Anax* 2.1 the highest; insects' median 0.25 | none logged (Inger: one beetle 400 Hz) | 505 (182): from dichromats to *Graphium sarpedon*'s many classes | Δφ in 46 species (0.24 to 57 degrees), Δρ in 10, acute zones, *Anax* 28,672 ommatidia |
+| `plant` | none | none | none | none |
+| `fungus`, `slime` | none | none | none | none |
+| `spider` | wolf spider 0.28 cpd | none | *Cupiennius* 340/480/520 | none |
+| `jumper` | *Portia* 12.5 to 13 cpd | none | *Plexippus* 360/520 | none |
+| `fish` | 10 (9): 0.43 (larval alewife) to 40 (rock bass) | 5 (5): eel 14 to tuna 80; goldfish 67.2 | none | none |
+| `shark` (sharks and rays) | 2 (bamboo shark) to 11 (bigeye thresher) | 4 (4): 18 to 37 | none | none |
+| `snail` | *Littorina* 0.11 cpd | none | none | none |
+| `sealife` | scallop 0.31 cpd | none | giant clam 360/490/540 | none |
+| `crab` (and woodlice) | 5 (5): 0.033 to 0.33; decapods at most 0.4 | none | shore crab 440/508, the isopod *Ligia* 340/470/520, *Daphnia* 4 classes | none |
+| `salamander` | none | tiger salamander 30 (ERG) | none | none |
+| `worm` | planarian 0.014 cpd | none | the alciopid *Torrea* 400/560 | none |
+| `scorpion`, `tick` | none | none | none | none |
+| `mammal` (other mammals) | none | tree shrew 90 | none | 7 lenses: hedgehog 326 nm (65.5% of UVA), ferret 344, pig 375, meerkat 420 to 436 |
+| `primate` | chimpanzee 64 cpd | macaque 95 | none | 8 lenses: 420 to 441 nm, 0 to 2.8% of UVA |
+| `whale` (whales and seals) | none | harp seal 32.7 | none | none |
+| `bat` | *Myotis* 0.1 cpd | none | none | none |
+| `flyingfox` | none | none | none | lenses of two *Pteropus*: 332 to 422 and 388 nm |
+| `cephalopod` | *Octopus vulgaris* 46 cpd, *Nautilus* 0.063 | none | octopus 540 only; firefly squid 470/484/500 | none |
+| person (reference) | 60 cpd at the fovea, 6 at 7 degrees out; 73 cpd in Table 3.1 | 60 Hz | none | none |
+
+**For the rows.** Three findings bear on build 22's wording directly. Dogs and cats have lenses that pass most UVA (61% and 59%), and Douglas and Jeffery argue that "an animal with a lens transmitting UV radiation will inevitably be sensitive" there because every pigment absorbs a little; the dog and cat rows can say that their eyes let in ultraviolet that ours block, graded `g` until a behavioural test is found. Diurnal squirrels block it entirely, so the squirrel view should never show ultraviolet. And the bird group splits by ultraviolet: passerines and parrots have UVS pigments near 355 to 380 nm with ocular media passing half the light at 316 to 343 nm, while pigeons, gamebirds and ducks have VS pigments near 409 to 426 nm and media that pass half only at 358 to 380 nm in the three measured (turkey, peafowl, mallard) (Hart 2001). One "violet tint" for every bird is false for one side or the other.
+
