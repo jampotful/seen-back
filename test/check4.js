@@ -382,6 +382,36 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     if (bad.length) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: these views being tried did not behave as they should: ' + bad.join(', ')); }
   }
 
+  if (mode === 'still') {
+    // Every offered view on one still photo (test/assets/garden.jpg) with the camera refused, a screenshot of each after its change of eyes
+    // has finished. The picture holds still, so two builds' screenshots can be compared pixel for pixel (STILL_DIR names where they go).
+    const dir = process.env.STILL_DIR || path.join(shots, 'still'); fs.mkdirSync(dir, { recursive: true });
+    const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+    await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+    await page.goto(HTTP); await page.waitForTimeout(500);
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
+    await page.locator('#inAnimalPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
+    await page.waitForSelector('#askView:visible, #claim:visible', { timeout: 20000 });
+    if (await page.locator('#claim').isVisible()) { await page.locator('#claimName').fill('cat'); await page.keyboard.press('Enter'); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 }); }
+    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'garden.jpg'));
+    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+    const keys = await page.evaluate(() => Object.keys(window.__seenBack.EYES).filter((k) => k !== 'other' && k !== 'person' && !window.__seenBack.EYES[k].zones));
+    const names = { cat: 'cat', dog: 'dog', squirrel: 'squirrel', deer: 'deer', rabbit: 'rabbit', wader: 'heron', bird: 'cardinal', hawk: 'hawk', alligator: 'alligator', reptile: 'anole', frog: 'treefrog', bee: 'bee', insect: 'beetle', plant: 'oak' };
+    for (const k of keys) {
+      if (k !== 'cat') {
+        await page.locator('#btnWho').tap(); await page.locator('#infoChange').tap(); await say(page, names[k] || k);
+        await page.waitForTimeout(600);
+        if (await page.locator('#askView').isVisible()) { await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'garden.jpg')); await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 }); }
+      }
+      await page.waitForTimeout(4500);
+      await page.locator('canvas').first().screenshot({ path: path.join(dir, k + '.png') });
+    }
+    out.still = { keys: keys, errors: errors }; await ctx.close();
+    if (errors.length) throw new Error('still: ' + errors.join('; '));
+  }
+
   if (mode === 'floor') {
     // The visibility floor (docs/ENGINE-DESIGN.md, section 5), on a still picture: the view (FLOOR_VIEW, jumper) at 390 by 844 CSS pixels
     // and a device pixel ratio of 2, the clip paused at FLOOR_T seconds and the gaze pinned, rendered at a parameter's value v and at v + d;
