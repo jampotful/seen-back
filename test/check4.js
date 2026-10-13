@@ -142,14 +142,16 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.goto(HTTP.replace('rec=off', 'rec=models/pocket')); await page.waitForFunction(() => window.__seenBack.rec.about().state === 'ready', null, { timeout: 120000 });
     await page.locator('#btnBegin').tap(); await page.waitForSelector('#askAnimal', { state: 'visible' });
     const r = {}; const type = async (w) => { await page.evaluate(() => window.__seenBack.openClaim('')); await page.waitForSelector('#claim', { state: 'visible' }); await page.locator('#claimName').fill(w); await page.locator('#claimForm button[type=submit]').tap(); await page.waitForTimeout(350);
-      return page.evaluate(() => ({ note: document.getElementById('claimNote').textContent, sug: [...document.querySelectorAll('#claimSuggest button')].map((b) => b.textContent), show: !document.getElementById('claimOtherRow').hidden, about: !!document.querySelector('#claimNote a[href*="issues/new"]'), eyes: window.__seenBack.S.eyes, named: window.__seenBack.S.named && (window.__seenBack.S.named.common + '|' + window.__seenBack.S.named.scientific) })); };
+      return page.evaluate(() => ({ note: document.getElementById('claimNote').textContent, sug: [...document.querySelectorAll('#claimSuggest button')].map((b) => b.textContent), show: !!document.getElementById('claimOtherRow') && !document.getElementById('claimOtherRow').hidden, about: !!document.querySelector('#claimNote a[href*="issues/new"]'), eyes: window.__seenBack.S.eyes, named: window.__seenBack.S.named && (window.__seenBack.S.named.common + '|' + window.__seenBack.S.named.scientific) })); };
     r.unknown = await type('xqzzvk'); r.slip = await type('herron'); r.slipSpecies = await type('monarhc'); r.several = await type('blue heron x'); r.noEyes = await type('wolf spider');
     r.exact = await type('green treefrog');
+    r.human = await type('human');   // a human is no view (build 22): the sheet says so and the eyes stay as they are
     r.errors = errors; out.typed = r; await ctx.close();
     const ok = /^Xqzzvk isn’t a creature we know\./.test(r.unknown.note) && r.unknown.about && !r.unknown.sug.length && !r.unknown.eyes
       && r.slip.note === 'Did you mean:' && r.slip.sug.includes('heron') && r.slipSpecies.sug.includes('Monarch')
       && /^Regards doesn’t have the ability to view the world as a wolf spider right now\./.test(r.noEyes.note) && !r.noEyes.show && !r.noEyes.about
-      && r.exact.eyes === 'frog' && /\|Dryophytes cinereus$/.test(r.exact.named || '') && !errors.length;
+      && r.exact.eyes === 'frog' && /\|Dryophytes cinereus$/.test(r.exact.named || '')
+      && r.human.note === 'That’s a human. You already see the world as one. Try photographing another creature.' && r.human.eyes === r.exact.eyes && !errors.length;
     if (!ok) { console.log(JSON.stringify(out, null, 1)); throw new Error('typed: a typed name is not handled as it should be'); }
   }
   if (mode === 'record') {

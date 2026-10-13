@@ -142,6 +142,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .sheet a { color: inherit; text-underline-offset: 3px; }
 .sheet .media { display: block; width: 100%; max-height: 46vh; object-fit: contain; border-radius: 12px; background: #000; }
 .note { margin: 0; font-size: calc(var(--h3-size) * .84); color: var(--dim); min-height: 1.3em; }
+.note.via { color: var(--faint); }
 .note:empty { display: none; }
 .sheet.fromtop { top: 0; bottom: auto; border-top: 0; border-bottom: 1px solid var(--line); border-radius: 0 0 22px 22px; padding: calc(18px + env(safe-area-inset-top, 0px)) 18px 20px; }
 .field { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
@@ -286,7 +287,6 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     </form>
     <p class="note" id="claimNote" role="status" aria-live="polite"></p>
     <div class="offers" id="claimSuggestRow" hidden><div class="row" id="claimSuggest"></div></div>
-    <div class="row links" id="claimOtherRow" hidden><button class="pill ghost" id="claimOther" type="button">Show it</button></div>
     <div class="row links" id="claimAboutRow" hidden><button class="link" id="claimAbout" type="button">About</button></div>
     <div class="row links" id="claimAskRow" hidden><button class="link" id="claimAsk" type="button"></button></div>
   </section>
@@ -345,7 +345,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <label class="fld"><span>Name</span><input id="contactName" type="text" autocomplete="name" maxlength="80"></label>
       <label class="fld"><span>Email</span><input id="contactEmail" type="email" autocomplete="email" inputmode="email" maxlength="120"></label>
       <label class="fld"><span>Message</span><textarea id="contactMsg" rows="5" maxlength="2000"></textarea></label>
+      <input id="contactBot" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
       <div class="row"><button class="pill" id="contactSend" type="submit">Send</button><p class="note" id="contactNote" role="status" aria-live="polite"></p></div>
+      <p class="note via">Your message goes by email to the maker of Regards, sent through a service called Web3Forms.</p>
     </form>
   </section>
 

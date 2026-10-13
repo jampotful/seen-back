@@ -27,8 +27,8 @@
     paintType();
   }
   function openClaim(sub) {
-    var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
-    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
+    var kinds = (pocket.kindOffers || []).filter(function (k) { return k !== 'other' && k !== 'none'; }), kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its likeliest, as buttons above the typed field; a creature of no known group is never a choice (build 22)
+    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
       var name = key === 'person' ? 'a human' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
@@ -67,8 +67,12 @@
     $('noticeText').innerHTML = html; openSheet('notice'); paintType();
   }
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
+  function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name && !/^this /.test(name) ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
+  var HUMAN_SAYS = 'That\u2019s a human. You already see the world as one. Try photographing another creature.';
   function reveal(key, named) {
+    if (key === 'person') {                        // a human: no view to change into and no encounter kept; the identifying screen stays (build 22)
+      diag('person', ''); S.seq++; tell(HUMAN_SAYS); return;
+    }
     if (noView(key)) {                             // a living thing with no view of its own: named where the app knows its group, and no encounter kept
       var nm = named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '';
       if (!nm && key !== 'other') nm = handName(key);
@@ -331,11 +335,12 @@
   $('claimForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var t = clip($('claimName').value, 60), hit = pocket.find ? pocket.find(t) : null, sp = hit && hit.exact, key, named, sug, box = $('claimSuggest');
-    box.textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);
+    box.textContent = ''; show('claimSuggestRow', false); show('claimAboutRow', false);
     if (!t) { $('claimNote').textContent = 'Type what it was first.'; return; }
     // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
     if (sp) { key = sp.kind; named = { common: nameCase(clip(sp.en || sp.sci, 60)), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
+    if (key === 'person') { diag('said-person', ''); $('claimNote').textContent = HUMAN_SAYS; return; }
     if (noView(key)) {                             // it exists, and none of the kinds of eye is its own
       diag('said-noview', clip(named.common, 60)); $('claimNote').innerHTML = noViewSays(named.common); return;
     }
@@ -695,8 +700,6 @@
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
   $('backAskView').addEventListener('click', back);
-  var claimKept = null;
-  $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', claimKept); } });
   $('claimAbout').addEventListener('click', openAbout);
   $('changeAskView').addEventListener('click', function () { openClaim(''); });
   $('claimBack').addEventListener('click', dismissSheets);
@@ -811,9 +814,11 @@
       }
     }
     show('fittedOn', true); paintChoices(); }
-  var CONTACT_URL = '', CONTACT_FIELDS = { name: '', email: '', message: '', build: '' };   // a form's address and the names of its fields; empty until one is set up
+  // The contact form sends an email to the app's maker through Web3Forms, a form-to-email service (build 22). The service keeps the
+  // address; the page holds only the access key, which can send to that one address and nowhere else, so it may sit in public code.
+  var CONTACT_KEY = '', CONTACT_API = 'https://api.web3forms.com/submit';
   function openContact(about) {
-    if (!CONTACT_URL && !/[?&]contact=demo\b/.test(location.search)) return false;
+    if (!CONTACT_KEY && !/[?&]contact=demo\b/.test(location.search)) return false;
     closeSheets(); ['contactName', 'contactEmail', 'contactMsg'].forEach(function (id) { $(id).parentNode.classList.remove('bad'); });
     $('contactNote').textContent = ''; waitMark($('contactNote')); $('contactSend').disabled = false;
     if (about && !$('contactMsg').value) $('contactMsg').value = about;
@@ -827,12 +832,21 @@
     $('contactEmail').parentNode.classList.toggle('bad', !okMail); $('contactMsg').parentNode.classList.toggle('bad', !text);
     if (!text) { $('contactNote').textContent = 'Write a message first.'; return; }
     if (!okMail) { $('contactNote').textContent = 'That email doesn\u2019t look right.'; return; }
-    if (!CONTACT_URL) { $('contactNote').textContent = 'Sending isn\u2019t set up yet.'; return; }
-    body = new URLSearchParams(); body.append(CONTACT_FIELDS.name, name); body.append(CONTACT_FIELDS.email, email); body.append(CONTACT_FIELDS.message, text); if (CONTACT_FIELDS.build) body.append(CONTACT_FIELDS.build, 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10));
+    if (!CONTACT_KEY) { $('contactNote').textContent = 'Sending isn\u2019t set up yet.'; return; }
+    body = new FormData();                         // a plain form post, so the browser sends it without asking the service first
+    body.append('access_key', CONTACT_KEY); body.append('subject', 'A message from Regards'); body.append('from_name', 'Regards');
+    body.append('name', name || '(no name given)'); if (email) body.append('email', email); body.append('message', text);
+    body.append('build', 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10) + ' (build ' + BUILD + ')');
+    if ($('contactBot').checked) body.append('botcheck', 'on');   // a box only a program filling in every field would tick; the service drops such messages
     $('contactSend').disabled = true; $('contactNote').textContent = 'Sending\u2026'; waitMark($('contactNote'));
-    fetch(CONTACT_URL, { method: 'POST', mode: 'no-cors', body: body }).then(function () {
-      $('contactNote').textContent = 'Sent. Thank you.'; waitMark($('contactNote')); $('contactMsg').value = '';
-    }, function () { $('contactSend').disabled = false; $('contactNote').textContent = 'That didn\u2019t send. Check your connection and try again.'; waitMark($('contactNote')); });
+    fetch(CONTACT_API, { method: 'POST', body: body, headers: { Accept: 'application/json' } }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j || j.success !== true) throw new Error((j && j.message) || ('HTTP ' + r.status)); });
+    }).then(function () {
+      diag('contact', 'sent'); $('contactNote').textContent = 'Sent. Thank you.'; waitMark($('contactNote')); $('contactMsg').value = '';
+    }, function (err) {
+      diag('contact', clip(String(err && err.message), 80)); $('contactSend').disabled = false;
+      $('contactNote').textContent = navigator.onLine === false ? 'That didn\u2019t send. Check your connection and try again.' : 'That didn\u2019t send. Try again in a moment.'; waitMark($('contactNote'));
+    });
   });
   contactLink($('aboutTellLink'), '');
   $('noticeOk').addEventListener('click', dismissSheets);

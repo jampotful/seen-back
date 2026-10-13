@@ -278,7 +278,7 @@
         yes.addEventListener('click', function () { forgetMeeting(m.id); });
         no.addEventListener('click', renderRecord);
       });
-      li.appendChild(th); li.appendChild(tx); if (lent(m)) { li.appendChild(days); li.appendChild(look); } li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back
+      li.appendChild(th); li.appendChild(tx); if (lent(m) && !noViewOrPerson(m.key)) { li.appendChild(days); li.appendChild(look); } li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back, or where there were never any
     });
     $('g60Sum').textContent = 'Gainesville’s sixty: ' + Object.keys(have).length + ' met';
     var ol = $('g60List'); ol.textContent = '';
@@ -307,7 +307,7 @@
     });
   }
   function lookAgain(m) {
-    if (!m || !EYES[m.key] || !lent(m)) return;
+    if (!m || !EYES[m.key] || noViewOrPerson(m.key) || !lent(m)) return;      // encounters kept by older builds with a human or a creature of no group have no view
     var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at, local: !!m.loc };
     closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; pocket.kindOffers = []; paintSvc();
     if (rec) { recDrop = true; stopRec(); }

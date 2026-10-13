@@ -142,6 +142,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
 .sheet a { color: inherit; text-underline-offset: 3px; }
 .sheet .media { display: block; width: 100%; max-height: 46vh; object-fit: contain; border-radius: 12px; background: #000; }
 .note { margin: 0; font-size: calc(var(--h3-size) * .84); color: var(--dim); min-height: 1.3em; }
+.note.via { color: var(--faint); }
 .note:empty { display: none; }
 .sheet.fromtop { top: 0; bottom: auto; border-top: 0; border-bottom: 1px solid var(--line); border-radius: 0 0 22px 22px; padding: calc(18px + env(safe-area-inset-top, 0px)) 18px 20px; }
 .field { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
@@ -286,7 +287,6 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     </form>
     <p class="note" id="claimNote" role="status" aria-live="polite"></p>
     <div class="offers" id="claimSuggestRow" hidden><div class="row" id="claimSuggest"></div></div>
-    <div class="row links" id="claimOtherRow" hidden><button class="pill ghost" id="claimOther" type="button">Show it</button></div>
     <div class="row links" id="claimAboutRow" hidden><button class="link" id="claimAbout" type="button">About</button></div>
     <div class="row links" id="claimAskRow" hidden><button class="link" id="claimAsk" type="button"></button></div>
   </section>
@@ -345,7 +345,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       <label class="fld"><span>Name</span><input id="contactName" type="text" autocomplete="name" maxlength="80"></label>
       <label class="fld"><span>Email</span><input id="contactEmail" type="email" autocomplete="email" inputmode="email" maxlength="120"></label>
       <label class="fld"><span>Message</span><textarea id="contactMsg" rows="5" maxlength="2000"></textarea></label>
+      <input id="contactBot" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
       <div class="row"><button class="pill" id="contactSend" type="submit">Send</button><p class="note" id="contactNote" role="status" aria-live="polite"></p></div>
+      <p class="note via">Your message goes by email to the maker of Regards, sent through a service called Web3Forms.</p>
     </form>
   </section>
 
@@ -416,7 +418,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '21';
+  var BUILD = '22';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -429,93 +431,93 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var PROTAN = [0.11238, 0.88762, 0, 0.11238, 0.88762, 0, 0.00401, -0.00401, 1];   // Vienot, Brettel & Mollon 1999, from memory
   var DEUTAN = [0.29275, 0.70725, 0, 0.29275, 0.70725, 0, -0.02234, 0.02234, 1];
   var BEE = [0, 1, 0, 0, 0, 1, 0, 0, 0];   // their green drawn as red, their blue as green; ultraviolet (invented) goes to blue
-  var SLOW = ' The picture is slowed to that ratio, then jumps to catch up. That rendering is this app’s invention.';
   var EYES = {
     cat: { chip: 'Cat', who: 'a cat', fov: 200, cpd: 8, topoA: 1, fall: 2.0, pupil: 'v', dof: 26, M: DEUTAN, gain: 1.7, sat: .8,
-      cue: 'Out-of-focus things smear up and down. Tap to move the focus.', rows: [
-      ['m', 'Sharpness', 'A cat sees about a fifth to a tenth of the detail you do. We blur the picture to match.'],
-      ['m', 'Colour', 'Cats have two kinds of colour sensor in their eyes, and you have three. Reds look olive or grey to a cat.'],
-      ['m', 'Pupil', 'A cat’s pupil is a vertical slit, like those of many hunters that ambush their prey. It makes out-of-focus things smear up and down.'],
-      ['m', 'Field of view', 'A cat sees about 200 degrees around it, and you see about 180. Your camera captures less than that, so we fill in the edges ourselves.'],
-      ['m', 'Dim light', 'A cat needs six to eight times less light than you do to see. We brighten the shadows to show it.'],
-      ['i', 'Depth', 'A phone camera can’t measure distance. We guess that things lower in the picture are closer, and you can tap to set the focus.'],
-      ['i', 'Sharpest spot', 'We assume a cat sees most sharply in the centre of its view.']] },
+      cue: 'Out-of-focus things smear up and down. Tap the screen to move the focus.', rows: [
+      ['m', 'Sharpness', 'Cats see about a fifth to a tenth as much detail as people do. This view is blurred to match.'],
+      ['m', 'Colour', 'Cats have two kinds of colour-sensing cells in their eyes, where people have three. Reds and greens are hard for them to tell apart, so reds look olive or grey to a cat.'],
+      ['m', 'Pupil', 'A cat’s pupil closes to a narrow vertical slit, a shape common in animals that hunt by ambush. A slit like this smears out-of-focus things up and down, and this view does the same.'],
+      ['m', 'Field of view', 'A cat takes in about 200 degrees around itself, and a person about 180. A phone camera sees far less than either, so this view bends the picture at its edges to suggest the wider sweep.'],
+      ['m', 'Dim light', 'Cats can see in light six to eight times dimmer than people need. This view brightens the shadows to show it.'],
+      ['i', 'Depth', 'A phone camera can’t measure distance, so this view assumes that things lower in the picture are closer. Tap the screen to move the focus.'],
+      ['i', 'Sharpest spot', 'This view assumes that a cat sees most sharply straight ahead.']] },
     dog: { chip: 'Dog', who: 'a dog', fov: 240, cpd: 11, topoS: 1, fall: 1.6, pupil: 'o', dof: 10, M: DEUTAN, gain: 1.3, sat: .85,
-      cue: 'Sharpest along the horizon. Tap to move the focus.', rows: [
-      ['m', 'Sharpness', 'A dog sees about a quarter to a seventh of the detail you do. We blur the picture to match.'],
-      ['m', 'Sharpest spot', 'Long-nosed dogs see most sharply in a band along the horizon, and short-nosed dogs in a single spot. We show the band.'],
-      ['i', 'Colour', 'Dogs have two kinds of colour sensor in their eyes, and you have three. We show colours the way a person with only two kinds sees them.'],
-      ['i', 'Field of view, dim light and depth', 'These are our best guesses. We treat things lower in the picture as closer.']] },
+      cue: 'The sharpest part is a band along the horizon. Tap the screen to move the focus.', rows: [
+      ['m', 'Sharpness', 'Dogs see about a quarter to a seventh as much detail as people do. This view is blurred to match.'],
+      ['m', 'Sharpest spot', 'Dogs with long noses see most sharply along a band level with the horizon. Dogs with short noses see most sharply in one central spot. This view shows the band.'],
+      ['i', 'Colour', 'Dogs have two kinds of colour-sensing cells, where people have three. This view shows colours as a person with two kinds would see them.'],
+      ['i', 'Field of view, dim light and depth', 'These parts of the view are guesses. This view treats things lower in the picture as closer.']] },
     squirrel: { chip: 'Squirrel', who: 'a squirrel', fov: 270, cpd: 6, topoS: 1, fall: 1.0, pupil: 'o', dof: 4, M: PROTAN, rate: .56,
-      cue: 'Each moment runs slow, then the picture catches up.', rows: [
-      ['g', 'Colour', 'Ground squirrels have two kinds of colour sensor in their eyes, and you have three.'],
-      ['g', 'Speed', 'A ground squirrel’s eyes can follow a light flashing up to 108 times a second, and yours give up at about 60. Fast things look slower to it. We slow the picture down to suggest it, then let it jump to catch up.'],
-      ['i', 'Field of view and sharpness', 'Our best guess is that eyes on the sides of the head give a wide view, with less detail than you see.']] },
+      cue: 'The picture runs slowly, then jumps ahead to catch up.', rows: [
+      ['g', 'Colour', 'Ground squirrels have two kinds of colour-sensing cells in their eyes, where people have three.'],
+      ['g', 'Speed', 'A ground squirrel can see a light flicker on and off up to 108 times a second. To a person, a light that flickers faster than about 60 times a second looks steady. Fast movements look slower to a squirrel, so this view runs slowly and then jumps ahead to catch up.'],
+      ['i', 'Field of view and sharpness', 'A squirrel’s eyes sit on the sides of its head, which probably gives it a wide view with less detail than yours. This part of the view is a guess.']] },
     deer: { chip: 'Deer', who: 'a deer', fov: 310, cpd: 8, topoS: 1, fall: 2.2, pupil: 'h', dof: 22, M: DEUTAN, gain: 1.5, sat: .85,
-      cue: 'A wide band of ground. Out-of-focus things smear sideways.', rows: [
-      ['m', 'Colour', 'White-tailed deer have two kinds of colour sensor in their eyes, and you have three. Reds and oranges look yellow or grey to a deer.'],
-      ['m', 'Field of view', 'A deer sees about 310 degrees around it, which is nearly a full circle. Your camera captures less than a quarter of that, so we fill in the rest ourselves.'],
-      ['g', 'Pupil', 'Grazing animals have a pupil shaped like a horizontal bar. It widens their view along the ground and cuts the glare from the sky. It makes out-of-focus things smear sideways.'],
-      ['i', 'Sharpness, dim light and depth', 'These are our best guesses. We treat things lower in the picture as closer.']] },
+      cue: 'You see a wide band of ground. Out-of-focus things smear sideways.', rows: [
+      ['m', 'Colour', 'White-tailed deer have two kinds of colour-sensing cells, where people have three. Reds and oranges look yellow or grey to them.'],
+      ['m', 'Field of view', 'A deer takes in about 310 degrees around itself, almost a full circle. A phone camera sees less than a quarter of that, so this view bends the picture at its edges to suggest it.'],
+      ['g', 'Pupil', 'Grazing animals have pupils shaped like horizontal bars. The shape widens their view along the ground and cuts glare from the sky. It also smears out-of-focus things sideways, and this view does the same.'],
+      ['i', 'Sharpness, dim light and depth', 'These parts of the view are guesses. This view treats things lower in the picture as closer.']] },
     rabbit: { chip: 'Rabbit', who: 'a rabbit', fov: 350, cpd: 3, topoS: 1, fall: 2.0, pupil: 'o', dof: 6, M: DEUTAN,
-      cue: 'Nearly the whole circle at once, and little of it sharp.', rows: [
-      ['i', 'The whole view', 'Everything here is our best guess, and we haven’t checked it yet. A rabbit likely sees nearly all the way around itself, most sharply along the horizon, with little detail and two kinds of colour sensor.']] },
+      cue: 'You see almost the whole circle at once, and little of it is sharp.', rows: [
+      ['i', 'The whole view', 'This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells.']] },
     hawk: { chip: 'Hawk, eagle, falcon', who: 'a hawk', fov: 180, cpd: 60, fovea: 2.2, pupil: 'o', rate: .6,
-      cue: 'The centre is pulled close, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'An eagle sees more than twice the detail you do. A phone can’t capture that much, so we magnify the centre of the picture to suggest it.'],
-      ['m', 'Speed', 'A peregrine falcon’s eyes can follow a light flashing up to 129 times a second, and a Harris’s hawk’s up to 77. Yours give up at 50 to 60. We slow the picture down to suggest it, then let it jump to catch up.'],
-      ['i', 'Field of view', 'We leave the field of view as your camera gives it.']] },
+      cue: 'The centre is magnified, and the picture runs slowly, then jumps ahead.', rows: [
+      ['g', 'Sharpness', 'Eagles see more than twice as much detail as people do. A phone camera can’t capture that much detail, so this view magnifies the centre to suggest it.'],
+      ['m', 'Speed', 'A peregrine falcon can see a light flicker up to 129 times a second, and a Harris’s hawk up to 77. People see flicker up to 50 or 60 times a second. This view runs slowly and then jumps ahead to suggest the difference.'],
+      ['i', 'Field of view', 'This view keeps the field of view your camera gives.']] },
     wader: { chip: 'Heron, crane, pigeon', who: 'a wading bird', fov: 300, cpd: 25, topoS: .6, fall: .8, pupil: 'o', sheen: .6, hold: 280, thrust: 120,
       cue: 'Walk. The picture holds still, then lurches forward, the way a heron’s head does.', rows: [
-      ['m', 'Head movement', 'Herons, egrets, cranes, pigeons and chickens hold their head still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch up with the body.'],
+      ['m', 'Head movement', 'Herons, egrets, cranes, pigeons and chickens hold their heads still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch up with the body. This view does the same while you walk.'],
       ['g', 'Speed', 'In pigeons, each dart forward takes about a tenth of a second.'],
-      ['g', 'Sharpness', 'Most birds see about half the detail you do, or less.'],
-      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.'],
-      ['i', 'Field of view', 'Our best guess is that eyes on the sides of the head give a wide view.']] },
+      ['g', 'Sharpness', 'Most birds see half as much detail as people do, or less.'],
+      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.'],
+      ['i', 'Field of view', 'Eyes on the sides of the head probably give a wide view. This part of the view is a guess.']] },
     bird: { chip: 'Other bird', who: 'a bird', fov: 300, cpd: 25, topoA: .5, fall: .6, pupil: 'o', sheen: .8, rate: .5,
-      cue: 'Each moment runs slow, then the picture catches up.', rows: [
-      ['g', 'Speed', 'Birds’ eyes can follow a light flashing 40 to 140 times a second, and the fastest fliers are at the high end. Yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
-      ['g', 'Sharpness', 'Most birds see about half the detail you do, or less.'],
-      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.'],
-      ['i', 'Field of view', 'Our best guess is that eyes on the sides of the head give a wide view.']] },
+      cue: 'The picture runs slowly, then jumps ahead to catch up.', rows: [
+      ['g', 'Speed', 'Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference.'],
+      ['g', 'Sharpness', 'Most birds see half as much detail as people do, or less.'],
+      ['i', 'Ultraviolet', 'Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.'],
+      ['i', 'Field of view', 'Eyes on the sides of the head probably give a wide view. This part of the view is a guess.']] },
     alligator: { chip: 'Alligator', who: 'an alligator', fov: 280, cpd: 9, topoS: 1, fall: 2.6, pupil: 'v', dof: 24, gain: 1.6, sat: .9,
-      cue: 'One sharp band along the waterline.', rows: [
-      ['g', 'Sharpest spot', 'Crocodiles see most sharply in a band along the horizon. It lets them scan the waterline without turning their head.'],
-      ['g', 'Colour', 'Crocodiles have three kinds of colour sensor in their eyes, as you do, so we leave colours as your camera gives them.'],
-      ['g', 'Pupil', 'An alligator’s pupil is a vertical slit. It makes out-of-focus things smear up and down.'],
-      ['i', 'Field of view, sharpness, dim light and depth', 'These are our best guesses.']] },
+      cue: 'The sharpest part is a band along the waterline.', rows: [
+      ['g', 'Sharpest spot', 'Crocodiles see most sharply along a band level with the horizon. It lets them scan the waterline without turning their heads.'],
+      ['g', 'Colour', 'Crocodiles have three kinds of colour-sensing cells, as people do, so this view leaves colours as your camera shows them.'],
+      ['g', 'Pupil', 'An alligator’s pupil is a vertical slit. It smears out-of-focus things up and down, and this view does the same.'],
+      ['i', 'Field of view, sharpness, dim light and depth', 'These parts of the view are guesses.']] },
     reptile: { chip: 'Lizard, snake, turtle', who: 'a reptile', fov: 280, cpd: 15, topoA: 1, fall: 1.2, pupil: 'o', sheen: .6,
       cue: '', rows: [
-      ['i', 'The whole view', 'Everything here is our best guess. We assume eyes on the sides of the head, one sharp spot in the centre, and the ability to see ultraviolet light, which we show as a violet tint.']] },
+      ['i', 'The whole view', 'This whole view is a guess. It assumes eyes on the sides of the head, one sharp spot straight ahead, and the ability to see ultraviolet light, which appears here as a violet tint.']] },
     frog: { chip: 'Frog, toad', who: 'a frog or toad', fov: 340, cpd: 4, pupil: 'h', persist: .15, gate: 1,
       cue: 'Hold still, as a frog does. Only things that move show up.', rows: [
-      ['m', 'Movement', 'A frog doesn’t notice the parts of its world that stay still. It can starve next to food that doesn’t move. So we only show what changes. Hold your phone as still as a frog holds itself.'],
-      ['g', 'Speed', 'A cane toad’s eyes can follow a light flashing only about 7 times a second, a ninth of what yours can. Anything that moves smears into a trail.'],
-      ['i', 'Field of view, sharpness and pupil', 'These are our best guesses.']] },
+      ['m', 'Movement', 'A frog takes little notice of the parts of its world that stay still, and it can starve beside food that never moves. This view shows only what changes, so hold your phone as still as a frog holds itself.'],
+      ['g', 'Speed', 'A cane toad can see a light flicker only about 7 times a second, a ninth as often as a person can. Anything that moves smears into a trail.'],
+      ['i', 'Field of view, sharpness and pupil', 'These parts of the view are guesses.']] },
     bee: { chip: 'Bee', who: 'a bee', fov: 320, cpd: 1, pupil: 'none', M: BEE, uvBlue: 1, rate: .3,
-      cue: 'Red goes dark, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'Most insects see less than a sixtieth of the detail you do.'],
-      ['m', 'Red', 'Bees can’t see red. Red things look dark to them.'],
-      ['m', 'Speed', 'In bright light, a honeybee’s eyes can follow a light flashing up to 200 times a second, and yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
-      ['i', 'Ultraviolet', 'Bees can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the blue here stands in for it.'],
-      ['i', 'How we show the colours', 'A bee sees green, blue and ultraviolet. We can’t show you ultraviolet, so we shift every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue.']] },
+      cue: 'Red turns dark, and the picture runs slowly, then jumps ahead.', rows: [
+      ['g', 'Sharpness', 'Most insects see less than a sixtieth as much detail as people do.'],
+      ['m', 'Red', 'Bees have no colour-sensing cells for red, so red flowers and objects look dark to them.'],
+      ['m', 'Speed', 'In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference.'],
+      ['i', 'Ultraviolet', 'Bees can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the blue in this view stands in for it.'],
+      ['i', 'How the colours are shown', 'A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue.']] },
     insect: { chip: 'Butterfly, other insect', who: 'an insect', fov: 320, cpd: 1, pupil: 'none', sheen: .8, rate: .45,
-      cue: 'Blurry and wide, and each moment runs slow.', rows: [
-      ['g', 'Sharpness', 'Most insects see less than a sixtieth of the detail you do.'],
-      ['g', 'Speed', 'The eyes of flies and dragonflies can follow a light flashing more than 100 times a second, and one beetle’s up to 400. Yours give up at about 60. We slow the picture down to suggest it, then let it jump to catch up.'],
-      ['i', 'Ultraviolet', 'Bees and some other insects can see ultraviolet light, which is invisible to us. A phone can’t capture it, so the violet tint here stands in for it.']] },
+      cue: 'The view is wide and blurry, and it runs slowly, then jumps ahead.', rows: [
+      ['g', 'Sharpness', 'Most insects see less than a sixtieth as much detail as people do.'],
+      ['g', 'Speed', 'Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then jumps ahead to suggest the difference.'],
+      ['i', 'Ultraviolet', 'Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.']] },
     plant: { chip: 'Plant', who: 'a plant', pupil: 'none', field: 1, noGreen: 1, persist: 2.5,
-      cue: 'No picture here. Only how much light there is, what colour it is, and where it comes from.', rows: [
-      ['g', 'No picture', 'A plant has nothing like a lens to focus light into a picture. It senses how much light there is, what colour it is, and which direction it comes from.'],
-      ['m', 'Neighbours', 'Plants compare red light with far-red light, a colour just beyond what we can see. That tells them a neighbour is growing close by, before it shades them. A phone can’t capture far-red light.'],
-      ['i', 'Green and time', 'We take out the green, because leaves reflect most of it away, and we blur out anything quick. Both are our own choices.']] },
-    other: { chip: 'Something else', who: 'this one', pupil: 'none', field: 1, sat: 0,
-      cue: '', rows: [
+      cue: 'There’s no picture here, only how much light there is, what colour it is, and where it comes from.', rows: [
+      ['g', 'No picture', 'A plant has nothing like a lens to focus light into an image. It senses how much light there is, what colour it is, and which direction it comes from.'],
+      ['m', 'Neighbours', 'Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, even before the neighbour shades it. Phone cameras capture very little far-red light.'],
+      ['i', 'Green and time', 'This view removes green, because leaves reflect most green light away, and it smooths out anything quick. Both are the app’s own choices.']] },
+    // `other` and `person` are never views (build 22): a creature with no view of its own, and a human, each get a notice and the
+    // identifying screen stays as it is. The entries remain so that encounters kept by older builds still read.
+    other: { chip: null, who: 'this creature', pupil: 'none', field: 1, sat: 0, cue: '', rows: [
       ['i', 'No view yet', 'Regards doesn’t have the ability to view the world as this creature right now.']] },
     person: { chip: null, who: 'a human', pupil: 'o', cue: '', rows: [
       ['m', 'Same eyes', 'That’s a human. You already see the world as one.']] }
   };
-  var ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'wader', 'bird', 'hawk', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other'];
+  var ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'wader', 'bird', 'hawk', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant'];
   // Groups the app can name and cannot yet view the world as (docs/COVERAGE.md, decided by the owner on 12 October 2026).
   // A photo or a typed name in one of them gets the notice that Regards can't view the world as that creature yet, and no
   // encounter is kept. A group moves into EYES when its view is drawn from its sheet (docs/views/sheets/).
@@ -524,6 +526,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     scorpion: 'a scorpion or harvestman', tick: 'a tick', mammal: 'a mammal', primate: 'a monkey or ape', whale: 'a whale, dolphin or seal',
     bat: 'a bat', flyingfox: 'a flying fox', cephalopod: 'an octopus or squid' };
   function noView(key) { return key === 'other' || (!!GROUPS[key] && !EYES[key]); }
+  function noViewOrPerson(key) { return key === 'person' || noView(key); }   // neither becomes a view, and neither is kept as an encounter
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
   function lerp(a, b, t) { return a + (b - a) * t; }
@@ -857,7 +860,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       return keep ? w : w.toLowerCase();
     });
   }
-  function handName(key) { return key === 'other' ? 'something alive' : (EYES[key] ? EYES[key].who : GROUPS[key] || 'something alive').replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own
+  function handName(key) { return key === 'other' ? 'this creature' : (EYES[key] ? EYES[key].who : GROUPS[key] || 'this creature').replace(/^an? /, ''); }   // the names of groups carry no capital; a species keeps its own. A creature of no known group has no general name (build 22)
   function shownName() { return (S.named && S.named.common) || handName(S.eyes); }
   function guessed(key) { return EYES[key].rows.some(function (r) { return r[0] === 'i' || r[0] === 'g'; }); }
   function later(fn, ms) { var seq = S.seq; setTimeout(function () { if (seq === S.seq) fn(); }, ms); }
@@ -1322,7 +1325,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         yes.addEventListener('click', function () { forgetMeeting(m.id); });
         no.addEventListener('click', renderRecord);
       });
-      li.appendChild(th); li.appendChild(tx); if (lent(m)) { li.appendChild(days); li.appendChild(look); } li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back
+      li.appendChild(th); li.appendChild(tx); if (lent(m) && !noViewOrPerson(m.key)) { li.appendChild(days); li.appendChild(look); } li.appendChild(x); ul.appendChild(li);   // no way to look where the eyes have gone back, or where there were never any
     });
     $('g60Sum').textContent = 'Gainesville’s sixty: ' + Object.keys(have).length + ' met';
     var ol = $('g60List'); ol.textContent = '';
@@ -1351,7 +1354,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     });
   }
   function lookAgain(m) {
-    if (!m || !EYES[m.key] || !lent(m)) return;
+    if (!m || !EYES[m.key] || noViewOrPerson(m.key) || !lent(m)) return;      // encounters kept by older builds with a human or a creature of no group have no view
     var named = { common: m.common, scientific: m.sci, by: m.by, again: m.at, local: !!m.loc };
     closeSheets(); S.seq++; S.token++; if (nameCtl) nameCtl.abort(); hideName(); msg(''); pocket.offers = []; pocket.kindOffers = []; paintSvc();
     if (rec) { recDrop = true; stopRec(); }
@@ -2176,8 +2179,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     paintType();
   }
   function openClaim(sub) {
-    var kinds = pocket.kindOffers || [], kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its three likeliest, as buttons above the typed field
-    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
+    var kinds = (pocket.kindOffers || []).filter(function (k) { return k !== 'other' && k !== 'none'; }), kbox = $('claimKinds'); kbox.textContent = '';   // not sure of the kind: its likeliest, as buttons above the typed field; a creature of no known group is never a choice (build 22)
+    $('claimSub').textContent = sub || ''; $('claimName').value = ''; $('claimNote').textContent = ''; show('claimSuggestRow', false); show('claimAboutRow', false);   // the field's own words say what to type
     kinds.forEach(function (key) {
       var name = key === 'person' ? 'a human' : handName(key), b = el('button', 'pill ghost', name); b.type = 'button';
       b.addEventListener('click', function () { diag('kind-offer', key); reveal(key, { common: name, scientific: '', by: 'you' }); });
@@ -2216,8 +2219,12 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     $('noticeText').innerHTML = html; openSheet('notice'); paintType();
   }
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
+  function noViewSays(name) { return REGARDS + ' doesn\u2019t have the ability to view the world as ' + (name && !/^this /.test(name) ? esc(aAn(name)) : 'this creature') + ' right now. We\u2019re adding new species all the time. In the meantime, try another creature.'; }
+  var HUMAN_SAYS = 'That\u2019s a human. You already see the world as one. Try photographing another creature.';
   function reveal(key, named) {
+    if (key === 'person') {                        // a human: no view to change into and no encounter kept; the identifying screen stays (build 22)
+      diag('person', ''); S.seq++; tell(HUMAN_SAYS); return;
+    }
     if (noView(key)) {                             // a living thing with no view of its own: named where the app knows its group, and no encounter kept
       var nm = named && named.scientific ? named.common : named && named.by === 'you' ? named.common : '';
       if (!nm && key !== 'other') nm = handName(key);
@@ -2480,11 +2487,12 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   $('claimForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var t = clip($('claimName').value, 60), hit = pocket.find ? pocket.find(t) : null, sp = hit && hit.exact, key, named, sug, box = $('claimSuggest');
-    box.textContent = ''; show('claimOtherRow', false); show('claimSuggestRow', false); show('claimAboutRow', false);
+    box.textContent = ''; show('claimSuggestRow', false); show('claimAboutRow', false);
     if (!t) { $('claimNote').textContent = 'Type what it was first.'; return; }
     // a species of the list by its own name, else a word of the table (a pet's own name can come along: "Biscuit, a cat")
     if (sp) { key = sp.kind; named = { common: nameCase(clip(sp.en || sp.sci, 60)), scientific: clip(sp.sci, 80), by: 'you', local: true }; }
     else { key = kindOfName(t); named = { common: t, scientific: '', by: 'you' }; }
+    if (key === 'person') { diag('said-person', ''); $('claimNote').textContent = HUMAN_SAYS; return; }
     if (noView(key)) {                             // it exists, and none of the kinds of eye is its own
       diag('said-noview', clip(named.common, 60)); $('claimNote').innerHTML = noViewSays(named.common); return;
     }
@@ -2844,8 +2852,6 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   $('btnBack').addEventListener('click', back);
   $('backAskAnimal').addEventListener('click', back);
   $('backAskView').addEventListener('click', back);
-  var claimKept = null;
-  $('claimOther').addEventListener('click', function () { if (claimKept) { diag('said', 'other'); reveal('other', claimKept); } });
   $('claimAbout').addEventListener('click', openAbout);
   $('changeAskView').addEventListener('click', function () { openClaim(''); });
   $('claimBack').addEventListener('click', dismissSheets);
@@ -2960,9 +2966,11 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       }
     }
     show('fittedOn', true); paintChoices(); }
-  var CONTACT_URL = '', CONTACT_FIELDS = { name: '', email: '', message: '', build: '' };   // a form's address and the names of its fields; empty until one is set up
+  // The contact form sends an email to the app's maker through Web3Forms, a form-to-email service (build 22). The service keeps the
+  // address; the page holds only the access key, which can send to that one address and nowhere else, so it may sit in public code.
+  var CONTACT_KEY = '', CONTACT_API = 'https://api.web3forms.com/submit';
   function openContact(about) {
-    if (!CONTACT_URL && !/[?&]contact=demo\b/.test(location.search)) return false;
+    if (!CONTACT_KEY && !/[?&]contact=demo\b/.test(location.search)) return false;
     closeSheets(); ['contactName', 'contactEmail', 'contactMsg'].forEach(function (id) { $(id).parentNode.classList.remove('bad'); });
     $('contactNote').textContent = ''; waitMark($('contactNote')); $('contactSend').disabled = false;
     if (about && !$('contactMsg').value) $('contactMsg').value = about;
@@ -2976,12 +2984,21 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     $('contactEmail').parentNode.classList.toggle('bad', !okMail); $('contactMsg').parentNode.classList.toggle('bad', !text);
     if (!text) { $('contactNote').textContent = 'Write a message first.'; return; }
     if (!okMail) { $('contactNote').textContent = 'That email doesn\u2019t look right.'; return; }
-    if (!CONTACT_URL) { $('contactNote').textContent = 'Sending isn\u2019t set up yet.'; return; }
-    body = new URLSearchParams(); body.append(CONTACT_FIELDS.name, name); body.append(CONTACT_FIELDS.email, email); body.append(CONTACT_FIELDS.message, text); if (CONTACT_FIELDS.build) body.append(CONTACT_FIELDS.build, 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10));
+    if (!CONTACT_KEY) { $('contactNote').textContent = 'Sending isn\u2019t set up yet.'; return; }
+    body = new FormData();                         // a plain form post, so the browser sends it without asking the service first
+    body.append('access_key', CONTACT_KEY); body.append('subject', 'A message from Regards'); body.append('from_name', 'Regards');
+    body.append('name', name || '(no name given)'); if (email) body.append('email', email); body.append('message', text);
+    body.append('build', 'v1.' + Math.max(0, (parseInt(BUILD, 10) || 10) - 10) + ' (build ' + BUILD + ')');
+    if ($('contactBot').checked) body.append('botcheck', 'on');   // a box only a program filling in every field would tick; the service drops such messages
     $('contactSend').disabled = true; $('contactNote').textContent = 'Sending\u2026'; waitMark($('contactNote'));
-    fetch(CONTACT_URL, { method: 'POST', mode: 'no-cors', body: body }).then(function () {
-      $('contactNote').textContent = 'Sent. Thank you.'; waitMark($('contactNote')); $('contactMsg').value = '';
-    }, function () { $('contactSend').disabled = false; $('contactNote').textContent = 'That didn\u2019t send. Check your connection and try again.'; waitMark($('contactNote')); });
+    fetch(CONTACT_API, { method: 'POST', body: body, headers: { Accept: 'application/json' } }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok || !j || j.success !== true) throw new Error((j && j.message) || ('HTTP ' + r.status)); });
+    }).then(function () {
+      diag('contact', 'sent'); $('contactNote').textContent = 'Sent. Thank you.'; waitMark($('contactNote')); $('contactMsg').value = '';
+    }, function (err) {
+      diag('contact', clip(String(err && err.message), 80)); $('contactSend').disabled = false;
+      $('contactNote').textContent = navigator.onLine === false ? 'That didn\u2019t send. Check your connection and try again.' : 'That didn\u2019t send. Try again in a moment.'; waitMark($('contactNote'));
+    });
   });
   contactLink($('aboutTellLink'), '');
   $('noticeOk').addEventListener('click', dismissSheets);
