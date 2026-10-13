@@ -4,7 +4,7 @@ Written on 13 October 2026, from 01:48 UTC, on branch `research/herps`. The evid
 
 What could and could not be read:
 
-- **Land and Nilsson (2012), *Animal Eyes*, 2nd edition**, from the owner's library. The text that came through holds chapters 1 and 2 and chapter 3 up to about page 66 ("Available photon numbers"). Chapters 4 to 9 (pages 72 to 242), including "Amphibious eyes" (p. 117), the land-vertebrate lens eyes (pp. 94 to 129) and "Movements of the eyes" (pp. 215 to 242), did not come through. Six log lines come from the pages read (L22 to L27, L193).
+- **Land and Nilsson (2012), *Animal Eyes*, 2nd edition**, from the owner's library. A first text extraction stopped near page 66. The whole book (291 pages) then came through as a PDF, and I read every passage on reptiles and amphibians in it: chapters 1 to 3, the land-vertebrate eyes of chapter 5 (pp. 94 to 129, with the visual fields of pp. 116 to 117 read from the rendered figure, and "Amphibious eyes" on pp. 117 to 119), and "Movements of the eyes" (chapter 9, pp. 215 to 242). Nineteen log lines come from it (L22 to L27, L193, L202 to L213).
 - **Sites that refused with HTTP 429**, after which I fetched nothing more from them: Europe PMC's REST service (for Bakken and Krochmal 2007 and Gracheva and colleagues 2010), the Crossref API (for the year of Fite and Lister), journals.plos.org (for the species table of Inger and colleagues 2014), and link.springer.com (for doi 10.1007/BF00611872, after nine abstracts had been read there). PubMed, PubMed Central, the Journal of Experimental Biology and IEEE Xplore returned bot checks or empty pages.
 - The shell on this machine could reach only GitHub, so every web page was read through the fetch tool, which answers questions about a page. Every quotation in the log was asked for verbatim, and short quotations are what the log keeps.
 
@@ -104,7 +104,12 @@ L164, L165 (Leitch and Catania 2012, as reported by Vanderbilt University; the d
 L167, L168 (Higgs and colleagues 2002).
 
 ```
-['i', 'Field of view and depth', 'No one has measured how wide an alligator’s view is, so the wide, bent picture here is a guess. Depth is guessed from height in the frame, and a tap moves the focus.'],
+['g', 'Field of view', 'In most reptiles the eyes face out to the sides, each taking in about 170 degrees, and the two views overlap by a few tens of degrees in front. No one has measured an alligator’s field. This view follows the general rule, bending the picture at its edges to fit about 310 degrees.'],
+```
+L202, L203 (Land and Nilsson 2012, pp. 116 to 117). The total is my arithmetic: 2 × 170 − about 30 = 310. The same rule gives 307 degrees for the one snake measured, beside its measured 308.5 (L85, L86).
+
+```
+['i', 'Depth', 'How an alligator judges distance has not been measured, so depth here is guessed from height in the frame, and a tap moves the focus.'],
 ```
 No source.
 
@@ -113,7 +118,7 @@ No source.
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Alligator, crocodile', 'an alligator or crocodile' | The app's wording; the view covers crocodiles (29% of records). |
-| `fov` | 280 | **invented** (unchanged). |
+| `fov` | 310 (was 280) | L202, L203: two eyes of about 170 degrees overlapping by a few tens of degrees; the overlap of 30 is **invented** within that range. |
 | `cpd` | 8.4 | L7, L8 (mean of the two crocodiles; was 9, graded a guess). |
 | `topoS` | 1 | L9. |
 | `fall` | 2.6 | **invented** (unchanged; the abstract gives no gradient). |
@@ -127,7 +132,7 @@ No source.
 
 **New effects.**
 
-- **Ripples felt by the face.** A tap or knock on the phone, read from the accelerometer (`devicemotion`), sends rings outward along the sharp band from the side the tap came from, fading in about a second. The phone's body stands in for the water's surface, and the accelerometer for the face domes (L164, L166). The phone samples motion at about 60 per second, so it cannot resolve the domes' 20 to 35 Hz tuning; a tap is a broad jolt and serves. Medium work (iOS asks permission for motion). It would be beautiful if the rings were drawn as refraction of the picture itself, a lensing of the image along the waterline, with no added colour.
+- **Ripples felt by the face.** A tap or knock on the phone, read from the accelerometer (`devicemotion`), sends rings outward along the sharp band from the side the tap came from, fading in about a second. The phone's body stands in for the water's surface, and the accelerometer for the face domes (L164, L166). The phone samples motion at about 60 per second, so it cannot resolve the domes' 20 to 35 Hz tuning; a tap is a broad jolt and serves. Medium work (iOS asks permission for motion). The rings could be drawn as refraction of the picture itself, a lensing of the image along the waterline, with no added colour.
 - **The waterline.** When the phone tilts down past the horizon (orientation sensor), the part of the picture below the horizon softens strongly, since crocodilian eyes are badly defocused under water (L162). The mapping from tilt to "under water" is **invented**. Easy.
 
 ### 2.2 `turtle` (Testudines): new
@@ -173,7 +178,17 @@ L191 (Christensen-Dalsgaard and colleagues 2012).
 No source for the stand-in.
 
 ```
-['i', 'Field of view and pupil', 'No one has measured how wide a turtle’s view is, so the wide, bent picture here is a guess, and so is the round pupil.'],
+['g', 'Under water', 'Turtles that live in water, like diving ducks, are thought to keep their focus under water by squeezing the lens forward into the pupil with a ring of muscle. A person’s eye loses most of its focusing power in water. This view keeps the part of the picture below the waterline as sharp as the rest.'],
+```
+L208 (Land and Nilsson 2012, pp. 118 to 119: "as do aquatic turtles and water snakes"). A person under water loses 40 dioptres and can add only 10 (same pages). The alligator view does the opposite (L162).
+
+```
+['g', 'Field of view', 'In most reptiles the eyes face out to the sides, each taking in about 170 degrees, and the two views overlap by a few tens of degrees in front. No one has measured a turtle’s field. This view follows the general rule, bending the picture at its edges to fit about 310 degrees.'],
+```
+L202, L203.
+
+```
+['i', 'Pupil', 'No source we opened gives the shape of a turtle’s pupil, so the round pupil here is a guess.'],
 ```
 L173 gives the pupil's dark dilation (three- to four-fold in area) and no shape.
 
@@ -182,7 +197,7 @@ L173 gives the pupil's dark dilation (three- to four-fold in area) and no shape.
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Turtle, tortoise', 'a turtle or tortoise' | The app's wording. |
-| `fov` | 280 | **invented**. |
+| `fov` | 310 | L202, L203; the overlap of 30 is **invented**. |
 | `cpd` | 7 | L177 (middle of 4.4 to 9.9). |
 | `topoS`, `fall` | 1, 1.5 | L112, L179; the fall is **invented**. |
 | `pupil` | 'o' | **invented** (L173 gives no shape). |
@@ -210,9 +225,9 @@ L77, L78 (ball python: 361 and 550 nm), L79, L80 (boa: 357 and 549 nm), L40 (vip
 L87 (paradise tree snake, 2.89), L88 (two pit vipers, 2.3 to 2.8), L90 (two South American colubrids, 2.4 to 2.7). L84 (a northern watersnake at 4.25, cited by Gomez and colleagues) is higher; L82 (ball python, 0.13 by an eye-movement test) is far lower.
 
 ```
-['g', 'Field of view', 'A paradise tree snake takes in about 300 degrees around itself, and both of its eyes see a region 33 degrees wide straight ahead. This view bends the picture at its edges to suggest the wider sweep.'],
+['g', 'Field of view', 'A paradise tree snake takes in about 310 degrees around itself, and both of its eyes see a region about 33 degrees wide straight ahead. That fits the general rule for reptiles, two eyes of about 170 degrees each that overlap a little in front. This view bends the picture at its edges to suggest the wider sweep.'],
 ```
-L85, L86 (Zamore and colleagues 2020).
+L85, L86 (Zamore and colleagues 2020: 308.5 and 33.0 degrees), L202, L203.
 
 ```
 ['m', 'Movement', 'Garter snakes strike at prey that moves far more readily than at the same prey held still, and the smell of prey makes them strike more. This view brightens whatever moves.'],
@@ -239,7 +254,7 @@ L172 (Brischoux and colleagues 2010).
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Snake', 'a snake' | The app's wording. |
-| `fov` | 300 | L85 (a colubrid). |
+| `fov` | 310 | L85 (308.5 in a colubrid), L202. |
 | `cpd` | 2.5 | L87, L88, L90. |
 | `topoS`, `fall` | .4, .8 | Streaks in some species (L89, L90); values **invented**. |
 | `pupil` | 'o' | **invented**, with L172. |
@@ -317,7 +332,7 @@ L30.
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Pit viper, boa, python', 'a heat-sensing snake' | The app's wording. |
-| `fov` | 300 | From the colubrid L85; **invented** for this group. |
+| `fov` | 310 | From the colubrid (L85) and the general rule (L202, L203); not measured in this group. |
 | `cpd` | 2.5 | L88. |
 | `topoS`, `fall` | .4, .8 | L89; values **invented**. |
 | `pupil` | 'v' | L172, L195. |
@@ -358,16 +373,21 @@ L69 (Tosini 1997), L70 (Romero and de Souza 2025: geckos and teiids lack it; the
 L93, L94 (Baeckens and colleagues 2016), L95 (Cooper 1989: a spiny lizard and an agamid), L97 (Little Brown Skink).
 
 ```
-['i', 'Field of view and pupil', 'No one has measured how wide a lizard’s view is, so the wide, bent picture here is a guess, and so is the round pupil.'],
+['g', 'Field of view', 'A lizard’s eyes face almost straight out to the sides, and each takes in about 170 degrees. The two views overlap by only about 18 degrees in front, so a lizard sees about 320 degrees around itself. This view bends the picture at its edges to fit that sweep.'],
 ```
-No source.
+L204 (Land and Nilsson 2012, Fig. 5.14: a lizard's eye axis at 85 degrees and a binocular overlap of 18 degrees; the species is not named), L202. The total is my arithmetic: 2 × 170 − 18 = 322.
+
+```
+['i', 'Pupil', 'Slit pupils are common in lizards and snakes, but no source we opened covers the commonest day lizards, so the round pupil here is a guess.'],
+```
+L207 (slits are "more commonly vertical, as in many lizards, snakes, and mammals").
 
 **The picture.**
 
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Lizard', 'a lizard' | The app's wording. |
-| `fov` | 280 | **invented**. |
+| `fov` | 320 | L202, L204. |
 | `cpd` | 10 | From the anole fovea (L175); **invented** for other lizards. |
 | `topoA`, `topoS`, `fall` | 1, .4, 2.0 | L182 to L184; values **invented**. |
 | `pupil` | 'o' | **invented**. |
@@ -375,7 +395,7 @@ No source.
 | `third` (new) | a top strip in light-only mode | L71 to L74. |
 | `cue` | 'The centre is sharp, colours run deeper with a violet tint, and a glow at the top shows what the third eye senses.' | The app's wording. |
 
-**New effect: the third eye.** A strip along the top of the screen shows no image at all, only a soft glow whose colour is the ratio of blue to green light averaged over the top third of the camera picture, changing slowly (over several seconds). It uses the engine's light-only mode (`field: 1`) in one region. The behaviour of the cells is measured (L71 to L73); the strip's form and timing are **invented**. Medium work once regions with their own settings exist. It would be beautiful as a faint, breathing band like dawn light on a ceiling.
+**New effect: the third eye.** A strip along the top of the screen shows no image at all, only a soft glow whose colour is the ratio of blue to green light averaged over the top third of the camera picture, changing slowly (over several seconds). It uses the engine's light-only mode (`field: 1`) in one region. The behaviour of the cells is measured (L71 to L73); the strip's form and timing are **invented**. Medium work once regions with their own settings exist. It could be drawn as a faint, slowly breathing band, like dawn light on a ceiling.
 
 ### 2.6 `anole` (Dactyloidae): new
 
@@ -415,16 +435,16 @@ L75 (Miller and Wolbarsht 1962), L70.
 L95, L96.
 
 ```
-['i', 'Field of view', 'No one has measured how wide an anole’s view is, so the wide, bent picture here is a guess.'],
+['g', 'Field of view', 'A lizard’s eyes face almost straight out to the sides, each taking in about 170 degrees, and the two views overlap by about 18 degrees in front. No one has measured an anole’s field. This view follows the measured lizard, bending the picture at its edges to fit about 320 degrees.'],
 ```
-No source.
+L204, L202. The lizard in L204 is not named.
 
 **The picture.**
 
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Anole', 'an anole' | The app's wording. |
-| `fov` | 280 | **invented**. |
+| `fov` | 320 | L202, L204. |
 | `cpd` | 12 | L175. |
 | `topoA`, `fall` | 1, 3.0 | Peak 12 falling to about 1.2 (L174); the fall value that gives a tenfold drop is **invented** for the engine. |
 | `spots` (new) | two lateral sharp spots at ±90 degrees of azimuth, with the centre spot at half their sharpness | L58, L59 (the central fovea is denser than the temporal); positions are my optics reading; the half is **invented**. |
@@ -436,7 +456,7 @@ No source.
 
 **New effects.**
 
-- **Two foveae.** With a 280-degree field squeezed into the screen, the lateral spots land about two-thirds of the way from the centre to each edge. This needs the engine's regions with their own sharpness. Easy once regions exist.
+- **Two foveae.** With a 320-degree field squeezed into the screen, the lateral spots land a little more than halfway from the centre to each edge (90 of 160 degrees). This needs the engine's regions with their own sharpness. Easy once regions exist.
 - **Sudden jumps.** A temporal filter on the motion map that answers to onsets: displacement that starts within about 100 ms makes a brief bright flash, and motion that keeps repeating at the same place (leaves in wind) is divided down over a few seconds of adaptation (L61, L62). Medium work. It would look like the world going quiet around you until something twitches.
 
 ### 2.7 `gecko` (nocturnal geckos): new
@@ -457,19 +477,19 @@ L63 (no rods, three cone types), L66 (Loew and colleagues 1996: *Hemidactylus tu
 L64 (Roth and colleagues 2009).
 
 ```
-['g', 'Pupil', 'A gecko’s pupil opens into a wide circle in the dark and closes in bright light to a vertical slit pinched into a row of three or four pinholes. Its area can change about 300-fold, where a cat’s changes 135-fold.'],
+['g', 'Pupil', 'A gecko’s pupil opens wide in the dark and closes in bright light to a vertical slit whose notched edges meet, leaving a row of tiny holes, four in the helmet gecko. The closed pupil lets in several hundred to a thousand times less light than the open one, where a person’s pupil changes the light only about tenfold. This view uses a vertical slit.'],
 ```
-L170 (Banks and colleagues 2015), L195.
+L170 (Banks and colleagues 2015: area changes about 300-fold, a cat's 135-fold), L205, L206 (Land and Nilsson 2012: the notches line up into pinholes; more than a thousand-fold), L214 (Renero-Carrillo 2014: four small pupils in the helmet gecko), L215 (Underwood 1951: most geckos have vertical slits, many with lobed margins), L195.
 
 ```
-['i', 'Copies', 'Each pinhole in a gecko’s closed pupil should form its own image, which would turn things out of focus into a short vertical row of copies. This view shows them that way in bright light, and the effect is our own working of the optics.'],
+['i', 'Copies', 'Each of the four holes in a helmet gecko’s closed pupil should form its own image, so anything out of focus would appear as a short vertical row of four overlapping copies. No study we opened has tested what a gecko makes of them. This view shows out-of-focus things that way in bright light.'],
 ```
-No source opened for the effect; it follows from L170 and the optics of several apertures.
+L214, L205. The copies are my working of the optics: an out-of-focus point is drawn in the shape of the pupil, here four dots in a row.
 
 ```
-['g', 'Rings of focus', 'A helmet gecko’s eye has rings of different focusing power, about the spread needed to bring all the colours it sees to a focus at once. A day gecko’s eye has a single focus.'],
+['g', 'Rings of focus', 'A helmet gecko’s eye has rings of different focusing power, about the spread needed to bring all the colours it sees to a focus at once. A day gecko’s eye has a single focus. A slit keeps all the rings in use when the pupil closes, and among land vertebrates surveyed, slit pupils were found only in eyes with such rings.'],
 ```
-L65 (Roth and colleagues 2009).
+L65 (Roth and colleagues 2009), L216, L217 (Malmström and Kröger 2006).
 
 ```
 ['g', 'Slow at night', 'To see colour in near darkness, nocturnal geckos give up some sharpness and speed. This view leaves trails behind things that move in dim light.'],
@@ -477,33 +497,38 @@ L65 (Roth and colleagues 2009).
 L136 (Kelber 2010).
 
 ```
-['i', 'Field and sharpness', 'No one has measured how wide a house gecko’s view is or how much detail it sees, so those parts of this view are guesses.'],
+['i', 'Field and sharpness', 'No one has measured how wide a house gecko’s view is or how much detail it sees. The field here follows a measured lizard, about 320 degrees, and the sharpness is a guess.'],
 ```
-L198 gives a fovea in gekkonids and no acuity.
+L204, L202 for the field; L198 gives a fovea in gekkonids and no acuity.
 
 **The picture.**
 
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Gecko', 'a gecko' | The app's wording. |
-| `fov` | 280 | **invented**. |
+| `fov` | 320 | L202, L204. |
 | `cpd` | 4 | **invented**. |
 | `topoA`, `fall` | .6, 1.0 | L198; values **invented**. |
 | `pupil` | 'v' | L170. |
 | `M`, `uvBlue` | `BEE`, 1 | Ultraviolet, blue and green cones (L66): the bee view's convention of moving colours over by one, which the app has already chosen for a UV-blue-green eye. |
 | `gain` | 2.5 | Direction from L64; amount **invented**. |
 | `persist` | .2 in dim light, 0 in bright | L136; amounts **invented**. |
-| `copies` (new) | 3 vertical copies of out-of-focus areas when the scene is bright | L170; the effect is **invented** optics. |
+| `copies` (new) | 4 vertical copies of out-of-focus areas when the scene is bright | L214, L205; the drawing is **invented** optics. |
 | `cue` | 'Colours stay as the light fades, reds go dark, and in bright light things out of focus split into a row of copies.' | The app's wording. |
 
-**New effect: pinhole copies.** In bright scenes, the depth-of-field blur is replaced by three faint copies stacked vertically, their spacing growing with the guessed distance from focus. Medium work (three offset samples in the blur pass). It would be beautiful at dusk, when the copies merge as the pupil opens.
+**New effect: pinhole copies.** In bright scenes, the depth-of-field blur is replaced by four faint copies stacked vertically, their spacing growing with the guessed distance from focus. Medium work (four offset samples in the blur pass). As the scene darkens toward dusk, the copies merge into one blur, as the pupil opens.
 
 ### 2.8 `frog` (Anura): revised
 
 ```
 ['m', 'Movement', 'Frogs and toads strike most readily at small things that move. They still see what keeps still: toads strike at still prey dummies, and frogs steer around still obstacles. A toad’s prey-detecting nerve cells go quiet when the whole background moves with the prey, as it does when the toad turns. This view shows moving things at full strength, dims still ones, and dims both while your phone is turning.'],
 ```
-L123 (Honigmann 1944), L118 (Roth and Wiggers 1983), L119 (Ingle 1973), L120 (Lock and Collett 1980), L122 (Tsai and Ewert 1988), L163 (Lettvin and colleagues 1959, the source of the current row).
+L123 (Honigmann 1944), L118 (Roth and Wiggers 1983), L119 (Ingle 1973), L120 (Lock and Collett 1980), L122 (Tsai and Ewert 1988), L219 (Recktenwald and colleagues 2017: a part of the leopard frog's thalamus appears to process the still surroundings), L163 (Lettvin and colleagues 1959, the source of the current row).
+
+```
+['i', 'Fading', 'A sitting bullfrog keeps its eyes almost perfectly still as it breathes, raising them only about six hundredths of a millimetre with each breath. In people, an image held that still on the eye fades within a few seconds, leaving only what moves, though no one has tested whether a frog’s still world fades. This view lets still things fade slowly while you hold the phone steady.'],
+```
+L218 (Witzmann and colleagues 2019, American Bullfrogs filmed by X-ray), L211 (Land and Nilsson 2012, p. 231, people), L212 (the same authors' suggestion that toads and snakes may see only movement when they keep still, which they call an idea).
 
 ```
 ['g', 'Speed', 'Amphibians that have been tested stop seeing flicker at about 20 flashes a second on average, and the cane toad at about 7, much slower than people. In dim light a frog’s rods may gather light for as long as three seconds. This view leaves trails behind anything that moves.'],
@@ -546,20 +571,20 @@ L192 (Thomas and colleagues 2021).
 L133 (Goutte and colleagues 2017), L185, L186 (Moss and Simmons 1986; Simmons 1988). L134 records two Brazilian toadlets that cannot hear their own calls.
 
 ```
-['i', 'Field of view', 'No measurement of a frog’s field of view was found, so the nearly complete circle shown here is a guess.'],
+['g', 'Field of view', 'In most amphibians the eyes face out to the sides, each taking in about 170 degrees, and the two views overlap by a few tens of degrees in front. No frog’s field was measured in the sources we opened. This view follows the general rule, bending the picture at its edges to fit about 310 degrees.'],
 ```
-Fite (1973) is on the wanted list.
+L202, L203. Fite (1973), on the wanted list, measured frogs and toads.
 
 **The picture.**
 
 | Field | Value | Behind it |
 |---|---|---|
-| `fov` | 340 | **invented** (unchanged). |
+| `fov` | 310 (was 340) | L202, L203; the overlap of 30 is **invented**. |
 | `cpd` | 2.8 | L114 (was 4, graded a guess). |
 | `topoS`, `fall` | .4, .6 | A treefrog's streak (L117); values **invented**. |
 | `pupil` | 'h' | L192 (was a guess). |
 | `persist` | .15 | L137, L138, L129 (unchanged). |
-| `gate` | .6 (was 1) | Still things are seen (L118 to L120, L123); the strength is **invented**. |
+| `gate` | a fade (was 1): still parts dim from full strength to .4 over about 3 seconds while the phone is held still, and recover when it moves | Still things are seen (L118 to L120, L123, L219); a still image fades over seconds in people (L211); the bullfrog's eyes stay still (L218); the floor of .4 and the 3 seconds are **invented**. |
 | `gain` | 1.6 | Direction from L125, L127; amount **invented**. |
 | `dof` | 12 | L121; strength **invented**. |
 | `selfmask` (new) | gate lifts toward dimming everything while the gyroscope reports turning | L122. |
@@ -568,6 +593,7 @@ Fite (1973) is on the wanted list.
 
 **New effects.**
 
+- **Fading while still.** A running average of the picture is built while the gyroscope reports the phone still, and the parts that match it are dimmed toward .4 with a time constant of about 3 seconds; any turn of the phone resets the average (L211, L218). Easy.
 - **Self-motion masking.** While the gyroscope reports the phone turning faster than a few degrees a second, the motion highlight is suppressed, as moving backgrounds mask a toad's prey cells (L122). Easy.
 - **Looming flash.** The motion map's divergence (expansion) is summed over regions; when a region grows past about 20 degrees of the animal's field quickly, the whole picture flashes once and briefly drops in brightness (L124). Medium work.
 - **The chorus.** With microphone permission, sound energy in the bands of the frog's two hearing organs (below about 1,000 and above about 1,000 vibrations a second; L133) gently pulses the brightness of the picture's lower half. For a recognized Green Treefrog the bands narrow to about 900 and 3,000 (L185, L186), so its own species' calls make the picture throb and other sounds barely do. The microphone stands in for the ear, and the drawing is **invented**. Medium work (the Web Audio API's AnalyserNode). At a pond at night, a chorus would set the whole lower half pulsing.
@@ -627,16 +653,16 @@ L155 (Tovar and colleagues 2025), L154 (Fritzsch 1981), L189 (Keathley and Moon 
 L150 (Phillips and colleagues 2001). L151 (Rough-skinned Newts steer by sun and moon even with their eyes removed).
 
 ```
-['i', 'Ultraviolet tint, field and pupil', 'A phone captures little ultraviolet light, so the violet tint here stands in for it. The field of view and pupil shape are our best guesses.'],
+['i', 'Ultraviolet tint, field and pupil', 'A phone captures little ultraviolet light, so the violet tint here stands in for it. Most amphibians have eyes facing the sides that see about 310 degrees around them, but lungless salamanders that shoot out their tongues have eyes set forward, so the field here is a guess between the two. The pupil shape is a guess too.'],
 ```
-No source.
+L202, L203 (the general rule), L158 (forward-set eyes in tongue-shooting lungless salamanders). No source for the tint or the pupil.
 
 **The picture.**
 
 | Field | Value | Behind it |
 |---|---|---|
 | `chip`, `who` | 'Salamander, newt', 'a salamander or newt' | As in `GROUPS`. |
-| `fov` | 260 | **invented** (as in the earlier sheet). |
+| `fov` | 280 (was 260 in the earlier sheet) | **invented**, between the side-facing amphibian rule (about 310; L202, L203) and the forward-set eyes of tongue-shooting salamanders (L158). |
 | `cpd` | 1.7 | L140 (was 4, invented). |
 | `topoA`, `topoS`, `fall` | unset | L141, L142. |
 | `pupil` | 'o' | **invented**. |
@@ -655,7 +681,7 @@ No source.
 
 | Field or row today | Check | Source |
 |---|---|---|
-| `fov` 280 | unsupported; still a guess | none found |
+| `fov` 280 | corrected to 310 from the general rule for reptiles and amphibians (g); nothing measured in crocodilians | L202, L203 |
 | `cpd` 9 | confirmed in size, corrected in grade: 8.0 to 8.8 in two crocodiles (g) | L7, L8 |
 | `topoS` 1 | confirmed (g) | L9 |
 | `fall` 2.6 | unsupported | none |
@@ -666,17 +692,17 @@ No source.
 | Row 'Sharpest spot' (g) | first sentence confirmed; the second ("It lets them scan the waterline without turning their heads") is not in the source and is cut | L9 |
 | Row 'Colour' (g) | corrected: the alligator itself was measured (Sillman and colleagues 1991), with four cone pigments of which three sit in single and principal double cones near 444, 535 and 566 nm, and no ultraviolet cone; regraded m | L1 to L6, L21 |
 | Row 'Pupil' (g) | confirmed (g), now sourced | L169, L171 |
-| Row 'Field of view, sharpness, dim light and depth' (i) | sharpness and dim light now have sources; field and depth remain guesses | L7, L8, L5, L18, L19 |
+| Row 'Field of view, sharpness, dim light and depth' (i) | sharpness and dim light now have sources; the field now follows a group rule (g), and depth remains a guess | L7, L8, L5, L18, L19, L202, L203 |
 | `docs/SOURCES.md`: Nagloo 2016 via *Science News* | confirmed from the primary abstract | L7 to L14 |
 
 ### `reptile`
 
 | Field or row today | Check | Source |
 |---|---|---|
-| `fov` 280 | unsupported for every group; a colubrid measured at 308.5 | L85 |
+| `fov` 280 | too narrow: a colubrid was measured at 308.5, a lizard's 18-degree overlap gives about 320, and the general rule for reptiles about 310 | L85, L202 to L204 |
 | `cpd` 15 | corrected per group: snakes about 2.5, turtles about 7, anole fovea about 12 and periphery about 1.2 | L87, L88, L90, L177, L174, L175 |
 | `topoA` 1, `fall` 1.2 | corrected: turtles and crocodilians have streaks; anoles two foveae; many lizards a central fovea that, in eyes on the sides of the head, looks sideways | L112, L59, L184 |
-| `pupil` 'o' | corrected for geckos, pit vipers and boas (vertical slits) | L170, L172 |
+| `pupil` 'o' | corrected for geckos, pit vipers and boas (vertical slits) | L170, L172, L205, L207, L214, L215 |
 | `sheen` .6 | supported as a stand-in: ultraviolet cones measured in anoles, turtles, geckos, pythons and boas | L54, L103, L66, L77, L79 |
 | Row 'The whole view' (i) | "eyes on the sides of the head": supported for skinks (L184); "one sharp spot straight ahead": wrong for most groups; "the ability to see ultraviolet": confirmed | as above |
 | `docs/SOURCES.md` "entered from memory: ultraviolet vision in lizards and turtles" | confirmed | L54, L56, L103, L109 |
@@ -685,14 +711,14 @@ No source.
 
 | Field or row today | Check | Source |
 |---|---|---|
-| `fov` 340 | unsupported; still a guess | none found |
+| `fov` 340 | corrected to 310 from the general rule for amphibians (g); no frog measurement opened | L202, L203 |
 | `cpd` 4 | corrected to 2.8 (g); 4.3 by an older eye-movement test | L114, L115, L116 |
 | `pupil` 'h' | confirmed for toads and day-active frogs (g) | L192 |
 | `persist` .15 | supported (g) | L137, L138, L129 |
-| `gate` 1 | corrected: frogs and toads see still things; set to a partial gate | L118 to L120, L123 |
+| `gate` 1 | corrected: frogs and toads see still things; set to a slow, partial fade while the phone is held still | L118 to L120, L123, L211, L218, L219 |
 | Row 'Movement' (m) | corrected: "takes little notice of the parts of its world that stay still, and it can starve beside food that never moves" comes from the introduction of Lettvin and colleagues (1959), read here as quoted in lecture notes; it is a remark, and later experiments show stationary vision | L163, L118 to L123 |
 | Row 'Speed' (g) | confirmed: 6.7 Hz for the cane toad (Inger and colleagues 2014), which is rare in Alachua (one record); the amphibian mean is 19.2 Hz | L137, L138 |
-| Row 'Field of view, sharpness and pupil' (i) | sharpness and pupil now sourced; field still a guess | L114, L192 |
+| Row 'Field of view, sharpness and pupil' (i) | sharpness and pupil now sourced; the field now follows a group rule (g) | L114, L192, L202, L203 |
 | `docs/SOURCES.md`: Lettvin via NYU lecture notes | the notes carry the quotation the row rests on; the paper itself did not render here, so the wording is checked against the notes alone, and the claim is the authors' remark | L163 |
 
 ## 4. Species with their own measurements
@@ -710,48 +736,50 @@ These are commonly photographed species measured well enough for a profile of th
 | Ball Python | 2 in Alachua | cone pigments, optokinetic acuity, hearing by skull vibration | L77, L78, L82, L190 |
 | Western Rattlesnake | (not resolved) | heat-picture resolution, vomeronasal trailing, squirrels' heat signal | L28, L29, L38, L41 |
 | Green Treefrog | 895 in Alachua | two rod types, hearing tuned to 900 and 3,000 Hz | L130, L185, L186 |
-| American Bullfrog | 101,114; 185 | looming threshold | L124 |
+| American Bullfrog | 101,114; 185 | looming threshold, eyes held still while breathing | L124, L218 |
 | Common Toad and Common Frog | 77,425 and 64,712 | still-prey strikes, low-light snapping, depth by accommodation, rod-based colour at threshold, blue phototaxis | L118, L121, L122, L125 to L127, L131 |
 | Eastern Newt | 61,966; 30 | acuity, retinal topography, magnetic compass | L140, L141, L150 |
 | Eastern Red-backed Salamander | 74,121 | feeding on still prey by smell | L149 |
 
 ## 5. Gaps and how to fill them
 
-- **Field of view** for crocodilians, turtles, lizards, anoles, geckos, frogs and salamanders: no measurement opened. The nearest is a colubrid snake at 308.5 degrees with 33 degrees of overlap (L85, L86). A value could be inferred from orbit orientation in skull scans with a lens model, as done for that snake (L85); Cerio and Witmer (2023, crocodylian eye position, title in the collection) is a start for crocodilians. For frogs, Fite (1973) is wanted.
+- **Field of view** for crocodilians, turtles, anoles, geckos, frogs and salamanders: no measurement in the group itself was opened. The values here use the textbook rule of about 170 degrees per eye with a few tens of degrees of overlap (L202, L203), a lizard's 18-degree overlap (L204), and a colubrid's measured 308.5 degrees (L85), which the rule matches to within 2 degrees. A value for each group could be inferred from orbit orientation in skull scans with a lens model, as done for that snake (L85); Cerio and Witmer (2023, crocodylian eye position, title in the collection) is a start for crocodilians. For frogs, Fite (1973) is wanted.
 - **Flicker fusion** for crocodilians, lizards, geckos and salamanders: none opened. Nearest: the reptile mean of 43 Hz (L139); turtle cone response times (L107); the salamander rod synapse's 1.5 to 4 Hz passband in the dark (L156); Jenssen and Swenson (1974) for anoles and Crozier and Wolf (1939) for a gecko are in the collection without numbers.
 - **Acuity of non-anole lizards and of geckos**: none opened. The anole fovea is the nearest relative (L175); New and Bull (2011) for a skink and Röll (2001) for geckos are wanted.
 - **Snake hearing in colubrids**: nothing opened; the python's 80 to 160 Hz (L190) is the nearest.
 - **Crocodilian flicker, field and colour behaviour**: nothing known; the pigments are measured (L1 to L6).
+- **Whether a frog's still world fades**: measured only in people (L211); the bullfrog's still eyes (L218) make it possible. Leopard frogs, by the title of Skorina and colleagues (2011), move their heads and not their eyes; no abstract could be opened.
 - **The heat sense in a picture**: the coarse resolution is measured (L28); how a snake perceives a still warm animal over seconds is not. Bakken and Krochmal (2007) is wanted for the pit's field of view.
 - **Directions of the anole foveae**: no source gives the visual axes; inferred from optics in 2.6.
 - **The worm lizard's eyes**: no source opened; sent to `other` on its habits alone.
 - **Aquatic salamanders' vision** (amphiumas and sirens, a third of Alachua's salamander records): nothing opened on their eyes. Nearest: the newt and tiger salamander measurements, with the lateral line and electric sense as `x` rows.
-- **Pinhole copies in geckos**: the multiple-image rendering is my own working of the optics (2.7).
+- **Pinhole copies in geckos**: the four holes are measured in the helmet gecko (L214); the copies are my own working of the optics (2.7), and what a gecko makes of them is untested.
 
 ## 6. Closed sources wanted
 
 The same list as `docs/views/wanted/herps.jsonl`, most useful first. Priority 1 would change a view's picture, 2 would confirm or correct a row, and 3 is background.
 
-1. (Priority 1) Fite KV (1973). The visual fields of the frog and toad: a comparative study. *Behavioral Biology*. doi:10.1016/s0091-6773(73)80131-2. It would set the frog's and toad's field of view and binocular overlap, which the frog view now guesses.
+1. (Priority 1) Fite KV (1973). The visual fields of the frog and toad: a comparative study. *Behavioral Biology*. doi:10.1016/s0091-6773(73)80131-2. It would replace the frog view's field of view and binocular overlap, now set from a general rule for amphibians, with measured frogs and toads.
 2. (Priority 1) Brown KT (1969). A linear area centralis extending across the turtle retina and stabilized to the horizon by non-visual cues. *Vision Research*. doi:10.1016/0042-6989(69)90047-9. It would show whether the turtle's sharp band should stay level with the horizon as the phone tilts.
 3. (Priority 1) Bakken GS, Krochmal AR (2007). The imaging properties and sensitivity of the facial pits of pitvipers as determined by optical and heat-transfer analysis. *Journal of Experimental Biology*. doi:10.1242/jeb.006965. It would give the pit organ's field of view and optical blur, which set the size and softness of the heat glow.
 4. (Priority 1) Jenssen TA, Swenson B (1974). An ecological correlate of critical flicker-fusion frequencies for some *Anolis* lizards. *Vision Research*. doi:10.1016/0042-6989(74)90164-3. It would give anole flicker fusion, which sets the anole view's pace and is the nearest value for other lizards.
 5. (Priority 1) Manteuffel G, Himstedt W (1978). The aerial and aquatic visual acuity of the optomotor response in the crested newt (*Triturus cristatus*). *Journal of Comparative Physiology A*. doi:10.1007/bf00657609. It would give a newt's acuity by behaviour in air and in water, which sets the salamander view's sharpness.
 6. (Priority 1) Röll B (2001). Gecko vision: retinal organization, foveae and implications for binocular vision. *Vision Research*. doi:10.1016/s0042-6989(01)00093-1. It would give gecko foveae and acuity, which the gecko view now borrows from anoles.
 7. (Priority 1) New STD, Bull CM (2011). Retinal ganglion cell topography and visual acuity of the sleepy lizard (*Tiliqua rugosa*). *Journal of Comparative Physiology A*. doi:10.1007/s00359-011-0635-8. It would give a skink's acuity and retinal topography for the lizard view's sharpness and sharp spot.
-8. (Priority 1) Land MF, Nilsson D-E (2012). *Animal Eyes*, 2nd edition, chapters 4 to 9 (pp. 72 to 242). Oxford University Press, https://global.oup.com/academic/product/animal-eyes-9780199581146. The owner's copy came through only to about p. 66, and chapter 5 (Lens eyes on land, with Amphibious eyes at p. 117) and chapter 9 (Movements of the eyes) would check the optics, pupils and eye movements behind every view here.
-9. (Priority 2) Heath JE, Northcutt RG, Barber RP (1969). Rotational optokinesis in reptiles and its bearing on pupillary shape. *Journal of Comparative Physiology A*. doi:10.1007/bf00298043. It would check the slit and round pupils in the alligator, gecko, pitviper and lizard views against measured eye movements.
-10. (Priority 2) Martinez PS, Plummer CE (2022). Ophthalmology of Crocodilia: alligators, crocodiles, caimans, and gharials. Springer eBooks (book chapter). doi:10.1007/978-3-030-71302-7_15. It would check the crocodilian pupil, tapetum and field-of-view rows against a veterinary review.
-11. (Priority 2) Arnold K, Neumeyer C (1987). Wavelength discrimination in the turtle *Pseudemys scripta elegans*. *Vision Research*. doi:10.1016/0042-6989(87)90159-3. It would confirm by behaviour the four-cone colour vision that the turtle view's colour rows rest on.
-12. (Priority 2) Aho A-C (1996). The visual acuity of the frog (*Rana pipiens*). *Journal of Comparative Physiology A*. doi:10.1007/s003590050023. It would give the full method and conditions behind the frog view's 2.8 cycles per degree, now taken from a conference abstract.
-13. (Priority 2) Fleishman LJ (1986). Motion detection in the presence and absence of background motion in an *Anolis* lizard. *Journal of Comparative Physiology A*. doi:10.1007/bf00612043. It would set how strongly the anole view damps movement when the whole scene sways.
-14. (Priority 2) Safer A, Grace MS (2004). Infrared imaging in vipers: differential responses of crotaline and viperine snakes to paired thermal targets. *Behavioural Brain Research*. doi:10.1016/j.bbr.2004.01.020. It would show whether true vipers without pits respond to heat, which decides whether they belong in the heat view.
-15. (Priority 2) Grace MS, Woodward OM, Church DR, Calisch G (2001). Prey targeting by the infrared-imaging snake *Python molurus*: effects of experimental and congenital visual deprivation. *Behavioural Brain Research*. doi:10.1016/s0166-4328(00)00336-3. It would confirm that pythons can aim strikes by heat alone, which places pythons and boas in the heat view.
-16. (Priority 3) Gracheva EO and colleagues (2010). Molecular basis of infrared detection by snakes. *Nature*. doi:10.1038/nature08943. It is the primary source for the heat-sensing channel of pit vipers, boas and pythons, open in PubMed Central, though every route to it returned a rate limit or a bot check.
-17. (Priority 3) Hutchison VH, Kosh RJ (1974). Thermoregulatory function of the parietal eye in the lizard *Anolis carolinensis*. *Oecologia*. doi:10.1007/bf00345581. It would show how the parietal eye changes basking in anoles, which bears on the third-eye strip.
-18. (Priority 3) Bartol S, Musick JA, Ochs AL (2002). Visual acuity thresholds of juvenile loggerhead sea turtles (*Caretta caretta*): an electrophysiological approach. *Journal of Comparative Physiology A*. doi:10.1007/s00359-001-0262-x. It would give a sea turtle's acuity for comparison with the pond slider's.
-19. (Priority 3) Lindquist SB, Bachmann MD (1982). The role of visual and olfactory cues in the prey catching behavior of the tiger salamander, *Ambystoma tigrinum*. *Copeia*. doi:10.2307/1444271. It would weigh sight against smell in a salamander's strike, which sets the strength of the salamander view's movement gate.
-20. (Priority 3) Placyk JS, Graves BM (2002). Prey detection by vomeronasal chemoreception in a plethodontid salamander. *Journal of Chemical Ecology*. doi:10.1023/a:1015213918739. It would support the salamander view's smell row with a measured vomeronasal response to prey.
+8. (Priority 2) Heath JE, Northcutt RG, Barber RP (1969). Rotational optokinesis in reptiles and its bearing on pupillary shape. *Journal of Comparative Physiology A*. doi:10.1007/bf00298043. It would check the slit and round pupils in the alligator, gecko, pitviper and lizard views against measured eye movements.
+9. (Priority 2) Martinez PS, Plummer CE (2022). Ophthalmology of Crocodilia: alligators, crocodiles, caimans, and gharials. Springer eBooks (book chapter). doi:10.1007/978-3-030-71302-7_15. It would check the crocodilian pupil, tapetum and field-of-view rows against a veterinary review.
+10. (Priority 2) Arnold K, Neumeyer C (1987). Wavelength discrimination in the turtle *Pseudemys scripta elegans*. *Vision Research*. doi:10.1016/0042-6989(87)90159-3. It would confirm by behaviour the four-cone colour vision that the turtle view's colour rows rest on.
+11. (Priority 2) Aho A-C (1996). The visual acuity of the frog (*Rana pipiens*). *Journal of Comparative Physiology A*. doi:10.1007/s003590050023. It would give the full method and conditions behind the frog view's 2.8 cycles per degree, now taken from a conference abstract.
+12. (Priority 2) Skorina LK, Kazaure HS, Gruberg ER (2011). Leopard frogs move their heads, but not their eyes: Implications for perception of stationary objects. *Neuroscience Letters*. doi:10.1016/j.neulet.2011.07.025. It would show whether leopard frogs hold their eyes still enough for a still scene to fade, which sets the strength and speed of the frog view's fading.
+13. (Priority 2) Recktenwald EW, Skorina LK, Neeb CN, Dudkin EA, Gruberg ER (2014). Light and shadow: visual recognition of the stationary environment by leopard frogs. *Behavioural Processes*. doi:10.1016/j.beproc.2014.08.008. It would say what leopard frogs recognize in their still surroundings, which sets how much of a still scene the frog view keeps.
+14. (Priority 2) Fleishman LJ (1986). Motion detection in the presence and absence of background motion in an *Anolis* lizard. *Journal of Comparative Physiology A*. doi:10.1007/bf00612043. It would set how strongly the anole view damps movement when the whole scene sways.
+15. (Priority 2) Safer A, Grace MS (2004). Infrared imaging in vipers: differential responses of crotaline and viperine snakes to paired thermal targets. *Behavioural Brain Research*. doi:10.1016/j.bbr.2004.01.020. It would show whether true vipers without pits respond to heat, which decides whether they belong in the heat view.
+16. (Priority 2) Grace MS, Woodward OM, Church DR, Calisch G (2001). Prey targeting by the infrared-imaging snake *Python molurus*: effects of experimental and congenital visual deprivation. *Behavioural Brain Research*. doi:10.1016/s0166-4328(00)00336-3. It would confirm that pythons can aim strikes by heat alone, which places pythons and boas in the heat view.
+17. (Priority 3) Gracheva EO and colleagues (2010). Molecular basis of infrared detection by snakes. *Nature*. doi:10.1038/nature08943. It is the primary source for the heat-sensing channel of pit vipers, boas and pythons, open in PubMed Central, though every route to it returned a rate limit or a bot check.
+18. (Priority 3) Hutchison VH, Kosh RJ (1974). Thermoregulatory function of the parietal eye in the lizard *Anolis carolinensis*. *Oecologia*. doi:10.1007/bf00345581. It would show how the parietal eye changes basking in anoles, which bears on the third-eye strip.
+19. (Priority 3) Bartol S, Musick JA, Ochs AL (2002). Visual acuity thresholds of juvenile loggerhead sea turtles (*Caretta caretta*): an electrophysiological approach. *Journal of Comparative Physiology A*. doi:10.1007/s00359-001-0262-x. It would give a sea turtle's acuity for comparison with the pond slider's.
+20. (Priority 3) Lindquist SB, Bachmann MD (1982). The role of visual and olfactory cues in the prey catching behavior of the tiger salamander, *Ambystoma tigrinum*. *Copeia*. doi:10.2307/1444271. It would weigh sight against smell in a salamander's strike, which sets the strength of the salamander view's movement gate.
+21. (Priority 3) Placyk JS, Graves BM (2002). Prey detection by vomeronasal chemoreception in a plethodontid salamander. *Journal of Chemical Ecology*. doi:10.1023/a:1015213918739. It would support the salamander view's smell row with a measured vomeronasal response to prey.
 
 ## 7. Sources
 
@@ -819,7 +847,7 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Kelber A (2010), *Journal of Vision*, doi:10.1167/10.15.3. Opened. L136, L194.
 - King RB, Douglass JK, Phillips JB, Baube CL (1993), *Journal of Experimental Zoology*, doi:10.1002/jez.1402670107. Opened. L130.
 - Korenyak DA, Govardovskii VI (2013), *Journal of Evolutionary Biochemistry and Physiology*, doi:10.1134/s0022093013040038. Opened. L146, L147.
-- Land MF, Nilsson D-E (2012), *Animal Eyes*, 2nd edition, Oxford University Press, https://global.oup.com/academic/product/animal-eyes-9780199581146 (publisher's page opened for the contents). Opened (owner's copy; chapters 1 to 3 only, to about p. 66). L22 to L27, L193.
+- Land MF, Nilsson D-E (2012), *Animal Eyes*, 2nd edition, Oxford University Press, https://global.oup.com/academic/product/animal-eyes-9780199581146 (publisher's page opened for the contents). Opened (owner's copy, the whole book; every passage on reptiles and amphibians read, and Fig. 5.14 read from the rendered page). L22 to L27, L193, L202 to L213.
 - Landreth HF, Ferguson DE (1967), *Science*, doi:10.1126/science.158.3807.1459. Opened. L151.
 - Larsen LO, Pedersen JN (1981), *Amphibia-Reptilia*, doi:10.1163/156853882x00248. Opened. L125.
 - Leal M, Fleishman LJ (2002), *Proceedings of the Royal Society B*, doi:10.1098/rspb.2001.1904. Opened. L197.
@@ -830,6 +858,7 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Loew ER, Fleishman LJ, Foster F, Provencio I (2002), Visual pigments and oil droplets in diurnal lizards, *Journal of Experimental Biology*, doi:10.1242/jeb.205.7.927. Opened (abstract; authors as the collection gives them). L51 to L55.
 - Loew ER, Govardovskii VI (2001), *Visual Neuroscience*, doi:10.1017/s0952523801185081. Opened. L100 to L104.
 - Loew ER, Govardovskii VI, Röhlich P, Szél A (1996), *Visual Neuroscience*, doi:10.1017/s0952523800007483. Opened. L66.
+- Malmström T, Kröger R (2006), *Journal of Experimental Biology* 209(1): 18 to 25, doi:10.1242/jeb.01959. Opened (abstract on the Lund University repository record). L216, L217.
 - Ma J-X and colleagues (2001), *Visual Neuroscience*, doi:10.1017/s0952523801183057. Opened. L144.
 - Martin M and colleagues (2016), *Biology Letters*, doi:10.1098/rsbl.2015.0954. Opened. L148.
 - McDevitt DS, Brahma SK, Jeanny J-C, Hicks D (1993), *Anatomical Record*, doi:10.1002/ar.1092370302. Opened. L58.
@@ -854,6 +883,8 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Przyrembel C, Keller B, Neumeyer C (1995), *Journal of Comparative Physiology A* 176(4): 575 to 586, doi:10.1007/bf00196422. Opened. L159, L160.
 - Pushchin II (2019), *Journal of Anatomy*, doi:10.1111/joa.13075. Opened. L116, L117.
 - Pushchin II, Karetin YA (2009), *Journal of Comparative Neurology*, doi:10.1002/cne.22127. Opened. L140, L141.
+- Recktenwald EW, Dudkin EA, Skorina LK, Saidel WM, Gruberg ER (2017), *Brain, Behavior and Evolution*, doi:10.1159/000481393. Opened. L219.
+- Renero-Carrillo FJ (2014), Latin America Optics and Photonics Conference, doi:10.1364/laop.2014.lf1b.5. Opened (conference abstract). L214.
 - Rocha FAF and colleagues (2008), *Visual Neuroscience*, doi:10.1017/s0952523808080516. Opened. L110.
 - Röll B (2001), *Journal of Comparative Neurology*, doi:10.1002/cne.1082. Opened. L184, L198.
 - Romero RD, de Souza FSJ (2025), *Genome Biology and Evolution*, doi:10.1093/gbe/evaf058. Opened. L70.
@@ -882,12 +913,14 @@ Each source is listed once with its log lines. "opened" means I read the abstrac
 - Tovar RU and colleagues (2025), *PNAS*, doi:10.1073/pnas.2504850122. Opened. L155.
 - Tsai H-J, Ewert J-P (1988), *Brain, Behavior and Evolution*, doi:10.1159/000116530. Opened. L122.
 - Twyman H and colleagues (2016), *Proceedings of the Royal Society B*, doi:10.1098/rspb.2016.1208. Opened. L111.
+- Underwood G (1951), *Copeia*, doi:10.2307/1439099. Opened (the opening paragraph, in the collection). L215.
 - Vanderbilt University News (8 November 2012), on Leitch D and Catania K (2012) in the *Journal of Experimental Biology*. Opened; secondary for the primary study. L164, L165.
 - Ventura DF, Zana Y, de Souza JM, DeVoe RD (2001), *Journal of Experimental Biology*, doi:10.1242/jeb.204.14.2527. Opened. L109.
 - Wada S and colleagues (2012), *PLoS ONE*, doi:10.1371/journal.pone.0039003. Opened. L71.
 - Wald G, Brown PK, Kennedy D (1957), *Journal of General Physiology*, doi:10.1085/jgp.40.5.703. Opened. L17, L18.
 - Werner C, Himstedt W (1984), *Behavioural Brain Research* 12(1): 69 to 73, doi:10.1016/0166-4328(84)90204-3. Opened (EurekaMag record). L187.
 - Wiggers W, Roth G, Eurich C, Straub A (1995), *Journal of Comparative Physiology A* 176(3): 365 to 377, doi:10.1007/bf00219062. Opened (Springer abstract; the fourth author is confirmed by the collection). L158.
+- Witzmann F, Brainerd EL, Konow N (2019), *Integrative Organismal Biology*, doi:10.1093/iob/obz011. Opened (full text in the collection). L218.
 - Yamamoto K, Nakata M, Nakagawa H (2003), *Brain, Behavior and Evolution*, doi:10.1159/000073272. Opened. L124.
 - Yovanovich CA and colleagues (2017), *Philosophical Transactions of the Royal Society B*, doi:10.1098/rstb.2016.0066. Opened (full text). L126 to L129.
 - Zamore SA, Araújo N, Socha JJ (2020), *Integrative and Comparative Biology*, doi:10.1093/icb/icaa143. Opened. L85 to L87.
