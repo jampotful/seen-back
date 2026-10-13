@@ -1,0 +1,11 @@
+{
+ "about": "TinyCLIP 39M/16 vectors (the original model, through transformers) for the world photos the new group head is fitted on (lab/world-fit on pub/data-world, made by tools/world/). Waits for the manifest while run 3 of the world job publishes it.",
+ "data": "pub/data-world",
+ "manifest": "lab/world-fit/manifest.csv",
+ "wait_minutes": 60,
+ "shard_mode": "mod",
+ "models": ["tinyclip-39m-16"],
+ "stages": ["images"],
+ "shards": {"tinyclip-39m-16": 12},
+ "max_parallel": 12
+}

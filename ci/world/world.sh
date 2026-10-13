@@ -6,8 +6,8 @@
 # through the decompressor and mawk and never written to disk. The observation pass keeps, for each species, at most
 # three research-grade observations a continent dated through 2024, three dated 2025 or later, and two casual ones
 # (60, 60 and 20 in the ten groups with fewest species, 20, 20 and 6 in the next seven), plus a thin even sample of research-grade observations from 2025 on, and counts every research-grade and casual
-# observation by group, continent and period. tools/world/select.py ranks from those; the photo pass fetches the
-# photos of the ranked observations; select.py keeps those the licence rule allows. S3_BASE replaces the bucket's
+# observation by group, continent and period. tools/world/choose.py ranks from those; the photo pass fetches the
+# photos of the ranked observations; choose.py keeps those the licence rule allows. S3_BASE replaces the bucket's
 # address and NE_URL Natural Earth's, for a local test.
 set -uo pipefail
 mkdir -p out work stage/world
@@ -74,7 +74,7 @@ FNR == 1 {
   tx = $t
   if (!(tx in tm)) { nomap[g]++; next }
   split(tm[tx], m, "\t"); grp = m[1]
-  if (grp == "person" || grp == "other") { skipped[grp]++; next }
+  if (grp == "person") { skipped[grp]++; next }
   y = $la; x = $lo
   if (y == "" || x == "") { noplace[g]++; next }
   r = int((y + 90) * 2); c = int((x + 180) * 2)
@@ -158,10 +158,10 @@ step "Natural Earth countries" "${CURL[@]}" --retry 5 -o work/ne.geojson "$NE" |
 step "continent grid" python3 -I tools/world/continents.py --geojson work/ne.geojson --out work/grid.tsv --map out/continents-map.txt || exit 1
 step "observations (streamed)" obs_pass || exit 1
 sort -t$'\t' -k1,1 -k2,2 -k3,3 work/counts.tsv > out/counts.tsv
-step "rank" python3 -I tools/world/select.py pick --cand work/cand.tsv --casual work/casual.tsv --even work/even.tsv \
+step "rank" python3 -I tools/world/choose.py pick --cand work/cand.tsv --casual work/casual.tsv --even work/even.tsv \
   --out work/ranked.tsv --uuids work/uuids.txt || exit 1
 step "photos of the ranked observations (streamed)" photos_pass || exit 1
-step "manifests" python3 -I tools/world/select.py finish --ranked work/ranked.tsv --photos work/photos.tsv --taxa work/taxa.csv.gz \
+step "manifests" python3 -I tools/world/choose.py finish --ranked work/ranked.tsv --photos work/photos.tsv --taxa work/taxa.csv.gz \
   --counts out/counts.tsv --out stage/world --snapshot "$SNAP" || exit 1
 cp stage/world/SUMMARY.md out/
 cp work/grid.tsv stage/world/continents-0.5deg.tsv
@@ -170,12 +170,13 @@ cat > stage/world/README.md <<EOF
 # World photos
 
 Lists of iNaturalist photos for fitting, tuning and testing the base app's group head on the 33 groups of
-docs/COVERAGE.md, and for the full database's world test. Made by tools/world/select.py through ci/world/world.sh
+docs/COVERAGE.md, and for the full database's world test. Made by tools/world/choose.py through ci/world/world.sh
 from iNaturalist's open-data snapshot of ${SNAP:-an unrecorded date}. Each row gives the observation's address,
 the photo's address and the photo's licence; the photographer is named on the observation's page.
 
 - fit.csv, tune.csv, test.csv, casual.csv, species.csv: the sets (SUMMARY.md says what each holds).
 - records-by-group.tsv: research-grade (F through 2024, E from 2025) and casual (C) observations by group and continent.
+- lab/world-fit, lab/world-eval, lab/world-species: the same rows as manifests for tools/lab (an id and a split added).
 - continents-0.5deg.tsv: the continent of each half-degree cell, from Natural Earth's countries at 1:50 million
   (public domain, https://www.naturalearthdata.com), as tools/world/continents.py makes it.
 EOF

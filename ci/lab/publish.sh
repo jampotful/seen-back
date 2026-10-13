@@ -23,10 +23,13 @@ fi
 if git ls-remote --exit-code origin "refs/heads/pub/lab-$model" >/dev/null 2>&1; then
   git fetch -q --depth 1 origin "pub/lab-$model" && git --work-tree=pubdir checkout FETCH_HEAD -- . && git reset -q
   say "merging into existing pub/lab-$model ($(git rev-parse --short FETCH_HEAD))"
+  run python3 -I ci/lab/bigfiles.py join pubdir || exit 1        # a file kept in parts is merged into whole
 fi
 ls -d parts/*/ >> "$L" 2>&1 || { say "no job outputs to publish"; exit 1; }
 run python3 -u tools/lab/lab.py merge --model "$model" --manifest data_in/manifest.csv --run "${GITHUB_RUN_NUMBER:-0}" --out pubdir parts/*/ || exit 1
 rm -rf pubdir/_ci
+# GitHub refuses a file over 100 MiB (run 39 failed so): such a file goes in parts, with <file>.parts.json beside them
+run python3 -I ci/lab/bigfiles.py split pubdir || exit 1
 run bash ci/put_branch.sh "pub/lab-$model" pubdir "lab: $model" || exit 1
 cp pubdir/card.json ret/ 2>/dev/null; cp pubdir/onnx/parity.json ret/ 2>/dev/null
 (cd pubdir && find . -type f -not -path './.git/*' -printf '%s %p\n' | sort -k2) > ret/files.txt

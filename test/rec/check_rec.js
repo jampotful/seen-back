@@ -1,7 +1,7 @@
 // Checks of the recognizer inside the page, in a headless browser (Chromium unless BROWSER says otherwise), against the stand-in under test/rec/models/standin
 // (made by test/rec/make_standin.py; it is not a recognizer, only the same machinery with labels made from its own answers).
 //   node test/rec/serve.js 8782 &
-//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|nameover|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
+//   NODE_PATH=<where playwright lives> node test/rec/check_rec.js [flow|nameover|camera|fuse|notsure|trained|parity|progress|typeit|service|large|away|zone|offline|version|keptcopy|missing|damaged|dying|about|viewer ...]
 // "large" (the full database a person may download) needs a second origin for the model's parts: the script starts test/rec/serve.js <BIG_PORT> cors
 // by itself (8788 unless BIG_PORT says otherwise) if nothing answers there.
 // Every check ends with ok: true or false, and the script exits 1 if any is false.
@@ -26,14 +26,14 @@ const SLOW = +(process.env.SLOW || 1);
 const patient = (page) => { if (SLOW === 1) return page;
   const scale = (o) => (o && o.timeout ? Object.assign({}, o, { timeout: o.timeout * SLOW }) : o), wf = page.waitForFunction.bind(page), ws = page.waitForSelector.bind(page);
   page.waitForFunction = (fn, arg, o) => wf(fn, arg, scale(o)); page.waitForSelector = (sel, o) => ws(sel, scale(o)); return page; };
-const phone = Object.assign({}, devices['Pixel 7']);
+const phone = Object.assign({}, devices['Pixel 7'], { timezoneId: 'America/New_York' });   // the county's time zone, where the page uses its species list (build 22); the section 'zone' tries others
 if (ENGINE === 'firefox') { delete phone.isMobile; delete phone.userAgent; }      // Firefox has no mobile emulation in Playwright
 if (ENGINE === 'webkit') delete phone.userAgent;
 const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'zone', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -892,6 +892,24 @@ async function meet(page, name) {
       && r.away.info === 'Ardea alba' && /named by the full database on a server · This creature’s view is yours for a week$/.test(r.away.rows[0])
       && r.afterReload === false && r.tickedAfterReload && r.nearAgain === 'great blue heron' && r.nearAgainPosts === 0 && r.locationAsked === 0 && !errors.length);
     await ctx.close();
+  });
+
+  if (want.includes('zone')) await section('zone', async () => {     // the phone's time zone says whether the county's list applies (build 22); a choice the person made stands
+    const r = {}, Q = '&rec=' + SLOT;
+    const tryZone = async (zone, said) => {
+      const ctx = await browser.newContext(Object.assign({}, phone, { timezoneId: zone }));
+      if (said) await ctx.addInitScript((v) => { try { localStorage.setItem('seenback.away.v1', v); } catch (e) {} }, said);
+      const { page, errors } = await open(browser, Q, null, ctx); await ready(page);
+      const local = await page.evaluate(() => window.__seenBack.rec.local); await begin(page);
+      const h = await meet(page, 'heron.png'); const out = { local, shown: h.shown, eyes: h.eyes, errors: errors.length };
+      await ctx.close(); return out;
+    };
+    r.paris = await tryZone('Europe/Paris'); r.chicago = await tryZone('America/Chicago'); r.newYork = await tryZone('America/New_York');
+    r.parisSaidNear = await tryZone('Europe/Paris', '0'); r.newYorkSaidAway = await tryZone('America/New_York', '1');
+    done('zone', r, r.paris.local === false && r.paris.eyes === 'wader' && r.paris.shown === 'wading bird' && r.chicago.local === false
+      && r.newYork.local === true && r.newYork.shown === 'great blue heron' && r.parisSaidNear.local === true && r.parisSaidNear.shown === 'great blue heron'
+      && r.newYorkSaidAway.local === false && r.newYorkSaidAway.shown === 'wading bird'
+      && [r.paris, r.chicago, r.newYork, r.parisSaidNear, r.newYorkSaidAway].every((x) => x.errors === 0));
   });
 
   if (want.includes('offline') || want.includes('version')) await section('offline', async () => {   // a second visit with the network off; then a new version is noticed, fetched, and the old one let go

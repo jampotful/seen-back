@@ -8,7 +8,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '29';
+  var BUILD = '30';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -1966,7 +1966,9 @@
   // person has said so, its parts are kept one by one so that a download carries on where it stopped, and its worker is started only
   // when a photo needs it and let go after a minute with nothing to do.
   var ORT = { v: '1.30.0', dir: 'vendor/ort/', js: 'ort.wasm.min.js', mjs: 'ort-wasm-simd-threaded.mjs', wasm: 'ort-wasm-simd-threaded.wasm', wasmBytes: 14239897, ep: 'wasm' };
-  var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person'];   // the order of KINDS in tools/fusion/fuse.py
+  var KIND_ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'hawk', 'wader', 'bird', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant', 'other', 'person',
+    'fungus', 'slime', 'spider', 'jumper', 'fish', 'shark', 'snail', 'sealife', 'crab', 'salamander', 'worm', 'scorpion', 'tick', 'mammal', 'primate', 'whale', 'bat', 'flyingfox', 'cephalopod'];   // the order of KINDS in tools/fusion/fuse.py; the groups with no view yet (GROUPS) follow
+  function knownKind(k) { return !!(EYES[k] || GROUPS[k]); }   // a kind with a view, or a group the page names and cannot yet view the world as
   var onThisMachine = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   function plain(x) { return String(x || '').toLowerCase().replace(/[^a-z' -]+/g, ' ').replace(/\s+/g, ' ').trim(); }
   function slips(a, b, lim) {                          // how many slips of the keys turn one word into the other: a letter wrong, missing, added, or two swapped
@@ -2242,7 +2244,7 @@
       if (!v || !f || !num(m.width) || !num(v.size) || !Array.isArray(v.mean) || !Array.isArray(v.std) || !(v.url || Array.isArray(v.parts))) throw err('unfit', 'manifest lacks a field');
       // a slot may come without a kinds head: then the kind is taken from the species answer, and the species are not optional
       if (k ? !(Array.isArray(k.labels) && k.url && num(f.t_kind)) : !sp) throw err('unfit', 'manifest lacks a field');
-      if (k && k.labels.some(function (l) { return l !== 'none' && !EYES[l]; })) throw err('unfit', 'a kind this page does not know');
+      if (k && k.labels.some(function (l) { return l !== 'none' && !knownKind(l); })) throw err('unfit', 'a kind this page does not know');
       if (sp && !((sp.url || Array.isArray(sp.parts)) && sp.table && num(sp.count) && num(f.t_species) && num(f.alpha_prior) && (!k || num(f.w_kind)) && num(f.name_at) && num(f.offer_at))) throw err('unfit', 'species without their settings');
       // rows at one byte a number carry a scale for each row; a database for the world carries its place files, and only the full database may
       if (sp && sp.dtype !== undefined && sp.dtype !== 'f16' && sp.dtype !== 'int8') throw err('unfit', 'species rows of a kind this page does not know');
@@ -2252,6 +2254,7 @@
       if (big && sp && !groupsOf(m).slice(1).every(function (g) { return okGroup(g.V); })) throw err('unfit', 'the parts do not add up to the whole');
       // a trained head carries a bias for each row; a manifest may choose how the two heads are combined. Anything this build does not know is refused, not guessed at.
       if (k && k.bias !== undefined && k.bias !== null && !(Array.isArray(k.bias) && k.bias.length === k.labels.length && k.bias.every(num))) throw err('unfit', 'kinds.bias does not match the labels');
+      if (k && k.county_bias !== undefined && k.county_bias !== null && !(Array.isArray(k.county_bias) && k.county_bias.length === k.labels.length && k.county_bias.every(num))) throw err('unfit', 'kinds.county_bias does not match the labels');
       if (f.rule !== undefined && f.rule !== 'product' && f.rule !== 'mix') throw err('unfit', 'a combination rule this page does not know');
       if (f.guard !== undefined && !(num(f.guard) && f.guard > 0)) throw err('unfit', 'fusion.guard is not a positive number');
       if (f.kind_at !== undefined && f.kind_at !== null && !num(f.kind_at)) throw err('unfit', 'fusion.kind_at is not a number');
@@ -2268,7 +2271,7 @@
       rows = Array.isArray(t) ? t : t && t.species;
       if (!Array.isArray(rows) || rows.length !== count) throw err('unfit', 'species table has ' + (rows ? rows.length : 0) + ' rows, not ' + count);
       return rows.map(function (r) {
-        var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = EYES[a[2]] ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
+        var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = knownKind(a[2]) ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
         return { sci: clip(a[0], 80), en: clip(a[1], 60), kind: kind, m: m };
       });
     }
@@ -2279,13 +2282,16 @@
       return out;
     }
     function slotOf(m, rows, sb) {                     // everything the scoring needs: the settings, the labels, the species table, the biases
-      var has = {};
+      var has = {}, uniq = [], rowAt = [];
       if (rows) rows.forEach(function (r) { has[r.kind] = 1; });
       if (sb && (!rows || sb.length !== rows.length)) throw err('unfit', 'species biases do not match the table');
       if (!m.kinds && !rows) throw err('unfit', 'neither kinds nor species');
+      // rows of the kinds head that share a label are one kind, in the place of the label's first row (a group head keeps the row
+      // of a group it cannot yet name well and labels it `other`); their probabilities are added in fuseWith, as in tools/fusion/fuse.py
+      if (m.kinds) m.kinds.labels.forEach(function (l) { var j = uniq.indexOf(l); if (j < 0) { j = uniq.length; uniq.push(l); } rowAt.push(j); });
       // without a kinds head the labels are the kinds the table has, in the one fixed order
-      return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? m.kinds.labels : KIND_ORDER.filter(function (k) { return has[k]; }), table: rows, has: has,
-        kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, sb: sb || null, prior: {} };
+      return { f: m.fusion, head: !!m.kinds, labels: m.kinds ? uniq : KIND_ORDER.filter(function (k) { return has[k]; }), rowAt: m.kinds ? rowAt : null, table: rows, has: has,
+        kb: m.kinds && m.kinds.bias ? Float64Array.from(m.kinds.bias) : null, kbl: m.kinds && m.kinds.county_bias ? Float64Array.from(m.kinds.county_bias) : null, sb: sb || null, prior: {} };
     }
     function encV(V) { return V && !V.parts && typeof V.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(V.sha256) ? 'sha256-' + V.sha256.toLowerCase() : ''; }   // the encoder's own version, where its checksum is given
     function prune(cache, v) {                         // older versions of this slot and of the runtime are let go; the encoder in use stays under its checksum
@@ -2609,9 +2615,13 @@
     function fuseWith(c, kd, sd, month) {
       var f = c.f, labels = c.labels, table = c.table, n = labels.length, z, i, p = null, q = {}, s = null, order = [], comb, kinds = [], species = [];
       if (c.head) {
-        z = new Float64Array(n);
-        for (i = 0; i < n; i++) z[i] = f.t_kind * kd[i] + (c.kb ? c.kb[i] : 0);
-        p = softmax(z);
+        var nr = c.rowAt.length, pr;
+        z = new Float64Array(nr);
+        var kbu = (table && sd && c.kbl) ? c.kbl : c.kb;      // a second bias where the county list is used (kinds.county_bias), as fuse.py does
+        for (i = 0; i < nr; i++) z[i] = f.t_kind * kd[i] + (kbu ? kbu[i] : 0);
+        pr = softmax(z);
+        if (nr === n) p = pr;
+        else { p = new Float64Array(n); for (i = 0; i < nr; i++) p[c.rowAt[i]] += pr[i]; }   // rows that share a label are one kind
       }
       if (table && sd) {
         var pr = f.alpha_prior ? priorFor(c, month) : null, zs = new Float64Array(table.length);
@@ -2806,9 +2816,9 @@
       if (typeof out === 'string') { try { out = JSON.parse(out); } catch (e) { out = null; } }
       if (!out || typeof out !== 'object' || !Array.isArray(out.species)) throw fail(out && (out.error || out.refused) ? 'refused' : 'garbled', out && (out.error || out.refused));
       var species = out.species.slice(0, 10).map(function (s) {
-        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: EYES[s.eyes] ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
+        return s && typeof s === 'object' && num(s.p) ? { sci: clip(s.sci, 80), en: clip(s.en, 60), kind: knownKind(s.eyes) ? s.eyes : 'other', p: Math.max(0, Math.min(1, s.p)) } : null;
       }).filter(function (s) { return s && (s.sci || s.en); });
-      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (EYES[k.key] || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
+      var kinds = (Array.isArray(out.kinds) ? out.kinds : []).map(function (k) { return k && typeof k === 'object' && num(k.p) && (knownKind(k.key) || k.key === 'none') ? { key: k.key, p: Math.max(0, Math.min(1, k.p)) } : null; }).filter(Boolean);
       species.sort(function (a, b) { return b.p - a.p; }); kinds.sort(function (a, b) { return b.p - a.p; });
       return { species: species, kinds: kinds, region: typeof out.region === 'string' ? out.region : '', model: clip(out.model, 60), ms: num(out.ms) ? out.ms : 0 };
     }
@@ -3581,9 +3591,13 @@
     });
   }
 
-  // ---------- where the species list applies: it is one town's. No location is asked of the device; the person says if they are elsewhere.
-  var AWAY_KEY = 'seenback.away.v1';
-  try { pocket.local = localStorage.getItem(AWAY_KEY) !== '1'; } catch (e) {}
+  // ---------- where the species list applies: it is one county's. No location is asked of the device. Since build 22 the phone's time
+  // zone says whether the phone could be there: in the county's zone, or where the browser gives none, the list is used; elsewhere
+  // the kinds head answers alone and the full database is not told the region. A choice the person made with the switch stands.
+  var AWAY_KEY = 'seenback.away.v1', LIST_ZONES = ['America/New_York', 'US/Eastern', 'EST5EDT'];
+  function zoneNear() { try { var z = Intl.DateTimeFormat().resolvedOptions().timeZone; return !z || LIST_ZONES.indexOf(z) >= 0; } catch (e) { return true; } }
+  pocket.local = zoneNear();
+  try { var said = localStorage.getItem(AWAY_KEY); if (said === '1') pocket.local = false; else if (said === '0') pocket.local = true; } catch (e) {}
   function paintChoices() {
     // the switch is shown where it changes something: this device has a species list, or there is the full database that is told the region
     show('awayRow', false); $('awayBox').checked = pocket.local === false;

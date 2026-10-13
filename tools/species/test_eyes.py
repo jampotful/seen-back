@@ -5,7 +5,7 @@ including its habit of ranking Crocodylia, Squamata and Testudines as classes.
 """
 import unittest
 
-from eyes import KINDS, kind_of_eye, kind_of_record
+from eyes import GROUPS, KINDS, kind_of_eye, kind_of_record, kind_or_group, kind_or_group_of_record
 
 A, CH, AR = "Animalia", "Chordata", "Arthropoda"
 
@@ -173,6 +173,63 @@ class AwkwardCases(unittest.TestCase):
                    for o in ("Rodentia", "Falconiformes", None) for f in ("Felidae", "Ardeidae", None) for g in ("Homo", None)]
         for s in samples:
             self.assertIn(k(*s), KINDS)
+
+
+class GroupsOfOther(unittest.TestCase):
+    """kind_or_group: the nineteen groups for what kind_of_eye sends to `other`, on the backbone's ranks."""
+
+    def test_each_group(self):
+        cases = {
+            "whale": (A, CH, "Mammalia", "Cetacea", "Delphinidae", "Tursiops"),
+            "whale ": (A, CH, "Mammalia", "Carnivora", "Otariidae", "Zalophus"),
+            "whale  ": (A, CH, "Mammalia", "Sirenia", "Trichechidae", "Trichechus"),
+            "flyingfox": (A, CH, "Mammalia", "Chiroptera", "Pteropodidae", "Pteropus"),
+            "bat": (A, CH, "Mammalia", "Chiroptera", "Molossidae", "Tadarida"),
+            "primate": (A, CH, "Mammalia", "Primates", "Hominidae", "Pan"),
+            "mammal": (A, CH, "Mammalia", "Carnivora", "Procyonidae", "Procyon"),
+            "salamander": (A, CH, "Amphibia", "Caudata", "Sirenidae", "Siren"),
+            "shark": (A, CH, "Elasmobranchii", "Myliobatiformes", "Dasyatidae", "Hypanus"),
+            "fish": (A, CH, None, "Perciformes", "Centrarchidae", "Micropterus"),
+            "fish ": (A, CH, "Actinopterygii", "Perciformes", "Centrarchidae", "Micropterus"),
+            "jumper": (A, AR, "Arachnida", "Araneae", "Salticidae", "Phidippus"),
+            "spider": (A, AR, "Arachnida", "Araneae", "Araneidae", "Argiope"),
+            "tick": (A, AR, "Arachnida", "Ixodida", "Ixodidae", "Amblyomma"),
+            "scorpion": (A, AR, "Arachnida", "Scorpiones", "Buthidae", "Centruroides"),
+            "crab": (A, AR, "Malacostraca", "Decapoda", "Cambaridae", "Procambarus"),
+            "worm": (A, "Annelida", "Clitellata", "Crassiclitellata", "Lumbricidae", "Lumbricus"),
+            "worm ": (A, AR, "Diplopoda", "Spirobolida", "Spirobolidae", "Narceus"),
+            "cephalopod": (A, "Mollusca", "Cephalopoda", "Octopoda", "Octopodidae", "Octopus"),
+            "snail": (A, "Mollusca", "Gastropoda", None, "Ampullariidae", "Pomacea"),
+            "sealife": (A, "Mollusca", "Bivalvia", "Unionida", "Unionidae", "Elliptio"),
+            "sealife ": (A, "Cnidaria", "Hydrozoa", "Anthoathecata", "Physaliidae", "Physalia"),
+            "fungus": ("Fungi", "Basidiomycota", "Agaricomycetes", "Agaricales", "Amanitaceae", "Amanita"),
+            "fungus ": ("Fungi", "Ascomycota", "Lecanoromycetes", None, None, None),
+            "slime": ("Protozoa", "Mycetozoa", "Myxomycetes", "Physarales", "Physaraceae", "Fuligo"),
+        }
+        for want, ranks in cases.items():
+            self.assertEqual(kind_or_group(*ranks), want.strip(), ranks)
+        self.assertEqual(set(c.strip() for c in cases), set(GROUPS))
+
+    def test_kinds_of_eye_are_unchanged(self):
+        for ranks, want in (((A, CH, "Aves", "Passeriformes", "Cardinalidae", "Cardinalis"), "bird"),
+                            ((A, CH, "Mammalia", "Primates", "Hominidae", "Homo"), "person"),
+                            ((A, AR, "Insecta", "Hymenoptera", "Formicidae", "Camponotus"), "insect"),
+                            (("Plantae", "Tracheophyta", "Magnoliopsida", "Fagales", "Fagaceae", "Quercus"), "plant")):
+            self.assertEqual(kind_or_group(*ranks), want)
+
+    def test_moves_and_what_stays_other(self):
+        self.assertEqual(kind_or_group(A, AR, "Collembola", "Entomobryomorpha", "Entomobryidae", "Entomobrya"), "insect")
+        self.assertEqual(kind_or_group("Chromista", "Ochrophyta", "Phaeophyceae", "Fucales", "Sargassaceae", "Sargassum"), "plant")
+        self.assertEqual(kind_or_group("Chromista", "Oomycota", None, None, None, None), "other")
+        self.assertEqual(kind_or_group(A, "Tardigrada", "Eutardigrada", None, None, None), "other")
+        self.assertEqual(kind_or_group(A, AR, "Arachnida", "Trombidiformes", "Eriophyidae", "Aceria"), "other")
+        self.assertEqual(kind_or_group(), "other")
+
+    def test_record_form(self):
+        rec = {"kingdom": "Fungi", "phylum": "Basidiomycota", "class": "Agaricomycetes", "order": "Polyporales",
+               "family": "Polyporaceae", "genus": "Trametes"}
+        self.assertEqual(kind_or_group_of_record(rec), "fungus")
+        self.assertEqual(kind_of_record(rec), "other")
 
 
 if __name__ == "__main__":
