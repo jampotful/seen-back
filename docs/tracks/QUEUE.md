@@ -24,3 +24,18 @@ Burst 2 results: engine merged (build 26), world database merged (build 24), cou
 ## Burst 4 (13 October, 12:20)
 
 Burst 3 results: the specs for all fourteen waiting groups and the jumper review sheet (in Drive) are done; the engine has `spectrum`, `light`'s clock, sun and moon, `pace` and `motion` (build 28); the county-bias head is built but stopped at three unresolved checks. The extraction key test passed (Haiku recovers 38% exactly, 61% loosely). Burst 4 running: `burst4-lit.md` (up to $60 of the $150 cap), `burst4-shiphead2.md`, `burst4-engine3.md`.
+
+## Round 2: the species people meet (13 October, 15:40), run by the research thread
+
+The owner's research thread launches these entries itself, at most three at once, Sonnet at medium effort, and keeps their rows here current; the control room counts them against its limit and leaves them to that thread. The text floor and the carry rules are in the "Round 2" section of `docs/views/research/BRIEF.md`. Entries 9 and 10 must follow them when their prompts are written: rows are compiled per species from the logs by those rules, and the grade a reader sees is computed per species.
+
+| # | Agent | Model | Prompt | Needs | State |
+|---|---|---|---|---|---|
+| 12 | Unit `mammals-met`: deer, cat, dog, squirrel and rabbit views | Sonnet | `docs/tracks/prompts/round2-unit.md` | | wave 1 |
+| 13 | Unit `birds-met`: bird, hawk and wader views | Sonnet | same | | wave 1 |
+| 14 | Unit `herps-met`: alligator, frog and reptile views | Sonnet | same | | wave 1 |
+| 15 | The gap table | Sonnet | `docs/tracks/prompts/round2-gaps.md` | a free slot | wave 2 |
+| 16 | Unit `insects-met`: insect and bee views | Sonnet | `docs/tracks/prompts/round2-unit.md` | a free slot | wave 2 |
+| 17 | The Drive intake, each time the owner adds papers | Sonnet | `docs/tracks/prompts/round2-intake.md` | the owner's word and a free slot | on call |
+
+The owner's download list merges every unit's wanted list with `tools/views/wanted_csv.py` (313 papers on 13 October at 15:40, 91 of them priority 1). Files already read are listed in `docs/views/sources/drive.jsonl` by a hash of their Drive id.

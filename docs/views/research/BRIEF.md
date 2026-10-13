@@ -141,3 +141,31 @@ The rows in build 22 (`EYES` in `src/cam.a.js`) were rewritten to this standard 
 - Open access only, by legal routes. Do not use shadow libraries or any site that redistributes paywalled papers without permission. A paper you cannot open goes on the wanted list.
 - Go as deep as the time allows. Your prompt sets a time limit (75 minutes if it sets none). Run `date` at the start and every so often. Ten minutes before the limit, make sure all the files are complete and well formed (`python3 -I tools/senses/check.py` passes), mark anything unfinished in the sheet and the progress note, and push.
 - Your final message: at most 300 words, giving the views you propose, the number of log lines, the strongest and weakest evidence, the wanted papers that would change the most, and the commit you pushed last.
+
+## Round 2: the species people meet (13 October 2026)
+
+This section governs every round-2 prompt. Where it differs from the sections above, it wins.
+
+**Why.** The app lends each view to every species with that kind of eye (`tools/species/eyes.py`), and today's rows were written for one measured animal per view. A llama gets the white-tailed deer's rows, two of them marked "known in this animal", and an alligator gets rows about crocodiles although the herps log holds the alligator's own measurements. The owner has decided that rows will speak to the reader in the second person, as the animal ("You have two kinds of colour-sensing cell"), and that every such sentence must be true of the species on screen at the grade it shows. The owner wants as much species-level evidence as can be found, with vaguer wording only where the literature truly runs out.
+
+**The text floor.** The visibility floor (`docs/ENGINE-DESIGN.md`, section 5) decides when research on a value in the picture can stop. It says nothing about whether a row holds for each species a view is lent to. Round 2 adds a second floor for the words: for every offered view and every commonly photographed species that borrows it, each row's claim is measured in that species, carried from a relative by one of the rules below, or replaced by a sentence about what the view does.
+
+**The carry rules.** The owner may change any of them, and the audit tests them.
+
+1. Numbers never travel. A figure is stated only for the species it was measured in, and the row names that species.
+2. Photopigments and the number of receptor classes may travel within an order when two or more measured families of the order agree and no measured member of the order disagrees.
+3. Pupil shape, eye position, field of view, the spot or band of sharpest vision, acuity, flicker speed and the tapetum travel only within a genus, because they follow how an animal lives. A house cat has a slit pupil and a lion a round one.
+4. Anything further needs a written exception with its reason, one JSON object a line in `docs/views/carry.jsonl`: `{"from": "<taxon measured>", "to": "<taxon it carries to>", "traits": ["<trait key>"], "reason": "one sentence", "source": "<the record or paper behind the reason>"}`. Propose exceptions there; the owner or the audit accepts them.
+5. A measured disagreement inside the carry range blocks the carry. Log it as a record of its own (the alpaca's band of sharp vision is horizontal and, by the same thesis, the dromedary's is vertical).
+6. The grade a reader sees is computed for the species on screen: `m` only when that species was measured, `g` when a rule or an exception carried it (and the row names the relative), `i` otherwise.
+
+**Where species-level evidence hides.** Besides the physiology journals: veterinary ophthalmology for domestic and zoo animals (textbook chapters describe pupils, tapeta, fundi and ganglion-cell maps), husbandry and welfare studies (colour choice tests in livestock), genome studies of opsin genes (an intact gene predicts a pigment and does not measure one; grade and `method` say so), comparative surveys whose tables list many species (pupil shape, eye size, flicker fusion, SWS1 opsin type across birds), and theses. Search for each species by its scientific and common names and by its genus.
+
+**What a round-2 unit does.**
+- Start from the gap table for your views (`docs/views/gaps/<view>.md`) if it exists on `main` or on `agent/gaps`; otherwise make the scope yourself as in "The sheet", section 1, using `docs/views/world-orders.csv` and `docs/views/no-view-us-fl-alachua.csv` for counts. Work down the species people meet most, worldwide and in Alachua County.
+- For each species (or genus, where the species are many and alike), look for its own measurement of each row's trait. Log what you can open, as in round 1.
+- Put what you cannot open on the wanted list, with the extra fields below. The owner is downloading from these lists as you work, so push the wanted list within 20 minutes of starting and every 15 minutes after.
+- Record searches that found nothing in `docs/views/searched/<unit>.jsonl`, one object a line: `{"taxon": "...", "trait": "...", "queries": ["..."], "where": ["Google Scholar", "..."], "date": "2026-10-13"}`, so nobody repeats them.
+- Draft rows in the second person, addressed to the reader as the animal, one set per species or genus that differs, each row followed by the log lines behind it. Their final wording comes later in one pass.
+
+**Extra fields on round-2 wanted lines:** `"for"` (scientific names of the species it would fix), `"rows"` (`"<view>:<row title>"`), `"records"` (iNaturalist research-grade records of those species, where known, for ranking), `"get"` (how the owner can get it: the ISBN for a book chapter, "journal via library", "thesis via ProQuest", or an open-access address if you found one too late to read). The owner drops files anywhere in the papers folder; the intake finds them.
