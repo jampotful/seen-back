@@ -148,7 +148,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     r.human = await type('human');   // a human is no view (build 22): the sheet says so and the eyes stay as they are
     r.errors = errors; out.typed = r; await ctx.close();
     const ok = /^Xqzzvk isn’t a creature we know\./.test(r.unknown.note) && r.unknown.about && !r.unknown.sug.length && !r.unknown.eyes
-      && r.slip.note === 'Did you mean:' && r.slip.sug.includes('heron') && r.slipSpecies.sug.includes('Monarch')
+      && r.slip.note === 'Did you mean:' && r.slip.sug.includes('heron') && r.slipSpecies.sug.includes('monarch')
       && /^Regards doesn’t have the ability to view the world as a wolf spider right now\./.test(r.noEyes.note) && !r.noEyes.show && !r.noEyes.about
       && r.exact.eyes === 'frog' && /\|Dryophytes cinereus$/.test(r.exact.named || '')
       && r.human.note === 'That’s a human. You already see the world as one. Try photographing another creature.' && r.human.eyes === r.exact.eyes && !errors.length;
