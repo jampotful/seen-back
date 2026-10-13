@@ -432,7 +432,10 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     await page.evaluate((t) => { const v = document.getElementById('vid'); v.pause(); v.currentTime = t; window.__seenBack.tune.hide(true); window.__seenBack.engine.pinGaze(.5, .5); }, +(process.env.FLOOR_T || 2));
     await page.waitForTimeout(3000); await page.evaluate(() => window.__seenBack.pose(null));
     const specs = await page.evaluate(() => { const t = window.__seenBack.tune; return t.list(); });
-    const want = (process.env.FLOOR_PARAMS ? process.env.FLOOR_PARAMS.split(',') : specs);
+    let want = (process.env.FLOOR_PARAMS ? process.env.FLOOR_PARAMS.split(',') : specs);
+    if (process.env.FLOOR_SKIP && fs.existsSync(process.env.FLOOR_SKIP)) {   // parameters already measured (docs/views/floor.json) are left out
+      const done = (JSON.parse(fs.readFileSync(process.env.FLOOR_SKIP, 'utf8')).floor || {})[view] || {}; want = want.filter((l) => !done[l]);
+    }
     const info = await page.evaluate((v) => window.__seenBack.tuneInfo ? window.__seenBack.tuneInfo() : null, view);
     let n = 0;
     async function render(lab, x) {
