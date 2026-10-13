@@ -411,7 +411,7 @@ The weights overlap, since one view uses many mechanisms.
 **Phone in, phone out.** No phone sensor reads chemistry. The microphone hears a breath blown on the phone, standing for the act of breathing (`tick.md`); the touch screen can stand for a tasting touch.
 
 **Ways to draw it.**
-- **Breath wakes the tick** (reframe; low). The view is still and dim until the person breathes on the phone; the microphone hears the breath and the picture stirs and searches for a few seconds, as a tick wakes to breath. Graded `i`; the sheet calls it the act of breathing, not carbon dioxide.
+- **Breath wakes the tick** (reframe; low). The view is still and dim until the person breathes on the phone; the microphone hears the breath and the picture stirs and searches for a few seconds, as a tick wakes to breath. Graded `i`; the sheet says the microphone hears the act of breathing and cannot measure carbon dioxide.
 - **Trails that stay** (held moments; low). Each touch of the screen leaves a soft coloured trail that fades over a minute, like a snail's slime trail or a millipede's tapped antenna; the person paints the path the animal would smell back along.
 
 **Invented.** Both drawings.
