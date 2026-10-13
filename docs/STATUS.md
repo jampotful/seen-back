@@ -37,6 +37,6 @@ The order of work is `docs/tracks/QUEUE.md`, which the owner approves once and e
 ## Known limits
 
 - PDFs from Drive now read in full through `download_file_content` and `pdftotext` (the brief says how), for files up to 10 MB; *Animal Eyes* gives all 291 pages. *Neurobiology of Arachnids* (18 MB) and *Spider Biology* (159 MB) are over the limit and wait for the owner to split them into parts.
-- The papers the finished units want are in a sheet in the owner's Drive, beside the papers (71 from the first three units, 22 of them priority 1). Units add to it as they finish.
+- The papers the units want are merged by `tools/views/wanted_csv.py` into the owner's private download page, which the research thread rebuilds as lists arrive (523 papers on 13 October, 164 of them priority 1). The earlier Drive sheet of 71 papers was retired that day, after a check that every paper on it is on the page.
 - From the cloud machines, PubMed, PubMed Central, Europe PMC, Crossref, doi.org, GBIF and iNaturalist mostly refuse or rate-limit. The research rests on the collection on `pub/lit-t1` and the owner's papers.
 - The branch `probe/remote-push` holds one empty commit from a test; agents cannot delete branches, so it waits for the owner or a person with access.
