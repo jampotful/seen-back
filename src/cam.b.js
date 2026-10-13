@@ -97,7 +97,7 @@
     'uniform sampler2D u_sal; uniform float u_salOn; uniform vec4 u_base; uniform vec3 u_glowC;',   // the movement map; the view\'s own glow, living weight and ultraviolet in red
     'uniform vec4 u_ior[6];',  // places the side eyes are ignoring: x, y, reach, strength
     'uniform vec4 u_rip[4]; uniform float u_ripK;',   // ripples on the screen: x, y, age in seconds, strength
-    'uniform float u_pan, u_shimmer, u_time;',        // a sideways sweep of the whole picture (in the picture\'s width), a shimmer on the glow, the clock
+    'uniform float u_pan, u_shimmer, u_time, u_palm;',   // u_palm: the guessed ultraviolet felt as a fine moving grain (&draw=palm, invented)        // a sideways sweep of the whole picture (in the picture\'s width), a shimmer on the glow, the clock
     'uniform vec4 u_water; uniform vec3 u_waterC;',   // light lost in water: per channel, and how far the top of the picture is taken to be (GUESSED from height); the water\'s own colour
     'vec2 ripple(vec2 p){',
     '  vec2 s = vec2(0.0);',
@@ -172,6 +172,7 @@
     '  m.b = mix(m.b, uvg, uvB);',
     '#if ZONES',
     '  m.r += uvR * uvg;',
+    '  if (u_palm > 0.0) { float gr = fract(sin(dot(floor(gl_FragCoord.xy * 0.5) + floor(u_time * 24.0) * vec2(7.13, 3.71), vec2(12.9898, 78.233))) * 43758.5453); m += (gr - 0.5) * 0.7 * uvg * uvB * u_palm; }',
     '#endif',
     '  m = mix(m, vec3(0.62, 0.12, 1.0), 0.45 * uvg * sheen);',
     '  m.g *= 1.0 - 0.9 * u_noGreen;',
@@ -651,10 +652,11 @@
       newView: function () { gaze.reset(); salReset(); zLag = [0, 0, 0, 0]; },
       state: function () { return { sw: sw, sh: sh, writes: writes, stepMs: stepMs, moving: moving, floatOK: floatOK, err: gl.getError() }; },
       // what the last frames cost: script time inside draw() and, where offered, the graphics chip's time (both in ms, means of up to 90)
-      probe: function (clear) { var r = { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr }; if (clear) { cpuMs = []; gpuMs = []; } return r; },
+      probe: function (clear) { var r = { cpu: avg(cpuMs), gpu: avg(gpuMs), timer: !!tq, n: cpuMs.length, gpuN: gpuMs.length, sal: ws ? ws + 'x' + hs : '', zones: !!pViewZ, zErr: zErr, glErr: gl.getError(), stamps: stampSlots.filter(function (q) { return q.got && !q.live; }).length, light: LIGHT.reads, lum: +LIGHT.lum.toFixed(3) }; if (clear) { cpuMs = []; gpuMs = []; } return r; },
       // for the checks: the gaze, the movement map's last read, and a way to hold the gaze in one place
       gazeState: function () { var G = gaze.G(); return { x: G.x, y: G.y, mode: G.mode, jumps: G.jumps, ior: G.ior.length, sleep: G.sleep, best: G.best, map: mapInfo, sal: [ws, hs], salFrames: salFrames, pending: !!sync, log: G.log.slice(), gazes: gazes.map(function (g) { return [+g.G.x.toFixed(3), +g.G.y.toFixed(3), g.G.mode, g.G.jumps]; }) }; },
       pinGaze: function (x, y) { gaze.pin(x === undefined ? null : x, y); },
+      toPic: toPic, toScreen: toScreen, stampCount: function () { return stampSlots.filter(function (q) { return q.got && !q.live; }).length; },
       resize: function () {
         var dpr = Math.min(window.devicePixelRatio || 1, 2), w = canvas.clientWidth * dpr, h = canvas.clientHeight * dpr, k = Math.min(1, MAXSIDE / Math.max(w, h, 1));
         w = Math.max(2, Math.round(w * k)); h = Math.max(2, Math.round(h * k));
@@ -669,7 +671,116 @@
     };
     return api;
 
+    // ---- the screen and the camera picture. toScreen inverts the view pass's remap (squeeze and zoom; the fovea bulge is taken as 1),
+    // in fractions of the canvas with y up; toPic is the forward remap, for a thumb on the screen.
+    var lastP = null, lastMirror = 0, lastCamZoom = 1;
+    function spanOf() { var A = canvas.width / canvas.height, sa = sw / Math.max(1, sh), k = Math.max(1, A / sa); return [k * sa, k, A]; }
+    function toPic(fx, fy) {
+      if (!lastP || !sw) return null;
+      var S = spanOf(), px = (fx - .5) * S[2], py = fy - .5, r2 = px * px + py * py, z = lastP.zoom / lastCamZoom;
+      var u = px * (1 + lastP.barrel * r2) / z / S[0] + .5, v = py * (1 + lastP.barrel * r2) / z / S[1] + .5;
+      return [lastMirror ? 1 - u : u, v];
+    }
+    function toScreen(u, v) {
+      if (!lastP || !sw) return null;
+      var S = spanOf(), z = lastP.zoom / lastCamZoom, qx = ((lastMirror ? 1 - u : u) - .5) * S[0] * z, qy = (v - .5) * S[1] * z, px = qx, py = qy;
+      for (var i = 0; i < 4; i++) { var r2 = px * px + py * py; px = qx / (1 + lastP.barrel * r2); py = qy / (1 + lastP.barrel * r2); }
+      return [px / S[2] + .5, py + .5, S[1] * z];   // the last: one unit of the picture's long side, in canvas heights
+    }
+
+    // ---- stamps of attention (&draw=, the default gaze drawing for the jumping spider; docs/views/ATLAS.md, entry 10). While the gaze
+    // looks a place over, what the strip shows there is copied into a slot; when the gaze jumps away the copy stays where it was taken
+    // and fades over the view's ignoring time (gaze.ior, about 5 s: Ferrante and colleagues 2024). The thumbnail and its fade are invented.
+    var STAMP_N = 6, STAMP_W = 96, STAMP_H = 224, stampTex = null, stampSlots = [], stampJumps = -1, stampAt = 0, pStamp = null;
+    var FS_STAMP = '#version 300 es\nprecision highp float; in vec2 v; out vec4 o; uniform sampler2D u_s; uniform vec4 u_src; uniform float u_a;\n' +
+      'void main(){ vec2 t = u_src.xy + v * u_src.zw; vec2 e = min(v, 1.0 - v); float m = smoothstep(0.0, 0.12, min(e.x, e.y * 0.45));\n' +
+      '  float rim = (1.0 - smoothstep(0.0, 0.03, min(e.x, e.y * 0.45))) * 0.5; o = vec4(mix(texture(u_s, t).rgb, vec3(1.0), rim), u_a * max(m, rim)); }';
+    function stamps(P, now) {
+      var G = gaze.G(), z = null, i;
+      for (i = 0; i < (P.zones || []).length; i++) if (P.zones[i].gaze === 1) { z = P.zones[i]; break; }
+      if (!z) return;
+      if (!stampTex) {
+        stampTex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, stampTex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, STAMP_W * STAMP_N, STAMP_H, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        try { pStamp = prog(FS_STAMP); } catch (e) { zErr = zErr || String(e.message || e).slice(0, 200); return; }
+      }
+      var ior = (G.cfg && G.cfg.ior) || 5000, sc = toScreen(G.x, G.y);
+      if (!sc) return;
+      var H = canvas.height, hh = Math.min(.45, z.hh * 1.15 * sc[2]) * H, hw = Math.max(hh * .42, 8);   // the cross and a little round it
+      var rect = [Math.round(sc[0] * canvas.width - hw), Math.round(sc[1] * H - hh), Math.round(hw * 2), Math.round(hh * 2)];
+      var looking = G.mode === 'look' || G.mode === 'hold';
+      if (G.jumps !== stampJumps) { stampJumps = G.jumps; if (stampSlots.length && stampSlots[stampSlots.length - 1].live) stampSlots[stampSlots.length - 1].live = false; }
+      var cur = stampSlots[stampSlots.length - 1];
+      if (looking && (!cur || !cur.live)) {
+        var used = stampSlots.map(function (q) { return q.slot; }), slot = 0;
+        while (used.indexOf(slot) >= 0 && slot < STAMP_N) slot++;
+        if (slot >= STAMP_N) { slot = stampSlots[0].slot; stampSlots.shift(); }
+        cur = { slot: slot, live: true, rect: rect, left: 0, got: 0 }; stampSlots.push(cur);
+      }
+      if (cur && cur.live) {
+        cur.rect = rect; cur.left = now;
+        if (now - stampAt > 120) {   // copy what the strip shows now, scaled into its slot (a blit from the picture just drawn)
+          stampAt = now; cur.got = 1;
+          var x0 = Math.max(0, rect[0]), y0 = Math.max(0, rect[1]), x1 = Math.min(canvas.width, rect[0] + rect[2]), y1 = Math.min(H, rect[1] + rect[3]);
+          if (x1 - x0 > 2 && y1 - y0 > 2) {
+            if (!stampFb) stampFb = gl.createFramebuffer();
+            gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, stampFb); gl.framebufferTexture2D(gl.DRAW_FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, stampTex, 0);
+            gl.bindFramebuffer(gl.READ_FRAMEBUFFER, null);
+            gl.blitFramebuffer(x0, y0, x1, y1, cur.slot * STAMP_W, 0, (cur.slot + 1) * STAMP_W, STAMP_H, gl.COLOR_BUFFER_BIT, gl.LINEAR);
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+            cur.rect = [x0, y0, x1 - x0, y1 - y0];
+          }
+        }
+      }
+      stampSlots = stampSlots.filter(function (q) { return q.live || now - q.left < ior; });
+      gl.useProgram(pStamp.p); gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, stampTex); gl.uniform1i(pStamp.u.u_s, 0);
+      stampSlots.forEach(function (q) {
+        if (q.live || !q.got) return;                  // the live look is the strip itself
+        var a = 1 - (now - q.left) / ior; if (a <= 0) return;
+        gl.viewport(q.rect[0], q.rect[1], q.rect[2], q.rect[3]);
+        gl.uniform4f(pStamp.u.u_src, q.slot / STAMP_N, 0, 1 / STAMP_N, 1); gl.uniform1f(pStamp.u.u_a, .92 * a * a);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      });
+      gl.disable(gl.BLEND); gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    var stampFb = null;
+
+    // ---- the light module (docs/ENGINE-DESIGN.md, module 3), first part: four times a second the smallest levels of the picture's
+    // mip chain (8 by 8 cells or fewer) are read back behind a fence, never waited for. They give the mean light (LIGHT.lum, 0 to 1 of
+    // the camera's own exposure, smoothed over about 2.5 s; a phone's exposure control means this is relative light, not lux), the
+    // mean colour, the direction of the brightest cell, a darkening shock, and the colour at any place (for &draw=palm).
+    var light = (function () {
+      var fb = null, pbo = null, sync = null, at = 0, lvl = 0, w = 0, h = 0, buf = null;
+      function tick(now) {
+        if (!sw || !tA) return;
+        if (sync && gl.getSyncParameter(sync, gl.SYNC_STATUS) === gl.SIGNALED) {
+          gl.deleteSync(sync); sync = null;
+          gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo); gl.getBufferSubData(gl.PIXEL_PACK_BUFFER, 0, buf, 0, w * h * 4); gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+          var n = w * h, r = 0, g = 0, b = 0, best = -1, bi = 0, i, sc = floatOK ? 1 : 1 / 255;
+          for (i = 0; i < n; i++) { var R = buf[i * 4] * sc, Gc = buf[i * 4 + 1] * sc, B = buf[i * 4 + 2] * sc, Y = .2126 * R + .7152 * Gc + .0722 * B; r += R; g += Gc; b += B; if (Y > best) { best = Y; bi = i; } }
+          r /= n; g /= n; b /= n;
+          var lum = .2126 * r + .7152 * g + .0722 * b, k = LIGHT.reads ? Math.min(1, (now - LIGHT.at) / 2500) : 1;
+          LIGHT.shock = Math.max(LIGHT.shock * .5, LIGHT.raw > 0 && lum < LIGHT.raw * .5 && now - LIGHT.at < 400 ? 1 : 0);
+          LIGHT.raw = lum; LIGHT.lum += (lum - LIGHT.lum) * k; LIGHT.col = [r, g, b]; LIGHT.dir = [(bi % w + .5) / w, (Math.floor(bi / w) + .5) / h];
+          LIGHT.cells = { w: w, h: h, scale: sc, data: buf.slice(0, n * 4) }; LIGHT.at = now; LIGHT.reads++;
+        }
+        if (sync || now - at < 250) return;
+        at = now;
+        if (!fb) { fb = gl.createFramebuffer(); pbo = gl.createBuffer(); buf = floatOK ? new Float32Array(64 * 4) : new Uint8Array(64 * 4); gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo); gl.bufferData(gl.PIXEL_PACK_BUFFER, buf.byteLength, gl.STREAM_READ); gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null); }
+        lvl = Math.max(0, levels - 4); w = Math.max(1, sw >> lvl); h = Math.max(1, sh >> lvl);
+        while (w * h > 64) { lvl++; w = Math.max(1, sw >> lvl); h = Math.max(1, sh >> lvl); }
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tA, lvl);
+        gl.bindBuffer(gl.PIXEL_PACK_BUFFER, pbo); gl.readPixels(0, 0, w, h, gl.RGBA, floatOK ? gl.FLOAT : gl.UNSIGNED_BYTE, 0); gl.bindBuffer(gl.PIXEL_PACK_BUFFER, null);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        sync = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
+      }
+      return { tick: tick };
+    })();
     function drawFrame(P, fx, now, dt) {
+        lastP = P; lastMirror = fx.mirror ? 1 : 0; lastCamZoom = fx.camZoom || 1;
         gl.bindVertexArray(vao);
         if (!hasFrame) { gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); return; }
         var Z = P.zones && P.zones.length ? P.zones : null, zoned = (Z || P.sal > .001 || P.ripple > .001 || P.pan || P.water) && zonePrograms();
@@ -765,7 +876,7 @@
           for (var ri = 0; ri < 4; ri++) { var rr = R[ri]; ripU[ri * 4] = rr ? rr[0] : 0; ripU[ri * 4 + 1] = rr ? rr[1] : 0; ripU[ri * 4 + 2] = rr ? rr[2] : 0; ripU[ri * 4 + 3] = rr ? rr[3] : 0; }
           gl.uniform4fv(u['u_rip[0]'], ripU); gl.uniform1f(u.u_ripK, (fx.ripK || 0) * P.ripple);
           gl.uniform1f(u.u_shimmer, calm ? P.shimmer * .3 : P.shimmer); gl.uniform1f(u.u_time, (now / 1000) % 1000);
-          gl.uniform1f(u.u_pan, panOf(P, now, dt));
+          gl.uniform1f(u.u_pan, panOf(P, now, dt)); gl.uniform1f(u.u_palm, P.palm || 0);
           var W4 = P.water || [0, 0, 0, 0], WC = P.waterC || [0, 0, 0]; gl.uniform4f(u.u_water, W4[0], W4[1], W4[2], W4[3]); gl.uniform3f(u.u_waterC, WC[0], WC[1], WC[2]);
         }
         gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -779,5 +890,7 @@
           viewU(pView.u, hu); gl.uniform1f(pView.u.u_gateMix, 0); gl.uniform1f(pView.u.u_blur, blurOf(HUMAN.inv, longPx));
           gl.drawArrays(gl.TRIANGLES, 0, 3); gl.disable(gl.SCISSOR_TEST);
         }
+        if (zoned && P.gz && P.stamps > .5) stamps(P, now);
+        light.tick(now);
     }
   }

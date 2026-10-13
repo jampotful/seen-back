@@ -1,4 +1,28 @@
 
+  // ---------- drawing options that take a person's hand (&draw=, docs/views/ATLAS.md entries 1, 5 and 10)
+  // The painted map: while a thumb is held on the picture the gaze follows it, and when the thumb lifts the movement map leads again.
+  // The palm (&draw=palm): where the browser can vibrate (Android), the guessed ultraviolet under the gaze is felt as short pulses; on
+  // iOS, which cannot, the view pass draws it as a fine moving grain instead. Both are invented ways of showing a sense.
+  // A view with a value given against light is recomputed twice a second.
+  (function drawOptions() {
+    var held = null;
+    function paints() { return S.screen === 'animal' && !S.tr && eyeP && eyeP.gz && eyeP.draw && eyeP.draw.sharpness === 'paint' && engine && engine.toPic; }
+    function pinAt(e) { var r = canvas.getBoundingClientRect(), q = engine.toPic((e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height); if (q) engine.pinGaze(clamp(q[0], 0, 1), clamp(q[1], 0, 1)); }
+    canvas.addEventListener('pointerdown', function (e) { if (!paints()) return; held = e.pointerId; pinAt(e); });
+    canvas.addEventListener('pointermove', function (e) { if (held === e.pointerId && paints()) pinAt(e); });
+    ['pointerup', 'pointercancel'].forEach(function (ev) { canvas.addEventListener(ev, function (e) { if (held !== e.pointerId) return; held = null; if (engine && engine.pinGaze) engine.pinGaze(); }); });
+    var buzz = 0, curveAt = 0;
+    setInterval(function () {
+      var now = performance.now();
+      if (S.eyes && SPECS[S.eyes] && SPECS[S.eyes].hasCurve && now - curveAt > 500 && !S.tr) { curveAt = now; EYES[S.eyes] = viewOf(SPECS[S.eyes]); eyeP = paramsOf(EYES[S.eyes], S.named); }
+      if (!(eyeP && eyeP.palm && S.screen === 'animal' && navigator.vibrate && LIGHT.cells && engine && engine.gazeState)) return;
+      var g = engine.gazeState(), C = LIGHT.cells, x = clamp(Math.floor(g.x * C.w), 0, C.w - 1), y = clamp(Math.floor(g.y * C.h), 0, C.h - 1), i = (y * C.w + x) * 4;
+      var r = C.data[i] * C.scale, gg = C.data[i + 1] * C.scale, b = C.data[i + 2] * C.scale, mn = Math.min(r, gg, b);
+      var uv = clamp(1.6 * (b - .5 * (r + gg)) + 2.5 * Math.max(mn - .6, 0), 0, 1);   // the view pass's own guess (src/cam.b.js), invented
+      if (uv > .2 && now - buzz > 350) { buzz = now; try { navigator.vibrate(Math.round(8 + 32 * uv)); } catch (e) { /* refused */ } }
+    }, 120);
+  })();
+
   // ---------- the tuning panel and the compare slider (docs/ENGINE-DESIGN.md, section 4), only with ?try=<view>&tune=1
   // Every parameter of the view's spec gets a slider over its range. The slider steps by the parameter's visibility floor where
   // docs/views/floor.json has one, so each step is a change a person can see, and by a two-hundredth of the range otherwise. Copy puts
@@ -66,7 +90,7 @@
         row.addEventListener('pointerdown', function () { press = setTimeout(function () { note.textContent = lab + ': ' + ((it.o.src || []).join('; ') || 'no source') + (it.o.note ? ' (' + it.o.note + ')' : ''); }, 450); });
         ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) { row.addEventListener(ev, function () { clearTimeout(press); }); });
         row.appendChild(name); row.appendChild(s); row.appendChild(out); row.appendChild(reset);
-        body.appendChild(row); rows.push({ lab: lab, s: s, set: set });
+        body.appendChild(row); rows.push({ lab: lab, s: s, set: set, lo: lo, hi: hi, v0: v0 });
       });
     });
     // a patch kept on this phone comes back on load
@@ -90,9 +114,10 @@
     bar.addEventListener('pointerup', function () { drag = false; clearTimeout(hold); });
     document.body.appendChild(bar); document.body.appendChild(box);
     setInterval(function () {   // the panel and the divider belong to the creature's picture and stay out of every other screen
-      var on = S.screen === 'animal' && S.eyes === key;
+      var on = S.screen === 'animal' && S.eyes === key && !TUNE.hidden;
       box.style.display = on ? '' : 'none'; bar.style.display = on && TUNE.cmp ? '' : 'none';
     }, 250);
     box.style.display = 'none';
-    window.__seenBack.tune = { key: key, list: function () { return rows.map(function (r) { return r.lab; }); }, set: function (lab, v) { var r = rows.filter(function (q) { return q.lab === lab; })[0]; if (!r) return false; r.s.value = v; r.set(v); return true; }, patch: patch };
+    window.__seenBack.tune = { key: key, list: function () { return rows.map(function (r) { return r.lab; }); }, set: function (lab, v) { var r = rows.filter(function (q) { return q.lab === lab; })[0]; if (!r) return false; r.s.value = v; r.set(v); return true; }, patch: patch, hide: function (h) { TUNE.hidden = !!h; } };
+    window.__seenBack.tuneInfo = function () { var o = {}; rows.forEach(function (r) { o[r.lab] = [r.lo, r.hi, r.v0]; }); return o; };
   })();

@@ -372,7 +372,7 @@
     if (tryStart()) return;                        // a view being tried opens at once (?try=, src/cam.c1.js)
     if (!hasCamera || S.camRefused) { toAskAnimal(); return; }
     var btn = $('btnBegin'); btn.disabled = true;
-    openCamera('environment').then(function () {
+    openCamera(TUNE.draw === 'face' ? 'user' : 'environment').then(function () {
       btn.disabled = false; setEyes(null); go('finder'); msg('That didn’t work. Try again or upload a photo of a species.', 4500);
     }, function () { btn.disabled = false; toAskAnimal(); });
   });

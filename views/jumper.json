@@ -428,7 +428,45 @@
       "A jumping spider senses low sounds in the air through hairs on its legs. The picture leaves this out."
     ]
   ],
-  "modules": ["zones","salience","gaze"],
+  "modules": ["zones","light","salience","gaze"],
   "falls_back_to": "spider",
-  "applies_to": {"family":["Salticidae"]}
+  "applies_to": {"family":["Salticidae"]},
+  "draw": {
+    "gaze": [
+      {
+        "name": "stamps",
+        "invented": true,
+        "note": "the hunting strip; each past fixation stays as a sharp thumbnail where it was taken and fades over gaze.ior"
+      },
+      {"name":"strip","invented":true,"note":"the hunting strip alone"},
+      {"name":"face","invented":true,"note":"the front camera, so the person is the one looked at"}
+    ],
+    "sharpness": [
+      {
+        "name": "paint",
+        "invented": true,
+        "note": "while a thumb is held on the picture the strip follows it; when it lifts the movement map leads again"
+      }
+    ],
+    "colour": [
+      {
+        "name": "two",
+        "invented": true,
+        "note": "the strip carries the principal eyes' two classes and the surround the side eyes' one; the classes are measured, the display mapping is the app's"
+      },
+      {
+        "name": "palm",
+        "invented": true,
+        "note": "adds the guessed ultraviolet under the strip felt in the hand: vibration where the browser allows it (Android), a fine moving grain otherwise (iOS)"
+      }
+    ],
+    "surround": [
+      {"name":"glow","invented":true,"note":"the coarse green picture with movement glowing faintly"},
+      {
+        "name": "pond",
+        "invented": true,
+        "note": "still things fade out of the surround, and only movement and the strip remain"
+      }
+    ]
+  }
 }

@@ -98,7 +98,19 @@ for n, (g, inv, src, note) in MATS.items():
     if n in s["matrices"]:
         s["matrices"][n].update(grade=g, invented=inv, src=src, note=note)
 missing = [k for k in G if k not in seen]
-s["modules"] = ["zones", "salience", "gaze"]
+s["modules"] = ["zones", "light", "salience", "gaze"]
+# Drawing options (docs/views/ATLAS.md entries 1, 5, 9 and 10), switched with &draw=<name>; the first of each list is the default.
+# Every one is a way of drawing chosen by the app, so every one is invented.
+s["draw"] = {
+    "gaze": [{"name": "stamps", "invented": True, "note": "the hunting strip; each past fixation stays as a sharp thumbnail where it was taken and fades over gaze.ior"},
+             {"name": "strip", "invented": True, "note": "the hunting strip alone"},
+             {"name": "face", "invented": True, "note": "the front camera, so the person is the one looked at"}],
+    "sharpness": [{"name": "paint", "invented": True, "note": "while a thumb is held on the picture the strip follows it; when it lifts the movement map leads again"}],
+    "colour": [{"name": "two", "invented": True, "note": "the strip carries the principal eyes' two classes and the surround the side eyes' one; the classes are measured, the display mapping is the app's"},
+               {"name": "palm", "invented": True, "note": "adds the guessed ultraviolet under the strip felt in the hand: vibration where the browser allows it (Android), a fine moving grain otherwise (iOS)"}],
+    "surround": [{"name": "glow", "invented": True, "note": "the coarse green picture with movement glowing faintly"},
+                 {"name": "pond", "invented": True, "note": "still things fade out of the surround, and only movement and the strip remain"}],
+}
 s["falls_back_to"] = "spider"
 s["applies_to"] = {"family": ["Salticidae"]}
 fmt = subprocess.run(["node", "-e", "const {fmt}=require(process.argv[1]);let d='';process.stdin.on('data',c=>d+=c).on('end',()=>process.stdout.write(fmt(JSON.parse(d))+'\\n'))",

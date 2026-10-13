@@ -10,7 +10,7 @@ function load(file, specs) {
   vm.runInContext(L.slice(a, b).join('\n').replace('/*@SPECS@*/{}', JSON.stringify(specs || {})) + '\n;this.EYES = EYES; this.TRY = TRY;', ctx);
   return Object.assign({}, ctx.EYES, ctx.TRY);
 }
-const sorted = x => Array.isArray(x) ? x.map(sorted) : x && typeof x === 'object' ? Object.keys(x).sort().reduce((o, k) => (x[k] === undefined ? o : (o[k] = sorted(x[k]), o)), {}) : x;
+const sorted = x => Array.isArray(x) ? x.map(sorted) : x && typeof x === 'object' ? Object.keys(x).sort().reduce((o, k) => (x[k] === undefined || k === 'draw' ? o : (o[k] = sorted(x[k]), o)), {}) : x;
 const specs = {};
 for (const f of fs.readdirSync(path.join(root, 'views'))) if (f.endsWith('.json') && f !== 'index.json') specs[f.slice(0, -5)] = JSON.parse(fs.readFileSync(path.join(root, 'views', f), 'utf8'));
 const old = load(process.argv[2]), now = load(path.join(root, 'src', 'cam.a.js'), specs);

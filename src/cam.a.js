@@ -20,6 +20,7 @@
   // x = left out. Specs with "offered": true are the views the app offers; the rest are reached only with ?try=<key>.
   var I3 = [1, 0, 0, 0, 1, 0, 0, 0, 1];
   var SPECS = /*@SPECS@*/{};
+  var LIGHT = { lum: 0, raw: 0, col: [0, 0, 0], dir: [.5, .5], shock: 0, at: 0, reads: 0, cells: null };   // written by the light module (src/cam.b.js)
   var FLOOR = /*@FLOOR@*/{};   // docs/views/floor.json: the smallest visible change of each parameter, by view
   function isParam(x) { return !!x && typeof x === 'object' && !Array.isArray(x) && x.hasOwnProperty('grade') && (x.hasOwnProperty('value') || x.hasOwnProperty('curve')); }
   function specValue(x, spec, mats, key) {
@@ -30,21 +31,30 @@
     if (x && typeof x === 'object') { var o = {}, k; for (k in x) o[k] = specValue(x[k], spec, mats, k); return o; }
     return x;
   }
-  // A value given against a measured input ({ curve: 'lux', points: [[x, v], ...] }) takes its first point until the light module
-  // reports the input; the light module replaces this.
-  function specCurve(p) { return p.points && p.points.length ? p.points[0][1] : 0; }
+  // A value given against a measured input ({ curve: 'lux', points: [[x, v], ...] }) is interpolated in the logarithm of light, x being
+  // log10 of the light module's relative level (LIGHT.lum, 0 to 1 of the camera's exposure; absolute light needs the exposure time, which
+  // most browsers do not report). Before the first reading it takes the first point. The page recomputes such a view twice a second.
+  function specCurve(p) {
+    var P = p.points || []; if (!P.length) return 0;
+    if (!LIGHT.reads) return P[0][1];
+    var x = Math.log(Math.max(LIGHT.lum, 1e-3)) / Math.LN10, i;
+    if (x <= P[0][0]) return P[0][1];
+    for (i = 1; i < P.length; i++) if (x <= P[i][0]) return P[i - 1][1] + (P[i][1] - P[i - 1][1]) * (x - P[i - 1][0]) / (P[i][0] - P[i - 1][0]);
+    return P[P.length - 1][1];
+  }
   function viewOf(spec) {
     var mats = spec.matrices || {}, v = { chip: spec.chip, who: spec.who, cue: spec.cue }, k, g;
     for (k in spec.params) v[k] = specValue(spec.params[k], spec, mats, k);
     if (spec.zones) v.zones = specValue(spec.zones, spec, mats, 'zones');
     if (spec.gaze) v.gaze = specValue(spec.gaze, spec, mats, 'gaze');
+    if (spec.draw) v.draw = spec.draw;
     if (spec.inputs && spec.inputs.senses) v.senses = specValue(spec.inputs.senses, spec, mats, 'senses');
     if (spec.by && spec.by.genus) { v.byGenus = {}; for (g in spec.by.genus) v.byGenus[g] = specValue(spec.by.genus[g], spec, mats, g); }
     v.rows = (spec.rows || []).map(function (r) { return r.slice(0, 3); });
     return v;
   }
   var EYES = {}, TRY = {};
-  Object.keys(SPECS).forEach(function (k) { (SPECS[k].offered ? EYES : TRY)[k] = viewOf(SPECS[k]); });
+  Object.keys(SPECS).forEach(function (k) { SPECS[k].hasCurve = JSON.stringify(SPECS[k]).indexOf('"curve"') >= 0; (SPECS[k].offered ? EYES : TRY)[k] = viewOf(SPECS[k]); });
   var ORDER = ['cat', 'dog', 'squirrel', 'deer', 'rabbit', 'wader', 'bird', 'hawk', 'alligator', 'reptile', 'frog', 'bee', 'insect', 'plant'];
   // Groups the app can name and cannot yet view the world as (docs/COVERAGE.md, decided by the owner on 12 October 2026).
   // A photo or a typed name in one of them gets the notice that Regards can't view the world as that creature yet, and no
@@ -98,6 +108,11 @@
     if (v.zones && m.zones) o.zones = m.zones.map(function (z) { var w = v.zones[z.id], r = {}, j; if (!w) return z; for (j in z) r[j] = z[j]; for (j in w) r[j] = w[j]; return r; });
     return o;
   }
+  function drawOf(d) {
+    var o = {}, c; if (!d) return o;
+    for (c in d) { var names = d[c].map(function (x) { return x.name; }); o[c] = names.indexOf(TUNE.draw) >= 0 ? TUNE.draw : names[0]; }
+    return o;
+  }
   function paramsOf(m, named) {
     m = withGenus(m || {}, named);
     var s = clamp(180 / (m.fov || 180), .45, 1);
@@ -109,6 +124,9 @@
       pan: m.sweep ? m.sweep[0] : 0, panS: m.sweep ? m.sweep[1] : 1 };
     P.glowC = m.glowC || [1, 1, 1];
     P.zones = m.zones ? m.zones.slice(0, 4).map(function (z) { return zoneOf(z, P); }) : null;
+    // drawing options (&draw=, docs/views/ATLAS.md): each category's first option is the default
+    P.draw = drawOf(m.draw); P.palm = P.draw.colour === 'palm' ? 1 : 0; P.stamps = P.draw.gaze === 'stamps' ? 1 : 0;
+    if (P.draw.surround === 'pond') { P.gate = 1; if (P.zones) P.zones.forEach(function (z) { z.gate = z.gaze ? 0 : 1; }); }   // still things fade out
     P.gz = m.gaze || null; P.senses = m.senses || null; P.water = m.water || null; P.waterC = m.waterC || null;
     return P;
   }
@@ -132,7 +150,7 @@
     var src = t > .5 ? b : a;                      // the pace of movement switches whole, half way
     o.persist = src.persist; o.hold = src.hold; o.thrust = src.thrust; o.rate = src.rate; o.gate = t > .5 ? b.gate * clamp(t * 2 - 1, 0, 1) : 0;
     var z = b.zones || b.sal ? b : a;               // what comes with zones keeps to the view that has them
-    o.glowC = z.glowC; o.gz = z.gz; o.senses = z.senses; o.waterC = (b.water ? b : a).waterC;
+    o.glowC = z.glowC; o.gz = z.gz; o.draw = z.draw; o.senses = z.senses; o.waterC = (b.water ? b : a).waterC;
     o.water = a.water || b.water ? [0, 1, 2, 3].map(function (i) { return lerp(a.water ? a.water[i] : 0, b.water ? b.water[i] : 0, t); }) : null;
     o.zones = a.zones || b.zones ? mixZones(a, b, t) : null;
     return o;

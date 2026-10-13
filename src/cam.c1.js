@@ -327,7 +327,7 @@
     S.animalPhoto = null; S.meetingId = null; S.nov = ''; S.seq++; S.token++;
     function live() { thaw(); setEyes(key, named); go('animal'); showName(); later(startChange, calm ? 150 : 750); }
     function still() { showStill(blankStill(), false); setEyes(key, named); setViewPrompt(key); go('askView'); }
-    openCamera('environment').then(live, still);
+    openCamera(TUNE.draw === 'face' ? 'user' : 'environment').then(live, still);
     return true;
   }
   function afterChange() {

@@ -373,10 +373,66 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       r.errors = errors;
       if (process.env.TRACE) fs.writeFileSync(process.env.TRACE.replace(/(\.json)?$/, '-' + key + '.json'), JSON.stringify(trace, null, 1));
       await ctx.close();
+      if (r.probe.glErr) errors.push('GL error ' + r.probe.glErr);
+      if (/draw=palm|draw=pond|draw=strip|draw=face/.test(process.env.EXTRA || '') === false && key === 'jumper' && process.env.STAMPS && !(r.probe.stamps > 0)) errors.push('no stamp of attention was left');
+      if (key === 'jumper' && !(r.probe.light > 0)) errors.push('the light module read nothing');
       const ok = r.eyes === key && r.rows >= 6 && !errors.length && r.probe.zones && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)));
       if (!ok) bad.push(key);
     }
     if (bad.length) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: these views being tried did not behave as they should: ' + bad.join(', ')); }
+  }
+
+  if (mode === 'floor') {
+    // The visibility floor (docs/ENGINE-DESIGN.md, section 5), on a still picture: the view (FLOOR_VIEW, jumper) at 390 by 844 CSS pixels
+    // and a device pixel ratio of 2, the clip paused at FLOOR_T seconds and the gaze pinned, rendered at a parameter's value v and at v + d;
+    // d is doubled until the 95th percentile of delta E*ab between the renders passes FLOOR_DE (2.3, see docs/views/floor.json), then
+    // bisected four times. FLOOR_PARAMS lists tuning-panel labels (all of the view's scalars by default); FLOOR_VALUES the number of values
+    // across each range (1: the spec's value only). Results go to FLOOR_OUT (docs/views/floor.json's form). Temporal parameters need the
+    // moving clip and are not measured here.
+    const view = process.env.FLOOR_VIEW || 'jumper', DE = +(process.env.FLOOR_DE || 2.3), tmp = fs.mkdtempSync(path.join(require('os').tmpdir(), 'floor-'));
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, userAgent: phone.userAgent });
+    const page = patient(await ctx.newPage()); const errors = [];
+    page.on('pageerror', (e) => errors.push(e.message));
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+    await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+    await page.goto(HTTP + '&try=' + view + '&tune=1&draw=strip'); await page.waitForTimeout(500);
+    await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+    await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', 'scene.webm'));
+    await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+    await page.evaluate((t) => { const v = document.getElementById('vid'); v.pause(); v.currentTime = t; window.__seenBack.tune.hide(true); window.__seenBack.engine.pinGaze(.5, .5); }, +(process.env.FLOOR_T || 2));
+    await page.waitForTimeout(3000); await page.evaluate(() => window.__seenBack.pose(null));
+    const specs = await page.evaluate(() => { const t = window.__seenBack.tune; return t.list(); });
+    const want = (process.env.FLOOR_PARAMS ? process.env.FLOOR_PARAMS.split(',') : specs);
+    const info = await page.evaluate((v) => window.__seenBack.tuneInfo ? window.__seenBack.tuneInfo() : null, view);
+    let n = 0;
+    async function render(lab, x) {
+      await page.evaluate(([l, v]) => window.__seenBack.tune.set(l, v), [lab, x]); await page.waitForTimeout(+(process.env.FLOOR_WAIT || 1800));
+      const f = path.join(tmp, (n++) + '.png'); await page.locator('canvas').first().screenshot({ path: f }); return f;
+    }
+    const de = (a, b) => JSON.parse(require('child_process').execFileSync('python3', ['-I', path.join(here, '..', 'tools', 'views', 'delta_e.py'), a, b]).toString());
+    const res = {}, NV = +(process.env.FLOOR_VALUES || 1);
+    for (const lab of want) {
+      const meta = info && info[lab]; if (!meta) { res[lab] = 'no such parameter'; continue; }
+      const [lo, hi, v0] = meta, vals = NV <= 1 ? [v0] : Array.from({ length: NV }, (_, i) => lo + (hi - lo) * (i + .5) / NV);
+      res[lab] = [];
+      for (const v of vals) {
+        const a = await render(lab, v); let d = (hi - lo) / 64, up = v + d <= hi ? 1 : -1, seen = null, lastNo = 0, e = null;
+        while (Math.abs(d) <= (hi - lo)) {
+          const b = await render(lab, v + up * d); e = de(a, b);
+          if (e.p95 > DE) { seen = d; break; } lastNo = d; d *= 2;
+          if (v + up * d > hi || v + up * d < lo) break;
+        }
+        if (seen === null) { res[lab].push([v, 'invisible', e && e.p95]); continue; }
+        let A = lastNo, B = seen;
+        for (let i = 0; i < 4; i++) { const m = (A + B) / 2, b = await render(lab, v + up * m); if (de(a, b).p95 > DE) B = m; else A = m; }
+        res[lab].push([+v.toPrecision(4), +B.toPrecision(3)]);
+        await render(lab, v0);
+      }
+      console.log(lab, JSON.stringify(res[lab]));
+    }
+    out.floor = { view: view, threshold: DE, errors: errors, floor: res };
+    if (process.env.FLOOR_OUT) fs.writeFileSync(process.env.FLOOR_OUT, JSON.stringify(out.floor, null, 1));
+    await ctx.close();
   }
 
   if (mode === 'perf') {
