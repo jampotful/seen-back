@@ -1,0 +1,6 @@
+# canon-5: Caves et al. bird acuity dataset logged; remaining open-access compilations (14 October 2026)
+
+Worktree /tmp/wscanon5, branch research/canon-5. Evidence in docs/views/evidence/canon-5.jsonl, wanted lines in docs/views/wanted/canon-5.jsonl. Started 14:15 EDT.
+
+## Done
+- Caves, Fernandez-Juricic and Kelley 2024, J Exp Biol 227: jeb246063 (in hand, marked full). The Drive copy is the main article only (12 pages, no Table S1 or S2), so the species data were read from the paper's deposited dataset, Dryad 10.5061/dryad.bzkh189g3 mirrored at Zenodo record 10498392 (CC0). Bird_Acuity_Data.csv read whole through the fetch tool (zenodo.org/api/records/10498392/files/<name>/content; the records/.../files/...?download=1 route returned 429): 94 rows, each logged twice, acuity_cpd (grade m, value and method from the row) and diel (grade g: the Nocturnal flag is the authors' classification from EltonTraits, not a measurement). Behav_and_RGC_Data.csv (the paper's Table S2, 28 species of five classes measured by both methods) logged as 28 acuity_cpd records with both values. Quotes are the CSV lines, in two or three consecutive pieces where a line exceeds the fetch tool's cap; `where` names the split points. Family names kept as printed (Melphagidae, Procellaridae, Canachites_candensis are the file's spellings). 216 records.
