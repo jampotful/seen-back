@@ -1,0 +1,36 @@
+name: quiet-alert
+# Tells the owner when the research goes quiet (no commit on any branch for a while), so a used-up Claude allowance
+# gets its reset while they are away. Uses none of the Claude allowance. Settings: docs/tracks/watch.json; the script
+# and its rules: tools/watch/quiet.py. Run it by hand with "test" ticked to send one test alert.
+on:
+  schedule:
+    - cron: '4,19,34,49 * * * *'
+  workflow_dispatch:
+    inputs:
+      test:
+        description: 'Send one test alert and close it at once'
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: quiet-alert
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools/watch
+            docs/tracks/watch.json
+          sparse-checkout-cone-mode: false
+      - name: look for a quiet spell
+        run: python3 -I tools/watch/quiet.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          TEST: ${{ inputs.test }}
