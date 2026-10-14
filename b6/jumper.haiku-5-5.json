@@ -1,0 +1,293 @@
+{
+ "key": "jumper",
+ "version": 1,
+ "chip": "Jumping spider",
+ "who": "a jumping spider",
+ "cue": "Hold still and watch. A jumping spider sees a small sharp strip well, and the rest of the scene in movement.",
+ "applies_to": {
+  "family": [
+   "Salticidae"
+  ]
+ },
+ "modules": [],
+ "inputs": {
+  "motion": "optional"
+ },
+ "params": {
+  "M": "JUMP",
+  "cpd": {
+   "value": 12.4,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "jumper.jsonl:Williams 1980",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   "note": "principal eye acuity of Portia fimbriata; the family's other species are lower",
+   "range": [
+    0.005,
+    40
+   ]
+  },
+  "fov": {
+   "value": 300,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "spider-day.jsonl:E 2023",
+    "spider-day.jsonl:Rößler 2021"
+   ],
+   "note": "whole-animal field from the secondary eyes, near 300 to 360 degrees",
+   "range": [
+    100,
+    360
+   ]
+  },
+  "fovea": {
+   "value": 2.2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "scale of the sharp middle; chosen by the app from the narrow principal-eye field"
+  },
+  "gate": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how much still things fade; movement is favoured but still objects stay faint"
+  },
+  "persist": {
+   "value": 0.1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how long the picture lingers",
+   "range": [
+    0,
+    60
+   ]
+  },
+  "pupil": "o",
+  "sat": {
+   "value": 0.9,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "colour is kept, as the principal eyes see colour",
+   "range": [
+    0,
+    1.5
+   ]
+  },
+  "fall": {
+   "value": 2.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how fast sharpness falls with light",
+   "range": [
+    0,
+    3
+   ]
+  },
+  "glow": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how brightly movement glows",
+   "range": [
+    0,
+    2
+   ]
+  },
+  "glowC": {
+   "value": [
+    0.78,
+    1,
+    0.62
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the glow's colour",
+   "range": [
+    0,
+    1
+   ]
+  },
+  "topoA": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "sharpness falls from the middle along the long axis, by analogy with other small predators",
+   "range": [
+    0,
+    2
+   ]
+  },
+  "noGreen": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "no green removed",
+   "range": [
+    0,
+    1
+   ]
+  },
+  "uvBlue": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the blue channel stands in for ultraviolet"
+  }
+ },
+ "matrices": {
+  "JUMP": {
+   "grade": "i",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:DeVoe 1975",
+    "jumper.jsonl:Glenszczyk 2021",
+    "jumper.jsonl:Yamashita 1976",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   "note": "a dichromat's view: ultraviolet and green receptors, the blue channel standing in for ultraviolet",
+   "rows": [
+    [
+     0,
+     0.3,
+     0.7
+    ],
+    [
+     0,
+     0.3,
+     0.7
+    ],
+    [
+     0.5,
+     0.5,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [],
+ "rows": [
+  [
+   "m",
+   "Sharp middle",
+   "The principal eyes resolve fine detail better than most animals of this size. A Portia spider reaches about 12 cycles per degree, and a Phidippus about 4, so the sharpest part of the picture is near a person's own.",
+   [
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Williams 1980",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Narrow sharp field",
+   "The principal eyes see only a thin upright strip, about 2 degrees wide and 21 high in Phidippus johnsoni. The spider turns its eyes to scan across the scene, so the sharp strip moves over the picture.",
+   [
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Land 1969"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "Wide, dim surround",
+   "Four pairs of eyes see the rest of the world. The side eyes see movement across nearly the whole circle around the spider, and they are much blurrier.",
+   [
+    "jumper.jsonl:Goté 2019",
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Land 2012",
+    "spider-day.jsonl:Rößler 2021"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "Jumping spiders have two colour receptors in the principal eyes, one ultraviolet and one green. Saitis barbipes and Plexippus validus both showed these two classes, so the picture is a dichromat's picture.",
+   [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Glenszczyk 2021"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "g",
+   "Movement",
+   "The side eyes respond to movement and little else, and a still object stays unseen until it moves. Metaphidippus harfordi turned only to targets that moved.",
+   [
+    "jumper.jsonl:De Agrò 2024",
+    "jumper.jsonl:Land 1971"
+   ],
+   [
+    "params.gate"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "Sharpness falls away from the middle, the blue channel stands in for ultraviolet, and the glow and the lingering picture are the app's drawing. None of these numbers is measured in this animal.",
+   [],
+   [
+    "params.fovea",
+    "params.gate",
+    "params.persist",
+    "params.topoA",
+    "params.uvBlue",
+    "params.glow",
+    "params.glowC",
+    "params.fall",
+    "params.sat",
+    "params.M"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "params.noGreen",
+    "matrices.JUMP"
+   ]
+  ]
+ ],
+ "draw": {
+  "field": [
+   {
+    "name": "wedge",
+    "invented": true,
+    "note": "the sharp strip shown as a wedge"
+   }
+  ],
+  "overlay": [
+   {
+    "name": "off",
+    "invented": true,
+    "note": "no overlay"
+   }
+  ]
+ },
+ "falls_back_to": "spider",
+ "draft": true
+}

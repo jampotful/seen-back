@@ -1,0 +1,257 @@
+{
+ "key": "primate",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "matrices.primate_trichro: peak 561 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it",
+  "matrices.primate_trichro: peak 539 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it",
+  "matrices.primate_trichro: peak 430 nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. Single peaks from records graded m on the view's own taxon: 430 nm (R31), 491 nm (R25), 530 nm (R32), 539 nm (R24), 543 nm (R28), 546 nm (R29), 558 nm (R33), 561 nm (R23), 562 nm (R35), 562 nm (R36), 562 nm (R37), 563 nm (R34), 563 nm (R38), 564 nm (R26), 564 nm (R30), 575 nm (R27). Put the records you use in src and keep the colour matrix; do not drop it"
+ ],
+ "reply": {
+  "spec": {
+   "key": "primate",
+   "chip": "Monkey or ape",
+   "who": "a monkey or ape",
+   "cue": "Three kinds of colour sensor in many species, a sharp middle, and eyes that dart about.",
+   "applies_to": {
+    "order": [
+     "Primates"
+    ],
+    "not_family": [
+     "Hominidae:Homo"
+    ]
+   },
+   "falls_back_to": "mammal",
+   "modules": [],
+   "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "version": 1,
+   "draft": true,
+   "params": {
+    "M": {
+     "value": "primate_trichro",
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the three peaks sit near marmoset, owl monkey and cynomolgus records; the mapping is the app's"
+    },
+    "cpd": {
+     "value": 21.4,
+     "grade": "m",
+     "invented": true,
+     "src": [
+      "R12"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "floor": null,
+     "note": "the stumptail macaque figure, converted from 1.4 arc minutes; the app takes this one animal's value as its picture of sharpness"
+    },
+    "fovea": {
+     "value": 2.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.5,
+      5
+     ],
+     "floor": null,
+     "note": "the app's choice of sharp-middle scale; no record gives a fovea scale for these animals"
+    },
+    "fov": {
+     "value": 180,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      100,
+      360
+     ],
+     "floor": null,
+     "note": "no whole-field measurement was found; a person's width is used"
+    },
+    "pupil": "o",
+    "gain": {
+     "value": 1.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "floor": null,
+     "note": "no dim-light ratio was found for these animals"
+    },
+    "sat": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "floor": null,
+     "note": "a person's saturation"
+    },
+    "rate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.25,
+      2
+     ],
+     "floor": null,
+     "note": "no flicker figure was taken for these animals"
+    }
+   },
+   "matrices": {
+    "primate_trichro": {
+     "from_pigments": [
+      561,
+      539,
+      430
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "peaks near the marmoset, owl monkey and cynomolgus records; the mapping is the app's"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Colour",
+     "Many monkeys and apes see three kinds of colour sensor; some New World species have only two, and owl monkeys see no colour at all.",
+     [
+      "R39",
+      "R50",
+      "R52",
+      "R146",
+      "R143",
+      "R137"
+     ],
+     []
+    ],
+    [
+     "m",
+     "Sharpness",
+     "A stumptail macaque with normal eyes resolves about 21 cycles per degree, close to a person's figure. A marmoset's fovea is estimated to resolve about 30. We blur the picture to about 21, the stumptail's figure.",
+     [
+      "R12",
+      "R2",
+      "R4"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Eyes that dart",
+     "Monkeys make small, quick eye movements even while they fix, averaging about half a degree. Microsaccades in rhesus monkeys average about 29 minutes of arc.",
+     [
+      "R68",
+      "R69",
+      "R70"
+     ],
+     []
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The sharp middle, the field width, the gain, the saturation, the frame rate and the picture's colour mapping are the app's choices, since no record gave them for these animals.",
+     [
+      "R17",
+      "R18"
+     ],
+     [
+      "params.fovea",
+      "params.fov",
+      "params.gain",
+      "params.sat",
+      "params.rate",
+      "params.M"
+     ]
+    ]
+   ],
+   "zones": []
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R12"
+    ],
+    "kind": "value",
+    "how": "The stumptail macaque's 1.4 arc minutes converts to 21.4 cycles per degree by 1 / (2 x 1.4/60), so the value is the record's converted figure."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R12",
+    "quote": "Visual acuity in a normal stumptail macaque is 1.4 minutes of arc-similar to man's."
+   },
+   {
+    "record": "R2",
+    "quote": "The foveal acuity predicted by the Nyquist limits set by the cone mosaic (30 c/deg) is in agreement with behavioral measures of visual acuity."
+   },
+   {
+    "record": "R4",
+    "quote": "The spatial resolution of the photoreceptor mosaic in the marmoset is therefore estimated to be close to 30 cycles/degree"
+   },
+   {
+    "record": "R68",
+    "quote": "28.8 ± 23.4 min arc for control"
+   },
+   {
+    "record": "R69",
+    "quote": "ranged between 0.15 and 2.4◦ in Monkey C"
+   },
+   {
+    "record": "R70",
+    "quote": "between 0.04 and 1.6◦ in Monkey E"
+   },
+   {
+    "record": "R39",
+    "quote": "to allow effective stimulation of all 3 cone types"
+   },
+   {
+    "record": "R50",
+    "quote": "Color perception in macaque monkeys and humans depends on the visually evoked activity in three cone photoreceptors"
+   },
+   {
+    "record": "R52",
+    "quote": "Macaca monkey and humans have three cone types containing either long-wavelength (L), medium-wavelength (M), or short-wavelength (S)-specific opsin"
+   },
+   {
+    "record": "R146",
+    "quote": "We compared marmosets which were identified as having dichromatic or trichromatic color vision."
+   },
+   {
+    "record": "R143",
+    "quote": "owl monkeys (Aotus), the sole nocturnal anthropoid primates, are the cone monochromacy due to the loss of functional S opsin gene"
+   },
+   {
+    "record": "R137",
+    "quote": "Because the retinas of these species have only a single type of M/L cone, they lack colour vision."
+   },
+   {
+    "record": "R17",
+    "quote": "to allow 24 degrees or 37 degrees of unrestricted central vision, respectively"
+   },
+   {
+    "record": "R18",
+    "quote": "maximum lateral visual field eccentricity with eyeball abduction ( Pan -like: 115°; human: 136.1°)"
+   }
+  ]
+ }
+}

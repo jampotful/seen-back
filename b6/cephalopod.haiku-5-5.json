@@ -1,0 +1,326 @@
+{
+ "key": "cephalopod",
+ "chip": "Octopus, squid or cuttlefish",
+ "who": "an octopus, squid or cuttlefish",
+ "applies_to": {
+  "class": [
+   "Cephalopoda"
+  ]
+ },
+ "cue": "Edges are soft and the eye sees little colour. Tap the screen to move the focus.",
+ "modules": [
+  "tilt"
+ ],
+ "params": {
+  "M": "cephalopod_mono",
+  "cpd": {
+   "value": 6,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Taniguchi 2015",
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the records span 0.63 to 12.23 cycles per degree for squid and octopus, with a cuttlefish figure of 8; 6 is the app's middle choice"
+  },
+  "fov": {
+   "value": 180,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "cephalopods.jsonl:Land 1992"
+   ],
+   "range": [
+    100,
+    360
+   ]
+  },
+  "topoA": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "by analogy with the house cat"
+  },
+  "topoS": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ]
+  },
+  "fall": {
+   "value": 1.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ]
+  },
+  "pupil": "h",
+  "dof": {
+   "value": 8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    40
+   ]
+  },
+  "sat": {
+   "value": 0.2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "little colour, since most records say the group sees no colour"
+  },
+  "gain": {
+   "value": 1.3,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    4
+   ]
+  },
+  "rate": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0.25,
+    2
+   ]
+  },
+  "sheen": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "no tapetum is recorded, so the app sets no sheen"
+  },
+  "uvBlue": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ]
+  },
+  "noGreen": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ]
+  }
+ },
+ "matrices": {
+  "cephalopod_mono": {
+   "rows": [
+    [
+     0.33,
+     0.33,
+     0.33
+    ],
+    [
+     0.33,
+     0.33,
+     0.33
+    ],
+    [
+     0.33,
+     0.33,
+     0.33
+    ]
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "one visual pigment in most records, so one brightness channel"
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the view as it was"
+   },
+   {
+    "name": "window",
+    "invented": true,
+    "note": "Snell's window always on, centred, as a remap of the field with no tilt needed"
+   }
+  ],
+  "tilt": [
+   {
+    "name": "level",
+    "invented": true,
+    "note": "the view as it was"
+   },
+   {
+    "name": "snell",
+    "invented": true,
+    "note": "point the phone up and the scene above is pressed into a disc about 97 degrees across"
+   }
+  ]
+ },
+ "tilt": {
+  "fromDeg": {
+   "value": 15,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    60
+   ]
+  },
+  "fullDeg": {
+   "value": 45,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    20,
+    90
+   ]
+  }
+ },
+ "inputs": {
+  "motion": "optional",
+  "sound": "none",
+  "haptic": "none",
+  "senses": {
+   "motion": 1
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "An octopus resolves about 3 to 12 cycles per degree, and a cuttlefish about 8. A squid resolves about 0.6, so the screen is blurred to what the animal would keep. The picture uses a middle value of 6.",
+   [
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Taniguchi 2015",
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "Most records say the group has one visual pigment and sees no colour. The picture is therefore drawn in one brightness channel, with only a little colour left.",
+   [
+    "cephalopods.jsonl:A 2016",
+    "cephalopods.jsonl:Chung 2014",
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:How 2017"
+   ],
+   [
+    "params.M",
+    "params.sat"
+   ]
+  ],
+  [
+   "g",
+   "Field",
+   "An octopus or squid sees about 180 degrees on one side, and a squid of 7 days old sees about 311 degrees. The picture uses a wide field of 180 degrees.",
+   [
+    "cephalopods.jsonl:Land 1992",
+    "cephalopods.jsonl:Sugimoto 2026"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "i",
+   "How it is drawn",
+   "The soft edges, the shallow focus, the slit pupil, the brightness channel and the lack of sheen are the app's own choices, set inside the measured ranges. Polarised light is not drawn, because no engine setting carries it.",
+   [
+    "cephalopods.jsonl:Chung 2017",
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Roura Á 2023",
+    "cephalopods.jsonl:Vee 2022"
+   ],
+   [
+    "params.topoA",
+    "params.topoS",
+    "params.fall",
+    "params.dof",
+    "params.pupil",
+    "params.M",
+    "params.gain",
+    "params.sheen"
+   ]
+  ],
+  [
+   "g",
+   "Where it is sharp",
+   "The sharp middle and the soft edge of the picture are the app's guess, since the records describe a central streak in the retina but give no sharpness across the field.",
+   [
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Sugimoto 2026"
+   ],
+   [
+    "params.topoA",
+    "params.topoS"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "params.cpd",
+    "params.sat",
+    "params.rate",
+    "params.uvBlue",
+    "params.noGreen",
+    "tilt.fromDeg",
+    "tilt.fullDeg",
+    "matrices.cephalopod_mono"
+   ]
+  ]
+ ],
+ "version": 1,
+ "zones": [],
+ "clock": null,
+ "falls_back_to": "fish",
+ "draft": true
+}

@@ -1,0 +1,387 @@
+{
+ "key": "jumper",
+ "version": 1,
+ "chip": "Jumping spider",
+ "who": "a jumping spider",
+ "cue": "Let your eyes roam. A small sharp patch finds the colour and the detail, and the wide blurry rest watches for anything that moves.",
+ "applies_to": {
+  "family": [
+   "Salticidae"
+  ]
+ },
+ "params": {
+  "fov": {
+   "value": 360,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "jumper.jsonl:Harland 2012",
+    "spider-day.jsonl:Lauren 2018"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the three pairs of side eyes together cover close to the full circle"
+  },
+  "cpd": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "a soft picture for the side eyes, which see most of the frame"
+  },
+  "M": {
+   "value": "SALTICID",
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's own mapping of the two measured pigments onto a phone picture"
+  },
+  "uvBlue": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the phone cannot record ultraviolet, so its blue channel stands in for it"
+  },
+  "sat": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "the side eyes are drawn without colour; the sharp middle puts it back"
+  },
+  "gate": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "outside the sharp middle, still things fade away"
+  },
+  "pupil": "o"
+ },
+ "matrices": {
+  "SALTICID": {
+   "from_pigments": [
+    360,
+    530
+   ],
+   "src": [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   "note": "one ultraviolet pigment near 360 nm and one green pigment near 530 nm",
+   "rows": [
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [
+  {
+   "id": "principal",
+   "shape": "ellipse",
+   "at": {
+    "value": [
+     0,
+     0
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the sharp patch sits in the middle of the picture; the gaze block moves it around"
+   },
+   "deg": {
+    "value": [
+     5,
+     20
+    ],
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "spider-day.jsonl:Shepeleva 2021"
+    ],
+    "note": "width and height of the sharp patch, in degrees"
+   },
+   "cpd": {
+    "value": 3.8,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "jumper.jsonl:Harland 2012"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "worked out from 0.13 degrees between receptors in a typical jumping spider"
+   },
+   "gate": 0,
+   "sat": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "colour returns in the sharp patch"
+   },
+   "M": "SALTICID"
+  }
+ ],
+ "gaze": {
+  "sweep": {
+   "value": [
+    2,
+    1.5
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Land 1969"
+   ],
+   "note": "side-to-side scan: at least 2 degrees across, once every 1 to 2 seconds"
+  },
+  "twist": {
+   "value": [
+    25,
+    2000,
+    3500
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Land 1969"
+   ],
+   "note": "the retinas turn about 25 degrees each way, taking about 2 seconds and holding each end for 2 to 5 seconds"
+  },
+  "ior": {
+   "value": 5000,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Ferrante 2024",
+    "spider-day.jsonl:Ferrante 2024"
+   ],
+   "note": "for about 5 seconds the side eyes ignore the place the sharp eyes just inspected"
+  },
+  "iorDeg": {
+   "value": 5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    30
+   ],
+   "note": "how wide the ignored place is; the records give no figure"
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the full circle of side-eye vision is squeezed into the phone's frame"
+   }
+  ],
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "the picture is recoloured through the two-pigment matrix"
+   }
+  ],
+  "gaze": [
+   {
+    "name": "stamps",
+    "invented": true,
+    "note": "the sharp patch jumps to each new place of interest and stamps a clear image there"
+   }
+  ],
+  "sharpness": [
+   {
+    "name": "paint",
+    "invented": true,
+    "note": "sharpness is painted as a clear middle fading into blur"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "g",
+   "Ultraviolet and green",
+   "Most jumping spiders build their colour from two pigments in the large front eyes. One peaks in the ultraviolet near 360 nm and the other in the green near 530 nm. Red and orange have no receptor of their own, so they shift toward dark green.",
+   [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   [
+    "params.M",
+    "params.uvBlue"
+   ]
+  ],
+  [
+   "g",
+   "Colour only in the middle",
+   "The sharp front eyes carry the colour. The side eyes give a single-pigment picture at lower sharpness, so the colour is kept to the sharp patch. Later work on the genes suggests the side eyes may carry some colour, which this picture leaves out.",
+   [
+    "jumper.jsonl:Goté 2019",
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Steck 2024",
+    "spider-day.jsonl:Lauren 2018"
+   ],
+   [
+    "params.sat",
+    "zones[0].sat",
+    "zones[0].M"
+   ]
+  ],
+  [
+   "m",
+   "A small sharp patch",
+   "Each front eye has a narrow strip of retina, about 5 degrees across and 20 high. A typical jumping spider can pick out about 3.8 cycles per degree there, around an eighth of your sharpness. Portia is the star, at 12.5 cycles per degree.",
+   [
+    "jumper.jsonl:Harland 2012",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "zones[0].cpd",
+    "zones[0].deg"
+   ]
+  ],
+  [
+   "g",
+   "Wide and blurry",
+   "The side eyes together cover close to the whole circle around the animal. They are blurry, with about 0.3 to 1.3 cycles per degree in the front side eyes, so most of the picture is soft.",
+   [
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Shepeleva 2022",
+    "spider-day.jsonl:Lauren 2018"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Only movement reaches the sides",
+   "With the front eyes covered, the side eyes behave as if completely blind to stationary things. A light that only switches on and off draws no reaction.",
+   [
+    "jumper.jsonl:Land 1971",
+    "spider-day.jsonl:Zurek 2010"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Roving eyes",
+   "The front retinas sweep side to side across what they inspect, at least 2 degrees wide, once every 1 to 2 seconds. They also twist about 25 degrees each way, taking about 2 seconds and pausing for 2 to 5 seconds at each end. After the front eyes inspect a place, the side eyes ignore it for about 5 seconds.",
+   [
+    "jumper.jsonl:Ferrante 2024",
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Ferrante 2024",
+    "spider-day.jsonl:Land 1969"
+   ],
+   [
+    "gaze.sweep",
+    "gaze.twist",
+    "gaze.ior"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The app draws the side eyes soft and grey and the sharp patch in colour. It uses the phone's blue channel in place of ultraviolet, starts the sharp patch at the centre of the picture, and fades still things outside it. The softness of the side eyes and the size of the ignored place after an inspection are guesses. The squeeze into the frame, the stamped images and the painted blur are the app's drawings.",
+   [],
+   [
+    "params.cpd",
+    "params.M",
+    "params.uvBlue",
+    "params.sat",
+    "params.gate",
+    "zones[0].at",
+    "zones[0].cpd",
+    "zones[0].sat",
+    "gaze.iorDeg"
+   ]
+  ],
+  [
+   "x",
+   "A third colour in some species",
+   "The Habronattus spiders have a filtered third receptor that reaches into the red, near 626 nm. This picture leaves it out because most jumping spiders have two pigments.",
+   [
+    "jumper.jsonl:Zurek 2015"
+   ],
+   []
+  ]
+ ],
+ "falls_back_to": "spider",
+ "modules": [
+  "gaze",
+  "zones"
+ ],
+ "draft": true
+}

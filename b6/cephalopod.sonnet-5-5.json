@@ -1,0 +1,303 @@
+{
+ "key": "cephalopod",
+ "chip": "Octopus, squid or cuttlefish",
+ "who": "an octopus, squid or cuttlefish",
+ "falls_back_to": null,
+ "applies_to": {
+  "class": [
+   "Cephalopoda"
+  ]
+ },
+ "cue": "Everything is one shade, with a sharp band across the middle and a very wide field.",
+ "params": {
+  "cpd": {
+   "value": 6.56,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "a squid's measured value, used by the app for the whole picture"
+  },
+  "fov": {
+   "value": 320,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Sugimoto 2026"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "measured in young oval squid only; the squeeze toward this width is the app's"
+  },
+  "M": {
+   "value": "CEPHALOPOD_ONE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:How 2017",
+    "cephalopods.jsonl:Hubbard 1965"
+   ],
+   "note": "one visual pigment; the mapping to the screen is the app's"
+  },
+  "pupil": "h"
+ },
+ "matrices": {
+  "CEPHALOPOD_ONE": {
+   "from_pigments": [
+    480
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "cephalopods.jsonl:Hubbard 1965"
+   ],
+   "note": "one pigment peaking near 480 nanometres, so the picture has a single shade",
+   "rows": [
+    [
+     0.02336,
+     0.3491,
+     0.52395,
+     0.10358
+    ],
+    [
+     0.02336,
+     0.3491,
+     0.52395,
+     0.10358
+    ],
+    [
+     0.02336,
+     0.3491,
+     0.52395,
+     0.10358
+    ]
+   ],
+   "q": [
+    [
+     0.02336,
+     0.3491,
+     0.52395,
+     0.10358
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [
+  {
+   "id": "streak",
+   "shape": "strip",
+   "frac": {
+    "value": 0.3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0.1,
+     0.6
+    ],
+    "note": "how tall the sharp band is on the screen; the app's choice"
+   },
+   "cpd": {
+    "value": 12.23,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "cephalopods.jsonl:Turnbull 2014"
+    ],
+    "range": [
+     3,
+     13
+    ],
+    "note": "an octopus's measured acuity, given to the sharp band by the app"
+   }
+  }
+ ],
+ "by": {
+  "order": {
+   "Octopoda": {
+    "params": {
+     "rate": {
+      "value": 0.83,
+      "grade": "g",
+      "invented": true,
+      "src": [
+       "cephalopods.jsonl:Hanke 2020"
+      ],
+      "range": [
+       0.3,
+       1.2
+      ],
+      "note": "a person's flicker limit near 60 over 72 for octopus in bright light"
+     }
+    }
+   }
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the whole field squeezed into the picture"
+   }
+  ],
+  "overlay": [
+   {
+    "name": "polar",
+    "invented": true,
+    "note": "the app's drawing of contrast in the direction of polarised light"
+   },
+   {
+    "name": "off",
+    "invented": true,
+    "note": "no overlay"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "An octopus resolves about 12 cycles per degree and a squid about 6.6, against a person's 30. Some small octopus species fall between 3 and 7, a cuttlefish is put near 8, and a newly hatched oval squid manages only 0.63. The picture is blurred to a middling value for adults.",
+   [
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Taniguchi 2015",
+    "cephalopods.jsonl:Turnbull 2014"
+   ],
+   [
+    "params.cpd",
+    "zones[0].cpd"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "Almost all of these animals have a single visual pigment, with its peak between 470 and 500 nanometres, near 480 in octopus. With one pigment they cannot tell hues apart, and tests on octopus and on cuttlefish agree. The picture keeps one shade and only the brightness changes.",
+   [
+    "cephalopods.jsonl:A 2016",
+    "cephalopods.jsonl:Chung 2016",
+    "cephalopods.jsonl:How 2017",
+    "cephalopods.jsonl:Hubbard 1965",
+    "cephalopods.jsonl:Mäthger 2010",
+    "cephalopods.jsonl:Nahmad–Rohen 2020"
+   ],
+   [
+    "params.M",
+    "matrices.CEPHALOPOD_ONE"
+   ]
+  ],
+  [
+   "g",
+   "Field",
+   "Young oval squid see about 311 to 329 degrees around themselves. One eye of a cuttlefish covers 253 degrees, and the two eyes of a cuttlefish overlap by 86 degrees in front. Octopuses have no significant overlap. The camera holds a slice of this wide field.",
+   [
+    "cephalopods.jsonl:Allen 2026",
+    "cephalopods.jsonl:Sugimoto 2026",
+    "cephalopods.jsonl:Watanuki 2000"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Where it is sharp",
+   "The receptors of an octopus are packed most densely in a horizontal stripe across the middle of the retina, about 55,000 per square millimetre against 18,000 to 22,000 at the edge. Cuttlefish and squid also have a streak or a patch of crowding. A sharp band runs across the picture.",
+   [
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Talbot 2011"
+   ],
+   [
+    "zones[0].shape",
+    "zones[0].cpd"
+   ]
+  ],
+  [
+   "m",
+   "Pupil",
+   "An octopus pupil is round in the dark and shrinks to a horizontal slit in bright light, down to about a tenth of its dark area. A cuttlefish can shrink its pupil to 3 percent of the widest opening. The picture uses the slit.",
+   [
+    "cephalopods.jsonl:Brauckhoff 2020",
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Soto 2020"
+   ],
+   [
+    "params.pupil"
+   ]
+  ],
+  [
+   "g",
+   "Flicker",
+   "A squid stops seeing flicker near 51 a second and a cuttlefish near 30. An octopus reaches 72 in bright light and only 20 when the light is far dimmer. A person stops near 60, so only the octopus in bright light slows the picture a little.",
+   [
+    "cephalopods.jsonl:GJP 2026",
+    "cephalopods.jsonl:Hanke 2020",
+    "cephalopods.jsonl:Taniguchi 2015"
+   ],
+   [
+    "by.order.Octopoda.params.rate"
+   ]
+  ],
+  [
+   "m",
+   "Polarised light",
+   "Octopuses can pick out differences in the direction of polarised light that a person cannot see at all. Their eyes have two sensitive planes, one horizontal and one vertical. The typical octopus threshold is very fine, at 0.01 on the scale used by the study.",
+   [
+    "cephalopods.jsonl:Talbot 2012",
+    "cephalopods.jsonl:Tasaki 1966",
+    "cephalopods.jsonl:Temple 2021"
+   ],
+   [
+    "draw.overlay"
+   ]
+  ],
+  [
+   "i",
+   "How it is drawn",
+   "The squid value of 6.56 for the whole picture, the width of the squeezed field, the height of the sharp band, the sharpness given to that band, the single-shade mapping, the slowing of the octopus picture and the polarised overlay are the app's own settings, placed inside what the records describe.",
+   [],
+   [
+    "params.cpd",
+    "params.fov",
+    "params.M",
+    "matrices.CEPHALOPOD_ONE",
+    "zones[0].frac",
+    "zones[0].cpd",
+    "by.order.Octopoda.params.rate",
+    "draw.field",
+    "draw.overlay"
+   ]
+  ]
+ ],
+ "version": 1,
+ "modules": [
+  "zones"
+ ],
+ "draft": true
+}
