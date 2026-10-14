@@ -7,8 +7,8 @@ Each file gets one action in PLAN.jsonl:
 - file: it matches a paper on docs/views/wanted-merged.csv (by a DOI or ISBN in its name, a link fragment, its title,
   or its snippet). "name" is "Surname Year Short title.pdf" (with " (partial)" when the owner marked the paper
   partial) and "folder" the paper's folder (a top-level paper goes to a topic folder named after the views that asked
-  for it: Mammals, Reptiles and amphibians, Fish, Plants and fungi, Sea life; the executor creates any that are
-  missing); "page_id" is the paper's id on the Papers Wanted page.
+  for it: Mammals, Reptiles and amphibians, Fish, Plants and fungi, Other invertebrates; nothing is left at the top
+  level); "page_id" is the paper's id on the Papers Wanted page.
 - extra: no match, but its title or snippet names a listed animal or a trait word together with an animal; filed under
   "Extras (not on the list)" with a cleaned name, and read by the intake like any paper.
 - skip: no match and nothing to do with the views (an article on human perception from an issue downloaded whole,
@@ -34,7 +34,8 @@ ANIMAL = re.compile(r'\b(cats?|dogs?|frogs?|toads?|fish|fishes|goldfish|carp|bir
 
 TOPIC = [('Mammals', 'deer dog cat bigcat fox horse squirrel rabbit raccoon mammal-groups mammals-met'),
          ('Reptiles and amphibians', 'reptile alligator frog herps herps-met turtle lizard snake'),
-         ('Fish', 'fish-shark fish'), ('Plants and fungi', 'plant-fungus-slime plant'), ('Sea life', 'sea-invertebrates')]
+         ('Fish', 'fish-shark fish'), ('Plants and fungi', 'plant-fungus-slime plant'),
+         ('Other invertebrates', 'sea-invertebrates ground-invertebrates')]
 def topic(views):
     vs = {v.strip() for v in (views or '').split(',')}
     for name, keys in TOPIC:
