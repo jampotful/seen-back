@@ -5,6 +5,9 @@ name: quiet-alert
 on:
   schedule:
     - cron: '4,19,34,49 * * * *'
+  push:  # a change to the settings takes effect, and a new test value is sent, at once
+    branches: [main]
+    paths: ['docs/tracks/watch.json']
   workflow_dispatch:
     inputs:
       test:
