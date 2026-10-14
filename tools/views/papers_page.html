@@ -66,7 +66,7 @@ details.lib input { font: inherit; width: 100%; max-width: 520px; margin-top: 8p
 </style>
 <div class="wrap">
   <h1>Papers wanted</h1>
-  <p class="steps">Open a paper, save the PDF into the UNPROCESSED folder, then tap the circle. If the library won't give you the full text, save the printed page with the abstract and references and tap Partial. If you can't get it at all, tap Can't get it. Each choice is passed to the research agents, and the paper leaves your list. Within each priority, the papers that could fill the most open gaps come first.</p>
+  <p class="steps">Open a paper, save the PDF into the UNPROCESSED folder, then tap the circle. If the library won't give you the full text, save the printed page with the abstract and references and tap Partial. If you can't get it at all, tap Can't get it. Each choice is passed to the research agents, and the paper leaves your list. Within each priority, the papers that could fill the most open gaps come first. A paper whose gaps get filled in the meantime leaves the list by itself; Show handled lists it with a Still want it button.</p>
   <div class="top">
     <a class="btn main" href="__DRIVE_URL__" target="_blank" rel="noopener">Open UNPROCESSED in Drive</a>
     <div class="prog"><span id="progText"></span><div class="meter"><i id="meter"></i></div></div>
@@ -99,17 +99,24 @@ var proxy = store.get('rg2.proxy', '');
 var ticks = store.get('rg2.ticks', {});   // id -> true; mirrors the shared store when it is reachable
 var extra = {};                            // id -> row added after this page was built
 var tickDoc = null, shared = false, toastTimer = 0, lastTick = null;
+var verdicts = {}, keep = {}, keepDoc = null;   // the desk's verdict per paper (status/all) and the owner's overrides (keep/all)
+var WHY = { done: 'No longer needed: every gap it covers is now measured in the species itself.', read: 'No longer needed: already read in full from your Drive folder.', upgrade: "Its gaps are already filled by borrowing from relatives or from an abstract. It would give the species' own measurement, so it sits below the papers that fill open gaps." };
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 function oldKey(d) { return (d.u || d.t).toLowerCase(); }
 function rows() {
   var seen = {}, all = [];
   DATA.forEach(function (d) { seen[d.id] = 1; all.push(d); });
   Object.keys(extra).forEach(function (id) { if (!seen[id]) all.push(extra[id]); });
-  all.sort(function (a, b) { return (a.p - b.p) || (a.n - b.n); });
+  all.sort(function (a, b) { return (a.p - b.p) || (tierOf(a) - tierOf(b)) || (rankOf(a) - rankOf(b)); });
   return all;
 }
 function stateOf(d) { var v = ticks[d.id]; return v === true || v === 'full' ? 'full' : (v === 'partial' || v === 'na' ? v : ''); }
-function isDone(d) { return !!(d.got || stateOf(d)); }
+function rawVerdict(d) { var s = verdicts[d.id]; return s ? s.v : ''; }
+function retired(d) { var v = rawVerdict(d); return !keep[d.id] && (v === 'done' || v === 'read'); }
+function tierOf(d) { return retired(d) ? 2 : (!keep[d.id] && rawVerdict(d) === 'upgrade') ? 1 : 0; }
+function rankOf(d) { var s = verdicts[d.id]; return s && s.r ? s.r : d.n; }
+function gapsOf(d) { var s = verdicts[d.id]; return s && s.gc != null ? s.gc : d.gc; }
+function isDone(d) { return !!(d.got || stateOf(d) || retired(d)); }
 function link(d) { var u = d.u || ('https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t)); return proxy && d.u ? proxy + u : u; }
 function scholar(d) { return 'https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t); }
 function big(n) { return n >= 1e6 ? (n / 1e6).toFixed(1) + ' million' : n >= 1e3 ? Math.round(n / 1e3) + ',000' : String(n); }
@@ -118,7 +125,7 @@ function render() {
   var all = rows(), q = (state.q || '').toLowerCase(), out = [], shown = 0, c = { 1: [0, 0], 2: [0, 0], 3: [0, 0] };
   all.forEach(function (d) { var k = c[d.p] || c[3]; k[1]++; if (isDone(d)) k[0]++; });
   all.forEach(function (d) {
-    var done = isDone(d), st = stateOf(d);
+    var done = isDone(d), st = stateOf(d), gcn = gapsOf(d), rv = rawVerdict(d), up = tierOf(d) === 1, ret = retired(d);
     if (state.p && d.p !== state.p) return;
     if (state.folder && d.f !== state.folder) return;
     if (done && !state.done) return;
@@ -126,21 +133,22 @@ function render() {
     shown++;
     var rest = String(d.w || '').split(' | ').slice(1).join(' ');
     out.push('<li class="row' + (done ? ' done' : '') + '"><button class="tick" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'full' || !!d.got) + '" aria-label="' + (st === 'full' ? 'Untick' : 'Tick') + ': I have saved the full paper"' + (d.got ? ' disabled' : '') + '>✓</button><div>' +
-      '<div class="head"><span class="pr p' + d.p + '">P' + d.p + '</span><span class="fold">' + esc(d.f) + '</span>' + (d.got ? '<span class="indrive">Already in Drive</span>' : '') + (st ? '<span class="st ' + st + '">' + ({ full: 'Saved', partial: 'Partial', na: "Can't get it" })[st] + '</span>' : '') + '</div>' +
+      '<div class="head"><span class="pr p' + d.p + '">P' + d.p + '</span><span class="fold">' + esc(d.f) + '</span>' + (d.got ? '<span class="indrive">Already in Drive</span>' : '') + (st ? '<span class="st ' + st + '">' + ({ full: 'Saved', partial: 'Partial', na: "Can't get it" })[st] + '</span>' : '') + (ret ? '<span class="st na">No longer needed</span>' : up ? '<span class="st partial">Upgrade</span>' : '') + '</div>' +
       '<div class="t">' + esc(d.t) + '</div>' +
       '<div class="cite">' + esc(d.a) + (d.y ? ' (' + esc(d.y) + ')' : '') + (d.j ? ', ' + esc(d.j) : '') + '</div>' +
-      (d.gc ? '<div class="gain">Could fill about ' + d.gc + ' open ' + (d.gc === 1 ? 'gap' : 'gaps') + ' (' + big(d.gr) + ' observations of the species involved)</div>' : '') +
+      (gcn ? '<div class="gain">Could fill about ' + gcn + ' open ' + (gcn === 1 ? 'gap' : 'gaps') + (gcn === d.gc && d.gr ? ' (' + big(d.gr) + ' observations of the species involved)' : '') + '</div>' : '') +
+      (ret || up ? '<div class="why">' + esc(WHY[ret ? rv : 'upgrade']) + '</div>' : '') +
       (d.w ? '<div class="why">' + esc(firstSentence(d.w)) + '</div>' : '') +
       '<div class="acts">' + (d.u ? '<a class="btn main" href="' + esc(link(d)) + '" target="_blank" rel="noopener">Open paper</a>' : '') +
-      '<a class="btn" href="' + esc(scholar(d)) + '" target="_blank" rel="noopener">Search Scholar</a>' + (d.got ? '' : '<span class="sp"></span><button class="btn" data-act="partial" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'partial') + '" title="Abstract and references only">Partial</button><button class="btn" data-act="na" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'na') + '" title="I cannot get this paper">Can\'t get it</button>') + '</div>' +
+      '<a class="btn" href="' + esc(scholar(d)) + '" target="_blank" rel="noopener">Search Scholar</a>' + ((rv === 'done' || rv === 'read') ? '<button class="btn" data-act="keep" data-id="' + esc(d.id) + '" aria-pressed="' + !!keep[d.id] + '">' + (keep[d.id] ? 'Kept on the list' : 'Still want it') + '</button>' : '') + (d.got ? '' : '<span class="sp"></span><button class="btn" data-act="partial" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'partial') + '" title="Abstract and references only">Partial</button><button class="btn" data-act="na" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'na') + '" title="I cannot get this paper">Can\'t get it</button>') + '</div>' +
       ((rest || d.h || d.s) ? '<details class="more"><summary>More</summary>' + (d.h ? '<p><em>How to get it:</em> ' + esc(d.h) + '</p>' : '') + (rest ? '<p><em>Also:</em> ' + esc(rest) + '</p>' : '') + (d.s ? '<p><em>Species it would fix:</em> ' + esc(d.s) + '</p>' : '') + (d.by ? '<p><em>Asked for by:</em> ' + esc(d.by) + '</p>' : '') + '</details>' : '') +
       '</div></li>');
   });
   $('list').innerHTML = out.join('') || '<li class="empty">' + (state.p === 1 && !state.q && !state.folder && !state.done ? 'Every priority 1 paper is ticked.' : 'Nothing matches these filters.') + '</li>';
   $('count').textContent = shown + ' ' + (shown === 1 ? 'paper' : 'papers') + ' shown';
   [1, 2, 3].forEach(function (p) { $('n' + p).textContent = (c[p][1] - c[p][0]) + ' left'; });
-  var p1 = c[1], sv = 0, pa = 0, nn = 0; all.forEach(function (d) { if (d.p !== 1) return; var s = stateOf(d); if (d.got || s === 'full') sv++; else if (s === 'partial') pa++; else if (s === 'na') nn++; });
-  $('progText').innerHTML = '<b>' + p1[0] + ' of ' + p1[1] + '</b> priority 1 papers handled · ' + sv + ' saved, ' + pa + ' partial, ' + nn + " can't get";
+  var p1 = c[1], sv = 0, pa = 0, nn = 0, rr = 0; all.forEach(function (d) { if (d.p !== 1) return; var s = stateOf(d); if (d.got || s === 'full') sv++; else if (s === 'partial') pa++; else if (s === 'na') nn++; else if (retired(d)) rr++; });
+  $('progText').innerHTML = '<b>' + p1[0] + ' of ' + p1[1] + '</b> priority 1 papers handled · ' + sv + ' saved, ' + pa + ' partial, ' + nn + " can't get, " + rr + ' no longer needed';
   $('meter').style.width = (p1[1] ? 100 * p1[0] / p1[1] : 0) + '%';
   document.querySelectorAll('.seg .chip').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.p === (state.p || 0))); });
 }
@@ -158,8 +166,14 @@ function setTick(id, v) {   // v: true (saved in full), 'partial', 'na', or null
   if (tickDoc) { var o = {}; o[id] = v || false; tickDoc.update(o).catch(function () { $('sync').textContent = 'Could not save that tick to the shared list. It is kept on this device.'; }); }
 }
 var MSG = { full: 'Saved. It has left the list.', partial: 'Marked partial. The agents will use the abstract and references only.', na: "Marked can't get. The agents will stop asking for it." };
+function setKeep(id, on) {
+  if (on) keep[id] = true; else delete keep[id];
+  render();
+  if (keepDoc) { var o = {}; o[id] = !!on; keepDoc.update(o).catch(function () { $('sync').textContent = 'Could not save that choice to the shared list.'; }); }
+}
 $('list').addEventListener('click', function (e) {
   var b = e.target.closest && e.target.closest('.tick, [data-act]'); if (!b || b.disabled) return;
+  if (b.dataset.act === 'keep') { var on = !keep[b.dataset.id]; setKeep(b.dataset.id, on); toast(on ? 'Kept. It stays on your list.' : 'Back under no longer needed.', false); return; }
   var id = b.dataset.id, want = b.classList.contains('tick') ? true : b.dataset.act, cur = ticks[id] || null;
   var next = (cur === want || (want === true && cur === 'full')) ? null : want;
   lastTick = { id: id, prev: cur }; setTick(id, next);
@@ -196,6 +210,14 @@ $('sync').textContent = 'Ticks are kept on this device only until the shared lis
   db.collection('extra').onSnapshot(function (snap) {
     var m = {}; snap.forEach(function (doc) { var r = doc.data(); if (r && r.id && r.t) m[r.id] = r; });
     extra = m; populateFolders(); render();
+  }, function () {});
+  db.doc('status/all').onSnapshot(function (snap) { verdicts = (snap.exists && snap.data && snap.data()) || {}; render(); }, function () {});
+  keepDoc = db.doc('keep/all');
+  try { var k = await keepDoc.get(); if (!k.exists) await keepDoc.set({}); } catch (e) { keepDoc = null; }
+  if (keepDoc) keepDoc.onSnapshot(function (snap) {
+    var d = (snap.data && snap.data()) || {}, m = {};
+    Object.keys(d).forEach(function (x) { if (d[x] === true) m[x] = true; });
+    keep = m; render();
   }, function () {});
 })();
 </script>

@@ -12,3 +12,5 @@ Final message, at most 200 words: files read, records logged, files skipped and 
 **Partial files.** A file whose name ends in "(partial)" is a printed web page with the abstract and reference list only. Read both. Log abstract-level evidence with the grade "abstract only", list the reference-list papers that bear on the views as new wanted lines (skipping any marked `n/a` in `docs/views/papers-status.jsonl`), and never ask for that paper again.
 
 **Cheaper extraction (13 October 2026, 20:30).** The desk runs the intake with Haiku subagents for extraction, one paper each. Before logging, run `python3 -I tools/views/quotecheck.py PAPER.pdf RECORDS.jsonl`; only the records that fail go to a Sonnet subagent for a second reading. For a book or a broad review, `tools/views/windows.py` cuts the text to the passages that can hold evidence first.
+
+**Partial flag (13 October 2026, 20:50).** Every record logged from a partial file carries `"partial": true`. `gaps.py` uses it to tell a cell measured from a full text from one measured only from an abstract, and the papers-wanted verdicts depend on that.

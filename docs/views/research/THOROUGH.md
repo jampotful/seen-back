@@ -68,3 +68,16 @@ Example: `{"taxon": "Sciurus", "level": "genus", "trait": "cff_hz; acuity_cpd", 
 - Precision. An Opus agent checks 20 random new records against their sources and reports the error rate. Above 5%, the batch they came from is checked again. Burst 5's audit corrected 748 of 1,077 settled records, mostly their grades, so this test pays for itself.
 
 The coverage line carries the three results, for example `--tests "search 9/10; extraction 96%; precision 1/20"`.
+
+## Papers that are no longer needed
+
+After every intake or sweep is merged, the desk reruns `gaps.py` (which also writes `docs/views/gaps/cells.jsonl`, every cell with its state), then `wanted_csv.py` and `python3 -I tools/views/gain.py IN.csv docs/views/wanted-merged.csv --status STATUS.json`, and writes STATUS.json to the page's database document `status/all` (ArtifactData `set`, pinned to the version it last read). The page then re-sorts and hides papers by itself, with no republish. Each paper gets a verdict:
+
+- needed: at least one cell it bears on is open. It is ranked by the weight of its open cells.
+- upgrade: none is open, but some are filled only by borrowing from a relative or only by an abstract. It stays on the list below the needed papers of its priority, because it would give the species' own measurement. `--retire-upgrades` retires these too, if the owner prefers.
+- done: every cell it bears on is measured in the species itself from a full text. The page hides it.
+- read: the intake has already read it in full from Drive. The page hides it.
+- unknown: it names no listed species and no view, so nothing can judge it. It is never hidden.
+
+The owner can bring any hidden paper back with its Still want it button (document `keep/all`), and the desk never overrides that. Records logged from a partial file carry `"partial": true`, so a cell that rests only on an abstract never counts as measured from a full text.
+
