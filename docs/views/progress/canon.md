@@ -1,6 +1,6 @@
 # canon progress (13 October 2026)
 
-Done: 136 canon lines covering all queue traits except `motion`; 54 wanted lines; 13 searched lines; 512 evidence lines (Briscoe & Chittka 2001 Table 1 except the first 30 or so Lepidoptera rows already logged by family, the Cantlay 2023 text values, two frog and one snake pigment peak).
+Done: 138 canon lines covering all queue traits except `motion`; 54 wanted lines; 13 searched lines; 512 evidence lines (Briscoe & Chittka 2001 Table 1 except the first 30 or so Lepidoptera rows already logged by family, the Cantlay 2023 text values, two frog and one snake pigment peak).
 
 Limits met: curl to Crossref and OpenAlex returned 403 and WebFetch to Crossref returned 429, so no DOI was confirmed through an index; DOIs were taken from landing pages or from URLs in search results. The WebSearch budget for the turn ran out after about 85 searches. PMC pages answered with a browser check, so PMC-only papers have `"doi": ""` where no other page gave it.
 
