@@ -61,3 +61,30 @@ Next steps:
 1. Resume the nine missing title/book lookups when OpenAlex is available, accepting only title/first-author/year matches.
 2. Resolve the 14 candidate-copy failures through legal copies, checking identities before reading. The source-status files preserve the distinction between unsuccessful search and inaccessible candidate.
 3. Desk-review a sample of the records, especially the transposed field diagram/prose, secondary CFF assignments and model-versus-measurement qualifiers, before merging. The owner opens the pull request; none was opened here.
+
+## 2026-10-14: remaining-entry follow-up
+
+This round addressed only list positions **30, 37, 42, 46, 52, 56, 58, 70 and 76** (batch ranks 188, 195, 200, 204, 210, 214, 216, 228 and 234). Counts below are additions to the earlier pass, not replacement totals.
+
+- **9 entries checked; 2 legal main-paper copies found and read; 43 records added**: 31 from the full fritillary paper and its supplement, plus 12 explicitly partial abstract records from entries 37 (2), 56 (4), and 58 (6).
+- **2 no-free-copy determinations** were added: entry 42 after successful OpenAlex, Europe PMC and Semantic Scholar responses, and entry 70 after the permitted single successful OpenAlex book-chapter check.
+- **5 entries remain pending**: positions **37, 46, 52, 56 and 58**. Failed or incomplete API requests were not classified as absence of a free copy. A supplement alone was not marked as a fully read main paper.
+- Cumulative batch totals are now **11 main papers read, 595 evidence records, and 63 no-copy status lines**. The prior pass's incomplete lookup flags and candidate-access limitations remain in force.
+
+### Newly read papers
+
+**30 / rank 188, Ilić et al. 2022, DOI 10.1098/rstb.2021.0276:** The exact title and full author list were confirmed through Crossref and Europe PMC; the batch had listed the authors in a different order. Read the full PMC HTML and the 12-page Figshare supplement, including the viewed Fig. 3 and supplementary Figs. S2 and S5. **31 records** cover *Argynnis paphia*, *A. sagana* and female *Speyeria aglaja*. The numerical spectral peaks were read from the original labelled figure panels, not digitized from curves; the records identify the panel and use its exact caption as the checked quotation. The 615-nm red peak in male *A. paphia* was measured indirectly, and the record preserves that distinction. The sixth male class in *A. sagana* is inferred from opponent responses and is grade g. Receptor classes are physiological substrates, not a behavioural demonstration of colour dimensionality. No facet size or interommatidial angle was found. The supplemental species table includes *Agraulis vanillae* in the comparative eyeshine phylogeny, but supplies no species-specific peak for it; no peak was transferred to *Dione*.
+
+**76 / rank 234, Goodrich and Gibernau 2024, DOI 10.1016/j.phytochem.2024.114111:** Confirmed the previously unknown author/year metadata through HAL and Europe PMC, and read the 34-page HAL manuscript, its six figures and included Supplemental Figure 1. **0 sensory records.** The study measures emitted floral scent and its two chemotypes; it does not test chemical detection by *Symplocarpus foetidus*. Emitting a volatile does not establish the plant senses that volatile. Supplemental Table 1 is referenced but not included in the deposit; it was not read. The source-status note states this scope.
+
+### Pending papers and recovered metadata
+
+| Position / rank | Confirmed DOI | Remaining limitation |
+|---|---|---|
+| 37 / 195 | 10.1086/691404 | Crossref and Europe PMC confirm title, Tyrrell first author and 2017. Publisher PDF returned 403; OpenAlex title lookup returned 429. Abstract read, 2 group-level partial records; the abstract names swallows without naming a measured species. Its 100° arc is the span containing four foveae, not full field width. |
+| 46 / 204 | 10.1111/j.1420-9101.2010.02046.x | Europe PMC confirms title, authors and 2010, and supplies a Wiley free-PDF candidate; both Wiley page/PDF attempts returned 403. OpenAlex and Crossref title requests returned 429. Abstract has no species table or numerical sensory measurement. |
+| 52 / 210 | 10.1080/01584197.2020.1857652 | Crossref lists print year 2020 and online publication 2021-01-04, explaining the batch/OpenAlex year difference; first author is Belén Casalía. Figshare article 13521423 supplies only the eight-page supplementary PDF, not the main paper. CONICET repository returned 503. The supplement identifies *Ramphocelus carbo* among the sequenced UVS-type species, but does not contain *Paroaria*, *Sicalis* or *Thraupis*. No measured pigment peak or behavioural UV sensitivity was inferred from a gene sequence. |
+| 56 / 214 | 10.1002/cne.21626 | Europe PMC confirms title, authors and 2008; Wiley page returned 403; OpenAlex/Crossref title requests returned 429. Abstract read, 4 group-level partial records. The 25-species assertion was not assigned to *Alces alces*, whose inclusion the abstract does not establish. |
+| 58 / 216 | 10.1126/science.7352290 | OpenAlex confirms Goldsmith/1980 and reports closed access; Europe PMC supplied the abstract. Semantic Scholar returned 429, so the required lookup remains incomplete. Six partial behavioural records cover the three named hummingbird species, including 370-nm detection. The 20-nm stimulus half bandwidth was not misrepresented as the whole visual spectral range. |
+
+The first lookup script saved responses for all nine positions before reading began. OpenAlex/Crossref responses mixed successes and 429 errors within that script; after inspecting those errors, no further calls were made to those services. Semantic Scholar also returned 429 and was not retried. Raw responses, paper files and extraction scripts stay under `/tmp/oa/oa3-round`, outside the repository. The 43 added records passed quote checks against the retrieved full text, supplement or abstracts, and `addlog.py` validated them. App builds and app tests were not run.
