@@ -234,7 +234,7 @@ Rows and their traits:
 | 220 | Mauremys sinensis (Chinese Stripe-necked Turtle) | 2,222 | 0 | Geoemydidae / Testudines | i |
 | 221 | Zamenis scalaris (Ladder Snake) | 2,188 | 0 | ? / ? | i |
 | 222 | Cryptoblepharus pulcher (Elegant Snake-eyed Skink) | 2,166 | 0 | Scincidae / Squamata | i |
-| 223 | Gehyra mutilata (Mutilating Gecko) | 2,161 | 0 | ? / ? | i |
+| 223 | Gehyra mutilata (Mutilating Gecko) | 2,161 | 0 | Gekkonidae / Squamata | i |
 | 224 | Regina septemvittata (Queen Snake) | 2,157 | 0 | ? / ? | i |
 | 225 | Acanthocercus atricollis (Southern Tree Agama) | 2,150 | 0 | ? / ? | i |
 | 226 | Drymarchon melanurus (Central American Indigo Snake) | 2,142 | 0 | Colubridae / Squamata | i |
@@ -595,7 +595,7 @@ Rows and their traits:
 | 581 | Lophosaurus boydii (Boyd's Forest Dragon) | 585 | 0 | ? / ? | i |
 | 582 | Anniella stebbinsi (San Diegan Legless Lizard) | 582 | 0 | ? / ? | i |
 | 583 | Tenuidactylus caspius (Caspian Bent-toed Gecko) | 582 | 0 | ? / ? | i |
-| 584 | Gehyra dubia (Dubious Dtella) | 577 | 0 | ? / ? | i |
+| 584 | Gehyra dubia (Dubious Dtella) | 577 | 0 | Gekkonidae / Squamata | i |
 | 585 | Karusasaurus polyzonus (Karoo Girdled Lizard) | 577 | 0 | ? / ? | i |
 | 586 | Ameiva praesignis (Dusky Giant Ameiva) | 575 | 0 | ? / ? | i |
 | 587 | Anolis porcatus (Cuban Green Anole) | 575 | 0 | Dactyloidae / Squamata | i |
@@ -724,7 +724,7 @@ Rows and their traits:
 | 710 | Cnemidophorus gaigei (Gaige’s Rainbow Lizard) | 437 | 0 | ? / ? | i |
 | 711 | Plica umbra (Blue-lipped Tree Lizard) | 434 | 0 | ? / ? | i |
 | 712 | Stenorrhina freminvillei (Blood Snake) | 434 | 0 | ? / ? | i |
-| 713 | Gehyra versicolor (Eastern tree dtella) | 433 | 0 | ? / ? | i |
+| 713 | Gehyra versicolor (Eastern tree dtella) | 433 | 0 | Gekkonidae / Squamata | i |
 | 714 | Gerrhosaurus flavigularis (Yellow-throated Plated Lizard) | 433 | 0 | ? / ? | i |
 | 715 | Crotalus stephensi (Panamint Rattlesnake) | 430 | 0 | Viperidae / Squamata | i |
 | 716 | Lycodon ruhstrati (Formosa Wolf Snake) | 430 | 0 | ? / ? | i |
@@ -928,7 +928,7 @@ Rows and their traits:
 | 914 | Carlia amax (Bauxite Rainbow Skink) | 303 | 0 | ? / ? | i |
 | 915 | Platysaurus broadleyi (Augrabies flat lizard) | 303 | 0 | Cordylidae / Squamata | i |
 | 916 | Siphlophis compressus (Tropical Flat Snake) | 303 | 0 | ? / ? | i |
-| 917 | Gehyra oceanica (Pacific Dtella) | 302 | 0 | ? / ? | i |
+| 917 | Gehyra oceanica (Pacific Dtella) | 302 | 0 | Gekkonidae / Squamata | i |
 | 918 | Trachemys stejnegeri (Puerto Rican Slider) | 302 | 0 | Emydidae / Testudines | i |
 | 919 | Kentropyx pelviceps (Forest Whiptail) | 301 | 0 | ? / ? | i |
 | 920 | Lophosaurus spinipes (Southern Angle-Headed Dragon) | 301 | 0 | ? / ? | i |
@@ -1052,7 +1052,7 @@ Rows and their traits:
 | 1038 | Furcifer verrucosus (Spiny Chameleon) | 246 | 0 | ? / ? | i |
 | 1039 | Rhabdophis chrysargos (Specklebelly Keelback) | 246 | 0 | ? / ? | i |
 | 1040 | Deinagkistrodon acutus (Chinese Moccasin) | 245 | 0 | ? / ? | i |
-| 1041 | Gehyra variegata (Tree Dtella) | 245 | 0 | ? / ? | i |
+| 1041 | Gehyra variegata (Tree Dtella) | 245 | 0 | Gekkonidae / Squamata | i |
 | 1042 | Geochelone elegans (Indian Star Tortoise) | 245 | 0 | ? / ? | i |
 | 1043 | Salvadora bairdi (Baird's Patchnose Snake) | 245 | 0 | ? / ? | i |
 | 1044 | Cyclura cornuta (Rhinoceros Iguana) | 243 | 0 | ? / ? | i |
@@ -1439,7 +1439,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Mauremys sinensis*: receptor_classes: g, rule 2 (2 measured families) from Trachemys scripta (canon-3#216); lambda_max_nm: g, rule 2 (2 measured families) from Trachemys scripta (canon-3#215); acuity_cpd: i, closest order (canon-3#627), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest order (canon-3#620), no carry rule allows order level for this trait
 - *Zamenis scalaris*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Cryptoblepharus pulcher*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest family (canon-3#628), no carry rule allows family level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest genus (herps#184), the genus record is grade g, not a measurement [lit table has genus: Cryptoblepharus boutonii]
-- *Gehyra mutilata*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Gehyra mutilata*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest family (intake#26), no carry rule allows family level for this trait
 - *Regina septemvittata*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Acanthocercus atricollis*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Drymarchon melanurus*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest family (canon-3#582), no carry rule allows family level for this trait; fov_h_deg: i, closest family (herps#85), no carry rule allows family level for this trait; pupil_shape: i, none; fovea: i, closest family (canon-3#581), no carry rule allows family level for this trait
@@ -1800,7 +1800,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Lophosaurus boydii*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Anniella stebbinsi*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Tenuidactylus caspius*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
-- *Gehyra dubia*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Gehyra dubia*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest family (intake#26), no carry rule allows family level for this trait
 - *Karusasaurus polyzonus*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Ameiva praesignis*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Anolis porcatus*: receptor_classes: g, rule 2 from Anolis (sweep-4#1); lambda_max_nm: g, rule 2 from Anolis carolinensis (canon-2#40); acuity_cpd: g, rule 3 from Anolis carolinensis (canon-3#629); fov_h_deg: i, none; pupil_shape: i, none; fovea: g, rule 3 from Anolis carolinensis (herps#58)
@@ -1929,7 +1929,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Cnemidophorus gaigei*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Plica umbra*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Stenorrhina freminvillei*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
-- *Gehyra versicolor*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Gehyra versicolor*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest family (intake#26), no carry rule allows family level for this trait
 - *Gerrhosaurus flavigularis*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Crotalus stephensi*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 from Crotalus atrox (canon-2#62); acuity_cpd: i, closest genus (herps#88), the genus record is grade g, not a measurement [lit table has genus: Crotalus durissus]; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest genus (herps#89), the genus record is grade g, not a measurement [lit table has genus: Crotalus durissus]
 - *Lycodon ruhstrati*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
@@ -2133,7 +2133,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Carlia amax*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Platysaurus broadleyi*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest order (canon-3#581), no carry rule allows order level for this trait
 - *Siphlophis compressus*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
-- *Gehyra oceanica*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Gehyra oceanica*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest family (intake#26), no carry rule allows family level for this trait
 - *Trachemys stejnegeri*: receptor_classes: g, rule 2 from Trachemys scripta (canon-3#216); lambda_max_nm: g, rule 2 from Trachemys scripta (canon-3#215); acuity_cpd: g, rule 3 from Trachemys scripta (canon-3#627); fov_h_deg: i, none; pupil_shape: i, none; fovea: g, rule 3 from Trachemys scripta (canon-3#620)
 - *Kentropyx pelviceps*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Lophosaurus spinipes*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
@@ -2257,7 +2257,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Furcifer verrucosus*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Rhabdophis chrysargos*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Deinagkistrodon acutus*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
-- *Gehyra variegata*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Gehyra variegata*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest family (intake#26), no carry rule allows family level for this trait
 - *Geochelone elegans*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Salvadora bairdi*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Cyclura cornuta*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
