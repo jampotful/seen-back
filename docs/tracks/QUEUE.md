@@ -34,9 +34,9 @@ The owner's research thread launches these entries itself, at most three at once
 | 12 | Unit `mammals-met`: deer, cat, dog, squirrel and rabbit views | Sonnet | `docs/tracks/prompts/round2-unit.md` | | done 13 Oct 15:58: `research/mammals-met` `cda601f`; 23 wanted, 15 records, 9 carry proposals |
 | 13 | Unit `birds-met`: bird, hawk and wader views | Sonnet | same | | done 13 Oct 15:59 (stopped at its context limit): `research/birds-met` `66005ae`; 77 records, 27 wanted |
 | 14 | Unit `herps-met`: alligator, frog and reptile views | Sonnet | same | | done 13 Oct 16:25: `research/herps-met` `11a8955`; 38 records, 29 wanted |
-| 15 | The gap table | Sonnet | `docs/tracks/prompts/round2-gaps.md` | a free slot | wave 2 |
+| 15 | The gap table | Sonnet | `docs/tracks/prompts/round2-gaps.md` | a free slot | done 13 Oct 19:44: `agent/gaps` `21e9cfe`, merged to `main` `4169e20`; 4,719 gaps ranked in `docs/views/gaps/queue.jsonl`; largest by records: bird, plant, insect, wader, reptile |
 | 16 | Unit `insects-met`: insect and bee views | Sonnet | `docs/tracks/prompts/round2-unit.md` | | done 13 Oct 16:45: `research/insects-met` `07604da`; 52 records, 26 wanted |
-| 16a | Web searches for the species still borrowed (mammals, birds), run from the research thread because cloud agents cannot reach the open web | Sonnet | in the launch prompt | | done 13 Oct 16:25 to 16:50: `docs/views/wanted/web-mammals.jsonl` (45), `web-birds.jsonl` (57), `web-herps.jsonl` (22), nothing-found lines in `docs/views/searched/`; the insect search was not run |
+| 16a | Web searches for the species still borrowed (mammals, birds), run from the research thread because cloud agents cannot reach the open web | Sonnet | in the launch prompt | | done 13 Oct 16:25 to 16:50 for mammals, birds, herps: `docs/views/wanted/web-mammals.jsonl` (45), `web-birds.jsonl` (57), `web-herps.jsonl` (22), nothing-found lines in `docs/views/searched/`; the insect search (`docs/tracks/prompts/round2-web-insects.md`) launched 13 Oct 19:55 |
 | 17 | The Drive intake, each time the owner adds papers | Sonnet | `docs/tracks/prompts/round2-intake.md` | the owner's word and a free slot | on call |
 
 The owner's download list merges every unit's wanted list with `tools/views/wanted_csv.py` (523 papers on 13 October at 16:50, 164 of them priority 1, on the owner's private download page; the earlier Drive sheet of 71 papers is retired and every paper on it is on the page; corrections go in `docs/views/wanted/fixes.jsonl`). Files already read are listed in `docs/views/sources/drive.jsonl` by a hash of their Drive id.
@@ -46,3 +46,18 @@ Cloud agents reach GitHub and the owner's Drive but not the open web (PubMed, PM
 ## Burst 5 (13 October, 17:00), the control room's
 
 Burst 4 results: extraction improved and run (Haiku everywhere; Sonnet gained 3 points for 21 times the cost; 13 of 34 topics on `pub/lit-table`, the rest running as `run/lit-table/fullBC`); the county-bias head merged (build 30); `slow`, tilt, heading and the pigment trials built (build 29). The round 2 research units (12 to 16a) were run by the research thread and are done, except entries 15 and 17, which stay with it. Burst 5 running: `burst5-audit.md` (queue 6, up to $12) and `burst5-engine4.md` (queue 8 and the compiler's input). One slot stays free for the research thread.
+
+## Burst 6 (13 October, 18:40), the control room's
+
+Burst 5 results: the audit ran over all 18 logs (77% flagged on the first pass, mostly a reviewer rule that wanted `m` lowered whenever the quote lacked the species name; 1,077 settled, 310 confirmed, 748 corrected, 19 retracted); engine build 31 is finished on `agent/engine` (`96fab69`: `field`, `overlay`, `sound` and `haptic` modules, specs for owl, duck, bigcat, fox, millipede, centipede, harvestman and woodlouse, `docs/views/COMPILER.md`) but the agent's push to `main` was refused by the session's permission check, so it waits for the owner. The literature table is complete (34 topics, `pub/lit-table`, about $31). Burst 6 running: `burst6-audit2.md` and `burst6-compiler.md` (queue 7 and 9).
+
+## Round 3: thoroughness (13 October, 20:30), run by the research desk
+The definition of done, the protocol and the order of work are in `docs/views/research/THOROUGH.md`. After every burst the desk prints `tools/views/coverage.py`'s line.
+
+| # | Task | Model | Prompt | State |
+|---|---|---|---|---|
+| 18 | Baseline: fetch, merge finished lit-table runs, rerun gaps.py, grow the lists to 90% of each view's records | desk (script) | THOROUGH.md, step 0 | to run |
+| 19 | Canon: cross-species compilations for every trait | Sonnet, local (web) | `docs/tracks/prompts/round3-canon.md` | to launch |
+| 20 | Genus sweeps, three at a time, batches from `tools/views/sweep_batches.py` | Sonnet, local (web) | `docs/tracks/prompts/round3-sweep.md` | to launch after 18 |
+| 21 | Intake of the owner's downloads: Haiku extraction, `quotecheck.py`, Sonnet only on failures | Haiku, then Sonnet | `docs/tracks/prompts/round2-intake.md` | on the owner's word |
+

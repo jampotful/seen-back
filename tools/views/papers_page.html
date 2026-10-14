@@ -1,0 +1,201 @@
+<title>Regards Papers Wanted</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif&display=swap">
+<style>
+/* Layout: one column. A fixed order of work: open a paper, save it to Drive, tap the circle. Ticked papers leave the list. Inks come from the app icon. */
+:root { --bg: #f6f4f9; --panel: #ffffff; --fg: #1d1a24; --muted: #675f75; --line: #e1dce9; --violet: #5b4bc4; --on-violet: #ffffff; --pink: #c42f72; --amber: #8a6a00; --ok: #2a7a4b; --ok-bg: #e4f3ea;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif; --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #14121a; --panel: #1d1a26; --fg: #ece8f2; --muted: #a59eb3; --line: #2f2a3b; --violet: #a69af7; --on-violet: #14121a; --pink: #f27aae; --amber: #f2c94c; --ok: #6cc893; --ok-bg: #1b2e24; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #14121a; --panel: #1d1a26; --fg: #ece8f2; --muted: #a59eb3; --line: #2f2a3b; --violet: #a69af7; --on-violet: #14121a; --pink: #f27aae; --amber: #f2c94c; --ok: #6cc893; --ok-bg: #1b2e24; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 820px; margin: 0 auto; padding-inline: 16px; padding-block: 26px 80px; }
+h1 { font: 400 42px/1.05 var(--serif); margin: 0; text-wrap: balance; }
+.steps { color: var(--muted); margin: 8px 0 0; max-width: 60ch; }
+.top { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; margin-top: 16px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 16px; border-radius: 10px; font: 600 14px var(--sans); text-decoration: none; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
+.btn.main { background: var(--violet); border-color: var(--violet); color: var(--on-violet); }
+.btn:focus-visible, .chip:focus-visible, .tick:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, a:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+.prog { flex: 1 1 220px; min-width: 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.prog b { color: var(--fg); font-weight: 600; }
+.meter { height: 8px; border-radius: 99px; background: var(--line); margin-top: 6px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s; }
+.sync { font-size: 12px; color: var(--muted); margin-top: 10px; }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 3; background: var(--bg); margin: 16px -16px 0; padding: 10px 16px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.seg { display: flex; gap: 4px; flex-wrap: wrap; }
+.chip { font: 500 13px var(--sans); min-height: 36px; padding: 0 12px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.chip[aria-pressed=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.bar input[type=search], .bar select { font: inherit; min-height: 36px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 0 10px; min-width: 0; }
+.bar input[type=search] { flex: 1 1 180px; }
+.bar label.t { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); min-height: 36px; }
+.count { color: var(--muted); font-size: 13px; margin: 14px 0 6px; font-variant-numeric: tabular-nums; }
+ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.row { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.tick { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--line); background: transparent; color: transparent; font-size: 20px; cursor: pointer; display: grid; place-items: center; }
+.tick:hover { border-color: var(--ok); }
+.tick[aria-pressed=true] { background: var(--ok); border-color: var(--ok); color: var(--bg); }
+.tick[disabled] { cursor: default; }
+.head { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.pr { font: 600 11px/1 var(--sans); letter-spacing: .05em; border-radius: 4px; padding: 4px 6px; border: 1px solid currentColor; }
+.p1 { color: var(--pink); } .p2 { color: var(--amber); } .p3 { color: var(--muted); }
+.fold { font-size: 12px; font-weight: 600; color: var(--violet); }
+.t { font-weight: 600; font-size: 16px; line-height: 1.35; margin-top: 4px; overflow-wrap: anywhere; }
+.cite { color: var(--muted); font-size: 13.5px; margin-top: 2px; overflow-wrap: anywhere; }
+.why { font-size: 14px; margin-top: 8px; }
+.gain { font-size: 12.5px; font-weight: 600; color: var(--ok); margin-top: 6px; font-variant-numeric: tabular-nums; }
+.acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.acts .btn { min-height: 36px; font-size: 13px; }
+.acts .btn[aria-pressed=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.acts .sp { flex: 1 1 8px; }
+.st { font-size: 12px; font-weight: 600; border-radius: 4px; padding: 3px 6px; }
+.st.full { color: var(--ok); background: var(--ok-bg); } .st.partial { color: var(--amber); border: 1px solid currentColor; } .st.na { color: var(--muted); border: 1px dashed currentColor; }
+details.more { margin-top: 8px; font-size: 13px; color: var(--muted); }
+details.more summary { cursor: pointer; width: fit-content; }
+details.more p { margin: 6px 0 0; overflow-wrap: anywhere; }
+details.more em { font-style: normal; color: var(--fg); }
+.row.done { background: transparent; border-style: dashed; }
+.row.done .t, .row.done .cite, .row.done .why { opacity: .55; }
+.indrive { color: var(--ok); font-weight: 600; font-size: 12px; }
+.empty { padding: 36px 0; text-align: center; color: var(--muted); }
+details.lib { margin-top: 18px; font-size: 13px; color: var(--muted); }
+details.lib summary { cursor: pointer; width: fit-content; }
+details.lib input { font: inherit; width: 100%; max-width: 520px; margin-top: 8px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); border-radius: 10px; padding: 10px 14px; display: flex; gap: 12px; align-items: center; font-size: 14px; max-width: calc(100% - 32px); z-index: 5; }
+.toast button { font: 600 14px var(--sans); background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; min-height: 32px; }
+@media (max-width: 520px) { h1 { font-size: 34px; } .row { grid-template-columns: 40px minmax(0, 1fr); gap: 10px; padding: 12px; } .tick { width: 40px; height: 40px; } }
+@media (prefers-reduced-motion: reduce) { .meter i { transition: none } }
+</style>
+<div class="wrap">
+  <h1>Papers wanted</h1>
+  <p class="steps">Open a paper, save the PDF into the UNPROCESSED folder, then tap the circle. If the library won't give you the full text, save the printed page with the abstract and references and tap Partial. If you can't get it at all, tap Can't get it. Each choice is passed to the research agents, and the paper leaves your list. Within each priority, the papers that could fill the most open gaps come first.</p>
+  <div class="top">
+    <a class="btn main" href="__DRIVE_URL__" target="_blank" rel="noopener">Open UNPROCESSED in Drive</a>
+    <div class="prog"><span id="progText"></span><div class="meter"><i id="meter"></i></div></div>
+  </div>
+  <div class="sync" id="sync">Checking whether your ticks are saved…</div>
+  <div class="bar" role="search">
+    <div class="seg" role="group" aria-label="Priority">
+      <button class="chip" data-p="1" aria-pressed="true">Priority 1 <span id="n1"></span></button>
+      <button class="chip" data-p="2" aria-pressed="false">2 <span id="n2"></span></button>
+      <button class="chip" data-p="3" aria-pressed="false">3 <span id="n3"></span></button>
+      <button class="chip" data-p="0" aria-pressed="false">All</button>
+    </div>
+    <input id="q" type="search" placeholder="Search title, author, species" aria-label="Search">
+    <select id="folder" aria-label="Folder"><option value="">Any folder</option></select>
+    <label class="t" for="showdone"><input id="showdone" type="checkbox"> Show handled</label>
+  </div>
+  <p class="count" id="count"></p>
+  <ol id="list"></ol>
+  <details class="lib"><summary>Reach papers through my library</summary><label for="proxy">Paste your library's proxy prefix, for example one that ends in <code>login?url=</code>, and every Open button goes through it. It stays in this browser.</label><input id="proxy" type="text" placeholder="https://…/login?url=" autocomplete="off"></details>
+  <p class="count">List built __NOW__. Papers added after that appear on their own.</p>
+</div>
+<div class="toast" id="toast" hidden><span id="toastMsg"></span><button id="undo">Undo</button></div>
+<script>
+var DATA = __DATA__;
+var $ = function (id) { return document.getElementById(id); };
+var store = { get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+var state = store.get('rg2.filters', { p: 1, folder: '', q: '', done: false });
+var proxy = store.get('rg2.proxy', '');
+var ticks = store.get('rg2.ticks', {});   // id -> true; mirrors the shared store when it is reachable
+var extra = {};                            // id -> row added after this page was built
+var tickDoc = null, shared = false, toastTimer = 0, lastTick = null;
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function oldKey(d) { return (d.u || d.t).toLowerCase(); }
+function rows() {
+  var seen = {}, all = [];
+  DATA.forEach(function (d) { seen[d.id] = 1; all.push(d); });
+  Object.keys(extra).forEach(function (id) { if (!seen[id]) all.push(extra[id]); });
+  all.sort(function (a, b) { return (a.p - b.p) || (a.n - b.n); });
+  return all;
+}
+function stateOf(d) { var v = ticks[d.id]; return v === true || v === 'full' ? 'full' : (v === 'partial' || v === 'na' ? v : ''); }
+function isDone(d) { return !!(d.got || stateOf(d)); }
+function link(d) { var u = d.u || ('https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t)); return proxy && d.u ? proxy + u : u; }
+function scholar(d) { return 'https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t); }
+function big(n) { return n >= 1e6 ? (n / 1e6).toFixed(1) + ' million' : n >= 1e3 ? Math.round(n / 1e3) + ',000' : String(n); }
+function firstSentence(w) { return String(w || '').split(' | ')[0]; }
+function render() {
+  var all = rows(), q = (state.q || '').toLowerCase(), out = [], shown = 0, c = { 1: [0, 0], 2: [0, 0], 3: [0, 0] };
+  all.forEach(function (d) { var k = c[d.p] || c[3]; k[1]++; if (isDone(d)) k[0]++; });
+  all.forEach(function (d) {
+    var done = isDone(d), st = stateOf(d);
+    if (state.p && d.p !== state.p) return;
+    if (state.folder && d.f !== state.folder) return;
+    if (done && !state.done) return;
+    if (q && (d.t + ' ' + d.a + ' ' + d.s + ' ' + d.j + ' ' + d.w).toLowerCase().indexOf(q) < 0) return;
+    shown++;
+    var rest = String(d.w || '').split(' | ').slice(1).join(' ');
+    out.push('<li class="row' + (done ? ' done' : '') + '"><button class="tick" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'full' || !!d.got) + '" aria-label="' + (st === 'full' ? 'Untick' : 'Tick') + ': I have saved the full paper"' + (d.got ? ' disabled' : '') + '>✓</button><div>' +
+      '<div class="head"><span class="pr p' + d.p + '">P' + d.p + '</span><span class="fold">' + esc(d.f) + '</span>' + (d.got ? '<span class="indrive">Already in Drive</span>' : '') + (st ? '<span class="st ' + st + '">' + ({ full: 'Saved', partial: 'Partial', na: "Can't get it" })[st] + '</span>' : '') + '</div>' +
+      '<div class="t">' + esc(d.t) + '</div>' +
+      '<div class="cite">' + esc(d.a) + (d.y ? ' (' + esc(d.y) + ')' : '') + (d.j ? ', ' + esc(d.j) : '') + '</div>' +
+      (d.gc ? '<div class="gain">Could fill about ' + d.gc + ' open ' + (d.gc === 1 ? 'gap' : 'gaps') + ' (' + big(d.gr) + ' observations of the species involved)</div>' : '') +
+      (d.w ? '<div class="why">' + esc(firstSentence(d.w)) + '</div>' : '') +
+      '<div class="acts">' + (d.u ? '<a class="btn main" href="' + esc(link(d)) + '" target="_blank" rel="noopener">Open paper</a>' : '') +
+      '<a class="btn" href="' + esc(scholar(d)) + '" target="_blank" rel="noopener">Search Scholar</a>' + (d.got ? '' : '<span class="sp"></span><button class="btn" data-act="partial" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'partial') + '" title="Abstract and references only">Partial</button><button class="btn" data-act="na" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'na') + '" title="I cannot get this paper">Can\'t get it</button>') + '</div>' +
+      ((rest || d.h || d.s) ? '<details class="more"><summary>More</summary>' + (d.h ? '<p><em>How to get it:</em> ' + esc(d.h) + '</p>' : '') + (rest ? '<p><em>Also:</em> ' + esc(rest) + '</p>' : '') + (d.s ? '<p><em>Species it would fix:</em> ' + esc(d.s) + '</p>' : '') + (d.by ? '<p><em>Asked for by:</em> ' + esc(d.by) + '</p>' : '') + '</details>' : '') +
+      '</div></li>');
+  });
+  $('list').innerHTML = out.join('') || '<li class="empty">' + (state.p === 1 && !state.q && !state.folder && !state.done ? 'Every priority 1 paper is ticked.' : 'Nothing matches these filters.') + '</li>';
+  $('count').textContent = shown + ' ' + (shown === 1 ? 'paper' : 'papers') + ' shown';
+  [1, 2, 3].forEach(function (p) { $('n' + p).textContent = (c[p][1] - c[p][0]) + ' left'; });
+  var p1 = c[1], sv = 0, pa = 0, nn = 0; all.forEach(function (d) { if (d.p !== 1) return; var s = stateOf(d); if (d.got || s === 'full') sv++; else if (s === 'partial') pa++; else if (s === 'na') nn++; });
+  $('progText').innerHTML = '<b>' + p1[0] + ' of ' + p1[1] + '</b> priority 1 papers handled · ' + sv + ' saved, ' + pa + ' partial, ' + nn + " can't get";
+  $('meter').style.width = (p1[1] ? 100 * p1[0] / p1[1] : 0) + '%';
+  document.querySelectorAll('.seg .chip').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.p === (state.p || 0))); });
+}
+function populateFolders() {
+  var seen = {}; rows().forEach(function (d) { seen[d.f] = 1; });
+  var sel = $('folder'), cur = sel.value || state.folder;
+  sel.innerHTML = '<option value="">Any folder</option>' + Object.keys(seen).sort().map(function (f) { return '<option>' + esc(f) + '</option>'; }).join('');
+  sel.value = cur;
+}
+function saveFilters() { store.set('rg2.filters', state); render(); }
+function toast(msg, withUndo) { $('toastMsg').textContent = msg; $('undo').hidden = !withUndo; $('toast').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { $('toast').hidden = true; }, 5000); }
+function setTick(id, v) {   // v: true (saved in full), 'partial', 'na', or null to clear
+  if (v) ticks[id] = v; else delete ticks[id];
+  store.set('rg2.ticks', ticks); render();
+  if (tickDoc) { var o = {}; o[id] = v || false; tickDoc.update(o).catch(function () { $('sync').textContent = 'Could not save that tick to the shared list. It is kept on this device.'; }); }
+}
+var MSG = { full: 'Saved. It has left the list.', partial: 'Marked partial. The agents will use the abstract and references only.', na: "Marked can't get. The agents will stop asking for it." };
+$('list').addEventListener('click', function (e) {
+  var b = e.target.closest && e.target.closest('.tick, [data-act]'); if (!b || b.disabled) return;
+  var id = b.dataset.id, want = b.classList.contains('tick') ? true : b.dataset.act, cur = ticks[id] || null;
+  var next = (cur === want || (want === true && cur === 'full')) ? null : want;
+  lastTick = { id: id, prev: cur }; setTick(id, next);
+  toast(next ? MSG[next === true ? 'full' : next] : 'Cleared.', true);
+});
+$('undo').addEventListener('click', function () { if (lastTick) { setTick(lastTick.id, lastTick.prev); lastTick = null; } $('toast').hidden = true; });
+$('q').addEventListener('input', function () { state.q = this.value; saveFilters(); });
+$('folder').addEventListener('change', function () { state.folder = this.value; saveFilters(); });
+$('showdone').addEventListener('change', function () { state.done = this.checked; saveFilters(); });
+$('proxy').addEventListener('change', function () { proxy = this.value.trim(); store.set('rg2.proxy', proxy); render(); });
+document.querySelectorAll('.seg .chip').forEach(function (b) { b.addEventListener('click', function () { state.p = +b.dataset.p; saveFilters(); }); });
+$('q').value = state.q || ''; $('showdone').checked = !!state.done; $('proxy').value = proxy;
+populateFolders(); $('folder').value = state.folder || ''; render();
+$('sync').textContent = 'Ticks are kept on this device only until the shared list connects.';
+
+(async function () {
+  var db = null;
+  try { db = await claude.use('db'); } catch (e) { db = null; }
+  if (!db) return;
+  tickDoc = db.doc('ticks/all');
+  try { var s = await tickDoc.get(); if (!s.exists) await tickDoc.set({}); } catch (e) { tickDoc = null; return; }
+  var migrated = false;
+  tickDoc.onSnapshot(function (snap) {
+    var d = (snap.data && snap.data()) || {}, t = {};
+    Object.keys(d).forEach(function (k) { if (d[k] === true || d[k] === 'partial' || d[k] === 'na') t[k] = d[k]; });
+    if (!migrated) {   // first time on this device: carry over ticks from the older page and from local storage
+      migrated = true; var up = {}, old = store.get('rg.got', {}), n = 0;
+      DATA.forEach(function (r) { if ((old[oldKey(r)] || ticks[r.id]) && !t[r.id]) { up[r.id] = true; t[r.id] = true; n++; } });
+      if (n) tickDoc.update(up).catch(function () {});
+    }
+    ticks = t; store.set('rg2.ticks', ticks); shared = true;
+    $('sync').textContent = 'Ticks are saved to your shared list and will match on your phone and laptop.'; render();
+  }, function () { $('sync').textContent = 'The shared list stopped answering. Ticks are kept on this device.'; });
+  db.collection('extra').onSnapshot(function (snap) {
+    var m = {}; snap.forEach(function (doc) { var r = doc.data(); if (r && r.id && r.t) m[r.id] = r; });
+    extra = m; populateFolders(); render();
+  }, function () {});
+})();
+</script>

@@ -175,3 +175,10 @@ This section governs every round-2 prompt. Where it differs from the sections ab
 - Draft rows in the second person, addressed to the reader as the animal, one set per species or genus that differs, each row followed by the log lines behind it. Their final wording comes later in one pass.
 
 **Extra fields on round-2 wanted lines:** `"for"` (scientific names of the species it would fix), `"rows"` (`"<view>:<row title>"`), `"records"` (iNaturalist research-grade records of those species, where known, for ranking), `"get"` (how the owner can get it: the ISBN for a book chapter, "journal via library", "thesis via ProQuest", or an open-access address if you found one too late to read). The owner drops files anywhere in the papers folder; the intake finds them.
+
+**Paper status from the owner (13 October 2026).** The owner marks each wanted paper on the download page as saved in full, partial, or can't get. The research desk exports the marks to `docs/views/papers-status.jsonl` (`tools/views/papers_status.py`), and `wanted_csv.py --status` carries them into the merged list. What each mark means for you:
+- `full`: the file is in the papers folder and the intake reads it. Treat it as any opened paper.
+- `partial`: the file is a printed web page holding the abstract and reference list only (its name ends in "(partial)"). Log only what the abstract states, grade the evidence as from an abstract, and use the reference list to name the papers worth asking for next. Do not request the same paper again.
+- `n/a`: the owner cannot obtain it by any route. Never put it on a wanted list again. Search for another source of the same fact (a thesis, a review, a dataset, a sister paper), and when none turns up, record the null search in `docs/views/searched/<unit>.jsonl` so the row's wording can be loosened under "Wording by certainty".
+
+**Thoroughness (13 October 2026, 20:30).** What counts as done, the search protocol that may declare a fact unknown, the order of work and the tests that keep it honest are in `docs/views/research/THOROUGH.md`. A search record without its full protocol fields counts as half-searched there.
