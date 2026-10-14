@@ -8,9 +8,9 @@ Started 13 October 2026, 22:25 UTC; stopped at the time limit. Spend about $6 of
 
 ## Results
 - Drafts: branch `pub/views-draft`, one folder a run (`b1`, `b3`, `b4`, `b5`, `b6`), each with `<key>.<model>.json` (the spec), `.md` (the report), `.reply.json` omitted, and `COMPARISON.md`. The same files, with each attempt's errors, are on `ci` under `runs/views-compile/<n>`.
-- Four finished batch runs (b1, b3, b4, b5; six views, two models, two attempts each): Sonnet 5.5 passed every check for 20 of 24 view-runs, Haiku 5.5 for 4 of 24. Haiku's failures are mostly grades without a claim, an m row whose parameters are all i, and a colour matrix named but not defined.
+- Five finished batch runs (b1, b3, b4, b5 with two attempts, b6 with up to three; six views and two models each): Sonnet 5.5 passed every check for 26 of 30 view-runs, Haiku 5.5 for 6 of 30 (a third attempt fixed none of Haiku's four remaining views). Haiku's failures are mostly grades without a claim, an m row whose parameters are all i, and a colour matrix named but not defined.
 - Against the hand-made jumper (58 parameters), a Sonnet draft carries 9 to 12 parameters, 5 or 6 of them in the hand-made spec; 2 or 3 of those have the same value (within 10%) and 4 or 5 of the 6 the same grade when the draft is checked. Against the hand-made bee (10 parameters, most graded `?`), a Sonnet draft carries 3 or 4, all in the hand-made spec.
 
 ## Not done
-- Batch run b6 (three attempts, 32,000 output tokens) may have finished after this note; its folder `b6` on `pub/views-draft` is the latest.
+- Run-to-run variation is large (Sonnet passed 6, 5, 5, 4 and 6 of 6 views in the five runs), so one run's comparison with a hand-made spec is one sample.
 - A colour matrix given by pigment peaks still needs a claim as well as the peak check; the claim is redundant and could be dropped.
