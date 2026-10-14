@@ -903,6 +903,9 @@ def check_reply(job, F, records, reply, like_spec, floor):
         for kk in z:
             if kk not in F["zone_keys"]:
                 errs.append("zones[%d].%s is not a zone key" % (i, kk))
+    if isinstance(spec.get("gaze"), dict) and spec["gaze"] and not any(isinstance(z, dict) and z.get("gaze") for z in spec.get("zones") or []):
+        errs.append("gaze has timings and no zone follows the gaze (a zone with \"gaze\": 1), so nothing would move; add the zone the "
+                    "gaze carries or leave gaze out and say it in a row")
     for cat, lst in (spec.get("draw") or {}).items():
         if cat not in F["draw"]:
             errs.append("draw category %r unknown" % cat)

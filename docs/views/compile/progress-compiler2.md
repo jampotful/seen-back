@@ -1,10 +1,11 @@
 # Progress: the compiler's second pass (track `compiler2`, burst 9)
 
-Started 14 October 2026. Branch `agent/compiler2`. The prompt allows writing under `docs/views/` only in `COMPILER.md`, `compile/` and `specs/`, so this note lives here in place of `docs/views/progress/compiler2.md`.
+Started and finished 14 October 2026. Branch `agent/compiler2`. The prompt allows writing under `docs/views/` only in `COMPILER.md`, `compile/` and `specs/`, so this note lives here.
 
 ## Done
-- Read the failed runs on `ci` (runs 1 to 19) and rebuilt the records each run sent from `pub/lit-table`.
+- The mix-ups and their fixes: `docs/views/COMPILER.md`, section 8.
+- Fourteen compiled drafts behind `?try=` (trial blocks); reports in this folder. Run 20 on `ci`, $2.45.
+- `ci/views/compile.env` is back to plan-only.
 
 ## Next
-- Fix the prompt and the checker for the parameter mix-ups (units, direction, which eye).
-- Job files for the offered views whose specs carry no graded parameter; run Sonnet 5.5; wire the drafts behind `?try=`.
+- The owner judges the trials on a phone. The checker could learn the order and genus of each record to enforce the carry rules itself.
