@@ -154,7 +154,7 @@ Part (b): 88 records opened, 21 unverifiable, 67 verifiable, 28 wrong: **42%**. 
 ## Patterns (this run)
 
 1. The old batches carry the summariser-rebuild error as audit 5 found it. sweep-17 is wrong in every record: every quote is the fetch tool's rewording (units rewritten as "degrees" or "cycles per degree", two sentences stitched with semicolons). Values stood in all twelve.
-2. The clause-cut shape (a full stop added where the page's sentence continues) accounts for 6 of the 29 errors across both parts (sweep-44:7, sweep-19:5, sweep-19:8, sweep-17:3, sweep-17:7, and in part the stitched sweep-17:11).
+2. The clause-cut shape (a full stop added where the page's sentence continues) accounts for 5 of the 29 errors across both parts (sweep-44:7, sweep-19:5, sweep-19:8, sweep-17:3, sweep-17:7).
 3. The new sweeps (44 to 48), which asked the fetch tool for the sentence verbatim in pieces and recorded the split points, run at 5%. The method change worked; the residual risk is the clause cut.
 4. insects-met 24 to 52 is mostly unverifiable through this proxy (21 of 28): Wiley, the Royal Society, PNAS, BioOne and Annual Reviews all failed, and PMC served a reCAPTCHA. These need an owner PDF through `quotecheck.py`. insects-met:51 and 52 are Annual Reviews table rows, so secondary citations that should carry `partial: true` once the primary sources are named; insects-met:36 cites `Abstract` but the published abstract names no species, so its `where` is probably wrong.
 5. Wikipedia and blog pages remain sources for some `m` records (sweep-19:15, 19:19, 19:20, sweep-7:16). The quotes match, but the grade is a question for the canon pass, not this audit.
