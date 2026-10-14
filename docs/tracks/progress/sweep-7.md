@@ -1,3 +1,6 @@
 # sweep-7 progress
-Status: started 2026-10-14. Batch: sweep5/sweep-1.json (40 genera, order as in the file).
-Done genera (full-protocol search record written): none yet
+Status: complete. All 40 genera of the batch (sweep5/sweep-1.json) have a full-protocol search record in docs/views/searched/sweep-7.jsonl.
+Evidence: 18 lines in docs/views/evidence/sweep-7.jsonl (check.py: 0 problems).
+Wanted: 5 lines in docs/views/wanted/sweep-7.jsonl (Cantlay 2023 supplement for Dendrocygna and Lophodytes, Martin and Piersma 2009 plover, Hadden 2020 takahe, Potier 2016 black kite, Horridge 1972 skippers).
+Closed by a measurement: plants sense_light_nonvisual for Betula (pendula, papyrifera), Stellaria media, Rudbeckia hirta; diel for Sedum album; motion for Bufo bufo and B. japonicus; spectral_range_nm for Lycaena rubidus. Relatives logged: Vespula, Vespa crabro (interommatidial angle), Sympetrum, Sciurus vulgaris, Melanoplus sanguinipes (colour), Leptoglossus occidentalis (infrared).
+Cautions: PMC returns reCAPTCHA and HAL returns access denied; WebFetch only opens URLs that appeared in search results; Sison-Mangus 2006 (Lycaena) reference details are from memory and flagged in the note; Takacs (Leptoglossus) is from a news page; Bidens gardneri phytochrome abstract was not logged (no authors on page); Agrotis infusa 1.30 deg not logged (authors not shown).
