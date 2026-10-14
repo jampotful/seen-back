@@ -4,7 +4,7 @@ Groups the cells of docs/views/gaps/queue.jsonl that are untouched or half-searc
 orders the genera by the summed weight of those cells, and writes the next BATCHES batches of SIZE genera each to
 DIR/sweep-<n>.json: [{"genus", "family", "order", "traits": [...], "species": [...], "closest": {trait: record},
 "weight"}]. Prints one line per batch with its share of the open weight. Genera already in a running batch are skipped
-when their names appear in DIR/running.txt, one a line."""
+when their names appear in DIR/running.txt, one a line, or in docs/tracks/batches/claimed.txt (handed to an outside worker)."""
 import argparse, json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from coverage import cell_status
@@ -12,8 +12,8 @@ from coverage import cell_status
 ap = argparse.ArgumentParser(); ap.add_argument('--size', type=int, default=40); ap.add_argument('--batches', type=int, default=3)
 ap.add_argument('--out', default='.'); ap.add_argument('--repo', default='.'); a = ap.parse_args()
 running = set()
-rp = os.path.join(a.out, 'running.txt')
-if os.path.exists(rp): running = {l.strip() for l in open(rp) if l.strip()}
+for rp in (os.path.join(a.out, 'running.txt'), os.path.join(a.repo, 'docs/tracks/batches/claimed.txt')):
+    if os.path.exists(rp): running |= {l.strip() for l in open(rp) if l.strip() and not l.startswith('#')}
 gen = {}; total = 0
 for c, st in cell_status(a.repo):
     if st == 'exhausted': continue

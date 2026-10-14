@@ -73,3 +73,9 @@ The owner approved the voice for now and will revisit it: `docs/views/VOICE.md` 
 ## Burst 9 (14 October, 12:05), the control room's
 
 The owner is away until evening and spends freely until 3 pm; two Opus agents at most, none in `docs/views` outside the audit and compiler files. Running: `burst9-audit3.md` (reads the 820 grade changes, prepares corrected copies of the logs) and `burst9-compiler2.md` (the parameter mix-ups, then specs for views without them). Skipped: anything that needs the phone checks.
+
+## Outside worker (14 October, 13:10)
+| # | Task | Model | Prompt | State |
+|---|---|---|---|---|
+| 22 | Genus sweep by an outside agent (the owner's ChatGPT plan) on 400 untouched genera (ranks 401 to 800 of the untouched list, 4.1% of the open weight), branch `external/sweep-1` | outside | `docs/tracks/prompts/external-sweep.md`, batch `docs/tracks/batches/external-1.json` | on the owner's word; the desk merges only after a 20-record precision audit (above 5% errors, recheck or drop) |
+
