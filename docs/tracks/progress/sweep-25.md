@@ -14,3 +14,5 @@ done idx 10 Lethe
 done idx 11 Osmia
 done idx 12 Cepphus
 done idx 13 Scilla
+done idx 14 Pantala
+done idx 15 Diphasiastrum
