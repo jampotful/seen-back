@@ -1,14 +1,14 @@
 # Open-access pass, batch 1
 
-2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Stopped between papers after entry 11 for the brief's context-budget handoff. The next full paper to read is **entry 13, The evolution of amphibian photoreception**. Resumed on 2026-10-14; this paper is being read and is not yet registered as complete. No app setup, builds, servers, browser tests or self-tests ran.
+2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Resumed from the entry-13 handoff on 2026-10-14. Completed entry 13; next full verified copy is **entry 17, Mammalian retinal specializations for high acuity vision**. Entries 14–16 require retrieval or abstract review before moving onward. No app setup, builds, servers, browser tests or self-tests ran.
 
 ## Counts
 
 - **79 batch entries processed** in the discovery pass before reading papers. This does not mean all three providers successfully checked every entry.
-- **35 candidate open-copy locations found**; **17 full documents retrieved and identified** by title on the PDF first page or XML article title. Six are read; eleven are waiting.
-- **6 full papers read**, including available relevant tables and supplements; **3,292 full-text records**.
+- **35 candidate open-copy locations found**; **17 full documents retrieved and identified** by title on the PDF first page or XML article title. Seven are read; ten are waiting.
+- **7 full papers read**, including available relevant tables and supplements; **3,391 full-text records**.
 - **4 additional abstracts read** from papers with no free full copy located; **32 partial records**. Abstracts do not count as full papers read.
-- **3,324 evidence records total**, all quote-checked before append with `addlog.py`; no failed quotes retained. Source-registry counts agree with full-text evidence counts.
+- **3,423 evidence records total**, all quote-checked before append with `addlog.py`; no failed quotes retained. Source-registry counts agree with full-text evidence counts.
 - **10 papers with no free copy located after completed permitted lookups**, recorded in `docs/views/sources/oa-none-1.jsonl`. Four of these yielded the abstract records above.
 - **34 entries remain unresolved at discovery**, due to provider interruption or no verifiable title/author/year match. They are not declared unavailable.
 - **18 further advertised candidate copies could not be retrieved**. They remain retrieval-blocked rather than counted as confirmed no-copy papers.
@@ -27,8 +27,9 @@ The temporary lookup script, provider responses, downloads and extracted text ar
 | 7 | Nityananda & Read, stereopsis | 34 | Full XML, figures/captions and references. Species remain unspecified when only common groups are given. Behavioral stereo, physiological responses and predictions are distinct. Owl distance range/optimum are inferred; dragonfly temporal resolution is not called behavioral CFF. |
 | 9 | Sondhi et al., Lepidoptera opsins | 809 | Full XML and legal Europe PMC supplement archive; all 175 entries and reference sheet in Data 1, with Data 2–4/figure context. 699 recovered-sequence counts, 107 qualified diel assignments and three secondary repertoire summaries. Zeros mean non-recovery, not loss/color blindness. Crambus 2? retained; Eacles RH7 count 2 does not assert a validated duplication. Blank RH7/unknown diel cells remain missing. |
 | 11 | Potier et al., owl fields | 898 | Full XML plus DOCX, Table S1 PDF and four-sheet workbook. 43 species' descriptors, 665 individual signed profile cells and 52 bill projections. Profile cells conservatively inferred because interpolation is unmarked. Ninox 54.5° in text versus 52° in tables, and Strix aluco 47° versus 48°, remain flagged. Posterior 180° is only an upper bound. |
+| 13 | Mohun & Davies, amphibian photoreception | 99 | All 12 pages, Table 1 and figure captions/references. Review evidence: native/regenerated and A1/A2 peaks, life stages and mixture ratios stay separate. Split printed Xenopus 4/45 interpreted as 445 ±6 only with inference grade; Cynops green-rod table/text conflict retained. No supplement is cited in the PDF. |
 
-None of the six read copies is an accepted manuscript: publisher-formatted papers or XML metadata explicitly mark manuscript/preprint as no. No full source is marked read until the reading and quote checks were complete.
+None of the seven read copies is an accepted manuscript: publisher-formatted papers or XML metadata explicitly mark manuscript/preprint as no. No full source is marked read until the reading and quote checks were complete.
 
 The detailed CSV/XLSX evidence quotes exact cells (or consecutive cells), with filename, sheet, row/column or cell coordinates in `where`. Signed retinal-margin separation is distinct from total field of view. The genetic-recovery trait is distinct from physiological receptor classes. New traits have reasons in `note`; derived/inferred results retain their grades.
 
@@ -45,7 +46,7 @@ All carry `partial: true`, `access: abstract`, `opened: true`, and the retrieved
 
 ## Resume
 
-1. Read entry 13 in full, including any free tables/supplements, then continue down the batch in order. Keep source-registry entries confined to completed full readings.
+1. Investigate entries 14–16, then read entry 17 in full, including free tables/supplements; continue down the batch in order. Keep source-registry entries confined to completed full readings.
 2. Revisit discovery-pending entries in a fresh session with the rate-limit rule respected. Exact title/first-author/year agreement is still required for DOI-less records. Do not convert provider failures into no-copy results.
 3. Investigate retrieval-blocked candidate copies through lawful publisher/repository routes. Read and quote-check any abstract-only measurements; do not mark a full paper read from an abstract.
 
@@ -53,7 +54,6 @@ Discovery-pending entry numbers: 2, 12, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 
 
 Retrieved, title-verified copies awaiting full reading (the following are metadata links, not read claims):
 
-- **13**: The evolution of amphibian photoreception. https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2019.00321/pdf
 - **17**: Mammalian retinal specializations for high acuity vision evolve in response to both foraging strategies and morphological constraints (Supplementary Table S1). https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11968189/fullTextXML
 - **18**: Ecological and morphological correlates of visual acuity in birds: supplementary Tables S1 and S2 (acuity, eye size and body mass for 94 species). https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10906485/fullTextXML
 - **27**: Overcoming the loss of blue sensitivity through opsin duplication in the largest animal group, beetles. https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5428366/fullTextXML
