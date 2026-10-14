@@ -1,4 +1,6 @@
 # sweep-46 progress
-Status: in progress. Batch: sweep-3.json of the sweep-30 scratch set, 40 genera, in the batch's order.
-Done so far (position 0 to 19 and Callophrys, Necrophila pending): Euphydryas, Poecilocapsus, Diploderma, Rostrhamus, Simmondsia, Mimas, Liatris, Brotogeris, Caragana, Acontia, Cacyreus, Rhionaeschna, Synchlora, Epimecis, Ammospermophilus, Fulmarus, Callophrys, Adelphocoris.
-Tools: WebFetch only opens URLs that a search returned; PMC and HAL pages were blocked.
+Status: DONE 2026-10-14. All 40 genera of the batch were run in the batch's order, from Euphydryas to Regiscolia (the last genus reached).
+Outputs: docs/views/searched/sweep-46.jsonl (40 search records, one per genus), docs/views/evidence/sweep-46.jsonl (14 records, most from abstracts and flagged partial), docs/views/wanted/sweep-46.jsonl (3 lines).
+Cells closed by a measurement (genus-level, so grade g or m by the carry check): sense_light_nonvisual for Simmondsia, Liatris, Hypoxis, Scirpus, Reseda, Polygonum, Arctotheca and Nereocystis; diel for Croton (congener Croton suberosus); sense_chemical for Serenoa. Other evidence: Fulmarus glacialis acuity (two methods, Mitkus et al. 2016), Callophrys sheridanii lambda max (preprint abstract), Trybliographa rapae colour-vision peaks (family-level lead for Acraspis).
+Cells exhausted: every other open cell of the batch carries a full search record with a chased source; most animal genera (insects, birds, reptiles, the frog and the squirrel) returned no eye measurement for the genus.
+Notes: WebFetch opened only URLs a search had returned; PMC, HAL and BioOne pages were blocked. Plant eye_type cells remain open because no source states that a plant has no eye.
