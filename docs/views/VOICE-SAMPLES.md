@@ -1,59 +1,51 @@
-# Voice samples for the rows (burst 8)
+# Voice samples, round 2
 
-Written 13 October 2026 on `agent/voice` for the owner to approve or redirect before the pass over every view's rows (the last step of `docs/tracks/QUEUE.md`). Five views that differ as much as the app's views can: the jumping spider, the dog, the bee, the owl and the fungus. For each, the three rows that do the most to explain the picture, as they stand on `main` today and as the pass would write them. No row in `views/` has changed.
-
-Each rewrite keeps its grade and says nothing its source does not support. The sources checked are the row's own tags, `docs/SOURCES.md` and, for the fungus, `docs/views/sheets/fungus.md`, section 2. The rewrites are written for the animal the view was built on. When a row is lent to another species its grade is computed again under the carry rules in `docs/views/research/BRIEF.md`, and its wording follows the grade as shown below.
+Revised 13 October 2026 at 22:00, after the owner's notes on round 1. The same five views and three rows each, rewritten. The grade marks are the sheet's own: `m` known in this animal, `g` known in a relative, `i` speculative, `x` left out. No row in `views/` has changed.
 
 ## Jumping spider (`jumper`)
 
-| Grade and title | Now | Rewrite |
-|---|---|---|
-| `m` Eight eyes, one picture | Six of a jumping spider’s eyes watch for movement all around it, and two large front eyes swing toward whatever they report to look closely. This view draws all eight as one picture. | Six of your eight eyes watch for movement all around you. When they catch something, your two large front eyes swing toward it and look closely. This view draws all eight as one picture. |
-| `m` The front eyes | Each large front eye sees a narrow upright strip about 2 degrees wide and 21 high, bent in the middle, and the two strips cross like an X. In Phidippus they see about a sixteenth of the detail you do, and in Portia about a fifth. | Each of your large front eyes sees a narrow upright strip, about 2 degrees wide and 21 high and bent in the middle, and the two strips cross like an X. Through them a Phidippus sees about a sixteenth of the detail a person sees, and a Portia about a fifth. |
-| `i` How the picture is drawn | No one knows how a jumping spider joins what its eyes report. Drawing the front eyes’ cross inside the side eyes’ surround, as one picture, is the app’s own choice. | Nobody knows how you put together what your eight eyes report. Setting the sharp cross of your front eyes inside the dim green surround of your side eyes is the app’s own choice. |
-
-The current front-eyes row uses "you" for the person, which the second person makes impossible: "you" is now the spider, and the person becomes "a person".
+- `m` **Eight eyes.** You have eight eyes. Six of them watch for movement all around you. When they see something move, you turn to face it so your two big front eyes can take a close look.
+- `m` **The front eyes.** Each of your big front eyes sees sharply only within a narrow upright strip, about as wide as a human thumb held at arm's length and ten times as tall. The strips of your two front eyes cross in an X. If you are a Phidippus, you see about a sixteenth of the detail a human sees through them. If you are a Portia, you see about a fifth.
+- `i` **Putting it together.** Nobody yet knows how your brain combines what your eight eyes see.
 
 ## Dog (`dog`)
 
-| Grade and title | Now | Rewrite |
-|---|---|---|
-| `m` Sharpness | Dogs see about a quarter to a seventh as much detail as people do. This view is blurred to match. | You see about a quarter to a seventh of the detail a person sees. This view is blurred to match. |
-| `m` Sharpest spot | Dogs with long noses see most sharply along a band level with the horizon. Dogs with short noses see most sharply in one central spot. This view shows the band. | If your nose is long, you see most sharply along a band level with the horizon. If it is short, you see most sharply in one spot at the centre. This view draws the band whatever your nose. |
-| `i` Colour | Dogs have two kinds of colour-sensing cells, where people have three. This view shows colours as a person with two kinds would see them. | This view assumes you have two kinds of colour-sensing cell, where a person has three, and shows colours as a person with two kinds sees them. The app has not yet checked that count against a source. |
-
-The colour row is graded `i` because the two cone types were entered from memory and never checked (`docs/SOURCES.md`, "Entered from memory, still unchecked"). The current wording states the count as a fact; the rewrite says what the grade means. Once the count is checked against a paper opened for the purpose, the row becomes `m` and reads "You have two kinds of colour-sensing cell, where a person has three."
+- `m` **Sharpness.** Your eyesight is much blurrier than a human's. You see a quarter or less of the fine detail a human sees.
+- `m` **Sharpest spot.** If you have a long nose, like a greyhound, you see most sharply along a band level with the horizon. If you have a short nose, like a pug, you see most sharply in one spot in the middle.
+- `m` **Colour.** You have two kinds of colour-sensing cell, where humans have three. A blue-green that looks like a clear colour to a human looks grey to you.
 
 ## Bee (`bee`)
 
-| Grade and title | Now | Rewrite |
-|---|---|---|
-| `m` Red | Bees have no colour-sensing cells for red, so red flowers and objects look dark to them. | You have no colour-sensing cell for red, so red flowers and other red things look dark to you. This view turns red dark. |
-| `m` Speed | In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference. | If you are a honeybee, you see a light flicker up to 200 times a second, where a person stops at about 60. This view runs slowly and then jumps ahead to suggest the difference. |
-| `i` How the colours are shown | A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue. | You see green, blue and ultraviolet, and a screen cannot show ultraviolet. This view moves every colour over by one, so your green shows as red, your blue as green and your ultraviolet as blue. The shift is the app’s way of drawing it. |
-
-The rewrite of Speed drops "in bright light", which `docs/SOURCES.md` lists among the words no source backs.
+- `m` **Red.** You have no colour-sensing cell for red, so red flowers and other red things look dark to you.
+- `m` **Flicker.** If you are a honeybee, you can see a light flicker even when it flashes 200 times a second. Humans stop seeing flicker at about 60 flashes a second, so a lamp that looks steady to a human can look like it is flashing to you.
+- `m` **Colours.** Like a human, you have three kinds of colour-sensing cell. Yours pick up ultraviolet, blue and green, where a human's pick up blue, green and red. Ultraviolet is light that humans cannot see at all.
 
 ## Owl (`owl`)
 
-| Grade and title | Now | Rewrite |
-|---|---|---|
-| `m` Sharpness | A barn owl sees only a fifteenth to a twentieth as much detail as a person does, and other owls measured average about a third. This view is blurred to about a sixth of a person's sharpness, between the two. | You see far less detail than a person. A barn owl sees a fifteenth to a twentieth as much, and the other owls measured average about a third. This view blurs the picture to about a sixth of a person’s sharpness, between the two. |
-| `m` Hearing | Owls can find and catch prey by sound alone. A barn owl hears faint sounds about 20 decibels quieter than other birds can, and hears pitches above 10,000 vibrations a second. | You can find and catch prey by sound alone. If you are a barn owl, you hear sounds about 20 decibels fainter than other birds can, and pitches above 10,000 vibrations a second. |
-| `x` Where sounds come from | A barn owl can place a sound within about 3 degrees side to side and 8 degrees up and down. A phone's microphone cannot tell direction, so this view leaves direction out. | If you are a barn owl, you can place a sound within about 3 degrees side to side and 8 degrees up and down. A phone’s microphone cannot tell where a sound comes from, so this view leaves direction out. |
-
-The owl view is lent to every owl, and its figures come from a few species. "If you are a barn owl" keeps each figure with the species it was measured in (carry rule 1) and stays true when a screech owl is on screen.
+- `m` **Sharpness.** You see much less fine detail than a human does. If you are a barn owl, you see less than a tenth as much. The other owls measured so far see about a third as much.
+- `m` **Hearing.** You can find and catch prey by sound alone. If you are a barn owl, you can hear sounds about a hundred times fainter than other birds can.
+- `x` **Where sounds come from.** If you are a barn owl, you can tell where a sound comes from to within a few degrees, about the width of a human thumb held at arm's length. You are less exact about whether a sound is above or below you.
 
 ## Fungus (`fungus`)
 
-| Grade and title | Now | Rewrite |
-|---|---|---|
-| `g` No picture | A fungus has no eye. Its cells read how much light there is, mostly blue and green, and which way it comes from. | You have no eye. The moulds Neurospora and Phycomyces sense how much light there is, mostly blue, and the pin mould Phycomyces turns toward where it comes from. You very likely sense light in the same way. |
-| `m` Down | A mushroom stem laid on its side starts to turn up in about 25 minutes, and its tip is upright again within 3 to 4 hours. The gills of a field mushroom turn back toward straight down within an hour, so the spores fall clear. | Your stem grows up and your gills hang down. A stem of Coprinopsis cinerea laid on its side starts to turn up within about 25 minutes, and the tip of a mushroom stem is upright again within 3 to 4 hours. Tip the cap of a field mushroom a little and its gills swing back toward straight down within an hour, so the spores fall clear. |
-| `i` Colour and time | Green counts for less than blue, dim light is lifted, and changes are averaged over about 20 seconds. A fungus answers light over minutes to hours, far slower than this. These choices are the app's own. | You answer light over minutes to hours. This view counts green for less than blue, lifts dim light and averages changes over about 20 seconds, far faster than you do, and each of those settings is the app’s choice. |
+- `g` **No eyes.** You have no eyes. In two moulds that have been studied closely, the red bread mould and a pin mould, cells sense how much light there is, above all blue light, and the pin mould's stalk bends toward it. You very likely sense light in much the same way.
+- `m` **Up and down.** Your stem grows upward and your gills hang straight down, so your spores fall clear. If something knocks you over, your stem bends until its top points straight up again within a few hours, and your gills turn back toward straight down. In the grey shag, the stem starts to bend within half an hour.
+- `g` **Pace.** The stalk of a pin mould starts to bend toward a light within about five minutes. You very likely respond to light over minutes as well, where an animal with eyes responds in a fraction of a second.
 
-The `g` row now names the relatives its grade rests on, as the round-2 wording requires; the sheet's sources are He and Liu, 2005 (Neurospora) and Sanz and colleagues, 2009 (Phycomyces). The sheet gives the blue, so "and green" leaves this row and stays in the Colour row, where the split gill mushroom backs it. The 25 minutes was measured in Coprinopsis cinerea (Kher and colleagues, 1992, under its older name Coprinus cinereus), and the rewrite says so.
+## What changed
 
-## The voice
+- **Rows describe the animal and nothing else.** Every sentence about the app, the phone, the screen or the drawing is gone, since the grade mark beside each row already tells the reader what is speculative or left out. Two rows existed only to explain the drawing. The bee's colour row now states the bee's three colours, a fact measured in honeybees (346, 430 and 540 nm in the bee log), so it is graded `m`. The fungus's colour-and-time row had nothing left about the fungus once the app's settings went, so it is cut, and the sheet's Pace row takes its place.
+- **The dog's colour row is `m`.** Round 1 called its count unchecked; the cat-dog log has it from Neitz, Geist and Jacobs, 1989, which also places the grey blue-green near 480 nm.
+- **Humans are "humans" or "a human".** "Person" and "people" are gone, since the app does not assume that only humans are persons.
+- **Literal verbs and plain nouns.** Eyes see, cells sense, stems bend. Nothing "answers" light, eyes do not "report", and adjectives are not turned into nouns ("the surround").
+- **Numbers have a job.** A number stays when it lets the reader compare (200 flashes a second against 60), picture something (a thumb at arm's length for 2 or 3 degrees) or be impressed (half an hour for a mushroom), and it is rounded to what a reader can hold. Otherwise it goes: the barn owl's 10,000 vibrations a second told the reader nothing without a comparison, and its 20 decibels became "a hundred times fainter", which is the same figure in sound energy. Common names come first (grey shag for *Coprinopsis cinerea*, red bread mould for *Neurospora*), and a figure stays with the species it was measured in.
+- **One correction.** The jumper's front eyes do not swing toward a target. They are fixed in the head, the retinas move inside them, and the spider turns its body to face what moved.
 
-Every row speaks to the reader as the animal, and the human is always "a person". A row opens with something concrete you have or do (an eye, a stem, a flicker rate), runs to two or three sentences, and may end with one sentence that begins "This view". The grade shows in the grammar. An `m` row states its claim flatly. A `g` row names the measured relatives and says you very likely share it. An `i` row makes the app or "nobody" the subject. An `x` row says what you sense and why this view leaves it out. A figure from one species arrives as "If you are a barn owl". Rows never praise, hedge or exclaim.
+## The voice for the pass over every row
+
+Every row is about the animal and speaks to it as "you". Humans are "humans" or "a human", never "people" or "a person". A row never mentions the app, the phone, the screen or how the picture is drawn; the grade mark carries that. Verbs are literal and sentences are complete and direct, at the level of a museum panel read by all ages: plain words, real names for body parts, nothing dumbed down. A row opens with something the reader can picture and runs one to three sentences. A number stays only when it helps the reader compare, picture or be impressed, rounded to what a reader can hold, and a figure measured in one species arrives as "If you are a barn owl". An `m` row states its claim flatly. A `g` row names the relatives and says "you very likely". An `i` row says plainly what nobody knows. An `x` row states the ability. Rows never praise, hedge or exclaim.
+
+## Open for the owner
+
+- **The closing sentence.** Round 1 let a row end with one sentence on what the view does ("This view is blurred to match"). Round 2 drops it everywhere, reading "meta statements" to include it. If only the disclaimers were meant (the app's choices, the screen's limits), each row can end again with one plain sentence on what the picture shows.
+- **The false-colour key.** With the bee's colour row about the bee, nothing in the rows tells a reader that the bee's green shows as red on the screen. A small legend on the picture would carry it outside the rows.
