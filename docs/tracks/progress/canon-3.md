@@ -12,3 +12,4 @@ Following canon-2's notes: WebFetch only; PMC serves reCAPTCHA, eLife a JS chall
 - 10.1098/rstb.2009.0044 Hunt 2009: royalsocietypublishing.org fetch failed; UCL Discovery has no file. WANTED.
 - 10.1007/s10336-007-0213-6 Martin 2007: Illinois State PDF read in full; no table; Appendix 2 (32 species with field type) and 5 text values logged. DONE.
 - 10.1017/S1464793102005985 Kelber 2003: Lund repository PDF (truncated past section VI but both tables read); Table 2 (behavioural colour vision, 88 species records) and Table 1 (receptor maxima, 58 records) logged. Quotes are rows as extracted; q-marks are the fetch tool's reading. DONE.
+- Briscoe & Chittka 2001 (no DOI in canon.jsonl; 10.1146/annurev.ento.46.1.471): Chittka lab PDF; Table 1 read whole (about 158 rows); 302 records (λmax and receptor count per row). DONE.
