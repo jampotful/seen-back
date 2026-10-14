@@ -10,7 +10,9 @@ You are helping research which animals, plants and fungi see what, for a phone a
 `docs/tracks/batches/oa-k.json` lists about 80 papers in the order of the owner's page, most useful first. Each entry gives what is known of the paper: title, authors, year, journal, DOI or link, why it was wanted, and the species and views it bears on.
 
 ## Finding a free copy
-Check each paper in order, with these APIs from the shell:
+Do the lookups with one script before you read anything: write a short Python script that checks every paper in your batch against the three sources below, saves what each returns under `/tmp/oa`, and prints one line per paper (found or not, and where). Then read only the papers it found, in batch order. Work down the list; if you have to stop before the end, stop between papers, with everything so far committed and the summary written.
+
+The sources, by paper:
 - OpenAlex, by DOI: `https://api.openalex.org/works/doi:<doi>?select=id,doi,display_name,publication_year,open_access,best_oa_location,locations`. Use `best_oa_location`, or any location with `is_oa` true, and its `pdf_url` (or its `landing_page_url` when that page carries the full text).
 - Europe PMC: `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:"<doi>"&resultType=core&format=json`. A result with a `pmcid` and `isOpenAccess` "Y" (or `inPMC` "Y") has its full text at `https://www.ebi.ac.uk/europepmc/webservices/rest/<PMCID>/fullTextXML`.
 - Semantic Scholar: `https://api.semanticscholar.org/graph/v1/paper/DOI:<doi>?fields=title,openAccessPdf,externalIds`, at about one request a second.

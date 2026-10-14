@@ -17,10 +17,11 @@ You are helping research which animals, plants and fungi see what, for a phone a
 - Crossref to confirm a DOI and its title: `https://api.crossref.org/works/<doi>`.
 - Semantic Scholar for a free PDF that OpenAlex missed: `https://api.semanticscholar.org/graph/v1/paper/DOI:<doi>?fields=title,openAccessPdf`, at about one request a second.
 - An open-access PDF (OpenAlex `open_access.oa_url`) may be downloaded and read with `pypdf` or `pdftotext`. Keep it outside the repository. Never reach a paper through a library login, a university proxy, Sci-Hub, LibGen, ResearchGate or Academia.edu.
-Screen the first 25 results of each query by title and abstract; read anything that may hold a measurement.
+Screen the first 25 results of each query by title and abstract; read anything that may hold a measurement. Send each genus's queries from one short script and read its saved results, so the API responses stay out of your context until you screen them.
 
 ## Write what you find
 - A measurement you read (full text, or an abstract that states the value): one evidence record per value, appended with `python3 -I tools/senses/addlog.py external-k < records.jsonl` (one JSON object a line, with the fields of BRIEF's evidence log; the script checks each record and writes `docs/views/evidence/external-k.jsonl`). The quote is copied exactly from the source you read, and the source carries its DOI. The record's taxon is the species that was measured, graded `m`. Write no records for unmeasured species of the genus: the carry to them is computed later from the carry rules.
+- Before you commit records, check their quotes against the file you read: `python3 -I tools/views/quotecheck.py <file.pdf or file.txt> records.jsonl`. Correct or drop each record that fails.
 - A measurement you could not read (no open full text and the abstract does not give the value): one line in `docs/views/wanted/external-k.jsonl` in the format of the other files in that folder, with `for`, `rows`, `records` and `get`.
 - A trait with nothing found: one line in `docs/views/searched/external-k.jsonl` with all of `taxon` (the genus), `level` ("genus"), `trait`, `queries` (two or more, as sent), `where` (the APIs and pages used), `canon` (an empty list is fine), `chased` (the DOI whose citations you checked, or "none: no measured relative; checked <review or query>"), `found` ("none"), `date`.
 
