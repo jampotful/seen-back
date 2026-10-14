@@ -121,7 +121,7 @@ By the THOROUGH rule (over 5% wrong, or two or more wrong records): sweep-6, swe
 
 ## Patterns
 
-1. Summariser renderings logged as quotes, again. Eleven of the twelve wrong records are `requote`: the value is on the page, the quote is not. Every one carries "read through a summariser" in `where` or `note`. A quote written by a summariser is not a quote; the sweeps should ask the fetch tool for the verbatim sentence and log that, or log the quote field empty.
+1. Summariser renderings logged as quotes, again. Ten of the twelve wrong records are `requote` (one retarget, one regrade): the value is on the page, the quote is not. Every one carries "read through a summariser" in `where` or `note`. A quote written by a summariser is not a quote; the sweeps should ask the fetch tool for the verbatim sentence and log that, or log the quote field empty.
 2. Preprint and published text drift. Two records cite one version and quote another: insects-met:37 quotes the bioRxiv abstract under the PNAS DOI, and the species is absent from the published paper; sweep-22:6 quotes a figure (0.378) that is on neither version. When a preprint is read, the record must cite the preprint.
 3. Opsin-sequence predictions graded m at species rank (sweep-6:10) while the same evidence is g elsewhere. The rule from recheck 1 holds: predicted pigment class is g, never m.
 4. Value clauses that outrun the page: sweep-12:4 adds compounds "named in later work" with no source; sweep-6:32 quotes a news page under the paper's address with no title or DOI.
