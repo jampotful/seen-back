@@ -1,0 +1,179 @@
+{
+  "key": "primate",
+  "chip": "Monkey or ape",
+  "who": "a monkey or ape",
+  "version": 1,
+  "falls_back_to": "mammal",
+  "applies_to": {
+    "order": [
+      "Primates"
+    ]
+  },
+  "cue": "Three kinds of colour sensor, close to yours, and almost as much detail.",
+  "modules": [],
+  "params": {
+    "M": {
+      "value": "PRIMATE_TRI",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "primates.jsonl:Baylor 1987",
+        "primates.jsonl:O’Brien 1999"
+      ],
+      "note": "the cone peaks of one macaque species stand in for the group; the mapping to the screen is the app's"
+    },
+    "cpd": {
+      "value": 26.3,
+      "grade": "m",
+      "invented": false,
+      "src": [
+        "primates.jsonl:Laughlin 2008"
+      ],
+      "range": [
+        0.005,
+        40
+      ],
+      "note": "the highest acuity the test could assess in young rhesus monkeys, so the true limit lies at or above this"
+    }
+  },
+  "matrices": {
+    "PRIMATE_TRI": {
+      "from_pigments": [
+        430,
+        531,
+        561
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "primates.jsonl:Baylor 1987"
+      ],
+      "note": "the three cone peaks of a cynomolgus monkey (430, 531 and 561 nm) stand in for monkeys and apes",
+      "rows": [
+        [
+          0.32957,
+          0.46264,
+          0.13475,
+          0.07303
+        ],
+        [
+          0.1783,
+          0.50901,
+          0.23464,
+          0.07804
+        ],
+        [
+          0.00046,
+          0.08751,
+          0.63677,
+          0.27526
+        ]
+      ],
+      "q": [
+        [
+          0.00046,
+          0.08751,
+          0.63677,
+          0.27526
+        ],
+        [
+          0.1783,
+          0.50901,
+          0.23464,
+          0.07804
+        ],
+        [
+          0.32957,
+          0.46264,
+          0.13475,
+          0.07303
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "draw": {
+    "spectrum": [
+      {
+        "name": "matrix",
+        "invented": true,
+        "note": "colour drawn from three monkey cone peaks"
+      }
+    ]
+  },
+  "rows": [
+    [
+      "m",
+      "Colour",
+      "A cynomolgus monkey has three kinds of cone, most sensitive near 430, 531 and 561 nanometres. Macaques share this three-cone plan with people and apes, so colours look much as they do to you.",
+      [
+        "primates.jsonl:Baylor 1987",
+        "primates.jsonl:O’Brien 1999"
+      ],
+      [
+        "params.M"
+      ]
+    ],
+    [
+      "g",
+      "Other monkeys see less colour",
+      "Owl monkeys and bushbabies have a single kind of cone for medium and long light and lack colour vision. Male marmosets have two kinds of cone, and howler monkeys have three. This view shows the three-cone picture of a macaque.",
+      [
+        "primates.jsonl:Derrington 2002",
+        "primates.jsonl:Gilad 2004",
+        "primates.jsonl:Jacobs 1996"
+      ],
+      []
+    ],
+    [
+      "m",
+      "Sharpness",
+      "Young rhesus monkeys reached 26.3 cycles per degree on a grating test, the highest value the test could assess. A marmoset's cone mosaic could carry about 30, about what a person reads on a chart. A grey mouse lemur resolves only about 4.9, so smaller primates see less fine detail.",
+      [
+        "primates.jsonl:Laughlin 2008",
+        "primates.jsonl:Melin 2016",
+        "primates.jsonl:Solomon 2014"
+      ],
+      [
+        "params.cpd"
+      ]
+    ],
+    [
+      "i",
+      "Field of view",
+      "No record gives a monkey's whole field of view. One skull model gives a chimpanzee-like eye socket a sideways reach of 115 degrees against 136 for a person, which says little about the field itself. This view leaves the field at yours.",
+      [
+        "primates.jsonl:Denion É 2016"
+      ],
+      []
+    ],
+    [
+      "m",
+      "Night monkeys",
+      "The owl monkey is the only night-active monkey. Its retina is fully adapted to the dark and its fovea is only rudimentary.",
+      [
+        "primates.jsonl:Dyer 2009",
+        "primates.jsonl:Silveira 1993"
+      ],
+      []
+    ],
+    [
+      "i",
+      "What the app chose",
+      "All three cone peaks come from one cynomolgus monkey study. The app chose how they map onto your colours. It draws no dim-light change and no special fovea, because the records give no numbers for them.",
+      [],
+      [
+        "params.M",
+        "matrices.PRIMATE_TRI"
+      ]
+    ]
+  ],
+  "zones": [],
+  "by": {},
+  "draft": true
+}

@@ -130,6 +130,12 @@ def schema_facts(specs):
     # ranges: the widest any existing spec gives, and one example value for each name
     rng, ex = {}, {}
     block_keys = collections.defaultdict(dict)
+
+    def add_range(name, p):                     # the widest range any spec gives a gaze, zone or block key
+        if isinstance(p, dict) and p.get("range") and all(isinstance(x, (int, float)) for x in p["range"]):
+            r = rng.setdefault(name, list(p["range"]))
+            r[0], r[1] = min(r[0], p["range"][0]), max(r[1], p["range"][1])
+
     top = set()
     for k, s in specs.items():
         top |= set(s) - SKIP_TOP
@@ -142,6 +148,10 @@ def schema_facts(specs):
             if isinstance(s.get(b), dict):
                 for kk, v in s[b].items():
                     block_keys[b].setdefault(kk, v)
+                    add_range("%s.%s" % (b, kk), v)
+        for z in s.get("zones") or []:
+            for kk, v in z.items():
+                add_range("zones.%s" % kk, v)
     return {"params": param_names, "blocks": blocks, "draw": draw, "shapes": shapes, "zone_keys": zone_keys, "ranges": rng,
             "examples": ex, "block_keys": block_keys, "top": top}
 
@@ -739,6 +749,11 @@ def check_reply(job, F, records, reply, like_spec, floor):
     for p, o in walk_params(spec):
         if p.startswith("params.") and F["ranges"].get(param_name(p)) and isinstance(o.get("value"), (int, float, list)):
             o["range"] = F["ranges"][param_name(p)]
+        elif isinstance(o.get("value"), (int, float, list)):
+            grp = "zones" if p.startswith("zones[") else p.split(".")[0]
+            wide = F["ranges"].get("%s.%s" % (grp, param_name(p)))
+            if wide and o.get("range") is not None:
+                o["range"] = wide
     note = name_invented(spec)
     if note:
         warns.append(note)

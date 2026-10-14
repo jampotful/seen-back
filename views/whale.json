@@ -1,0 +1,284 @@
+{
+  "key": "whale",
+  "chip": "Whale, dolphin or seal",
+  "who": "a whale, dolphin or seal",
+  "falls_back_to": "mammal",
+  "applies_to": {
+    "order": [
+      "Cetacea",
+      "Carnivora:Pinnipedia",
+      "Sirenia"
+    ]
+  },
+  "version": 1,
+  "cue": "Almost no colour, a softer picture than yours, and eyes built for dim water.",
+  "modules": [
+    "sound"
+  ],
+  "inputs": {
+    "motion": "none",
+    "sound": "optional",
+    "haptic": "none"
+  },
+  "params": {
+    "cpd": {
+      "value": 3.95,
+      "grade": "m",
+      "invented": true,
+      "src": [
+        "marine-mammals.jsonl:Bolin 2025"
+      ],
+      "range": [
+        0.005,
+        40
+      ],
+      "note": "a humpback whale's estimated sharpness stands for the group; seals measure higher and a manatee lower"
+    },
+    "fov": {
+      "value": 225,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "marine-mammals.jsonl:JM 2022",
+        "marine-mammals.jsonl:Kremers 2016"
+      ],
+      "range": [
+        100,
+        360
+      ],
+      "note": "each side of a dolphin's head sees 120 to 130 degrees and the two eyes overlap by 20 to 30 degrees, so 2 x 125 - 25 = 225 degrees together"
+    },
+    "gain": {
+      "value": 3.16,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "marine-mammals.jsonl:Madsen 1976"
+      ],
+      "range": [
+        1,
+        4
+      ],
+      "note": "half a log unit of extra dim-light sensitivity in a bottlenose dolphin, worked out as ten to the power 0.5"
+    },
+    "M": {
+      "value": "SEA_L",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "marine-mammals.jsonl:Chi 2024",
+        "marine-mammals.jsonl:Peichl 2001"
+      ],
+      "note": "one kind of cone, tuned to long wavelengths, stands for whales and seals"
+    },
+    "sheen": {
+      "value": 0.5,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        1
+      ],
+      "note": "records say a reflective layer is present in many species, but give no strength"
+    }
+  },
+  "matrices": {
+    "SEA_L": {
+      "from_pigments": [
+        523
+      ],
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "marine-mammals.jsonl:Chi 2024"
+      ],
+      "note": "the long-wavelength cone peak reported for dolphins and porpoises; the mapping to the picture is the app's",
+      "rows": [
+        [
+          0.14657,
+          0.50601,
+          0.26748,
+          0.07994
+        ],
+        [
+          0.14657,
+          0.50601,
+          0.26748,
+          0.07994
+        ],
+        [
+          0.14657,
+          0.50601,
+          0.26748,
+          0.07994
+        ]
+      ],
+      "q": [
+        [
+          0.14657,
+          0.50601,
+          0.26748,
+          0.07994
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "zones": [],
+  "by": {},
+  "sound": {
+    "k": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0,
+        3
+      ],
+      "floor": null,
+      "note": "how strongly a heard sound draws rings across the picture"
+    }
+  },
+  "draw": {
+    "sound": [
+      {
+        "name": "off",
+        "invented": true,
+        "note": "the view without sound"
+      },
+      {
+        "name": "rings",
+        "invented": true,
+        "note": "sounds the microphone hears draw rings, as an echo might"
+      }
+    ]
+  },
+  "rows": [
+    [
+      "m",
+      "Colour",
+      "Dolphins, porpoises and seals have a single kind of cone, tuned to long wavelengths, and no blue-sensitive cone. In dolphins and porpoises that cone peaks near 523 nanometres. This view draws the picture with a single colour sensor, so colours collapse into lighter and darker shades.",
+      [
+        "marine-mammals.jsonl:Chi 2024",
+        "marine-mammals.jsonl:Peichl 2001"
+      ],
+      [
+        "params.M",
+        "matrices.SEA_L"
+      ]
+    ],
+    [
+      "m",
+      "Some colour may remain",
+      "Baleen whales and sperm whales have lost the genes for their cone pigments and rely on rods alone. A manatee has two kinds of cone, and a California sea lion picked out colours in behaviour tests. The single sensor picture is a middle case for the group.",
+      [
+        "marine-mammals.jsonl:Cohen 1982",
+        "marine-mammals.jsonl:Gao 2022",
+        "marine-mammals.jsonl:Meredith 2013"
+      ],
+      [
+        "params.M"
+      ]
+    ],
+    [
+      "m",
+      "Sharpness",
+      "A humpback whale resolves about 3.95 cycles per degree and a Bryde's whale 4.8. A false killer whale, a Pacific white-sided dolphin and a beluga managed 2.6 to 3.3. A harbour seal reaches 11.5 under water and a manatee only 1.6. Most of these values are estimated from the retina. A person resolves about 30, so this view blurs the picture to 3.95.",
+      [
+        "marine-mammals.jsonl:Bolin 2025",
+        "marine-mammals.jsonl:Hanke 2009",
+        "marine-mammals.jsonl:Lisney 2018",
+        "marine-mammals.jsonl:Mass 2011",
+        "marine-mammals.jsonl:Murayama 1998"
+      ],
+      [
+        "params.cpd"
+      ]
+    ],
+    [
+      "g",
+      "Field of view",
+      "A dolphin's eyes sit on the sides of its head. Each sees 120 to 130 degrees to its side, and the two overlap by only 20 to 30 degrees in front. Together that is about 225 degrees, worked out from those figures, and this view squeezes the picture to match.",
+      [
+        "marine-mammals.jsonl:JM 2022",
+        "marine-mammals.jsonl:Kremers 2016"
+      ],
+      [
+        "params.fov"
+      ]
+    ],
+    [
+      "m",
+      "Dim light",
+      "A bottlenose dolphin sees low light half a log unit better than a person, about three times better, but 0.2 log units worse in bright light. Dolphins, harbour seals and elephant seals have a reflective layer behind the retina. Manatees lack it. We brighten the picture about three times.",
+      [
+        "marine-mammals.jsonl:Bauer 2020",
+        "marine-mammals.jsonl:Jamieson 1971",
+        "marine-mammals.jsonl:Madsen 1976",
+        "marine-mammals.jsonl:Smodlaka 2016",
+        "marine-mammals.jsonl:Young 1988"
+      ],
+      [
+        "params.gain"
+      ]
+    ],
+    [
+      "x",
+      "Whiskers",
+      "Seal whiskers are most sensitive to vibration between 10 and 100 hertz, and a harbour seal can follow a fish's wake for up to 30 seconds after the fish has passed. A phone has no way to give this, so it is left out.",
+      [
+        "marine-mammals.jsonl:J 2025"
+      ],
+      []
+    ],
+    [
+      "i",
+      "The app's own choices",
+      "The blur, the squeeze of the field, the brightening, the single colour sensor and the strength of the reflective sheen are the app's choices, set from the records above. A humpback whale's sharpness stands for the whole group, though seals see sharper and manatees see softer. No record gives the strength of the sheen, so it is set by eye.",
+      [
+        "marine-mammals.jsonl:Bolin 2025",
+        "marine-mammals.jsonl:JM 2022",
+        "marine-mammals.jsonl:Madsen 1976"
+      ],
+      [
+        "params.cpd",
+        "params.fov",
+        "params.gain",
+        "params.M",
+        "params.sheen",
+        "matrices.SEA_L"
+      ]
+    ],
+    [
+      "i",
+      "Being tried: echo rings",
+      "A bottlenose dolphin sends clicks between 40 and 150 kilohertz, far above what a phone microphone can hear. With the microphone on, the app can draw rings from the sounds it does hear. The drawing is the app's.",
+      [
+        "marine-mammals.jsonl:C 2021"
+      ],
+      [
+        "sound.k"
+      ]
+    ]
+  ],
+  "draft": true
+}

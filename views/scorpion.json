@@ -1,0 +1,240 @@
+{
+  "key": "scorpion",
+  "version": 1,
+  "chip": "Scorpion",
+  "who": "a scorpion",
+  "falls_back_to": "spider",
+  "applies_to": {
+    "order": [
+      "Scorpiones",
+      "Uropygi",
+      "Amblypygi",
+      "Pseudoscorpiones"
+    ]
+  },
+  "cue": "The view wraps all the way around you, in blues and greens, and the picture is coarse.",
+  "modules": [],
+  "inputs": {
+    "motion": "optional"
+  },
+  "params": {
+    "fov": {
+      "value": 360,
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "arachnids-other.jsonl:Gaffin 2022",
+        "arachnids-other.jsonl:Prévost 2020"
+      ],
+      "range": [
+        100,
+        360
+      ],
+      "note": "scorpions can apparently see all the way around the body; the app squeezes this into the phone's picture"
+    },
+    "M": {
+      "value": "SCORPION",
+      "grade": "g",
+      "invented": true,
+      "src": [
+        "arachnids-other.jsonl:Forero 2026"
+      ],
+      "note": "a colour mapping built from a blue peak and a green peak measured in two scorpions"
+    },
+    "cpd": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        0.005,
+        40
+      ],
+      "note": "a coarse picture; no record gives how much detail a scorpion sees"
+    },
+    "gain": {
+      "value": 2,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+        1,
+        4
+      ],
+      "note": "a brighter picture for a night animal with very sensitive eyes"
+    }
+  },
+  "matrices": {
+    "SCORPION": {
+      "from_pigments": [
+        470,
+        525
+      ],
+      "src": [
+        "arachnids-other.jsonl:Forero 2026"
+      ],
+      "grade": "g",
+      "invented": true,
+      "note": "the blue and green peaks of the eye's electrical response",
+      "rows": [
+        [
+          0.1554,
+          0.50752,
+          0.25771,
+          0.07937
+        ],
+        [
+          0.1554,
+          0.50752,
+          0.25771,
+          0.07937
+        ],
+        [
+          0.01267,
+          0.29043,
+          0.58055,
+          0.11635
+        ]
+      ],
+      "q": [
+        [
+          0.01267,
+          0.29043,
+          0.58055,
+          0.11635
+        ],
+        [
+          0.1554,
+          0.50752,
+          0.25771,
+          0.07937
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  },
+  "draw": {
+    "field": [
+      {
+        "name": "squeeze",
+        "invented": true,
+        "note": "the whole way around the animal is pressed into the phone's picture"
+      }
+    ],
+    "spectrum": [
+      {
+        "name": "matrix",
+        "invented": true,
+        "note": "the picture is recoloured from the two peaks"
+      }
+    ]
+  },
+  "rows": [
+    [
+      "g",
+      "All around",
+      "A scorpion's eyes can apparently take in the whole way around its body. The two middle eyes together cover a full circle, with about forty degrees of overlap above the animal.",
+      [
+        "arachnids-other.jsonl:Gaffin 2022",
+        "arachnids-other.jsonl:Prévost 2020"
+      ],
+      [
+        "params.fov",
+        "params.fov"
+      ]
+    ],
+    [
+      "g",
+      "Two kinds of eyes",
+      "The pair of eyes in the middle of the head are the main eyes. They give a fairly sharp picture and tell shapes apart. The side eyes, three to five pairs, seem to notice mostly changes in how bright the light is.",
+      [
+        "arachnids-other.jsonl:El‐Aziz FEAA 2019",
+        "arachnids-other.jsonl:Lehmann 2013",
+        "arachnids-other.jsonl:Yang 2013"
+      ],
+      []
+    ],
+    [
+      "m",
+      "Many small eyes",
+      "Buthid scorpions have five pairs of small side eyes. The first three are about 0.3 mm across and the last two are about 0.12 mm across in one species.",
+      [
+        "arachnids-other.jsonl:Yang 2013"
+      ],
+      []
+    ],
+    [
+      "m",
+      "Blue and green",
+      "Electrical recordings from the eyes of two scorpion genera peak in blue light at 470 nanometres and in green light at 525. The recordings do not say how many kinds of receptor lie behind the two peaks. The side eyes also respond in the ultraviolet.",
+      [
+        "arachnids-other.jsonl:Forero 2026",
+        "arachnids-other.jsonl:Prévost 2020"
+      ],
+      [
+        "params.M"
+      ]
+    ],
+    [
+      "g",
+      "Eyes for the night",
+      "Scorpions are active at night and their eyes can sense starlight. In one species the middle eyes are about a thousand times more sensitive at night than by day.",
+      [
+        "arachnids-other.jsonl:B 2025",
+        "arachnids-other.jsonl:Fleissner 1977",
+        "arachnids-other.jsonl:Gaffin 2022"
+      ],
+      [
+        "params.gain"
+      ]
+    ],
+    [
+      "i",
+      "The app's choices",
+      "No record gives how much detail a scorpion sees, so this view shows a coarse picture. The extra brightness, the recolouring from two colour peaks, and the way the all-round view is pressed into the phone are the app's own.",
+      [
+        "arachnids-other.jsonl:Forero 2026",
+        "arachnids-other.jsonl:Lehmann 2013"
+      ],
+      [
+        "params.cpd",
+        "params.gain",
+        "params.M",
+        "params.fov"
+      ]
+    ],
+    [
+      "x",
+      "Not in the picture",
+      "A scorpion feels the ground through its legs and can locate prey up to about 50 cm away by the waves it makes in sand. It tastes the air and ground with its comb-like pectines and feels wind with fine hairs. The camera records none of this.",
+      [
+        "arachnids-other.jsonl:Brownell 1977",
+        "arachnids-other.jsonl:Haessig 2020",
+        "arachnids-other.jsonl:Krapf 1986",
+        "arachnids-other.jsonl:Linsenmair 1972"
+      ],
+      []
+    ],
+    [
+      "i",
+      "Settings the app chose",
+      "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+      [],
+      [
+        "matrices.SCORPION"
+      ]
+    ]
+  ],
+  "draft": true
+}
