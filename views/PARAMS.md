@@ -2,9 +2,14 @@
 
 What each setting of a view's spec controls, which part of the picture it acts on, its units, and which eye or region of the animal its value comes from. `tools/views/compile.py` sends the entries a view needs with that view's request, so each entry is written to be read alone. The sources are `src/cam.a.js` (`paramsOf`, `zoneOf`), the shader in `src/cam.b.js`, and `docs/ENGINE.md`. A person's own values in the engine are the defaults: 60 cycles a degree, a field of 180 degrees, the pace 1.
 
-The rule that decides most mistakes: **a setting written at the top of `params` acts on the whole picture, so its value comes from the eyes that cover most of the field. A region with its own eye (a sharp strip, a fovea, the middle of a cross) states its own values in `zones`, and a measurement of that eye goes there.** A jumping spider's large front eyes see 3.3 to 12.5 cycles a degree, but they cover a strip about 2 degrees wide, so that value belongs to the zone for those eyes. The side eyes, at 0.5 to 1.1 cycles a degree, cover almost the whole field and give the top-level value.
+The rule that decides most mistakes is in the group below, "Which eye a value comes from".
 
 An entry is headed by the name as a spec writes it (`### name`). Groups: whole-picture settings (`params.<name>`), zone keys (`zones[i].<key>`), gaze keys (`gaze.<key>`), and the keys of the blocks (`spectrum`, `pace`, `motion`, `slow`, `tilt`, `magnet`, `remap`, `overlay`, `sound`, `haptic`).
+
+## Which eye a value comes from
+
+### which eye
+A setting written at the top of `params` acts on the whole picture, so its value comes from the eyes that cover most of the field. When an animal has eyes with different jobs, take the top-level `cpd`, `M`, `sat` and `gate` from the eyes that cover the widest part of the field, and put the values of a pair of small eyes that see a narrow part of it (a sharp strip, a fovea, the middle of a cross) in a zone. Such a pair of eyes usually resolves much finer detail than the eyes that cover the field. Its acuity then belongs to `zones[i].cpd`, and its field to `zones[i].deg`. Never copy the sharpest eye's acuity into the top-level `cpd`. A record's `eye` and `conditions` say which eye it measured; read them for every value you use.
 
 ## Whole-picture settings
 
