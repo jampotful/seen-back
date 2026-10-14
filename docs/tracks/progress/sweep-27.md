@@ -5,3 +5,4 @@ Done through batch index 10 (Equus).
 Done through batch index 14 (Pyrrhosoma).
 Done through batch index 18 (Armeria).
 Done through batch index 21 (Hesperoyucca).
+Done through batch index 24 (Broussonetia).
