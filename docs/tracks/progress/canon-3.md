@@ -25,3 +25,6 @@ Following canon-2's notes: WebFetch only; PMC serves reCAPTCHA, eLife a JS chall
 - Healy 2013 (10.1016/j.anbehav.2013.06.018): TARA (TCD) bitstream read in full; Table 1 (34 species CFF) logged. figshare ndownloader needed a permission not granted. DONE.
 - Futahashi 2015 dragonflies: PMC blocked; AIST press release only. WANTED.
 - Hall 2012 eye shape (no DOI in canon; 10.1098/rspb.2012.2258): Royal Society routes refused. WANTED.
+- 10.1038/ncomms8852 phytochrome diversity: nature.com HTML (truncated in Methods); no main table (species counts in Supplementary Tables 1-2); 7 statements logged (g). DONE for the main text.
+- Brischoux 2010, Land 2015 (Springer paywall, no 429), Heesy & Hall 2010 (Karger refused), Hunt & Peichl 2014, Ollivier 2004 (Wiley refused), Warrant & Johnsen 2013 (cell.com refused): WANTED.
+- Not attempted: 1KP (10.1038/s41586-019-1693-2; no species-trait table in the main text), Land 1997, Rutowski 2009, Hughes 1977 chapter, Heesy 2011, books.
