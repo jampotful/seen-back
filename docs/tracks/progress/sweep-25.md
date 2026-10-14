@@ -6,3 +6,6 @@ done idx 2 Urocitellus
 done idx 3 Meconema
 done idx 4 Ulex
 done idx 5 Diadophis
+done idx 6 Phainopepla
+done idx 7 Pleopeltis
+done idx 8 Cyanocorax
