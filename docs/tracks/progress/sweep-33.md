@@ -10,3 +10,4 @@ Done genera (in order):
 - Rivula, Boana (13:30)
 - Erythromma, Stilpnia, Gryllus (13:50)
 - Echinochloa, Carpobrotus (14:10)
+- Bunias, Eacles, Labidomera (14:30)
