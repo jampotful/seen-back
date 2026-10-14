@@ -10,3 +10,5 @@ done idx 6 Phainopepla
 done idx 7 Pleopeltis
 done idx 8 Cyanocorax
 done idx 9 Tradescantia
+done idx 10 Lethe
+done idx 11 Osmia
