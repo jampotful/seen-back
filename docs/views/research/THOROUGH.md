@@ -36,7 +36,7 @@ Run it at the widest level that cannot miss a measurement, and record it once fo
 
 The steps, all in one line of `docs/views/searched/<unit>.jsonl`:
 
-a. Canon. Check the trait's compilations in `docs/views/research/canon.jsonl` that are in hand, and list their DOIs in `"canon"`. A compilation the owner marked n/a counts as checked. A trait with no compilations takes `"canon": []`.
+a. Canon. Check the trait's compilations in `docs/views/research/canon.jsonl` that are in hand and list their DOIs in `"canon"`. The script decides when this step is done, so nobody can skip it: `coverage.py` counts a trait's canon step complete when `canon.jsonl` exists and each of the trait's compilations is logged in the evidence or marked n/a by the owner. A sweep may therefore run before the compilations arrive; its records turn from half-searched to exhausted when they are logged.
 b. Two searches. Search the scientific name with the trait's words, then the common name with the trait's words. Read the first 20 titles of each and open anything plausible. List the queries in `"queries"` and the places in `"where"`.
 c. One citation step. Take the source of the nearest measured relative (the queue's `closest_record`) and look for later work that cites it and names the taxon, or for a review of the family. Put its DOI in `"chased"`.
 

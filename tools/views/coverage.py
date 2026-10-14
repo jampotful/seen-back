@@ -2,7 +2,8 @@
 Usage: python3 -I tools/views/coverage.py [--views] [--no-save] [--tests "search 9/10; extraction 96%; precision 1/20"]
 Settled: the share of record-rows (iNaturalist research-grade records times rows) whose traits are all m or g, from
 docs/views/gaps/summary.json. Open cells (docs/views/gaps/queue.jsonl, weighted by their score) split three ways:
-exhausted (a search record with the full protocol: canon, chased, two or more queries), half-searched (a search record
+exhausted (a search record with two or more queries and a chased source, once the trait's canon step is done: canon.jsonl
+exists and each of the trait's compilations is logged in the evidence or marked n/a by the owner), half-searched (a search record
 without it) and untouched. A search record covers a cell when its "taxon" text names the cell's species or genus, or
 its family or order for pigment traits or when the record says "level": "family", and its "trait" text names the
 cell's trait (tools/views/traitwords.py; free-text records are matched by a heuristic). Appends to
@@ -11,8 +12,31 @@ import argparse, datetime, glob, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from traitwords import traits_in
 
-def full(r):
-    return 'canon' in r and bool(r.get('chased')) and len(r.get('queries') or []) >= 2
+def searched_fully(r):
+    return bool(r.get('chased')) and len(r.get('queries') or []) >= 2
+
+def canon_done(repo):
+    """Traits whose canon step is complete: canon.jsonl exists and each of the trait's compilations is either logged in
+    the evidence (its DOI appears in a record's source) or marked n/a by the owner. Returns a function trait -> bool."""
+    cp = os.path.join(repo, 'docs/views/research/canon.jsonl')
+    if not os.path.exists(cp): return lambda t: False
+    logged = set()
+    for p in glob.glob(os.path.join(repo, 'docs/views/evidence/*.jsonl')):
+        for l in open(p, encoding='utf-8'):
+            logged.update(m.lower().rstrip('.,;)') for m in re.findall(r'10\.\d{4,9}/[^\s"\']+', l))
+    na = set()
+    sp = os.path.join(repo, 'docs/views/papers-status.jsonl')
+    if os.path.exists(sp):
+        for l in open(sp, encoding='utf-8'):
+            try: j = json.loads(l)
+            except ValueError: continue
+            if j.get('status') == 'n/a' and j.get('doi'): na.add(j['doi'].lower().strip())
+    need = {}
+    for l in open(cp, encoding='utf-8'):
+        try: j = json.loads(l)
+        except ValueError: continue
+        need.setdefault(j.get('trait'), set()).add((j.get('doi') or j.get('title') or '').lower().strip())
+    return lambda t: all(d in logged or d in na for d in need.get(t, set()))
 
 def word(name, text):
     return bool(name) and re.search(r'(?<![a-z])' + re.escape(name.lower()) + r'(?![a-z])', text) is not None
@@ -27,12 +51,13 @@ def cell_status(repo):
         for l in open(p, encoding='utf-8'):
             try: r = json.loads(l)
             except ValueError: continue
-            recs.append((str(r.get('taxon', '')).lower(), traits_in(str(r.get('trait', ''))), full(r), r.get('level') == 'family'))
-    out = []
+            recs.append((str(r.get('taxon', '')).lower(), traits_in(str(r.get('trait', ''))), searched_fully(r), r.get('level') == 'family'))
+    canon_ok = canon_done(repo); out = []
     for c in cells:
         st = 'untouched'
-        for tax, traits, isfull, fam in recs:
+        for tax, traits, fully, fam in recs:
             if c['trait'] not in traits: continue
+            isfull = fully and canon_ok(c['trait'])
             hit = c['taxon'].lower() in tax or word(c['genus'], tax) or ((c['trait'] in order_traits or fam) and (word(c['family'], tax) or word(c['order'], tax)))
             if hit:
                 st = 'exhausted' if isfull else 'half'
