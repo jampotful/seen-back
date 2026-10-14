@@ -1,6 +1,6 @@
 # Open-access pass, batch 1
 
-2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Stopped between papers after entry 11 for the brief's context-budget handoff. The next full paper to read is **entry 13, The evolution of amphibian photoreception**. No app setup, builds, servers, browser tests or self-tests ran.
+2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Stopped between papers after entry 11 for the brief's context-budget handoff. The next full paper to read is **entry 13, The evolution of amphibian photoreception**. Resumed on 2026-10-14; this paper is being read and is not yet registered as complete. No app setup, builds, servers, browser tests or self-tests ran.
 
 ## Counts
 
@@ -85,3 +85,7 @@ Advertised candidate copies not yet retrievable (no absence verdict implied):
 - **59**: Visual pigments, ocular filters and the evolution of snake vision. Candidate: https://academic.oup.com/mbe/article-pdf/33/10/2483/17473520/msw148.pdf
 - **61**: A 'bright zone' in male hoverfly (Eristalis tenax) eyes and associated faster motion detection and increased contrast sensitivity. Candidate: https://journals.biologists.com/jeb/article-pdf/209/21/4339/1541731/4339.pdf
 - **70**: Visual abilities in two raptors with different ecology. Candidate: https://jeb.biologists.org/content/jexbio/219/17/2639.full.pdf
+
+## Resumed discovery attempt
+
+On 2026-10-14 the unresolved-entry retry script enforced at least 1.1 seconds between OpenAlex request start times (and between Semantic Scholar request starts). The first OpenAlex request, for entry 2 by exact title, immediately returned HTTP 429. Per BRIEF, no further requests went to that provider in this session. No second OpenAlex request occurred, so there is no observed spacing pair to report. The 34 unresolved entries remain unresolved; provider failure is not an absence verdict. Saved previous lookup responses before retrying; no completed search was erased from the audit trail. Existing Europe PMC and Semantic Scholar successful/404 results were retained.
