@@ -399,7 +399,7 @@ Rows and their traits:
 | 382 | Poecile palustris (Marsh Tit) | 10,180 | 0 | Paridae / Passeriformes | i | i | i | i |
 | 383 | Numenius phaeopus (Eurasian Whimbrel) | 10,141 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
 | 384 | Poecile gambeli (Mountain Chickadee) | 10,099 | 0 | Paridae / Passeriformes | i | i | i | i |
-| 385 | Cuculus canorus (Common Cuckoo) | 10,098 | 0 | ? / ? | i | i | i | i |
+| 385 | Cuculus canorus (Common Cuckoo) | 10,098 | 0 | Cuculidae / Cuculiformes | i | i | i | i |
 | 386 | Contopus sordidulus (Western Wood-Pewee) | 10,039 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
 | 387 | Platycercus eximius (Eastern Rosella) | 10,034 | 0 | Psittaculidae / Psittaciformes | i | i | i | i |
 | 388 | Halcyon smyrnensis (White-throated Kingfisher) | 10,012 | 0 | ? / ? | i | i | i | i |
