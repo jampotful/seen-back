@@ -1,0 +1,251 @@
+{
+ "key": "bee",
+ "version": 1,
+ "chip": "Bee",
+ "who": "a bee",
+ "cue": "The view is wide and very soft, the colours shift toward ultraviolet, and the picture steps along as if each moment held more than a person can follow.",
+ "applies_to": {
+  "family": [
+   "Apidae",
+   "Halictidae",
+   "Megachilidae",
+   "Andrenidae",
+   "Colletidae"
+  ]
+ },
+ "falls_back_to": "insect",
+ "params": {
+  "fov": {
+   "value": 312,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "bee.jsonl:Taylor 2019"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "Both eyes together at the horizon, honeybee."
+  },
+  "cpd": {
+   "value": 0.26,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "bee.jsonl:Land 1997"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "Honeybee grating limit in bright light."
+  },
+  "pupil": "none",
+  "M": {
+   "value": "BEE",
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   "note": "The three peaks are measured in the honeybee. The mapping from the phone camera is the app's choice."
+  },
+  "uvBlue": {
+   "value": 0.7,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "The camera records almost no ultraviolet, so part of the blue stands in for it."
+  },
+  "rate": {
+   "value": 0.3,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Srinivasan 1984"
+   ],
+   "range": [
+    0.25,
+    2
+   ],
+   "note": "A person's 60 hertz divided by the bee's 200 hertz."
+  }
+ },
+ "matrices": {
+  "BEE": {
+   "from_pigments": [
+    346,
+    430,
+    540
+   ],
+   "src": [
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   "rows": [
+    [
+     0.22664,
+     0.50311,
+     0.19444,
+     0.07581
+    ],
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ],
+    [
+     0.0,
+     0.0001,
+     0.01023,
+     0.98967
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.0001,
+     0.01023,
+     0.98967
+    ],
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ],
+    [
+     0.22664,
+     0.50311,
+     0.19444,
+     0.07581
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "BEE"
+ },
+ "remap": {
+  "blindAt": {
+   "value": 180,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Taylor 2019"
+   ],
+   "note": "The blind wedge sits straight behind, midway between the two eyes' rear limits."
+  },
+  "blindDeg": {
+   "value": 48,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Taylor 2019"
+   ],
+   "range": [
+    0,
+    120
+   ],
+   "note": "What remains of the full circle after the two eye fields."
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "wedge",
+    "invented": true,
+    "note": "A blind wedge is drawn behind the head."
+   }
+  ],
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "Colours pass through the bee's three receptor classes."
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "In bright light a bee tells stripes apart only when they repeat about a quarter of a time in each degree. A person sees far finer detail, roughly a hundred times finer or more, so the bee's picture is very soft.",
+   [
+    "bee.jsonl:Hecht 1929",
+    "bee.jsonl:Land 1997"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "A nearly all-round view",
+   "Each honeybee eye reaches about 156 degrees back from straight ahead. The two together cover about 312 degrees and leave a small blind wedge behind the head.",
+   [
+    "bee.jsonl:Taylor 2019"
+   ],
+   [
+    "params.fov",
+    "remap.blindAt",
+    "remap.blindDeg"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "A bee has three kinds of colour receptor, tuned to ultraviolet, blue and green light at about 346, 430 and 540 nanometres. Bees see ultraviolet light and are blind to far red.",
+   [
+    "bee.jsonl:German Aerospace Center (DLR) and Bee Sensory and Behavioural Ecology Lab 2026",
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "g",
+   "Speed",
+   "In bright light a honeybee can follow flicker up to about 200 times a second, and a person stops near 60. The picture lags and steps to hint at how much more a bee sees in each moment.",
+   [
+    "bee.jsonl:Srinivasan 1984"
+   ],
+   [
+    "params.rate"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "Phone cameras record almost no ultraviolet, so the app reads part of the blue as ultraviolet and shifts the three receptor colours into colours a person can see. The blind wedge behind the head is placed midway between the two eyes' rear limits.",
+   [
+    "bee.jsonl:Lunau 2025",
+    "bee.jsonl:Taylor 2019"
+   ],
+   [
+    "params.M",
+    "params.uvBlue",
+    "params.rate",
+    "remap.blindAt",
+    "remap.blindDeg"
+   ]
+  ]
+ ],
+ "modules": [
+  "remap",
+  "spectrum"
+ ],
+ "draft": true
+}

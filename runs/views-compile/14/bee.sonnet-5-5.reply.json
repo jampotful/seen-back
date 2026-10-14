@@ -1,0 +1,286 @@
+{
+ "spec": {
+  "key": "bee",
+  "version": 1,
+  "chip": "Bee",
+  "who": "a bee",
+  "cue": "The view is wide and very soft, the colours shift toward ultraviolet, and the picture steps along as if each moment held more than a person can follow.",
+  "applies_to": {
+   "family": [
+    "Apidae",
+    "Halictidae",
+    "Megachilidae",
+    "Andrenidae",
+    "Colletidae"
+   ]
+  },
+  "falls_back_to": "insect",
+  "params": {
+   "fov": {
+    "value": 312,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "Both eyes together at the horizon, honeybee."
+   },
+   "cpd": {
+    "value": 0.26,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "Honeybee grating limit in bright light."
+   },
+   "pupil": "none",
+   "M": {
+    "value": "BEE",
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R43",
+     "R73",
+     "R85"
+    ],
+    "note": "The three peaks are measured in the honeybee. The mapping from the phone camera is the app's choice."
+   },
+   "uvBlue": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "The camera records almost no ultraviolet, so part of the blue stands in for it."
+   },
+   "rate": {
+    "value": 0.3,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R135"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "A person's 60 hertz divided by the bee's 200 hertz."
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     346,
+     430,
+     540
+    ],
+    "src": [
+     "R43",
+     "R73",
+     "R85"
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "BEE"
+  },
+  "remap": {
+   "blindAt": {
+    "value": 180,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "note": "The blind wedge sits straight behind, midway between the two eyes' rear limits."
+   },
+   "blindDeg": {
+    "value": 48,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     0,
+     120
+    ],
+    "note": "What remains of the full circle after the two eye fields."
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "wedge",
+     "invented": true,
+     "note": "A blind wedge is drawn behind the head."
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "Colours pass through the bee's three receptor classes."
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "In bright light a bee tells stripes apart only when they repeat about a quarter of a time in each degree. A person sees far finer detail, roughly a hundred times finer or more, so the bee's picture is very soft.",
+    [
+     "R1",
+     "R13"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "A nearly all-round view",
+    "Each honeybee eye reaches about 156 degrees back from straight ahead. The two together cover about 312 degrees and leave a small blind wedge behind the head.",
+    [
+     "R32"
+    ],
+    [
+     "params.fov",
+     "remap.blindAt",
+     "remap.blindDeg"
+    ]
+   ],
+   [
+    "m",
+    "Colour",
+    "A bee has three kinds of colour receptor, tuned to ultraviolet, blue and green light at about 346, 430 and 540 nanometres. Bees see ultraviolet light and are blind to far red.",
+    [
+     "R43",
+     "R73",
+     "R85",
+     "R100"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Speed",
+    "In bright light a honeybee can follow flicker up to about 200 times a second, and a person stops near 60. The picture lags and steps to hint at how much more a bee sees in each moment.",
+    [
+     "R135"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "Phone cameras record almost no ultraviolet, so the app reads part of the blue as ultraviolet and shifts the three receptor colours into colours a person can see. The blind wedge behind the head is placed midway between the two eyes' rear limits.",
+    [
+     "R268",
+     "R32"
+    ],
+    [
+     "params.M",
+     "params.uvBlue",
+     "params.rate",
+     "remap.blindAt",
+     "remap.blindDeg"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The honeybee grating limit of 0.26 cycles per degree is used as stated."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R32"
+   ],
+   "kind": "value",
+   "how": "The record gives 312 degrees for the two eyes together at the horizon."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R135"
+   ],
+   "kind": "calculation",
+   "how": "60 hertz for a person divided by the bee's 200 hertz gives 0.3."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R43",
+    "R73",
+    "R85"
+   ],
+   "kind": "value",
+   "how": "The matrix peaks 346, 430 and 540 nm are the UV, blue and green values these records state for the worker honeybee."
+  },
+  {
+   "path": "remap.blindDeg",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "Each eye reaches 156 degrees back, so the fields total 312 and 360 minus 312 leaves a wedge of 48 degrees."
+  },
+  {
+   "path": "remap.blindAt",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "The two eyes each end 156 degrees from straight ahead, so the gap between them is centred at 180 degrees."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "They found that the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1"
+  },
+  {
+   "record": "R32",
+   "quote": "Seidl and Kaiser (1981) reported that the honeybee FOV extends down to −90° in elevation and back to −156° in azimuth (at 0° el.)"
+  },
+  {
+   "record": "R135",
+   "quote": "At ca. 200 Hz the FRC drops to 50%."
+  },
+  {
+   "record": "R43",
+   "quote": "Apidae Apis mellifera 346 430 540"
+  },
+  {
+   "record": "R73",
+   "quote": "Apidae Apis mellifera 346 430 540"
+  },
+  {
+   "record": "R85",
+   "quote": "Apidae Apis mellifera 346 430 540"
+  }
+ ]
+}
