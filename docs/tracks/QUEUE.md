@@ -65,3 +65,7 @@ The definition of done, the protocol and the order of work are in `docs/views/re
 ## Burst 7 (13 October, 19:50), the control room's
 
 Build 31 is on `main` (the owner said "push it" after the session's permission check refused the engine agent's own push): `field`, `overlay`, `sound` and `haptic` modules, specs for owl, duck, bigcat, fox, millipede, centipede, harvestman and woodlouse. All browser checks pass except `try` for `jumper` and `spider`, which count rows that belong to inactive drawing options (a check defect, also present on the engine agent's own tip). The audit is merged (`docs/views/audit/ALL.jsonl`; 4,622 settled records: 599 confirm, 1,152 correct, 25 retract; 975 corrections change a grade, 820 of them `m` to `g`). The compiler is merged, plan-only by default: Sonnet 5.5 passes every check in 26 of 30 view-runs, Haiku 6 of 30. Burst 7 running: `burst7-views.md`. Spend on the API so far: about $50 of the $150 cap.
+
+## The voice (13 October, 22:15)
+
+The owner approved the voice for now and will revisit it: `docs/views/VOICE.md` (rows in US English, about the animal only, humans never called people). Queue entry 10, the pass over every row, follows it once round 2 and the audit's decisions have settled what the rows say, so that the rows are written once.

@@ -121,13 +121,15 @@ Priority 1 would change a view's picture; 2 would confirm or correct a row; 3 is
 
 ## How the rows are written
 
+**The voice is `docs/views/VOICE.md`** (approved for now by the owner, 13 October 2026). Where this section differs from it on wording, VOICE.md wins; this section still governs what a row may claim.
+
 The rows are what a person reads in the app, so they get the most care. The owner asked for "normal, direct sentences", "in the very readable, direct, approachable style of, say, natural history museum display panels", and objected to rows that sounded as if a child wrote them, that swung between explaining the app and stating facts, and that were elliptical in the way machine writing often is.
 
 - Write each row as one to three complete sentences. Say what the animal does or has, plainly, with the animal or its eye as the subject and an active verb. Then, if the view does something about it, say what the view does in one sentence.
 - Explain a technical idea in plain words the first time it appears ("colour-sensing cells", "a light that flickers"), and give a comparison with people when it helps a reader picture the difference.
 - Let the grade carry the certainty. Do not write "studies suggest" or "scientists think". A row graded `i` says plainly that this part of the view is a guess and what the guess assumes.
 - Address the reader as a person who is curious and adult. No exclamations, no jokes at the reader's expense, no baby talk.
-- Canadian spelling. No em dashes. No "not X but Y", "X, not Y" or "rather than" constructions. No sentence fragments. Do not say that anything "matters". Do not praise the animal or the reader. Avoid these words: load-bearing, delve, tapestry, testament, navigate, underscore, crucial, vital, rich, nuanced, interplay, lens, boasts, leverage, robust, seamless, realm, landscape (as a metaphor), resonate, deeply, profound, myriad, multifaceted, intricate.
+- US spelling. No em dashes. No "not X but Y", "X, not Y" or "rather than" constructions. No sentence fragments. Do not say that anything "matters". Do not praise the animal or the reader. Avoid these words: load-bearing, delve, tapestry, testament, navigate, underscore, crucial, vital, rich, nuanced, interplay, lens, boasts, leverage, robust, seamless, realm, landscape (as a metaphor), resonate, deeply, profound, myriad, multifaceted, intricate.
 
 The rows in build 22 (`EYES` in `src/cam.a.js`) were rewritten to this standard and are the pattern to follow. Two of them:
 
@@ -144,7 +146,7 @@ The rows in build 22 (`EYES` in `src/cam.a.js`) were rewritten to this standard 
 
 ## Round 2: the species people meet (13 October 2026)
 
-This section governs every round-2 prompt. Where it differs from the sections above, it wins.
+This section governs every round-2 prompt. Where it differs from the sections above, it wins. Rows are worded as `docs/views/VOICE.md` says, in US English.
 
 **Why.** The app lends each view to every species with that kind of eye (`tools/species/eyes.py`), and today's rows were written for one measured animal per view. A llama gets the white-tailed deer's rows, two of them marked "known in this animal", and an alligator gets rows about crocodiles although the herps log holds the alligator's own measurements. The owner has decided that rows will speak to the reader in the second person, as the animal ("You have two kinds of colour-sensing cell"), and that every such sentence must be true of the species on screen at the grade it shows. The owner wants as much species-level evidence as can be found, with vaguer wording only where the literature truly runs out.
 

@@ -6,4 +6,4 @@ Read `docs/STATUS.md` first. Push within 10 minutes of starting and then every 1
 
 `main` is the live page, served at https://jampotful.github.io/seen-back/ about a minute after every push. Merge to it only where your prompt allows, only when every check passes, and only after fetching `main` again and merging it in, since other agents may merge at the same time.
 
-Writing, in every file: plain sentences, Canadian spelling, no em dashes, no "not X but Y", no sentence fragments.
+Writing, in every file: plain sentences, US spelling, no em dashes, no "not X but Y", no sentence fragments.
