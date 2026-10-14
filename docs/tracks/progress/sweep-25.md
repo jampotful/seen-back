@@ -37,3 +37,4 @@ done idx 33 Marrubium
 done idx 34 Silphium
 done idx 35 Psyllobora
 done idx 36 Lycopus
+done idx 37 Galerida
