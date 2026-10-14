@@ -8,3 +8,5 @@ Only WebFetch reaches the web (curl to datadryad.org etc. is refused by the egre
 ## Status by compilation (unlogged ones, biggest first)
 - 10.5061/dryad.3xsj3txq7 avian eye morphology (3,475 spp): Dryad download refused (robots). WANTED.
 - 10.1038/s42003-021-01688-z Lepidoptera opsins (175 spp): species data only in Supplementary Data xlsx and Dryad. WANTED.
+- 10.3389/fevo.2019.00321 amphibian photoreception: Table 1 read in full, 39 records (λmax). DONE.
+- 10.3389/fevo.2019.00352 reptile photopigments: no tables; species sentences logged (43 records). DONE.
