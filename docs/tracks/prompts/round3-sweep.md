@@ -10,6 +10,7 @@ For each genus, in the batch's order, run the protocol once for all its open tra
    - a measurement you can open goes to the evidence log through `tools/senses/addlog.py`;
    - a measurement you cannot open goes on `docs/views/wanted/sweep-<n>.jsonl` with `for`, `rows`, `records` and `get`;
    - for each trait with nothing found, write a search record with the full protocol (`level`, `queries`, `where`, `canon`, `chased`, `found`, `date`) to `docs/views/searched/sweep-<n>.jsonl`.
+   - `chased` is never empty. Put the DOI of the work whose citations or reference list you checked; when the genus has no measured relative anywhere (the batch's `closest` is empty), name the family review you checked instead, or write `"none: no measured relative and no family review found"` with the places you looked in `where`. A record with an empty `chased` counts as half-searched and the genus is swept again later.
 5. Never request a paper marked `n/a` in `docs/views/papers-status.jsonl`.
 
 Final message, at most 150 words: genera done, cells closed by a measurement, cells exhausted, wanted lines added, and the last commit.

@@ -20,10 +20,15 @@ def canon_done(repo):
     the evidence (its DOI appears in a record's source) or marked n/a by the owner. Returns a function trait -> bool."""
     cp = os.path.join(repo, 'docs/views/research/canon.jsonl')
     if not os.path.exists(cp): return lambda t: False
-    logged = set()
+    logged, titles = set(), set()
+    nt = lambda t: re.sub(r'[^a-z0-9]+', ' ', (t or '').lower()).strip()
     for p in glob.glob(os.path.join(repo, 'docs/views/evidence/*.jsonl')):
         for l in open(p, encoding='utf-8'):
             logged.update(m.lower().rstrip('.,;)') for m in re.findall(r'10\.\d{4,9}/[^\s"\']+', l))
+            try: src = json.loads(l).get('source')
+            except (ValueError, AttributeError): continue
+            if isinstance(src, dict): titles.add(nt(src.get('title')))
+            elif isinstance(src, str): titles.add(nt(src))
     na = set()
     sp = os.path.join(repo, 'docs/views/papers-status.jsonl')
     if os.path.exists(sp):
@@ -35,8 +40,12 @@ def canon_done(repo):
     for l in open(cp, encoding='utf-8'):
         try: j = json.loads(l)
         except ValueError: continue
-        need.setdefault(j.get('trait'), set()).add((j.get('doi') or j.get('title') or '').lower().strip())
-    return lambda t: all(d in logged or d in na for d in need.get(t, set()))
+        need.setdefault(j.get('trait'), []).append(((j.get('doi') or '').lower().strip(), nt(j.get('title'))))
+    def done(doi, title):  # a book has no DOI: its title must appear in an evidence record's source
+        if doi: return doi in logged or doi in na
+        return bool(title) and any(title in t for t in titles if t)
+    status = {t: all(done(d, ti) for d, ti in items) for t, items in need.items()}  # once per trait, not per cell
+    return lambda t: status.get(t, True)
 
 def word(name, text):
     return bool(name) and re.search(r'(?<![a-z])' + re.escape(name.lower()) + r'(?![a-z])', text) is not None
