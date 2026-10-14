@@ -17,3 +17,4 @@ Following canon-2's notes: WebFetch only; PMC serves reCAPTCHA, eLife a JS chall
 - 10.1007/s00239-004-0294-2 Lariguet 2005: rero PDF read in full; no main table (supplement is an accession list); 8 species statements logged (sense_light_nonvisual, g). DONE.
 - 10.3389/fpls.2015.00207 Weller & Ortega 2015: Frontiers HTML (truncated after Table 2); Table 1 is loci, not species; 12 records (photoperiod class per crop species, two gene records). DONE.
 - 10.1007/s00359-007-0281-3 Necker 2007: author PDF read in full; Table 1 is by order (garbled columns); 25 records (species sentences m, family/order g). DONE.
+- 10.5772/intechopen.74645 Hauzman 2018: IntechOpen HTML read in full (no 429 this time); Tables 1, 3, 4 (12 colubrid/dipsadid snakes plus two Philodryas) and 11 introduction statements logged, 51 records. The fetch tool re-headed the tables; values are the chapter's. DONE.
