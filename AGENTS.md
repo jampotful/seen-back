@@ -1,6 +1,6 @@
 # Instructions for outside agents (Codex and others)
 
-A task that names `docs/tracks/prompts/codex-round.md`, `docs/tracks/prompts/external-sweep.md`, `docs/tracks/prompts/oa-pass.md` or `docs/tracks/prompts/recall-test.md` is a research task. For it, start nothing and run no checks: no build, no `prepare.py`, no servers, no Playwright, no browser tests and no self-test. It needs Python 3 with `requests` and `pypdf`, and internet access. Follow the named prompt, which says which files you may write.
+A task that names `docs/tracks/prompts/codex-round.md`, `docs/tracks/prompts/external-sweep.md`, `docs/tracks/prompts/oa-pass.md` or `docs/tracks/prompts/recall-test.md` is a research task. Before anything else, update to the latest main from GitHub (`git fetch origin main`, then check out `origin/main`), because the environment's saved copy of the repository can be hours old. Then start nothing and run no checks: no build, no `prepare.py`, no servers, no Playwright, no browser tests and no self-test. It needs Python 3 with `requests` and `pypdf`, and internet access. Follow the named prompt, which says which files you may write.
 
 For a task on the app itself, the environment's start instructions apply.
 
