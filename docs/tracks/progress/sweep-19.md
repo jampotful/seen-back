@@ -1,4 +1,4 @@
 # sweep-19 progress
-Batch: scratchpad sweep15/sweep-1.json, 40 genera, in order. Resume at the first genus lacking a line in docs/views/searched/sweep-19.jsonl.
-Done so far: (see searched file)
-Order done through Manorina's batch position so far: Rhinella, Raphanus, Daphne, Tragelaphus, Daptrius, Melitaea, Calyptocarpus, Asarum, Eolophus, Castanea, Coluber, Cynanthus, Gallus, Coccothraustes, Gyps, Tigrisoma, Cinclus, Manorina. Tools in /tmp/w19s are scratch only; records are in the jsonl files.
+Complete: all 40 genera of batch sweep15/sweep-1.json have a full-protocol search record in docs/views/searched/sweep-19.jsonl.
+Evidence: 26 records (Raphanus, Rhinella marina motion, Castanea x2, Asarum heterotropoides, Daptrius chimango, Gallus x2, Gyps x2, Serinus canaria, Caiman crocodilus, Helianthus annuus x2, Tragopogon hybridus, Nicotiana sylvestris, Pastinaca, Lunaria, Hypochaeris x2). Wanted: 2 lines (Super 1974 kudu; Karl 2018 caiman).
+Notes: PMC pages returned bot checks; Cambridge, Royal Society, Revista USP and Springer-chapter permission requests went unanswered or redirected; HAL page an access-denied screen; no 429 met. Each is named in the chased fields.
