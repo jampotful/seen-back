@@ -28,3 +28,7 @@ Following canon-2's notes: WebFetch only; PMC serves reCAPTCHA, eLife a JS chall
 - 10.1038/ncomms8852 phytochrome diversity: nature.com HTML (truncated in Methods); no main table (species counts in Supplementary Tables 1-2); 7 statements logged (g). DONE for the main text.
 - Brischoux 2010, Land 2015 (Springer paywall, no 429), Heesy & Hall 2010 (Karger refused), Hunt & Peichl 2014, Ollivier 2004 (Wiley refused), Warrant & Johnsen 2013 (cell.com refused): WANTED.
 - Not attempted: 1KP (10.1038/s41586-019-1693-2; no species-trait table in the main text), Land 1997, Rutowski 2009, Hughes 1977 chapter, Heesy 2011, books.
+- 10.1016/j.asd.2008.08.003 Rutowski 2009: Lund record abstract-only. WANTED.
+
+## Stopped (14 October)
+No 429 and no search-budget notice; stopped after the open-access list was exhausted. 724 records from 15 compilations in evidence/canon-3.jsonl (check.py: 0 problems); 12 wanted lines in wanted/canon-3.jsonl. Routes that worked this round: Lund lucris, Chittka lab, Illinois State, reinhold-necker.de, agrilife.org, eScholarship PDF, TARA (tcd.ie) bitstreams, NSF PAR, IntechOpen HTML, ResearchGate link PDF, silverchair PDF, Cambridge aop-cambridge-core PDF. Refused: royalsocietypublishing.org, academic.oup.com, cell.com, karger.com, onlinelibrary.wiley.com, figshare ndownloader (permission), PMC (reCAPTCHA).
