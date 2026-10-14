@@ -1,14 +1,14 @@
 # Open-access pass, batch 1
 
-2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Resumed from the entry-13 handoff on 2026-10-14. Completed through entry 18 where full text was available. Next full verified copy is **entry 27, Overcoming the loss of blue sensitivity through opsin duplication in the largest animal group, beetles**. Entries 19–26 are now reviewed to the extent accessible; entry 25’s full supplement bundle is read. Entry 14 yielded four abstract-only records; entries 14–15 remain full-text retrieval-blocked and entry 16 has no retrieved abstract. No app setup, builds, servers, browser tests or self-tests ran.
+2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Resumed from the entry-13 handoff on 2026-10-14. Completed through entry 18 where full text was available. Next full verified copy is **entry 28, Lens and cornea limit UV vision of birds**. Entries 19–26 are now reviewed to the extent accessible; entry 25’s full supplement bundle is read. Entry 14 yielded four abstract-only records; entries 14–15 remain full-text retrieval-blocked and entry 16 has no retrieved abstract. No app setup, builds, servers, browser tests or self-tests ran.
 
 ## Counts
 
 - **79 batch entries processed** in the discovery pass before reading papers. This does not mean all three providers successfully checked every entry.
-- **35 candidate open-copy locations found**; **18 batch source copies retrieved and identified** by title on the PDF first page or XML article title. Ten are read; eight are waiting. The newly retrieved copy is entry 25’s complete two-file supplement bundle, identified from its first-page dataset heading and the official Figshare record/file metadata.
-- **10 batch entries read in full (9 articles and 1 supplement bundle)**, including available relevant tables and supplements; **4,271 full-text/supplement records**.
+- **35 candidate open-copy locations found**; **18 batch source copies retrieved and identified** by title on the PDF first page or XML article title. Eleven are read; seven are waiting. The newly retrieved copy is entry 25’s complete two-file supplement bundle, identified from its first-page dataset heading and the official Figshare record/file metadata.
+- **11 batch entries read in full (10 articles and 1 supplement bundle)**, including available relevant tables and supplements; **4,531 full-text/supplement records**.
 - **7 additional abstracts with logged measurements** from papers with no free full copy located; **50 partial records**. Abstracts do not count as full papers read.
-- **4,321 evidence records total**, all quote-checked before append with `addlog.py`; no failed quotes retained. Source-registry counts agree with full-text evidence counts.
+- **4,581 evidence records total**, all quote-checked before append with `addlog.py`; no failed quotes retained. Source-registry counts agree with full-text evidence counts.
 - **10 papers with no free copy located after completed permitted lookups**, recorded in `docs/views/sources/oa-none-1.jsonl`. Four of these yielded the abstract records above.
 - **34 entries remain unresolved at discovery**, due to provider interruption or no verifiable title/author/year match. They are not declared unavailable.
 - **17 further advertised candidate copies could not be retrieved**. They remain retrieval-blocked rather than counted as confirmed no-copy papers.
@@ -31,8 +31,9 @@ The temporary lookup script, provider responses, downloads and extracted text ar
 | 17 | Kopania & Clark, mammalian retinal specializations | 290 | Full XML, six supplement tables and four supplement figures/references. 119 features from 82 retinal-species rows, 91 bony orbit angles, 78 estimated map coordinates, two secondary human cell densities. Measured-species columns override phylogeny/common-name labels; wolf, hyena, primates, marmot and camel distinctions preserved. Chinchilla retinal species ambiguous; blanks not absence. Published 2025 (batch says 2024). |
 | 18 | Caves et al., avian acuity | 374 | Full XML, all 17 supplement pages, main tables and figure labels. 94 S1 bird rows (caption says 93); 29 S2 vertebrates (caption says 28), two duplicate RGC values omitted. RGC/behavior distinctions and uncertain method labels preserved; Dasyurus table/reference species conflict left unresolved at genus level. S1/S2 acuity disagreements retained. Main Table 1 image values and Fig.4 labels manually transcribed, visually verified, then quote-checked; Fig.4 magpie 38.3 versus S1 33 flagged inferred. |
 | 25 | Veilleux & Kirk, mammal acuity supplements | 216 | Entire 14-page Table PDF (91 species, source bibliography) and 1-page Figure PDF; only the batch’s standalone supplement entry is marked read, not the main article. 91 acuities, 91 axial lengths, 34 activity classes. Blank method/AP cells stay unknown; cone-based estimates distinct from RGC. Taxon/citation conflicts (Eptesicus/Macrotus, primates, ground squirrel), source spellings and estimated wallaby axial length explicitly qualified. |
+| 27 | Sharkey et al., beetle opsins | 260 | Full XML, all 11 supplement pages/seven tables, figure captions and Fig.4 grid. 231 recovery counts across 77 taxa, 26 categorical spectral bands, three prose measurements/classifications. Partial-copy asterisks retained; Xenos sequence/protein counts and Agrilus S2/S3 discrepancy qualified. Physiology stays with the right-hand measured taxa, not related left-column taxa. Dendroctonus blue report without UV stimuli remains inferred. |
 
-None of the nine read article copies is an accepted manuscript: publisher-formatted papers or XML metadata explicitly mark manuscript/preprint as no. No full source is marked read until the reading and quote checks were complete.
+None of the ten read article copies is an accepted manuscript: publisher-formatted papers or XML metadata explicitly mark manuscript/preprint as no. No full source is marked read until the reading and quote checks were complete.
 
 The detailed CSV/XLSX evidence quotes exact cells (or consecutive cells), with filename, sheet, row/column or cell coordinates in `where`. Signed retinal-margin separation is distinct from total field of view. The genetic-recovery trait is distinct from physiological receptor classes. New traits have reasons in `note`; derived/inferred results retain their grades.
 
@@ -52,7 +53,7 @@ All carry `partial: true`, `access: abstract`, `opened: true`, and the retrieved
 
 ## Resume
 
-1. Read entry 27 in full with supplements; continue down the batch in order. Keep source-registry entries confined to completed full readings.
+1. Read entry 28 in full with supplements; continue down the batch in order. Keep source-registry entries confined to completed full readings.
 2. Revisit discovery-pending entries in a fresh session with the rate-limit rule respected. Exact title/first-author/year agreement is still required for DOI-less records. Do not convert provider failures into no-copy results.
 3. Investigate retrieval-blocked candidate copies through lawful publisher/repository routes. Read and quote-check any abstract-only measurements; do not mark a full paper read from an abstract.
 
@@ -60,7 +61,6 @@ Discovery-pending entry numbers: 2, 12, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 
 
 Retrieved, title-verified copies awaiting full reading (the following are metadata links, not read claims):
 
-- **27**: Overcoming the loss of blue sensitivity through opsin duplication in the largest animal group, beetles. https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5428366/fullTextXML
 - **28**: Lens and cornea limit UV vision of birds – a phylogenetic perspective. https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8601714/fullTextXML
 - **32**: Visual fields, foraging and collision vulnerability in gulls (Laridae). https://pure-oai.bham.ac.uk/ws/files/239436691/ibi.13360.pdf
 - **60**: Slow or Fast Eyes: Associations Between Critical Flicker Fusion Frequency and Anti-Predator Strategy in Lepidoptera. https://carleton.scholaris.ca/server/api/core/bitstreams/c439f395-f97d-4061-ae6d-ca7101030ee8/content
