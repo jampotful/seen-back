@@ -10,5 +10,5 @@ Worktree /tmp/wscanon4, branch research/canon-4. Evidence in docs/views/evidence
 ## Not reached this round (open-access compilations still unlogged, from the canon-3 list)
 10.7554/eLife.15675 (eLife JS challenge; try the eLife PDF or bioRxiv), 10.1038/s41598-017-00061-7 and 10.1038/s42003-021-01688-z (species data in supplements only), 10.1098/rspb.2020.1393 (ESM), 10.5061/dryad.3xsj3txq7 and 10.5061/dryad.nzs7h44v8 (Dryad downloads refuse robots), 10.1371/journal.pone.0057702 (table is an image), 10.1126/sciadv.1500391 (in hand, marked full, not yet in evidence; 214 species in its supplement), 10.1242/jeb.246063 (in hand, marked full, not yet in evidence), 10.1038/s41586-019-1693-2 (no species-trait table). All but the two in-hand ones already have wanted lines in canon-2 or canon-3.
 
-## Stopped (14 October, 14:05 EDT)
+## Stopped (14 October, 13:56 EDT)
 Two HTTP 429 refusals from the fetch proxy (Europe PMC REST for the Perrin DOI, then api.crossref.org for the Zeng article). Per the brief, stopped. 400 records in evidence/canon-4.jsonl (check.py: 0 problems), 2 wanted lines, 3 canon lines added. Routes that worked: par.nsf.gov full text (fetch tool only), api.crossref.org for DOI confirmation (until the 429), datadryad.org dataset landing pages, researchers.westernsydney.edu.au record pages (the PDF link needs a permission).
