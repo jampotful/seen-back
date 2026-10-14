@@ -1,0 +1,2 @@
+# sweep-24 progress
+Stopped before searching: all 40 genera of sweep20/sweep-1.json already have full-protocol search records (dated 2026-10-14) in docs/views/searched/sweep-22.jsonl and sweep-23.jsonl (Rupornis, Cerastium, Viscum, Helminthotheca in sweep-23 only). THOROUGH.md says a record is redone only after a year, so no search, evidence or wanted lines were written. The batch file appears to duplicate sweep 22's batch. No WebSearch used.
