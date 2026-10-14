@@ -1,0 +1,51 @@
+{
+ "spec": "{\"key\":\"bee\",\"version\":1,\"chip\":\"Bee\",\"who\":\"a bee\",\"applies_to\":{\"family\":[\"Apidae\",\"Halictidae\",\"Megachilidae\",\"Andrenidae\",\"Colletidae\"]},\"cue\":\"The view is wide and very blurry, with ultraviolet in the colours and no red.\",\"params\":{\"fov\":{\"value\":312,\"grade\":\"g\",\"invented\":true,\"src\":[\"R32\"],\"range\":[100,360],\"note\":\"two eyes, each reaching 156 degrees back from straight ahead\"},\"cpd\":{\"value\":0.26,\"grade\":\"m\",\"invented\":false,\"src\":[\"R1\"],\"range\":[0.005,40],\"note\":\"grating acuity of worker honeybees\"},\"pupil\":\"none\",\"M\":{\"value\":\"BEE\",\"grade\":\"i\",\"invented\":true,\"src\":[],\"note\":\"the receptor peaks are measured, and the way the camera's colours are mapped onto them is the app's choice\"},\"uvBlue\":{\"value\":0.7,\"grade\":\"i\",\"invented\":true,\"src\":[],\"range\":[0,1],\"note\":\"phone cameras record almost no ultraviolet, so some of the blue stands in for it\"},\"rate\":{\"value\":0.3,\"grade\":\"g\",\"invented\":true,\"src\":[\"R135\"],\"range\":[0.25,2],\"note\":\"60 Hz divided by 200 Hz\"}},\"matrices\":{\"BEE\":{\"from_pigments\":[344,436,540],\"src\":[\"R55\",\"R84\",\"R85\"],\"note\":\"ultraviolet, blue and green receptors of the honeybee\"}},\"spectrum\":{\"q\":\"BEE\"},\"remap\":{\"blindAt\":{\"value\":180,\"grade\":\"i\",\"invented\":true,\"src\":[],\"range\":[90,270],\"note\":\"the blind wedge sits straight behind, midway between the two eyes' rear limits\"},\"blindDeg\":{\"value\":48,\"grade\":\"g\",\"invented\":true,\"src\":[\"R32\"],\"range\":[10,120],\"note\":\"360 degrees minus two fields of 156 degrees\"},\"blindSoft\":{\"value\":8,\"grade\":\"i\",\"invented\":true,\"src\":[],\"range\":[0,30],\"note\":\"how softly the wedge edge fades\"}},\"draw\":{\"field\":[{\"name\":\"wedge\",\"invented\":true,\"note\":\"the wide field with a blind wedge behind\"}],\"spectrum\":[{\"name\":\"matrix\",\"invented\":true,\"note\":\"colours are drawn through the bee's three receptor classes\"}]},\"rows\":[[\"m\",\"Sharpness\",\"A bee can just resolve stripes at about a quarter of a cycle for each degree of view. A person manages 30 or more, so a bee's picture is more than a hundred times coarser than yours.\",[\"R1\",\"R13\"],[\"params.cpd\"]],[\"g\",\"A very wide view\",\"The two compound eyes together cover about 312 degrees at the horizon, with the field reaching nearly all round. Only a small blind wedge of about 48 degrees remains behind the head.\",[\"R31\",\"R32\",\"R35\"],[\"params.fov\",\"remap.blindDeg\"]],[\"g\",\"Colour\",\"Bees have three kinds of colour receptor, tuned to ultraviolet, blue and green light, with peaks near 344, 436 and 540 nanometres. They can see ultraviolet but not far red, so the view shifts colours toward shorter wavelengths.\",[\"R55\",\"R84\",\"R85\",\"R100\",\"R268\"],[\"params.M\",\"matrices.BEE\"]],[\"g\",\"Speed\",\"A honeybee's eye can follow flicker up to about 200 times a second in bright light, while a person stops at about 60. In this view the world moves at a pace a bee could follow and you cannot.\",[\"R135\",\"R138\"],[\"params.rate\"]],[\"i\",\"The app's own choices\",\"Phone cameras record almost no ultraviolet, so the app reads part of the blue as ultraviolet and draws it as a tint. The strength of that tint, the mapping of camera colours onto the bee's receptors, and the placement and soft edge of the blind wedge are all the app's choices.\",[],[\"params.M\",\"params.uvBlue\",\"remap.blindAt\",\"remap.blindSoft\"]]]},\"claims\":[{\"path\":\"params.cpd\",\"records\":[\"R1\"],\"kind\":\"value\",\"how\":\"The record states the highest spatial frequency reliably resolved by honeybees as 0.26 cycle per degree.\"},{\"path\":\"params.fov\",\"records\":[\"R32\"],\"kind\":\"calculation\",\"how\":\"Each eye reaches 156 degrees back from straight ahead at the horizon, so 2 x 156 = 312 degrees.\"},{\"path\":\"params.rate\",\"records\":[\"R135\"],\"kind\":\"calculation\",\"how\":\"A person's flicker fusion of 60 Hz divided by the honeybee's 200 Hz gives 0.3.\"},{\"path\":\"remap.blindDeg\",\"records\":[\"R32\"],\"kind\":\"calculation\",\"how\":\"360 degrees minus the two fields of 156 degrees each (312 degrees) leaves a blind wedge of 48 degrees.\"}],\"quotes\":[{\"record\":\"R1\",\"quote\":\"the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1\"},{\"record\":\"R32\",\"quote\":\"Seidl and Kaiser (1981) reported that the honeybee FOV extends down to −90° in elevation and back to −156° in azimuth (at 0° el.)\"},{\"record\":\"R135\",\"quote\":\"At ca. 200 Hz the FRC drops to 50%.\"}]}",
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The record states the highest spatial frequency reliably resolved by honeybees as 0.26 cycle per degree."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "Each eye reaches 156 degrees back from straight ahead at the horizon, so 2 x 156 = 312 degrees."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R135"
+   ],
+   "kind": "calculation",
+   "how": "A person's flicker fusion of 60 Hz divided by the honeybee's 200 Hz gives 0.3."
+  },
+  {
+   "path": "remap.blindDeg",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "360 degrees minus the two fields of 156 degrees each (312 degrees) leaves a blind wedge of 48 degrees."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1"
+  },
+  {
+   "record": "R32",
+   "quote": "Seidl and Kaiser (1981) reported that the honeybee FOV extends down to −90° in elevation and back to −156° in azimuth (at 0° el.)"
+  },
+  {
+   "record": "R135",
+   "quote": "At ca. 200 Hz the FRC drops to 50%."
+  }
+ ]
+}
