@@ -23,3 +23,11 @@ Rank 166's true CFF was not reached in three birds; their highest tested FFF is 
 3. Finish the access-failure and unsearched-paper lists, update counts, commit and push.
 
 The nine unsearched entries are ranks 188, 195, 200, 204, 210, 214, 216, 228 and 234. They have no no-copy claim. Raw API responses, extracted text, PDFs and supplements stay outside the repository under `/tmp/oa`.
+
+## Second checkpoint
+
+423 records are now logged and quote-checked. Five full papers are completed (ranks 166, 167, 175, 191, 203), plus rank 164's five abstract-only records. Rank 175 contributes 299 review-level records, including 200 retained S10 rows, 93 additional condition-specific values from its Comments cells, and six individual maxima explicitly stated in the main text. Its 26 critically excluded S10 rows were not logged. Review bounds, approximate values, uncertainty and risk-of-bias labels are retained; a non-CFF pigeon peak-response value and the beetle infrared pit-organ response are not mislabeled as ocular CFF. The review conflicts with the opened primary raptor paper on flycatcher assignments and some methods/luminances; these require desk review.
+
+Rank 191 was read in full (12-page publisher PDF). Canada-goose fields are separated by eye position; the unconfirmed fovea is explicitly conditional. Rank 203 was read in full, including the supplementary image-analysis methods and Figure S1; sample frames of the 24-second supplementary video were viewed. Its hypothetical corrected male acuity is grade i, distinct from the measured mean. Unidentified fruit-fly species and the hypothetical averaged bird predator are not assigned species-level measured records.
+
+Access recovery from additional links already returned in Europe PMC metadata yielded PDFs for ranks 164 and 202 and an accepted manuscript for rank 230. These are pending reading/extraction, in that order. A second Europe PMC PDF attempt for rank 236 still returned 500. A retry of rank 163's interrupted HAL transfer timed out. No rate-limit or access-control blocks were bypassed. All paper files remain outside the repository.
