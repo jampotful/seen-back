@@ -111,3 +111,19 @@ Error rate is errors over verifiable records (checked minus unverifiable).
 | sweep-19:18 | Lunaria annua / sense_light_nonvisual | m | confirm | verbatim ("This suggested that annual Lunaria is a long-day plant."); 17 of 18, 0 of 20, 13.8 against 26.9 and 29.3 days confirmed |
 | sweep-19:19 | Hypochaeris radicata / diel | m | confirm | verbatim clause; 3–7 hours and rain confirmed |
 | sweep-19:20 | Hypochaeris radicata / sense_light_nonvisual | m | confirm | verbatim but for an en dash ("one–hour"); Salisbury 1964 and germination sentence confirmed |
+| sweep-7:1 | Betula pendula / sense_light_nonvisual | m | confirm | verbatim opening of the abstract sentence; no hours on the page, as the value says |
+| sweep-7:2 | Betula papyrifera / sense_light_nonvisual | m | confirm | verbatim; sentence ends "as a photosensory cue for canopy light foraging." |
+| sweep-7:3 | Stellaria media / sense_light_nonvisual | m | confirm | verbatim in the abstract |
+| sweep-7:4 | Rudbeckia hirta / sense_light_nonvisual | m | confirm | verbatim in the abstract |
+| sweep-7:5 | Sedum album / diel | m | confirm | verbatim clause (page: "whereas nocturnal acid accumulation ..."; capital letter only) in Results, Global transcriptomic co-expression, not a section named Results alone |
+| sweep-7:6 | Lycaena rubidus / spectral_range_nm | m | confirm | verbatim opening of the Summary sentence; 360 and 568 nm confirmed |
+| sweep-7:7 | Lycaena rubidus / lambda_max_nm | m | confirm | as sweep-7:6; 360, 437, 500, 568 nm confirmed |
+| sweep-7:8 | Vespula germanica / interommatidial_deg | m | confirm | verbatim clause of the abstract; 1.0 deg assigned to V. germanica in Results |
+| sweep-7:9 | Vespula vulgaris / interommatidial_deg | m | confirm | as sweep-7:8; 1.5 deg to V. vulgaris |
+| sweep-7:11 | Bufo bufo / motion | m | requote | value confirmed; the quote writes "were" where the page writes "are" |
+| sweep-7:13 | Sympetrum / interommatidial_deg | m | confirm | verbatim in the abstract; 1.5°–2° in the rest of the eye confirmed |
+| sweep-7:14 | Sciurus vulgaris / receptor_classes | m | requote | value confirmed; quote is a paraphrase of "rods, shortwave-sensitive (S) and middle-to-longwave-sensitive (M) cones were present and distributed across the entire retina" |
+| sweep-7:15 | Sciurus vulgaris / fovea | m | requote | value confirmed; page: "with peak values in a horizontal streak ventral of the papilla" |
+| sweep-7:16 | Leptoglossus occidentalis / sense_infrared | m | correct | quote verbatim from a blog quoting Takács et al. 2008; secondary citation, now `partial: true`; value's "stops it finding them" narrowed to "impairs IR perception" |
+| sweep-7:17 | Vespa crabro / interommatidial_deg | m | requote | value confirmed; quote not on the page; Figure 3 caption: "the smallest interommatidial angles (1°) and look into a frontal and slightly ventral direction" |
+| sweep-7:18 | Melanoplus sanguinipes / colour_vision | m | confirm | verbatim but for a lost space after the italic name ("sanguinipesinvolves") |
