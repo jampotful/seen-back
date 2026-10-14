@@ -1,0 +1,302 @@
+{
+ "key": "cat",
+ "version": 1,
+ "chip": "Cat",
+ "who": "a cat",
+ "applies_to": {
+  "genus": [
+   "Felis"
+  ]
+ },
+ "cue": "Things out of focus stretch into upright streaks.",
+ "modules": [
+  "gaze",
+  "salience",
+  "spectrum"
+ ],
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "cpd": {
+   "value": 8.1,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "carnivores.jsonl:Clark 2013"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "a chart test of a domestic cat, 20/74 converted to cycles per degree"
+  },
+  "topoA": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "the area centralis is the sharpest place, and no record gives how much blurrier the edge is"
+  },
+  "fall": {
+   "value": 1.0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "the app's choice for how fast sharpness drops toward the edge"
+  },
+  "pupil": {
+   "value": "v",
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "carnivores.jsonl:Goldfinger 2004",
+    "carnivores.jsonl:Tabin 2024"
+   ],
+   "note": "constricted pupil of domestic cats is an upright slit, and the ancestral felid had vertical pupils"
+  },
+  "M": {
+   "value": "CAT",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "carnivores.jsonl:Crocker 1980",
+    "carnivores.jsonl:Narfström 2011"
+   ],
+   "note": "two cone classes, peaks near 450 and 556 nm"
+  },
+  "sat": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "two cone classes give less color than a human, and the exact strength is a guess"
+  },
+  "gain": {
+   "value": 1.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    4
+   ],
+   "note": "a lift for dim light, the amount is a guess"
+  },
+  "sheen": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "a tapetum is present, the strength of the shine is a guess"
+  },
+  "salience": 1
+ },
+ "matrices": {
+  "CAT": {
+   "from_pigments": [
+    450,
+    556
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "carnivores.jsonl:Crocker 1980",
+    "carnivores.jsonl:Narfström 2011"
+   ],
+   "note": "short and middle wavelength cones; ganglion cell recordings also show a third mechanism near 500 nm that is left out because cats are called dichromatic",
+   "rows": [
+    [
+     0.3057,
+     0.47473,
+     0.14613,
+     0.07344
+    ],
+    [
+     0.3057,
+     0.47473,
+     0.14613,
+     0.07344
+    ],
+    [
+     0.00291,
+     0.17666,
+     0.65538,
+     0.16506
+    ]
+   ],
+   "q": [
+    [
+     0.00291,
+     0.17666,
+     0.65538,
+     0.16506
+    ],
+    [
+     0.3057,
+     0.47473,
+     0.14613,
+     0.07344
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "CAT"
+ },
+ "gaze": {
+  "saccade": {
+   "value": [
+    25,
+    3.1
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "carnivores.jsonl:Park 2020"
+   ],
+   "note": "3.1 ms per degree from a measured cat slope; the 25 ms base is the app's choice"
+  }
+ },
+ "draw": {
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "two cone classes mapped from the measured peaks"
+   }
+  ],
+  "sharpness": [
+   {
+    "name": "paint",
+    "invented": true,
+    "note": "blur grows from the sharp middle toward the edge"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "g",
+   "Sharpness",
+   "If you are a domestic cat, a chart test gave one gray tabby about 8 cycles per degree and a younger cat about 18, where a human reads about 30. Behavior studies put cats between 3 and 9.",
+   [
+    "carnivores.jsonl:Clark 2013",
+    "carnivores.jsonl:Melin 2016"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "Color",
+   "If you are a domestic cat, you have two kinds of cone, one most sensitive near 450 nanometers in the blue and one near 556 in the yellow-green, where a human has three. Reds and oranges lose their color for you.",
+   [
+    "carnivores.jsonl:Crocker 1980",
+    "carnivores.jsonl:Narfström 2011",
+    "carnivores.jsonl:Tabin 2024"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "g",
+   "Pupil",
+   "In bright light your pupil shrinks to an upright slit, as the pupils of your felid ancestors did. Lions and other large cats keep a round one.",
+   [
+    "carnivores.jsonl:Goldfinger 2004",
+    "carnivores.jsonl:Tabin 2024"
+   ],
+   [
+    "params.pupil"
+   ]
+  ],
+  [
+   "m",
+   "Mirror layer",
+   "Behind your retina, in the upper back of the eye, lies a mirror-like layer of cells called a tapetum cellulosum. The pigment cells over it carry no dark granules.",
+   [
+    "carnivores.jsonl:Braekevelt 1990"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Sharpest patch",
+   "If you are a domestic cat, your sharpest sight lies in a cone-rich patch called the area centralis. You have no macula like a human's.",
+   [
+    "carnivores.jsonl:Narfström 2011"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Gaze jumps",
+   "If you are a domestic cat, each degree of a quick eye jump adds about 3 milliseconds to its length. Peak eye speed climbs about 13.6 degrees per second for every degree of jump.",
+   [
+    "carnivores.jsonl:Park 2020"
+   ],
+   [
+    "gaze.saccade"
+   ]
+  ],
+  [
+   "i",
+   "Unmeasured",
+   "Nobody has measured how fast sharpness fades from your area centralis toward the edge of your sight, or how vivid your two-cone colors are beside a human's. Studies report cats six times as sensitive to light as humans in dim light, but the exact lift and the strength of your eye shine remain guesses.",
+   [
+    "carnivores.jsonl:Braekevelt 1990",
+    "carnivores.jsonl:Melin 2016"
+   ],
+   [
+    "params.topoA",
+    "params.fall",
+    "params.sat",
+    "params.gain",
+    "params.sheen"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Nobody has measured some parts of how you see, so they are guesses.",
+   [],
+   [
+    "matrices.CAT"
+   ]
+  ]
+ ],
+ "falls_back_to": "bigcat",
+ "draft": true
+}

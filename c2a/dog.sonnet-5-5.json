@@ -1,0 +1,394 @@
+{
+ "key": "dog",
+ "version": 1,
+ "chip": "Dog",
+ "who": "a dog",
+ "applies_to": {
+  "genus": [
+   "Canis"
+  ]
+ },
+ "cue": "Blues and yellows stay clear while reds fade, and fine detail softens.",
+ "modules": [
+  "spectrum"
+ ],
+ "params": {
+  "fov": {
+   "value": 240,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "carnivores.jsonl:Park 2020"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "typical field for dogs, from earlier work"
+  },
+  "cpd": {
+   "value": 7.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "a guess in the spirit of dogs seeing several times less detail than humans; no record gives a figure in cycles per degree"
+  },
+  "topoS": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "a horizontal streak of sharpest sight; its weight is a guess"
+  },
+  "fall": {
+   "value": 1.2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "no record gives how fast sharpness drops toward the edge"
+  },
+  "pupil": {
+   "value": "o",
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "carnivores.jsonl:Araujo 2019",
+    "carnivores.jsonl:Paszta 2021"
+   ],
+   "note": "a round pupil, measured in the painted dog and described for the domestic dog"
+  },
+  "M": {
+   "value": "DOG",
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "carnivores.jsonl:Jacobs 1993"
+   ],
+   "note": "two cone classes from measured peaks; the mapping is the app's"
+  },
+  "sat": {
+   "value": 0.7,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "two cone classes give less color than a human, the amount is a guess"
+  },
+  "gain": {
+   "value": 1.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    4
+   ],
+   "note": "a rod-rich retina with a mirror layer; the lift is a guess"
+  },
+  "sheen": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "strength of eye shine is a guess"
+  },
+  "uvBlue": {
+   "value": 0.3,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "both cone kinds respond to UVA; how much of the blue to read as ultraviolet is a guess"
+  },
+  "rate": {
+   "value": 0.8,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "intake-6.jsonl:Inger 2014"
+   ],
+   "range": [
+    0.25,
+    2
+   ],
+   "note": "60 divided by a flicker fusion of 75 Hz"
+  }
+ },
+ "matrices": {
+  "DOG": {
+   "from_pigments": [
+    430,
+    555
+   ],
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "carnivores.jsonl:Jacobs 1993"
+   ],
+   "note": "two cone pigments of the domestic dog",
+   "rows": [
+    [
+     0.30084,
+     0.477,
+     0.14861,
+     0.07355
+    ],
+    [
+     0.30084,
+     0.477,
+     0.14861,
+     0.07355
+    ],
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ]
+   ],
+   "q": [
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ],
+    [
+     0.30084,
+     0.477,
+     0.14861,
+     0.07355
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "DARK_508": {
+   "from_pigments": [
+    508
+   ],
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "carnivores.jsonl:Jacobs 1993"
+   ],
+   "note": "the rod pigment of the domestic dog",
+   "rows": [
+    [
+     0.08817,
+     0.47704,
+     0.34962,
+     0.08517
+    ],
+    [
+     0.08817,
+     0.47704,
+     0.34962,
+     0.08517
+    ],
+    [
+     0.08817,
+     0.47704,
+     0.34962,
+     0.08517
+    ]
+   ],
+   "q": [
+    [
+     0.08817,
+     0.47704,
+     0.34962,
+     0.08517
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "DOG",
+  "dark": "DARK_508",
+  "adaptAt": {
+   "value": [
+    -2.5,
+    -1
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    -3,
+    0
+   ],
+   "note": "the light levels where rods take over are a guess"
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "Two kinds of color",
+   "If you are a domestic dog, you have two kinds of cone, one most sensitive near 555 nm and one near 430 nm. Yellows and blues reach you clearly while reds and greens come close together.",
+   [
+    "carnivores.jsonl:Jacobs 1993"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Dim light",
+   "If you are a domestic dog, your rod cells peak near 508 nm and take over when the light fades. If you are a coyote, your retina holds many more rods than cones.",
+   [
+    "carnivores.jsonl:Horn 1975",
+    "carnivores.jsonl:Jacobs 1993"
+   ],
+   [
+    "spectrum.dark"
+   ]
+  ],
+  [
+   "g",
+   "Mirror behind the retina",
+   "Dogs have a reflecting layer behind the retina, and in a domestic dog it throws light back. You very likely gather more of a dim scene because of it.",
+   [
+    "carnivores.jsonl:Horn 1975",
+    "carnivores.jsonl:Park 2020",
+    "carnivores.jsonl:Wen 1985"
+   ],
+   [
+    "params.gain",
+    "params.sheen"
+   ]
+  ],
+  [
+   "g",
+   "Wide view",
+   "Dogs take in about 240 degrees around them, with an overlap of 30 to 60 degrees straight ahead. You very likely see most of the world beside you at once.",
+   [
+    "carnivores.jsonl:Park 2020"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "Detail",
+   "Dogs see up to four times less fine detail than humans. If you are a domestic dog or a wolf, your sharpest sight lies along a horizontal streak, pronounced or moderate, with an oval patch of dense cells in it.",
+   [
+    "carnivores.jsonl:Huber 2013",
+    "carnivores.jsonl:Peichl 1992",
+    "intake-3.jsonl:Hebel 1976"
+   ],
+   [
+    "params.topoS",
+    "params.fall"
+   ]
+  ],
+  [
+   "g",
+   "Pupil",
+   "A painted dog's pupil is round, and a domestic dog's pupil is described as round too. You very likely have a round pupil.",
+   [
+    "carnivores.jsonl:Araujo 2019",
+    "carnivores.jsonl:Paszta 2021"
+   ],
+   [
+    "params.pupil"
+   ]
+  ],
+  [
+   "g",
+   "Flicker",
+   "A flickering light merged into steady light at about 75 flashes a second in tests on domestic dogs. You very likely follow quick change in fine slices of time.",
+   [
+    "intake-6.jsonl:Inger 2014"
+   ],
+   [
+    "params.rate"
+   ]
+  ],
+  [
+   "i",
+   "What nobody has measured",
+   "Nobody has given your sharpness as a number of cycles per degree, how strongly colors register for you, how fast sharpness falls from the center of your streak, how much brighter dim scenes look through your mirror layer, how bright your eye shine is, or how much ultraviolet reaches you, though both cone kinds respond to it. The light levels where your rods take over are also unmeasured.",
+   [
+    "carnivores.jsonl:Huber 2013",
+    "carnivores.jsonl:Jacobs 1993",
+    "carnivores.jsonl:Nordling 2019"
+   ],
+   [
+    "params.cpd",
+    "params.M",
+    "params.sat",
+    "params.fall",
+    "params.topoS",
+    "params.gain",
+    "params.sheen",
+    "params.uvBlue",
+    "spectrum.adaptAt"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Nobody has measured some parts of how you see, so they are guesses.",
+   [],
+   [
+    "matrices.DOG",
+    "matrices.DARK_508"
+   ]
+  ]
+ ],
+ "falls_back_to": "fox",
+ "draft": true
+}

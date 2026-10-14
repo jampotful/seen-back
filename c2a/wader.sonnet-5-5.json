@@ -1,0 +1,294 @@
+{
+ "key": "wader",
+ "version": 1,
+ "chip": "Heron, crane, pigeon",
+ "who": "a wading bird",
+ "falls_back_to": "bird",
+ "applies_to": {
+  "family": [
+   "Ardeidae",
+   "Gruidae",
+   "Threskiornithidae",
+   "Ciconiidae"
+  ]
+ },
+ "cue": "Hold the phone level and turn slowly. A narrow wedge behind where you started stays blank, as the space behind a heron's head does.",
+ "modules": [
+  "remap",
+  "spectrum"
+ ],
+ "params": {
+  "fov": {
+   "value": 320,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "birds-other.jsonl:Katzir 1998"
+   ],
+   "note": "the black-crowned night heron's field across the horizon, both eyes together",
+   "range": [
+    100,
+    360
+   ]
+  },
+  "cpd": {
+   "value": 11.04,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "birds-other.jsonl:Rounsley 2005"
+   ],
+   "note": "a pigeon's peak on its frontal axis, standing in for an unmeasured wader",
+   "range": [
+    0.005,
+    40
+   ]
+  },
+  "M": {
+   "value": "WADER",
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "intake-3.jsonl:Porter 2014"
+   ],
+   "note": "four cone classes from the whooping crane"
+  },
+  "rate": {
+   "value": 0.78,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "intake-6.jsonl:Inger 2014"
+   ],
+   "note": "60 hertz divided by a pigeon's 77 hertz flicker fusion",
+   "range": [
+    0.25,
+    2
+   ]
+  },
+  "hold": {
+   "value": 20,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "how long the head rests between thrusts, by analogy with a walking crane",
+   "range": [
+    0,
+    300
+   ]
+  },
+  "thrust": {
+   "value": 50,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the quick forward move of the head, by analogy with a walking crane",
+   "range": [
+    0,
+    100
+   ]
+  }
+ },
+ "matrices": {
+  "WADER": {
+   "from_pigments": [
+    404,
+    450,
+    499,
+    561
+   ],
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "intake-3.jsonl:Porter 2014"
+   ],
+   "rows": [
+    [
+     0.32957,
+     0.46264,
+     0.13475,
+     0.07303
+    ],
+    [
+     0.0416,
+     0.35551,
+     0.48827,
+     0.11461
+    ],
+    [
+     0.00098,
+     0.07365,
+     0.48941,
+     0.43596
+    ]
+   ],
+   "q": [
+    [
+     2e-05,
+     0.02214,
+     0.40642,
+     0.57141
+    ],
+    [
+     0.00291,
+     0.17666,
+     0.65538,
+     0.16506
+    ],
+    [
+     0.06095,
+     0.44494,
+     0.40472,
+     0.08939
+    ],
+    [
+     0.32957,
+     0.46264,
+     0.13475,
+     0.07303
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "WADER"
+ },
+ "remap": {
+  "blindAt": {
+   "value": 180,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the direction of the blind wedge, behind the head",
+   "range": [
+    0,
+    360
+   ]
+  },
+  "blindDeg": {
+   "value": 40,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "birds-other.jsonl:Katzir 1998"
+   ],
+   "note": "360 degrees minus the night heron's 320 degree field",
+   "range": [
+    0,
+    120
+   ]
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "wedge",
+    "invented": true,
+    "note": "a blind wedge behind the head, fixed in the room as the phone turns"
+   },
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the wide field squeezed into the picture without the wedge"
+   }
+  ]
+ },
+ "inputs": {
+  "motion": "optional",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "rows": [
+  [
+   "m",
+   "Nearly all the way around",
+   "If you are a black-crowned night heron, each of your eyes covers about 171 degrees, and together they take in about 320 degrees across the horizon. Other herons have eyes of much the same width, about 170 degrees each.",
+   [
+    "birds-other.jsonl:Katzir 1998",
+    "birds-other.jsonl:Martin 2008"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "A gap behind your head",
+   "If you are a heron, you very likely have a blind wedge of about 40 degrees directly behind your head. That figure comes from taking the night heron's 320 degree field away from a full circle.",
+   [
+    "birds-other.jsonl:Katzir 1998"
+   ],
+   [
+    "remap.blindDeg"
+   ]
+  ],
+  [
+   "m",
+   "A narrow strip ahead",
+   "If you are a black-crowned night heron, your two eyes overlap in a strip about 22 degrees wide that runs long from top to bottom. In three heron species, eye movements can remove this overlap at every height in front of you.",
+   [
+    "birds-other.jsonl:Katzir 1998",
+    "birds-other.jsonl:Martin 2008"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Four kinds of color cells",
+   "If you are a whooping crane, you have four kinds of color-sensing cones that peak at 404, 450, 499 and 561 nanometers, one more than a human, and the first responds to violet light. A gray heron's eye lets less than half the light through below about 380 nanometers, so little ultraviolet reaches the back of the eye.",
+   [
+    "birds-met.jsonl:Olsson 2021",
+    "intake-3.jsonl:Porter 2014"
+   ],
+   [
+    "params.M",
+    "matrices.WADER"
+   ]
+  ],
+  [
+   "m",
+   "Head held still",
+   "If you are a whooping crane walking, you hold your head still for about 30 percent or more of each step cycle, then thrust it forward at about two hock lengths a second. When you run to food, you do not bob your head at all.",
+   [
+    "intake-4.jsonl:Cronin 2007"
+   ],
+   []
+  ],
+  [
+   "g",
+   "How sharp",
+   "Nobody has measured how sharp a heron, a crane or an ibis sees. A pigeon reads about 11 cycles per degree along its front axis, and you very likely see in about that range.",
+   [
+    "birds-other.jsonl:Rounsley 2005"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "How fast",
+   "Nobody has tested a wader for flicker. A pigeon fuses flicker at about 77 hertz in bright light, so you very likely see movement a little finer than a human does at 60 hertz.",
+   [
+    "intake-6.jsonl:Inger 2014"
+   ],
+   [
+    "params.rate"
+   ]
+  ],
+  [
+   "i",
+   "What nobody has measured",
+   "Nobody has measured exactly where a heron's blind wedge lies, or how long and how fast a crane's head holds and thrusts as one move. Nobody has measured the color cells of a heron, an ibis or a stork either, so the whooping crane's four peaks stand in for every wader. These parts are guesses.",
+   [],
+   [
+    "remap.blindAt",
+    "params.hold",
+    "params.thrust",
+    "params.M",
+    "matrices.WADER"
+   ]
+  ]
+ ],
+ "draft": true
+}
