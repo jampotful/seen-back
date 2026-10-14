@@ -1,0 +1,402 @@
+{
+ "key": "bee",
+ "version": 1,
+ "chip": "Bee",
+ "who": "a bee",
+ "cue": "The view is wide and soft, with a fine blur at the edges. Ultraviolet flowers show their markings, and fast movement jumps ahead.",
+ "params": {
+  "fov": {
+   "value": 312,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Taylor 2019"
+   ],
+   "note": "the two eyes together at the horizon, worked out from the 156 degrees each eye reaches back",
+   "range": [
+    100,
+    360
+   ]
+  },
+  "cpd": {
+   "value": 0.26,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "bee.jsonl:Land 1997"
+   ],
+   "note": "the behavioural limit of the honeybee",
+   "range": [
+    0.005,
+    40
+   ]
+  },
+  "fovea": {
+   "value": 1.2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "a small central magnification the records do not measure"
+  },
+  "topoA": {
+   "value": 0.3,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's choice",
+   "range": [
+    0,
+    2
+   ]
+  },
+  "fall": {
+   "value": 1.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's choice",
+   "range": [
+    0,
+    3
+   ]
+  },
+  "pupil": "none",
+  "M": "BEE",
+  "uvBlue": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's choice; phone cameras record little ultraviolet"
+  },
+  "sat": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's reduction for the shifted colours; records give three colour classes but no saturation figure",
+   "range": [
+    0,
+    1.5
+   ]
+  },
+  "gain": {
+   "value": 1.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's choice for dim light",
+   "range": [
+    1,
+    4
+   ]
+  },
+  "rate": {
+   "value": 0.3,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Srinivasan 1984",
+    "bees-wasps.jsonl:Ibarra 2014"
+   ],
+   "note": "a person's 60 hertz divided by the bee's 200 hertz in bright light",
+   "range": [
+    0.25,
+    2
+   ]
+  },
+  "dof": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's choice",
+   "range": [
+    0,
+    40
+   ]
+  },
+  "persist": {
+   "value": 0.1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's choice",
+   "range": [
+    0,
+    60
+   ]
+  },
+  "salience": 1,
+  "glow": {
+   "value": 0.9,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the app's choice; records say only that bee neurons respond to motion",
+   "range": [
+    0,
+    2
+   ]
+  },
+  "glowC": {
+   "value": [
+    0.78,
+    1,
+    0.62
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the glow's colour"
+  },
+  "living": {
+   "value": 0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "no record says bees pick out living movement"
+  }
+ },
+ "matrices": {
+  "BEE": {
+   "from_pigments": [
+    340,
+    436,
+    556
+   ],
+   "src": [
+    "bee.jsonl:Land 2012",
+    "bees-wasps.jsonl:Kolyfetis 2025"
+   ],
+   "note": "UV peak 340 nm from R57; blue 436 nm and green 556 nm from the honeybee compilation",
+   "rows": [
+    [
+     0.3057,
+     0.47473,
+     0.14613,
+     0.07344
+    ],
+    [
+     0.00084,
+     0.11082,
+     0.65545,
+     0.2329
+    ],
+    [
+     0.0,
+     6e-05,
+     0.00648,
+     0.99346
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     6e-05,
+     0.00648,
+     0.99346
+    ],
+    [
+     0.00084,
+     0.11082,
+     0.65545,
+     0.2329
+    ],
+    [
+     0.3057,
+     0.47473,
+     0.14613,
+     0.07344
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "BEE",
+  "neutral": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "the app's choice"
+  }
+ },
+ "zones": [
+  {
+   "id": "ocelli",
+   "shape": "whole",
+   "at": [
+    0.5,
+    0.2
+   ],
+   "deg": {
+    "value": [
+     20,
+     20
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": []
+   },
+   "cpd": {
+    "value": 0.5,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "bees-wasps.jsonl:YS 2014"
+    ],
+    "note": "the lateral ocellus resolves 2 degree gratings, which is 0.5 cycles a degree"
+   },
+   "M": "BEE",
+   "gate": 0
+  }
+ ],
+ "draw": {
+  "field": [
+   {
+    "name": "wedge",
+    "invented": true,
+    "note": "the default drawing"
+   }
+  ],
+  "colour": [
+   {
+    "name": "palm",
+    "invented": true,
+    "note": "the default drawing"
+   }
+  ],
+  "gaze": [
+   {
+    "name": "stamps",
+    "invented": true,
+    "note": "the default drawing"
+   }
+  ],
+  "clock": [
+   {
+    "name": "time",
+    "invented": true,
+    "note": "the default drawing"
+   }
+  ]
+ },
+ "modules": [
+  "salience",
+  "spectrum",
+  "zones"
+ ],
+ "inputs": {
+  "camera": "required"
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "A honeybee resolves about 0.26 cycles a degree, roughly 1 part in 230 of a person. This view is soft, so fine detail blurs out.",
+   [
+    "bee.jsonl:Land 1997"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Ultraviolet and colour",
+   "Bees see ultraviolet, blue and green. Their UV receptors peak near 340 nm, their blue near 436 nm and their green near 556 nm. This view draws colour in those three bands.",
+   [
+    "bee.jsonl:Guignard 2021",
+    "bee.jsonl:Land 2012",
+    "bees-wasps.jsonl:Kolyfetis 2025"
+   ],
+   [
+    "params.M",
+    "matrices.BEE"
+   ]
+  ],
+  [
+   "m",
+   "Speed",
+   "Bee eyes register flicker up to about 200 hertz in bright light, so this view runs slower than a person and then jumps ahead.",
+   [
+    "bee.jsonl:Srinivasan 1984",
+    "bees-wasps.jsonl:Ibarra 2014"
+   ],
+   [
+    "params.rate"
+   ]
+  ],
+  [
+   "g",
+   "Field of view",
+   "Bees see nearly all round them, with a blind region behind and below. This view squeezes a wide field toward the middle.",
+   [
+    "bee.jsonl:Taylor 2019"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "Sharp middle, soft edge, glow on movement, dim-light gain, saturation and the blur with distance are the app's guesses. No record gives these numbers.",
+   [],
+   [
+    "params.fovea",
+    "params.topoA",
+    "params.fall",
+    "params.uvBlue",
+    "params.gain",
+    "params.sat",
+    "params.dof",
+    "params.persist",
+    "params.glow",
+    "params.glowC"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "params.rate",
+    "params.living",
+    "zones[0].deg",
+    "spectrum.neutral"
+   ]
+  ]
+ ],
+ "applies_to": {
+  "family": [
+   "Apidae",
+   "Halictidae",
+   "Megachilidae",
+   "Andrenidae",
+   "Colletidae"
+  ]
+ },
+ "falls_back_to": "insect",
+ "draft": true
+}

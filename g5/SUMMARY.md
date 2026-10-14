@@ -1,0 +1,8 @@
+# Compile run
+
+Spent $0.0234 by the usage blocks at batch prices.
+
+- jumper claude-haiku-5-5 attempt 1: 17 errors
+- bee claude-haiku-5-5 attempt 1: 7 errors
+- jumper claude-haiku-5-5 attempt 2: 3 errors
+- bee claude-haiku-5-5 attempt 2: ok
