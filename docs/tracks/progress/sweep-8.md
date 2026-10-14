@@ -1,5 +1,6 @@
 # sweep-8 progress
-Status: in progress. Batch: scratchpad sweep5/sweep-2.json (40 genera, in batch order; indexes 0-39).
-Done (searched record written): idx 0,3,7,9,12,13,14,16,17,18,19,21,25,26,28,29,30,32,33,36,38 (birds, mammals, herps).
-Remaining: idx 1,2,4,5,8,10,11,22,27,35,39 (plants), 6,15,20,23,24,31,34 (insects), 37 Iris.
-Evidence so far: Phasianus versicolor binocular; Crocodylus porosus/johnstoni acuity, fovea, lambda_max, receptor classes, tapetum, pupil.
+Status: complete. All 40 genera of the batch have a full-protocol search record in docs/views/searched/sweep-8.jsonl.
+Evidence: 24 lines in docs/views/evidence/sweep-8.jsonl (check.py: 0 problems).
+Wanted: 5 lines in docs/views/wanted/sweep-8.jsonl.
+Closed by a measurement: Phasianus (binocular, via P. versicolor), Crocodylus (acuity, fovea, lambda max, receptor classes, tapetum, pupil), Halyomorpha (spectral range, abstract level), plus relatives logged for Mantis (Tenodera), Plathemis (Sympetrum), Hippodamia (Coccinella), Hyles (Deilephila). Plants: Convolvulus diel, Mahonia diel and light (M. japonica), Tsuga chemical, Allium light (A. cepa), Hedera light, Onoclea light, Iris diel.
+Cautions: several records are abstract level (partial) and their quote fields restate page summaries; WebFetch refused non-search URLs and PMC returned reCAPTCHA; the Iris 2015 note was blocked.
