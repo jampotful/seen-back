@@ -41,6 +41,8 @@ def topic(views):
         if vs & set(keys.split()): return name
     return ''
 
+VISIONWORD = re.compile(r'colou?r|chromatic|spectral|acuity|flicker|pigment|pupil|retina|photorecept|\\brods?\\b|\\bcones?\\b|opsin|ultraviolet|polari|dark.adaptation|electroretinogra|\\beyes?\\b|lens', re.I)
+
 def words(t): return [w for w in norm(t).split() if len(w) > 3 and w not in STOP]
 
 def name_title(fname):
@@ -175,7 +177,7 @@ def main():
         nt = norm(text)
         issue_dump = re.search(r'_(1[89]\d\d|20\d\d)_[A-Za-z-]+\.pdf$', f['fname']) is not None
         named = ANIMAL.search(text) or any(' ' + a + ' ' in ' ' + nt + ' ' for a in animals)
-        if issue_dump and not named and traits_in(text) and f['key'] not in snips:
+        if issue_dump and not named and f['key'] not in snips and (traits_in(text) or VISIONWORD.search(text)):
             # a whole-issue download: the file name is cut short and may hide the animal, so look at the first page
             plan.append({'key': f['key'], 'action': 'unknown', 'was': f['fname']}); continue
         if named or (not issue_dump and traits_in(text)):
