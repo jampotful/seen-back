@@ -1,0 +1,301 @@
+{
+ "spec": {
+  "key": "plant",
+  "chip": "Plant",
+  "who": "a plant",
+  "applies_to": {
+   "kingdom": [
+    "Plantae"
+   ]
+  },
+  "cue": "There is no picture here, only how much light of each color there is, and from where.",
+  "modules": [
+   "slow"
+  ],
+  "version": 1,
+  "params": {
+   "field": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "floor": null,
+    "note": "light only, no picture; a reading of the records on photoreceptors"
+   },
+   "pupil": {
+    "value": "none",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "floor": null,
+    "note": "follows from having no eye"
+   },
+   "M": {
+    "value": "plant_light",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R5",
+     "R6",
+     "R7"
+    ],
+    "floor": null,
+    "note": "red, blue and ultraviolet-A receptors; the mixing weights are chosen"
+   },
+   "uvBlue": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "floor": null,
+    "note": "a guess; some of the blue stands for ultraviolet"
+   },
+   "gain": {
+    "value": 2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     4
+    ],
+    "floor": null,
+    "note": "stands for sensitivity to faint light"
+   },
+   "persist": {
+    "value": 20,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     60
+    ],
+    "floor": null,
+    "note": "seconds; real responses take minutes, so this falls far short"
+   }
+  },
+  "matrices": {
+   "plant_light": {
+    "from_pigments": [
+     360,
+     475,
+     660
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R5",
+     "R6",
+     "R7"
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "plant_light"
+  },
+  "slow": {
+   "everyMs": {
+    "value": 3000,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     500,
+     20000
+    ],
+    "floor": null,
+    "note": "one frame kept every few seconds"
+   },
+   "windowS": {
+    "value": 600,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     30,
+     3600
+    ],
+    "floor": null,
+    "note": "light is averaged over ten minutes"
+   },
+   "rightS": {
+    "value": 20,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     2,
+     120
+    ],
+    "floor": null,
+    "note": "a chosen speed-up of the slow righting after a tilt"
+   }
+  },
+  "inputs": {
+   "motion": "optional",
+   "sound": "none",
+   "haptic": "none",
+   "senses": {
+    "motion": 1
+   }
+  },
+  "draw": {
+   "slow": [
+    {
+     "name": "hour",
+     "invented": true,
+     "note": "one frame every few seconds, averaged over ten minutes, so only what stays remains"
+    },
+    {
+     "name": "righting",
+     "invented": true,
+     "note": "tilt the phone and the picture turns slowly back to upright"
+    },
+    {
+     "name": "off",
+     "invented": true,
+     "note": "no slow averaging"
+    }
+   ]
+  },
+  "zones": [],
+  "by": {},
+  "rows": [
+   [
+    "g",
+    "No picture",
+    "You have no eye and no lens. Your photoreceptors fall into five classes that together cover light from 280 to 750 nanometers, and a shoot appears to read the direction of light from the gradient of light across its width.",
+    [
+     "R17",
+     "R235",
+     "param:field",
+     "param:pupil"
+    ],
+    [
+     "params.field",
+     "params.pupil"
+    ]
+   ],
+   [
+    "m",
+    "Ultraviolet and red",
+    "If you are Arabidopsis, the UV-B receptor in your leaves reacts most to light at 290 nanometers. The red receptor phyA of Arabidopsis and maize absorbs most at 665 nanometers and shifts to 725 after strong red light.",
+    [
+     "R1",
+     "R2"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Colors",
+    "You very likely read red with phytochrome, which absorbs most near 660 nanometers, and blue with receptors whose action peaks near 475. The flavin in the blue receptors also absorbs near 360 in the ultraviolet.",
+    [
+     "R5",
+     "R6",
+     "R7"
+    ],
+    [
+     "params.M",
+     "params.uvBlue"
+    ]
+   ],
+   [
+    "g",
+    "Faint light",
+    "If you are an Arabidopsis seedling, blue light from one side as dim as 0.005 micromoles on a square meter each second makes you curve after about 50 minutes, and you reach about 70 degrees after 3 hours. Arabidopsis seedlings have answered even 0.0017 after a red light pretreatment. You very likely sense faint light about as well.",
+    [
+     "R37",
+     "R20",
+     "R21"
+    ],
+    [
+     "params.gain"
+    ]
+   ],
+   [
+    "m",
+    "Down",
+    "If you are Arabidopsis, the starch grains in your shoot cells can sink to the low side within 3 minutes of a tilt. Your lateral branches begin growing upward within 60 minutes after being turned upside down and have fully changed posture within 120 minutes.",
+    [
+     "R265",
+     "R254"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Pace",
+    "If you are Arabidopsis, the signaling state of your cry1 blue receptor fades with a half-life near 5 minutes. A seedling in shade waits about 45 minutes before it grows faster.",
+    [
+     "R24",
+     "R26"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has tested whether a plant forms any picture at all, so light with no picture is a reading of the records on photoreceptors. Nobody has measured how long a plant holds a moment of light, how much of the blue it reads as ultraviolet, or how much it lifts faint light, and the time compression of an hour of light or of a righting after a tilt is a guess too.",
+    [],
+    [
+     "params.field",
+     "params.pupil",
+     "params.uvBlue",
+     "params.gain",
+     "params.persist",
+     "slow.everyMs",
+     "slow.windowS",
+     "slow.rightS"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.M",
+   "records": [
+    "R5",
+    "R6",
+    "R7"
+   ],
+   "kind": "calculation",
+   "how": "The named matrix is built from peaks 360, 475 and 660 nm, which are the values of R7, R6 and R5; the mixing is chosen."
+  },
+  {
+   "path": "matrices.plant_light",
+   "records": [
+    "R5",
+    "R6",
+    "R7"
+   ],
+   "kind": "value",
+   "how": "The peaks 660 nm, 475 nm and 360 nm are the values stated by R5, R6 and R7."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R5",
+   "quote": "Phytochromes (PHY) are the sensors of red (R, ʎmax ∼ 660 nm) and far-red (FR, ʎmax ∼ 730 nm) light."
+  },
+  {
+   "record": "R6",
+   "quote": "shows a single sharp action peak near 475 mm"
+  },
+  {
+   "record": "R7",
+   "quote": "the flavin chromophores of the receptors have an absorption peak at around 360 nm in addition to peaks in the blue"
+  }
+ ]
+}

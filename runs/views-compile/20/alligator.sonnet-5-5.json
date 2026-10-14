@@ -1,0 +1,308 @@
+{
+ "key": "alligator",
+ "chip": "Alligator",
+ "who": "an alligator",
+ "falls_back_to": "other",
+ "applies_to": {
+  "order": [
+   "Crocodylia"
+  ]
+ },
+ "version": 1,
+ "modules": [
+  "spectrum"
+ ],
+ "cue": "A level band of sharper sight runs through the middle and the edges soften. Colors shift toward violet and green, and in dim light they settle into one blue-green tone.",
+ "params": {
+  "cpd": {
+   "value": 8.4,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "halfway between juvenile saltwater crocodile 8.8 and freshwater crocodile 8.0, counted from ganglion cell density at the streak"
+  },
+  "topoS": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "a horizontal foveal streak is measured in crocodiles; how much sharper it is than the edge is a guess"
+  },
+  "fall": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "how fast sharpness drops away from the streak is a guess"
+  },
+  "pupil": {
+   "value": "v",
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the record says a mobile slit and gives no direction"
+  },
+  "sheen": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "a reflecting layer is measured in crocodilians; the strength of the glow is a guess"
+  },
+  "M": {
+   "value": "CROC",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "crocodilians-reptiles.jsonl:Nagloo 2016",
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   "note": "built from the three single-cone peaks of a juvenile saltwater crocodile"
+  }
+ },
+ "matrices": {
+  "CROC": {
+   "from_pigments": [
+    424,
+    502,
+    546
+   ],
+   "src": [
+    "crocodilians-reptiles.jsonl:Nagloo 2016"
+   ],
+   "rows": [
+    [
+     0.25643,
+     0.49473,
+     0.17409,
+     0.07475
+    ],
+    [
+     0.06933,
+     0.45679,
+     0.38602,
+     0.08786
+    ],
+    [
+     0.00024,
+     0.06734,
+     0.60495,
+     0.32747
+    ]
+   ],
+   "q": [
+    [
+     0.00024,
+     0.06734,
+     0.60495,
+     0.32747
+    ],
+    [
+     0.06933,
+     0.45679,
+     0.38602,
+     0.08786
+    ],
+    [
+     0.25643,
+     0.49473,
+     0.17409,
+     0.07475
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "ROD": {
+   "from_pigments": [
+    501
+   ],
+   "src": [
+    "crocodilians-reptiles.jsonl:Sillman 1991"
+   ],
+   "rows": [
+    [
+     0.06646,
+     0.45296,
+     0.39222,
+     0.08836
+    ],
+    [
+     0.06646,
+     0.45296,
+     0.39222,
+     0.08836
+    ],
+    [
+     0.06646,
+     0.45296,
+     0.39222,
+     0.08836
+    ]
+   ],
+   "q": [
+    [
+     0.06646,
+     0.45296,
+     0.39222,
+     0.08836
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "CROC",
+  "dark": "ROD",
+  "adaptAt": {
+   "value": [
+    -1.6,
+    -0.6
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    -3,
+    0
+   ],
+   "note": "the light levels where the picture turns to rod colors are a guess"
+  }
+ },
+ "zones": [],
+ "draw": {
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colors are mapped through the cone peaks"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "A level band of sharper sight",
+   "Juvenile saltwater crocodiles resolve about 8.8 cycles per degree and juvenile freshwater crocodiles 8.0, counted from the densest nerve cells in a horizontal streak across the retina. No count was found for an alligator itself, so this picture sits halfway between them, far coarser than the 30 a human reads on a chart.",
+   [
+    "crocodilians-reptiles.jsonl:Nagloo 2016",
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "i",
+   "The streak and its edges",
+   "Crocodile retinas carry a horizontal streak with about four times the cell density of the periphery. Nobody has measured how fast your sharpness falls away above and below it, so the softness of the edges is a guess.",
+   [
+    "crocodilians-reptiles.jsonl:Nagloo 2016",
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   [
+    "params.topoS",
+    "params.fall"
+   ]
+  ],
+  [
+   "m",
+   "Colors",
+   "A juvenile saltwater crocodile has three single cones that peak near 424, 502 and 546 nanometers, and a freshwater crocodile near 426, 510 and 554. An American alligator has four cone pigments, at 444 and 535 in single cones and at 566 and 503 in the double cone, so you very likely see color across the violet, green and red ends of the spectrum.",
+   [
+    "crocodilians-reptiles.jsonl:Nagloo 2016",
+    "crocodilians-reptiles.jsonl:Sillman 1991",
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Night eyes",
+   "Your retina is mostly rods, with one rod pigment that peaks near 501 nanometers, and a layer of crystals behind the retina bounces light back through it. A spectacled caiman is said to see in both day and night.",
+   [
+    "crocodilians-reptiles.jsonl:Braekevelt 1977",
+    "crocodilians-reptiles.jsonl:Sillman 1991",
+    "crocodilians-reptiles.jsonl:X 1993",
+    "crocodilians-reptiles.jsonl:Zayas‐Santiago 2014",
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   []
+  ],
+  [
+   "m",
+   "A slit pupil",
+   "A juvenile saltwater crocodile has a mobile slit for a pupil. The record says nothing about which way the slit runs.",
+   [
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   []
+  ],
+  [
+   "x",
+   "Sound",
+   "An American alligator hears from 100 hertz to 8 kilohertz in air, best near 1000 hertz, and from 100 hertz to 2 kilohertz in water, best near 800 hertz. Sound reaches you with no picture of its own.",
+   [
+    "crocodilians-reptiles.jsonl:Bevan 2018"
+   ],
+   []
+  ],
+  [
+   "i",
+   "What nobody has measured",
+   "Nobody has measured which way your pupil slit runs, how bright the glow behind your retina looks to another animal, at what light level your colors turn to rod colors, or how your cone signals blend into the colors you experience.",
+   [
+    "crocodilians-reptiles.jsonl:Sillman 1991",
+    "sweep-8.jsonl:Nagloo 2016"
+   ],
+   [
+    "params.pupil",
+    "params.sheen",
+    "spectrum.adaptAt",
+    "params.M"
+   ]
+  ]
+ ],
+ "draft": true
+}

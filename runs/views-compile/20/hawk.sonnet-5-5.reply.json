@@ -1,0 +1,379 @@
+{
+ "spec": {
+  "key": "hawk",
+  "version": 1,
+  "chip": "Hawk, eagle, falcon",
+  "who": "a hawk",
+  "falls_back_to": "bird",
+  "applies_to": {
+   "order": [
+    "Accipitriformes",
+    "Falconiformes"
+   ]
+  },
+  "cue": "Hold the phone still on something far away, then let a small thing move. A hawk looks at one place at a time and moves its head to look at the next.",
+  "modules": [
+   "remap",
+   "gaze"
+  ],
+  "params": {
+   "fov": {
+    "value": 280,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R27",
+     "R33",
+     "R195"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "the middle of a Cooper's hawk's 300 degrees and a short-toed eagle's 260 degrees, close to 360 minus a red-tailed hawk's 82 degree blind area"
+   },
+   "cpd": {
+    "value": 40,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R12",
+     "R4"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "a Harris's hawk resolved 62.3 cycles per degree, above the highest value the engine takes, so the value sits at that ceiling, inside the 27.4 to 60 behavioral range of the same hawk"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "one round sharp middle stands in for the two foveas of each eye"
+   },
+   "fall": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "how fast sharpness falls away from the middle; no record gives it"
+   },
+   "rate": {
+    "value": 0.77,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R64"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "60 divided by a Harris's hawk's flicker fusion of 77.7 hertz"
+   },
+   "sat": {
+    "value": 1,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R58",
+     "R59"
+    ],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "four kinds of single cone, so no muting of color"
+   },
+   "salience": 1
+  },
+  "remap": {
+   "blindAt": {
+    "value": 180,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the blind area lies above and at the rear of the head"
+   },
+   "blindDeg": {
+    "value": 71,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R195",
+     "R196"
+    ],
+    "range": [
+     20,
+     120
+    ],
+    "note": "the middle of 60 degrees for a Cooper's hawk and 82 degrees for a red-tailed hawk"
+   },
+   "blindSoft": {
+    "value": 6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how softly the edge of the blind area fades"
+   }
+  },
+  "gaze": {
+   "examine": {
+    "value": [
+     2000,
+     5000
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R77",
+     "R78"
+    ],
+    "note": "from the average gap between head movements, 2 seconds in hawks and falcons and 5 seconds in bald eagles"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "wedge",
+     "invented": true,
+     "note": "the blind area above and behind the head is drawn as a wedge"
+    },
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "the whole field pressed into the picture"
+    }
+   ],
+   "gaze": [
+    {
+     "name": "stamps",
+     "invented": true,
+     "note": "the sharp middle jumps to each place the hawk looks at, one head move at a time"
+    }
+   ]
+  },
+  "inputs": {
+   "motion": "none"
+  },
+  "rows": [
+   [
+    "m",
+    "Fine stripes",
+    "If you are a Harris's hawk, you can pick out black and white stripes as fine as 62.3 cycles per degree. Red and green stripes of equal brightness blur together sooner, at 21.6 cycles per degree.",
+    [
+     "R12",
+     "R23"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Sharpness across the group",
+    "A black kite resolved 25.9 to 32.7 cycles per degree and a Harris's hawk 27.4 to 60. A wedge-tailed eagle resolved 138 and a falcon in an older test 160. No single figure fits every hawk, eagle and falcon, so 40 is a choice inside the Harris's hawk range.",
+    [
+     "R5",
+     "R4",
+     "R20",
+     "R11",
+     "R12"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Two sharp spots",
+    "If you are a red-tailed hawk, each of your eyes has two foveas, small pits where sight is sharpest. A peregrine turns its head about 40 degrees to bring prey onto the deep fovea of one eye.",
+    [
+     "R94",
+     "R97"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Nearly all the way around",
+    "A Cooper's hawk's eyes together cover about 300 degrees, with a blind area of about 60 degrees, and a short-toed eagle's cover 260. A red-tailed hawk's blind area above and behind the head is about 82 degrees. You very likely see about 280 degrees around you, blind in a wedge of about 70 degrees above and behind your head.",
+    [
+     "R27",
+     "R33",
+     "R195",
+     "R196"
+    ],
+    [
+     "params.fov",
+     "remap.blindDeg"
+    ]
+   ],
+   [
+    "g",
+    "Head moves, still eyes",
+    "If you are an American kestrel, your eyes move only about 1 degree in their sockets, and a Cooper's hawk's move about 8. Hawks and falcons move the head about every 2 seconds on average, and bald eagles about every 5. You very likely look at one place for 2 to 5 seconds before the next head move.",
+    [
+     "R72",
+     "R71",
+     "R77",
+     "R78"
+    ],
+    [
+     "gaze.examine"
+    ]
+   ],
+   [
+    "g",
+    "Fine steps in time",
+    "A Harris's hawk sees flicker up to 77.7 times a second, a saker falcon 102 and a peregrine 124.5. You very likely follow movement in finer steps than a human does.",
+    [
+     "R64",
+     "R63",
+     "R62"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "g",
+    "Four kinds of cone",
+    "Raptors very likely have four kinds of single cone, and the short-wave one is tuned to violet. In a peregrine and a common buzzard its pigment peaks near 405 nanometers. Colored oil droplets sit in the other three kinds.",
+    [
+     "R58",
+     "R123",
+     "R124",
+     "R144"
+    ],
+    [
+     "params.sat"
+    ]
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how sharpness falls from the center of your sight to its edge, or how your two foveas blend into one sharp middle. Where your blind wedge begins and how softly its edge fades are also unmeasured. The records give no pupil shape, no depth of focus and no peaks for the other three color pigments.",
+    [],
+    [
+     "params.topoA",
+     "params.fall",
+     "remap.blindAt",
+     "remap.blindSoft"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R27",
+    "R33",
+    "R195"
+   ],
+   "kind": "calculation",
+   "how": "Middle of 300 degrees (Cooper's hawk, 360 minus a 60 degree blind area) and 260 degrees (short-toed eagle), which is close to 360 - 82 = 278 for a red-tailed hawk."
+  },
+  {
+   "path": "params.cpd",
+   "records": [
+    "R12",
+    "R4"
+   ],
+   "kind": "calculation",
+   "how": "A Harris's hawk reached 62.3 cycles per degree and ranged 27.4 to 60; the engine accepts at most 40, so 40 is chosen inside that range."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R64"
+   ],
+   "kind": "calculation",
+   "how": "60 Hz divided by a Harris's hawk's flicker fusion of 77.7 Hz is 0.772, rounded to 0.77."
+  },
+  {
+   "path": "params.sat",
+   "records": [
+    "R58",
+    "R59"
+   ],
+   "kind": "calculation",
+   "how": "Four spectral types of single cone against a human's three, so color is not muted and the value is 1."
+  },
+  {
+   "path": "remap.blindDeg",
+   "records": [
+    "R195",
+    "R196"
+   ],
+   "kind": "range_middle",
+   "how": "Middle of 60 degrees (Cooper's hawk) and 82 degrees (red-tailed hawk), which is 71."
+  },
+  {
+   "path": "gaze.examine",
+   "records": [
+    "R77",
+    "R78"
+   ],
+   "kind": "calculation",
+   "how": "Lower bound 2000 ms from the 2 s head-movement interval of hawks and falcons, upper bound 5000 ms from the 5 s interval of bald eagles."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R27",
+   "quote": "Cooper's Hawks' have relatively wide binocular fields (∼36°), small blind areas (∼60°)"
+  },
+  {
+   "record": "R33",
+   "quote": "The cyclopean field extends through 260 degrees"
+  },
+  {
+   "record": "R195",
+   "quote": "They have large blind areas (82°) above and at the rear of their heads"
+  },
+  {
+   "record": "R196",
+   "quote": "small blind areas (60°)"
+  },
+  {
+   "record": "R12",
+   "quote": "The maximal spatial resolution for achromatic gratings was 62.3 c deg −1"
+  },
+  {
+   "record": "R4",
+   "quote": "Harris's hawk Parabuteo unicinctus  5  27.4-60  Behaviour"
+  },
+  {
+   "record": "R64",
+   "quote": "Harris's hawk  Parabuteo unicinctus  Behavioural  77.7"
+  },
+  {
+   "record": "R58",
+   "quote": "The raptor retina has rods, double cones, and four spectral types of single cones."
+  },
+  {
+   "record": "R59",
+   "quote": "The retina of diurnal raptors is equipped with four types of single cones"
+  },
+  {
+   "record": "R77",
+   "quote": "approximately every 2 s on average in hawks and falcons"
+  },
+  {
+   "record": "R78",
+   "quote": "approximately every 5 s in bald eagles"
+  }
+ ]
+}

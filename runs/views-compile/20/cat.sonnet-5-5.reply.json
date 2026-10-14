@@ -1,0 +1,329 @@
+{
+ "spec": {
+  "key": "cat",
+  "version": 1,
+  "chip": "Cat",
+  "who": "a cat",
+  "applies_to": {
+   "genus": [
+    "Felis"
+   ]
+  },
+  "cue": "Things out of focus stretch into upright streaks.",
+  "modules": [],
+  "inputs": {
+   "motion": "none",
+   "sound": "none",
+   "haptic": "none"
+  },
+  "params": {
+   "cpd": {
+    "value": 8.1,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R2"
+    ],
+    "range": [
+     3,
+     18.2
+    ],
+    "note": "a chart test of a domestic cat, 20/74 converted to cycles per degree"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "the area centralis is the sharpest place, and no record gives how much blurrier the edge is"
+   },
+   "fall": {
+    "value": 1.0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "the app's choice for how fast sharpness drops toward the edge"
+   },
+   "pupil": {
+    "value": "v",
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R178",
+     "R21"
+    ],
+    "note": "constricted pupil of domestic cats is an upright slit, and the ancestral felid had vertical pupils"
+   },
+   "M": {
+    "value": "CAT",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R8",
+     "R11",
+     "R12"
+    ],
+    "note": "two cone classes, peaks near 450 and 556 nm"
+   },
+   "sat": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "two cone classes give less color than a human, and the exact strength is a guess"
+   },
+   "gain": {
+    "value": 1.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     4
+    ],
+    "note": "a lift for dim light, the amount is a guess"
+   },
+   "sheen": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "a tapetum is present, the strength of the shine is a guess"
+   },
+   "salience": 1
+  },
+  "matrices": {
+   "CAT": {
+    "from_pigments": [
+     450,
+     556
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R8",
+     "R11",
+     "R12"
+    ],
+    "note": "short and middle wavelength cones; ganglion cell recordings also show a third mechanism near 500 nm that is left out because cats are called dichromatic"
+   }
+  },
+  "spectrum": {
+   "q": "CAT"
+  },
+  "gaze": {
+   "saccade": {
+    "value": [
+     25,
+     3.1
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R154"
+    ],
+    "note": "3.1 ms per degree from a measured cat slope; the 25 ms base is the app's choice"
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "two cone classes mapped from the measured peaks"
+    }
+   ],
+   "sharpness": [
+    {
+     "name": "paint",
+     "invented": true,
+     "note": "blur grows from the sharp middle toward the edge"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "g",
+    "Sharpness",
+    "If you are a domestic cat, a chart test gave one gray tabby about 8 cycles per degree and a younger cat about 18, where a human reads about 30. Behavior studies put cats between 3 and 9.",
+    [
+     "R2",
+     "R3",
+     "R4",
+     "R5"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Color",
+    "If you are a domestic cat, you have two kinds of cone, one most sensitive near 450 nanometers in the blue and one near 556 in the yellow-green, where a human has three. Reds and oranges lose their color for you.",
+    [
+     "R8",
+     "R11",
+     "R12",
+     "R13",
+     "R135"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Pupil",
+    "In bright light your pupil shrinks to an upright slit, as the pupils of your felid ancestors did. Lions and other large cats keep a round one.",
+    [
+     "R178",
+     "R21"
+    ],
+    [
+     "params.pupil"
+    ]
+   ],
+   [
+    "m",
+    "Mirror layer",
+    "Behind your retina, in the upper back of the eye, lies a mirror-like layer of cells called a tapetum cellulosum. The pigment cells over it carry no dark granules.",
+    [
+     "R69",
+     "R70"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Sharpest patch",
+    "If you are a domestic cat, your sharpest sight lies in a cone-rich patch called the area centralis. You have no macula like a human's.",
+    [
+     "R82",
+     "R83"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Gaze jumps",
+    "If you are a domestic cat, each degree of a quick eye jump adds about 3 milliseconds to its length. Peak eye speed climbs about 13.6 degrees per second for every degree of jump.",
+    [
+     "R153",
+     "R154"
+    ],
+    [
+     "gaze.saccade"
+    ]
+   ],
+   [
+    "i",
+    "Unmeasured",
+    "Nobody has measured how fast sharpness fades from your area centralis toward the edge of your sight, or how vivid your two-cone colors are beside a human's. Studies report cats six times as sensitive to light as humans in dim light, but the exact lift and the strength of your eye shine remain guesses.",
+    [
+     "R22",
+     "R69"
+    ],
+    [
+     "params.topoA",
+     "params.fall",
+     "params.sat",
+     "params.gain",
+     "params.sheen"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R2"
+   ],
+   "kind": "calculation",
+   "how": "Snellen 20/74 converted to cycles per degree as 600 / 74 = 8.1."
+  },
+  {
+   "path": "params.pupil",
+   "records": [
+    "R178",
+    "R21"
+   ],
+   "kind": "value",
+   "how": "R178 states the constricted pupil of domestic cats is vertical and R21 states the ancestral felid had vertical pupils, written here as an upright slit."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R8",
+    "R11",
+    "R12"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is worked out from two cone peaks, 450 nm (R8) and 556 nm (R11), with two cone classes (R12)."
+  },
+  {
+   "path": "matrices.CAT",
+   "records": [
+    "R8",
+    "R11",
+    "R12"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the measured peaks 450 nm (R8) and 556 nm (R11) for the two cone classes (R12)."
+  },
+  {
+   "path": "gaze.saccade",
+   "records": [
+    "R154"
+   ],
+   "kind": "calculation",
+   "how": "The second element 3.1 ms per degree is the measured slope in R154; the first element 25 ms is the app's choice."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R2",
+   "quote": "tested for best visual acuity of 20/74"
+  },
+  {
+   "record": "R178",
+   "quote": "Constricted pupil in domestic cats is vertical; round in large cats."
+  },
+  {
+   "record": "R21",
+   "quote": "the ancestral felid had vertical pupils"
+  },
+  {
+   "record": "R8",
+   "quote": "Three different photopic systems, with peak spectral sensitivities at 450, 500, and 556 nm, were observed."
+  },
+  {
+   "record": "R11",
+   "quote": "All ganglion cells received input from a cone system with a peak spectral sensitivity of 556 nm."
+  },
+  {
+   "record": "R12",
+   "quote": "the latter; short and middle wavelength sensitive cones"
+  },
+  {
+   "record": "R154",
+   "quote": "cat | ≈ 3.1 | Evinger & Fuchs (1978, Fig.3)"
+  }
+ ]
+}

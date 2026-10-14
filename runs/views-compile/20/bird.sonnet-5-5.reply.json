@@ -1,0 +1,389 @@
+{
+ "spec": {
+  "key": "bird",
+  "version": 1,
+  "chip": "Other bird",
+  "who": "a bird",
+  "applies_to": {
+   "class": [
+    "Aves"
+   ]
+  },
+  "cue": "Look at a sunlit leaf or a patch of bright sky. A bird's eyes add a fourth color that a human has no name for, and here it glows in the blues.",
+  "modules": [],
+  "params": {
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R35"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "the whole field of a zebra finch, both eyes together, from earlier work"
+   },
+   "cpd": {
+    "value": 8,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R3",
+     "R5"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "between a chicken's 7.0 and an eastern towhee's 8.35 cycles a degree"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "one round sharp spot in each eye, how much blurrier the edge is has no measurement"
+   },
+   "fall": {
+    "value": 1.0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "how fast sharpness falls from the sharp spot"
+   },
+   "M": {
+    "value": "PASSERINE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R63",
+     "R82",
+     "R90",
+     "R96"
+    ],
+    "note": "four cone classes, averaged over four songbird families"
+   },
+   "uvBlue": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "how much of the blue is read as ultraviolet; a phone camera records almost none"
+   },
+   "rate": {
+    "value": 0.45,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R128",
+     "R129",
+     "R130"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "60 divided by the mean flicker limit of about 132 hertz in a blue tit and two flycatchers"
+   }
+  },
+  "matrices": {
+   "PASSERINE": {
+    "from_pigments": [
+     369,
+     449,
+     503,
+     563
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R60",
+     "R61",
+     "R62",
+     "R63",
+     "R82",
+     "R83",
+     "R84",
+     "R85",
+     "R88",
+     "R89",
+     "R90",
+     "R91",
+     "R94",
+     "R95",
+     "R96",
+     "R97"
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "PASSERINE"
+  },
+  "rows": [
+   [
+    "g",
+    "A very wide ring",
+    "A zebra finch takes in about 300 degrees around its head, with only about 10 degrees of overlap straight ahead. You very likely see nearly all the way around you, with a gap behind your head.",
+    [
+     "R35",
+     "R55"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "A coarser picture",
+    "A human reads about 30 cycles a degree on an eye chart. A house sparrow reads 4.9, a domestic chicken about 7, an eastern towhee 8.4, an eastern meadowlark 10.3 and a rock pigeon 12.8. You very likely see less fine detail than a human does.",
+    [
+     "R6",
+     "R3",
+     "R5",
+     "R1",
+     "R14"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "One small sharp spot",
+    "If you are a starling, a house sparrow or a house finch, each of your eyes holds one small area where the cells pack at more than 20,000 per square millimeter. If you are a pigeon, you look at distant things with your foveas and at food near your feet with a separate area of the retina.",
+    [
+     "R250",
+     "R312",
+     "R316",
+     "R245"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Four primary colors",
+    "A starling's four cone pigments peak at 362, 449, 504 and 563 nanometers, and a blackbird, a blue tit and a canary agree within about ten nanometers. You very likely sense four primary colors, one of them ultraviolet, where a human senses three.",
+    [
+     "R60",
+     "R82",
+     "R88",
+     "R94",
+     "R61",
+     "R62",
+     "R63",
+     "R106",
+     "R100"
+    ],
+    [
+     "params.M",
+     "spectrum.q"
+    ]
+   ],
+   [
+    "m",
+    "Violet in place of ultraviolet",
+    "If you are a rock pigeon, your shortest-wave cones peak near 409 nanometers, in the violet. If you are a domestic chicken, they peak near 419. A pigeon's sensitivity still reaches well into the ultraviolet below 400 nanometers.",
+    [
+     "R58",
+     "R59",
+     "R299"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Faster than a human",
+    "A blue tit, a collared flycatcher and a pied flycatcher tell flickering light from steady light up to 130 to 145 times a second, where a human stops at about 60. A pigeon manages about 77 and a chicken about 72. You very likely follow fast motion in finer steps than a human does.",
+    [
+     "R124",
+     "R128",
+     "R129",
+     "R130",
+     "R121",
+     "R125"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how fast sharpness falls from the sharp spot toward the edge of a bird's picture, and nobody can say how ultraviolet looks to a bird. The size of that fall and how much of the blue is read as ultraviolet are guesses.",
+    [],
+    [
+     "params.topoA",
+     "params.fall",
+     "params.uvBlue"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R35"
+   ],
+   "kind": "value",
+   "how": "The record states the zebra finch field covers about 300 degrees of azimuth."
+  },
+  {
+   "path": "params.cpd",
+   "records": [
+    "R3",
+    "R5"
+   ],
+   "kind": "range_middle",
+   "how": "8 cycles a degree lies between 7.0 for domestic chickens (R3) and 8.35 for the eastern towhee (R5)."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R60",
+    "R61",
+    "R62",
+    "R63",
+    "R82",
+    "R83",
+    "R84",
+    "R85",
+    "R88",
+    "R89",
+    "R90",
+    "R91",
+    "R94",
+    "R95",
+    "R96",
+    "R97"
+   ],
+   "kind": "calculation",
+   "how": "Means over starling, blackbird, blue tit and canary: ultraviolet (362+373+371+369)/4=368.75, short (449+454+448+444)/4=448.75, middle (504+504+503+500)/4=502.75, long (563+557+563+571)/4=563.5, rounded to 369, 449, 503, 563."
+  },
+  {
+   "path": "matrices.PASSERINE",
+   "records": [
+    "R63",
+    "R82",
+    "R90",
+    "R96"
+   ],
+   "kind": "calculation",
+   "how": "Peaks 369, 449, 503 and 563 are rounded means over four songbird families and each lies within 2 nm of a cited record (R63, R82, R90, R96)."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R128",
+    "R129",
+    "R130"
+   ],
+   "kind": "calculation",
+   "how": "Mean flicker limit (130.3+128.1+138.2)/3=132.2 hertz; 60/132.2=0.454, rounded to 0.45."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R35",
+   "quote": "The visual field of the zebra finch covers an area of ~300°"
+  },
+  {
+   "record": "R3",
+   "quote": "acuity (upper frequency limit) about 7.0 c/deg at 16 cd/m2"
+  },
+  {
+   "record": "R5",
+   "quote": "Visual acuity (cycles/deg) 8.35"
+  },
+  {
+   "record": "R128",
+   "quote": "130.3 ± 0.94 Hz (±SD) in three blue tits"
+  },
+  {
+   "record": "R129",
+   "quote": "128.1 ± 9.8 Hz in seven collared flycatchers"
+  },
+  {
+   "record": "R130",
+   "quote": "138.2 ± 6.5 Hz in eight pied flycatchers"
+  },
+  {
+   "record": "R60",
+   "quote": "Sturnus vulgaris European starling: UVS/VS 362, SWS 449, MWS 504, LWS 563"
+  },
+  {
+   "record": "R82",
+   "quote": "Sturnus vulgaris European starling: UVS/VS 362, SWS 449, MWS 504, LWS 563"
+  },
+  {
+   "record": "R88",
+   "quote": "Sturnus vulgaris European starling: UVS/VS 362, SWS 449, MWS 504, LWS 563"
+  },
+  {
+   "record": "R94",
+   "quote": "Sturnus vulgaris European starling: UVS/VS 362, SWS 449, MWS 504, LWS 563"
+  },
+  {
+   "record": "R61",
+   "quote": "Turdus merula Blackbird: UVS/VS 373, SWS 454, MWS 504, LWS 557"
+  },
+  {
+   "record": "R83",
+   "quote": "Turdus merula Blackbird: UVS/VS 373, SWS 454, MWS 504, LWS 557"
+  },
+  {
+   "record": "R89",
+   "quote": "Turdus merula Blackbird: UVS/VS 373, SWS 454, MWS 504, LWS 557"
+  },
+  {
+   "record": "R95",
+   "quote": "Turdus merula Blackbird: UVS/VS 373, SWS 454, MWS 504, LWS 557"
+  },
+  {
+   "record": "R62",
+   "quote": "Parus caeruleus Blue tit: UVS/VS 371, SWS 448, MWS 503, LWS 563"
+  },
+  {
+   "record": "R84",
+   "quote": "Parus caeruleus Blue tit: UVS/VS 371, SWS 448, MWS 503, LWS 563"
+  },
+  {
+   "record": "R90",
+   "quote": "Parus caeruleus Blue tit: UVS/VS 371, SWS 448, MWS 503, LWS 563"
+  },
+  {
+   "record": "R96",
+   "quote": "Parus caeruleus Blue tit: UVS/VS 371, SWS 448, MWS 503, LWS 563"
+  },
+  {
+   "record": "R63",
+   "quote": "Serinus canaria Canary: UVS/VS 369, SWS 444, MWS 500, LWS 571"
+  },
+  {
+   "record": "R85",
+   "quote": "Serinus canaria Canary: UVS/VS 369, SWS 444, MWS 500, LWS 571"
+  },
+  {
+   "record": "R91",
+   "quote": "Serinus canaria Canary: UVS/VS 369, SWS 444, MWS 500, LWS 571"
+  },
+  {
+   "record": "R97",
+   "quote": "Serinus canaria Canary: UVS/VS 369, SWS 444, MWS 500, LWS 571"
+  }
+ ]
+}

@@ -1,0 +1,380 @@
+{
+ "spec": {
+  "key": "dog",
+  "version": 1,
+  "chip": "Dog",
+  "who": "a dog",
+  "applies_to": {
+   "genus": [
+    "Canis"
+   ]
+  },
+  "cue": "Blues and yellows stay clear while reds fade, and fine detail softens.",
+  "modules": [],
+  "params": {
+   "fov": {
+    "value": 240,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R2"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "typical field for dogs, from earlier work"
+   },
+   "cpd": {
+    "value": 7.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "a guess in the spirit of dogs seeing several times less detail than humans; no record gives a figure in cycles per degree"
+   },
+   "topoS": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "a horizontal streak of sharpest sight; its weight is a guess"
+   },
+   "fall": {
+    "value": 1.2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "no record gives how fast sharpness drops toward the edge"
+   },
+   "pupil": {
+    "value": "o",
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R13",
+     "R183"
+    ],
+    "note": "a round pupil, measured in the painted dog and described for the domestic dog"
+   },
+   "M": {
+    "value": "DOG",
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R4",
+     "R7"
+    ],
+    "note": "two cone classes from measured peaks; the mapping is the app's"
+   },
+   "sat": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "two cone classes give less color than a human, the amount is a guess"
+   },
+   "gain": {
+    "value": 1.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     4
+    ],
+    "note": "a rod-rich retina with a mirror layer; the lift is a guess"
+   },
+   "sheen": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "strength of eye shine is a guess"
+   },
+   "uvBlue": {
+    "value": 0.3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "both cone kinds respond to UVA; how much of the blue to read as ultraviolet is a guess"
+   },
+   "rate": {
+    "value": 0.8,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R14"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "60 divided by a flicker fusion of 75 Hz"
+   }
+  },
+  "matrices": {
+   "DOG": {
+    "from_pigments": [
+     430,
+     555
+    ],
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R4",
+     "R7"
+    ],
+    "note": "two cone pigments of the domestic dog"
+   },
+   "DARK_508": {
+    "from_pigments": [
+     508
+    ],
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R9"
+    ],
+    "note": "the rod pigment of the domestic dog"
+   }
+  },
+  "spectrum": {
+   "q": "DOG",
+   "dark": "DARK_508",
+   "adaptAt": {
+    "value": [
+     -2.5,
+     -1
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     -4,
+     1
+    ],
+    "note": "the light levels where rods take over are a guess"
+   }
+  },
+  "rows": [
+   [
+    "m",
+    "Two kinds of color",
+    "If you are a domestic dog, you have two kinds of cone, one most sensitive near 555 nm and one near 430 nm. Yellows and blues reach you clearly while reds and greens come close together.",
+    [
+     "R4",
+     "R7",
+     "R10"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Dim light",
+    "If you are a domestic dog, your rod cells peak near 508 nm and take over when the light fades. If you are a coyote, your retina holds many more rods than cones.",
+    [
+     "R9",
+     "R181"
+    ],
+    [
+     "spectrum.dark"
+    ]
+   ],
+   [
+    "g",
+    "Mirror behind the retina",
+    "Dogs have a reflecting layer behind the retina, and in a domestic dog it throws light back. You very likely gather more of a dim scene because of it.",
+    [
+     "R99",
+     "R97",
+     "R181"
+    ],
+    [
+     "params.gain",
+     "params.sheen"
+    ]
+   ],
+   [
+    "g",
+    "Wide view",
+    "Dogs take in about 240 degrees around them, with an overlap of 30 to 60 degrees straight ahead. You very likely see most of the world beside you at once.",
+    [
+     "R2",
+     "R3"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Detail",
+    "Dogs see up to four times less fine detail than humans. If you are a domestic dog or a wolf, your sharpest sight lies along a horizontal streak, pronounced or moderate, with an oval patch of dense cells in it.",
+    [
+     "R1",
+     "R77",
+     "R80",
+     "R81"
+    ],
+    [
+     "params.topoS",
+     "params.fall"
+    ]
+   ],
+   [
+    "g",
+    "Pupil",
+    "A painted dog's pupil is round, and a domestic dog's pupil is described as round too. You very likely have a round pupil.",
+    [
+     "R13",
+     "R183"
+    ],
+    [
+     "params.pupil"
+    ]
+   ],
+   [
+    "g",
+    "Flicker",
+    "A flickering light merged into steady light at about 75 flashes a second in tests on domestic dogs. You very likely follow quick change in fine slices of time.",
+    [
+     "R14"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has given your sharpness as a number of cycles per degree, how strongly colors register for you, how fast sharpness falls from the center of your streak, how much brighter dim scenes look through your mirror layer, how bright your eye shine is, or how much ultraviolet reaches you, though both cone kinds respond to it. The light levels where your rods take over are also unmeasured.",
+    [
+     "R1",
+     "R121",
+     "R4",
+     "R7"
+    ],
+    [
+     "params.cpd",
+     "params.M",
+     "params.sat",
+     "params.fall",
+     "params.topoS",
+     "params.gain",
+     "params.sheen",
+     "params.uvBlue",
+     "spectrum.adaptAt"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R2"
+   ],
+   "kind": "value",
+   "how": "The record states a field of 240 degrees for dogs."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R14"
+   ],
+   "kind": "calculation",
+   "how": "A human flicker fusion of 60 Hz divided by the dog's 75 Hz gives 0.8."
+  },
+  {
+   "path": "params.pupil",
+   "records": [
+    "R13",
+    "R183"
+   ],
+   "kind": "value",
+   "how": "Both records state a round pupil, one in the painted dog and one in the domestic dog."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R4",
+    "R7"
+   ],
+   "kind": "value",
+   "how": "The matrix is built from the two cone peaks of 555 nm and 430 nm."
+  },
+  {
+   "path": "matrices.DOG",
+   "records": [
+    "R4",
+    "R7"
+   ],
+   "kind": "value",
+   "how": "Peaks 430 and 555 nm come from the two cone pigment records."
+  },
+  {
+   "path": "matrices.DARK_508",
+   "records": [
+    "R9"
+   ],
+   "kind": "value",
+   "how": "The peak 508 nm is the record's rod pigment value."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R2",
+   "quote": "dogs have wide field of view (240 °)"
+  },
+  {
+   "record": "R14",
+   "quote": "Domestic dog Canis familiaris Mammalia High Behavioural 75.0"
+  },
+  {
+   "record": "R13",
+   "quote": "The pupil in the examined South African Painted Dogs was round"
+  },
+  {
+   "record": "R183",
+   "quote": "a round pupil is observed"
+  },
+  {
+   "record": "R4",
+   "quote": "each has one cone pigment with peak sensitivity of about 555 nm and a second cone pigment with peak at 430-435 nm"
+  },
+  {
+   "record": "R7",
+   "quote": "each has one cone pigment with peak sensitivity of about 555 nm and a second cone pigment with peak at 430-435 nm"
+  },
+  {
+   "record": "R9",
+   "quote": "place the peak of the dog rod pigment at about 508 nm"
+  }
+ ]
+}

@@ -1,0 +1,261 @@
+{
+ "spec": {
+  "key": "reptile",
+  "chip": "Lizard, snake, turtle",
+  "who": "a reptile",
+  "version": 1,
+  "falls_back_to": "other",
+  "applies_to": {
+   "class": [
+    "Reptilia"
+   ],
+   "not_order": [
+    "Crocodylia"
+   ]
+  },
+  "cue": "Look along the band across the middle, where your eyes see sharpest. A violet tint stands in for the ultraviolet you can see.",
+  "modules": [],
+  "params": {
+   "cpd": {
+    "value": 6.1,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R7",
+     "R1",
+     "R2"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "one figure for lizards, snakes and turtles; it is the red-eared slider's, and a shingleback skink and the slider's own range straddle it; anoles measure higher and snakes measure lower"
+   },
+   "topoS": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "turtles, many lizards and snakes have a horizontal band of sharpest vision, but no record gives how much sharper it is than the edge"
+   },
+   "fall": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "no measured ratio of sharpest to edge acuity was found, so the steepness is the app's choice"
+   },
+   "M": {
+    "value": "REPTILE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R22",
+     "R40",
+     "R42",
+     "R43"
+    ],
+    "note": "the four cone peaks of the red-eared slider, used for every reptile"
+   },
+   "uvBlue": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "turtles, anoles and snakes have an ultraviolet cone, but a phone camera records almost none, so the share of blue read as ultraviolet is a guess"
+   }
+  },
+  "spectrum": {
+   "q": "REPTILE"
+  },
+  "matrices": {
+   "REPTILE": {
+    "from_pigments": [
+     372,
+     458,
+     515,
+     617
+    ],
+    "src": [
+     "R22",
+     "R40",
+     "R42",
+     "R43"
+    ]
+   }
+  },
+  "zones": [],
+  "rows": [
+   [
+    "m",
+    "How fine you see",
+    "If you are a red-eared slider, you resolve about 6 cycles per degree, and the retina of a shingleback skink sets a ceiling of 6.8. A green anole reaches 13.6, while a ball python tested in a darkened room managed only 0.13.",
+    [
+     "R7",
+     "R1",
+     "R8",
+     "R4"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "A band across the middle",
+    "If you are a red-eared slider, your sharpest vision runs as a line of small, tightly packed receptors across the retina. Hatchling green turtles and loggerheads have a horizontal visual streak, and so does a garter snake. A green anole has a round fovea in each eye and a second, smaller one at the front where its two views overlap.",
+    [
+     "R203",
+     "R205",
+     "R217",
+     "R220",
+     "R214",
+     "R218"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Four kinds of color receptor",
+    "If you are a red-eared slider, your cones peak near 617, 515, 458 and 372 nanometres, so you see ultraviolet light that a human cannot. A green anole has an ultraviolet pigment near 365 nanometres, and a brown anole has four classes of single cone.",
+    [
+     "R22",
+     "R40",
+     "R42",
+     "R43",
+     "R31",
+     "R47"
+    ],
+    [
+     "params.M",
+     "params.uvBlue"
+    ]
+   ],
+   [
+    "g",
+    "Snakes with two cone kinds",
+    "If you are a pine snake, you have two cone pigments, one near 370 nanometres in the ultraviolet and one near 534. If you are another snake, you very likely have just two cone kinds as well, so your hues are fewer than a turtle's.",
+    [
+     "R39",
+     "R41",
+     "R44",
+     "R199",
+     "R60"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Flicker",
+    "If you are a green anole, a light flashing faster than about 33 to 36 times a second fuses into steady light for you in bright red light. If you are a Turkish gecko, the limit is about 25 in bright light and 18 in the dark.",
+    [
+     "R71",
+     "R77",
+     "R75"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Pupils differ",
+    "If you are a gecko, you very likely have a vertical slit pupil, as do the pit vipers. Colubrid snakes have round pupils.",
+    [
+     "R63",
+     "R64",
+     "R65"
+    ],
+    []
+   ],
+   [
+    "x",
+    "Heat",
+    "If you are a rattlesnake of the species Crotalus polystictus, your facial pits pick up the heat of a still warm object from 20 to 200 centimeters away. A ball python can detect a moving, mouse-sized warm object up to 30 centimeters away. Light gives you none of this.",
+    [
+     "R106",
+     "R108"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured one sharpness, one set of colors or one field of view that fits every lizard, snake and turtle. The sharpness figure, the turtle's four colors used for all, the strength of the violet tint, how much sharper the central band is than the edge, and how steeply it falls away are our guesses.",
+    [],
+    [
+     "params.cpd",
+     "params.M",
+     "params.uvBlue",
+     "params.topoS",
+     "params.fall"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R7",
+    "R1",
+    "R2"
+   ],
+   "kind": "value",
+   "how": "The value 6.1 equals the red-eared slider figure in R7; R1 (6.8) and the range 4.4 to 9.9 in R2 lie on either side of it."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R22",
+    "R40",
+    "R42",
+    "R43"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the four cone peaks 617, 515, 458 and 372 nm of the red-eared slider, and the choice to use them for every reptile is the app's."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R7",
+   "quote": "6.1 cpd in the red-eared slider turtle (Trachemys scripta elegans) [69]"
+  },
+  {
+   "record": "R1",
+   "quote": "we calculate an upper limit of visual acuity of 6.8 c/deg"
+  },
+  {
+   "record": "R2",
+   "quote": "The high spatial-frequency cutoff ranged from about 4.4 to 9.9 cycles/degree across animals."
+  },
+  {
+   "record": "R22",
+   "quote": "617 nm or red; 515 nm or green; 458 nm or blue; 372 nm or ultraviolet"
+  },
+  {
+   "record": "R40",
+   "quote": "617 nm or red; 515 nm or green; 458 nm or blue; 372 nm or ultraviolet"
+  },
+  {
+   "record": "R42",
+   "quote": "617 nm or red; 515 nm or green; 458 nm or blue; 372 nm or ultraviolet"
+  },
+  {
+   "record": "R43",
+   "quote": "617 nm or red; 515 nm or green; 458 nm or blue; 372 nm or ultraviolet"
+  }
+ ]
+}

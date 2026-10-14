@@ -1,0 +1,322 @@
+{
+ "spec": {
+  "key": "insect",
+  "chip": "Butterfly, other insect",
+  "who": "an insect",
+  "falls_back_to": null,
+  "applies_to": {
+   "class": [
+    "Insecta"
+   ]
+  },
+  "cue": "Hold the phone at the height of a flower and turn slowly. An insect sees nearly all the way around at once, in a coarse mosaic with ultraviolet in it.",
+  "modules": [],
+  "inputs": {
+   "motion": "none",
+   "sound": "none",
+   "haptic": "none"
+  },
+  "params": {
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R26",
+     "R24",
+     "R25"
+    ],
+    "range": [
+     200,
+     360
+    ],
+    "note": "measured in ants and reported as about 300 degrees; one figure stands for every insect, though a locust reaches 360"
+   },
+   "cpd": {
+    "value": 0.5,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R5",
+     "R7"
+    ],
+    "range": [
+     0.1,
+     3
+    ],
+    "note": "a butterfly and an ant resolve about half a cycle per degree; one figure stands for every insect, though locusts and dragonflies are sharper and fruit flies coarser"
+   },
+   "pupil": {
+    "value": "none",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "no record describes a pupil in an insect compound eye"
+   },
+   "M": {
+    "value": "insect_uvbg",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R64",
+     "R60",
+     "R81"
+    ],
+    "note": "an ultraviolet, a blue and a green pigment, the classes found in many insects"
+   },
+   "uvBlue": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "how much of the blue a phone records is read as ultraviolet is a guess"
+   },
+   "rate": {
+    "value": 0.3,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R129",
+     "R140"
+    ],
+    "range": [
+     0.25,
+     1
+    ],
+    "note": "60 divided by about 200 flicker per second, as measured in skippers and nymphalid butterflies; slower insects such as locusts are not covered"
+   }
+  },
+  "matrices": {
+   "insect_uvbg": {
+    "from_pigments": [
+     360,
+     440,
+     540
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R64",
+     "R60",
+     "R81"
+    ],
+    "note": "peaks near 360, 440 and 540 nm taken from a copper butterfly and a skipper"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "a wide field squeezed toward the middle of the picture"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "g",
+    "All around",
+    "Ants are credited with a visual field of about 300 degrees, and a desert locust's two eyes together cover 360. A fruit fly has a blind patch behind about 50 degrees wide. You very likely see nearly all the way around you.",
+    [
+     "R26",
+     "R17",
+     "R28",
+     "R40"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "A coarse mosaic",
+    "A Heliconius butterfly resolves about 0.49 cycles per degree and a weaver ant about 0.52, where a human reads about 30. You very likely see the world in a mosaic far coarser than a human's.",
+    [
+     "R5",
+     "R7",
+     "R2"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Sharper and blurrier kin",
+    "A locust at its best resolves about 3 cycles per degree. Dragonflies reach about 2, the finest known among insects, and a fruit fly manages about 0.09.",
+    [
+     "R9",
+     "R12",
+     "R10"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Ultraviolet, blue and green",
+    "A copper butterfly has four pigments, peaking near 360, 437, 500 and 568 nanometers. A skipper has two, near 440 and 540, and a cockroach has only an ultraviolet one and a green one. You very likely have an ultraviolet receptor, a blue one and a green one.",
+    [
+     "R64",
+     "R60",
+     "R81",
+     "R65",
+     "R100"
+    ],
+    [
+     "params.M",
+     "matrices.insect_uvbg",
+     "params.uvBlue"
+    ]
+   ],
+   [
+    "g",
+    "A red cell in some",
+    "A monarch butterfly, a Heliconius butterfly and a fire ant each have a cell most sensitive near 610 to 620 nanometers. A red admiral butterfly has none. You may or may not have this red cell.",
+    [
+     "R52",
+     "R53",
+     "R90",
+     "R87"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Fast flicker",
+    "A skipper butterfly's eye follows flicker up to about 180 to 200 times a second, a housefly's about 230, and dragonflies go past 300. A locust follows only 30 to 40. You very likely see flicker that a human, who stops at about 60, cannot.",
+    [
+     "R129",
+     "R140",
+     "R152",
+     "R150",
+     "R147"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "m",
+    "Dim light",
+    "A cockroach's compound eyes still steer its walking by moving stripes at 0.005 lux, about the light of a moonless night.",
+    [
+     "R113",
+     "R114"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how much ultraviolet reaches you from bluish and bright surfaces, and no record describes a pupil in your eyes. One set of numbers stands for every insect, though acuity differs by more than ten times from a fruit fly to a locust.",
+    [],
+    [
+     "params.uvBlue",
+     "params.pupil"
+    ]
+   ]
+  ],
+  "version": 1,
+  "zones": [],
+  "by": {},
+  "draft": true
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R26",
+    "R24",
+    "R25"
+   ],
+   "kind": "value",
+   "how": "Three records give a visual field of about 300 degrees for ants, and the parameter equals that figure."
+  },
+  {
+   "path": "params.cpd",
+   "records": [
+    "R5",
+    "R7"
+   ],
+   "kind": "range_middle",
+   "how": "0.5 lies between 0.49 cycles per degree in Heliconius erato cyrbia and 0.52 in Oecophylla smaragdina."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R64",
+    "R60",
+    "R81"
+   ],
+   "kind": "value",
+   "how": "The matrix is built from peaks 360, 440 and 540 nm, each equal to a peak stated in these records."
+  },
+  {
+   "path": "matrices.insect_uvbg",
+   "records": [
+    "R64",
+    "R60",
+    "R81"
+   ],
+   "kind": "value",
+   "how": "Pigment peaks 360 nm (Lycaena rubidus), 440 nm and 540 nm (Epargyreus clarus) are each stated in a cited record."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R129",
+    "R140"
+   ],
+   "kind": "calculation",
+   "how": "Flicker fusion of about 200 Hz lies in 180 to 200 Hz (skipper) and 184 to 204 Hz (nymphalids); 60 / 200 = 0.3."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R26",
+   "quote": "their vision is characterised by a wide visual field (~ 300°) coupled with low visual acuity"
+  },
+  {
+   "record": "R24",
+   "quote": "we used a global visual field of 300° and a resolution of 5° as these parameters match the ant’s optics"
+  },
+  {
+   "record": "R25",
+   "quote": "modelled here as 1 pixel covering 5° with a visual field of 300°"
+  },
+  {
+   "record": "R5",
+   "quote": "mean visual acuity = 0.49 cycles-per-degree (cpd)"
+  },
+  {
+   "record": "R7",
+   "quote": "Spatial resolving power was 0.52 ± 0.03 cpd (mean ± s.e.m., n = 3) in O. smaragdina."
+  },
+  {
+   "record": "R64",
+   "quote": "The L. rubidus eye contains four visual pigments with peak sensitivities in the ultraviolet"
+  },
+  {
+   "record": "R60",
+   "quote": "a two-receptor system with maxima at about 440 and 540 mp"
+  },
+  {
+   "record": "R81",
+   "quote": "a two-receptor system with maxima at about 440 and 540 mp"
+  },
+  {
+   "record": "R129",
+   "quote": "to a maximum of 180 to 200 set"
+  },
+  {
+   "record": "R140",
+   "quote": "the FFF was 155–202 Hz and 184–204"
+  }
+ ]
+}

@@ -1,0 +1,307 @@
+{
+ "spec": {
+  "key": "squirrel",
+  "chip": "Squirrel",
+  "who": "a squirrel",
+  "falls_back_to": "mammal",
+  "applies_to": {
+   "family": [
+    "Sciuridae"
+   ]
+  },
+  "cue": "Two kinds of color sensor, a sharp band across the middle, and much less detail than yours.",
+  "modules": [],
+  "inputs": {
+   "motion": "none",
+   "sound": "none",
+   "haptic": "none"
+  },
+  "params": {
+   "cpd": {
+    "value": 3.9,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R2"
+    ],
+    "range": [
+     2,
+     4
+    ],
+    "note": "the best figure measured in an eastern gray squirrel in bright light; fox squirrels and the genus average about 2.2 in dim light"
+   },
+   "M": {
+    "value": "SQUIRREL_DI",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R5"
+    ],
+    "note": "two cone peaks from the California ground squirrel; the mapping to colors is the app's"
+   },
+   "sat": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "two cone classes give less color than a human; the exact strength is a guess"
+   },
+   "topoS": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "records describe a horizontal streak of sharp vision; how strongly the picture softens away from it is a guess"
+   },
+   "fall": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "how fast sharpness drops away from the streak is a guess"
+   },
+   "rate": {
+    "value": 0.92,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R42"
+    ],
+    "range": [
+     0.8,
+     1
+    ],
+    "note": "60 divided by the flicker fusion frequency measured in the American red squirrel"
+   }
+  },
+  "spectrum": {
+   "q": "SQUIRREL_DI",
+   "dark": "DARK_502",
+   "adaptAt": {
+    "value": [
+     -2,
+     -0.5
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     -3,
+     1
+    ],
+    "note": "the light levels at which colors give way to rod sight are a guess"
+   }
+  },
+  "matrices": {
+   "SQUIRREL_DI": {
+    "from_pigments": [
+     436.7,
+     518.9
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R5"
+    ],
+    "note": "blue and green cone peaks measured in the California ground squirrel"
+   },
+   "DARK_502": {
+    "from_pigments": [
+     502
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R7"
+    ],
+    "note": "rod peak measured in the gray squirrel"
+   }
+  },
+  "zones": [],
+  "by": {},
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "the two cone peaks turn the camera colors into squirrel colors"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Two kinds of color sensor",
+    "If you are a California ground squirrel, your cones peak near 437 and 519 nanometers, one blue-sensitive and one green-sensitive. A gray squirrel's longer pigment peaks near 532, so the green end may sit a little further toward yellow for you.",
+    [
+     "R5",
+     "R6",
+     "R128"
+    ],
+    [
+     "params.M",
+     "matrices.SQUIRREL_DI"
+    ]
+   ],
+   [
+    "g",
+    "Pigments in your relatives",
+    "Other ground squirrels have a blue cone near 436 nanometers and a green cone between 520 and 530. You very likely have the same pair, so reds and greens run together for you.",
+    [
+     "R18",
+     "R19",
+     "R21",
+     "R132"
+    ],
+    [
+     "params.M",
+     "matrices.SQUIRREL_DI"
+    ]
+   ],
+   [
+    "m",
+    "Less detail than a human",
+    "If you are a gray squirrel, the finest stripes you can tell apart in bright light are about 3.9 cycles per degree. A fox squirrel in dim light manages about 2.2, and a human reads about 30 on a chart.",
+    [
+     "R1",
+     "R2",
+     "R3"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "A band of sharp sight",
+    "You have no fovea. A red squirrel packs its cones densely in a horizontal streak below the optic nerve, and a California ground squirrel's streak has about five times as many cells as its edges.",
+    [
+     "R105",
+     "R106",
+     "R109"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Rods for the dark",
+    "A gray squirrel's dark-adapted sight peaks near 502 nanometers, the peak of a typical rod pigment. About four in ten of a gray squirrel's receptors are rod-like, and ground squirrels have far fewer.",
+    [
+     "R7",
+     "R195",
+     "R197"
+    ],
+    [
+     "matrices.DARK_502"
+    ]
+   ],
+   [
+    "g",
+    "Flicker",
+    "An American red squirrel's eye follows flicker up to about 65 flashes a second in bright light. You very likely keep close to a human's pace.",
+    [
+     "R42"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "m",
+    "Sunglasses in the lens",
+    "A gray squirrel's lens holds a yellow pigment that removes short-wave light. In a thirteen-lined ground squirrel the lens absorbs everything below 410 nanometers, so almost no ultraviolet reaches your retina.",
+    [
+     "R149",
+     "R150"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how quickly your sharpness falls away from the streak, how strong your colors are, or the light levels at which rods take over from cones. Those settings are guesses, and so is the pupil, which is left round, and the width of your total field.",
+    [],
+    [
+     "params.sat",
+     "params.topoS",
+     "params.fall",
+     "spectrum.adaptAt",
+     "matrices.DARK_502"
+    ]
+   ]
+  ],
+  "version": 1
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R2"
+   ],
+   "kind": "value",
+   "how": "The record gives a maximum of 3.9 cycles per degree in a gray squirrel, and the parameter equals it."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R5"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the two cone peaks 436.7 and 518.9 nm of R5, so the mapping is worked out by the engine and graded g."
+  },
+  {
+   "path": "matrices.SQUIRREL_DI",
+   "records": [
+    "R5"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is derived from the peaks 436.7 and 518.9 nm stated in R5."
+  },
+  {
+   "path": "matrices.DARK_502",
+   "records": [
+    "R7"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is derived from the rod peak of 502 nm stated in R7."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R42"
+   ],
+   "kind": "calculation",
+   "how": "60 Hz divided by the 65.0 Hz flicker fusion of the American red squirrel gives 0.92."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R2",
+   "quote": "reaching a maximum of 3.9 c/d at 340"
+  },
+  {
+   "record": "R5",
+   "quote": "Middle-wavelength cone peak sensitivity 518.9 nm (California); second cone type 436.7 nm"
+  },
+  {
+   "record": "R7",
+   "quote": "closely matches in shape a rhodopsin nomogram curve (lambda max equals 502 nm)"
+  },
+  {
+   "record": "R42",
+   "quote": "American red squirrel Tamiasciurus hudsonicus Tamiasciurus Mammalia High ERG 65.0"
+  }
+ ]
+}

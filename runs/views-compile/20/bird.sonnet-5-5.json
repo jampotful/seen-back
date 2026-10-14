@@ -1,0 +1,261 @@
+{
+ "key": "bird",
+ "version": 1,
+ "chip": "Other bird",
+ "who": "a bird",
+ "applies_to": {
+  "class": [
+   "Aves"
+  ]
+ },
+ "cue": "Look at a sunlit leaf or a patch of bright sky. A bird's eyes add a fourth color that a human has no name for, and here it glows in the blues.",
+ "modules": [
+  "spectrum"
+ ],
+ "params": {
+  "fov": {
+   "value": 300,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "birds-other.jsonl:Eckmeier 2013"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the whole field of a zebra finch, both eyes together, from earlier work"
+  },
+  "cpd": {
+   "value": 8,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "sweep-19.jsonl:Jarvis 2009",
+    "sweep-6.jsonl:Moore 2015"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "between a chicken's 7.0 and an eastern towhee's 8.35 cycles a degree"
+  },
+  "topoA": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "one round sharp spot in each eye, how much blurrier the edge is has no measurement"
+  },
+  "fall": {
+   "value": 1.0,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "how fast sharpness falls from the sharp spot"
+  },
+  "M": {
+   "value": "PASSERINE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "birds-met.jsonl:Hart 2001"
+   ],
+   "note": "four cone classes, averaged over four songbird families"
+  },
+  "uvBlue": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "how much of the blue is read as ultraviolet; a phone camera records almost none"
+  },
+  "rate": {
+   "value": 0.45,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "birds-other.jsonl:Boström 2016"
+   ],
+   "range": [
+    0.25,
+    2
+   ],
+   "note": "60 divided by the mean flicker limit of about 132 hertz in a blue tit and two flycatchers"
+  }
+ },
+ "matrices": {
+  "PASSERINE": {
+   "from_pigments": [
+    369,
+    449,
+    503,
+    563
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "birds-met.jsonl:Hart 2001"
+   ],
+   "rows": [
+    [
+     0.33891,
+     0.45753,
+     0.13066,
+     0.07291
+    ],
+    [
+     0.04908,
+     0.36415,
+     0.47228,
+     0.1145
+    ],
+    [
+     0.00089,
+     0.05787,
+     0.26,
+     0.68124
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.00106,
+     0.06144,
+     0.9375
+    ],
+    [
+     0.00268,
+     0.17147,
+     0.65712,
+     0.16873
+    ],
+    [
+     0.07228,
+     0.46049,
+     0.37985,
+     0.08738
+    ],
+    [
+     0.33891,
+     0.45753,
+     0.13066,
+     0.07291
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "PASSERINE"
+ },
+ "rows": [
+  [
+   "g",
+   "A very wide ring",
+   "A zebra finch takes in about 300 degrees around its head, with only about 10 degrees of overlap straight ahead. You very likely see nearly all the way around you, with a gap behind your head.",
+   [
+    "birds-other.jsonl:Eckmeier 2013",
+    "birds-other.jsonl:Michael 2015"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "A coarser picture",
+   "A human reads about 30 cycles a degree on an eye chart. A house sparrow reads 4.9, a domestic chicken about 7, an eastern towhee 8.4, an eastern meadowlark 10.3 and a rock pigeon 12.8. You very likely see less fine detail than a human does.",
+   [
+    "birds-other.jsonl:Caves 2023",
+    "birds-other.jsonl:Rounsley 2005",
+    "sweep-11.jsonl:Tyrrell 2013",
+    "sweep-19.jsonl:Jarvis 2009",
+    "sweep-6.jsonl:Moore 2015"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "One small sharp spot",
+   "If you are a starling, a house sparrow or a house finch, each of your eyes holds one small area where the cells pack at more than 20,000 per square millimeter. If you are a pigeon, you look at distant things with your foveas and at food near your feet with a separate area of the retina.",
+   [
+    "birds-other.jsonl:Dolan 2010",
+    "birds-other.jsonl:Kano 2022",
+    "birds-other.jsonl:W 2022"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Four primary colors",
+   "A starling's four cone pigments peak at 362, 449, 504 and 563 nanometers, and a blackbird, a blue tit and a canary agree within about ten nanometers. You very likely sense four primary colors, one of them ultraviolet, where a human senses three.",
+   [
+    "birds-met.jsonl:Hart 2001",
+    "birds-other.jsonl:Hart 1998",
+    "birds-other.jsonl:Varkevisser 2021"
+   ],
+   [
+    "params.M",
+    "spectrum.q"
+   ]
+  ],
+  [
+   "m",
+   "Violet in place of ultraviolet",
+   "If you are a rock pigeon, your shortest-wave cones peak near 409 nanometers, in the violet. If you are a domestic chicken, they peak near 419. A pigeon's sensitivity still reaches well into the ultraviolet below 400 nanometers.",
+   [
+    "birds-met.jsonl:Hart 2001",
+    "birds-other.jsonl:Emmerton 1975"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Faster than a human",
+   "A blue tit, a collared flycatcher and a pied flycatcher tell flickering light from steady light up to 130 to 145 times a second, where a human stops at about 60. A pigeon manages about 77 and a chicken about 72. You very likely follow fast motion in finer steps than a human does.",
+   [
+    "birds-other.jsonl:Boström 2016",
+    "intake-6.jsonl:Inger 2014"
+   ],
+   [
+    "params.rate"
+   ]
+  ],
+  [
+   "i",
+   "What nobody has measured",
+   "Nobody has measured how fast sharpness falls from the sharp spot toward the edge of a bird's picture, and nobody can say how ultraviolet looks to a bird. The size of that fall and how much of the blue is read as ultraviolet are guesses.",
+   [],
+   [
+    "params.topoA",
+    "params.fall",
+    "params.uvBlue"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Nobody has measured some parts of how you see, so they are guesses.",
+   [],
+   [
+    "matrices.PASSERINE"
+   ]
+  ]
+ ],
+ "falls_back_to": "owl",
+ "draft": true
+}

@@ -1,0 +1,343 @@
+{
+ "spec": {
+  "key": "bee",
+  "chip": "Bee",
+  "who": "a bee",
+  "version": 1,
+  "falls_back_to": null,
+  "applies_to": {
+   "family": [
+    "Apidae",
+    "Halictidae",
+    "Megachilidae",
+    "Andrenidae",
+    "Colletidae"
+   ]
+  },
+  "cue": "Take the phone out into the sun and turn slowly toward flowers. A bee sees a wide, coarse world where red goes dark and ultraviolet shows.",
+  "modules": [],
+  "inputs": {
+   "motion": "none",
+   "sound": "none",
+   "haptic": "none"
+  },
+  "params": {
+   "fov": {
+    "value": 285,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R21",
+     "R22"
+    ],
+    "range": [
+     200,
+     360
+    ],
+    "floor": null,
+    "note": "between the 300 degrees given for bees and the 270 given for the honeybee"
+   },
+   "cpd": {
+    "value": 0.35,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "range": [
+     0.1,
+     1
+    ],
+    "floor": null,
+    "note": "measured with gratings in one bumblebee species and used for every bee; honeybee figures run from 0.25 to 0.36"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "floor": null,
+    "note": "the front of the eye is sharpest, but no record gives a ratio for a worker"
+   },
+   "fall": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "floor": null,
+    "note": "how fast sharpness drops toward the edge is the app's choice"
+   },
+   "pupil": {
+    "value": "none",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "floor": null,
+    "note": "a compound eye has no pupil; no record describes one"
+   },
+   "M": {
+    "value": "BEE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R43",
+     "R46",
+     "R31"
+    ],
+    "floor": null,
+    "note": "three receptor classes near 344, 436 and 540 nanometers, taken from honeybee, mason bee and bumblebee records"
+   },
+   "uvBlue": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "floor": null,
+    "note": "how much of the blue is read as ultraviolet is the app's guess"
+   },
+   "rate": {
+    "value": 0.46,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R83",
+     "R85",
+     "R86"
+    ],
+    "range": [
+     0.25,
+     1
+    ],
+    "floor": null,
+    "note": "60 divided by 130 hertz; records for bees run from 100 to 200 hertz"
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     344,
+     436,
+     540
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R43",
+     "R46",
+     "R31"
+    ],
+    "note": "ultraviolet, blue and green receptors"
+   }
+  },
+  "spectrum": {
+   "q": "BEE"
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "a very wide field squeezed toward the middle"
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colors come from the receptor peaks"
+    }
+   ]
+  },
+  "zones": [],
+  "rows": [
+   [
+    "g",
+    "Coarse sight",
+    "Bumblebees of the species Bombus impatiens separate stripes only as fine as 0.35 cycles per degree, and honeybees reach about 0.26 to 0.36. You very likely see less than a hundredth of the detail a human reads on an eye chart.",
+    [
+     "R1",
+     "R4",
+     "R12"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Three colors",
+    "Honeybees have an ultraviolet receptor near 344 nanometers, a bumblebee has a green receptor near 540, and a red mason bee has a blue receptor near 436. You very likely have the same three kinds, so you see ultraviolet, blue and green and red light looks dark to you.",
+    [
+     "R43",
+     "R31",
+     "R46",
+     "R346"
+    ],
+    [
+     "params.M",
+     "matrices.BEE"
+    ]
+   ],
+   [
+    "g",
+    "Nearly all the way around",
+    "Bees are said to see about 300 degrees across the body plane, and a honeybee about 270. You very likely take in almost the whole circle around you, with the finest detail straight ahead.",
+    [
+     "R21",
+     "R22"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Fast flicker",
+    "A bumblebee's eye follows flicker up to about 130 times a second, a free-flying honeybee's color vision about 100, and a honeybee in bright light about 200. You very likely catch changes that a human, at 60, blurs together.",
+    [
+     "R86",
+     "R85",
+     "R83"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "m",
+    "A sharper front",
+    "In a forager honeybee the front of each eye is the sharpest part, with facets as little as 1.3 degrees apart. Toward the sides they sit farther apart.",
+    [
+     "R400",
+     "R270"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Sky pattern",
+    "If you are a honeybee, you read the pattern of polarized light in the sky as a compass, using ultraviolet receptors at the top rim of your eye. Bumblebees have such receptors too.",
+    [
+     "R230",
+     "R227",
+     "R229"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how quickly sharpness fades from the front of a worker's eye to its edge, or how much of what you see as blue reads to you as ultraviolet. A compound eye has no pupil, and no record describes one.",
+    [
+     "R201",
+     "R400"
+    ],
+    [
+     "params.topoA",
+     "params.fall",
+     "params.uvBlue",
+     "params.pupil"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R21",
+    "R22"
+   ],
+   "kind": "range_middle",
+   "how": "The middle of 300 degrees for bees and 270 degrees for the honeybee is 285."
+  },
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "Bombus impatiens resolved gratings at 0.35 cycles per degree, used here for every bee."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R43",
+    "R46",
+    "R31"
+   ],
+   "kind": "calculation",
+   "how": "A three-class matrix built from peaks 344 nm (honeybee UV, R43), 436 nm (mason bee blue, R46) and 540 nm (bumblebee green, R31)."
+  },
+  {
+   "path": "matrices.BEE",
+   "records": [
+    "R43",
+    "R46",
+    "R31"
+   ],
+   "kind": "calculation",
+   "how": "from_pigments lists 344, 436 and 540 nm, each equal to a cited peak."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R83",
+    "R85",
+    "R86"
+   ],
+   "kind": "calculation",
+   "how": "60 Hz divided by about 130 Hz (bumblebee, between honeybee figures of 100 and 200 Hz) gives 0.46."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R21",
+   "quote": "Bees can see ~300° horizontally on the body plane with low spatial resolution for peripheral ommatidia"
+  },
+  {
+   "record": "R22",
+   "quote": "a very coarse representation of the whole 270° bee eye horizontal field of view"
+  },
+  {
+   "record": "R1",
+   "quote": "best angular acuity obtained for horizontal and vertical gratings was 0.35 and 0.36 cycles degree(-)(1)"
+  },
+  {
+   "record": "R43",
+   "quote": "the short-wavelength-receptor (S-receptor) peaks in the UV (344 nm)"
+  },
+  {
+   "record": "R46",
+   "quote": "Three receptor types were found whose spectral sensitivity functions followed a rhodopsin-like photopigment absorption function with λmax values at 348nm (ultraviolet receptor), 436nm (blue receptor) and 572nm (green receptor)"
+  },
+  {
+   "record": "R31",
+   "quote": "λmax ≈ 540 nm for the bumblebee Bombus terrestris"
+  },
+  {
+   "record": "R83",
+   "quote": "Honeybee Apis mellifera Apis Insecta High Behavioural 200.0"
+  },
+  {
+   "record": "R85",
+   "quote": "The temporal resolution of colour vision, determined to be at 100 Hz in free-flying bees through measurements of the flicker-fusion frequency"
+  },
+  {
+   "record": "R86",
+   "quote": "The bumblebee compound eye has a flicker fusion frequency of approximately 130 Hz."
+  }
+ ]
+}

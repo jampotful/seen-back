@@ -1,0 +1,240 @@
+{
+ "key": "reptile",
+ "chip": "Lizard, snake, turtle",
+ "who": "a reptile",
+ "version": 1,
+ "falls_back_to": "other",
+ "applies_to": {
+  "class": [
+   "Reptilia"
+  ],
+  "not_order": [
+   "Crocodylia"
+  ]
+ },
+ "cue": "Look along the band across the middle, where your eyes see sharpest. A violet tint stands in for the ultraviolet you can see.",
+ "modules": [
+  "spectrum"
+ ],
+ "params": {
+  "cpd": {
+   "value": 6.1,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "crocodilians-reptiles.jsonl:Hauzman 2018",
+    "intake-7.jsonl:New 2011",
+    "sweep-6.jsonl:Northmore 1991"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "one figure for lizards, snakes and turtles; it is the red-eared slider's, and a shingleback skink and the slider's own range straddle it; anoles measure higher and snakes measure lower"
+  },
+  "topoS": {
+   "value": 0.6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "turtles, many lizards and snakes have a horizontal band of sharpest vision, but no record gives how much sharper it is than the edge"
+  },
+  "fall": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "no measured ratio of sharpest to edge acuity was found, so the steepness is the app's choice"
+  },
+  "M": {
+   "value": "REPTILE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "sweep-6.jsonl:Loew 2001"
+   ],
+   "note": "the four cone peaks of the red-eared slider, used for every reptile"
+  },
+  "uvBlue": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "turtles, anoles and snakes have an ultraviolet cone, but a phone camera records almost none, so the share of blue read as ultraviolet is a guess"
+  }
+ },
+ "spectrum": {
+  "q": "REPTILE"
+ },
+ "matrices": {
+  "REPTILE": {
+   "from_pigments": [
+    372,
+    458,
+    515,
+    617
+   ],
+   "src": [
+    "sweep-6.jsonl:Loew 2001"
+   ],
+   "rows": [
+    [
+     0.51238,
+     0.31232,
+     0.09376,
+     0.08154
+    ],
+    [
+     0.07752,
+     0.40308,
+     0.41754,
+     0.10186
+    ],
+    [
+     0.00182,
+     0.07439,
+     0.26215,
+     0.66164
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.00144,
+     0.07639,
+     0.92217
+    ],
+    [
+     0.00546,
+     0.22029,
+     0.63367,
+     0.14059
+    ],
+    [
+     0.11355,
+     0.49448,
+     0.30947,
+     0.0825
+    ],
+    [
+     0.51238,
+     0.31232,
+     0.09376,
+     0.08154
+    ]
+   ]
+  }
+ },
+ "zones": [],
+ "rows": [
+  [
+   "m",
+   "How fine you see",
+   "If you are a red-eared slider, you resolve about 6 cycles per degree, and the retina of a shingleback skink sets a ceiling of 6.8. A green anole reaches 13.6, while a ball python tested in a darkened room managed only 0.13.",
+   [
+    "crocodilians-reptiles.jsonl:Gomez 2024",
+    "crocodilians-reptiles.jsonl:Hauzman 2018",
+    "intake-7.jsonl:New 2011"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "A band across the middle",
+   "If you are a red-eared slider, your sharpest vision runs as a line of small, tightly packed receptors across the retina. Hatchling green turtles and loggerheads have a horizontal visual streak, and so does a garter snake. A green anole has a round fovea in each eye and a second, smaller one at the front where its two views overlap.",
+   [
+    "crocodilians-reptiles.jsonl:Bartol 2001",
+    "crocodilians-reptiles.jsonl:Fite 2008",
+    "crocodilians-reptiles.jsonl:Fleishman 2026",
+    "crocodilians-reptiles.jsonl:Wong 1989",
+    "intake-7.jsonl:Brown 1969",
+    "sweep-17.jsonl:DeCarlo 1998"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Four kinds of color receptor",
+   "If you are a red-eared slider, your cones peak near 617, 515, 458 and 372 nanometres, so you see ultraviolet light that a human cannot. A green anole has an ultraviolet pigment near 365 nanometres, and a brown anole has four classes of single cone.",
+   [
+    "crocodilians-reptiles.jsonl:D 2025",
+    "crocodilians-reptiles.jsonl:Loew 2002",
+    "sweep-6.jsonl:Loew 2001"
+   ],
+   [
+    "params.M",
+    "params.uvBlue"
+   ]
+  ],
+  [
+   "g",
+   "Snakes with two cone kinds",
+   "If you are a pine snake, you have two cone pigments, one near 370 nanometres in the ultraviolet and one near 534. If you are another snake, you very likely have just two cone kinds as well, so your hues are fewer than a turtle's.",
+   [
+    "crocodilians-reptiles.jsonl:IH 2023",
+    "herps-met.jsonl:Bhattacharyya 2017"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Flicker",
+   "If you are a green anole, a light flashing faster than about 33 to 36 times a second fuses into steady light for you in bright red light. If you are a Turkish gecko, the limit is about 25 in bright light and 18 in the dark.",
+   [
+    "crocodilians-reptiles.jsonl:Dodt 1961",
+    "reread-1.jsonl:Jenssen 1974"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Pupils differ",
+   "If you are a gecko, you very likely have a vertical slit pupil, as do the pit vipers. Colubrid snakes have round pupils.",
+   [
+    "crocodilians-reptiles.jsonl:Branson 1904",
+    "crocodilians-reptiles.jsonl:Underwood 1951"
+   ],
+   []
+  ],
+  [
+   "x",
+   "Heat",
+   "If you are a rattlesnake of the species Crotalus polystictus, your facial pits pick up the heat of a still warm object from 20 to 200 centimeters away. A ball python can detect a moving, mouse-sized warm object up to 30 centimeters away. Light gives you none of this.",
+   [
+    "crocodilians-reptiles.jsonl:Ebert 2007",
+    "crocodilians-reptiles.jsonl:Vaca-León 2018"
+   ],
+   []
+  ],
+  [
+   "i",
+   "What nobody has measured",
+   "Nobody has measured one sharpness, one set of colors or one field of view that fits every lizard, snake and turtle. The sharpness figure, the turtle's four colors used for all, the strength of the violet tint, how much sharper the central band is than the edge, and how steeply it falls away are our guesses.",
+   [],
+   [
+    "params.cpd",
+    "params.M",
+    "params.uvBlue",
+    "params.topoS",
+    "params.fall"
+   ]
+  ]
+ ],
+ "draft": true
+}

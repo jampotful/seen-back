@@ -1,0 +1,312 @@
+{
+ "key": "deer",
+ "chip": "Deer",
+ "who": "a deer",
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "family": [
+   "Cervidae"
+  ]
+ },
+ "version": 1,
+ "cue": "Two kinds of color sensor, a view that wraps nearly all the way round, and less detail than yours.",
+ "modules": [
+  "spectrum"
+ ],
+ "inputs": {
+  "motion": "none",
+  "sound": "none",
+  "haptic": "none"
+ },
+ "params": {
+  "cpd": {
+   "value": 5,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "ungulates.jsonl:Watson 2022"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "floor": null,
+   "note": "the middle of the 4 to 6 cycles per degree measured in white-tailed deer"
+  },
+  "fov": {
+   "value": 360,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "ungulates.jsonl:Reimers 2021"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "floor": null,
+   "note": "stated for reindeer and other deer when grazing with the eyes turned horizontal"
+  },
+  "pupil": "h",
+  "M": {
+   "value": "DEER",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "ungulates.jsonl:DR 2025"
+   ],
+   "floor": null,
+   "note": "built from the two cone peaks measured in white-tailed deer; how they become screen colors is the app's reading"
+  },
+  "topoS": {
+   "value": 0.7,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "floor": null,
+   "note": "a streak is recorded but nobody gave a ratio of its sharpness to the edge"
+  },
+  "fall": {
+   "value": 1.2,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "floor": null,
+   "note": "how fast the blur grows away from the streak is the app's choice"
+  },
+  "sheen": {
+   "value": 0.5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "floor": null,
+   "note": "a reflecting layer is recorded; its strength in this picture is the app's choice"
+  },
+  "gain": {
+   "value": 1.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    4
+   ],
+   "floor": null,
+   "note": "no dim-light advantage over a human was found for deer"
+  },
+  "uvBlue": {
+   "value": 0.4,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "floor": null,
+   "note": "phone cameras record almost no ultraviolet, so some of the blue is read as ultraviolet by guess"
+  }
+ },
+ "matrices": {
+  "DEER": {
+   "from_pigments": [
+    450,
+    537
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "ungulates.jsonl:DR 2025"
+   ],
+   "note": "two cone peaks, the short one taken at the low end of the 450 to 460 nm range",
+   "rows": [
+    [
+     0.21189,
+     0.50602,
+     0.20567,
+     0.07642
+    ],
+    [
+     0.21189,
+     0.50602,
+     0.20567,
+     0.07642
+    ],
+    [
+     0.00291,
+     0.17666,
+     0.65538,
+     0.16506
+    ]
+   ],
+   "q": [
+    [
+     0.00291,
+     0.17666,
+     0.65538,
+     0.16506
+    ],
+    [
+     0.21189,
+     0.50602,
+     0.20567,
+     0.07642
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "DEER"
+ },
+ "zones": [],
+ "draw": {
+  "field": [
+   {
+    "name": "squeeze",
+    "invented": true,
+    "note": "the wide field is pressed toward the middle of the picture"
+   }
+  ],
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colors come from the two cone peaks"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Two kinds of cone",
+   "If you are a white-tailed deer, you have one cone most sensitive at 450 to 460 nanometers and one at 537. A human has three kinds, and you have two. Blues and yellow-greens stay apart for you, and orange and red can still be told from them.",
+   [
+    "ungulates.jsonl:DR 2025",
+    "ungulates.jsonl:Newman 2023",
+    "ungulates.jsonl:VerCauteren 2003"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Sharpness",
+   "If you are a white-tailed deer, the finest detail you resolve lies between 4 and 6 cycles per degree. A human reads about 30 on an eye chart. Fences, faces and the edges of a dark shape blur at a distance where a human still sees them clearly.",
+   [
+    "ungulates.jsonl:Newman 2024",
+    "ungulates.jsonl:Watson 2022"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "A horizontal slit",
+   "If you are a white-tailed deer, your pupil is a horizontal slit. A reindeer's pupil in bright light is also a bar stretched sideways.",
+   [
+    "ungulates.jsonl:D’Angelo 2008",
+    "ungulates.jsonl:Stokkan 2013"
+   ],
+   [
+    "params.pupil"
+   ]
+  ],
+  [
+   "m",
+   "A sharp band",
+   "If you are a white-tailed deer, your cones that answer to middle wavelengths crowd into a horizontal streak across the retina. A level band of your view is sharper than the rest.",
+   [
+    "ungulates.jsonl:Ahnelt 2006",
+    "ungulates.jsonl:D’Angelo 2008",
+    "ungulates.jsonl:Newman 2023"
+   ],
+   []
+  ],
+  [
+   "g",
+   "All the way round",
+   "A reindeer grazing with its eyes turned to a horizontal position has a combined field of about 360 degrees parallel to the ground, and the same is said of deer generally. You very likely see almost all the way round without turning your head.",
+   [
+    "ungulates.jsonl:Reimers 2021"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Dim light",
+   "If you are a white-tailed deer, a reflecting layer behind your retina sends light back through it. Your eyes are specialized for the low light of dawn and dusk, when you are most active.",
+   [
+    "ungulates.jsonl:Cohen 2014",
+    "ungulates.jsonl:D’Angelo 2008"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Short wavelengths",
+   "A reindeer's eye lets some ultraviolet through, and its dark-adapted eyes detect light from 330 to 410 nanometers. Deer in general are very likely sensitive to wavelengths shorter than 400. You very likely see bluish and bright surfaces with a hint of ultraviolet.",
+   [
+    "ungulates.jsonl:DR 2025",
+    "ungulates.jsonl:Hogg 2011",
+    "ungulates.jsonl:Tyler 2016"
+   ],
+   [
+    "params.uvBlue"
+   ]
+  ],
+  [
+   "i",
+   "What nobody has measured",
+   "Nobody has measured how much sharper your streak is than the edge of your view, or how steeply the blur grows away from it. Nobody has measured how much the reflecting layer lifts a dim scene, or how much of a bluish surface reaches you as ultraviolet. Those amounts, and the way your two cone peaks turn into colors, are guesses.",
+   [],
+   [
+    "params.topoS",
+    "params.fall",
+    "params.sheen",
+    "params.gain",
+    "params.uvBlue",
+    "params.M",
+    "draw.field",
+    "draw.spectrum"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Nobody has measured some parts of how you see, so they are guesses.",
+   [],
+   [
+    "matrices.DEER"
+   ]
+  ]
+ ],
+ "draft": true
+}
