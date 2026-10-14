@@ -9,3 +9,4 @@ Done through batch index 24 (Broussonetia).
 Done through batch index 27 (Auriparus).
 Done through batch index 30 (Aphis).
 Done through batch index 32 (Elophila).
+Done through batch index 34 (Rivina).
