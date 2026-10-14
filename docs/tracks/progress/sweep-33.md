@@ -12,3 +12,7 @@ Done genera (in order):
 - Echinochloa, Carpobrotus (14:10)
 - Bunias, Eacles, Labidomera (14:30)
 - Hemiargus, Rissa (14:50)
+
+STOPPED 14:55: WebSearch budget used up (shared allowance). Reached Ipomopsis (genus 27 of 40): its first search was refused, so no record for it.
+Resume from Ipomopsis: Ipomopsis, Myocastor, Calycopis, Coccoloba, Coleomegilla, Xenox, Automeris, Galgula, Alloberberis, Pistacia, Pardalotus, Rupicapra, Merodon, Nuphar.
+Notes for the desk: several batch genera have no family/order in the batch (Schizachyrium, Tellima, Pinicola, Zanda, Euclidia, Roeseliana, Delta, Boana, Erythromma, Stilpnia, Carpobrotus, Bunias, Rissa, Alloberberis, Pistacia, Pardalotus, Merodon), so no closest record or rule-2 carry was offered; Delta (Vespidae) in particular should carry receptor classes and pigments from logged Vespidae/Apidae records.
