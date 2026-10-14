@@ -4,7 +4,7 @@ Branch: research/intake-2. Launch prompt: docs/tracks/prompts/round2-intake.md.
 
 ## Files (10 named in the launch prompt, all full texts, none over 10 MB, none "(partial)")
 Downloaded and decoded to the scratchpad; pdftotext -layout run on each.
-Reading status: NOT YET STARTED on extraction (see below).
+Reading status: all ten read in full (pdftotext -layout), none skipped.
 
 | sha1 key | file | wanted line (DOI) | status |
 |---|---|---|---|
@@ -22,7 +22,10 @@ Reading status: NOT YET STARTED on extraction (see below).
 Note: three of these (Jacobs, Lisney, Ault) already have lines in sources/drive.jsonl from intake-1. They are re-read here as the launch prompt asks.
 Note: the rank numbers in the launch prompt match wanted-merged.csv only for Kraatz (72). The rest are matched by DOI.
 
-## Progress
-- Log lines: 0
-- Failed records: 0
-- Next three things: extract and grep Veilleux; Laughlin; Potier. Then the remaining seven, quotecheck each, log.
+## Progress (complete for this prompt)
+- Logged: 43 records to docs/views/evidence/intake-2.jsonl (all pass quotecheck, verbatim or table).
+- Failed: 12 records to docs/views/evidence/intake-2-failed.jsonl. Causes: table species names that wrap onto a second line (Laughlin Table 1, 4 rows), OCR-merged or garbled names (Peitsch: Paravespulayermanica, 9allicus, 6 rows), a row whose species is not printed (Potier Hirsch 40), and a spaceless PDF line (Ault, Bubo).
+- drive.jsonl: 10 lines appended. Jacobs, Lisney and Ault keys already had intake-1 lines; these are now duplicated with different counts (Lisney intake-1 6, intake-2 2; Ault intake-1 0, intake-2 1).
+- Wanted lines: none added (all ten files are full texts).
+- Prompt ranks: only Kraatz (72) matches wanted-merged.csv. The rest are matched by DOI.
+- Not logged: Veilleux per-species values (in supplementary table, not in PDF); Jander per-species values (Figure 7 only).
