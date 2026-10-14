@@ -51,3 +51,26 @@ Error rate is errors over verifiable records (checked minus unverifiable).
 
 | id | taxon / trait | grade | verdict | note |
 |---|---|---|---|---|
+| insects-met:24 | Popillia japonica / receptor_classes | m | unverifiable | the doi.org route to the Wiley page answered 429 with an instruction not to retry; no repository copy found by search |
+| insects-met:25 | Popillia japonica / behaviour_vision | m | unverifiable | as insects-met:24 |
+| insects-met:26 | Perithemis tenera / behaviour_vision | m | confirm | verbatim opening of the abstract sentence (academic.oup.com), which continues "; they also detected more intruders in front of them than from other angles"; distant-against-near vegetation confirmed |
+| insects-met:27 | Danaus plexippus / lambda_max_nm | m | unverifiable | Royal Society page returned a fetch error; PMC8548807 served a reCAPTCHA; the Europe PMC REST copy answered 429; the Zenodo and Dryad records carry data files, not the table |
+| insects-met:28 | Heliconius erato / lambda_max_nm | m | unverifiable | as insects-met:27 |
+| insects-met:29 | Argynnis paphia / lambda_max_nm | m | unverifiable | as insects-met:27 |
+| insects-met:30 | Speyeria aglaja / lambda_max_nm | m | unverifiable | as insects-met:27 |
+| insects-met:31 | Melitaea athalia / lambda_max_nm | m | unverifiable | as insects-met:27 |
+| insects-met:32 | Morpho peleides / lambda_max_nm | m | unverifiable | as insects-met:27 |
+| insects-met:33 | Vanessa atalanta / receptor_classes | m | unverifiable | as insects-met:27 |
+| insects-met:34 | Apatura ilia / receptor_classes | m | unverifiable | as insects-met:27 |
+| insects-met:35 | Heliconiinae / filter_pigments | m | unverifiable | as insects-met:27 |
+| insects-met:36 | Eumaeus atala / lambda_max_nm | m | unverifiable | PNAS (doi.org and pnas.org) returned fetch errors; the MIT DSpace record of the published version shows an abstract that names no species and no nm values, so `where: Abstract` looks wrong, but its PDF bitstream returned a fetch error; the string may be in the Significance statement or Results, unchecked |
+| insects-met:38 | Manduca sexta / motion | m | requote | values confirmed; the quote writes "cycles/degree" where the abstract writes "cycles deg−1", and the sentence continues with the 4.5 Hz clause |
+| insects-met:39 | Manduca sexta / absolute_sensitivity | m | requote | value confirmed; the quote writes "between 1% to 5%" where the abstract writes "between 1 and 5%" |
+| insects-met:40 | Heliothis zea / cff_hz | m | confirm | sentence verbatim but for a line-break hyphen on the page ("laboratory- reared"), counted typography |
+| insects-met:41 | Hesperiidae / behaviour_vision | m | unverifiable | the BioOne page's permission request timed out; complete.bioone.org served an Incapsula wall; the journals.flvc.org page found is the supplementary material only |
+| insects-met:42 | Danaus plexippus / colour_vision | m | confirm | verbatim clause of the abstract sentence beginning "In addition," |
+| insects-met:43 | Danaus plexippus / filter_pigments | m | confirm | verbatim clause of the abstract's last sentence; dark orange pigment "distributed heterogeneously in the eye" confirmed (from colour-space modelling) |
+| insects-met:44 | Danaus plexippus / acceptance_deg | m | unverifiable | doi.org returned a fetch error and the bioRxiv page's permission request timed out |
+| insects-met:45 | Danaus plexippus / motion | m | unverifiable | as insects-met:44 |
+| insects-met:46 | Parantica sita / receptor_classes | m | confirm | sentence verbatim in the abstract (journals.biologists.com) |
+| insects-met:47 | Bombus (review) / cff_hz | g | unverifiable | the doi.org route answered 429 |
