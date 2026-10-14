@@ -43,22 +43,25 @@ TRAIT_ORDER = ["acuity_cpd", "fov_h_deg", "fov_v_deg", "binocular_deg", "lambda_
                "absolute_sensitivity", "cff_hz", "eye_movement"]
 # which table traits stand behind which parameter (a parameter not listed here is checked for a record, not for a trait)
 TRAIT_MAP = {
-    "fov": ["fov_h_deg"], "cpd": ["acuity_cpd"], "topoA": ["fov_v_deg", "fovea"], "topoS": ["fov_v_deg", "fovea"],
+    "fov": ["fov_h_deg"], "cpd": ["acuity_cpd", "interommatidial_deg", "interreceptor_deg"],
+    "topoA": ["fovea", "acuity_cpd"], "topoS": ["fovea", "acuity_cpd"], "fall": ["fovea", "acuity_cpd"],
     "pupil": ["pupil_shape"], "rate": ["cff_hz", "corner_hz"], "hold": ["cff_hz", "corner_hz"], "persist": ["cff_hz", "corner_hz"],
-    "fall": ["absolute_sensitivity"], "M": ["lambda_max_nm", "receptor_classes", "colour_vision"],
+    "M": ["lambda_max_nm", "receptor_classes", "colour_vision"],
 }
+# Burst 9 (compiler2): topoA and topoS once pointed at fov_v_deg and fall at absolute_sensitivity, which described other
+# settings than the engine draws (src/cam.b.js: the blur radius is blur x (1 + fall x topo^2), topo = topoA x r/0.5 + topoS x |y|/0.5).
 MEANING = {
-    "fov": "horizontal field of view of the whole animal, degrees (the picture is squeezed toward this; 180 is a person)",
-    "cpd": "sharpness of the whole picture in cycles per degree (a person is about 30)",
-    "topoA": "how much sharper the middle of the picture is than the edge, along the long axis (0 to 1)",
-    "topoS": "how much sharper the middle is than the edge, across (0 to 1)",
-    "fall": "how fast sharpness falls with light (log units; invented unless a measurement is cited)",
+    "fov": "horizontal field of view of the whole animal, all its eyes together, degrees (the picture is squeezed toward this; 180 is a human)",
+    "cpd": "sharpness at the center of the picture in cycles per degree, larger is sharper (the engine draws a human at 60; a human reads about 30 on an eye chart). It comes from the eyes that cover most of the field",
+    "topoA": "how much blurrier the edge is than a round sharp middle (fovea, area centralis), 0 flat to 1 (works with fall)",
+    "topoS": "the same as topoA for a horizontal band of sharp sight (a visual streak) in place of a round middle",
+    "fall": "how steeply sharpness drops from the sharp middle or band to the edge, multiplying the blur by 1 + fall at the edge (0 none; usually the app's choice; from a measured center-to-edge acuity ratio R it is R - 1, a calculation)",
     "pupil": "pupil shape: 'o' round, 'v' vertical slit, 'h' horizontal slit, 'none'",
     "dof": "depth of field blur strength (0 to 1)",
-    "M": "the colour matrix name (a key of matrices), or the string of a matrix",
+    "M": "the color matrix name (a key of matrices), or the string of a matrix",
     "uvBlue": "how much of the blue channel is read as ultraviolet (0 to 1)",
     "gain": "brightness gain of the picture",
-    "sat": "colour saturation (0 greyscale to 1 as a person)",
+    "sat": "color saturation (0 grayscale to 1 as a person)",
     "sheen": "a reflective sheen (tapetum), 0 to 1",
     "noGreen": "removes the green channel (0 to 1)",
     "gate": "how much still things fade away (0 to 1; 1 means only movement is seen)",
@@ -69,13 +72,13 @@ MEANING = {
     "rate": "playback rate of time (1 is a person; below 1 is slower)",
     "glow": "how brightly movement glows (0 to 2)",
     "living": "extra weight for living movement (0 to 4)",
-    "glowC": "the colour of the glow, [r, g, b] 0 to 1",
+    "glowC": "the color of the glow, [r, g, b] 0 to 1",
     "salience": "1 draws attention to the most salient place",
     "ripple": "ripples that follow movement (0 to 1)",
-    "shimmer": "a shimmer (heat haze) where the animal sees no colour (0 to 1)",
+    "shimmer": "a shimmer (heat haze) where the animal sees no color (0 to 1)",
     "sweep": "[degrees, seconds] of a scanning sweep",
     "fovea": "scale of the sharp middle (1 is a person)",
-    "water": "water-surface block", "waterC": "water colour",
+    "water": "water-surface block", "waterC": "water color",
 }
 BLOCKS = ["spectrum", "clock", "pace", "motion", "slow", "tilt", "magnet", "remap", "overlay", "sound", "haptic"]
 SKIP_TOP = {"offered", "trial", "draft", "notes", "variants", "version"}
@@ -195,14 +198,22 @@ GRADES_TEXT = """GRADES
 
 RULES_TEXT = """WHAT TO INCLUDE
 - The example shows the form of a spec; its numbers belong to another animal. Copy none of them.
-- Include a parameter when a record gives its value (grade m or g), or when the view needs it to show something that the records describe (grade i, invented true). Use the blocks the schema lists where the records describe them: zones for a region with its own sharpness or colour (a fovea, a sharp strip, a blind spot), gaze for scanning, dwell and saccade timings, spectrum and matrices for colour, pace for flicker, and so on. Leave out a parameter or a block about which the records say nothing; the engine then uses a person's value. Do not fill the spec with guesses.
+- Include a parameter when a record gives its value (grade m or g), or when the view needs it to show something that the records describe (grade i, invented true). Use the blocks the schema lists where the records describe them: zones for a region with its own sharpness or color (a fovea, a sharp strip, a blind spot), gaze for scanning, dwell and saccade timings, spectrum and matrices for color, pace for flicker, and so on. Leave out a parameter or a block about which the records say nothing; the engine then uses a person's value. Do not fill the spec with guesses.
 - A number graded m or g must be a number that a cited record states, or lie between two cited records. When you work a number out, say so with kind calculation and grade it at most g.
-- Write two or three rows that say plainly what the animal's view is like, each citing records, and one row graded i for the app's own choices, naming those parameters in its fifth element.
-- Colour matters most to what a person sees, so keep a colour matrix whenever records give pigment peaks. params.M is a parameter object whose value is the name of a key of matrices, so define every matrix you name. Give a matrix either from_pigments (a list of peak wavelengths in nm, each within 2 nm of a cited record graded for lambda_max_nm, with that record in the matrix's src) or the rows of a matrix in the example when its mapping suits your animal (then grade it i). When no record gives pigment peaks and the example's mapping does not suit, leave out M and matrices.
+- Write rows that say plainly what the animal sees, each citing records, and one row graded i that says what nobody has measured, naming the invented parameters in its fifth element.
+- Color matters most to what a person sees, so keep a color matrix whenever records give pigment peaks. params.M is a parameter object whose value is the name of a key of matrices, so define every matrix you name. Give a matrix either from_pigments (a list of peak wavelengths in nm, each within 2 nm of a cited record graded for lambda_max_nm, with that record in the matrix's src) or the rows of a matrix in the example when its mapping suits your animal (then grade it i). When no record gives pigment peaks and the example's mapping does not suit, leave out M and matrices.
 - The spec is one JSON object in the spec field; claims and quotes are separate fields.
 
-WRITING RULES (rows, notes and cue)
-- Plain sentences that a curious adult understands. Canadian spelling (colour, grey, centre, metre, behaviour).
+SHARPNESS (params.cpd and zones[i].cpd), where drafts have gone wrong most often
+- Units. The value is in cycles per degree, and larger is sharper. Every sharpness record carries as_cpd: its figure in cycles per degree, with as_cpd_how when the script converted it, or the word unreadable when its units cannot be converted (a percentage, a ratio to a human, no units). Use as_cpd and never the raw value of a record in other units. An angle (minutes of arc, degrees between neighboring receptors, a minimum separable angle, a stripe width) runs the other way: a smaller angle is sharper sight, and the figure in cycles per degree is 1 / (2 x the angle in degrees), which is 30 / the angle in minutes of arc. Snellen 20/x is 600 / x; decimal acuity d is 30 x d; cycles per radian divide by 57.3. A figure you or the script converted is a calculation: the claim's kind is calculation, the grade at most g, and invented true.
+- Scale. The engine draws a human at 60 cycles per degree; a human reads about 30 on an eye chart. A record that says "a fifth of a human" is a ratio, and any number you make from it is a calculation.
+- Which eye. params.cpd is the sharpness at the center of the picture, for the eyes that cover most of the field. When the animal has one kind of eye (a mammal, a bird, a fish, a frog, a bee's compound eyes), that is the best acuity of those eyes, at their fovea, area centralis or streak when they have one, and topoA or topoS with fall blur the edge. When the animal has eyes with different jobs (the principal eyes of a jumping spider, the ocelli of an insect, any small pair that sees a narrow part of the field), the small pair's acuity goes to a zone's cpd with its own deg, and params.cpd comes from the eyes that see the rest. A record's eye and conditions say which eye it measured; read them for every sharpness value.
+- Field of view. params.fov is the whole field of all eyes together. A record of one eye's field or of the binocular overlap is a different quantity; the whole field is the two eyes' fields added, counting the overlap once (a calculation).
+- A value that mixes units (a gaze block's [degrees, milliseconds, milliseconds]) is supported only when records give every element. When records give some elements and the app chose the rest, grade it g, set invented true and make its claim a calculation that says which elements came from which record.
+
+WRITING RULES (rows, notes and cue; the voice of docs/views/VOICE.md)
+- The reader is the animal: every row speaks to it as "you", and names relatives and other species in the third person. Humans are "humans" or "a human"; never write "people" or "a person". A row is about the animal only and never mentions the app, the phone, the screen, the view or how the picture is drawn. An m row states its claim flatly; a g row names the relatives and says "you very likely"; an i row says plainly what nobody has measured. A figure measured in one species stays with that species ("If you are a barn owl, ..."). One to three sentences a row, opening with something the reader can picture.
+- Plain sentences that a curious adult understands. US spelling (color, gray, center, meter, behavior).
 - No em dashes. No "not X but Y" or "Y, not X", and no ", not" anywhere in a row, a note or the cue: say the positive thing instead ("only movement reaches it" rather than "it sees movement, not stillness"). No sentence fragments. No word with an underscore, no dot inside a word, no @, and no reference to the app's code or to parameter names in the text.
 - A row is [grade, title, text, [record ids], [parameter paths]]. The record ids are the R numbers of the records behind it; the paths name the parameters it describes ("params.cpd", "zones[1].mag"). A row graded m cites at least one record graded m. Every parameter that is invented has a row graded i or g that names it in the fifth element.
 - Each row says one thing a person could picture on a phone. Four to eight rows."""
@@ -402,6 +413,14 @@ def record_line(r):
     d["quote"] = r.get("quote", "")
     if r.get("note"):
         d["note"] = r["note"][:200]
+    if r.get("trait") in SHARP_TRAITS:
+        n, how = as_cpd(r)
+        if n is None:
+            d["as_cpd"] = "unreadable: " + (how or "")
+        else:
+            d["as_cpd"] = n if len(n) > 1 else n[0]
+            if how:
+                d["as_cpd_how"] = how
     d["source"] = short_src(r.get("source"))
     d["check"] = r["_audit"]
     return json.dumps(d, ensure_ascii=False, separators=(",", ":"))
@@ -560,13 +579,157 @@ def value_supported(v, recs):
     return False
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# sharpness: units, direction and which eye (burst 9, compiler2). In 30 view-runs most refusals of a sharpness value were one
+# of these mix-ups: a record in minutes of arc or degrees read as cycles per degree, an angle inverted without the factor 2,
+# a ratio to a human read as a figure, and the acuity of a small specialized pair of eyes copied into the whole picture.
+
+ANGLE_TRAITS = ("interommatidial_deg", "interreceptor_deg")
+SHARP_TRAITS = ("acuity_cpd",) + ANGLE_TRAITS
+RX_CPD_UNITS = re.compile(r"cycles?\s*(/|per)\s*(deg|degree|°)|\bc\s*/\s*d(eg)?\b|\bcpd\b|\bcyc\s*/\s*deg|cycles?\s*(deg|°|o)\s*-\s*1", re.I)
+RX_NOT_CPD = re.compile(r"\bnot\s+(converted|cycles|c/d|cpd)", re.I)
+RX_ARCMIN = re.compile(r"arc\s*-?\s*min|arcmin|\bmin(ute)?s?\s*(of\s*)?(arc|visual angle)|\bmin\s*\(arc|^\s*'|minutes", re.I)
+RX_DEGREES = re.compile(r"\bdeg(ree)?s?\b|°", re.I)
+RX_UNREADABLE = re.compile(r"percent|%|ratio|relative|times|fold|/mm|\bmm\b|\bum\b|µm|index|feet|unitless", re.I)
+SMALL_EYE = re.compile(r"principal|\bAMEs?\b|anterior[ -]?median|\bocell|\bmedian eyes?\b|\bstemmat", re.I)
+
+
+def as_cpd(r):
+    """(numbers in cycles per degree, how) for a sharpness record: how is "" when the record is already in cycles per degree
+    and one sentence when the script converted it. (None, why) when its units cannot be read as cycles per degree, and
+    (None, None) for a record of another trait."""
+    t, v = r.get("trait"), r.get("value")
+    u = str(r.get("units") or "")
+    nums = flat_numbers(v)
+    if t in ANGLE_TRAITS:
+        if not nums or any(n <= 0 for n in nums):
+            return None, "the angle is not a positive number"
+        return [round(1 / (2 * n), 3) for n in nums], "converted from an angle of %s degrees between neighboring receptors: 1 / (2 x angle)" % short_json(v, 30)
+    if t != "acuity_cpd":
+        return None, None
+    if isinstance(v, str):
+        m = re.match(r"^\s*20\s*/\s*([\d,.]+)\s*$", v)
+        if m and float(m.group(1).replace(",", "")) > 0:
+            x = float(m.group(1).replace(",", ""))
+            return [round(600 / x, 3)], "converted from Snellen 20/%s: 600 / %s" % (m.group(1), m.group(1))
+        if RX_CPD_UNITS.search(v + " " + u) and not RX_NOT_CPD.search(u):
+            nums = [float(x) for x in re.findall(r"(?<![\w.])\d+(?:\.\d+)?(?![\w.])", v)]
+            if nums:
+                return nums, ""
+        return None, "the value is words"
+    if not nums:
+        return None, "no number"
+    ul = u.lower()
+    if "radian" in ul:
+        return [round(n / 57.2958, 3) for n in nums], "converted from cycles per radian: divided by 57.3"
+    if "snellen" in ul or "logmar" in ul:
+        if "logmar" in ul:
+            return [round(30 / 10 ** n, 3) for n in nums], "converted from logMAR: 30 / 10^logMAR"
+        return None, "Snellen units with no 20/x fraction"
+    if "decimal" in ul or re.search(r"1\s*/\s*arc\s*-?\s*min", ul):
+        return [round(30 * n, 3) for n in nums], "converted from decimal acuity (1 / minutes of arc): 30 x value"
+    if RX_ARCMIN.search(ul) and "cycle" not in ul:
+        if any(n <= 0 for n in nums):
+            return None, "the angle is not a positive number"
+        return [round(30 / n, 3) for n in nums], "converted from an angle of %s minutes of arc: 30 / angle" % short_json(v, 30)
+    if RX_CPD_UNITS.search(ul) and not RX_NOT_CPD.search(ul):
+        return nums, ""
+    if RX_DEGREES.search(ul) and "cycle" not in ul and not RX_UNREADABLE.search(ul):
+        if any(n <= 0 for n in nums):
+            return None, "the angle is not a positive number"
+        return [round(1 / (2 * n), 3) for n in nums], "converted from an angle of %s degrees: 1 / (2 x angle)" % short_json(v, 30)
+    if RX_UNREADABLE.search(ul):
+        return None, "units %r are a comparison, not a figure in cycles per degree" % u[:50]
+    if not ul.strip() or "not stated" in ul or "no unit" in ul or "as given" in ul or "as printed" in ul:
+        if RX_CPD_UNITS.search(str(r.get("quote") or "")):
+            return nums, ""
+        return None, "no units are stated"
+    return None, "units %r cannot be read as cycles per degree" % u[:50]
+
+
+def cpd_errors(path, o, claim, recs, pool):
+    """Errors for a sharpness value (params.cpd or zones[i].cpd) graded m or g, in plain words. `recs` are the cited records of a
+    sharpness trait, `pool` those that may support the grade (graded m on the view's own taxa for m)."""
+    errs, v = [], o.get("value")
+    nv = flat_numbers(v)
+    if path == "params.cpd":
+        for r in recs:
+            if SMALL_EYE.search(str(r.get("eye") or "")):
+                errs.append("%s cites %s, measured in the %s, a small pair of eyes that sees a narrow part of the field. params.cpd is the "
+                            "sharpness of the eyes that cover most of the field: put this figure in a zone's cpd (with its deg) and take "
+                            "params.cpd from the other eyes, or grade params.cpd i" % (path, r["_id"], r.get("eye")))
+        if errs:
+            return errs
+    if not nv:
+        return errs
+    direct, conv, unread = [], [], []
+    for r in pool:
+        n, how = as_cpd(r)
+        if n is None:
+            unread.append((r, how))
+        elif how:
+            conv.append((r, n, how))
+        else:
+            direct.append((r, n))
+    if not direct and not conv:
+        return ["%s: no cited record gives a figure that can be read as cycles per degree (%s); cite one that does, or grade it i"
+                % (path, "; ".join("%s: %s" % (r["_id"], why) for r, why in unread[:4]) or "none of the cited records is graded for this")]
+    as_rec = lambda lst: [{"value": n if len(n) > 1 else n[0], "quote": ""} for n in lst]
+    calc = (claim or {}).get("kind") == "calculation"
+    if direct and value_supported(v, as_rec([n for _, n in direct])):
+        return errs
+    if conv and value_supported(v, as_rec([n for _, n in direct] + [n for _, n, _ in conv])):
+        if (claim or {}).get("kind") != "calculation" or o.get("grade") == "m" or o.get("invented") is not True:
+            r, n, how = conv[0]
+            errs.append("%s: %s is %s cycles per degree only after a conversion (%s). Make the claim a calculation that says so, grade it g "
+                        "at most and set invented true" % (path, r["_id"], short_json(n if len(n) > 1 else n[0], 30), how))
+        return errs
+    for r in pool:                                     # direction: the raw angle, or an angle inverted without the factor 2
+        raw = flat_numbers(r.get("value"))
+        n, how = as_cpd(r)
+        if not how or not raw:
+            continue
+        if any(close(a, b) for a in nv for b in raw):
+            errs.append("%s: %s is the raw figure of %s, which is %s. A smaller angle is sharper sight, so the figure runs the other way; "
+                        "in cycles per degree it is %s (%s)" % (path, short_json(v, 20), r["_id"], how.replace("converted from ", "").split(":")[0],
+                                                                 short_json(n, 30), how.split(": ")[-1]))
+            return errs
+        inv = [1 / a for a in raw if a > 0]
+        if "degrees" in how and any(close(a, b) for a in nv for b in inv):
+            errs.append("%s: %s is 1 / the angle of %s. A cycle is a dark and a light stripe, two receptors wide, so the figure is "
+                        "1 / (2 x angle) = %s" % (path, short_json(v, 20), r["_id"], short_json(n, 30)))
+            return errs
+    if calc:                                           # a worked figure (from cell density, from a ratio) is judged by its claim
+        return errs
+    figs = ["%s %s" % (r["_id"], short_json(n if len(n) > 1 else n[0], 20)) for r, n in direct] + \
+           ["%s %s (converted)" % (r["_id"], short_json(n if len(n) > 1 else n[0], 20)) for r, n, _ in conv]
+    errs.append("%s: value %s is not a cited record's figure in cycles per degree and does not lie between two of them (%s). "
+                "If the app chose it, grade it i" % (path, short_json(v, 30), ", ".join(figs)))
+    return errs
+
+
+def fov_errors(path, o, recs):
+    """A whole field of view taken from one eye's field or from the binocular overlap."""
+    nv = flat_numbers(o.get("value"))
+    for r in recs:
+        raw = flat_numbers(r.get("value"))
+        said = " ".join(str(r.get(k) or "") for k in ("eye", "conditions", "note", "units"))
+        if r.get("trait") == "binocular_deg" or re.search(r"binocular|overlap", said, re.I) and r.get("trait") != "fov_h_deg":
+            return ["%s cites %s, the binocular overlap. params.fov is the whole field of all eyes together; the overlap is part of it" % (path, r["_id"])]
+        if re.search(r"monocular|each eye|per eye|one eye|single eye", said, re.I) and any(close(a, b) for a in nv for b in raw):
+            return ["%s: %s is one eye's field (%s). The whole field is the two eyes' fields added, counting the overlap once; "
+                    "that is a calculation, so grade it g with invented true" % (path, short_json(o.get("value"), 20), r["_id"])]
+    return []
+
+
 RX_EM = re.compile("—")
 RX_NOTBUT = re.compile(r"\bnot\b[^.;!?]*\bbut\b|,\s*not\b", re.I)
-RX_SPELL = re.compile(r"\b(colors?|colored|gray|grays|centers?|meters?|behaviors?|color\w*)\b", re.I)
+RX_SPELL = re.compile(r"\b(colour\w*|grey|greys|greyish|centres?|centred|metres?|behaviours?|favour\w*|neighbour\w*|recognis\w*|specialis\w*)\b", re.I)
+RX_PEOPLE = re.compile(r"\b(people|a person|persons?)\b", re.I)
 RX_CODE = re.compile(r"\w_\w|@|(?<!\be)(?<!\bi)[a-z]\.[a-z]{2,}\b")
 
 
-def plain_errors(text, where):
+def plain_errors(text, where, voice=True):
     errs = []
     if RX_EM.search(text):
         errs.append("%s: has an em dash" % where)
@@ -574,8 +737,11 @@ def plain_errors(text, where):
         m0 = RX_NOTBUT.search(text)
         errs.append("%s: has a 'not X but Y' or ', not' construction; rewrite this sentence without it: %r" % (where, text[max(0, m0.start() - 50):m0.end() + 40]))
     m = RX_SPELL.search(text)
-    if m and m.group(0).lower() not in ("colour", "colours"):
-        errs.append("%s: American spelling %r" % (where, m.group(0)))
+    if m:
+        errs.append("%s: British spelling %r; the rows are in US English" % (where, m.group(0)))
+    m = RX_PEOPLE.search(text) if voice else None
+    if m:
+        errs.append("%s: says %r; write \"humans\" or \"a human\" (docs/views/VOICE.md, rule 2)" % (where, m.group(0)))
     m = RX_CODE.search(text)
     if m:
         errs.append("%s: looks like a code name %r" % (where, m.group(0)))
@@ -636,8 +802,7 @@ def name_invented(spec):
         if isinstance(r, list) and len(r) >= 5 and r[1] == "Settings the app chose":
             r[4] = list(r[4]) + miss
             return "added %d paths to the row 'Settings the app chose'" % len(miss)
-    rows.append(["i", "Settings the app chose", "Some settings in this view are the app's own choices, because no measurement gives them. "
-                 "They are set to give a fair picture of the animal and can be tuned by hand.", [], miss])
+    rows.append(["i", "Settings the app chose", "Nobody has measured some parts of how you see, so they are guesses.", [], miss])
     return "added the row 'Settings the app chose', which names %d invented parameters the reply left unnamed" % len(miss)
 
 
@@ -815,6 +980,11 @@ def check_reply(job, F, records, reply, like_spec, floor):
                     errs.append("%s: reached by a calculation, so invented must be true" % path)
             traits = TRAIT_MAP.get(name)
             fit = [r for r in recs if (not traits or r.get("trait") in traits)]
+            if name == "fov" and path == "params.fov":
+                fe = fov_errors(path, o, recs)
+                if fe:
+                    errs += fe
+                    continue
             if traits and not fit:
                 errs.append("%s: cites no record of the trait (%s)" % (path, ", ".join(traits)))
                 continue
@@ -826,6 +996,10 @@ def check_reply(job, F, records, reply, like_spec, floor):
                 pool = em
             else:
                 pool = fit
+            if name == "cpd":
+                sharp = [r for r in fit if r.get("trait") in SHARP_TRAITS]
+                errs += cpd_errors(path, o, c, sharp, [r for r in pool if r.get("trait") in SHARP_TRAITS])
+                continue
             if c.get("kind") != "calculation":
                 ok = value_supported(o.get("value"), pool)
                 if ok is False:
@@ -846,7 +1020,7 @@ def check_reply(job, F, records, reply, like_spec, floor):
             for pk in peaks:
                 if not any(abs(pk - n) <= 2 for n in nums):
                     errs.append("matrices.%s: peak %s nm is not within 2 nm of a lambda_max_nm record that the matrix's src cites. "
-                                "Single peaks from records graded m on the view's own taxon: %s. Put the records you use in src and keep the colour matrix; "
+                                "Single peaks from records graded m on the view's own taxon: %s. Put the records you use in src and keep the color matrix; "
                                 "do not drop it" % (name, pk, ", ".join("%d nm (%s)" % a for a in avail[:30]) or "none"))
     # 6. inside the floor's range: ranges were set above and checked by the checker; floors are warnings
     for path, o in params.items():
@@ -874,7 +1048,7 @@ def check_reply(job, F, records, reply, like_spec, floor):
     errs += plain_errors(str(spec.get("cue", "")), "cue")
     for path, o in params.items():
         if o.get("note"):
-            errs += plain_errors(str(o["note"]), path + " note")
+            errs += plain_errors(str(o["note"]), path + " note", voice=False)
     return errs, warns, spec, cby
 
 
