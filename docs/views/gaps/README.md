@@ -23,11 +23,11 @@ A species is `m` for a trait when a record of grade `m` names the species. It is
 
 ## Run summary
 
-Records read: 5586 (after dropping 25 the audit retracted); queue lines: 53918.
+Records read: 5599 (after dropping 25 the audit retracted); queue lines: 53886.
 
 | View | species in the world rows | records | share covered by the listed species | county records | share covered by the county's 20 | records of listed species with a gap | gap row-records (records x rows in state i) |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| plant | 141,468 | 44,079,457 | 50.5% | 56,850 | 23.1% | 22,273,484 | 66,652,264 |
+| plant | 141,468 | 44,079,457 | 50.5% | 56,850 | 23.1% | 22,273,484 | 66,620,532 |
 | bird | 9,190 | 18,548,533 | 90.3% | 20,542 | 50.5% | 16,743,425 | 58,666,081 |
 | insect | 158,004 | 24,749,927 | 54.3% | 55,748 | 19.2% | 13,449,285 | 30,692,046 |
 | wader | 852 | 3,172,323 | 100.0% | 12,583 | 96.0% | 3,172,323 | 14,993,606 |
@@ -36,7 +36,7 @@ Records read: 5586 (after dropping 25 the audit retracted); queue lines: 53918.
 | hawk | 302 | 1,568,972 | 100.0% | 3,337 | 100.0% | 1,568,972 | 3,911,463 |
 | frog | 4,513 | 1,318,661 | 98.0% | 4,857 | 100.0% | 1,292,499 | 3,472,079 |
 | squirrel | 1,282 | 926,361 | 100.0% | 1,187 | 100.0% | 905,546 | 2,072,373 |
-| deer | 204 | 684,030 | 100.0% | 1,187 | 100.0% | 684,030 | 1,707,226 |
+| deer | 204 | 684,030 | 100.0% | 1,187 | 100.0% | 657,801 | 1,654,768 |
 | rabbit | 91 | 218,949 | 100.0% | 590 | 100.0% | 218,949 | 218,949 |
 | dog | 37 | 197,300 | 100.0% | 102 | 100.0% | 197,300 | 393,418 |
 | alligator | 27 | 86,487 | 100.0% | 2,781 | 100.0% | 86,487 | 221,490 |
