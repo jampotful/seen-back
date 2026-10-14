@@ -20,3 +20,5 @@ done idx 16 Conopholis
 done idx 17 Xanthium
 done idx 18 Prinia
 done idx 19 Ramphocelus
+done idx 20 Alauda
+done idx 24 Phylidonyris
