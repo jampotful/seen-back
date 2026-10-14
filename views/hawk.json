@@ -1,29 +1,278 @@
 {
-  "key": "hawk",
-  "version": 1,
-  "offered": true,
-  "chip": "Hawk, eagle, falcon",
-  "who": "a hawk",
-  "cue": "The centre is magnified, and the picture runs slowly, then jumps ahead.",
-  "params": {
-    "fov": {"value":180,"grade":"?","invented":null,"src":[]},
-    "cpd": {"value":60,"grade":"?","invented":null,"src":[]},
-    "fovea": {"value":2.2,"grade":"?","invented":null,"src":[]},
-    "pupil": "o",
-    "rate": {"value":0.6,"grade":"?","invented":null,"src":[]}
+ "key": "hawk",
+ "version": 1,
+ "offered": true,
+ "chip": "Hawk, eagle, falcon",
+ "who": "a hawk",
+ "cue": "The centre is magnified, and the picture runs slowly, then jumps ahead.",
+ "params": {
+  "fov": {
+   "value": 180,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
-  "matrices": {},
-  "rows": [
-    [
-      "g",
-      "Sharpness",
-      "Eagles see more than twice as much detail as people do. A phone camera can’t capture that much detail, so this view magnifies the centre to suggest it."
-    ],
-    [
-      "m",
-      "Speed",
-      "A peregrine falcon can see a light flicker up to 129 times a second, and a Harris’s hawk up to 77. People see flicker up to 50 or 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
-    ],
-    ["i","Field of view","This view keeps the field of view your camera gives."]
+  "cpd": {
+   "value": 60,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "fovea": {
+   "value": 2.2,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "pupil": "o",
+  "rate": {
+   "value": 0.6,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  }
+ },
+ "matrices": {},
+ "rows": [
+  [
+   "g",
+   "Sharpness",
+   "Eagles see more than twice as much detail as people do. A phone camera can’t capture that much detail, so this view magnifies the centre to suggest it."
+  ],
+  [
+   "m",
+   "Speed",
+   "A peregrine falcon can see a light flicker up to 129 times a second, and a Harris’s hawk up to 77. People see flicker up to 50 or 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
+  ],
+  [
+   "i",
+   "Field of view",
+   "This view keeps the field of view your camera gives."
   ]
+ ],
+ "trial": {
+  "params": {
+   "fov": {
+    "value": 280,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "birds-raptors-owls.jsonl:Martin 1999",
+     "birds-raptors-owls.jsonl:O'Rourke 2010",
+     "sweep-5.jsonl:O'Rourke 2010"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "the middle of a Cooper's hawk's 300 degrees and a short-toed eagle's 260 degrees, close to 360 minus a red-tailed hawk's 82 degree blind area"
+   },
+   "cpd": {
+    "value": 40,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "birds-raptors-owls.jsonl:Potier 2018",
+     "intake-2.jsonl:Potier 2020"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "a Harris's hawk resolved 62.3 cycles per degree, above the highest value the engine takes, so the value sits at that ceiling, inside the 27.4 to 60 behavioral range of the same hawk"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "one round sharp middle stands in for the two foveas of each eye"
+   },
+   "fall": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "how fast sharpness falls away from the middle; no record gives it"
+   },
+   "rate": {
+    "value": 0.77,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "intake-2.jsonl:Potier 2020"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "60 divided by a Harris's hawk's flicker fusion of 77.7 hertz"
+   },
+   "sat": {
+    "value": 1,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "birds-raptors-owls.jsonl:Mitkus 2017",
+     "birds-raptors-owls.jsonl:NA 2022"
+    ],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "four kinds of single cone, so no muting of color"
+   },
+   "salience": 1
+  },
+  "gaze": {
+   "examine": {
+    "value": [
+     2000,
+     5000
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "birds-raptors-owls.jsonl:Tucker 2000"
+    ],
+    "note": "from the average gap between head movements, 2 seconds in hawks and falcons and 5 seconds in bald eagles"
+   }
+  },
+  "remap": {
+   "blindAt": {
+    "value": 180,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the blind area lies above and at the rear of the head"
+   },
+   "blindDeg": {
+    "value": 71,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "birds-raptors-owls.jsonl:O'Rourke 2010"
+    ],
+    "range": [
+     0,
+     120
+    ],
+    "note": "the middle of 60 degrees for a Cooper's hawk and 82 degrees for a red-tailed hawk"
+   },
+   "blindSoft": {
+    "value": 6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how softly the edge of the blind area fades"
+   }
+  },
+  "rows": [
+   [
+    "m",
+    "Fine stripes",
+    "If you are a Harris's hawk, you can pick out black and white stripes as fine as 62.3 cycles per degree. Red and green stripes of equal brightness blur together sooner, at 21.6 cycles per degree.",
+    [
+     "birds-raptors-owls.jsonl:Potier 2018"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Sharpness across the group",
+    "A black kite resolved 25.9 to 32.7 cycles per degree and a Harris's hawk 27.4 to 60. A wedge-tailed eagle resolved 138 and a falcon in an older test 160. No single figure fits every hawk, eagle and falcon, so 40 is a choice inside the Harris's hawk range.",
+    [
+     "birds-raptors-owls.jsonl:Fox 1976",
+     "birds-raptors-owls.jsonl:Potier 2018",
+     "intake-2.jsonl:Potier 2020"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Two sharp spots",
+    "If you are a red-tailed hawk, each of your eyes has two foveas, small pits where sight is sharpest. A peregrine turns its head about 40 degrees to bring prey onto the deep fovea of one eye.",
+    [
+     "birds-raptors-owls.jsonl:Fite 2008",
+     "birds-raptors-owls.jsonl:Tucker 2000"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Nearly all the way around",
+    "A Cooper's hawk's eyes together cover about 300 degrees, with a blind area of about 60 degrees, and a short-toed eagle's cover 260. A red-tailed hawk's blind area above and behind the head is about 82 degrees. You very likely see about 280 degrees around you, blind in a wedge of about 70 degrees above and behind your head.",
+    [
+     "birds-raptors-owls.jsonl:Martin 1999",
+     "birds-raptors-owls.jsonl:O'Rourke 2010",
+     "sweep-5.jsonl:O'Rourke 2010"
+    ],
+    [
+     "params.fov",
+     "remap.blindDeg"
+    ]
+   ],
+   [
+    "g",
+    "Head moves, still eyes",
+    "If you are an American kestrel, your eyes move only about 1 degree in their sockets, and a Cooper's hawk's move about 8. Hawks and falcons move the head about every 2 seconds on average, and bald eagles about every 5. You very likely look at one place for 2 to 5 seconds before the next head move.",
+    [
+     "birds-raptors-owls.jsonl:O'Rourke 2010",
+     "birds-raptors-owls.jsonl:Tucker 2000"
+    ],
+    [
+     "gaze.examine"
+    ]
+   ],
+   [
+    "g",
+    "Fine steps in time",
+    "A Harris's hawk sees flicker up to 77.7 times a second, a saker falcon 102 and a peregrine 124.5. You very likely follow movement in finer steps than a human does.",
+    [
+     "intake-2.jsonl:Potier 2020"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "g",
+    "Four kinds of cone",
+    "Raptors very likely have four kinds of single cone, and the short-wave one is tuned to violet. In a peregrine and a common buzzard its pigment peaks near 405 nanometers. Colored oil droplets sit in the other three kinds.",
+    [
+     "birds-raptors-owls.jsonl:Mitkus 2017",
+     "birds-raptors-owls.jsonl:NA 2022",
+     "intake-3.jsonl:Ödeen 2003"
+    ],
+    [
+     "params.sat"
+    ]
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how sharpness falls from the center of your sight to its edge, or how your two foveas blend into one sharp middle. Where your blind wedge begins and how softly its edge fades are also unmeasured. The records give no pupil shape, no depth of focus and no peaks for the other three color pigments.",
+    [],
+    [
+     "params.topoA",
+     "params.fall",
+     "remap.blindAt",
+     "remap.blindSoft"
+    ]
+   ]
+  ],
+  "compiled": "c2a/hawk.sonnet-5-5.json"
+ }
 }

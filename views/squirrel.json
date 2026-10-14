@@ -1,135 +1,577 @@
 {
-  "key": "squirrel",
-  "version": 1,
-  "offered": true,
-  "chip": "Squirrel",
-  "who": "a squirrel",
-  "cue": "The picture runs slowly, then jumps ahead to catch up.",
-  "params": {
-    "fov": {"value":270,"grade":"?","invented":null,"src":[]},
-    "cpd": {"value":6,"grade":"?","invented":null,"src":[]},
-    "topoS": {"value":1,"grade":"?","invented":null,"src":[]},
-    "fall": {"value":1,"grade":"?","invented":null,"src":[]},
-    "pupil": "o",
-    "dof": {"value":4,"grade":"?","invented":null,"src":[]},
-    "M": "PROTAN",
-    "rate": {"value":0.56,"grade":"?","invented":null,"src":[]}
+ "key": "squirrel",
+ "version": 1,
+ "offered": true,
+ "chip": "Squirrel",
+ "who": "a squirrel",
+ "cue": "The picture runs slowly, then jumps ahead to catch up.",
+ "params": {
+  "fov": {
+   "value": 270,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
-  "matrices": {
-    "PROTAN": {
-      "rows": [[0.11238,0.88762,0],[0.11238,0.88762,0],[0.00401,-0.00401,1]],
-      "grade": "?",
-      "invented": null,
-      "src": [],
-      "note": "Vienot, Brettel and Mollon 1999, entered from memory"
-    }
+  "cpd": {
+   "value": 6,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
-  "rows": [
-    ["g","Colour","Ground squirrels have two kinds of colour-sensing cells in their eyes, where people have three."],
+  "topoS": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "fall": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "pupil": "o",
+  "dof": {
+   "value": 4,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "M": "PROTAN",
+  "rate": {
+   "value": 0.56,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  }
+ },
+ "matrices": {
+  "PROTAN": {
+   "rows": [
     [
-      "g",
-      "Speed",
-      "A ground squirrel can see a light flicker on and off up to 108 times a second. To a person, a light that flickers faster than about 60 times a second looks steady. Fast movements look slower to a squirrel, so this view runs slowly and then jumps ahead to catch up."
+     0.11238,
+     0.88762,
+     0
     ],
     [
-      "i",
-      "Field of view and sharpness",
-      "A squirrel’s eyes sit on the sides of its head, which probably gives it a wide view with less detail than yours. This part of the view is a guess."
+     0.11238,
+     0.88762,
+     0
+    ],
+    [
+     0.00401,
+     -0.00401,
+     1
     ]
-  ],
-  "trial": {
-    "matrices": {
-      "SQUIRREL": {
-        "from_pigments": [444,543],
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/squirrel-deer-rabbit evidence L128, L129, L130: Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel (cones 444 and 543 nm, rods about 502 nm)",
-          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
-        ],
-        "rows": [[0.24151,0.49932,0.18392,0.07525],[0.24151,0.49932,0.18392,0.07525],[0.00174,0.1466,0.66211,0.18955]],
-        "q": [[0.00174,0.1466,0.66211,0.18955],[0.24151,0.49932,0.18392,0.07525],[0,0,0,0],[0,0,0,0]]
-      },
-      "SQUIRREL_ROD": {
-        "from_pigments": [502],
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/squirrel-deer-rabbit evidence L128, L129, L130: Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel (cones 444 and 543 nm, rods about 502 nm)",
-          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
-        ],
-        "rows": [[0.06933,0.45679,0.38602,0.08786],[0.06933,0.45679,0.38602,0.08786],[0.06933,0.45679,0.38602,0.08786]],
-        "q": [[0.06933,0.45679,0.38602,0.08786],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
-      }
-    },
-    "params": {
-      "M": {
-        "value": "SQUIRREL",
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/squirrel-deer-rabbit evidence L128, L129, L130: Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel (cones 444 and 543 nm, rods about 502 nm)"
-        ]
-      }
-    },
-    "spectrum": {
-      "q": "SQUIRREL",
-      "neutral": {"value":1,"grade":"i","invented":true,"src":[],"range":[0,2]},
-      "dark": "SQUIRREL_ROD",
-      "adaptAt": {"value":[-2,-1],"grade":"i","invented":true,"src":[],"range":[-3,0]}
-    },
-    "draw": {
-      "spectrum": [
-        {
-          "name": "shift",
-          "invented": true,
-          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
-        },
-        {
-          "name": "neutral",
-          "invented": true,
-          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
-        },
-        {
-          "name": "wheel",
-          "invented": true,
-          "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
-        }
-      ]
-    },
-    "rows": [
-      ["g","Colour","Ground squirrels have two kinds of colour-sensing cells in their eyes, where people have three."],
-      [
-        "g",
-        "Speed",
-        "A ground squirrel can see a light flicker on and off up to 108 times a second. To a person, a light that flickers faster than about 60 times a second looks steady. Fast movements look slower to a squirrel, so this view runs slowly and then jumps ahead to catch up."
-      ],
-      [
-        "i",
-        "Field of view and sharpness",
-        "A squirrel’s eyes sit on the sides of its head, which probably gives it a wide view with less detail than yours. This part of the view is a guess."
-      ],
-      [
-        "i",
-        "Being tried: colour from pigments",
-        "On this trial the colours come from the measured receptor peaks (444, 543 nm). The camera's colours and the display are the app's.",
-        [
-          "Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel",
-          "param:spectrum.neutral",
-          "param:matrices.SQUIRREL",
-          "param:M"
-        ]
-      ],
-      [
-        "i",
-        "Being tried: dusk",
-        "As the light falls, the colours drift toward what the rods take in, which peak near 502 nm. The peak is measured; where the change happens is the app's guess.",
-        [
-          "Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel",
-          "param:spectrum.adaptAt",
-          "param:matrices.SQUIRREL_ROD"
-        ]
-      ]
-    ]
+   ],
+   "grade": "?",
+   "invented": null,
+   "src": [],
+   "note": "Vienot, Brettel and Mollon 1999, entered from memory"
   }
+ },
+ "rows": [
+  [
+   "g",
+   "Colour",
+   "Ground squirrels have two kinds of colour-sensing cells in their eyes, where people have three."
+  ],
+  [
+   "g",
+   "Speed",
+   "A ground squirrel can see a light flicker on and off up to 108 times a second. To a person, a light that flickers faster than about 60 times a second looks steady. Fast movements look slower to a squirrel, so this view runs slowly and then jumps ahead to catch up."
+  ],
+  [
+   "i",
+   "Field of view and sharpness",
+   "A squirrel’s eyes sit on the sides of its head, which probably gives it a wide view with less detail than yours. This part of the view is a guess."
+  ]
+ ],
+ "trial": {
+  "matrices": {
+   "SQUIRREL": {
+    "from_pigments": [
+     444,
+     543
+    ],
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/squirrel-deer-rabbit evidence L128, L129, L130: Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel (cones 444 and 543 nm, rods about 502 nm)",
+     "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+    ],
+    "rows": [
+     [
+      0.24151,
+      0.49932,
+      0.18392,
+      0.07525
+     ],
+     [
+      0.24151,
+      0.49932,
+      0.18392,
+      0.07525
+     ],
+     [
+      0.00174,
+      0.1466,
+      0.66211,
+      0.18955
+     ]
+    ],
+    "q": [
+     [
+      0.00174,
+      0.1466,
+      0.66211,
+      0.18955
+     ],
+     [
+      0.24151,
+      0.49932,
+      0.18392,
+      0.07525
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "SQUIRREL_ROD": {
+    "from_pigments": [
+     502
+    ],
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/squirrel-deer-rabbit evidence L128, L129, L130: Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel (cones 444 and 543 nm, rods about 502 nm)",
+     "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+    ],
+    "rows": [
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ]
+    ],
+    "q": [
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "SQUIRREL_DI": {
+    "from_pigments": [
+     436.7,
+     518.9
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "sweep-11.jsonl:Jacobs 1985"
+    ],
+    "note": "blue and green cone peaks measured in the California ground squirrel",
+    "rows": [
+     [
+      0.12916,
+      0.50121,
+      0.28844,
+      0.0812
+     ],
+     [
+      0.12916,
+      0.50121,
+      0.28844,
+      0.0812
+     ],
+     [
+      0.00089,
+      0.11374,
+      0.65682,
+      0.22854
+     ]
+    ],
+    "q": [
+     [
+      0.00089,
+      0.11374,
+      0.65682,
+      0.22854
+     ],
+     [
+      0.12916,
+      0.50121,
+      0.28844,
+      0.0812
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "DARK_502": {
+    "from_pigments": [
+     502
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "rodents-lagomorphs.jsonl:Green 1975"
+    ],
+    "note": "rod peak measured in the gray squirrel",
+    "rows": [
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ]
+    ],
+    "q": [
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   }
+  },
+  "params": {
+   "M": {
+    "value": "SQUIRREL",
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/squirrel-deer-rabbit evidence L128, L129, L130: Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel (cones 444 and 543 nm, rods about 502 nm)"
+    ]
+   },
+   "cpd": {
+    "value": 3.9,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "intake-2.jsonl:Jacobs 1982"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "the best figure measured in an eastern gray squirrel in bright light; fox squirrels and the genus average about 2.2 in dim light"
+   },
+   "sat": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "two cone classes give less color than a human; the exact strength is a guess"
+   },
+   "topoS": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "records describe a horizontal streak of sharp vision; how strongly the picture softens away from it is a guess"
+   },
+   "fall": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "how fast sharpness drops away from the streak is a guess"
+   },
+   "rate": {
+    "value": 0.92,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "intake-6.jsonl:Inger 2014"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "60 divided by the flicker fusion frequency measured in the American red squirrel"
+   }
+  },
+  "spectrum": {
+   "q": "SQUIRREL",
+   "neutral": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ]
+   },
+   "dark": "SQUIRREL_ROD",
+   "adaptAt": {
+    "value": [
+     -2,
+     -1
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     -3,
+     0
+    ]
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "shift",
+     "invented": true,
+     "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+    },
+    {
+     "name": "neutral",
+     "invented": true,
+     "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+    },
+    {
+     "name": "wheel",
+     "invented": true,
+     "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Two kinds of color sensor",
+    "If you are a California ground squirrel, your cones peak near 437 and 519 nanometers, one blue-sensitive and one green-sensitive. A gray squirrel's longer pigment peaks near 532, so the green end may sit a little further toward yellow for you.",
+    [
+     "rodents-lagomorphs.jsonl:Crognale 1991",
+     "rodents-lagomorphs.jsonl:Yokoyama 1999",
+     "sweep-11.jsonl:Jacobs 1985"
+    ],
+    [
+     "params.M",
+     "matrices.SQUIRREL_DI"
+    ]
+   ],
+   [
+    "g",
+    "Pigments in your relatives",
+    "Other ground squirrels have a blue cone near 436 nanometers and a green cone between 520 and 530. You very likely have the same pair, so reds and greens run together for you.",
+    [
+     "rodents-lagomorphs.jsonl:CP 2023",
+     "rodents-lagomorphs.jsonl:Sajdak 2016",
+     "rodents-lagomorphs.jsonl:Zhang 2020"
+    ],
+    [
+     "params.M",
+     "matrices.SQUIRREL_DI"
+    ]
+   ],
+   [
+    "m",
+    "Less detail than a human",
+    "If you are a gray squirrel, the finest stripes you can tell apart in bright light are about 3.9 cycles per degree. A fox squirrel in dim light manages about 2.2, and a human reads about 30 on a chart.",
+    [
+     "intake-2.jsonl:Jacobs 1982"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "A band of sharp sight",
+    "You have no fovea. A red squirrel packs its cones densely in a horizontal streak below the optic nerve, and a California ground squirrel's streak has about five times as many cells as its edges.",
+    [
+     "rodents-lagomorphs.jsonl:Long 1983",
+     "sweep-11.jsonl:Long 1983",
+     "sweep-7.jsonl:Scheer A and five co-authors 2024"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Rods for the dark",
+    "A gray squirrel's dark-adapted sight peaks near 502 nanometers, the peak of a typical rod pigment. About four in ten of a gray squirrel's receptors are rod-like, and ground squirrels have far fewer.",
+    [
+     "rodents-lagomorphs.jsonl:Green 1975",
+     "rodents-lagomorphs.jsonl:West 1975"
+    ],
+    [
+     "matrices.DARK_502"
+    ]
+   ],
+   [
+    "g",
+    "Flicker",
+    "An American red squirrel's eye follows flicker up to about 65 flashes a second in bright light. You very likely keep close to a human's pace.",
+    [
+     "intake-6.jsonl:Inger 2014"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "m",
+    "Sunglasses in the lens",
+    "A gray squirrel's lens holds a yellow pigment that removes short-wave light. In a thirteen-lined ground squirrel the lens absorbs everything below 410 nanometers, so almost no ultraviolet reaches your retina.",
+    [
+     "rodents-lagomorphs.jsonl:Chou 1984",
+     "rodents-lagomorphs.jsonl:Zigman 1988"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how quickly your sharpness falls away from the streak, how strong your colors are, or the light levels at which rods take over from cones. Those settings are guesses, and so is the pupil, which is left round, and the width of your total field.",
+    [],
+    [
+     "params.sat",
+     "params.topoS",
+     "params.fall",
+     "spectrum.adaptAt",
+     "matrices.DARK_502",
+     "spectrum.neutral",
+     "matrices.SQUIRREL",
+     "matrices.SQUIRREL_ROD"
+    ]
+   ],
+   [
+    "g",
+    "Colour",
+    "Ground squirrels have two kinds of colour-sensing cells in their eyes, where people have three."
+   ],
+   [
+    "g",
+    "Speed",
+    "A ground squirrel can see a light flicker on and off up to 108 times a second. To a person, a light that flickers faster than about 60 times a second looks steady. Fast movements look slower to a squirrel, so this view runs slowly and then jumps ahead to catch up."
+   ],
+   [
+    "i",
+    "Field of view and sharpness",
+    "A squirrel’s eyes sit on the sides of its head, which probably gives it a wide view with less detail than yours. This part of the view is a guess."
+   ],
+   [
+    "i",
+    "Being tried: colour from pigments",
+    "On this trial the colours come from the measured receptor peaks (444, 543 nm). The camera's colours and the display are the app's.",
+    [
+     "Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel",
+     "param:spectrum.neutral",
+     "param:matrices.SQUIRREL",
+     "param:M"
+    ]
+   ],
+   [
+    "i",
+    "Being tried: dusk",
+    "As the light falls, the colours drift toward what the rods take in, which peak near 502 nm. The peak is measured; where the change happens is the app's guess.",
+    [
+     "Blakeslee, Jacobs and Neitz 1988, eastern grey squirrel",
+     "param:spectrum.adaptAt",
+     "param:matrices.SQUIRREL_ROD"
+    ]
+   ]
+  ],
+  "compiled": "c2a/squirrel.sonnet-5-5.json"
+ }
 }

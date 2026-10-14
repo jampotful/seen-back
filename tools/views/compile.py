@@ -714,8 +714,8 @@ def fov_errors(path, o, recs):
     nv = flat_numbers(o.get("value"))
     for r in recs:
         raw = flat_numbers(r.get("value"))
-        said = " ".join(str(r.get(k) or "") for k in ("eye", "conditions", "note", "units"))
-        if r.get("trait") == "binocular_deg" or re.search(r"binocular|overlap", said, re.I) and r.get("trait") != "fov_h_deg":
+        said = " ".join(str(r.get(k) or "") for k in ("eye", "conditions"))      # the note often names the other quantity in passing
+        if r.get("trait") == "binocular_deg":
             return ["%s cites %s, the binocular overlap. params.fov is the whole field of all eyes together; the overlap is part of it" % (path, r["_id"])]
         if re.search(r"monocular|each eye|per eye|one eye|single eye", said, re.I) and any(close(a, b) for a in nv for b in raw):
             return ["%s: %s is one eye's field (%s). The whole field is the two eyes' fields added, counting the overlap once; "
@@ -725,7 +725,7 @@ def fov_errors(path, o, recs):
 
 RX_EM = re.compile("—")
 RX_NOTBUT = re.compile(r"\bnot\b[^.;!?]*\bbut\b|,\s*not\b", re.I)
-RX_SPELL = re.compile(r"\b(colour\w*|grey|greys|greyish|centres?|centred|metres?|behaviours?|favour\w*|neighbour\w*|recognis\w*|specialis\w*)\b", re.I)
+RX_SPELL = re.compile(r"\b(colour\w*|grey|greys|greyish|centres?|centred|\w*metres?|behaviours?|favour\w*|neighbour\w*|recognis\w*|specialis\w*)\b", re.I)
 RX_PEOPLE = re.compile(r"\b(people|a person|persons?)\b", re.I)
 RX_CODE = re.compile(r"\w_\w|@|(?<!\be)(?<!\bi)[a-z]\.[a-z]{2,}\b")
 
@@ -1280,6 +1280,8 @@ def cmd_check(a):
     reply = json.load(open(a.reply))
     errs, warns, spec, cby = finish(k, "offline", prepped[k], reply, F, specs, floor_of(), a.out)
     print("\n".join("ERROR " + e for e in errs) or "no errors")
+    if not errs and a.write:                         # a reply refused by an earlier checker can be written once it passes this one
+        write_outputs(a.out, k, a.write, prepped[k]["job"], prepped[k], spec, cby, warns + ["checked offline by compile.py check"], reply, a.write)
     print("\n".join("WARN " + w for w in warns))
     return 1 if errs else 0
 
@@ -1352,6 +1354,7 @@ def main():
     ap.add_argument("--audit", default=os.path.join(ROOT, "docs", "views", "audit"))
     ap.add_argument("--views", default=os.path.join(ROOT, "views"))
     ap.add_argument("--out", default="out")
+    ap.add_argument("--write", default="", help="check: the tag to write a passing reply under (<key>.<tag>.json in --out)")
     ap.add_argument("--models", default=os.environ.get("COMPILE_MODELS", "claude-haiku-5-5"))
     ap.add_argument("--direct", action="store_true", help="plain Messages API requests instead of a batch (for a first trial)")
     ap.add_argument("--max-usd", dest="max_usd", type=float, default=float(os.environ.get("COMPILE_MAX_USD", "6")))

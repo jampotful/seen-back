@@ -1,223 +1,447 @@
 {
-  "key": "insect",
-  "version": 1,
-  "offered": true,
-  "chip": "Butterfly, other insect",
-  "who": "an insect",
-  "cue": "The view is wide and blurry, and it runs slowly, then jumps ahead.",
-  "params": {
-    "fov": {
-      "value": 320,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "cpd": {
-      "value": 1,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "pupil": "none",
-    "sheen": {
-      "value": 0.8,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "rate": {
-      "value": 0.45,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    }
+ "key": "insect",
+ "version": 1,
+ "offered": true,
+ "chip": "Butterfly, other insect",
+ "who": "an insect",
+ "cue": "The view is wide and blurry, and it runs slowly, then jumps ahead.",
+ "params": {
+  "fov": {
+   "value": 320,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
-  "matrices": {},
-  "rows": [
-    [
-      "g",
-      "Sharpness",
-      "Most insects see less than a sixtieth as much detail as people do."
-    ],
-    [
-      "g",
-      "Speed",
-      "Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
-    ],
-    [
-      "i",
-      "Ultraviolet",
-      "Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
-    ]
-  ],
-  "trial": {
-    "matrices": {
-      "INSECT": {
-        "from_pigments": [
-          360,
-          420,
-          520
-        ],
-        "grade": "g",
-        "invented": true,
-        "src": [
-          "research/insect evidence L1 and L190 to L192: van der Kooi and Stavenga 2021 (most insects studied have ultraviolet, blue and green receptors; the peaks are the seven-spot ladybird's, 360, 420 and 520 nm)",
-          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
-        ],
-        "rows": [
-          [
-            0.13373,
-            0.50272,
-            0.28269,
-            0.08085
-          ],
-          [
-            0.00016,
-            0.05564,
-            0.5761,
-            0.36811
-          ],
-          [
-            0.0,
-            0.00042,
-            0.03086,
-            0.96872
-          ]
-        ],
-        "q": [
-          [
-            0.0,
-            0.00042,
-            0.03086,
-            0.96872
-          ],
-          [
-            0.00016,
-            0.05564,
-            0.5761,
-            0.36811
-          ],
-          [
-            0.13373,
-            0.50272,
-            0.28269,
-            0.08085
-          ],
-          [
-            0,
-            0,
-            0,
-            0
-          ]
-        ]
-      }
-    },
-    "params": {
-      "M": {
-        "value": "INSECT",
-        "grade": "g",
-        "invented": true,
-        "src": [
-          "research/insect evidence L1 and L190 to L192: van der Kooi and Stavenga 2021 (most insects studied have ultraviolet, blue and green receptors; the peaks are the seven-spot ladybird's, 360, 420 and 520 nm)"
-        ]
-      }
-    },
-    "spectrum": {
-      "q": "INSECT",
-      "neutral": {
-        "value": 1,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          0,
-          2
-        ]
-      }
-    },
-    "draw": {
-      "spectrum": [
-        {
-          "name": "shift",
-          "invented": true,
-          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
-        },
-        {
-          "name": "neutral",
-          "invented": true,
-          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
-        },
-        {
-          "name": "wheel",
-          "invented": true,
-          "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
-        }
-      ],
-      "overlay": [
-        {
-          "name": "off",
-          "invented": true,
-          "note": "the view without the sky's pattern"
-        },
-        {
-          "name": "polar",
-          "invented": true,
-          "note": "fine strokes over the sky, strongest 90 degrees from the sun, along the direction the light is polarized (atlas 6)"
-        }
-      ]
-    },
-    "rows": [
-      [
-        "g",
-        "Sharpness",
-        "Most insects see less than a sixtieth as much detail as people do."
-      ],
-      [
-        "g",
-        "Speed",
-        "Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
-      ],
-      [
-        "i",
-        "Ultraviolet",
-        "Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
-      ],
-      [
-        "i",
-        "Being tried: colour from pigments",
-        "On this trial the colours come from the measured receptor peaks (360, 420, 520 nm). The camera's colours and the display are the app's.",
-        [
-          "van der Kooi and Stavenga 2021",
-          "param:spectrum.neutral",
-          "param:matrices.INSECT",
-          "param:M"
-        ]
-      ],
-      [
-        "i",
-        "Being tried: the sky's pattern",
-        "Many insects see the direction in which sky light is polarized, strongest in a band 90 degrees from the sun, and steer by it. With &draw=polar and the motion sensors on, fine strokes show that band from the time, the date and the phone's heading. The latitude is taken as 35 degrees north, and the drawing is the app's.",
-        [
-          "param:overlay.polar"
-        ]
-      ]
-    ],
-    "overlay": {
-      "polar": {
-        "value": 0.8,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "floor": null,
-        "note": "how strongly the polarized band of sky is drawn",
-        "range": [
-          0,
-          2
-        ]
-      }
-    },
-    "inputs": {
-      "motion": "optional"
-    }
+  "cpd": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "pupil": "none",
+  "sheen": {
+   "value": 0.8,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "rate": {
+   "value": 0.45,
+   "grade": "?",
+   "invented": null,
+   "src": []
   }
+ },
+ "matrices": {},
+ "rows": [
+  [
+   "g",
+   "Sharpness",
+   "Most insects see less than a sixtieth as much detail as people do."
+  ],
+  [
+   "g",
+   "Speed",
+   "Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
+  ],
+  [
+   "i",
+   "Ultraviolet",
+   "Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
+  ]
+ ],
+ "trial": {
+  "matrices": {
+   "INSECT": {
+    "from_pigments": [
+     360,
+     420,
+     520
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "research/insect evidence L1 and L190 to L192: van der Kooi and Stavenga 2021 (most insects studied have ultraviolet, blue and green receptors; the peaks are the seven-spot ladybird's, 360, 420 and 520 nm)",
+     "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+    ],
+    "rows": [
+     [
+      0.13373,
+      0.50272,
+      0.28269,
+      0.08085
+     ],
+     [
+      0.00016,
+      0.05564,
+      0.5761,
+      0.36811
+     ],
+     [
+      0.0,
+      0.00042,
+      0.03086,
+      0.96872
+     ]
+    ],
+    "q": [
+     [
+      0.0,
+      0.00042,
+      0.03086,
+      0.96872
+     ],
+     [
+      0.00016,
+      0.05564,
+      0.5761,
+      0.36811
+     ],
+     [
+      0.13373,
+      0.50272,
+      0.28269,
+      0.08085
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "insect_uvbg": {
+    "from_pigments": [
+     360,
+     440,
+     540
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "intake-2.jsonl:Swihart 1969",
+     "sweep-7.jsonl:Sison-Mangus 2006"
+    ],
+    "note": "peaks near 360, 440 and 540 nm taken from a copper butterfly and a skipper",
+    "rows": [
+     [
+      0.22664,
+      0.50311,
+      0.19444,
+      0.07581
+     ],
+     [
+      0.00122,
+      0.12806,
+      0.6612,
+      0.20952
+     ],
+     [
+      0.0,
+      0.00042,
+      0.03086,
+      0.96872
+     ]
+    ],
+    "q": [
+     [
+      0.0,
+      0.00042,
+      0.03086,
+      0.96872
+     ],
+     [
+      0.00122,
+      0.12806,
+      0.6612,
+      0.20952
+     ],
+     [
+      0.22664,
+      0.50311,
+      0.19444,
+      0.07581
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   }
+  },
+  "params": {
+   "M": {
+    "value": "INSECT",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "research/insect evidence L1 and L190 to L192: van der Kooi and Stavenga 2021 (most insects studied have ultraviolet, blue and green receptors; the peaks are the seven-spot ladybird's, 360, 420 and 520 nm)"
+    ]
+   },
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "insects-general.jsonl:A 2016",
+     "insects-general.jsonl:Freas 2022"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "measured in ants and reported as about 300 degrees; one figure stands for every insect, though a locust reaches 360"
+   },
+   "cpd": {
+    "value": 0.5,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "sweep-22.jsonl:Wright 2023",
+     "sweep-26.jsonl:Ogawa 2023"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "a butterfly and an ant resolve about half a cycle per degree; one figure stands for every insect, though locusts and dragonflies are sharper and fruit flies coarser"
+   },
+   "pupil": {
+    "value": "none",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "no record describes a pupil in an insect compound eye"
+   },
+   "uvBlue": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "how much of the blue a phone records is read as ultraviolet is a guess"
+   },
+   "rate": {
+    "value": 0.3,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "intake-2.jsonl:Swihart 1969",
+     "intake-3.jsonl:Chatterjee 2020"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "60 divided by about 200 flicker per second, as measured in skippers and nymphalid butterflies; slower insects such as locusts are not covered"
+   }
+  },
+  "spectrum": {
+   "q": "INSECT",
+   "neutral": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ]
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "shift",
+     "invented": true,
+     "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+    },
+    {
+     "name": "neutral",
+     "invented": true,
+     "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+    },
+    {
+     "name": "wheel",
+     "invented": true,
+     "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
+    }
+   ],
+   "overlay": [
+    {
+     "name": "off",
+     "invented": true,
+     "note": "the view without the sky's pattern"
+    },
+    {
+     "name": "polar",
+     "invented": true,
+     "note": "fine strokes over the sky, strongest 90 degrees from the sun, along the direction the light is polarized (atlas 6)"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "g",
+    "All around",
+    "Ants are credited with a visual field of about 300 degrees, and a desert locust's two eyes together cover 360. A fruit fly has a blind patch behind about 50 degrees wide. You very likely see nearly all the way around you.",
+    [
+     "dragonflies.jsonl:Kawahara 2021",
+     "flies.jsonl:Zhao 2025",
+     "insects-general.jsonl:Freas 2022",
+     "insects-general.jsonl:U 2023"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "A coarse mosaic",
+    "A Heliconius butterfly resolves about 0.49 cycles per degree and a weaver ant about 0.52, where a human reads about 30. You very likely see the world in a mosaic far coarser than a human's.",
+    [
+     "sweep-11.jsonl:Bergman 2021",
+     "sweep-22.jsonl:Wright 2023",
+     "sweep-26.jsonl:Ogawa 2023"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Sharper and blurrier kin",
+    "A locust at its best resolves about 3 cycles per degree. Dragonflies reach about 2, the finest known among insects, and a fruit fly manages about 0.09.",
+    [
+     "beetles-bugs-others.jsonl:Burtt 1969",
+     "butterflies-moths.jsonl:Wright 2023",
+     "flies.jsonl:Wardill 2015"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Ultraviolet, blue and green",
+    "A copper butterfly has four pigments, peaking near 360, 437, 500 and 568 nanometers. A skipper has two, near 440 and 540, and a cockroach has only an ultraviolet one and a green one. You very likely have an ultraviolet receptor, a blue one and a green one.",
+    [
+     "insects-general.jsonl:French 2015",
+     "insects-general.jsonl:Song 2018",
+     "intake-2.jsonl:Swihart 1969",
+     "sweep-7.jsonl:Sison-Mangus 2006"
+    ],
+    [
+     "params.M",
+     "matrices.insect_uvbg",
+     "params.uvBlue"
+    ]
+   ],
+   [
+    "g",
+    "A red cell in some",
+    "A monarch butterfly, a Heliconius butterfly and a fire ant each have a cell most sensitive near 610 to 620 nanometers. A red admiral butterfly has none. You may or may not have this red cell.",
+    [
+     "insects-met.jsonl:Gregor Belušič 2021",
+     "insects-met.jsonl:van der Kooi 2021"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Fast flicker",
+    "A skipper butterfly's eye follows flicker up to about 180 to 200 times a second, a housefly's about 230, and dragonflies go past 300. A locust follows only 30 to 40. You very likely see flicker that a human, who stops at about 60, cannot.",
+    [
+     "beetles-bugs-others.jsonl:Vowles 1961",
+     "flies.jsonl:N 2026",
+     "insects-general.jsonl:Futahashi 2017",
+     "intake-2.jsonl:Swihart 1969",
+     "intake-3.jsonl:Chatterjee 2020"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "m",
+    "Dim light",
+    "A cockroach's compound eyes still steer its walking by moving stripes at 0.005 lux, about the light of a moonless night.",
+    [
+     "insects-general.jsonl:Honkanen 2017"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how much ultraviolet reaches you from bluish and bright surfaces, and no record describes a pupil in your eyes. One set of numbers stands for every insect, though acuity differs by more than ten times from a fruit fly to a locust.",
+    [],
+    [
+     "params.uvBlue",
+     "params.pupil",
+     "spectrum.neutral",
+     "overlay.polar",
+     "matrices.INSECT"
+    ]
+   ],
+   [
+    "g",
+    "Sharpness",
+    "Most insects see less than a sixtieth as much detail as people do."
+   ],
+   [
+    "g",
+    "Speed",
+    "Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
+   ],
+   [
+    "i",
+    "Ultraviolet",
+    "Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
+   ],
+   [
+    "i",
+    "Being tried: colour from pigments",
+    "On this trial the colours come from the measured receptor peaks (360, 420, 520 nm). The camera's colours and the display are the app's.",
+    [
+     "van der Kooi and Stavenga 2021",
+     "param:spectrum.neutral",
+     "param:matrices.INSECT",
+     "param:M"
+    ]
+   ],
+   [
+    "i",
+    "Being tried: the sky's pattern",
+    "Many insects see the direction in which sky light is polarized, strongest in a band 90 degrees from the sun, and steer by it. With &draw=polar and the motion sensors on, fine strokes show that band from the time, the date and the phone's heading. The latitude is taken as 35 degrees north, and the drawing is the app's.",
+    [
+     "param:overlay.polar"
+    ]
+   ]
+  ],
+  "overlay": {
+   "polar": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "floor": null,
+    "note": "how strongly the polarized band of sky is drawn",
+    "range": [
+     0,
+     2
+    ]
+   }
+  },
+  "inputs": {
+   "motion": "optional"
+  },
+  "compiled": "c2a/insect.sonnet-5-5.json"
+ }
 }

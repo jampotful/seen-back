@@ -1,337 +1,572 @@
 {
-  "key": "bird",
-  "version": 1,
-  "offered": true,
-  "chip": "Other bird",
-  "who": "a bird",
-  "cue": "The picture runs slowly, then jumps ahead to catch up.",
-  "params": {
-    "fov": {
-      "value": 300,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "cpd": {
-      "value": 25,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "topoA": {
-      "value": 0.5,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "fall": {
-      "value": 0.6,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "pupil": "o",
-    "sheen": {
-      "value": 0.8,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "rate": {
-      "value": 0.5,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    }
+ "key": "bird",
+ "version": 1,
+ "offered": true,
+ "chip": "Other bird",
+ "who": "a bird",
+ "cue": "The picture runs slowly, then jumps ahead to catch up.",
+ "params": {
+  "fov": {
+   "value": 300,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
-  "matrices": {},
-  "rows": [
-    [
-      "g",
-      "Speed",
-      "Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
-    ],
-    [
-      "g",
-      "Sharpness",
-      "Most birds see half as much detail as people do, or less."
-    ],
-    [
-      "i",
-      "Ultraviolet",
-      "Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
-    ],
-    [
-      "i",
-      "Field of view",
-      "Eyes on the sides of the head probably give a wide view. This part of the view is a guess."
-    ]
-  ],
-  "trial": {
-    "matrices": {
-      "SONGBIRD": {
-        "from_pigments": [
-          370,
-          450,
-          505,
-          610
-        ],
-        "grade": "g",
-        "invented": true,
-        "src": [
-          "research/birds drafts/birds.md L220: Hart 2001 (ultraviolet classes 360 to 373 nm in songbirds)",
-          "research/birds evidence L38 (oil droplets push the long class to about 610 nm)",
-          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
-        ],
-        "note": "450 and 505 are the app's guesses; no line in the log gives them yet",
-        "rows": [
-          [
-            0.49977,
-            0.32908,
-            0.09213,
-            0.07902
-          ],
-          [
-            0.05324,
-            0.37056,
-            0.46355,
-            0.11266
-          ],
-          [
-            0.00097,
-            0.05967,
-            0.26254,
-            0.67682
-          ]
-        ],
-        "q": [
-          [
-            0.0,
-            0.00118,
-            0.06612,
-            0.9327
-          ],
-          [
-            0.00291,
-            0.17666,
-            0.65538,
-            0.16506
-          ],
-          [
-            0.0784,
-            0.46751,
-            0.36763,
-            0.08646
-          ],
-          [
-            0.49977,
-            0.32908,
-            0.09213,
-            0.07902
-          ]
-        ]
-      }
-    },
-    "spectrum": {
-      "q": "SONGBIRD",
-      "neutral": {
-        "value": 1,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          0,
-          2
-        ]
-      }
-    },
-    "draw": {
-      "spectrum": [
-        {
-          "name": "shift",
-          "invented": true,
-          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
-        },
-        {
-          "name": "wheel",
-          "invented": true,
-          "note": "a finger dragged across the picture turns which three of the four classes are shown (atlas 5)"
-        },
-        {
-          "name": "neutral",
-          "invented": true,
-          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
-        }
-      ],
-      "steady": [
-        {
-          "name": "lock",
-          "invented": true,
-          "note": "the picture holds still in the world against the hand, then snaps to catch up (atlas 11)"
-        },
-        {
-          "name": "held",
-          "invented": true,
-          "note": "today's held frames"
-        },
-        {
-          "name": "arm",
-          "invented": true,
-          "note": "the picture moves only when the phone is jerked forward, as a pigeon thrusts its head"
-        }
-      ],
-      "magnet": [
-        {
-          "name": "none",
-          "invented": true,
-          "note": "the view as it was"
-        },
-        {
-          "name": "tide",
-          "invented": true,
-          "note": "a faint darkening of the sky that follows the angle between the camera and magnetic north, fading in red or yellow light (atlas 21)"
-        },
-        {
-          "name": "grain",
-          "invented": true,
-          "note": "a fine directional grain, like brushed metal, that runs along magnetic north whichever way the phone turns; red light melts it (atlas 21)"
-        }
-      ]
-    },
-    "rows": [
-      [
-        "g",
-        "Speed",
-        "Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
-      ],
-      [
-        "g",
-        "Sharpness",
-        "Most birds see half as much detail as people do, or less."
-      ],
-      [
-        "i",
-        "Ultraviolet",
-        "Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
-      ],
-      [
-        "i",
-        "Field of view",
-        "Eyes on the sides of the head probably give a wide view. This part of the view is a guess."
-      ],
-      [
-        "i",
-        "Being tried: four colours",
-        "On this trial a songbird's four colour classes are drawn three at a time, ultraviolet in the bluest slot; dragging across the picture with the wheel turns which three are shown. Two of the four peaks are the app's guesses.",
-        [
-          "Hart 2001",
-          "param:spectrum.neutral",
-          "param:matrices.SONGBIRD",
-          "param:M",
-          "param:sheen"
-        ]
-      ],
-      [
-        "i",
-        "Being tried: a steady head",
-        "With motion allowed, the picture holds still in the world between quick catches, as a bird's head does while its body moves. How long it holds and how far it lets the phone turn are the app's guesses.",
-        [
-          "param:motion.holdMs",
-          "param:motion.maxDeg",
-          "param:motion.thrust",
-          "param:motion.thrustMs"
-        ]
-      ],
-      [
-        "i",
-        "Being tried: north",
-        "Many songbirds and pigeons sense the direction of the earth's magnetic field through their eyes, and the sense fails in red or yellow light. With &draw=grain or &draw=tide and the motion sensors on, the picture carries a texture tied to magnetic north that melts in warm light. The drawing is the app's.",
-        [
-          "research/birds draft: Wiltschko 2021",
-          "param:magnet.k"
-        ]
-      ]
-    ],
-    "params": {
-      "M": {
-        "value": "SONGBIRD",
-        "grade": "g",
-        "invented": true,
-        "src": [
-          "research/birds drafts/birds.md L220: Hart 2001 (ultraviolet classes 360 to 373 nm in songbirds)",
-          "research/birds evidence L38 (oil droplets push the long class to about 610 nm)"
-        ]
-      },
-      "sheen": {
-        "value": 0,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "note": "the matrix carries the ultraviolet"
-      }
-    },
-    "motion": {
-      "holdMs": {
-        "value": 700,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          100,
-          3000
-        ]
-      },
-      "maxDeg": {
-        "value": 8,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          1,
-          30
-        ]
-      },
-      "thrust": {
-        "value": 3,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          1,
-          10
-        ],
-        "note": "metres a second squared along the phone's depth"
-      },
-      "thrustMs": {
-        "value": 140,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          40,
-          500
-        ]
-      }
-    },
-    "inputs": {
-      "motion": "optional",
-      "senses": {
-        "motion": true
-      }
-    },
-    "magnet": {
-      "k": {
-        "value": 1,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          0,
-          2
-        ],
-        "floor": null,
-        "note": "how strongly the compass is drawn; nobody knows what the sense is like"
-      }
-    }
+  "cpd": {
+   "value": 25,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "topoA": {
+   "value": 0.5,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "fall": {
+   "value": 0.6,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "pupil": "o",
+  "sheen": {
+   "value": 0.8,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "rate": {
+   "value": 0.5,
+   "grade": "?",
+   "invented": null,
+   "src": []
   }
+ },
+ "matrices": {},
+ "rows": [
+  [
+   "g",
+   "Speed",
+   "Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
+  ],
+  [
+   "g",
+   "Sharpness",
+   "Most birds see half as much detail as people do, or less."
+  ],
+  [
+   "i",
+   "Ultraviolet",
+   "Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
+  ],
+  [
+   "i",
+   "Field of view",
+   "Eyes on the sides of the head probably give a wide view. This part of the view is a guess."
+  ]
+ ],
+ "trial": {
+  "matrices": {
+   "SONGBIRD": {
+    "from_pigments": [
+     370,
+     450,
+     505,
+     610
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "research/birds drafts/birds.md L220: Hart 2001 (ultraviolet classes 360 to 373 nm in songbirds)",
+     "research/birds evidence L38 (oil droplets push the long class to about 610 nm)",
+     "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+    ],
+    "note": "450 and 505 are the app's guesses; no line in the log gives them yet",
+    "rows": [
+     [
+      0.49977,
+      0.32908,
+      0.09213,
+      0.07902
+     ],
+     [
+      0.05324,
+      0.37056,
+      0.46355,
+      0.11266
+     ],
+     [
+      0.00097,
+      0.05967,
+      0.26254,
+      0.67682
+     ]
+    ],
+    "q": [
+     [
+      0.0,
+      0.00118,
+      0.06612,
+      0.9327
+     ],
+     [
+      0.00291,
+      0.17666,
+      0.65538,
+      0.16506
+     ],
+     [
+      0.0784,
+      0.46751,
+      0.36763,
+      0.08646
+     ],
+     [
+      0.49977,
+      0.32908,
+      0.09213,
+      0.07902
+     ]
+    ]
+   },
+   "PASSERINE": {
+    "from_pigments": [
+     369,
+     449,
+     503,
+     563
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "birds-met.jsonl:Hart 2001"
+    ],
+    "rows": [
+     [
+      0.33891,
+      0.45753,
+      0.13066,
+      0.07291
+     ],
+     [
+      0.04908,
+      0.36415,
+      0.47228,
+      0.1145
+     ],
+     [
+      0.00089,
+      0.05787,
+      0.26,
+      0.68124
+     ]
+    ],
+    "q": [
+     [
+      0.0,
+      0.00106,
+      0.06144,
+      0.9375
+     ],
+     [
+      0.00268,
+      0.17147,
+      0.65712,
+      0.16873
+     ],
+     [
+      0.07228,
+      0.46049,
+      0.37985,
+      0.08738
+     ],
+     [
+      0.33891,
+      0.45753,
+      0.13066,
+      0.07291
+     ]
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "SONGBIRD",
+   "neutral": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ]
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "shift",
+     "invented": true,
+     "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+    },
+    {
+     "name": "wheel",
+     "invented": true,
+     "note": "a finger dragged across the picture turns which three of the four classes are shown (atlas 5)"
+    },
+    {
+     "name": "neutral",
+     "invented": true,
+     "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+    }
+   ],
+   "steady": [
+    {
+     "name": "lock",
+     "invented": true,
+     "note": "the picture holds still in the world against the hand, then snaps to catch up (atlas 11)"
+    },
+    {
+     "name": "held",
+     "invented": true,
+     "note": "today's held frames"
+    },
+    {
+     "name": "arm",
+     "invented": true,
+     "note": "the picture moves only when the phone is jerked forward, as a pigeon thrusts its head"
+    }
+   ],
+   "magnet": [
+    {
+     "name": "none",
+     "invented": true,
+     "note": "the view as it was"
+    },
+    {
+     "name": "tide",
+     "invented": true,
+     "note": "a faint darkening of the sky that follows the angle between the camera and magnetic north, fading in red or yellow light (atlas 21)"
+    },
+    {
+     "name": "grain",
+     "invented": true,
+     "note": "a fine directional grain, like brushed metal, that runs along magnetic north whichever way the phone turns; red light melts it (atlas 21)"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "g",
+    "A very wide ring",
+    "A zebra finch takes in about 300 degrees around its head, with only about 10 degrees of overlap straight ahead. You very likely see nearly all the way around you, with a gap behind your head.",
+    [
+     "birds-other.jsonl:Eckmeier 2013",
+     "birds-other.jsonl:Michael 2015"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "A coarser picture",
+    "A human reads about 30 cycles a degree on an eye chart. A house sparrow reads 4.9, a domestic chicken about 7, an eastern towhee 8.4, an eastern meadowlark 10.3 and a rock pigeon 12.8. You very likely see less fine detail than a human does.",
+    [
+     "birds-other.jsonl:Caves 2023",
+     "birds-other.jsonl:Rounsley 2005",
+     "sweep-11.jsonl:Tyrrell 2013",
+     "sweep-19.jsonl:Jarvis 2009",
+     "sweep-6.jsonl:Moore 2015"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "One small sharp spot",
+    "If you are a starling, a house sparrow or a house finch, each of your eyes holds one small area where the cells pack at more than 20,000 per square millimeter. If you are a pigeon, you look at distant things with your foveas and at food near your feet with a separate area of the retina.",
+    [
+     "birds-other.jsonl:Dolan 2010",
+     "birds-other.jsonl:Kano 2022",
+     "birds-other.jsonl:W 2022"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Four primary colors",
+    "A starling's four cone pigments peak at 362, 449, 504 and 563 nanometers, and a blackbird, a blue tit and a canary agree within about ten nanometers. You very likely sense four primary colors, one of them ultraviolet, where a human senses three.",
+    [
+     "birds-met.jsonl:Hart 2001",
+     "birds-other.jsonl:Hart 1998",
+     "birds-other.jsonl:Varkevisser 2021"
+    ],
+    [
+     "params.M",
+     "spectrum.q"
+    ]
+   ],
+   [
+    "m",
+    "Violet in place of ultraviolet",
+    "If you are a rock pigeon, your shortest-wave cones peak near 409 nanometers, in the violet. If you are a domestic chicken, they peak near 419. A pigeon's sensitivity still reaches well into the ultraviolet below 400 nanometers.",
+    [
+     "birds-met.jsonl:Hart 2001",
+     "birds-other.jsonl:Emmerton 1975"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Faster than a human",
+    "A blue tit, a collared flycatcher and a pied flycatcher tell flickering light from steady light up to 130 to 145 times a second, where a human stops at about 60. A pigeon manages about 77 and a chicken about 72. You very likely follow fast motion in finer steps than a human does.",
+    [
+     "birds-other.jsonl:Boström 2016",
+     "intake-6.jsonl:Inger 2014"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how fast sharpness falls from the sharp spot toward the edge of a bird's picture, and nobody can say how ultraviolet looks to a bird. The size of that fall and how much of the blue is read as ultraviolet are guesses.",
+    [],
+    [
+     "params.topoA",
+     "params.fall",
+     "params.uvBlue"
+    ]
+   ],
+   [
+    "i",
+    "Settings the app chose",
+    "Nobody has measured some parts of how you see, so they are guesses.",
+    [],
+    [
+     "matrices.PASSERINE",
+     "params.sheen",
+     "spectrum.neutral",
+     "motion.holdMs",
+     "motion.maxDeg",
+     "motion.thrust",
+     "motion.thrustMs",
+     "magnet.k",
+     "matrices.SONGBIRD"
+    ]
+   ],
+   [
+    "g",
+    "Speed",
+    "Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. This view runs slowly and then jumps ahead to suggest the difference."
+   ],
+   [
+    "g",
+    "Sharpness",
+    "Most birds see half as much detail as people do, or less."
+   ],
+   [
+    "i",
+    "Ultraviolet",
+    "Some birds can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it."
+   ],
+   [
+    "i",
+    "Field of view",
+    "Eyes on the sides of the head probably give a wide view. This part of the view is a guess."
+   ],
+   [
+    "i",
+    "Being tried: four colours",
+    "On this trial a songbird's four colour classes are drawn three at a time, ultraviolet in the bluest slot; dragging across the picture with the wheel turns which three are shown. Two of the four peaks are the app's guesses.",
+    [
+     "Hart 2001",
+     "param:spectrum.neutral",
+     "param:matrices.SONGBIRD",
+     "param:M",
+     "param:sheen"
+    ]
+   ],
+   [
+    "i",
+    "Being tried: a steady head",
+    "With motion allowed, the picture holds still in the world between quick catches, as a bird's head does while its body moves. How long it holds and how far it lets the phone turn are the app's guesses.",
+    [
+     "param:motion.holdMs",
+     "param:motion.maxDeg",
+     "param:motion.thrust",
+     "param:motion.thrustMs"
+    ]
+   ],
+   [
+    "i",
+    "Being tried: north",
+    "Many songbirds and pigeons sense the direction of the earth's magnetic field through their eyes, and the sense fails in red or yellow light. With &draw=grain or &draw=tide and the motion sensors on, the picture carries a texture tied to magnetic north that melts in warm light. The drawing is the app's.",
+    [
+     "research/birds draft: Wiltschko 2021",
+     "param:magnet.k"
+    ]
+   ]
+  ],
+  "params": {
+   "M": {
+    "value": "SONGBIRD",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "research/birds drafts/birds.md L220: Hart 2001 (ultraviolet classes 360 to 373 nm in songbirds)",
+     "research/birds evidence L38 (oil droplets push the long class to about 610 nm)"
+    ]
+   },
+   "sheen": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the matrix carries the ultraviolet"
+   },
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "birds-other.jsonl:Eckmeier 2013"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "the whole field of a zebra finch, both eyes together, from earlier work"
+   },
+   "cpd": {
+    "value": 8,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "sweep-19.jsonl:Jarvis 2009",
+     "sweep-6.jsonl:Moore 2015"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "between a chicken's 7.0 and an eastern towhee's 8.35 cycles a degree"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "one round sharp spot in each eye, how much blurrier the edge is has no measurement"
+   },
+   "fall": {
+    "value": 1.0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "how fast sharpness falls from the sharp spot"
+   },
+   "uvBlue": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "how much of the blue is read as ultraviolet; a phone camera records almost none"
+   },
+   "rate": {
+    "value": 0.45,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "birds-other.jsonl:Boström 2016"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "note": "60 divided by the mean flicker limit of about 132 hertz in a blue tit and two flycatchers"
+   }
+  },
+  "motion": {
+   "holdMs": {
+    "value": 700,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     100,
+     3000
+    ]
+   },
+   "maxDeg": {
+    "value": 8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     30
+    ]
+   },
+   "thrust": {
+    "value": 3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     10
+    ],
+    "note": "metres a second squared along the phone's depth"
+   },
+   "thrustMs": {
+    "value": 140,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     40,
+     500
+    ]
+   }
+  },
+  "inputs": {
+   "motion": "optional",
+   "senses": {
+    "motion": true
+   }
+  },
+  "magnet": {
+   "k": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "floor": null,
+    "note": "how strongly the compass is drawn; nobody knows what the sense is like"
+   }
+  },
+  "compiled": "c2a/bird.sonnet-5-5.json"
+ }
 }

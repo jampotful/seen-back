@@ -13,9 +13,12 @@ DRAFT_DIR holds <key>.<model>.json from tools/views/compile.py (a folder of pub/
 - "compiled" in the trial says which draft it came from.
 The spec checker runs on every file written, and a refused file is put back as it was.
 """
-import copy, glob, json, os, subprocess, sys
+import copy, glob, importlib.util, json, os, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_s = importlib.util.spec_from_file_location("check_spec", os.path.join(ROOT, "tools", "views", "check_spec.py"))
+CS = importlib.util.module_from_spec(_s)
+_s.loader.exec_module(CS)
 BLOCKS = ["zones", "gaze", "spectrum", "clock", "pace", "motion", "slow", "tilt", "magnet", "remap", "overlay", "sound", "haptic"]
 
 
@@ -61,6 +64,16 @@ def promote(spec, draft, label):
     t["compiled"] = label
     out = dict(spec)
     out["trial"] = t
+    # the hand-made trial's own invented settings were covered by its rows as a whole; the draft's rows name parameters, so the
+    # checker now wants each one named: they are added to the names of the draft's row for what nobody has measured
+    errs, _ = CS.check_obj(CS.merged(out, t))
+    miss = [e.split(":")[0] for e in errs if e.endswith("invented, and no row graded i or g names it")]
+    if miss:
+        named = [r for r in rows if isinstance(r, list) and len(r) >= 5 and r[0] == "i"]
+        if named:
+            named[-1][4] = list(named[-1][4]) + [m for m in miss if m not in named[-1][4]]
+        else:
+            rows.append(["i", "Settings the app chose", "Nobody has measured some parts of how you see, so they are guesses.", [], miss])
     return out
 
 

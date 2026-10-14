@@ -1,32 +1,324 @@
 {
-  "key": "plant",
-  "version": 1,
-  "offered": true,
-  "chip": "Plant",
-  "who": "a plant",
-  "cue": "There’s no picture here, only how much light there is, what colour it is, and where it comes from.",
-  "params": {
-    "pupil": "none",
-    "field": {"value":1,"grade":"?","invented":null,"src":[]},
-    "noGreen": {"value":1,"grade":"?","invented":null,"src":[]},
-    "persist": {"value":2.5,"grade":"?","invented":null,"src":[]}
+ "key": "plant",
+ "version": 1,
+ "offered": true,
+ "chip": "Plant",
+ "who": "a plant",
+ "cue": "There’s no picture here, only how much light there is, what colour it is, and where it comes from.",
+ "params": {
+  "pupil": "none",
+  "field": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
-  "matrices": {},
-  "rows": [
-    [
-      "g",
-      "No picture",
-      "A plant has nothing like a lens to focus light into an image. It senses how much light there is, what colour it is, and which direction it comes from."
-    ],
-    [
-      "m",
-      "Neighbours",
-      "Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, even before the neighbour shades it. Phone cameras capture very little far-red light."
-    ],
-    [
-      "i",
-      "Green and time",
-      "This view removes green, because leaves reflect most green light away, and it smooths out anything quick. Both are the app’s own choices."
-    ]
+  "noGreen": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "persist": {
+   "value": 2.5,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  }
+ },
+ "matrices": {},
+ "rows": [
+  [
+   "g",
+   "No picture",
+   "A plant has nothing like a lens to focus light into an image. It senses how much light there is, what colour it is, and which direction it comes from."
+  ],
+  [
+   "m",
+   "Neighbours",
+   "Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, even before the neighbour shades it. Phone cameras capture very little far-red light."
+  ],
+  [
+   "i",
+   "Green and time",
+   "This view removes green, because leaves reflect most green light away, and it smooths out anything quick. Both are the app’s own choices."
   ]
+ ],
+ "trial": {
+  "params": {
+   "field": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "floor": null,
+    "note": "light only, no picture; a reading of the records on photoreceptors"
+   },
+   "pupil": {
+    "value": "none",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "floor": null,
+    "note": "follows from having no eye"
+   },
+   "M": {
+    "value": "plant_light",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "plants-light.jsonl:Briggs 1983",
+     "plants-light.jsonl:Péter 2024",
+     "plants-light.jsonl:Spalding 2003"
+    ],
+    "floor": null,
+    "note": "red, blue and ultraviolet-A receptors; the mixing weights are chosen"
+   },
+   "uvBlue": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "floor": null,
+    "note": "a guess; some of the blue stands for ultraviolet"
+   },
+   "gain": {
+    "value": 2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     4
+    ],
+    "floor": null,
+    "note": "stands for sensitivity to faint light"
+   },
+   "persist": {
+    "value": 20,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     60
+    ],
+    "floor": null,
+    "note": "seconds; real responses take minutes, so this falls far short"
+   }
+  },
+  "matrices": {
+   "plant_light": {
+    "from_pigments": [
+     360,
+     475,
+     660
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "plants-light.jsonl:Briggs 1983",
+     "plants-light.jsonl:Péter 2024",
+     "plants-light.jsonl:Spalding 2003"
+    ],
+    "rows": [
+     [
+      0.52237,
+      0.23491,
+      0.1361,
+      0.10662
+     ],
+     [
+      0.01737,
+      0.32004,
+      0.55327,
+      0.10932
+     ],
+     [
+      0.0,
+      0.00042,
+      0.03086,
+      0.96872
+     ]
+    ],
+    "q": [
+     [
+      0.0,
+      0.00042,
+      0.03086,
+      0.96872
+     ],
+     [
+      0.01737,
+      0.32004,
+      0.55327,
+      0.10932
+     ],
+     [
+      0.52237,
+      0.23491,
+      0.1361,
+      0.10662
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "plant_light"
+  },
+  "slow": {
+   "everyMs": {
+    "value": 3000,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     500,
+     20000
+    ],
+    "floor": null,
+    "note": "one frame kept every few seconds"
+   },
+   "windowS": {
+    "value": 600,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     30,
+     3600
+    ],
+    "floor": null,
+    "note": "light is averaged over ten minutes"
+   },
+   "rightS": {
+    "value": 20,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     2,
+     120
+    ],
+    "floor": null,
+    "note": "a chosen speed-up of the slow righting after a tilt"
+   }
+  },
+  "rows": [
+   [
+    "g",
+    "No picture",
+    "You have no eye and no lens. Your photoreceptors fall into five classes that together cover light from 280 to 750 nanometers, and a shoot appears to read the direction of light from the gradient of light across its width.",
+    [
+     "plants-light.jsonl:Buskirk 2011",
+     "plants-touch.jsonl:R 2015"
+    ],
+    [
+     "params.field",
+     "params.pupil",
+     "field",
+     "pupil"
+    ]
+   ],
+   [
+    "m",
+    "Ultraviolet and red",
+    "If you are Arabidopsis, the UV-B receptor in your leaves reacts most to light at 290 nanometers. The red receptor phyA of Arabidopsis and maize absorbs most at 665 nanometers and shifts to 725 after strong red light.",
+    [
+     "plants-light.jsonl:Ramos 2019",
+     "plants-light.jsonl:Zhang 2023"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Colors",
+    "You very likely read red with phytochrome, which absorbs most near 660 nanometers, and blue with receptors whose action peaks near 475. The flavin in the blue receptors also absorbs near 360 in the ultraviolet.",
+    [
+     "plants-light.jsonl:Briggs 1983",
+     "plants-light.jsonl:Péter 2024",
+     "plants-light.jsonl:Spalding 2003"
+    ],
+    [
+     "params.M",
+     "params.uvBlue"
+    ]
+   ],
+   [
+    "g",
+    "Faint light",
+    "If you are an Arabidopsis seedling, blue light from one side as dim as 0.005 micromoles on a square meter each second makes you curve after about 50 minutes, and you reach about 70 degrees after 3 hours. Arabidopsis seedlings have answered even 0.0017 after a red light pretreatment. You very likely sense faint light about as well.",
+    [
+     "plants-light.jsonl:M 2021",
+     "plants-light.jsonl:S 2016",
+     "plants-light.jsonl:T 2025"
+    ],
+    [
+     "params.gain"
+    ]
+   ],
+   [
+    "m",
+    "Down",
+    "If you are Arabidopsis, the starch grains in your shoot cells can sink to the low side within 3 minutes of a tilt. Your lateral branches begin growing upward within 60 minutes after being turned upside down and have fully changed posture within 120 minutes.",
+    [
+     "plants-touch.jsonl:C 2025",
+     "plants-touch.jsonl:Kawamoto 2020"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Pace",
+    "If you are Arabidopsis, the signaling state of your cry1 blue receptor fades with a half-life near 5 minutes. A seedling in shade waits about 45 minutes before it grows faster.",
+    [
+     "plants-light.jsonl:Casal 2023",
+     "plants-light.jsonl:Herbel 2013"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has tested whether a plant forms any picture at all, so light with no picture is a reading of the records on photoreceptors. Nobody has measured how long a plant holds a moment of light, how much of the blue it reads as ultraviolet, or how much it lifts faint light, and the time compression of an hour of light or of a righting after a tilt is a guess too.",
+    [],
+    [
+     "params.field",
+     "params.pupil",
+     "params.uvBlue",
+     "params.gain",
+     "params.persist",
+     "slow.everyMs",
+     "slow.windowS",
+     "slow.rightS"
+    ]
+   ],
+   [
+    "i",
+    "Settings the app chose",
+    "Nobody has measured some parts of how you see, so they are guesses.",
+    [],
+    [
+     "matrices.plant_light"
+    ]
+   ]
+  ],
+  "compiled": "c2a/plant.sonnet-5-5.json"
+ }
 }

@@ -1,113 +1,562 @@
 {
-  "key": "rabbit",
-  "version": 1,
-  "offered": true,
-  "chip": "Rabbit",
-  "who": "a rabbit",
-  "cue": "You see almost the whole circle at once, and little of it is sharp.",
-  "params": {
-    "fov": {"value":350,"grade":"?","invented":null,"src":[]},
-    "cpd": {"value":3,"grade":"?","invented":null,"src":[]},
-    "topoS": {"value":1,"grade":"?","invented":null,"src":[]},
-    "fall": {"value":2,"grade":"?","invented":null,"src":[]},
-    "pupil": "o",
-    "dof": {"value":6,"grade":"?","invented":null,"src":[]},
-    "M": "DEUTAN"
+ "key": "rabbit",
+ "version": 1,
+ "offered": true,
+ "chip": "Rabbit",
+ "who": "a rabbit",
+ "cue": "You see almost the whole circle at once, and little of it is sharp.",
+ "params": {
+  "fov": {
+   "value": 350,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
+  "cpd": {
+   "value": 3,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "topoS": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "fall": {
+   "value": 2,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "pupil": "o",
+  "dof": {
+   "value": 6,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "M": "DEUTAN"
+ },
+ "matrices": {
+  "DEUTAN": {
+   "rows": [
+    [
+     0.29275,
+     0.70725,
+     0
+    ],
+    [
+     0.29275,
+     0.70725,
+     0
+    ],
+    [
+     -0.02234,
+     0.02234,
+     1
+    ]
+   ],
+   "grade": "?",
+   "invented": null,
+   "src": [],
+   "note": "Vienot, Brettel and Mollon 1999, entered from memory"
+  }
+ },
+ "rows": [
+  [
+   "i",
+   "The whole view",
+   "This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells."
+  ]
+ ],
+ "trial": {
   "matrices": {
-    "DEUTAN": {
-      "rows": [[0.29275,0.70725,0],[0.29275,0.70725,0],[-0.02234,0.02234,1]],
-      "grade": "?",
-      "invented": null,
-      "src": [],
-      "note": "Vienot, Brettel and Mollon 1999, entered from memory"
+   "RABBIT": {
+    "from_pigments": [
+     425,
+     523
+    ],
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)",
+     "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+    ],
+    "rows": [
+     [
+      0.14657,
+      0.50601,
+      0.26748,
+      0.07994
+     ],
+     [
+      0.14657,
+      0.50601,
+      0.26748,
+      0.07994
+     ],
+     [
+      0.00027,
+      0.07048,
+      0.6112,
+      0.31805
+     ]
+    ],
+    "q": [
+     [
+      0.00027,
+      0.07048,
+      0.6112,
+      0.31805
+     ],
+     [
+      0.14657,
+      0.50601,
+      0.26748,
+      0.07994
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "RABBIT_ROD": {
+    "from_pigments": [
+     498
+    ],
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)",
+     "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+    ],
+    "rows": [
+     [
+      0.05831,
+      0.44075,
+      0.411,
+      0.08993
+     ],
+     [
+      0.05831,
+      0.44075,
+      0.411,
+      0.08993
+     ],
+     [
+      0.05831,
+      0.44075,
+      0.411,
+      0.08993
+     ]
+    ],
+    "q": [
+     [
+      0.05831,
+      0.44075,
+      0.411,
+      0.08993
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "rabbit_cones": {
+    "from_pigments": [
+     465,
+     509
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "rodents-lagomorphs.jsonl:Caldwell 1978",
+     "rodents-lagomorphs.jsonl:Radlwimmer 1998"
+    ],
+    "note": "blue-sensitive cone near 465 nm and green-sensitive cone near 509 nm",
+    "rows": [
+     [
+      0.09158,
+      0.47995,
+      0.34372,
+      0.08476
+     ],
+     [
+      0.09158,
+      0.47995,
+      0.34372,
+      0.08476
+     ],
+     [
+      0.00905,
+      0.26081,
+      0.60514,
+      0.12499
+     ]
+    ],
+    "q": [
+     [
+      0.00905,
+      0.26081,
+      0.60514,
+      0.12499
+     ],
+     [
+      0.09158,
+      0.47995,
+      0.34372,
+      0.08476
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "rabbit_rod": {
+    "from_pigments": [
+     500
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "rodents-lagomorphs.jsonl:Ribelayga 2010"
+    ],
+    "note": "rod-driven recordings peak near 500 nm",
+    "rows": [
+     [
+      0.06366,
+      0.44901,
+      0.39846,
+      0.08886
+     ],
+     [
+      0.06366,
+      0.44901,
+      0.39846,
+      0.08886
+     ],
+     [
+      0.06366,
+      0.44901,
+      0.39846,
+      0.08886
+     ]
+    ],
+    "q": [
+     [
+      0.06366,
+      0.44901,
+      0.39846,
+      0.08886
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   }
+  },
+  "params": {
+   "M": {
+    "value": "RABBIT",
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)"
+    ]
+   },
+   "fov": {
+    "value": 360,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "rodents-lagomorphs.jsonl:Hughes 1982",
+     "rodents-lagomorphs.jsonl:Wong 2008"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "the two eyes' fields added with the overlap counted once; records give the whole field as about 360 degrees, which is also the most the engine draws"
+   },
+   "cpd": {
+    "value": 2.1,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "rodents-lagomorphs.jsonl:Grzywacz 1994",
+     "rodents-lagomorphs.jsonl:Wyk 2006"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "worked out from the spacing of neighboring ganglion cells in the visual streak; no record gives a direct figure"
+   },
+   "topoS": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "records name a visual streak but give no ratio of sharpness; the strength is the app's"
+   },
+   "fall": {
+    "value": 2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "how fast the picture softens above and below the streak is the app's choice"
+   },
+   "salience": 1,
+   "glow": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "retinal cells answer to movement; how brightly it shows is the app's choice"
+   }
+  },
+  "spectrum": {
+   "q": "RABBIT",
+   "neutral": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ]
+   },
+   "dark": "RABBIT_ROD",
+   "adaptAt": {
+    "value": [
+     -2,
+     -1
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     -3,
+     0
+    ]
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "shift",
+     "invented": true,
+     "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+    },
+    {
+     "name": "neutral",
+     "invented": true,
+     "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
+    },
+    {
+     "name": "wheel",
+     "invented": true,
+     "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
     }
+   ]
   },
   "rows": [
+   [
+    "g",
+    "All the way around",
+    "Your two eyes together very likely cover close to a full circle. A rabbit in the freeze position has a field of 360 degrees, and only a 24 degree wedge in front is seen by both eyes at once.",
     [
-      "i",
-      "The whole view",
-      "This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells."
+     "rodents-lagomorphs.jsonl:Hughes 1982",
+     "rodents-lagomorphs.jsonl:Wong 2008"
+    ],
+    [
+     "params.fov"
     ]
+   ],
+   [
+    "m",
+    "Two kinds of cone",
+    "You have a blue-sensitive cone that peaks near 465 nanometers and a green-sensitive cone that peaks near 509. Two kinds of cone make you a dichromat, and your rods are a third kind of light sensor.",
+    [
+     "rodents-lagomorphs.jsonl:Armington 1994",
+     "rodents-lagomorphs.jsonl:Caldwell 1978",
+     "rodents-lagomorphs.jsonl:Hack 1999",
+     "rodents-lagomorphs.jsonl:Radlwimmer 1998"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Dim light",
+    "In dim light your rods take over. Recordings from rod-fed cells in the rabbit retina peak near 500 nanometers, so you very likely see a dim scene in one blue-green gray. If you are a European rabbit, no reflecting layer sits behind your retina to give light a second pass.",
+    [
+     "rodents-lagomorphs.jsonl:Caldwell 1978",
+     "rodents-lagomorphs.jsonl:Ribelayga 2010",
+     "sweep-29.jsonl:Verstappen 2012"
+    ],
+    [
+     "params.M",
+     "spectrum.q",
+     "spectrum.dark"
+    ]
+   ],
+   [
+    "m",
+    "A sharp band",
+    "A level band across your retina is the sharpest part. Cones there reach about 18,000 per square millimeter, against about 7,000 in the upper retina, and you have no fovea.",
+    [
+     "rodents-lagomorphs.jsonl:Collewijn 1977",
+     "rodents-lagomorphs.jsonl:Famiglietti 1995",
+     "rodents-lagomorphs.jsonl:Provis 1979"
+    ],
+    []
+   ],
+   [
+    "g",
+    "How sharp",
+    "Neighboring edge-detecting ganglion cells sit 30 to 40 micrometers apart along your streak, and 1.9 micrometers of retina spans 46 arcseconds. You very likely resolve about 2 cycles per degree there, a fourteenth of the 30 a human reads on an eye chart.",
+    [
+     "rodents-lagomorphs.jsonl:Grzywacz 1994",
+     "rodents-lagomorphs.jsonl:Wyk 2006"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Eyes that jump",
+    "You move your eyes in jumps that average about 21 degrees and are never smaller than 1 degree. When you follow something that moves, you follow it in jumps and never smoothly.",
+    [
+     "rodents-lagomorphs.jsonl:Collewijn 1977"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Movement cells",
+    "Cells in your retina answer to movement in one direction and stay quiet for the opposite one. Four kinds prefer up, down, toward the nose and toward the temple.",
+    [
+     "rodents-lagomorphs.jsonl:Barlow 1963",
+     "rodents-lagomorphs.jsonl:Levick 2006"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how fast sharpness fades above and below your streak, how strongly movement stands out, or the light level at which rods take over from cones. We chose those values.",
+    [],
+    [
+     "params.topoS",
+     "params.fall",
+     "params.glow",
+     "spectrum.adaptAt"
+    ]
+   ],
+   [
+    "i",
+    "Settings the app chose",
+    "Nobody has measured some parts of how you see, so they are guesses.",
+    [],
+    [
+     "matrices.rabbit_cones",
+     "matrices.rabbit_rod",
+     "spectrum.neutral",
+     "matrices.RABBIT",
+     "matrices.RABBIT_ROD"
+    ]
+   ],
+   [
+    "i",
+    "The whole view",
+    "This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells."
+   ],
+   [
+    "i",
+    "Being tried: colour from pigments",
+    "On this trial the colours come from the measured receptor peaks (425, 523 nm). The camera's colours and the display are the app's.",
+    [
+     "Nuboer, van Nuys and Wortel 1983, wild rabbit",
+     "param:spectrum.neutral",
+     "param:matrices.RABBIT",
+     "param:M"
+    ]
+   ],
+   [
+    "i",
+    "Being tried: dusk",
+    "As the light falls, the colours drift toward what the rods take in, which peak near 498 nm. The peak is measured; where the change happens is the app's guess.",
+    [
+     "Nuboer, van Nuys and Wortel 1983, wild rabbit",
+     "param:spectrum.adaptAt",
+     "param:matrices.RABBIT_ROD"
+    ]
+   ]
   ],
-  "trial": {
-    "matrices": {
-      "RABBIT": {
-        "from_pigments": [425,523],
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)",
-          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
-        ],
-        "rows": [[0.14657,0.50601,0.26748,0.07994],[0.14657,0.50601,0.26748,0.07994],[0.00027,0.07048,0.6112,0.31805]],
-        "q": [[0.00027,0.07048,0.6112,0.31805],[0.14657,0.50601,0.26748,0.07994],[0,0,0,0],[0,0,0,0]]
-      },
-      "RABBIT_ROD": {
-        "from_pigments": [498],
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)",
-          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
-        ],
-        "rows": [[0.05831,0.44075,0.411,0.08993],[0.05831,0.44075,0.411,0.08993],[0.05831,0.44075,0.411,0.08993]],
-        "q": [[0.05831,0.44075,0.411,0.08993],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
-      }
-    },
-    "params": {
-      "M": {
-        "value": "RABBIT",
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/squirrel-deer-rabbit evidence L79, L80, L81: Nuboer, van Nuys and Wortel 1983, wild rabbit (cones 425 and 523 nm, rods 498 nm)"
-        ]
-      }
-    },
-    "spectrum": {
-      "q": "RABBIT",
-      "neutral": {"value":1,"grade":"i","invented":true,"src":[],"range":[0,2]},
-      "dark": "RABBIT_ROD",
-      "adaptAt": {"value":[-2,-1],"grade":"i","invented":true,"src":[],"range":[-3,0]}
-    },
-    "draw": {
-      "spectrum": [
-        {
-          "name": "shift",
-          "invented": true,
-          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
-        },
-        {
-          "name": "neutral",
-          "invented": true,
-          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
-        },
-        {
-          "name": "wheel",
-          "invented": true,
-          "note": "a finger dragged across the picture turns which classes are shown (atlas 5)"
-        }
-      ]
-    },
-    "rows": [
-      [
-        "i",
-        "The whole view",
-        "This view is a guess that hasn’t yet been checked against research. A rabbit probably sees almost all the way around itself, most sharply along the horizon, in little detail, with two kinds of colour-sensing cells."
-      ],
-      [
-        "i",
-        "Being tried: colour from pigments",
-        "On this trial the colours come from the measured receptor peaks (425, 523 nm). The camera's colours and the display are the app's.",
-        ["Nuboer, van Nuys and Wortel 1983, wild rabbit","param:spectrum.neutral","param:matrices.RABBIT","param:M"]
-      ],
-      [
-        "i",
-        "Being tried: dusk",
-        "As the light falls, the colours drift toward what the rods take in, which peak near 498 nm. The peak is measured; where the change happens is the app's guess.",
-        ["Nuboer, van Nuys and Wortel 1983, wild rabbit","param:spectrum.adaptAt","param:matrices.RABBIT_ROD"]
-      ]
-    ]
-  }
+  "compiled": "c2a/rabbit.sonnet-5-5.json"
+ }
 }

@@ -1,29 +1,324 @@
 {
-  "key": "frog",
-  "version": 1,
-  "offered": true,
-  "chip": "Frog, toad",
-  "who": "a frog or toad",
-  "cue": "Hold still, as a frog does. Only things that move show up.",
-  "params": {
-    "fov": {"value":340,"grade":"?","invented":null,"src":[]},
-    "cpd": {"value":4,"grade":"?","invented":null,"src":[]},
-    "pupil": "h",
-    "persist": {"value":0.15,"grade":"?","invented":null,"src":[]},
-    "gate": {"value":1,"grade":"?","invented":null,"src":[]}
+ "key": "frog",
+ "version": 1,
+ "offered": true,
+ "chip": "Frog, toad",
+ "who": "a frog or toad",
+ "cue": "Hold still, as a frog does. Only things that move show up.",
+ "params": {
+  "fov": {
+   "value": 340,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
-  "matrices": {},
-  "rows": [
-    [
-      "m",
-      "Movement",
-      "A frog takes little notice of the parts of its world that stay still, and it can starve beside food that never moves. This view shows only what changes, so hold your phone as still as a frog holds itself."
-    ],
-    [
-      "g",
-      "Speed",
-      "A cane toad can see a light flicker only about 7 times a second, a ninth as often as a person can. Anything that moves smears into a trail."
-    ],
-    ["i","Field of view, sharpness and pupil","These parts of the view are guesses."]
+  "cpd": {
+   "value": 4,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "pupil": "h",
+  "persist": {
+   "value": 0.15,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "gate": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  }
+ },
+ "matrices": {},
+ "rows": [
+  [
+   "m",
+   "Movement",
+   "A frog takes little notice of the parts of its world that stay still, and it can starve beside food that never moves. This view shows only what changes, so hold your phone as still as a frog holds itself."
+  ],
+  [
+   "g",
+   "Speed",
+   "A cane toad can see a light flicker only about 7 times a second, a ninth as often as a person can. Anything that moves smears into a trail."
+  ],
+  [
+   "i",
+   "Field of view, sharpness and pupil",
+   "These parts of the view are guesses."
   ]
+ ],
+ "trial": {
+  "params": {
+   "fov": {
+    "value": 300,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     100,
+     360
+    ],
+    "floor": null,
+    "note": "one cane toad eye covers nearly 200 degrees and a common frog's two eyes overlap across about 100 degrees; no whole field was found for any one animal, so 300 is a guess"
+   },
+   "cpd": {
+    "value": 4.3,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "frogs.jsonl:Aho 1997"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "floor": null,
+    "note": "common frog, optomotor test; a leopard frog read 2.8"
+   },
+   "topoS": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "floor": null,
+    "note": "a horizontal streak of sharp sight is described in treefrogs and the cane toad; how strongly to draw it is the app's choice"
+   },
+   "fall": {
+    "value": 1.33,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "frogs.jsonl:Pushchin 2019"
+    ],
+    "range": [
+     0,
+     3
+    ],
+    "floor": null,
+    "note": "treefrog best spot 2.1 against periphery 0.9 cycles per degree in air; the ratio 2.33 minus 1"
+   },
+   "pupil": "h",
+   "M": {
+    "value": "FROG",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "frogs.jsonl:Matthews 1983",
+     "herps-met.jsonl:Schott 2022",
+     "intake-8.jsonl:Schott 2022"
+    ],
+    "floor": null,
+    "note": "blue receptor near 433, rod near 502 and red cone near 570 nanometers, taken from toads and a bullfrog; the mapping to camera colors is the app's"
+   },
+   "gate": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "floor": null,
+    "note": "a still model drew no response in moor frogs, yet frogs also notice large still objects; how far still things fade is a guess"
+   },
+   "glow": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "floor": null,
+    "note": "how brightly movement stands out is the app's choice"
+   },
+   "salience": 1
+  },
+  "matrices": {
+   "FROG": {
+    "from_pigments": [
+     433,
+     502,
+     570
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "frogs.jsonl:Matthews 1983",
+     "herps-met.jsonl:Schott 2022",
+     "intake-8.jsonl:Schott 2022"
+    ],
+    "rows": [
+     [
+      0.37036,
+      0.43871,
+      0.11821,
+      0.07271
+     ],
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0.00062,
+      0.09877,
+      0.64768,
+      0.25292
+     ]
+    ],
+    "q": [
+     [
+      0.00062,
+      0.09877,
+      0.64768,
+      0.25292
+     ],
+     [
+      0.06933,
+      0.45679,
+      0.38602,
+      0.08786
+     ],
+     [
+      0.37036,
+      0.43871,
+      0.11821,
+      0.07271
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "FROG"
+  },
+  "rows": [
+   [
+    "m",
+    "Sharp enough to catch a fly",
+    "If you are a common frog, your sharpest vision reaches about 4.3 cycles per degree, measured by how you follow moving stripes. A leopard frog tested with a screen read 2.8. Both are far coarser than a human's.",
+    [
+     "frogs.jsonl:Aho 1997"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "A band of sharp sight",
+    "In a Japanese treefrog the retina holds a horizontal streak of sharp sight close to its equator. Its sharpest spot reaches about 2.1 cycles per degree in air and the lower edge falls to about 0.9. A cane toad and another treefrog also have a streak, so you very likely see a sharp band across the middle with the rest softer by a factor of about 2.3.",
+    [
+     "frogs.jsonl:Humphrey 1985",
+     "frogs.jsonl:Jagger 1988",
+     "frogs.jsonl:Pushchin 2019"
+    ],
+    [
+     "params.topoS",
+     "params.fall"
+    ]
+   ],
+   [
+    "i",
+    "Nearly all the way around",
+    "A cane toad's eye alone covers nearly 200 degrees, and a common frog's two eyes overlap across about 100 degrees. Nobody has added these up for one animal, so the 300 degrees drawn for you is a guess.",
+    [
+     "frogs.jsonl:Gaze 1962",
+     "frogs.jsonl:Jagger 1988",
+     "frogs.jsonl:RD 2024"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "A horizontal pupil",
+    "If you are a cane toad, your pupil is horizontal in a black iris with greenish flecks. About 78 of every 100 frog and toad species surveyed have a horizontal pupil, so you very likely do too. A red-eyed treefrog has a vertical one.",
+    [
+     "frogs.jsonl:Cervino 2021",
+     "intake-3.jsonl:Cervino 2021"
+    ],
+    [
+     "params.pupil"
+    ]
+   ],
+   [
+    "g",
+    "Blue, green and red",
+    "A bullfrog's red-sensitive receptor peaks near 570 nanometers. A toad has a second kind of rod, called a green rod, that peaks near 433 in the blue, beside the usual rod near 502. Common toads combine blue receptors with red cones and green rods to tell colors even in dim light, so you very likely read the world as three color signals.",
+    [
+     "frogs.jsonl:Kondrashev 2023",
+     "frogs.jsonl:Matthews 1983",
+     "herps-met.jsonl:Schott 2022",
+     "intake-8.jsonl:Schott 2022"
+    ],
+    [
+     "params.M",
+     "spectrum.q"
+    ]
+   ],
+   [
+    "i",
+    "Prey is what moves",
+    "If you are a moor frog, a still model draws no response, and the same model moved up and down a few centimeters does. A common toad reads an object stretched along its path of travel as prey. Nobody has measured how completely a still scene fades for you, so that strength is a guess.",
+    [
+     "frogs.jsonl:M 2012",
+     "sweep-7.jsonl:Ewert 1974"
+    ],
+    [
+     "params.gate"
+    ]
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how brightly a mover stands out against its surroundings for you, or how much blurrier the edge of your streak is than its middle. Those strengths are guesses.",
+    [],
+    [
+     "params.glow",
+     "params.topoS",
+     "params.gate",
+     "params.fov"
+    ]
+   ],
+   [
+    "x",
+    "Water, sound and smell",
+    "Bullfrog tadpoles feel flowing water through a lateral line, and flows near 1 centimeter per second are close to what they can detect. Frogs hear low and middle pitches from about 50 hertz to 1 kilohertz with one organ of the ear, and some follow smells home. A camera records none of this.",
+    [
+     "frogs.jsonl:EE 2016",
+     "frogs.jsonl:Oldham 1967",
+     "frogs.jsonl:S 2017"
+    ],
+    []
+   ],
+   [
+    "i",
+    "Settings the app chose",
+    "Nobody has measured some parts of how you see, so they are guesses.",
+    [],
+    [
+     "matrices.FROG"
+    ]
+   ]
+  ],
+  "compiled": "c2a/frog.sonnet-5-5.json"
+ }
 }

@@ -1,303 +1,535 @@
 {
-  "key": "bee",
-  "version": 1,
-  "offered": true,
-  "chip": "Bee",
-  "who": "a bee",
-  "cue": "Red turns dark, and the picture runs slowly, then jumps ahead.",
-  "params": {
-    "fov": {
-      "value": 320,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "cpd": {
-      "value": 1,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "pupil": "none",
-    "M": "BEE",
-    "uvBlue": {
-      "value": 1,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    },
-    "rate": {
-      "value": 0.3,
-      "grade": "?",
-      "invented": null,
-      "src": []
-    }
+ "key": "bee",
+ "version": 1,
+ "offered": true,
+ "chip": "Bee",
+ "who": "a bee",
+ "cue": "Red turns dark, and the picture runs slowly, then jumps ahead.",
+ "params": {
+  "fov": {
+   "value": 320,
+   "grade": "?",
+   "invented": null,
+   "src": []
   },
+  "cpd": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "pupil": "none",
+  "M": "BEE",
+  "uvBlue": {
+   "value": 1,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  },
+  "rate": {
+   "value": 0.3,
+   "grade": "?",
+   "invented": null,
+   "src": []
+  }
+ },
+ "matrices": {
+  "BEE": {
+   "rows": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     0
+    ]
+   ],
+   "grade": "?",
+   "invented": null,
+   "src": [],
+   "note": "their green drawn as red, their blue as green; ultraviolet goes to blue"
+  }
+ },
+ "rows": [
+  [
+   "g",
+   "Sharpness",
+   "Most insects see less than a sixtieth as much detail as people do."
+  ],
+  [
+   "m",
+   "Red",
+   "Bees have no colour-sensing cells for red, so red flowers and objects look dark to them."
+  ],
+  [
+   "m",
+   "Speed",
+   "In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
+  ],
+  [
+   "i",
+   "Ultraviolet",
+   "Bees can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the blue in this view stands in for it."
+  ],
+  [
+   "i",
+   "How the colours are shown",
+   "A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue."
+  ]
+ ],
+ "trial": {
   "matrices": {
-    "BEE": {
-      "rows": [
-        [
-          0,
-          1,
-          0
-        ],
-        [
-          0,
-          0,
-          1
-        ],
-        [
-          0,
-          0,
-          0
-        ]
-      ],
-      "grade": "?",
-      "invented": null,
-      "src": [],
-      "note": "their green drawn as red, their blue as green; ultraviolet goes to blue"
+   "BEE4": {
+    "from_pigments": [
+     344,
+     436,
+     544
+    ],
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/bee drafts/bee.md L221: Hempel de Ibarra and colleagues 2014 (344, 436 and 544 nm)",
+     "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
+    ],
+    "rows": [
+     [
+      0.24648,
+      0.49787,
+      0.18056,
+      0.07508
+     ],
+     [
+      0.00084,
+      0.11082,
+      0.65545,
+      0.2329
+     ],
+     [
+      0.0,
+      8e-05,
+      0.00877,
+      0.99115
+     ]
+    ],
+    "q": [
+     [
+      0.0,
+      8e-05,
+      0.00877,
+      0.99115
+     ],
+     [
+      0.00084,
+      0.11082,
+      0.65545,
+      0.2329
+     ],
+     [
+      0.24648,
+      0.49787,
+      0.18056,
+      0.07508
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "BEE_COMPILED": {
+    "from_pigments": [
+     344,
+     436,
+     540
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "bees-wasps.jsonl:Nouvian 2020",
+     "bees-wasps.jsonl:Z 2020",
+     "insects-met.jsonl:Randolf Menzel 1988"
+    ],
+    "note": "ultraviolet, blue and green receptors",
+    "rows": [
+     [
+      0.22664,
+      0.50311,
+      0.19444,
+      0.07581
+     ],
+     [
+      0.00084,
+      0.11082,
+      0.65545,
+      0.2329
+     ],
+     [
+      0.0,
+      8e-05,
+      0.00877,
+      0.99115
+     ]
+    ],
+    "q": [
+     [
+      0.0,
+      8e-05,
+      0.00877,
+      0.99115
+     ],
+     [
+      0.00084,
+      0.11082,
+      0.65545,
+      0.2329
+     ],
+     [
+      0.22664,
+      0.50311,
+      0.19444,
+      0.07581
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "BEE4",
+   "neutral": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ]
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "shift",
+     "invented": true,
+     "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
+    },
+    {
+     "name": "neutral",
+     "invented": true,
+     "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
     }
+   ],
+   "pace": [
+    {
+     "name": "lag",
+     "invented": true,
+     "note": "today's pace"
+    },
+    {
+     "name": "replay",
+     "invented": true,
+     "note": "a tap replays the last moment three times slower"
+    }
+   ],
+   "overlay": [
+    {
+     "name": "off",
+     "invented": true,
+     "note": "the view without the sky's pattern"
+    },
+    {
+     "name": "polar",
+     "invented": true,
+     "note": "fine strokes over the sky, strongest 90 degrees from the sun, along the direction the light is polarized (atlas 6)"
+    }
+   ]
   },
   "rows": [
+   [
+    "g",
+    "Coarse sight",
+    "Bumblebees of the species Bombus impatiens separate stripes only as fine as 0.35 cycles per degree, and honeybees reach about 0.26 to 0.36. You very likely see less than a hundredth of the detail a human reads on an eye chart.",
     [
-      "g",
-      "Sharpness",
-      "Most insects see less than a sixtieth as much detail as people do."
+     "bees-wasps.jsonl:A 2019",
+     "bees-wasps.jsonl:Chakravarthi 2016",
+     "insects-met.jsonl:Todd Macuda 2001"
     ],
     [
-      "m",
-      "Red",
-      "Bees have no colour-sensing cells for red, so red flowers and objects look dark to them."
-    ],
-    [
-      "m",
-      "Speed",
-      "In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
-    ],
-    [
-      "i",
-      "Ultraviolet",
-      "Bees can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the blue in this view stands in for it."
-    ],
-    [
-      "i",
-      "How the colours are shown",
-      "A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue."
+     "params.cpd"
     ]
-  ],
-  "trial": {
-    "matrices": {
-      "BEE4": {
-        "from_pigments": [
-          344,
-          436,
-          544
-        ],
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/bee drafts/bee.md L221: Hempel de Ibarra and colleagues 2014 (344, 436 and 544 nm)",
-          "tools/views/pigments.py (template: Govardovskii 2000; camera curves invented)"
-        ],
-        "rows": [
-          [
-            0.24648,
-            0.49787,
-            0.18056,
-            0.07508
-          ],
-          [
-            0.00084,
-            0.11082,
-            0.65545,
-            0.2329
-          ],
-          [
-            0.0,
-            8e-05,
-            0.00877,
-            0.99115
-          ]
-        ],
-        "q": [
-          [
-            0.0,
-            8e-05,
-            0.00877,
-            0.99115
-          ],
-          [
-            0.00084,
-            0.11082,
-            0.65545,
-            0.2329
-          ],
-          [
-            0.24648,
-            0.49787,
-            0.18056,
-            0.07508
-          ],
-          [
-            0,
-            0,
-            0,
-            0
-          ]
-        ]
-      }
-    },
-    "spectrum": {
-      "q": "BEE4",
-      "neutral": {
-        "value": 1,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          0,
-          2
-        ]
-      }
-    },
-    "draw": {
-      "spectrum": [
-        {
-          "name": "shift",
-          "invented": true,
-          "note": "each class on one of the screen's three, the guessed ultraviolet in the bluest slot (atlas 5)"
-        },
-        {
-          "name": "neutral",
-          "invented": true,
-          "note": "where the animal sees no colour and a person does, a faint shimmer like heat haze (atlas 4)"
-        }
-      ],
-      "pace": [
-        {
-          "name": "lag",
-          "invented": true,
-          "note": "today's pace"
-        },
-        {
-          "name": "replay",
-          "invented": true,
-          "note": "a tap replays the last moment three times slower"
-        }
-      ],
-      "overlay": [
-        {
-          "name": "off",
-          "invented": true,
-          "note": "the view without the sky's pattern"
-        },
-        {
-          "name": "polar",
-          "invented": true,
-          "note": "fine strokes over the sky, strongest 90 degrees from the sun, along the direction the light is polarized (atlas 6)"
-        }
-      ]
-    },
-    "rows": [
-      [
-        "g",
-        "Sharpness",
-        "Most insects see less than a sixtieth as much detail as people do."
-      ],
-      [
-        "m",
-        "Red",
-        "Bees have no colour-sensing cells for red, so red flowers and objects look dark to them."
-      ],
-      [
-        "m",
-        "Speed",
-        "In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
-      ],
-      [
-        "i",
-        "Ultraviolet",
-        "Bees can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the blue in this view stands in for it."
-      ],
-      [
-        "i",
-        "How the colours are shown",
-        "A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue."
-      ],
-      [
-        "i",
-        "Being tried: colour from pigments",
-        "On this trial the colours come from the honeybee's three measured receptor classes, ultraviolet in the bluest slot. The camera's colours and the ultraviolet guess are the app's.",
-        [
-          "Hempel de Ibarra 2014",
-          "param:spectrum.neutral",
-          "param:matrices.BEE4",
-          "param:M",
-          "param:uvBlue"
-        ]
-      ],
-      [
-        "i",
-        "Being tried: a moment slowed",
-        "A tap keeps the last moment and plays it three times slower, as a faster eye might have time for it. The ratio is the app's guess.",
-        [
-          "param:pace.ratio"
-        ]
-      ],
-      [
-        "i",
-        "Being tried: the sky's pattern",
-        "Many insects see the direction in which sky light is polarized, strongest in a band 90 degrees from the sun, and steer by it. With &draw=polar and the motion sensors on, fine strokes show that band from the time, the date and the phone's heading. The latitude is taken as 35 degrees north, and the drawing is the app's.",
-        [
-          "param:overlay.polar"
-        ]
-      ]
+   ],
+   [
+    "g",
+    "Three colors",
+    "Honeybees have an ultraviolet receptor near 344 nanometers, a bumblebee has a green receptor near 540, and a red mason bee has a blue receptor near 436. You very likely have the same three kinds, so you see ultraviolet, blue and green and red light looks dark to you.",
+    [
+     "bees-wasps.jsonl:Nouvian 2020",
+     "bees-wasps.jsonl:Ruedenauer 2018",
+     "bees-wasps.jsonl:Z 2020",
+     "insects-met.jsonl:Randolf Menzel 1988"
     ],
-    "params": {
-      "M": {
-        "value": "BEE4",
-        "grade": "m",
-        "invented": true,
-        "src": [
-          "research/bee drafts/bee.md L221: Hempel de Ibarra and colleagues 2014 (344, 436 and 544 nm)"
-        ]
-      },
-      "uvBlue": {
-        "value": 0,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "note": "the matrix's fourth column carries the ultraviolet"
-      }
-    },
-    "pace": {
-      "ratio": {
-        "value": 3,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "range": [
-          1,
-          6
-        ]
-      }
-    },
-    "overlay": {
-      "polar": {
-        "value": 0.8,
-        "grade": "i",
-        "invented": true,
-        "src": [],
-        "floor": null,
-        "note": "how strongly the polarized band of sky is drawn",
-        "range": [
-          0,
-          2
-        ]
-      }
-    },
-    "inputs": {
-      "motion": "optional"
-    }
-  }
+    [
+     "params.M",
+     "matrices.BEE"
+    ]
+   ],
+   [
+    "g",
+    "Nearly all the way around",
+    "Bees are said to see about 300 degrees across the body plane, and a honeybee about 270. You very likely take in almost the whole circle around you, with the finest detail straight ahead.",
+    [
+     "bees-wasps.jsonl:M 2017",
+     "bees-wasps.jsonl:Paffhausen 2021"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Fast flicker",
+    "A bumblebee's eye follows flicker up to about 130 times a second, a free-flying honeybee's color vision about 100, and a honeybee in bright light about 200. You very likely catch changes that a human, at 60, blurs together.",
+    [
+     "bees-wasps.jsonl:Ibarra 2014",
+     "bees-wasps.jsonl:Meyer‐Rochow 1981",
+     "intake-6.jsonl:Inger 2014"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "m",
+    "A sharper front",
+    "In a forager honeybee the front of each eye is the sharpest part, with facets as little as 1.3 degrees apart. Toward the sides they sit farther apart.",
+    [
+     "bees-wasps.jsonl:Rigosi 2021"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Sky pattern",
+    "If you are a honeybee, you read the pattern of polarized light in the sky as a compass, using ultraviolet receptors at the top rim of your eye. Bumblebees have such receptors too.",
+    [
+     "bees-wasps.jsonl:Evangelista 2014",
+     "bees-wasps.jsonl:Kolyfetis 2025",
+     "bees-wasps.jsonl:Stephens 1953"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What nobody has measured",
+    "Nobody has measured how quickly sharpness fades from the front of a worker's eye to its edge, or how much of what you see as blue reads to you as ultraviolet. A compound eye has no pupil, and no record describes one.",
+    [
+     "bees-wasps.jsonl:Durand 2025",
+     "bees-wasps.jsonl:Rigosi 2021"
+    ],
+    [
+     "params.topoA",
+     "params.fall",
+     "params.uvBlue",
+     "params.pupil",
+     "spectrum.neutral",
+     "pace.ratio",
+     "overlay.polar",
+     "matrices.BEE4",
+     "matrices.BEE_COMPILED"
+    ]
+   ],
+   [
+    "g",
+    "Sharpness",
+    "Most insects see less than a sixtieth as much detail as people do."
+   ],
+   [
+    "m",
+    "Red",
+    "Bees have no colour-sensing cells for red, so red flowers and objects look dark to them."
+   ],
+   [
+    "m",
+    "Speed",
+    "In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference."
+   ],
+   [
+    "i",
+    "Ultraviolet",
+    "Bees can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the blue in this view stands in for it."
+   ],
+   [
+    "i",
+    "How the colours are shown",
+    "A bee sees green, blue and ultraviolet. Since a screen can’t show ultraviolet, this view moves every colour over by one: a bee’s green appears as red, its blue as green, and its ultraviolet as blue."
+   ],
+   [
+    "i",
+    "Being tried: colour from pigments",
+    "On this trial the colours come from the honeybee's three measured receptor classes, ultraviolet in the bluest slot. The camera's colours and the ultraviolet guess are the app's.",
+    [
+     "Hempel de Ibarra 2014",
+     "param:spectrum.neutral",
+     "param:matrices.BEE4",
+     "param:M",
+     "param:uvBlue"
+    ]
+   ],
+   [
+    "i",
+    "Being tried: a moment slowed",
+    "A tap keeps the last moment and plays it three times slower, as a faster eye might have time for it. The ratio is the app's guess.",
+    [
+     "param:pace.ratio"
+    ]
+   ],
+   [
+    "i",
+    "Being tried: the sky's pattern",
+    "Many insects see the direction in which sky light is polarized, strongest in a band 90 degrees from the sun, and steer by it. With &draw=polar and the motion sensors on, fine strokes show that band from the time, the date and the phone's heading. The latitude is taken as 35 degrees north, and the drawing is the app's.",
+    [
+     "param:overlay.polar"
+    ]
+   ]
+  ],
+  "params": {
+   "M": {
+    "value": "BEE4",
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "research/bee drafts/bee.md L221: Hempel de Ibarra and colleagues 2014 (344, 436 and 544 nm)"
+    ]
+   },
+   "uvBlue": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the matrix's fourth column carries the ultraviolet"
+   },
+   "fov": {
+    "value": 285,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "bees-wasps.jsonl:M 2017",
+     "bees-wasps.jsonl:Paffhausen 2021"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "floor": null,
+    "note": "between the 300 degrees given for bees and the 270 given for the honeybee"
+   },
+   "cpd": {
+    "value": 0.35,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "insects-met.jsonl:Todd Macuda 2001"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "floor": null,
+    "note": "measured with gratings in one bumblebee species and used for every bee; honeybee figures run from 0.25 to 0.36"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "floor": null,
+    "note": "the front of the eye is sharpest, but no record gives a ratio for a worker"
+   },
+   "fall": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "floor": null,
+    "note": "how fast sharpness drops toward the edge is the app's choice"
+   },
+   "pupil": {
+    "value": "none",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "floor": null,
+    "note": "a compound eye has no pupil; no record describes one"
+   },
+   "rate": {
+    "value": 0.46,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "bees-wasps.jsonl:Ibarra 2014",
+     "bees-wasps.jsonl:Meyer‐Rochow 1981",
+     "intake-6.jsonl:Inger 2014"
+    ],
+    "range": [
+     0.25,
+     2
+    ],
+    "floor": null,
+    "note": "60 divided by 130 hertz; records for bees run from 100 to 200 hertz"
+   }
+  },
+  "pace": {
+   "ratio": {
+    "value": 3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     6
+    ]
+   }
+  },
+  "overlay": {
+   "polar": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "floor": null,
+    "note": "how strongly the polarized band of sky is drawn",
+    "range": [
+     0,
+     2
+    ]
+   }
+  },
+  "inputs": {
+   "motion": "optional"
+  },
+  "compiled": "c2a/bee.sonnet-5-5.json"
+ }
 }
