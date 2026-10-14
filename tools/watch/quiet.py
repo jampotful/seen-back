@@ -55,6 +55,8 @@ def newest_commit():
         refs = gh('POST', '/graphql', {'query': q, 'variables': {'owner': OWNER, 'name': NAME, 'after': after}})
         refs = refs['data']['repository']['refs']
         for n in refs['nodes']:
+            if n['name'].startswith('codex/'):
+                continue  # an outside worker's pull request says nothing about the Claude allowance
             c = (n.get('target') or {}).get('committedDate')
             if c and (best[0] is None or when(c) > best[0]):
                 best = (when(c), n['name'])
