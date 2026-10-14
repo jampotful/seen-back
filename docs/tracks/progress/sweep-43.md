@@ -13,4 +13,4 @@ Notes for the desk:
 - Chatterjee et al 2020 (cff canon, in hand) is logged for only a few species in intake-3; Elymnias hypermnestra (next in this batch) is an Indian butterfly and may be in its full table.
 - Peitsch et al 1992 (10.1007/BF00190398) is logged for five species only; a full read may give more Hymenoptera receptor data.
 - Rule 2 carries to weigh: Lepidoptera pigments for Cossus, Drepana, Amata; Hymenoptera receptor classes for Chalybion and Isodontia; Picidae spectral range for Dendrocoptes.
-- Two DOIs were derived rather than read: Urena (PLoS article-number pattern) and none other; the Crotaphytus JEB DOI was confirmed.
+- One DOI was derived rather than read: Awan et al 2014 (Urena), from the PLoS article-number pattern. The Crotaphytus JEB DOI was confirmed.
