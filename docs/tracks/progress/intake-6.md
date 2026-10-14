@@ -12,7 +12,7 @@ Status: in progress. Ten files downloaded and extracted to text (scratch only, n
 | 54a86759cc3c | Odeen 2013 UV sensitivity in birds | 10.1186/1471-2148-13-36 | birds-met (Aves); also canon | text extracted, 10 pp |
 | d70be66c7a6e | Mueller 2003 Scutigera compound eye | 10.1007/s00435-003-0085-0 | ground-invertebrates (centipede) | text extracted, 19 pp |
 | 2d0990d5553e | Duelli 1978 jumping spider posterolateral eyes | 10.1007/bf00656387 | jumper | text extracted, 12 pp |
-| 3 f9ab27dd8023 | Inger 2014 flickering artificial light | 10.1371/journal.pone.0098631 | methods (also canon) | text extracted, 11 pp |
+| f9ab27dd8023 | Inger 2014 flickering artificial light | 10.1371/journal.pone.0098631 | methods (also canon) | text extracted, 11 pp |
 | f226c7a88a64 | Roell 2001 gecko retina and foveae | 10.1016/s0042-6989(01)00093-1 | herps (gecko) | text extracted, 14 pp |
 | 14183a19367b | Wallace 2013 rat overhead binocular field | 10.1038/nature12153 | squirrel-deer-rabbit (mouse line) | text extracted, 5 pp |
 | b06043ac29f9 | Warrant 1999 seeing better at night | 10.1016/s0042-6989(98)00262-4 | methods | text extracted, 20 pp |
@@ -25,3 +25,12 @@ Download note: the Drive tool saves each result to a JSON file on disk, which de
 2. Failures to evidence/intake-6-failed.jsonl.
 3. drive.jsonl lines for the ten files (none existed before).
 4. Wanted lines for reference-list papers (only Schusterman is partial).
+
+## Done (13 October 2026)
+- Ten files read in full (text extracted), each matched to a wanted line.
+- evidence/intake-6.jsonl: 29 records, all pass quotecheck and tools/senses/check.py.
+- evidence/intake-6-failed.jsonl: 2 Warrant 1999 Table 1 records (acceptance and interommatidial angle), held because the table row names no species.
+- Schusterman 1971 (PARTIAL): printed page with no abstract text. 0 records. Four reference-list wanted lines in wanted/intake-6.jsonl (Schusterman and Balliet 1970 Nature and Science, Landau and Dawson 1970, Piggins 1970). No DOIs written, because the page does not print them.
+- drive.jsonl: ten lines added.
+- Trait keys added with "new trait" in the note: orbit_axis_deg (Mitchell), pupil_shape (Miyazaki), sws1_type (Odeen).
+- Open issues: Mitchell 2013 has no DOI (handle only). Wallace 2013 does not name the rat species (Rattus norvegicus assumed, noted). Duelli's degree sign prints as a tilde, read as degrees.
