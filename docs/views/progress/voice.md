@@ -1,6 +1,6 @@
 # Progress: voice (burst 8)
 
-Started 13 October 2026. Task: `docs/tracks/prompts/burst8-voice.md`.
+Started 13 October 2026, 21:45. Task: `docs/tracks/prompts/burst8-voice.md`.
 
-- Done: cloned, read STATUS, the preamble and the task.
-- Next: read the rows of jumper, dog, bee, owl and fungus, and write `docs/views/VOICE-SAMPLES.md`.
+- Done: `docs/views/VOICE-SAMPLES.md`, fifteen rows (three each for jumper, dog, bee, owl, fungus) now and rewritten, with the voice statement. Pushed on `agent/voice`. No file under `views/` changed; nothing merged to `main`.
+- Next: the owner approves or redirects the samples; then the pass over every view's rows follows the statement.
