@@ -87,9 +87,12 @@ bad = copy.deepcopy(good); bad["spec"]["rows"][0][2] = "It is wide — very wide
 e, _ = run(bad)
 ok(any("em dash" in x for x in e) and any("not X but Y" in x for x in e), "an em dash and a not-but sentence are refused")
 
-bad = copy.deepcopy(good); bad["spec"]["rows"][0][2] = "The color of it is set by params.fov."
+bad = copy.deepcopy(good); bad["spec"]["rows"][0][2] = "The colour of it is set by params.fov."
 e, _ = run(bad)
-ok(any("American spelling" in x for x in e) and any("code name" in x for x in e), "American spelling and code names are refused")
+ok(any("British spelling" in x for x in e) and any("code name" in x for x in e), "British spelling and code names are refused (rows are in US English)")
+bad = copy.deepcopy(good); bad["spec"]["rows"][0][2] = "You see more color than most people do."
+e, _ = run(bad)
+ok(any("humans" in x for x in e) and not any("spelling" in x for x in e), "rows say humans, never people (VOICE.md rule 2)")
 
 bad = copy.deepcopy(good); bad["spec"]["rows"][0][3] = ["R4"]
 e, _ = run(bad)
@@ -147,6 +150,59 @@ gt = C.glossary_text(G)
 ok("THE GLOSSARY" in gt and "- cpd:" in gt and "\u2014" not in gt, "glossary: the text sent has the entries and no em dash")
 ut = C.user_text({"key": "t", "who": "a test animal"}, "spider", specs["spider"], [], G)
 ok(ut.index("THE GLOSSARY") < ut.index("THE NEAREST EXISTING SPEC"), "glossary: sent with each view's request, before the example")
+
+# sharpness: units, direction and which eye (burst 9)
+S = lambda **k: rec(0, trait="acuity_cpd", **k)
+ok(C.as_cpd(S(value=42, units="arcmin (minimum separable angle)"))[0] == [0.714], "as_cpd: minutes of arc are inverted (30 / angle)")
+ok(C.as_cpd(S(value=0.13, units="degrees"))[0] == [3.846], "as_cpd: degrees are inverted with the factor 2")
+ok(C.as_cpd(rec(0, trait="interommatidial_deg", value=1.9, units="deg"))[0] == [0.263], "as_cpd: an interommatidial angle is converted")
+ok(C.as_cpd(S(value=3.6, units="cycles/radian"))[0] == [0.063], "as_cpd: cycles per radian are divided by 57.3")
+ok(C.as_cpd(S(value="20/249", units="Snellen fraction"))[0] == [2.41], "as_cpd: Snellen 20/x is 600 / x")
+ok(C.as_cpd(S(value=1.5, units="decimal acuity (source's unit, not cycles/degree)"))[0] == [45.0], "as_cpd: decimal acuity is 30 x value")
+ok(C.as_cpd(S(value=25, units="percent higher spatial resolution than honeybees"))[0] is None, "as_cpd: a percentage is unreadable")
+ok(C.as_cpd(S(value=0.26, units="cycles/degree")) == ([0.26], ""), "as_cpd: cycles per degree pass as they are")
+ok(C.as_cpd(S(value="anterior lateral eyes 0.3 to 1.3 cycles/degree", units=""))[0] == [0.3, 1.3], "as_cpd: figures written in a value of words count")
+ok(C.as_cpd(S(value=5, units=""))[0] is None and C.as_cpd(S(value=5, units="", quote="about 5 cycles per degree"))[0] == [5], "as_cpd: no units counts only when the quote says cycles per degree")
+
+records["R6"] = rec(6, trait="acuity_cpd", value=42, units="arcmin (minimum separable angle)", quote="The minimum separable angle was 42 arcmin.")
+records["R7"] = rec(7, trait="acuity_cpd", value=12.4, units="cycles/degree", eye="AME", quote="The principal eyes resolve 12.4 cycles per degree.")
+records["R8"] = rec(8, trait="interommatidial_deg", value=0.5, units="degrees", quote="Neighboring receptors lie 0.5 degrees apart.")
+records["R9"] = rec(9, trait="fov_h_deg", value=150, eye="monocular", quote="Each eye sees 150 degrees.")
+records["R10"] = rec(10, trait="acuity_cpd", value=25, units="percent higher than honeybees", quote="25 percent higher resolution")
+
+
+def with_cpd(value, grade, src, kind="value", invented=False, zone=False):
+    r = copy.deepcopy(good)
+    r["spec"]["params"]["cpd"] = P(value, grade, invented, src)
+    r["claims"][1] = {"path": "params.cpd", "records": src, "kind": kind, "how": "test"}
+    r["quotes"] += [{"record": i, "quote": records[i]["quote"]} for i in src]
+    if invented:
+        r["spec"]["rows"][1][4] = ["params.glow", "params.cpd"]; r["spec"]["rows"][1][0] = "g"
+    return r
+
+
+e, _ = run(with_cpd(42, "m", ["R6"]))
+ok(any("raw figure of R6" in x and "smaller angle is sharper" in x for x in e), "units: an angle read as cycles per degree is caught (%s)" % e[:1])
+e, _ = run(with_cpd(0.714, "m", ["R6"]))
+ok(any("only after a conversion" in x for x in e), "units: a converted figure graded m as a value is caught")
+e, _ = run(with_cpd(0.714, "g", ["R6"], kind="calculation", invented=True))
+ok(not e, "units: a converted figure as a calculation, g and invented, passes (%s)" % e)
+e, _ = run(with_cpd(2.0, "g", ["R8"], kind="calculation", invented=True))
+ok(any("1 / (2 x angle)" in x for x in e), "direction: an angle inverted without the factor 2 is caught (%s)" % e[:1])
+e, _ = run(with_cpd(12.4, "m", ["R7"]))
+ok(any("small pair of eyes" in x and "zone" in x for x in e), "which eye: the principal eyes' acuity in params.cpd is caught")
+z = with_cpd(2.0, "m", ["R3"]); z["spec"]["zones"] = [{"id": "front", "shape": "strip", "cpd": P(12.4, "m", False, ["R7"])}]
+z["claims"].append({"path": "zones[0].cpd", "records": ["R7"], "kind": "value", "how": "R7"}); z["quotes"].append({"record": "R7", "quote": records["R7"]["quote"]})
+e, _ = run(z)
+ok(not any("cpd" in x for x in e), "which eye: the same figure in a zone passes (%s)" % [x for x in e if "cpd" in x][:1])
+e, _ = run(with_cpd(25, "m", ["R10"]))
+ok(any("cannot be read as cycles per degree" in x or "comparison" in x for x in e), "units: a percentage supports no sharpness (%s)" % e[:1])
+f = copy.deepcopy(good); f["spec"]["params"]["fov"] = P(150, "m", False, ["R9"]); f["claims"][0]["records"] = ["R9"]; f["quotes"].append({"record": "R9", "quote": "Each eye sees 150 degrees."})
+e, _ = run(f)
+ok(any("one eye's field" in x for x in e), "field of view: one eye's field as the whole field is caught")
+ok(not C.SMALL_EYE.search("parvocellular LGN neurons, parafovea") and C.SMALL_EYE.search("median ocellus") and C.SMALL_EYE.search("AME"), "which eye: ocelli and principal eyes are named, parvocellular is not")
+ok("1 / (2 x the angle in degrees)" in C.system_text(F) and "US spelling" in C.system_text(F), "prompt: the sharpness rules and US spelling are sent")
+ok(any(x.startswith("as_cpd") or '"as_cpd":0.714' in C.record_line(dict(records["R6"], _audit="t")) for x in ["as_cpd"]), "record line: carries as_cpd")
 
 print("%d failed" % len(fails))
 sys.exit(1 if fails else 0)
