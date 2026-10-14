@@ -39,11 +39,12 @@ sweep-45 has no records (its run stopped on 429s before writing any), so four re
 
 | batch | due | records checked | errors | error rate | unverifiable | status |
 |---|---|---|---|---|---|---|
-| insects-met (24 on) | 28 | 0 | 0 | n/a | 0 | in progress |
-| sweep-15 | 13 | 0 | 0 | n/a | 0 | not started |
-| sweep-19 | 19 | 0 | 0 | n/a | 0 | not started |
-| sweep-7 | 16 | 0 | 0 | n/a | 0 | not started |
-| sweep-17 | 12 | 0 | 0 | n/a | 0 | not started |
+| insects-met (24 on) | 28 | 28 | 2 | 29% | 21 | finished |
+| sweep-15 | 13 | 13 | 3 | 23% | 0 | finished |
+| sweep-19 | 19 | 19 | 6 | 32% | 0 | finished |
+| sweep-7 | 16 | 16 | 5 | 31% | 0 | finished |
+| sweep-17 | 12 | 12 | 12 | 100% | 0 | finished |
+| all (b) | 88 | 88 | 28 | 42% | 21 | |
 
 Error rate is errors over verifiable records (checked minus unverifiable).
 
@@ -127,3 +128,33 @@ Error rate is errors over verifiable records (checked minus unverifiable).
 | sweep-7:16 | Leptoglossus occidentalis / sense_infrared | m | correct | quote verbatim from a blog quoting Takács et al. 2008; secondary citation, now `partial: true`; value's "stops it finding them" narrowed to "impairs IR perception" |
 | sweep-7:17 | Vespa crabro / interommatidial_deg | m | requote | value confirmed; quote not on the page; Figure 3 caption: "the smallest interommatidial angles (1°) and look into a frontal and slightly ventral direction" |
 | sweep-7:18 | Melanoplus sanguinipes / colour_vision | m | confirm | verbatim but for a lost space after the italic name ("sanguinipesinvolves") |
+| sweep-17:1 | Vitis riparia / sense_light_nonvisual | m | requote | value confirmed; quote not on the page; abstract: "a long critical photoperiod (dormancy induction), cold hardy, lower chilling requirement V. riparia parent" |
+| sweep-17:2 | Arctostaphylos alpina / diel | m | requote | value confirmed; page: "the dynamism in pigment content was mainly driven by PPFD, and was generally unrelated to day/night cycles" |
+| sweep-17:3 | Papaver argemone / sense_light_nonvisual | m | requote | value confirmed; the quote adds a full stop where the sentence continues "irrespective of dormancy level ..." |
+| sweep-17:4 | Lindera benzoin / sense_light_nonvisual | m | requote | values confirmed; page: "exhibited the highest fitness levels at an intensity of 164.5 μmol m-2 s-1 for 12-hour duration" |
+| sweep-17:5 | Hibiscus moscheutos / sense_light_nonvisual | m | correct | quote not on the page, and the abstract does not call the species day-neutral (DLI interacts with photoperiod; 15 leaves under 16 h, 24 to 18 under 9 h); label removed from the value |
+| sweep-17:6 | Foeniculum vulgare / sense_light_nonvisual | m | requote | value confirmed; page: "Fennel is recognised as a long-day plant which develops inflorescence (bolting) at day lengths greater than 14 hours." |
+| sweep-17:7 | Orgyia antiqua / interommatidial_deg | m | requote | values confirmed; the quote adds a full stop where the sentence continues "and were found to be statistically significantly different" |
+| sweep-17:8 | Pavo cristatus / acuity_cpd | m | requote | value confirmed; page: "of 20.6 cycles degrees-1" |
+| sweep-17:9 | Pavo cristatus / spectral_range_nm | m | requote | values confirmed; quote is a rendering of the λT0.5 sentence |
+| sweep-17:10 | Pavo cristatus / eye_movement | m | requote | values confirmed; page: "rarely exceeded 25 deg (11.9±0.7 deg)" |
+| sweep-17:11 | Lyrurus tetrix / binocular_deg | m | requote | values confirmed; quote stitched two sentences and wrote "degrees" for "deg" |
+| sweep-17:13 | Chelonia mydas / receptor_classes | m | requote | value confirmed; page: "green turtle cones have peak absorbance between 325–400 nm ..."; secondary citation, already partial |
+
+## Where this run stopped
+
+Part (b) finished: insects-met 24 to 52, sweep-15, sweep-19, sweep-7 and sweep-17 are all done. Three proxy 429 refusals came in the run, each on a different route and with successful fetches between them: the doi.org route to the Wiley page for insects-met:24, the Europe PMC REST copy of Belušič et al. 2021, and the doi.org route for Meyer-Rochow 2019. After the second doi.org refusal no further doi.org route was tried; publisher or repository addresses were used instead. curl through the proxy is refused (403), so no PDF could be downloaded for a local check.
+
+## Error rate
+
+Part (a): **1 of 20, 5%** (0 unverifiable).
+
+Part (b): 88 records opened, 21 unverifiable, 67 verifiable, 28 wrong: **42%**. Of the 28, 25 are requotes and 3 are corrects: sweep-15:9 (a light-period and a dark-period sample per day called a rhythm), sweep-7:16 (a blog quoting Takács et al. 2008, now partial, and "stops it finding them" narrowed to "impairs IR perception"), and sweep-17:5 (Hibiscus moscheutos called day-neutral; the abstract gives a photoperiod by light-integral interaction and no type). No retract and no grade change.
+
+## Patterns (this run)
+
+1. The old batches carry the summariser-rebuild error as audit 5 found it. sweep-17 is wrong in every record: every quote is the fetch tool's rewording (units rewritten as "degrees" or "cycles per degree", two sentences stitched with semicolons). Values stood in all twelve.
+2. The clause-cut shape (a full stop added where the page's sentence continues) accounts for 6 of the 29 errors across both parts (sweep-44:7, sweep-19:5, sweep-19:8, sweep-17:3, sweep-17:7, and in part the stitched sweep-17:11).
+3. The new sweeps (44 to 48), which asked the fetch tool for the sentence verbatim in pieces and recorded the split points, run at 5%. The method change worked; the residual risk is the clause cut.
+4. insects-met 24 to 52 is mostly unverifiable through this proxy (21 of 28): Wiley, the Royal Society, PNAS, BioOne and Annual Reviews all failed, and PMC served a reCAPTCHA. These need an owner PDF through `quotecheck.py`. insects-met:51 and 52 are Annual Reviews table rows, so secondary citations that should carry `partial: true` once the primary sources are named; insects-met:36 cites `Abstract` but the published abstract names no species, so its `where` is probably wrong.
+5. Wikipedia and blog pages remain sources for some `m` records (sweep-19:15, 19:19, 19:20, sweep-7:16). The quotes match, but the grade is a question for the canon pass, not this audit.
