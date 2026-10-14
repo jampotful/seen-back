@@ -1,0 +1,406 @@
+{
+ "key": "jumper",
+ "version": 1,
+ "chip": "Jumping spider",
+ "who": "a jumping spider",
+ "applies_to": {
+  "family": [
+   "Salticidae"
+  ]
+ },
+ "cue": "Watch what moves. A narrow sharp strip of colour swings round to look at it.",
+ "params": {
+  "fov": {
+   "value": 330,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the three pairs of side eyes together cover about this much of the circle"
+  },
+  "cpd": {
+   "value": 1.3,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the best measured sharpness of the front side eyes, which cover most of the field"
+  },
+  "M": {
+   "value": "SIDE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "note": "the side eyes carry one colour receptor class, so the wide picture is drawn in one colour"
+  },
+  "gate": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the side eyes answer only to movement, so still things fade from the wide picture"
+  },
+  "living": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "the weight given to movement that looks alive is the app's choice"
+  },
+  "salience": 1
+ },
+ "matrices": {
+  "FRONT": {
+   "from_pigments": [
+    360,
+    530
+   ],
+   "src": [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   "rows": [
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "SIDE": {
+   "from_pigments": [
+    535
+   ],
+   "src": [
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "rows": [
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ]
+   ],
+   "q": [
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [
+  {
+   "id": "front",
+   "shape": "strip",
+   "at": [
+    0.5,
+    0.5
+   ],
+   "deg": {
+    "value": [
+     2,
+     21
+    ],
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:Land 1969"
+    ],
+    "note": "width and height of the field of one principal eye retina when it is still"
+   },
+   "cpd": {
+    "value": 3.8,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:Harland 2012"
+    ],
+    "range": [
+     0.2,
+     15
+    ],
+    "note": "typical for a jumping spider; Portia reaches about 12.5"
+   },
+   "M": "FRONT",
+   "gate": 0,
+   "gaze": 1,
+   "uv": {
+    "value": [
+     1,
+     0
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "the camera records almost no ultraviolet, so the strip reads it from the blue channel"
+   }
+  }
+ ],
+ "gaze": {
+  "sweep": {
+   "value": [
+    2,
+    1.2
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "degrees across and seconds a cycle; the records describe a sweep of this size and pace for a small target, and the app sets the numbers"
+  },
+  "twist": {
+   "value": [
+    25,
+    2000,
+    3500
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "degrees each way, milliseconds to turn, milliseconds held at each end; the app sets these from the records' ranges"
+  },
+  "ior": {
+   "value": 5000,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    15000
+   ],
+   "note": "a place just looked at is ignored for about this long"
+  },
+  "iorDeg": {
+   "value": 5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    30
+   ],
+   "note": "the size of the ignored place is the app's choice"
+  }
+ },
+ "draw": {
+  "gaze": [
+   {
+    "name": "strip",
+    "invented": true,
+    "note": "the sharp strip drawn as one narrow upright strip that the gaze moves"
+   },
+   {
+    "name": "stamps",
+    "invented": true,
+    "note": "the app's drawing of the looked-at places as separate sharp patches"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "A sharp upright strip",
+   "The two big front eyes each see a narrow upright strip about 2 degrees wide and 21 degrees high. A typical jumping spider resolves just under four cycles a degree there, far less than a person. Portia fimbriata reaches twelve and a half.",
+   [
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "zones[0].deg",
+    "zones[0].cpd"
+   ]
+  ],
+  [
+   "m",
+   "Two colours in the strip",
+   "The front eyes hold a receptor that peaks in the ultraviolet near 360 nanometres and one that peaks in the green near 530. Most jumping spiders have only these two classes in the strip. A few, such as Habronattus pyrrithrix, add a third class that reaches into the red.",
+   [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   [
+    "zones[0].M"
+   ]
+  ],
+  [
+   "m",
+   "Side eyes see movement in one colour",
+   "The side eyes have a single kind of colour receptor that peaks near 535 nanometres, so colour is lost there. In Metaphidippus a target in view the whole time draws a turn only when it moves, and a light that only goes on and off draws none.",
+   [
+    "jumper.jsonl:Land 1971",
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Nearly all the way round",
+   "The three pairs of side eyes together cover about 330 degrees in Trite planiceps. In Metaphidippus aeneolus they cover almost the whole circle, with a small overlap of about 25 degrees in front.",
+   [
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Blurry at the sides",
+   "The front side eyes resolve between a third of a cycle a degree and a little over one cycle a degree, depending on the species. Everything outside the sharp strip is drawn at that coarse level.",
+   [
+    "jumper.jsonl:Shepeleva 2022",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "i",
+   "Looking around",
+   "The sharp strip sweeps side to side across a target, about 2 degrees across in a cycle of roughly 1.2 seconds for a small target. Both retinas also turn together about 25 degrees each way, taking about 2 seconds to turn and resting 2 to 5 seconds at each end. The app sets the exact numbers from these ranges.",
+   [
+    "jumper.jsonl:Land 1969"
+   ],
+   [
+    "gaze.sweep",
+    "gaze.twist"
+   ]
+  ],
+  [
+   "i",
+   "Not looking twice",
+   "After the front eyes inspect a place, the side eyes lose interest in that place for about 5 seconds. The app uses that figure as the time a place is ignored.",
+   [
+    "jumper.jsonl:Ferrante 2024",
+    "jumper.jsonl:Land 1971"
+   ],
+   [
+    "gaze.ior"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The app draws the side eyes in one colour and lets only movement show there. It gives extra weight to movement that looks alive, since the side eyes can pick out living motion. It reads the strip's ultraviolet from the camera's blue, because ultraviolet contrasts in nature most resemble blue ones. It also picks the size of the place that is ignored after a look.",
+   [
+    "jumper.jsonl:De Agrò 2024",
+    "jumper.jsonl:Glenszczyk 2021"
+   ],
+   [
+    "params.M",
+    "params.gate",
+    "params.living",
+    "zones[0].uv",
+    "gaze.iorDeg"
+   ]
+  ]
+ ],
+ "falls_back_to": "spider",
+ "modules": [
+  "gaze",
+  "salience",
+  "zones"
+ ],
+ "draft": true
+}

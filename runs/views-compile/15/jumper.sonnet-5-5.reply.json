@@ -1,0 +1,391 @@
+{
+ "spec": {
+  "key": "jumper",
+  "version": 1,
+  "chip": "Jumping spider",
+  "who": "a jumping spider",
+  "applies_to": {
+   "family": [
+    "Salticidae"
+   ]
+  },
+  "cue": "Watch what moves. A narrow sharp strip of colour swings round to look at it.",
+  "params": {
+   "fov": {
+    "value": 330,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R21"
+    ],
+    "range": [
+     300,
+     360
+    ],
+    "note": "the three pairs of side eyes together cover about this much of the circle"
+   },
+   "cpd": {
+    "value": 1.3,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R8"
+    ],
+    "range": [
+     0.3,
+     1.3
+    ],
+    "note": "the best measured sharpness of the front side eyes, which cover most of the field"
+   },
+   "M": {
+    "value": "SIDE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R53",
+     "R83"
+    ],
+    "note": "the side eyes carry one colour receptor class, so the wide picture is drawn in one colour"
+   },
+   "gate": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "the side eyes answer only to movement, so still things fade from the wide picture"
+   },
+   "living": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "the weight given to movement that looks alive is the app's choice"
+   },
+   "salience": 1
+  },
+  "matrices": {
+   "FRONT": {
+    "from_pigments": [
+     360,
+     530
+    ],
+    "src": [
+     "R73",
+     "R54"
+    ]
+   },
+   "SIDE": {
+    "from_pigments": [
+     535
+    ],
+    "src": [
+     "R53"
+    ]
+   }
+  },
+  "zones": [
+   {
+    "id": "front",
+    "shape": "strip",
+    "at": [
+     0.5,
+     0.5
+    ],
+    "deg": {
+     "value": [
+      2,
+      21
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R14",
+      "R45"
+     ],
+     "note": "width and height of the field of one principal eye retina when it is still"
+    },
+    "cpd": {
+     "value": 3.8,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R2"
+     ],
+     "range": [
+      3.3,
+      12.5
+     ],
+     "note": "typical for a jumping spider; Portia reaches about 12.5"
+    },
+    "M": "FRONT",
+    "gate": 0,
+    "gaze": 1,
+    "uv": {
+     "value": [
+      1,
+      0
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the camera records almost no ultraviolet, so the strip reads it from the blue channel"
+    }
+   }
+  ],
+  "gaze": {
+   "sweep": {
+    "value": [
+     2,
+     1.2
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "degrees across and seconds a cycle; the records describe a sweep of this size and pace for a small target, and the app sets the numbers"
+   },
+   "twist": {
+    "value": [
+     25,
+     2000,
+     3500
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "degrees each way, milliseconds to turn, milliseconds held at each end; the app sets these from the records' ranges"
+   },
+   "ior": {
+    "value": 5000,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1000,
+     10000
+    ],
+    "note": "a place just looked at is ignored for about this long"
+   },
+   "iorDeg": {
+    "value": 5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     30
+    ],
+    "note": "the size of the ignored place is the app's choice"
+   }
+  },
+  "draw": {
+   "gaze": [
+    {
+     "name": "strip",
+     "invented": true,
+     "note": "the sharp strip drawn as one narrow upright strip that the gaze moves"
+    },
+    {
+     "name": "stamps",
+     "invented": true,
+     "note": "the app's drawing of the looked-at places as separate sharp patches"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "A sharp upright strip",
+    "The two big front eyes each see a narrow upright strip about 2 degrees wide and 21 degrees high. A typical jumping spider resolves just under four cycles a degree there, far less than a person. Portia fimbriata reaches twelve and a half.",
+    [
+     "R14",
+     "R45",
+     "R2",
+     "R12"
+    ],
+    [
+     "zones[0].deg",
+     "zones[0].cpd"
+    ]
+   ],
+   [
+    "m",
+    "Two colours in the strip",
+    "The front eyes hold a receptor that peaks in the ultraviolet near 360 nanometres and one that peaks in the green near 530. Most jumping spiders have only these two classes in the strip. A few, such as Habronattus pyrrithrix, add a third class that reaches into the red.",
+    [
+     "R73",
+     "R54",
+     "R82",
+     "R84",
+     "R81"
+    ],
+    [
+     "zones[0].M"
+    ]
+   ],
+   [
+    "m",
+    "Side eyes see movement in one colour",
+    "The side eyes have a single kind of colour receptor that peaks near 535 nanometres, so colour is lost there. In Metaphidippus a target in view the whole time draws a turn only when it moves, and a light that only goes on and off draws none.",
+    [
+     "R83",
+     "R53",
+     "R369"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Nearly all the way round",
+    "The three pairs of side eyes together cover about 330 degrees in Trite planiceps. In Metaphidippus aeneolus they cover almost the whole circle, with a small overlap of about 25 degrees in front.",
+    [
+     "R21",
+     "R28"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Blurry at the sides",
+    "The front side eyes resolve between a third of a cycle a degree and a little over one cycle a degree, depending on the species. Everything outside the sharp strip is drawn at that coarse level.",
+    [
+     "R8",
+     "R5"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "i",
+    "Looking around",
+    "The sharp strip sweeps side to side across a target, about 2 degrees across in a cycle of roughly 1.2 seconds for a small target. Both retinas also turn together about 25 degrees each way, taking about 2 seconds to turn and resting 2 to 5 seconds at each end. The app sets the exact numbers from these ranges.",
+    [
+     "R134",
+     "R142"
+    ],
+    [
+     "gaze.sweep",
+     "gaze.twist"
+    ]
+   ],
+   [
+    "i",
+    "Not looking twice",
+    "After the front eyes inspect a place, the side eyes lose interest in that place for about 5 seconds. The app uses that figure as the time a place is ignored.",
+    [
+     "R356",
+     "R386"
+    ],
+    [
+     "gaze.ior"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The app draws the side eyes in one colour and lets only movement show there. It gives extra weight to movement that looks alive, since the side eyes can pick out living motion. It reads the strip's ultraviolet from the camera's blue, because ultraviolet contrasts in nature most resemble blue ones. It also picks the size of the place that is ignored after a look.",
+    [
+     "R273",
+     "R337"
+    ],
+    [
+     "params.M",
+     "params.gate",
+     "params.living",
+     "zones[0].uv",
+     "gaze.iorDeg"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R21"
+   ],
+   "kind": "value",
+   "how": "The record states about 330 degrees horizontally for the three pairs of secondary eyes of a jumping spider."
+  },
+  {
+   "path": "params.cpd",
+   "records": [
+    "R8"
+   ],
+   "kind": "value",
+   "how": "The record gives 1.3 cycles per degree for the antero-lateral eyes of Evarcha blancardi."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R53",
+    "R83"
+   ],
+   "kind": "calculation",
+   "how": "No arithmetic: the matrix SIDE is built from the single 535 nm peak of the lateral eyes (lower end of the 535 to 540 nm record), and R83 states these eyes have one receptor class."
+  },
+  {
+   "path": "zones[0].deg",
+   "records": [
+    "R14",
+    "R45"
+   ],
+   "kind": "value",
+   "how": "R14 gives the retina's field as 2 degrees wide and R45 gives 21 degrees high, from the same statement of about 21 by 2 degrees."
+  },
+  {
+   "path": "zones[0].cpd",
+   "records": [
+    "R2"
+   ],
+   "kind": "value",
+   "how": "The record gives 3.8 cycles per degree for the principal eyes of Phidippus johnsoni, from an inter-receptor angle of about 0.13 degrees."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R21",
+   "quote": "is estimated to be approximately 330° horizontally"
+  },
+  {
+   "record": "R8",
+   "quote": "to 1.3 cycles/degree, as in Evarcha blancardi Scopoli, 1763 [31]"
+  },
+  {
+   "record": "R53",
+   "quote": "Each curve has a single peak at 535-540 nm and a dip at the near ultraviolet region."
+  },
+  {
+   "record": "R83",
+   "quote": "The anterior and posterior lateral eyes have a single type of visual cell with a maximum spectral sensitivity at about 535-540 nm."
+  },
+  {
+   "record": "R14",
+   "quote": "about 21 ° x 2° for layers 1 and 2"
+  },
+  {
+   "record": "R45",
+   "quote": "about 21 ° x 2° for layers 1 and 2"
+  },
+  {
+   "record": "R2",
+   "quote": "visual angles of around 0.13 degrees"
+  }
+ ]
+}

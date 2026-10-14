@@ -1,0 +1,320 @@
+{
+ "spec": {
+  "key": "bee",
+  "version": 1,
+  "chip": "Bee",
+  "who": "a bee",
+  "applies_to": {
+   "family": [
+    "Apidae",
+    "Halictidae",
+    "Megachilidae",
+    "Andrenidae",
+    "Colletidae"
+   ]
+  },
+  "falls_back_to": "insect",
+  "cue": "The view is wide and very blurry, with colours shifted toward ultraviolet and a small blind patch behind.",
+  "params": {
+   "fov": {
+    "value": 312,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "two compound eyes that each reach 156 degrees back from straight ahead"
+   },
+   "cpd": {
+    "value": 0.26,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "the finest stripes a honeybee reliably resolves"
+   },
+   "pupil": "none",
+   "M": {
+    "value": "BEE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R55",
+     "R84",
+     "R93"
+    ],
+    "note": "built from the three measured receptor peaks of the honeybee"
+   },
+   "uvBlue": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "the app reads bluish and bright surfaces as ultraviolet"
+   },
+   "rate": {
+    "value": 0.3,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R135"
+    ],
+    "range": [
+     0.2,
+     1
+    ],
+    "note": "60 hertz divided by the 200 hertz a honeybee follows in bright light"
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     344,
+     436,
+     556
+    ],
+    "src": [
+     "R55",
+     "R84",
+     "R93"
+    ],
+    "grade": "g",
+    "invented": true
+   }
+  },
+  "spectrum": {
+   "q": "BEE"
+  },
+  "remap": {
+   "blindAt": {
+    "value": 180,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     90,
+     270
+    ],
+    "note": "the gap between the two eyes lies straight behind"
+   },
+   "blindDeg": {
+    "value": 48,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     0,
+     120
+    ],
+    "note": "the wedge the two eyes leave uncovered at the horizon"
+   },
+   "blindSoft": {
+    "value": 6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     30
+    ],
+    "note": "how softly the edge of the blind wedge fades"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "wedge",
+     "invented": true,
+     "note": "draws the blind patch behind the animal"
+    },
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "squeezes the wide field into the phone picture"
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "shift",
+     "invented": true,
+     "note": "ultraviolet shown as blue, blue as green, green as red, and red dropped"
+    },
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colours worked out from the receptor peaks"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "A honeybee resolves stripes only as fine as about a quarter of a cycle in each degree of view. A person sees more than 200 times finer detail, so the whole picture is very soft.",
+    [
+     "R1",
+     "R3"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "A wide view",
+    "The two compound eyes together cover about 312 degrees at the horizon. Only a wedge of about 48 degrees straight behind the bee stays blind.",
+    [
+     "R32",
+     "R35"
+    ],
+    [
+     "params.fov",
+     "remap.blindAt",
+     "remap.blindDeg"
+    ]
+   ],
+   [
+    "g",
+    "Colour",
+    "Bees have three kinds of colour receptor, with peaks near 344 nanometres in the ultraviolet, 436 in the blue and 556 in the green. They see ultraviolet light and lose far red, so reds fade and ultraviolet shows as a colour of its own.",
+    [
+     "R55",
+     "R84",
+     "R93",
+     "R100",
+     "R268"
+    ],
+    [
+     "params.M",
+     "matrices.BEE"
+    ]
+   ],
+   [
+    "g",
+    "Speed",
+    "A honeybee can follow flicker up to about 200 times a second in bright light, against about 60 for a person. The picture here steps and lags to hint at how much more the bee catches in each moment.",
+    [
+     "R135"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "Phone cameras record almost no ultraviolet, so the app reads bluish and bright surfaces as ultraviolet. How softly the edge of the blind patch fades is also the app's choice, as are the drawing options.",
+    [],
+    [
+     "params.uvBlue",
+     "remap.blindSoft"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The parameter equals the honeybee grating acuity of 0.26 cycles per degree in R1."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "Each eye reaches 156 degrees back from straight ahead, so the two together cover 2 x 156 = 312 degrees at the horizon."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R55",
+    "R84",
+    "R93"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the three honeybee receptor peaks 344, 436 and 556 nm, and the mapping to phone colours is the app's."
+  },
+  {
+   "path": "matrices.BEE",
+   "records": [
+    "R55",
+    "R84",
+    "R93"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the three honeybee receptor peaks 344, 436 and 556 nm, and the mapping to phone colours is the app's."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R135"
+   ],
+   "kind": "calculation",
+   "how": "A person's 60 Hz flicker fusion divided by the honeybee's 200 Hz gives 60 / 200 = 0.3."
+  },
+  {
+   "path": "remap.blindAt",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "Both eyes reach back 156 degrees from straight ahead, so the uncovered wedge is centred on 180 degrees."
+  },
+  {
+   "path": "remap.blindDeg",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "The eyes cover 2 x 156 = 312 degrees, which leaves 360 - 312 = 48 degrees behind."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1"
+  },
+  {
+   "record": "R32",
+   "quote": "the honeybee FOV extends down to −90° in elevation and back to −156° in azimuth (at 0° el.)"
+  },
+  {
+   "record": "R55",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R84",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R93",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R135",
+   "quote": "At ca. 200 Hz the FRC drops to 50%."
+  }
+ ]
+}
