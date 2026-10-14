@@ -1,4 +1,4 @@
 # sweep-29 progress
-Batch: scratchpad sweep24/sweep-1.json (40 genera). Outputs: docs/views/searched/sweep-29.jsonl (one full-protocol record per genus, written when done), wanted/sweep-29.jsonl, evidence/sweep-29.jsonl.
-Resume: genera in the batch order with a record in searched/sweep-29.jsonl are done; continue from the first without one.
-Done so far (batch order): Xanthocephalus through Oryctolagus (9 genera), 4 evidence lines
+Complete: all 40 genera of the batch (scratchpad sweep24/sweep-1.json) have a full-protocol record in docs/views/searched/sweep-29.jsonl.
+Evidence: 13 records in docs/views/evidence/sweep-29.jsonl (Gryllus bimaculatus lambda max x3, Oryctolagus cuniculus tapetum, Cuculus poliocephalus oil droplets, Giraffa fov, Paris quadrifolia, Marchantia polymorpha, Microstegium vimineum, Trapelus mutabilis fovea, Plutella xylostella eye type, Sequoia sempervirens light). Wanted: none new (the papers that mattered were already on earlier wanted lists).
+Blocked: PMC (reCAPTCHA), BioOne/Auk, Cambridge Core, Royal Society, HAL Anubis; named in each chased field. Search budget held to the end.
