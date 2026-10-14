@@ -1,0 +1,6 @@
+# sweep-53 progress
+Status: DONE 2026-10-14. All 40 genera of the batch were run in the batch's order (Dichromorpha to Thamnophilus; the last genus reached is Thamnophilus). Three isolated 429 replies from the fetch tool (doi.org, PLOS, Springer) cleared after a wait; no budget message.
+Outputs: docs/views/searched/sweep-53.jsonl (40 search records, each with queries, canon DOIs and a chased DOI), docs/views/wanted/sweep-53.jsonl (3 lines), docs/views/evidence/sweep-53.jsonl (9 records).
+Evidence logged: Qian et al 2025 (Popa spurca, Theopropus elegans, Hymenopus coronatus ERG spectral peaks, 6 records); Martin and Shaw 2010 (Ardeotis kori binocular width and per-eye field, 2 records, partial, read from a figure page quoting the article); Booth et al 2004 (Lampyris noctiluca photoreceptor acceptance angle, lower bound only, partial).
+Wanted: Martin and Shaw 2010 (bustard); Thomas et al 2022 supplementary pupil-shape data (Craugastor, Dendrobates); Lisney et al 2015 (Basilinna).
+Notes: No cell of the batch was closed by a measurement of its own genus except Ardeotis binocular_deg and fov_h_deg. PMC, ScienceDirect, JEB, PubMed and Royal Society pages blocked or errored; the Gemeno-group tortricid spectral paper (10.1242/jeb.245461) stayed unopened, though the 2025 sister paper (opened) names only Grapholita, Lobesia and Cydia.
