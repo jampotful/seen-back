@@ -13,3 +13,7 @@ Following canon-2's notes: WebFetch only; PMC serves reCAPTCHA, eLife a JS chall
 - 10.1007/s10336-007-0213-6 Martin 2007: Illinois State PDF read in full; no table; Appendix 2 (32 species with field type) and 5 text values logged. DONE.
 - 10.1017/S1464793102005985 Kelber 2003: Lund repository PDF (truncated past section VI but both tables read); Table 2 (behavioural colour vision, 88 species records) and Table 1 (receptor maxima, 58 records) logged. Quotes are rows as extracted; q-marks are the fetch tool's reading. DONE.
 - Briscoe & Chittka 2001 (no DOI in canon.jsonl; 10.1146/annurev.ento.46.1.471): Chittka lab PDF; Table 1 read whole (about 158 rows); 302 records (λmax and receptor count per row). DONE.
+- 10.1098/rspb.2020.1393 Thomas 2020 frogs: NSF PAR full text read; no species table in the main text (all per-species data in ESM table S1 / Dryad 10.5061/dryad.1zcrjdfq7); nothing logged. WANTED (canon-3 line).
+- 10.1007/s00239-004-0294-2 Lariguet 2005: rero PDF read in full; no main table (supplement is an accession list); 8 species statements logged (sense_light_nonvisual, g). DONE.
+- 10.3389/fpls.2015.00207 Weller & Ortega 2015: Frontiers HTML (truncated after Table 2); Table 1 is loci, not species; 12 records (photoperiod class per crop species, two gene records). DONE.
+- 10.1007/s00359-007-0281-3 Necker 2007: author PDF read in full; Table 1 is by order (garbled columns); 25 records (species sentences m, family/order g). DONE.
