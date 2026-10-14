@@ -1,0 +1,450 @@
+{
+ "key": "jumper",
+ "version": 1,
+ "chip": "Jumping spider",
+ "who": "a jumping spider",
+ "applies_to": {
+  "family": [
+   "Salticidae"
+  ]
+ },
+ "cue": "Hold the phone steady. The world is grey and blurry except where something moves, and a narrow sharp strip of colour turns toward it.",
+ "params": {
+  "fov": {
+   "value": 330,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "the three pairs of side eyes together cover about this much of the circle"
+  },
+  "cpd": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "a guess in the middle of the 0.3 to 1.3 cycles per degree reported for the front side eyes, which cover most of the field"
+  },
+  "M": {
+   "value": "SIDE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "note": "the side eyes carry one green receptor class"
+  },
+  "sat": {
+   "value": 0,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "one receptor class gives no colour contrast outside the front strip"
+  },
+  "gate": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the side eyes answer to movement only, so still things fade away outside the front strip"
+  },
+  "salience": 1,
+  "glow": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "how brightly movement glows outside the strip"
+  }
+ },
+ "matrices": {
+  "PRINCIPAL": {
+   "from_pigments": [
+    360,
+    530
+   ],
+   "src": [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   "invented": true,
+   "note": "ultraviolet and green receptors of the front eyes; the mapping to screen colours is the app's",
+   "rows": [
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "SIDE": {
+   "from_pigments": [
+    535
+   ],
+   "src": [
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "invented": true,
+   "note": "the single green receptor class of the side eyes",
+   "rows": [
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ]
+   ],
+   "q": [
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [
+  {
+   "id": "front",
+   "shape": "strip",
+   "at": [
+    0.5,
+    0.5
+   ],
+   "deg": {
+    "value": [
+     2,
+     21
+    ],
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:Land 1969"
+    ],
+    "note": "width and height in degrees of one unmoved principal retina"
+   },
+   "cpd": {
+    "value": 3.8,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:Harland 2012"
+    ],
+    "range": [
+     0.2,
+     15
+    ],
+    "note": "principal eye acuity in Phidippus"
+   },
+   "M": {
+    "value": "PRINCIPAL",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "jumper.jsonl:Blest 1981",
+     "jumper.jsonl:Zurek 2015"
+    ],
+    "note": "ultraviolet and green classes of the principal eyes"
+   },
+   "sat": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "two receptor classes give less colour than a person has"
+   },
+   "uv": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "the camera records almost no ultraviolet, so blue stands in for it"
+   },
+   "gate": 0,
+   "gaze": 1
+  }
+ ],
+ "gaze": {
+  "saccade": {
+   "value": [
+    0,
+    6.7
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Land 1969"
+   ],
+   "note": "worked out from a 15 degree turn finished within 0.1 seconds"
+  },
+  "sweep": {
+   "value": [
+    2,
+    1.2
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    10
+   ],
+   "note": "side-to-side scan across a target, at least 2 degrees across and about a second a cycle"
+  },
+  "twist": {
+   "value": [
+    25,
+    2000,
+    3500
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "the retinae turn about 25 degrees each way, taking about 2 seconds and holding a few seconds"
+  },
+  "ior": {
+   "value": 5000,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "note": "a place just inspected is ignored for about 5 seconds"
+  },
+  "iorDeg": {
+   "value": 5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    30
+   ],
+   "note": "a few degrees around the place just looked at"
+  }
+ },
+ "draw": {
+  "gaze": [
+   {
+    "name": "strip",
+    "invented": true,
+    "note": "the sharp strip moves over the picture toward what moves"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "The sharp strip",
+   "Each of the two big front eyes sees a strip about 2 degrees wide and 21 degrees tall. In Phidippus it resolves about 3.8 cycles per degree, roughly an eighth of what a person reads. Portia reaches 12.5.",
+   [
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "zones[0].deg",
+    "zones[0].cpd"
+   ]
+  ],
+  [
+   "m",
+   "Nearly all the way round",
+   "Three pairs of smaller side eyes cover about 330 degrees in one jumping spider and almost the whole circle in another. Together they look nearly all the way around the animal.",
+   [
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "g",
+   "Blurry sides",
+   "The front side eyes resolve between 0.3 and 1.3 cycles per degree. Everything outside the front strip is a soft blur, far below a person's sharpness of about 30.",
+   [
+    "jumper.jsonl:Shepeleva 2022",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "m",
+   "Only movement at the sides",
+   "The side eyes behave as though completely blind to stationary objects. A light that only turns on and off sets off no turn, and a small moving thing does. This view fades still things away outside the front strip.",
+   [
+    "jumper.jsonl:De Agrò 2024",
+    "jumper.jsonl:Land 1971"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Colour in front",
+   "The front eyes carry two kinds of receptor, one for ultraviolet near 360 nanometres and one for green near 530. The side eyes carry a single green kind near 535. This view keeps colour inside the strip and draws the rest in grey.",
+   [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Yamashita 1976",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   [
+    "zones[0].M",
+    "params.M",
+    "params.sat"
+   ]
+  ],
+  [
+   "g",
+   "Eyes that scan",
+   "Behind fixed lenses the front retinas sweep side to side across a target in about a second or two and twist 20 to 30 degrees each way, holding each end for a few seconds. A turn of 15 degrees is finished within a tenth of a second. After the front eyes inspect a spot, the side eyes stop noticing movement there for about five seconds.",
+   [
+    "jumper.jsonl:Ferrante 2024",
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Land 1969"
+   ],
+   [
+    "gaze.saccade",
+    "gaze.sweep",
+    "gaze.twist",
+    "gaze.ior"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The sharpness of the side eyes, the full fade of still things, the glow on moving things, the size of the ignored place, the amount of ultraviolet and the colour level in the strip belong to the app. So do the exact sweep, twist and ignore times, and the mapping from receptor peaks to screen colours. The camera records almost no ultraviolet, so its blue stands in for it, since ultraviolet contrasts in natural scenes most resemble blue ones.",
+   [
+    "jumper.jsonl:Glenszczyk 2021",
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Land 1971",
+    "jumper.jsonl:Shepeleva 2022"
+   ],
+   [
+    "params.cpd",
+    "params.gate",
+    "params.glow",
+    "params.M",
+    "params.sat",
+    "zones[0].M",
+    "zones[0].uv",
+    "zones[0].sat",
+    "gaze.iorDeg",
+    "gaze.sweep",
+    "gaze.twist",
+    "gaze.ior",
+    "gaze.saccade",
+    "matrices.PRINCIPAL",
+    "matrices.SIDE"
+   ]
+  ]
+ ],
+ "falls_back_to": "spider",
+ "modules": [
+  "gaze",
+  "salience",
+  "zones"
+ ],
+ "draft": true
+}

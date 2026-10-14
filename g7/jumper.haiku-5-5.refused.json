@@ -1,0 +1,575 @@
+{
+ "key": "jumper",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "claim params.cpd cites R2 with no quote from it",
+  "claim zones[0].cpd cites R2 with no quote from it",
+  "claim zones[0].cpd cites R14 with no quote from it",
+  "claim zones[0].deg cites R14 with no quote from it",
+  "claim params.fov cites R33 with no quote from it",
+  "claim params.fov cites R43 with no quote from it",
+  "claim gaze.sweep cites R134 with no quote from it",
+  "claim gaze.sweep cites R129 with no quote from it",
+  "claim gaze.twist cites R142 with no quote from it",
+  "claim matrices.JUMP cites R73 with no quote from it",
+  "claim matrices.JUMP cites R52 with no quote from it",
+  "gaze.sweep: value [2,1.2] is not a cited record's value and does not lie between two of them (R129, R134)",
+  "gaze.twist: value [25,2000,3500] is not a cited record's value and does not lie between two of them (R142)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "version": 1,
+   "chip": "Jumping spider",
+   "who": "a jumping spider",
+   "cue": "Hold still, as a jumping spider watches. Only what moves catches its eyes.",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "params": {
+    "fov": {
+     "value": 360,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R33",
+      "R43"
+     ],
+     "note": "the secondary eye pairs together, near 360 degrees"
+    },
+    "cpd": {
+     "value": 3.8,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R2"
+     ],
+     "note": "typical principal-eye acuity, Phidippus johnsoni"
+    },
+    "pupil": "o",
+    "M": "JUMP",
+    "fall": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ],
+     "note": "the app's choice of falloff"
+    },
+    "topoA": {
+     "value": 0.6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "the principal eyes are sharper in the middle of their strip; the app's choice"
+    },
+    "fovea": {
+     "value": 1.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "the app's choice; no magnification ratio is recorded"
+    },
+    "sat": {
+     "value": 0.7,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "two colour classes in the principal eyes, so less than full colour"
+    },
+    "gain": {
+     "value": 1.2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "the app's choice for dim light"
+    },
+    "gate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the app's choice: still things fade in the side eyes"
+    },
+    "persist": {
+     "value": 0.1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the app's choice"
+    },
+    "rate": {
+     "value": 0.3,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0.25,
+      2
+     ],
+     "note": "the app's pace; the flicker records give a fusion limit of about 40 Hz, which does not fix this value"
+    },
+    "glow": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ],
+     "note": "how brightly movement glows"
+    },
+    "glowC": {
+     "value": [
+      0.78,
+      1,
+      0.62
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the glow's colour"
+    },
+    "salience": 1,
+    "living": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      3
+     ],
+     "note": "no record gives extra weight for living movement"
+    },
+    "topoS": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      2
+     ]
+    },
+    "uvBlue": {
+     "value": 0.8,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the camera's blue stands in for ultraviolet"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "shimmer": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "ripple": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    },
+    "dof": {
+     "value": 0.4,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ]
+    }
+   },
+   "matrices": {
+    "JUMP": {
+     "from_pigments": [
+      360,
+      530
+     ],
+     "src": [
+      "R73",
+      "R52"
+     ],
+     "grade": "m",
+     "invented": true
+    }
+   },
+   "zones": [
+    {
+     "id": "front",
+     "shape": "strip",
+     "at": [
+      0.5,
+      0.5
+     ],
+     "deg": [
+      2,
+      21
+     ],
+     "cpd": {
+      "value": 3.8,
+      "grade": "m",
+      "invented": false,
+      "src": [
+       "R2",
+       "R14"
+      ],
+      "range": [
+       0.1,
+       60
+      ],
+      "note": "principal-eye acuity"
+     },
+     "M": "JUMP",
+     "gaze": 1,
+     "mag": {
+      "value": 1,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+       0.5,
+       3
+      ]
+     },
+     "rot": 0,
+     "gain": {
+      "value": 1.2,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+       1,
+       4
+      ]
+     },
+     "sat": {
+      "value": 0.7,
+      "grade": "i",
+      "invented": true,
+      "src": [],
+      "range": [
+       0,
+       1.5
+      ]
+     }
+    }
+   ],
+   "gaze": {
+    "saccade": {
+     "value": [
+      40,
+      4
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's base and speed; the record gives only that a 15 degree saccade completes within 0.1 s"
+    },
+    "sweep": {
+     "value": [
+      2,
+      1.2
+     ],
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R134",
+      "R129"
+     ],
+     "note": "a sweep of at least 2 degrees, with a cycle of 1.1 to 1.3 s"
+    },
+    "twist": {
+     "value": [
+      25,
+      2000,
+      3500
+     ],
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R142"
+     ],
+     "note": "the torsion of the retinae; ms values are the app's timing within R142"
+    },
+    "examine": {
+     "value": [
+      4000,
+      12000
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      500,
+      30000
+     ],
+     "note": "the app's choice of how long a target is looked over"
+    },
+    "hold": {
+     "value": 1500,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "back": {
+     "value": 0.8,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "pursuit": {
+     "value": 10,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice of smooth following speed; the record R150 gives tracking below 10 degrees a second"
+    },
+    "ior": {
+     "value": 5000,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice; the record R386 says habituation to a place is tied to location and lasts hours"
+    },
+    "iorDeg": {
+     "value": 6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      30
+     ]
+    }
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "wedge",
+      "invented": true,
+      "note": "the default: the picture is squeezed toward the middle"
+     },
+     {
+      "name": "window",
+      "invented": true,
+      "note": "a sharp strip only, with the rest of the world dimmed"
+     }
+    ],
+    "overlay": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no drawn overlay"
+     }
+    ],
+    "sound": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no sound view"
+     }
+    ],
+    "haptic": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no touch"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the default colour picture"
+     },
+     {
+      "name": "two",
+      "invented": true,
+      "note": "two colour classes, as the principal eyes have"
+     }
+    ],
+    "gaze": [
+     {
+      "name": "strip",
+      "invented": true,
+      "note": "the narrow sharp strip moves over the picture as the eyes scan"
+     },
+     {
+      "name": "stamps",
+      "invented": true,
+      "note": "short marks where the eyes have looked"
+     }
+    ],
+    "surround": [
+     {
+      "name": "glow",
+      "invented": true,
+      "note": "moving things glow"
+     },
+     {
+      "name": "pond",
+      "invented": true,
+      "note": "the app's choice"
+     }
+    ]
+   },
+   "rows": [
+    [
+     "m",
+     "Two colour channels in front",
+     "The principal eyes that look forward see two colour classes, ultraviolet and green. Colours are told apart in a way close to a dichromat.",
+     [
+      "R338",
+      "R92",
+      "R82"
+     ],
+     [
+      "params.M",
+      "matrices.JUMP",
+      "params.sat"
+     ]
+    ],
+    [
+     "m",
+     "Sharp strip in front",
+     "The front eyes resolve fine detail in a narrow upright strip about 2 degrees wide and 21 degrees high. The rest of the picture is blurred.",
+     [
+      "R14",
+      "R2",
+      "R12"
+     ],
+     [
+      "zones[0].deg",
+      "zones[0].cpd",
+      "params.cpd"
+     ]
+    ],
+    [
+     "g",
+     "A wide view from the side eyes",
+     "Four side eyes cover close to the full circle and respond to movement. Still things fade from the picture, so what moves stands out.",
+     [
+      "R33",
+      "R369",
+      "R296"
+     ],
+     [
+      "params.fov",
+      "params.gate",
+      "params.glow"
+     ]
+    ],
+    [
+     "g",
+     "Eye movements",
+     "The front eyes move a strip across the scene, scanning side to side about once every 1.2 seconds and turning back and forth as they go.",
+     [
+      "R134",
+      "R142",
+      "R129"
+     ],
+     [
+      "gaze.sweep",
+      "gaze.twist",
+      "zones[0].gaze"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The brightness, sharpness falloff, glow colour, pace, pull of the gaze and the ultraviolet stand-in are the app's guesses, since no record gives them for this animal.",
+     [
+      "R337"
+     ],
+     [
+      "params.fall",
+      "params.topoA",
+      "params.fovea",
+      "params.gain",
+      "params.glow",
+      "params.glowC",
+      "params.uvBlue",
+      "params.rate",
+      "gaze.pursuit",
+      "gaze.ior"
+     ]
+    ]
+   ],
+   "inputs": {
+    "motion": "optional"
+   }
+  },
+  "claims": "[{\"path\":\"params.cpd\",\"records\":[\"R2\"],\"kind\":\"value\",\"how\":\"The whole picture's sharpness is set to 3.8 cycles a degree, the value R2 gives for the principal eyes of Phidippus johnsoni.\"},{\"path\":\"zones[0].cpd\",\"records\":[\"R2\",\"R14\"],\"kind\":\"value\",\"how\":\"The front strip uses the 3.8 cycles a degree from R2, on the strip R14 describes.\"},{\"path\":\"zones[0].deg\",\"records\":[\"R14\"],\"kind\":\"value\",\"how\":\"The front strip is 2 degrees wide and 21 degrees high, as R14 gives for the retinae.\"},{\"path\":\"params.fov\",\"records\":[\"R33\",\"R43\"],\"kind\":\"range_middle\",\"how\":\"The whole field is set to 360 degrees, the near-360 field that the secondary eye pairs give together in R33 and R43.\"},{\"path\":\"gaze.sweep\",\"records\":[\"R134\",\"R129\"],\"kind\":\"range_middle\",\"how\":\"The sweep is 2 degrees across, the minimum amplitude in R134, with a cycle of 1.2 seconds, between the 1.1 to 1.3 s period in R134 and the 1 to 2 s oscillation in R129.\"},{\"path\":\"gaze.twist\",\"records\":[\"R142\"],\"kind\":\"range_middle\",\"how\":\"The torsion turns the retinae 25 degrees each way, the middle of the 20 to 30 degree range in R142; the millisecond timings are the app's choice within R142's two-second turn and two to five second holds.\"},{\"path\":\"matrices.JUMP\",\"records\":[\"R73\",\"R52\"],\"kind\":\"value\",\"how\":\"The two peaks are 360 nm for the UV class in R73 and 525 nm, the middle of the 520 to 530 nm green range in R52.\"}],\"quotes\":[{\"record\":\"R2\",\"quote\":\"with more typical species (e.g., *Phidippus johnsoni*) having eyes that support visual angles of around 0.13 degrees\"},{\"record\":\"R14\",\"quote\":\"the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species\"},{\"record\":\"R33\",\"quote\":\"collectively equip the spider with nearly 360° of field of view\"},{\"record\":\"R43\",\"quote\":\"combined it spans across almost 360 degrees all around the spider\"},{\"record\":\"R369\",\"quote\":\"the system behaves as though it were completely blind to stationary objects.\"},{\"record\":\"R134\",\"quote\":\"The amplitude of horizontal scanning does not become smaller than 2° even for targets £° wide.\"},{\"record\":\"R129\",\"quote\":\"It consists of an oscillatory, side-to-side movement of the retinae across the stimulus, with a period of 1-2 sec.\"},{\"record\":\"R142\",\"quote\":\"the retinae rotating 20-300 clockwise then returning through the resting position to an inclination of 20-300 in the opposite sense.\"},{\"record\":\"R73\",\"quote\":\"UV-sensitive cells had peaks at 360 nm with less than 10% sensitivity at wavelengths longer than 400 nm\"},{\"record\":\"R52\",\"quote\":\"green-sensitive cells had peaks at around 520-530 nm\"},{\"record\":\"R338\",\"quote\":\"color vision in the acute ‘principal’ eyes of most jumping spiders is based on only two types of photosensitive pigment, one sensitive to ultraviolet (UV) light, the other to green light\"},{\"record\":\"R92\",\"quote\":\"In most species of jumping spiders, photoreceptor cells in the retina of the principle eyes provide dichromatic vision\"},{\"record\":\"R82\",\"quote\":\"Intracellular recordings from AM photoreceptors reveal only two spectral classes: green cells with peak responses at ca. 520 nm, and ultraviolet (UV) cells with peak responses at ca. 360 nm.\"}]}"
+ }
+}
