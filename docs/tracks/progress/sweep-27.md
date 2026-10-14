@@ -3,3 +3,4 @@ Batch: sweep22/sweep-1.json (40 genera). Done genera are those with a line in do
 Done through batch index 7 (Sclerophrys).
 Done through batch index 10 (Equus).
 Done through batch index 14 (Pyrrhosoma).
+Done through batch index 18 (Armeria).
