@@ -4,7 +4,7 @@
 
 - Batch entries: 79. The discovery pass processed all 79 before any paper was read.
 - Candidate free-copy locations: 35; retrieval and identity verification are in progress.
-- Papers read: 0; records logged: 0.
+- Papers read: 1 (entry 3, Katti et al. 2019, all 16 pages); records logged: 89.
 - Completed lookups with no free copy located: 10 (in `docs/views/sources/oa-none-1.jsonl`).
 - Incomplete lookups or unresolved title-only identity: 34. These are pending, not declared unavailable.
 
@@ -13,3 +13,5 @@ OpenAlex returned HTTP 429 during an additional title lookup for entry 2. All fu
 Pending lookup entry numbers: 2, 12, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 47, 49, 51, 52, 53, 54, 55, 57, 58, 62, 63, 64, 65, 69, 72, 73, 74, 75, 76, 77, 78, 79. For title-only entries, exact title, first author and year must agree before accepting a match; incomplete citations were not guessed. Books and chapters receive only the permitted OpenAlex check.
 
 Next: retrieve and verify candidate copies; read them in batch order, including available supplements; quote-check and append evidence with `addlog.py`, committing between papers. Only the four batch-1 output paths will change. No app setup, build, server, browser, or app tests ran.
+
+Entry 3: 89 records, all passed PDF quotecheck verbatim and addlog validation. Review-derived measurements explicitly cite Katti et al.; primary studies were not opened. Reconstituted A1 spectra are distinguished from native A2 spectra, genetic complement is not logged as measured color vision, and pooled ranges remain assigned to the measured species group rather than individual species. No supplementary material was indicated in the review.
