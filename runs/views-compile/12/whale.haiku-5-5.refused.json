@@ -1,0 +1,317 @@
+{
+ "key": "whale",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "checker: row 'Colour' says m and every parameter it describes is graded i",
+  "checker: row 'Tapetum' says m and every parameter it describes is graded i",
+  "matrices.BEE note: American spelling 'gray'"
+ ],
+ "reply": {
+  "spec": {
+   "key": "whale",
+   "chip": "Whale, dolphin or seal",
+   "who": "a whale, dolphin or seal",
+   "version": 1,
+   "applies_to": {
+    "order": [
+     "Cetacea",
+     "Carnivora:Pinnipedia",
+     "Sirenia"
+    ]
+   },
+   "cue": "Mostly blue-green and grey, with sharpness that depends on the animal.",
+   "modules": [],
+   "inputs": {
+    "motion": "none",
+    "sound": "none",
+    "haptic": "none"
+   },
+   "params": {
+    "M": {
+     "value": "BEE",
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's pick of two peaks"
+    },
+    "cpd": {
+     "value": 3.3,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R4",
+      "R3"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "the humpback value, between the two whale records"
+    },
+    "pupil": "h",
+    "fov": {
+     "value": 125,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R19",
+      "R17"
+     ],
+     "range": [
+      100,
+      360
+     ],
+     "note": "the middle of the dolphin panoramic field"
+    },
+    "gain": {
+     "value": 1.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      1,
+      4
+     ],
+     "note": "no dim-light ratio was found in the records for this group"
+    },
+    "sheen": {
+     "value": 0.8,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the app's reading of a reflective tapetum"
+    },
+    "gate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "the app's choice to fade still things"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1
+     ],
+     "note": "no removal of a channel"
+    },
+    "sat": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "the app's choice for the colour strength"
+    }
+   },
+   "matrices": {
+    "BEE": {
+     "from_pigments": [
+      492,
+      520
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [
+      "R30",
+      "R34"
+     ],
+     "note": "the app's pick of two peaks, at the gray whale rod value 492 nm and the Yangtze finless porpoise green value 520 nm"
+    }
+   },
+   "rows": [
+    [
+     "m",
+     "Sharpness",
+     "A humpback whale resolves about 3.3 cycles per degree and a Bryde's whale about 4.8, both in water. The picture uses the humpback figure.",
+     [
+      "R4",
+      "R3"
+     ],
+     [
+      "params.cpd"
+     ]
+    ],
+    [
+     "m",
+     "Field of view",
+     "Dolphins see a panoramic field of 120 to 130 degrees, with their two eyes overlapping only a little. Their eyes sit to the side of the head.",
+     [
+      "R19",
+      "R17",
+      "R21"
+     ],
+     [
+      "params.fov"
+     ]
+    ],
+    [
+     "m",
+     "Colour",
+     "Most whales have only rod cells in the dim light, so they see almost no colour. Where a green-sensitive pigment is recorded, a harbour porpoise or pilot whale reads about 520 nanometres, and the picture shows that green range.",
+     [
+      "R34",
+      "R35",
+      "R46"
+     ],
+     [
+      "params.M"
+     ]
+    ],
+    [
+     "m",
+     "Tapetum",
+     "Cetaceans have a reflective layer behind the retina. Seals have one too, and the picture lifts the shadows a little in the dark.",
+     [
+      "R254",
+      "R240"
+     ],
+     [
+      "params.gain",
+      "params.sheen"
+     ]
+    ],
+    [
+     "i",
+     "Choices of the app",
+     "The gain, the fade of still things, the colour strength, the reflective sheen and the colour matrix are the app's own choices and have no record behind them.",
+     [],
+     [
+      "params.gain",
+      "params.gate",
+      "params.sat",
+      "params.sheen",
+      "matrices.BEE"
+     ]
+    ]
+   ],
+   "zones": [],
+   "by": {},
+   "draw": {
+    "field": [
+     {
+      "name": "wedge",
+      "invented": true,
+      "note": "the default panoramic wedge"
+     }
+    ],
+    "overlay": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no overlay"
+     }
+    ],
+    "sound": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no sound"
+     }
+    ],
+    "haptic": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "no haptic"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the default colour drawing"
+     }
+    ],
+    "spectrum": [
+     {
+      "name": "matrix",
+      "invented": true,
+      "note": "draws from the matrix"
+     }
+    ]
+   }
+  },
+  "claims": [
+   {
+    "path": "params.cpd",
+    "records": [
+     "R4",
+     "R3"
+    ],
+    "kind": "value",
+    "how": "Set to 3.3 cycles per degree, the humpback value from the Lisney record, which lies between the two whale records."
+   },
+   {
+    "path": "params.fov",
+    "records": [
+     "R19",
+     "R17"
+    ],
+    "kind": "range_middle",
+    "how": "Set to 125 degrees, the middle of the 120 to 130 degree dolphin range."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R4",
+    "quote": "we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively"
+   },
+   {
+    "record": "R3",
+    "quote": "we estimated the peak anatomical spatial resolving power in water to be 4.8 cycles/degree and 3.3 cycles/degree in the Bryde's whale and the humpback whale, respectively"
+   },
+   {
+    "record": "R19",
+    "quote": "allowing a panoramic vision with a 120–130◦ visual field"
+   },
+   {
+    "record": "R17",
+    "quote": "120–130, panoramic vision"
+   },
+   {
+    "record": "R21",
+    "quote": "20–30° binocular field"
+   },
+   {
+    "record": "R34",
+    "quote": "Our in vitro assays for M/LWS from the Yangtze finless porpoise and the long-finned pilot whale show that both pigments are green sensitive (∼520 nm)"
+   },
+   {
+    "record": "R35",
+    "quote": "Our in vitro assays for M/LWS from the Yangtze finless porpoise and the long-finned pilot whale show that both pigments are green sensitive (∼520 nm)"
+   },
+   {
+    "record": "R46",
+    "quote": "we here demonstrate an absence of S-cones in the retinae of all whales and seals studied"
+   },
+   {
+    "record": "R254",
+    "quote": "A reflective tapetum lucidum is present on two-thirds of the whole ocular fundus and is of the fibrillar type"
+   },
+   {
+    "record": "R240",
+    "quote": "The tapetum lucidum is more prominent than in other pinnipeds, making up about 63% of retinal thickness in the posterior aspect of the globe."
+   },
+   {
+    "record": "R30",
+    "quote": "the gray whale (Eschrichtius robustus) and the humpback whale (Megaptera novaeangliae) possessing absorbance maxima determined from difference spectra to be 492 and 497 nm, respectively"
+   }
+  ]
+ }
+}

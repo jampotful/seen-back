@@ -1,0 +1,216 @@
+{
+ "spec": {
+  "key": "primate",
+  "chip": "Monkey or ape",
+  "who": "a monkey or ape",
+  "version": 1,
+  "falls_back_to": "mammal",
+  "applies_to": {
+   "order": [
+    "Primates"
+   ],
+   "not_family": [
+    "Hominidae:Homo"
+   ]
+  },
+  "cue": "Three kinds of colour sensor, close to yours, and almost as much detail.",
+  "modules": [],
+  "params": {
+   "M": {
+    "value": "PRIMATE_TRI",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R31",
+     "R32",
+     "R23"
+    ],
+    "note": "three cone peaks taken from monkey records stand in for the whole group; the mapping is the app's reading"
+   },
+   "cpd": {
+    "value": 26.3,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R7"
+    ],
+    "range": [
+     4,
+     30
+    ],
+    "note": "the highest acuity assessed in young rhesus monkeys, so a ceiling of the test"
+   },
+   "fov": {
+    "value": 152,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R18"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "a person's 180 degrees scaled by the ratio of a Pan-like sideways reach to a human one"
+   }
+  },
+  "matrices": {
+   "PRIMATE_TRI": {
+    "from_pigments": [
+     430,
+     530,
+     561
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R31",
+     "R32",
+     "R23"
+    ],
+    "note": "blue peak from the cynomolgus monkey, middle peak from the howler monkey, long peak from the marmoset"
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colour drawn from three monkey cone peaks"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Colour",
+    "A cynomolgus monkey has three kinds of cone, most sensitive near 430, 531 and 561 nanometres. Macaques and people share this three-cone plan, so colours look much as they do to you.",
+    [
+     "R31",
+     "R52"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Other monkeys see less colour",
+    "Owl monkeys and bushbabies have a single kind of M/L cone and lack colour vision. Male marmosets have two kinds of cone. Howler monkeys have three. This view shows the three-cone picture of a macaque.",
+    [
+     "R40",
+     "R137",
+     "R53",
+     "R44"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Sharpness",
+    "Young rhesus monkeys reached 26.3 cycles per degree on a grating test, close to a person's 30. A marmoset's cone mosaic could carry about 30. A grey mouse lemur resolves only about 4.9, so smaller primates see less fine detail.",
+    [
+     "R7",
+     "R4",
+     "R5"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Field of view",
+    "A model of a chimpanzee-like skull gives a sideways reach of 115 degrees for the eye, against 136.1 degrees for a person. Scaling your 180 degrees by that ratio gives about 152 degrees.",
+    [
+     "R18"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Night monkeys",
+    "The owl monkey is the only night-active monkey. Its retina is fully adapted to the dark and its fovea is only rudimentary.",
+    [
+     "R183",
+     "R168"
+    ],
+    []
+   ],
+   [
+    "i",
+    "What the app chose",
+    "The three cone peaks come from different monkeys: a blue peak near 430 nanometres from a cynomolgus monkey, a middle peak near 530 from a howler monkey and a long peak near 561 from a marmoset. The app chose how they map onto your colours. We draw no dim-light change and no special fovea, because the records give no numbers for them.",
+    [],
+    [
+     "params.M",
+     "matrices.PRIMATE_TRI"
+    ]
+   ]
+  ],
+  "zones": [],
+  "by": {}
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R7"
+   ],
+   "kind": "value",
+   "how": "The value equals the 26.3 cycles per degree stated for rhesus monkeys."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R18"
+   ],
+   "kind": "calculation",
+   "how": "180 x 115 / 136.1 = 152, scaling a person's field by the Pan-like to human ratio of lateral eccentricity."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R31",
+    "R32",
+    "R23"
+   ],
+   "kind": "value",
+   "how": "The matrix is built from peaks 430, 530 and 561 nm stated in the three cited monkey records."
+  },
+  {
+   "path": "matrices.PRIMATE_TRI",
+   "records": [
+    "R31",
+    "R32",
+    "R23"
+   ],
+   "kind": "value",
+   "how": "The pigment peaks 430 nm (cynomolgus), 530 nm (howler) and 561 nm (marmoset) are each stated in a cited record."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R7",
+   "quote": "achieving the maximum acuity level assessed (26.3 c/deg) by 7 weeks of age for most monkeys"
+  },
+  {
+   "record": "R18",
+   "quote": "maximum lateral visual field eccentricity with eyeball abduction ( Pan -like: 115°; human: 136.1°)"
+  },
+  {
+   "record": "R31",
+   "quote": "The wave-lengths of maximum sensitivity were approximately 430, 531 and 561 nm, respectively."
+  },
+  {
+   "record": "R32",
+   "quote": "L and M genes encoding pigments with λmax values of 530 and 558 nm, respectively"
+  },
+  {
+   "record": "R23",
+   "quote": "we determined exact peak absorption spectrum (λmax) of all three allelic pigments, red, yellow, and green, of the marmoset, to be 561, 553, and 539nm, respectively"
+  }
+ ]
+}

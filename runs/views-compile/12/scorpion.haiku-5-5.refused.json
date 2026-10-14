@@ -1,0 +1,43 @@
+{
+ "key": "scorpion",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "top-level key 'pupil_note' is not in the schema"
+ ],
+ "reply": {
+  "spec": "{\"key\": \"scorpion\", \"version\": 1, \"chip\": \"Scorpion\", \"who\": \"a scorpion\", \"falls_back_to\": \"spider\", \"applies_to\": {\"order\": [\"Scorpiones\", \"Uropygi\", \"Amblypygi\", \"Pseudoscorpiones\"]}, \"cue\": \"The view takes in almost the whole circle around the animal, and it brightens in green, the colour a scorpion sees best, with ultraviolet and blue at the edges.\", \"modules\": [\"field\", \"spectrum\", \"haptic\"], \"params\": {\"M\": \"BEE\", \"cpd\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0.005, 40], \"note\": \"a rough picture of large shapes and light; no sharpness is measured for scorpions\"}, \"fov\": {\"value\": 360, \"grade\": \"g\", \"invented\": false, \"src\": [\"R1\", \"R2\"], \"range\": [100, 360]}, \"sat\": {\"value\": 0.8, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1.5], \"note\": \"colour is seen, but the peaks are few and broad\"}, \"gain\": {\"value\": 2, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [1, 4], \"note\": \"the eyes are sensitive to very low light\"}, \"pupil\": \"o\", \"gate\": {\"value\": 0.6, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"still things fade, but less than in a view with no movement sense\"}, \"living\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 3], \"note\": \"no extra weight for living movement outside the zones\"}, \"topoS\": {\"value\": 0.3, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"the eyes are small, so the picture is only a little sharper in the middle\"}, \"topoA\": {\"value\": 0.3, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"the picture is only a little sharper in the middle\"}, \"uvBlue\": {\"value\": 1, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"the blue channel is read partly as ultraviolet, as the lateral eye peaks in ultraviolet\"}, \"noGreen\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1]}, \"sheen\": {\"value\": 0, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1]}, \"glow\": {\"value\": 0.9, \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 2], \"note\": \"movement glows\"}, \"glowC\": {\"value\": [0.6, 1, 0.7], \"grade\": \"i\", \"invented\": true, \"src\": [], \"range\": [0, 1], \"note\": \"the glow's colour\"}}, \"matrices\": {\"BEE\": {\"from_pigments\": null, \"note\": \"placeholder\"}}, \"zones\": [], \"draw\": {\"field\": [{\"name\": \"squeeze\", \"invented\": true, \"note\": \"the whole circle squeezed toward the animal's field\"}, {\"name\": \"window\", \"invented\": true, \"note\": \"a view of the nearly full circle\"}], \"colour\": [{\"name\": \"palm\", \"invented\": true, \"note\": \"a colour matrix drawn from the animal's peaks\"}, {\"name\": \"two\", \"invented\": true, \"note\": \"a two-peak colour view\"}], \"haptic\": [{\"name\": \"off\", \"invented\": true, \"note\": \"the view without touch\"}, {\"name\": \"buzz\", \"invented\": true, \"note\": \"a short vibration on a knock\"}], \"spectrum\": [{\"name\": \"neutral\", \"invented\": true, \"note\": \"no colour change\"}]}, \"inputs\": {\"motion\": \"optional\", \"sound\": \"none\", \"haptic\": \"optional\"}, \"rows\": [[\"g\", \"Whole circle\", \"A scorpion's eyes take in close to the whole circle around its body. The records are reported from earlier work and are not measured in one named species.\", [\"R1\", \"R2\"], [\"params.fov\"]], [\"g\", \"Colour\", \"Scorpion eyes peak in the green, near 500 nm, with a second peak in the ultraviolet and blue.\", [\"R6\", \"R7\", \"R10\"], [\"params.M\"]], [\"i\", \"The app's choices\", \"The sharpness, the saturation, the gain, the glow and the edge mapping are the app's guesses, since no record gives them for scorpions.\", [], [\"params.cpd\", \"params.sat\", \"params.gain\", \"params.glow\", \"params.topoS\", \"params.topoA\"]]], \"pupil_note\": \"none\"}, \"claims\": [{\"path\": \"params.fov\", \"records\": [\"R1\", \"R2\"], \"kind\": \"range_middle\", \"how\": \"Both records give a 360 degree field of view for scorpions, so the value is 360, graded g because the records are reported from earlier work and are not measured in one named species.\"}], \"quotes\": [{\"record\": \"R1\", \"quote\": \"scorpions can apparently see 360° around their body\"}, {\"record\": \"R2\", \"quote\": \"Together, the two eyes have a 360 deg field of view\"}, {\"record\": \"R6\", \"quote\": \"Both sets of eyes are most sensitive to green light (~ 500 nm)\"}, {\"record\": \"R7\", \"quote\": \"The lateral eye shows one maximum in the ultraviolet and another in the blue-green region of the spectrum\"}, {\"record\": \"R10\", \"quote\": \"with a secondary peak of sensitivity in the lateral eyes to ultraviolet light (350–400 nm)\"}]}",
+  "claims": [
+   {
+    "path": "params.fov",
+    "records": [
+     "R1",
+     "R2"
+    ],
+    "kind": "range_middle",
+    "how": "Both records give a 360 degree field of view for scorpions, so the value is 360, graded g because the records are reported from earlier work and are not measured in one named species."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R1",
+    "quote": "scorpions can apparently see 360° around their body"
+   },
+   {
+    "record": "R2",
+    "quote": "Together, the two eyes have a 360 deg field of view"
+   },
+   {
+    "record": "R6",
+    "quote": "Both sets of eyes are most sensitive to green light (~ 500 nm)"
+   },
+   {
+    "record": "R7",
+    "quote": "The lateral eye shows one maximum in the ultraviolet and another in the blue-green region of the spectrum"
+   },
+   {
+    "record": "R10",
+    "quote": "with a secondary peak of sensitivity in the lateral eyes to ultraviolet light (350–400 nm)"
+   }
+  ]
+ }
+}

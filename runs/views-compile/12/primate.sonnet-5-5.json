@@ -1,0 +1,200 @@
+{
+ "key": "primate",
+ "chip": "Monkey or ape",
+ "who": "a monkey or ape",
+ "version": 1,
+ "falls_back_to": "mammal",
+ "applies_to": {
+  "order": [
+   "Primates"
+  ],
+  "not_family": [
+   "Hominidae:Homo"
+  ]
+ },
+ "cue": "Three kinds of colour sensor, close to yours, and almost as much detail.",
+ "modules": [],
+ "params": {
+  "M": {
+   "value": "PRIMATE_TRI",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:Carvalho 2017",
+    "primates.jsonl:Kawamura 2000"
+   ],
+   "note": "three cone peaks taken from monkey records stand in for the whole group; the mapping is the app's reading"
+  },
+  "cpd": {
+   "value": 26.3,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "primates.jsonl:Laughlin 2008"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the highest acuity assessed in young rhesus monkeys, so a ceiling of the test"
+  },
+  "fov": {
+   "value": 152,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Denion É 2016"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "a person's 180 degrees scaled by the ratio of a Pan-like sideways reach to a human one"
+  }
+ },
+ "matrices": {
+  "PRIMATE_TRI": {
+   "from_pigments": [
+    430,
+    530,
+    561
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:Carvalho 2017",
+    "primates.jsonl:Kawamura 2000"
+   ],
+   "note": "blue peak from the cynomolgus monkey, middle peak from the howler monkey, long peak from the marmoset",
+   "rows": [
+    [
+     0.32957,
+     0.46264,
+     0.13475,
+     0.07303
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ]
+   ],
+   "q": [
+    [
+     0.00046,
+     0.08751,
+     0.63677,
+     0.27526
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.32957,
+     0.46264,
+     0.13475,
+     0.07303
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "draw": {
+  "spectrum": [
+   {
+    "name": "matrix",
+    "invented": true,
+    "note": "colour drawn from three monkey cone peaks"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Colour",
+   "A cynomolgus monkey has three kinds of cone, most sensitive near 430, 531 and 561 nanometres. Macaques and people share this three-cone plan, so colours look much as they do to you.",
+   [
+    "primates.jsonl:Baylor 1987",
+    "primates.jsonl:O’Brien 1999"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Other monkeys see less colour",
+   "Owl monkeys and bushbabies have a single kind of M/L cone and lack colour vision. Male marmosets have two kinds of cone. Howler monkeys have three. This view shows the three-cone picture of a macaque.",
+   [
+    "primates.jsonl:Derrington 2002",
+    "primates.jsonl:Gilad 2004",
+    "primates.jsonl:Jacobs 1996"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Sharpness",
+   "Young rhesus monkeys reached 26.3 cycles per degree on a grating test, close to a person's 30. A marmoset's cone mosaic could carry about 30. A grey mouse lemur resolves only about 4.9, so smaller primates see less fine detail.",
+   [
+    "primates.jsonl:Laughlin 2008",
+    "primates.jsonl:Melin 2016",
+    "primates.jsonl:Solomon 2014"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "Field of view",
+   "A model of a chimpanzee-like skull gives a sideways reach of 115 degrees for the eye, against 136.1 degrees for a person. Scaling your 180 degrees by that ratio gives about 152 degrees.",
+   [
+    "primates.jsonl:Denion É 2016"
+   ],
+   [
+    "params.fov"
+   ]
+  ],
+  [
+   "m",
+   "Night monkeys",
+   "The owl monkey is the only night-active monkey. Its retina is fully adapted to the dark and its fovea is only rudimentary.",
+   [
+    "primates.jsonl:Dyer 2009",
+    "primates.jsonl:Silveira 1993"
+   ],
+   []
+  ],
+  [
+   "i",
+   "What the app chose",
+   "The three cone peaks come from different monkeys: a blue peak near 430 nanometres from a cynomolgus monkey, a middle peak near 530 from a howler monkey and a long peak near 561 from a marmoset. The app chose how they map onto your colours. We draw no dim-light change and no special fovea, because the records give no numbers for them.",
+   [],
+   [
+    "params.M",
+    "matrices.PRIMATE_TRI"
+   ]
+  ]
+ ],
+ "zones": [],
+ "by": {},
+ "draft": true
+}

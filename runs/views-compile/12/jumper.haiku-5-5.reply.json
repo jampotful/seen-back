@@ -1,0 +1,253 @@
+{
+ "spec": {
+  "key": "jumper",
+  "version": 1,
+  "chip": "Jumping spider",
+  "who": "a jumping spider",
+  "cue": "Hold still and watch. A jumping spider sees a small sharp strip well, and the rest of the scene in movement.",
+  "applies_to": {
+   "family": [
+    "Salticidae"
+   ]
+  },
+  "modules": [],
+  "inputs": {
+   "motion": "optional"
+  },
+  "params": {
+   "M": "JUMP",
+   "cpd": {
+    "value": 12.4,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1",
+     "R12"
+    ],
+    "note": "principal eye acuity of Portia fimbriata; the family's other species are lower"
+   },
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R35",
+     "R36"
+    ],
+    "note": "whole-animal field from the secondary eyes, near 300 to 360 degrees"
+   },
+   "fovea": {
+    "value": 2.2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "scale of the sharp middle; chosen by the app from the narrow principal-eye field"
+   },
+   "gate": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how much still things fade; movement is favoured but still objects stay faint"
+   },
+   "persist": {
+    "value": 0.1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how long the picture lingers"
+   },
+   "pupil": "o",
+   "sat": {
+    "value": 0.9,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "colour is kept, as the principal eyes see colour"
+   },
+   "fall": {
+    "value": 2.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how fast sharpness falls with light"
+   },
+   "glow": {
+    "value": 0.6,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "how brightly movement glows"
+   },
+   "glowC": {
+    "value": [
+     0.78,
+     1,
+     0.62
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the glow's colour"
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "sharpness falls from the middle along the long axis, by analogy with other small predators"
+   },
+   "noGreen": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "no green removed"
+   },
+   "uvBlue": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the blue channel stands in for ultraviolet"
+   }
+  },
+  "matrices": {
+   "JUMP": {
+    "grade": "i",
+    "invented": true,
+    "src": [
+     "R51",
+     "R52",
+     "R54",
+     "R55",
+     "R79",
+     "R80"
+    ],
+    "note": "a dichromat's view: ultraviolet and green receptors, the blue channel standing in for ultraviolet",
+    "rows": [
+     [
+      0,
+      0.3,
+      0.7
+     ],
+     [
+      0,
+      0.3,
+      0.7
+     ],
+     [
+      0.5,
+      0.5,
+      0
+     ]
+    ]
+   }
+  },
+  "zones": [],
+  "rows": [
+   [
+    "m",
+    "Sharp middle",
+    "The principal eyes resolve fine detail better than most animals of this size. A Portia spider reaches about 12 cycles per degree, and a Phidippus about 4, so the sharpest part of the picture is near a person's own.",
+    [
+     "R1",
+     "R2",
+     "R12"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Narrow sharp field",
+    "The principal eyes see only a thin upright strip, about 2 degrees wide and 21 high in Phidippus johnsoni. The spider turns its eyes to scan across the scene, so the sharp strip moves over the picture.",
+    [
+     "R14",
+     "R45",
+     "R129"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Wide, dim surround",
+    "Four pairs of eyes see the rest of the world. The side eyes see movement across nearly the whole circle around the spider, and they are much blurrier.",
+    [
+     "R18",
+     "R28",
+     "R30",
+     "R35"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Colour",
+    "Jumping spiders have two colour receptors in the principal eyes, one ultraviolet and one green. Saitis barbipes and Plexippus validus both showed these two classes, so the picture is a dichromat's picture.",
+    [
+     "R51",
+     "R52",
+     "R82",
+     "R86"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Movement",
+    "The side eyes respond to movement and little else, and a still object stays unseen until it moves. Metaphidippus harfordi turned only to targets that moved.",
+    [
+     "R369",
+     "R273"
+    ],
+    [
+     "params.gate"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "Sharpness falls away from the middle, the blue channel stands in for ultraviolet, and the glow and the lingering picture are the app's drawing. None of these numbers is measured in this animal.",
+    [],
+    [
+     "params.fovea",
+     "params.gate",
+     "params.persist",
+     "params.topoA",
+     "params.uvBlue",
+     "params.glow",
+     "params.glowC",
+     "params.fall",
+     "params.sat",
+     "params.M"
+    ]
+   ]
+  ],
+  "draw": {
+   "field": [
+    {
+     "name": "wedge",
+     "invented": true,
+     "note": "the sharp strip shown as a wedge"
+    }
+   ],
+   "overlay": [
+    {
+     "name": "off",
+     "invented": true,
+     "note": "no overlay"
+    }
+   ]
+  }
+ },
+ "claims": "[{\"path\": \"params.cpd\", \"records\": [\"R1\"], \"kind\": \"value\", \"how\": \"The app's sharpness of 12.4 cycles per degree equals the principal eye acuity Williams 1980 gives for Portia fimbriata.\"}, {\"path\": \"params.fov\", \"records\": [\"R35\", \"R36\"], \"kind\": \"range_middle\", \"how\": \"The whole-animal field of 300 degrees lies between the near 300 degree figure for the six smaller eyes and the almost 360 degree figure for the three other pairs.\"}, {\"path\": \"params.M\", \"records\": [\"R51\", \"R52\", \"R82\", \"R86\"], \"kind\": \"value\", \"how\": \"The matrix uses two classes, UV and green, as the records show for the principal eyes of Saitis barbipes and Plexippus validus.\"}, {\"path\": \"params.gate\", \"records\": [\"R369\"], \"kind\": \"value\", \"how\": \"Metaphidippus harfordi side eyes ignored stationary targets, which the value describes as near-total fading of still things.\"}]}",
+ "quotes": "[{\"record\": \"R1\", \"quote\": \"The highest spatial frequency that can be recon- structed by layer 1 with minimum receptor-row spacing 1.4 J..Lm and distance 1,980 J..Lm from the posterior nodal point of the telephoto system is 1,980/2.8 = 710 rad- 1.\"}, {\"record\": \"R12\", \"quote\": \"The highest value of the spatial resolving power (Nyquist frequency) of the principle eyes of jumping spiders, such as Portia fimbriata Doleschell, 1859, is 12.5 cycles/degree\"}, {\"record\": \"R35\", \"quote\": \"the remaining six, smaller eyes providing a near 300° field of view\"}, {\"record\": \"R36\", \"quote\": \"grant the spider an almost 360° field of view\"}, {\"record\": \"R51\", \"quote\": \"we find clear evidence for photoreceptor classes with maximal sensitivity in the UV (359 nm) and green (526 nm)\"}, {\"record\": \"R52\", \"quote\": \"green-sensitive cells had peaks at around 520-530 nm\"}, {\"record\": \"R82\", \"quote\": \"green cells with peak responses at ca. 520 nm, and ultraviolet (UV) cells with peak responses at ca. 360 nm.\"}, {\"record\": \"R86\", \"quote\": \"we used the relative numbers sampled during microspectrophotometry as an approximation, i.e., 1:7 for the dichromatic ultraviolet:green (U:M) model\"}, {\"record\": \"R369\", \"quote\": \"the system behaves as though it were completely blind to stationary objects.\"}]}"
+}

@@ -1,0 +1,434 @@
+{
+ "spec": {
+  "key": "jumper",
+  "version": 1,
+  "chip": "Jumping spider",
+  "who": "a jumping spider",
+  "cue": "Let your eyes roam. A small sharp patch finds the colour and the detail, and the wide blurry rest watches for anything that moves.",
+  "applies_to": {
+   "family": [
+    "Salticidae"
+   ]
+  },
+  "params": {
+   "fov": {
+    "value": 360,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R37",
+     "R23"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "the three pairs of side eyes together cover close to the full circle"
+   },
+   "cpd": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "a soft picture for the side eyes, which see most of the frame"
+   },
+   "M": {
+    "value": "SALTICID",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's own mapping of the two measured pigments onto a phone picture"
+   },
+   "uvBlue": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "the phone cannot record ultraviolet, so its blue channel stands in for it"
+   },
+   "sat": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "the side eyes are drawn without colour; the sharp middle puts it back"
+   },
+   "gate": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "outside the sharp middle, still things fade away"
+   },
+   "pupil": "o"
+  },
+  "matrices": {
+   "SALTICID": {
+    "from_pigments": [
+     360,
+     530
+    ],
+    "src": [
+     "R73",
+     "R54"
+    ],
+    "note": "one ultraviolet pigment near 360 nm and one green pigment near 530 nm"
+   }
+  },
+  "zones": [
+   {
+    "id": "principal",
+    "shape": "ellipse",
+    "at": {
+     "value": [
+      0,
+      0
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the sharp patch sits in the middle of the picture; the gaze block moves it around"
+    },
+    "deg": {
+     "value": [
+      5,
+      20
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R32"
+     ],
+     "note": "width and height of the sharp patch, in degrees"
+    },
+    "cpd": {
+     "value": 3.8,
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R2"
+     ],
+     "range": [
+      0.005,
+      40
+     ],
+     "note": "worked out from 0.13 degrees between receptors in a typical jumping spider"
+    },
+    "gate": 0,
+    "sat": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "colour returns in the sharp patch"
+    },
+    "M": "SALTICID"
+   }
+  ],
+  "gaze": {
+   "sweep": {
+    "value": [
+     2,
+     1.5
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R134",
+     "R129"
+    ],
+    "note": "side-to-side scan: at least 2 degrees across, once every 1 to 2 seconds"
+   },
+   "twist": {
+    "value": [
+     25,
+     2000,
+     3500
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R142"
+    ],
+    "note": "the retinas turn about 25 degrees each way, taking about 2 seconds and holding each end for 2 to 5 seconds"
+   },
+   "ior": {
+    "value": 5000,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R243",
+     "R356"
+    ],
+    "note": "for about 5 seconds the side eyes ignore the place the sharp eyes just inspected"
+   },
+   "iorDeg": {
+    "value": 5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     30
+    ],
+    "note": "how wide the ignored place is; the records give no figure"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "the full circle of side-eye vision is squeezed into the phone's frame"
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "the picture is recoloured through the two-pigment matrix"
+    }
+   ],
+   "gaze": [
+    {
+     "name": "stamps",
+     "invented": true,
+     "note": "the sharp patch jumps to each new place of interest and stamps a clear image there"
+    }
+   ],
+   "sharpness": [
+    {
+     "name": "paint",
+     "invented": true,
+     "note": "sharpness is painted as a clear middle fading into blur"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "g",
+    "Ultraviolet and green",
+    "Most jumping spiders build their colour from two pigments in the large front eyes. One peaks in the ultraviolet near 360 nm and the other in the green near 530 nm. Red and orange have no receptor of their own, so they shift toward dark green.",
+    [
+     "R73",
+     "R54",
+     "R82",
+     "R338"
+    ],
+    [
+     "params.M",
+     "params.uvBlue"
+    ]
+   ],
+   [
+    "g",
+    "Colour only in the middle",
+    "The sharp front eyes carry the colour. The side eyes give a single-pigment picture at lower sharpness, so the colour is kept to the sharp patch. Later work on the genes suggests the side eyes may carry some colour, which this picture leaves out.",
+    [
+     "R339",
+     "R287",
+     "R300",
+     "R307"
+    ],
+    [
+     "params.sat",
+     "zones[0].sat",
+     "zones[0].M"
+    ]
+   ],
+   [
+    "m",
+    "A small sharp patch",
+    "Each front eye has a narrow strip of retina, about 5 degrees across and 20 high. A typical jumping spider can pick out about 3.8 cycles per degree there, around an eighth of your sharpness. Portia is the star, at 12.5 cycles per degree.",
+    [
+     "R2",
+     "R12",
+     "R32"
+    ],
+    [
+     "zones[0].cpd",
+     "zones[0].deg"
+    ]
+   ],
+   [
+    "g",
+    "Wide and blurry",
+    "The side eyes together cover close to the whole circle around the animal. They are blurry, with about 0.3 to 1.3 cycles per degree in the front side eyes, so most of the picture is soft.",
+    [
+     "R5",
+     "R37",
+     "R23"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Only movement reaches the sides",
+    "With the front eyes covered, the side eyes behave as if completely blind to stationary things. A light that only switches on and off draws no reaction.",
+    [
+     "R369",
+     "R298"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Roving eyes",
+    "The front retinas sweep side to side across what they inspect, at least 2 degrees wide, once every 1 to 2 seconds. They also twist about 25 degrees each way, taking about 2 seconds and pausing for 2 to 5 seconds at each end. After the front eyes inspect a place, the side eyes ignore it for about 5 seconds.",
+    [
+     "R134",
+     "R129",
+     "R142",
+     "R243",
+     "R356"
+    ],
+    [
+     "gaze.sweep",
+     "gaze.twist",
+     "gaze.ior"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The app draws the side eyes soft and grey and the sharp patch in colour. It uses the phone's blue channel in place of ultraviolet, starts the sharp patch at the centre of the picture, and fades still things outside it. The softness of the side eyes and the size of the ignored place after an inspection are guesses. The squeeze into the frame, the stamped images and the painted blur are the app's drawings.",
+    [],
+    [
+     "params.cpd",
+     "params.M",
+     "params.uvBlue",
+     "params.sat",
+     "params.gate",
+     "zones[0].at",
+     "zones[0].cpd",
+     "zones[0].sat",
+     "gaze.iorDeg"
+    ]
+   ],
+   [
+    "x",
+    "A third colour in some species",
+    "The Habronattus spiders have a filtered third receptor that reaches into the red, near 626 nm. This picture leaves it out because most jumping spiders have two pigments.",
+    [
+     "R84",
+     "R81",
+     "R338"
+    ],
+    []
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R37",
+    "R23"
+   ],
+   "kind": "value",
+   "how": "Both records give the combined field of the eyes as close to 360 degrees."
+  },
+  {
+   "path": "zones[0].deg",
+   "records": [
+    "R32"
+   ],
+   "kind": "value",
+   "how": "The record gives the principal-eye field as 5.0 degrees horizontally and 20 degrees vertically."
+  },
+  {
+   "path": "zones[0].cpd",
+   "records": [
+    "R2"
+   ],
+   "kind": "calculation",
+   "how": "A typical species has receptors 0.13 degrees apart, so acuity is 1 / (2 x 0.13) = 3.8 cycles per degree."
+  },
+  {
+   "path": "gaze.sweep",
+   "records": [
+    "R134",
+    "R129"
+   ],
+   "kind": "calculation",
+   "how": "The 2 degrees is the minimum scan width in R134 and 1.5 seconds is the middle of the 1 to 2 second period in R129."
+  },
+  {
+   "path": "gaze.twist",
+   "records": [
+    "R142"
+   ],
+   "kind": "calculation",
+   "how": "25 degrees is the middle of 20 to 30 degrees, 2000 ms is the 2 second turn, and 3500 ms is the middle of the 2 to 5 second hold, all from R142."
+  },
+  {
+   "path": "gaze.ior",
+   "records": [
+    "R243",
+    "R356"
+   ],
+   "kind": "calculation",
+   "how": "The records give about 5 seconds of reduced detection at the inspected place, and 5 x 1000 = 5000 milliseconds."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R37",
+   "quote": "their combined field of view is close to 360 degrees."
+  },
+  {
+   "record": "R23",
+   "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+  },
+  {
+   "record": "R32",
+   "quote": "from 0.8°, as in P. fimbriata [26], to 5.0°, as in Metaphiddipus aeneolus Curtis [17], horizontally and 20°, as in M. aeneolus [17], vertically"
+  },
+  {
+   "record": "R2",
+   "quote": "with more typical species (e.g., *Phidippus johnsoni*) having eyes that support visual angles of around 0.13 degrees"
+  },
+  {
+   "record": "R134",
+   "quote": "The amplitude of horizontal scanning does not become smaller than 2° even for targets"
+  },
+  {
+   "record": "R129",
+   "quote": "with a period of 1-2 sec."
+  },
+  {
+   "record": "R142",
+   "quote": "with the retinae rotating 20-300 clockwise then returning through the resting position to an inclination of 20-300 in the opposite sense."
+  },
+  {
+   "record": "R243",
+   "quote": "in the order of 5 seconds."
+  },
+  {
+   "record": "R356",
+   "quote": "in the order of 5 seconds."
+  }
+ ]
+}

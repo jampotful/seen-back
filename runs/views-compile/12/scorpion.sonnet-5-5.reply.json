@@ -1,0 +1,244 @@
+{
+ "spec": {
+  "key": "scorpion",
+  "version": 1,
+  "chip": "Scorpion",
+  "who": "a scorpion",
+  "falls_back_to": "spider",
+  "applies_to": {
+   "order": [
+    "Scorpiones",
+    "Uropygi",
+    "Amblypygi",
+    "Pseudoscorpiones"
+   ]
+  },
+  "cue": "The view wraps all the way around you, in blues and greens, and the picture is coarse.",
+  "modules": [
+   "field"
+  ],
+  "draft": true,
+  "inputs": {
+   "motion": "optional"
+  },
+  "params": {
+   "fov": {
+    "value": 360,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R1",
+     "R2"
+    ],
+    "range": [
+     100,
+     360
+    ],
+    "note": "scorpions can apparently see all the way around the body; the app squeezes this into the phone's picture"
+   },
+   "M": {
+    "value": "SCORPION",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R5",
+     "R9"
+    ],
+    "note": "a colour mapping built from a blue peak and a green peak measured in two scorpions"
+   },
+   "cpd": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "a coarse picture; no record gives how much detail a scorpion sees"
+   },
+   "gain": {
+    "value": 2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     4
+    ],
+    "note": "a brighter picture for a night animal with very sensitive eyes"
+   }
+  },
+  "matrices": {
+   "SCORPION": {
+    "from_pigments": [
+     470,
+     525
+    ],
+    "src": [
+     "R5",
+     "R9"
+    ],
+    "grade": "g",
+    "invented": true,
+    "note": "the blue and green peaks of the eye's electrical response"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "the whole way around the animal is pressed into the phone's picture"
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "the picture is recoloured from the two peaks"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "g",
+    "All around",
+    "A scorpion's eyes can apparently take in the whole way around its body. The two middle eyes together cover a full circle, with about forty degrees of overlap above the animal.",
+    [
+     "R1",
+     "R2",
+     "R3",
+     "param:params.fov"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "g",
+    "Two kinds of eyes",
+    "The pair of eyes in the middle of the head are the main eyes. They give a fairly sharp picture and tell shapes apart. The side eyes, three to five pairs, seem to notice mostly changes in how bright the light is.",
+    [
+     "R97",
+     "R135",
+     "R138",
+     "R95"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Many small eyes",
+    "Buthid scorpions have five pairs of small side eyes. The first three are about 0.3 mm across and the last two are about 0.12 mm across in one species.",
+    [
+     "R91",
+     "R149",
+     "R150"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Blue and green",
+    "Electrical recordings from the eyes of two scorpion genera peak in blue light at 470 nm and in green light at 525 nm. The side eyes also respond in the ultraviolet.",
+    [
+     "R5",
+     "R9",
+     "R10"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Eyes for the night",
+    "Scorpions are active at night and their eyes can sense starlight. In one species the middle eyes are about a thousand times more sensitive at night than by day.",
+    [
+     "R101",
+     "R16",
+     "R151"
+    ],
+    [
+     "params.gain"
+    ]
+   ],
+   [
+    "i",
+    "The app's choices",
+    "No record gives how much detail a scorpion sees, so this view shows a coarse picture. The extra brightness, the recolouring from two colour peaks, and the way the all-round view is pressed into the phone are the app's own.",
+    [
+     "R5",
+     "R9",
+     "R135"
+    ],
+    [
+     "params.cpd",
+     "params.gain",
+     "params.M",
+     "params.fov"
+    ]
+   ],
+   [
+    "x",
+    "Not in the picture",
+    "A scorpion feels the ground through its legs and can locate prey up to about 50 cm away by the waves it makes in sand. It tastes the air and ground with its comb-like pectines and feels wind with fine hairs. The camera records none of this.",
+    [
+     "R34",
+     "R35",
+     "R29",
+     "R57"
+    ],
+    []
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R1",
+    "R2"
+   ],
+   "kind": "value",
+   "how": "Both records state a 360 degree field of view for scorpions."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R5",
+    "R9"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the two peaks, 470 nm (R5) and 525 nm (R9), that the records give; the mapping to screen colours is the app's."
+  },
+  {
+   "path": "matrices.SCORPION",
+   "records": [
+    "R5",
+    "R9"
+   ],
+   "kind": "calculation",
+   "how": "Pigment peaks 470 and 525 nm are taken directly from the two records and turned into a colour matrix by the app."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "scorpions can apparently see 360° around their body"
+  },
+  {
+   "record": "R2",
+   "quote": "Together, the two eyes have a 360 deg field of view"
+  },
+  {
+   "record": "R5",
+   "quote": "Los resultados de ERG muestran una sensibilidad máxima en las longitudes de onda correspondientes al azul (470 nm) y verde (525 nm)"
+  },
+  {
+   "record": "R9",
+   "quote": "Los resultados de ERG muestran una sensibilidad máxima en las longitudes de onda correspondientes al azul (470 nm) y verde (525 nm)"
+  }
+ ]
+}

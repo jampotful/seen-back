@@ -1,0 +1,404 @@
+{
+ "spec": {
+  "key": "cephalopod",
+  "chip": "Octopus, squid or cuttlefish",
+  "who": "an octopus, squid or cuttlefish",
+  "applies_to": {
+   "class": [
+    "Cephalopoda"
+   ]
+  },
+  "cue": "Edges are soft and the eye sees little colour. Tap the screen to move the focus.",
+  "modules": [
+   "tilt"
+  ],
+  "params": {
+   "M": "cephalopod_mono",
+   "cpd": {
+    "value": 6,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R2",
+     "R6",
+     "R7",
+     "R14"
+    ],
+    "range": [
+     0.005,
+     40
+    ],
+    "note": "the records span 0.63 to 12.23 cycles per degree for squid and octopus, with a cuttlefish figure of 8; 6 is the app's middle choice"
+   },
+   "fov": {
+    "value": 180,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R20"
+    ],
+    "range": [
+     100,
+     360
+    ]
+   },
+   "topoA": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "by analogy with the house cat"
+   },
+   "topoS": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ]
+   },
+   "fall": {
+    "value": 1.4,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ]
+   },
+   "pupil": "h",
+   "dof": {
+    "value": 8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     40
+    ]
+   },
+   "sat": {
+    "value": 0.2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "little colour, since most records say the group sees no colour"
+   },
+   "gain": {
+    "value": 1.3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     4
+    ]
+   },
+   "rate": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0.25,
+     2
+    ]
+   },
+   "sheen": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "no tapetum is recorded, so the app sets no sheen"
+   },
+   "uvBlue": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ]
+   },
+   "noGreen": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ]
+   }
+  },
+  "matrices": {
+   "cephalopod_mono": {
+    "rows": [
+     [
+      0.33,
+      0.33,
+      0.33
+     ],
+     [
+      0.33,
+      0.33,
+      0.33
+     ],
+     [
+      0.33,
+      0.33,
+      0.33
+     ]
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "one visual pigment in most records, so one brightness channel"
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "squeeze",
+     "invented": true,
+     "note": "the view as it was"
+    },
+    {
+     "name": "window",
+     "invented": true,
+     "note": "Snell's window always on, centred, as a remap of the field with no tilt needed"
+    }
+   ],
+   "tilt": [
+    {
+     "name": "level",
+     "invented": true,
+     "note": "the view as it was"
+    },
+    {
+     "name": "snell",
+     "invented": true,
+     "note": "point the phone up and the scene above is pressed into a disc about 97 degrees across"
+    }
+   ]
+  },
+  "tilt": {
+   "fromDeg": {
+    "value": 15,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     60
+    ]
+   },
+   "fullDeg": {
+    "value": 45,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     20,
+     90
+    ]
+   }
+  },
+  "inputs": {
+   "motion": "optional",
+   "sound": "none",
+   "haptic": "none",
+   "senses": {
+    "motion": 1
+   }
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "An octopus resolves about 3 to 12 cycles per degree, and a cuttlefish about 8. A squid resolves about 0.6, so the screen is blurred to what the animal would keep. The picture uses a middle value of 6.",
+    [
+     "R7",
+     "R14",
+     "R2",
+     "R6"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Colour",
+    "Most records say the group has one visual pigment and sees no colour. The picture is therefore drawn in one brightness channel, with only a little colour left.",
+    [
+     "R55",
+     "R56",
+     "R205",
+     "R206",
+     "R212"
+    ],
+    [
+     "params.M",
+     "params.sat"
+    ]
+   ],
+   [
+    "g",
+    "Field",
+    "An octopus or squid sees about 180 degrees on one side, and a squid of 7 days old sees about 311 degrees. The picture uses a wide field of 180 degrees.",
+    [
+     "R20",
+     "R23"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "i",
+    "How it is drawn",
+    "The soft edges, the shallow focus, the slit pupil, the brightness channel and the lack of sheen are the app's own choices, set inside the measured ranges. Polarised light is not drawn, because no engine setting carries it.",
+    [
+     "R69",
+     "R70",
+     "R348",
+     "R349"
+    ],
+    [
+     "params.topoA",
+     "params.topoS",
+     "params.fall",
+     "params.dof",
+     "params.pupil",
+     "params.M",
+     "params.gain",
+     "params.sheen"
+    ]
+   ],
+   [
+    "g",
+    "Where it is sharp",
+    "The sharp middle and the soft edge of the picture are the app's guess, since the records describe a central streak in the retina but give no sharpness across the field.",
+    [
+     "R272",
+     "R274"
+    ],
+    [
+     "params.topoA",
+     "params.topoS"
+    ]
+   ]
+  ],
+  "version": 1,
+  "zones": [],
+  "clock": null
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R7",
+    "R14",
+    "R2",
+    "R6"
+   ],
+   "kind": "range_middle",
+   "how": "The value 6 lies between the squid record of 0.63 cycles per degree and the octopus record of 12.23, and the cuttlefish record of 8 sits inside that span."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R20"
+   ],
+   "kind": "value",
+   "how": "The value 180 equals the wider-group figure of roughly 180 degrees on one side of the animal."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R7",
+   "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD)"
+  },
+  {
+   "record": "R14",
+   "quote": "the cuttlefish visual acuity is approximately 8 cycles per degree [23]"
+  },
+  {
+   "record": "R2",
+   "quote": "0.63 cpd (6.21 mm ML) for 0 day old"
+  },
+  {
+   "record": "R6",
+   "quote": "Visual acuity is high in the octopus (12.23 ± 1.61 CPD) and the squid (6.56 ± 1.14 CPD)"
+  },
+  {
+   "record": "R20",
+   "quote": "each of which has a field covering roughly the 180° on one side of the animal"
+  },
+  {
+   "record": "R55",
+   "quote": "Octopus vulgaris possesses only one visual pigment within its photoreceptors"
+  },
+  {
+   "record": "R56",
+   "quote": "MSP results demonstrated that this common reef squid only contains a single visual pigment as do all other shallow water cephalopods known"
+  },
+  {
+   "record": "R205",
+   "quote": "John B. Messenger demonstrated with still other learning experiments that Octopus does not distinguish different colors"
+  },
+  {
+   "record": "R206",
+   "quote": "most studies have concluded that Octopus vulgaris is color-blind"
+  },
+  {
+   "record": "R212",
+   "quote": "the vast majority of cephalopod species are color blind, possessing only a single visual pigment and failing to demonstrate color vision in behavioral tests"
+  },
+  {
+   "record": "R69",
+   "quote": "Despite the pupil is circular during the planktonic phase and pre-settlement, from ~ 80 days (> 35 suckers, ~ 48 − 40% ML/TL) the pupil starts to develop a horizontal pupillary response"
+  },
+  {
+   "record": "R70",
+   "quote": "The pupil of octopus is circular in darkness (Figure 1C), while in bright light, it constricts to a horizontal slit (Figures 1A,B)"
+  },
+  {
+   "record": "R348",
+   "quote": "To date, the tapetum has not been observed in any cephalopod"
+  },
+  {
+   "record": "R349",
+   "quote": "no such reflective layer analogous to the tapetum has been found in any squid studied so far"
+  },
+  {
+   "record": "R272",
+   "quote": "their density is highest in a central horizontal stripe"
+  },
+  {
+   "record": "R274",
+   "quote": "cephalopods (except in one deep-sea species; Chung and Marshall, 2017) lack a fovea per se, but a streak or centralized area is observed in octopus, cuttlefish and squid"
+  },
+  {
+   "record": "R23",
+   "quote": "7 days old (5.5) | 0.65 | 311"
+  }
+ ]
+}

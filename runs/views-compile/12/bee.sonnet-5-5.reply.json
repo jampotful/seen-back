@@ -1,0 +1,222 @@
+{
+ "spec": {
+  "key": "bee",
+  "version": 1,
+  "chip": "Bee",
+  "who": "a bee",
+  "applies_to": {
+   "family": [
+    "Apidae",
+    "Halictidae",
+    "Megachilidae",
+    "Andrenidae",
+    "Colletidae"
+   ]
+  },
+  "falls_back_to": "insect",
+  "cue": "The view is wide and very blurry, and the colours shift so that ultraviolet becomes visible.",
+  "params": {
+   "cpd": {
+    "value": 0.26,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "range": [
+     0.12,
+     0.55
+    ],
+    "note": "The finest stripes a honeybee reliably resolved were about 0.26 cycles per degree."
+   },
+   "fov": {
+    "value": 300,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R35"
+    ],
+    "range": [
+     200,
+     312
+    ],
+    "note": "Both eyes together cover about 300 degrees along the body plane."
+   },
+   "pupil": "none",
+   "M": {
+    "value": "BEE",
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "The app maps the three bee receptor peaks onto the three colours of a phone screen."
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     346,
+     430,
+     540
+    ],
+    "src": [
+     "R43",
+     "R73",
+     "R85"
+    ],
+    "note": "UV, blue and green receptor peaks of the worker honeybee."
+   }
+  },
+  "pace": {
+   "ratio": {
+    "value": 3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     6
+    ],
+    "note": "The app speeds up time to suggest that bees follow flicker faster than people do."
+   }
+  },
+  "draw": {
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "colours come from the bee receptor matrix"
+    }
+   ],
+   "overlay": [
+    {
+     "name": "polar",
+     "invented": true,
+     "note": "a hint of the sky polarisation compass bees use"
+    }
+   ],
+   "pace": [
+    {
+     "name": "replay",
+     "invented": true,
+     "note": "time runs ahead in short jumps to hint at fast flicker vision"
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "A honeybee can only just tell apart stripes about four degrees wide. Its picture is roughly a hundred times coarser than a person's, so fine detail melts into a soft blur.",
+    [
+     "R1",
+     "R3",
+     "R11",
+     "R13"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "Wide view",
+    "The two compound eyes together see about 300 degrees around the body. Only a small patch below and behind is blind, and the eyes overlap in front and above.",
+    [
+     "R35",
+     "R32",
+     "R31"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "m",
+    "Three colour receptors",
+    "A bee has receptors that peak in the ultraviolet near 346 nm, the blue near 430 nm and the green near 540 nm. It sees ultraviolet light, which people cannot see.",
+    [
+     "R43",
+     "R73",
+     "R85",
+     "R108"
+    ],
+    [
+     "matrices.BEE"
+    ]
+   ],
+   [
+    "m",
+    "Fast flicker",
+    "A honeybee can follow a flicker of about 200 times a second in bright light. In dimmer light of 300 lux the limit falls to about 144 times a second.",
+    [
+     "R135",
+     "R144"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Flowers with ultraviolet patterns",
+    "About a third of 80 flower species in one study carry patterns in ultraviolet. A person sees some of these flowers as a plain colour, while a bee sees a dark centre or guide marks.",
+    [
+     "R236",
+     "R259",
+     "R260"
+    ],
+    []
+   ],
+   [
+    "m",
+    "Sky compass",
+    "A ring of ultraviolet receptors along the top rim of the bee's eye reads the pattern of polarised light in the sky. The bee uses it as a compass when the sun is hidden.",
+    [
+     "R340",
+     "R348",
+     "R355"
+    ],
+    []
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The colour shift is the app's choice. It follows a common convention in which ultraviolet shows as blue, blue as green and green as red, and red is dropped. The speed-up that hints at fast flicker and the polarisation hint are also the app's own drawings.",
+    [
+     "R268",
+     "R135"
+    ],
+    [
+     "params.M",
+     "pace.ratio"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The record states the highest spatial frequency reliably resolved by honeybees as 0.26 cycles per degree."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R35"
+   ],
+   "kind": "value",
+   "how": "The record states that bees see about 300 degrees horizontally on the body plane."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "They found that the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1"
+  },
+  {
+   "record": "R35",
+   "quote": "Bees can see ~300° horizontally on the body plane"
+  }
+ ]
+}
