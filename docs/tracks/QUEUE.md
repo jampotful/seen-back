@@ -77,5 +77,5 @@ The owner is away until evening and spends freely until 3 pm; two Opus agents at
 ## Outside worker (14 October, 13:10)
 | # | Task | Model | Prompt | State |
 |---|---|---|---|---|
-| 22 | Genus sweep by an outside agent (the owner's ChatGPT plan) on 400 untouched genera (ranks 401 to 800 of the untouched list, 4.1% of the open weight), branch `external/sweep-1` | outside | `docs/tracks/prompts/external-sweep.md`, batch `docs/tracks/batches/external-1.json` | on the owner's word; the desk merges only after a 20-record precision audit (above 5% errors, recheck or drop) |
+| 22 | Genus sweeps by an outside agent (Codex cloud tasks on the owner's ChatGPT plan) on 400 untouched genera (ranks 401 to 800 of the untouched list, 4.1% of the open weight), eight tasks of 50 genera, each returned as a pull request | outside | `docs/tracks/prompts/external-sweep.md`, batches `docs/tracks/batches/external-1.json` to `external-8.json` | on the owner's word; the desk merges only after a 20-record precision audit (above 5% errors, recheck or drop) |
 

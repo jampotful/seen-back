@@ -1,26 +1,30 @@
-# Outside worker: a genus sweep for the Regards research (any coding agent with web access)
+# Outside worker: a genus sweep for the Regards research (Codex cloud task, or any agent with a shell and internet access)
 
-You are helping research which animals, plants and fungi see what, for a phone app. The repository is github.com/jampotful/seen-back. Work only on a new branch named `external/sweep-1` and push to it at least every 20 minutes. Never push to `main`; the owner's research desk reviews and merges your branch.
+You are helping research which animals, plants and fungi see what, for a phone app. The repository is github.com/jampotful/seen-back. Your task message names a batch number, k (1 to 8). Work only on that batch and write only the files named below with that k, so that eight tasks can run at once without touching each other's files.
 
 ## Read first
 1. `docs/views/research/THOROUGH.md`, the sections "What done means" and "The protocol that may declare a cell unknown".
-2. `docs/views/research/BRIEF.md`, the sections on the evidence log (record fields, grades `m`, `g`, `i`, the rule that `opened` means you read the source yourself) and "Round 2".
+2. `docs/views/research/BRIEF.md`, the sections on the evidence log (record fields, the grades `m`, `g`, `i`, and the rule that `opened` means you read the source yourself in this task) and "Round 2".
 3. `docs/tracks/prompts/round3-sweep.md`. You do the same work as the sweeps it describes.
 
 ## Your batch
-`docs/tracks/batches/external-1.json` lists 400 genera in order of importance. Each has its open traits, its species, its family and order, and the nearest measured relative for some traits (`closest`, an id in the evidence logs). Work down the list; it does not matter how far you get.
+`docs/tracks/batches/external-k.json` lists 50 genera in order of importance. Each has its open traits, its species, its family and order, and, for some traits, the nearest measured relative (`closest`, an id in the evidence logs). Work down the list; finish as many genera as you can, completely, before stopping.
 
-## For each genus
-1. Search the web for measurements of each open trait in any species of the genus: the scientific name with the trait's words, then the common name with the trait's words (for example "Sphaeralcea flower photoreceptor", "Trichius compound eye spectral sensitivity"). Read the first 20 results' titles and open anything plausible.
-2. Follow one citation trail: later work citing the nearest measured relative's source, or a review of the family.
-3. Write what you find:
-   - A measurement you could read (full text, or an abstract that states the value): one evidence record, appended with `python3 -I tools/senses/addlog.py external-1 < records.jsonl` (one JSON object a line, the fields of BRIEF's evidence log; the script checks each record and writes `docs/views/evidence/external-1.jsonl`). The quote must be copied exactly from the source, and the source must have a real DOI or URL that you opened in this task. Grade `m` only when the measurement is of that very species.
-   - A measurement you could not read (paywalled): one line in `docs/views/wanted/external-1.jsonl` in the format of the other files in that folder, with `for`, `rows`, `records` and `get`.
-   - A trait with nothing found: one line in `docs/views/searched/external-1.jsonl` with all of `taxon` (the genus), `level` ("genus"), `trait`, `queries` (at least two), `where`, `canon` (an empty list is fine), `chased` (the DOI you followed, or "none: ..." saying what you checked), `found` ("none"), `date`.
+## How to search (use the scholarly APIs from the shell; they are faster and more complete than web search)
+- OpenAlex, titles and abstracts of about 250 million works: `https://api.openalex.org/works?search=<genus> <trait words>&per-page=25&select=id,doi,display_name,publication_year,abstract_inverted_index,primary_location,open_access`. Search the scientific name with the trait's words, then the common name with the trait's words.
+- Citation trail: find the nearest relative's source in OpenAlex (by DOI: `https://api.openalex.org/works/doi:<doi>`), then list later work that cites it: `https://api.openalex.org/works?filter=cites:<openalex id>,title_and_abstract.search:<genus>`.
+- Europe PMC for abstracts and open full texts: `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=<terms>&resultType=core&format=json`, and full text for open-access papers at `https://www.ebi.ac.uk/europepmc/webservices/rest/<PMCID>/fullTextXML`.
+- Crossref to confirm a DOI and its title: `https://api.crossref.org/works/<doi>`.
+- An open-access PDF (OpenAlex `open_access.oa_url`) may be downloaded and read with `pypdf` or `pdftotext`.
+Screen the first 25 results of each query by title and abstract; read anything that may hold a measurement.
+
+## Write what you find
+- A measurement you read (full text, or an abstract that states the value): one evidence record per value, appended with `python3 -I tools/senses/addlog.py external-k < records.jsonl` (one JSON object a line, with the fields of BRIEF's evidence log; the script checks each record and writes `docs/views/evidence/external-k.jsonl`). The quote is copied exactly from the source you read, and the source carries its DOI. The record's taxon is the species that was measured, graded `m`. Write no records for unmeasured species of the genus: the carry to them is computed later from the carry rules.
+- A measurement you could not read (no open full text and the abstract does not give the value): one line in `docs/views/wanted/external-k.jsonl` in the format of the other files in that folder, with `for`, `rows`, `records` and `get`.
+- A trait with nothing found: one line in `docs/views/searched/external-k.jsonl` with all of `taxon` (the genus), `level` ("genus"), `trait`, `queries` (two or more, as sent), `where` (the APIs and pages used), `canon` (an empty list is fine), `chased` (the DOI whose citations you checked, or "none: no measured relative; checked <review or query>"), `found` ("none"), `date`.
 
 ## Rules that matter more than speed
-- Never write a citation, DOI, value or quote from memory. If you did not open it in this task, it does not go in.
-- A number from a review counts only if the review states it; say which review in the record's `note`.
-- Do not edit any other files.
-
-When you stop, push the branch and write a short summary at the end of `docs/tracks/progress/external-1.md`: genera done, records logged, wanted lines, null searches.
+- Never write a citation, DOI, value or quote from memory. If you did not retrieve it in this task, it does not go in.
+- A number from a review counts only if the review states it; name the review in the record's `note`.
+- Do not edit any other file.
+- Commit your work as you go. At the end, write a short summary to `docs/tracks/progress/external-k.md` (genera done, records logged, wanted lines, null searches) and commit it. The owner opens a pull request from your task; the research desk checks a sample of your records before merging.
