@@ -20,3 +20,8 @@ Following canon-2's notes: WebFetch only; PMC serves reCAPTCHA, eLife a JS chall
 - 10.5772/intechopen.74645 Hauzman 2018: IntechOpen HTML read in full (no 429 this time); Tables 1, 3, 4 (12 colubrid/dipsadid snakes plus two Philodryas) and 11 introduction statements logged, 51 records. The fetch tool re-headed the tables; values are the chapter's. DONE.
 - 10.1016/j.tree.2009.09.010 Heil & Karban 2010: agrilife PDF read in full; Table 1 (14 plant species) logged. DONE.
 - 10.1111/ele.12205 Karban 2014: eScholarship PDF read in full; no table (Table S1 in SI); 32 receiver species from Figure 1 labels logged as partial. DONE (SI not needed for the view).
+- 10.1017/S0952523813000035 Nilsson 2013: Cambridge PDF read (truncated in references); only a parameter table; 7 group/genus eye_type statements logged. DONE.
+- 10.1093/molbev/msw265 Emerling 2017: OUP PDF refused, paperity abstract only. WANTED.
+- Healy 2013 (10.1016/j.anbehav.2013.06.018): TARA (TCD) bitstream read in full; Table 1 (34 species CFF) logged. figshare ndownloader needed a permission not granted. DONE.
+- Futahashi 2015 dragonflies: PMC blocked; AIST press release only. WANTED.
+- Hall 2012 eye shape (no DOI in canon; 10.1098/rspb.2012.2258): Royal Society routes refused. WANTED.
