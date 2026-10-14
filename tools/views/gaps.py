@@ -240,7 +240,8 @@ def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
     sr = found.get("species", [])
     ms = [r for r in sr if r.get("grade") == "m"]
     if ms:
-        out.update(state="m", level="species", rec=best(ms), rule="measured")
+        out.update(state="m", level="species", rec=best(ms), rule="measured",
+                   full=any(not r.get("partial") for r in ms))  # False when only abstract-level records measure it
         return out
     # genus carry (rule 3, or rule 2 for the order class, which is wider)
     gr = found.get("genus", [])
@@ -374,6 +375,7 @@ def main():
 
     # per view
     queue = []
+    cells_out = []
     summary = {}
     all_by_view = collections.defaultdict(list)
     for r in world:
@@ -437,6 +439,11 @@ def main():
         # queue lines
         for e in species:
             for t, c in e["cells"].items():
+                titles_all = [title for title, traits in vrows.items() if t in traits]
+                cells_out.append({"view": view, "taxon": e["sci"], "genus": e["genus"], "family": e["family"],
+                                  "order": e["order"], "en": e.get("en", ""), "trait": t, "state": c["state"], "level": c["level"],
+                                  "full": bool(c.get("full", False)), "records": e["world"],
+                                  "score": e["world"] * len(titles_all)})
                 if c["state"] != "i":
                     continue
                 titles = [title for title, traits in vrows.items() if t in traits]
@@ -457,6 +464,10 @@ def main():
                          "n_rows": len(vrows)}
         write_view(out, view, vrows, wlist, clist, summary[view])
 
+    # every cell, open or closed, for the papers-wanted verdicts (tools/views/gain.py)
+    with open(os.path.join(out, "cells.jsonl"), "w", encoding="utf-8") as f:
+        for line in cells_out:
+            f.write(json.dumps(line, ensure_ascii=False) + "\n")
     queue.sort(key=lambda q: (-q["score"], q["taxon"], q["trait"]))
     with open(os.path.join(out, "queue.jsonl"), "w", encoding="utf-8") as f:
         for q in queue:
@@ -538,7 +549,7 @@ def write_readme(out, summary, nrec, nret, nq):
          "python3 -I tools/views/gaps.py            # add --no-lit to skip the literature table",
          "```",
          "It reads the evidence logs on the working tree and on every `origin/research/*` branch, drops records the "
-         "audit retracted (`docs/views/audit/ALL.jsonl`), and rewrites `docs/views/gaps/<view>.md`, `queue.jsonl` and "
+         "audit retracted (`docs/views/audit/ALL.jsonl`), and rewrites `docs/views/gaps/<view>.md`, `queue.jsonl`, `cells.jsonl` (every cell with its state, for the papers-wanted verdicts) and "
          "`summary.json`. Add a genus to `taxonomy-extra.tsv` when a new species has no family or order; the table "
          "marks those it filled by hand as `own`, from general knowledge, unchecked against GBIF.\n",
          "## What each file holds",
