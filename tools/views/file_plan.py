@@ -11,8 +11,9 @@ Each file gets one action in PLAN.jsonl:
   missing); "page_id" is the paper's id on the Papers Wanted page.
 - extra: no match, but its title or snippet names a listed animal or a trait word together with an animal; filed under
   "Extras (not on the list)" with a cleaned name, and read by the intake like any paper.
-- skip: no match and nothing to do with the views (a journal issue downloaded whole, an editorial, an obituary);
-  moved to "Not on the list" and never read.
+- skip: no match and nothing to do with the views (an article on human perception from an issue downloaded whole,
+  an editorial, an obituary); moved to "Not on the list" and never read. An article from a whole-issue download whose
+  cut-short name has trait words but no animal is "unknown" until its snippet shows whether an animal is involved.
 - duplicate: the same file as another one in the listing (same size and the same name once "(1)" is removed, or the
   same size and the same matched paper); moved to "Duplicates".
 - unknown: the name says nothing; fetch its snippet and run again with --snippets.
@@ -173,7 +174,11 @@ def main():
             plan.append({'key': f['key'], 'action': 'unknown', 'was': f['fname']}); continue
         nt = norm(text)
         issue_dump = re.search(r'_(1[89]\d\d|20\d\d)_[A-Za-z-]+\.pdf$', f['fname']) is not None
-        if ANIMAL.search(text) or any(' ' + a + ' ' in ' ' + nt + ' ' for a in animals) or (not issue_dump and traits_in(text)):
+        named = ANIMAL.search(text) or any(' ' + a + ' ' in ' ' + nt + ' ' for a in animals)
+        if issue_dump and not named and traits_in(text) and f['key'] not in snips:
+            # a whole-issue download: the file name is cut short and may hide the animal, so look at the first page
+            plan.append({'key': f['key'], 'action': 'unknown', 'was': f['fname']}); continue
+        if named or (not issue_dump and traits_in(text)):
             plan.append({'key': f['key'], 'action': 'extra', 'folder': 'Extras (not on the list)', 'was': f['fname'],
                          'name': (re.sub(r'\s+', ' ', title).strip()[:90] + (f' ({year})' if year else '') + '.pdf')}); continue
         plan.append({'key': f['key'], 'action': 'skip', 'folder': 'Not on the list', 'was': f['fname'], 'why': 'no listed animal'})
