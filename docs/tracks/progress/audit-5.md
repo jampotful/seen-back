@@ -12,13 +12,13 @@ A quote that differs from the page only by typography (curly apostrophes, en das
 | sweep-6 | 32 | 32 | 11 | 34% | 0 | finished |
 | sweep-11 | 15 | 15 | 11 | 73% | 0 | finished |
 | sweep-8 | 23 | 23 | 17 | 74% | 0 | finished |
-| sweep-22 | 5 | 0 | 0 | n/a | 0 | not started |
-| insects-met | 51 | 0 | 0 | n/a | 0 | not started |
+| sweep-22 | 5 | 5 | 0 | 0% | 2 | finished |
+| insects-met | 51 | 23 | 1 | 5% | 4 | in progress |
 | sweep-15 | 13 | 0 | 0 | n/a | 0 | not started |
 | sweep-19 | 19 | 0 | 0 | n/a | 0 | not started |
 | sweep-7 | 16 | 0 | 0 | n/a | 0 | not started |
 | sweep-17 | 12 | 0 | 0 | n/a | 0 | not started |
-| all | 193 | 77 | 43 | 56% | 0 | |
+| all | 193 | 105 | 44 | 44% | 6 | |
 
 Error rate is errors over verifiable records (checked minus unverifiable). Errors are requote, correct, regrade, retarget and retract; confirm is not an error.
 
@@ -103,7 +103,49 @@ Error rate is errors over verifiable records (checked minus unverifiable). Error
 | sweep-8:22 | Onoclea sensibilis / sense_light_nonvisual | m | requote | value confirmed; quote is a rendering; page: "Phytochrome is confirmed to be the photoreceptor pigment in the germination response of Onoclea sensibilis L. by demonstrating red-far-red (R-FR) photoreversibility." |
 | sweep-8:23 | Iris pseudacorus / diel | m | requote | value confirmed; the quote closes with a full stop where the sentence continues ", and were available for pollination only through the following day before senescing." |
 | sweep-8:24 | Iris versicolor / diel | m | requote | value confirmed and the page gives the counts the note said were missing (15 of 20 flowers); quote is a fragment |
+| sweep-22:1 | Dissosteira carolina / interommatidial_deg | m | unverifiable | the repository record shows the abstract only (no PDF link reachable; the export page was refused at the permission step, and the search budget was spent); the abstract says acuity was coarser "parallel to the horizon compared to the perpendicular", consistent with the Table 1 reading |
+| sweep-22:2 | Dissosteira carolina / acuity_cpd | m | unverifiable | same record as sweep-22:1; the Table 1 row cannot be checked from the abstract |
+| sweep-22:3 | Setaria viridis / sense_light_nonvisual | m | confirm | quote verbatim in the Abstract (sentence continues "whose flowering is delayed by long day lengths ..."); Results: "plants in the 12 h trial flowering first, followed by 10 and 14 h trials, then 8 h and finally the 16 h trial", photoperiod 87% confirmed |
+| sweep-22:4 | Buddleja davidii / sense_chemical | m | confirm | quote verbatim in the Abstract, which continues ", most effectively by 4-oxoisophorone and oxoisophorone epoxide." |
+| sweep-22:5 | Heliconius erato cyrbia / acuity_cpd | m | confirm | quote verbatim in the abstract; the page names only the genus, the subspecies rests on the preprint as `where` says |
+| insects-met:1 | Vanessa atalanta / colour_vision | m | confirm | quote verbatim in the Summary (clause of the sentence beginning "We show here, through behavioral experiments") |
+| insects-met:2 | Vanessa atalanta / filter_pigments | m | confirm | quote verbatim in the Summary |
+| insects-met:3 | Heliconius erato / colour_vision | m | confirm | quote verbatim in the Summary (same sentence as insects-met:1) |
+| insects-met:4 | Heliconius erato / filter_pigments | m | confirm | quote verbatim in the Summary; the sentence continues "seen under orthodromic illumination" |
+| insects-met:5 | Junonia coenia / lambda_max_nm | m | confirm | "R510 (J. coenia)" verbatim in the abstract, cited there to a previously published sequence |
+| insects-met:6 | Junonia coenia / receptor_classes | g | confirm | quote verbatim but for two missing spaces on the page ("(R3-9)in", "(LWS)opsin"); grade g already |
+| insects-met:7 | Inachis io / lambda_max_nm | m | confirm | "R530 (I. io)" verbatim in the abstract |
+| insects-met:8 | Nymphalis antiopa / lambda_max_nm | m | confirm | "R534 (N. antiopa)" verbatim in the abstract |
+| insects-met:9 | Pararge aegeria / interommatidial_deg | m | confirm | quote verbatim in the abstract (link.springer.com page) |
+| insects-met:10 | Pararge aegeria / interommatidial_deg | m | confirm | as insects-met:9 |
+| insects-met:11 | Pararge aegeria / fov_h_deg | m | confirm | quote verbatim in Results, Visual field and interommatidial angles; the sentence continues "where the view would anyway be blocked by the animal's own thorax, abdomen and wings" |
+| insects-met:12 | Pararge aegeria / eye_movement | m | confirm | quote verbatim in the abstract; the sentence continues "; thus, looking at a rather even and dark background ..." |
+| insects-met:13 | Osmia rufa / lambda_max_nm | m | confirm | quote verbatim in the abstract (348nm without a space, as on the page) |
+| insects-met:14 | Osmia rufa / lambda_max_nm | m | confirm | as insects-met:13 |
+| insects-met:15 | Osmia rufa / lambda_max_nm | m | confirm | as insects-met:13 |
+| insects-met:16 | Osmia rufa / receptor_classes | m | confirm | quote verbatim (opening words of the same sentence) |
+| insects-met:17 | Osmia rufa / colour_vision | m | confirm | quote verbatim; the sentence continues ", whereas Melipona discriminates less well in the violet-blue region."; dual forced-choice tests confirmed |
+| insects-met:18 | Bombus impatiens / acuity_cpd | m | requote | 0.35 and 0.36 confirmed; the unit in the quote is a database rendering ("degree(-)(1)"); page: "cycles degree−1" |
+| insects-met:19 | Bombus impatiens / receptor_classes | m | confirm | quote verbatim in the abstract; the sentence continues ",namely ommatidia containing two, one or no UV opsin-immunoreactive cells." |
+| insects-met:20 | Harmonia axyridis / behaviour_vision | m | unverifiable | Wiley page returns a fetch error (doi.org and onlinelibrary routes); Europe PMC's REST service and PubMed both answered 429 |
+| insects-met:21 | Harmonia axyridis / behaviour_vision | m | unverifiable | as insects-met:20 |
+| insects-met:22 | Harmonia axyridis / behaviour_vision | m | unverifiable | as insects-met:20 |
+| insects-met:23 | Harmonia axyridis / receptor_classes | m | unverifiable | as insects-met:20 |
 
-## Where this run stands
+## Where this run stopped
 
-In progress; see the batch table.
+Four proxy 429 refusals: the Springer page for sweep-6:23 by its doi.org route, the doi.org route for sweep-6:24 (both later opened by their link.springer.com addresses, so these were per-URL), then, for insects-met:20 to 23, the Europe PMC REST service and PubMed in succession after the Wiley page failed outright. The WebSearch budget message had already arrived at sweep-22:1 (a shared per-turn limit), so no further repository copies could be searched for. The brief says to stop on repeated 429s, so the run stopped after insects-met:23 with 94 fetches used.
+
+Finished whole: sweep-12 (7 records), sweep-6 (32), sweep-11 (15), sweep-8 (23), sweep-22 (5). In progress: insects-met, records 1 to 23 of 51 done; records 24 to 52 (except 37) not opened. Not started: sweep-15, sweep-19, sweep-7, sweep-17. The next run should begin at insects-met:24 (Guignard et al. 2025, Wiley, likely blocked; then Switzer and Eason 2000, Belušič et al. 2021 Table 1 on the Royal Society site, and on).
+
+## Error rate so far
+
+105 records opened, 6 unverifiable, 99 verifiable, 44 wrong: **44%**. Of the 44, 40 are requotes (value right, quote not on the page), 4 are corrects: sweep-12:5 (value said girdling changed volatiles; the abstract says it did not, and the page cited carried only the aims), sweep-8:15 (value said one-day flowers close the same day; the Results give a mean 14.6 h and a range to 42.4 h), and sweep-6:19 and sweep-6:21 (Lind et al. 2014 Table 1 cites the blue tit and firecrown values to Hart et al. 2000 and Herrera et al. 2008, so the records are secondary citations and now carry `partial: true`). No value needed a retract and no grade changed. Audit 2's sample estimates (sweep-6 4 of 5, sweep-12 3 of 3, sweep-11 2 of 3, sweep-8 1 of 1) held: the whole batches run 35% to 57% wrong.
+
+## Patterns (this run)
+
+1. The error has one shape in nearly every case, as audits 3 and 4 said: the quote is the fetch summariser's rendering of the page's sentence (a paraphrase, a stitched table row with colons and semicolons, a unit rewritten as "cycles/deg" or "degree(-)(1)", or two sentences fused). Many records say so in their own note ("the quote field restates the abstract as shown on the publisher page; check against the text"). The values stand.
+2. A second, smaller shape: the quote stops at a comma and adds a full stop, dropping a qualifying clause (sweep-6:3, sweep-8:20, sweep-8:23). In sweep-8:20 the dropped clause reverses the emphasis ("but during the juvenile phase, this capacity is not fully developed"). These are counted as requotes.
+3. Table-column readings written out as "Species: trait value, trait value" (the Pecsics and Lind tables) were accepted as confirm, as audit 2 did for sweep-6:16; the values are on the page and `where` names the table. A reader of `quotecheck.py` output should expect these to fail a verbatim match.
+4. Three `where` fields name the wrong section (sweep-12:3, sweep-6:31, sweep-11:4, sweep-11:16: the quote is in the abstract or the discussion, not where the record says). Not counted as errors; noted in the table.
+5. Page delivery: PMC's new host served full text for sweep-12:1 and sweep-22:3 but a reCAPTCHA for sweep-6:23 an hour later, so it is intermittent rather than closed. The Karger page for Heswall et al. carries the full text although the records said abstract. The JEB HTML page serves Table 1 of Moore et al. 2015 as an image; the cob.silverchair PDF has it as text. Springer refuses doi.org routes and accepts link.springer.com routes for the same paper. Wiley fails outright; Europe PMC and PubMed are rate-limited by the proxy, so Wiley-only papers (Qiu et al. 2025, Guignard et al. 2025) need an owner PDF through `quotecheck.py`.
