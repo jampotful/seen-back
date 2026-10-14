@@ -8,3 +8,4 @@ Done through batch index 21 (Hesperoyucca).
 Done through batch index 24 (Broussonetia).
 Done through batch index 27 (Auriparus).
 Done through batch index 30 (Aphis).
+Done through batch index 32 (Elophila).
