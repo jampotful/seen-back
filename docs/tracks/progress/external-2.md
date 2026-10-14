@@ -1,0 +1,15 @@
+# External batch 2 progress
+
+## 2026-10-14
+
+This round: **2 of 50 genera done**, **1 evidence record**, **0 wanted lines**, **7 null-search lines**. **48 genera remain**. Completed Dittrichia and Sidalcea, covering all eight genus-trait searches: one measured light-response trait and seven null results. Canon completion and exhausted-cell status remain for the desk's coverage calculation; no coverage or app checks were run.
+
+- Dittrichia: read the open full text of Cordovilla et al. (2026), *Chloride Salts and Light Modulate Germination and Early Seedling Performance in Dittrichia viscosa*, DOI 10.3390/plants15172607 (Europe PMC PMC13567514). Logged the controlled light-regime effect on germination during salt exposure; this does not establish a circadian rhythm or a particular photoreceptor. The source quote passed quotecheck verbatim (1/1). Also checked the open genus review *Volatile Organic Compounds and Beyond*, DOI 10.3390/molecules31142474 (PMC13414322), including its reference list. Chemical emission and effects on other organisms were excluded as evidence of reception by Dittrichia.
+- Sidalcea: screened scientific-name and checker-mallow/checkerbloom searches for all four traits, plus a Malvaceae sensory-review query. Read the abstract of DOI 10.1093/aobpla/plag031 (scarification/cold-stratification experiment) and the relevant full-text passages of DOI 10.1002/ece3.8773 (PMC8975776; drought/competition and gas exchange). Neither establishes the target sensory or diel traits.
+- Checked canon.jsonl and existing evidence logs for both genera. No genus-specific in-hand canon measurement was found. Empty canon lists do not assert that outstanding compilations were read.
+- OpenAlex returned HTTP 429 in the initial batched searches. Those failures were excluded from the null-search evidence, and subsequent work used successful Europe PMC requests. All seven logged nulls have successful scientific-name and common-name searches.
+
+Next work:
+1. Resume at Centrosema; scientific/common-name screening retrieved *Evolutionary gain and loss of a plant pattern-recognition receptor for HAMP recognition*, DOI 10.7554/elife.81050 (PMC9718524). Its full text mentions Centrosema molle in figure material; inspect species-specific source data before recording a chemical-response result. Check the nearest-relative citation step for the remaining traits.
+2. Finish Cochemiea. The Europe PMC abstract for *Germination requirements and the influence of buffelgrass invasion on a population of Mammillaria grahamii in the Sonoran Desert*, DOI 10.1016/j.jaridenv.2016.11.003, states that seeds require light. No record or null was written for this pending genus. The potentially relevant CAM review DOI 10.1093/aob/mcad135 (PMC10799995) returned HTTP 500 twice from Europe PMC full text; the PMC web page returned a bot challenge. This access failure is not a null finding.
+3. Continue at Stercorarius, then down the batch in order. The remaining 46 genera after Centrosema and Cochemiea were not researched.
