@@ -4,7 +4,7 @@
 
 - Batch entries: 79. The discovery pass processed all 79 before any paper was read.
 - Candidate free-copy locations: 35; retrieval and identity verification are in progress.
-- Papers read: 5 (entries 3, 4, 6, 7 and 9); records logged: 2394.
+- Papers read: 6 (entries 3, 4, 6, 7, 9 and 11); records logged: 3292.
 - Completed lookups with no free copy located: 10 (in `docs/views/sources/oa-none-1.jsonl`).
 - Incomplete lookups or unresolved title-only identity: 34. These are pending, not declared unavailable.
 
@@ -25,3 +25,5 @@ Entry 7: full stereopsis review read, including figures/captions and references;
 Entry 8: both advertised Wiley free-copy routes could not be retrieved; the Europe PMC abstract contains no species-specific measurement to log. The candidate remains retrieval-blocked, not declared closed.
 
 Entry 9: full XML read; Europe PMC supplementaryFiles supplied the legal supplement archive (including Data 1–4). Data 1 was read for all 175 entries and its reference sheet. Logged 809 quote-checked records: 699 recovered sequence counts, 107 qualified diel assignments, three secondary genetic-repertoire summaries. Blank RH7 and unknown diel cells were not filled. Zero recovered counts do not imply loss, color blindness or missing receptor classes; the new `opsin_sequences_recovered` trait keeps genotype evidence separate. Crambus Blue count 2? remains uncertain; Eacles RH7 count 2 is preserved without asserting a validated duplication (the narrative says no RH7 duplication events). Diel assignments based on relatives, color appearance or ambiguous N? codes are qualified. No inferred wavelength peaks or behavioral color dimensionality were logged. Next readable candidate: entry 11 (owl fields), after no-copy entry 10.
+
+Entry 11: full XML read, together with all three Figshare supplement files (DOCX, Table S1 PDF, four-sheet workbook). Logged 898 quote-checked records. Includes 43 species' field descriptors, the alternate Strix aluco maximum, 665 individual signed profile points, 52 individual bill projections, and nine full-text reports/bounds. Raw profile points are conservatively inferred because interpolated cells are unmarked. Main text Ninox boobook 54.5° conflicts with tables/workbook 52°; Strix aluco maximum is 47° in Table S1/owl sheet and 48° in the comparative sheet. All discrepant values are retained and flagged. The study could not measure precise rear-field limits; 180° is only an upper bound, not a field-of-view measurement. Source taxon typos/synonyms are explained rather than silently reassigned. Next readable candidate: entry 13, Katti et al. (2019) amphibian review.
