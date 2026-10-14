@@ -4,7 +4,7 @@
 
 - Batch entries: 79. The discovery pass processed all 79 before any paper was read.
 - Candidate free-copy locations: 35; retrieval and identity verification are in progress.
-- Papers read: 2 (entries 3 and 4); records logged: 395.
+- Papers read: 3 (entries 3, 4 and 6); records logged: 1551.
 - Completed lookups with no free copy located: 10 (in `docs/views/sources/oa-none-1.jsonl`).
 - Incomplete lookups or unresolved title-only identity: 34. These are pending, not declared unavailable.
 
@@ -17,3 +17,5 @@ Next: retrieve and verify candidate copies; read them in batch order, including 
 Entry 3: 89 records, all passed PDF quotecheck verbatim and addlog validation. Review-derived measurements explicitly cite Katti et al.; primary studies were not opened. Reconstituted A1 spectra are distinguished from native A2 spectra, genetic complement is not logged as measured color vision, and pooled ranges remain assigned to the measured species group rather than individual species. No supplementary material was indicated in the review.
 
 Entry 4: Lund University Publications linked the publisher-formatted PDF after the Figshare catalog page failed; first-page title and DOI confirmed. Read pp. 81–118, both tables and appendices. Logged 306 records: 296 table records quote-checked against the PDF layout text, 10 prose records quote-checked against the PDF. The p. 84 and p. 93 tables were also viewed to confirm 12+ receptor classes and ≥3 participating classes. Suggestive tests, model-derived class/mechanism counts, historical taxon-label conflicts, and the review's contradictory turtle/cat entries are explicitly qualified. No supplement was indicated. Next readable candidate: entry 6 (Anatidae), with its species data in supplementary material.
+
+Entry 6: read full Europe PMC XML and all three legal Figshare supplement files (collection 6781097): methods/tables DOCX and two CSV datasets. Title/DOI verified in main text and supplement. Logged 1,156 quote-checked records for 39 species: 195 field-size/location descriptors, 921 signed retinal-margin separations at specified elevations, 39 task-specific eye-movement observations, and one secondary visual-streak report. Quotes from CSV records are exact numeric cells or consecutive cells; `where` identifies the source row and column. Blank cells were not treated as zero. All eight limited vertical extents are explicitly marked `bound: lower`. Retinal-margin separation uses a new signed trait to distinguish positive binocular overlap from negative blind-area width. Prior-study source labels and measured subspecies are preserved. Dataset eye-movement yes for mallards/Canada geese is retained alongside the authors' no-movement observations for new measurements. Full texts remain outside the repository. Next readable candidate: entry 7.
