@@ -147,7 +147,7 @@ Rows and their traits:
 | 131 | Chalcorana chalconota (Schlegel's Frog) | 1,300 | 0 | ? / ? | i | i | i |
 | 132 | Craugastor fitzingeri (Fitzinger's Robber Frog) | 1,285 | 0 | ? / ? | i | i | i |
 | 133 | Rhinella alata (Forest Toad) | 1,285 | 0 | Bufonidae / Anura | g | g | i |
-| 134 | Xenopus laevis (African Clawed Frog) | 1,267 | 0 | ? / ? | i | i | i |
+| 134 | Xenopus laevis (African Clawed Frog) | 1,267 | 0 | Pipidae / Anura | i | i | i |
 | 135 | Pseudacris feriarum (Upland Chorus Frog) | 1,245 | 0 | Hylidae / Anura | i | i | i |
 | 136 | Dendropsophus ebraccatus (Harlequin Treefrog) | 1,241 | 0 | ? / ? | i | i | i |
 | 137 | Lithobates grylio (Pig Frog) | 1,218 | 58 | Ranidae / Anura | g | i | i |
@@ -198,7 +198,7 @@ Rows and their traits:
 | 182 | Pelophylax saharicus (Sahara Frog) | 787 | 0 | Ranidae / Anura | i | i | i |
 | 183 | Euphlyctis cyanophlyctis (Common skittering frog) | 783 | 0 | ? / ? | i | i | i |
 | 184 | Scinax elaeochroa (Olive Snouted Tree Frog) | 761 | 0 | ? / ? | i | i | i |
-| 185 | Leptopelis natalensis (Natal Forest Tree Frog) | 756 | 0 | ? / ? | i | i | i |
+| 185 | Leptopelis natalensis (Natal Forest Tree Frog) | 756 | 0 | Arthroleptidae / Anura | i | i | i |
 | 186 | Espadarana prosoblepon (Emerald Glass Frog) | 746 | 0 | ? / ? | i | i | i |
 | 187 | Anaxyrus debilis (Green Toad) | 737 | 0 | Bufonidae / Anura | i | i | i |
 | 188 | Boana platanera (Banana Tree Dwelling Frog) | 726 | 0 | ? / ? | i | i | i |
@@ -260,7 +260,7 @@ Rows and their traits:
 | 244 | Pristimantis unistrigatus (Striped Robber Frog) | 493 | 0 | ? / ? | i | i | i |
 | 245 | Bufo japonicus (Eastern-Japanese Common Toad) | 487 | 0 | Bufonidae / Anura | m | i | i |
 | 246 | Fejervarya cancrivora (Crab-eating Frog) | 486 | 0 | Dicroglossidae / Anura | i | i | i |
-| 247 | Rhinophrynus dorsalis (Mexican Burrowing Toad) | 483 | 0 | ? / ? | i | i | i |
+| 247 | Rhinophrynus dorsalis (Mexican Burrowing Toad) | 483 | 0 | Rhinophrynidae / Anura | i | i | i |
 | 248 | Boana lanciformis (Rocket Tree Frog) | 482 | 0 | ? / ? | i | i | i |
 | 249 | Phrynobatrachus natalensis (Natal Puddle Frog) | 481 | 0 | ? / ? | i | i | i |
 | 250 | Rana longicrus (Taipa Frog) | 481 | 0 | Ranidae / Anura | i | i | i |
@@ -316,7 +316,7 @@ Rows and their traits:
 | 300 | Microhyla pulchra (Beautiful Pygmy Frog) | 368 | 0 | ? / ? | i | i | i |
 | 301 | Lithobates montezumae (Montezuma Leopard Frog) | 367 | 0 | Ranidae / Anura | g | i | i |
 | 302 | Physalaemus cuvieri (Cuvier’s Foam Frog) | 364 | 0 | ? / ? | i | i | i |
-| 303 | Arthroleptis stenodactylus (Common Squeaker) | 363 | 0 | ? / ? | i | i | i |
+| 303 | Arthroleptis stenodactylus (Common Squeaker) | 363 | 0 | Arthroleptidae / Anura | i | i | i |
 | 304 | Papurana daemeli (Australian wood frog) | 361 | 0 | ? / ? | i | i | i |
 | 305 | Pseudacris fouquettei (Cajun Chorus Frog) | 361 | 0 | Hylidae / Anura | i | i | i |
 | 306 | Anaxyrus californicus (Arroyo Toad) | 360 | 0 | Bufonidae / Anura | i | i | i |
@@ -431,7 +431,7 @@ Rows and their traits:
 | 415 | Mixophyes iteratus (Giant Barred Frog) | 243 | 0 | ? / ? | i | i | i |
 | 416 | Polypedates colletti (Collett's Tree Frog) | 242 | 0 | Rhacophoridae / Anura | i | i | i |
 | 417 | Boophis madagascariensis (Madagascar Bright-eyed Frog) | 241 | 0 | ? / ? | i | i | i |
-| 418 | Ranitomeya variabilis (Zimmermann's Poison Frog) | 240 | 0 | ? / ? | i | i | i |
+| 418 | Ranitomeya variabilis (Zimmermann's Poison Frog) | 240 | 0 | Dendrobatidae / Anura | i | i | i |
 | 419 | Lithobates virgatipes (Carpenter Frog) | 239 | 0 | Ranidae / Anura | g | i | i |
 | 420 | Carichyla bicolor (Northern Dwarf Tree Frog) | 234 | 0 | ? / ? | i | i | i |
 | 421 | Itapotihyla langsdorffii (ocellated tree frog) | 234 | 0 | ? / ? | i | i | i |
@@ -449,7 +449,7 @@ Rows and their traits:
 | 433 | Physalaemus biligonigerus (Weeping Frog) | 228 | 0 | ? / ? | i | i | i |
 | 434 | Pristimantis cruentus (Golden-groined Robber Frog) | 228 | 0 | ? / ? | i | i | i |
 | 435 | Osteopilus dominicensis (Hispaniolan Common Treefrog) | 227 | 0 | Hylidae / Anura | i | i | i |
-| 436 | Arthroleptis wahlbergii (Bush Squeaker) | 225 | 0 | ? / ? | i | i | i |
+| 436 | Arthroleptis wahlbergii (Bush Squeaker) | 225 | 0 | Arthroleptidae / Anura | i | i | i |
 | 437 | Craugastor yucatanensis (Yucatan rainfrog) | 223 | 0 | ? / ? | i | i | i |
 | 438 | Dendropsophus rhodopeplus (Red-skirted Tree Frog) | 223 | 0 | ? / ? | i | i | i |
 | 439 | Bufo stejnegeri (Water Toad) | 222 | 0 | Bufonidae / Anura | g | i | i |
@@ -486,7 +486,7 @@ Rows and their traits:
 | 470 | Breviceps adspersus (Common Rain Frog) | 202 | 0 | ? / ? | i | i | i |
 | 471 | Limnonectes macrodon (Fanged River Frog) | 202 | 0 | ? / ? | i | i | i |
 | 472 | Uperodon systoma (Marbled balloon frog) | 202 | 0 | ? / ? | i | i | i |
-| 473 | Epipedobates anthonyi (Anthony's Poison Arrow Frog) | 199 | 0 | ? / ? | i | i | i |
+| 473 | Epipedobates anthonyi (Anthony's Poison Arrow Frog) | 199 | 0 | Dendrobatidae / Anura | i | i | i |
 | 474 | Leptodactylus knudseni (Knudsen's Thin-toed Frog) | 199 | 0 | ? / ? | i | i | i |
 | 475 | Raorchestes luteolus (Coorg Yellow Bush Frog) | 199 | 0 | ? / ? | i | i | i |
 | 476 | Hylarana bahuvistara (Wide-spread Fungoid Frog) | 198 | 0 | Ranidae / Anura | i | i | i |
@@ -572,8 +572,8 @@ Rows and their traits:
 | 556 | Eupsophus emiliopugini (Emilio's Ground Frog) | 150 | 0 | ? / ? | i | i | i |
 | 557 | Leptodactylus petersii (Peter's Jungle Frog) | 149 | 0 | ? / ? | i | i | i |
 | 558 | Pseudacris brachyphona (Mountain Chorus Frog) | 149 | 0 | Hylidae / Anura | i | i | i |
-| 559 | Xenopus muelleri (Müller's Platanna) | 149 | 0 | ? / ? | i | i | i |
-| 560 | Arthroleptis xenodactyloides (Dwarf Squeaker) | 147 | 0 | ? / ? | i | i | i |
+| 559 | Xenopus muelleri (Müller's Platanna) | 149 | 0 | Pipidae / Anura | i | i | i |
+| 560 | Arthroleptis xenodactyloides (Dwarf Squeaker) | 147 | 0 | Arthroleptidae / Anura | i | i | i |
 | 561 | Atelopus flavescens (Cayenne Stubfoot Toad) | 147 | 0 | ? / ? | i | i | i |
 | 562 | Colleeneremia larisonans (Western Desert Tree Frog) | 147 | 0 | ? / ? | i | i | i |
 | 563 | Sylvagemma brevipalmata (Green-thighed Tree Frog) | 147 | 0 | ? / ? | i | i | i |
@@ -625,13 +625,13 @@ Rows and their traits:
 | 609 | Strongylopus bonaespei (Banded Stream Frog) | 129 | 0 | ? / ? | i | i | i |
 | 610 | Craugastor aurilegulus (Nombre de Dios Streamside Frog) | 128 | 0 | ? / ? | i | i | i |
 | 611 | Pristimantis zeuctotylus (Sipaliwini Robber Frog) | 128 | 0 | ? / ? | i | i | i |
-| 612 | Arthroleptis poecilonotus (Mottled Squeaker) | 127 | 0 | ? / ? | i | i | i |
+| 612 | Arthroleptis poecilonotus (Mottled Squeaker) | 127 | 0 | Arthroleptidae / Anura | i | i | i |
 | 613 | Buergeria buergeri (Kajika Frog) | 127 | 0 | ? / ? | i | i | i |
 | 614 | Cochranella granulosa (Grainy Cochran Frog) | 127 | 0 | ? / ? | i | i | i |
 | 615 | Phlyctimantis maculatus (Red-legged Wot-wot) | 127 | 0 | ? / ? | i | i | i |
 | 616 | Chaperina fusca (Yellow-spotted Narrow-mouthed Frog) | 126 | 0 | ? / ? | i | i | i |
 | 617 | Gastrophryne mazatlanensis (Mazatlan Narrow-mouthed Toad) | 126 | 0 | Microhylidae / Anura | i | i | i |
-| 618 | Ranitomeya reticulata (Red-backed Poison Frog) | 126 | 0 | ? / ? | i | i | i |
+| 618 | Ranitomeya reticulata (Red-backed Poison Frog) | 126 | 0 | Dendrobatidae / Anura | i | i | i |
 | 619 | Lithobates areolatus (Crawfish Frog) | 125 | 0 | Ranidae / Anura | g | i | i |
 | 620 | Pleurodema bufoninum (Large Four-eyed Frog) | 125 | 0 | ? / ? | i | i | i |
 | 621 | Rhacophorus lateralis (winged gliding frog) | 125 | 0 | ? / ? | i | i | i |
@@ -676,7 +676,7 @@ Rows and their traits:
 | 660 | Fejervarya sakishimensis (Ishigakijima Wart Frog) | 109 | 0 | Dicroglossidae / Anura | i | i | i |
 | 661 | Indosylvirana temporalis (Günther's Golden-backed Frog) | 109 | 0 | ? / ? | i | i | i |
 | 662 | Leptobrachium smithi (Smith's Litter Frog) | 109 | 0 | ? / ? | i | i | i |
-| 663 | Leptopelis mossambicus (Mozambique Forest Tree Frog) | 109 | 0 | ? / ? | i | i | i |
+| 663 | Leptopelis mossambicus (Mozambique Forest Tree Frog) | 109 | 0 | Arthroleptidae / Anura | i | i | i |
 | 664 | Pristimantis appendiculatus (Pinocchio Rainfrog) | 109 | 0 | ? / ? | i | i | i |
 | 665 | Bufo praetextatus (Western Japanese Common Toad) | 108 | 0 | Bufonidae / Anura | g | i | i |
 | 666 | Notaden bennettii (Holy Cross Frog) | 108 | 0 | ? / ? | i | i | i |
@@ -698,7 +698,7 @@ Rows and their traits:
 | 682 | Discoglossus montalentii (Corsican Painted Frog) | 103 | 0 | ? / ? | i | i | i |
 | 683 | Boana multifasciata (Many-banded Tree Frog) | 102 | 0 | ? / ? | i | i | i |
 | 684 | Boana pardalis (Leopard Tree Frog) | 102 | 0 | ? / ? | i | i | i |
-| 685 | Glyphoglossus guttulatus (Burmese Squat Frog) | 102 | 0 | ? / ? | i | i | i |
+| 685 | Glyphoglossus guttulatus (Burmese Squat Frog) | 102 | 0 | Microhylidae / Anura | i | i | i |
 | 686 | Limnonectes conspicillatus (Matang Creek Frog) | 102 | 0 | ? / ? | i | i | i |
 | 687 | Melanophryniscus montevidensis (Montevideo Redbelly Toad) | 102 | 0 | ? / ? | i | i | i |
 | 688 | Natalobatrachus bonebergi (Boneberg's frog) | 102 | 0 | ? / ? | i | i | i |
@@ -720,7 +720,7 @@ Rows and their traits:
 | 704 | Leptodactylus didymus (Madre de Dios Thin-toed Frog) | 98 | 0 | ? / ? | i | i | i |
 | 705 | Leptodactylus rhodonotus (Peru white-lipped frog) | 98 | 0 | ? / ? | i | i | i |
 | 706 | Phyllomedusa distincta (Sao Paulo Leaf Frog) | 98 | 0 | ? / ? | i | i | i |
-| 707 | Epipedobates machalilla (Machalilla Poison Frog) | 97 | 0 | ? / ? | i | i | i |
+| 707 | Epipedobates machalilla (Machalilla Poison Frog) | 97 | 0 | Dendrobatidae / Anura | i | i | i |
 | 708 | Leptodactylus podicipinus (Pointedbelly Frog) | 97 | 0 | ? / ? | i | i | i |
 | 709 | Phyllomedusa venusta (Lovely Leaf Frog) | 97 | 0 | ? / ? | i | i | i |
 | 710 | Pithecopus azureus (Southern Orange-legged Leaf Frog) | 97 | 0 | ? / ? | i | i | i |
@@ -743,7 +743,7 @@ Rows and their traits:
 | 727 | Pelophryne signata (Lowland Dwarf Toad) | 92 | 0 | ? / ? | i | i | i |
 | 728 | Phrynobatrachus acridoides (Eastern puddle frog) | 92 | 0 | ? / ? | i | i | i |
 | 729 | Bufotes cypriensis (Cyprian Green Toad) | 91 | 0 | Bufonidae / Anura | i | i | i |
-| 730 | Leptopelis flavomaculatus (Yellow-spotted Tree Frog) | 91 | 0 | ? / ? | i | i | i |
+| 730 | Leptopelis flavomaculatus (Yellow-spotted Tree Frog) | 91 | 0 | Arthroleptidae / Anura | i | i | i |
 | 731 | Poyntonia paludicola (Montane Marsh Frog) | 91 | 0 | ? / ? | i | i | i |
 | 732 | Microhyla borneensis (Matang narrow-mouthed frog) | 90 | 0 | ? / ? | i | i | i |
 | 733 | Osteocephalus oophagus (Egg-eating Spiny-backed Frog) | 90 | 0 | ? / ? | i | i | i |
@@ -808,7 +808,7 @@ Rows and their traits:
 | 792 | Agalychnis lemur (Lemur Leaf Frog) | 76 | 0 | Phyllomedusidae / Anura | i | i | i |
 | 793 | Ansonia leptopus (Brown Slender Toad) | 76 | 0 | ? / ? | i | i | i |
 | 794 | Dendropsophus kamagarini (Inotawa Tree Frog) | 76 | 0 | ? / ? | i | i | i |
-| 795 | Epipedobates boulengeri (Marbled Poison Frog) | 76 | 0 | ? / ? | i | i | i |
+| 795 | Epipedobates boulengeri (Marbled Poison Frog) | 76 | 0 | Dendrobatidae / Anura | i | i | i |
 | 796 | Eupsophus altor (Oncol's Ground Frog) | 76 | 0 | ? / ? | i | i | i |
 | 797 | Limnonectes finchi (Rough Guardian Frog) | 76 | 0 | ? / ? | i | i | i |
 | 798 | Nidirana mangveni (Mangven Chang's Music Frog) | 76 | 0 | ? / ? | i | i | i |
@@ -849,7 +849,7 @@ Rows and their traits:
 | 833 | Occidozyga laevis (Puddle Frog) | 71 | 0 | ? / ? | i | i | i |
 | 834 | Pristimantis thectopternus (Northern Cordilleras Robber Frog) | 71 | 0 | ? / ? | i | i | i |
 | 835 | Sarcohyla hapsa (Northern Streamside Tree Frog) | 71 | 0 | ? / ? | i | i | i |
-| 836 | Xenopus gilli (Cape Platanna) | 71 | 0 | ? / ? | i | i | i |
+| 836 | Xenopus gilli (Cape Platanna) | 71 | 0 | Pipidae / Anura | i | i | i |
 | 837 | Duttaphrynus scaber (Schneider's Toad) | 70 | 0 | Bufonidae / Anura | i | i | i |
 | 838 | Hadromophryne natalensis (Natal Ghost Frog) | 70 | 0 | ? / ? | i | i | i |
 | 839 | Hylarana parva (Lesser White-Lipped Frog) | 70 | 0 | Ranidae / Anura | i | i | i |
@@ -891,7 +891,7 @@ Rows and their traits:
 | 875 | Hylarana macrodactyla (Guangdong Frog) | 66 | 0 | Ranidae / Anura | i | i | i |
 | 876 | Hyperolius glandicolor (Gong Rock Frog) | 66 | 0 | Hyperoliidae / Anura | i | i | i |
 | 877 | Leptomantis harrissoni (Brown Tree Frog) | 66 | 0 | ? / ? | i | i | i |
-| 878 | Leptopelis bocagii (Bocage's Tree Frog) | 66 | 0 | ? / ? | i | i | i |
+| 878 | Leptopelis bocagii (Bocage's Tree Frog) | 66 | 0 | Arthroleptidae / Anura | i | i | i |
 | 879 | Neobatrachus pelobatoides (Humming Frog) | 66 | 0 | ? / ? | i | i | i |
 | 880 | Pelophylax cretensis (Cretan Frog) | 66 | 0 | Ranidae / Anura | i | i | i |
 | 881 | Pristimantis ventrimarmoratus (Marbled Rain Frog) | 66 | 0 | ? / ? | i | i | i |
@@ -1002,7 +1002,7 @@ Rows and their traits:
 | 986 | Tomopterna tandyi (Tandy's sand frog) | 53 | 0 | ? / ? | i | i | i |
 | 987 | Zhangixalus aurantiventris (Orange-belly Tree Frog) | 53 | 0 | ? / ? | i | i | i |
 | 988 | Ansonia minuta (Dwarf Slender Toad) | 52 | 0 | ? / ? | i | i | i |
-| 989 | Glyphoglossus molossus (Blunt-headed Burrowing Frog) | 52 | 0 | ? / ? | i | i | i |
+| 989 | Glyphoglossus molossus (Blunt-headed Burrowing Frog) | 52 | 0 | Microhylidae / Anura | i | i | i |
 | 990 | Ingerophrynus philippinicus (Philippine Toad) | 52 | 0 | ? / ? | i | i | i |
 | 991 | Osteocephalus helenae (Helena's tree frog) | 52 | 0 | ? / ? | i | i | i |
 | 992 | Philautus aurantium (Golden-legged Bush Frog) | 52 | 0 | ? / ? | i | i | i |
@@ -1019,13 +1019,13 @@ Rows and their traits:
 | 1003 | Dendropsophus branneri (Bonito Tree Frog) | 51 | 0 | ? / ? | i | i | i |
 | 1004 | Elachistocleis pearsei (Colombian Plump Frog) | 51 | 0 | ? / ? | i | i | i |
 | 1005 | Eleutherodactylus verrucipes (Big-eared Chirping Frog) | 51 | 0 | Eleutherodactylidae / Anura | i | i | i |
-| 1006 | Leptopelis vermiculatus (Peacock Tree Frog) | 51 | 0 | ? / ? | i | i | i |
+| 1006 | Leptopelis vermiculatus (Peacock Tree Frog) | 51 | 0 | Arthroleptidae / Anura | i | i | i |
 | 1007 | Lithobates pustulosus (Mexican Cascades Frog) | 51 | 0 | Ranidae / Anura | g | i | i |
 | 1008 | Litoria nigrofrenata (Bridle Frog) | 51 | 0 | Hylidae / Anura | i | i | i |
 | 1009 | Amolops archotaphus (Doi Inthanon Rock Frog) | 50 | 0 | ? / ? | i | i | i |
 | 1010 | Microhyla okinavensis (Okinawa Rice Frog) | 50 | 0 | ? / ? | i | i | i |
 | 1011 | Ololygon littoralis (Rio Verde Snouted Tree Frog) | 50 | 0 | ? / ? | i | i | i |
-| 1012 | Ranitomeya ventrimaculata (Reticulated Poison Frog) | 50 | 0 | ? / ? | i | i | i |
+| 1012 | Ranitomeya ventrimaculata (Reticulated Poison Frog) | 50 | 0 | Dendrobatidae / Anura | i | i | i |
 | 1013 | Raorchestes hassanensis (Dutta's Bubble-nest Frog) | 50 | 0 | ? / ? | i | i | i |
 | 1014 | Rhinella dapsilis (Sharp-nosed Toad) | 50 | 0 | Bufonidae / Anura | g | g | i |
 | 1015 | Vandijkophrynus nubicola (Cloud Toad) | 50 | 0 | ? / ? | i | i | i |
@@ -1048,7 +1048,7 @@ Rows and their traits:
 | 1032 | Craugastor talamancae (Almirante Robber Frog) | 48 | 0 | ? / ? | i | i | i |
 | 1033 | Espadarana audax (Napo Giant Glass Frog) | 48 | 0 | ? / ? | i | i | i |
 | 1034 | Leptodactylus colombiensis (Colombian Thin-toed Frog) | 48 | 0 | ? / ? | i | i | i |
-| 1035 | Ranitomeya imitator (Imitating Poison Frog) | 48 | 0 | ? / ? | i | i | i |
+| 1035 | Ranitomeya imitator (Imitating Poison Frog) | 48 | 0 | Dendrobatidae / Anura | i | i | i |
 | 1036 | Rhacophorus kio (Black-webbed Treefrog) | 48 | 0 | ? / ? | i | i | i |
 | 1037 | Rhinella merianae () | 48 | 0 | Bufonidae / Anura | g | g | i |
 | 1038 | Scaphiophryne marmorata (Marbled Rain Frog) | 48 | 0 | ? / ? | i | i | i |
@@ -1062,7 +1062,7 @@ Rows and their traits:
 | 1046 | Atlantihyla spinipollex (Ceiba Stream Frog) | 47 | 0 | ? / ? | i | i | i |
 | 1047 | Cyclorana verrucosa (Rough Frog) | 47 | 0 | ? / ? | i | i | i |
 | 1048 | Discoglossus scovazzi (Moroccan Painted Frog) | 47 | 0 | ? / ? | i | i | i |
-| 1049 | Epipedobates espinosai (Darwin Wallace's Poison Frog) | 47 | 0 | ? / ? | i | i | i |
+| 1049 | Epipedobates espinosai (Darwin Wallace's Poison Frog) | 47 | 0 | Dendrobatidae / Anura | i | i | i |
 | 1050 | Ingerophrynus galeatus (Bony-headed Toad) | 47 | 0 | ? / ? | i | i | i |
 | 1051 | Leptobrachella arayai (Kinabalu Slender Litter Frog) | 47 | 0 | ? / ? | i | i | i |
 | 1052 | Odorrana amamiensis (Amami Tip-nosed Frog) | 47 | 0 | ? / ? | i | i | i |
@@ -1173,7 +1173,7 @@ Rows and their traits:
 | 1157 | Pelobatrachus stejnegeri (Mindanao Horned Frog) | 39 | 0 | ? / ? | i | i | i |
 | 1158 | Pristimantis omeviridis (Green Forest Rainfrog) | 39 | 0 | ? / ? | i | i | i |
 | 1159 | Pseudobufo subasper (False Toad) | 39 | 0 | ? / ? | i | i | i |
-| 1160 | Ranitomeya uakarii (Uakari Poison Frog) | 39 | 0 | ? / ? | i | i | i |
+| 1160 | Ranitomeya uakarii (Uakari Poison Frog) | 39 | 0 | Dendrobatidae / Anura | i | i | i |
 | 1161 | Rhinella stanlaii () | 39 | 0 | Bufonidae / Anura | g | g | i |
 | 1162 | Staurois nubilus (Palawan Rock Frog) | 39 | 0 | ? / ? | i | i | i |
 | 1163 | Agalychnis hulli (Amazonian Monkey Frog) | 38 | 0 | Phyllomedusidae / Anura | i | i | i |
@@ -1352,7 +1352,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Chalcorana chalconota*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Craugastor fitzingeri*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Rhinella alata*: motion: g, rule 3 from Rhinella marina (sweep-19#2); cff_hz: g, rule 3 from Rhinella marina (methods#995); fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: g, rule 3 from Rhinella marina (intake#47)
-- *Xenopus laevis*: motion: i, none [lit table has genus: Xenopus laevis, Xenopus larvae]; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Xenopus laevis*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait [lit table has genus: Xenopus laevis, Xenopus larvae]; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Pseudacris feriarum*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (herps#116), no carry rule allows family level for this trait; pupil_shape: i, closest family (intake#48), no carry rule allows family level for this trait
 - *Dendropsophus ebraccatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Lithobates grylio*: motion: g, rule 3 from Lithobates catesbeianus (herps#124); cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: g, rule 3 from Lithobates pipiens (sweep-1#23); pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
@@ -1403,7 +1403,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Pelophylax saharicus*: motion: i, closest family (herps#124), no carry rule allows family level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (sweep-1#23), no carry rule allows family level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Euphlyctis cyanophlyctis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Scinax elaeochroa*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Leptopelis natalensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Leptopelis natalensis*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Espadarana prosoblepon*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Anaxyrus debilis*: motion: i, closest family (sweep-19#2), no carry rule allows family level for this trait; cff_hz: i, closest family (methods#995), no carry rule allows family level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest family (intake#47), no carry rule allows family level for this trait
 - *Boana platanera*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -1465,7 +1465,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Pristimantis unistrigatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Bufo japonicus*: motion: m (sweep-7#12); cff_hz: i, closest family (methods#995), no carry rule allows family level for this trait [lit table has genus: Bufo marinus]; fov_h_deg: i, none [lit table has genus: Bufo marinus]; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest family (intake#47), no carry rule allows family level for this trait
 - *Fejervarya cancrivora*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
-- *Rhinophrynus dorsalis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Rhinophrynus dorsalis*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Boana lanciformis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Phrynobatrachus natalensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Rana longicrus*: motion: i, closest family (herps#124), no carry rule allows family level for this trait [lit table has genus: Rana catesbeiana, Rana pipiens, Rana temporaria]; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait [lit table has genus: Rana clamitans]; fov_h_deg: i, none; acuity_cpd: i, closest genus (herps#115), the genus record is grade g, not a measurement [lit table has genus: Rana guadranus, Rana temporaria]; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
@@ -1521,7 +1521,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Microhyla pulchra*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Lithobates montezumae*: motion: g, rule 3 from Lithobates catesbeianus (herps#124); cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: g, rule 3 from Lithobates pipiens (sweep-1#23); pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Physalaemus cuvieri*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Arthroleptis stenodactylus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Arthroleptis stenodactylus*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Papurana daemeli*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pseudacris fouquettei*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (herps#116), no carry rule allows family level for this trait; pupil_shape: i, closest family (intake#48), no carry rule allows family level for this trait
 - *Anaxyrus californicus*: motion: i, closest family (sweep-19#2), no carry rule allows family level for this trait; cff_hz: i, closest family (methods#995), no carry rule allows family level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest family (intake#47), no carry rule allows family level for this trait
@@ -1636,7 +1636,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Mixophyes iteratus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Polypedates colletti*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Boophis madagascariensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Ranitomeya variabilis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Ranitomeya variabilis*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Lithobates virgatipes*: motion: g, rule 3 from Lithobates catesbeianus (herps#124); cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: g, rule 3 from Lithobates pipiens (sweep-1#23); pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Carichyla bicolor*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Itapotihyla langsdorffii*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -1654,7 +1654,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Physalaemus biligonigerus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pristimantis cruentus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Osteopilus dominicensis*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (herps#116), no carry rule allows family level for this trait; pupil_shape: i, closest family (intake#48), no carry rule allows family level for this trait
-- *Arthroleptis wahlbergii*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Arthroleptis wahlbergii*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Craugastor yucatanensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Dendropsophus rhodopeplus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Bufo stejnegeri*: motion: g, rule 3 from Bufo bufo (sweep-7#10); cff_hz: i, closest family (methods#995), no carry rule allows family level for this trait [lit table has genus: Bufo marinus]; fov_h_deg: i, none [lit table has genus: Bufo marinus]; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest family (intake#47), no carry rule allows family level for this trait
@@ -1691,7 +1691,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Breviceps adspersus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Limnonectes macrodon*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Uperodon systoma*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Epipedobates anthonyi*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Epipedobates anthonyi*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Leptodactylus knudseni*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Raorchestes luteolus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Hylarana bahuvistara*: motion: i, closest family (herps#124), no carry rule allows family level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (sweep-1#23), no carry rule allows family level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
@@ -1777,8 +1777,8 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Eupsophus emiliopugini*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Leptodactylus petersii*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pseudacris brachyphona*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (herps#116), no carry rule allows family level for this trait; pupil_shape: i, closest family (intake#48), no carry rule allows family level for this trait
-- *Xenopus muelleri*: motion: i, none [lit table has genus: Xenopus laevis, Xenopus larvae]; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Arthroleptis xenodactyloides*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Xenopus muelleri*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait [lit table has genus: Xenopus laevis, Xenopus larvae]; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
+- *Arthroleptis xenodactyloides*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Atelopus flavescens*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Colleeneremia larisonans*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Sylvagemma brevipalmata*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -1830,13 +1830,13 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Strongylopus bonaespei*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Craugastor aurilegulus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pristimantis zeuctotylus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Arthroleptis poecilonotus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Arthroleptis poecilonotus*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Buergeria buergeri*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Cochranella granulosa*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Phlyctimantis maculatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Chaperina fusca*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Gastrophryne mazatlanensis*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
-- *Ranitomeya reticulata*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Ranitomeya reticulata*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Lithobates areolatus*: motion: g, rule 3 from Lithobates catesbeianus (herps#124); cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: g, rule 3 from Lithobates pipiens (sweep-1#23); pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Pleurodema bufoninum*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Rhacophorus lateralis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -1881,7 +1881,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Fejervarya sakishimensis*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Indosylvirana temporalis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Leptobrachium smithi*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Leptopelis mossambicus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Leptopelis mossambicus*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Pristimantis appendiculatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Bufo praetextatus*: motion: g, rule 3 from Bufo bufo (sweep-7#10); cff_hz: i, closest family (methods#995), no carry rule allows family level for this trait [lit table has genus: Bufo marinus]; fov_h_deg: i, none [lit table has genus: Bufo marinus]; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest family (intake#47), no carry rule allows family level for this trait
 - *Notaden bennettii*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -1903,7 +1903,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Discoglossus montalentii*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Boana multifasciata*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Boana pardalis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Glyphoglossus guttulatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Glyphoglossus guttulatus*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Limnonectes conspicillatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Melanophryniscus montevidensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Natalobatrachus bonebergi*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -1925,7 +1925,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Leptodactylus didymus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Leptodactylus rhodonotus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Phyllomedusa distincta*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Epipedobates machalilla*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Epipedobates machalilla*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Leptodactylus podicipinus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Phyllomedusa venusta*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pithecopus azureus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -1948,7 +1948,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Pelophryne signata*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Phrynobatrachus acridoides*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Bufotes cypriensis*: motion: i, closest family (sweep-19#2), no carry rule allows family level for this trait; cff_hz: i, closest family (methods#995), no carry rule allows family level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest family (intake#47), no carry rule allows family level for this trait
-- *Leptopelis flavomaculatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Leptopelis flavomaculatus*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Poyntonia paludicola*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Microhyla borneensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Osteocephalus oophagus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -2013,7 +2013,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Agalychnis lemur*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: g, rule 3 from Agalychnis callidryas (intake#48)
 - *Ansonia leptopus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Dendropsophus kamagarini*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Epipedobates boulengeri*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Epipedobates boulengeri*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Eupsophus altor*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Limnonectes finchi*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Nidirana mangveni*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -2054,7 +2054,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Occidozyga laevis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pristimantis thectopternus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Sarcohyla hapsa*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Xenopus gilli*: motion: i, none [lit table has genus: Xenopus laevis, Xenopus larvae]; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Xenopus gilli*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait [lit table has genus: Xenopus laevis, Xenopus larvae]; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Duttaphrynus scaber*: motion: i, closest family (sweep-19#2), no carry rule allows family level for this trait; cff_hz: i, closest family (methods#995), no carry rule allows family level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest family (intake#47), no carry rule allows family level for this trait
 - *Hadromophryne natalensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Hylarana parva*: motion: i, closest family (herps#124), no carry rule allows family level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (sweep-1#23), no carry rule allows family level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
@@ -2096,7 +2096,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Hylarana macrodactyla*: motion: i, closest family (herps#124), no carry rule allows family level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (sweep-1#23), no carry rule allows family level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Hyperolius glandicolor*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait [lit table has genus: Hyperolius ukaguruensis]
 - *Leptomantis harrissoni*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Leptopelis bocagii*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Leptopelis bocagii*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Neobatrachus pelobatoides*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pelophylax cretensis*: motion: i, closest family (herps#124), no carry rule allows family level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (sweep-1#23), no carry rule allows family level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Pristimantis ventrimarmoratus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -2207,7 +2207,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Tomopterna tandyi*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Zhangixalus aurantiventris*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Ansonia minuta*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Glyphoglossus molossus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Glyphoglossus molossus*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Ingerophrynus philippinicus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Osteocephalus helenae*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Philautus aurantium*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -2224,13 +2224,13 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Dendropsophus branneri*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Elachistocleis pearsei*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Eleutherodactylus verrucipes*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
-- *Leptopelis vermiculatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Leptopelis vermiculatus*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Lithobates pustulosus*: motion: g, rule 3 from Lithobates catesbeianus (herps#124); cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: g, rule 3 from Lithobates pipiens (sweep-1#23); pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Litoria nigrofrenata*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest family (herps#116), no carry rule allows family level for this trait; pupil_shape: i, closest family (intake#48), no carry rule allows family level for this trait
 - *Amolops archotaphus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Microhyla okinavensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Ololygon littoralis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Ranitomeya ventrimaculata*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Ranitomeya ventrimaculata*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Raorchestes hassanensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Rhinella dapsilis*: motion: g, rule 3 from Rhinella marina (sweep-19#2); cff_hz: g, rule 3 from Rhinella marina (methods#995); fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: g, rule 3 from Rhinella marina (intake#47)
 - *Vandijkophrynus nubicola*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -2253,7 +2253,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Craugastor talamancae*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Espadarana audax*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Leptodactylus colombiensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Ranitomeya imitator*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Ranitomeya imitator*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Rhacophorus kio*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Rhinella merianae*: motion: g, rule 3 from Rhinella marina (sweep-19#2); cff_hz: g, rule 3 from Rhinella marina (methods#995); fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: g, rule 3 from Rhinella marina (intake#47)
 - *Scaphiophryne marmorata*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -2267,7 +2267,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Atlantihyla spinipollex*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Cyclorana verrucosa*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Discoglossus scovazzi*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Epipedobates espinosai*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Epipedobates espinosai*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Ingerophrynus galeatus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Leptobrachella arayai*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Odorrana amamiensis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
@@ -2378,7 +2378,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Pelobatrachus stejnegeri*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pristimantis omeviridis*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Pseudobufo subasper*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
-- *Ranitomeya uakarii*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
+- *Ranitomeya uakarii*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: i, closest order (intake#49), no carry rule allows order level for this trait
 - *Rhinella stanlaii*: motion: g, rule 3 from Rhinella marina (sweep-19#2); cff_hz: g, rule 3 from Rhinella marina (methods#995); fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: g, rule 3 from Rhinella marina (intake#47)
 - *Staurois nubilus*: motion: i, none; cff_hz: i, none; fov_h_deg: i, none; acuity_cpd: i, none; pupil_shape: i, none
 - *Agalychnis hulli*: motion: i, closest order (sweep-19#2), no carry rule allows order level for this trait; cff_hz: i, closest order (methods#995), no carry rule allows order level for this trait; fov_h_deg: i, none; acuity_cpd: i, closest order (sweep-1#23), no carry rule allows order level for this trait; pupil_shape: g, rule 3 from Agalychnis callidryas (intake#48)
