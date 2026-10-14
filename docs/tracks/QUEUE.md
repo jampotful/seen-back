@@ -69,3 +69,7 @@ Build 31 is on `main` (the owner said "push it" after the session's permission c
 ## The voice (13 October, 22:15)
 
 The owner approved the voice for now and will revisit it: `docs/views/VOICE.md` (rows in US English, about the animal only, humans never called people). Queue entry 10, the pass over every row, follows it once round 2 and the audit's decisions have settled what the rows say, so that the rows are written once.
+
+## Burst 9 (14 October, 12:05), the control room's
+
+The owner is away until evening and spends freely until 3 pm; two Opus agents at most, none in `docs/views` outside the audit and compiler files. Running: `burst9-audit3.md` (reads the 820 grade changes, prepares corrected copies of the logs) and `burst9-compiler2.md` (the parameter mix-ups, then specs for views without them). Skipped: anything that needs the phone checks.
