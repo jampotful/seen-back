@@ -16,4 +16,6 @@ Entry 59: abstract read and 4 partial records logged with access abstract. XML h
 
 Completed entry 62, Healy et al. 2013: full XML, all 34 species rows, appendix and six figures read. Logged 34 secondary CFF values and the cited tiger-beetle stop–start pursuit behaviour. Table method classes and typical habitat-light classes are kept distinct from measured test luminance; original cat/seal citation ambiguity is flagged.
 
-Next free text in order: entry 72 (PMC2855400). Current downloads and raw lookup responses are under /tmp/oa/oa6 (ephemeral, not committed).
+Entry 72 (PMC2855400) is a free-copy candidate, but its fullTextXML route returned HTTP 500; retrieval remains unresolved. No paper text was read and no marker was written for it.
+
+Pass finished between papers: 5 of 79 entries settled (2, 32, 40, 58, 62), with 74 remaining, including abstract-only entry 59. Remaining positions: 1, 3–31, 33–39, 41–57, 59–61, 63–79. Resume with API checks when hosts are available, and retrieve the known free copies for 59 and 72. Final counts this round: 79 checked/attempted; 6 candidate free copies identified; 4 full papers plus 1 abstract read; 183 records logged; 1 no-free-copy chapter. Counts include 75 individual bird thresholds rather than just species summaries. Current downloads and raw lookup responses are under /tmp/oa/oa6 (ephemeral, not committed).
