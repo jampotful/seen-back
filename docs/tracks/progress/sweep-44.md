@@ -1,0 +1,5 @@
+# sweep-44 progress
+Status: DONE 2026-10-14. All 40 genera of the batch were run in batch order, Anania to Polygaloides and Endotropis (the last genus in the batch was Endotropis). One 429 came from the fetch proxy (Springer, Catopsilia lead); no repeated 429s.
+Outputs: docs/views/searched/sweep-44.jsonl (40 records), docs/views/wanted/sweep-44.jsonl (2 lines), docs/views/evidence/sweep-44.jsonl (8 records).
+Evidence: Tecoma stans (photoperiod, HortScience 2011), Syringa vulgaris (floral scent, J For Res), Cynodon dactylon (extended day, PeerJ), Lolium perenne (long-day LpCO, Plant Mol Biol), Bouteloua curtipendula (short-day, Botanical Gazette 1943), Triteleia laxa (as Brodiaea laxa, long days, NJAS 1969), Scolopax minor (scotopic ERG, abstract). Plant records from abstracts are flagged partial.
+Notes: bird, insect, reptile and mammal genera returned nothing at genus level. PMC, bioone, krishikosh and ULPGC pages were blocked. Wanted: owl paper Table S1 (Glaucidium) and the NHM amphibian pupil data (Bombina).
