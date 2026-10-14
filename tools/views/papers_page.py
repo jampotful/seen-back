@@ -7,7 +7,8 @@ import csv, hashlib, json, re, sys, datetime, os
 def norm(t): return re.sub(r'[^a-z0-9]+', ' ', (t or '').lower()).strip()
 def pid(r): return hashlib.sha1(((r['doi'] or '').lower().strip() or 'title:' + norm(r['title'])).encode()).hexdigest()[:10]
 def row(r): return {'id': pid(r), 'n': int(r['rank']), 'p': int(r['priority'] or 3), 'got': r['status'] == 'in Drive', 'f': r['put in folder'].replace(' (top level)', ' (top level)'),
-    'a': r['authors'], 'y': r['year'], 't': r['title'], 'j': r['journal or book'], 'u': r['link'], 'h': r['how to get it'], 'w': r['why'], 's': r['species it would fix'], 'by': r['asked for by']}
+    'a': r['authors'], 'y': r['year'], 't': r['title'], 'j': r['journal or book'], 'u': r['link'], 'h': r['how to get it'], 'w': r['why'], 's': r['species it would fix'], 'by': r['asked for by'],
+    'gc': int(r.get('gain cells') or 0), 'gr': int(r.get('gain records') or 0)}
 if __name__ == '__main__':
     rows = [row(r) for r in csv.DictReader(open(sys.argv[1], encoding='utf-8'))]
     tpl = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'papers_page.html'), encoding='utf-8').read()

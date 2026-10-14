@@ -52,7 +52,7 @@ with open(out, 'w', newline='', encoding='utf-8') as f:
     c.writerow(['rank', 'priority', 'status', 'put in folder', 'authors', 'year', 'title', 'journal or book', 'doi', 'link', 'how to get it', 'why', 'species it would fix', 'asked for by', 'views'])
     for n, m in enumerate(rows, 1):
         got = m['got']
-        units = sorted(m['units']); folder = next((FOLDER[u] for u in units if u in FOLDER), 'Regards papers (top level)')
+        units = sorted(m['units']); folder = next((f for u in units for k, f in FOLDER.items() if k in u), 'Regards papers (top level)')  # birds-met, web-insects ...
         if not m.get('journal') and re.search(r'isbn|book|chapter', (m.get('get') or '') + ' ' + ' '.join(m['why']), re.I): folder = 'Books'
         link = m.get('url') or (('https://doi.org/' + m['doi']) if m.get('doi') else '')
         c.writerow([n, m['priority'], got, folder, m.get('authors', ''), m.get('year', ''), m.get('title', ''), m.get('journal', ''), m.get('doi', ''), link,

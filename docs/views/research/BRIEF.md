@@ -180,3 +180,5 @@ This section governs every round-2 prompt. Where it differs from the sections ab
 - `full`: the file is in the papers folder and the intake reads it. Treat it as any opened paper.
 - `partial`: the file is a printed web page holding the abstract and reference list only (its name ends in "(partial)"). Log only what the abstract states, grade the evidence as from an abstract, and use the reference list to name the papers worth asking for next. Do not request the same paper again.
 - `n/a`: the owner cannot obtain it by any route. Never put it on a wanted list again. Search for another source of the same fact (a thesis, a review, a dataset, a sister paper), and when none turns up, record the null search in `docs/views/searched/<unit>.jsonl` so the row's wording can be loosened under "Wording by certainty".
+
+**Thoroughness (13 October 2026, 20:30).** What counts as done, the search protocol that may declare a fact unknown, the order of work and the tests that keep it honest are in `docs/views/research/THOROUGH.md`. A search record without its full protocol fields counts as half-searched there.
