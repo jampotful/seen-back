@@ -1,11 +1,32 @@
 # Open-access batch 2
 
-Checkpoint 2026-10-14. The 79 entries (ranks 80 through 158) were checked with the prescribed discovery script. It saved responses outside the repository in `/tmp/oa`. There are 38 entries with free-copy candidates and 39 entries with no location returned by the queried indexes. Ranks 87 and 120 remain unresolved: their DOI-free entries did not yield the required title, first-author and year match. Negative index results are recorded in `docs/views/sources/oa-none-2.jsonl`.
+Checkpoint: 2026-10-14, branch `research/oa-2`. Stopped between papers after rank 99 under the research brief’s context-limit rule. App setup, builds, servers and app checks were skipped.
 
-Read: rank 80, the complete amphibian pupil CSV and its documentation. Logged 2,240 records, all checked against the downloaded CSV with `quotecheck.py`: 1,385 pupil classifications (1,293 adult and 92 larval), 648 binary activity classifications and 207 eye diameters. No NA cell was treated as a measurement. Adult and larval records are separate. The larval `none` entry for Rhinoderma darwinii was not interpreted as an observed pupil absence.
+- Entries checked: 79 (ranks 80–158), with all discovery completed before reading.
+- Entries with legal free-copy candidates: 38; these are indexed locations, not verified successful downloads.
+- Complete sources read: 6 (one dataset, five papers).
+- Evidence records logged and quote-verified: 3,314.
+- Negative index results: 39, in `docs/views/sources/oa-none-2.jsonl`; this does not prove that no legal copy exists.
+- Identity lookups unresolved: 2 (87 and 120), excluded from the negative-copy log.
+- Found candidates attempted but inaccessible: 4; other candidates awaiting reading: 28.
 
-Also read: rank 83, all 12 scanned pages and both numerical tables, yielding 46 records; and rank 84, the main full XML, complete supplementary PDF and associated analysis dataset, yielding 447 records. Total evidence: 2,733 records. All quotes passed quotecheck against the retrieved source text; scanned numerical tables were checked visually, and supplementary categorical rows were checked against pdftotext -layout output.
+| Rank | Source | Records | Reading and limitations |
+| --- | --- | ---: | --- |
+| 80 | Amphibian pupil dataset | 2,240 | Complete 1,293-row CSV and documentation. Adult and larval pupils kept separate; NA excluded; larval `none` not interpreted as measured absence. Binary diurnal=no is not converted to nocturnal. Eye diameters explicitly identified as compiled from earlier measurements. |
+| 83 | Toad low-light vision | 46 | All 12 scanned pages and tables. OCR numerical errors corrected against page images. Behavioural thresholds, neuronal thresholds, integration time, latency, gaze and snapping accuracy distinguished; secondary values labeled. |
+| 84 | Pupil shapes | 447 | Main XML, complete supplementary PDF, 214-species table, original analysis matrices and both movies. Matrices cross-checked against Table S1; binary recodings and reconstructed ancestors excluded. |
+| 93 | Five honeybee species | 115 | Complete XML, Table 1’s 15 sex/caste rows, figures and references. Morphology logged without converting counts or diameters into acuity or sensitivity. No supplements listed. |
+| 94 | Bird UV sensitivity | 315 | Complete XML and 310-row Word supplement, labeled Additional file 1 in the publication (batch says Additional file 2). Blank Type excluded; question marks and paleognath exceptions retained. Genotype-based tuning assigned grade g, without claiming measured peaks or behavioural colour vision. |
+| 99 | Tropical seabird fields | 151 | Complete XML and supplementary DOCX; every measured S1/S2 cell logged. Missing cells remain missing. Binocular overlap, blind gaps and vertical extent distinguished; discrepancies and ambiguous coordinate labels documented. |
 
-Reading continues in batch order. Rank 81 has a free PMC manuscript, but the XML service failed and the PMC page returned a bot challenge. Rank 83's repository API resolves the correct title. Rank 84's supplementary archive succeeded on the second request; its 214-species table was fully read and cross-checked against the 72-species original nonbinary matrices. Supplementary movies were also retrieved. No inaccessible candidate is marked as read. App setup and app checks were skipped under `AGENTS.md` and the task instruction.
+Access limits: rank 81’s PMC manuscript is listed as free, but XML/PDF-render returned 500 and PMC HTML returned a bot challenge. NCBI BioC returned 429 and that host was not retried. Rank 86’s indexed journal PDF and rank 97’s Karger PDF returned 403. Rank 92’s Dryad page opened, but all three resource downloads returned 403 and its API query returned 404. None is marked read or labeled as lacking a legal copy.
 
-Next: rank 86 is blocked at its indexed PDF; continue with rank 92 and then 93. Rank 81 remains inaccessible after public XML, PDF-render and PMC-page attempts. Ranks 82, 85 and 88-91 have negative index results; rank 87 is unresolved. Only the four files authorized by `oa-pass.md` are changed. PDFs, full text, metadata caches and extraction scripts stay outside the repository.
+Resume at rank 100 (negative index result), then rank 101 (next candidate). The full discovery responses and helper scripts are in `/tmp/oa`; regenerate lookups for unread entries if the machine is replaced. Skip DOI/title pairs already in `docs/views/sources/oa-2.jsonl`.
+
+Rank 101’s preprint PDF, rank 102’s landing page, rank 103’s XML and rank 104’s landing page were retrieved but not read. Rank 101’s batch DOI is a Dryad dataset DOI: verify the document’s own DOI/version, and do not mark a dataset read from a preprint alone. Ranks 87 and 120 still need the required title/first-author/year match after corrected comma-containing queries; rank 87 lacks authors and has year 0.
+
+Pending candidate ranks: 101, 102, 103, 104, 105, 109, 110, 113, 116, 117, 118, 119, 122, 123, 125, 126, 128, 130, 132, 135, 137, 141, 143, 146, 153, 154, 156, 158.
+
+All records were appended with `addlog.py`; all quotes passed `quotecheck.py` against retrieved source text, visually verified scan transcripts, or extracted PDF table layout. Rank 84’s categorical rows fail the PDF prose-order path but all 283 pass against its `pdftotext -layout` text. Source counts reconcile exactly with the evidence log.
+
+Only the four files authorized by `oa-pass.md` changed: this summary, `docs/views/evidence/oa-2.jsonl`, `docs/views/sources/oa-2.jsonl` and `docs/views/sources/oa-none-2.jsonl`. PDFs, full text, XML, metadata caches and scripts remain outside the repository. No pull request was opened.
