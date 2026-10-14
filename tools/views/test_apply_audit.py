@@ -38,4 +38,28 @@ with tempfile.TemporaryDirectory() as d:
     r = run(log, "--all", allp, "--out", out, "--force", "--retracted", "keep", "--no-mark")
     got = [json.loads(l) for l in open(out)]
     assert len(got) == 5 and all("audit" not in g for g in got) and got[2]["value"] == 3
+    # decisions: line 2's grade change is declined (the record is then as logged); a decision on a non-correction is a problem
+    recs2 = recs + [{"taxon": "F f", "trait": "t", "value": 6, "grade": "m", "note": ""}]
+    log2 = os.path.join(d, "v.jsonl")
+    open(log2, "w").write("".join(json.dumps(r) + "\n" for r in recs2))
+    key2 = lambda i, v, **kw: dict({"unit": "v", "id": "v:%d" % i, "line": i, "taxon": recs2[i - 1]["taxon"], "trait": "t",
+                                    "value": recs2[i - 1]["value"], "verdict": v}, **kw)
+    rows2 = [key2(2, "correct", corrected_record=dict(recs2[1], grade="g"), reason="review"),
+             key2(6, "correct", corrected_record=dict(recs2[5], grade="g", note="fixed"), reason="review; note")]
+    all2 = os.path.join(d, "ALL2.jsonl")
+    open(all2, "w").write("".join(json.dumps(r) + "\n" for r in rows2))
+    dec = os.path.join(d, "decisions.jsonl")
+    open(dec, "w").write("".join(json.dumps(x) + "\n" for x in [
+        {"id": "v:2", "set": {"grade": "m"}, "why": "too strict"}, {"id": "v:6", "set": {"grade": "m"}, "why": "too strict"}]))
+    out2 = os.path.join(d, "v.corrected.jsonl")
+    r = run(log2, "--all", all2, "--out", out2, "--decisions", dec)
+    assert r.returncode == 0, r.stderr
+    got = [json.loads(l) for l in open(out2)]
+    assert len(got) == 6
+    assert got[1]["grade"] == "m" and got[1]["audit"]["verdict"] == "correct_declined", got[1]
+    assert got[5]["grade"] == "m" and got[5]["note"] == "fixed" and got[5]["audit"]["was"] == {"note": ""}, got[5]
+    assert got[5]["audit"]["decision"] == "too strict"
+    open(dec, "a").write(json.dumps({"id": "v:1", "set": {"grade": "m"}, "why": "x"}) + "\n")
+    r = run(log2, "--all", all2, "--out", out2, "--force", "--decisions", dec)
+    assert r.returncode == 1 and "decision v:1" in r.stderr, r.stderr
 print("ok")

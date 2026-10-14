@@ -26,7 +26,7 @@ Code: `tools/lit/audit.py` (both passes), `tools/lit/audit_compare.py` (first-pa
 
 Rows also carry `flags` (the first-pass reasons: `supports:partly`, `supports:no`, `units`, `grade`, `taxon`, `number_not_in_quote`), `grade` as logged and, for `correct`, `grade_final`.
 
-Most corrections are grade changes. Of the 1,152 corrections, 975 change the grade (820 from `m` to `g`, 146 from `g` to `m`, 9 between other grades). The second pass applies the rule that a species-level record whose passage names only a genus, family or common name, or reports other studies, is `g`. The rule is in `SYSTEM_ADJ` in `tools/lit/audit.py`. A sample of the 820 is worth reading before they are applied.
+Most corrections are grade changes. Of the 1,152 corrections, 975 change the grade (820 from `m` to `g`, 146 from `g` to `m`, 9 between other grades). The second pass applies the rule that a species-level record whose passage names only a genus, family or common name, or reports other studies, is `g`. The rule is in `SYSTEM_ADJ` in `tools/lit/audit.py`. A sample of the 820 was read in burst 9 (`SAMPLE.md`): 109 of 124 were too strict, so a narrower rule keeps 53 of the 820 at `g` and returns 767 to `m` through `decisions.jsonl`. The corrected copies of every audited log are in `corrected/`.
 
 ## How to apply it to a log
 

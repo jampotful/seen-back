@@ -2,7 +2,7 @@
 """Apply the audit's verdicts to an evidence log and write a corrected copy. The log itself is never edited.
 
     python3 -I tools/views/apply_audit.py LOG --all docs/views/audit/ALL.jsonl --out LOG.corrected.jsonl
-        [--unit NAME] [--retracted drop|keep] [--no-mark] [--force]
+        [--unit NAME] [--retracted drop|keep] [--no-mark] [--force] [--decisions docs/views/audit/decisions.jsonl]
 
 LOG is docs/views/evidence/<unit>.jsonl from a research branch. The unit defaults to the file's name without .jsonl.
 ALL.jsonl has one row per record: {"unit", "id" ("<unit>:<line number>"), "line", "verdict", "taxon", "trait", "value", ...}.
@@ -12,6 +12,11 @@ What each verdict does to the copy:
 - retract: the line is dropped (--retracted drop, the default) or kept and marked (--retracted keep).
 - confirm, stands, unverifiable, flagged_unchecked, unseen: the line is copied unchanged. With marking on, a record that is
   flagged_unchecked or unverifiable gains "audit": {"verdict": ..., "reason": ...} so the open flag travels with it.
+--decisions takes the owner's or a later audit's overrides, one JSON object a line: {"id": "<unit>:<line>", "set": {field:
+value, ...}, "why": "..."}. For a correct row its fields are set on corrected_record before it is applied (burst 9 uses this
+to keep the grade 'm' where the second pass's rule was too strict). When the override leaves the record as logged, the
+line is copied unchanged and, with marking on, gains "audit": {"verdict": "correct_declined", "reason": ..., "decision": why}.
+A decision for a row that is not a correction is reported as a problem.
 A row is applied only when the log's line still has the taxon, trait and value the audit saw. A line that has changed since
 the audit is copied unchanged and reported, so that a log edited after the audit is never overwritten with stale fixes.
 The script refuses to write over LOG, and over an existing file unless --force is given. It exits with status 1 when any
@@ -36,6 +41,7 @@ def main(argv=None):
     ap.add_argument("--retracted", choices=["drop", "keep"], default="drop")
     ap.add_argument("--no-mark", action="store_true", help="do not add the audit field to changed or open records")
     ap.add_argument("--force", action="store_true", help="overwrite an existing --out file")
+    ap.add_argument("--decisions", default="", help="overrides for corrected records (decisions.jsonl)")
     a = ap.parse_args(argv)
     base = os.path.basename(a.log)
     unit = a.unit or (base[:-6] if base.endswith(".jsonl") else "")
@@ -54,6 +60,17 @@ def main(argv=None):
     if not rows:
         sys.exit("no rows for unit %r in %s" % (unit, a.all))
     out, count, problems = [], collections.Counter(), []
+    decided = {}
+    if a.decisions:
+        for line in open(a.decisions, encoding="utf-8"):
+            if line.strip():
+                d = json.loads(line)
+                if d["id"].rsplit(":", 1)[0] == unit:
+                    decided[int(d["id"].rsplit(":", 1)[1])] = d
+    for k, d in decided.items():
+        if k not in rows or rows[k]["verdict"] != "correct":
+            problems.append("decision %s: the audit row is %s, not a correction; ignored" % (
+                d["id"], rows[k]["verdict"] if k in rows else "missing"))
     n = 0
     for raw in open(a.log, encoding="utf-8"):
         if not raw.strip():
@@ -73,9 +90,20 @@ def main(argv=None):
         count[v] += 1
         if v == "correct":
             new = dict(row["corrected_record"])
+            d = decided.get(n)
+            if d:
+                new.update(d.get("set") or {})
+                count["decision applied"] += 1
+            was = {k: rec.get(k) for k in set(rec) | set(new) if not same(rec.get(k), new.get(k))}
+            if not was:
+                count["correct, declined by decision"] += 1
+                if not a.no_mark:
+                    rec = dict(rec, audit={"verdict": "correct_declined", "reason": row.get("reason", ""), "decision": d.get("why", "")})
+                out.append(rec); continue
             if not a.no_mark:
-                was = {k: rec.get(k) for k in set(rec) | set(new) if not same(rec.get(k), new.get(k))}
                 new["audit"] = {"verdict": "correct", "was": was, "reason": row.get("reason", "")}
+                if d:
+                    new["audit"]["decision"] = d.get("why", "")
             out.append(new)
         elif v == "retract":
             if a.retracted == "keep":
