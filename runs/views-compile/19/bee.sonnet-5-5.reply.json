@@ -1,0 +1,303 @@
+{
+ "spec": {
+  "key": "bee",
+  "version": 1,
+  "chip": "Bee",
+  "who": "a bee",
+  "applies_to": {
+   "family": [
+    "Apidae",
+    "Halictidae",
+    "Megachilidae",
+    "Andrenidae",
+    "Colletidae"
+   ]
+  },
+  "falls_back_to": "insect",
+  "modules": [
+   "remap"
+  ],
+  "cue": "The view is wide and coarse, the colours lean toward ultraviolet, and fast flicker is easy to follow.",
+  "params": {
+   "fov": {
+    "value": 312,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     250,
+     360
+    ],
+    "note": "Worked out from the field of each eye, 156 degrees back from straight ahead."
+   },
+   "cpd": {
+    "value": 0.26,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "range": [
+     0.1,
+     0.6
+    ],
+    "note": "Honeybee grating limit; bumblebees give about 0.25."
+   },
+   "pupil": "none",
+   "M": {
+    "value": "BEE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R55",
+     "R84",
+     "R93"
+    ],
+    "note": "Peaks come from honeybee receptors; the mapping from camera channels is the app's."
+   },
+   "uvBlue": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "A phone camera records almost no ultraviolet, so some of the blue is read as ultraviolet."
+   },
+   "rate": {
+    "value": 0.3,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R135"
+    ],
+    "range": [
+     0.2,
+     1
+    ],
+    "note": "A person's 60 hertz divided by the honeybee's 200 hertz in bright light."
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     344,
+     436,
+     556
+    ],
+    "src": [
+     "R55",
+     "R84",
+     "R93"
+    ]
+   }
+  },
+  "spectrum": {
+   "q": "BEE"
+  },
+  "remap": {
+   "blindAt": {
+    "value": 180,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     150,
+     210
+    ],
+    "note": "The two eyes each reach 156 degrees back, so the gap sits straight behind."
+   },
+   "blindDeg": {
+    "value": 48,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "range": [
+     20,
+     80
+    ],
+    "note": "360 minus 2 times 156 degrees."
+   },
+   "blindSoft": {
+    "value": 8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     20
+    ],
+    "note": "How softly the edge of the blind wedge fades."
+   }
+  },
+  "draw": {
+   "field": [
+    {
+     "name": "wedge",
+     "invented": true,
+     "note": "Draws the blind wedge behind the bee."
+    }
+   ],
+   "spectrum": [
+    {
+     "name": "matrix",
+     "invented": true,
+     "note": "Applies the bee colour matrix to the picture."
+    }
+   ]
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "A bee resolves about a quarter of a cycle per degree, where a person resolves about 60. The picture is very soft, and a flower has to fill several degrees of the view before a bee can pick it out.",
+    [
+     "R1",
+     "R3",
+     "R246"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "g",
+    "A wide view",
+    "Each eye of a honeybee reaches 156 degrees back from straight ahead. Together they cover about 312 degrees and leave a blind wedge of about 48 degrees directly behind the bee.",
+    [
+     "R32",
+     "R31"
+    ],
+    [
+     "params.fov",
+     "remap.blindAt",
+     "remap.blindDeg"
+    ]
+   ],
+   [
+    "g",
+    "Colours",
+    "The three colour receptors of a honeybee peak at about 344, 436 and 556 nanometres, in the ultraviolet, blue and green. Bees can see ultraviolet but no far red. The view shifts the colours to match, and the app chose how the camera's channels map onto them.",
+    [
+     "R55",
+     "R84",
+     "R93",
+     "R100"
+    ],
+    [
+     "params.M"
+    ]
+   ],
+   [
+    "g",
+    "Fast flicker",
+    "A honeybee follows flicker up to about 200 times a second in bright light, and free-flying bees give about 100. A person stops near 60. The view divides 60 by 200 and runs at 0.3 of a person's pace, so the picture steps and lags behind the world.",
+    [
+     "R135",
+     "R138"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "A phone camera records almost no ultraviolet, so the app reads some of the blue as ultraviolet. The app also chose how softly the blind wedge fades, and how the wedge and the colour change are drawn.",
+    [],
+    [
+     "params.uvBlue",
+     "remap.blindSoft",
+     "draw.field",
+     "draw.spectrum"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The honeybee grating limit in R1 is 0.26 cycles per degree and the parameter equals it."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "Each eye reaches 156 degrees back from straight ahead, so 2 x 156 = 312 degrees at the horizon."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R55",
+    "R84",
+    "R93"
+   ],
+   "kind": "calculation",
+   "how": "The matrix is built from the three honeybee peaks 344, 436 and 556 nm, and the camera channel mapping is the app's own."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R135"
+   ],
+   "kind": "calculation",
+   "how": "A person's flicker fusion of 60 Hz divided by the honeybee's 200 Hz gives 0.3."
+  },
+  {
+   "path": "remap.blindAt",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "Each eye reaches 156 degrees back, so the gap between them is centred straight behind at 180 degrees."
+  },
+  {
+   "path": "remap.blindDeg",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "360 - 2 x 156 = 48 degrees of blind wedge."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1"
+  },
+  {
+   "record": "R32",
+   "quote": "the honeybee FOV extends down to −90° in elevation and back to −156° in azimuth (at 0° el.)"
+  },
+  {
+   "record": "R55",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R84",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R93",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R135",
+   "quote": "At ca. 200 Hz the FRC drops to 50%."
+  }
+ ]
+}
