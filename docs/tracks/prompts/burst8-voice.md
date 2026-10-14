@@ -1,0 +1,7 @@
+# Burst 8: five sample rows in one voice, for the owner's approval (Opus)
+
+Start with `burst2-common.md`. Your track is `voice`. Read the rules for rows in `docs/views/research/BRIEF.md` (the second person at every grade, the carry rules and the writing rules for "Round 2"), then `docs/COVERAGE.md` for who the app's readers are, and the existing rows in `views/human.json`, `views/jumper.json` and `views/bee.json`. Stop after 60 minutes. Do not launch research units and do not edit any file under `views/` or any `research/*` branch.
+
+The final step of the queue is one pass over every view's rows so that they speak in one voice. It begins with five samples that the owner approves or redirects. Write `docs/views/VOICE-SAMPLES.md`: for five views that differ as much as possible (the jumper, the dog, the bee, the owl, the fungus), the three rows that matter most for each, as they stand now and as you would write them, side by side, followed by a short statement (at most 120 words) of the voice the rewrites share: what a row says first, how long it runs, how it marks a grade `m`, `g`, `i` or `x` to the reader without saying so, and what it never does. Keep each row to what its source supports, never add a fact, and keep every grade where it is. Make the rewrites good enough to approve: concrete, plain, a little dry, and ready to be read by someone holding a phone up to an animal.
+
+Final report, at most 150 words: where the samples are and what the voice statement commits the pass to.
