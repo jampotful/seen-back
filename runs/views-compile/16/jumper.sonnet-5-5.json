@@ -1,0 +1,505 @@
+{
+ "key": "jumper",
+ "version": 1,
+ "chip": "Jumping spider",
+ "who": "a jumping spider",
+ "applies_to": {
+  "family": [
+   "Salticidae"
+  ]
+ },
+ "falls_back_to": "spider",
+ "cue": "Hold the phone still and watch the edges. Movement catches the side eyes, and then the sharp front eyes swing round to look.",
+ "params": {
+  "fov": {
+   "value": 360,
+   "grade": "g",
+   "invented": false,
+   "src": [
+    "jumper.jsonl:Harland 2012",
+    "spider-day.jsonl:Lauren 2018"
+   ],
+   "range": [
+    100,
+    360
+   ]
+  },
+  "cpd": {
+   "value": 1.3,
+   "grade": "m",
+   "invented": true,
+   "src": [
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "the sharpest measured value for the wide side eyes, used for the whole picture"
+  },
+  "M": {
+   "value": "SIDE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "note": "the side eyes carry one green receptor type"
+  },
+  "sat": {
+   "value": 0,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Goté 2019",
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "range": [
+    0,
+    1.5
+   ],
+   "note": "one receptor type in the side eyes gives no colour"
+  },
+  "uvBlue": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "a phone camera records almost no ultraviolet, so part of the blue stands in for it"
+  },
+  "gate": {
+   "value": 1,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Land 1971"
+   ],
+   "range": [
+    0,
+    1
+   ],
+   "note": "the side eyes behave as blind to stationary objects"
+  },
+  "salience": 1,
+  "glow": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    2
+   ],
+   "note": "how brightly movement glows"
+  },
+  "living": {
+   "value": 1,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    3
+   ],
+   "note": "extra weight for movement that looks alive"
+  }
+ },
+ "spectrum": {
+  "q": "FRONT"
+ },
+ "matrices": {
+  "SIDE": {
+   "from_pigments": [
+    535
+   ],
+   "src": [
+    "jumper.jsonl:Yamashita 1976"
+   ],
+   "note": "one green class for the side eyes",
+   "rows": [
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ]
+   ],
+   "q": [
+    [
+     0.20215,
+     0.50744,
+     0.21355,
+     0.07686
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  },
+  "FRONT": {
+   "from_pigments": [
+    360,
+    530
+   ],
+   "src": [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   "note": "an ultraviolet class and a green class for the front eyes",
+   "rows": [
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     0.00042,
+     0.03086,
+     0.96872
+    ],
+    [
+     0.1783,
+     0.50901,
+     0.23464,
+     0.07804
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "zones": [
+  {
+   "id": "front",
+   "shape": "strip",
+   "at": [
+    0.5,
+    0.5
+   ],
+   "deg": {
+    "value": [
+     2,
+     21
+    ],
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:Land 1969"
+    ],
+    "range": [
+     0.5,
+     180
+    ],
+    "note": "the field of one front eye retina, about 2 degrees wide and 21 tall"
+   },
+   "cpd": {
+    "value": 3.8,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "jumper.jsonl:Harland 2012"
+    ],
+    "range": [
+     0.2,
+     15
+    ],
+    "note": "a typical species; Portia reaches about 12.5"
+   },
+   "M": {
+    "value": "FRONT",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "jumper.jsonl:Blest 1981",
+     "jumper.jsonl:Zurek 2015"
+    ]
+   },
+   "sat": {
+    "value": 0.7,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "two receptor types give less colour than a person has"
+   },
+   "gate": 0,
+   "gaze": 1
+  }
+ ],
+ "gaze": {
+  "saccade": {
+   "value": [
+    0,
+    6.7
+   ],
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "jumper.jsonl:Land 1969"
+   ],
+   "range": [
+    0,
+    200
+   ],
+   "note": "a 15 degree move takes about a tenth of a second; the base of zero is the app's choice"
+  },
+  "sweep": {
+   "value": [
+    2,
+    1.5
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    10
+   ],
+   "note": "the app's own mix of the sweep width and period the records describe"
+  },
+  "twist": {
+   "value": [
+    25,
+    2000,
+    3500
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    8000
+   ],
+   "note": "the app's own turning timings, chosen from the records on scanning"
+  },
+  "examine": {
+   "value": [
+    20000,
+    40000
+   ],
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    500,
+    60000
+   ],
+   "note": "the app's own choice for how long a target is looked over"
+  },
+  "ior": {
+   "value": 5000,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "spider-day.jsonl:Ferrante 2024"
+   ],
+   "range": [
+    0,
+    15000
+   ],
+   "note": "about 5 seconds, written in milliseconds"
+  },
+  "iorDeg": {
+   "value": 5,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    1,
+    30
+   ],
+   "note": "the size of the place that is ignored"
+  }
+ },
+ "rows": [
+  [
+   "m",
+   "The sharp front eyes",
+   "Two large front eyes each look through a strip about 2 degrees wide and 21 degrees tall, and the spider swings these strips about behind fixed lenses. In a Phidippus the finest detail they separate is about 3.8 cycles a degree, roughly an eighth of what a person reads on a chart.",
+   [
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Land 1969",
+    "jumper.jsonl:Land 2012"
+   ],
+   [
+    "zones[0].deg",
+    "zones[0].cpd"
+   ]
+  ],
+  [
+   "m",
+   "Portia sees finer",
+   "Portia fimbriata, a jumping spider, resolves about 12.5 cycles a degree in its front eyes, over three times the figure for a typical jumping spider. This picture uses the typical figure for the front strip.",
+   [
+    "jumper.jsonl:Williams 1980",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   []
+  ],
+  [
+   "g",
+   "Wide, grey side eyes",
+   "Three pairs of smaller eyes sit around the head and together cover close to a full circle. The best measured side eye resolves about 1.3 cycles a degree, and the side eyes carry a single green receptor type, so the wide field is drawn soft and grey.",
+   [
+    "jumper.jsonl:Goté 2019",
+    "jumper.jsonl:Harland 2012",
+    "jumper.jsonl:Shepeleva 2022",
+    "jumper.jsonl:Yamashita 1976",
+    "spider-day.jsonl:Lauren 2018",
+    "spider-day.jsonl:Shepeleva 2021"
+   ],
+   [
+    "params.fov",
+    "params.cpd",
+    "params.sat",
+    "params.M"
+   ]
+  ],
+  [
+   "m",
+   "Colour in the front only",
+   "The front eyes carry two receptor types, one tuned to ultraviolet near 360 nanometres and one to green near 530 nanometres. Most jumping spiders are thought to see this way, and a few species add a third class at the centre of the retina.",
+   [
+    "jumper.jsonl:Blest 1981",
+    "jumper.jsonl:Zurek 2015"
+   ],
+   [
+    "zones[0].M"
+   ]
+  ],
+  [
+   "m",
+   "Side eyes read movement",
+   "The side eyes behave as though blind to stationary objects, and a light that only switches on and off draws no turn. The lateral eyes can also tell the coherent movement of a living thing from random dots. In this picture still things fade at the edges and moving things glow.",
+   [
+    "jumper.jsonl:De Agrò 2024",
+    "jumper.jsonl:Land 1971"
+   ],
+   [
+    "params.gate"
+   ]
+  ],
+  [
+   "m",
+   "A quick turn and a slow scan",
+   "A large retinal turn of 15 degrees finishes within a tenth of a second. Once on a target the front eyes sweep side to side with a period of one to two seconds and rotate about 25 degrees each way, taking around two seconds to turn and resting several seconds at each end.",
+   [
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Land 1969"
+   ],
+   [
+    "gaze.saccade"
+   ]
+  ],
+  [
+   "m",
+   "A long look and a short memory",
+   "One scanning bout on a target lasts from 5 to 94 seconds, and most last 20 to 40. Afterwards the side eyes overlook the place just inspected for about five seconds.",
+   [
+    "jumper.jsonl:Ferrante 2024",
+    "jumper.jsonl:Land 1969",
+    "spider-day.jsonl:Ferrante 2024"
+   ],
+   [
+    "gaze.ior"
+   ]
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "The camera has no ultraviolet channel, so the app reads part of its blue as ultraviolet. It chose how brightly movement glows, how much living movement counts, how colourful the front strip looks, the size of the ignored place, and the colour mixes themselves. It also chose the exact sweep width and period, the turning timings and the length of a long look, using the records only as a guide.",
+   [
+    "jumper.jsonl:Glenszczyk 2021"
+   ],
+   [
+    "params.uvBlue",
+    "params.glow",
+    "params.living",
+    "zones[0].sat",
+    "zones[0].M",
+    "gaze.sweep",
+    "gaze.twist",
+    "gaze.examine",
+    "gaze.iorDeg"
+   ]
+  ],
+  [
+   "i",
+   "Settings the app chose",
+   "Some settings in this view are the app's own choices, because no measurement gives them. They are set to give a fair picture of the animal and can be tuned by hand.",
+   [],
+   [
+    "params.gate",
+    "gaze.saccade",
+    "gaze.ior"
+   ]
+  ]
+ ],
+ "modules": [
+  "gaze",
+  "salience",
+  "spectrum",
+  "zones"
+ ],
+ "draft": true
+}

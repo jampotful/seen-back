@@ -1,0 +1,302 @@
+{
+ "key": "bee",
+ "version": 1,
+ "chip": "Bee",
+ "who": "a bee",
+ "cue": "The world is wide, soft and very coarse, with ultraviolet in the colours, a small blind wedge behind, and a clock that runs faster than yours.",
+ "applies_to": {
+  "family": [
+   "Apidae",
+   "Halictidae",
+   "Megachilidae",
+   "Andrenidae",
+   "Colletidae"
+  ]
+ },
+ "falls_back_to": "insect",
+ "modules": [
+  "remap",
+  "spectrum"
+ ],
+ "params": {
+  "fov": {
+   "value": 312,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Taylor 2019"
+   ],
+   "range": [
+    100,
+    360
+   ],
+   "note": "two eyes that each reach 156 degrees back from straight ahead"
+  },
+  "cpd": {
+   "value": 0.26,
+   "grade": "m",
+   "invented": false,
+   "src": [
+    "bee.jsonl:Land 1997"
+   ],
+   "range": [
+    0.005,
+    40
+   ],
+   "note": "finest stripes the honeybee reliably resolved"
+  },
+  "pupil": "none",
+  "M": {
+   "value": "BEE",
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Land 2012",
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   "note": "receptor peaks are measured; the mapping from camera colours is the app's"
+  },
+  "uvBlue": {
+   "value": 0.8,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    1
+   ],
+   "note": "how much of the camera's blue is read as ultraviolet; phone cameras record almost none"
+  },
+  "rate": {
+   "value": 0.3,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Srinivasan 1984"
+   ],
+   "range": [
+    0.25,
+    2
+   ],
+   "note": "60 hertz divided by about 200 hertz"
+  }
+ },
+ "matrices": {
+  "BEE": {
+   "from_pigments": [
+    344,
+    436,
+    540
+   ],
+   "src": [
+    "bee.jsonl:Land 2012",
+    "bee.jsonl:van der Kooi 2021"
+   ],
+   "grade": "g",
+   "invented": true,
+   "rows": [
+    [
+     0.22664,
+     0.50311,
+     0.19444,
+     0.07581
+    ],
+    [
+     0.00084,
+     0.11082,
+     0.65545,
+     0.2329
+    ],
+    [
+     0.0,
+     8e-05,
+     0.00877,
+     0.99115
+    ]
+   ],
+   "q": [
+    [
+     0.0,
+     8e-05,
+     0.00877,
+     0.99115
+    ],
+    [
+     0.00084,
+     0.11082,
+     0.65545,
+     0.2329
+    ],
+    [
+     0.22664,
+     0.50311,
+     0.19444,
+     0.07581
+    ],
+    [
+     0,
+     0,
+     0,
+     0
+    ]
+   ]
+  }
+ },
+ "spectrum": {
+  "q": "BEE"
+ },
+ "remap": {
+  "blindAt": {
+   "value": 180,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Taylor 2019"
+   ],
+   "range": [
+    0,
+    360
+   ],
+   "note": "the two eyes' reach ends behind the bee, centred straight back"
+  },
+  "blindDeg": {
+   "value": 48,
+   "grade": "g",
+   "invented": true,
+   "src": [
+    "bee.jsonl:Taylor 2019"
+   ],
+   "range": [
+    0,
+    120
+   ],
+   "note": "360 degrees less the 312 degrees the eyes cover"
+  },
+  "blindSoft": {
+   "value": 6,
+   "grade": "i",
+   "invented": true,
+   "src": [],
+   "range": [
+    0,
+    60
+   ],
+   "note": "how softly the edge of the blind wedge fades"
+  }
+ },
+ "draw": {
+  "field": [
+   {
+    "name": "wedge",
+    "invented": true,
+    "note": "a blank wedge behind the bee"
+   }
+  ],
+  "spectrum": [
+   {
+    "name": "shift",
+    "invented": true,
+    "note": "ultraviolet drawn as blue, blue as green, green as red"
+   }
+  ],
+  "overlay": [
+   {
+    "name": "polar",
+    "invented": true,
+    "note": "the polarized pattern of the sky"
+   }
+  ]
+ },
+ "rows": [
+  [
+   "m",
+   "Sharpness",
+   "A honeybee can only just resolve stripes about four degrees wide, which is 0.26 cycles in a degree. A person manages about 60, so fine detail melts into soft blobs. Bumblebees measure about the same, near a quarter of a cycle.",
+   [
+    "bee.jsonl:Chakravarthi 2017",
+    "bee.jsonl:Land 1997"
+   ],
+   [
+    "params.cpd"
+   ]
+  ],
+  [
+   "g",
+   "Wide view",
+   "Each eye reaches about 156 degrees back from straight ahead, so the two eyes together cover about 312 degrees. Only a small wedge of about 48 degrees behind the bee stays blank.",
+   [
+    "bee.jsonl:Kelber 2019",
+    "bee.jsonl:Taylor 2019"
+   ],
+   [
+    "params.fov",
+    "remap.blindAt",
+    "remap.blindDeg"
+   ]
+  ],
+  [
+   "m",
+   "Colour",
+   "A bee has three kinds of colour receptor, tuned to ultraviolet, blue and green light, with peaks near 344, 436 and 540 nanometres. It can see ultraviolet but has no receptor for far red.",
+   [
+    "bee.jsonl:German Aerospace Center (DLR) and Bee Sensory and Behavioural Ecology Lab 2026",
+    "bee.jsonl:Land 2012",
+    "bee.jsonl:van der Kooi 2021",
+    "bees-wasps.jsonl:M 2024"
+   ],
+   [
+    "params.M"
+   ]
+  ],
+  [
+   "g",
+   "Speed",
+   "A honeybee can follow a flicker of about 200 times a second in bright light, and about 144 times a second in dimmer light. A person stops at about 60. The picture here steps and lags behind the world to suggest the bee's faster clock.",
+   [
+    "bee.jsonl:Inger 2014",
+    "bee.jsonl:Srinivasan 1984"
+   ],
+   [
+    "params.rate"
+   ]
+  ],
+  [
+   "m",
+   "Sky pattern",
+   "Bees read the pattern of polarized light in the blue sky as a compass when the sun is hidden. Ultraviolet receptors along the top edge of each eye do this work.",
+   [
+    "bee.jsonl:Land 2012",
+    "bees-wasps.jsonl:Kolyfetis 2025"
+   ],
+   []
+  ],
+  [
+   "m",
+   "Head turns",
+   "A bumblebee flies straight, then snaps its head round by 5 to 60 degrees in about 45 to 135 milliseconds. Between snaps its gaze stays almost fixed.",
+   [
+    "bee.jsonl:Boeddeker 2015"
+   ],
+   []
+  ],
+  [
+   "i",
+   "The app's own choices",
+   "Phone cameras record almost no ultraviolet, so the violet tint that stands for it is a guess. The shift of ultraviolet to blue, blue to green and green to red, the colour mapping, the softness of the blind wedge, the sky pattern drawing and the way flicker speed becomes a lag are all choices made by the app.",
+   [
+    "bee.jsonl:Lunau 2025"
+   ],
+   [
+    "params.M",
+    "params.uvBlue",
+    "params.rate",
+    "matrices.BEE",
+    "remap.blindSoft",
+    "remap.blindAt",
+    "remap.blindDeg",
+    "params.fov"
+   ]
+  ]
+ ],
+ "draft": true
+}

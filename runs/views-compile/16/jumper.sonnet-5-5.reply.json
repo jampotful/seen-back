@@ -1,0 +1,548 @@
+{
+ "spec": {
+  "key": "jumper",
+  "version": 1,
+  "chip": "Jumping spider",
+  "who": "a jumping spider",
+  "applies_to": {
+   "family": [
+    "Salticidae"
+   ]
+  },
+  "falls_back_to": "spider",
+  "cue": "Hold the phone still and watch the edges. Movement catches the side eyes, and then the sharp front eyes swing round to look.",
+  "params": {
+   "fov": {
+    "value": 360,
+    "grade": "g",
+    "invented": false,
+    "src": [
+     "R23",
+     "R37"
+    ],
+    "range": [
+     100,
+     360
+    ]
+   },
+   "cpd": {
+    "value": 1.3,
+    "grade": "m",
+    "invented": true,
+    "src": [
+     "R8"
+    ],
+    "range": [
+     0.3,
+     1.3
+    ],
+    "note": "the sharpest measured value for the wide side eyes, used for the whole picture"
+   },
+   "M": {
+    "value": "SIDE",
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R53"
+    ],
+    "note": "the side eyes carry one green receptor type"
+   },
+   "sat": {
+    "value": 0,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R83",
+     "R339"
+    ],
+    "range": [
+     0,
+     1.5
+    ],
+    "note": "one receptor type in the side eyes gives no colour"
+   },
+   "uvBlue": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "a phone camera records almost no ultraviolet, so part of the blue stands in for it"
+   },
+   "gate": {
+    "value": 1,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R369"
+    ],
+    "range": [
+     0,
+     1
+    ],
+    "note": "the side eyes behave as blind to stationary objects"
+   },
+   "salience": 1,
+   "glow": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "how brightly movement glows"
+   },
+   "living": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "extra weight for movement that looks alive"
+   }
+  },
+  "spectrum": {
+   "q": "FRONT"
+  },
+  "matrices": {
+   "SIDE": {
+    "from_pigments": [
+     535
+    ],
+    "src": [
+     "R53"
+    ],
+    "note": "one green class for the side eyes"
+   },
+   "FRONT": {
+    "from_pigments": [
+     360,
+     530
+    ],
+    "src": [
+     "R73",
+     "R54"
+    ],
+    "note": "an ultraviolet class and a green class for the front eyes"
+   }
+  },
+  "zones": [
+   {
+    "id": "front",
+    "shape": "strip",
+    "at": [
+     0.5,
+     0.5
+    ],
+    "deg": {
+     "value": [
+      2,
+      21
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R14",
+      "R45"
+     ],
+     "range": [
+      1,
+      25
+     ],
+     "note": "the field of one front eye retina, about 2 degrees wide and 21 tall"
+    },
+    "cpd": {
+     "value": 3.8,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R2"
+     ],
+     "range": [
+      1,
+      15
+     ],
+     "note": "a typical species; Portia reaches about 12.5"
+    },
+    "M": {
+     "value": "FRONT",
+     "grade": "g",
+     "invented": true,
+     "src": [
+      "R73",
+      "R54"
+     ]
+    },
+    "sat": {
+     "value": 0.7,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "range": [
+      0,
+      1.5
+     ],
+     "note": "two receptor types give less colour than a person has"
+    },
+    "gate": 0,
+    "gaze": 1
+   }
+  ],
+  "gaze": {
+   "saccade": {
+    "value": [
+     0,
+     6.7
+    ],
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R120"
+    ],
+    "range": [
+     0,
+     50
+    ],
+    "note": "a 15 degree move takes about a tenth of a second; the base of zero is the app's choice"
+   },
+   "sweep": {
+    "value": [
+     2,
+     1.5
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     10
+    ],
+    "note": "the app's own mix of the sweep width and period the records describe"
+   },
+   "twist": {
+    "value": [
+     25,
+     2000,
+     3500
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     10,
+     50
+    ],
+    "note": "the app's own turning timings, chosen from the records on scanning"
+   },
+   "examine": {
+    "value": [
+     20000,
+     40000
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     5000,
+     94000
+    ],
+    "note": "the app's own choice for how long a target is looked over"
+   },
+   "ior": {
+    "value": 5000,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R243"
+    ],
+    "range": [
+     1000,
+     10000
+    ],
+    "note": "about 5 seconds, written in milliseconds"
+   },
+   "iorDeg": {
+    "value": 5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     1,
+     30
+    ],
+    "note": "the size of the place that is ignored"
+   }
+  },
+  "rows": [
+   [
+    "m",
+    "The sharp front eyes",
+    "Two large front eyes each look through a strip about 2 degrees wide and 21 degrees tall, and the spider swings these strips about behind fixed lenses. In a Phidippus the finest detail they separate is about 3.8 cycles a degree, roughly an eighth of what a person reads on a chart.",
+    [
+     "R14",
+     "R45",
+     "R2",
+     "R147"
+    ],
+    [
+     "zones[0].deg",
+     "zones[0].cpd"
+    ]
+   ],
+   [
+    "m",
+    "Portia sees finer",
+    "Portia fimbriata, a jumping spider, resolves about 12.5 cycles a degree in its front eyes, over three times the figure for a typical jumping spider. This picture uses the typical figure for the front strip.",
+    [
+     "R1",
+     "R12"
+    ],
+    []
+   ],
+   [
+    "g",
+    "Wide, grey side eyes",
+    "Three pairs of smaller eyes sit around the head and together cover close to a full circle. The best measured side eye resolves about 1.3 cycles a degree, and the side eyes carry a single green receptor type, so the wide field is drawn soft and grey.",
+    [
+     "R23",
+     "R37",
+     "R5",
+     "R8",
+     "R83",
+     "R339"
+    ],
+    [
+     "params.fov",
+     "params.cpd",
+     "params.sat",
+     "params.M"
+    ]
+   ],
+   [
+    "m",
+    "Colour in the front only",
+    "The front eyes carry two receptor types, one tuned to ultraviolet near 360 nanometres and one to green near 530 nanometres. Most jumping spiders are thought to see this way, and a few species add a third class at the centre of the retina.",
+    [
+     "R73",
+     "R54",
+     "R82",
+     "R338",
+     "R84"
+    ],
+    [
+     "zones[0].M"
+    ]
+   ],
+   [
+    "m",
+    "Side eyes read movement",
+    "The side eyes behave as though blind to stationary objects, and a light that only switches on and off draws no turn. The lateral eyes can also tell the coherent movement of a living thing from random dots. In this picture still things fade at the edges and moving things glow.",
+    [
+     "R369",
+     "R273"
+    ],
+    [
+     "params.gate"
+    ]
+   ],
+   [
+    "m",
+    "A quick turn and a slow scan",
+    "A large retinal turn of 15 degrees finishes within a tenth of a second. Once on a target the front eyes sweep side to side with a period of one to two seconds and rotate about 25 degrees each way, taking around two seconds to turn and resting several seconds at each end.",
+    [
+     "R120",
+     "R129",
+     "R134",
+     "R142"
+    ],
+    [
+     "gaze.saccade"
+    ]
+   ],
+   [
+    "m",
+    "A long look and a short memory",
+    "One scanning bout on a target lasts from 5 to 94 seconds, and most last 20 to 40. Afterwards the side eyes overlook the place just inspected for about five seconds.",
+    [
+     "R146",
+     "R356",
+     "R243"
+    ],
+    [
+     "gaze.ior"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "The camera has no ultraviolet channel, so the app reads part of its blue as ultraviolet. It chose how brightly movement glows, how much living movement counts, how colourful the front strip looks, the size of the ignored place, and the colour mixes themselves. It also chose the exact sweep width and period, the turning timings and the length of a long look, using the records only as a guide.",
+    [
+     "R337"
+    ],
+    [
+     "params.uvBlue",
+     "params.glow",
+     "params.living",
+     "zones[0].sat",
+     "zones[0].M",
+     "gaze.sweep",
+     "gaze.twist",
+     "gaze.examine",
+     "gaze.iorDeg"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.fov",
+   "records": [
+    "R23",
+    "R37"
+   ],
+   "kind": "value",
+   "how": "Both records state a field of 360 degrees, or close to it, for the eyes combined."
+  },
+  {
+   "path": "params.cpd",
+   "records": [
+    "R8"
+   ],
+   "kind": "value",
+   "how": "R8 gives 1.3 cycles a degree for the antero-lateral eye of Evarcha blancardi, the sharpest side eye measured."
+  },
+  {
+   "path": "params.M",
+   "records": [
+    "R53"
+   ],
+   "kind": "calculation",
+   "how": "The side eyes have one green class peaking at 535 nm (the low end of 535-540), so a one-peak matrix at 535 nm is built from that record with the camera mapping chosen by the app."
+  },
+  {
+   "path": "params.sat",
+   "records": [
+    "R83",
+    "R339"
+   ],
+   "kind": "calculation",
+   "how": "A single receptor type (one class) is mapped to a saturation of 0, a mapping the app chose."
+  },
+  {
+   "path": "params.gate",
+   "records": [
+    "R369"
+   ],
+   "kind": "calculation",
+   "how": "The record says the side eyes act as completely blind to stationary objects, which the app maps to a gate of 1."
+  },
+  {
+   "path": "zones[0].deg",
+   "records": [
+    "R14",
+    "R45"
+   ],
+   "kind": "value",
+   "how": "The records give the retinal field as about 21 by 2 degrees, written here as width 2 and height 21."
+  },
+  {
+   "path": "zones[0].cpd",
+   "records": [
+    "R2"
+   ],
+   "kind": "value",
+   "how": "The record gives 3.8 cycles a degree for Phidippus johnsoni, from an inter-receptor angle of 0.13 degrees."
+  },
+  {
+   "path": "zones[0].M",
+   "records": [
+    "R73",
+    "R54"
+   ],
+   "kind": "calculation",
+   "how": "The matrix takes a UV peak of 360 nm (R73) and a green peak of 530 nm (R54) and the camera mapping is the app's."
+  },
+  {
+   "path": "gaze.saccade",
+   "records": [
+    "R120"
+   ],
+   "kind": "calculation",
+   "how": "A 15 degree saccade finishes within 0.1 s, so 100 ms / 15 degrees = 6.7 ms per degree, with the base set to 0 by the app."
+  },
+  {
+   "path": "gaze.ior",
+   "records": [
+    "R243"
+   ],
+   "kind": "calculation",
+   "how": "R243 gives about 5 seconds of reduced detection at the inspected place, and 5 s x 1000 = 5000 ms."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R23",
+   "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+  },
+  {
+   "record": "R37",
+   "quote": "their combined field of view is close to 360 degrees"
+  },
+  {
+   "record": "R8",
+   "quote": "to 1.3 cycles/degree, as in Evarcha blancardi Scopoli, 1763 [31]"
+  },
+  {
+   "record": "R53",
+   "quote": "Each curve has a single peak at 535-540 nm and a dip at the near ultraviolet region."
+  },
+  {
+   "record": "R83",
+   "quote": "The anterior and posterior lateral eyes have a single type of visual cell with a maximum spectral sensitivity at about 535-540 nm."
+  },
+  {
+   "record": "R339",
+   "quote": "offer monochromatic vision at a slightly lower resolution"
+  },
+  {
+   "record": "R369",
+   "quote": "the system behaves as though it were completely blind to stationary objects."
+  },
+  {
+   "record": "R14",
+   "quote": "about 21 ° x 2° for layers 1 and 2"
+  },
+  {
+   "record": "R45",
+   "quote": "about 21 ° x 2° for layers 1 and 2"
+  },
+  {
+   "record": "R2",
+   "quote": "visual angles of around 0.13 degrees"
+  },
+  {
+   "record": "R73",
+   "quote": "UV-sensitive cells had peaks at 360 nm"
+  },
+  {
+   "record": "R54",
+   "quote": "one green-sensitive (tiers 1 and 2, λmax = 530 nm)"
+  },
+  {
+   "record": "R120",
+   "quote": "large saccades of 150 are complete within o-1 sec."
+  },
+  {
+   "record": "R243",
+   "quote": "in the order of 5 seconds"
+  }
+ ]
+}
