@@ -1,0 +1,652 @@
+{
+ "key": "jumper",
+ "model": "claude-haiku-5-5",
+ "errors": [
+  "gaze.sweep: value [2,1.2] is not a cited record's value and does not lie between two of them (R129, R134)",
+  "gaze.twist: value [25,2000,3500] is not a cited record's value and does not lie between two of them (R139, R142)",
+  "gaze.pursuit: value 10 is not a cited record's value and does not lie between two of them (R150)"
+ ],
+ "reply": {
+  "spec": {
+   "key": "jumper",
+   "version": 2,
+   "chip": "Jumping spider",
+   "who": "a jumping spider",
+   "cue": "Hold still, as a jumping spider watches. Its big front eyes pick out what is sharp, and the side eyes catch anything that moves.",
+   "applies_to": {
+    "family": [
+     "Salticidae"
+    ]
+   },
+   "modules": [],
+   "inputs": {
+    "motion": "optional"
+   },
+   "params": {
+    "M": "SALT",
+    "fov": {
+     "value": 300,
+     "grade": "g",
+     "invented": false,
+     "src": [
+      "R23",
+      "R35"
+     ],
+     "note": "the whole animal's field, with the side eyes near 360 degrees and the six smaller eyes near 300"
+    },
+    "cpd": {
+     "value": 3.8,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R2"
+     ],
+     "note": "typical principal eye acuity, measured in Phidippus johnsoni"
+    },
+    "pupil": "o",
+    "gate": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice; the side eyes answer to movement, so still things fade"
+    },
+    "persist": {
+     "value": 0.15,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "fall": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "topoA": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "fovea": {
+     "value": 2,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "sat": {
+     "value": 0.8,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice; two colour classes give less than full colour"
+    },
+    "dof": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "gain": {
+     "value": 1.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "rate": {
+     "value": 0.5,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's step; a person's 60 hertz against flicker followed to about 40 hertz gives about 0.67, rounded down"
+    },
+    "uvBlue": {
+     "value": 1,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice; the ultraviolet is drawn from the blue channel"
+    },
+    "salience": 1,
+    "glow": {
+     "value": 0.9,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "glowC": {
+     "value": [
+      0.78,
+      1,
+      0.62
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the glow's colour"
+    },
+    "living": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no extra weight for living movement is stated in the records"
+    },
+    "ripple": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no sound or knock drawing for this spider"
+    },
+    "shimmer": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no shimmer"
+    },
+    "sheen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no reflecting layer is recorded for the principal eyes"
+    },
+    "noGreen": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the green class is kept"
+    },
+    "uvR": "",
+    "hold": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no head bob"
+    },
+    "thrust": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no head bob"
+    },
+    "field": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the animal is drawn as a creature, so no plant picture"
+    }
+   },
+   "zones": [
+    {
+     "id": "front",
+     "shape": "strip",
+     "at": [
+      0.5,
+      0.5
+     ],
+     "deg": [
+      2,
+      21
+     ],
+     "cpd": {
+      "value": 3.8,
+      "grade": "m",
+      "invented": false,
+      "src": [
+       "R2"
+      ],
+      "note": "principal eye acuity"
+     },
+     "M": "SALT",
+     "gaze": 1,
+     "size": [
+      0.5,
+      0.5
+     ]
+    }
+   ],
+   "matrices": {
+    "SALT": {
+     "from_pigments": [
+      359,
+      526
+     ],
+     "src": [
+      "R51",
+      "R72"
+     ],
+     "note": "one UV class and one green class, from Saitis barbipes"
+    }
+   },
+   "gaze": {
+    "saccade": {
+     "value": [
+      40,
+      4
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice; a 15 degree saccade is complete within 0.1 second"
+    },
+    "sweep": {
+     "value": [
+      2,
+      1.2
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R134",
+      "R129"
+     ],
+     "note": "side-to-side sweeps of at least 2 degrees, period 1.1 to 1.3 s"
+    },
+    "twist": {
+     "value": [
+      25,
+      2000,
+      3500
+     ],
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R142",
+      "R139"
+     ],
+     "note": "retinae turn 20 to 30 degrees each way, about 2 s to turn, held 2 to 5 s"
+    },
+    "examine": {
+     "value": [
+      4000,
+      12000
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "hold": {
+     "value": 1500,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "back": {
+     "value": 0.8,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "pursuit": {
+     "value": 10,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R150"
+     ],
+     "note": "smooth tracking below 10 degrees a second"
+    },
+    "ior": {
+     "value": 5000,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice; records give about 5 seconds of reduced detection after a check"
+    },
+    "iorDeg": {
+     "value": 6,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice"
+    },
+    "habit": {
+     "value": 0.75,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "the app's choice; records say repeated movement at one place stops evoking turns"
+    }
+   },
+   "sound": {
+    "k": {
+     "value": 0,
+     "grade": "i",
+     "invented": true,
+     "src": [],
+     "note": "no sound drawing"
+    }
+   },
+   "draw": {
+    "field": [
+     {
+      "name": "wedge",
+      "invented": true,
+      "note": "the default, a plain view"
+     }
+    ],
+    "overlay": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "the view without a web"
+     }
+    ],
+    "sound": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "the view without sound"
+     }
+    ],
+    "haptic": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "the view without touch"
+     }
+    ],
+    "colour": [
+     {
+      "name": "palm",
+      "invented": true,
+      "note": "the default colour drawing"
+     }
+    ],
+    "gaze": [
+     {
+      "name": "stamps",
+      "invented": true,
+      "note": "the principal eyes' scanning drawn as a small sharp strip moving over the scene"
+     },
+     {
+      "name": "strip",
+      "invented": true,
+      "note": "the sharp strip alone"
+     }
+    ],
+    "surround": [
+     {
+      "name": "glow",
+      "invented": true,
+      "note": "movement glows in the side eyes' picture"
+     }
+    ],
+    "steady": [
+     {
+      "name": "held",
+      "invented": true,
+      "note": "the scene holds still while the sharp strip moves over it"
+     }
+    ],
+    "spectrum": [
+     {
+      "name": "matrix",
+      "invented": true,
+      "note": "the colour wheel from the two classes"
+     }
+    ],
+    "slow": [
+     {
+      "name": "off",
+      "invented": true,
+      "note": "the live view"
+     }
+    ]
+   },
+   "rows": [
+    [
+     "m",
+     "Two kinds of eye",
+     "The big front pair sees fine detail and colour in a narrow strip about 2 degrees wide and 21 high. The side eyes take in almost the whole circle around the animal and respond to movement.",
+     [
+      "R14",
+      "R45",
+      "R23",
+      "R300"
+     ],
+     [
+      "params.fov",
+      "zones[0].deg",
+      "zones[0].shape"
+     ]
+    ],
+    [
+     "m",
+     "Sharpness in front",
+     "The front eyes resolve about 3.8 cycles in each degree, a little under a quarter of a person's best. Portia, the best case, reaches about 12.5.",
+     [
+      "R2",
+      "R12",
+      "R1"
+     ],
+     [
+      "params.cpd",
+      "zones[0].cpd"
+     ]
+    ],
+    [
+     "g",
+     "Colour",
+     "The front eyes carry two pigment classes, one for ultraviolet and one for green, so colour is seen in a reduced palette. The ultraviolet is drawn from the blue channel of the phone.",
+     [
+      "R51",
+      "R72",
+      "R338",
+      "R337"
+     ],
+     [
+      "matrices.SALT",
+      "zones[0].M"
+     ]
+    ],
+    [
+     "m",
+     "Scanning",
+     "The front eyes sweep the scene side to side and twist, rather than staying still. The picture follows this scan, and stationary things fade as the side eyes see only movement.",
+     [
+      "R134",
+      "R142",
+      "R369",
+      "R386"
+     ],
+     [
+      "params.gate",
+      "gaze.sweep",
+      "gaze.twist"
+     ]
+    ],
+    [
+     "i",
+     "The app's own choices",
+     "The strength of the glow, the lingering of the picture, the sharpness falloff, the saturation and the timings of attention are the app's guesses. No record gives them.",
+     [],
+     [
+      "params.glow",
+      "params.glowC",
+      "params.persist",
+      "params.fall",
+      "params.topoA",
+      "params.sat",
+      "params.uvBlue",
+      "params.rate",
+      "gaze.saccade",
+      "gaze.examine",
+      "gaze.hold",
+      "gaze.back",
+      "gaze.ior",
+      "gaze.iorDeg",
+      "gaze.habit"
+     ]
+    ]
+   ]
+  },
+  "claims": [
+   {
+    "path": "params.fov",
+    "records": [
+     "R23",
+     "R35"
+    ],
+    "kind": "range_middle",
+    "how": "The whole animal is given as 360 degrees by one record and near 300 degrees for the six smaller eyes by another; 300 is set between them, graded g."
+   },
+   {
+    "path": "params.cpd",
+    "records": [
+     "R2"
+    ],
+    "kind": "value",
+    "how": "Phidippus johnsoni principal eye acuity is given as 0.13 degrees, which is 3.8 cycles per degree."
+   },
+   {
+    "path": "zones[0].cpd",
+    "records": [
+     "R2"
+    ],
+    "kind": "value",
+    "how": "The front zone uses the same principal eye acuity of 3.8 cycles per degree."
+   },
+   {
+    "path": "zones[0].deg",
+    "records": [
+     "R14",
+     "R45"
+    ],
+    "kind": "value",
+    "how": "The principal retina is about 2 degrees wide and 21 high in object space."
+   },
+   {
+    "path": "gaze.sweep",
+    "records": [
+     "R134",
+     "R129"
+    ],
+    "kind": "value",
+    "how": "Horizontal sweeps are at least 2 degrees across with a period of 1.1 to 1.3 seconds."
+   },
+   {
+    "path": "gaze.twist",
+    "records": [
+     "R142",
+     "R139"
+    ],
+    "kind": "value",
+    "how": "Retinae turn 20 to 30 degrees each way, about 2 seconds to turn, and are held 2 to 5 seconds at each end."
+   },
+   {
+    "path": "gaze.pursuit",
+    "records": [
+     "R150"
+    ],
+    "kind": "value",
+    "how": "Smooth tracking was tested below 10 degrees a second."
+   },
+   {
+    "path": "matrices.SALT",
+    "records": [
+     "R51",
+     "R72"
+    ],
+    "kind": "value",
+    "how": "Peaks at 359 nm (UV) and 526 nm (green) are both given by Saitis barbipes."
+   },
+   {
+    "path": "params.gate",
+    "records": [
+     "R369"
+    ],
+    "kind": "value",
+    "how": "The side eyes behave as though completely blind to stationary objects, so still things fade fully; the value 1 is the app's switch, graded i."
+   }
+  ],
+  "quotes": [
+   {
+    "record": "R2",
+    "quote": "with more typical species (e.g., *Phidippus johnsoni*) having eyes that support visual angles of around 0.13 degrees"
+   },
+   {
+    "record": "R12",
+    "quote": "The highest value of the spatial resolving power (Nyquist frequency) of the principle eyes of jumping spiders, such as Portia fimbriata Doleschell, 1859, is 12.5 cycles/degree"
+   },
+   {
+    "record": "R14",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   },
+   {
+    "record": "R45",
+    "quote": "the angular subtense of the retinae in object space (about 21 ° x 2° for layers 1 and 2) is the same in both species"
+   },
+   {
+    "record": "R23",
+    "quote": "Combined, the four pairs of eyes give the spider a 360° field of view."
+   },
+   {
+    "record": "R35",
+    "quote": "the remaining six, smaller eyes providing a near 300° field of view"
+   },
+   {
+    "record": "R300",
+    "quote": "the side eyes being concerned principally with movement detection requiring relatively low resolution"
+   },
+   {
+    "record": "R369",
+    "quote": "the system behaves as though it were completely blind to stationary objects."
+   },
+   {
+    "record": "R338",
+    "quote": "color vision in the acute ‘principal’ eyes of most jumping spiders is based on only two types of photosensitive pigment, one sensitive to ultraviolet (UV) light, the other to green light"
+   },
+   {
+    "record": "R51",
+    "quote": "we find clear evidence for photoreceptor classes with maximal sensitivity in the UV (359 nm) and green (526 nm)"
+   },
+   {
+    "record": "R72",
+    "quote": "clear evidence for photoreceptor classes with maximal sensitivity in the UV (359 nm) and green (526 nm)"
+   },
+   {
+    "record": "R337",
+    "quote": "Contrasts in the UV most resemble those in the blue"
+   },
+   {
+    "record": "R134",
+    "quote": "The amplitude of horizontal scanning does not become smaller than 2° even for targets £° wide."
+   },
+   {
+    "record": "R129",
+    "quote": "It consists of an oscillatory, side-to-side movement of the retinae across the stimulus, with a period of 1-2 sec."
+   },
+   {
+    "record": "R142",
+    "quote": "the retinae rotating 20-300 clockwise then returning through the resting position to an inclination of 20-300 in the opposite sense."
+   },
+   {
+    "record": "R139",
+    "quote": "a simultaneous torsional movement in which the retinae partially rotate about the visual axes, through an angle of approximately 50° and with a period of 5-15 sec."
+   },
+   {
+    "record": "R150",
+    "quote": "Targets in the form of small spots can be tracked vertically or horizontally by the retinae over angles of at least 250"
+   }
+  ]
+ }
+}

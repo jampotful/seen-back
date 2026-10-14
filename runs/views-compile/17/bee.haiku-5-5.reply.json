@@ -1,0 +1,376 @@
+{
+ "spec": {
+  "key": "bee",
+  "version": 1,
+  "chip": "Bee",
+  "who": "a bee",
+  "cue": "The view is wide and soft, with a fine blur at the edges. Ultraviolet flowers show their markings, and fast movement jumps ahead.",
+  "params": {
+   "fov": {
+    "value": 312,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R32"
+    ],
+    "note": "the two eyes together at the horizon, worked out from the 156 degrees each eye reaches back"
+   },
+   "cpd": {
+    "value": 0.26,
+    "grade": "m",
+    "invented": false,
+    "src": [
+     "R1"
+    ],
+    "note": "the behavioural limit of the honeybee"
+   },
+   "fovea": {
+    "value": 1.2,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "a small central magnification the records do not measure"
+   },
+   "topoA": {
+    "value": 0.3,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's choice"
+   },
+   "fall": {
+    "value": 1.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's choice"
+   },
+   "pupil": "none",
+   "M": "BEE",
+   "uvBlue": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's choice; phone cameras record little ultraviolet"
+   },
+   "sat": {
+    "value": 0.8,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's reduction for the shifted colours; records give three colour classes but no saturation figure"
+   },
+   "gain": {
+    "value": 1.4,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's choice for dim light"
+   },
+   "rate": {
+    "value": 0.3,
+    "grade": "g",
+    "invented": true,
+    "src": [
+     "R135",
+     "R138"
+    ],
+    "note": "a person's 60 hertz divided by the bee's 200 hertz in bright light"
+   },
+   "dof": {
+    "value": 0.5,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's choice"
+   },
+   "persist": {
+    "value": 0.1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's choice"
+   },
+   "salience": 1,
+   "glow": {
+    "value": 0.9,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "note": "the app's choice; records say only that bee neurons respond to motion"
+   },
+   "glowC": {
+    "value": [
+     0.78,
+     1,
+     0.62
+    ],
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     1
+    ],
+    "note": "the glow's colour"
+   },
+   "living": {
+    "value": 0,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     3
+    ],
+    "note": "no record says bees pick out living movement"
+   }
+  },
+  "matrices": {
+   "BEE": {
+    "from_pigments": [
+     340,
+     436,
+     556
+    ],
+    "src": [
+     "R57",
+     "R84",
+     "R93"
+    ],
+    "note": "UV peak 340 nm from R57; blue 436 nm and green 556 nm from the honeybee compilation"
+   }
+  },
+  "spectrum": {
+   "q": "BEE",
+   "neutral": {
+    "value": 1,
+    "grade": "i",
+    "invented": true,
+    "src": [],
+    "range": [
+     0,
+     2
+    ],
+    "note": "the app's choice"
+   }
+  },
+  "zones": [
+   {
+    "id": "ocelli",
+    "shape": "whole",
+    "at": [
+     0.5,
+     0.2
+    ],
+    "deg": {
+     "value": [
+      20,
+      20
+     ],
+     "grade": "i",
+     "invented": true,
+     "src": []
+    },
+    "cpd": {
+     "value": 0.5,
+     "grade": "m",
+     "invented": false,
+     "src": [
+      "R9"
+     ],
+     "note": "the lateral ocellus resolves 2 degree gratings, which is 0.5 cycles a degree"
+    },
+    "M": "BEE",
+    "gate": 0
+   }
+  ],
+  "draw": {
+   "field": [
+    {
+     "name": "wedge",
+     "invented": true,
+     "note": "the default drawing"
+    }
+   ],
+   "colour": [
+    {
+     "name": "palm",
+     "invented": true,
+     "note": "the default drawing"
+    }
+   ],
+   "gaze": [
+    {
+     "name": "stamps",
+     "invented": true,
+     "note": "the default drawing"
+    }
+   ],
+   "clock": [
+    {
+     "name": "time",
+     "invented": true,
+     "note": "the default drawing"
+    }
+   ]
+  },
+  "modules": [],
+  "inputs": {
+   "camera": "required"
+  },
+  "rows": [
+   [
+    "m",
+    "Sharpness",
+    "A honeybee resolves about 0.26 cycles a degree, roughly 1 part in 230 of a person. This view is soft, so fine detail blurs out.",
+    [
+     "R1"
+    ],
+    [
+     "params.cpd"
+    ]
+   ],
+   [
+    "m",
+    "Ultraviolet and colour",
+    "Bees see ultraviolet, blue and green. Their UV receptors peak near 340 nm, their blue near 436 nm and their green near 556 nm. This view draws colour in those three bands.",
+    [
+     "R57",
+     "R84",
+     "R93",
+     "R99"
+    ],
+    [
+     "params.M",
+     "matrices.BEE"
+    ]
+   ],
+   [
+    "m",
+    "Speed",
+    "Bee eyes register flicker up to about 200 hertz in bright light, so this view runs slower than a person and then jumps ahead.",
+    [
+     "R135",
+     "R138"
+    ],
+    [
+     "params.rate"
+    ]
+   ],
+   [
+    "g",
+    "Field of view",
+    "Bees see nearly all round them, with a blind region behind and below. This view squeezes a wide field toward the middle.",
+    [
+     "R32"
+    ],
+    [
+     "params.fov"
+    ]
+   ],
+   [
+    "i",
+    "The app's own choices",
+    "Sharp middle, soft edge, glow on movement, dim-light gain, saturation and the blur with distance are the app's guesses. No record gives these numbers.",
+    [],
+    [
+     "params.fovea",
+     "params.topoA",
+     "params.fall",
+     "params.uvBlue",
+     "params.gain",
+     "params.sat",
+     "params.dof",
+     "params.persist",
+     "params.glow",
+     "params.glowC"
+    ]
+   ]
+  ]
+ },
+ "claims": [
+  {
+   "path": "params.cpd",
+   "records": [
+    "R1"
+   ],
+   "kind": "value",
+   "how": "The record states the highest resolved spatial frequency as 0.26 cycles a degree, and this value equals it."
+  },
+  {
+   "path": "params.fov",
+   "records": [
+    "R32"
+   ],
+   "kind": "calculation",
+   "how": "Each eye reaches 156 degrees back from straight ahead, so the two together cover 2 x 156 = 312 degrees at the horizon; worked out from one record, so at most g and invented."
+  },
+  {
+   "path": "params.rate",
+   "records": [
+    "R135",
+    "R138"
+   ],
+   "kind": "calculation",
+   "how": "A person's flicker fusion of 60 hertz divided by the bee's 200 hertz in bright light (R135) gives 0.3; R138 gives 100 hertz for free-flying bees. Worked out, so at most g and invented."
+  },
+  {
+   "path": "zones[0].cpd",
+   "records": [
+    "R9"
+   ],
+   "kind": "value",
+   "how": "The lateral ocellus resolves 2 degree gratings, which is 1/2 = 0.5 cycles a degree; the record states the 2 degree pattern as clearly resolved."
+  },
+  {
+   "path": "matrices.BEE",
+   "records": [
+    "R57",
+    "R84",
+    "R93"
+   ],
+   "kind": "value",
+   "how": "UV peak 340 nm (R57) is within 2 nm of the cited record; blue 436 nm (R84) and green 556 nm (R93) are the honeybee values stated in the compilation."
+  }
+ ],
+ "quotes": [
+  {
+   "record": "R1",
+   "quote": "They found that the highest spatial frequency reliably resolved by the bees was 0.26 cycle deg−1, with no evidence of a difference in acuity between horizontal and vertical gratings."
+  },
+  {
+   "record": "R9",
+   "quote": "The orientation of the gratings can be clearly observed even with 2° patterns and the imaged gratings are quite sharp."
+  },
+  {
+   "record": "R32",
+   "quote": "Seidl and Kaiser (1981) reported that the honeybee FOV extends down to −90° in elevation and back to −156° in azimuth (at 0° el.)"
+  },
+  {
+   "record": "R57",
+   "quote": "Honeybees' and bumblebees' peak wavelength sensitivity of UV photoreceptors lies at approximately 340 nm"
+  },
+  {
+   "record": "R84",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R93",
+   "quote": "Honey bee ( Apis mellifera ) 344, 436, 556"
+  },
+  {
+   "record": "R99",
+   "quote": "All Apocrita investigated to date, except for the Ichneumonidae, possess one copy of the LW1, SW and UV visual opsin gene expressed in the green, blue and UV-sensitive photoreceptors, respectively"
+  },
+  {
+   "record": "R135",
+   "quote": "At ca. 200 Hz the FRC drops to 50%."
+  },
+  {
+   "record": "R138",
+   "quote": "The temporal resolution of colour vision, determined to be at 100 Hz in free-flying bees through measurements of the flicker-fusion frequency"
+  }
+ ]
+}
