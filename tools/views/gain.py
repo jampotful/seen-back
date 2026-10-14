@@ -15,8 +15,9 @@ Verdicts (column "verdict"; the page hides "done" and "read" and lists "upgrade"
 - upgrade: none open, but some are filled only by borrowing from a relative (g) or only by an abstract (partial file);
   the paper would give the species' own full measurement. With --retire-upgrades these become "done".
 - done: every cell it bears on is measured in the species itself from a full text.
-- read: the intake has already read the work in full from Drive (docs/views/sources/drive.jsonl; never for a
-  supplement or table entry, whose DOI is the article's).
+- read: the intake has already read the work in full from Drive (docs/views/sources/drive.jsonl), or an outside worker
+  read a free copy of it in full (docs/views/sources/oa-*.jsonl, matched by DOI, else by title); never for a supplement
+  or table entry, whose DOI is the article's.
 - unknown: no taxa and no views to judge by; never retired, sorted at its priority's median gain.
 --status writes {page id: {"v": verdict, "gc": open cells, "r": rank}} for the page's database document status/all (ArtifactData set), so
 the page re-sorts and hides papers without a republish. Gains are estimates for ordering, never facts about a paper."""
@@ -29,7 +30,7 @@ def norm(t): return re.sub(r'[^a-z0-9]+', ' ', (t or '').lower()).strip()
 def key(doi, title): return 'doi:' + doi.lower().strip() if (doi or '').strip() else 'title:' + norm(title)
 DOI = re.compile(r'10\.\d{4,9}/[^\s"\'<>]+')
 WHY = {'done': 'Every gap it covers is now measured in the species itself.',
-       'read': 'Already read in full from your Drive folder.',
+       'read': 'Already read in full, from your Drive folder or a free copy online.',
        'upgrade': "Its gaps are filled by borrowing from relatives or from an abstract; it would give the species' own measurement."}
 
 def main():
@@ -64,6 +65,14 @@ def main():
             try: j = json.loads(l)
             except ValueError: continue
             if j.get('doi') and not j.get('skipped'): read.add(j['doi'].lower().strip())
+    read_titles = set()  # free copies an outside worker read in full (docs/tracks/prompts/oa-pass.md); oa-none-k lines are skipped
+    for p in glob.glob(os.path.join(repo, 'docs/views/sources/oa-*.jsonl')):
+        for l in open(p, encoding='utf-8'):
+            try: j = json.loads(l)
+            except ValueError: continue
+            if j.get('skipped') or not j.get('read'): continue
+            if (j.get('doi') or '').strip(): read.add(j['doi'].lower().strip())
+            elif j.get('title'): read_titles.add(norm(j['title']))
     data = list(csv.DictReader(open(src, encoding='utf-8'))); fields = list(data[0].keys())
     for r in data:
         m = lines.get(key(r.get('doi'), r.get('title')), {'taxa': set(), 'rows': set(), 'canon': False})
@@ -87,7 +96,7 @@ def main():
         soft = [c for c in hit.values() if c['state'] == 'g' or (c['state'] == 'm' and not c.get('full', True))]
         supplement = re.search(r'supplement|additional file|table s\d|online table', (r.get('title') or ''), re.I)
         doi = (r.get('doi') or '').lower().strip()
-        if doi and doi in read and not supplement: v = 'read'
+        if ((doi and doi in read) or (not doi and norm(r.get('title')) in read_titles)) and not supplement: v = 'read'
         elif not known or not hit: v = 'unknown'
         elif opened: v = 'needed'
         elif soft: v = 'done' if retire_up else 'upgrade'

@@ -15,7 +15,8 @@ You are helping research which animals, plants and fungi see what, for a phone a
 - Citation trail: find the nearest relative's source in OpenAlex (by DOI: `https://api.openalex.org/works/doi:<doi>`), then list later work that cites it: `https://api.openalex.org/works?filter=cites:<openalex id>,title_and_abstract.search:<genus>`.
 - Europe PMC for abstracts and open full texts: `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=<terms>&resultType=core&format=json`, and full text for open-access papers at `https://www.ebi.ac.uk/europepmc/webservices/rest/<PMCID>/fullTextXML`.
 - Crossref to confirm a DOI and its title: `https://api.crossref.org/works/<doi>`.
-- An open-access PDF (OpenAlex `open_access.oa_url`) may be downloaded and read with `pypdf` or `pdftotext`.
+- Semantic Scholar for a free PDF that OpenAlex missed: `https://api.semanticscholar.org/graph/v1/paper/DOI:<doi>?fields=title,openAccessPdf`, at about one request a second.
+- An open-access PDF (OpenAlex `open_access.oa_url`) may be downloaded and read with `pypdf` or `pdftotext`. Keep it outside the repository. Never reach a paper through a library login, a university proxy, Sci-Hub, LibGen, ResearchGate or Academia.edu.
 Screen the first 25 results of each query by title and abstract; read anything that may hold a measurement.
 
 ## Write what you find
