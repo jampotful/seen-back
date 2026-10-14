@@ -87,7 +87,8 @@ def main():
     if prev:
         moves = sorted(((views[k] - prev['views'].get(k, 0), k) for k in views), reverse=True)
         moved = [f"{k} {d:+.1f}" for d, k in moves if abs(d) >= 0.1][:3]
-        line += f"; since {prev['date'][:16]}: settled {settled - prev['settled']:+.1f} points" + (f" ({', '.join(moved)})" if moved else '')
+        d = round(settled - prev['settled'], 1) + 0.0
+        line += f"; since {prev['date'][:16].replace('T', ' ')}: settled {d:+.1f} points" + (f" ({', '.join(moved)})" if moved else '')
     if a.tests: line += f"; tests: {a.tests}"
     print(line + '.')
     if a.views:
