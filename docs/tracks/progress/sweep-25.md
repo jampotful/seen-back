@@ -39,3 +39,7 @@ done idx 35 Psyllobora
 done idx 36 Lycopus
 done idx 37 Galerida
 done idx 38 Elymus
+done idx 39 Euchaetes
+
+Complete: all 40 genera have a full-protocol search record (searched/sweep-25.jsonl, 40 lines). Evidence 11 records, wanted 6 lines.
+Blocked: PMC pages (reCAPTCHA), science.org, journals.biologists.com, cambridge.org (Arundo herbivory), archive.org biostor-163026 (permissions); one Springer page (s00359-020-01429-3) returned HTTP 429 and was not retried.
