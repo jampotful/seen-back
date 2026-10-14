@@ -5,3 +5,4 @@ No genus in the batch had a full-protocol record before this sweep (Myocastor ha
 
 Done genera (in order):
 - Schizachyrium, Emmelina, Sorghastrum, Opheodrys, Tellima, Magnolia (12:35)
+- Pinicola, Zanda, Euclidia, Panorpa (12:55)
