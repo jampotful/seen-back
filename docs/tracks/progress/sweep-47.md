@@ -1,5 +1,6 @@
 # sweep-47 progress
-Status: RUNNING. Batch sweep-1.json (40 genera), in the batch's order.
-Outputs: docs/views/searched/sweep-47.jsonl, docs/views/wanted/sweep-47.jsonl, docs/views/evidence/sweep-47.jsonl (when a record is logged).
-Done so far: Pelidnota, Macaranga, Phlomoides, Eudryas, Cyanthillium, Erysimum, Acanthosoma, Zamenis.
-Notes: PMC and bioone are behind bot checks; Europe PMC and Crossref returned 429 once each and were not retried.
+Status: DONE 2026-10-14. All 40 genera of batch sweep-1.json were run in the batch's order, Pelidnota to Trichilogaster. No budget message; Europe PMC and Crossref returned 429 once each and were not used again, and PMC and bioone pages sat behind bot checks.
+Outputs: docs/views/searched/sweep-47.jsonl (40 search records, each with canon DOIs, two or more queries and a filled `chased`), docs/views/wanted/sweep-47.jsonl (4 lines), docs/views/evidence/sweep-47.jsonl (9 records, all abstract level and marked partial).
+Evidence logged: Bothrops jararaca (fovea position, Tashiro 2022); Bothrops atrox (opsin genes, Katti 2018, grade g); Caladenia crebra and C. plicata (floral sexual-deception scent); Polybia occidentalis (behavioural colour discrimination, Shafir 1996); Circaetus gallicus (visual field 260 deg and binocular 20 deg, Martin and Katzir 1999); Viperidae (rh1, sws1, lws opsins, Gower 2019, grade g); Sedum spectabile = Hylotelephium spectabile (long-day plant).
+Wanted: Macaranga tanarius pollination paper, Erysimum capitatum population paper, a colubrid retina and opsin paper (Zamenis), Bothrops jararaca full text.
+Notes: plant genera mostly returned nothing; eye_type is recorded as not applicable to plants. Search records were kept honest: each lists only queries that were run.
