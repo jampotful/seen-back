@@ -11,3 +11,4 @@ Done genera (in order):
 - Erythromma, Stilpnia, Gryllus (13:50)
 - Echinochloa, Carpobrotus (14:10)
 - Bunias, Eacles, Labidomera (14:30)
+- Hemiargus, Rissa (14:50)
