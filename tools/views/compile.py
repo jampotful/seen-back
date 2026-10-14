@@ -194,6 +194,7 @@ GRADES_TEXT = """GRADES
 - invented: true when the app chose the number, the mapping or the drawing, even if a measurement lies behind it. A value you reach by a calculation is at most g and is invented. Every draw option is invented: true.
 - A parameter graded m or g needs a claim and at least one record id in src. A parameter graded i has an empty src and invented true.
 - A grade of ? in an example means "not yet graded"; never use it.
+- The carry rules (docs/views/research/BRIEF.md, Round 2) decide how far a measurement travels. A figure is stated only for the species it was measured in, and a row that gives it names that species. Photopigments and the number of receptor classes may travel within an order when two or more measured families agree and no measured member disagrees (then g). Pupil shape, eye position, field of view, the spot or band of sharpest vision, acuity, flicker speed and the tapetum travel only within a genus. The job's taxa are the genera the view stands for, so a record from outside them is wider and gives at most g, and a record from another order gives at most g for pigments and i for the rest unless it is the only evidence and the row says so.
 - Never raise a grade to look better supported. A spec with many i parameters is correct when the records are thin; the owner prefers an honest i to an unsupported m."""
 
 RULES_TEXT = """WHAT TO INCLUDE
