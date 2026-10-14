@@ -1,13 +1,25 @@
 # OA batch 5 — 2026-10-14
 
-In progress. All 79 entries went through the one-script lookup pass before reading. 31 papers had candidate free locations; 17 complete papers retrieved. OpenAlex returned HTTP 429 at index 41 (rank 358); no further OpenAlex requests were sent. Europe PMC and Semantic Scholar continued. The Animal Eyes title query returned HTTP 400. NCBI BioC returned HTTP 429 during fallback retrieval and was stopped.
+Pass completed for the copies retrievable in this session. All 79 batch entries went through the single-script availability pass before reading; 31 had indexed free-copy candidates. Seventeen legal full copies were retrieved and their main papers read, in batch order. The full-read ledger contains 17 entries, including two zero-record papers. No unread paper is marked read.
 
-Full papers read: 17 (batch indices [3, 5, 6, 11, 24, 27, 28, 38, 42, 44, 45, 47, 49, 50, 54, 70, 74]; ranks [320, 322, 323, 328, 341, 344, 345, 355, 359, 361, 362, 364, 366, 367, 371, 387, 391]). Records logged: 937 (928 full-text records, 9 partial abstract records). The source ledger includes zero-record reads and exactly preserves batch titles. Every appended quote passed the named quote-check procedure. Image-only table/figure values were checked visually; independently OCRed figure text is included in the source text used for reef-fish quote verification.
+Logged **1,047 quote-verified records**: 928 from full sources and 119 abstract-only records from 28 papers. Thirty-three abstracts were reviewed; five supplied no sufficiently specific additional values. Every appended record passed the prompt's quote checker and evidence append validation. Table/figure values were also checked visually where needed; reef-fish figure OCR came from the retrieved paper.
 
-Negative lookup lines: 24. They mean no free location found in completed lookups, not proof none exists. Unresolved entries excluded from oa-none-5: [18, 32, 35, 41, 51, 52, 53, 55, 56, 57, 58, 59, 60, 62, 63, 64, 65, 66, 67, 69, 71, 75, 76, 78]. Fourteen candidate papers have inaccessible or unverified copies and are excluded from the negative ledger. No unread copy is marked read.
+Full-read ranks: 320, 322, 323, 328, 341, 344, 345, 355, 359, 361, 362, 364, 366, 367, 371, 387, 391.
 
-Downloaded papers still to read, in batch order: [] (ranks []). Next: continue at the first pending paper, then the next two.
+The no-copy ledger has **43 entries**: 24 completed negative lookups, plus 19 additional abstract-only papers counted as having no full copy, as the prompt requires. These statuses mean no full copy found or retrieved here, not proof none exists. Known indexed copies, blocked retrievals and incomplete provider coverage are identified in the abstract-only entries. A further 19 entries remain unresolved or have inaccessible/unverified indexed copies and are excluded from that ledger. Across the batch, 14 indexed candidates could not be retrieved or verified; some also have abstract-only evidence.
 
-Source caveats: red drum FFF is 54 Hz in the reef-fish table and 53 Hz in its Discussion; both are retained. The Harris’s hawk workbook/main-text subject-label discrepancy is recorded. Motion-neuron temporal tuning is distinct from CFF. Pigment-template peaks, opsin-derived peaks, pooled taxa and secondary values are labelled by method/note/grade. Camel OCT fovea terminology is retained as an author identification, not converted to acuity. Supplementary material coverage is described in the source ledger.
+Availability limits: OpenAlex returned HTTP 429 at rank 358, so no more requests were sent to it. Title queries at ranks 335, 349 and 352 returned HTTP 400. Europe PMC and Semantic Scholar continued where a DOI was available. NCBI BioC fallback also returned HTTP 429 and was stopped. Older Europe PMC XML requests sometimes returned HTTP 500; legal Europe PMC PDFs recovered several of those papers. API failures are not evidence of paywalls.
 
-PDFs, XML, source texts, supplementary files, API responses and extraction scripts remain outside the repository (/tmp/oa and /workspace/work/oa-5). Only batch-5 evidence, source ledgers and this progress note are edited. No app setup, build, prepare.py, server, browser or app checks run.
+Source caveats: the red-drum FFF table says 54 Hz and its Discussion says 53 Hz; both are retained. Harris's hawk workbook/main-text subject labels differ. Motion tuning, electrical CFF, gene-derived pigment predictions and model-only predictions are distinguished. Camel OCT fovea identification is not converted into acuity. Abstract taxa without a reliable species identity retain their reported scope. The flower-scent paper and chromatic-aberration critique yield zero sensory records. Frog data include all twelve accessible supplementary appendices; other supplementary coverage is recorded in the source ledger. Gymnadenia and cephalopod-model supplements were unavailable. Hawk head-motion videos were inspected through full-duration sampled contact sheets, with no measurements inferred from them.
+
+No retrieved paper remains pending. For a future pass, the first three unresolved/inaccessible entries in batch order are:
+
+- Rank 326: Flowering of Phlox paniculata is influenced by photoperiod and cold treatment
+
+- Rank 335: Animal Eyes, second edition: chapter 5, Lens eyes on land (pp. 94-128), and chapter 9, Movements of the eyes (pp. 215-241, head-bobbing in birds p. 227)
+
+- Rank 349: Descriptive comparative morphology of the eye and ocular adnexa in Felidae: observations from a clouded leopard (Neofelis nebulosa), African lion (Panthera leo) and Pallas's cat (Otocolobus manul)
+
+Remaining ranks (no full read and no no-copy ledger entry): 326, 335, 349, 352, 358, 360, 363, 365, 368, 375, 379, 381, 382, 384, 385, 386, 392, 394, 395.
+
+PDFs, XML, full texts, supplements and API caches remain under /tmp/oa, outside the repository; scratch scripts are under /workspace/work/oa-5. Only the four permitted batch-5 files changed. App setup, builds, servers and app tests were skipped.
