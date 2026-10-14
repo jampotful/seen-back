@@ -87,12 +87,12 @@ Rows and their traits:
 | 69 | Patagioenas picazuro (Picazuro Pigeon) | 6,631 | 0 | Columbidae / Columbiformes | i | i | i | i | i |
 | 70 | Gorsachius melanolophus (Malayan Night Heron) | 6,619 | 0 | ? / ? | i | i | i | i | i |
 | 71 | Leptotila verreauxi (White-tipped Dove) | 6,512 | 0 | ? / ? | i | i | i | i | i |
-| 72 | Ardeola grayii (Indian Pond Heron) | 6,444 | 0 | ? / ? | i | i | i | i | i |
+| 72 | Ardeola grayii (Indian Pond Heron) | 6,444 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
 | 73 | Phaps chalcoptera (Common Bronzewing) | 6,324 | 0 | ? / ? | i | i | i | i | i |
 | 74 | Botaurus lentiginosus (American Bittern) | 6,314 | 126 | Ardeidae / Pelecaniformes | i | i | i | i | i |
 | 75 | Phimosus infuscatus (Bare-faced Ibis) | 6,216 | 0 | ? / ? | i | i | i | i | i |
 | 76 | Butorides striata (Striated Heron) | 6,149 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
-| 77 | Ardeola ralloides (Squacco Heron) | 6,138 | 0 | ? / ? | i | i | i | i | i |
+| 77 | Ardeola ralloides (Squacco Heron) | 6,138 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
 | 78 | Ciconia nigra (Black Stork) | 6,049 | 0 | Ciconiidae / Ciconiiformes | i | i | i | i | i |
 | 79 | Streptopelia semitorquata (Red-eyed Dove) | 5,932 | 0 | Columbidae / Columbiformes | i | i | i | i | i |
 | 80 | Tigrisoma mexicanum (Bare-throated Tiger Heron) | 5,893 | 0 | ? / ? | i | i | i | i | i |
@@ -114,7 +114,7 @@ Rows and their traits:
 | 96 | Lyrurus tetrix (Eurasian Black Grouse) | 3,832 | 0 | Phasianidae / Galliformes | i | i | i | i | i |
 | 97 | Rallus limicola (Virginia Rail) | 3,743 | 22 | Rallidae / Gruiformes | i | i | i | i | i |
 | 98 | Gallirallus philippensis (Buff-banded Rail) | 3,731 | 0 | ? / ? | i | i | i | i | i |
-| 99 | Ardeola bacchus (Chinese Pond Heron) | 3,685 | 0 | ? / ? | i | i | i | i | i |
+| 99 | Ardeola bacchus (Chinese Pond Heron) | 3,685 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
 | 100 | Streptopelia tranquebarica (Red Turtle Dove) | 3,660 | 0 | Columbidae / Columbiformes | i | i | i | i | i |
 | 101 | Alectoris chukar (Chukar) | 3,658 | 0 | ? / ? | i | i | i | i | i |
 | 102 | Streptopelia capicola (Cape Turtle Dove) | 3,638 | 0 | Columbidae / Columbiformes | i | i | i | i | i |
@@ -197,7 +197,7 @@ Rows and their traits:
 | 179 | Lophura leucomelanos (Kalij Pheasant) | 1,463 | 0 | ? / ? | i | i | i | i | i |
 | 180 | Synoicus ypsilophorus (Brown Quail) | 1,460 | 0 | ? / ? | i | i | i | i | i |
 | 181 | Fulica ardesiaca (Slate-colored Coot) | 1,448 | 0 | Rallidae / Gruiformes | i | i | i | i | i |
-| 182 | Ardeola speciosa (Javan Pond Heron) | 1,429 | 0 | ? / ? | i | i | i | i | i |
+| 182 | Ardeola speciosa (Javan Pond Heron) | 1,429 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
 | 183 | Ortalis columbiana (Colombian Chachalaca) | 1,401 | 0 | ? / ? | i | i | i | i | i |
 | 184 | Aramides ypecaha (Giant Wood-Rail) | 1,394 | 0 | ? / ? | i | i | i | i | i |
 | 185 | Centrocercus urophasianus (Greater Sage Grouse) | 1,370 | 0 | ? / ? | i | i | i | i | i |
@@ -349,7 +349,7 @@ Rows and their traits:
 | 331 | Rallus caerulescens (African Rail) | 231 | 0 | Rallidae / Gruiformes | i | i | i | i | i |
 | 332 | Perdix dauurica (Daurian Partridge) | 226 | 0 | ? / ? | i | i | i | i | i |
 | 333 | Ciconia stormi (Storm's Stork) | 224 | 0 | Ciconiidae / Ciconiiformes | i | i | i | i | i |
-| 334 | Ardeola rufiventris (Rufous-bellied Heron) | 223 | 0 | ? / ? | i | i | i | i | i |
+| 334 | Ardeola rufiventris (Rufous-bellied Heron) | 223 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
 | 335 | Grus leucogeranus (Snow Crane) | 223 | 0 | Gruidae / Gruiformes | i | i | i | g | i |
 | 336 | Treron olax (Little Green-Pigeon) | 223 | 0 | ? / ? | i | i | i | i | i |
 | 337 | Grus nigricollis (Black-necked Crane) | 221 | 0 | Gruidae / Gruiformes | i | i | i | g | i |
@@ -428,7 +428,7 @@ Rows and their traits:
 | 410 | Mitu tuberosum (Razor-billed Curassow) | 113 | 0 | ? / ? | i | i | i | i | i |
 | 411 | Nesoenas mayeri (Pink Pigeon) | 113 | 0 | ? / ? | i | i | i | i | i |
 | 412 | Crax alector (Black Curassow) | 112 | 0 | ? / ? | i | i | i | i | i |
-| 413 | Ardeola idae (Madagascar Pond Heron) | 111 | 0 | ? / ? | i | i | i | i | i |
+| 413 | Ardeola idae (Madagascar Pond Heron) | 111 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
 | 414 | Columba trocaz (Trocaz Pigeon) | 111 | 0 | Columbidae / Columbiformes | g | g | i | i | i |
 | 415 | Crax blumenbachii (Red-knobbed Curassow) | 110 | 0 | ? / ? | i | i | i | i | i |
 | 416 | Egretta vinaceigula (Slaty Egret) | 109 | 0 | Ardeidae / Pelecaniformes | i | i | i | i | i |
@@ -944,12 +944,12 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Patagioenas picazuro*: eye_movement: i, closest family (methods#1108), no carry rule allows family level for this trait; fov_h_deg: i, closest family (birds#189), no carry rule allows family level for this trait; cff_hz: i, closest family (birds#92), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#52), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds-met#1), only 1 measured family [exception proposed: Columba livia -> Columbidae (mourning dove, Eurasian coll]; spectral_range_nm: i, none; binocular_deg: i, none
 - *Gorsachius melanolophus*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Leptotila verreauxi*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
-- *Ardeola grayii*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
+- *Ardeola grayii*: eye_movement: g, rule 3 from Ardeola ralloides (sweep-14#11); fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: g, rule 3 from Ardeola ralloides (sweep-14#10)
 - *Phaps chalcoptera*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Botaurus lentiginosus*: eye_movement: i, closest family (methods#1109), no carry rule allows family level for this trait [exception proposed: Ardea cinerea, Ardea herodias (field and -> Ardeidae (great egret, snowy egret, litt]; fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, closest family (sweep-13#8), no carry rule allows family level for this trait
 - *Phimosus infuscatus*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Butorides striata*: eye_movement: i, closest family (methods#1109), no carry rule allows family level for this trait [exception proposed: Ardea cinerea, Ardea herodias (field and -> Ardeidae (great egret, snowy egret, litt]; fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, closest family (sweep-13#8), no carry rule allows family level for this trait
-- *Ardeola ralloides*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
+- *Ardeola ralloides*: eye_movement: m (sweep-14#11); fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: m (sweep-14#10)
 - *Ciconia nigra*: eye_movement: i, closest family (methods#1110), no carry rule allows family level for this trait; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Streptopelia semitorquata*: eye_movement: i, closest family (methods#1108), no carry rule allows family level for this trait; fov_h_deg: i, closest family (birds#189), no carry rule allows family level for this trait; cff_hz: i, closest family (birds#92), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#52), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds-met#1), only 1 measured family [exception proposed: Columba livia -> Columbidae (mourning dove, Eurasian coll]; spectral_range_nm: i, none; binocular_deg: i, none
 - *Tigrisoma mexicanum*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
@@ -971,7 +971,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Lyrurus tetrix*: eye_movement: i, none; fov_h_deg: m (birds#172); cff_hz: i, closest family (birds#93), no carry rule allows family level for this trait; acuity_cpd: m (birds#173); interreceptor_deg: i, none; lambda_max_nm: m (birds#174); spectral_range_nm: i, none [lit table has genus: Lyrurus tetrix]; binocular_deg: i, closest family (sweep-8#1), no carry rule allows family level for this trait [lit table has genus: Lyrurus tetrix]
 - *Rallus limicola*: eye_movement: i, closest family (sweep-1#15), no carry rule allows family level for this trait; fov_h_deg: i, closest family (birds#149), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (intake#38), only 1 measured family; spectral_range_nm: i, closest order (sweep-3#5), only 1 measured family; binocular_deg: i, closest family (birds#150), no carry rule allows family level for this trait
 - *Gallirallus philippensis*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
-- *Ardeola bacchus*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
+- *Ardeola bacchus*: eye_movement: g, rule 3 from Ardeola ralloides (sweep-14#11); fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: g, rule 3 from Ardeola ralloides (sweep-14#10)
 - *Streptopelia tranquebarica*: eye_movement: i, closest family (methods#1108), no carry rule allows family level for this trait; fov_h_deg: i, closest family (birds#189), no carry rule allows family level for this trait; cff_hz: i, closest family (birds#92), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#52), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds-met#1), only 1 measured family [exception proposed: Columba livia -> Columbidae (mourning dove, Eurasian coll]; spectral_range_nm: i, none; binocular_deg: i, none
 - *Alectoris chukar*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Streptopelia capicola*: eye_movement: i, closest family (methods#1108), no carry rule allows family level for this trait; fov_h_deg: i, closest family (birds#189), no carry rule allows family level for this trait; cff_hz: i, closest family (birds#92), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#52), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds-met#1), only 1 measured family [exception proposed: Columba livia -> Columbidae (mourning dove, Eurasian coll]; spectral_range_nm: i, none; binocular_deg: i, none
@@ -1054,7 +1054,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Lophura leucomelanos*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Synoicus ypsilophorus*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Fulica ardesiaca*: eye_movement: g, rule 3 from Fulica (sweep-1#15); fov_h_deg: i, closest family (birds#149), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (intake#38), only 1 measured family; spectral_range_nm: i, closest order (sweep-3#5), only 1 measured family; binocular_deg: i, closest family (birds#150), no carry rule allows family level for this trait
-- *Ardeola speciosa*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
+- *Ardeola speciosa*: eye_movement: g, rule 3 from Ardeola ralloides (sweep-14#11); fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: g, rule 3 from Ardeola ralloides (sweep-14#10)
 - *Ortalis columbiana*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Aramides ypecaha*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Centrocercus urophasianus*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
@@ -1206,7 +1206,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Rallus caerulescens*: eye_movement: i, closest family (sweep-1#15), no carry rule allows family level for this trait; fov_h_deg: i, closest family (birds#149), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (intake#38), only 1 measured family; spectral_range_nm: i, closest order (sweep-3#5), only 1 measured family; binocular_deg: i, closest family (birds#150), no carry rule allows family level for this trait
 - *Perdix dauurica*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Ciconia stormi*: eye_movement: i, closest family (methods#1110), no carry rule allows family level for this trait; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
-- *Ardeola rufiventris*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
+- *Ardeola rufiventris*: eye_movement: g, rule 3 from Ardeola ralloides (sweep-14#11); fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: g, rule 3 from Ardeola ralloides (sweep-14#10)
 - *Grus leucogeranus*: eye_movement: i, closest genus (intake#26), measured members of the genus disagree (rule 5); fov_h_deg: i, closest order (birds#149), no carry rule allows order level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Grus americana (intake#38); spectral_range_nm: g, rule 2 from Grus americana (sweep-3#5); binocular_deg: g, rule 3 from Grus paradisea (birds#175)
 - *Treron olax*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Grus nigricollis*: eye_movement: i, closest genus (intake#26), measured members of the genus disagree (rule 5); fov_h_deg: i, closest order (birds#149), no carry rule allows order level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Grus americana (intake#38); spectral_range_nm: g, rule 2 from Grus americana (sweep-3#5); binocular_deg: g, rule 3 from Grus paradisea (birds#175)
@@ -1285,7 +1285,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Mitu tuberosum*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Nesoenas mayeri*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Crax alector*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
-- *Ardeola idae*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
+- *Ardeola idae*: eye_movement: g, rule 3 from Ardeola ralloides (sweep-14#11); fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: g, rule 3 from Ardeola ralloides (sweep-14#10)
 - *Columba trocaz*: eye_movement: g, rule 3 from Columba livia (methods#1108); fov_h_deg: g, rule 3 from Columba livia (birds#189); cff_hz: g, rule 3 from Columba livia (intake#9); acuity_cpd: g, rule 3 from Columba livia (birds#52); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Columba livia (birds-met#1); spectral_range_nm: i, none; binocular_deg: i, none
 - *Crax blumenbachii*: eye_movement: i, none; fov_h_deg: i, none; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, none
 - *Egretta vinaceigula*: eye_movement: i, closest family (methods#1109), no carry rule allows family level for this trait [exception proposed: Ardea cinerea, Ardea herodias (field and -> Ardeidae (great egret, snowy egret, litt]; fov_h_deg: i, closest family (birds#129), no carry rule allows family level for this trait; cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; binocular_deg: i, closest family (sweep-13#8), no carry rule allows family level for this trait
