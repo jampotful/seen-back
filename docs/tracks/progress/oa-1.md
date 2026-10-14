@@ -1,14 +1,14 @@
 # Open-access pass, batch 1
 
-2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Resumed from the entry-13 handoff on 2026-10-14. Completed through entry 17 where full text was available. Next full verified copy is **entry 18, Ecological and morphological correlates of visual acuity in birds**. Entry 14 yielded four abstract-only records; entries 14–15 remain full-text retrieval-blocked and entry 16 has no retrieved abstract. No app setup, builds, servers, browser tests or self-tests ran.
+2026-10-14. Partial pass on `research/oa-1`, based on `de54993`. Resumed from the entry-13 handoff on 2026-10-14. Completed through entry 18 where full text was available. Next full verified copy is **entry 27, Overcoming the loss of blue sensitivity through opsin duplication in the largest animal group, beetles**. Investigate entries 19–26 first. Entry 14 yielded four abstract-only records; entries 14–15 remain full-text retrieval-blocked and entry 16 has no retrieved abstract. No app setup, builds, servers, browser tests or self-tests ran.
 
 ## Counts
 
 - **79 batch entries processed** in the discovery pass before reading papers. This does not mean all three providers successfully checked every entry.
-- **35 candidate open-copy locations found**; **17 full documents retrieved and identified** by title on the PDF first page or XML article title. Eight are read; nine are waiting.
-- **8 full papers read**, including available relevant tables and supplements; **3,681 full-text records**.
+- **35 candidate open-copy locations found**; **17 full documents retrieved and identified** by title on the PDF first page or XML article title. Nine are read; eight are waiting.
+- **9 full papers read**, including available relevant tables and supplements; **4,055 full-text records**.
 - **5 additional abstracts with logged measurements** from papers with no free full copy located; **36 partial records**. Abstracts do not count as full papers read.
-- **3,717 evidence records total**, all quote-checked before append with `addlog.py`; no failed quotes retained. Source-registry counts agree with full-text evidence counts.
+- **4,091 evidence records total**, all quote-checked before append with `addlog.py`; no failed quotes retained. Source-registry counts agree with full-text evidence counts.
 - **10 papers with no free copy located after completed permitted lookups**, recorded in `docs/views/sources/oa-none-1.jsonl`. Four of these yielded the abstract records above.
 - **34 entries remain unresolved at discovery**, due to provider interruption or no verifiable title/author/year match. They are not declared unavailable.
 - **18 further advertised candidate copies could not be retrieved**. They remain retrieval-blocked rather than counted as confirmed no-copy papers.
@@ -29,8 +29,9 @@ The temporary lookup script, provider responses, downloads and extracted text ar
 | 11 | Potier et al., owl fields | 898 | Full XML plus DOCX, Table S1 PDF and four-sheet workbook. 43 species' descriptors, 665 individual signed profile cells and 52 bill projections. Profile cells conservatively inferred because interpolation is unmarked. Ninox 54.5° in text versus 52° in tables, and Strix aluco 47° versus 48°, remain flagged. Posterior 180° is only an upper bound. |
 | 13 | Mohun & Davies, amphibian photoreception | 99 | All 12 pages, Table 1 and figure captions/references. Review evidence: native/regenerated and A1/A2 peaks, life stages and mixture ratios stay separate. Split printed Xenopus 4/45 interpreted as 445 ±6 only with inference grade; Cynops green-rod table/text conflict retained. No supplement is cited in the PDF. |
 | 17 | Kopania & Clark, mammalian retinal specializations | 290 | Full XML, six supplement tables and four supplement figures/references. 119 features from 82 retinal-species rows, 91 bony orbit angles, 78 estimated map coordinates, two secondary human cell densities. Measured-species columns override phylogeny/common-name labels; wolf, hyena, primates, marmot and camel distinctions preserved. Chinchilla retinal species ambiguous; blanks not absence. Published 2025 (batch says 2024). |
+| 18 | Caves et al., avian acuity | 374 | Full XML, all 17 supplement pages, main tables and figure labels. 94 S1 bird rows (caption says 93); 29 S2 vertebrates (caption says 28), two duplicate RGC values omitted. RGC/behavior distinctions and uncertain method labels preserved; Dasyurus table/reference species conflict left unresolved at genus level. S1/S2 acuity disagreements retained. Main Table 1 image values and Fig.4 labels manually transcribed, visually verified, then quote-checked; Fig.4 magpie 38.3 versus S1 33 flagged inferred. |
 
-None of the eight read copies is an accepted manuscript: publisher-formatted papers or XML metadata explicitly mark manuscript/preprint as no. No full source is marked read until the reading and quote checks were complete.
+None of the nine read copies is an accepted manuscript: publisher-formatted papers or XML metadata explicitly mark manuscript/preprint as no. No full source is marked read until the reading and quote checks were complete.
 
 The detailed CSV/XLSX evidence quotes exact cells (or consecutive cells), with filename, sheet, row/column or cell coordinates in `where`. Signed retinal-margin separation is distinct from total field of view. The genetic-recovery trait is distinct from physiological receptor classes. New traits have reasons in `note`; derived/inferred results retain their grades.
 
@@ -48,7 +49,7 @@ All carry `partial: true`, `access: abstract`, `opened: true`, and the retrieved
 
 ## Resume
 
-1. Read entry 18 in full with its free supplement; continue down the batch in order. Keep source-registry entries confined to completed full readings.
+1. Investigate entries 19–26, then read entry 27 in full with supplements; continue down the batch in order. Keep source-registry entries confined to completed full readings.
 2. Revisit discovery-pending entries in a fresh session with the rate-limit rule respected. Exact title/first-author/year agreement is still required for DOI-less records. Do not convert provider failures into no-copy results.
 3. Investigate retrieval-blocked candidate copies through lawful publisher/repository routes. Read and quote-check any abstract-only measurements; do not mark a full paper read from an abstract.
 
@@ -56,7 +57,6 @@ Discovery-pending entry numbers: 2, 12, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 
 
 Retrieved, title-verified copies awaiting full reading (the following are metadata links, not read claims):
 
-- **18**: Ecological and morphological correlates of visual acuity in birds: supplementary Tables S1 and S2 (acuity, eye size and body mass for 94 species). https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10906485/fullTextXML
 - **27**: Overcoming the loss of blue sensitivity through opsin duplication in the largest animal group, beetles. https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5428366/fullTextXML
 - **28**: Lens and cornea limit UV vision of birds – a phylogenetic perspective. https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8601714/fullTextXML
 - **32**: Visual fields, foraging and collision vulnerability in gulls (Laridae). https://pure-oai.bham.ac.uk/ws/files/239436691/ibi.13360.pdf
@@ -92,3 +92,5 @@ Advertised candidate copies not yet retrievable (no absence verdict implied):
 On 2026-10-14 the unresolved-entry retry script enforced at least 1.1 seconds between OpenAlex request start times (and between Semantic Scholar request starts). The first OpenAlex request, for entry 2 by exact title, immediately returned HTTP 429. Per BRIEF, no further requests went to that provider in this session. No second OpenAlex request occurred, so there is no observed spacing pair to report. The 34 unresolved entries remain unresolved; provider failure is not an absence verdict. Saved previous lookup responses before retrying; no completed search was erased from the audit trail. Existing Europe PMC and Semantic Scholar successful/404 results were retained.
 
 Entry 15's re-retrieved abstract reports genomic hypotheses but no species-specific numerical vision measurement to add; entry 16's DOI search returned no abstract. The chick abstract is a fifth evidence-bearing abstract, not a completed no-copy verdict. Supplement Table S5 for entry 17 gives BH p=0.08 for the 50%-diet horizontal-streak-only test, despite main-text wording implying this cutoff result held; no universal ecological carry is inferred. Raw map pixel sizes were not logged as physical retinal dimensions.
+
+Entry 18's linked Dryad dataset metadata and file list were retrieved through the public API, but the first file download returned 401; no authentication attempted. Supplement PDFs provide the measurements above. Entry 30 is therefore still not fully retrieved/read. The Europe PMC advertised rendered main-PDF endpoint returned 404; the full XML, supplements and linked graphics were available.
