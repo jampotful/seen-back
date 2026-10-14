@@ -135,5 +135,18 @@ ok(len(out["matrices"]["X"]["rows"]) == 3, "rows are computed for a matrix given
 pairq = {"value": "sweeps of 2 degrees", "quote": "sweeps with an amplitude of 2 degrees and a period of 1.2 s"}
 ok(C.value_supported([2, 1.2], [pairq]) is True and C.value_supported([3, 1.2], [pairq]) is False, "numbers written in a record's quote support a pair worked from one sentence")
 
+# the glossary (views/PARAMS.md)
+G = C.read_glossary()
+whole, zone = G.get("Whole-picture settings", {}), G.get("Zone keys", {})
+missing = [n for n in F["params"] if n not in whole]
+ok(not missing, "glossary: every whole-picture setting the engine reads has an entry (missing: %s)" % ", ".join(missing))
+missing = [k for k in F["zone_keys"] if "zones." + k not in zone]
+ok(not missing, "glossary: every zone key has an entry (missing: %s)" % ", ".join(missing))
+ok("zones.cpd" in zone and "eye" in zone["zones.cpd"] and "gaze.saccade" in G.get("Gaze keys", {}), "glossary: zone and gaze entries are read")
+gt = C.glossary_text(G)
+ok("THE GLOSSARY" in gt and "- cpd:" in gt and "\u2014" not in gt, "glossary: the text sent has the entries and no em dash")
+ut = C.user_text({"key": "t", "who": "a test animal"}, "spider", specs["spider"], [], G)
+ok(ut.index("THE GLOSSARY") < ut.index("THE NEAREST EXISTING SPEC"), "glossary: sent with each view's request, before the example")
+
 print("%d failed" % len(fails))
 sys.exit(1 if fails else 0)

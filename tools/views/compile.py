@@ -416,9 +416,60 @@ def nearest_example(job, specs):
     return best, specs[best]
 
 
-def user_text(job, example_key, example, picked):
+# ---------------------------------------------------------------------------------------------------------------
+# the glossary (views/PARAMS.md): what each setting controls, its units, and which eye or region its value comes from
+
+GLOSSARY_FILE = os.path.join(ROOT, "views", "PARAMS.md")
+
+
+def read_glossary(path=GLOSSARY_FILE):
+    """{group: {name: text}} from views/PARAMS.md. A `### name` heading with no text before the next heading shares the next entry's text."""
+    if not os.path.exists(path):
+        return {}
+    out, group, pending = collections.OrderedDict(), None, []
+    names, body = [], []
+
+    def flush():
+        txt = " ".join(" ".join(body).split())
+        if names and txt and group:
+            for n in names:
+                out[group][n] = txt
+
+    for line in open(path, encoding="utf-8").read().splitlines():
+        if line.startswith("## "):
+            flush(); names, body = [], []
+            group = line[3:].strip()
+            out[group] = collections.OrderedDict()
+        elif line.startswith("### "):
+            if body and any(b.strip() for b in body):
+                flush(); names, body = [], []
+            names.append(line[4:].strip())
+        elif names:
+            body.append(line.strip())
+    flush()
+    return out
+
+
+def glossary_text(glossary=None):
+    """Every entry of views/PARAMS.md, grouped, as the paragraph sent with each view's request."""
+    G = glossary if glossary is not None else read_glossary()
+    if not G:
+        return ""
+    L = ["THE GLOSSARY (what each setting controls, its units, and which eye or region of the animal its value comes from; read it before you choose any value)"]
+    for group, ents in G.items():
+        if ents:
+            L.append("\n" + group)
+            L += ["- %s: %s" % (n, t) for n, t in ents.items()]
+    return "\n".join(L) if len(L) > 1 else ""
+
+
+def user_text(job, example_key, example, picked, glossary=None):
     j = {k: v for k, v in job.items() if k not in ("logs", "topics", "draft")}
-    parts = ["THE JOB\n" + json.dumps(j, ensure_ascii=False),
+    parts = ["THE JOB\n" + json.dumps(j, ensure_ascii=False)]
+    gl = glossary_text(glossary)
+    if gl:
+        parts.append(gl)
+    parts += [
              "THE NEAREST EXISTING SPEC, as the example of form (the view %r; its numbers are about its own animal, not yours)\n%s"
              % (example_key, json.dumps({k: v for k, v in example.items() if k not in ("trial", "notes", "variants")},
                                        ensure_ascii=False, separators=(",", ":"))),

@@ -381,9 +381,40 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       if (key === 'jumper' && !(r.probe.light > 0)) errors.push('the light module read nothing');
       const sp = JSON.parse(fs.readFileSync(path.join(here, '..', 'views', key + '.json'), 'utf8')), want = ((sp.trial && sp.trial.rows) || sp.rows || []).length;
       r.rowsWanted = want;   // every row the spec (or its trial) holds is shown
-      const ok = r.eyes === key && r.rows >= Math.max(3, want) && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)))
+      const ok = r.eyes === key && r.rows === want && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)))
         && (!/^(hour|exposure)$/.test(P.slow) || (r.slow && r.slow.mode === P.slow && r.slow.n > 1)) && (!P.slow || r.probe.zones);
       if (!ok) bad.push(key);
+    }
+    // Every drawing option a spec names (its "draw" block, past each category's first, which is the default the run above used): the view is
+    // loaded again with &draw=<option> and must still be the same view, with no error and no GL error, and the sheet must show every row
+    // the spec holds. The page shows all of a spec's rows whatever option is on (the rows that begin "With the ... switched on" are always
+    // there), so the count to expect is the same for every option. OPTIONS=0 skips this pass; OPTION_SECS (3) is the wait after the view opens.
+    if (process.env.OPTIONS !== '0') {
+      out.options = {};
+      for (const key of keys) {
+        const sp = JSON.parse(fs.readFileSync(path.join(here, '..', 'views', key + '.json'), 'utf8')), want = ((sp.trial && sp.trial.rows) || sp.rows || []).length;
+        const d = sp.draw && !Array.isArray(sp.draw) ? sp.draw : {}, opts = [];
+        Object.keys(d).forEach((c) => (Array.isArray(d[c]) ? d[c] : []).slice(1).forEach((o) => { if (o && o.name && opts.indexOf(o.name) < 0) opts.push(o.name); }));
+        for (const opt of opts) {
+          const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+          page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
+          await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+          await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+          await page.goto(HTTP + '&try=' + key + '&draw=' + opt + (process.env.GENUS ? '&genus=' + process.env.GENUS : '')); await page.waitForTimeout(500);
+          const r = out.options[key + ':' + opt] = {};
+          await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+          await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
+          await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+          await page.waitForTimeout(+(process.env.OPTION_SECS || 3) * 1000);
+          r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
+          r.eyes = (await st(page)).eyes;
+          await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); await page.waitForTimeout(200);
+          r.rows = await page.evaluate(() => [...document.querySelectorAll('#rows li')].length); r.rowsWanted = want;
+          if (r.probe.glErr) errors.push('GL error ' + r.probe.glErr);
+          r.errors = errors; await ctx.close();
+          if (!(r.eyes === key && r.rows === want && !errors.length && !r.probe.zErr)) bad.push(key + ':' + opt);
+        }
+      }
     }
     if (bad.length) { console.log(JSON.stringify(out, null, 1)); throw new Error('try: these views being tried did not behave as they should: ' + bad.join(', ')); }
   }
