@@ -8,7 +8,7 @@ You are helping research which animals, plants and fungi see what, for a phone a
 3. `docs/tracks/prompts/round3-sweep.md`. You do the same work as the sweeps it describes.
 
 ## Your batch
-`docs/tracks/batches/external-k.json` lists 50 genera in order of importance. Each has its open traits, its species, its family and order, and, for some traits, the nearest measured relative (`closest`, an id in the evidence logs). Work down the list; finish as many genera as you can, completely, before stopping.
+`docs/tracks/batches/external-k.json` lists 50 genera in order of importance. Each has its open traits, its species, its family and order, and, for some traits, the nearest measured relative (`closest`, an id in the evidence logs). Work down the list; finish as many genera as you can, completely, before stopping. When your instructions name genera, do only those: earlier rounds settled the rest.
 
 ## How to search (use the scholarly APIs from the shell; they are faster and more complete than web search)
 - OpenAlex, titles and abstracts of about 250 million works: `https://api.openalex.org/works?search=<genus> <trait words>&per-page=25&select=id,doi,display_name,publication_year,abstract_inverted_index,primary_location,open_access`. Search the scientific name with the trait's words, then the common name with the trait's words.

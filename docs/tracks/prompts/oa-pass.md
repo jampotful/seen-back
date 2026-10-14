@@ -7,7 +7,7 @@ You are helping research which animals, plants and fungi see what, for a phone a
 2. `docs/tracks/prompts/round2-intake.md`, which says how a paper is read. You read papers the same way, from a free copy instead of the owner's folder.
 
 ## Your batch
-`docs/tracks/batches/oa-k.json` lists about 80 papers in the order of the owner's page, most useful first. Each entry gives what is known of the paper: title, authors, year, journal, DOI or link, why it was wanted, and the species and views it bears on.
+`docs/tracks/batches/oa-k.json` lists about 80 papers in the order of the owner's page, most useful first. When your instructions name entries (positions in its list, counting from 1), do only those: earlier rounds settled the rest. Each entry gives what is known of the paper: title, authors, year, journal, DOI or link, why it was wanted, and the species and views it bears on.
 
 ## Finding a free copy
 Do the lookups with one script before you read anything: write a short Python script that checks every paper in your batch against the three sources below, saves what each returns under `/tmp/oa`, and prints one line per paper (found or not, and where). Then read only the papers it found, in batch order. Work down the list; if you have to stop before the end, stop between papers, with everything so far committed and the summary written.
