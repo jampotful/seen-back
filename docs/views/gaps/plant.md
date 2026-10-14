@@ -425,7 +425,7 @@ Rows and their traits:
 | 409 | Diphasiastrum digitatum (fan clubmoss) | 17,449 | 0 | ? / ? | i | i | i |
 | 410 | Eupatorium perfoliatum (common boneset) | 17,446 | 4 | Asteraceae / Asterales | i | i | i |
 | 411 | Conopholis americana (bear corn) | 17,427 | 6 | Orobanchaceae / Lamiales | i | i | i |
-| 412 | Xanthium strumarium (rough cocklebur) | 17,424 | 0 | ? / ? | i | i | i |
+| 412 | Xanthium strumarium (rough cocklebur) | 17,424 | 0 | Asteraceae / Asterales | i | i | i |
 | 413 | Goodyera pubescens (downy rattlesnake plantain) | 17,422 | 0 | ? / ? | i | i | i |
 | 414 | Primula vulgaris (Primrose) | 17,364 | 0 | ? / ? | i | i | i |
 | 415 | Centaurea scabiosa (Greater Knapweed) | 17,328 | 0 | Asteraceae / Asterales | i | i | i |
@@ -437,7 +437,7 @@ Rows and their traits:
 | 421 | Calamagrostis epigejos (Bushgrass) | 17,128 | 0 | ? / ? | i | i | i |
 | 422 | Tilia americana (basswood) | 17,122 | 32 | Malvaceae / Malvales | i | i | i |
 | 423 | Actaea pachypoda (doll's eyes) | 17,008 | 0 | ? / ? | i | i | i |
-| 424 | Marrubium vulgare (White Horehound) | 17,004 | 0 | ? / ? | i | i | i |
+| 424 | Marrubium vulgare (White Horehound) | 17,004 | 0 | Lamiaceae / Lamiales | i | i | i |
 | 425 | Lycopus europaeus (European bugleweed) | 16,940 | 0 | Lamiaceae / Lamiales | i | i | i |
 | 426 | Allium ursinum (Ramsons) | 16,938 | 0 | Amaryllidaceae / Asparagales | i | i | i |
 | 427 | Lonicera involucrata (twinberry honeysuckle) | 16,887 | 0 | Caprifoliaceae / Dipsacales | i | i | i |
@@ -1008,7 +1008,7 @@ Rows and their traits:
 | 992 | Silene laciniata (Indian-pink) | 8,484 | 0 | Caryophyllaceae / Caryophyllales | i | i | i |
 | 993 | Hexastylis arifolia (Little Brown Jugs) | 8,482 | 1 | Aristolochiaceae / Piperales | i | i | i |
 | 994 | Viscaria vulgaris (Sticky Catchfly) | 8,463 | 0 | ? / ? | i | i | i |
-| 995 | Elymus repens (Quack Grass) | 8,459 | 0 | ? / ? | i | i | i |
+| 995 | Elymus repens (Quack Grass) | 8,459 | 0 | Poaceae / Poales | i | i | i |
 | 996 | Ilex decidua (possumhaw) | 8,456 | 1 | Aquifoliaceae / Aquifoliales | i | i | i |
 | 997 | Geranium lucidum (Shining Crane's-bill) | 8,439 | 0 | Geraniaceae / Geraniales | i | i | i |
 | 998 | Arctium lappa (greater burdock) | 8,435 | 0 | Asteraceae / Asterales | i | i | i |
@@ -1027,7 +1027,7 @@ Rows and their traits:
 | 1011 | Lysimachia punctata (Dotted Loosestrife) | 8,351 | 0 | Primulaceae / Ericales | i | i | i |
 | 1012 | Solidago rugosa (common wrinkle-leaved goldenrod) | 8,351 | 0 | Asteraceae / Asterales | i | i | i |
 | 1013 | Rhus ovata (sugar bush) | 8,342 | 0 | Anacardiaceae / Sapindales | i | i | i |
-| 1014 | Elymus hystrix (bottlebrush grass) | 8,326 | 0 | ? / ? | i | i | i |
+| 1014 | Elymus hystrix (bottlebrush grass) | 8,326 | 0 | Poaceae / Poales | i | i | i |
 | 1015 | Simmondsia chinensis (jojoba) | 8,325 | 0 | ? / ? | i | i | i |
 | 1016 | Solidago sempervirens (northern seaside goldenrod) | 8,319 | 0 | Asteraceae / Asterales | i | i | i |
 | 1017 | Liatris punctata (dotted gayfeather) | 8,304 | 0 | Asteraceae / Asterales | i | i | i |
@@ -1630,20 +1630,20 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Diphasiastrum digitatum*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Eupatorium perfoliatum*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Conopholis americana*: eye_type: i, none; sense_light_nonvisual: i, closest order (sweep-14#5), no carry rule allows order level for this trait; sense_chemical: i, closest order (sweep-12#5), no carry rule allows order level for this trait; diel: i, closest order (sweep-15#3), no carry rule allows order level for this trait
-- *Xanthium strumarium*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
+- *Xanthium strumarium*: eye_type: i, none; sense_light_nonvisual: m (sweep-25#4); sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Goodyera pubescens*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Primula vulgaris*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Centaurea scabiosa*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Pinus contorta*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-11#3), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-11#8), no carry rule allows family level for this trait; diel: i, closest family (sweep-11#4), no carry rule allows family level for this trait
 - *Arundo donax*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-20#9), no carry rule allows family level for this trait; sense_chemical: i, none; diel: i, closest order (sweep-11#6), no carry rule allows order level for this trait
-- *Tridax procumbens*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
-- *Sphagneticola trilobata*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
+- *Tridax procumbens*: eye_type: i, none; sense_light_nonvisual: m (sweep-25#6); sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
+- *Sphagneticola trilobata*: eye_type: i, none; sense_light_nonvisual: m (sweep-25#7); sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Lysichiton americanus*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Calamagrostis epigejos*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Tilia americana*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-10#6), no carry rule allows family level for this trait; sense_chemical: i, closest genus (sweep-15#7), no carry rule allows genus level for this trait; diel: i, none
 - *Actaea pachypoda*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
-- *Marrubium vulgare*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
-- *Lycopus europaeus*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-14#5), no carry rule allows family level for this trait; sense_chemical: i, closest order (sweep-12#5), no carry rule allows order level for this trait; diel: i, closest family (sweep-21#13), no carry rule allows family level for this trait
+- *Marrubium vulgare*: eye_type: i, none; sense_light_nonvisual: m (sweep-25#8); sense_chemical: i, closest order (sweep-12#5), no carry rule allows order level for this trait; diel: i, closest family (sweep-21#13), no carry rule allows family level for this trait
+- *Lycopus europaeus*: eye_type: i, none; sense_light_nonvisual: m (sweep-25#10); sense_chemical: i, closest order (sweep-12#5), no carry rule allows order level for this trait; diel: i, closest family (sweep-21#13), no carry rule allows family level for this trait
 - *Allium ursinum*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-8#19), no carry rule allows genus level for this trait; sense_chemical: i, closest family (sweep-21#11), no carry rule allows family level for this trait; diel: i, closest order (sweep-20#5), no carry rule allows order level for this trait
 - *Lonicera involucrata*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, closest family (sweep-20#1), no carry rule allows family level for this trait; diel: g, rule 3 from Lonicera japonica (sweep-3#15)
 - *Ilex vomitoria*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
@@ -2096,7 +2096,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Circaea lutetiana*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Castilleja miniata*: eye_type: i, none; sense_light_nonvisual: i, closest order (sweep-14#5), no carry rule allows order level for this trait; sense_chemical: i, closest order (sweep-12#5), no carry rule allows order level for this trait; diel: i, closest order (sweep-15#3), no carry rule allows order level for this trait
 - *Echinocereus coccineus*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
-- *Tradescantia fluminensis*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#2), no carry rule allows family level for this trait; sense_chemical: i, none; diel: i, closest family (sweep-12#3), no carry rule allows family level for this trait
+- *Tradescantia fluminensis*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#2), no carry rule allows family level for this trait; sense_chemical: i, none; diel: g, rule 3 from Tradescantia ohiensis (sweep-25#2)
 - *Platanthera dilatata*: eye_type: i, none; sense_light_nonvisual: i, closest order (sweep-20#6), no carry rule allows order level for this trait; sense_chemical: i, closest genus (sweep-21#1), no carry rule allows genus level for this trait; diel: g, rule 3 from Platanthera bifolia (sweep-21#2)
 - *Glebionis coronaria*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Pleurozium schreberi*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
@@ -2110,7 +2110,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Cylindropuntia acanthocarpa*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-6#29), no carry rule allows genus level for this trait; sense_chemical: i, closest order (sweep-14#7), no carry rule allows order level for this trait; diel: i, closest family (sweep-10#5), no carry rule allows family level for this trait
 - *Carduus crispus*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Hemerocallis fulva*: eye_type: i, none; sense_light_nonvisual: i, closest order (sweep-20#6), no carry rule allows order level for this trait; sense_chemical: i, closest order (sweep-12#1), no carry rule allows order level for this trait; diel: i, closest order (sweep-20#5), no carry rule allows order level for this trait
-- *Silphium perfoliatum*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
+- *Silphium perfoliatum*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-25#9), no carry rule allows genus level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Polypodium vulgare*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Polytrichum juniperinum*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Setaria pumila*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-22#3), no carry rule allows genus level for this trait; sense_chemical: i, none; diel: i, closest order (sweep-11#6), no carry rule allows order level for this trait
@@ -2213,7 +2213,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Silene laciniata*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-7#3), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-15#8), no carry rule allows family level for this trait; diel: g, rule 3 from Silene latifolia (sweep-1#13)
 - *Hexastylis arifolia*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-19#5), no carry rule allows family level for this trait; sense_chemical: i, none; diel: i, none
 - *Viscaria vulgaris*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
-- *Elymus repens*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
+- *Elymus repens*: eye_type: i, none; sense_light_nonvisual: m (sweep-25#11); sense_chemical: i, none; diel: i, closest order (sweep-11#6), no carry rule allows order level for this trait
 - *Ilex decidua*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Geranium lucidum*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-1#11), no carry rule allows genus level for this trait; sense_chemical: i, none; diel: i, none
 - *Arctium lappa*: eye_type: i, none; sense_light_nonvisual: m (sweep-12#6); sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
@@ -2232,7 +2232,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Lysimachia punctata*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-2#11), no carry rule allows genus level for this trait; sense_chemical: i, closest order (sweep-21#10), no carry rule allows order level for this trait; diel: i, closest order (sweep-17#2), no carry rule allows order level for this trait
 - *Solidago rugosa*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest genus (sweep-5#10), no carry rule allows genus level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Rhus ovata*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, closest order (sweep-20#7), no carry rule allows order level for this trait; diel: i, none
-- *Elymus hystrix*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
+- *Elymus hystrix*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-25#11), no carry rule allows genus level for this trait; sense_chemical: i, none; diel: i, closest order (sweep-11#6), no carry rule allows order level for this trait
 - *Simmondsia chinensis*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Solidago sempervirens*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest genus (sweep-5#10), no carry rule allows genus level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Liatris punctata*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
@@ -2271,7 +2271,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Viola adunca*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-5#15), no carry rule allows genus level for this trait; sense_chemical: i, closest order (sweep-16#7), no carry rule allows order level for this trait; diel: i, closest order (sweep-16#8), no carry rule allows order level for this trait
 - *Cystopteris fragilis*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Salvia coccinea*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-5#9), no carry rule allows genus level for this trait; sense_chemical: i, closest order (sweep-12#5), no carry rule allows order level for this trait; diel: i, closest family (sweep-21#13), no carry rule allows family level for this trait
-- *Tradescantia ohiensis*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#2), no carry rule allows family level for this trait; sense_chemical: i, none; diel: i, closest family (sweep-12#3), no carry rule allows family level for this trait
+- *Tradescantia ohiensis*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#2), no carry rule allows family level for this trait; sense_chemical: i, none; diel: m (sweep-25#2)
 - *Carya cordiformis*: eye_type: i, none; sense_light_nonvisual: i, closest order (sweep-19#3), no carry rule allows order level for this trait; sense_chemical: i, closest order (sweep-19#4), no carry rule allows order level for this trait; diel: i, closest order (sweep-9#3), no carry rule allows order level for this trait
 - *Pinus resinosa*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-11#3), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-11#8), no carry rule allows family level for this trait; diel: i, closest family (sweep-11#4), no carry rule allows family level for this trait
 - *Lysimachia quadrifolia*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-2#11), no carry rule allows genus level for this trait; sense_chemical: i, closest order (sweep-21#10), no carry rule allows order level for this trait; diel: i, closest order (sweep-17#2), no carry rule allows order level for this trait
@@ -2332,7 +2332,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Geranium sibiricum*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-1#11), no carry rule allows genus level for this trait; sense_chemical: i, none; diel: i, none
 - *Physocarpus opulifolius*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Dittrichia viscosa*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
-- *Silphium laciniatum*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
+- *Silphium laciniatum*: eye_type: i, none; sense_light_nonvisual: m (sweep-25#9); sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Cirsium occidentale*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#6), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: i, closest family (sweep-19#13), no carry rule allows family level for this trait
 - *Sidalcea malviflora*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Helianthus tuberosus*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-19#14), no carry rule allows genus level for this trait; sense_chemical: i, closest family (sweep-5#10), no carry rule allows family level for this trait; diel: g, rule 3 from Helianthus annuus (sweep-19#13)
@@ -2459,7 +2459,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Vitis rotundifolia*: eye_type: i, none; sense_light_nonvisual: i, closest genus (sweep-17#1), no carry rule allows genus level for this trait; sense_chemical: i, none; diel: i, none
 - *Magnolia grandiflora*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, closest order (sweep-18#1), no carry rule allows order level for this trait; diel: i, closest order (sweep-18#2), no carry rule allows order level for this trait
 - *Pleopeltis michauxiana*: eye_type: i, none; sense_light_nonvisual: i, closest order (sweep-11#7), no carry rule allows order level for this trait; sense_chemical: i, none; diel: i, none
-- *Tradescantia ohiensis*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#2), no carry rule allows family level for this trait; sense_chemical: i, none; diel: i, closest family (sweep-12#3), no carry rule allows family level for this trait
+- *Tradescantia ohiensis*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-12#2), no carry rule allows family level for this trait; sense_chemical: i, none; diel: m (sweep-25#2)
 - *Sabal palmetto*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, none; diel: i, none
 - *Smilax bona-nox*: eye_type: i, none; sense_light_nonvisual: i, none; sense_chemical: i, closest genus (sweep-9#6), no carry rule allows genus level for this trait; diel: g, rule 3 from Smilax insularis (sweep-9#7)
 - *Erythrina herbacea*: eye_type: i, none; sense_light_nonvisual: i, closest family (sweep-10#8), no carry rule allows family level for this trait; sense_chemical: i, closest family (sweep-15#1), no carry rule allows family level for this trait; diel: i, closest family (sweep-10#7), no carry rule allows family level for this trait
