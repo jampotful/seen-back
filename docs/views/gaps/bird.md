@@ -1,6 +1,6 @@
 # Gap table: bird
 
-Made by `tools/views/gaps.py`. The 60 species most recorded worldwide that borrow this view cover 32.6% of its 18,548,533 research-grade records; the 20 most recorded in Alachua County cover 50.5% of the county's 20,542. Counts are iNaturalist research-grade records through 2024. The view's own measured animal is not excluded: it shows as `m` where it was measured.
+Made by `tools/views/gaps.py`. The 1200 species most recorded worldwide that borrow this view cover 90.3% of its 18,548,533 research-grade records; the 20 most recorded in Alachua County cover 50.5% of the county's 20,542. Counts are iNaturalist research-grade records through 2024. The view's own measured animal is not excluded: it shows as `m` where it was measured.
 
 Row grades: `m` every trait of the row measured in that species; `g` every trait measured or carried by a rule; `i` at least one trait neither. The detail columns give the state of each trait.
 
@@ -75,6 +75,1146 @@ Rows and their traits:
 | 58 | Sayornis nigricans (Black Phoebe) | 55,562 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
 | 59 | Bucephala albeola (Bufflehead) | 55,139 | 75 | Anatidae / Anseriformes | i | i | i | i |
 | 60 | Regulus calendula (Ruby-crowned Kinglet) | 53,190 | 118 | Regulidae / Passeriformes | i | i | i | i |
+| 61 | Podiceps cristatus (Great Crested Grebe) | 52,272 | 0 | Podicipedidae / Podicipediformes | i | i | i | i |
+| 62 | Bucephala clangula (Common Goldeneye) | 51,364 | 19 | Anatidae / Anseriformes | i | i | i | i |
+| 63 | Molothrus ater (Brown-headed Cowbird) | 51,206 | 76 | Icteridae / Passeriformes | i | i | i | i |
+| 64 | Turdus pilaris (Fieldfare) | 50,454 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 65 | Quiscalus quiscula (Common Grackle) | 50,426 | 44 | Icteridae / Passeriformes | i | i | i | i |
+| 66 | Pyrocephalus rubinus (Vermilion Flycatcher) | 50,217 | 34 | Tyrannidae / Passeriformes | i | i | i | i |
+| 67 | Leucophaeus atricilla (Laughing Gull) | 48,954 | 20 | Laridae / Charadriiformes | i | i | i | i |
+| 68 | Passerculus sandwichensis (Savannah Sparrow) | 48,072 | 421 | Passerellidae / Passeriformes | i | i | i | i |
+| 69 | Dumetella carolinensis (Gray Catbird) | 48,023 | 224 | Mimidae / Passeriformes | i | i | i | i |
+| 70 | Himantopus mexicanus (Black-necked Stilt) | 47,360 | 75 | Recurvirostridae / Charadriiformes | i | i | i | i |
+| 71 | Pelecanus erythrorhynchos (American White Pelican) | 47,291 | 64 | Pelecanidae / Pelecaniformes | i | i | i | i |
+| 72 | Mareca americana (American Wigeon) | 47,209 | 9 | Anatidae / Anseriformes | i | i | i | i |
+| 73 | Actitis macularius (Spotted Sandpiper) | 47,158 | 123 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 74 | Megaceryle alcyon (Belted Kingfisher) | 46,535 | 115 | Alcedinidae / Coraciiformes | i | i | i | i |
+| 75 | Larus smithsonianus (American Herring Gull) | 46,424 | 11 | Laridae / Charadriiformes | i | i | i | i |
+| 76 | Garrulus glandarius (Eurasian Jay) | 45,296 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 77 | Pyrrhula pyrrhula (Eurasian Bullfinch) | 44,936 | 0 | ? / ? | i | i | i | i |
+| 78 | Archilochus colubris (Ruby-throated Hummingbird) | 44,920 | 226 | Trochilidae / Apodiformes | i | i | i | i |
+| 79 | Calidris alba (Sanderling) | 44,752 | 1 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 80 | Chloris chloris (European Greenfinch) | 44,651 | 0 | ? / ? | i | i | i | i |
+| 81 | Lophodytes cucullatus (Hooded Merganser) | 44,560 | 199 | Anatidae / Anseriformes | i | i | i | i |
+| 82 | Thryothorus ludovicianus (Carolina Wren) | 44,539 | 454 | Troglodytidae / Passeriformes | i | i | i | i |
+| 83 | Tringa semipalmata (Willet) | 43,082 | 2 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 84 | Baeolophus bicolor (Tufted Titmouse) | 42,987 | 275 | Paridae / Passeriformes | i | i | i | i |
+| 85 | Dryocopus pileatus (Pileated Woodpecker) | 42,913 | 332 | Picidae / Piciformes | i | i | i | i |
+| 86 | Coloeus monedula (European Jackdaw) | 42,910 | 0 | ? / ? | i | i | i | i |
+| 87 | Tachycineta bicolor (Tree Swallow) | 42,900 | 60 | Hirundinidae / Passeriformes | i | i | i | i |
+| 88 | Anser anser (Greylag Goose) | 42,809 | 2 | Anatidae / Anseriformes | i | i | i | i |
+| 89 | Aphelocoma californica (California Scrub-Jay) | 42,661 | 0 | ? / ? | i | i | i | i |
+| 90 | Aythya collaris (Ring-necked Duck) | 42,116 | 28 | Anatidae / Anseriformes | i | i | i | i |
+| 91 | Alopochen aegyptiaca (Egyptian Goose) | 41,490 | 15 | Anatidae / Anseriformes | i | i | i | i |
+| 92 | Pipilo maculatus (Spotted Towhee) | 41,371 | 0 | Passerellidae / Passeriformes | i | i | i | i |
+| 93 | Phoenicurus ochruros (Black Redstart) | 41,125 | 0 | ? / ? | i | i | i | i |
+| 94 | Sitta europaea (Eurasian Nuthatch) | 41,109 | 0 | Sittidae / Passeriformes | i | i | i | i |
+| 95 | Pitangus sulphuratus (Great Kiskadee) | 40,896 | 0 | ? / ? | i | i | i | i |
+| 96 | Larus occidentalis (Western Gull) | 40,802 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 97 | Setophaga aestiva (American yellow warbler) | 40,627 | 46 | Parulidae / Passeriformes | i | i | i | i |
+| 98 | Geothlypis trichas (Common Yellowthroat) | 40,507 | 137 | Parulidae / Passeriformes | i | i | i | i |
+| 99 | Tringa melanoleuca (Greater Yellowlegs) | 40,198 | 96 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 100 | Bubo virginianus (Great Horned Owl) | 39,843 | 80 | Strigidae / Strigiformes | m | i | i | i |
+| 101 | Aythya fuligula (Tufted Duck) | 39,559 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 102 | Corvus corone (Carrion Crow) | 39,345 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 103 | Cairina moschata (Muscovy Duck) | 39,074 | 318 | Anatidae / Anseriformes | i | i | i | i |
+| 104 | Spatula discors (Blue-winged Teal) | 38,597 | 411 | Anatidae / Anseriformes | i | i | i | i |
+| 105 | Leuconotopicus villosus (Hairy Woodpecker) | 38,312 | 5 | Picidae / Piciformes | i | i | i | i |
+| 106 | Sialia mexicana (Western Bluebird) | 38,049 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 107 | Calidris minutilla (Least Sandpiper) | 37,848 | 143 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 108 | Anas acuta (Northern Pintail) | 37,669 | 9 | Anatidae / Anseriformes | i | i | i | i |
+| 109 | Tyrannus tyrannus (Eastern Kingbird) | 36,617 | 25 | Tyrannidae / Passeriformes | i | i | i | i |
+| 110 | Arenaria interpres (Ruddy Turnstone) | 36,586 | 3 | Caryophyllaceae / Caryophyllales | i | i | i | i |
+| 111 | Melanerpes formicivorus (Acorn Woodpecker) | 36,134 | 0 | Picidae / Piciformes | i | i | i | i |
+| 112 | Oxyura jamaicensis (Ruddy Duck) | 35,471 | 31 | Anatidae / Anseriformes | i | i | i | i |
+| 113 | Phalacrocorax brasilianus (Olivaceous Cormorant) | 35,285 | 0 | Phalacrocoracidae / Suliformes | i | i | i | i |
+| 114 | Poecile carolinensis (Carolina Chickadee) | 35,242 | 246 | Paridae / Passeriformes | i | i | i | i |
+| 115 | Icterus galbula (Baltimore Oriole) | 34,929 | 97 | Icteridae / Passeriformes | i | i | i | i |
+| 116 | Gavia immer (Common Loon) | 34,474 | 22 | Gaviidae / Gaviiformes | i | i | i | i |
+| 117 | Larus argentatus (European Herring Gull) | 34,038 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 118 | Catharus guttatus (Hermit Thrush) | 33,788 | 81 | Turdidae / Passeriformes | i | i | i | i |
+| 119 | Anhinga anhinga (Anhinga) | 33,769 | 1,331 | Anhingidae / Suliformes | i | i | i | i |
+| 120 | Aegithalos caudatus (Long-tailed Tit) | 33,411 | 0 | ? / ? | i | i | i | i |
+| 121 | Melozone crissalis (California Towhee) | 32,831 | 0 | ? / ? | i | i | i | i |
+| 122 | Larus michahellis (Yellow-legged Gull) | 32,749 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 123 | Polioptila caerulea (Blue-gray Gnatcatcher) | 32,255 | 207 | Polioptilidae / Passeriformes | i | i | i | i |
+| 124 | Strix varia (Barred Owl) | 32,109 | 289 | Strigidae / Strigiformes | i | i | i | i |
+| 125 | Gymnorhina tibicen (Australian Magpie) | 31,467 | 0 | ? / ? | i | i | i | i |
+| 126 | Cyanocitta stelleri (Steller's Jay) | 31,052 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 127 | Sphyrapicus varius (Yellow-bellied Sapsucker) | 30,934 | 136 | Picidae / Piciformes | i | i | i | i |
+| 128 | Leiothlypis celata (Orange-crowned Warbler) | 30,831 | 88 | Parulidae / Passeriformes | i | i | i | i |
+| 129 | Vanellus vanellus (Northern Lapwing) | 30,575 | 0 | ? / ? | i | i | i | i |
+| 130 | Pluvialis squatarola (Black-bellied Plover) | 30,318 | 3 | Charadriidae / Charadriiformes | i | i | i | i |
+| 131 | Phylloscopus collybita (Common Chiffchaff) | 30,272 | 0 | ? / ? | i | i | i | i |
+| 132 | Larus fuscus (Lesser Black-backed Gull) | 30,256 | 1 | Laridae / Charadriiformes | i | i | i | i |
+| 133 | Sterna hirundo (Common Tern) | 30,230 | 5 | Laridae / Charadriiformes | i | i | i | i |
+| 134 | Saxicola rubicola (European Stonechat) | 29,677 | 0 | ? / ? | i | i | i | i |
+| 135 | Setophaga palmarum (Palm Warbler) | 29,590 | 659 | Parulidae / Passeriformes | i | i | i | i |
+| 136 | Turdus philomelos (Song Thrush) | 29,254 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 137 | Actitis hypoleucos (Common Sandpiper) | 29,152 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 138 | Mergus serrator (Red-breasted Merganser) | 28,891 | 3 | Anatidae / Anseriformes | i | i | i | i |
+| 139 | Acanthis flammea (Common Redpoll) | 28,848 | 0 | ? / ? | i | i | i | i |
+| 140 | Himantopus himantopus (Black-winged Stilt) | 28,805 | 0 | Recurvirostridae / Charadriiformes | i | i | i | i |
+| 141 | Tyrannus melancholicus (Tropical Kingbird) | 28,759 | 3 | Tyrannidae / Passeriformes | i | i | i | i |
+| 142 | Sayornis saya (Say's Phoebe) | 28,561 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 143 | Dendrocygna autumnalis (Black-bellied Whistling-Duck) | 28,437 | 626 | Anatidae / Anseriformes | i | i | i | i |
+| 144 | Calidris alpina (Dunlin) | 27,976 | 6 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 145 | Psaltriparus minimus (Bushtit) | 27,933 | 0 | ? / ? | i | i | i | i |
+| 146 | Passerina cyanea (Indigo Bunting) | 27,787 | 77 | Cardinalidae / Passeriformes | i | i | i | i |
+| 147 | Tachybaptus ruficollis (Little Grebe) | 27,752 | 0 | ? / ? | i | i | i | i |
+| 148 | Sitta canadensis (Red-breasted Nuthatch) | 27,463 | 2 | Sittidae / Passeriformes | i | i | i | i |
+| 149 | Troglodytes aedon (House Wren) | 27,430 | 75 | Troglodytidae / Passeriformes | i | i | i | i |
+| 150 | Aythya affinis (Lesser Scaup) | 27,302 | 62 | Anatidae / Anseriformes | i | i | i | i |
+| 151 | Emberiza citrinella (Yellowhammer) | 27,275 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 152 | Acridotheres tristis (Common Mynah) | 27,220 | 0 | ? / ? | i | i | i | i |
+| 153 | Thryomanes bewickii (Bewick's Wren) | 26,834 | 0 | ? / ? | i | i | i | i |
+| 154 | Cygnus buccinator (Trumpeter Swan) | 26,820 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 155 | Linaria cannabina (Linnet) | 26,682 | 0 | Plantaginaceae / Lamiales | i | i | i | i |
+| 156 | Pheucticus ludovicianus (Rose-breasted Grosbeak) | 26,641 | 36 | Cardinalidae / Passeriformes | i | i | i | i |
+| 157 | Alcedo atthis (Common Kingfisher) | 26,585 | 0 | ? / ? | i | i | i | i |
+| 158 | Setophaga ruticilla (American Redstart) | 26,529 | 97 | Parulidae / Passeriformes | i | i | i | i |
+| 159 | Zonotrichia atricapilla (Golden-crowned Sparrow) | 26,320 | 0 | Passerellidae / Passeriformes | i | i | i | i |
+| 160 | Euphagus cyanocephalus (Brewer's Blackbird) | 26,068 | 5 | Icteridae / Passeriformes | i | i | i | i |
+| 161 | Lanius ludovicianus (Loggerhead Shrike) | 25,755 | 114 | Laniidae / Passeriformes | i | i | i | i |
+| 162 | Spinus pinus (Pine Siskin) | 25,593 | 2 | Fringillidae / Passeriformes | i | i | i | i |
+| 163 | Corvus frugilegus (Rook) | 25,402 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 164 | Mniotilta varia (Black-and-white Warbler) | 25,402 | 182 | Parulidae / Passeriformes | i | i | i | i |
+| 165 | Lanius collurio (Red-backed Shrike) | 25,370 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 166 | Hydroprogne caspia (Caspian Tern) | 25,334 | 6 | Laridae / Charadriiformes | i | i | i | i |
+| 167 | Piranga rubra (Summer Tanager) | 25,288 | 136 | Cardinalidae / Passeriformes | i | i | i | i |
+| 168 | Oenanthe oenanthe (Northern Wheatear) | 25,162 | 0 | ? / ? | i | i | i | i |
+| 169 | Recurvirostra americana (American Avocet) | 24,522 | 12 | Recurvirostridae / Charadriiformes | i | i | i | i |
+| 170 | Motacilla flava (Western Yellow Wagtail) | 24,238 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 171 | Toxostoma rufum (Brown Thrasher) | 23,656 | 149 | Mimidae / Passeriformes | i | i | i | i |
+| 172 | Thalasseus maximus (Royal Tern) | 23,598 | 7 | Laridae / Charadriiformes | i | i | i | i |
+| 173 | Melospiza lincolnii (Lincoln's Sparrow) | 23,366 | 12 | Passerellidae / Passeriformes | i | i | i | i |
+| 174 | Mareca penelope (Eurasian Wigeon) | 23,315 | 1 | Anatidae / Anseriformes | i | i | i | i |
+| 175 | Melanerpes aurifrons (Golden-fronted Woodpecker) | 23,145 | 0 | Picidae / Piciformes | i | i | i | i |
+| 176 | Athene cunicularia (Burrowing Owl) | 22,689 | 13 | Strigidae / Strigiformes | i | i | i | i |
+| 177 | Dacelo novaeguineae (Laughing Kookaburra) | 22,494 | 0 | Alcedinidae / Coraciiformes | i | i | i | i |
+| 178 | Emberiza schoeniclus (Reed Bunting) | 22,450 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 179 | Geococcyx californianus (Greater Roadrunner) | 22,450 | 0 | ? / ? | i | i | i | i |
+| 180 | Zonotrichia capensis (Rufous-collared Sparrow) | 22,222 | 0 | Passerellidae / Passeriformes | i | i | i | i |
+| 181 | Larus marinus (Great Black-backed Gull) | 22,187 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 182 | Charadrius semipalmatus (Semipalmated Plover) | 22,132 | 17 | Charadriidae / Charadriiformes | i | i | i | i |
+| 183 | Motacilla cinerea (Grey Wagtail) | 22,032 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 184 | Sicalis flaveola (Saffron Finch) | 21,982 | 0 | ? / ? | i | i | i | i |
+| 185 | Malurus cyaneus (Superb Fairywren) | 21,884 | 0 | ? / ? | i | i | i | i |
+| 186 | Podiceps nigricollis (Eared Grebe) | 21,820 | 0 | Podicipedidae / Podicipediformes | i | i | i | i |
+| 187 | Upupa epops (Common Hoopoe) | 21,812 | 0 | ? / ? | i | i | i | i |
+| 188 | Myiopsitta monachus (Monk Parakeet) | 21,577 | 0 | ? / ? | i | i | i | i |
+| 189 | Bombycilla garrulus (Bohemian Waxwing) | 21,574 | 0 | Bombycillidae / Passeriformes | i | i | i | i |
+| 190 | Fregata magnificens (Magnificent Frigatebird) | 21,358 | 7 | Fregatidae / Suliformes | i | i | i | i |
+| 191 | Anser caerulescens (Snow Goose) | 21,354 | 17 | Anatidae / Anseriformes | i | i | i | i |
+| 192 | Larus canus (Common Gull) | 21,325 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 193 | Cardellina pusilla (Wilson's Warbler) | 21,323 | 13 | Parulidae / Passeriformes | i | i | i | i |
+| 194 | Tringa totanus (Common Redshank) | 21,189 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 195 | Aythya ferina (Common Pochard) | 20,971 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 196 | Pica hudsonia (Black-billed Magpie) | 20,822 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 197 | Tyrannus verticalis (Western Kingbird) | 20,796 | 9 | Tyrannidae / Passeriformes | i | i | i | i |
+| 198 | Haematopus ostralegus (European Oystercatcher) | 20,753 | 0 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 199 | Haemorhous purpureus (Purple Finch) | 20,685 | 9 | Fringillidae / Passeriformes | i | i | i | i |
+| 200 | Chroicocephalus novaehollandiae (Silver Gull) | 20,675 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 201 | Muscicapa striata (Spotted Flycatcher) | 20,597 | 0 | ? / ? | i | i | i | i |
+| 202 | Anser albifrons (Greater White-fronted Goose) | 20,554 | 12 | Anatidae / Anseriformes | i | i | i | i |
+| 203 | Spinus spinus (Eurasian Siskin) | 20,471 | 0 | Fringillidae / Passeriformes | i | i | i | i |
+| 204 | Sylvia atricapilla (Blackcap) | 20,379 | 0 | Sylviidae / Passeriformes | i | i | i | i |
+| 205 | Certhia americana (Brown Creeper) | 20,317 | 1 | Certhiidae / Passeriformes | i | i | i | i |
+| 206 | Periparus ater (Coal Tit) | 19,925 | 0 | ? / ? | i | i | i | i |
+| 207 | Pipilo erythrophthalmus (Eastern Towhee) | 19,627 | 81 | Passerellidae / Passeriformes | i | i | i | i |
+| 208 | Larus californicus (California Gull) | 19,482 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 209 | Larus dominicanus (Dominican Gull) | 19,482 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 210 | Tringa glareola (Wood Sandpiper) | 19,459 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 211 | Tringa flavipes (Lesser Yellowlegs) | 19,408 | 51 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 212 | Trichoglossus haematodus (Rainbow Lorikeet) | 19,354 | 0 | ? / ? | i | i | i | i |
+| 213 | Piranga ludoviciana (Western Tanager) | 19,143 | 8 | Cardinalidae / Passeriformes | i | i | i | i |
+| 214 | Regulus satrapa (Golden-crowned Kinglet) | 19,133 | 8 | Regulidae / Passeriformes | i | i | i | i |
+| 215 | Spatula cyanoptera (Cinnamon Teal) | 19,073 | 8 | Anatidae / Anseriformes | i | i | i | i |
+| 216 | Chondestes grammacus (Lark Sparrow) | 19,011 | 5 | Passerellidae / Passeriformes | i | i | i | i |
+| 217 | Toxostoma curvirostre (Curve-billed Thrasher) | 18,982 | 0 | Mimidae / Passeriformes | i | i | i | i |
+| 218 | Somateria mollissima (Common Eider) | 18,965 | 0 | ? / ? | i | i | i | i |
+| 219 | Passerina ciris (Painted Bunting) | 18,841 | 52 | Cardinalidae / Passeriformes | i | i | i | i |
+| 220 | Icterus cucullatus (Hooded Oriole) | 18,766 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 221 | Vanellus chilensis (Southern Lapwing) | 18,543 | 0 | ? / ? | i | i | i | i |
+| 222 | Chenonetta jubata (Australian Wood Duck) | 18,444 | 0 | ? / ? | i | i | i | i |
+| 223 | Petrochelidon pyrrhonota (Cliff Swallow) | 18,325 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 224 | Tyrannus vociferans (Cassin's Kingbird) | 18,304 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 225 | Pheucticus melanocephalus (Black-headed Grosbeak) | 18,263 | 0 | Cardinalidae / Passeriformes | i | i | i | i |
+| 226 | Microcarbo melanoleucos (Little Pied Cormorant) | 18,261 | 0 | ? / ? | i | i | i | i |
+| 227 | Podiceps auritus (Horned Grebe) | 18,231 | 16 | Podicipedidae / Podicipediformes | i | i | i | i |
+| 228 | Phoenicopterus roseus (Greater Flamingo) | 18,007 | 0 | Phoenicopteridae / Phoenicopteriformes | i | i | i | i |
+| 229 | Sterna forsteri (Forster's Tern) | 17,895 | 12 | Laridae / Charadriiformes | i | i | i | i |
+| 230 | Quiscalus major (Boat-tailed Grackle) | 17,877 | 626 | Icteridae / Passeriformes | i | i | i | i |
+| 231 | Tringa solitaria (Solitary Sandpiper) | 17,821 | 79 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 232 | Numenius hudsonicus (Hudsonian Whimbrel) | 17,797 | 1 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 233 | Sturnella neglecta (Western Meadowlark) | 17,639 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 234 | Anthus trivialis (Tree Pipit) | 17,511 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 235 | Tyrannus forficatus (Scissor-tailed Flycatcher) | 17,495 | 2 | Tyrannidae / Passeriformes | i | i | i | i |
+| 236 | Phoenicurus phoenicurus (Common Redstart) | 17,401 | 0 | ? / ? | i | i | i | i |
+| 237 | Troglodytes troglodytes (Eurasian Wren) | 17,390 | 0 | Troglodytidae / Passeriformes | i | i | i | i |
+| 238 | Saxicola rubetra (Whinchat) | 17,367 | 0 | ? / ? | i | i | i | i |
+| 239 | Stelgidopteryx serripennis (Northern Rough-winged Swallow) | 17,336 | 12 | Hirundinidae / Passeriformes | i | i | i | i |
+| 240 | Poecile montanus (Willow Tit) | 17,324 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 241 | Setophaga pinus (Pine Warbler) | 17,297 | 152 | Parulidae / Passeriformes | i | i | i | i |
+| 242 | Melanitta perspicillata (Surf Scoter) | 17,288 | 1 | Anatidae / Anseriformes | i | i | i | i |
+| 243 | Vireo olivaceus (Red-eyed Vireo) | 17,261 | 128 | Vireonidae / Passeriformes | i | i | i | i |
+| 244 | Cygnus atratus (Black Swan) | 17,255 | 11 | Anatidae / Anseriformes | i | i | i | i |
+| 245 | Tringa nebularia (Common Greenshank) | 17,217 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 246 | Psittacula krameri (Rose-ringed Parakeet) | 17,158 | 0 | ? / ? | i | i | i | i |
+| 247 | Passerella iliaca (Fox Sparrow) | 17,131 | 8 | Passerellidae / Passeriformes | i | i | i | i |
+| 248 | Passerina caerulea (Blue Grosbeak) | 17,115 | 53 | Cardinalidae / Passeriformes | i | i | i | i |
+| 249 | Melanerpes erythrocephalus (Red-headed Woodpecker) | 16,842 | 114 | Picidae / Piciformes | i | i | i | i |
+| 250 | Luscinia svecica (Bluethroat) | 16,773 | 0 | ? / ? | i | i | i | i |
+| 251 | Sylvia communis (Greater Whitethroat) | 16,763 | 0 | Sylviidae / Passeriformes | i | i | i | i |
+| 252 | Limosa fedoa (Marbled Godwit) | 16,753 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 253 | Calidris pugnax (Ruff) | 16,744 | 12 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 254 | Prunella modularis (Dunnock) | 16,681 | 0 | Lamiaceae / Lamiales | i | i | i | i |
+| 255 | Thinornis dubius (Little Ringed Plover) | 16,593 | 0 | ? / ? | i | i | i | i |
+| 256 | Tadorna tadorna (Common Shelduck) | 16,472 | 0 | ? / ? | i | i | i | i |
+| 257 | Melospiza georgiana (Swamp Sparrow) | 16,354 | 140 | Passerellidae / Passeriformes | i | i | i | i |
+| 258 | Eremophila alpestris (Horned Lark) | 16,296 | 2 | Alaudidae / Passeriformes | i | i | i | i |
+| 259 | Aythya americana (Redhead) | 16,219 | 9 | Anatidae / Anseriformes | i | i | i | i |
+| 260 | Spizelloides arborea (American Tree Sparrow) | 16,181 | 0 | ? / ? | i | i | i | i |
+| 261 | Catharus ustulatus (Swainson's Thrush) | 16,034 | 29 | Turdidae / Passeriformes | i | i | i | i |
+| 262 | Dryobates scalaris (Ladder-backed Woodpecker) | 16,015 | 0 | Picidae / Piciformes | i | i | i | i |
+| 263 | Aythya marila (Greater Scaup) | 15,959 | 9 | Anatidae / Anseriformes | i | i | i | i |
+| 264 | Serinus serinus (European Serin) | 15,890 | 0 | Fringillidae / Passeriformes | i | i | i | i |
+| 265 | Poecile rufescens (Chestnut-backed Chickadee) | 15,878 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 266 | Anas superciliosa (Pacific Black Duck) | 15,748 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 267 | Setophaga americana (Northern Parula) | 15,728 | 159 | Parulidae / Passeriformes | i | i | i | i |
+| 268 | Tadorna ferruginea (Ruddy Shelduck) | 15,674 | 0 | ? / ? | i | i | i | i |
+| 269 | Eolophus roseicapilla (Galah) | 15,671 | 0 | ? / ? | i | i | i | i |
+| 270 | Cynanthus latirostris (Broad-billed Hummingbird) | 15,610 | 15 | Trochilidae / Apodiformes | i | i | i | i |
+| 271 | Copsychus saularis (Oriental Magpie-Robin) | 15,586 | 0 | ? / ? | i | i | i | i |
+| 272 | Coccothraustes coccothraustes (Hawfinch) | 15,568 | 0 | ? / ? | i | i | i | i |
+| 273 | Merops apiaster (European Bee-eater) | 15,461 | 0 | Meropidae / Coraciiformes | i | i | i | i |
+| 274 | Vanellus miles (Masked Lapwing) | 15,421 | 0 | ? / ? | i | i | i | i |
+| 275 | Leiothlypis ruficapilla (Nashville Warbler) | 15,414 | 6 | Parulidae / Passeriformes | i | i | i | i |
+| 276 | Cacatua galerita (Sulphur-crested Cockatoo) | 15,395 | 0 | ? / ? | i | i | i | i |
+| 277 | Numenius americanus (Long-billed Curlew) | 15,332 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 278 | Loxia curvirostra (Red Crossbill) | 15,301 | 0 | ? / ? | i | i | i | i |
+| 279 | Anthus pratensis (Meadow Pipit) | 15,098 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 280 | Manorina melanocephala (Noisy Miner) | 15,097 | 0 | ? / ? | i | i | i | i |
+| 281 | Progne subis (Purple Martin) | 14,907 | 47 | Hirundinidae / Passeriformes | i | i | i | i |
+| 282 | Icterus spurius (Orchard Oriole) | 14,883 | 7 | Icteridae / Passeriformes | i | i | i | i |
+| 283 | Chroicocephalus philadelphia (Bonaparte's Gull) | 14,742 | 41 | Laridae / Charadriiformes | i | i | i | i |
+| 284 | Setophaga townsendi (Townsend's Warbler) | 14,718 | 0 | Parulidae / Passeriformes | i | i | i | i |
+| 285 | Platycercus elegans (Crimson Rosella) | 14,708 | 0 | ? / ? | i | i | i | i |
+| 286 | Grallina cyanoleuca (Magpie-lark) | 14,633 | 0 | ? / ? | i | i | i | i |
+| 287 | Limosa limosa (Black-tailed Godwit) | 14,629 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 288 | Myiarchus crinitus (Great Crested Flycatcher) | 14,586 | 117 | Tyrannidae / Passeriformes | i | i | i | i |
+| 289 | Ficedula hypoleuca (European Pied Flycatcher) | 14,522 | 0 | Muscicapidae / Passeriformes | m | i | i | i |
+| 290 | Delichon urbicum (House Martin) | 14,491 | 0 | ? / ? | i | i | i | i |
+| 291 | Setophaga magnolia (Magnolia Warbler) | 14,474 | 30 | Parulidae / Passeriformes | i | i | i | i |
+| 292 | Anas rubripes (American Black Duck) | 14,436 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 293 | Myiozetetes similis (Social Flycatcher) | 14,354 | 0 | ? / ? | i | i | i | i |
+| 294 | Rhipidura leucophrys (Willie Wagtail) | 14,352 | 0 | ? / ? | i | i | i | i |
+| 295 | Lonchura punctulata (Nutmeg Mannikin) | 14,310 | 3 | Estrildidae / Passeriformes | i | i | i | i |
+| 296 | Xanthocephalus xanthocephalus (Yellow-headed Blackbird) | 14,200 | 8 | Icteridae / Passeriformes | i | i | i | i |
+| 297 | Contopus virens (Eastern Wood-Pewee) | 14,199 | 28 | Tyrannidae / Passeriformes | i | i | i | i |
+| 298 | Spizella pusilla (Field Sparrow) | 14,046 | 15 | Passerellidae / Passeriformes | i | i | i | i |
+| 299 | Larus heermanni (Heermann's Gull) | 14,022 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 300 | Anthus rubescens (American Pipit) | 13,960 | 5 | Motacillidae / Passeriformes | i | i | i | i |
+| 301 | Setophaga virens (Black-throated Green Warbler) | 13,939 | 5 | Parulidae / Passeriformes | i | i | i | i |
+| 302 | Rynchops niger (Black Skimmer) | 13,907 | 7 | Laridae / Charadriiformes | i | i | i | i |
+| 303 | Turdus iliacus (Redwing) | 13,907 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 304 | Clangula hyemalis (Long-tailed Duck) | 13,814 | 0 | ? / ? | i | i | i | i |
+| 305 | Piranga olivacea (Scarlet Tanager) | 13,743 | 13 | Cardinalidae / Passeriformes | i | i | i | i |
+| 306 | Melozone fusca (Canyon Towhee) | 13,725 | 0 | ? / ? | i | i | i | i |
+| 307 | Thraupis episcopus (Blue-gray Tanager) | 13,527 | 0 | ? / ? | i | i | i | i |
+| 308 | Gallinago delicata (Wilson's Snipe) | 13,468 | 113 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 309 | Podargus strigoides (Tawny Frogmouth) | 13,468 | 0 | ? / ? | i | i | i | i |
+| 310 | Archilochus alexandri (Black-chinned Hummingbird) | 13,338 | 6 | Trochilidae / Apodiformes | i | i | i | i |
+| 311 | Thalasseus sandvicensis (Sandwich Tern) | 13,294 | 2 | Laridae / Charadriiformes | i | i | i | i |
+| 312 | Haematopus palliatus (American Oystercatcher) | 13,284 | 1 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 313 | Charadrius hiaticula (Common Ringed Plover) | 13,247 | 0 | Charadriidae / Charadriiformes | i | i | i | i |
+| 314 | Seiurus aurocapilla (Ovenbird) | 13,167 | 83 | Parulidae / Passeriformes | i | i | i | i |
+| 315 | Branta bernicla (Brant) | 13,109 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 316 | Fringilla montifringilla (Brambling) | 13,099 | 0 | Fringillidae / Passeriformes | i | i | i | i |
+| 317 | Turdus grayi (Clay-colored Thrush) | 13,013 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 318 | Phylloscopus trochilus (Willow Warbler) | 12,822 | 0 | ? / ? | i | i | i | i |
+| 319 | Certhia familiaris (Treecreeper) | 12,821 | 0 | Certhiidae / Passeriformes | i | i | i | i |
+| 320 | Apus apus (Common Swift) | 12,812 | 0 | ? / ? | i | i | i | i |
+| 321 | Aythya valisineria (Canvasback) | 12,753 | 4 | Anatidae / Anseriformes | i | i | i | i |
+| 322 | Rhipidura albiscapa (Grey Fantail) | 12,703 | 0 | ? / ? | i | i | i | i |
+| 323 | Recurvirostra avosetta (Pied Avocet) | 12,634 | 0 | Recurvirostridae / Charadriiformes | i | i | i | i |
+| 324 | Numenius arquata (Eurasian Curlew) | 12,595 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 325 | Phainopepla nitens (Phainopepla) | 12,552 | 0 | ? / ? | i | i | i | i |
+| 326 | Aechmophorus occidentalis (Western Grebe) | 12,460 | 0 | ? / ? | i | i | i | i |
+| 327 | Leiothlypis peregrina (Tennessee Warbler) | 12,387 | 40 | Parulidae / Passeriformes | i | i | i | i |
+| 328 | Alauda arvensis (Skylark) | 12,322 | 0 | ? / ? | i | i | i | i |
+| 329 | Regulus regulus (Goldcrest) | 12,271 | 0 | Regulidae / Passeriformes | i | i | i | i |
+| 330 | Furnarius rufus (Rufous Hornero) | 12,270 | 0 | ? / ? | i | i | i | i |
+| 331 | Tringa ochropus (Green Sandpiper) | 12,256 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 332 | Riparia riparia (Bank Swallow) | 12,212 | 5 | Hirundinidae / Passeriformes | i | i | i | i |
+| 333 | Setophaga pensylvanica (Chestnut-sided Warbler) | 12,076 | 23 | Parulidae / Passeriformes | i | i | i | i |
+| 334 | Myiarchus cinerascens (Ash-throated Flycatcher) | 11,970 | 18 | Tyrannidae / Passeriformes | i | i | i | i |
+| 335 | Pelecanus conspicillatus (Australian Pelican) | 11,954 | 0 | Pelecanidae / Pelecaniformes | i | i | i | i |
+| 336 | Troglodytes musculus (Southern House Wren) | 11,950 | 0 | Troglodytidae / Passeriformes | i | i | i | i |
+| 337 | Dryobates nuttallii (Nuttall's Woodpecker) | 11,925 | 0 | Picidae / Piciformes | i | i | i | i |
+| 338 | Uria aalge (Common Murre) | 11,924 | 0 | ? / ? | i | i | i | i |
+| 339 | Morus bassanus (Northern Gannet) | 11,914 | 0 | Moraceae / Rosales | i | i | i | i |
+| 340 | Calidris mauri (Western Sandpiper) | 11,906 | 12 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 341 | Sialia currucoides (Mountain Bluebird) | 11,830 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 342 | Hirundo neoxena (Welcome Swallow) | 11,743 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 343 | Molothrus bonariensis (Shiny Cowbird) | 11,719 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 344 | Haematopus bachmani (Black Oystercatcher) | 11,662 | 0 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 345 | Perisoreus canadensis (Gray Jay) | 11,643 | 0 | ? / ? | i | i | i | i |
+| 346 | Salpinctes obsoletus (Rock Wren) | 11,574 | 0 | ? / ? | i | i | i | i |
+| 347 | Gallinago gallinago (Common Snipe) | 11,562 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 348 | Icterus bullockii (Bullock's Oriole) | 11,559 | 1 | Icteridae / Passeriformes | i | i | i | i |
+| 349 | Pooecetes gramineus (Vesper Sparrow) | 11,548 | 45 | Passerellidae / Passeriformes | i | i | i | i |
+| 350 | Campylorhynchus brunneicapillus (Cactus Wren) | 11,525 | 0 | ? / ? | i | i | i | i |
+| 351 | Picus viridis (Green Woodpecker) | 11,523 | 0 | Picidae / Piciformes | i | i | i | i |
+| 352 | Anthochaera carunculata (Red Wattlebird) | 11,507 | 0 | ? / ? | i | i | i | i |
+| 353 | Selasphorus sasin (Allen's Hummingbird) | 11,446 | 0 | Trochilidae / Apodiformes | i | i | i | i |
+| 354 | Selasphorus rufus (Rufous Hummingbird) | 11,413 | 14 | Trochilidae / Apodiformes | i | i | i | i |
+| 355 | Amphispiza bilineata (Black-throated Sparrow) | 11,400 | 0 | ? / ? | i | i | i | i |
+| 356 | Cygnus columbianus (Tundra Swan) | 11,363 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 357 | Aix galericulata (Mandarin Duck) | 11,267 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 358 | Anas zonorhyncha (Eastern Spot-billed Duck) | 11,205 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 359 | Crotophaga sulcirostris (Groove-billed Ani) | 11,152 | 2 | Cuculidae / Cuculiformes | i | i | i | i |
+| 360 | Turdus viscivorus (Mistle Thrush) | 11,118 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 361 | Podiceps grisegena (Red-necked Grebe) | 11,099 | 3 | Podicipedidae / Podicipediformes | i | i | i | i |
+| 362 | Saxicola maurus (Siberian Stonechat) | 11,019 | 0 | ? / ? | i | i | i | i |
+| 363 | Auriparus flaviceps (Verdin) | 10,998 | 0 | ? / ? | i | i | i | i |
+| 364 | Spatula querquedula (Garganey) | 10,956 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 365 | Emberiza calandra (Corn Bunting) | 10,916 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 366 | Zosterops lateralis (Silvereye) | 10,874 | 0 | ? / ? | i | i | i | i |
+| 367 | Urile penicillatus (Townsend's Cormorant) | 10,861 | 0 | ? / ? | i | i | i | i |
+| 368 | Tachycineta thalassina (Violet-green Swallow) | 10,743 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 369 | Pycnonotus jocosus (Red-whiskered Bulbul) | 10,737 | 0 | ? / ? | i | i | i | i |
+| 370 | Vireo griseus (White-eyed Vireo) | 10,474 | 148 | Vireonidae / Passeriformes | i | i | i | i |
+| 371 | Coereba flaveola (Bananaquit) | 10,470 | 0 | ? / ? | i | i | i | i |
+| 372 | Megascops asio (Eastern Screech-Owl) | 10,452 | 15 | Strigidae / Strigiformes | i | i | i | i |
+| 373 | Pycnonotus sinensis (Light-vented Bulbul) | 10,439 | 0 | ? / ? | i | i | i | i |
+| 374 | Molothrus aeneus (Bronzed Cowbird) | 10,401 | 1 | Icteridae / Passeriformes | i | i | i | i |
+| 375 | Todiramphus sanctus (Sacred Kingfisher) | 10,391 | 0 | ? / ? | i | i | i | i |
+| 376 | Phylidonyris novaehollandiae (New Holland Honeyeater) | 10,365 | 0 | ? / ? | i | i | i | i |
+| 377 | Mimus saturninus (Chalk-browed Mockingbird) | 10,361 | 0 | Mimidae / Passeriformes | i | i | i | i |
+| 378 | Sturnella magna (Eastern Meadowlark) | 10,322 | 41 | Icteridae / Passeriformes | i | i | i | i |
+| 379 | Cygnus cygnus (Whooper Swan) | 10,304 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 380 | Plectrophenax nivalis (Snow Bunting) | 10,254 | 0 | ? / ? | i | i | i | i |
+| 381 | Thalasseus bergii (Crested Tern) | 10,245 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 382 | Poecile palustris (Marsh Tit) | 10,180 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 383 | Numenius phaeopus (Eurasian Whimbrel) | 10,141 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 384 | Poecile gambeli (Mountain Chickadee) | 10,099 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 385 | Cuculus canorus (Common Cuckoo) | 10,098 | 0 | ? / ? | i | i | i | i |
+| 386 | Contopus sordidulus (Western Wood-Pewee) | 10,039 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 387 | Platycercus eximius (Eastern Rosella) | 10,034 | 0 | ? / ? | i | i | i | i |
+| 388 | Halcyon smyrnensis (White-throated Kingfisher) | 10,012 | 0 | ? / ? | i | i | i | i |
+| 389 | Calidris pusilla (Semipalmated Sandpiper) | 10,002 | 28 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 390 | Paroaria coronata (Red-crested Cardinal) | 9,992 | 0 | ? / ? | i | i | i | i |
+| 391 | Asio otus (Long-eared Owl) | 9,956 | 0 | Strigidae / Strigiformes | g | i | i | i |
+| 392 | Mimus gilvus (Tropical Mockingbird) | 9,922 | 0 | Mimidae / Passeriformes | i | i | i | i |
+| 393 | Chlidonias niger (Black Tern) | 9,770 | 3 | Laridae / Charadriiformes | i | i | i | i |
+| 394 | Baeolophus inornatus (Oak Titmouse) | 9,718 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 395 | Limnodromus scolopaceus (Long-billed Dowitcher) | 9,711 | 44 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 396 | Calidris melanotos (Pectoral Sandpiper) | 9,709 | 20 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 397 | Alisterus scapularis (Australian King-Parrot) | 9,667 | 0 | ? / ? | i | i | i | i |
+| 398 | Setophaga tigrina (Cape May Warbler) | 9,612 | 22 | Parulidae / Passeriformes | i | i | i | i |
+| 399 | Larus glaucescens (Glaucous-winged Gull) | 9,600 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 400 | Histrionicus histrionicus (Harlequin Duck) | 9,576 | 0 | ? / ? | i | i | i | i |
+| 401 | Vireo solitarius (Blue-headed Vireo) | 9,497 | 51 | Vireonidae / Passeriformes | i | i | i | i |
+| 402 | Chloroceryle americana (Green Kingfisher) | 9,423 | 0 | ? / ? | i | i | i | i |
+| 403 | Setophaga fusca (Blackburnian Warbler) | 9,409 | 16 | Parulidae / Passeriformes | i | i | i | i |
+| 404 | Galerida cristata (Crested Lark) | 9,406 | 0 | ? / ? | i | i | i | i |
+| 405 | Phalaropus lobatus (Red-necked Phalarope) | 9,401 | 3 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 406 | Cistothorus palustris (Marsh Wren) | 9,393 | 41 | Troglodytidae / Passeriformes | i | i | i | i |
+| 407 | Lanius excubitor (Great Grey Shrike) | 9,385 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 408 | Netta rufina (Red-crested Pochard) | 9,348 | 0 | ? / ? | i | i | i | i |
+| 409 | Asio flammeus (Short-eared Owl) | 9,305 | 5 | Strigidae / Strigiformes | m | i | i | i |
+| 410 | Hesperiphona vespertina (Skidoo Bird) | 9,257 | 0 | ? / ? | i | i | i | i |
+| 411 | Strepera graculina (Pied Currawong) | 9,223 | 0 | ? / ? | i | i | i | i |
+| 412 | Dicrurus macrocercus (Black Drongo) | 9,185 | 0 | ? / ? | i | i | i | i |
+| 413 | Spiza americana (Dickcissel) | 9,146 | 9 | Cardinalidae / Passeriformes | i | i | i | i |
+| 414 | Branta hutchinsii (Cackling Goose) | 9,129 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 415 | Spizella pallida (Clay-colored Sparrow) | 9,110 | 9 | Passerellidae / Passeriformes | i | i | i | i |
+| 416 | Cracticus torquatus (Grey Butcherbird) | 9,103 | 0 | ? / ? | i | i | i | i |
+| 417 | Dryocopus martius (Black Woodpecker) | 9,028 | 0 | Picidae / Piciformes | i | i | i | i |
+| 418 | Melanerpes uropygialis (Gila Woodpecker) | 9,027 | 0 | Picidae / Piciformes | i | i | i | i |
+| 419 | Corvus macrorhynchos (Large-billed Crow) | 8,978 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 420 | Anarhynchus nivosus (Snowy Plover) | 8,971 | 0 | ? / ? | i | i | i | i |
+| 421 | Ixoreus naevius (Varied Thrush) | 8,890 | 0 | ? / ? | i | i | i | i |
+| 422 | Piaya cayana (Squirrel Cuckoo) | 8,822 | 0 | ? / ? | i | i | i | i |
+| 423 | Phalaropus tricolor (Wilson's Phalarope) | 8,814 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 424 | Larus brachyrhynchus (Short-billed Gull) | 8,807 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 425 | Megaceryle torquata (Ringed Kingfisher) | 8,740 | 0 | Alcedinidae / Coraciiformes | i | i | i | i |
+| 426 | Branta leucopsis (Barnacle Goose) | 8,739 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 427 | Setophaga caerulescens (Black-throated Blue Warbler) | 8,721 | 29 | Parulidae / Passeriformes | i | i | i | i |
+| 428 | Phalacrocorax pelagicus (Pelagic Cormorant) | 8,700 | 0 | Phalacrocoracidae / Suliformes | i | i | i | i |
+| 429 | Setophaga castanea (Bay-breasted Warbler) | 8,672 | 9 | Parulidae / Passeriformes | i | i | i | i |
+| 430 | Pluvialis fulva (Pacific Golden-Plover) | 8,648 | 0 | Charadriidae / Charadriiformes | i | i | i | i |
+| 431 | Parkesia noveboracensis (Northern Waterthrush) | 8,564 | 30 | Parulidae / Passeriformes | i | i | i | i |
+| 432 | Larus glaucoides (Iceland Gull) | 8,535 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 433 | Eopsaltria australis (Eastern Yellow Robin) | 8,481 | 0 | ? / ? | i | i | i | i |
+| 434 | Toxostoma redivivum (California Thrasher) | 8,433 | 0 | Mimidae / Passeriformes | i | i | i | i |
+| 435 | Chordeiles minor (Common Nighthawk) | 8,416 | 14 | Caprimulgidae / Caprimulgiformes | i | i | i | i |
+| 436 | Sphyrapicus ruber (Red-breasted Sapsucker) | 8,404 | 0 | Picidae / Piciformes | i | i | i | i |
+| 437 | Protonotaria citrea (Prothonotary Warbler) | 8,402 | 46 | Parulidae / Passeriformes | i | i | i | i |
+| 438 | Pycnonotus cafer (Red-vented Bulbul) | 8,368 | 0 | ? / ? | i | i | i | i |
+| 439 | Turdus rufopalliatus (Rufous-backed Robin) | 8,345 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 440 | Passerina amoena (Lazuli Bunting) | 8,333 | 0 | Cardinalidae / Passeriformes | i | i | i | i |
+| 441 | Cinclus cinclus (White-throated Dipper) | 8,326 | 0 | ? / ? | i | i | i | i |
+| 442 | Coccyzus americanus (Yellow-billed Cuckoo) | 8,317 | 33 | Cuculidae / Cuculiformes | i | i | i | i |
+| 443 | Pinicola enucleator (Pine Grosbeak) | 8,297 | 0 | ? / ? | i | i | i | i |
+| 444 | Zanda funerea (Yellow-tailed Black-Cockatoo) | 8,294 | 0 | ? / ? | i | i | i | i |
+| 445 | Leucophaeus pipixcan (Franklin's Gull) | 8,287 | 1 | Laridae / Charadriiformes | i | i | i | i |
+| 446 | Calypte costae (Costa's Hummingbird) | 8,269 | 0 | Trochilidae / Apodiformes | g | i | i | i |
+| 447 | Aphelocoma woodhouseii (Woodhouse's Scrub-Jay) | 8,250 | 0 | ? / ? | i | i | i | i |
+| 448 | Thraupis palmarum (Palm Tanager) | 8,222 | 0 | ? / ? | i | i | i | i |
+| 449 | Limosa lapponica (Bar-tailed Godwit) | 8,169 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 450 | Rissa tridactyla (Black-legged Kittiwake) | 8,158 | 0 | ? / ? | i | i | i | i |
+| 451 | Turdus rufiventris (Rufous-bellied Thrush) | 8,113 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 452 | Charadrius melodus (Piping Plover) | 8,112 | 0 | Charadriidae / Charadriiformes | i | i | i | i |
+| 453 | Sturnus unicolor (Spotless Starling) | 8,075 | 0 | Sturnidae / Passeriformes | g | i | i | i |
+| 454 | Motacilla citreola (Citrine Wagtail) | 8,070 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 455 | Tyto furcata (American Barn Owl) | 8,069 | 8 | Tytonidae / Strigiformes | i | i | i | i |
+| 456 | Athene noctua (Little Owl) | 8,060 | 0 | Strigidae / Strigiformes | i | i | i | i |
+| 457 | Dendrocopos leucotos (White-backed Woodpecker) | 8,051 | 0 | Picidae / Piciformes | i | i | i | i |
+| 458 | Phalacrocorax sulcirostris (Little Black Cormorant) | 8,033 | 0 | Phalacrocoracidae / Suliformes | i | i | i | i |
+| 459 | Pycnonotus barbatus (Common Bulbul) | 8,001 | 0 | ? / ? | i | i | i | i |
+| 460 | Dryobates minor (Lesser Spotted Woodpecker) | 7,985 | 0 | Picidae / Piciformes | i | i | i | i |
+| 461 | Bucephala islandica (Barrow's Goldeneye) | 7,958 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 462 | Empidonax difficilis (Pacific-slope Flycatcher) | 7,949 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 463 | Crotophaga ani (Smooth-billed Ani) | 7,947 | 0 | Cuculidae / Cuculiformes | i | i | i | i |
+| 464 | Prosthemadera novaeseelandiae (Tūī) | 7,939 | 0 | ? / ? | i | i | i | i |
+| 465 | Sternula antillarum (Least Tern) | 7,900 | 3 | Laridae / Charadriiformes | i | i | i | i |
+| 466 | Phalacrocorax aristotelis (Common Shag) | 7,884 | 0 | Phalacrocoracidae / Suliformes | i | i | i | i |
+| 467 | Anas diazi (Mexican Duck) | 7,879 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 468 | Dolichonyx oryzivorus (Bobolink) | 7,875 | 92 | Icteridae / Passeriformes | i | i | i | i |
+| 469 | Picus canus (Grey-headed Woodpecker) | 7,844 | 0 | Picidae / Piciformes | i | i | i | i |
+| 470 | Anas castanea (Chestnut Teal) | 7,842 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 471 | Anhinga novaehollandiae (Australian Darter) | 7,836 | 0 | Anhingidae / Suliformes | i | i | i | i |
+| 472 | Phalacrocorax varius (Australian Pied Cormorant) | 7,834 | 0 | Phalacrocoracidae / Suliformes | i | i | i | i |
+| 473 | Phoenicurus auroreus (Daurian Redstart) | 7,818 | 0 | ? / ? | i | i | i | i |
+| 474 | Baeolophus atricristatus (Black-crested Titmouse) | 7,804 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 475 | Chlidonias hybrida (Whiskered Tern) | 7,788 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 476 | Gavia stellata (Red-throated Loon) | 7,744 | 0 | Gaviidae / Gaviiformes | i | i | i | i |
+| 477 | Corvus splendens (House Crow) | 7,730 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 478 | Ceryle rudis (Pied Kingfisher) | 7,708 | 0 | ? / ? | i | i | i | i |
+| 479 | Acrocephalus schoenobaenus (Sedge Warbler) | 7,642 | 0 | ? / ? | i | i | i | i |
+| 480 | Parus cinereus (Cinereous Tit) | 7,640 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 481 | Sylvia curruca (Lesser Whitethroat) | 7,610 | 0 | Sylviidae / Passeriformes | i | i | i | i |
+| 482 | Curruca melanocephala (Sardinian Warbler) | 7,600 | 0 | ? / ? | i | i | i | i |
+| 483 | Arenaria melanocephala (Black Turnstone) | 7,576 | 0 | Caryophyllaceae / Caryophyllales | i | i | i | i |
+| 484 | Cyanocorax yncas (Green Jay) | 7,575 | 0 | ? / ? | i | i | i | i |
+| 485 | Cepphus columba (Pigeon Guillemot) | 7,549 | 0 | ? / ? | i | i | i | i |
+| 486 | Tyrannus savana (Fork-tailed Flycatcher) | 7,510 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 487 | Lanius schach (Long-tailed Shrike) | 7,497 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 488 | Carpodacus erythrinus (Common Rosefinch) | 7,454 | 0 | ? / ? | i | i | i | i |
+| 489 | Pachycephala pectoralis (Golden Whistler) | 7,440 | 0 | ? / ? | i | i | i | i |
+| 490 | Cacatua sanguinea (Little Corella) | 7,434 | 0 | ? / ? | i | i | i | i |
+| 491 | Lophophanes cristatus (Crested Tit) | 7,381 | 0 | ? / ? | i | i | i | i |
+| 492 | Himantopus leucocephalus (White-headed Stilt) | 7,376 | 0 | Recurvirostridae / Charadriiformes | i | i | i | i |
+| 493 | Setophaga striata (Blackpoll Warbler) | 7,341 | 10 | Parulidae / Passeriformes | i | i | i | i |
+| 494 | Monticola solitarius (Blue Rock-Thrush) | 7,336 | 0 | ? / ? | i | i | i | i |
+| 495 | Euphagus carolinus (Rusty Blackbird) | 7,335 | 23 | Icteridae / Passeriformes | i | i | i | i |
+| 496 | Amazilia tzacatl (Rufous-tailed Hummingbird) | 7,304 | 0 | ? / ? | i | i | i | i |
+| 497 | Charadrius alexandrinus (KEPL) | 7,282 | 0 | Charadriidae / Charadriiformes | i | i | i | i |
+| 498 | Tachybaptus dominicus (Least Grebe) | 7,273 | 0 | ? / ? | i | i | i | i |
+| 499 | Machetornis rixosa (Cattle Tyrant) | 7,248 | 0 | ? / ? | i | i | i | i |
+| 500 | Pica serica (Oriental Magpie) | 7,223 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 501 | Bubo scandiacus (Snowy Owl) | 7,209 | 0 | Strigidae / Strigiformes | g | i | i | i |
+| 502 | Rhipidura fuliginosa (New Zealand Fantail) | 7,209 | 0 | ? / ? | i | i | i | i |
+| 503 | Setophaga dominica (Yellow-throated Warbler) | 7,201 | 108 | Parulidae / Passeriformes | i | i | i | i |
+| 504 | Icteria virens (Yellow-breasted Chat) | 7,178 | 12 | Parulidae / Passeriformes | i | i | i | i |
+| 505 | Jacana jacana (Wattled Jacana) | 7,142 | 0 | ? / ? | i | i | i | i |
+| 506 | Vanellus armatus (Blacksmith Lapwing) | 7,139 | 0 | ? / ? | i | i | i | i |
+| 507 | Volatinia jacarina (Blue-black Grassquit) | 7,079 | 0 | ? / ? | i | i | i | i |
+| 508 | Neochmia temporalis (Red-browed Firetail) | 7,070 | 0 | Estrildidae / Passeriformes | i | i | i | i |
+| 509 | Calidris minuta (Little Stint) | 7,056 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 510 | Tachybaptus novaehollandiae (Australasian Grebe) | 7,031 | 0 | ? / ? | i | i | i | i |
+| 511 | Anser cygnoides (Swan Goose) | 6,985 | 3 | Anatidae / Anseriformes | i | i | i | i |
+| 512 | Lanius cristatus (Brown Shrike) | 6,972 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 513 | Estrilda astrild (Common Waxbill) | 6,909 | 0 | ? / ? | i | i | i | i |
+| 514 | Cinclus mexicanus (American Dipper) | 6,827 | 0 | ? / ? | i | i | i | i |
+| 515 | Fulmarus glacialis (Northern Fulmar) | 6,816 | 0 | ? / ? | i | i | i | i |
+| 516 | Cardinalis sinuatus (Pyrrhuloxia) | 6,814 | 0 | Cardinalidae / Passeriformes | i | i | i | i |
+| 517 | Acridotheres javanicus (Javan Myna) | 6,813 | 0 | ? / ? | i | i | i | i |
+| 518 | Myadestes townsendi (Townsend's Solitaire) | 6,800 | 0 | ? / ? | i | i | i | i |
+| 519 | Pycnonotus goiavier (Yellow-vented Bulbul) | 6,787 | 0 | ? / ? | i | i | i | i |
+| 520 | Glaucidium brasilianum (Ferruginous Pygmy-Owl) | 6,786 | 0 | ? / ? | i | i | i | i |
+| 521 | Setophaga nigrescens (Black-throated Gray Warbler) | 6,720 | 0 | Parulidae / Passeriformes | i | i | i | i |
+| 522 | Dendrocygna viduata (White-faced Whistling Duck) | 6,666 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 523 | Fratercula arctica (Atlantic Puffin) | 6,658 | 0 | ? / ? | i | i | i | i |
+| 524 | Sitta pygmaea (Pygmy Nuthatch) | 6,602 | 0 | Sittidae / Passeriformes | i | i | i | i |
+| 525 | Struthio camelus (Common Ostrich) | 6,589 | 0 | Struthionidae / Struthioniformes | i | i | i | i |
+| 526 | Setophaga discolor (Prairie Warbler) | 6,546 | 84 | Parulidae / Passeriformes | i | i | i | i |
+| 527 | Jacana spinosa (Northern Jacana) | 6,529 | 0 | ? / ? | i | i | i | i |
+| 528 | Colluricincla harmonica (Gray Shrikethrush) | 6,517 | 0 | ? / ? | i | i | i | i |
+| 529 | Sericornis frontalis (White-browed Scrubwren) | 6,478 | 0 | ? / ? | i | i | i | i |
+| 530 | Hylocichla mustelina (Wood Thrush) | 6,473 | 3 | Turdidae / Passeriformes | i | i | i | i |
+| 531 | Psephotus haematonotus (Red-rumped Parrot) | 6,428 | 0 | ? / ? | i | i | i | i |
+| 532 | Limnodromus griseus (Short-billed Dowitcher) | 6,421 | 2 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 533 | Dendrocoptes medius (Middle Spotted Woodpecker) | 6,420 | 0 | ? / ? | i | i | i | i |
+| 534 | Anas gracilis (Grey Teal) | 6,416 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 535 | Vanellus indicus (Red-wattled Lapwing) | 6,385 | 0 | ? / ? | i | i | i | i |
+| 536 | Melanitta deglandi (American White-winged Scoter) | 6,379 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 537 | Larus cachinnans (Caspian Gull) | 6,377 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 538 | Cisticola juncidis (Zitting Cisticola) | 6,369 | 0 | ? / ? | i | i | i | i |
+| 539 | Icterus gularis (Altamira Oriole) | 6,350 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 540 | Contopus cooperi (Olive-sided Flycatcher) | 6,328 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 541 | Coracina novaehollandiae (Black-faced Cuckoo-shrike) | 6,221 | 0 | ? / ? | i | i | i | i |
+| 542 | Microcarbo africanus (Long-tailed Cormorant) | 6,208 | 0 | ? / ? | i | i | i | i |
+| 543 | Colaptes melanochloros (Green-barred Woodpecker) | 6,187 | 0 | Picidae / Piciformes | i | i | i | i |
+| 544 | Carpodacus sibiricus (Long-tailed Rosefinch) | 6,155 | 0 | ? / ? | i | i | i | i |
+| 545 | Calidris canutus (Red Knot) | 6,149 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 546 | Setophaga citrina (Hooded Warbler) | 6,121 | 52 | Parulidae / Passeriformes | i | i | i | i |
+| 547 | Dryocopus lineatus (Lineated Woodpecker) | 6,046 | 0 | Picidae / Piciformes | i | i | i | i |
+| 548 | Ammodramus savannarum (Grasshopper Sparrow) | 6,011 | 20 | Passerellidae / Passeriformes | i | i | i | i |
+| 549 | Ichthyaetus melanocephalus (Mediterranean Gull) | 5,954 | 0 | ? / ? | i | i | i | i |
+| 550 | Acrocephalus dumetorum (Blyth's Reed Warbler) | 5,942 | 0 | ? / ? | i | i | i | i |
+| 551 | Nucifraga columbiana (Clark's Nutcracker) | 5,935 | 0 | ? / ? | i | i | i | i |
+| 552 | Dicrurus adsimilis (Fork-tailed Drongo) | 5,886 | 0 | ? / ? | i | i | i | i |
+| 553 | Passer italiae (Italian Sparrow) | 5,886 | 0 | Passeridae / Passeriformes | i | i | i | i |
+| 554 | Acanthiza pusilla (Brown Thornbill) | 5,877 | 0 | ? / ? | i | i | i | i |
+| 555 | Certhia brachydactyla (Short-toed Treecreeper) | 5,840 | 0 | Certhiidae / Passeriformes | i | i | i | i |
+| 556 | Turdus fuscater (Great Thrush) | 5,822 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 557 | Lanius borealis (Northern Shrike) | 5,804 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 558 | Sphecotheres vieilloti (Australasian Figbird) | 5,799 | 0 | ? / ? | i | i | i | i |
+| 559 | Icterus pustulatus (Streak-backed Oriole) | 5,781 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 560 | Sporophila torqueola (Cinnamon-rumped Seedeater) | 5,748 | 0 | ? / ? | i | i | i | i |
+| 561 | Strix aluco (Tawny Owl) | 5,736 | 0 | Strigidae / Strigiformes | i | i | i | i |
+| 562 | Selasphorus platycercus (Broad-tailed Hummingbird) | 5,722 | 0 | Trochilidae / Apodiformes | i | i | i | i |
+| 563 | Phoenicopterus ruber (American Flamingo) | 5,685 | 4 | Phoenicopteridae / Phoenicopteriformes | i | i | i | i |
+| 564 | Tadorna variegata (Paradise Shelduck) | 5,668 | 0 | ? / ? | i | i | i | i |
+| 565 | Thraupis sayaca (Sayaca Tanager) | 5,659 | 0 | ? / ? | i | i | i | i |
+| 566 | Piranga flava (Hepatic Tanager) | 5,656 | 0 | Cardinalidae / Passeriformes | i | i | i | i |
+| 567 | Vireo gilvus (Warbling Vireo) | 5,617 | 0 | Vireonidae / Passeriformes | i | i | i | i |
+| 568 | Anas flavirostris (Speckled Teal) | 5,608 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 569 | Zonotrichia querula (Harris's Sparrow) | 5,608 | 0 | Passerellidae / Passeriformes | i | i | i | i |
+| 570 | Sitta pusilla (Brown-headed Nuthatch) | 5,595 | 17 | Sittidae / Passeriformes | i | i | i | i |
+| 571 | Merops orientalis (Asian Green Bee-eater) | 5,533 | 0 | Meropidae / Coraciiformes | i | i | i | i |
+| 572 | Haematopus unicolor (VOC) | 5,520 | 0 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 573 | Microcarbo niger (Little Cormorant) | 5,517 | 0 | ? / ? | i | i | i | i |
+| 574 | Calidris bairdii (Baird's Sandpiper) | 5,515 | 4 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 575 | Guira guira (Guira Cuckoo) | 5,499 | 0 | ? / ? | i | i | i | i |
+| 576 | Lanius collaris (Southern Fiscal) | 5,498 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 577 | Catharus fuscescens (Veery) | 5,451 | 22 | Turdidae / Passeriformes | i | i | i | i |
+| 578 | Corvus albus (Pied Crow) | 5,400 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 579 | Tringa stagnatilis (Marsh Sandpiper) | 5,397 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 580 | Pachycephala rufiventris (Rufous Whistler) | 5,379 | 0 | ? / ? | i | i | i | i |
+| 581 | Haematopus longirostris (Pied Oystercatcher) | 5,362 | 0 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 582 | Coracias garrulus (European Roller) | 5,360 | 0 | ? / ? | i | i | i | i |
+| 583 | Alca torda (Razorbill) | 5,358 | 0 | ? / ? | i | i | i | i |
+| 584 | Acanthorhynchus tenuirostris (Eastern Spinebill) | 5,329 | 0 | ? / ? | i | i | i | i |
+| 585 | Chaetura pelagica (Chimney Swift) | 5,322 | 20 | Apodidae / Apodiformes | i | i | i | i |
+| 586 | Calidris ferruginea (Curlew Sandpiper) | 5,283 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 587 | Aimophila ruficeps (Rufous-crowned Sparrow) | 5,276 | 0 | ? / ? | i | i | i | i |
+| 588 | Sterna paradisaea (Arctic Tern) | 5,274 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 589 | Prinia inornata (Plain Prinia) | 5,272 | 0 | ? / ? | i | i | i | i |
+| 590 | Troglodytes hiemalis (Winter Wren) | 5,265 | 10 | Troglodytidae / Passeriformes | i | i | i | i |
+| 591 | Merops ornatus (Rainbow Bee-eater) | 5,264 | 0 | Meropidae / Coraciiformes | i | i | i | i |
+| 592 | Vireo swainsoni (Western Warbling Vireo) | 5,260 | 0 | Vireonidae / Passeriformes | i | i | i | i |
+| 593 | Spinus magellanicus (Hooded Siskin) | 5,259 | 0 | Fringillidae / Passeriformes | i | i | i | i |
+| 594 | Hypsipetes amaurotis (Brown-eared Bulbul) | 5,245 | 0 | ? / ? | i | i | i | i |
+| 595 | Jynx torquilla (Eurasian Wryneck) | 5,218 | 0 | ? / ? | i | i | i | i |
+| 596 | Anthus spinoletta (Water Pipit) | 5,217 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 597 | Ptilotula penicillata (White-plumed Honeyeater) | 5,214 | 0 | ? / ? | i | i | i | i |
+| 598 | Ploceus velatus (Southern Masked Weaver) | 5,211 | 0 | ? / ? | i | i | i | i |
+| 599 | Saucerottia beryllina (Berylline Hummingbird) | 5,193 | 0 | ? / ? | i | i | i | i |
+| 600 | Sternula albifrons (Little Tern) | 5,193 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 601 | Aechmophorus clarkii (Clark's Grebe) | 5,189 | 0 | ? / ? | i | i | i | i |
+| 602 | Lanius senator (Woodchat Shrike) | 5,184 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 603 | Pyrrhocorax graculus (Alpine Chough) | 5,164 | 0 | ? / ? | i | i | i | i |
+| 604 | Zosterops simplex (Swinhoe’s White-eye) | 5,110 | 0 | ? / ? | i | i | i | i |
+| 605 | Coracias caudatus (Lilac-breasted Roller) | 5,083 | 0 | ? / ? | i | i | i | i |
+| 606 | Copsychus malabaricus (White-rumped Shama) | 5,076 | 0 | ? / ? | i | i | i | i |
+| 607 | Empidonax minimus (Least Flycatcher) | 5,074 | 10 | Tyrannidae / Passeriformes | i | i | i | i |
+| 608 | Caligavis chrysops (Yellow-faced Honeyeater) | 5,072 | 0 | ? / ? | i | i | i | i |
+| 609 | Entomyzon cyanotis (Blue-faced Honeyeater) | 5,065 | 0 | ? / ? | i | i | i | i |
+| 610 | Eudynamys scolopaceus (Asian Koel) | 5,064 | 0 | ? / ? | i | i | i | i |
+| 611 | Thalasseus elegans (Elegant Tern) | 5,053 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 612 | Chloroceryle amazona (Amazon Kingfisher) | 5,046 | 0 | ? / ? | i | i | i | i |
+| 613 | Gelochelidon nilotica (Gull-billed Tern) | 5,009 | 0 | ? / ? | i | i | i | i |
+| 614 | Melanitta americana (Black Scoter) | 4,989 | 3 | Anatidae / Anseriformes | i | i | i | i |
+| 615 | Anas fulvigula (Mottled Duck) | 4,979 | 87 | Anatidae / Anseriformes | i | i | i | i |
+| 616 | Gracupica nigricollis (Black-collared Starling) | 4,978 | 0 | ? / ? | i | i | i | i |
+| 617 | Anthochaera chrysoptera (Little Wattlebird) | 4,972 | 0 | ? / ? | i | i | i | i |
+| 618 | Regulus ignicapilla (Common Firecrest) | 4,967 | 0 | Regulidae / Passeriformes | i | i | i | i |
+| 619 | Cinnyris ornatus (Ornate Sunbird) | 4,966 | 0 | ? / ? | i | i | i | i |
+| 620 | Progne chalybea (Gray-breasted Martin) | 4,964 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 621 | Ramphastos sulfuratus (Keel-billed Toucan) | 4,962 | 1 | Ramphastidae / Piciformes | i | i | i | i |
+| 622 | Calidris himantopus (Stilt Sandpiper) | 4,948 | 14 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 623 | Cepphus grylle (Black Guillemot) | 4,935 | 0 | ? / ? | i | i | i | i |
+| 624 | Motacilla capensis (Cape Wagtail) | 4,929 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 625 | Emberiza cirlus (Cirl Bunting) | 4,864 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 626 | Ramphocelus passerinii (Scarlet-rumped Tanager) | 4,848 | 0 | ? / ? | i | i | i | i |
+| 627 | Sula nebouxii (Blue-footed Booby) | 4,847 | 0 | ? / ? | i | i | i | i |
+| 628 | Lichmera indistincta (Brown Honeyeater) | 4,811 | 0 | ? / ? | i | i | i | i |
+| 629 | Eumomota superciliosa (Turquoise-browed Motmot) | 4,790 | 0 | ? / ? | i | i | i | i |
+| 630 | Ara macao (Scarlet Macaw) | 4,755 | 0 | ? / ? | i | i | i | i |
+| 631 | Corvus ossifragus (Fish Crow) | 4,755 | 41 | Corvidae / Passeriformes | i | i | i | i |
+| 632 | Calidris fuscicollis (White-rumped Sandpiper) | 4,750 | 12 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 633 | Pipilo chlorurus (Green-tailed Towhee) | 4,745 | 2 | Passerellidae / Passeriformes | i | i | i | i |
+| 634 | Spizella breweri (Brewer's Sparrow) | 4,743 | 0 | Passerellidae / Passeriformes | i | i | i | i |
+| 635 | Microcarbo pygmaeus (Pygmy Cormorant) | 4,737 | 0 | ? / ? | i | i | i | i |
+| 636 | Agelaioides badius (Grayish Baywing) | 4,724 | 0 | ? / ? | i | i | i | i |
+| 637 | Haemorhous cassinii (Cassin's Finch) | 4,721 | 0 | Fringillidae / Passeriformes | i | i | i | i |
+| 638 | Tringa erythropus (Spotted Redshank) | 4,706 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 639 | Dromaius novaehollandiae (Emu) | 4,703 | 1 | Dromaiidae / Casuariiformes | i | i | i | i |
+| 640 | Junco phaeonotus (Yellow-eyed Junco) | 4,696 | 0 | Passerellidae / Passeriformes | i | i | i | i |
+| 641 | Parkesia motacilla (Louisiana Waterthrush) | 4,675 | 12 | Parulidae / Passeriformes | i | i | i | i |
+| 642 | Aphelocoma wollweberi (Mexican Jay) | 4,662 | 0 | ? / ? | i | i | i | i |
+| 643 | Ptilonorhynchus violaceus (Satin Bowerbird) | 4,633 | 0 | ? / ? | i | i | i | i |
+| 644 | Pyrrhocorax pyrrhocorax (Red-billed Chough) | 4,630 | 0 | ? / ? | i | i | i | i |
+| 645 | Scolopax minor (American Woodcock) | 4,630 | 3 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 646 | Tityra semifasciata (Masked Tityra) | 4,622 | 0 | ? / ? | i | i | i | i |
+| 647 | Pluvialis apricaria (European Golden Plover) | 4,606 | 0 | Charadriidae / Charadriiformes | i | i | i | i |
+| 648 | Sula leucogaster (Brown Booby) | 4,594 | 0 | ? / ? | i | i | i | i |
+| 649 | Spheniscus magellanicus (Magellanic Penguin) | 4,588 | 0 | Spheniscidae / Sphenisciformes | i | i | i | i |
+| 650 | Sporophila morelleti (Morelet's Seedeater) | 4,574 | 0 | ? / ? | i | i | i | i |
+| 651 | Cracticus nigrogularis (Pied Butcherbird) | 4,562 | 0 | ? / ? | i | i | i | i |
+| 652 | Myiodynastes maculatus (Streaked Flycatcher) | 4,557 | 0 | ? / ? | i | i | i | i |
+| 653 | Burhinus grallarius (Bush Stone-curlew) | 4,551 | 0 | ? / ? | i | i | i | i |
+| 654 | Orthotomus sutorius (Common Tailorbird) | 4,549 | 0 | ? / ? | i | i | i | i |
+| 655 | Larus hyperboreus (Glaucous Gull) | 4,543 | 3 | Laridae / Charadriiformes | i | i | i | i |
+| 656 | Momotus lessonii (Lesson's Motmot) | 4,535 | 0 | ? / ? | i | i | i | i |
+| 657 | Passer melanurus (Cape Sparrow) | 4,523 | 0 | Passeridae / Passeriformes | i | i | i | i |
+| 658 | Oriolus oriolus (Eurasian Golden Oriole) | 4,514 | 0 | ? / ? | i | i | i | i |
+| 659 | Ptyonoprogne rupestris (Eurasian Crag Martin) | 4,509 | 0 | ? / ? | i | i | i | i |
+| 660 | Vidua macroura (Pin-tailed Whydah) | 4,486 | 0 | ? / ? | i | i | i | i |
+| 661 | Pteroglossus torquatus (Collared Aracari) | 4,476 | 0 | ? / ? | i | i | i | i |
+| 662 | Meliphaga lewinii (Lewin's Honeyeater) | 4,465 | 0 | ? / ? | i | i | i | i |
+| 663 | Vireo huttoni (Hutton's Vireo) | 4,465 | 0 | Vireonidae / Passeriformes | i | i | i | i |
+| 664 | Phoenicopterus chilensis (Chilean Flamingo) | 4,464 | 0 | Phoenicopteridae / Phoenicopteriformes | i | i | i | i |
+| 665 | Megarynchus pitangua (Boat-billed Flycatcher) | 4,451 | 0 | ? / ? | i | i | i | i |
+| 666 | Strix uralensis (Ural Owl) | 4,448 | 0 | Strigidae / Strigiformes | i | i | i | i |
+| 667 | Cyanerpes cyaneus (Red-legged Honeycreeper) | 4,446 | 0 | ? / ? | i | i | i | i |
+| 668 | Troglodytes pacificus (Pacific Wren) | 4,442 | 0 | Troglodytidae / Passeriformes | i | i | i | i |
+| 669 | Chroicocephalus maculipennis (Brown-hooded Gull) | 4,439 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 670 | Chlorostilbon lucidus (Glittering-bellied Emerald) | 4,426 | 0 | ? / ? | i | i | i | i |
+| 671 | Remiz pendulinus (European Penduline Tit) | 4,424 | 0 | ? / ? | i | i | i | i |
+| 672 | Merops philippinus (Blue-tailed Bee-eater) | 4,418 | 0 | Meropidae / Coraciiformes | i | i | i | i |
+| 673 | Onychognathus morio (Red-winged Starling) | 4,413 | 0 | ? / ? | i | i | i | i |
+| 674 | Ploceus capensis (Cape Weaver) | 4,403 | 0 | ? / ? | i | i | i | i |
+| 675 | Dendrocygna bicolor (Fulvous Whistling-Duck) | 4,401 | 15 | Anatidae / Anseriformes | i | i | i | i |
+| 676 | Colius striatus (Speckled Mousebird) | 4,391 | 0 | ? / ? | i | i | i | i |
+| 677 | Petroica australis (South Island Robin) | 4,390 | 0 | ? / ? | i | i | i | i |
+| 678 | Hymenops perspicillatus (Spectacled Tyrant) | 4,376 | 0 | ? / ? | i | i | i | i |
+| 679 | Ploceus cucullatus (Village Weaver) | 4,374 | 0 | ? / ? | i | i | i | i |
+| 680 | Catherpes mexicanus (Canyon Wren) | 4,360 | 0 | ? / ? | i | i | i | i |
+| 681 | Todiramphus chloris (Collared Kingfisher) | 4,353 | 0 | ? / ? | i | i | i | i |
+| 682 | Turdus amaurochalinus (Creamy-bellied Thrush) | 4,330 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 683 | Psilorhinus morio (Brown Jay) | 4,311 | 0 | ? / ? | i | i | i | i |
+| 684 | Tyrannus dominicensis (Gray Kingbird) | 4,308 | 4 | Tyrannidae / Passeriformes | i | i | i | i |
+| 685 | Colibri coruscans (Sparkling Violetear) | 4,302 | 0 | ? / ? | i | i | i | i |
+| 686 | Calcarius lapponicus (Lapland Longspur) | 4,279 | 0 | ? / ? | i | i | i | i |
+| 687 | Callocephalon fimbriatum (Gang-gang Cockatoo) | 4,275 | 0 | ? / ? | i | i | i | i |
+| 688 | Hirundo javanica (Pacific Swallow) | 4,246 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 689 | Halcyon albiventris (Brown-hooded Kingfisher) | 4,237 | 0 | ? / ? | i | i | i | i |
+| 690 | Leucolia violiceps (Violet-crowned Hummingbird) | 4,237 | 0 | ? / ? | i | i | i | i |
+| 691 | Colaptes campestris (Campo Flicker) | 4,226 | 0 | Picidae / Piciformes | i | i | i | i |
+| 692 | Pelecanus onocrotalus (Great White Pelican) | 4,205 | 0 | Pelecanidae / Pelecaniformes | i | i | i | i |
+| 693 | Turdus leucomelas (Pale-breasted Thrush) | 4,203 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 694 | Anser rossii (Ross's Goose) | 4,194 | 2 | Anatidae / Anseriformes | i | i | i | i |
+| 695 | Nucifraga caryocatactes (Eurasian Nutcracker) | 4,184 | 0 | ? / ? | i | i | i | i |
+| 696 | Amazona albifrons (White-fronted Parrot) | 4,183 | 0 | Psittacidae / Psittaciformes | i | i | i | i |
+| 697 | Florisuga mellivora (White-necked Jacobin) | 4,183 | 0 | ? / ? | i | i | i | i |
+| 698 | Anas georgica (Yellow-billed Pintail) | 4,170 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 699 | Amazilia rutila (Cinnamon Hummingbird) | 4,158 | 0 | ? / ? | i | i | i | i |
+| 700 | Ptilogonys cinereus (Gray Silky-flycatcher) | 4,123 | 0 | ? / ? | i | i | i | i |
+| 701 | Cardellina canadensis (Canada Warbler) | 4,089 | 1 | Parulidae / Passeriformes | i | i | i | i |
+| 702 | Dessonornis caffer (Cape Robin-Chat) | 4,082 | 0 | ? / ? | i | i | i | i |
+| 703 | Pardalotus punctatus (Spotted Pardalote) | 4,076 | 0 | ? / ? | i | i | i | i |
+| 704 | Ramphastos ambiguus (Black-mandibled Toucan) | 4,059 | 0 | Ramphastidae / Piciformes | i | i | i | i |
+| 705 | Psarocolius montezuma (Montezuma Oropendola) | 4,055 | 0 | ? / ? | i | i | i | i |
+| 706 | Calocitta formosa (White-throated Magpie-Jay) | 4,052 | 0 | ? / ? | i | i | i | i |
+| 707 | Notiochelidon cyanoleuca (Blue-and-white Swallow) | 4,052 | 0 | ? / ? | i | i | i | i |
+| 708 | Cinnyris chalybeus (Southern Double-collared Sunbird) | 4,026 | 0 | ? / ? | i | i | i | i |
+| 709 | Oriolus chinensis (Black-naped Oriole) | 4,015 | 0 | ? / ? | i | i | i | i |
+| 710 | Barnardius zonarius (Australian Ringneck) | 4,011 | 0 | ? / ? | i | i | i | i |
+| 711 | Hypsipetes leucocephalus (Black Bulbul) | 4,008 | 0 | ? / ? | i | i | i | i |
+| 712 | Melanerpes rubricapillus (Red-crowned Woodpecker) | 3,999 | 0 | Picidae / Piciformes | i | i | i | i |
+| 713 | Calidris temminckii (Temminck's Stint) | 3,989 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 714 | Scopus umbretta (Hamerkop) | 3,985 | 0 | ? / ? | i | i | i | i |
+| 715 | Anas bahamensis (White-cheeked Pintail) | 3,982 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 716 | Pardalotus striatus (Striated Pardalote) | 3,982 | 0 | ? / ? | i | i | i | i |
+| 717 | Anas undulata (Yellow-billed Duck) | 3,976 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 718 | Spodiopsar cineraceus (White-cheeked Starling) | 3,965 | 0 | ? / ? | i | i | i | i |
+| 719 | Chroicocephalus cirrocephalus (Grey-hooded Gull) | 3,963 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 720 | Euplectes orix (Red Bishop) | 3,963 | 0 | ? / ? | i | i | i | i |
+| 721 | Chamaea fasciata (Wrentit) | 3,950 | 0 | ? / ? | i | i | i | i |
+| 722 | Acrocephalus scirpaceus (Eurasian Reed-Warbler) | 3,948 | 0 | ? / ? | i | i | i | i |
+| 723 | Gavicalis virescens (Singing Honeyeater) | 3,937 | 0 | ? / ? | i | i | i | i |
+| 724 | Todirostrum cinereum (Common Tody-Flycatcher) | 3,914 | 0 | ? / ? | i | i | i | i |
+| 725 | Empidonax traillii (Willow Flycatcher) | 3,905 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 726 | Anhinga rufa (African Darter) | 3,895 | 0 | Anhingidae / Suliformes | i | i | i | i |
+| 727 | Larus crassirostris (Black-tailed Gull) | 3,878 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 728 | Vireo flavifrons (Yellow-throated Vireo) | 3,875 | 25 | Vireonidae / Passeriformes | i | i | i | i |
+| 729 | Mergellus albellus (Smew) | 3,854 | 0 | ? / ? | i | i | i | i |
+| 730 | Cyanopica cooki (Iberian Magpie) | 3,852 | 0 | ? / ? | i | i | i | i |
+| 731 | Tiaris olivaceus (Yellow-faced Grassquit) | 3,849 | 0 | ? / ? | i | i | i | i |
+| 732 | Calidris maritima (Purple Sandpiper) | 3,846 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 733 | Larus pacificus (Pacific Gull) | 3,846 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 734 | Acridotheres cristatellus (Crested Myna) | 3,837 | 0 | ? / ? | i | i | i | i |
+| 735 | Fluvicola nengeta (Masked Water-Tyrant) | 3,818 | 0 | ? / ? | i | i | i | i |
+| 736 | Cinnyris asiaticus (Purple Sunbird) | 3,817 | 0 | ? / ? | i | i | i | i |
+| 737 | Pluvialis dominica (American Golden-Plover) | 3,807 | 3 | Charadriidae / Charadriiformes | i | i | i | i |
+| 738 | Aplonis panayensis (Asian Glossy Starling) | 3,803 | 0 | ? / ? | i | i | i | i |
+| 739 | Actophilornis africanus (African Jacana) | 3,798 | 0 | ? / ? | i | i | i | i |
+| 740 | Sphyrapicus nuchalis (Red-naped Sapsucker) | 3,798 | 0 | Picidae / Piciformes | i | i | i | i |
+| 741 | Emberiza cia (Rock Bunting) | 3,791 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 742 | Acanthiza chrysorrhoa (Yellow-rumped Thornbill) | 3,789 | 0 | ? / ? | i | i | i | i |
+| 743 | Calidris ruficollis (Red-necked Stint) | 3,789 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 744 | Aythya australis (White-eyed Duck) | 3,775 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 745 | Saxicola torquatus (African Stonechat) | 3,775 | 0 | ? / ? | i | i | i | i |
+| 746 | Amazona viridigenalis (Red-crowned Parrot) | 3,769 | 0 | Psittacidae / Psittaciformes | i | i | i | i |
+| 747 | Iduna caligata (Booted Warbler) | 3,759 | 0 | ? / ? | i | i | i | i |
+| 748 | Amazonetta brasiliensis (Brazilian Teal) | 3,736 | 0 | ? / ? | i | i | i | i |
+| 749 | Eurystomus orientalis (Dollarbird) | 3,716 | 0 | ? / ? | i | i | i | i |
+| 750 | Vultur gryphus (Andean Condor) | 3,713 | 0 | ? / ? | i | i | i | i |
+| 751 | Zosterops japonicus (Warbling White-eye) | 3,707 | 0 | ? / ? | i | i | i | i |
+| 752 | Centropus sinensis (Greater Coucal) | 3,704 | 0 | ? / ? | i | i | i | i |
+| 753 | Strix nebulosa (Great Gray Owl) | 3,704 | 0 | Strigidae / Strigiformes | i | i | i | i |
+| 754 | Chlorophanes spiza (Green Honeycreeper) | 3,672 | 0 | ? / ? | i | i | i | i |
+| 755 | Nyctidromus albicollis (Common Pauraque) | 3,642 | 0 | ? / ? | i | i | i | i |
+| 756 | Sula sula (Red-footed Booby) | 3,633 | 0 | ? / ? | i | i | i | i |
+| 757 | Petroica boodang (Scarlet Robin) | 3,632 | 0 | ? / ? | i | i | i | i |
+| 758 | Pachyramphus aglaiae (Rose-throated Becard) | 3,607 | 0 | ? / ? | i | i | i | i |
+| 759 | Acrocephalus arundinaceus (Great Reed-Warbler) | 3,599 | 0 | ? / ? | i | i | i | i |
+| 760 | Puffinus griseus (Sooty Shearwater) | 3,599 | 0 | Procellariidae / Procellariiformes | i | i | i | i |
+| 761 | Motacilla tschutschensis (Eastern Yellow Wagtail) | 3,587 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 762 | Sporophila caerulescens (Double-collared Seedeater) | 3,577 | 0 | ? / ? | i | i | i | i |
+| 763 | Anarhynchus wilsonia (Wilson's Plover) | 3,571 | 0 | ? / ? | i | i | i | i |
+| 764 | Hydrocoloeus minutus (Little Gull) | 3,554 | 0 | ? / ? | i | i | i | i |
+| 765 | Passer hispaniolensis (Spanish Sparrow) | 3,554 | 0 | Passeridae / Passeriformes | i | i | i | i |
+| 766 | Progne tapera (Brown-chested Martin) | 3,546 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 767 | Coscoroba coscoroba (Coscoroba Swan) | 3,542 | 0 | ? / ? | i | i | i | i |
+| 768 | Amazona autumnalis (Red-lored Parrot) | 3,539 | 0 | Psittacidae / Psittaciformes | i | i | i | i |
+| 769 | Anthornis melanura (New Zealand Bellbird) | 3,530 | 0 | ? / ? | i | i | i | i |
+| 770 | Merops pusillus (Little Bee-eater) | 3,529 | 0 | Meropidae / Coraciiformes | i | i | i | i |
+| 771 | Dives dives (Melodious Blackbird) | 3,524 | 0 | ? / ? | i | i | i | i |
+| 772 | Cacatua tenuirostris (Long-billed Corella) | 3,520 | 0 | ? / ? | i | i | i | i |
+| 773 | Dacnis cayana (Blue Dacnis) | 3,518 | 0 | ? / ? | i | i | i | i |
+| 774 | Anthus hodgsoni (Olive-backed Pipit) | 3,514 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 775 | Chauna torquata (Southern Screamer) | 3,511 | 0 | ? / ? | i | i | i | i |
+| 776 | Psilopogon haemacephalus (Coppersmith Barbet) | 3,507 | 0 | ? / ? | i | i | i | i |
+| 777 | Sturnella loyca (Long-tailed Meadowlark) | 3,503 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 778 | Setophaga pitiayumi (Tropical Parula) | 3,501 | 0 | Parulidae / Passeriformes | i | i | i | i |
+| 779 | Sigelus silens (Fiscal Flycatcher) | 3,500 | 0 | ? / ? | i | i | i | i |
+| 780 | Cyanopica cyanus (Azure-winged Magpie) | 3,497 | 0 | ? / ? | i | i | i | i |
+| 781 | Anthracoceros albirostris (Oriental Pied Hornbill) | 3,496 | 0 | ? / ? | i | i | i | i |
+| 782 | Oenanthe familiaris (Familiar Chat) | 3,481 | 0 | ? / ? | i | i | i | i |
+| 783 | Stercorarius parasiticus (Parasitic Jaeger) | 3,477 | 0 | ? / ? | i | i | i | i |
+| 784 | Euphonia laniirostris (Thick-billed Euphonia) | 3,470 | 0 | ? / ? | i | i | i | i |
+| 785 | Muscicapa latirostris (Asian Brown Flycatcher) | 3,470 | 0 | ? / ? | i | i | i | i |
+| 786 | Zosterops virens (Cape White-eye) | 3,465 | 0 | ? / ? | i | i | i | i |
+| 787 | Calamospiza melanocorys (Lark Bunting) | 3,453 | 0 | ? / ? | i | i | i | i |
+| 788 | Melanerpes chrysogenys (Golden-cheeked Woodpecker) | 3,420 | 0 | Picidae / Piciformes | i | i | i | i |
+| 789 | Eudyptula minor (Little Penguin) | 3,419 | 0 | ? / ? | i | i | i | i |
+| 790 | Cormobates leucophaea (White-throated Treecreeper) | 3,406 | 0 | ? / ? | i | i | i | i |
+| 791 | Gymnogyps californianus (California Condor) | 3,406 | 0 | ? / ? | i | i | i | i |
+| 792 | Sylvia borin (Garden Warbler) | 3,396 | 0 | Sylviidae / Passeriformes | i | i | i | i |
+| 793 | Eugenes fulgens (Rivoli's Hummingbird) | 3,392 | 0 | ? / ? | i | i | i | i |
+| 794 | Pycnonotus aurigaster (Sooty-headed Bulbul) | 3,382 | 0 | ? / ? | i | i | i | i |
+| 795 | Rollandia rolland (White-tufted Grebe) | 3,363 | 0 | ? / ? | i | i | i | i |
+| 796 | Dendrocopos syriacus (Syrian Woodpecker) | 3,355 | 0 | Picidae / Piciformes | i | i | i | i |
+| 797 | Melanerpes lewis (Lewis's Woodpecker) | 3,355 | 0 | Picidae / Piciformes | i | i | i | i |
+| 798 | Basileuterus rufifrons (Rufous-capped Warbler) | 3,350 | 0 | ? / ? | i | i | i | i |
+| 799 | Myioborus miniatus (Slate-throated Redstart) | 3,350 | 0 | ? / ? | i | i | i | i |
+| 800 | Dendrocitta formosae (Gray Treepie) | 3,331 | 0 | ? / ? | i | i | i | i |
+| 801 | Lullula arborea (Woodlark) | 3,329 | 0 | ? / ? | i | i | i | i |
+| 802 | Geothlypis tolmiei (MacGillivray's Warbler) | 3,327 | 0 | Parulidae / Passeriformes | i | i | i | i |
+| 803 | Setophaga petechia (Mangrove Yellow Warbler) | 3,326 | 0 | Parulidae / Passeriformes | i | i | i | i |
+| 804 | Pycnonotus capensis (Cape Bulbul) | 3,324 | 0 | ? / ? | i | i | i | i |
+| 805 | Phylloscopus sibilatrix (Wood Warbler) | 3,320 | 0 | ? / ? | i | i | i | i |
+| 806 | Luscinia luscinia (Thrush Nightingale) | 3,319 | 0 | ? / ? | i | i | i | i |
+| 807 | Embernagra platensis (Great Pampa-Finch) | 3,318 | 0 | ? / ? | i | i | i | i |
+| 808 | Chloris sinica (Oriental Greenfinch) | 3,316 | 0 | ? / ? | i | i | i | i |
+| 809 | Morus serrator (Australasian Gannet) | 3,311 | 0 | Moraceae / Rosales | i | i | i | i |
+| 810 | Melozone aberti (Abert's Towhee) | 3,308 | 0 | ? / ? | i | i | i | i |
+| 811 | Aratinga leucophthalma (White-eyed Parakeet) | 3,300 | 0 | ? / ? | i | i | i | i |
+| 812 | Calyptorhynchus banksii (Red-tailed Black-Cockatoo) | 3,291 | 0 | ? / ? | i | i | i | i |
+| 813 | Dicrurus paradiseus (Greater Racket-tailed Drongo) | 3,285 | 0 | ? / ? | i | i | i | i |
+| 814 | Icterus parisorum (Scott's Oriole) | 3,281 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 815 | Ploceus philippinus (Baya Weaver) | 3,281 | 0 | ? / ? | i | i | i | i |
+| 816 | Loxia leucoptera (White-winged Crossbill) | 3,276 | 0 | ? / ? | i | i | i | i |
+| 817 | Aegolius acadicus (Northern Saw-whet Owl) | 3,274 | 0 | ? / ? | i | i | i | i |
+| 818 | Heliodoxa jacula (Green-crowned Brilliant) | 3,272 | 0 | ? / ? | i | i | i | i |
+| 819 | Polioptila dumicola (Masked Gnatcatcher) | 3,267 | 0 | Polioptilidae / Passeriformes | i | i | i | i |
+| 820 | Corcorax melanorhamphos (White-winged Chough) | 3,262 | 0 | ? / ? | i | i | i | i |
+| 821 | Corvus coronoides (Australian Raven) | 3,261 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 822 | Corythornis cristatus (Malachite Kingfisher) | 3,260 | 0 | ? / ? | i | i | i | i |
+| 823 | Gavia arctica (Arctic Loon) | 3,256 | 0 | Gaviidae / Gaviiformes | i | i | i | i |
+| 824 | Momotus mexicanus (Russet-crowned Motmot) | 3,252 | 0 | ? / ? | i | i | i | i |
+| 825 | Crithagra mozambica (Yellow-fronted Canary) | 3,244 | 0 | ? / ? | i | i | i | i |
+| 826 | Chroicocephalus hartlaubii (Hartlaub's Gull) | 3,234 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 827 | Saltator grandis (Cinnamon-bellied Saltator) | 3,234 | 0 | ? / ? | i | i | i | i |
+| 828 | Philemon corniculatus (Noisy Friarbird) | 3,223 | 0 | ? / ? | i | i | i | i |
+| 829 | Haematopus fuliginosus (Sooty Oystercatcher) | 3,220 | 0 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 830 | Artamus leucorynchus (White-breasted Woodswallow) | 3,219 | 0 | ? / ? | i | i | i | i |
+| 831 | Trichoglossus concinnus (Musk Lorikeet) | 3,214 | 0 | ? / ? | i | i | i | i |
+| 832 | Megascops kennicottii (Western Screech-Owl) | 3,212 | 0 | Strigidae / Strigiformes | i | i | i | i |
+| 833 | Aratinga canicularis (Orange-fronted Parakeet) | 3,208 | 0 | ? / ? | i | i | i | i |
+| 834 | Thinornis tricollaris (Three-banded Plover) | 3,197 | 0 | ? / ? | i | i | i | i |
+| 835 | Rauenia bonariensis (Blue-and-yellow Tanager) | 3,195 | 0 | ? / ? | i | i | i | i |
+| 836 | Xenus cinereus (Terek Sandpiper) | 3,195 | 0 | ? / ? | i | i | i | i |
+| 837 | Cerorhinca monocerata (Rhinoceros Auklet) | 3,191 | 0 | ? / ? | i | i | i | i |
+| 838 | Corvus mellori (Little Raven) | 3,188 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 839 | Paroaria capitata (Yellow-billed Cardinal) | 3,188 | 0 | ? / ? | i | i | i | i |
+| 840 | Nandayus nenday (Nanday Parakeet) | 3,184 | 0 | ? / ? | i | i | i | i |
+| 841 | Brotogeris jugularis (Orange-chinned Parakeet) | 3,182 | 0 | ? / ? | i | i | i | i |
+| 842 | Thinornis melanops (Black-fronted Dotterel) | 3,173 | 0 | ? / ? | i | i | i | i |
+| 843 | Cacicus melanicterus (Yellow-winged Cacique) | 3,159 | 0 | ? / ? | i | i | i | i |
+| 844 | Contopus pertinax (Greater Pewee) | 3,146 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 845 | Anthus petrosus (Rock Pipit) | 3,144 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 846 | Lamprotornis nitens (Red-shouldered Glossy-starling) | 3,140 | 0 | ? / ? | i | i | i | i |
+| 847 | Plectropterus gambensis (Spur-winged Goose) | 3,125 | 0 | ? / ? | i | i | i | i |
+| 848 | Cecropis daurica (Eastern Red-rumped Swallow) | 3,123 | 0 | ? / ? | i | i | i | i |
+| 849 | Galbula ruficauda (Rufous-tailed Jacamar) | 3,109 | 0 | ? / ? | i | i | i | i |
+| 850 | Motacilla aguimp (African Pied Wagtail) | 3,106 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 851 | Luscinia megarhynchos (Common Nightingale) | 3,105 | 0 | ? / ? | i | i | i | i |
+| 852 | Tringa incana (Wandering Tattler) | 3,102 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 853 | Vanellus coronatus (Crowned Lapwing) | 3,095 | 0 | ? / ? | i | i | i | i |
+| 854 | Cistothorus platensis (Northern Sedge Wren) | 3,085 | 18 | Troglodytidae / Passeriformes | i | i | i | i |
+| 855 | Anthreptes malacensis (Brown-throated Sunbird) | 3,081 | 0 | ? / ? | i | i | i | i |
+| 856 | Anhinga melanogaster (Oriental Darter) | 3,071 | 0 | Anhingidae / Suliformes | i | i | i | i |
+| 857 | Tachycineta albilinea (Mangrove Swallow) | 3,068 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 858 | Vermivora cyanoptera (Blue-winged Warbler) | 3,068 | 7 | Parulidae / Passeriformes | i | i | i | i |
+| 859 | Saxicola caprata (Pied Bushchat) | 3,056 | 0 | ? / ? | i | i | i | i |
+| 860 | Cathartes burrovianus (Lesser Yellow-headed Vulture) | 3,047 | 0 | Cathartidae / Accipitriformes | i | i | i | i |
+| 861 | Myioborus pictus (Painted Redstart) | 3,040 | 0 | ? / ? | i | i | i | i |
+| 862 | Selasphorus calliope (Calliope Hummingbird) | 3,037 | 22 | Trochilidae / Apodiformes | i | i | i | i |
+| 863 | Sicalis luteola (Grassland Yellow-Finch) | 3,036 | 0 | ? / ? | i | i | i | i |
+| 864 | Urocissa erythroryncha (Red-billed Blue Magpie) | 3,036 | 0 | ? / ? | i | i | i | i |
+| 865 | Malurus melanocephalus (Red-backed Fairy-wren) | 3,032 | 0 | ? / ? | i | i | i | i |
+| 866 | Podiceps major (Great Grebe) | 3,030 | 0 | Podicipedidae / Podicipediformes | i | i | i | i |
+| 867 | Chroicocephalus genei (Slender-billed Gull) | 3,027 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 868 | Dicrurus bracteatus (Spangled Drongo) | 3,024 | 0 | ? / ? | i | i | i | i |
+| 869 | Emberiza hortulana (Ortolan Bunting) | 3,023 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 870 | Ardeotis kori (Kori Bustard) | 3,021 | 0 | ? / ? | i | i | i | i |
+| 871 | Turdus falcklandii (Austral Thrush) | 3,020 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 872 | Calidris virgata (Surfbird) | 3,019 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 873 | Bartramia longicauda (Upland Sandpiper) | 3,009 | 1 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 874 | Lonchura striata (White-rumped Munia) | 2,995 | 0 | Estrildidae / Passeriformes | i | i | i | i |
+| 875 | Chlidonias leucopterus (White-winged Tern) | 2,985 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 876 | Promerops cafer (Cape Sugarbird) | 2,975 | 0 | ? / ? | i | i | i | i |
+| 877 | Aythya novaeseelandiae (New Zealand Scaup) | 2,969 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 878 | Cygnus melancoryphus (Black-necked Swan) | 2,965 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 879 | Pica nuttalli (Yellow-billed Magpie) | 2,964 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 880 | Poliocephalus poliocephalus (Hoary-headed Grebe) | 2,963 | 0 | ? / ? | i | i | i | i |
+| 881 | Sterna striata (White-fronted Tern) | 2,963 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 882 | Hydrophasianus chirurgus (Pheasant-tailed Jacana) | 2,960 | 0 | ? / ? | i | i | i | i |
+| 883 | Leptocoma zeylonica (Purple-rumped Sunbird) | 2,950 | 0 | ? / ? | i | i | i | i |
+| 884 | Saltator aurantiirostris (Golden-billed Saltator) | 2,949 | 0 | ? / ? | i | i | i | i |
+| 885 | Euphonia hirundinacea (Yellow-throated Euphonia) | 2,948 | 0 | ? / ? | i | i | i | i |
+| 886 | Ramphastos toco (Toco Toucan) | 2,940 | 0 | Ramphastidae / Piciformes | i | i | i | i |
+| 887 | Lagonosticta senegala (Red-billed Firefinch) | 2,936 | 0 | ? / ? | i | i | i | i |
+| 888 | Oreoscoptes montanus (Sage Thrasher) | 2,931 | 0 | ? / ? | i | i | i | i |
+| 889 | Nestor meridionalis (New Zealand Kaka) | 2,926 | 0 | ? / ? | i | i | i | i |
+| 890 | Vireo philadelphicus (Philadelphia Vireo) | 2,925 | 2 | Vireonidae / Passeriformes | i | i | i | i |
+| 891 | Trogon melanocephalus (Black-headed Trogon) | 2,919 | 0 | ? / ? | i | i | i | i |
+| 892 | Dendrocygna javanica (Lesser Whistling-Duck) | 2,917 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 893 | Myiodynastes luteiventris (Sulphur-bellied Flycatcher) | 2,909 | 0 | ? / ? | i | i | i | i |
+| 894 | Turdus mandarinus (Chinese Blackbird) | 2,908 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 895 | Thalassarche melanophris (Black-browed Albatross) | 2,905 | 0 | ? / ? | i | i | i | i |
+| 896 | Dicrurus leucophaeus (Ashy Drongo) | 2,901 | 0 | ? / ? | i | i | i | i |
+| 897 | Lonchura cucullata (Bronze Mannikin) | 2,896 | 0 | Estrildidae / Passeriformes | i | i | i | i |
+| 898 | Spatula versicolor (Silver Teal) | 2,895 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 899 | Passerina versicolor (Varied Bunting) | 2,887 | 0 | Cardinalidae / Passeriformes | i | i | i | i |
+| 900 | Ara ararauna (Blue-and-yellow Macaw) | 2,885 | 0 | ? / ? | i | i | i | i |
+| 901 | Anthus rufulus (Oriental Pipit) | 2,884 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 902 | Basilinna leucotis (White-eared Hummingbird) | 2,874 | 0 | ? / ? | i | i | i | i |
+| 903 | Trogon caligatus (Gartered Trogon) | 2,874 | 0 | ? / ? | i | i | i | i |
+| 904 | Haematopus moquini (African Black Oystercatcher) | 2,872 | 0 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 905 | Terpsiphone paradisi (Indian Paradise-Flycatcher) | 2,870 | 0 | ? / ? | i | i | i | i |
+| 906 | Leucocarbo atriceps (Imperial Shag) | 2,863 | 0 | ? / ? | i | i | i | i |
+| 907 | Chloephaga picta (Upland Goose) | 2,861 | 0 | ? / ? | i | i | i | i |
+| 908 | Petroica macrocephala (Miromiro) | 2,859 | 0 | ? / ? | i | i | i | i |
+| 909 | Thamnophilus doliatus (Barred Antshrike) | 2,857 | 0 | ? / ? | i | i | i | i |
+| 910 | Aeronautes saxatalis (White-throated Swift) | 2,854 | 0 | ? / ? | i | i | i | i |
+| 911 | Buphagus erythroryncha (Red-billed Oxpecker) | 2,852 | 0 | ? / ? | i | i | i | i |
+| 912 | Lepidocolaptes angustirostris (Narrow-billed Woodcreeper) | 2,848 | 0 | ? / ? | i | i | i | i |
+| 913 | Myiarchus tuberculifer (Dusky-capped Flycatcher) | 2,846 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 914 | Sporophila corvina (Variable Seedeater) | 2,844 | 0 | ? / ? | i | i | i | i |
+| 915 | Branta sandvicensis (Hawaiian Goose) | 2,826 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 916 | Prunella collaris (Alpine Accentor) | 2,822 | 0 | Lamiaceae / Lamiales | i | i | i | i |
+| 917 | Aegithina tiphia (Common Iora) | 2,819 | 0 | ? / ? | i | i | i | i |
+| 918 | Amazilia yucatanensis (Buff-bellied Hummingbird) | 2,809 | 0 | ? / ? | i | i | i | i |
+| 919 | Netta peposaca (Rosybill Pochard) | 2,809 | 0 | ? / ? | i | i | i | i |
+| 920 | Tachymarptis melba (Alpine Swift) | 2,809 | 0 | ? / ? | i | i | i | i |
+| 921 | Athene brama (Spotted Owlet) | 2,808 | 0 | Strigidae / Strigiformes | i | i | i | i |
+| 922 | Prinia maculosa (Karoo Prinia) | 2,801 | 0 | ? / ? | i | i | i | i |
+| 923 | Toxostoma longirostre (Long-billed Thrasher) | 2,792 | 0 | Mimidae / Passeriformes | i | i | i | i |
+| 924 | Plocepasser mahali (White-browed Sparrow-Weaver) | 2,786 | 0 | ? / ? | i | i | i | i |
+| 925 | Aythya nyroca (Ferruginous Duck) | 2,782 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 926 | Artamus cyanopterus (Dusky Woodswallow) | 2,771 | 0 | ? / ? | i | i | i | i |
+| 927 | Chordeiles acutipennis (Lesser Nighthawk) | 2,770 | 0 | Caprimulgidae / Caprimulgiformes | i | i | i | i |
+| 928 | Stelgidopteryx ruficollis (Southern Rough-winged Swallow) | 2,770 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 929 | Limosa haemastica (Hudsonian Godwit) | 2,765 | 1 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 930 | Tyto alba (Common Barn-Owl) | 2,748 | 0 | Tytonidae / Strigiformes | i | i | i | i |
+| 931 | Nectarinia famosa (Malachite Sunbird) | 2,747 | 0 | ? / ? | i | i | i | i |
+| 932 | Brotogeris chiriri (Yellow-chevroned Parakeet) | 2,746 | 0 | ? / ? | i | i | i | i |
+| 933 | Vanellus spinosus (Spur-winged Lapwing) | 2,744 | 0 | ? / ? | i | i | i | i |
+| 934 | Phoeniconaias minor (Lesser Flamingo) | 2,733 | 0 | ? / ? | i | i | i | i |
+| 935 | Spheniscus demersus (African Penguin) | 2,730 | 0 | Spheniscidae / Sphenisciformes | i | i | i | i |
+| 936 | Gavia pacifica (Pacific Loon) | 2,729 | 2 | Gaviidae / Gaviiformes | i | i | i | i |
+| 937 | Vireo bellii (Bell's Vireo) | 2,727 | 5 | Vireonidae / Passeriformes | i | i | i | i |
+| 938 | Panurus biarmicus (Bearded Reedling) | 2,718 | 0 | ? / ? | i | i | i | i |
+| 939 | Turdus chiguanco (Chiguanco Thrush) | 2,711 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 940 | Tockus leucomelas (Southern Yellow-billed Hornbill) | 2,706 | 0 | ? / ? | i | i | i | i |
+| 941 | Turdus ignobilis (Black-billed Thrush) | 2,705 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 942 | Campephilus guatemalensis (Pale-billed Woodpecker) | 2,700 | 0 | ? / ? | i | i | i | i |
+| 943 | Oenanthe isabellina (Isabelline Wheatear) | 2,695 | 0 | ? / ? | i | i | i | i |
+| 944 | Geothlypis philadelphia (Mourning Warbler) | 2,693 | 0 | Parulidae / Passeriformes | i | i | i | i |
+| 945 | Phoenicurus fuliginosus (Plumbeous Water Redstart) | 2,693 | 0 | ? / ? | i | i | i | i |
+| 946 | Quiscalus lugubris (Carib Grackle) | 2,693 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 947 | Galerida theklae (Thekla Lark) | 2,690 | 0 | ? / ? | i | i | i | i |
+| 948 | Polioptila melanura (Black-tailed Gnatcatcher) | 2,690 | 0 | Polioptilidae / Passeriformes | i | i | i | i |
+| 949 | Anous stolidus (Brown Noddy) | 2,679 | 0 | ? / ? | i | i | i | i |
+| 950 | Saxicoloides fulicatus (Indian Robin) | 2,665 | 0 | ? / ? | i | i | i | i |
+| 951 | Turdus eunomus (Dusky Thrush) | 2,661 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 952 | Quiscalus niger (Greater Antillean Grackle) | 2,656 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 953 | Spinus lawrencei (Lawrence's Goldfinch) | 2,656 | 0 | Fringillidae / Passeriformes | i | i | i | i |
+| 954 | Chrysomus ruficapillus (Chestnut-capped Blackbird) | 2,648 | 0 | ? / ? | i | i | i | i |
+| 955 | Terpsiphone viridis (African Paradise-Flycatcher) | 2,626 | 0 | ? / ? | i | i | i | i |
+| 956 | Scolopax rusticola (Eurasian Woodcock) | 2,625 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 957 | Bubo africanus (Spotted Eagle-Owl) | 2,613 | 0 | Strigidae / Strigiformes | g | i | i | i |
+| 958 | Callonetta leucophrys (Ringed Teal) | 2,611 | 0 | ? / ? | i | i | i | i |
+| 959 | Arremonops rufivirgatus (Olive Sparrow) | 2,609 | 0 | ? / ? | i | i | i | i |
+| 960 | Ramphocelus dimidiatus (Crimson-backed Tanager) | 2,603 | 0 | ? / ? | i | i | i | i |
+| 961 | Anarhynchus ruficapillus (Red Capped Dotterel) | 2,598 | 0 | ? / ? | i | i | i | i |
+| 962 | Ramphocelus flammigerus (Flame-rumped Tanager) | 2,596 | 0 | ? / ? | i | i | i | i |
+| 963 | Icterus cayanensis (Variable Oriole) | 2,589 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 964 | Pelecanus crispus (Dalmatian Pelican) | 2,587 | 0 | Pelecanidae / Pelecaniformes | i | i | i | i |
+| 965 | Corythaixoides concolor (Grey Lourie) | 2,582 | 0 | ? / ? | i | i | i | i |
+| 966 | Setophaga occidentalis (Hermit Warbler) | 2,580 | 0 | Parulidae / Passeriformes | i | i | i | i |
+| 967 | Surnia ulula (Northern Hawk Owl) | 2,574 | 0 | ? / ? | i | i | i | i |
+| 968 | Cyclarhis gujanensis (Rufous-browed Peppershrike) | 2,570 | 0 | ? / ? | i | i | i | i |
+| 969 | Cyanocorax yucatanicus (Yucatán Jay) | 2,568 | 0 | ? / ? | i | i | i | i |
+| 970 | Thraupis abbas (Yellow-winged Tanager) | 2,567 | 0 | ? / ? | i | i | i | i |
+| 971 | Cyanistes cyanus (Azure Tit) | 2,564 | 0 | Paridae / Passeriformes | g | i | i | i |
+| 972 | Colibri cyanotus (Lesser Violetear) | 2,561 | 0 | ? / ? | i | i | i | i |
+| 973 | Eupetomena macroura (Swallow-tailed Hummingbird) | 2,557 | 0 | ? / ? | i | i | i | i |
+| 974 | Anseranas semipalmata (Magpie Goose) | 2,554 | 0 | ? / ? | i | i | i | i |
+| 975 | Tarsiger cyanurus (Red-flanked Bluetail) | 2,554 | 0 | ? / ? | i | i | i | i |
+| 976 | Anthus campestris (Tawny Pipit) | 2,551 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 977 | Myophonus caeruleus (Blue Whistling-Thrush) | 2,549 | 0 | ? / ? | i | i | i | i |
+| 978 | Emberiza spodocephala (Black-faced Bunting) | 2,542 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 979 | Myiarchus tyrannulus (Brown-crested Flycatcher) | 2,540 | 1 | Tyrannidae / Passeriformes | i | i | i | i |
+| 980 | Turdoides striata (Jungle Babbler) | 2,532 | 0 | ? / ? | i | i | i | i |
+| 981 | Tachyphonus rufus (White-lined Tanager) | 2,524 | 0 | ? / ? | i | i | i | i |
+| 982 | Malurus lamberti (Variegated Fairywren) | 2,517 | 0 | ? / ? | i | i | i | i |
+| 983 | Tringa brevipes (Grey-tailed Tattler) | 2,515 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 984 | Bucorvus leadbeateri (Southern Ground-Hornbill) | 2,506 | 0 | ? / ? | i | i | i | i |
+| 985 | Oriolus sagittatus (Olive-backed Oriole) | 2,503 | 0 | ? / ? | i | i | i | i |
+| 986 | Anthus australis (Australian Pipit) | 2,500 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 987 | Tadorna tadornoides (Australian Shelduck) | 2,496 | 0 | ? / ? | i | i | i | i |
+| 988 | Trogon elegans (Coppery-tailed Trogon) | 2,496 | 0 | ? / ? | i | i | i | i |
+| 989 | Aratinga nana (Olive-throated Parakeet) | 2,493 | 0 | ? / ? | i | i | i | i |
+| 990 | Aphelocoma coerulescens (Florida Scrub Jay) | 2,488 | 0 | ? / ? | i | i | i | i |
+| 991 | Empidonax hammondii (Hammond's Flycatcher) | 2,488 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 992 | Thalurania colombica (Violet-crowned Woodnymph) | 2,482 | 0 | ? / ? | i | i | i | i |
+| 993 | Coracias benghalensis (Indian Roller) | 2,479 | 0 | ? / ? | i | i | i | i |
+| 994 | Ichthyaetus audouinii (Audouin's Gull) | 2,479 | 0 | ? / ? | i | i | i | i |
+| 995 | Saxicola stejnegeri (Amur Stonechat) | 2,467 | 0 | ? / ? | i | i | i | i |
+| 996 | Menura novaehollandiae (Superb Lyrebird) | 2,466 | 0 | ? / ? | i | i | i | i |
+| 997 | Psarocolius decumanus (Crested Oropendola) | 2,464 | 0 | ? / ? | i | i | i | i |
+| 998 | Puffinus gravis (Great Shearwater) | 2,463 | 0 | Procellariidae / Procellariiformes | i | i | i | i |
+| 999 | Calidris acuminata (Sharp-tailed Sandpiper) | 2,461 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 1000 | Basileuterus culicivorus (Golden-crowned Warbler) | 2,458 | 0 | ? / ? | i | i | i | i |
+| 1001 | Phytotoma rutila (White-tipped Plantcutter) | 2,458 | 0 | ? / ? | i | i | i | i |
+| 1002 | Anarhynchus obscurus (Red-breasted Plover) | 2,457 | 0 | ? / ? | i | i | i | i |
+| 1003 | Passer diffusus (Southern Gray-headed Sparrow) | 2,454 | 0 | Passeridae / Passeriformes | i | i | i | i |
+| 1004 | Euodice malabarica (Indian Silverbill) | 2,441 | 0 | ? / ? | i | i | i | i |
+| 1005 | Lanius minor (Lesser Grey Shrike) | 2,441 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 1006 | Anas poecilorhyncha (Indian Spot-billed Duck) | 2,429 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1007 | Anthobaphes violacea (Orange-breasted Sunbird) | 2,424 | 0 | ? / ? | i | i | i | i |
+| 1008 | Saltator maximus (Buff-throated Saltator) | 2,421 | 0 | ? / ? | i | i | i | i |
+| 1009 | Cecropis rufula (European Red-rumped Swallow) | 2,420 | 0 | ? / ? | i | i | i | i |
+| 1010 | Corvus orru (Torresian Crow) | 2,419 | 0 | Corvidae / Passeriformes | i | i | i | i |
+| 1011 | Pygoscelis papua (Gentoo Penguin) | 2,415 | 0 | ? / ? | i | i | i | i |
+| 1012 | Petrochelidon fulva (Cave Swallow) | 2,394 | 1 | Hirundinidae / Passeriformes | i | i | i | i |
+| 1013 | Hypothymis azurea (Black-naped Monarch) | 2,393 | 0 | ? / ? | i | i | i | i |
+| 1014 | Leuconotopicus albolarvatus (White-headed Woodpecker) | 2,393 | 0 | Picidae / Piciformes | i | i | i | i |
+| 1015 | Taeniopygia bichenovii (Double-barred Finch) | 2,390 | 0 | Estrildidae / Passeriformes | i | i | i | i |
+| 1016 | Catharus minimus (Gray-cheeked Thrush) | 2,387 | 5 | Turdidae / Passeriformes | i | i | i | i |
+| 1017 | Dicaeum hirundinaceum (Mistletoebird) | 2,386 | 0 | ? / ? | i | i | i | i |
+| 1018 | Cyanocorax chrysops (Plush-crested Jay) | 2,385 | 0 | ? / ? | i | i | i | i |
+| 1019 | Rhipidura javanica (Malaysian Pied-Fantail) | 2,382 | 0 | ? / ? | i | i | i | i |
+| 1020 | Muscicapa adusta (African Dusky Flycatcher) | 2,380 | 0 | ? / ? | i | i | i | i |
+| 1021 | Sporophila nigricollis (Yellow-bellied Seedeater) | 2,380 | 0 | ? / ? | i | i | i | i |
+| 1022 | Cacomantis flabelliformis (Fan-tailed Cuckoo) | 2,379 | 0 | ? / ? | i | i | i | i |
+| 1023 | Acrocephalus australis (Australian Reed Warbler) | 2,378 | 0 | ? / ? | i | i | i | i |
+| 1024 | Hirundo smithii (Wire-tailed Swallow) | 2,378 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 1025 | Merops bullockoides (White-fronted Bee-eater) | 2,374 | 0 | Meropidae / Coraciiformes | i | i | i | i |
+| 1026 | Melanotis caerulescens (Blue Mockingbird) | 2,367 | 0 | ? / ? | i | i | i | i |
+| 1027 | Agelasticus thilius (Yellow-winged Blackbird) | 2,357 | 0 | ? / ? | i | i | i | i |
+| 1028 | Burhinus capensis (Spotted Thick-knee) | 2,356 | 0 | ? / ? | i | i | i | i |
+| 1029 | Anser indicus (Bar-headed Goose) | 2,354 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1030 | Psilopogon nuchalis (Taiwan Barbet) | 2,347 | 0 | ? / ? | i | i | i | i |
+| 1031 | Vermivora chrysoptera (Golden-winged Warbler) | 2,347 | 10 | Parulidae / Passeriformes | i | i | i | i |
+| 1032 | Haematopus finschi (South Island Pied Oystercatcher) | 2,340 | 0 | Haematopodidae / Charadriiformes | i | i | i | i |
+| 1033 | Fregata minor (Great Frigatebird) | 2,338 | 0 | Fregatidae / Suliformes | i | i | i | i |
+| 1034 | Spatula rhynchotis (Australasian Shoveler) | 2,337 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1035 | Uraeginthus angolensis (Blue-breasted Cordonbleu) | 2,336 | 0 | ? / ? | i | i | i | i |
+| 1036 | Anarhynchus bicinctus (Double-banded Plover) | 2,335 | 0 | ? / ? | i | i | i | i |
+| 1037 | Pelecanus thagus (Peruvian Pelican) | 2,319 | 0 | Pelecanidae / Pelecaniformes | i | i | i | i |
+| 1038 | Bubo bubo (Eurasian Eagle-Owl) | 2,317 | 0 | Strigidae / Strigiformes | g | i | i | i |
+| 1039 | Spatula platalea (Red Shoveler) | 2,316 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1040 | Dendrocitta vagabunda (Rufous Treepie) | 2,313 | 0 | ? / ? | i | i | i | i |
+| 1041 | Cisticola exilis (Golden-headed Cisticola) | 2,309 | 0 | ? / ? | i | i | i | i |
+| 1042 | Calonectris diomedea (Cory's Shearwater) | 2,307 | 0 | ? / ? | i | i | i | i |
+| 1043 | Burhinus vermiculatus (Water Thick-knee) | 2,302 | 0 | ? / ? | i | i | i | i |
+| 1044 | Turdus atrogularis (Black-throated Thrush) | 2,296 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 1045 | Cisticola tinniens (Levaillant's Cisticola) | 2,295 | 0 | ? / ? | i | i | i | i |
+| 1046 | Pastor roseus (Rosy Starling) | 2,284 | 0 | ? / ? | i | i | i | i |
+| 1047 | Ramphocelus carbo (Silver-beaked Tanager) | 2,276 | 0 | ? / ? | i | i | i | i |
+| 1048 | Pharomachrus mocinno (Resplendent Quetzal) | 2,271 | 0 | ? / ? | i | i | i | i |
+| 1049 | Lophoceros nasutus (African Grey Hornbill) | 2,254 | 0 | ? / ? | i | i | i | i |
+| 1050 | Prinia socialis (Ashy Prinia) | 2,249 | 0 | ? / ? | i | i | i | i |
+| 1051 | Myzomela sanguinolenta (Scarlet Myzomela) | 2,239 | 0 | ? / ? | i | i | i | i |
+| 1052 | Anser serrirostris (Tundra Bean Goose) | 2,237 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1053 | Phalaropus fulicarius (Red Phalarope) | 2,232 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 1054 | Quelea quelea (Red-billed Quelea) | 2,224 | 0 | ? / ? | i | i | i | i |
+| 1055 | Strepera versicolor (Grey Currawong) | 2,223 | 0 | ? / ? | i | i | i | i |
+| 1056 | Xolmis irupero (White Monjita) | 2,222 | 0 | ? / ? | i | i | i | i |
+| 1057 | Poecile hudsonicus (Boreal Chickadee) | 2,221 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 1058 | Sula brewsteri (Cocos Booby) | 2,221 | 0 | ? / ? | i | i | i | i |
+| 1059 | Megascops choliba (Tropical Screech-Owl) | 2,217 | 0 | Strigidae / Strigiformes | i | i | i | i |
+| 1060 | Lamprotornis superbus (Superb Starling) | 2,215 | 0 | ? / ? | i | i | i | i |
+| 1061 | Cinclodes fuscus (Buff-winged Cinclodes) | 2,214 | 0 | ? / ? | i | i | i | i |
+| 1062 | Melanerpes pucherani (Black-cheeked Woodpecker) | 2,213 | 0 | Picidae / Piciformes | i | i | i | i |
+| 1063 | Oenanthe hispanica (Eastern Black-eared Wheatear) | 2,209 | 0 | ? / ? | i | i | i | i |
+| 1064 | Vanellus senegallus (African Wattled Lapwing) | 2,194 | 0 | ? / ? | i | i | i | i |
+| 1065 | Lophonetta specularioides (Crested Duck) | 2,191 | 0 | ? / ? | i | i | i | i |
+| 1066 | Anser fabalis (Taiga Bean Goose) | 2,184 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1067 | Anthus cervinus (Red-throated Pipit) | 2,181 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 1068 | Anas erythrorhyncha (Red-billed Teal) | 2,175 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1069 | Platycercus adscitus (Pale-headed Rosella) | 2,175 | 0 | ? / ? | i | i | i | i |
+| 1070 | Tachycineta albiventer (White-winged Swallow) | 2,170 | 0 | Hirundinidae / Passeriformes | i | i | i | i |
+| 1071 | Lessonia rufa (Austral Negrito) | 2,168 | 0 | ? / ? | i | i | i | i |
+| 1072 | Macronectes giganteus (Southern Giant Petrel) | 2,162 | 0 | ? / ? | i | i | i | i |
+| 1073 | Phaetusa simplex (Large-billed Tern) | 2,160 | 0 | ? / ? | i | i | i | i |
+| 1074 | Anthus cinnamomeus (Grassveld Pipit) | 2,159 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 1075 | Acanthagenys rufogularis (Spiny-cheeked Honeyeater) | 2,158 | 0 | ? / ? | i | i | i | i |
+| 1076 | Elaenia flavogaster (Yellow-bellied Elaenia) | 2,157 | 0 | ? / ? | i | i | i | i |
+| 1077 | Campylopterus hemileucurus (Violet Sabrewing) | 2,154 | 0 | ? / ? | i | i | i | i |
+| 1078 | Nesoptilotis leucotis (White-eared Honeyeater) | 2,154 | 0 | ? / ? | i | i | i | i |
+| 1079 | Nyctibius griseus (Common Potoo) | 2,154 | 0 | ? / ? | i | i | i | i |
+| 1080 | Lanius bucephalus (Bull-headed Shrike) | 2,151 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 1081 | Opisthocomus hoazin (Hoatzin) | 2,148 | 0 | ? / ? | i | i | i | i |
+| 1082 | Momotus aequatorialis (Andean Motmot) | 2,147 | 0 | ? / ? | i | i | i | i |
+| 1083 | Hippolais polyglotta (Melodious Warbler) | 2,145 | 0 | ? / ? | i | i | i | i |
+| 1084 | Chroicocephalus serranus (Andean Gull) | 2,144 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 1085 | Acrocephalus palustris (Marsh Warbler) | 2,141 | 0 | ? / ? | i | i | i | i |
+| 1086 | Stilpnia larvata (Golden-hooded Tanager) | 2,141 | 0 | ? / ? | i | i | i | i |
+| 1087 | Mareca sibilatrix (Chiloé Wigeon) | 2,133 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1088 | Emberiza pusilla (Little Bunting) | 2,130 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 1089 | Trachyphonus vaillantii (Crested Barbet) | 2,128 | 0 | ? / ? | i | i | i | i |
+| 1090 | Cecropis abyssinica (Lesser Striped-Swallow) | 2,126 | 0 | ? / ? | i | i | i | i |
+| 1091 | Chalcomitra amethystina (Amethyst Sunbird) | 2,120 | 0 | ? / ? | i | i | i | i |
+| 1092 | Icterus icterus (Venezuelan Troupial) | 2,120 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 1093 | Trogon massena (Slaty-tailed Trogon) | 2,115 | 0 | ? / ? | i | i | i | i |
+| 1094 | Rhea americana (Greater Rhea) | 2,113 | 0 | Rheidae / Rheiformes | i | i | i | i |
+| 1095 | Emberiza rustica (Rustic Bunting) | 2,112 | 0 | Emberizidae / Passeriformes | i | i | i | i |
+| 1096 | Gracupica contra (Indian Pied Starling) | 2,112 | 0 | ? / ? | i | i | i | i |
+| 1097 | Helmitheros vermivorum (Worm-eating Warbler) | 2,109 | 16 | Parulidae / Passeriformes | i | i | i | i |
+| 1098 | Anser brachyrhynchus (Pink-footed Goose) | 2,103 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1099 | Stilpnia cyanicollis (Blue-necked Tanager) | 2,102 | 0 | ? / ? | i | i | i | i |
+| 1100 | Anthracothorax nigricollis (Black-throated Mango) | 2,100 | 0 | ? / ? | i | i | i | i |
+| 1101 | Colaptes rubiginosus (Golden-olive Woodpecker) | 2,095 | 0 | Picidae / Piciformes | i | i | i | i |
+| 1102 | Lybius torquatus (Black-collared Barbet) | 2,095 | 0 | ? / ? | i | i | i | i |
+| 1103 | Ichthyaetus ichthyaetus (Pallas's Gull) | 2,092 | 0 | ? / ? | i | i | i | i |
+| 1104 | Anarhynchus collaris (Collared Plover) | 2,089 | 0 | ? / ? | i | i | i | i |
+| 1105 | Tyrannus crassirostris (Thick-billed Kingbird) | 2,060 | 0 | Tyrannidae / Passeriformes | i | i | i | i |
+| 1106 | Petroica phoenicea (Flame Robin) | 2,054 | 0 | ? / ? | i | i | i | i |
+| 1107 | Anarhynchus marginatus (White-fronted Plover) | 2,051 | 0 | ? / ? | i | i | i | i |
+| 1108 | Prinia subflava (Tawny-flanked Prinia) | 2,047 | 0 | ? / ? | i | i | i | i |
+| 1109 | Lanius meridionalis (Iberian Grey Shrike) | 2,043 | 0 | Laniidae / Passeriformes | i | i | i | i |
+| 1110 | Motacilla maderaspatensis (White-browed Wagtail) | 2,043 | 0 | Motacillidae / Passeriformes | i | i | i | i |
+| 1111 | Petronia petronia (Rock Petronia) | 2,035 | 0 | ? / ? | i | i | i | i |
+| 1112 | Poecile varius (Varied Tit) | 2,032 | 0 | Paridae / Passeriformes | i | i | i | i |
+| 1113 | Picoides dorsalis (American Three-toed Woodpecker) | 2,028 | 0 | ? / ? | i | i | i | i |
+| 1114 | Turdus torquatus (Ring Ouzel) | 2,015 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 1115 | Ficedula parva (Red-breasted Flycatcher) | 2,013 | 0 | Muscicapidae / Passeriformes | g | i | i | i |
+| 1116 | Garrulax perspicillatus (Masked Laughing-thrush) | 2,012 | 0 | ? / ? | i | i | i | i |
+| 1117 | Dinopium benghalense (Black-rumped Flameback) | 2,010 | 0 | ? / ? | i | i | i | i |
+| 1118 | Serinus canaria (Island Canary) | 2,009 | 0 | Fringillidae / Passeriformes | i | i | i | i |
+| 1119 | Calyptorhynchus lathami (Glossy Black-Cockatoo) | 2,007 | 0 | ? / ? | i | i | i | i |
+| 1120 | Phalacrocorax capensis (Cape Cormorant) | 2,007 | 0 | Phalacrocoracidae / Suliformes | i | i | i | i |
+| 1121 | Coccyzus erythropthalmus (Black-billed Cuckoo) | 2,004 | 0 | Cuculidae / Cuculiformes | i | i | i | i |
+| 1122 | Calocitta colliei (Black-throated Magpie-Jay) | 1,999 | 0 | ? / ? | i | i | i | i |
+| 1123 | Petroica goodenovii (Red-capped Robin) | 1,999 | 0 | ? / ? | i | i | i | i |
+| 1124 | Pelargopsis capensis (Stork-billed Kingfisher) | 1,996 | 0 | ? / ? | i | i | i | i |
+| 1125 | Phoeniculus purpureus (Green Wood Hoopoe) | 1,993 | 0 | ? / ? | i | i | i | i |
+| 1126 | Halcyon senegalensis (Woodland Kingfisher) | 1,989 | 0 | ? / ? | i | i | i | i |
+| 1127 | Numenius madagascariensis (Far Eastern Curlew) | 1,987 | 0 | Scolopacidae / Charadriiformes | i | i | i | i |
+| 1128 | Trogon citreolus (Citreoline Trogon) | 1,987 | 0 | ? / ? | i | i | i | i |
+| 1129 | Hylocharis chrysura (Gilded Hummingbird) | 1,986 | 0 | ? / ? | i | i | i | i |
+| 1130 | Stilpnia vitriolina (Scrub Tanager) | 1,986 | 0 | ? / ? | i | i | i | i |
+| 1131 | Myiozetetes cayanensis (Rusty-margined Flycatcher) | 1,982 | 0 | ? / ? | i | i | i | i |
+| 1132 | Taeniopygia guttata (Zebra Finch) | 1,982 | 0 | Estrildidae / Passeriformes | i | i | i | i |
+| 1133 | Ficedula albicollis (Collared Flycatcher) | 1,981 | 0 | Muscicapidae / Passeriformes | m | i | i | i |
+| 1134 | Nestor notabilis (Kea) | 1,980 | 0 | ? / ? | i | i | i | i |
+| 1135 | Todiramphus macleayii (Forest Kingfisher) | 1,975 | 0 | ? / ? | i | i | i | i |
+| 1136 | Certhiaxis cinnamomeus (Yellow-chinned Spinetail) | 1,974 | 0 | ? / ? | i | i | i | i |
+| 1137 | Merops persicus (Blue-cheeked Bee-eater) | 1,974 | 0 | Meropidae / Coraciiformes | i | i | i | i |
+| 1138 | Pycnonotus leucotis (White-eared Bulbul) | 1,969 | 0 | ? / ? | i | i | i | i |
+| 1139 | Empidonax virescens (Acadian Flycatcher) | 1,967 | 26 | Tyrannidae / Passeriformes | i | i | i | i |
+| 1140 | Geothlypis formosa (Kentucky Warbler) | 1,964 | 8 | Parulidae / Passeriformes | i | i | i | i |
+| 1141 | Stilpnia cayana (Burnished-buff Tanager) | 1,964 | 0 | ? / ? | i | i | i | i |
+| 1142 | Cereopsis novaehollandiae (Cape Barren Goose) | 1,963 | 0 | ? / ? | i | i | i | i |
+| 1143 | Icterus abeillei (Black-backed Oriole) | 1,963 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 1144 | Thalassarche cauta (Shy Mollymawk) | 1,960 | 0 | ? / ? | i | i | i | i |
+| 1145 | Turdus olivaceus (Olive Thrush) | 1,955 | 0 | Turdidae / Passeriformes | i | i | i | i |
+| 1146 | Picoides arcticus (Black-backed Woodpecker) | 1,950 | 0 | ? / ? | i | i | i | i |
+| 1147 | Acanthiza lineata (Striated Thornbill) | 1,948 | 0 | ? / ? | i | i | i | i |
+| 1148 | Empidonax flaviventris (Yellow-bellied Flycatcher) | 1,946 | 2 | Tyrannidae / Passeriformes | i | i | i | i |
+| 1149 | Sturnella superciliaris (White-browed Blackbird) | 1,944 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 1150 | Campylorhynchus capistratus (Rufous-backed Wren) | 1,943 | 0 | ? / ? | i | i | i | i |
+| 1151 | Sula granti (Nazca Booby) | 1,943 | 0 | ? / ? | i | i | i | i |
+| 1152 | Caprimulgus europaeus (European Nightjar) | 1,939 | 0 | ? / ? | i | i | i | i |
+| 1153 | Stercorarius pomarinus (Pomarine Jaeger) | 1,939 | 0 | ? / ? | i | i | i | i |
+| 1154 | Struthidea cinerea (Apostlebird) | 1,936 | 0 | ? / ? | i | i | i | i |
+| 1155 | Euphonia affinis (Scrub Euphonia) | 1,933 | 0 | ? / ? | i | i | i | i |
+| 1156 | Trogon collaris (Collared Trogon) | 1,932 | 0 | ? / ? | i | i | i | i |
+| 1157 | Malurus splendens (Splendid Fairywren) | 1,930 | 0 | ? / ? | i | i | i | i |
+| 1158 | Glareola pratincola (Collared Pratincole) | 1,923 | 0 | ? / ? | i | i | i | i |
+| 1159 | Vireo cassinii (Cassin's Vireo) | 1,923 | 0 | Vireonidae / Passeriformes | i | i | i | i |
+| 1160 | Eumyias thalassinus (Verditer Flycatcher) | 1,922 | 0 | ? / ? | i | i | i | i |
+| 1161 | Leucosticte tephrocotis (Gray-crowned Rosy-Finch) | 1,920 | 0 | ? / ? | i | i | i | i |
+| 1162 | Phylidonyris niger (White-cheeked Honeyeater) | 1,914 | 0 | ? / ? | i | i | i | i |
+| 1163 | Ninox boobook (Southern Boobook) | 1,913 | 0 | ? / ? | i | i | i | i |
+| 1164 | Cacicus cela (Yellow-rumped Cacique) | 1,907 | 0 | ? / ? | i | i | i | i |
+| 1165 | Lonchura oryzivora (Java Sparrow) | 1,902 | 0 | Estrildidae / Passeriformes | i | i | i | i |
+| 1166 | Oenanthe pleschanka (Pied Wheatear) | 1,901 | 0 | ? / ? | i | i | i | i |
+| 1167 | Picoides tridactylus (Eurasian Three-toed Woodpecker) | 1,894 | 0 | ? / ? | i | i | i | i |
+| 1168 | Camptostoma obsoletum (Southern Beardless-Tyrannulet) | 1,889 | 0 | ? / ? | i | i | i | i |
+| 1169 | Diuca diuca (Common Diuca-Finch) | 1,889 | 0 | ? / ? | i | i | i | i |
+| 1170 | Phalacrocorax punctatus (Spotted Shag) | 1,888 | 0 | Phalacrocoracidae / Suliformes | i | i | i | i |
+| 1171 | Peucaea ruficauda (Stripe-headed Sparrow) | 1,886 | 0 | Passerellidae / Passeriformes | i | i | i | i |
+| 1172 | Phoebastria nigripes (Black-footed Albatross) | 1,886 | 0 | ? / ? | i | i | i | i |
+| 1173 | Philemon citreogularis (Little Friarbird) | 1,882 | 0 | ? / ? | i | i | i | i |
+| 1174 | Tersina viridis (Swallow Tanager) | 1,880 | 0 | ? / ? | i | i | i | i |
+| 1175 | Tangara gyrola (Bay-headed Tanager) | 1,877 | 0 | ? / ? | i | i | i | i |
+| 1176 | Tockus rufirostris (Southern Red-billed Hornbill) | 1,874 | 0 | ? / ? | i | i | i | i |
+| 1177 | Ceyx azureus (Azure Kingfisher) | 1,872 | 0 | ? / ? | i | i | i | i |
+| 1178 | Pelecanus philippensis (Grey Pelican) | 1,868 | 0 | Pelecanidae / Pelecaniformes | i | i | i | i |
+| 1179 | Cinnyris afer (Greater Double-collared Sunbird) | 1,867 | 0 | ? / ? | i | i | i | i |
+| 1180 | Driophlox fuscicauda (Red-throated Ant-Tanager) | 1,866 | 0 | ? / ? | i | i | i | i |
+| 1181 | Megaceryle maxima (Giant Kingfisher) | 1,866 | 0 | Alcedinidae / Coraciiformes | i | i | i | i |
+| 1182 | Myiagra rubecula (Leaden Flycatcher) | 1,864 | 0 | ? / ? | i | i | i | i |
+| 1183 | Dicaeum cruentatum (Scarlet-backed Flowerpecker) | 1,859 | 0 | ? / ? | i | i | i | i |
+| 1184 | Sarcoramphus papa (King Vulture) | 1,858 | 0 | ? / ? | i | i | i | i |
+| 1185 | Melopsittacus undulatus (Budgerigar) | 1,855 | 0 | Psittaculidae / Psittaciformes | m | i | i | i |
+| 1186 | Puffinus pacificus (Wedge-tailed Shearwater) | 1,855 | 0 | Procellariidae / Procellariiformes | i | i | i | i |
+| 1187 | Rhopospina fruticeti (Mourning Sierra-Finch) | 1,850 | 0 | ? / ? | i | i | i | i |
+| 1188 | Icterus wagleri (Black-vented Oriole) | 1,837 | 0 | Icteridae / Passeriformes | i | i | i | i |
+| 1189 | Aulacorhynchus prasinus (Northern Emerald-Toucanet) | 1,836 | 0 | ? / ? | i | i | i | i |
+| 1190 | Cinnyris frenatus (Sahul Sunbird) | 1,833 | 0 | ? / ? | i | i | i | i |
+| 1191 | Saltator coerulescens (Blue-gray Saltator) | 1,832 | 0 | ? / ? | i | i | i | i |
+| 1192 | Aratinga erythrogenys (Red-masked Parakeet) | 1,831 | 0 | ? / ? | i | i | i | i |
+| 1193 | Crotophaga major (Greater Ani) | 1,831 | 0 | Cuculidae / Cuculiformes | i | i | i | i |
+| 1194 | Oxyura vittata (Argentine Blue-bill) | 1,825 | 0 | Anatidae / Anseriformes | i | i | i | i |
+| 1195 | Chroicocephalus bulleri (Black-billed Gull) | 1,820 | 0 | Laridae / Charadriiformes | i | i | i | i |
+| 1196 | Cettia cetti (Cetti's Warbler) | 1,819 | 0 | ? / ? | i | i | i | i |
+| 1197 | Ficedula albicilla (Taiga Flycatcher) | 1,819 | 0 | Muscicapidae / Passeriformes | g | i | i | i |
+| 1198 | Sphyrapicus thyroideus (Williamson's Sapsucker) | 1,818 | 0 | Picidae / Piciformes | i | i | i | i |
+| 1199 | Aethopyga siparaja (Crimson Sunbird) | 1,817 | 0 | ? / ? | i | i | i | i |
+| 1200 | Fratercula cirrhata (Tufted Puffin) | 1,815 | 0 | ? / ? | i | i | i | i |
 
 ### Detail by trait (worldwide)
 
@@ -140,6 +1280,1146 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Sayornis nigricans*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: m (birds#64); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
 - *Bucephala albeola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
 - *Regulus calendula*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Podiceps cristatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Bucephala clangula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Molothrus ater*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Turdus pilaris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Quiscalus quiscula*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pyrocephalus rubinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Leucophaeus atricilla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Passerculus sandwichensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dumetella carolinensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Himantopus mexicanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pelecanus erythrorhynchos*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#129), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#127), no carry rule allows order level for this trait
+- *Mareca americana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Actitis macularius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Megaceryle alcyon*: cff_hz: i, none; acuity_cpd: i, closest family (birds#51), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus smithsonianus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Garrulus glandarius*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: m (birds#56); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Pyrrhula pyrrhula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Archilochus colubris*: cff_hz: i, closest family (birds#138), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#59), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Calidris alba*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chloris chloris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lophodytes cucullatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Thryothorus ludovicianus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tringa semipalmata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Baeolophus bicolor*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dryocopus pileatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Coloeus monedula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tachycineta bicolor*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anser anser*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Aphelocoma californica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aythya collaris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Alopochen aegyptiaca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Pipilo maculatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Phoenicurus ochruros*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sitta europaea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pitangus sulphuratus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus occidentalis*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Setophaga aestiva*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Geothlypis trichas*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tringa melanoleuca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Bubo virginianus*: cff_hz: m (methods#225); acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait [lit table has genus: Bubo scandiaca]
+- *Aythya fuligula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Corvus corone*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Cairina moschata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Spatula discors*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Spatula clypeata (birds#132)
+- *Leuconotopicus villosus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sialia mexicana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#54), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Calidris minutilla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anas acuta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Tyrannus tyrannus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Arenaria interpres*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanerpes formicivorus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oxyura jamaicensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Phalacrocorax brasilianus*: cff_hz: i, none; acuity_cpd: g, rule 3 from Phalacrocorax carbo (birds#151); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Poecile carolinensis*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Icterus galbula*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Gavia immer*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus argentatus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Catharus guttatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#54), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anhinga anhinga*: cff_hz: i, none; acuity_cpd: i, closest order (birds#151), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, closest species (birds#205), no carry rule allows species level for this trait
+- *Aegithalos caudatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melozone crissalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus michahellis*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Polioptila caerulea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Strix varia*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Strix aluco (birds#26); spectral_range_nm: i, none; fov_h_deg: g, rule 3 from Strix aluco (birds#73); binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Gymnorhina tibicen*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyanocitta stelleri*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Cyanocitta cristata (birds#201); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Sphyrapicus varius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leiothlypis celata*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Vanellus vanellus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pluvialis squatarola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phylloscopus collybita*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus fuscus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Sterna hirundo*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Saxicola rubicola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga palmarum*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Turdus philomelos*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Actitis hypoleucos*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Mergus serrator*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Acanthis flammea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Himantopus himantopus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tyrannus melancholicus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sayornis saya*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Sayornis nigricans (birds#64); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dendrocygna autumnalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Calidris alpina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Psaltriparus minimus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Passerina cyanea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tachybaptus ruficollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sitta canadensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Troglodytes aedon*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Aythya affinis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Emberiza citrinella*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Acridotheres tristis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thryomanes bewickii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cygnus buccinator*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Linaria cannabina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pheucticus ludovicianus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Alcedo atthis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga ruticilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Zonotrichia atricapilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Zonotrichia albicollis (birds#66); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Euphagus cyanocephalus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Lanius ludovicianus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Spinus pinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Spinus tristis (birds#53); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait [lit table has genus: Spinus tristis]; binocular_deg: i, none [lit table has genus: Spinus tristis]
+- *Corvus frugilegus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: m (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Mniotilta varia*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Lanius collurio*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Hydroprogne caspia*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Piranga rubra*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Oenanthe oenanthe*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Recurvirostra americana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Motacilla flava*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Toxostoma rufum*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Thalasseus maximus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Melospiza lincolnii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Mareca penelope*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Melanerpes aurifrons*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Athene cunicularia*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait [lit table has genus: Athene noctua]; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Dacelo novaeguineae*: cff_hz: i, none; acuity_cpd: m (birds#51); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Emberiza schoeniclus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: m (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Geococcyx californianus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Zonotrichia capensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Zonotrichia albicollis (birds#66); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Larus marinus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Charadrius semipalmatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Motacilla cinerea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sicalis flaveola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Malurus cyaneus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Podiceps nigricollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Upupa epops*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myiopsitta monachus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Bombycilla garrulus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Fregata magnificens*: cff_hz: i, none; acuity_cpd: i, closest order (birds#151), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anser caerulescens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Larus canus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Cardellina pusilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tringa totanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aythya ferina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Pica hudsonia*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Tyrannus verticalis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Haematopus ostralegus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Haemorhous purpureus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Haemorhous mexicanus (birds#69); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chroicocephalus novaehollandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Muscicapa striata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anser albifrons*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Spinus spinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Spinus tristis (birds#53); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait [lit table has genus: Spinus tristis]; binocular_deg: i, none [lit table has genus: Spinus tristis]
+- *Sylvia atricapilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Certhia americana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Periparus ater*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pipilo erythrophthalmus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Larus californicus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Larus dominicanus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Tringa glareola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tringa flavipes*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Trichoglossus haematodus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Piranga ludoviciana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Regulus satrapa*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Spatula cyanoptera*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Spatula clypeata (birds#132)
+- *Chondestes grammacus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Toxostoma curvirostre*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Somateria mollissima*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Passerina ciris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Icterus cucullatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Vanellus chilensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chenonetta jubata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Petrochelidon pyrrhonota*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tyrannus vociferans*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pheucticus melanocephalus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Microcarbo melanoleucos*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Podiceps auritus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phoenicopterus roseus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Phoenicopterus chilensis, Phoenicopterus ruber]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sterna forsteri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Quiscalus major*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tringa solitaria*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Numenius hudsonicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sturnella neglecta*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anthus trivialis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tyrannus forficatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Phoenicurus phoenicurus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Troglodytes troglodytes*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Saxicola rubetra*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Stelgidopteryx serripennis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Poecile montanus*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Setophaga pinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Melanitta perspicillata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Melanitta deglandi]
+- *Vireo olivaceus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cygnus atratus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Tringa nebularia*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Psittacula krameri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Passerella iliaca*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Passerina caerulea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Melanerpes erythrocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Luscinia svecica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sylvia communis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Limosa fedoa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris pugnax*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Prunella modularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thinornis dubius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tadorna tadorna*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melospiza georgiana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Eremophila alpestris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Aythya americana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Spizelloides arborea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Catharus ustulatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#54), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dryobates scalaris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aythya marila*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Serinus serinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#53), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Serinus canaria (birds-met#33); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Poecile rufescens*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anas superciliosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Setophaga americana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tadorna ferruginea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Eolophus roseicapilla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cynanthus latirostris*: cff_hz: i, closest family (birds#138), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#59), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Copsychus saularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Coccothraustes coccothraustes*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Merops apiaster*: cff_hz: i, none; acuity_cpd: i, closest order (birds#51), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vanellus miles*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leiothlypis ruficapilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cacatua galerita*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Numenius americanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Loxia curvirostra*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthus pratensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Manorina melanocephala*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Progne subis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Icterus spurius*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chroicocephalus philadelphia*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Setophaga townsendi*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Platycercus elegans*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none [lit table has genus: Platycercus elegans]; fov_h_deg: i, none; binocular_deg: i, none
+- *Grallina cyanoleuca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Limosa limosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myiarchus crinitus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ficedula hypoleuca*: cff_hz: m (birds#89); acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Delichon urbicum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga magnolia*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anas rubripes*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Myiozetetes similis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Rhipidura leucophrys*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lonchura punctulata*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Lonchura maja (methods#315); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#186), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Xanthocephalus xanthocephalus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Contopus virens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Spizella pusilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Larus heermanni*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Anthus rubescens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Setophaga virens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Rynchops niger*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Turdus iliacus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Clangula hyemalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none [lit table has genus: Clangula hyemalis]
+- *Piranga olivacea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Melozone fusca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thraupis episcopus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Gallinago delicata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Podargus strigoides*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Archilochus alexandri*: cff_hz: i, closest family (birds#138), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#59), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Thalasseus sandvicensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Haematopus palliatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Charadrius hiaticula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Seiurus aurocapilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Branta bernicla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Fringilla montifringilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#53), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Turdus grayi*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Phylloscopus trochilus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Certhia familiaris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Apus apus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aythya valisineria*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Rhipidura albiscapa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Recurvirostra avosetta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Numenius arquata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phainopepla nitens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aechmophorus occidentalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leiothlypis peregrina*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Alauda arvensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Regulus regulus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Furnarius rufus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tringa ochropus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Riparia riparia*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Setophaga pensylvanica*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Myiarchus cinerascens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pelecanus conspicillatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#129), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#127), no carry rule allows order level for this trait
+- *Troglodytes musculus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dryobates nuttallii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Uria aalge*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Morus bassanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris mauri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sialia currucoides*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#54), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Hirundo neoxena*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Molothrus bonariensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Haematopus bachmani*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Perisoreus canadensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Salpinctes obsoletus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Gallinago gallinago*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus bullockii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pooecetes gramineus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Campylorhynchus brunneicapillus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Picus viridis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthochaera carunculata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Selasphorus sasin*: cff_hz: i, closest family (birds#138), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#59), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Selasphorus rufus*: cff_hz: i, closest family (birds#138), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#59), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Amphispiza bilineata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cygnus columbianus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Aix galericulata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Anas zonorhyncha*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Crotophaga sulcirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus viscivorus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Podiceps grisegena*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Saxicola maurus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Auriparus flaviceps*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Spatula querquedula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Spatula clypeata (birds#132)
+- *Emberiza calandra*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Zosterops lateralis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Urile penicillatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tachycineta thalassina*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pycnonotus jocosus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vireo griseus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Coereba flaveola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Megascops asio*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Pycnonotus sinensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Molothrus aeneus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Todiramphus sanctus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phylidonyris novaehollandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Mimus saturninus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sturnella magna*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cygnus cygnus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Plectrophenax nivalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thalasseus bergii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Poecile palustris*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Numenius phaeopus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Poecile gambeli*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cuculus canorus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Contopus sordidulus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Platycercus eximius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none [lit table has genus: Platycercus elegans]; fov_h_deg: i, none; binocular_deg: i, none
+- *Halcyon smyrnensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris pusilla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Paroaria coronata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Asio otus*: cff_hz: g, rule 3 from Asio flammeus (methods#224); acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Mimus gilvus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chlidonias niger*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Baeolophus inornatus*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Limnodromus scolopaceus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris melanotos*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Alisterus scapularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga tigrina*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Larus glaucescens*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Histrionicus histrionicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vireo solitarius*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chloroceryle americana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga fusca*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Galerida cristata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phalaropus lobatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cistothorus palustris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Lanius excubitor*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Netta rufina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Asio flammeus*: cff_hz: m (methods#224); acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Hesperiphona vespertina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Strepera graculina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dicrurus macrocercus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Spiza americana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Branta hutchinsii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Spizella pallida*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cracticus torquatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dryocopus martius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanerpes uropygialis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Corvus macrorhynchos*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Anarhynchus nivosus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ixoreus naevius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Piaya cayana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phalaropus tricolor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus brachyrhynchus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Megaceryle torquata*: cff_hz: i, none; acuity_cpd: i, closest family (birds#51), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Branta leucopsis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Setophaga caerulescens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Phalacrocorax pelagicus*: cff_hz: i, none; acuity_cpd: g, rule 3 from Phalacrocorax carbo (birds#151); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga castanea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pluvialis fulva*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Parkesia noveboracensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Larus glaucoides*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Eopsaltria australis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Toxostoma redivivum*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chordeiles minor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sphyrapicus ruber*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Protonotaria citrea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pycnonotus cafer*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus rufopalliatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Passerina amoena*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cinclus cinclus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Coccyzus americanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pinicola enucleator*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Zanda funerea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leucophaeus pipixcan*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Calypte costae*: cff_hz: g, rule 3 from Calypte anna (birds#138); acuity_cpd: g, rule 3 from Calypte anna (birds#59); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Aphelocoma woodhouseii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thraupis palmarum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Limosa lapponica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Rissa tridactyla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus rufiventris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Charadrius melodus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sturnus unicolor*: cff_hz: g, rule 3 from Sturnus vulgaris (methods#250); acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Motacilla citreola*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tyto furcata*: cff_hz: i, closest order (birds#182), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Tyto alba pratincola (birds#49); interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#73), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Athene noctua*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait [lit table has genus: Athene noctua]; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Dendrocopos leucotos*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phalacrocorax sulcirostris*: cff_hz: i, none; acuity_cpd: g, rule 3 from Phalacrocorax carbo (birds#151); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pycnonotus barbatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dryobates minor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Bucephala islandica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Empidonax difficilis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Empidonax minimus (birds#65); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Crotophaga ani*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Prosthemadera novaeseelandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sternula antillarum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Phalacrocorax aristotelis*: cff_hz: i, none; acuity_cpd: g, rule 3 from Phalacrocorax carbo (birds#151); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anas diazi*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Dolichonyx oryzivorus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Picus canus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anas castanea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Anhinga novaehollandiae*: cff_hz: i, none; acuity_cpd: i, closest order (birds#151), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, closest genus (birds#205), the genus record is grade i, not a measurement
+- *Phalacrocorax varius*: cff_hz: i, none; acuity_cpd: g, rule 3 from Phalacrocorax carbo (birds#151); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phoenicurus auroreus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Baeolophus atricristatus*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chlidonias hybrida*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Gavia stellata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Corvus splendens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Ceryle rudis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Acrocephalus schoenobaenus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Parus cinereus*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Parus caeruleus (birds-met#29); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sylvia curruca*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Curruca melanocephala*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Arenaria melanocephala*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyanocorax yncas*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cepphus columba*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tyrannus savana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Lanius schach*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Carpodacus erythrinus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Carpodacus mexicanus]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pachycephala pectoralis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cacatua sanguinea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lophophanes cristatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Himantopus leucocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga striata*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Monticola solitarius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Euphagus carolinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Amazilia tzacatl*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Amazilia tzacatl]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Charadrius alexandrinus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tachybaptus dominicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Machetornis rixosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pica serica*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Bubo scandiacus*: cff_hz: g, rule 3 from Bubo virginianus (methods#225); acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait [lit table has genus: Bubo scandiaca]
+- *Rhipidura fuliginosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga dominica*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Icteria virens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Jacana jacana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vanellus armatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Volatinia jacarina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Neochmia temporalis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Neochmia modesta (methods#320); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#186), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Calidris minuta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tachybaptus novaehollandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anser cygnoides*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Lanius cristatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Estrilda astrild*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cinclus mexicanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Fulmarus glacialis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cardinalis sinuatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Acridotheres javanicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myadestes townsendi*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pycnonotus goiavier*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Glaucidium brasilianum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga nigrescens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dendrocygna viduata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Fratercula arctica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sitta pygmaea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Struthio camelus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: m (methods#369); spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga discolor*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Jacana spinosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Colluricincla harmonica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sericornis frontalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hylocichla mustelina*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#54), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Psephotus haematonotus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Limnodromus griseus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dendrocoptes medius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anas gracilis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Vanellus indicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanitta deglandi*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Melanitta deglandi]
+- *Larus cachinnans*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Cisticola juncidis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus gularis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Contopus cooperi*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Coracina novaehollandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Microcarbo africanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Colaptes melanochloros*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Carpodacus sibiricus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Carpodacus mexicanus]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris canutus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga citrina*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dryocopus lineatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ammodramus savannarum*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ichthyaetus melanocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Acrocephalus dumetorum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Nucifraga columbiana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dicrurus adsimilis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Passer italiae*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Passer domesticus (birds#68); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Passer domesticus (methods#330); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Acanthiza pusilla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Certhia brachydactyla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Turdus fuscater*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Lanius borealis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sphecotheres vieilloti*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus pustulatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sporophila torqueola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Strix aluco*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: m (birds#26); spectral_range_nm: i, none; fov_h_deg: m (birds#73); binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Selasphorus platycercus*: cff_hz: i, closest family (birds#138), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#59), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Phoenicopterus ruber*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Phoenicopterus chilensis, Phoenicopterus ruber]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tadorna variegata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thraupis sayaca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Piranga flava*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Vireo gilvus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anas flavirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Zonotrichia querula*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Zonotrichia albicollis (birds#66); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sitta pusilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Merops orientalis*: cff_hz: i, none; acuity_cpd: i, closest order (birds#51), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Haematopus unicolor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Microcarbo niger*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris bairdii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Guira guira*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lanius collaris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Catharus fuscescens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#54), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Corvus albus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Tringa stagnatilis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pachycephala rufiventris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Haematopus longirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Coracias garrulus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Alca torda*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Acanthorhynchus tenuirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chaetura pelagica*: cff_hz: i, closest order (birds#138), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#59), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris ferruginea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aimophila ruficeps*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sterna paradisaea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Prinia inornata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Troglodytes hiemalis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Merops ornatus*: cff_hz: i, none; acuity_cpd: i, closest order (birds#51), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vireo swainsoni*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Spinus magellanicus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Spinus tristis (birds#53); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait [lit table has genus: Spinus tristis]; binocular_deg: i, none [lit table has genus: Spinus tristis]
+- *Hypsipetes amaurotis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Jynx torquilla*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthus spinoletta*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ptilotula penicillata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ploceus velatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Saucerottia beryllina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sternula albifrons*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Aechmophorus clarkii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lanius senator*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pyrrhocorax graculus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Zosterops simplex*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Coracias caudatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Copsychus malabaricus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Empidonax minimus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: m (birds#65); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Caligavis chrysops*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Entomyzon cyanotis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Eudynamys scolopaceus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thalasseus elegans*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Chloroceryle amazona*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Gelochelidon nilotica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanitta americana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Melanitta deglandi]
+- *Anas fulvigula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Gracupica nigricollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthochaera chrysoptera*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Regulus ignicapilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cinnyris ornatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Progne chalybea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ramphastos sulfuratus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris himantopus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cepphus grylle*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Motacilla capensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Emberiza cirlus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ramphocelus passerinii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sula nebouxii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lichmera indistincta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Eumomota superciliosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ara macao*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Corvus ossifragus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Calidris fuscicollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pipilo chlorurus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Spizella breweri*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Microcarbo pygmaeus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Agelaioides badius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Haemorhous cassinii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Haemorhous mexicanus (birds#69); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tringa erythropus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dromaius novaehollandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: m (methods#363); spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Junco phaeonotus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Parkesia motacilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Aphelocoma wollweberi*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ptilonorhynchus violaceus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pyrrhocorax pyrrhocorax*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Scolopax minor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tityra semifasciata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pluvialis apricaria*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sula leucogaster*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Spheniscus magellanicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Spheniscus humboldti (birds-met#39); spectral_range_nm: i, none; fov_h_deg: i, none [lit table has genus: Spheniscus humboldti]; binocular_deg: i, none [lit table has genus: Spheniscus humboldti]
+- *Sporophila morelleti*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cracticus nigrogularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myiodynastes maculatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Burhinus grallarius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Orthotomus sutorius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus hyperboreus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Momotus lessonii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Passer melanurus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Passer domesticus (birds#68); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Passer domesticus (methods#330); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Oriolus oriolus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ptyonoprogne rupestris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vidua macroura*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pteroglossus torquatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Meliphaga lewinii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vireo huttoni*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Phoenicopterus chilensis*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Phoenicopterus chilensis, Phoenicopterus ruber]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Megarynchus pitangua*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Strix uralensis*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Strix aluco (birds#26); spectral_range_nm: i, none; fov_h_deg: g, rule 3 from Strix aluco (birds#73); binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Cyanerpes cyaneus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Troglodytes pacificus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chroicocephalus maculipennis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Chlorostilbon lucidus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Remiz pendulinus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Merops philippinus*: cff_hz: i, none; acuity_cpd: i, closest order (birds#51), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Onychognathus morio*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ploceus capensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dendrocygna bicolor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Colius striatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Petroica australis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hymenops perspicillatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ploceus cucullatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Catherpes mexicanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Todiramphus chloris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus amaurochalinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Psilorhinus morio*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tyrannus dominicensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Colibri coruscans*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calcarius lapponicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Callocephalon fimbriatum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hirundo javanica*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Halcyon albiventris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leucolia violiceps*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Colaptes campestris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pelecanus onocrotalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#129), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#127), no carry rule allows order level for this trait
+- *Turdus leucomelas*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anser rossii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Nucifraga caryocatactes*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Amazona albifrons*: cff_hz: i, closest order (birds#94), no carry rule allows order level for this trait; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#25), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Florisuga mellivora*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anas georgica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Amazilia rutila*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Amazilia tzacatl]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ptilogonys cinereus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cardellina canadensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dessonornis caffer*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pardalotus punctatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ramphastos ambiguus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Psarocolius montezuma*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calocitta formosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Notiochelidon cyanoleuca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cinnyris chalybeus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oriolus chinensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Barnardius zonarius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hypsipetes leucocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanerpes rubricapillus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris temminckii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Scopus umbretta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anas bahamensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Pardalotus striatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anas undulata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Spodiopsar cineraceus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chroicocephalus cirrocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Euplectes orix*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chamaea fasciata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Acrocephalus scirpaceus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Gavicalis virescens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Todirostrum cinereum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Empidonax traillii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Empidonax minimus (birds#65); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anhinga rufa*: cff_hz: i, none; acuity_cpd: i, closest order (birds#151), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, closest genus (birds#205), the genus record is grade i, not a measurement
+- *Larus crassirostris*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Vireo flavifrons*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Mergellus albellus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyanopica cooki*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tiaris olivaceus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris maritima*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Larus pacificus*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Larus michahellis]; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Larus atricilla (methods#265); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Acridotheres cristatellus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Fluvicola nengeta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cinnyris asiaticus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pluvialis dominica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aplonis panayensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Actophilornis africanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sphyrapicus nuchalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Emberiza cia*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Acanthiza chrysorrhoa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris ruficollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aythya australis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Saxicola torquatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Amazona viridigenalis*: cff_hz: i, closest order (birds#94), no carry rule allows order level for this trait; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#25), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Iduna caligata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Amazonetta brasiliensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Eurystomus orientalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vultur gryphus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Zosterops japonicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Centropus sinensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Strix nebulosa*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Strix aluco (birds#26); spectral_range_nm: i, none; fov_h_deg: g, rule 3 from Strix aluco (birds#73); binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Chlorophanes spiza*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Nyctidromus albicollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sula sula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Petroica boodang*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pachyramphus aglaiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Acrocephalus arundinaceus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Puffinus griseus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Puffinus puffinus (birds-met#37); spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Motacilla tschutschensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sporophila caerulescens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anarhynchus wilsonia*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hydrocoloeus minutus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Passer hispaniolensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Passer domesticus (birds#68); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Passer domesticus (methods#330); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Progne tapera*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Coscoroba coscoroba*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Amazona autumnalis*: cff_hz: i, closest order (birds#94), no carry rule allows order level for this trait; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#25), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthornis melanura*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Merops pusillus*: cff_hz: i, none; acuity_cpd: i, closest order (birds#51), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dives dives*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cacatua tenuirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dacnis cayana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthus hodgsoni*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Chauna torquata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Psilopogon haemacephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sturnella loyca*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Setophaga pitiayumi*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sigelus silens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyanopica cyanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthracoceros albirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oenanthe familiaris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Stercorarius parasiticus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Euphonia laniirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Muscicapa latirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Zosterops virens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calamospiza melanocorys*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanerpes chrysogenys*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Eudyptula minor*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Eudyptula minor]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cormobates leucophaea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Gymnogyps californianus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sylvia borin*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Eugenes fulgens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pycnonotus aurigaster*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Rollandia rolland*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dendrocopos syriacus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanerpes lewis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Basileuterus rufifrons*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myioborus miniatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dendrocitta formosae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lullula arborea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Geothlypis tolmiei*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Setophaga petechia*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pycnonotus capensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phylloscopus sibilatrix*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Luscinia luscinia*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Embernagra platensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chloris sinica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Morus serrator*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melozone aberti*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aratinga leucophthalma*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calyptorhynchus banksii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dicrurus paradiseus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus parisorum*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ploceus philippinus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Loxia leucoptera*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aegolius acadicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Heliodoxa jacula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Polioptila dumicola*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Corcorax melanorhamphos*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Corvus coronoides*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Corythornis cristatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Gavia arctica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Momotus mexicanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Crithagra mozambica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chroicocephalus hartlaubii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Saltator grandis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Philemon corniculatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Haematopus fuliginosus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Artamus leucorynchus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Trichoglossus concinnus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Megascops kennicottii*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Aratinga canicularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thinornis tricollaris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Rauenia bonariensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Xenus cinereus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cerorhinca monocerata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Corvus mellori*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Paroaria capitata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Nandayus nenday*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Brotogeris jugularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thinornis melanops*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cacicus melanicterus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Contopus pertinax*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anthus petrosus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Lamprotornis nitens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Plectropterus gambensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cecropis daurica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Galbula ruficauda*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Motacilla aguimp*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Luscinia megarhynchos*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tringa incana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vanellus coronatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cistothorus platensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anthreptes malacensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anhinga melanogaster*: cff_hz: i, none; acuity_cpd: i, closest order (birds#151), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, closest genus (birds#205), the genus record is grade i, not a measurement
+- *Tachycineta albilinea*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Vermivora cyanoptera*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Saxicola caprata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cathartes burrovianus*: cff_hz: i, closest order (birds#98), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Cathartes aura and Coragyps  (birds#153); interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#31), only 1 measured family [exception proposed: Buteo jamaicensis, Parabuteo unicinctus, -> Accipitriformes (red-shouldered hawk, os]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#82), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#72), no carry rule allows order level for this trait
+- *Myioborus pictus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Selasphorus calliope*: cff_hz: i, closest family (birds#138), no carry rule allows family level for this trait; acuity_cpd: i, closest family (birds#59), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#155), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Sicalis luteola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Urocissa erythroryncha*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Malurus melanocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Podiceps major*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chroicocephalus genei*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Dicrurus bracteatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Emberiza hortulana*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ardeotis kori*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus falcklandii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Calidris virgata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Bartramia longicauda*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lonchura striata*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Lonchura maja (methods#315); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#186), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Chlidonias leucopterus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Promerops cafer*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aythya novaeseelandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Cygnus melancoryphus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Pica nuttalli*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Poliocephalus poliocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sterna striata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Hydrophasianus chirurgus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leptocoma zeylonica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Saltator aurantiirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Euphonia hirundinacea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ramphastos toco*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lagonosticta senegala*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oreoscoptes montanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Nestor meridionalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vireo philadelphicus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Trogon melanocephalus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dendrocygna javanica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Myiodynastes luteiventris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus mandarinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Thalassarche melanophris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dicrurus leucophaeus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lonchura cucullata*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Lonchura maja (methods#315); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#186), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Spatula versicolor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Spatula clypeata (birds#132)
+- *Passerina versicolor*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ara ararauna*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthus rufulus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Basilinna leucotis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Trogon caligatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Haematopus moquini*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Terpsiphone paradisi*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leucocarbo atriceps*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chloephaga picta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Petroica macrocephala*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thamnophilus doliatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aeronautes saxatalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Buphagus erythroryncha*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lepidocolaptes angustirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myiarchus tuberculifer*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sporophila corvina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Branta sandvicensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Prunella collaris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aegithina tiphia*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Amazilia yucatanensis*: cff_hz: i, none; acuity_cpd: i, none [lit table has genus: Amazilia tzacatl]; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Netta peposaca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tachymarptis melba*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Athene brama*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait [lit table has genus: Athene noctua]; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Prinia maculosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Toxostoma longirostre*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Plocepasser mahali*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aythya nyroca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Artamus cyanopterus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chordeiles acutipennis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Stelgidopteryx ruficollis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Limosa haemastica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tyto alba*: cff_hz: i, closest order (birds#182), no carry rule allows order level for this trait; acuity_cpd: m (birds#49); interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#73), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Nectarinia famosa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Brotogeris chiriri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vanellus spinosus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phoeniconaias minor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Spheniscus demersus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Spheniscus humboldti (birds-met#39); spectral_range_nm: i, none; fov_h_deg: i, none [lit table has genus: Spheniscus humboldti]; binocular_deg: i, none [lit table has genus: Spheniscus humboldti]
+- *Gavia pacifica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vireo bellii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Panurus biarmicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus chiguanco*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tockus leucomelas*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus ignobilis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Campephilus guatemalensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oenanthe isabellina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Geothlypis philadelphia*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Phoenicurus fuliginosus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Quiscalus lugubris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Galerida theklae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Polioptila melanura*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anous stolidus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Saxicoloides fulicatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus eunomus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Quiscalus niger*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Spinus lawrencei*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Spinus tristis (birds#53); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait [lit table has genus: Spinus tristis]; binocular_deg: i, none [lit table has genus: Spinus tristis]
+- *Chrysomus ruficapillus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Terpsiphone viridis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Scolopax rusticola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Bubo africanus*: cff_hz: g, rule 3 from Bubo virginianus (methods#225); acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait [lit table has genus: Bubo scandiaca]
+- *Callonetta leucophrys*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Arremonops rufivirgatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ramphocelus dimidiatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anarhynchus ruficapillus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ramphocelus flammigerus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus cayanensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Pelecanus crispus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#129), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#127), no carry rule allows order level for this trait
+- *Corythaixoides concolor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Setophaga occidentalis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Surnia ulula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyclarhis gujanensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyanocorax yucatanicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Thraupis abbas*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyanistes cyanus*: cff_hz: g, rule 3 from Cyanistes caeruleus (birds#91); acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Cyanistes caeruleus (birds#17); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Colibri cyanotus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Eupetomena macroura*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anseranas semipalmata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tarsiger cyanurus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthus campestris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Myophonus caeruleus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Emberiza spodocephala*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Myiarchus tyrannulus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Turdoides striata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tachyphonus rufus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Malurus lamberti*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tringa brevipes*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Bucorvus leadbeateri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oriolus sagittatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthus australis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Tadorna tadornoides*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Trogon elegans*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aratinga nana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aphelocoma coerulescens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Empidonax hammondii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Empidonax minimus (birds#65); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Thalurania colombica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Coracias benghalensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ichthyaetus audouinii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Saxicola stejnegeri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Menura novaehollandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Psarocolius decumanus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Puffinus gravis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Puffinus puffinus (birds-met#37); spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calidris acuminata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Basileuterus culicivorus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phytotoma rutila*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anarhynchus obscurus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Passer diffusus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Passer domesticus (birds#68); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Passer domesticus (methods#330); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Euodice malabarica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lanius minor*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anas poecilorhyncha*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Anthobaphes violacea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Saltator maximus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cecropis rufula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Corvus orru*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#56), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Corvus frugilegus (methods#302); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds-met#66), no carry rule allows family level for this trait
+- *Pygoscelis papua*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none [lit table has genus: Pygoscelis papua]; fov_h_deg: i, none; binocular_deg: i, none
+- *Petrochelidon fulva*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Hypothymis azurea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leuconotopicus albolarvatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Taeniopygia bichenovii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Taeniopygia guttata (birds#24); spectral_range_nm: i, none; fov_h_deg: g, rule 3 from Taeniopygia guttata (birds#186); binocular_deg: i, none [lit table has genus: Taeniopygia guttata]
+- *Catharus minimus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#54), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Dicaeum hirundinaceum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cyanocorax chrysops*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Rhipidura javanica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Muscicapa adusta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sporophila nigricollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cacomantis flabelliformis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Acrocephalus australis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hirundo smithii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Merops bullockoides*: cff_hz: i, none; acuity_cpd: i, closest order (birds#51), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanotis caerulescens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Agelasticus thilius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Burhinus capensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anser indicus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Psilopogon nuchalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vermivora chrysoptera*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Haematopus finschi*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Fregata minor*: cff_hz: i, none; acuity_cpd: i, closest order (birds#151), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Spatula rhynchotis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Spatula clypeata (birds#132)
+- *Uraeginthus angolensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anarhynchus bicinctus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pelecanus thagus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#129), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#127), no carry rule allows order level for this trait
+- *Bubo bubo*: cff_hz: g, rule 3 from Bubo virginianus (methods#225); acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait [lit table has genus: Bubo scandiaca]
+- *Spatula platalea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Spatula clypeata (birds#132)
+- *Dendrocitta vagabunda*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cisticola exilis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calonectris diomedea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Burhinus vermiculatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus atrogularis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Cisticola tinniens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pastor roseus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ramphocelus carbo*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pharomachrus mocinno*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lophoceros nasutus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Prinia socialis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myzomela sanguinolenta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anser serrirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Phalaropus fulicarius*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Quelea quelea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Strepera versicolor*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Xolmis irupero*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Poecile hudsonicus*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sula brewsteri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Megascops choliba*: cff_hz: i, closest family (methods#224), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#61), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#26), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#73), no carry rule allows family level for this trait; binocular_deg: i, closest order (birds#70), no carry rule allows order level for this trait
+- *Lamprotornis superbus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cinclodes fuscus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melanerpes pucherani*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oenanthe hispanica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vanellus senegallus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lophonetta specularioides*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anser fabalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Anthus cervinus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anas erythrorhyncha*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Anas platyrhynchos (birds#1); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: g, rule 3 from Anas platyrhynchos (birds#77)
+- *Platycercus adscitus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none [lit table has genus: Platycercus elegans]; fov_h_deg: i, none; binocular_deg: i, none
+- *Tachycineta albiventer*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Lessonia rufa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Macronectes giganteus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phaetusa simplex*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthus cinnamomeus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Acanthagenys rufogularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Elaenia flavogaster*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Campylopterus hemileucurus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Nesoptilotis leucotis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Nyctibius griseus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lanius bucephalus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Opisthocomus hoazin*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Momotus aequatorialis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hippolais polyglotta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chroicocephalus serranus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Acrocephalus palustris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Stilpnia larvata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Mareca sibilatrix*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Emberiza pusilla*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Trachyphonus vaillantii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cecropis abyssinica*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Chalcomitra amethystina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus icterus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Trogon massena*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Rhea americana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: m (methods#365); spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Emberiza rustica*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Emberiza schoeniclus (birds#55); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Gracupica contra*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Helmitheros vermivorum*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Anser brachyrhynchus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait [lit table has genus: Anser caerulescens]
+- *Stilpnia cyanicollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anthracothorax nigricollis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Colaptes rubiginosus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lybius torquatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ichthyaetus ichthyaetus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anarhynchus collaris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tyrannus crassirostris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#64), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Petroica phoenicea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Anarhynchus marginatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Prinia subflava*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lanius meridionalis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Motacilla maderaspatensis*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Petronia petronia*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Poecile varius*: cff_hz: i, closest family (birds#91), no carry rule allows family level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Picoides dorsalis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus torquatus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Ficedula parva*: cff_hz: g, rule 3 from Ficedula hypoleuca (birds#89); acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Garrulax perspicillatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dinopium benghalense*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Serinus canaria*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#53), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: m (birds-met#33); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Calyptorhynchus lathami*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phalacrocorax capensis*: cff_hz: i, none; acuity_cpd: g, rule 3 from Phalacrocorax carbo (birds#151); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Coccyzus erythropthalmus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Calocitta colliei*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Petroica goodenovii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pelargopsis capensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phoeniculus purpureus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Halcyon senegalensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Numenius madagascariensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Trogon citreolus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Hylocharis chrysura*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Stilpnia vitriolina*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myiozetetes cayanensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Taeniopygia guttata*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: m (birds#24); spectral_range_nm: i, none; fov_h_deg: m (birds#186); binocular_deg: i, none [lit table has genus: Taeniopygia guttata]
+- *Ficedula albicollis*: cff_hz: m (birds#90); acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Nestor notabilis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Todiramphus macleayii*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Certhiaxis cinnamomeus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Merops persicus*: cff_hz: i, none; acuity_cpd: i, closest order (birds#51), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pycnonotus leucotis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Empidonax virescens*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Empidonax minimus (birds#65); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Geothlypis formosa*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Stilpnia cayana*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cereopsis novaehollandiae*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus abeillei*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Thalassarche cauta*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Turdus olivaceus*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Turdus merula (birds#54); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Turdus merula (birds-met#25); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Picoides arcticus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Acanthiza lineata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Empidonax flaviventris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Empidonax minimus (birds#65); interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sturnella superciliaris*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Campylorhynchus capistratus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sula granti*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Caprimulgus europaeus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Stercorarius pomarinus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Struthidea cinerea*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Euphonia affinis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Trogon collaris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Malurus splendens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Glareola pratincola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Vireo cassinii*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Eumyias thalassinus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Leucosticte tephrocotis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phylidonyris niger*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ninox boobook*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none [lit table has genus: Ninox boobook]
+- *Cacicus cela*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Lonchura oryzivora*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Lonchura maja (methods#315); spectral_range_nm: i, none; fov_h_deg: i, closest family (birds#186), no carry rule allows family level for this trait; binocular_deg: i, none
+- *Oenanthe pleschanka*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Picoides tridactylus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Camptostoma obsoletum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Diuca diuca*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Phalacrocorax punctatus*: cff_hz: i, none; acuity_cpd: g, rule 3 from Phalacrocorax carbo (birds#151); interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Peucaea ruficauda*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest family (birds#66), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Phoebastria nigripes*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Philemon citreogularis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tersina viridis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tangara gyrola*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Tockus rufirostris*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ceyx azureus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Pelecanus philippensis*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#129), no carry rule allows order level for this trait; binocular_deg: i, closest order (birds#127), no carry rule allows order level for this trait
+- *Cinnyris afer*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Driophlox fuscicauda*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Megaceryle maxima*: cff_hz: i, none; acuity_cpd: i, closest family (birds#51), no carry rule allows family level for this trait; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Myiagra rubecula*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Dicaeum cruentatum*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Sarcoramphus papa*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Melopsittacus undulatus*: cff_hz: m (birds#94); acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: m (birds#25); spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Puffinus pacificus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 from Puffinus puffinus (birds-met#37); spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Rhopospina fruticeti*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Icterus wagleri*: cff_hz: i, closest order (methods#994), no carry rule allows order level for this trait; acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Aulacorhynchus prasinus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Cinnyris frenatus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Saltator coerulescens*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aratinga erythrogenys*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Crotophaga major*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Oxyura vittata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (birds#1), only 1 measured family [exception proposed: Anas platyrhynchos -> Anseriformes (whistling-ducks, teal, Mus]; spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#170), no carry rule allows order level for this trait; binocular_deg: i, closest family (birds#79), no carry rule allows family level for this trait
+- *Chroicocephalus bulleri*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, closest order (methods#265), only 1 measured family; spectral_range_nm: i, none; fov_h_deg: i, closest family (birds-met#65), no carry rule allows family level for this trait; binocular_deg: i, closest family (birds-met#64), no carry rule allows family level for this trait
+- *Cettia cetti*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Ficedula albicilla*: cff_hz: g, rule 3 from Ficedula hypoleuca (birds#89); acuity_cpd: i, closest order (birds#53), no carry rule allows order level for this trait; interreceptor_deg: i, none; lambda_max_nm: g, rule 2 (8 measured families) from Sturnus vulgaris (birds-met#21); spectral_range_nm: i, none; fov_h_deg: i, closest order (birds#186), no carry rule allows order level for this trait; binocular_deg: i, none
+- *Sphyrapicus thyroideus*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Aethopyga siparaja*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
+- *Fratercula cirrhata*: cff_hz: i, none; acuity_cpd: i, none; interreceptor_deg: i, none; lambda_max_nm: i, none; spectral_range_nm: i, none; fov_h_deg: i, none; binocular_deg: i, none
 
 ## Alachua County
 
