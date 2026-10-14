@@ -1,3 +1,4 @@
 # sweep-22 progress
-Batch: sweep18/sweep-1.json (40 genera, in order). Records are written to docs/views/searched/sweep-22.jsonl as each genus finishes; a restart resumes at the first genus with no line there.
-Done so far: see searched/sweep-22.jsonl. Evidence: evidence/sweep-22.jsonl (Dissosteira, Duncan 2017 thesis). 
+Complete: all 40 genera of sweep18/sweep-1.json have a full-protocol search record in docs/views/searched/sweep-22.jsonl.
+Evidence: 6 records in evidence/sweep-22.jsonl (Dissosteira carolina acuity and interommatidial angle from Duncan 2017 thesis; Heliconius erato cyrbia acuity and derived angle; Setaria viridis photoperiod; Buddleja davidii floral volatiles). Wanted: 3 lines (Rodrigues 2026 swift fovea preprint, Hughes 2019 Tipularia, Kansas Academy Asteraceae germination).
+Notes: pmc.ncbi.nlm.nih.gov returned bot checks; Springer-mirror, doi.org, Oxford Academic, ScienceDirect and journals.biologists.com URLs not taken from search results were withheld for permission; one WebFetch 429 (Springer BMC page for Puma), no repeat. Named in each chased field. WebSearch budget held.
