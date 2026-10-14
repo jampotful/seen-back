@@ -8,3 +8,4 @@ Done genera (in order):
 - Pinicola, Zanda, Euclidia, Panorpa (12:55)
 - Roeseliana, Pooecetes, Momordica, Delta (13:15)
 - Rivula, Boana (13:30)
+- Erythromma, Stilpnia, Gryllus (13:50)
