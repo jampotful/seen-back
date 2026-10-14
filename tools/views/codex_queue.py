@@ -54,8 +54,23 @@ def sweep_items():
                           'genera': left, 'count': len(left), 'of': len(genera)})
     return items
 
+def held():
+    """Items docs/tracks/codex-gates.json holds back until a time, e.g. while an earlier chat may still be working on them."""
+    import datetime
+    gates = P('docs/tracks/codex-gates.json')
+    if not os.path.exists(gates): return set()
+    now = datetime.datetime.now(datetime.timezone.utc)
+    out = set()
+    for item, until in (json.load(open(gates)).get('hold') or {}).items():
+        try:
+            if datetime.datetime.fromisoformat(until) > now: out.add(item)
+        except ValueError:
+            out.add(item)
+    return out
+
 def main():
-    items = oa_items() + sweep_items()
+    hold = held()
+    items = [it for it in oa_items() + sweep_items() if it['item'] not in hold]
     if '--json' in sys.argv[1:]:
         print(json.dumps(items, ensure_ascii=False, indent=1)); return
     if not items:
