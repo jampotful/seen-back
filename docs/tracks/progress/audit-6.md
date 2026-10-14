@@ -74,3 +74,40 @@ Error rate is errors over verifiable records (checked minus unverifiable).
 | insects-met:45 | Danaus plexippus / motion | m | unverifiable | as insects-met:44 |
 | insects-met:46 | Parantica sita / receptor_classes | m | confirm | sentence verbatim in the abstract (journals.biologists.com) |
 | insects-met:47 | Bombus (review) / cff_hz | g | unverifiable | the doi.org route answered 429 |
+| insects-met:48 | Bombus (review) / acceptance_deg | g | unverifiable | as insects-met:47; the research.fi record carries no abstract |
+| insects-met:49 | Bombus (review) / eyes_count | g | unverifiable | as insects-met:48 |
+| insects-met:50 | Libellula quadrimaculata / fovea | m | unverifiable | the eje.cz page's permission request timed out; doi.org avoided after two 429s on that host; no copy found by search |
+| insects-met:51 | Callonychium petuniae / receptor_classes | m | unverifiable | the Annual Reviews page shows the abstract and references but not Table 1 ("Full text loading..."); a review table row is a secondary citation and should probably carry `partial: true`, as audit 5 ruled for sweep-6:19, once the cited primary source is known |
+| insects-met:52 | Solenopsis saevissima / receptor_classes | m | unverifiable | as insects-met:51 |
+| sweep-15:1 | Cytisus scoparius / sense_chemical | m | confirm | verbatim opening of the abstract sentence, which continues "with blends dominated by monoterpenes, aromatics, and fatty acid esters"; 56 VOCs confirmed in Results |
+| sweep-15:2 | Berteroa incana / sense_light_nonvisual | m | requote | value confirmed; quote is a rendering; page: "Significant reductions in the share of large leaves, leaf stalk length and root biomass were noted for plants growing under 8 kJ UV-BBE." |
+| sweep-15:3 | Campsis radicans / diel | m | confirm | verbatim clause of the abstract sentence beginning "Interestingly,"; ~30% w/w confirmed; the abstract says nectar was characterised by time of day but gives no standing-crop figures |
+| sweep-15:4 | Ribes uva-crispa / sense_light_nonvisual | m | confirm | verbatim but for an en dash ("15–16 h"); 10-h SD within 2–3 weeks and 20-h LD for 8 weeks confirmed |
+| sweep-15:5 | Argynnis paphia / lambda_max_nm | m | confirm | verbatim but for an en dash ("R1–9"); R9 at 615 nm, R1–2, R3–8 and the male differences confirmed (Prevc 2023 master's thesis, Ljubljana) |
+| sweep-15:6 | Cuculus poliocephalus / oil_droplets | m | confirm | verbatim in Results, Observation of oil droplets, p. 130 |
+| sweep-15:7 | Tilia cordata / sense_chemical | m | requote | the quote is on the page but in the Discussion and is a background sentence that does not support the value; replaced with the abstract's flowering-stage sentence; 09:00–10:00 is a sampling time |
+| sweep-15:8 | Dianthus cruentus / sense_chemical | m | confirm | verbatim in the abstract; 24 constituents and compound classes confirmed |
+| sweep-15:9 | Dianthus caryophyllus / diel | m | correct | quote verbatim; value said two compounds "drive the rhythm", but the study took one light-period (09:30) and one dark-period (16:30) sample per day, so it shows a light/dark difference, not a rhythm; value rewritten |
+| sweep-15:10 | Calluna vulgaris / sense_light_nonvisual | m | confirm | verbatim in the abstract; 12–16 h and above 14°C confirmed |
+| sweep-15:11 | Crataegus monogyna / sense_chemical | m | confirm | verbatim fragment of the abstract sentence; porous polymers and GC-MS confirmed; the Pherobase listing not reopened |
+| sweep-15:12 | Celastrus orbiculatus / sense_light_nonvisual | m | confirm | sentence verbatim; elevated FR against neutral shade (height, biomass, leaf mass) confirmed |
+| sweep-15:14 | Tachycineta bicolor / fovea | m | confirm | verbatim but for "100°" written "100 degree"; bifoveate, long eye, blind area, narrow binocular field confirmed (Dryad page) |
+| sweep-19:1 | Raphanus raphanistrum / sense_light_nonvisual | m | requote | value confirmed; quote not on the page; page: "On the other hand, for accessions with facultative vernalization requirements the photoperiod pathway predominates." |
+| sweep-19:2 | Rhinella marina / motion | m | confirm | verbatim in the abstract; strip, right hemifield and 1.7 revolutions/min confirmed |
+| sweep-19:3 | Castanea sativa / sense_light_nonvisual | m | confirm | verbatim clause of the abstract's last sentence |
+| sweep-19:4 | Castanea mollissima / sense_chemical | m | confirm | verbatim clause; 926 compounds and the three above 5% confirmed |
+| sweep-19:5 | Asarum heterotropoides / sense_light_nonvisual | m | requote | value confirmed; the quote adds a full stop where the sentence continues "A. heterotropides volatile oil and this is ascribed to upregulation of key genes" |
+| sweep-19:6 | Daptrius chimango / acuity_cpd | m | requote | values confirmed; page: "The visual acuity range from 15.08 to 39.83 cycles/degrees." |
+| sweep-19:7 | Gallus gallus domesticus / acuity_cpd | m | requote | values confirmed; quote is a rendering of units and order; page sentence now the quote |
+| sweep-19:8 | Gallus gallus / acuity_cpd | m | requote | values confirmed; the quote adds a full stop where the sentence continues "compared with 3.794 c/deg in the jungle light group"; source a 2018 master's thesis |
+| sweep-19:9 | Gyps fulvus / binocular_deg | m | confirm | verbatim in Results, General topography of the visual field; species pooled per Methods |
+| sweep-19:10 | Gyps africanus / binocular_deg | m | confirm | as sweep-19:9 |
+| sweep-19:11 | Serinus canaria / spectral_range_nm | m | confirm | verbatim in the abstract; P567, P501, P442, P366 confirmed |
+| sweep-19:12 | Caiman crocodilus / tapetum | m | confirm | verbatim on the DFG page, which lists "presence of a retinal tapetum" |
+| sweep-19:13 | Helianthus annuus / diel | m | requote | value confirmed; quote not on the page; page: "these plants maintained their directional growth rhythms for several days" |
+| sweep-19:15 | Tragopogon hybridus / diel | m | confirm | table row verbatim; T. pratensis 3 a.m. confirmed |
+| sweep-19:16 | Nicotiana sylvestris / diel | m | confirm | verbatim fragment; the review cites Loughrin et al. 1991, already `partial: true` |
+| sweep-19:17 | Pastinaca sativa / sense_light_nonvisual | m | confirm | verbatim in the abstract (sentence continues "(imperatorin and sphondin)") |
+| sweep-19:18 | Lunaria annua / sense_light_nonvisual | m | confirm | verbatim ("This suggested that annual Lunaria is a long-day plant."); 17 of 18, 0 of 20, 13.8 against 26.9 and 29.3 days confirmed |
+| sweep-19:19 | Hypochaeris radicata / diel | m | confirm | verbatim clause; 3–7 hours and rain confirmed |
+| sweep-19:20 | Hypochaeris radicata / sense_light_nonvisual | m | confirm | verbatim but for an en dash ("one–hour"); Salisbury 1964 and germination sentence confirmed |
