@@ -23,13 +23,13 @@ A species is `m` for a trait when a record of grade `m` names the species. It is
 
 ## Run summary
 
-Records read: 5409 (after dropping 25 the audit retracted); queue lines: 55414.
+Records read: 5426 (after dropping 25 the audit retracted); queue lines: 55389.
 
 | View | species in the world rows | records | share covered by the listed species | county records | share covered by the county's 20 | records of listed species with a gap | gap row-records (records x rows in state i) |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| plant | 141,468 | 44,079,457 | 50.5% | 56,850 | 23.1% | 22,273,484 | 66,769,922 |
+| plant | 141,468 | 44,079,457 | 50.5% | 56,850 | 23.1% | 22,273,484 | 66,745,397 |
 | bird | 9,190 | 18,548,533 | 90.3% | 20,542 | 50.5% | 16,743,425 | 65,918,854 |
-| insect | 158,004 | 24,749,927 | 54.3% | 55,748 | 19.2% | 13,449,285 | 32,581,868 |
+| insect | 158,004 | 24,749,927 | 54.3% | 55,748 | 19.2% | 13,449,285 | 32,517,836 |
 | wader | 852 | 3,172,323 | 100.0% | 12,583 | 96.0% | 3,172,323 | 15,012,951 |
 | reptile | 8,623 | 3,091,009 | 93.5% | 9,642 | 85.7% | 2,888,573 | 2,888,573 |
 | bee | 12,161 | 2,515,754 | 93.7% | 4,245 | 67.3% | 1,748,562 | 6,556,414 |
