@@ -25,3 +25,4 @@ done idx 24 Phylidonyris
 done idx 21 Arundo
 done idx 22 Lasiocampa
 done idx 23 Tridax
+done idx 25 Ancistrocerus
