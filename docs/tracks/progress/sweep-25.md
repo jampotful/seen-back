@@ -18,3 +18,5 @@ done idx 14 Pantala
 done idx 15 Diphasiastrum
 done idx 16 Conopholis
 done idx 17 Xanthium
+done idx 18 Prinia
+done idx 19 Ramphocelus
