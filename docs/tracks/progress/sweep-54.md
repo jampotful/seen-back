@@ -1,6 +1,6 @@
 # Sweep 54 (batch sweep-2, 14 October 2026)
 
-Stopped on the web search budget message (200 searches per turn, shared) after 20 of the 40 genera. Done: Neotoma, Plecia, Aeronautes, Buphagus, Lepidocolaptes, Amphibolurus, Naja, Pelobates, Odorrana, Aegithina, Tachymarptis, Christinus, Plocepasser, Pseudonaja, Melierax, Nectarinia, Panurus, Campephilus, Lepidochelys, Ophisaurus. The last genus reached in the batch's order is Pelobates (position 15); the later ones in that run were taken from the same genus groups.
+Stopped on the web search budget message (200 searches per turn, shared) after 20 of the 40 genera. Done: Neotoma, Plecia, Aeronautes, Buphagus, Lepidocolaptes, Amphibolurus, Naja, Pelobates, Odorrana, Aegithina, Tachymarptis, Christinus, Plocepasser, Pseudonaja, Melierax, Nectarinia, Panurus, Campephilus, Lepidochelys, Ophisaurus. I worked the vertebrate genera in groups rather than strictly in batch order; the last one reached is Pelobates.
 
 Not started (20): Dynastes, Panopoda, Dromogomphus, Tabanus, Hagenius, Parapolybia, Glenoides, Synoeca, Tympanuchus, Polygrammate, Aphrophora, Besbicus, Ptilothrix, Lissopimpla, Parnassius, Gazella, Orthosoma, Lithacodes, Peponapis, Heteroecus.
 
