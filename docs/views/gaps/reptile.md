@@ -898,7 +898,7 @@ Rows and their traits:
 | 884 | Heterodon kennerlyi (Mexican Hog-nosed Snake) | 315 | 0 | Colubridae / Squamata | i |
 | 885 | Kinixys zombensis (Eastern Hinged-Back Tortoise) | 315 | 0 | ? / ? | i |
 | 886 | Podarcis ionicus (Ionian Wall Lizard) | 315 | 0 | Lacertidae / Squamata | i |
-| 887 | Meroles knoxii (Knox's Ocellated Sand Lizard) | 314 | 0 | ? / ? | i |
+| 887 | Meroles knoxii (Knox's Ocellated Sand Lizard) | 314 | 0 | Lacertidae / Squamata | i |
 | 888 | Amphisbaena fuliginosa (Speckled Worm Lizard) | 313 | 0 | ? / ? | i |
 | 889 | Callopistes maculatus (Spotted False Monitor) | 313 | 0 | ? / ? | i |
 | 890 | Lygophis anomalus (Gunther's Striped Snake) | 313 | 0 | ? / ? | i |
@@ -1041,7 +1041,7 @@ Rows and their traits:
 | 1027 | Heliobolus lugubris (Bushveld Lizard) | 251 | 0 | ? / ? | i |
 | 1028 | Trachemys callirostris (South American slider) | 250 | 0 | Emydidae / Testudines | i |
 | 1029 | Darevskia derjugini (Derjugin's Lizard) | 249 | 0 | ? / ? | i |
-| 1030 | Meroles cuneirostris (Wedge-snouted Desert Lizard) | 249 | 0 | ? / ? | i |
+| 1030 | Meroles cuneirostris (Wedge-snouted Desert Lizard) | 249 | 0 | Lacertidae / Squamata | i |
 | 1031 | Ctenotus labillardieri (Common Southwest Ctenotus) | 248 | 0 | ? / ? | i |
 | 1032 | Draco maculatus (Asian Gliding Lizard) | 248 | 0 | ? / ? | i |
 | 1033 | Sceloporus taeniocnemis (Guatemalan Emerald Spiny Lizard) | 248 | 0 | Phrynosomatidae / Squamata | i |
@@ -2103,7 +2103,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Heterodon kennerlyi*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest family (canon-3#582), no carry rule allows family level for this trait; fov_h_deg: i, closest family (herps#85), no carry rule allows family level for this trait; pupil_shape: i, closest family (sweep-56#5), no carry rule allows family level for this trait; fovea: i, closest family (canon-3#581), no carry rule allows family level for this trait
 - *Kinixys zombensis*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Podarcis ionicus*: receptor_classes: g, rule 2 from Podarcis muralis (oa-8#245); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait [lit table has genus: Podarcis muralis]; fov_h_deg: i, none; pupil_shape: i, closest order (sweep-56#5), no carry rule allows order level for this trait; fovea: i, closest order (canon-3#581), no carry rule allows order level for this trait [lit table has genus: Podarcis muralis]
-- *Meroles knoxii*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Meroles knoxii*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, closest order (sweep-56#5), no carry rule allows order level for this trait; fovea: i, closest order (canon-3#581), no carry rule allows order level for this trait
 - *Amphisbaena fuliginosa*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Callopistes maculatus*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Lygophis anomalus*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
@@ -2246,7 +2246,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Heliobolus lugubris*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Trachemys callirostris*: receptor_classes: g, rule 2 from Trachemys scripta (canon-3#216); lambda_max_nm: g, rule 2 from Trachemys scripta (canon-3#215); acuity_cpd: g, rule 3 from Trachemys scripta (canon-3#627); fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest genus (canon-3#620), measured members of the genus disagree (rule 5) [lit table has genus: Trachemys scripta]
 - *Darevskia derjugini*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
-- *Meroles cuneirostris*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Meroles cuneirostris*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, closest order (sweep-56#5), no carry rule allows order level for this trait; fovea: i, closest order (canon-3#581), no carry rule allows order level for this trait
 - *Ctenotus labillardieri*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Draco maculatus*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Sceloporus taeniocnemis*: receptor_classes: g, rule 2 (4 measured families) from Gekko gecko (canon-3#220); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest family (sweep-14#9), no carry rule allows family level for this trait; fov_h_deg: i, none; pupil_shape: i, closest order (sweep-56#5), no carry rule allows order level for this trait; fovea: i, closest order (canon-3#581), no carry rule allows order level for this trait
