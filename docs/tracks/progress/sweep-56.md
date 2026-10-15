@@ -1,4 +1,6 @@
 # sweep-56 progress
-Status: in progress. Batch: sweep-1.json (starts Anseranas, Tarsiger, Myophonus).
-Done so far: Anseranas, Tarsiger, Myophonus, Turdoides, Tachyphonus, Anthropoides, Thalurania, Euodice, Anthobaphes, Phytotoma, Taeniopygia, Takydromus, Hypsiglena, Rhinocheilus, Charina, Cordylus.
-Notes: Europe PMC and PubMed answered 429 to the fetch proxy and were dropped; PMC returned browser checks.
+Status: complete. All 40 genera of the batch (sweep-1.json) have a full-protocol search record in docs/views/searched/sweep-56.jsonl.
+Evidence: 12 lines in docs/views/evidence/sweep-56.jsonl (check.py: 0 problems). Wanted: 2 lines in docs/views/wanted/sweep-56.jsonl.
+Cells closed by a measurement: Taeniopygia guttata binocular_deg (abstract level); Ictidomys tridecemlineatus receptor_classes (abstract level); Rhinocheilus lecontei and Charina bottae pupil_shape (descriptions, partial); Cerdocyon thous tapetum (case report, partial). Closed at genus or family level (g): Takydromus receptor_classes, Hypsiglena pupil_shape, Trochilidae binocular_deg (pooled Calypte anna and Selasphorus rufus), Cerdocyon thous LWS about 555 nm (opsin-inferred). Relatives logged: Grapholita molesta and Paysandisia archon (Lepidoptera).
+Exhausted: every other cell of the batch, at the level the traits allow.
+Cautions: Europe PMC and PubMed answered 429 to the fetch proxy (the tool said not to retry) and PMC, Bielefeld, Incapsula and Anubis pages returned browser checks, so those sources went unread. The Springer page for Zoological Letters s40851-023-00205-w was not opened (permission prompt unanswered). Several quotes are abstract level and flagged partial.
