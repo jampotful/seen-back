@@ -29,13 +29,14 @@ def canon_done(repo):
             except (ValueError, AttributeError): continue
             if isinstance(src, dict): titles.add(nt(src.get('title')))
             elif isinstance(src, str): titles.add(nt(src))
-    na = set()
+    na, na_titles = set(), set()
     sp = os.path.join(repo, 'docs/views/papers-status.jsonl')
     if os.path.exists(sp):
         for l in open(sp, encoding='utf-8'):
             try: j = json.loads(l)
             except ValueError: continue
             if j.get('status') == 'n/a' and j.get('doi'): na.add(j['doi'].lower().strip())
+            elif j.get('status') == 'n/a' and j.get('title'): na_titles.add(nt(j['title']))  # a book or chapter has no DOI
     need = {}
     for l in open(cp, encoding='utf-8'):
         try: j = json.loads(l)
@@ -43,9 +44,15 @@ def canon_done(repo):
         need.setdefault(j.get('trait'), []).append(((j.get('doi') or '').lower().strip(), nt(j.get('title'))))
     def done(doi, title):  # a book has no DOI: its title must appear in an evidence record's source
         if doi: return doi in logged or doi in na
-        return bool(title) and any(title in t for t in titles if t)
+        return bool(title) and (title in na_titles or any(title in t for t in titles if t))
     status = {t: all(done(d, ti) for d, ti in items) for t, items in need.items()}  # once per trait, not per cell
+    canon_done.missing = [(d, ti, t) for t, items in need.items() for d, ti in items if not done(d, ti)]
     return lambda t: status.get(t, True)
+
+def canon_missing(repo):
+    """The compilations of canon.jsonl not yet logged or marked n/a: a list of (doi, normalised title, trait)."""
+    canon_done(repo)
+    return getattr(canon_done, 'missing', [])
 
 def word(name, text):
     return bool(name) and re.search(r'(?<![a-z])' + re.escape(name.lower()) + r'(?![a-z])', text) is not None
