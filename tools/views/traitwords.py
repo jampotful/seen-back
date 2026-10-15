@@ -20,10 +20,25 @@ WORDS = {
     'stereo': ['depth_cue'], 'motion detect': ['motion'],
 }
 
+WORDS.update({'interreceptor': ['interreceptor_deg'], 'eye type': ['eye_type'], 'ocelli': ['eye_type'],
+              'chemical sens': ['sense_chemical'], 'olfact': ['sense_chemical'], 'chemorecept': ['sense_chemical'],
+              'non-visual': ['sense_light_nonvisual'], 'nonvisual': ['sense_light_nonvisual'], 'extraocular': ['sense_light_nonvisual']})
+
+def _all_keys():
+    """Every trait key of docs/views/gaps/rows.json, so a field that names a key is read even when no word maps to it."""
+    import json, os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'docs', 'views', 'gaps', 'rows.json')
+    try:
+        d = json.load(open(p, encoding='utf-8'))
+        return {k for v in d['views'].values() for ks in v.values() for k in ks}
+    except (OSError, ValueError, KeyError):
+        return set()
+ALL_KEYS = _all_keys()
+
 def traits_in(text):
     """Trait keys named in a free-text field, by key or by word."""
     t = (text or '').lower()
-    keys = {k for ks in WORDS.values() for k in ks if k in t}
+    keys = {k for ks in WORDS.values() for k in ks if k in t} | {k for k in ALL_KEYS if k in t}
     keys |= {k for w, ks in WORDS.items() if w != 'max' and w in t for k in ks}
     if re.search(r'(λ|lambda)\s*_?max', t): keys.add('lambda_max_nm')
     return keys
