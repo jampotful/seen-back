@@ -23,7 +23,7 @@ A species is `m` for a trait when a record of grade `m` names the species. It is
 
 ## Run summary
 
-Records read: 20331 (after dropping 287 the audit retracted); queue lines: 51269.
+Records read: 20335 (after dropping 287 the audit retracted); queue lines: 51264.
 
 | View | species in the world rows | records | share covered by the listed species | county records | share covered by the county's 20 | records of listed species with a gap | gap row-records (records x rows in state i) |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -32,7 +32,7 @@ Records read: 20331 (after dropping 287 the audit retracted); queue lines: 51269
 | insect | 158,004 | 24,749,927 | 54.3% | 55,748 | 19.2% | 13,449,285 | 28,765,854 |
 | wader | 852 | 3,172,323 | 100.0% | 12,583 | 96.0% | 3,172,323 | 14,119,101 |
 | reptile | 8,623 | 3,091,009 | 93.5% | 9,642 | 85.7% | 2,888,573 | 2,888,573 |
-| bee | 12,161 | 2,515,754 | 93.7% | 4,245 | 67.3% | 1,748,562 | 4,892,949 |
+| bee | 12,161 | 2,515,754 | 93.7% | 4,245 | 67.3% | 1,748,562 | 4,891,883 |
 | hawk | 302 | 1,568,972 | 100.0% | 3,337 | 100.0% | 1,568,972 | 3,679,307 |
 | frog | 4,513 | 1,318,661 | 98.0% | 4,857 | 100.0% | 1,292,499 | 3,470,229 |
 | squirrel | 1,282 | 926,361 | 100.0% | 1,187 | 100.0% | 907,108 | 2,011,966 |

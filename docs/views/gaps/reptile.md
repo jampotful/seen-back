@@ -444,7 +444,7 @@ Rows and their traits:
 | 430 | Eutropis carinata (Keeled Indian Mabuya) | 876 | 0 | ? / ? | i |
 | 431 | Senticolis triaspis (Green Rat Snake) | 875 | 0 | ? / ? | i |
 | 432 | Kinosternon leucostomum (White-lipped Mud Turtle) | 870 | 0 | Kinosternidae / Testudines | i |
-| 433 | Pelodiscus sinensis (Chinese Soft-shelled Turtle) | 867 | 0 | ? / ? | i |
+| 433 | Pelodiscus sinensis (Chinese Soft-shelled Turtle) | 867 | 0 | Trionychidae / Testudines | i |
 | 434 | Podarcis tauricus (Balkan Wall Lizard) | 866 | 0 | Lacertidae / Squamata | i |
 | 435 | Dolichophis caspius (Caspian Whipsnake) | 861 | 0 | ? / ? | i |
 | 436 | Furcifer pardalis (Panther Chameleon) | 858 | 0 | ? / ? | i |
@@ -1649,7 +1649,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Eutropis carinata*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Senticolis triaspis*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Kinosternon leucostomum*: receptor_classes: g, rule 2 (2 measured families) from Trachemys scripta (canon-3#216); lambda_max_nm: g, rule 2 (2 measured families) from Trachemys scripta (canon-3#215); acuity_cpd: i, closest order (canon-3#627), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest order (canon-3#620), no carry rule allows order level for this trait
-- *Pelodiscus sinensis*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
+- *Pelodiscus sinensis*: receptor_classes: g, rule 2 (2 measured families) from Trachemys scripta (canon-3#216); lambda_max_nm: g, rule 2 (2 measured families) from Trachemys scripta (canon-3#215); acuity_cpd: i, closest order (canon-3#627), no carry rule allows order level for this trait; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, closest order (canon-3#620), no carry rule allows order level for this trait
 - *Podarcis tauricus*: receptor_classes: g, rule 2 from Podarcis muralis (oa-8#245); lambda_max_nm: g, rule 2 (9 measured families) from Anolis carolinensis (canon-2#40); acuity_cpd: i, closest order (canon-3#582), no carry rule allows order level for this trait [lit table has genus: Podarcis muralis]; fov_h_deg: i, none; pupil_shape: i, closest order (sweep-56#5), no carry rule allows order level for this trait; fovea: i, closest order (canon-3#581), no carry rule allows order level for this trait [lit table has genus: Podarcis muralis]
 - *Dolichophis caspius*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
 - *Furcifer pardalis*: receptor_classes: i, none; lambda_max_nm: i, none; acuity_cpd: i, none; fov_h_deg: i, none; pupil_shape: i, none; fovea: i, none
