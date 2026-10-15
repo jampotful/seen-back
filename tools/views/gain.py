@@ -74,6 +74,13 @@ def main():
             if (j.get('doi') or '').strip(): read.add(j['doi'].lower().strip())
             elif j.get('title'): read_titles.add(norm(j['title']))
     data = list(csv.DictReader(open(src, encoding='utf-8'))); fields = list(data[0].keys())
+    # A reference compilation of canon.jsonl not yet logged or marked n/a keeps every cell of its traits from being
+    # exhausted (coverage.py), so it ranks first in priority 1, by the open weight of all its traits' cells.
+    from coverage import canon_missing
+    missing = canon_missing(repo)
+    def canon_traits(r):
+        d, t = (r.get('doi') or '').lower().strip(), norm(r.get('title'))
+        return {tr for md, mt, tr in missing if (md and md == d) or (not md and mt and len(mt) > 12 and mt in t)}
     for r in data:
         m = lines.get(key(r.get('doi'), r.get('title')), {'taxa': set(), 'rows': set(), 'canon': False})
         taxa = set(m['taxa']) | {s.strip().lower() for s in (r.get('species it would fix') or '').split(';') if s.strip()}
@@ -103,6 +110,13 @@ def main():
         else: v = 'done'
         r['verdict'] = v; r['verdict why'] = WHY.get(v, '')
         r['gain'] = sum(c['score'] for c in opened) if known else None; r['gain cells'] = len(opened)
+        ct = canon_traits(r) if v not in ('read', 'done') else set()
+        if ct:
+            blocked = [c for c in cells if c['state'] == 'i' and c['trait'] in ct]
+            r['verdict'] = v = 'needed'; r['priority'] = '1'
+            r['verdict why'] = f"Reference work: the search can only be finished for {len(ct)} traits once it is read or marked n/a ({', '.join(sorted(ct))})."
+            r['gain'] = sum(c['score'] for c in blocked); r['gain cells'] = len(blocked)
+        r['canon traits'] = ', '.join(sorted(ct))
         r['upgrade cells'] = len(soft)
         sp = {c['taxon']: c['records'] for c in opened}; r['gain species'] = len(sp); r['gain records'] = sum(sp.values())
     med = {}  # a paper with nothing to judge by sorts at its priority's median gain, neither first nor last
@@ -110,12 +124,12 @@ def main():
         gs = sorted(r['gain'] for r in data if (r['priority'] or '3') == p and r['gain'] is not None and r['verdict'] == 'needed')
         med[p] = gs[len(gs) // 2] if gs else 0
     tier = {'needed': 0, 'unknown': 0, 'upgrade': 1, 'done': 2, 'read': 2}
-    data.sort(key=lambda r: (r['status'] != '', tier[r['verdict']], int(r['priority'] or 3),
+    data.sort(key=lambda r: (r['status'] != '', tier[r['verdict']], int(r['priority'] or 3), not r['canon traits'],
                              -(r['gain'] if r['gain'] is not None else med[r['priority'] or '3']), int(r['rank'])))
     for n, r in enumerate(data, 1):
         r['rank'] = n
         if r['gain'] is None: r['gain'] = ''
-    extra = [k for k in ('gain', 'gain cells', 'gain species', 'gain records', 'upgrade cells', 'verdict', 'verdict why') if k not in fields]
+    extra = [k for k in ('gain', 'gain cells', 'gain species', 'gain records', 'upgrade cells', 'verdict', 'verdict why', 'canon traits') if k not in fields]
     with open(out, 'w', newline='', encoding='utf-8') as f:
         wr = csv.DictWriter(f, fieldnames=fields + extra); wr.writeheader(); wr.writerows(data)
     if status_out:
