@@ -328,7 +328,7 @@ Rows and their traits:
 | 312 | Eutamias siskiyou (Siskiyou Chipmunk) | 60 | 0 | ? / ? | i | i | i |
 | 313 | Ochrotomys nuttalli (Golden Mouse) | 60 | 0 | ? / ? | i | i | i |
 | 314 | Parotomys brantsii (Brants's Whistling Rat) | 60 | 0 | ? / ? | i | i | i |
-| 315 | Micaelamys namaquensis (Namaqua Rock Rat) | 59 | 0 | ? / ? | i | i | i |
+| 315 | Micaelamys namaquensis (Namaqua Rock Rat) | 59 | 0 | Muridae / Rodentia | g | i | i |
 | 316 | Peromyscus boylii (Brush Mouse) | 59 | 0 | Cricetidae / Rodentia | g | i | i |
 | 317 | Spermophilus erythrogenys (Red-cheeked Ground Squirrel) | 59 | 0 | Sciuridae / Rodentia | g | g | i |
 | 318 | Notocitellus adocetus (Tropical Ground Squirrel) | 58 | 0 | ? / ? | i | i | i |
@@ -1533,7 +1533,7 @@ Each line: species, trait, state, record behind it, and whether a carry rule all
 - *Eutamias siskiyou*: receptor_classes: i, none; lambda_max_nm: i, none; cff_hz: i, none; fov_h_deg: i, none; binocular_deg: i, none; acuity_cpd: i, none; fovea: i, none
 - *Ochrotomys nuttalli*: receptor_classes: i, none; lambda_max_nm: i, none; cff_hz: i, none; fov_h_deg: i, none; binocular_deg: i, none; acuity_cpd: i, none; fovea: i, none
 - *Parotomys brantsii*: receptor_classes: i, none; lambda_max_nm: i, none; cff_hz: i, none; fov_h_deg: i, none; binocular_deg: i, none; acuity_cpd: i, none; fovea: i, none
-- *Micaelamys namaquensis*: receptor_classes: i, none [lit table has genus: Micaelamys namaquensis]; lambda_max_nm: i, none; cff_hz: i, none; fov_h_deg: i, none; binocular_deg: i, none; acuity_cpd: i, none; fovea: i, none
+- *Micaelamys namaquensis*: receptor_classes: m (sweep-86#1); lambda_max_nm: g, rule 2 (6 measured families) from Spermophilus (canon-3#227); cff_hz: i, closest family (canon-3#709), no carry rule allows family level for this trait; fov_h_deg: i, closest family (methods#1128), no carry rule allows family level for this trait; binocular_deg: i, closest family (sweep-48#2), no carry rule allows family level for this trait; acuity_cpd: i, closest family (intake#25), no carry rule allows family level for this trait; fovea: i, closest family (mammals-met#15), no carry rule allows family level for this trait
 - *Peromyscus boylii*: receptor_classes: g, rule 2 from Peromyscus maniculatus (squirrel-deer-rabbit#72); lambda_max_nm: g, rule 2 (6 measured families) from Spermophilus (canon-3#227); cff_hz: i, closest order (canon-3#693), no carry rule allows order level for this trait; fov_h_deg: i, closest order (recheck-11-fixed#10), no carry rule allows order level for this trait; binocular_deg: i, closest order (intake#19), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Peromyscus maniculatus (oa-1#4299); fovea: i, closest order (canon-3#622), no carry rule allows order level for this trait
 - *Spermophilus erythrogenys*: receptor_classes: g, rule 2 from Spermophilus (canon-3#15); lambda_max_nm: g, rule 2 from Spermophilus (canon-3#227); cff_hz: g, rule 3 from Spermophilus lateralis (methods#247); fov_h_deg: i, closest family (methods#1129), no carry rule allows family level for this trait; binocular_deg: i, closest order (intake#19), no carry rule allows order level for this trait; acuity_cpd: g, rule 3 from Spermophilus beecheyi (recheck-9-fixed#1); fovea: g, rule 3 from Spermophilus beecheyi (oa-1#3632)
 - *Notocitellus adocetus*: receptor_classes: i, none; lambda_max_nm: i, none; cff_hz: i, none; fov_h_deg: i, none; binocular_deg: i, none; acuity_cpd: i, none; fovea: i, none
