@@ -1,0 +1,33 @@
+name: harvest
+# Searches OpenAlex from build machines for the genera whose open cells still lack a full search (ci/harvest/harvest.py),
+# so the research desk's agents screen results instead of searching through a rate-limited proxy. Uses no Claude
+# allowance. Start it by pushing a commit to a branch named run/harvest/<anything>; ci/harvest/params.env may set TOP.
+# Results come back on the ci branch as runs/harvest/<run>-<shard>/harvest.jsonl.gz; read them with
+# tools/views/harvest_get.py.
+on:
+  push:
+    branches: ['run/harvest/**']
+permissions:
+  contents: write
+concurrency:
+  group: harvest-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - name: search OpenAlex
+        run: |
+          TOP=1600; [ -f ci/harvest/params.env ] && . ci/harvest/params.env
+          python3 -I ci/harvest/harvest.py out --top "$TOP" --shard ${{ matrix.shard }}/3
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh harvest out ${{ matrix.shard }}

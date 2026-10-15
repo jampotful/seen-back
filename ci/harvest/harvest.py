@@ -1,0 +1,172 @@
+"""Searches OpenAlex from a build machine for the genera whose open cells still lack a full search, so the research
+desk's agents screen results instead of searching through a rate-limited proxy.
+
+Usage, from the repository root on a GitHub Actions runner:
+    python3 -I ci/harvest/harvest.py OUT_DIR [--top 1600] [--shard 0/2]
+
+Which genera: the open cells of docs/views/gaps/queue.jsonl that are untouched, or half-searched with no search record
+that ran the full protocol (two queries and a citation step), grouped by genus and taken in order of their summed weight.
+For each genus it sends to OpenAlex (15 results each): "<Genus> vision", "<Genus> eye", one query for each group of open
+traits (pigments, flicker, light sensing in plants, chemical senses, daily activity), and "<English name> vision". Then
+one citation step for each source of the nearest measured relative (the queue's closest_record): works citing it that
+name the genus in title or abstract. Once per family it adds "<Family> vision review". Each work is kept once per genus:
+OpenAlex id, DOI, title, year, venue, the open-access link, status and licence, and the abstract's first 700 characters.
+
+Output: OUT_DIR/harvest.jsonl.gz, one genus a line (and one line per family review), and OUT_DIR/summary.txt.
+The desk reads it with tools/views/harvest_get.py. Only titles, abstracts and links are kept: no full texts."""
+import gzip, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
+
+ROOT = os.getcwd()
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'views'))
+import coverage as cv  # noqa: E402
+from traitwords import traits_in  # noqa: E402
+
+API = 'https://api.openalex.org'
+SELECT = 'id,doi,display_name,publication_year,primary_location,open_access,best_oa_location,abstract_inverted_index'
+GROUPS = [  # open traits -> one extra query
+    ({'lambda_max_nm', 'receptor_classes', 'spectral_range_nm', 'colour_vision'}, 'spectral sensitivity opsin'),
+    ({'cff_hz', 'corner_hz'}, 'flicker fusion temporal resolution'),
+    ({'sense_chemical'}, 'olfaction chemoreception'),
+    ({'diel'}, 'nocturnal diurnal activity'),
+    ({'interommatidial_deg', 'interreceptor_deg', 'acuity_cpd'}, 'visual acuity'),
+    ({'fov_h_deg', 'binocular_deg'}, 'visual field'),
+]
+PLANT = ['phytochrome photoreceptor', 'light perception', 'phototropism']
+calls = 0
+
+
+def get(path, params):
+    global calls
+    url = API + path + '?' + urllib.parse.urlencode(params)
+    for attempt in range(6):
+        try:
+            calls += 1
+            req = urllib.request.Request(url, headers={'User-Agent': 'regards-harvest (github.com/jampotful/seen-back)'})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                time.sleep(0.12)
+                return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504):
+                time.sleep(2 ** attempt); continue
+            return {'error': e.code}
+        except Exception as e:  # network hiccup
+            time.sleep(2 ** attempt); last = str(e)
+    return {'error': 'gave up'}
+
+
+def abstract(inv):
+    if not inv: return ''
+    pos = {}
+    for w, ix in inv.items():
+        for i in ix: pos[i] = w
+    return ' '.join(pos[i] for i in sorted(pos))[:700]
+
+
+def work(w):
+    loc = w.get('best_oa_location') or {}
+    pl = w.get('primary_location') or {}
+    oa = w.get('open_access') or {}
+    return {'doi': (w.get('doi') or '').replace('https://doi.org/', ''), 'title': w.get('display_name') or '',
+            'year': w.get('publication_year'), 'venue': ((pl.get('source') or {}).get('display_name') or ''),
+            'oa_status': oa.get('oa_status') or '', 'oa_url': loc.get('pdf_url') or loc.get('landing_page_url') or oa.get('oa_url') or '',
+            'license': loc.get('license') or '', 'abstract': abstract(w.get('abstract_inverted_index'))}
+
+
+def search(q, works, filt=None):
+    params = {'search': q, 'per-page': 15, 'select': SELECT} if not filt else {'filter': filt, 'per-page': 25, 'select': SELECT}
+    d = get('/works', params)
+    if 'error' in d: return {'q': q or filt, 'error': d['error'], 'ids': []}
+    ids = []
+    for w in d.get('results', []):
+        wid = w['id'].rsplit('/', 1)[-1]; ids.append(wid)
+        works.setdefault(wid, work(w))
+    return {'q': q or filt, 'n': (d.get('meta') or {}).get('count'), 'ids': ids}
+
+
+def evidence_doi(ref, cache={}):
+    """'oa-6#343' -> the DOI of line 343 of docs/views/evidence/oa-6.jsonl."""
+    m = re.match(r'(.+)#(\d+)$', ref or '')
+    if not m: return ''
+    unit, n = m.group(1), int(m.group(2))
+    if unit not in cache:
+        p = os.path.join(ROOT, 'docs/views/evidence', unit + '.jsonl')
+        cache[unit] = open(p, encoding='utf-8').read().splitlines() if os.path.exists(p) else []
+    lines = cache[unit]
+    if not 0 < n <= len(lines): return ''
+    try: return ((json.loads(lines[n - 1]).get('source') or {}).get('doi') or '').strip()
+    except (ValueError, AttributeError): return ''
+
+
+def targets():
+    """Genera to harvest, heaviest first: open cells untouched, or half-searched without a full-protocol record."""
+    g = os.path.join(ROOT, 'docs/views/gaps')
+    order_traits = set(json.load(open(os.path.join(g, 'rows.json')))['classes']['order'])
+    by_trait = {}
+    import glob
+    for p in sorted(glob.glob(os.path.join(ROOT, 'docs/views/searched/*.jsonl'))):
+        for l in open(p, encoding='utf-8'):
+            try: r = json.loads(l)
+            except ValueError: continue
+            rec = (str(r.get('taxon', '')).lower(), cv.searched_fully(r), r.get('level') == 'family')
+            for t in traits_in(str(r.get('trait', ''))): by_trait.setdefault(t, []).append(rec)
+    out = {}
+    for l in open(os.path.join(g, 'queue.jsonl'), encoding='utf-8'):
+        if not l.strip(): continue
+        c = json.loads(l); full = False
+        for tax, fully, fam in by_trait.get(c['trait'], ()):
+            if not fully: continue
+            if c['taxon'].lower() in tax or cv.word(c['genus'], tax) or ((c['trait'] in order_traits or fam) and (cv.word(c['family'], tax) or cv.word(c['order'], tax))):
+                full = True; break
+        if full: continue
+        t = out.setdefault(c['genus'], {'genus': c['genus'], 'family': c['family'], 'order': c['order'], 'english': set(),
+                                         'views': set(), 'traits': set(), 'weight': 0, 'closest': set()})
+        t['weight'] += c['score']; t['traits'].add(c['trait']); t['views'].add(c['view'])
+        if c.get('en'): t['english'].add(c['en'])
+        if c.get('closest_record'): t['closest'].add(c['closest_record'])
+    return sorted(out.values(), key=lambda t: -t['weight'])
+
+
+def main():
+    args = sys.argv[1:]; out = args[0]; top = 1600; shard, nshard = 0, 1
+    if '--top' in args: top = int(args[args.index('--top') + 1])
+    if '--shard' in args: shard, nshard = map(int, args[args.index('--shard') + 1].split('/'))
+    os.makedirs(out, exist_ok=True)
+    allt = targets(); todo = allt[:top]
+    mine = [t for i, t in enumerate(todo) if i % nshard == shard]
+    fam_done = set(); n_err = 0; start = time.time()
+    with gzip.open(os.path.join(out, 'harvest.jsonl.gz'), 'wt', encoding='utf-8') as f:
+        for i, t in enumerate(mine, 1):
+            works = {}; queries = []; genus = t['genus']
+            plant = t['views'] == {'plant'}
+            qs = [f'{genus} {w}' for w in PLANT] if plant else [f'{genus} vision', f'{genus} eye']
+            if not plant:
+                qs += [f'{genus} {words}' for keys, words in GROUPS if keys & t['traits']]
+            qs += [f'{en} vision' for en in sorted(t['english'])[:1] if en and not plant]
+            for q in qs: queries.append(search(q, works))
+            chase = []
+            for ref in sorted(t['closest'])[:3]:
+                doi = evidence_doi(ref)
+                if not doi: continue
+                d = get('/works/doi:' + doi, {'select': 'id'})
+                if 'id' not in d: chase.append({'cited_doi': doi, 'error': d.get('error', 'no id')}); continue
+                cid = d['id'].rsplit('/', 1)[-1]
+                r = search(None, works, filt=f'cites:{cid},title_and_abstract.search:{genus}')
+                chase.append({'cited_doi': doi, 'cited_id': cid, 'n': r.get('n'), 'ids': r.get('ids', []), 'error': r.get('error')})
+            n_err += sum(1 for q in queries if q.get('error')) + sum(1 for c in chase if c.get('error'))
+            f.write(json.dumps({'type': 'genus', 'genus': genus, 'family': t['family'], 'order': t['order'],
+                                'english': sorted(t['english']), 'views': sorted(t['views']), 'traits': sorted(t['traits']),
+                                'weight': t['weight'], 'queries': queries, 'chase': chase, 'works': works}, ensure_ascii=False) + '\n')
+            fam = t['family']
+            if fam and fam not in fam_done and not plant:
+                fam_done.add(fam); fworks = {}
+                r = search(f'{fam} vision review', fworks)
+                f.write(json.dumps({'type': 'family', 'family': fam, 'query': r, 'works': fworks}, ensure_ascii=False) + '\n')
+            if i % 100 == 0: print(f'{i}/{len(mine)} genera, {calls} calls, {n_err} errors, {time.time() - start:.0f} s', flush=True)
+    with open(os.path.join(out, 'summary.txt'), 'w') as s:
+        s.write(f'shard {shard}/{nshard}: {len(mine)} genera of the top {len(todo)} (of {len(allt)} needing a search), '
+                f'{len(fam_done)} family reviews, {calls} OpenAlex calls, {n_err} failed queries, {time.time() - start:.0f} s\n')
+    print(open(os.path.join(out, 'summary.txt')).read())
+
+
+if __name__ == '__main__':
+    main()

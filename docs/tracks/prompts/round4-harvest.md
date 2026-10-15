@@ -1,0 +1,14 @@
+# Round 4: finish the protocol from a harvest (Sonnet, medium effort, local agent with web access)
+
+Build machines have already sent the protocol's searches to OpenAlex for every genus whose open cells lack a full search (`.github/workflows/harvest.yml`). Your job is to screen what they found, open what may hold a measurement, and write the records, so that each genus ends with the full protocol on record. Do not repeat the searches.
+
+Read first: `docs/views/research/THOROUGH.md` (the protocol), the Round 2 section of `docs/views/research/BRIEF.md` (records, grades, carry rules) and `docs/tracks/prompts/round3-sweep.md` (how a sweep logs). Your launch prompt gives about 40 genera and your branch, `research/harvest-<n>`. Push at least every 15 minutes.
+
+For each genus, in the order given:
+1. `python3 -I tools/views/harvest_get.py <Genus>` prints the open traits, the searches already sent (scientific name, English name, one per trait group), the citation step (works citing the nearest measured relative's source that name the genus) and a family review search, each work with its abstract's start and its open-access link.
+2. Screen every title and abstract. Open each work that may report a measurement of an open trait in a species of the genus: WebFetch its open-access link, or its DOI page. Check the canon compilations in hand for the genus too (step a of the protocol).
+3. Log as `round3-sweep.md` says: a measurement you read goes to the evidence through `tools/senses/addlog.py`; a measurement you cannot open goes on `docs/views/wanted/harvest-<n>.jsonl`; and for each open trait with nothing found, one search record in `docs/views/searched/harvest-<n>.jsonl` with `level` "genus", `queries` (the harvest's queries, word for word), `where` (["OpenAlex, harvest run <run>"] plus anything you opened), `canon`, `chased` (the DOI of the citation step's cited work; with no measured relative, the family review you checked, or "none: no measured relative and no family review found"), `found` "none" and `date`.
+4. Grades, as the audits enforce them: `m` only for one named species measured in the source; a value for a group is `g` at most, with the group in `note`; a value you compute yourself is `i`, with the measured quantity as its own record; a value from a review's table names the review as the source and the original in `note`; a record read only from an abstract carries `"partial": true`. Never use Wikipedia, encyclopedias, academia.edu, ResearchGate, Sci-Hub, LibGen or a library proxy.
+5. If a work you need will not open from your machine, put it on the wanted list with its open-access link in `get`; the next Codex round reads it.
+
+Final message, at most 150 words: genera done, cells closed by a measurement, search records written, wanted lines added, and the last commit.
