@@ -19,8 +19,10 @@ Verdicts (column "verdict"; the page hides "done" and "read" and lists "upgrade"
   read a free copy of it in full (docs/views/sources/oa-*.jsonl, matched by DOI, else by title); never for a supplement
   or table entry, whose DOI is the article's.
 - unknown: no taxa and no views to judge by; never retired, sorted at its priority's median gain.
---status writes {page id: {"v": verdict, "gc": open cells, "r": rank}} for the page's database document status/all (ArtifactData set), so
-the page re-sorts and hides papers without a republish. Gains are estimates for ordering, never facts about a paper."""
+--status writes {page id: {"v": verdict, "gc": open cells, "r": rank, "p": priority, "k": reference-work traits}} for the page's
+database document status/all (ArtifactData set), so the page re-sorts, re-prioritises and files papers into To get, Try
+again and Done without a republish. A reference work of canon.jsonl the owner marked can't get keeps its rank by the open
+cells of its traits, so it heads Try again. Gains are estimates for ordering, never facts about a paper."""
 import csv, glob, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from traitwords import traits_in
@@ -76,11 +78,11 @@ def main():
     data = list(csv.DictReader(open(src, encoding='utf-8'))); fields = list(data[0].keys())
     # A reference compilation of canon.jsonl not yet logged or marked n/a keeps every cell of its traits from being
     # exhausted (coverage.py), so it ranks first in priority 1, by the open weight of all its traits' cells.
-    from coverage import canon_missing
-    missing = canon_missing(repo)
-    def canon_traits(r):
+    from coverage import canon_missing, canon_all
+    missing, every = canon_missing(repo), canon_all(repo)
+    def canon_traits(r, items):
         d, t = (r.get('doi') or '').lower().strip(), norm(r.get('title'))
-        return {tr for md, mt, tr in missing if (md and md == d) or (not md and mt and len(mt) > 12 and mt in t)}
+        return {tr for md, mt, tr in items if (md and md == d) or (not md and mt and len(mt) > 12 and mt in t)}
     for r in data:
         m = lines.get(key(r.get('doi'), r.get('title')), {'taxa': set(), 'rows': set(), 'canon': False})
         taxa = set(m['taxa']) | {s.strip().lower() for s in (r.get('species it would fix') or '').split(';') if s.strip()}
@@ -110,12 +112,19 @@ def main():
         else: v = 'done'
         r['verdict'] = v; r['verdict why'] = WHY.get(v, '')
         r['gain'] = sum(c['score'] for c in opened) if known else None; r['gain cells'] = len(opened)
-        ct = canon_traits(r) if v not in ('read', 'done') else set()
+        ct = canon_traits(r, missing) if v not in ('read', 'done') else set()
         if ct:
             blocked = [c for c in cells if c['state'] == 'i' and c['trait'] in ct]
             r['verdict'] = v = 'needed'; r['priority'] = '1'
             r['verdict why'] = f"Reference work: the search can only be finished for {len(ct)} traits once it is read or marked n/a ({', '.join(sorted(ct))})."
             r['gain'] = sum(c['score'] for c in blocked); r['gain cells'] = len(blocked)
+        elif v not in ('read', 'done') and (r.get('status') or '') in ('n/a', 'partial'):
+            ct = canon_traits(r, every)  # a reference work the owner could not get: ranked by what it would still fill
+            fill = [c for c in cells if c['state'] == 'i' and c['trait'] in ct]
+            if fill:
+                r['verdict'] = v = 'needed'; r['priority'] = '1'
+                r['verdict why'] = f"Reference work for {len(ct)} traits ({', '.join(sorted(ct))}); marked can't get or partial, so its traits were searched without it."
+                r['gain'] = sum(c['score'] for c in fill); r['gain cells'] = len(fill)
         r['canon traits'] = ', '.join(sorted(ct))
         r['upgrade cells'] = len(soft)
         sp = {c['taxon']: c['records'] for c in opened}; r['gain species'] = len(sp); r['gain records'] = sum(sp.values())
@@ -136,7 +145,8 @@ def main():
         st = {}
         for r in data:
             pid = page_row(r)['id']
-            st[pid] = {'v': r['verdict'], 'gc': r['gain cells'], 'r': r['rank']}
+            st[pid] = {'v': r['verdict'], 'gc': r['gain cells'], 'r': r['rank'], 'p': int(r['priority'] or 3)}
+            if r['canon traits']: st[pid]['k'] = len(r['canon traits'].split(', '))
         json.dump(st, open(status_out, 'w'), ensure_ascii=False, separators=(',', ':'))
     count = {}
     for r in data: count[r['verdict']] = count.get(r['verdict'], 0) + 1

@@ -54,6 +54,17 @@ def canon_missing(repo):
     canon_done(repo)
     return getattr(canon_done, 'missing', [])
 
+def canon_all(repo):
+    """Every compilation of canon.jsonl, done or not: a list of (doi, normalised title, trait)."""
+    cp = os.path.join(repo, 'docs/views/research/canon.jsonl')
+    if not os.path.exists(cp): return []
+    nt = lambda t: re.sub(r'[^a-z0-9]+', ' ', (t or '').lower()).strip(); out = []
+    for l in open(cp, encoding='utf-8'):
+        try: j = json.loads(l)
+        except ValueError: continue
+        out.append(((j.get('doi') or '').lower().strip(), nt(j.get('title')), j.get('trait')))
+    return out
+
 def word(name, text):
     return bool(name) and re.search(r'(?<![a-z])' + re.escape(name.lower()) + r'(?![a-z])', text) is not None
 

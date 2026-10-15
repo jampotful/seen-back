@@ -71,13 +71,16 @@ The coverage line carries the three results, for example `--tests "search 9/10; 
 
 ## Papers that are no longer needed
 
-After every intake or sweep is merged, the desk reruns `gaps.py` (which also writes `docs/views/gaps/cells.jsonl`, every cell with its state), then `wanted_csv.py` and `python3 -I tools/views/gain.py IN.csv docs/views/wanted-merged.csv --status STATUS.json`, and writes STATUS.json to the page's database document `status/all` (ArtifactData `set`, pinned to the version it last read). The page then re-sorts and hides papers by itself, with no republish. Each paper gets a verdict:
+At every check-in, and after every intake or sweep is merged, the desk saves the page's `ticks/all` (ArtifactData `get`) and its `extra` collection (`list`, limit 1000) into one folder, runs `python3 -I tools/views/papers_refresh.py FOLDER OUT --gaps` (gaps.py with the 1,200-species lists, the owner's marks, wanted_csv.py, gain.py, papers_extra.py), then writes OUT/status.json to `status/all` (ArtifactData `set`, pinned to the version it last read), sends each OUT/extra/batch-N.json (`batch`), and applies OUT/ticks-patch.json to `ticks/all` (`update`) when it exists. The page files every paper by itself, with no republish: To get (unmarked papers), Try again (marked partial or can't get, ranked by priority and then by what the paper would still fill) and Done (saved, in Drive, given up, or verdict done or read). A paper missing from `status/all` leaves the page, so `status/all` must always be written from the same run as the extras. Each paper gets a verdict:
 
 - needed: at least one cell it bears on is open. It is ranked by the weight of its open cells.
 - upgrade: none is open, but some are filled only by borrowing from a relative or only by an abstract. It stays on the list below the needed papers of its priority, because it would give the species' own measurement. `--retire-upgrades` retires these too, if the owner prefers.
 - done: every cell it bears on is measured in the species itself from a full text. The page hides it.
 - read: the intake has already read it in full from Drive. The page hides it.
 - unknown: it names no listed species and no view, so nothing can judge it. It is never hidden.
+- A reference work of `canon.jsonl` that the owner marked can't get or partial keeps priority 1 and ranks by the open cells of its traits, so it heads Try again.
+
+Duplicates fold: a paper without a DOI whose title equals, extends or is extended by another paper's title, same first author and year, joins that paper (`wanted_csv.py`; supplements and data packages never fold). A mark on the folded copy carries over through OUT/ticks-patch.json.
 
 The owner can bring any hidden paper back with its Still want it button (document `keep/all`), and the desk never overrides that. Records logged from a partial file carry `"partial": true`, so a cell that rests only on an abstract never counts as measured from a full text.
 

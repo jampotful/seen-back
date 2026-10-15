@@ -2,155 +2,233 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Instrument+Serif&display=swap">
 <style>
-/* Layout: one column. A fixed order of work: open a paper, save it to Drive, tap the circle. Ticked papers leave the list. Inks come from the app icon. */
-:root { --bg: #f6f4f9; --panel: #ffffff; --fg: #1d1a24; --muted: #675f75; --line: #e1dce9; --violet: #5b4bc4; --on-violet: #ffffff; --pink: #c42f72; --amber: #8a6a00; --ok: #2a7a4b; --ok-bg: #e4f3ea;
+/* Layout: one column and three piles. To get holds what to download next; Try again holds what the library refused,
+   ranked by what it would still fill; Done holds what needs nothing more. A paper moves between piles by itself as the
+   owner ticks it and as the research's verdicts (status/all) change. Inks come from the app icon. */
+:root { --bg: #f6f4f9; --panel: #ffffff; --fg: #1d1a24; --muted: #675f75; --line: #e1dce9; --violet: #5b4bc4; --on-violet: #ffffff; --pink: #c42f72; --amber: #8a6a00; --amber-bg: #fbf3d9; --ok: #2a7a4b; --ok-bg: #e4f3ea; --shade: rgba(29, 26, 36, .10);
   --serif: "Instrument Serif", Georgia, "Times New Roman", serif; --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #14121a; --panel: #1d1a26; --fg: #ece8f2; --muted: #a59eb3; --line: #2f2a3b; --violet: #a69af7; --on-violet: #14121a; --pink: #f27aae; --amber: #f2c94c; --ok: #6cc893; --ok-bg: #1b2e24; color-scheme: dark } }
-:root[data-theme="dark"] { --bg: #14121a; --panel: #1d1a26; --fg: #ece8f2; --muted: #a59eb3; --line: #2f2a3b; --violet: #a69af7; --on-violet: #14121a; --pink: #f27aae; --amber: #f2c94c; --ok: #6cc893; --ok-bg: #1b2e24; color-scheme: dark }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #14121a; --panel: #1d1a26; --fg: #ece8f2; --muted: #a59eb3; --line: #2f2a3b; --violet: #a69af7; --on-violet: #14121a; --pink: #f27aae; --amber: #f2c94c; --amber-bg: #2c2612; --ok: #6cc893; --ok-bg: #1b2e24; --shade: rgba(0, 0, 0, .35); color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #14121a; --panel: #1d1a26; --fg: #ece8f2; --muted: #a59eb3; --line: #2f2a3b; --violet: #a69af7; --on-violet: #14121a; --pink: #f27aae; --amber: #f2c94c; --amber-bg: #2c2612; --ok: #6cc893; --ok-bg: #1b2e24; --shade: rgba(0, 0, 0, .35); color-scheme: dark }
 body { background: var(--bg); color: var(--fg); font: 15px/1.5 var(--sans); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
 .wrap { max-width: 820px; margin: 0 auto; padding-inline: 16px; padding-block: 26px 80px; }
 h1 { font: 400 42px/1.05 var(--serif); margin: 0; text-wrap: balance; }
-.steps { color: var(--muted); margin: 8px 0 0; max-width: 60ch; }
+.steps { color: var(--muted); margin: 8px 0 0; max-width: 62ch; }
 .top { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; margin-top: 16px; }
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 16px; border-radius: 10px; font: 600 14px var(--sans); text-decoration: none; border: 1px solid var(--line); background: var(--panel); color: var(--fg); cursor: pointer; }
 .btn.main { background: var(--violet); border-color: var(--violet); color: var(--on-violet); }
-.btn:focus-visible, .chip:focus-visible, .tick:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, a:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
-.prog { flex: 1 1 220px; min-width: 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.btn:focus-visible, .chip:focus-visible, .tab:focus-visible, .tick:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, a:focus-visible, .linkish:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+.prog { flex: 1 1 240px; min-width: 0; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .prog b { color: var(--fg); font-weight: 600; }
-.meter { height: 8px; border-radius: 99px; background: var(--line); margin-top: 6px; overflow: hidden; }
-.meter i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s; }
+.prog .fresh { color: var(--violet); font-weight: 600; }
+.meter { display: flex; height: 8px; border-radius: 99px; background: var(--line); margin-top: 6px; overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; transition: width .3s; }
+.meter .m-done { background: var(--ok); } .meter .m-try { background: var(--amber); }
 .sync { font-size: 12px; color: var(--muted); margin-top: 10px; }
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 3; background: var(--bg); margin: 16px -16px 0; padding: 10px 16px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tabs { flex: 1 1 320px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: var(--line); border-radius: 12px; }
+.tab { min-height: 40px; min-width: 0; padding: 0 8px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font: 600 14px var(--sans); cursor: pointer; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tab[aria-pressed=true] { background: var(--panel); color: var(--fg); box-shadow: 0 1px 3px var(--shade); }
+.tab .n { font-weight: 500; margin-left: 4px; }
+.tab[data-tab=try] .n { color: var(--amber); }
+.bar input[type=search] { flex: 1 1 200px; min-width: 0; font: inherit; min-height: 40px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
 .seg { display: flex; gap: 4px; flex-wrap: wrap; }
 .chip { font: 500 13px var(--sans); min-height: 36px; padding: 0 12px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; font-variant-numeric: tabular-nums; }
 .chip[aria-pressed=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.bar input[type=search], .bar select { font: inherit; min-height: 36px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 0 10px; min-width: 0; }
-.bar input[type=search] { flex: 1 1 180px; }
-.bar label.t { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); min-height: 36px; }
+.filters select { font: inherit; min-height: 36px; min-width: 0; max-width: 100%; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 0 10px; }
+.intro { color: var(--muted); font-size: 14px; margin: 14px 0 0; max-width: 62ch; }
 .count { color: var(--muted); font-size: 13px; margin: 14px 0 6px; font-variant-numeric: tabular-nums; }
+.linkish { font: inherit; color: var(--violet); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
 ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .row { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.row > div { min-width: 0; }
 .tick { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--line); background: transparent; color: transparent; font-size: 20px; cursor: pointer; display: grid; place-items: center; }
 .tick:hover { border-color: var(--ok); }
 .tick[aria-pressed=true] { background: var(--ok); border-color: var(--ok); color: var(--bg); }
 .tick[disabled] { cursor: default; }
-.head { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.head { display: flex; gap: 6px 8px; align-items: baseline; flex-wrap: wrap; }
 .pr { font: 600 11px/1 var(--sans); letter-spacing: .05em; border-radius: 4px; padding: 4px 6px; border: 1px solid currentColor; }
 .p1 { color: var(--pink); } .p2 { color: var(--amber); } .p3 { color: var(--muted); }
 .fold { font-size: 12px; font-weight: 600; color: var(--violet); }
+.new { font: 600 11px/1 var(--sans); letter-spacing: .05em; text-transform: uppercase; color: var(--on-violet); background: var(--violet); border-radius: 4px; padding: 4px 6px; }
 .t { font-weight: 600; font-size: 16px; line-height: 1.35; margin-top: 4px; overflow-wrap: anywhere; }
 .cite { color: var(--muted); font-size: 13.5px; margin-top: 2px; overflow-wrap: anywhere; }
-.why { font-size: 14px; margin-top: 8px; }
+.why { font-size: 14px; margin-top: 8px; overflow-wrap: anywhere; }
 .gain { font-size: 12.5px; font-weight: 600; color: var(--ok); margin-top: 6px; font-variant-numeric: tabular-nums; }
 .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.acts .btn { min-height: 36px; font-size: 13px; }
+.acts .btn { min-height: 36px; font-size: 13px; padding: 0 12px; }
 .acts .btn[aria-pressed=true] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .acts .sp { flex: 1 1 8px; }
 .st { font-size: 12px; font-weight: 600; border-radius: 4px; padding: 3px 6px; }
-.st.full { color: var(--ok); background: var(--ok-bg); } .st.partial { color: var(--amber); border: 1px solid currentColor; } .st.na { color: var(--muted); border: 1px dashed currentColor; }
+.st.full { color: var(--ok); background: var(--ok-bg); } .st.partial { color: var(--amber); background: var(--amber-bg); } .st.na { color: var(--amber); border: 1px dashed currentColor; } .st.off { color: var(--muted); border: 1px dashed currentColor; } .st.ref { color: var(--violet); border: 1px solid currentColor; }
 details.more { margin-top: 8px; font-size: 13px; color: var(--muted); }
 details.more summary { cursor: pointer; width: fit-content; }
 details.more p { margin: 6px 0 0; overflow-wrap: anywhere; }
 details.more em { font-style: normal; color: var(--fg); }
+.citation { user-select: all; -webkit-user-select: all; color: var(--fg); }
 .row.done { background: transparent; border-style: dashed; }
-.row.done .t, .row.done .cite, .row.done .why { opacity: .55; }
+.row.done .t, .row.done .cite, .row.done .why { opacity: .6; }
 .indrive { color: var(--ok); font-weight: 600; font-size: 12px; }
-.empty { padding: 36px 0; text-align: center; color: var(--muted); }
+.empty { padding: 36px 0; text-align: center; color: var(--muted); display: grid; gap: 12px; justify-items: center; }
 details.lib { margin-top: 18px; font-size: 13px; color: var(--muted); }
 details.lib summary { cursor: pointer; width: fit-content; }
 details.lib input { font: inherit; width: 100%; max-width: 520px; margin-top: 8px; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); border-radius: 10px; padding: 10px 14px; display: flex; gap: 12px; align-items: center; font-size: 14px; max-width: calc(100% - 32px); z-index: 5; }
 .toast button { font: 600 14px var(--sans); background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; min-height: 32px; }
-@media (max-width: 520px) { h1 { font-size: 34px; } .row { grid-template-columns: 40px minmax(0, 1fr); gap: 10px; padding: 12px; } .tick { width: 40px; height: 40px; } }
+@media (max-width: 520px) { h1 { font-size: 34px; } .row { grid-template-columns: 40px minmax(0, 1fr); gap: 10px; padding: 12px; } .tick { width: 40px; height: 40px; } .tab { font-size: 13px; padding: 0 4px; } }
 @media (prefers-reduced-motion: reduce) { .meter i { transition: none } }
 </style>
 <div class="wrap">
   <h1>Papers wanted</h1>
-  <p class="steps">Open a paper, save the PDF into the UNPROCESSED folder, then tap the circle. If the library won't give you the full text, save the printed page with the abstract and references and tap Partial. If you can't get it at all, tap Can't get it. Each choice is passed to the research agents, and the paper leaves your list. Within each priority, the papers that could fill the most open gaps come first. A paper whose gaps get filled in the meantime leaves the list by itself; Show handled lists it with a Still want it button.</p>
+  <p class="steps">Open a paper, save the PDF into the UNPROCESSED folder, then tap the circle. If the library shows you only the abstract, save that page and tap Partial; if it shows you nothing, tap Can't get it. Both send the paper to Try again, where the papers the research still needs most come first. Saved papers, and papers the research stops needing, move to Done by themselves.</p>
   <div class="top">
     <a class="btn main" href="__DRIVE_URL__" target="_blank" rel="noopener">Open UNPROCESSED in Drive</a>
-    <div class="prog"><span id="progText"></span><div class="meter"><i id="meter"></i></div></div>
+    <div class="prog"><span id="progText"></span><div class="meter" aria-hidden="true"><i class="m-done" id="mDone"></i><i class="m-try" id="mTry"></i></div></div>
   </div>
-  <div class="sync" id="sync">Checking whether your ticks are saved…</div>
+  <div class="sync" id="sync">Connecting to your shared list…</div>
   <div class="bar" role="search">
+    <div class="tabs" role="group" aria-label="Pile">
+      <button class="tab" id="tab-get" data-tab="get" aria-pressed="true">To get<span class="n" id="nGet"></span></button>
+      <button class="tab" id="tab-try" data-tab="try" aria-pressed="false">Try again<span class="n" id="nTry"></span></button>
+      <button class="tab" id="tab-done" data-tab="done" aria-pressed="false">Done<span class="n" id="nDone"></span></button>
+    </div>
+    <input id="q" type="search" placeholder="Search title, author, species" aria-label="Search">
+  </div>
+  <div class="filters" id="filters">
     <div class="seg" role="group" aria-label="Priority">
       <button class="chip" data-p="1" aria-pressed="true">Priority 1 <span id="n1"></span></button>
       <button class="chip" data-p="2" aria-pressed="false">2 <span id="n2"></span></button>
       <button class="chip" data-p="3" aria-pressed="false">3 <span id="n3"></span></button>
       <button class="chip" data-p="0" aria-pressed="false">All</button>
     </div>
-    <input id="q" type="search" placeholder="Search title, author, species" aria-label="Search">
     <select id="folder" aria-label="Folder"><option value="">Any folder</option></select>
-    <label class="t" for="showdone"><input id="showdone" type="checkbox"> Show handled</label>
   </div>
+  <p class="intro" id="intro" hidden></p>
   <p class="count" id="count"></p>
   <ol id="list"></ol>
   <details class="lib"><summary>Reach papers through my library</summary><label for="proxy">Paste your library's proxy prefix, for example one that ends in <code>login?url=</code>, and every Open button goes through it. It stays in this browser.</label><input id="proxy" type="text" placeholder="https://…/login?url=" autocomplete="off"></details>
-  <p class="count">List built __NOW__. Papers added after that appear on their own.</p>
+  <p class="count">List built __NOW__. Papers the research asks for later appear in To get by themselves, marked New.</p>
 </div>
 <div class="toast" id="toast" hidden><span id="toastMsg"></span><button id="undo">Undo</button></div>
 <script>
 var DATA = __DATA__;
+var SEEN0 = __SEEN0__;   // ids this owner had already been shown when the page was built; a new device counts papers outside it as new
 var $ = function (id) { return document.getElementById(id); };
+var storageOK = (function () { try { localStorage.setItem('rg3.t', '1'); localStorage.removeItem('rg3.t'); return true; } catch (e) { return false; } })();
 var store = { get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
   set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
-var state = store.get('rg2.filters', { p: 1, folder: '', q: '', done: false });
+var TABS = { get: 'To get', try: 'Try again', done: 'Done' };
+var state = store.get('rg3.filters', { tab: 'get', p: 1, folder: '', q: '' });
+if (!TABS[state.tab]) state.tab = 'get';
+var hashTab = (location.hash || '').slice(1); if (TABS[hashTab]) state.tab = hashTab;
 var proxy = store.get('rg2.proxy', '');
-var ticks = store.get('rg2.ticks', {});   // id -> true; mirrors the shared store when it is reachable
-var extra = {};                            // id -> row added after this page was built
-var tickDoc = null, shared = false, toastTimer = 0, lastTick = null;
-var verdicts = {}, keep = {}, keepDoc = null;   // the desk's verdict per paper (status/all) and the owner's overrides (keep/all)
-var WHY = { done: 'No longer needed: every gap it covers is now measured in the species itself.', read: 'No longer needed: already read in full from your Drive folder.', upgrade: "Its gaps are already filled by borrowing from relatives or from an abstract. It would give the species' own measurement, so it sits below the papers that fill open gaps." };
+var ticks = store.get('rg2.ticks', {});    // id -> true | 'partial' | 'na'; mirrors ticks/all once the shared list answers
+var extra = {};                             // id -> paper added after this page was built (collection extra)
+var verdicts = {}, statusLoaded = false;    // id -> {v, gc, r, p, k}: the research's verdict, open gaps, rank, priority, reference-work traits (status/all)
+var keep = {}, giveup = {};                 // the owner's Still want it (keep/all) and Give up on it (giveup/all)
+var docs = { ticks: null, keep: null, giveup: null };
+var prevSeen = storageOK ? new Set(store.get('rg3.seen', null) || SEEN0) : null;
+var toastTimer = 0, lastChange = null;
+var WHY = { done: 'Every gap it covers is now measured in the species itself.', read: 'The research has read it in full, from your Drive folder or a free copy online.',
+  upgrade: "Its gaps are already filled by borrowing from relatives or from an abstract. It would give the species' own measurement, so it sits below the papers that fill open gaps." };
+var INTRO = { get: '',
+  try: "These are the papers you couldn't get, or got only part of, that the research still needs. The ones that would fill the most gaps come first. Interlibrary loan and a note to the author are the usual routes, and Copy citation gives you the details for the request. When one arrives, save it and tap the circle. Give up on it moves a paper to Done.",
+  done: 'Saved papers, papers already in Drive, papers the research no longer needs and papers you gave up on. Untick a paper, or tap Still want it, to bring it back.' };
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-function oldKey(d) { return (d.u || d.t).toLowerCase(); }
 function rows() {
   var seen = {}, all = [];
   DATA.forEach(function (d) { seen[d.id] = 1; all.push(d); });
   Object.keys(extra).forEach(function (id) { if (!seen[id]) all.push(extra[id]); });
-  all.sort(function (a, b) { return (a.p - b.p) || (tierOf(a) - tierOf(b)) || (rankOf(a) - rankOf(b)); });
-  return all;
+  return statusLoaded ? all.filter(function (d) { return verdicts[d.id]; }) : all;   // status/all lists every paper still on the research's list
 }
 function stateOf(d) { var v = ticks[d.id]; return v === true || v === 'full' ? 'full' : (v === 'partial' || v === 'na' ? v : ''); }
-function rawVerdict(d) { var s = verdicts[d.id]; return s ? s.v : ''; }
-function retired(d) { var v = rawVerdict(d); return !keep[d.id] && (v === 'done' || v === 'read'); }
-function tierOf(d) { return retired(d) ? 2 : (!keep[d.id] && rawVerdict(d) === 'upgrade') ? 1 : 0; }
-function rankOf(d) { var s = verdicts[d.id]; return s && s.r ? s.r : d.n; }
+function verdict(d) { var s = verdicts[d.id]; return s ? s.v : ''; }
+function prio(d) { var s = verdicts[d.id]; return s && s.p ? s.p : d.p; }
+function rankOf(d) { var s = verdicts[d.id]; return s && s.r ? s.r : 100000 + d.n; }
 function gapsOf(d) { var s = verdicts[d.id]; return s && s.gc != null ? s.gc : d.gc; }
-function isDone(d) { return !!(d.got || stateOf(d) || retired(d)); }
+function refTraits(d) { var s = verdicts[d.id]; return s && s.k ? s.k : 0; }
+function retired(d) { var v = verdict(d); return !keep[d.id] && (v === 'done' || v === 'read'); }
+function upgrade(d) { return !keep[d.id] && verdict(d) === 'upgrade'; }
+function pileOf(d) {   // done: nothing more to do; try: the library refused it and the research still needs it; get: the rest
+  var st = stateOf(d);
+  if (d.got || st === 'full' || giveup[d.id] || retired(d)) return 'done';
+  if (st === 'na' || st === 'partial') return 'try';
+  return 'get';
+}
+function order(a, b) { return (prio(a) - prio(b)) || ((upgrade(a) ? 1 : 0) - (upgrade(b) ? 1 : 0)) || (rankOf(a) - rankOf(b)); }
+function isNew(d) { return !!prevSeen && !prevSeen.has(d.id); }
 function link(d) { var u = d.u || ('https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t)); return proxy && d.u ? proxy + u : u; }
 function scholar(d) { return 'https://scholar.google.com/scholar?q=' + encodeURIComponent(d.t); }
+function worldcat(d) { return 'https://search.worldcat.org/search?q=' + encodeURIComponent(d.t + ' ' + String(d.a || '').split(/[ ,]/)[0]); }
+function citation(d) { var isbn = /isbn[\s:]*[0-9][0-9-]{8,}[0-9xX]/i.exec(String(d.h || '') + ' ' + String(d.j || '')); return [String(d.a || '').trim() + (d.y ? ' (' + d.y + ').' : '.'), String(d.t || '').trim() + '.', d.j ? String(d.j).trim() + '.' : '', d.u || '', isbn ? isbn[0] : ''].filter(Boolean).join(' '); }
+function num(n) { return Number(n).toLocaleString('en-US'); }
 function big(n) { return n >= 1e6 ? (n / 1e6).toFixed(1) + ' million' : n >= 1e3 ? Math.round(n / 1e3) + ',000' : String(n); }
 function firstSentence(w) { return String(w || '').split(' | ')[0]; }
+function matches(d, q) { return !q || (d.t + ' ' + d.a + ' ' + d.s + ' ' + d.j + ' ' + d.w).toLowerCase().indexOf(q) >= 0; }
+function rowHTML(d, pile) {
+  var st = stateOf(d), gcn = gapsOf(d), v = verdict(d), ret = retired(d), up = upgrade(d), k = refTraits(d), gone = !!giveup[d.id];
+  var badges = '<span class="pr p' + prio(d) + '">P' + prio(d) + '</span><span class="fold">' + esc(d.f) + '</span>' +
+    (isNew(d) && pile !== 'done' ? '<span class="new">New</span>' : '') +
+    (d.got ? '<span class="indrive">Already in Drive</span>' : '') +
+    (st === 'full' ? '<span class="st full">Saved</span>' : st === 'partial' ? '<span class="st partial">Only part saved</span>' : st === 'na' ? '<span class="st na">Can\'t get it</span>' : '') +
+    (gone ? '<span class="st off">Given up</span>' : ret ? '<span class="st off">No longer needed</span>' : up ? '<span class="st partial">Upgrade</span>' : '') +
+    (k ? '<span class="st ref">Reference work, ' + k + (k === 1 ? ' trait' : ' traits') + '</span>' : '');
+  var gain = (gcn && pile !== 'done') ? '<div class="gain">' + (k ? 'Its traits hold about ' + num(gcn) + ' open ' + (gcn === 1 ? 'gap' : 'gaps') : (pile === 'try' ? 'Would still fill about ' : 'Could fill about ') + num(gcn) + ' open ' + (gcn === 1 ? 'gap' : 'gaps') + (gcn === d.gc && d.gr ? ' (' + big(d.gr) + ' observations of the species involved)' : '')) + '</div>' : '';
+  var acts = (d.u ? '<a class="btn main" href="' + esc(link(d)) + '" target="_blank" rel="noopener">Open paper</a>' : '') +
+    '<a class="btn" href="' + esc(scholar(d)) + '" target="_blank" rel="noopener">Search Scholar</a>';
+  if (pile === 'try') acts += '<a class="btn" href="' + esc(worldcat(d)) + '" target="_blank" rel="noopener">Search WorldCat</a><button class="btn" data-act="copy" data-id="' + esc(d.id) + '">Copy citation</button>';
+  if (pile === 'done' && ret && st !== 'full' && !d.got && !gone) acts += '<button class="btn" data-act="keep" data-id="' + esc(d.id) + '">Still want it</button>';
+  if (pile !== 'done' && keep[d.id] && (v === 'done' || v === 'read')) acts += '<button class="btn" data-act="keep" data-id="' + esc(d.id) + '" aria-pressed="true">Kept on the list</button>';
+  if (gone) acts += '<button class="btn" data-act="giveup" data-id="' + esc(d.id) + '">Bring it back</button>';
+  if (!d.got && !gone && st !== 'full' && !ret) acts += '<span class="sp"></span><button class="btn" data-act="partial" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'partial') + '" title="Abstract and references only">Partial</button><button class="btn" data-act="na" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'na') + '" title="I cannot get this paper">Can\'t get it</button>' + (pile === 'try' ? '<button class="btn" data-act="giveup" data-id="' + esc(d.id) + '" title="Stop showing it in Try again">Give up on it</button>' : '');
+  var rest = String(d.w || '').split(' | ').slice(1).join(' ');
+  return '<li class="row' + (pile === 'done' ? ' done' : '') + '"><button class="tick" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'full' || !!d.got) + '" aria-label="' + (st === 'full' ? 'Unmark: saved in full' : 'Mark as saved in full') + '"' + (d.got ? ' disabled' : '') + '>✓</button><div>' +
+    '<div class="head">' + badges + '</div>' +
+    '<div class="t">' + esc(d.t) + '</div>' +
+    '<div class="cite">' + esc(d.a) + (d.y ? ' (' + esc(d.y) + ')' : '') + (d.j ? ', ' + esc(d.j) : '') + '</div>' + gain +
+    (ret || up ? '<div class="why">' + esc(WHY[ret ? v : 'upgrade']) + '</div>' : '') +
+    (d.w ? '<div class="why">' + esc(firstSentence(d.w)) + '</div>' : '') +
+    '<div class="acts">' + acts + '</div>' +
+    '<details class="more"><summary>More</summary>' + (d.h ? '<p><em>How to get it:</em> ' + esc(d.h) + '</p>' : '') + (rest ? '<p><em>Also:</em> ' + esc(rest) + '</p>' : '') + (d.s ? '<p><em>Species it would fix:</em> ' + esc(d.s) + '</p>' : '') + (d.by ? '<p><em>Asked for by:</em> ' + esc(d.by) + '</p>' : '') + '<p><em>Citation:</em> <span class="citation">' + esc(citation(d)) + '</span></p></details>' +
+    '</div></li>';
+}
 function render() {
-  var all = rows(), q = (state.q || '').toLowerCase(), out = [], shown = 0, c = { 1: [0, 0], 2: [0, 0], 3: [0, 0] };
-  all.forEach(function (d) { var k = c[d.p] || c[3]; k[1]++; if (isDone(d)) k[0]++; });
-  all.forEach(function (d) {
-    var done = isDone(d), st = stateOf(d), gcn = gapsOf(d), rv = rawVerdict(d), up = tierOf(d) === 1, ret = retired(d);
-    if (state.p && d.p !== state.p) return;
-    if (state.folder && d.f !== state.folder) return;
-    if (done && !state.done) return;
-    if (q && (d.t + ' ' + d.a + ' ' + d.s + ' ' + d.j + ' ' + d.w).toLowerCase().indexOf(q) < 0) return;
-    shown++;
-    var rest = String(d.w || '').split(' | ').slice(1).join(' ');
-    out.push('<li class="row' + (done ? ' done' : '') + '"><button class="tick" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'full' || !!d.got) + '" aria-label="' + (st === 'full' ? 'Untick' : 'Tick') + ': I have saved the full paper"' + (d.got ? ' disabled' : '') + '>✓</button><div>' +
-      '<div class="head"><span class="pr p' + d.p + '">P' + d.p + '</span><span class="fold">' + esc(d.f) + '</span>' + (d.got ? '<span class="indrive">Already in Drive</span>' : '') + (st ? '<span class="st ' + st + '">' + ({ full: 'Saved', partial: 'Partial', na: "Can't get it" })[st] + '</span>' : '') + (ret ? '<span class="st na">No longer needed</span>' : up ? '<span class="st partial">Upgrade</span>' : '') + '</div>' +
-      '<div class="t">' + esc(d.t) + '</div>' +
-      '<div class="cite">' + esc(d.a) + (d.y ? ' (' + esc(d.y) + ')' : '') + (d.j ? ', ' + esc(d.j) : '') + '</div>' +
-      (gcn ? '<div class="gain">Could fill about ' + gcn + ' open ' + (gcn === 1 ? 'gap' : 'gaps') + (gcn === d.gc && d.gr ? ' (' + big(d.gr) + ' observations of the species involved)' : '') + '</div>' : '') +
-      (ret || up ? '<div class="why">' + esc(WHY[ret ? rv : 'upgrade']) + '</div>' : '') +
-      (d.w ? '<div class="why">' + esc(firstSentence(d.w)) + '</div>' : '') +
-      '<div class="acts">' + (d.u ? '<a class="btn main" href="' + esc(link(d)) + '" target="_blank" rel="noopener">Open paper</a>' : '') +
-      '<a class="btn" href="' + esc(scholar(d)) + '" target="_blank" rel="noopener">Search Scholar</a>' + ((rv === 'done' || rv === 'read') ? '<button class="btn" data-act="keep" data-id="' + esc(d.id) + '" aria-pressed="' + !!keep[d.id] + '">' + (keep[d.id] ? 'Kept on the list' : 'Still want it') + '</button>' : '') + (d.got ? '' : '<span class="sp"></span><button class="btn" data-act="partial" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'partial') + '" title="Abstract and references only">Partial</button><button class="btn" data-act="na" data-id="' + esc(d.id) + '" aria-pressed="' + (st === 'na') + '" title="I cannot get this paper">Can\'t get it</button>') + '</div>' +
-      ((rest || d.h || d.s) ? '<details class="more"><summary>More</summary>' + (d.h ? '<p><em>How to get it:</em> ' + esc(d.h) + '</p>' : '') + (rest ? '<p><em>Also:</em> ' + esc(rest) + '</p>' : '') + (d.s ? '<p><em>Species it would fix:</em> ' + esc(d.s) + '</p>' : '') + (d.by ? '<p><em>Asked for by:</em> ' + esc(d.by) + '</p>' : '') + '</details>' : '') +
-      '</div></li>');
+  var all = rows(), q = (state.q || '').toLowerCase(), piles = { get: [], try: [], done: [] };
+  all.forEach(function (d) { piles[pileOf(d)].push(d); });
+  Object.keys(piles).forEach(function (k) { piles[k].sort(order); });
+  var tab = state.tab, list = piles[tab], byP = { 1: 0, 2: 0, 3: 0 };
+  piles.get.forEach(function (d) { byP[prio(d)] = (byP[prio(d)] || 0) + 1; });
+  var shown = list.filter(function (d) {
+    if (tab === 'get' && state.p && prio(d) !== state.p) return false;
+    if (tab === 'get' && state.folder && d.f !== state.folder) return false;
+    return matches(d, q);
   });
-  $('list').innerHTML = out.join('') || '<li class="empty">' + (state.p === 1 && !state.q && !state.folder && !state.done ? 'Every priority 1 paper is ticked.' : 'Nothing matches these filters.') + '</li>';
-  $('count').textContent = shown + ' ' + (shown === 1 ? 'paper' : 'papers') + ' shown';
-  [1, 2, 3].forEach(function (p) { $('n' + p).textContent = (c[p][1] - c[p][0]) + ' left'; });
-  var p1 = c[1], sv = 0, pa = 0, nn = 0, rr = 0; all.forEach(function (d) { if (d.p !== 1) return; var s = stateOf(d); if (d.got || s === 'full') sv++; else if (s === 'partial') pa++; else if (s === 'na') nn++; else if (retired(d)) rr++; });
-  $('progText').innerHTML = '<b>' + p1[0] + ' of ' + p1[1] + '</b> priority 1 papers handled · ' + sv + ' saved, ' + pa + ' partial, ' + nn + " can't get, " + rr + ' no longer needed';
-  $('meter').style.width = (p1[1] ? 100 * p1[0] / p1[1] : 0) + '%';
+  var html = shown.map(function (d) { return rowHTML(d, tab); }).join('');
+  if (!html) {
+    var hint = '';
+    if (q) {
+      var other = Object.keys(piles).filter(function (k) { return k !== tab && piles[k].some(function (d) { return matches(d, q); }); });
+      hint = other.length ? 'No match here. ' + other.map(function (k) { return '<button class="linkish" data-go="' + k + '">' + piles[k].filter(function (d) { return matches(d, q); }).length + ' in ' + TABS[k] + '</button>'; }).join(' and ') + '.' : 'Nothing matches this search.';
+    } else if (tab === 'get' && state.p) {
+      var next = [1, 2, 3].filter(function (p) { return p !== state.p && byP[p]; });
+      hint = 'Nothing left to get in priority ' + state.p + '.' + (next.length ? ' <button class="linkish" data-p-go="' + next[0] + '">Show priority ' + next[0] + ' (' + byP[next[0]] + ')</button>' : '') + (piles.try.length ? ' <button class="linkish" data-go="try">Try again (' + piles.try.length + ')</button>' : '');
+    } else hint = tab === 'try' ? 'Nothing to try again. Papers you mark Partial or Can\'t get it wait here.' : tab === 'done' ? 'Nothing is done yet.' : 'Nothing left to get.';
+    html = '<li class="empty"><span>' + hint + '</span></li>';
+  }
+  $('list').innerHTML = html;
+  $('count').textContent = shown.length ? shown.length + ' ' + (shown.length === 1 ? 'paper' : 'papers') + (tab === 'get' && state.p ? ' in priority ' + state.p : '') : '';
+  $('nGet').textContent = piles.get.length; $('nTry').textContent = piles.try.length; $('nDone').textContent = piles.done.length;
+  [1, 2, 3].forEach(function (p) { $('n' + p).textContent = '(' + (byP[p] || 0) + ')'; });
+  document.querySelectorAll('.tab').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.tab === tab)); });
   document.querySelectorAll('.seg .chip').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.p === (state.p || 0))); });
+  $('filters').hidden = tab !== 'get';
+  $('intro').hidden = !INTRO[tab]; $('intro').textContent = INTRO[tab];
+  var c = { get: 0, try: 0, done: 0 }, fresh = 0;
+  all.forEach(function (d) { var k = pileOf(d); if (prio(d) === 1) c[k]++; if (k !== 'done' && isNew(d)) fresh++; });
+  var tot = c.get + c.try + c.done;
+  $('progText').innerHTML = '<b>Priority 1:</b> ' + c.done + ' done, ' + c.get + ' to get, ' + c.try + ' to try again.' + (fresh ? ' <span class="fresh">' + fresh + ' new since you last looked.</span>' : '');
+  $('mDone').style.width = (tot ? 100 * c.done / tot : 0) + '%'; $('mTry').style.width = (tot ? 100 * c.try / tot : 0) + '%';
 }
 function populateFolders() {
   var seen = {}; rows().forEach(function (d) { seen[d.f] = 1; });
@@ -158,66 +236,85 @@ function populateFolders() {
   sel.innerHTML = '<option value="">Any folder</option>' + Object.keys(seen).sort().map(function (f) { return '<option>' + esc(f) + '</option>'; }).join('');
   sel.value = cur;
 }
-function saveFilters() { store.set('rg2.filters', state); render(); }
+function saveFilters() { store.set('rg3.filters', state); render(); }
+function saveSeen() { if (storageOK) store.set('rg3.seen', rows().map(function (d) { return d.id; })); }
+document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') saveSeen(); });
+window.addEventListener('pagehide', saveSeen);
 function toast(msg, withUndo) { $('toastMsg').textContent = msg; $('undo').hidden = !withUndo; $('toast').hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { $('toast').hidden = true; }, 5000); }
-function setTick(id, v) {   // v: true (saved in full), 'partial', 'na', or null to clear
-  if (v) ticks[id] = v; else delete ticks[id];
-  store.set('rg2.ticks', ticks); render();
-  if (tickDoc) { var o = {}; o[id] = v || false; tickDoc.update(o).catch(function () { $('sync').textContent = 'Could not save that tick to the shared list. It is kept on this device.'; }); }
+function writer(name, problem) {   // one write at a time per shared document; a burst of taps is merged into the next write
+  var pending = null, busy = false;
+  function flush() {
+    var doc = docs[name]; if (!doc || busy || !pending) return;
+    var patch = pending; pending = null; busy = true;
+    doc.update(patch).catch(function () { $('sync').textContent = problem; }).then(function () { busy = false; flush(); });
+  }
+  return { put: function (patch) { pending = Object.assign(pending || {}, patch); flush(); }, flush: flush };
 }
-var MSG = { full: 'Saved. It has left the list.', partial: 'Marked partial. The agents will use the abstract and references only.', na: "Marked can't get. The agents will stop asking for it." };
-function setKeep(id, on) {
-  if (on) keep[id] = true; else delete keep[id];
-  render();
-  if (keepDoc) { var o = {}; o[id] = !!on; keepDoc.update(o).catch(function () { $('sync').textContent = 'Could not save that choice to the shared list.'; }); }
-}
+var W = { ticks: writer('ticks', 'Could not save that change to the shared list. It is kept on this device for now.'),
+  keep: writer('keep', 'Could not save that choice to the shared list.'), giveup: writer('giveup', 'Could not save that choice to the shared list.') };
+function find(id) { var r = null; rows().some(function (d) { if (d.id === id) { r = d; return true; } return false; }); return r; }
+function setTick(id, v) { if (v) ticks[id] = v; else delete ticks[id]; store.set('rg2.ticks', ticks); var o = {}; o[id] = v || false; W.ticks.put(o); }
+function setFlag(map, name, id, on) { if (on) map[id] = true; else delete map[id]; var o = {}; o[id] = !!on; W[name].put(o); }
+function where(id) { var d = find(id); return d ? TABS[pileOf(d)] : ''; }
 $('list').addEventListener('click', function (e) {
+  var go = e.target.closest && e.target.closest('[data-go], [data-p-go]');
+  if (go) { if (go.dataset.go) state.tab = go.dataset.go; else { state.tab = 'get'; state.p = +go.dataset.pGo; } saveFilters(); return; }
   var b = e.target.closest && e.target.closest('.tick, [data-act]'); if (!b || b.disabled) return;
-  if (b.dataset.act === 'keep') { var on = !keep[b.dataset.id]; setKeep(b.dataset.id, on); toast(on ? 'Kept. It stays on your list.' : 'Back under no longer needed.', false); return; }
-  var id = b.dataset.id, want = b.classList.contains('tick') ? true : b.dataset.act, cur = ticks[id] || null;
+  var id = b.dataset.id, act = b.dataset.act, d = find(id);
+  if (act === 'copy') {
+    var text = d ? citation(d) : '';
+    var done = function () { toast('Citation copied.', false); }, fail = function () { toast("Copying didn't work here. Open More and select the citation.", false); };
+    try { navigator.clipboard.writeText(text).then(done, fail); } catch (err) { fail(); }
+    return;
+  }
+  if (act === 'keep') { var on = !keep[id]; lastChange = { kind: 'keep', id: id, prev: !!keep[id] }; setFlag(keep, 'keep', id, on); render(); toast(on ? 'Kept. It is back in ' + where(id) + '.' : 'Back in Done.', true); return; }
+  if (act === 'giveup') { var g = !giveup[id]; lastChange = { kind: 'giveup', id: id, prev: !!giveup[id] }; setFlag(giveup, 'giveup', id, g); render(); toast(g ? 'Given up. It moved to Done.' : 'Back in ' + where(id) + '.', true); return; }
+  var want = b.classList.contains('tick') ? true : act, cur = ticks[id] || null;
   var next = (cur === want || (want === true && cur === 'full')) ? null : want;
-  lastTick = { id: id, prev: cur }; setTick(id, next);
-  toast(next ? MSG[next === true ? 'full' : next] : 'Cleared.', true);
+  lastChange = { kind: 'tick', id: id, prev: cur }; setTick(id, next); render();
+  toast(next === true ? 'Saved. It moved to Done.' : next === 'partial' ? 'Marked partial. It moved to Try again.' : next === 'na' ? "Marked can't get. It moved to Try again." : 'Cleared. It is back in ' + where(id) + '.', true);
 });
-$('undo').addEventListener('click', function () { if (lastTick) { setTick(lastTick.id, lastTick.prev); lastTick = null; } $('toast').hidden = true; });
+$('undo').addEventListener('click', function () {
+  var c = lastChange; lastChange = null; $('toast').hidden = true; if (!c) return;
+  if (c.kind === 'tick') setTick(c.id, c.prev); else setFlag(c.kind === 'keep' ? keep : giveup, c.kind, c.id, c.prev);
+  render();
+});
+document.querySelectorAll('.tab').forEach(function (b) { b.addEventListener('click', function () { state.tab = b.dataset.tab; saveFilters(); }); });
+document.querySelectorAll('.seg .chip').forEach(function (b) { b.addEventListener('click', function () { state.p = +b.dataset.p; saveFilters(); }); });
 $('q').addEventListener('input', function () { state.q = this.value; saveFilters(); });
 $('folder').addEventListener('change', function () { state.folder = this.value; saveFilters(); });
-$('showdone').addEventListener('change', function () { state.done = this.checked; saveFilters(); });
 $('proxy').addEventListener('change', function () { proxy = this.value.trim(); store.set('rg2.proxy', proxy); render(); });
-document.querySelectorAll('.seg .chip').forEach(function (b) { b.addEventListener('click', function () { state.p = +b.dataset.p; saveFilters(); }); });
-$('q').value = state.q || ''; $('showdone').checked = !!state.done; $('proxy').value = proxy;
+$('q').value = state.q || ''; $('proxy').value = proxy;
 populateFolders(); $('folder').value = state.folder || ''; render();
-$('sync').textContent = 'Ticks are kept on this device only until the shared list connects.';
 
 (async function () {
   var db = null;
   try { db = await claude.use('db'); } catch (e) { db = null; }
-  if (!db) return;
-  tickDoc = db.doc('ticks/all');
-  try { var s = await tickDoc.get(); if (!s.exists) await tickDoc.set({}); } catch (e) { tickDoc = null; return; }
-  var migrated = false;
-  tickDoc.onSnapshot(function (snap) {
-    var d = (snap.data && snap.data()) || {}, t = {};
-    Object.keys(d).forEach(function (k) { if (d[k] === true || d[k] === 'partial' || d[k] === 'na') t[k] = d[k]; });
-    if (!migrated) {   // first time on this device: carry over ticks from the older page and from local storage
-      migrated = true; var up = {}, old = store.get('rg.got', {}), n = 0;
-      DATA.forEach(function (r) { if ((old[oldKey(r)] || ticks[r.id]) && !t[r.id]) { up[r.id] = true; t[r.id] = true; n++; } });
-      if (n) tickDoc.update(up).catch(function () {});
-    }
-    ticks = t; store.set('rg2.ticks', ticks); shared = true;
-    $('sync').textContent = 'Ticks are saved to your shared list and will match on your phone and laptop.'; render();
-  }, function () { $('sync').textContent = 'The shared list stopped answering. Ticks are kept on this device.'; });
-  db.collection('extra').onSnapshot(function (snap) {
-    var m = {}; snap.forEach(function (doc) { var r = doc.data(); if (r && r.id && r.t) m[r.id] = r; });
+  if (!db) { $('sync').textContent = 'The shared list is not reachable here, so ticks stay on this device and papers added after ' + '__NOW__' + ' cannot load.'; return; }
+  async function openDoc(path, name) {
+    var ref = db.doc(path);
+    try { var s = await ref.get(); if (!s.exists) await ref.set({}); docs[name] = ref; W[name].flush(); return ref; } catch (e) { return null; }
+  }
+  var t = await openDoc('ticks/all', 'ticks');
+  if (!t) { $('sync').textContent = 'The shared list did not answer. Ticks are kept on this device for now.'; }
+  else t.onSnapshot(function (snap) {
+    var d = (snap.exists && snap.data()) || {}, m = {};
+    Object.keys(d).forEach(function (k) { if (d[k] === true || d[k] === 'partial' || d[k] === 'na') m[k] = d[k]; });
+    ticks = m; store.set('rg2.ticks', ticks);
+    $('sync').textContent = 'Ticks are saved to your shared list and match on your phone and laptop.'; render();
+  }, function () { $('sync').textContent = 'The shared list stopped answering. Reload the page to reconnect; ticks made meanwhile stay on this device.'; });
+  db.collection('extra').limit(1000).onSnapshot(function (snap) {
+    var m = {}; (snap.docs || []).forEach(function (doc) { var r = doc.exists ? doc.data() : null; if (r && r.id && r.t) m[r.id] = r; });
     extra = m; populateFolders(); render();
-  }, function () {});
-  db.doc('status/all').onSnapshot(function (snap) { verdicts = (snap.exists && snap.data && snap.data()) || {}; render(); }, function () {});
-  keepDoc = db.doc('keep/all');
-  try { var k = await keepDoc.get(); if (!k.exists) await keepDoc.set({}); } catch (e) { keepDoc = null; }
-  if (keepDoc) keepDoc.onSnapshot(function (snap) {
-    var d = (snap.data && snap.data()) || {}, m = {};
-    Object.keys(d).forEach(function (x) { if (d[x] === true) m[x] = true; });
-    keep = m; render();
-  }, function () {});
+  }, function () { $('sync').textContent = 'Papers added after ' + '__NOW__' + ' could not be loaded. Reload the page to try again.'; });
+  db.doc('status/all').onSnapshot(function (snap) { verdicts = (snap.exists && snap.data()) || {}; statusLoaded = Object.keys(verdicts).length > 0; populateFolders(); render(); }, function () {});
+  [['keep/all', 'keep'], ['giveup/all', 'giveup']].forEach(async function (x) {
+    var ref = await openDoc(x[0], x[1]); if (!ref) return;
+    ref.onSnapshot(function (snap) {
+      var d = (snap.exists && snap.data()) || {}, m = {};
+      Object.keys(d).forEach(function (k) { if (d[k] === true) m[k] = true; });
+      if (x[1] === 'keep') keep = m; else giveup = m; render();
+    }, function () {});
+  });
 })();
 </script>
