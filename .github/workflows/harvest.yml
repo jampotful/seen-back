@@ -2,7 +2,8 @@ name: harvest
 # Searches OpenAlex from build machines for the genera whose open cells still lack a full search (ci/harvest/harvest.py),
 # so the research desk's agents screen results instead of searching through a rate-limited proxy. Uses no Claude
 # allowance. Start it by pushing a commit to a branch named run/harvest/<anything>; ci/harvest/params.env may set TOP.
-# Results come back on the ci branch as runs/harvest/<run>-<shard>/harvest.jsonl.gz; read them with
+# Each run skips genera an earlier run already holds. Results come back on the ci branch as
+# runs/harvest/<run>-<shard>/harvest.jsonl.gz, even from a shard stopped by its time limit; read them with
 # tools/views/harvest_get.py.
 on:
   push:
@@ -15,19 +16,21 @@ concurrency:
 jobs:
   harvest:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 340
     strategy:
       fail-fast: false
       matrix:
-        shard: [0, 1, 2]
+        shard: [0, 1, 2, 3, 4, 5]
     steps:
       - uses: actions/checkout@v4
       - name: search OpenAlex
         run: |
           TOP=1600; [ -f ci/harvest/params.env ] && . ci/harvest/params.env
-          python3 -I ci/harvest/harvest.py out --top "$TOP" --shard ${{ matrix.shard }}/3
+          python3 -I ci/harvest/harvest.py out --top "$TOP" --shard ${{ matrix.shard }}/6
       - name: return results
         if: always()
         env:
           JOB_STATUS: ${{ job.status }}
-        run: bash ci/return.sh harvest out ${{ matrix.shard }}
+        run: |
+          [ -f out/harvest.jsonl ] && gzip -f out/harvest.jsonl
+          bash ci/return.sh harvest out ${{ matrix.shard }}

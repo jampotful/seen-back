@@ -12,9 +12,10 @@ one citation step for each source of the nearest measured relative (the queue's 
 name the genus in title or abstract. Once per family it adds "<Family> vision review". Each work is kept once per genus:
 OpenAlex id, DOI, title, year, venue, the open-access link, status and licence, and the abstract's first 700 characters.
 
-Output: OUT_DIR/harvest.jsonl.gz, one genus a line (and one line per family review), and OUT_DIR/summary.txt.
+Output: OUT_DIR/harvest.jsonl, one genus a line (and one line per family review; the workflow compresses it), and
+OUT_DIR/summary.txt. Genera already in an earlier run on the ci branch are skipped, so each run continues the last.
 The desk reads it with tools/views/harvest_get.py. Only titles, abstracts and links are kept: no full texts."""
-import gzip, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
+import json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
 
 ROOT = os.getcwd()
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'views'))
@@ -126,45 +127,72 @@ def targets():
     return sorted(out.values(), key=lambda t: -t['weight'])
 
 
+def harvested_before():
+    """Genera already in an earlier harvest run on the ci branch, so a new run does only the rest."""
+    import subprocess, zlib
+    subprocess.run(['git', 'fetch', '-q', '--depth', '1', 'origin', '+refs/heads/ci:refs/remotes/origin/ci'], capture_output=True)
+    names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'origin/ci', 'runs/harvest'], capture_output=True, text=True).stdout.split()
+    done = set()
+    for n in names:
+        if not n.endswith(('harvest.jsonl.gz', 'harvest.jsonl')): continue
+        raw = subprocess.run(['git', 'show', 'origin/ci:' + n], capture_output=True).stdout
+        if n.endswith('.gz'):
+            raw = zlib.decompressobj(16 + zlib.MAX_WBITS).decompress(raw)  # a run cut off by its time limit leaves a stream without its end
+        for l in raw.decode('utf-8', 'replace').splitlines():
+            try: d = json.loads(l)
+            except ValueError: continue
+            if d.get('type') == 'genus': done.add(d['genus'])
+    return done
+
+
 def main():
+    import signal
+    signal.signal(signal.SIGTERM, lambda *a: (_ for _ in ()).throw(KeyboardInterrupt()))
     args = sys.argv[1:]; out = args[0]; top = 1600; shard, nshard = 0, 1
     if '--top' in args: top = int(args[args.index('--top') + 1])
     if '--shard' in args: shard, nshard = map(int, args[args.index('--shard') + 1].split('/'))
     os.makedirs(out, exist_ok=True)
-    allt = targets(); todo = allt[:top]
+    before = harvested_before()
+    allt = [t for t in targets() if t['genus'] not in before]; todo = allt[:top]
     mine = [t for i, t in enumerate(todo) if i % nshard == shard]
-    fam_done = set(); n_err = 0; start = time.time()
-    with gzip.open(os.path.join(out, 'harvest.jsonl.gz'), 'wt', encoding='utf-8') as f:
-        for i, t in enumerate(mine, 1):
-            works = {}; queries = []; genus = t['genus']
-            plant = t['views'] == {'plant'}
-            qs = [f'{genus} {w}' for w in PLANT] if plant else [f'{genus} vision', f'{genus} eye']
-            if not plant:
-                qs += [f'{genus} {words}' for keys, words in GROUPS if keys & t['traits']]
-            qs += [f'{en} vision' for en in sorted(t['english'])[:1] if en and not plant]
-            for q in qs: queries.append(search(q, works))
-            chase = []
-            for ref in sorted(t['closest'])[:3]:
-                doi = evidence_doi(ref)
-                if not doi: continue
-                d = get('/works/doi:' + doi, {'select': 'id'})
-                if 'id' not in d: chase.append({'cited_doi': doi, 'error': d.get('error', 'no id')}); continue
-                cid = d['id'].rsplit('/', 1)[-1]
-                r = search(None, works, filt=f'cites:{cid},title_and_abstract.search:{genus}')
-                chase.append({'cited_doi': doi, 'cited_id': cid, 'n': r.get('n'), 'ids': r.get('ids', []), 'error': r.get('error')})
-            n_err += sum(1 for q in queries if q.get('error')) + sum(1 for c in chase if c.get('error'))
-            f.write(json.dumps({'type': 'genus', 'genus': genus, 'family': t['family'], 'order': t['order'],
-                                'english': sorted(t['english']), 'views': sorted(t['views']), 'traits': sorted(t['traits']),
-                                'weight': t['weight'], 'queries': queries, 'chase': chase, 'works': works}, ensure_ascii=False) + '\n')
-            fam = t['family']
-            if fam and fam not in fam_done and not plant:
-                fam_done.add(fam); fworks = {}
-                r = search(f'{fam} vision review', fworks)
-                f.write(json.dumps({'type': 'family', 'family': fam, 'query': r, 'works': fworks}, ensure_ascii=False) + '\n')
-            if i % 100 == 0: print(f'{i}/{len(mine)} genera, {calls} calls, {n_err} errors, {time.time() - start:.0f} s', flush=True)
+    fam_done = set(); n_err = 0; start = time.time(); done = 0
+    plain = os.path.join(out, 'harvest.jsonl')
+    try:
+        with open(plain, 'w', encoding='utf-8') as f:  # one line per genus, flushed, so a run stopped by its time limit keeps what it did
+            for i, t in enumerate(mine, 1):
+                works = {}; queries = []; genus = t['genus']
+                plant = t['views'] == {'plant'}
+                qs = [f'{genus} {w}' for w in PLANT] if plant else [f'{genus} vision', f'{genus} eye']
+                if not plant:
+                    qs += [f'{genus} {words}' for keys, words in GROUPS if keys & t['traits']]
+                qs += [f'{en} vision' for en in sorted(t['english'])[:1] if en and not plant]
+                for q in qs: queries.append(search(q, works))
+                chase = []
+                for ref in sorted(t['closest'])[:3]:
+                    doi = evidence_doi(ref)
+                    if not doi: continue
+                    d = get('/works/doi:' + doi, {'select': 'id'})
+                    if 'id' not in d: chase.append({'cited_doi': doi, 'error': d.get('error', 'no id')}); continue
+                    cid = d['id'].rsplit('/', 1)[-1]
+                    r = search(None, works, filt=f'cites:{cid},title_and_abstract.search:{genus}')
+                    chase.append({'cited_doi': doi, 'cited_id': cid, 'n': r.get('n'), 'ids': r.get('ids', []), 'error': r.get('error')})
+                n_err += sum(1 for q in queries if q.get('error')) + sum(1 for c in chase if c.get('error'))
+                f.write(json.dumps({'type': 'genus', 'genus': genus, 'family': t['family'], 'order': t['order'],
+                                    'english': sorted(t['english']), 'views': sorted(t['views']), 'traits': sorted(t['traits']),
+                                    'weight': t['weight'], 'queries': queries, 'chase': chase, 'works': works}, ensure_ascii=False) + '\n')
+                fam = t['family']
+                if fam and fam not in fam_done and not plant:
+                    fam_done.add(fam); fworks = {}
+                    r = search(f'{fam} vision review', fworks)
+                    f.write(json.dumps({'type': 'family', 'family': fam, 'query': r, 'works': fworks}, ensure_ascii=False) + '\n')
+                f.flush(); done = i
+                if i % 50 == 0: print(f'{i}/{len(mine)} genera, {calls} calls, {n_err} errors, {time.time() - start:.0f} s', flush=True)
+    except KeyboardInterrupt:
+        print('stopped by the time limit; keeping what was done', flush=True)
     with open(os.path.join(out, 'summary.txt'), 'w') as s:
-        s.write(f'shard {shard}/{nshard}: {len(mine)} genera of the top {len(todo)} (of {len(allt)} needing a search), '
-                f'{len(fam_done)} family reviews, {calls} OpenAlex calls, {n_err} failed queries, {time.time() - start:.0f} s\n')
+        s.write(f'shard {shard}/{nshard}: {done} of {len(mine)} genera done, of the top {len(todo)} still needing a harvest '
+                f'({len(before)} were in earlier runs), {len(fam_done)} family reviews, {calls} OpenAlex calls, '
+                f'{n_err} failed queries, {time.time() - start:.0f} s\n')
     print(open(os.path.join(out, 'summary.txt')).read())
 
 
