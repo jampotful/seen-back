@@ -141,7 +141,8 @@ def harvested_before():
         for l in raw.decode('utf-8', 'replace').splitlines():
             try: d = json.loads(l)
             except ValueError: continue
-            if d.get('type') == 'genus': done.add(d['genus'])
+            # a genus whose searches errored (rate limit, 'gave up') is not done; a later run tries it again
+            if d.get('type') == 'genus' and not any(q.get('error') for q in d.get('queries', [])): done.add(d['genus'])
     return done
 
 
