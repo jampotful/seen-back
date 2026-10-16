@@ -37,7 +37,7 @@ Method as in audits 13 to 17: each source opened with WebFetch (WebSearch only t
 ## Checks
 
 - **Partial flag on compiled values.** The canon units logged table rows from reviews and compilations at `m` without `partial`. Nine of the twelve `correct` verdicts are this one fault (canon-2:8, 2:51, 3:148, 3:404, 3:592, 3:715, 3:570, 4:235, 7:16). The canon files hold about 1,500 records of the same kind, so a mechanical pass setting `partial: true` on every compiled row whose `note` says "Compiled in" is the obvious next step; the audit does not make it, since it may not edit evidence files.
-- **Grade.** canon-3:547 was `m` on a clade-level generalisation; lowered to `g`. canon-3:81 holds a field-type range at `m` and needs the same look once its source opens.
+- **Grade.** canon-3:547 was `m` on a clade-level generalization; lowered to `g`. canon-3:81 holds a field-type range at `m` and needs the same look once its source opens.
 - **Complete sentences.** Five quotes were fragments or rearranged rows (canon-2:51, 2:97, 2:112, 3:570, 3:715); one expanded a table code (canon-3:592).
 - **Values.** Every opened value stood except sweep-5:11 (closing time).
 
