@@ -1,0 +1,9 @@
+# sweep-107 progress
+Batch: sweep-107-batch.json, 38 genera, all run in order. Each genus got a scientific-name and a common-name search (titles read), plus pages opened with WebFetch. A page reader returns a model summary, so nothing was logged from a summary alone.
+Evidence: 0 records. No measurement of an open trait in a listed genus or congener turned up in a source that could be opened in full.
+Search records: 38, one per genus, in docs/views/searched/sweep-107.jsonl. Chase papers whose reference lists were read: Thomas et al 2022 (frogs), Lamond et al 2025 (birds), Banks et al 2015 (bovids, Peromyscus), McCulloch et al 2016 (Lepidoptera), Ogawa et al 2023 (ants, bees, wasps), Meglic et al 2020 (Agrypnus), Yang and Osorio 1991 (Hemicordulia), Hauzman et al 2018 (snakes). Cicada, Scolypopa and Cochemiea carry the "none" chase string: no measured relative and no family review was reachable.
+Wanted: 1 line (Ribi and Zeil 2015, the Redeye cicada).
+Already in the logs and not repeated: pupil_shape for Kaloula, Scinax, Gastrophryne, Hylarana, Pristimantis, Amietia (Thomas et al 2022) and Morelia and Dendrelaphis (Banks et al 2015); ostrich 405 nm pigment (Lind et al 2014).
+Blocked: PMC, PubMed, Europe PMC, Crossref, GitHub, the NHM Data Portal and Dryad downloads, Springer (HTTP 429 on Cezario et al 2025). The amphibian pupil CSV (1293 species) would settle pupil_shape for the remaining Kaloula, Scinax and Hylarana species if it can be downloaded by hand: https://doi.org/10.5519/4q5uvvpa
+Not listed as wanted because the DOI could not be confirmed from an opened page: Heesy 2004 (orbit orientation and binocular overlap in mammals, Anat Rec A 281A:1104), Laughlin and Hardie 1978 (light adaptation in fly and dragonfly, J Comp Physiol 128:319, contains Hemicordulia tau photoreceptor data).
+Next: a species-level pass on the bovid and Peromyscus cells once a mammal visual-field compilation (Heesy 2004, Hughes 1977) is in hand.
