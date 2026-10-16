@@ -60,11 +60,10 @@ def sentences(text):
 HUMANS = re.compile(r"\b(?:people|peoples|persons?|person['’]s|people['’]s|folks?|man|men|woman|women)\b", re.I)
 HUMANS = re.compile(r"\b(?:people|peoples|persons?|folks)\b|\bperson['’]s\b|\bpeople['’]s\b", re.I)
 
-APP_WORDS = re.compile(r"\b(?:app|apps|phones?|screens?|cameras?|smartphones?|tap|taps|tapped|tapping|swipe|slider|buttons?|"
-                       r"viewer|viewers|views|trial|trials|tuning|panel|pixels?|filters?|draws?|drawn|drawing|drawings|"
-                       r"rendered|renders?|simulat\w+|colou?red in|tinted|tint)\b", re.I)
-VIEW_WORD = re.compile(r"(?<!field of )(?<!point of )(?<!points of )(?<!in )(?<!line of )\bviews?\b", re.I)
-APP_PHRASES = re.compile(r"&draw=|&sense=|\?try=|\bthis view\b|\bthe view\b|\bin this view\b|\bbeing tried\b|\bparam:", re.I)
+APP_WORDS = re.compile(r"\b(?:app|apps|phones?|smartphones?|screens?|cameras?(?![- ]type)(?! eyes?)|tap|taps|tapped|tapping|swipe|viewers?|"
+                       r"draws?|drawn|drawing|drawings)\b", re.I)
+VIEW_WORD = re.compile(r"(?<!field of )(?<!fields of )(?<!point of )(?<!points of )(?<!in )(?<!line of )\bviews?\b", re.I)
+APP_PHRASES = re.compile(r"&draw=|&sense=|\?try=|\bthis view\b|\bthe view\b|\bin this view\b|\bbeing tried\b|\bparam:|\bon this trial\b", re.I)
 LAST_ABOUT_VIEW = re.compile(r"\b(?:this view|the view|the app|your phone|the phone|the screen|the picture|this picture|the image|"
                              r"a phone camera|phone cameras?|the camera|draws?|drawn)\b", re.I)
 
@@ -143,7 +142,7 @@ rang click clicks clicked buzz buzzes buzzed beat beats thump thumps thumped bit
 spot spots spotted spit spits dodge dodges dodged chase chases chased freeze freezes froze flee flees fled escape escapes escaped
 glide glides glided soar soars soared hover hovers hovered perch perches perched nest nests nested lay lays laid hatch hatches
 hatched molt molts molted breathe breathes breathed swallow swallows swallowed digest digests digested drink drinks drank
-bloom blooms bloomed open wilt wilts wilted germinate germinates germinated sprout sprouts sprouted reproduce reproduces""".split())
+belong belongs belonged bloom blooms bloomed open wilt wilts wilted germinate germinates germinated sprout sprouts sprouted reproduce reproduces""".split())
 
 NUM = re.compile(r"(?<![\w.])(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)(?![\w])")
 SPELLED = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"}

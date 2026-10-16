@@ -38,6 +38,7 @@ has("Your eyes face forward. Tap the screen to move the focus.", "app")
 has("With &draw=air the view shows breath.", "app")
 has("You see a wide field. The camera cannot match it.", "app")
 lacks("Your field of view is about 300 degrees.", "app")
+lacks("An eastern red-eared slider has camera-type eyes and filter pigments that tint its lens.", "app")
 lacks("You see all the way around you without turning your head.", "app")
 has("Your eyes sit on the sides of your head. The picture is drawn to suggest it.", "app")
 

@@ -605,10 +605,18 @@ def indent_of(path):
     return 1
 
 
+def find_draft(srcs, v):
+    for d in srcs.split(","):
+        p = os.path.join(d, "%s.rows_draft.json" % v)
+        if os.path.exists(p):
+            return p
+    return None
+
+
 def cmd_apply(a):
     for v in a.views.split(","):
-        src = os.path.join(a.src, "%s.rows_draft.json" % v)
-        if not os.path.exists(src):
+        src = find_draft(a.src, v)
+        if src is None:
             print("no draft for", v)
             continue
         draft = json.load(open(src, encoding="utf-8"))
@@ -628,48 +636,88 @@ def live_rows(v):
     return (spec.get("trial") or {}).get("rows") or spec.get("rows") or []
 
 
+def first_attempt_failures(srcs, views):
+    """{cid: [errors]} for the first attempts that failed, found again by checking the raw batch replies in each source's _work."""
+    system, jobs, nrec = prepare(ROOT, views)
+    out = {}
+    for d in srcs.split(","):
+        w = os.path.join(d, "_work")
+        for f in sorted(os.listdir(w)) if os.path.isdir(w) else []:
+            if not f.startswith("results-"):
+                continue
+            for line in open(os.path.join(w, f), encoding="utf-8"):
+                if not line.strip():
+                    continue
+                x = json.loads(line)
+                if not x["custom_id"].endswith("__a1"):
+                    continue
+                cid = x["custom_id"][:-4]
+                reply, why, usage = reply_of(x)
+                if cid in jobs:
+                    out[cid] = [why] if reply is None else check_draft(reply, jobs[cid]["row"], jobs[cid]["ids"])
+    return {c: e for c, e in out.items() if e}, jobs
+
+
 def cmd_report(a):
-    views = [f[:-len(".rows_draft.json")] for f in sorted(os.listdir(a.src)) if f.endswith(".rows_draft.json")]
-    stats = json.load(open(os.path.join(a.src, "stats.json"))) if os.path.exists(os.path.join(a.src, "stats.json")) else {}
+    dirs = a.src.split(",")
+    views = sorted({f[:-len(".rows_draft.json")] for d in dirs for f in os.listdir(d) if f.endswith(".rows_draft.json")},
+                   key=lambda v: (v not in DEFAULT_VIEWS.split(","), DEFAULT_VIEWS.split(",").index(v) if v in DEFAULT_VIEWS.split(",") else 0, v))
+    spent, nreq, nrec, model = 0.0, 0, "?", "?"
+    for d in dirs:
+        p = os.path.join(d, "stats.json")
+        if os.path.exists(p):
+            st = json.load(open(p))
+            spent += st.get("spent_usd", 0)
+            nreq += st.get("requests", 0)
+            nrec, model = st.get("records_read", nrec), st.get("model", model)
+    failures, jobs = first_attempt_failures(a.src, views)
     lines = ["## Rows pipeline (burst 10)", "",
-             "`tools/views/rows.py` drafted %d rows of %d views with %s, reading %s evidence records (audit and the burst 9 decisions applied). Spent $%s." % (
-                 stats.get("requests", 0), len(views), stats.get("model", "?"), stats.get("records_read", "?"), stats.get("spent_usd", "?")), "",
-             "A draft passes when `voice_check.py` finds nothing in it and every number in it is in a record it cites, for a species of the view or its relative. A failed draft is sent once more with the errors.", "",
+             "`tools/views/rows.py` drafted %d rows of %d views with %s, from %s evidence records (the audit and the burst 9 decisions applied). Spent $%.2f at batch prices." % (
+                 nreq, len(views), model, nrec, spent), "",
+             "A draft passes when `voice_check.py` finds nothing in it, every number in it is in a record it cites, and the records cited belong to a species of the view or a relative of one. A draft that fails is sent once more with the errors; what still fails is listed. The first eight views are the ones with the most evidence records; the rest followed.", "",
              "| view | rows | passed first time | passed after the retry | failed |", "|---|---:|---:|---:|---:|"]
-    tot = collections.Counter()
+    tot, first8 = collections.Counter(), collections.Counter()
     allrows, failed = [], []
     for v in views:
-        d = json.load(open(os.path.join(a.src, "%s.rows_draft.json" % v)))
+        d = json.load(open(find_draft(a.src, v)))
         p1 = sum(1 for r in d["rows"] if r["attempt"] == 1)
         p2 = sum(1 for r in d["rows"] if r["attempt"] == 2)
         f = len(d["failed"])
         lines.append("| %s | %d | %d | %d | %d |" % (v, p1 + p2 + f, p1, p2, f))
-        tot.update(rows=p1 + p2 + f, p1=p1, p2=p2, f=f)
+        for c in (tot, first8) if v in DEFAULT_VIEWS.split(",") else (tot,):
+            c.update(rows=p1 + p2 + f, p1=p1, p2=p2, f=f)
         allrows += [(v, r) for r in d["rows"]]
         failed += [(v, r) for r in d["failed"]]
+    for name, c in (("the first eight", first8), ("all", tot)):
+        n = max(1, c["rows"])
+        lines.append("| %s | %d | %d (%.0f%%) | %d | %d |" % (name, c["rows"], c["p1"], 100.0 * c["p1"] / n, c["p2"], c["f"]))
     n = max(1, tot["rows"])
-    lines.append("| all | %d | %d (%.0f%%) | %d | %d |" % (tot["rows"], tot["p1"], 100.0 * tot["p1"] / n, tot["p2"], tot["f"]))
-    lines += ["", "Pass rate after the retry: %.0f%%." % (100.0 * (tot["p1"] + tot["p2"]) / n), ""]
+    lines += ["", "Pass rate on the first attempt: %.0f%%. After the retry: %.0f%%." % (100.0 * tot["p1"] / n, 100.0 * (tot["p1"] + tot["p2"]) / n), ""]
+    if failures:
+        lines += ["### Rows that failed the first time, and why", ""]
+        for cid, errs in sorted(failures.items()):
+            lines.append("- **%s, %s**: %s" % (jobs[cid]["view"], jobs[cid]["row"]["title"], "; ".join(errs[:5])))
+        lines.append("")
     if failed:
-        lines += ["### Rows that failed", ""]
+        lines += ["### Rows that still fail after the retry", ""]
         for v, r in failed:
             lines.append("- **%s, %s** (grade %s): %s" % (v, r["title"], r["grade"], "; ".join(r["errors"][:6])))
             if r.get("last"):
                 lines.append("  - last draft: %s" % r["last"].replace("\n", " "))
         lines.append("")
+    else:
+        lines += ["No row fails after the retry.", ""]
     lines += ["### Ten drafts beside the live rows", ""]
-    chosen, seen_views = [], collections.Counter()
-    for v, r in allrows:
-        if seen_views[v] < 2 and len(chosen) < 10:
-            chosen.append((v, r))
-            seen_views[v] += 1
+    pick = [("bird", "Ultraviolet"), ("cat", "Pupil"), ("cat", "Sharpness"), ("dog", "Color"), ("bee", "Speed"), ("insect", "Ultraviolet"),
+            ("jumper", "Color"), ("spider", "The web"), ("plant", "Neighbors"), ("deer", "Field of view")]
+    chosen = [(v, r) for v, t in pick for vv, r in allrows if vv == v and r["title"] == t][:10]
     for v, r in chosen:
         live = live_rows(v)
-        old = next((x for x in live if x[1].lower().startswith(r["title"].lower()[:5])), None)
-        lines += ["**%s, %s** (draft grade `%s`; %.0f%% of the species' records measured, %.0f%% carried, %.0f%% unknown)" % (
+        old = next((x for x in live if x[1].lower().replace("colour", "color")[:5] == r["title"].lower()[:5]), None)
+        lines += ["**%s, %s** (draft grade `%s`; of the species' records %.0f%% measured, %.0f%% carried, %.0f%% unknown)" % (
             v, r["title"], r["grade"], 100 * r["shares"]["m"], 100 * r["shares"]["g"], 100 * r["shares"]["i"]), "",
             "- Draft: %s" % r["text"], "- Live: %s" % (("`%s` %s: %s" % (old[0], old[1], old[2])) if old else "(no live row with this title)"),
-            "- Cites: %s" % ", ".join("%s %s %s" % (c["id"], c["taxon"], c["trait"]) for c in r["cites"]), ""]
+            "- Cites: %s" % ", ".join("%s (%s)" % (c["id"], c["taxon"]) for c in r["cites"]), ""]
     VC.write_block(VC.REPORT, "rows-pipeline", "\n".join(lines))
     print("wrote", os.path.relpath(VC.REPORT, ROOT))
     return 0
