@@ -84,6 +84,7 @@ with tempfile.TemporaryDirectory() as d:
     src_spec = os.path.join(rows.ROOT, "views", "cat.json")
     shutil.copy(src_spec, os.path.join(tmp_root, "views", "cat.json"))
     before = json.load(open(src_spec))
+    before.pop("rows_draft", None)                            # the repository's own copy may already hold a draft
     rows.ROOT = tmp_root
 
     class B:
@@ -92,6 +93,7 @@ with tempfile.TemporaryDirectory() as d:
     after = json.load(open(os.path.join(tmp_root, "views", "cat.json")))
     assert after["rows"] == before["rows"] and after.get("trial") == before.get("trial")
     assert after["rows_draft"]["rows"] and "failed" not in after["rows_draft"]
+    assert after["rows_draft"]["rows"][0]["text"].startswith("A person") is False
     del after["rows_draft"]
     assert after == before
 print("test_rows: ok")

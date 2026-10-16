@@ -6,14 +6,14 @@ Written by `tools/views/voice_check.py` and `tools/views/rows.py`; each tool own
 ## Voice check
 
 `tools/views/voice_check.py` read 444 rows in 44 views (a row held in both a view's own list and its trial list counts once).
-342 rows (77%) break at least one rule that a script can see; 1153 findings in all.
+341 rows (77%) break at least one rule that a script can see; 1139 findings in all.
 
 ### By rule
 
 | rule | findings |
 |---|---:|
 | humans | 46 |
-| app | 628 |
+| app | 614 |
 | voice_words | 14 |
 | banned | 0 |
 | contrast | 0 |
@@ -36,40 +36,40 @@ Written by `tools/views/voice_check.py` and `tools/views/rows.py`; each tool own
 | bird | 10 | 2 | 21 |  |  |  |  | 1 |  | 12 |  |  | 5 |
 | deer | 10 | 2 | 21 | 1 |  |  |  | 6 |  | 3 |  |  | 4 |
 | fish | 11 |  | 19 |  |  |  |  | 2 |  | 10 |  |  | 6 |
-| insect | 10 | 3 | 19 |  |  |  |  | 2 |  | 6 |  |  | 7 |
+| insect | 10 | 3 | 18 |  |  |  |  | 2 |  | 6 |  |  | 7 |
 | dog | 8 | 3 | 20 |  |  |  |  | 5 |  | 2 |  |  | 4 |
-| salamander | 10 |  | 21 |  |  |  |  | 10 |  | 1 |  |  | 2 |
 | fox | 7 | 2 | 21 |  |  |  |  | 7 |  | 1 |  |  | 1 |
-| fungus | 10 |  | 17 | 2 |  |  |  | 5 |  |  |  |  | 8 |
-| owl | 7 | 2 | 23 |  |  |  | 2 | 4 |  |  |  |  | 1 |
+| salamander | 10 |  | 19 |  |  |  |  | 10 |  | 1 |  |  | 2 |
+| fungus | 10 |  | 16 | 2 |  |  |  | 5 |  |  |  |  | 8 |
+| owl | 7 | 2 | 22 |  |  |  | 2 | 4 |  |  |  |  | 1 |
 | cephalopod | 8 | 3 | 11 |  |  |  |  | 3 | 1 | 8 |  |  | 3 |
 | hawk | 7 | 2 | 11 |  |  |  |  | 1 |  | 12 |  |  | 3 |
 | reef | 8 |  | 22 |  |  |  |  | 4 |  |  |  |  | 3 |
 | shark | 8 |  | 23 |  |  |  |  | 4 |  | 1 |  |  | 1 |
-| bigcat | 7 | 4 | 18 |  |  |  |  | 6 |  |  |  |  |  |
 | spider | 7 |  | 18 |  |  |  | 1 | 1 | 1 | 2 |  |  | 5 |
+| bigcat | 7 | 4 | 17 |  |  |  |  | 6 |  |  |  |  |  |
 | sealife | 10 |  | 14 |  |  |  |  | 4 |  | 3 |  |  | 6 |
 | squirrel | 8 | 1 | 10 |  |  |  |  | 4 |  | 10 |  |  | 2 |
 | alligator | 7 | 1 | 9 |  |  |  |  | 2 |  | 10 |  |  | 4 |
 | bat | 10 |  | 14 |  |  |  |  | 5 |  | 3 |  |  | 4 |
 | tick | 7 |  | 11 |  |  |  |  | 6 |  | 4 |  |  | 5 |
 | primate | 5 | 3 | 9 |  |  |  |  | 5 |  | 5 |  |  | 3 |
-| duck | 7 | 2 | 17 |  |  |  |  | 2 |  | 1 |  |  | 1 |
 | frog | 10 | 1 | 11 |  |  |  | 1 |  |  | 8 |  |  | 2 |
 | mammal | 8 | 1 | 10 |  |  |  |  | 5 |  | 4 |  |  | 3 |
+| duck | 7 | 2 | 16 |  |  |  |  | 2 |  | 1 |  |  | 1 |
 | rabbit | 9 |  | 8 | 1 |  |  | 1 | 4 |  | 7 |  |  | 1 |
 | snail | 9 |  | 9 |  |  |  |  | 7 |  | 1 |  |  | 4 |
 | worm | 6 |  | 11 | 2 |  |  |  | 4 |  | 1 |  |  | 3 |
 | scorpion | 8 |  | 11 |  |  |  | 1 | 2 |  | 2 |  |  | 4 |
 | millipede | 5 | 1 | 12 |  |  |  |  | 3 |  |  |  |  | 3 |
-| slime | 5 |  | 11 | 1 |  |  |  | 3 |  |  |  |  | 4 |
 | centipede | 6 |  | 13 |  |  |  |  | 2 |  | 1 |  |  | 2 |
+| slime | 5 |  | 10 | 1 |  |  |  | 3 |  |  |  |  | 4 |
 | plant | 5 | 1 | 7 |  |  |  |  | 4 |  | 2 |  |  | 3 |
-| reptile | 7 |  | 8 |  |  |  |  |  |  | 9 |  |  |  |
 | crab | 8 |  | 8 | 1 |  |  |  | 2 |  | 3 |  |  | 2 |
 | wader | 8 | 1 | 7 |  |  |  |  |  |  | 6 |  |  | 2 |
 | flyingfox | 7 |  | 6 |  |  |  |  | 5 |  |  |  |  | 4 |
 | woodlouse | 6 |  | 7 |  |  |  |  | 2 |  | 2 |  |  | 4 |
+| reptile | 6 |  | 2 |  |  |  |  |  |  | 9 |  |  |  |
 | harvestman | 3 |  | 7 |  |  |  |  | 1 |  |  |  |  | 1 |
 | other | 1 |  | 1 |  |  |  |  |  |  |  |  |  | 1 |
 | person | 1 |  |  |  |  |  | 1 |  |  |  |  |  |  |
@@ -107,14 +107,15 @@ Pass rate on the first attempt: 81%. After the retry: 98%.
 
 ### Rows that failed the first time, and why
 
+The reasons are found again by checking the batch's first replies with the checker as it stands now, which no longer counts 'slider' (a turtle) or 'camera-type eye' as talk about the app; the reptile row that this fixed still shows as passing only on its second attempt in the counts above.
+
 - **alligator, Field of view, sharpness, dim light and depth**: voice check app: view
 - **cat, Sharpness**: voice check numbers: 23
-- **deer, Field of view**: voice check app: views; voice check app: views
+- **deer, Field of view**: voice check app: views
 - **dog, Sharpest spot**: voice check app: view; voice check app: this view; voice check app: last sentence: Nobody has measured this in the other species that share thi
 - **dog, Sharpness**: voice check length: 4 sentences
 - **frog, Movement**: voice check app: view
 - **rabbit, The whole view**: voice check numbers: 24
-- **reptile, The whole view**: voice check app: slider
 - **spider, Color**: voice check numbers: 26
 - **spider, Sharpness**: voice check voice_words: answer
 - **wader, Head movement**: voice check spelling: grey
@@ -130,19 +131,19 @@ Pass rate on the first attempt: 81%. After the retry: 98%.
 **bird, Ultraviolet** (draft grade `g`; of the species' records 0% measured, 50% carried, 50% unknown)
 
 - Draft: Ultraviolet is light that humans cannot see at all, and in the blue tit, the European starling and the Eurasian blackbird a cone cell senses it best at about 370 nanometers. If you are a songbird, you very likely sense ultraviolet too, and a blue tit's cornea and lens let it through. Birds are not all alike here: the mallard's cone of this kind peaks in violet, and in the pied cormorant the cornea and lens block ultraviolet.
-- Live: (no live row with this title)
+- Live: `g` Ultraviolet: A starling, a blue tit and a blackbird have a short-wave cone that peaks in the ultraviolet, between 360 and 375 nanometers, and gulls have the same type. A mallard, a pigeon and a chicken have the violet type instead, which peaks between 410 and 420. If you are a duck or a vulture, you very likely see little ultraviolet, and if you are a songbird or a gull, you very likely see it.
 - Cites: birds#1 (Anas platyrhynchos), birds#17 (Cyanistes caeruleus), birds-met#21 (Sturnus vulgaris), birds-met#25 (Turdus merula), recheck-5-fixed#11 (Phalacrocorax varius), recheck-5-fixed#13 (Cyanistes caeruleus)
 
 **cat, Pupil** (draft grade `m`; of the species' records 100% measured, 0% carried, 0% unknown)
 
 - Draft: If you are a domestic cat, an African wildcat, an ocelot, a serval or a fishing cat, the pupil in the middle of each eye is a vertical slit. If you are a lion, tiger, leopard, jaguar, mountain lion or cheetah, your pupil is round. If you are a bobcat, a caracal, a Canada lynx or an Iberian lynx, it is nearly round, and if you are a Eurasian lynx, it is oval to diamond-shaped.
-- Live: `g` Pupil: In bright light your pupil shrinks to an upright slit, as the pupils of your felid ancestors did. Lions and other large cats keep a round one.
+- Live: `m` Pupil: A cat’s pupil closes to a narrow vertical slit, a shape common in animals that hunt by ambush. A slit like this smears out-of-focus things up and down, and this view does the same.
 - Cites: cat-dog#20 (Felis catus), oa-2#2289 (Felis silvestris), oa-2#2325 (Leopardus pardalis), sweep-66#3 (Leptailurus serval), oa-2#2307 (Prionailurus viverrinus), cat-dog#103 (Panthera leo), cat-dog#49 (Panthera tigris), oa-2#2311 (Puma concolor), oa-2#2351 (Panthera onca), oa-2#2353 (Panthera pardus), oa-2#2315 (Acinonyx jubatus), oa-2#2323 (Lynx rufus), oa-2#2339 (Caracal caracal), oa-2#2321 (Lynx canadensis), oa-2#2317 (Lynx pardinus), cat-dog#50 (Lynx lynx)
 
 **cat, Sharpness** (draft grade `i`; of the species' records 38% measured, 2% carried, 60% unknown)
 
 - Draft: If you are a domestic cat, you read about 10 cycles a degree, a third of the 30 that a human reads on an eye chart. If you are a cheetah, you read about 25. If you are a wildcat of the same genus as the domestic cat, such as a sand cat, you very likely see about as sharply as it does, but for the other cats nobody has measured how sharply you see.
-- Live: `g` Sharpness: If you are a domestic cat, a chart test gave one gray tabby about 8 cycles per degree and a younger cat about 18, where a human reads about 30. Behavior studies put cats between 3 and 9.
+- Live: `m` Sharpness: Cats see about a fifth to a tenth as much detail as people do. This view is blurred to match.
 - Cites: cat-dog#17 (Felis catus), cat-dog#94 (Acinonyx jubatus)
 
 **dog, Color** (draft grade `m`; of the species' records 42% measured, 36% carried, 21% unknown)
@@ -160,7 +161,7 @@ Pass rate on the first attempt: 81%. After the retry: 98%.
 **insect, Ultraviolet** (draft grade `g`; of the species' records 2% measured, 62% carried, 37% unknown)
 
 - Draft: Monarchs, cabbage whites, small tortoiseshells and LD moths each have a color-sensing cell that senses ultraviolet best, and so do the drone fly, the seven-spotted ladybird, a dragonfly, a damselfly and the brown marmorated stink bug. You very likely have one as well. Ultraviolet is light that humans cannot see at all.
-- Live: `g` Ultraviolet, blue and green: A copper butterfly has four pigments, peaking near 360, 437, 500 and 568 nanometers. A skipper has two, near 440 and 540, and a cockroach has only an ultraviolet one and a green one. You very likely have an ultraviolet receptor, a blue one and a green one.
+- Live: `i` Ultraviolet: Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.
 - Cites: insect#8 (Danaus plexippus), insect#24 (Pieris rapae crucivora), methods#476 (Aglais urticae), methods#535 (Lymantria dispar), insect#167 (Eristalis tenax), insect#190 (Coccinella septempunctata), insect#109 (Anax junius), insect#125 (Ischnura elegans), oa-8#52 (Halyomorpha halys)
 
 **jumper, Color** (draft grade `i`; of the species' records 0% measured, 22% carried, 78% unknown)
@@ -178,12 +179,24 @@ Pass rate on the first attempt: 81%. After the retry: 98%.
 **plant, Neighbors** (draft grade `i`; of the species' records 1% measured, 0% carried, 99% unknown)
 
 - Draft: If you are a wood strawberry, your daughter plants grow more root over live substrate than over dead substrate, so you detect the state of a patch before you touch it. You also sense red and far-red light through a protein called phytochrome B. For nearly every other plant that borrows this row, nobody has measured whether you sense your neighbors by chemicals or by light.
-- Live: (no live row with this title)
+- Live: `m` Neighbours: Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, even before the neighbour shades it. Phone cameras capture very little far-red light.
 - Cites: harvest-11#2 (Fragaria vesca), harvest-13#7 (Fragaria vesca)
 
 **deer, Field of view** (draft grade `i`; of the species' records 2% measured, 6% carried, 92% unknown)
 
 - Draft: Your eyes sit on the sides of your head, so each one looks out in a different direction. Nobody has measured how wide an area you see at once, or how much of it both of your eyes see together in front of you. Both have been measured in cattle, goats, giraffes and horses, but in no deer.
-- Live: (no live row with this title)
+- Live: `g` Field of view: Reindeer grazing with their eyes turned level are given a combined field of about 360 degrees along the ground, and horses a field of about 320. Nobody has measured the field of a white-tailed deer, so you very likely see most of the way around you without turning your head.
 - Cites: squirrel-deer-rabbit#120 (Cervidae (deer, as the page states it)), intake-3#4 (Bos taurus), intake-3#5 (Bos taurus), intake-5#31 (Capra hircus), intake-5#32 (Capra hircus), intake-6#14 (Giraffa camelopardalis), squirrel-deer-rabbit#148 (Equus caballus), squirrel-deer-rabbit#92 (Equus caballus), sweep-29#6 (Giraffa camelopardalis)
 <!-- rows-pipeline:end -->
+
+<!-- burst10-before-after:start -->
+
+### Before and after the four corrections (burst 10)
+
+The same checker run over the views on main before the corrections and over the corrected views. The corrections changed five rows (deer, wader, bird, squirrel and bigcat) in the five views and added one (the clouded leopard).
+
+| | rows read | rows flagged | findings | humans | app | voice_words | banned | contrast | fragment | spelling | length | numbers | dash | hedge | grade_words |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| before | 443 | 346 | 1168 | 50 | 635 | 14 | 0 | 0 | 7 | 156 | 4 | 160 | 0 | 0 | 142 |
+| after | 444 | 341 | 1139 | 46 | 614 | 14 | 0 | 0 | 7 | 156 | 4 | 159 | 0 | 0 | 139 |
+<!-- burst10-before-after:end -->

@@ -633,7 +633,7 @@ def cmd_apply(a):
 
 def live_rows(v):
     spec = json.load(open(os.path.join(ROOT, "views", v + ".json"), encoding="utf-8"))
-    return (spec.get("trial") or {}).get("rows") or spec.get("rows") or []
+    return spec.get("rows") or []
 
 
 def first_attempt_failures(srcs, views):
@@ -694,7 +694,8 @@ def cmd_report(a):
     n = max(1, tot["rows"])
     lines += ["", "Pass rate on the first attempt: %.0f%%. After the retry: %.0f%%." % (100.0 * tot["p1"] / n, 100.0 * (tot["p1"] + tot["p2"]) / n), ""]
     if failures:
-        lines += ["### Rows that failed the first time, and why", ""]
+        lines += ["### Rows that failed the first time, and why", "",
+                  "The reasons are found again by checking the batch's first replies with the checker as it stands now, which no longer counts 'slider' (a turtle) or 'camera-type eye' as talk about the app; the reptile row that this fixed still shows as passing only on its second attempt in the counts above.", ""]
         for cid, errs in sorted(failures.items()):
             lines.append("- **%s, %s**: %s" % (jobs[cid]["view"], jobs[cid]["row"]["title"], "; ".join(errs[:5])))
         lines.append("")
