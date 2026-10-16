@@ -1,0 +1,24 @@
+name: crossref
+# Looks up every DOI cited in the evidence logs on Crossref (ci/crossref/crossref.py) and returns the metadata on the ci
+# branch as runs/crossref/<run>/crossref.jsonl. Uses no Claude allowance. Start it by pushing a commit to a branch
+# named run/crossref/<anything>.
+on:
+  push:
+    branches: ['run/crossref/**']
+permissions:
+  contents: write
+jobs:
+  crossref:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: look up
+        run: python3 -I ci/crossref/crossref.py out
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          [ -f out/crossref.jsonl ] && gzip -f out/crossref.jsonl
+          bash ci/return.sh crossref out
