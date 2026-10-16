@@ -1,6 +1,6 @@
 # Precision audit 20, 16 October 2026
 
-Scope: 20 records from 12 evidence files that no earlier audit table, recheck file or retract row had touched: external-5 (2), external-6 (2), external-7 (1), canon-9 (1), oa-5 (2), reread-1 (1), sweep-18 (1), sweep-26 (2), sweep-33 (1), sweep-34 (1), sweep-39 (1), sweep-41 (1), sweep-42 (3), sweep-43 (1). Taxa: birds 5, insects 6, mammals 3, reptiles 3, plants 3. Eighteen at `m`, three at `g` before the audit.
+Scope: 20 records from 14 evidence files that no earlier audit table, recheck file or retract row had touched: external-5 (2), external-6 (2), external-7 (1), canon-9 (1), oa-5 (2), reread-1 (1), sweep-18 (1), sweep-26 (2), sweep-33 (1), sweep-34 (1), sweep-39 (1), sweep-41 (1), sweep-42 (3), sweep-43 (1). Taxa: birds 5, insects 6, mammals 3, reptiles 3, plants 3. Seventeen at `m`, three at `g` before the audit.
 
 Method as in audits 13 to 19: each source opened with WebFetch (WebSearch only to locate a paper or an open copy) and asked first whether the exact quote string appears, then for the page's own sentence in consecutive pieces. Metadata checked against the opened page or the journal's own record. A change to the partial flag, the grade or a bibliographic field counts as `correct`. Corrections are in `docs/views/recheck/recheck-20.jsonl` in the recheck-5 schema. No evidence file, no wanted file and not `docs/views/audit/ALL.jsonl` was edited.
 
