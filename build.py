@@ -31,6 +31,11 @@ chk = subprocess.run([sys.executable, "-I", str(root / "tools" / "views" / "chec
 if chk.returncode != 0:
     sys.exit("the spec checker refused a view:\n" + chk.stdout + chk.stderr)
 specs = {k: json.loads((vdir / (k + ".json")).read_text(encoding="utf-8")) for k in keys}
+def _no_drafts(o):   # rows_draft blocks are the rows pipeline's drafts for the owner to read (docs/views/voice/REPORT.md); the page never uses them
+    if isinstance(o, dict): return {k: _no_drafts(v) for k, v in o.items() if k != "rows_draft"}
+    if isinstance(o, list): return [_no_drafts(v) for v in o]
+    return o
+specs = _no_drafts(specs)
 SPEC_JS = json.dumps(specs, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 assert "/*@SPECS@*/{}" in js
 js = js.replace("/*@SPECS@*/{}", SPEC_JS)

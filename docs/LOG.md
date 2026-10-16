@@ -2,6 +2,10 @@
 
 Newest first. Times are US Eastern.
 
+## 16 October 2026
+
+- **19:00** Build 32. Five rows that round 2 found false are corrected and graded by what the evidence supports: the deer's field of view (no source for 310 degrees), the ultraviolet rows of the wader and bird views (ducks, waders and vultures have the violet type), the squirrel's flicker rate (the 108 belongs to a ground squirrel), and the pupils of the big cats (round, with the clouded leopard held back as unsettled). The rows pipeline, its voice check and sixteen views of draft rows sit in the views' `rows_draft` blocks and are left out of the page (`docs/views/voice/REPORT.md`). Checked in headless Chromium: `try` for the five views and cat, `record`, `viewer`, `lent`, `check_spec`.
+
 ## 13 October 2026
 
 - **18:00** Build 31 (the engine track, burst 5), everything new behind `?try=`. Modules 8 to 11 (`docs/ENGINE.md`): `field` (`&draw=wedge`, a blind area fixed in the room as the phone turns; `fold`, the duck's sky pressed into the top; `window`, Snell's window always on; `ribbon`, a band that keeps every direction the phone has faced), `overlay` (`polar`, sky polarization from the sun's place; `web`; `rings`, sound circles; `shadow`, a dark ring when the light falls), `sound` (three bands, onsets and breath from the microphone after a tap: `hear`, `clap`, `air`, `rumble`, `rings`) and `haptic` (`buzz`, with a pulse at the picture's edge where the phone cannot vibrate). New specs from the research drafts: `?try=owl`, `duck`, `bigcat`, `fox`, `millipede`, `centipede`, `harvestman`, `woodlouse`. The options are also offered in fish, spider, worm, bat, mammal and the bee and insect trials. `&fakesound=1` feeds the sound views a made-up sound for a desk. `docs/views/COMPILER.md` says what the spec compiler sends, receives and checks. The offered views are unchanged.
