@@ -1,0 +1,37 @@
+name: views-rows
+# The rows pipeline: Claude (Sonnet) drafts one row of a view at a time from the audited evidence (tools/views/rows.py), and every draft is
+# checked by script (tools/views/voice_check.py and a check of each number against the records it cites).
+# Push a commit to run/views-rows/<label>; ci/views/rows.env names the views, the model, the spend ceiling and whether to plan only.
+# The drafts come back on the ci branch as runs/views-rows/<run>, and the branch pub/rows-draft holds them. Nothing is merged into views/.
+# The key is the repository secret ANTHROPIC_API_KEY; without it the job stops at once and says so.
+on:
+  push:
+    branches: ['run/views-rows/**']
+permissions:
+  contents: write
+concurrency:
+  group: views-rows
+  cancel-in-progress: false      # a cancelled run would leave paid batches uncollected
+jobs:
+  rows:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: tests
+        run: python3 -I tools/views/test_voice_check.py && python3 -I tools/views/test_rows.py
+      - name: rows
+        run: bash ci/views/rows.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: views-rows
+          path: out/
+          retention-days: 7
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh views-rows out
