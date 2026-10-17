@@ -15,3 +15,9 @@ Completed Deilephila:2 search rows (1 limited-source CFF negative and1 positive 
 Screened all cached harvested Deilephila titles/abstract starts plus first20 results of each of3 added EuropePMC common/scientific-name/trait/family queries. Read temporal sections of2017 primary physiology and flower-tracking papers,2016 neural summation main PDF,2019 family review,2021 temporal-vision review,2022 colour-vision review and2017 photoreceptor review. Source PDFs/XML remain /tmp/oa/harvest-c6.2017 physiology supplementaryFiles endpoint returned XML stating the article is outside the EuropePMC OA subset; main PDF render succeeded, publisher previously refused. Four-page SOKENDAI item is a scanned thesis examination summary, not a full thesis. No new403/429/challenge hosts. Quotechecks and evidence schema passed.
 
 Round increment:1 genus completed,2 evidence lines,2 search lines,1 wanted line. Batch total:2/35 genera screened,3 evidence lines,5 search lines,3 wanted lines. Next:Coracina, then Aedes, Lagurus;33 genera remain.
+
+### Coracina completed2026-10-17
+
+Added5 limited-source negative search rows,0 evidence,0 wanted. All47 cached works and5 added EuropePMC scientific/common-name/trait/family query results screened; both cached citation chases returned0. Retrieved Toronto visual-pigment thesis, UTS mistletoe-search thesis and bird-blinking XML: Coracina records concern sequence accession, background bird lists and eyelids respectively, not requested acuity/fields/receptor spacing/flicker. No compilation represented as freshly read and no universal-exhaustion claim. No new refusals.
+
+This agent increment now:2 genera,2 evidence,7 search rows,1 wanted; batch total3/35 genera,3 evidence,10 search rows,3 wanted. Next:Aedes, then Lagurus, Mauremys;32 genera remain.
