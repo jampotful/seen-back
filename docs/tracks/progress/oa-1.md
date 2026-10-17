@@ -115,4 +115,30 @@ Checkpoint: entry59 is complete from the 59-page CITY accepted manuscript with i
 
 Checkpoint: entry60 (Para thesis) is complete, including AppendicesA–D. Added105 records:54 explicitly approximate, inferred readings of the nine species’ CFF/ERG median lines; three exact group-level CFF spans; one illustrative Morpho ERG threshold;35 literature-appendix entries; and12 other secondary/qualitative observations. Raw individual data were not supplied, so plotted medians are never presented as exact author-tabulated values. The source’s voltage signs/units and100× amplifier gain are retained; population ERG latency/half-width are distinct from single-cell integration time. Earlier2024 protocol-error data were excluded by the author. The thesis’s87-Hz chicken average versus90–100-Hz stated individual range is flagged. Species identity, colour class, diel category and phylogeny remain confounded in the44-individual sample.
 
-Checkpoint: entry66 is complete for the requested Additionalfiles1–3. The main XML and136-row DOCX were read, as were both alternative phylogeny figures. Added551 records:408 tuning-site residues (171 from57 newly sequenced taxa and237 secondary),137 explicitly inferred VS/UVS predictions including a qualified alternative for a source conflict, four group-level review measurements and two amplification failures. Additionalfile1 prints Cyanistes caeruleus as VS despite its Cys90 sequence and the main article’s UVS description; both variants are retained. Acanthisitta Leu93 has an unknown tuning effect, and Caracara cheriway is not silently reassigned to C.plancus. No physiological peak or behavioral tetrachromacy is inferred from marker counts.
+Checkpoint: entry66 is complete for the requested Additionalfiles1–3. The main XML and136-row DOCX were read, as were both alternative phylogeny figures. Added 552 records: 408 tuning-site residues (171 from57 newly sequenced taxa and237 secondary),137 explicitly inferred VS/UVS predictions including a qualified alternative for a source conflict, five group-level review measurements and two amplification failures. Additionalfile1 prints Cyanistes caeruleus as VS despite its Cys90 sequence and the main article’s UVS description; both variants are retained. Acanthisitta Leu93 has an unknown tuning effect, and Caracara cheriway is not silently reassigned to C.plancus. No physiological peak or behavioral tetrachromacy is inferred from marker counts.
+
+### Final counts for this round
+
+- Discovery attempted for all **56 assigned entries**. OpenAlex and Europe PMC returned successful DOI responses for applicable entries. Three DOI-less entries were resolved by matching title, author and year (19, 52, 78). Other incomplete citations and unmatched searches remain unresolved. Semantic Scholar supplied three successful responses before HTTP 429; later requests stopped. This is not a claim that all three providers completed every lookup.
+- **11 distinct papers have retrieved, title-identified legal full main copies** this round: 19, 32, 39, 57, 59, 60, 66, 67, 68, 70, 71. Multiple versions/supplements of the same paper count once.
+- **4 requested sources completed**: 57, 59, 60, 66. Their new source-ledger records total **1,539**. Main articles at 19 and 39 were read and supplied **324 partial records**, with their supporting material still blocked. Entry 32's earlier main-only coverage remains unchanged.
+- **1,863 records added**, bringing this batch log to **7,020**. Seven earlier group-level abstract grades were corrected. Of the new values, **54 are visually estimated plot medians**, all explicitly inferred with uncertainty and sample sizes. The other **1,809** come from explicit text/table/figure labels, including qualified author predictions and secondary reports.
+- **6 new no-free-copy verdicts**, all books/chapters using the prompt's single-OpenAlex allowance: 36, 37, 41, 49, 51, 55. Batch no-copy ledger now has 16 entries. Blocked advertised copies and unavailable providers were not counted as no-copy verdicts.
+- **10 assigned entries resolved**, leaving **46 unresolved**: 2, 8, 12, 14, 15, 19, 23, 24, 26, 30, 32, 33, 35, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 50, 52, 53, 54, 56, 58, 61, 62, 63, 64, 65, 67, 68, 69, 70, 71, 73, 74, 75, 76, 77, 78, 79.
+
+All 1,863 new records passed final quote checking; the complete 7,020-record batch passed its evidence schema check. The source ledger has 16 completed entries totaling 6,608 records; 412 partial records reconcile the difference. No app setup, builds, servers or app tests ran. No paper text, PDF, XML, document or image was committed.
+
+### Review manifest and continuation
+
+External review manifest: `/tmp/oa/oa-1/review-manifest.json`. Record-to-quotecheck mappings, all under `/tmp/oa/oa-1/`:
+
+| Records | Quotecheck text | Retrieved source |
+|---|---|---|
+| `19-records.jsonl` | `19-checked.txt` | `19-pdf.pdf`; visually verified figure-4 and figure-6 transcription appended to extracted text |
+| `39-records.jsonl` | `39-checked.txt` | `39.pdf`; visually verified figure labels appended to extracted text |
+| `57-records.jsonl` | `57-checked.txt` | `57.pdf`; figure-6f count labels appended after image review |
+| `59-records.jsonl` | `59-checked.txt` | `59-city.pdf`; manuscript line-number gutter removed from main prose |
+| `60-records.jsonl` | `60.txt` | `60.pdf`; caption quotes checked, median estimates visually checked in `60-figs/p-48.png` through `p-53.png` |
+| `66-records.jsonl` | `66-checked.txt` | `66.xml` and `66-supp/1471-2148-11-313-S1.DOCX`; extracted table cells combined with XML text |
+
+Stop at the source boundary before **entry 67**: the broad frog paper and its large species supplements need a fresh reading context. Main copies for **67, 68, 70 and 71** are downloaded and title-identified, but not claimed read. Continue them in batch order. Entry 77's Vienna repository page also opens; its thesis PDF has not been retrieved. The next worker should use the current discovery/provider responses rather than converting rate-limited or incomplete lookups into absence verdicts. All scratch files are ephemeral.
