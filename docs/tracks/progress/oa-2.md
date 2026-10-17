@@ -34,3 +34,21 @@ Only the four files authorized by `oa-pass.md` changed: this summary, `docs/view
 ## 2026-10-17
 
 Discovery checkpoint for the 26 entries assigned this round: positions 2, 7, 13, 18, 22, 30, 31, 37, 39, 41, 43, 44, 46, 47, 49, 51, 53, 56, 58, 62, 64, 67, 74, 75, 77 and 79. OpenAlex and Europe PMC lookups completed before reading. Semantic Scholar returned HTTP 429 at position 13; further requests to that host stopped. Unresolved lookups and blocked free-copy candidates are kept pending, rather than newly declared unavailable. Downloaded papers and scripts are outside the repository in `/tmp/oa2-20261017`. Reading and record counts follow at the final checkpoint below.
+
+Final checkpoint for this round:
+
+- Assigned entries checked: 26. OpenAlex indexed an OA location for 21; position 39 additionally supplied a repository link, giving 22 legal-copy candidates to attempt. Four entries had no indexed OA location; incomplete Semantic Scholar coverage prevents a definitive new no-copy finding.
+- Full texts successfully retrieved: 9, at positions 22, 30, 43, 44, 46, 47, 49, 62 and 74. A retrieved paper is not counted as read merely because it downloaded.
+- Complete papers read and retired: 2 (positions 30 and 43; ranks 109 and 122).
+- Records added: 122, all appended with `addlog.py` and all quotes verified with `quotecheck.py`. The evidence log now contains 3,436 records. Both sources are secondary compilations; every added record is conservatively graded `g`.
+- New definitive no-free-copy lines: 0. The existing negative-copy log was unchanged.
+- Assigned entries remaining: 24, positions 2, 7, 13, 18, 22, 31, 37, 39, 41, 44, 46, 47, 49, 51, 53, 56, 58, 62, 64, 67, 74, 75, 77 and 79. Access failures and unread downloads remain pending.
+
+| Position (rank) | Source read this round | Added records | Reading and caveats |
+| --- | --- | ---: | --- |
+| 30 (109) | Hunt et al. 2009, visual-pigment evolution | 88 | Complete PMC HTML, tables, figures/captions and references. Secondary pigment measurements, cone classes and oil droplets. Original citations are named in notes and not claimed opened. Table 1 jointly attributes several studies without mapping each row to one study; this limitation is explicit. Genus/group rows remain group evidence; allelic variants do not imply every individual has all listed peaks. In vitro expression is identified where the passage states it. |
+| 43 (122) | Healy et al. 2013, temporal perception | 34 | Complete XML, Table 1, figures/captions and complete in-article appendix. Every Table 1 CFF value logged, with ERG/behavioral method and optimum/suboptimum protocol flags. H/L habitat coding is not experimental illumination or a diel classification. Tupaia glis versus the cited T. belangeri title and the harp-seal citation-number mismatch are explicitly unresolved in notes. |
+
+Access detail: Semantic Scholar returned 429 on the third request, position 13, and was not queried again. NCBI BioC returned 503 on one supported-endpoint attempt and was not retried. PMC manuscript requests mostly served bot pages; Europe PMC XML returned 500 for those manuscripts. Both Dryad datasets opened as landing pages, but all listed data-file downloads returned 403. Journal/repository candidates also produced 403, 404, proxy errors or challenges; none was mislabeled as a completed read or definitive no-copy result.
+
+Resume information: the downloaded paper associated with position 22 is the ant article (DOI 10.1371/journal.pone.0257779), not proof that the requested Dryad dataset was read. Positions 44 and 46 had their main texts inspected, but supplements remain unread and no completion lines were added. Their supplement ZIP files did download before the round closed. Other downloaded papers have not been read. All raw responses, PDFs, extracted text and helper scripts are in `/tmp/oa2-20261017`; regenerate when that temporary directory is unavailable. Stop was between completed source records after the research round's rate-limit close instruction. No app setup, builds, servers or app tests ran.
