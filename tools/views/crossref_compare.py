@@ -14,6 +14,10 @@ def fold(s):
     return re.sub(r'[^a-z]', '', unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode().lower())
 
 
+def strip_accents(x):
+    return ''.join(c for c in unicodedata.normalize('NFKD', x) if not unicodedata.combining(c))
+
+
 def initials(given):
     parts = re.split(r'[\s.]+', given.replace('-', ' -').strip())
     out = ''
@@ -63,7 +67,7 @@ def main():
             new = json.loads(json.dumps(s)); why = []
             j = str(s.get('journal', ''))
             if j and not re.search(r'\d', j) and m.get('volume'):
-                jn = j.strip()
+                jn = re.sub(r'\s*\((?:volume|vol\.?)[^)]*unconfirmed\)', '', j).strip()
                 add = m['volume'] + (f"({m['issue']})" if m.get('issue') else '') + (f": {pages(m)}" if pages(m) else '')
                 new['journal'] = f'{jn} {add}'; why.append(f"journal field had no volume; Crossref gives {add}")
             ca = m.get('authors') or []
@@ -76,6 +80,10 @@ def main():
                     for x, y in zip(logged, cr_names):
                         xs, ys = x.split(), y.split()
                         fam = xs[0] if (ys[0].isupper() and not xs[0].isupper()) else ys[0]  # Crossref prints some old names in capitals
+                        # take the Crossref family name only when removing accents makes the two identical (UPDATE 18b):
+                        # a changed apostrophe, hyphen, capital or spacing accent leaves the logged name as it is
+                        if strip_accents(fam) != strip_accents(xs[0]) or fam == xs[0]:
+                            fam = xs[0]
                         fixed.append(' '.join([fam] + xs[1:]) if len(xs) > 1 else fam)
                     if fixed != logged:
                         new['authors'] = ', '.join(fixed); why.append('family names with their accents as Crossref prints them')
