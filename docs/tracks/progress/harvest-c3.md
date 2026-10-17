@@ -2,7 +2,7 @@
 
 ## 2026-10-17
 
-Checkpoint at the round stop condition: **5 of 40 genera screened**, in the assigned order: Rhododendron, Coccinella, Euonymus, Ribes, Polygonatum. **0 genera completed the full protocol.** Next genus: Epargyreus; 35 genera remain. Its summary was inspected, but no entry is claimed complete and no work beyond the first five is logged.
+Checkpoint at the round stop condition: **5 of 40 genera screened**, in the assigned order: Rhododendron, Coccinella, Euonymus, Ribes, Polygonatum. **4 genera are represented by retained evidence**: Rhododendron, Coccinella, Euonymus and Ribes. **0 genera completed the full protocol.** **35 genera have not yet been screened**, starting with Epargyreus. **36 genera remain in the final queue**, including screened Polygonatum, which has no retained evidence or search record. The Epargyreus summary was inspected, but no entry is claimed complete and no work beyond the first five is logged.
 
 Added **9 evidence records** through addlog.py: **7 grade m and 2 grade g**, **8 from full texts and 1 abstract-only/partial**. The full-text evidence comes from four primary articles and one thesis. Added **7 wanted lines**. **0 search records retained**: harvest queries omit common names (english=[] for these genera), and plant queries also omit diel/chemical/eye-type terms. Incomplete search rows were removed because coverage.py ignores protocol_complete and would falsely mark cells exhausted. All screening and citation details are preserved below instead.
 
