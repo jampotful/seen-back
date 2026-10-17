@@ -100,3 +100,7 @@ Other advertised entries still retrieval-blocked (not absence verdicts):
 - **59**: Visual pigments, ocular filters and the evolution of snake vision. https://academic.oup.com/mbe/article-pdf/33/10/2483/17473520/msw148.pdf
 - **61**: A 'bright zone' in male hoverfly (Eristalis tenax) eyes and associated faster motion detection and increased contrast sensitivity. https://journals.biologists.com/jeb/article-pdf/209/21/4339/1541731/4339.pdf
 - **70**: Visual abilities in two raptors with different ecology. https://jeb.biologists.org/content/jexbio/219/17/2639.full.pdf
+
+## 2026-10-16
+
+This round is checking only entries 2, 8, 12, 14, 15, 19, 23, 24, 26, 30, 32, 33, 35–71 (excluding 72), and 73–79 named by the round coordinator. Fresh discovery is in progress for the 56 assigned entries. Semantic Scholar returned HTTP 429 at entry 23 after three successful DOI requests; further requests to that provider stopped. Provider failures and title matches without verified author/year remain unresolved, rather than no-copy verdicts. No additional papers or records are claimed at this checkpoint. Scratch responses stay in `/tmp/oa/oa-1`, and scripts stay under `work/oa-1`.
