@@ -155,3 +155,12 @@ The remaining need is an accessible authorized main article and its Table S1. Th
 - Responses, request status and the search ledger remain outside the repository under `/tmp/oa/oa-3-relations`. No new HTTP 403/429 or robots refusal occurred. The known free publisher copy remains technically inaccessible, so no no-copy retirement line, full-read claim or species-level pupil record was added. This progress-only update requires no quote checking or app checks.
 
 The remaining need is an accessible authorized main article and its Table S1. Crossref's advertised TDM route did not provide an alternative in this environment.
+
+
+## 2026-10-16 continuation: entry 46, additional repository and supplement indexes
+
+- **1 paper checked; 0 new complete free copies retrieved; 0 papers read; 0 evidence records added; 0 no-copy outcomes added; 1 entry remains unresolved.** Cumulative totals remain 633 evidence records, 11 fully read sources and 65 historical no-copy outcomes.
+- This pass inspected the preceding progress and round service skip list, then checked unused public discovery routes. Indexed searches for the known supplement filename and publisher content-CDN domains supplied no independent legal supplement location. Targeted Brazilian university repository searches (UFMG, Unicamp, UNESP and USP) yielded citing theses or unrelated works, not this article. Additional targeted Australian repository searches supplied no usable manuscript. Search results were not treated as read sources or as species-level evidence.
+- The Dissemin DOI API request failed during proxy connection with **CONNECT 403 Forbidden**, before an article or metadata response was received. It was not retried, and the coordinator was notified to skip `dissem.in` for the rest of the round. Previously refusing services were not requested. Request status and the search ledger remain outside the repository under `/tmp/oa/oa-3-dissemin`.
+
+The known free publisher copy remains technically inaccessible, and its Table S1 remains unread. No full-read or no-copy retirement line was added. This progress-only update requires no quote checking or app checks.
