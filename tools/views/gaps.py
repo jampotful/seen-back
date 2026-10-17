@@ -133,9 +133,21 @@ def load_evidence(repo, tax, retracted):
             if "%s:%d" % (u, n) in retracted:
                 continue
             r["_id"] = "%s#%d" % (u, n)
+            r.update(fixes.get("%s:%d" % (u, n), {}))
             r["_origin"] = origin
             recs.append(r)
 
+    fixes = {}  # "<unit>:<line>" -> fields that override the record (docs/views/fixes/*.jsonl; the evidence files stay as written)
+    fxdir = os.path.join(repo, "docs/views/fixes")
+    for f in sorted(os.listdir(fxdir)) if os.path.isdir(fxdir) else []:
+        if f.endswith(".jsonl"):
+            for line in open(os.path.join(fxdir, f), encoding="utf-8"):
+                try:
+                    fx = json.loads(line)
+                except ValueError:
+                    continue
+                if fx.get("id"):
+                    fixes.setdefault(fx["id"], {}).update({k: v for k, v in fx.items() if k in ("partial",)})
     evdir = os.path.join(repo, "docs/views/evidence")
     for f in sorted(os.listdir(evdir)) if os.path.isdir(evdir) else []:
         if f.endswith(".jsonl"):

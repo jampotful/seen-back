@@ -54,6 +54,8 @@ Papers Wanted page (rebuilt 15 October 2026; build with DRIVE_URL set to the pri
 
 Thoroughness (13 October 2026): done means no open cell untouched or half-searched (docs/views/research/THOROUGH.md). `tools/views/coverage.py` prints the line after every burst; baseline: settled 8.7% of record-rows, open cells 4,719, exhausted 0.0%, half-searched 11.4%, untouched 88.6%.
 
+Research desk coverage (17 October 2026, 05:50 UTC): settled 16.4% of record-rows; open cells 51,081; exhausted 6.0%, half-searched 92.2%, untouched 1.7% of their weight. 1,402 canon records read from compilations, tables, appendices or reviews now count as partial through `docs/views/fixes/canon-partial.jsonl` (read by `tools/views/gaps.py`; the evidence files are unchanged). Codex pull requests 18, 19 and 20 were closed unmerged after audits 28, 29 and 31; the Crossref correction waits on `research/crossref-fix`.
+
 Papers-wanted verdicts (13 October 2026): gain.py judges each wanted paper needed, upgrade, done, read or unknown against `docs/views/gaps/cells.jsonl` and writes the page's `status/all`; the page hides done and read papers by itself and the owner's Still want it choices live in `keep/all` (THOROUGH.md, "Papers that are no longer needed"). First run: needed 201, upgrade 18, done 14, unknown 313.
 
 Search-recall test (14 October 2026, scored by hand against the sources): high 7 of 10, medium 7 of 10. Phidippus acuity is not a hit in either run because the cycles-per-degree value is the run's own conversion, and Onitis found nothing; the Ovis binocular-field table could not be opened in either run. Both are below 9, so the genus sweeps stay with the desk (docs/tracks/codex-gates.json keeps "sweeps": false).
