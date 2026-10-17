@@ -1,0 +1,54 @@
+# Rows plan
+
+20371 evidence records read; 49 requests (one for each row); system part about 2868 tokens (cached), user parts 132919 tokens in all.
+Estimated cost for claude-sonnet-5-5 at batch prices with the cache: $0.22; the retry of failures is extra, at most the same again.
+
+- alligator__sharpest-spot: grade i, shares {'m': 0.054, 'g': 0.0, 'i': 0.946}, 27 species, 2 records
+- alligator__color: grade m, shares {'m': 0.631, 'g': 0.233, 'i': 0.136}, 27 species, 6 records
+- alligator__pupil: grade m, shares {'m': 0.631, 'g': 0.0, 'i': 0.368}, 27 species, 3 records
+- alligator__field-of-view-sharpness-dim-light-and-depth: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 27 species, 5 records
+- bee__sharpness: grade i, shares {'m': 0.175, 'g': 0.322, 'i': 0.504}, 1200 species, 30 records
+- bee__red: grade g, shares {'m': 0.27, 'g': 0.366, 'i': 0.364}, 1200 species, 30 records
+- bee__speed: grade i, shares {'m': 0.0, 'g': 0.258, 'i': 0.742}, 1200 species, 5 records
+- bee__ultraviolet: grade i, shares {'m': 0.0, 'g': 0.007, 'i': 0.993}, 1200 species, 30 records
+- bird__speed: grade i, shares {'m': 0.04, 'g': 0.011, 'i': 0.949}, 1200 species, 14 records
+- bird__sharpness: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 1200 species, 30 records
+- bird__ultraviolet: grade g, shares {'m': 0.005, 'g': 0.499, 'i': 0.496}, 1200 species, 30 records
+- bird__field-of-view: grade i, shares {'m': 0.082, 'g': 0.049, 'i': 0.869}, 1200 species, 30 records
+- deer__color: grade g, shares {'m': 0.32, 'g': 0.652, 'i': 0.028}, 204 species, 14 records
+- deer__field-of-view: grade i, shares {'m': 0.023, 'g': 0.058, 'i': 0.919}, 204 species, 10 records
+- deer__pupil: grade m, shares {'m': 0.477, 'g': 0.071, 'i': 0.452}, 204 species, 29 records
+- deer__sharpness-dim-light-and-depth: grade i, shares {'m': 0.012, 'g': 0.0, 'i': 0.988}, 204 species, 26 records
+- dog__sharpness: grade m, shares {'m': 0.422, 'g': 0.365, 'i': 0.213}, 37 species, 3 records
+- dog__sharpest-spot: grade i, shares {'m': 0.422, 'g': 0.0, 'i': 0.578}, 37 species, 3 records
+- dog__color: grade m, shares {'m': 0.422, 'g': 0.365, 'i': 0.213}, 37 species, 7 records
+- dog__field-of-view-dim-light-and-depth: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 37 species, 10 records
+- frog__movement: grade i, shares {'m': 0.101, 'g': 0.185, 'i': 0.714}, 1200 species, 5 records
+- frog__speed: grade i, shares {'m': 0.01, 'g': 0.019, 'i': 0.971}, 1200 species, 1 records
+- frog__field-of-view-sharpness-and-pupil: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 1200 species, 30 records
+- hawk__sharpness: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 302 species, 14 records
+- hawk__speed: grade i, shares {'m': 0.029, 'g': 0.124, 'i': 0.848}, 302 species, 3 records
+- hawk__field-of-view: grade i, shares {'m': 0.265, 'g': 0.238, 'i': 0.497}, 302 species, 30 records
+- insect__sharpness: grade i, shares {'m': 0.04, 'g': 0.079, 'i': 0.881}, 1200 species, 30 records
+- insect__speed: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 1200 species, 30 records
+- insect__ultraviolet: grade g, shares {'m': 0.017, 'g': 0.615, 'i': 0.367}, 1200 species, 30 records
+- jumper__eyes: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 39 species, 8 records
+- jumper__sharpness: grade i, shares {'m': 0.0, 'g': 0.213, 'i': 0.787}, 39 species, 5 records
+- jumper__field-of-view: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 39 species, 8 records
+- jumper__eye-movement: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 39 species, 5 records
+- jumper__color: grade i, shares {'m': 0.0, 'g': 0.216, 'i': 0.784}, 39 species, 14 records
+- jumper__movement: grade i, shares {'m': 0.366, 'g': 0.108, 'i': 0.526}, 39 species, 15 records
+- jumper__vibration-and-sound: grade i, shares {'m': 0.049, 'g': 0.0, 'i': 0.951}, 39 species, 5 records
+- plant__no-picture: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 1204 species, 1 records
+- plant__neighbors: grade i, shares {'m': 0.006, 'g': 0.0, 'i': 0.994}, 1204 species, 30 records
+- plant__green-and-time: grade i, shares {'m': 0.01, 'g': 0.0, 'i': 0.99}, 1204 species, 30 records
+- rabbit__the-whole-view: grade i, shares {'m': 0.107, 'g': 0.0, 'i': 0.893}, 91 species, 9 records
+- reptile__the-whole-view: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 1200 species, 30 records
+- squirrel__color: grade g, shares {'m': 0.058, 'g': 0.5, 'i': 0.443}, 1200 species, 30 records
+- squirrel__speed: grade i, shares {'m': 0.13, 'g': 0.121, 'i': 0.749}, 1200 species, 11 records
+- squirrel__field-of-view-and-sharpness: grade i, shares {'m': 0.02, 'g': 0.0, 'i': 0.979}, 1200 species, 30 records
+- wader__head-movement: grade i, shares {'m': 0.111, 'g': 0.057, 'i': 0.832}, 852 species, 30 records
+- wader__speed: grade i, shares {'m': 0.067, 'g': 0.027, 'i': 0.906}, 852 species, 2 records
+- wader__sharpness: grade i, shares {'m': 0.0, 'g': 0.0, 'i': 1.0}, 852 species, 13 records
+- wader__ultraviolet: grade i, shares {'m': 0.005, 'g': 0.0, 'i': 0.995}, 852 species, 10 records
+- wader__field-of-view: grade i, shares {'m': 0.139, 'g': 0.122, 'i': 0.74}, 852 species, 24 records
