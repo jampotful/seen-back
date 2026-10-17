@@ -36,3 +36,7 @@ All 659 records passed `quotecheck.py` against the downloaded text/PDF or a fait
 Stopped at the requested clean boundary after entry 35. Resume with **entry 36**, keeping unresolved earlier entries **3–17, 19–31 and 33** pending. Entries **36–79** have initial lookup responses and some downloaded candidate files but have not been read in this round. Do not infer full-read status from a cached download.
 
 Commits before this final checkpoint: `e9a2000`, `cca37f8`, `67f99a8`. The coordinator handles the shared branch's push and pull request.
+
+## 2026-10-16
+
+Round in progress. All 73 assigned entries are receiving initial OpenAlex, Europe PMC and Semantic Scholar lookups. Semantic Scholar returned HTTP 429 at entry 13 and was stopped for the round. Five earlier entries (4, 5, 7, 9 and 12) returned no free-copy candidate from the completed three-provider lookups and are settled as no free copy. No new evidence records or full-read markers yet. Remaining entries stay queued when discovery or downloads fail; errors are not no-free outcomes.
