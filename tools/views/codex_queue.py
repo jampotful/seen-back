@@ -3,11 +3,16 @@ Usage: python3 -I tools/views/codex_queue.py [--json]
 Items:
 - oa-k: papers of docs/tracks/batches/oa-k.json with no line yet in docs/views/sources/oa-k.jsonl or oa-none-k.jsonl
   (matched by DOI, else by normalised title). Prompt docs/tracks/prompts/oa-pass.md.
+- harvest-cK: genera of docs/tracks/batches/harvest-cK.json with no record yet in docs/views/searched/harvest-cK.jsonl
+  or docs/views/evidence/harvest-cK.jsonl. Prompt docs/tracks/prompts/round4-harvest.md (screening what the harvest
+  workflow already found; the searches themselves are done).
 - external-k: genera of docs/tracks/batches/external-k.json with no record yet in docs/views/searched/external-k.jsonl
   or docs/views/evidence/external-k.jsonl, listed only when docs/tracks/codex-gates.json has "sweeps": true.
   Prompt docs/tracks/prompts/external-sweep.md.
-Entries are positions in the batch file's list, counting from 1. Work from an open pull request is not on main yet, so
-a round should start only when no outside pull request is open (docs/tracks/prompts/codex-round.md)."""
+Entries are positions in the batch file's list, counting from 1. Work from a round whose pull request is still open is
+not on main yet: list its branch under "pending" in docs/tracks/codex-gates.json and the queue counts that branch's
+source ledgers as done too (fetch origin first), so the next round can start before the last one is merged. Take a
+branch off the list when its pull request is closed without merging."""
 import glob, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -22,6 +27,25 @@ def lines(path):
         except ValueError: pass
     return out
 
+_fetched = set()
+
+def pending_lines(rel):
+    """The lines of a file on each branch listed under "pending" in codex-gates.json (open pull requests)."""
+    import subprocess
+    gates = P('docs/tracks/codex-gates.json')
+    out = []
+    if not os.path.exists(gates): return out
+    for b in json.load(open(gates)).get('pending') or []:
+        if b not in _fetched:  # a clone that tracks main only does not hold the branch yet
+            f = subprocess.run(['git', '-C', ROOT, 'fetch', '-q', '--depth', '50', 'origin', f'+refs/heads/{b}:refs/remotes/origin/{b}'], capture_output=True, text=True)
+            if f.returncode: print(f'warning: could not fetch pending branch {b}; its finished entries are listed again', file=sys.stderr)
+            _fetched.add(b)
+        r = subprocess.run(['git', '-C', ROOT, 'show', f'origin/{b}:{rel}'], capture_output=True, text=True)
+        for l in r.stdout.splitlines():
+            try: out.append(json.loads(l))
+            except ValueError: pass
+    return out
+
 def oa_items():
     items = []
     for path in sorted(glob.glob(P('docs/tracks/batches/oa-*.json')), key=lambda p: int(re.findall(r'\d+', os.path.basename(p))[0])):
@@ -29,7 +53,7 @@ def oa_items():
         papers = json.load(open(path, encoding='utf-8'))['papers']
         seen_doi, seen_title = set(), set()
         for name in (f'oa-{k}.jsonl', f'oa-none-{k}.jsonl'):
-            for j in lines(P('docs/views/sources', name)):
+            for j in lines(P('docs/views/sources', name)) + pending_lines(f'docs/views/sources/{name}'):
                 if (j.get('doi') or '').strip(): seen_doi.add(j['doi'].lower().strip())
                 if j.get('title'): seen_title.add(norm(j['title']))
         left = [n for n, p in enumerate(papers, 1)
@@ -54,6 +78,26 @@ def sweep_items():
                           'genera': left, 'count': len(left), 'of': len(genera)})
     return items
 
+def harvest_items():
+    items = []
+    for path in sorted(glob.glob(P('docs/tracks/batches/harvest-c*.json')), key=lambda p: int(re.findall(r'(\d+)\.json$', p)[0])):
+        k = re.findall(r'harvest-c(\d+)\.json$', path)[0]; unit = f'harvest-c{k}'
+        genera = json.load(open(path, encoding='utf-8'))['genera']
+        recs = (lines(P('docs/views/searched', unit + '.jsonl')) + lines(P('docs/views/evidence', unit + '.jsonl'))
+                + pending_lines(f'docs/views/searched/{unit}.jsonl') + pending_lines(f'docs/views/evidence/{unit}.jsonl'))
+        done = {(j.get('taxon') or '').split()[0] for j in recs if j.get('taxon')}
+        left = [g for g in genera if g not in done]
+        if left:
+            items.append({'item': unit, 'prompt': 'docs/tracks/prompts/round4-harvest.md', 'batch': f'docs/tracks/batches/{unit}.json',
+                          'genera': left, 'count': len(left), 'of': len(genera)})
+    return items
+
+def interleave(a, b):
+    out = []
+    for i in range(max(len(a), len(b))):
+        out += a[i:i + 1] + b[i:i + 1]
+    return out
+
 def held():
     """Items docs/tracks/codex-gates.json holds back until a time, e.g. while an earlier chat may still be working on them."""
     import datetime
@@ -70,14 +114,17 @@ def held():
 
 def main():
     hold = held()
-    items = [it for it in oa_items() + sweep_items() if it['item'] not in hold]
+    items = [it for it in interleave(harvest_items(), oa_items()) + sweep_items() if it['item'] not in hold]
     if '--json' in sys.argv[1:]:
         print(json.dumps(items, ensure_ascii=False, indent=1)); return
     if not items:
         print('Nothing to do: every outside batch is finished on main.'); return
     for it in items:
         what = 'entries ' + ','.join(map(str, it['entries'])) if 'entries' in it else 'genera ' + ', '.join(it['genera'])
-        print(f"{it['item']}: {it['count']} of {it['of']} left. Follow {it['prompt']} for {it['batch']}, doing only {what}.")
+        how = (f" as unit {it['item']}: write docs/views/searched/{it['item']}.jsonl, docs/views/wanted/{it['item']}.jsonl and evidence"
+               f" through tools/senses/addlog.py with unit {it['item']}; commit instead of pushing, since the round opens the pull request,"
+               f" and fetch pages with your own tools") if it['item'].startswith('harvest-c') else ''
+        print(f"{it['item']}: {it['count']} of {it['of']} left. Follow {it['prompt']}{how} for {it['batch']}, doing only {what}.")
 
 if __name__ == '__main__':
     main()
