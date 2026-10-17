@@ -84,8 +84,8 @@ def main():
                         # a changed apostrophe, hyphen, capital or spacing accent leaves the logged name as it is
                         if strip_accents(fam) != strip_accents(xs[0]) or fam == xs[0]:
                             fam = xs[0]
-                        fixed.append(' '.join([fam] + xs[1:]) if len(xs) > 1 else fam)
-                    if fixed != logged:
+                        fixed.append(x if fam == xs[0] else (' '.join([fam] + xs[1:]) if len(xs) > 1 else fam))
+                    if re.sub(r'\s+', ' ', ', '.join(fixed)) != re.sub(r'\s+', ' ', ', '.join(logged)):
                         new['authors'] = ', '.join(fixed); why.append('family names with their accents as Crossref prints them')
                 elif len(logged) != len(cr_names) or [fold(x.split()[0]) for x in logged if x.split()] != [fold(y.split()[0]) for y in cr_names if y.split()]:
                     report.append(f'{rid}\t{s.get("doi")}\tauthors differ\tlogged: {s["authors"]}\tcrossref: {", ".join(cr_names)}')
