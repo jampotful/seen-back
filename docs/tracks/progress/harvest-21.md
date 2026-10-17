@@ -6,7 +6,7 @@ Branch research/harvest-21, 20 genera in the order given. The harvest data (run 
 Every WebFetch call (publisher pages, repository pages, jeb.biologists.org, api.openalex.org) ended with "permission request not answered", and curl through the proxy was refused for api.openalex.org and the repository hosts. WebSearch returns links only. So no work was opened in full or from its abstract page, and no author byline or OpenAlex work record could be read. Under the audit rules that leaves no evidence records and no wanted lines (a wanted line needs authors confirmed from an opened page or the OpenAlex record). The harvest records carry no author field.
 
 ## Done
-- 19 search records in docs/views/searched/harvest-21.jsonl (one per genus, traits grouped as in earlier harvest files), all `found` "none", each saying that the title and abstract start of every listed work were screened and none was opened.
+- 20 search records in docs/views/searched/harvest-21.jsonl (one per genus, traits grouped as in earlier harvest files), all `found` "none", each saying that the title and abstract start of every listed work were screened and none was opened.
 - Medicago: diel and eye_type already have records (harvest-8, harvest-11), and M. truncatula is logged for sense_light_nonvisual (harvest-11), so only a sense_light_nonvisual search record was written. Oxalis was not skipped: harvest-13 logged only O. triangularis measurements, and no Oxalis genus search record existed.
 - Cells closed by a measurement: 0. Wanted lines: 0.
 
