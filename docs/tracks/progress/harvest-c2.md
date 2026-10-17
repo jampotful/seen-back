@@ -17,3 +17,5 @@ Next three entries: Opuntia, Schistocerca, Malva; their harvest and Europe PMC f
 ## 2026-10-17 — continuation
 
 Completed Opuntia, Schistocerca and Malva (12 total including the earlier nine). Added 7 evidence records (6 full-text, 1 abstract-only), 7 search records (49 total), and 5 wanted lines (7 total). Full-text measurements address Opuntia light response, Schistocerca photoreceptor cutoff, and Malva diurnal tracking; no response bandwidth was called flicker fusion, and no spectral peaks were used as range endpoints. Retrieved eight candidate/review full texts through Europe PMC; no new service refusals. All remaining genera from Coenagrion onward remain pending.
+
+Completed Coenagrion, Dactylorhiza and Adiantum (15 total). This continuation now adds 10 evidence records (9 full-text, 1 abstract-only), 19 search records (61 total), and 6 wanted lines (8 total). Primary Adiantum scanned PDFs opened with Europe PMC PDF render after article-specific XML errors; new MDPI HTTP 403 reported to round lead. Dactylorhiza review prose/table lighting discrepancy preserved and primary article requested. Remaining assigned genera begin with Castilleja.
