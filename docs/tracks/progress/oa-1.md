@@ -100,3 +100,24 @@ Other advertised entries still retrieval-blocked (not absence verdicts):
 - **59**: Visual pigments, ocular filters and the evolution of snake vision. https://academic.oup.com/mbe/article-pdf/33/10/2483/17473520/msw148.pdf
 - **61**: A 'bright zone' in male hoverfly (Eristalis tenax) eyes and associated faster motion detection and increased contrast sensitivity. https://journals.biologists.com/jeb/article-pdf/209/21/4339/1541731/4339.pdf
 - **70**: Visual abilities in two raptors with different ecology. https://jeb.biologists.org/content/jexbio/219/17/2639.full.pdf
+
+## 2026-10-17 round
+
+The assigned continuation covers entries 2, 8, 12, 14, 15, 19, 23, 24, 26, 30, 32, 33, 35, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 50, 52, 53, 54, 56, 58, 61, 62, 63, 64, 65, 67, 68, 69, 70, 71, 73, 74, 75, 76, 77, 78 and 79. Earlier completed entries were left alone.
+
+### Counts so far
+
+- Checked all **46 assigned entries** in one discovery script before reading. OpenAlex returned 45 successful responses and one HTTP 400 for the chapter citation at entry35. Exact title, first author and year matched DOI-less entries19, 52 and78; unmatched/incomplete citations remain unresolved.
+- **21 entries advertised candidate copies.** Six entries yielded identifiable article PDFs or XML: 32, 39, 67, 68, 70 and71. Retrieval is separate from reading.
+- Europe PMC search succeeded for all **39 DOI-resolved entries**. Semantic Scholar succeeded for entry8, returned HTTP 429 at entry14, and was stopped immediately; the other 37 DOI lookups were skipped. No incomplete or blocked lookup became a definitive no-free-copy verdict.
+- **14 new records** from entry39's full main article, all marked `partial: true` because its supporting tables remain inaccessible. **0 completed full-read registry entries**, **0 new no-copy verdicts** so far. Existing evidence and registry lines were retained.
+
+### Reading and access
+
+Read all six article pages and the prefixed publisher correction of entry39, *Eukaryotic algal phytochromes span the visible spectrum*, in the GEOMAR repository's publisher PDF. The correction concerns funding only. Logged the fourteen labeled absorption maxima of the seven taxon-derived recombinant photosensory modules in Figures2 and3. These are molecule absorption peaks under heterologous expression with the stated bilin, not behavioral spectral limits. Species names come from the main article's strain list. Figure2C gives 586nm for PcolPHY1, while the pooled prose range begins at 584nm; that disagreement is retained explicitly. Figure labels were visually inspected, manually transcribed outside the repository and quote-checked against the transcription; this does not claim automated PDF text extraction verified the image-only labels. Supporting TablesS1–S2 and FiguresS1–S3 were not retrieved, so this source remains incomplete and has no completed registry line.
+
+Entries8, 14, 15, 23, 26 and33 have advertised copies blocked by publisher/repository HTTP403 or the session proxy. Entry19's Europe PMC fullTextXML endpoint returned HTTP500, and its publisher copy returned403. Previously logged abstract evidence at entries14, 15, 19 and24 was not duplicated. Entry32's Birmingham publisher PDF was retrieved again, but its raw supporting tables remain outstanding and its existing main-article records were not duplicated. Entry30's public Dryad landing page was retrieved, without a dataset-read claim. Entry2 still lacks an exact bibliographic match after two OpenAlex searches; entries12 and62 have incomplete author/year citations and were not guessed. No PDF, XML or article text was written inside the repository. Scratch audit trail: `/tmp/oa/oa1-20261017`.
+
+### Next
+
+Continue from entry40 in assigned batch order. Retrieved later copies await reading: entry67 (frog opsins, including its supplementary ZIP), entry68 (diving-bird skull geometry), entry70 (raptor visual abilities), entry71 (iguana parietal-eye photopigments). Entry39 needs its publisher supporting PDF to resolve the remaining table values. Stop between papers and update this dated section with final counts.
