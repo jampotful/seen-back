@@ -58,3 +58,50 @@ Entry 59 read in full (20-page publisher PDF): 17 records. Compound-eye and medi
 Entry 60 read in full (five-page paper): 4 records of new-bud opening and pollen-release rhythms in Hepatica nobilis. First opening of buds is distinguished from repeated daily flower movement; no isolated light-response mechanism is claimed. The conclusion’s 09:00 pollen-release start conflicts with 10:00 in the results and abstract; both statements are labelled. H. acutiloba and H. americana were not measured. All 4 quotes passed.
 
 Entry 62 read in full, including all nine appendix tables: 35 secondary records, all grade g. Table 1 supplies 34 CFF values with ERG/behavioural and optimum/suboptimum codes preserved. The high/low light labels describe normal habitat/foraging environments, not measured stimulus luminance; the 25 °C correction applies to metabolic rates, not CFF temperature. Cat 55 Hz is labelled ERG while its cited primary title says Behavioral methods, and harp-seal 32.7 Hz points to the cat reference rather than the separately listed seal study. These source discrepancies remain explicit and unresolved. One tiger-beetle motion-behaviour record is also secondary. All 35 quotes passed. This round’s other explicitly secondary reports were conservatively set to g; direct species measurements remain m. Earlier-round records were unchanged.
+
+### Final checkpoint for 2026-10-16
+
+Stopped cleanly between entries after entry 62, before starting extraction from the 81-page entry 73 review, to preserve room for a complete source-by-source extraction in a fresh context. All 73 assigned entries received initial discovery checks; checked does not mean resolved.
+
+| Outcome | This round |
+|---|---:|
+| Assigned entries checked | 73 |
+| Verified legal free full copies retrieved | 10 |
+| Papers completely read and settled | 8 |
+| Additional main texts read with missing supports | 1 |
+| Evidence records logged | 384 |
+| Records from complete reads | 229 |
+| Partial-main-text records | 155 |
+| Abstract-only records added | 0 |
+| Papers settled as no free copy | 5 |
+| Newly settled queue entries | 13 |
+| Papers still queueable | 60 |
+| Cumulative oa-6 evidence records | 1043 |
+
+Full reads settled this round: **33, 40, 53, 56, 58, 59, 60, 62** (respectively **0, 90, 17, 51, 15, 17, 4, 35** records). No-free entries: **4, 5, 7, 9, 12**. The 384 records comprise **272 m** direct species measurements/descriptions and **112 g** secondary or aggregate reports. All 155 entry-31 records have `partial:true`; its full-read marker was removed, so entry 31 remains queued. Earlier-round records and outcomes were preserved.
+
+Remaining entries, exactly: **3, 6, 8, 10, 11, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 36, 37, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 54, 55, 57, 61, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79**.
+
+Discovery limits: Semantic Scholar returned HTTP 429 at entry 13 and was not called again. OpenAlex title queries were corrected and title/first-author/year matches verified before accepting recovered DOI identities. Entries without an accepted match, incomplete provider coverage, failed publisher downloads, inaccessible repositories, and bot pages remain unresolved. Five no-free markers are backed by completed provider responses before the throttle. ANU entry 52 explicitly requires a copy request; no request was sent. No library login, proxy library, unauthorized host, ResearchGate or Academia.edu copy was used.
+
+Readable material pending: entry **73**, verified publisher PDF from `https://zenodo.org/records/6360448/files/source.pdf`, is saved as `/tmp/oa/oa-6/2026-10-16/73/more-0.pdf`; first-page title/author/date match. Its 81 pages have not been read or logged. Entry **31** still needs its publisher supplementary methods/tables and Dataverse trial data; the complete main text and all Table 1 rows were read. Entry **72** returned errors from Europe PMC full-text/PDF routes; its Nature page opened only the abstract, references and figure thumbnails, with access options for the main text. It remains queued and received no full-read marker or new record.
+
+Source discrepancies retained for review: entry 40’s abstract means differ from its results; entry 60’s conclusion starts pollen release at 09:00 while the results/abstract say 10:00; entry 62 labels cat 55 Hz ERG despite citing a primary title saying Behavioral methods, and maps the harp-seal value to that cat reference although a seal reference is separately listed. These were not silently corrected. The primary cat paper remains unopened.
+
+Verification: every new quote passed `quotecheck.py` (229 verbatim and 155 faithful table-row matches; 0 failed). `addlog.py` accepted every record and the batch-only evidence validator reported **1043 records, 0 problems**. No app build, server, browser or app tests were run. Only the four permitted oa-6 evidence/source/progress files were changed. Downloads, XML, PDFs, spreadsheets and extracted text remain outside the repository; scratch scripts remain under ignored `work/`.
+
+Temporary quote-check map (record file → source file; all under `/tmp/oa/oa-6/2026-10-16/`):
+
+- `40/records-main.jsonl` → `40/copy-0.txt` (15 verbatim, 0 table rows, 0 failed).
+- `40/records-table.jsonl` → `40/s003.txt` (75 verbatim, 0 table rows, 0 failed).
+- `53/records.jsonl` → `53/more-0.pdf` (17 verbatim, 0 table rows, 0 failed).
+- `56/records.jsonl` → `56/more-0.txt` (51 verbatim, 0 table rows, 0 failed).
+- `31/records.jsonl` → `31/last.pdf` (0 verbatim, 155 table rows, 0 failed).
+- `58/records.jsonl` → `58/copy-0.txt` (15 verbatim, 0 table rows, 0 failed).
+- `59/records.jsonl` → `59/more-0.pdf` (17 verbatim, 0 table rows, 0 failed).
+- `60/records.jsonl` → `60/more-0.pdf` (4 verbatim, 0 table rows, 0 failed).
+- `62/records.jsonl` → `62/copy-0.txt` (35 verbatim, 0 table rows, 0 failed).
+
+Resume in batch order among accessible pending sources: finish entry 31’s supports, obtain a readable full copy of entry 72, then read entry 73; retain every other unresolved entry above for a fresh discovery round after provider access recovers.
+
+Commits before this final progress checkpoint: `0b6a2cc`, `abdc5b6`, `61f000e`, `82d5b62`, `9632db9`, `8d7f6fd`, `dee5446`, `ed4c7da`, `3b2dbf3`, `a1187dc`. The coordinator handles the shared branch’s push and pull request.
