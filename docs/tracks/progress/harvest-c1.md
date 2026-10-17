@@ -11,3 +11,5 @@ Read the complete eight-page You et al. 2023 paper (10.48130/tih-2023-0011), com
 This checkpoint: 1 genus screened; 4 evidence records, including two full-text upgrades for O. triangularis, O. corymbosa blue-light perception, and a secondary O. stricta night-leaf observation quoted from You et al. (original Harshberger 1922 not opened). The stricta record potentially closes 1 listed diel cell. No genus-wide negative search claims were written for diel or light perception, since positive measurements were found. Four wanted entries added. Other focal Oxalis species remain unresolved; plant traits have no carry rule.
 
 Next: screen Medicago, then Tussilago and Campanula, opening the plausible sources. The other 39 genera are not complete at this checkpoint. No usage limit encountered by this agent.
+
+Quote validation at final checkpoint: both You et al. prose quotes pass quotecheck against the PDF; the 26.33/27.33-hour table quote passes verbatim against pdftotext -layout text. The Nakanishi blue-light quote passes against the PDF. The table quote includes the measured values, not merely its header.
