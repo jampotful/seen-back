@@ -30,3 +30,7 @@ Pending candidate ranks: 101, 102, 103, 104, 105, 109, 110, 113, 116, 117, 118, 
 All records were appended with `addlog.py`; all quotes passed `quotecheck.py` against retrieved source text, visually verified scan transcripts, or extracted PDF table layout. Rank 84’s categorical rows fail the PDF prose-order path but all 283 pass against its `pdftotext -layout` text. Source counts reconcile exactly with the evidence log.
 
 Only the four files authorized by `oa-pass.md` changed: this summary, `docs/views/evidence/oa-2.jsonl`, `docs/views/sources/oa-2.jsonl` and `docs/views/sources/oa-none-2.jsonl`. PDFs, full text, XML, metadata caches and scripts remain outside the repository. No pull request was opened.
+
+## 2026-10-17
+
+Discovery checkpoint for the 26 entries assigned this round: positions 2, 7, 13, 18, 22, 30, 31, 37, 39, 41, 43, 44, 46, 47, 49, 51, 53, 56, 58, 62, 64, 67, 74, 75, 77 and 79. OpenAlex and Europe PMC lookups completed before reading. Semantic Scholar returned HTTP 429 at position 13; further requests to that host stopped. Unresolved lookups and blocked free-copy candidates are kept pending, rather than newly declared unavailable. Downloaded papers and scripts are outside the repository in `/tmp/oa2-20261017`. Reading and record counts follow at the final checkpoint below.
