@@ -3,6 +3,9 @@ Usage: python3 -I tools/views/codex_queue.py [--json]
 Items:
 - oa-k: papers of docs/tracks/batches/oa-k.json with no line yet in docs/views/sources/oa-k.jsonl or oa-none-k.jsonl
   (matched by DOI, else by normalised title). Prompt docs/tracks/prompts/oa-pass.md.
+- harvest-cK: genera of docs/tracks/batches/harvest-cK.json with no record yet in docs/views/searched/harvest-cK.jsonl
+  or docs/views/evidence/harvest-cK.jsonl. Prompt docs/tracks/prompts/round4-harvest.md (screening what the harvest
+  workflow already found; the searches themselves are done).
 - external-k: genera of docs/tracks/batches/external-k.json with no record yet in docs/views/searched/external-k.jsonl
   or docs/views/evidence/external-k.jsonl, listed only when docs/tracks/codex-gates.json has "sweeps": true.
   Prompt docs/tracks/prompts/external-sweep.md.
@@ -75,6 +78,26 @@ def sweep_items():
                           'genera': left, 'count': len(left), 'of': len(genera)})
     return items
 
+def harvest_items():
+    items = []
+    for path in sorted(glob.glob(P('docs/tracks/batches/harvest-c*.json')), key=lambda p: int(re.findall(r'(\d+)\.json$', p)[0])):
+        k = re.findall(r'harvest-c(\d+)\.json$', path)[0]; unit = f'harvest-c{k}'
+        genera = json.load(open(path, encoding='utf-8'))['genera']
+        recs = (lines(P('docs/views/searched', unit + '.jsonl')) + lines(P('docs/views/evidence', unit + '.jsonl'))
+                + pending_lines(f'docs/views/searched/{unit}.jsonl') + pending_lines(f'docs/views/evidence/{unit}.jsonl'))
+        done = {(j.get('taxon') or '').split()[0] for j in recs if j.get('taxon')}
+        left = [g for g in genera if g not in done]
+        if left:
+            items.append({'item': unit, 'prompt': 'docs/tracks/prompts/round4-harvest.md', 'batch': f'docs/tracks/batches/{unit}.json',
+                          'genera': left, 'count': len(left), 'of': len(genera)})
+    return items
+
+def interleave(a, b):
+    out = []
+    for i in range(max(len(a), len(b))):
+        out += a[i:i + 1] + b[i:i + 1]
+    return out
+
 def held():
     """Items docs/tracks/codex-gates.json holds back until a time, e.g. while an earlier chat may still be working on them."""
     import datetime
@@ -91,14 +114,17 @@ def held():
 
 def main():
     hold = held()
-    items = [it for it in oa_items() + sweep_items() if it['item'] not in hold]
+    items = [it for it in interleave(harvest_items(), oa_items()) + sweep_items() if it['item'] not in hold]
     if '--json' in sys.argv[1:]:
         print(json.dumps(items, ensure_ascii=False, indent=1)); return
     if not items:
         print('Nothing to do: every outside batch is finished on main.'); return
     for it in items:
         what = 'entries ' + ','.join(map(str, it['entries'])) if 'entries' in it else 'genera ' + ', '.join(it['genera'])
-        print(f"{it['item']}: {it['count']} of {it['of']} left. Follow {it['prompt']} for {it['batch']}, doing only {what}.")
+        how = (f" as unit {it['item']}: write docs/views/searched/{it['item']}.jsonl, docs/views/wanted/{it['item']}.jsonl and evidence"
+               f" through tools/senses/addlog.py with unit {it['item']}; commit instead of pushing, since the round opens the pull request,"
+               f" and fetch pages with your own tools") if it['item'].startswith('harvest-c') else ''
+        print(f"{it['item']}: {it['count']} of {it['of']} left. Follow {it['prompt']}{how} for {it['batch']}, doing only {what}.")
 
 if __name__ == '__main__':
     main()
