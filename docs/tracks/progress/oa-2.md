@@ -67,6 +67,22 @@ Round checkpoint: 34 entries checked; 29 indexed legal candidates; 7 complete so
 
 Entry 40 (rank 119), legume flowering review: full main XML, both tables and figures read; no supplements listed. Logged 24 secondary records, distinguishing photoperiodic phenotypes, phytochrome/cryptochrome gene complement, mutant effects and vernalization. Gene copies are not converted to spectral receptor classes; all records grade g and no invented critical daylengths, wavelengths or temperatures. The source states four soybean PHYA copies including a likely pseudogene.
 
-Quality correction after the entry-38 commit: ten raw museum measurements labeled Adenomera sp. (hylaedactyla?) or Dendropsophus sp. 2 are now grade g/rank genus, with the exact uncertain source labels retained. Named-species grade m is not applied to these unidentified specimens. Quotes and source measurements are unchanged.
+Quality correction after the entry-38 commit: 14 measurements labeled Adenomera sp. (hylaedactyla?), Dendropsophus sp. 2, or Stumpffia ?grandis are now grade g/rank genus, with the exact uncertain source labels retained. Named-species grade m is not applied to these unidentified specimens. Quotes and source measurements are unchanged.
 
 Round checkpoint: 34 entries checked; 29 indexed legal candidates; 8 complete sources/datasets read, plus 5 additional abstracts; 5,575 new records; 0 new no-free declarations; 26 assigned entries remain queued for complete reading.
+
+### Final reconciliation for this round
+
+Stopped between sources before entry 43 at the research brief’s long-context handoff boundary, after completing entry 40. No application builds, servers or tests were run.
+
+- Assigned entries checked: 34.
+- Indexed legal-copy candidates: 29; successful complete-source retrievals: 13, of which 8 were fully read (including their available supporting material). The five downloaded sources still awaiting reading are entries 43, 44, 46, 62 and 74.
+- Complete sources/datasets read and retired from this assigned queue: 8, entries 8, 23, 24, 25, 26, 34, 38 and 40.
+- Additional abstract-only sources: 5, entries 2, 7, 51, 56 and 58; these remain in the full-source queue.
+- New evidence: 5,575 records. The eight new read markers account for 5,556 records; 19 partial abstract records have no full-read marker. The batch evidence log now totals 8,889 records.
+- New no-free-copy declarations: 0. No-candidate results are incomplete because Semantic Scholar returned 429; inaccessible indexed copies remain separate from absent copies.
+- Remaining assigned entries for full-source work: 26, positions 2, 7, 13, 18, 22, 30, 31, 37, 39, 41, 43, 44, 46, 47, 49, 51, 53, 56, 58, 62, 64, 67, 74, 75, 77, 79.
+
+No candidate or identity unresolved: 7, 18, 39, 41, 53. Entry 39 retains its supplied university PDF URL for a future direct attempt; its OpenAlex title lookup did not produce an identity match. Indexed candidates not successfully downloaded: 2, 13, 22, 30, 31, 37, 47, 49, 51, 56, 58, 64, 67, 75, 77, 79. The Dryad entries 13 and 22 have resource-download failures, not completed dataset reads. Entry 22’s downloaded journal article is not substituted for its wanted Dryad dataset.
+
+Downloaded paper files, supporting tables, metadata caches and quote-check manifests remain in `/tmp/oa/oa-2`; scratch scripts stay untracked in `work/`. The exact manifest for the 5,575 new records is `/tmp/oa/oa-2/quotecheck-manifest.json`. Every manifest record set passed quotecheck against its listed source text. Source PDFs/XML/full text are not committed.
