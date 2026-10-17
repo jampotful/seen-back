@@ -40,3 +40,5 @@ Commits before this final checkpoint: `e9a2000`, `cca37f8`, `67f99a8`. The coord
 ## 2026-10-16
 
 Round in progress. All 73 assigned entries are receiving initial OpenAlex, Europe PMC and Semantic Scholar lookups. Semantic Scholar returned HTTP 429 at entry 13 and was stopped for the round. Five earlier entries (4, 5, 7, 9 and 12) returned no free-copy candidate from the completed three-provider lookups and are settled as no free copy. No new evidence records or full-read markers yet. Remaining entries stay queued when discovery or downloads fail; errors are not no-free outcomes.
+
+Entry 33 has now been read in full (eight-page publisher PDF via Europe PMC). Its primary measurements concern eye and skull dimensions and allometric scaling, with no measured value of the listed sensory traits: 0 evidence records. The paper does not supply species-level acuity from eye diameter, and none was inferred.
