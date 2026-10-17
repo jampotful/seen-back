@@ -92,3 +92,35 @@ The required batch lookup script saved raw responses outside the repository unde
 All **49 new quotes passed quotecheck** against the retrieved full-paper, supplement or abstract text exports. `addlog.py` validated all additions. Only this batch's evidence, source and progress files were changed. The no-copy file is unchanged. No downloaded paper, full text, metadata response or script was committed.
 
 Commits before this progress update: `3a0dd6a` (fritillary paper and supplement), `b122af7` (partial records and zero-record skunk-cabbage reading). Next: retry the seven unresolved entries when the lookup services are available; retrieve the refused publisher candidate for entry 46 and resolve the missing identities for entries 42 and 52.
+
+## 2026-10-16 continuation: seven queued entries
+
+Checked only entries **37, 42, 46, 52, 56, 58 and 70** (ranks 195, 200, 204, 210, 214, 216 and 228) on the round coordinator's freshly updated shared branch. No app setup, builds or tests were run.
+
+- **7 papers checked; 0 free full articles retrieved; 0 full articles read; 33 evidence records added; 2 no-free-copy decisions; 5 entries remain queued.** One complete, freely available six-page supplement was retrieved and read; it is counted separately from full articles. The two no-free decisions concern entries 37 and 70 only.
+- **Cumulative files:** 634 evidence records (553 from full-article reading and 81 explicitly partial records), 11 full-read source entries, and 63 no-free entries. There are now **74 of 79 queue entries recorded as read or skipped, with 5 remaining**: entries **42, 46, 52, 56 and 58**. Historical limitations in earlier progress sections still apply.
+- All **33 new quotes passed quotecheck (33 verbatim, 0 failed)** against the downloaded supplement's text, and addlog validated all records. They occupy evidence lines **602–634**. All are grade g and explicitly partial; none asserts a measured physiological peak or demonstrated behavioural colour discrimination.
+
+### Lookup and reading results
+
+| Entry | Result this round |
+|---|---|
+| 37 | DOI `10.1086/691404` confirmed again. OpenAlex returned closed with no OA location; Europe PMC has no PMC full text and lists subscription access; Semantic Scholar returned closed with no PDF. Added a no-free-copy line. Existing partial abstract evidence was not duplicated. |
+| 42 | Exact OpenAlex title/first-author/year match and Crossref confirm DOI `10.1016/j.anbehav.2010.11.014`, Fernández-Juricic et al., 2011, *Animal Behaviour* 81(4):705–713. OpenAlex is closed; Europe PMC DOI query has no result. Semantic Scholar returned HTTP 429. Kept queued because that discovery service is unavailable. |
+| 46 | OpenAlex confirms the Wiley free-PDF candidate for DOI `10.1111/j.1420-9101.2010.02046.x`; retrieval returned HTTP 403. The HAL record `hal-00649940` has no deposited file in its API response and links to the same Wiley PDF. An Oxford page also returned 403. Kept queued: a refused candidate is not proof that no legal free copy exists. |
+| 52 | Identified DOI `10.1080/01584197.2020.1857652` through the exact OpenAlex title match and Crossref. Crossref gives first author **Belén Casalía**, print date **2020-10-01**, online date **2021-01-04**, resolving the batch's 2021 date; its first-author initials are inaccurate. OpenAlex's Figshare candidate is a **supplement**, not the main article. Main publisher PDF returned 403; CONICET returned 503. Kept queued. |
+| 56 | DOI `10.1002/cne.21626` confirmed. OpenAlex has no OA location; Europe PMC has no PMC text and lists subscription access. Semantic Scholar was not retried after the 429. Kept queued; existing partial abstract records were not duplicated. |
+| 58 | DOI `10.1126/science.7352290` confirmed. OpenAlex has no OA location; Europe PMC has no PMC text and lists subscription access. Semantic Scholar was not retried after the 429. Kept queued; existing six partial abstract records were not duplicated. |
+| 70 | The chapter's single required OpenAlex check succeeded and reports closed with no OA location. Added a no-free-copy line with `checked: ["openalex"]`, as the prompt explicitly permits one OpenAlex check for a book chapter. |
+
+The required scripted lookups ran before paper reading and saved responses under `/tmp/oa/oa-3`. Initial title searches for entries 42 and 52 used a trailing slash that OpenAlex rejected with 404; corrected requests to `/works` both succeeded before accepting either identity. Semantic Scholar's first request (entry 37) succeeded, its next request returned 429, and no further calls to that service followed. Google returned a JavaScript challenge; Bing returned irrelevant broad results. Neither search supplied evidence.
+
+### Cardinal and tanager supplement
+
+Read all six pages of the publisher-associated Figshare file, including Table S1, its references and the visually inspected image-only Figure S1. Its cover reads *UV sensitive vision in cardinals and tanagers is ubiquitous and conserved*. Figshare article `13521423` explicitly links it to the main article DOI above; the permanent file URL read was `https://ndownloader.figshare.com/files/25953891`.
+
+The **33 records cover 32 taxon labels**: 21 species newly sequenced in this study and 12 secondary sequence/classification entries (one repeats *Cardinalis cardinalis* using an earlier accession). Duplicate individuals within each newly sampled species are combined into one class record, with all accessions identified in the note. The new trait `opsin_class` records an inferred UVS or VS SWS1 class, because `lambda_max_nm` would wrongly imply a measured pigment peak and `colour_vision` would imply behavioural evidence. All records explain the gene-based inference and use grade g. Secondary rows identify the reference printed in Table S1; their original sources were not opened.
+
+**Ramphocelus carbo is sampled and has a predicted UVS SWS1 class. Thraupis, Sicalis and Paroaria are absent from this table.** No measurement was assigned to those unsampled genera. The main article remains unread, so there is no new full-read source entry and no no-free-copy decision for entry 52.
+
+Commits before this note: `9bba216` (two no-free-copy determinations), `d32f9ba` (33 supplement records). Next steps: retrieve the main article for entry 52; resolve entry 46's refused free PDF; complete missing Semantic Scholar checks for entries 42, 56 and 58 when the service is available. Only this batch's permitted evidence, no-free and progress files changed; no downloaded paper, supplement, text or script is committed.
