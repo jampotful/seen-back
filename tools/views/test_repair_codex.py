@@ -36,6 +36,7 @@ check("both", R.quote_flag(rec(quote="of the retina is made up of rods with 97 p
 check("marked cut", R.quote_flag(rec(quote="... of the retina is made up of rods with 97 percent being red ...")), None)
 check("short phrase", R.quote_flag(rec(quote="night-time scent")), None)
 check("table row", R.quote_flag(rec(quote="Passer_domesticus,78,Passeriformes,4.88,RGC Density,6.07", where="Bird.csv row 62")), None)
+check("figure caption fragment", R.quote_flag(rec(quote="the blind area is indicated by", where="Fig.2 p.882")), "start")
 check("symbol lead", R.quote_flag(rec(quote="pH of 7.2 was held for the whole run of the trial.")), None)
 
 # (c) journal, authors

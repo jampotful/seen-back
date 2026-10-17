@@ -61,7 +61,7 @@ def partial_reason(r):
 
 
 # ---------- (b) the quote ----------
-TABULAR = re.compile(r"\b(?:table|csv|xlsx?|sheet|row|rows|column|fig(?:ure)?s?\.?|supplement\w*|dataset|appendix|S\d|tsv|spreadsheet)\b", re.I)
+TABULAR = re.compile(r"\b(?:table|csv|xlsx?|sheet|row|rows|column|supplement\w*|dataset|appendix|S\d|tsv|spreadsheet)\b", re.I)
 SMALL_LEAD = re.compile(r"^(?:[a-z]{1,2}[A-Z0-9]|[a-z]+[A-Z]|pH\b|n\s*=|mRNA|rRNA|cDNA|eBird|iNat|et al|dB\b|cm\b|mm\b|nm\b|um\b|µm\b|kHz\b|Hz\b|ms\b|c/deg\b|cpd\b)")
 
 
