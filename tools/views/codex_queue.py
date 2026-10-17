@@ -6,8 +6,10 @@ Items:
 - external-k: genera of docs/tracks/batches/external-k.json with no record yet in docs/views/searched/external-k.jsonl
   or docs/views/evidence/external-k.jsonl, listed only when docs/tracks/codex-gates.json has "sweeps": true.
   Prompt docs/tracks/prompts/external-sweep.md.
-Entries are positions in the batch file's list, counting from 1. Work from an open pull request is not on main yet, so
-a round should start only when no outside pull request is open (docs/tracks/prompts/codex-round.md)."""
+Entries are positions in the batch file's list, counting from 1. Work from a round whose pull request is still open is
+not on main yet: list its branch under "pending" in docs/tracks/codex-gates.json and the queue counts that branch's
+source ledgers as done too (fetch origin first), so the next round can start before the last one is merged. Take a
+branch off the list when its pull request is closed without merging."""
 import glob, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -22,6 +24,25 @@ def lines(path):
         except ValueError: pass
     return out
 
+_fetched = set()
+
+def pending_lines(rel):
+    """The lines of a file on each branch listed under "pending" in codex-gates.json (open pull requests)."""
+    import subprocess
+    gates = P('docs/tracks/codex-gates.json')
+    out = []
+    if not os.path.exists(gates): return out
+    for b in json.load(open(gates)).get('pending') or []:
+        if b not in _fetched:  # a clone that tracks main only does not hold the branch yet
+            f = subprocess.run(['git', '-C', ROOT, 'fetch', '-q', '--depth', '50', 'origin', f'+refs/heads/{b}:refs/remotes/origin/{b}'], capture_output=True, text=True)
+            if f.returncode: print(f'warning: could not fetch pending branch {b}; its finished entries are listed again', file=sys.stderr)
+            _fetched.add(b)
+        r = subprocess.run(['git', '-C', ROOT, 'show', f'origin/{b}:{rel}'], capture_output=True, text=True)
+        for l in r.stdout.splitlines():
+            try: out.append(json.loads(l))
+            except ValueError: pass
+    return out
+
 def oa_items():
     items = []
     for path in sorted(glob.glob(P('docs/tracks/batches/oa-*.json')), key=lambda p: int(re.findall(r'\d+', os.path.basename(p))[0])):
@@ -29,7 +50,7 @@ def oa_items():
         papers = json.load(open(path, encoding='utf-8'))['papers']
         seen_doi, seen_title = set(), set()
         for name in (f'oa-{k}.jsonl', f'oa-none-{k}.jsonl'):
-            for j in lines(P('docs/views/sources', name)):
+            for j in lines(P('docs/views/sources', name)) + pending_lines(f'docs/views/sources/{name}'):
                 if (j.get('doi') or '').strip(): seen_doi.add(j['doi'].lower().strip())
                 if j.get('title'): seen_title.add(norm(j['title']))
         left = [n for n, p in enumerate(papers, 1)
