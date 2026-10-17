@@ -18,3 +18,7 @@ Resume from these actual files and metadata:
 - Next work: finish supplement availability for5; read8 with any free supplements; read9 with its free species-data supplements. Recheck the shared refusal list before fetching another host.
 
 Commits this round before final status update:5fc7a9f6,dc76e18e,4eb99a22.
+
+## 2026-10-17
+
+Continuation this round: entry5 finalized as a truthful incomplete-supplement access outcome (main previously read and41 records already logged; TableS1 unread; no full-read ledger). Entry8 full eleven-page turtle paper read, with no supplement linked or cited, adding29 quotechecked records across both species. Added1 full-paper ledger row and1 inaccessible-supplement discovery row. New evidence total2151; total full-paper reads2 plus requested dataset3; terminal discovery rows35. Entry8 retains Table1/Table2 inconsistencies, treats field areas as planar areas at20cm, and does not infer stereopsis from binocular overlap. No new host refusal. Next: entry9 cached main XML plus successfully downloaded EuropePMC supplementary ZIP, not yet read; then15,17,18,19,23,26,34,35,36,38,39,41,43,48,50,51,53.
