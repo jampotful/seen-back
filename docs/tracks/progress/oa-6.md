@@ -48,3 +48,26 @@ Entry **45**, *Retinal regionalization and heterogeneity of butterfly eyes*, was
 New refused hosts, reported to the coordinator: `connectsci.au` HTTP 403; `researchspace.auckland.ac.nz` JavaScript anti-bot challenge; `www.oceanfirstinstitute.org` and `www.bdbotsociety.org` HTTP 406; `stinchcombe.eeb.utoronto.ca` proxy CONNECT 403. No retry after refusal. UMass entry 51 and ANU entry 52 have actual download links but return login/request-copy pages; no access restriction was bypassed. Entry 63's Nebraska full-paper PDF was downloaded but is **not yet read**. Entry 73's actual Zenodo API record resolves to version 6360448 and supplies an 81-page review; it is **not yet read**. Downloading or finding a file is not a full-read claim.
 
 At this checkpoint, continue with assigned entry **46**. Raw files, API responses and scripts are outside the public repository in `/tmp/oa/oa-6`. Commit for the entry-45 full read: `4e18f3a6`.
+
+Final checkpoint for this UTC date: **all 60 assigned entries processed**. This round added **163 evidence records**: **148 from 2 complete papers**, and **15 partial records from 4 abstracts**. Grades for this round are **149 `m`, 13 `g`, 1 `i`**. All new quotes passed `quotecheck.py`; `addlog.py` validated every new evidence record. The batch log now has **822 records**. Only the two complete papers, entries **45 and 63**, received new full-read source markers.
+
+| Final outcome, this round | Count |
+|---|---:|
+| Assigned entries checked in initial Europe PMC script | 60 |
+| Legal complete papers acquired and read | 2 |
+| Full-text records | 148 |
+| Abstract-only records | 15 |
+| Actual limited-search no-copy outcomes | 41 |
+| Known free or indexed candidates inaccessible/restricted | 15 |
+| Identity/citation unresolved | 2 |
+| New full-read source markers | 2 |
+
+Entry **63**, *Gull plumages are, and are not, what they appear to human vision*, was read in full from Nebraska's public repository, including all four tables and three appendices. Its own data measure feather reflectance, and its discrimination results are visual-model predictions, not measured gull behavioural thresholds. The eight logged records are **all grade `g`**, documenting secondary physiology and model-input cone-density ratios with Hart (2001), Hart & Hunt (2007), Håstad et al. (2009) and other original references explicitly identified. No sampled gull is assigned direct measured vision on this paper's authority. All eight quotes passed against the PDF's normal text extraction.
+
+Entry **61** adds four quote-checked `partial: true` records from the complete public conference abstract: jungle-crow ganglion-cell total, peak density, soma-area range and anatomical acute areas. These are for **Corvus macrorhynchos**, not the batch's target relative C. brachyrhynchos. No full journal paper was read or retired. Together with entries 36, 39 and 42, this makes four newly used abstracts and 15 partial records this round.
+
+All fifteen inaccessible/restricted candidates have `skipped: free copy inaccessible`, actual candidate URLs, specific response/restriction reasons and an explicit unread/manual-acquisition note. They are entries **8, 14, 26, 31, 41, 48, 49, 50, 51, 52, 55, 64, 72, 73 and 79**. UMass/ANU download links require login or request-a-copy; their availability as free copies is **not established**, and no login or request was attempted. Entry 55's actual BDTD full-text link returned HTTP 404. Entry 72's Europe PMC XML and PDF-render routes both returned HTTP 500; PMC membership establishes a known free copy, not a successful read. Entry 73's Zenodo metadata was retrieved before the global HTTP 429, but its file was never fetched after that refusal; its alternate actual publisher PDF returned **HTTP 406**, and `peckhamia.com` was reported to the coordinator and not retried. The entire review remains unread. The indexed free DOI location for entry 79 remains unverified.
+
+Entries **47 and 65** use `skipped: lookup unresolved`, not an absence claim. Their incomplete citation identities could not be confirmed in opened lawful primary metadata. The 41 no-copy rows list actual Europe PMC and general-web searches, identify API/publisher limits, and explicitly distinguish a limited negative search from proof of absence. No skipped row claims a complete read. NASA's entry-78 record and USF's entry-69 listing were opened: both supply metadata/external links, not repository full texts.
+
+Stopped after the final assigned entry **79**. Nothing assigned remains unprocessed, although all inaccessible, restricted, unresolved and abstract-only sources remain unread in full. No papers, XML, extracted source text or scripts were added to the public repository. Coordinator handles push and the shared pull request. Commits so far: `4e18f3a6`, `ac3b93a6`, `4a1fdd6a`.
