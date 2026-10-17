@@ -30,3 +30,9 @@ Pending candidate ranks: 101, 102, 103, 104, 105, 109, 110, 113, 116, 117, 118, 
 All records were appended with `addlog.py`; all quotes passed `quotecheck.py` against retrieved source text, visually verified scan transcripts, or extracted PDF table layout. Rank 84’s categorical rows fail the PDF prose-order path but all 283 pass against its `pdftotext -layout` text. Source counts reconcile exactly with the evidence log.
 
 Only the four files authorized by `oa-pass.md` changed: this summary, `docs/views/evidence/oa-2.jsonl`, `docs/views/sources/oa-2.jsonl` and `docs/views/sources/oa-none-2.jsonl`. PDFs, full text, XML, metadata caches and scripts remain outside the repository. No pull request was opened.
+
+## 2026-10-16
+
+Discovery completed for all 34 assigned entries before reading. OpenAlex and Europe PMC returned 29 entries with indexed free-copy candidates; five entries have no candidate or unresolved identity. Semantic Scholar returned HTTP 429 on entry 7 and was not retried. Missing candidates therefore remain queued, with no new no-free-copy declarations.
+
+Checkpoint: one complete paper read (entry 8, rank 87), 37 records appended and quote-verified. Title and supplied PMC identifier resolve the batch’s missing author/year to Gutiérrez et al. 2024. All ten figure captions and full body read; no supplementary files listed. Anatomical spacing is kept distinct from behavioral acuity, pooled acceptance angles are grade g, and cited comparisons are labeled secondary. Entry 2’s XML returned 500 and PMC HTML was a browser challenge; it remains queued. Downloads are in `/tmp/oa/oa-2`, scripts untracked in `work/`.
