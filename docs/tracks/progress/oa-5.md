@@ -23,3 +23,7 @@ No retrieved paper remains pending. For a future pass, the first three unresolve
 Remaining ranks (no full read and no no-copy ledger entry): 326, 335, 349, 352, 358, 360, 363, 365, 368, 375, 379, 381, 382, 384, 385, 386, 392, 394, 395.
 
 PDFs, XML, full texts, supplements and API caches remain under /tmp/oa, outside the repository; scratch scripts are under /workspace/work/oa-5. Only the four permitted batch-5 files changed. App setup, builds, servers and app tests were skipped.
+
+## 2026-10-16
+
+Round in progress. All 19 assigned entries checked in a single discovery script before reading. Semantic Scholar returned HTTP 429 at entry 36 and was stopped. OpenAlex and Europe PMC continued successfully. Five full papers verified so far; one paper read and 41 records logged and quote-checked. One book/chapter has no free copy after the prompt’s one-check exception. Entries with an unavailable required provider or blocked indexed copies remain queued.
