@@ -13,3 +13,7 @@ Remaining assigned genera are uncompleted and have no new search records until t
 Evidence added this round: 5 records (4 full-text Speyeria habitat-targeting outcomes, 1 abstract-only Pontederia ethylene response). No habitat distance was converted into acuity.
 
 Next three entries: Opuntia, Schistocerca, Malva; their harvest and Europe PMC fallback results are cached in work/harvest-c2 but have not completed source screening. Continue only the assigned list from Opuntia onward; Egretta and Stachys were outside this assignment.
+
+## 2026-10-17 — continuation
+
+Completed Opuntia, Schistocerca and Malva (12 total including the earlier nine). Added 7 evidence records (6 full-text, 1 abstract-only), 7 search records (49 total), and 5 wanted lines (7 total). Full-text measurements address Opuntia light response, Schistocerca photoreceptor cutoff, and Malva diurnal tracking; no response bandwidth was called flicker fusion, and no spectral peaks were used as range endpoints. Retrieved eight candidate/review full texts through Europe PMC; no new service refusals. All remaining genera from Coenagrion onward remain pending.
