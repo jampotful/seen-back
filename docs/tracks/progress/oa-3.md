@@ -145,3 +145,13 @@ The next useful input remains the authorized publisher PDF or an accessible auth
 - The already identified free publisher copy remains blocked by the round's existing host refusal. No refusing service was retried, no unauthorized upload was opened and no new refusal occurred. No complete-source line, no-copy retirement line or inferred species-level pupil measurement was added. Figshare responses remain outside the repository under `/tmp/oa/oa-3-version-leads`; no paper text was committed.
 
 The remaining need is an accessible authorized main article and its Table S1. This progress-only update does not require quote checking or app checks.
+
+
+## 2026-10-16 continuation: entry 46, metadata relations and advertised TDM link
+
+- **1 paper checked; 0 new complete free copies retrieved; 0 papers read; 0 evidence records added; 0 no-copy outcomes added; 1 entry remains unresolved.** Cumulative totals remain 633 evidence records, 11 fully read sources and 65 historical no-copy outcomes.
+- This pass inspected the preceding progress and retained entry-46 lookup artifacts before checking unused metadata routes. Crossref returned HTTP 200 for DOI `10.1111/j.1420-9101.2010.02046.x`; its `relation` object is empty. It supplies only the Wiley publisher PDF and Wiley TDM link, with a migrated Oxford Academic primary landing page. Already refused publisher landing-page/PDF hosts were not requested. DataCite returned HTTP 200 and zero results for this DOI as a related identifier; this checks registered relations, not every possible repository copy.
+- The actual `api.wiley.com` TDM URL retrieved from Crossref was tried once by an ordinary unauthenticated request. It returned **HTTP 400 with an empty body**, so it supplied no paper. No credentials were sought and no retry followed. Additional indexed author-publication/manuscript and repository searches supplied no new usable authorized copy; repeated catalogue results, unrelated citing papers and unauthorized uploads were excluded.
+- Responses, request status and the search ledger remain outside the repository under `/tmp/oa/oa-3-relations`. No new HTTP 403/429 or robots refusal occurred. The known free publisher copy remains technically inaccessible, so no no-copy retirement line, full-read claim or species-level pupil record was added. This progress-only update requires no quote checking or app checks.
+
+The remaining need is an accessible authorized main article and its Table S1. Crossref's advertised TDM route did not provide an alternative in this environment.
