@@ -105,12 +105,12 @@ Other advertised entries still retrieval-blocked (not absence verdicts):
 
 The assigned continuation covers entries 2, 8, 12, 14, 15, 19, 23, 24, 26, 30, 32, 33, 35, 38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 50, 52, 53, 54, 56, 58, 61, 62, 63, 64, 65, 67, 68, 69, 70, 71, 73, 74, 75, 76, 77, 78 and 79. Earlier completed entries were left alone.
 
-### Counts so far
+### Final counts for this round
 
 - Checked all **46 assigned entries** in one discovery script before reading. OpenAlex returned 45 successful responses and one HTTP 400 for the chapter citation at entry35. Exact title, first author and year matched DOI-less entries19, 52 and78; unmatched/incomplete citations remain unresolved.
 - **21 entries advertised candidate copies.** Six entries yielded identifiable article PDFs or XML: 32, 39, 67, 68, 70 and71. Retrieval is separate from reading.
 - Europe PMC search succeeded for all **39 DOI-resolved entries**. Semantic Scholar succeeded for entry8, returned HTTP 429 at entry14, and was stopped immediately; the other 37 DOI lookups were skipped. No incomplete or blocked lookup became a definitive no-free-copy verdict.
-- **14 new records** from entry39's full main article, all marked `partial: true` because its supporting tables remain inaccessible. **0 completed full-read registry entries**, **0 new no-copy verdicts** so far. Existing evidence and registry lines were retained.
+- **33 new records**: 14 from entry39's complete main article, marked `partial: true` because its supporting tables remain inaccessible, and 19 abstract-only records from nine later entries. All 33 are partial evidence. **0 completed full-read registry entries**, **0 new no-copy verdicts**, **0 assigned entries retired; all 46 remain queued**. The log now has **5,190 records** (5,157 earlier plus 33 this round). Existing evidence and registry lines were retained.
 
 ### Reading and access
 
@@ -118,6 +118,12 @@ Read all six article pages and the prefixed publisher correction of entry39, *Eu
 
 Entries8, 14, 15, 23, 26 and33 have advertised copies blocked by publisher/repository HTTP403 or the session proxy. Entry19's Europe PMC fullTextXML endpoint returned HTTP500, and its publisher copy returned403. Previously logged abstract evidence at entries14, 15, 19 and24 was not duplicated. Entry32's Birmingham publisher PDF was retrieved again, but its raw supporting tables remain outstanding and its existing main-article records were not duplicated. Entry30's public Dryad landing page was retrieved, without a dataset-read claim. Entry2 still lacks an exact bibliographic match after two OpenAlex searches; entries12 and62 have incomplete author/year citations and were not guessed. No PDF, XML or article text was written inside the repository. Scratch audit trail: `/tmp/oa/oa1-20261017`.
 
-### Next
+### Abstract coverage added this round
 
-Continue from entry40 in assigned batch order. Retrieved later copies await reading: entry67 (frog opsins, including its supplementary ZIP), entry68 (diving-bird skull geometry), entry70 (raptor visual abilities), entry71 (iguana parietal-eye photopigments). Entry39 needs its publisher supporting PDF to resolve the remaining table values. Stop between papers and update this dated section with final counts.
+Read the available Europe PMC abstracts in assigned order through entry63, omitting duplicate previously logged values. Added 19 records: entry40 (3; brittle-star spatial responses and chromatophore state), entry43 (2; approximate woodlouse ommatidial count and pigment migration), entry44 (3; eye-specific Argiope tapetum anatomy), entry45 (1; principal-eye receptor count), entry46 (2; Plathemis head tracking and interception control), entry47 (1; crow behavioral acuity 8.4cycles/degree), entry48 (1; unnamed hawkmoth summation benefit, family-level grade), entry50 (3; Deinopis neural frequency range, demonstrated detection distance and tested sound level), entry61 (3; male Eristalis bright-zone and motion-response properties). Each carries `partial: true`, `access: abstract`, and an exact retrieved abstract quote. New count traits explicitly explain their distinction from eye count and spectral receptor-class count. The hawkmoth abstract never names a species, so its record stays at family level. No numerical hearing threshold, CFF or maximum detection distance was inferred from the tested observations.
+
+Every new record passed the relevant quotecheck (14 against visually verified figure-label transcription; 19 against saved abstract text) and was appended through addlog.py validation. No application build, server, prepare step, browser check or broad test ran. The round closed at this paper boundary after Semantic Scholar's rate-limit stop condition was reported. All lookup results, abstracts, figure transcriptions and PDFs stayed outside the repository.
+
+### Resume
+
+All 46 assigned entries remain unresolved for full-source retirement. Entry39 now has partial main-article evidence and needs its supporting PDF. Entries40,43,44,45,46,47,48,50 and61 now also have partial abstract evidence; avoid duplicating it. Unmatched DOI-less citations (2,12,35,62,64,65,69) still need identity resolution; entry35's OpenAlex chapter-title query returned HTTP400. No record or no-copy verdict was invented for them. Retrieved later copies await reading: entry67 (frog opsins, including its supplementary ZIP), entry68 (diving-bird skull geometry), entry70 (raptor visual abilities), entry71 (iguana parietal-eye photopigments). Entry77 has a retrieved public thesis landing page but its PDF remains unexamined. No later source was begun after the round closure instruction.
