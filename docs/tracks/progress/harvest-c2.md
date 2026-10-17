@@ -34,4 +34,4 @@ The final sources include a Carleton thesis with a visually inspected Battus pol
 
 New access failures reported to round lead: www.mdpi.com HTTP 403; www.botanicalsciences.com.mx HTTP 401; karger.com HTTP 403; refubium.fu-berlin.de HTTP 200 anti-bot challenge. Two old ELTE thesis links returned 404. Europe PMC XML HTTP 500 for several scanned/manuscript articles was resolved using its legitimate PDF-render endpoint. Crossref metadata was obtained before the round lead reported its later HTTP 429; no further Crossref request was sent after that report. No paper PDF or full text is included in the commit.
 
-Round review (UTC2026-10-17): corrected the Castilleja tenuiflora MeJA statement fromm tog because the retrieved source is a review citing a book chapter. Total39 records unchanged; no direct species measurement or full-source cell closure is claimed for that secondary statement.
+Round review (UTC2026-10-17): corrected the Castilleja tenuiflora MeJA statement from m to g because the retrieved source is a review citing a book chapter. Total 39 records unchanged; no direct species measurement or full-source cell closure is claimed for that secondary statement.
