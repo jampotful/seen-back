@@ -137,3 +137,11 @@ Entry 46 follow-up exhausted the available alternative leads: exact-title/DOI/au
 - New refusals: CORE returned HTTP 403, and the web-search service reported a non-retryable robots.txt block for `ses.library.usyd.edu.au`; neither was retried. Existing round-wide refusing services were skipped. Responses remain outside the repository in `/tmp/oa/oa-3-unused-leads`. No full-read line, no-copy retirement line or species-level pupil claim was added.
 
 The next useful input remains the authorized publisher PDF or an accessible author manuscript, together with Table S1. Metadata/search snippets cannot replace reading those sources. This progress-only update requires no app checks or quote checking.
+
+## 2026-10-16 continuation: entry 46, repository version checks
+
+- **1 paper checked; 0 new complete free copies retrieved; 0 papers read; 0 evidence records added; 0 no-copy outcomes added; 1 entry remains unresolved.** Cumulative totals remain 633 evidence records, 11 fully read sources and 65 historical no-copy outcomes.
+- After reading the earlier progress and retained `/tmp/oa/oa-3-current`, `/tmp/oa/oa-3-followup` and `/tmp/oa/oa-3-unused-leads` artifacts, this pass checked additional repository-version routes. Targeted indexed searches of Newcastle's institutional domains and La Trobe/OPAL supplied no usable manuscript link. Figshare's public search API returned HTTP 200 and empty lists for the exact article title, the known `JEB_2046_sm_Table-S1` supplement filename and the paired author names. These are search outcomes, not proof that those repositories contain no copy.
+- The already identified free publisher copy remains blocked by the round's existing host refusal. No refusing service was retried, no unauthorized upload was opened and no new refusal occurred. No complete-source line, no-copy retirement line or inferred species-level pupil measurement was added. Figshare responses remain outside the repository under `/tmp/oa/oa-3-version-leads`; no paper text was committed.
+
+The remaining need is an accessible authorized main article and its Table S1. This progress-only update does not require quote checking or app checks.
