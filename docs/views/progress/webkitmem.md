@@ -7,7 +7,7 @@ Track `webkitmem`, branch `agent/webkitmem`, started 18 October 2026, 16:43 US E
 - Tooling: `ci/engines/bigwm.sh` (pages against each other on build machines, from `run/engines/bigwm-<label>`), `ci/engines/memwatch2.py` (each process's footprint and its own peak), `ci/engines/bigwmsum.py` (tables), and `NOCACHES=1` for `test/engines/big.js`.
 - Trials: runs 81 (`bigwm-1`: base, nodig, xfree, wheap on build 34, with the harness's census of the caches), 84 (`bigwm-2`: base, keys, wheap, wkeys, xfree, with no census), 85 to 87 (`bigwm-3` to `bigwm-5`: main, which had become build 35, against the fix on build 34) and 88 (`bigwm-6`: main against the fix on build 35). The trial pages with the variants and the marks of each load step are on the local branch `wm-exp`, pushed as `run/engines/bigwm-1` and `bigwm-2`.
 - The fix on build 34 (`298d24c`, `ee8bca9`, `60517a4` on `agent/webkitmem-rows`) and on build 35 (`c0a3e53` on `agent/webkitmem-35`), which became build 37.
-- Checks on `c0a3e53` on this machine: `check_ext.js` (20 of 20), `check_rec.js` in every section, `check4.js try`, `build.py --check`. The `kindsHead` part of `check_rec.js large` runs only on port 8788, which other agents' checks may hold, so it was skipped here.
+- Checks on this machine: on `c0a3e53`, `check_ext.js` (20 of 20) and `check_rec.js` in every section (ports 8882 and 8888); on the build 37 tree, `check_rec.js large` again with the parts on port 8788, so that its `kindsHead` part ran too, `check4.js try` after the last merge of `main`, and `build.py --check`. Merged to `main` as build 37 (`04d2246`).
 
 ## Next
 
