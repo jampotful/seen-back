@@ -5,25 +5,25 @@ Branch `agent/oa-read-d`, made from `main` at c640337. Prompt: `docs/tracks/prom
 ## Counts
 
 - Papers with text: 12 of 13. Read in full: 10. Abstract only: 2 (entries 20 and 34; see below). Not fetched: 1 (entry 14).
-- Records logged in `docs/views/evidence/oa-9.jsonl`: 400. Grades: 317 `m` and 83 `g`, with no `i`. Partial: 213. Access: 395 `open` and 5 `abstract`.
+- Records logged in `docs/views/evidence/oa-9.jsonl`: 400. Grades: 176 `m` and 224 `g`, with no `i`. Partial: 213. Following oa-read.md and oa-audit.md, `m` is used only where the named species was measured in the paper itself. A value the paper reports from other work (a review, a cited study, a meta-analysis) is partial and graded `g`, and its note says so, even when it names one species. That applies to 141 records. The six partial records still at `m` are the abstract-only reads (entries 20 and 34) and one value read from the paper's own Fig. 1 (entry 51). Access: 395 `open` and 5 `abstract`.
 - Every record passed `tools/views/quotecheck.py` against its own text (400 verbatim), `tools/senses/check.py`, and `tools/views/oa_lint.py` with `--text` and `--since-main HEAD` (0 faults).
 - Papers with no measurement of a BRIEF trait: none. Entry 7 holds only one cited group value.
 
 | Entry | Paper | Read | Records | m | g | partial |
 |---|---|---|---|---|---|---|
-| 3 | Thomas et al. 2022, amphibian pupil shapes | full text (bioRxiv preprint) | 29 | 9 | 20 | 7 |
+| 3 | Thomas et al. 2022, amphibian pupil shapes | full text (bioRxiv preprint) | 29 | 7 | 22 | 7 |
 | 7 | Thomas et al. 2020, frog eye size (Dryad entry) | full text of the article (PMC) | 1 | 0 | 1 | 1 |
-| 8 | Warraich et al. 2020, sea turtle visual fields | full text | 22 | 22 | 0 | 2 |
+| 8 | Warraich et al. 2020, sea turtle visual fields | full text | 22 | 20 | 2 | 2 |
 | 9 | Perrin et al. 2025, photoperiod sensitivity | full text (Europe PMC) | 16 | 14 | 2 | 2 |
 | 14 | Ranade et al. 2013, Pinus taeda microarray | not fetched | 0 | | | |
-| 19 | Stöckl and Kelber 2019, hawkmoth review | full text (Europe PMC) | 103 | 83 | 20 | 103 |
+| 19 | Stöckl and Kelber 2019, hawkmoth review | full text (Europe PMC) | 103 | 0 | 103 | 103 |
 | 20 | Vermeulen et al. 2008, Potentilla reptans | abstract only | 3 | 3 | 0 | 3 |
-| 23 | Hornych et al. 2021, fern antheridiogens | full text (Europe PMC) | 129 | 112 | 17 | 29 |
-| 25 | Plotsker et al. 2026, parrot ophthalmology review | full text (BioOne PDF) | 19 | 14 | 5 | 19 |
-| 26 | Bischoff et al. 2014, Ipomopsis floral scent | full text (PMC) | 21 | 17 | 4 | 10 |
+| 23 | Hornych et al. 2021, fern antheridiogens | full text (Europe PMC) | 129 | 98 | 31 | 29 |
+| 25 | Plotsker et al. 2026, parrot ophthalmology review | full text (BioOne PDF) | 19 | 0 | 19 | 19 |
+| 26 | Bischoff et al. 2014, Ipomopsis floral scent | full text (PMC) | 21 | 11 | 10 | 10 |
 | 34 | Nishimura et al. 2023, owl retinas | abstract only | 2 | 2 | 0 | 2 |
-| 51 | Portugal et al. 2023, African Harrier-Hawk | full text (CentAUR, published version) | 8 | 6 | 2 | 5 |
-| 53 | Hart et al. 2016, emu visual pigments | full text (PMC) | 47 | 35 | 12 | 30 |
+| 51 | Portugal et al. 2023, African Harrier-Hawk | full text (CentAUR, published version) | 8 | 4 | 4 | 5 |
+| 53 | Hart et al. 2016, emu visual pigments | full text (PMC) | 47 | 17 | 30 | 30 |
 
 ## Not read, or read only in part
 
