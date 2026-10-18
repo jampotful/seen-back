@@ -234,7 +234,7 @@ def supplement_main(out, shard, nshard):
 
 
 PLANT_TRAIT_QUERIES = {  # plant traits -> queries the plant word list misses (audit 41: a diel and a photoperiod paper missed)
-    'diel': ['flower opening time', 'nyctinasty'],
+    'diel': ['flower opening time', 'nyctinasty', 'anthesis', 'pollination biology'],  # audit 43: an anthesis-hours paper missed
     'sense_light_nonvisual': ['photoperiod', 'circadian rhythm'],
     'sense_chemical': ['volatile signalling'],
 }
