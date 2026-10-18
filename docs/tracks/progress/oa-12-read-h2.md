@@ -9,6 +9,8 @@ Prompt: `docs/tracks/prompts/oa-read.md`, with the texts already fetched and dec
 | 13 | Eckardt 2001, Auxin and the Power of the Proteasome in Plants (Plant Cell) | full text (PMC page) | 3 |
 | 20 | Chan et al. 2024, eye morphology of Lepidoptera (Research Square preprint) | full text (PDF) | 10 |
 | 38 | Swanton et al. 2026, light signaling in crop-weed competition (Weed Technology review) | full text (PDF) | 17 |
+| 45 | Sondhi et al. 2024, day-night gene expression in two saturniid moths (Proc R Soc B) | full text (Europe PMC XML) | 2 |
+| 53 | Douma et al. 2019, light quality and plant defence, a model of Brassica nigra (Plant Cell Environ) | full text (Europe PMC XML) | 3 |
 
 ## Next
-Entries 45, 53, 58, 64, 70, 71, 74 in that order.
+Entries 58, 64, 70, 71, 74 in that order.
