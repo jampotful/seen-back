@@ -150,7 +150,15 @@ def build_place(placedir, tzdb, nrows, res, out):
     return info
 
 
-def load_shipped(d, radius_km, eps):
+def home_shares(table, S):
+    """The "home" list of table.json, [[row, share], ...], as one share a row (0 for a row it does not name)."""
+    h = np.zeros(int(S), np.float64)
+    for r, v in (table.get("home") or []) if isinstance(table, dict) else []:
+        h[int(r)] = float(v)
+    return h
+
+
+def load_shipped(d, radius_km, eps, home=None):
     """tools/world/place.Place from place.bin and zones.json, as the page reads them."""
     P = read_place(os.path.join(d, "place.bin"))
     g = place.Grid(P["res"])
@@ -159,7 +167,7 @@ def load_shipped(d, radius_km, eps):
         raise ValueError("the cells' records do not add up to their species' records")
     z = json.load(open(os.path.join(d, "zones.json")))
     zs = {k: (np.asarray(v[0], np.int64), np.asarray(v[1], np.float64)) for k, v in z["zones"].items()}
-    return place.Place(R, zones=zs, alias=z["alias"], radius_km=radius_km, eps=eps)
+    return place.Place(R, zones=zs, alias=z["alias"], radius_km=radius_km, eps=eps, home=home)
 
 
 def main():

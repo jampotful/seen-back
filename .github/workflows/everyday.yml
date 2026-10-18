@@ -36,3 +36,30 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh everyday out resolve
+
+  build:
+    if: startsWith(github.ref_name, 'run/everyday/build')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: build and measure
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PUBLISH: ${{ startsWith(github.ref_name, 'run/everyday/build-pub') && '1' || '0' }}
+        run: bash ci/everyday/build.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out build
