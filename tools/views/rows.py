@@ -5,9 +5,11 @@
     python3 -I tools/views/rows.py run   --views bird,insect --out out            # needs ANTHROPIC_API_KEY; batch, direct with --direct
     python3 -I tools/views/rows.py apply --views bird,insect --from out           # writes the drafts into views/<key>.json as `rows_draft`
     python3 -I tools/views/rows.py report --from out                              # writes docs/views/voice/REPORT.md (the pipeline block)
+    python3 -I tools/views/rows.py report --from out --block rows-try               # the block for the views behind ?try=
 
 What a row is. A view has rows (rows.json of the gap table, docs/views/gaps/rows.json, for the fourteen offered views, and the SLOTS below
-for the jumping spider and the spiders): a title and the evidence traits it rests on. For each row the script
+for the jumping spider and the spiders, docs/views/gaps/try-rows.json for the other views behind ?try=, whose species are in
+docs/views/gaps/try-species.json, written by tools/views/try_species.py): a title and the evidence traits it rests on. For each row the script
   1. reads the evidence logs with the audit applied (docs/views/audit/corrected/<unit>.jsonl, which holds the corrections and the burst 9
      decisions of tools/views/audit_rule.py, docs/views/audit/decisions.jsonl, and drops the retracted records), and the logs of
      docs/views/evidence that were not audited as units;
@@ -80,6 +82,18 @@ SLOTS = {
 SKIP_ROWS = {("bee", "How the colours are shown")}
 US_TITLES = (("Colour", "Color"), ("colour", "color"), ("Neighbours", "Neighbors"), ("neighbours", "neighbors"))
 WHO = {"jumper": "a jumping spider", "spider": "a spider other than a jumping spider"}
+TRY_ROWS = os.path.join("docs", "views", "gaps", "try-rows.json")
+TRY_SPECIES = os.path.join("docs", "views", "gaps", "try-species.json")
+_TRY = {}
+
+
+def try_file(root, rel):
+    """The rows or species file of the views behind ?try= (empty when missing), read once."""
+    key = (root, rel)
+    if key not in _TRY:
+        p = os.path.join(root, rel)
+        _TRY[key] = json.load(open(p, encoding="utf-8")).get("views", {}) if os.path.exists(p) else {}
+    return _TRY[key]
 
 
 # ---------------------------------------------------------------- the evidence, audit applied
@@ -183,7 +197,37 @@ def view_rows(root, view):
     rj = json.load(open(os.path.join(root, "docs", "views", "gaps", "rows.json"), encoding="utf-8"))
     if view in rj["views"] and rj["views"][view]:
         return collections.OrderedDict((t, ts) for t, ts in rj["views"][view].items() if (view, t) not in SKIP_ROWS)
-    return SLOTS[view]
+    if view in SLOTS:
+        return SLOTS[view]
+    return collections.OrderedDict((t, e["traits"]) for t, e in try_file(root, TRY_ROWS)[view].items())
+
+
+def try_meta(root, view, title):
+    """The extra fields of a row of try-rows.json ('live', 'taxa'); empty for the views of rows.json and SLOTS."""
+    return try_file(root, TRY_ROWS).get(view, {}).get(title, {})
+
+
+def row_species(root, view, title, species):
+    """The species a row is drafted for: all of the view's, or those in the row's 'taxa' (a genus, family or order list) when it has one."""
+    taxa = try_meta(root, view, title).get("taxa")
+    if not taxa:
+        return species
+    rank, names = next(iter(taxa.items()))
+    sub = [e for e in species if e.get(rank) in names]
+    return sub or species
+
+
+def live_grade(root, view, title):
+    """The grade letter of the live row this row stands for (by its 'live' title, or its own), or None."""
+    want = try_meta(root, view, title).get("live", title)
+    try:
+        rows = json.load(open(os.path.join(root, "views", view + ".json"), encoding="utf-8")).get("rows") or []
+    except OSError:
+        return None
+    for r in rows:
+        if r[1] == want:
+            return r[0]
+    return None
 
 
 def class_of(root):
@@ -208,6 +252,10 @@ def view_species(root, view, tax):
             tax.add(genus, r["family"], r["order"])
             out[r["scientific"]] = {"sci": r["scientific"], "en": r["english"], "genus": genus, "family": r["family"], "order": r["order"],
                                     "records": int(r["records"] or 0)}
+    elif view in try_file(root, TRY_SPECIES):
+        for e in try_file(root, TRY_SPECIES)[view]:
+            tax.add(e["genus"], e["family"], e["order"])
+            out[e["sci"]] = {"sci": e["sci"], "en": e["en"], "genus": e["genus"], "family": e["family"], "order": e["order"], "records": int(e["records"] or 0)}
     else:
         for line in open(os.path.join(root, "docs", "views", "gaps", "cells.jsonl"), encoding="utf-8"):
             if '"view": "%s"' % view not in line:
@@ -485,9 +533,15 @@ def prepare(root, views):
         for title, traits in view_rows(root, v).items():
             for old, new in US_TITLES:
                 title = title.replace(old, new)
-            row = compute_row(root, v, title, traits, species[v], index, ord_ev, tax, cls_of, carry)
+            row = compute_row(root, v, title, traits, row_species(root, v, title, species[v]), index, ord_ev, tax, cls_of, carry)
             user, ids = user_text(v, chip, who, row)
-            jobs["%s__%s" % (v, re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-"))] = {"view": v, "row": row, "user": user, "ids": ids}
+            job = {"view": v, "row": row, "user": user, "ids": ids}
+            # a row of a view behind ?try= with no record at all is not sent when the live row claims something (m, g or x): the draft could
+            # only say that nobody has measured it, and the live row's sources lie outside the evidence logs
+            if not row["records"] and v in try_file(root, TRY_ROWS) and live_grade(root, v, title) in ("m", "g", "x"):
+                job["skip"] = "no record of %s for these species or their relatives in the evidence logs; the live row is graded %s" % (
+                    ", ".join(traits), live_grade(root, v, title))
+            jobs["%s__%s" % (v, re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-"))] = job
     return system, jobs, len(recs)
 
 
@@ -496,7 +550,8 @@ def est_tokens(s):
 
 
 def cmd_plan(a):
-    system, jobs, nrec = prepare(ROOT, a.views.split(","))
+    system, alljobs, nrec = prepare(ROOT, a.views.split(","))
+    jobs = {c: j for c, j in alljobs.items() if not j.get("skip")}
     EX.set_model(a.model)
     est_in = sum(est_tokens(j["user"]) for j in jobs.values())
     cost = (est_tokens(system) * len(jobs) * EX.PRICE["cache_read"] + est_in * EX.PRICE["in"] + len(jobs) * 300 * EX.PRICE["out"]) / 1e6 \
@@ -507,6 +562,9 @@ def cmd_plan(a):
     for cid, j in jobs.items():
         r = j["row"]
         lines.append("- %s: grade %s, shares %s, %d species, %d records" % (cid, r["grade"], r["shares"], len(r["species"]), len(r["records"])))
+    for cid, j in alljobs.items():
+        if j.get("skip"):
+            lines.append("- %s: not sent (%s)" % (cid, j["skip"]))
     open(os.path.join(a.out, "plan.md"), "w").write("\n".join(lines) + "\n")
     json.dump({cid: {"system_chars": len(system), "user": j["user"]} for cid, j in jobs.items()}, open(os.path.join(a.out, "plan-requests.json"), "w"),
               ensure_ascii=False, indent=1)
@@ -555,7 +613,7 @@ def cmd_run(a):
     work = os.path.join(a.out, "_work")
     os.makedirs(work, exist_ok=True)
     spent, results, errors_of, prev = 0.0, {}, {}, {}
-    pending = set(jobs)
+    pending = {c for c, j in jobs.items() if not j.get("skip")}
     extra = {}
     for attempt in (1, 2):
         if not pending:
@@ -582,8 +640,9 @@ def cmd_run(a):
                 results[cid] = {"attempt": attempt, "reply": reply}
         pending = nxt
     write_outputs(a.out, jobs, results, prev, spent, a.model, nrec)
-    print("spent $%.4f; %d drafts passed (%d on the first attempt), %d failed" % (
-        spent, len(results), sum(1 for r in results.values() if r["attempt"] == 1), len(jobs) - len(results)))
+    sent = sum(1 for j in jobs.values() if not j.get("skip"))
+    print("spent $%.4f; %d drafts passed (%d on the first attempt), %d failed, %d rows not sent" % (
+        spent, len(results), sum(1 for r in results.values() if r["attempt"] == 1), sent - len(results), len(jobs) - sent))
     return 0
 
 
@@ -598,11 +657,13 @@ def cite_names(job, cites):
 
 
 def write_outputs(out, jobs, results, prev, spent, model, nrec):
-    by_view = collections.defaultdict(lambda: {"rows": [], "failed": []})
+    by_view = collections.defaultdict(lambda: {"rows": [], "failed": [], "skipped": []})
     for cid, j in jobs.items():
         r = j["row"]
         base = {"title": r["title"], "traits": r["traits"], "grade": r["grade"], "shares": r["shares"], "species": len(r["species"])}
-        if cid in results:
+        if j.get("skip"):
+            by_view[j["view"]]["skipped"].append(dict(base, reason=j["skip"]))
+        elif cid in results:
             rep = results[cid]["reply"]
             by_view[j["view"]]["rows"].append(dict(base, text=rep["text"].strip(), cites=cite_names(j, rep.get("cites") or []), note=(rep.get("note") or "").strip(),
                                                    attempt=results[cid]["attempt"]))
@@ -612,8 +673,11 @@ def write_outputs(out, jobs, results, prev, spent, model, nrec):
     stamp = datetime.date.today().isoformat()
     for v, d in by_view.items():
         blob = {"version": 1, "model": model, "made": stamp, "rule": "docs/views/VOICE.md", "rows": d["rows"], "failed": d["failed"]}
+        if d["skipped"]:
+            blob["skipped"] = d["skipped"]
         json.dump(blob, open(os.path.join(out, "%s.rows_draft.json" % v), "w"), ensure_ascii=False, indent=1)
-    json.dump({"spent_usd": round(spent, 4), "model": model, "records_read": nrec, "requests": len(jobs), "passed": len(results),
+    json.dump({"spent_usd": round(spent, 4), "model": model, "records_read": nrec, "requests": sum(1 for j in jobs.values() if not j.get("skip")),
+               "not_sent": sum(1 for j in jobs.values() if j.get("skip")), "passed": len(results),
                "first_attempt": sum(1 for r in results.values() if r["attempt"] == 1)}, open(os.path.join(out, "stats.json"), "w"), indent=1)
 
 
@@ -643,6 +707,7 @@ def cmd_apply(a):
             continue
         draft = json.load(open(src, encoding="utf-8"))
         draft.pop("failed", None)
+        draft.pop("skipped", None)
         path = os.path.join(ROOT, "views", v + ".json")
         raw = open(path, encoding="utf-8").read()
         spec = json.loads(raw)
@@ -693,26 +758,42 @@ def cmd_report(a):
             nreq += st.get("requests", 0)
             nrec, model = st.get("records_read", nrec), st.get("model", model)
     failures, jobs = first_attempt_failures(a.src, views)
-    lines = ["## Rows pipeline (burst 10)", "",
-             "`tools/views/rows.py` drafted %d rows of %d views with %s, from %s evidence records (the audit and the burst 9 decisions applied). Spent $%.2f at batch prices." % (
-                 nreq, len(views), model, nrec, spent), "",
-             "A draft passes when `voice_check.py` finds nothing in it, every number in it is in a record it cites, and the records cited belong to a species of the view or a relative of one. A draft that fails is sent once more with the errors; what still fails is listed. The first eight views are the ones with the most evidence records; the rest followed.", "",
-             "| view | rows | passed first time | passed after the retry | failed |", "|---|---:|---:|---:|---:|"]
+    trymode = a.block != "rows-pipeline"
+    if trymode:
+        lines = ["## Rows pipeline, the views behind ?try= (18 October)", "",
+                 "`tools/views/rows.py` drafted %d rows of %d views behind `?try=` with %s, from %s evidence records (the audit and the burst 9 decisions applied). Spent $%.2f at batch prices." % (
+                     nreq, len(views), model, nrec, spent), "",
+                 "The rows and the traits they rest on are `docs/views/gaps/try-rows.json` (every live row about the animal; rows about the drawing or the app's choices are left out), and the species that borrow each view are `docs/views/gaps/try-species.json` (`tools/views/try_species.py`: the 60 most recorded species of the view's world group or taxa, and the measured species of the view). A row about one group (elephants, chitons) is drafted for that group's species. A row with no evidence record at all is not sent when its live row claims something (graded m, g or x), since the draft could only say that nobody has measured it. A draft passes when `voice_check.py` finds nothing in it, every number in it is in a record it cites, and the records cited belong to a species of the view or a relative of one. A draft that fails is sent once more with the errors; what still fails is listed. The live rows, the `offered` flags and the specs are unchanged.", "",
+                 "| view | rows | passed first time | passed after the retry | failed | not sent |", "|---|---:|---:|---:|---:|---:|"]
+    else:
+        lines = ["## Rows pipeline (burst 10)", "",
+                 "`tools/views/rows.py` drafted %d rows of %d views with %s, from %s evidence records (the audit and the burst 9 decisions applied). Spent $%.2f at batch prices." % (
+                     nreq, len(views), model, nrec, spent), "",
+                 "A draft passes when `voice_check.py` finds nothing in it, every number in it is in a record it cites, and the records cited belong to a species of the view or a relative of one. A draft that fails is sent once more with the errors; what still fails is listed. The first eight views are the ones with the most evidence records; the rest followed.", "",
+                 "| view | rows | passed first time | passed after the retry | failed |", "|---|---:|---:|---:|---:|"]
     tot, first8 = collections.Counter(), collections.Counter()
-    allrows, failed = [], []
+    allrows, failed, skipped = [], [], []
     for v in views:
         d = json.load(open(find_draft(a.src, v)))
         p1 = sum(1 for r in d["rows"] if r["attempt"] == 1)
         p2 = sum(1 for r in d["rows"] if r["attempt"] == 2)
         f = len(d["failed"])
-        lines.append("| %s | %d | %d | %d | %d |" % (v, p1 + p2 + f, p1, p2, f))
-        for c in (tot, first8) if v in DEFAULT_VIEWS.split(",") else (tot,):
-            c.update(rows=p1 + p2 + f, p1=p1, p2=p2, f=f)
+        k = len(d.get("skipped", []))
+        if trymode:
+            lines.append("| %s | %d | %d | %d | %d | %d |" % (v, p1 + p2 + f, p1, p2, f, k))
+        else:
+            lines.append("| %s | %d | %d | %d | %d |" % (v, p1 + p2 + f, p1, p2, f))
+        for c in (tot, first8) if v in DEFAULT_VIEWS.split(",") and not trymode else (tot,):
+            c.update(rows=p1 + p2 + f, p1=p1, p2=p2, f=f, k=k)
         allrows += [(v, r) for r in d["rows"]]
         failed += [(v, r) for r in d["failed"]]
-    for name, c in (("the first eight", first8), ("all", tot)):
+        skipped += [(v, r) for r in d.get("skipped", [])]
+    for name, c in ((("all", tot),) if trymode else (("the first eight", first8), ("all", tot))):
         n = max(1, c["rows"])
-        lines.append("| %s | %d | %d (%.0f%%) | %d | %d |" % (name, c["rows"], c["p1"], 100.0 * c["p1"] / n, c["p2"], c["f"]))
+        if trymode:
+            lines.append("| %s | %d | %d (%.0f%%) | %d | %d | %d |" % (name, c["rows"], c["p1"], 100.0 * c["p1"] / n, c["p2"], c["f"], c["k"]))
+        else:
+            lines.append("| %s | %d | %d (%.0f%%) | %d | %d |" % (name, c["rows"], c["p1"], 100.0 * c["p1"] / n, c["p2"], c["f"]))
     n = max(1, tot["rows"])
     lines += ["", "Pass rate on the first attempt: %.0f%%. After the retry: %.0f%%." % (100.0 * tot["p1"] / n, 100.0 * (tot["p1"] + tot["p2"]) / n), ""]
     if failures:
@@ -730,18 +811,27 @@ def cmd_report(a):
         lines.append("")
     else:
         lines += ["No row fails after the retry.", ""]
+    if skipped:
+        lines += ["### Rows not sent", ""]
+        for v, r in skipped:
+            lines.append("- **%s, %s**: %s" % (v, r["title"], r["reason"]))
+        lines.append("")
     lines += ["### Ten drafts beside the live rows", ""]
     pick = [("bird", "Ultraviolet"), ("cat", "Pupil"), ("cat", "Sharpness"), ("dog", "Color"), ("bee", "Speed"), ("insect", "Ultraviolet"),
             ("jumper", "Color"), ("spider", "The web"), ("plant", "Neighbors"), ("deer", "Field of view")]
+    if trymode:
+        pick = [("owl", "Sharpness"), ("fox", "Pupil"), ("bat", "Calls"), ("shark", "Electric sense"), ("cephalopod", "Color"), ("tick", "Heat"),
+                ("fungus", "Down"), ("crab", "Polarized light"), ("whale", "Sharpness"), ("snail", "Eyes")]
     chosen = [(v, r) for v, t in pick for vv, r in allrows if vv == v and r["title"] == t][:10]
     for v, r in chosen:
         live = live_rows(v)
-        old = next((x for x in live if x[1].lower().replace("colour", "color")[:5] == r["title"].lower()[:5]), None)
+        want = try_meta(ROOT, v, r["title"]).get("live", r["title"]).lower().replace("colour", "color")
+        old = next((x for x in live if x[1].lower().replace("colour", "color")[:5] == want[:5]), None)
         lines += ["**%s, %s** (draft grade `%s`; of the species' records %.0f%% measured, %.0f%% carried, %.0f%% unknown)" % (
             v, r["title"], r["grade"], 100 * r["shares"]["m"], 100 * r["shares"]["g"], 100 * r["shares"]["i"]), "",
             "- Draft: %s" % r["text"], "- Live: %s" % (("`%s` %s: %s" % (old[0], old[1], old[2])) if old else "(no live row with this title)"),
             "- Cites: %s" % ", ".join("%s (%s)" % (c["id"], c["taxon"]) for c in r["cites"]), ""]
-    VC.write_block(VC.REPORT, "rows-pipeline", "\n".join(lines))
+    VC.write_block(VC.REPORT, a.block, "\n".join(lines))
     print("wrote", os.path.relpath(VC.REPORT, ROOT))
     return 0
 
@@ -756,6 +846,7 @@ def main():
     ap.add_argument("--direct", action="store_true")
     ap.add_argument("--max-usd", dest="max_usd", type=float, default=float(os.environ.get("ROWS_MAX_USD", "6")))
     ap.add_argument("--wait-min", dest="wait_min", type=int, default=int(os.environ.get("ROWS_WAIT_MIN", "180")))
+    ap.add_argument("--block", default="rows-pipeline", help="report: the block of REPORT.md to write (rows-try for the views behind ?try=)")
     a = ap.parse_args()
     return {"plan": cmd_plan, "run": cmd_run, "apply": cmd_apply, "report": cmd_report}[a.cmd](a)
 
