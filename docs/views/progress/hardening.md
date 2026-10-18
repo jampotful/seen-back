@@ -11,6 +11,8 @@ Running:
 - Item 4: `try` with all 44 specs for 3 seconds, on the scene clip and on the fake camera (`CAM=1`, new), with and without `OPTIONS=0`; then `perf` over every view. The `try` check now also measures the canvas and fails a view whose canvas is one flat color.
 - The full `test/rec/check_rec.js` on build 33.
 
+- Engine fix (`a48ff06`), asked for by the coordinator: the macOS self-test of build 32 found `?try=millipede` and `?try=snail` flat in Safari, WebKit and the iPhone simulator. Chromium's phone self-test here gives the same (millipede mean 131, spread 0; snail mean 181, spread 0.6), so the cause is the picture's size, which sets whether the blur reads the one-texel mipmap level, and no WebKit difference. With the coarsest level clamped to `maxLod - 2`: millipede spread 4.1, snail 6.84, centipede 9.05; the only failures left in that self-test are four "frames advance" checks of the motion videos, which build 32 fails the same way on this loaded machine. The macOS self-test is rerunning on `run/engines/mac-39-hardening`.
+
 Prepared, not pushed: the lighter form of the larger model (`agent/rec-b`) on build 34 in a third worktree, with `check_ext.js` updated to today's wording; it ships only if `check_rec.js`, `check_ext.js` and the page's other checks pass.
 
 Next: commit items 1 and 4, then the extra item, then fetch `main`, merge, check and merge to `main`.
