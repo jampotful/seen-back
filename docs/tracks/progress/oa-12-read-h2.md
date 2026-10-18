@@ -12,6 +12,8 @@ Prompt: `docs/tracks/prompts/oa-read.md`, with the texts already fetched and dec
 | 45 | Sondhi et al. 2024, day-night gene expression in two saturniid moths (Proc R Soc B) | full text (Europe PMC XML) | 2 |
 | 53 | Douma et al. 2019, light quality and plant defence, a model of Brassica nigra (Plant Cell Environ) | full text (Europe PMC XML) | 3 |
 | 58 | Tyrrell and Fernández-Juricic 2017, avian binocular vision and the anterior blind area (PLOS ONE) | full text (Europe PMC XML; S1 Table not included) | 13 |
+| 64 | Troscianko et al. 2025, butterfly wing patterns and illusory motion (Research Square preprint) | full text (PDF) | 3 |
+| 70 | Quan et al. 2018, UV-B and jasmonic acid in Scutellaria baicalensis (IJMS) | full text (Europe PMC XML; Tables 1 to 3 not included) | 7 |
 
 ## Next
-Entries 64, 70, 71, 74 in that order.
+Entries 71, 74 in that order.
