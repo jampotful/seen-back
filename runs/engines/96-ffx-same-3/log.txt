@@ -1,0 +1,38 @@
+
+=== 23:19:03 machine (same-3)
+Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1094       12520          41        2738       14895
+Swap:           3071           0        3071
+4
+model name	: AMD EPYC 9V45 96-Core Processor
+ssse3 fma sse4_1 sse4_2 avx avx2 avx512f avx_vnni avx512_vnni 
+
+=== 23:19:03 playwright 1.56.0
+added 2 packages in 1s
+
+=== 23:19:23 variant same-3: firefox, headed 0, prefs {}, cases pocket:all:5 big:all:2
+23:19:36 same-3-pw-chromium pocket:all:5 | fetch 40 ms | session 330 ms | runs [250,207,205,202,208] ms | head [0.011763,0.215329,-0.131141,-0.000086,0.297737,0.082296] sum -89.13024 | error  
+23:19:50 same-3-pw-chromium big:all:2 | fetch 6938 ms | session 820 ms | runs [2846,2698] ms | head [1.13896,1.475898,0.308418,-2.129014,1.126932,-0.788226] sum -170.96748 | error  
+23:19:50 same-3-pw-chromium version 141.0.7390.37 | features {"ua":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.7390.37 Safari/537.36","coi":false,"cores":4,"sab":"undefined","simd":true,"relaxedSimd":true,"sharedMemory":true}
+23:20:14 same-3-pw-firefox pocket:all:5 | fetch 77 ms | session 605 ms | runs [3842,3971,3955,3971,3902] ms | head [0.011763,0.215329,-0.131141,-0.000086,0.297737,0.082296] sum -89.13024 | error  
+23:21:48 same-3-pw-firefox big:all:2 | fetch 1126 ms | session 2379 ms | runs [44525,44527] ms | head [1.13896,1.475898,0.308418,-2.129014,1.126932,-0.788226] sum -170.96748 | error  
+23:21:48 same-3-pw-firefox version 142.0.1 | features {"ua":"Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0","coi":false,"cores":4,"sab":"undefined","simd":true,"relaxedSimd":false,"sharedMemory":true}
+firefox (same-3-plain-system): /usr/bin/firefox, Mozilla Firefox 157.0
+same-3-plain-system pocket:all:5 | fetch 228 ms | session 439 ms | runs [291, 294, 298, 251, 255] ms | head [0.011763, 0.215329, -0.131141, -8.6e-05, 0.297737, 0.082296] sum -89.13024 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": true, "sharedMemory": true}
+same-3-plain-system big:all:2 | fetch 1981 ms | session 752 ms | runs [2816, 2799] ms | head [1.13896, 1.475898, 0.308418, -2.129014, 1.126932, -0.788226] sum -170.96748 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": true, "sharedMemory": true}
+firefox (same-3-plain-pwbinary): /home/runner/.cache/ms-playwright/firefox-1495/firefox/firefox, [4705] Sandbox: CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM
+same-3-plain-pwbinary pocket:all:5 | fetch 80 ms | session 568 ms | runs [3812, 3802, 3891, 3912, 3840] ms | head [0.011763, 0.215329, -0.131141, -8.6e-05, 0.297737, 0.082296] sum -89.13024 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": false, "sharedMemory": true}
+same-3-plain-pwbinary big:all:2 | fetch 1210 ms | session 2291 ms | runs [44137, 44056] ms | head [1.13896, 1.475898, 0.308418, -2.129014, 1.126932, -0.788226] sum -170.96748 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": false, "sharedMemory": true}
+top - 23:24:17 up 6 min,  0 user,  load average: 0.98, 0.78, 0.37
+Tasks: 151 total,   1 running, 150 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  2.4 sy,  0.0 ni, 97.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15989.7 total,  10391.0 free,    988.6 used,   5001.5 buff/cache     
+MiB Swap:   3072.0 total,   3072.0 free,      0.0 used.  15001.1 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0   22808  14432   9940 S   0.0   0.1   0:02.17 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
