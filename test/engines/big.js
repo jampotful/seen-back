@@ -6,7 +6,9 @@
 // a visit with the network cut at a proxy here, and the larger model answering with the network off.
 // Writes OUT/big-<browser>.json and screenshots. Epoch times (epoch*) let ci/engines/bigsum.py find the memory peaks in mem.jsonl.
 const fs = require('fs'), path = require('path'), net = require('net');
-const OUT = process.env.OUT || 'out', SITE0 = process.env.SITE || 'https://jampotful.github.io/seen-back/', SITE = SITE0.includes('?') ? SITE0 : SITE0.replace(/\/?$/, '/'), NAME = process.env.BROWSER || 'chromium';
+// The page is opened with bigios=1 (build 38), which offers the full database in an iPhone simulator's Safari and in WebKit with touch points.
+const OUT = process.env.OUT || 'out', SITE0 = process.env.SITE || 'https://jampotful.github.io/seen-back/', SITE1 = SITE0.includes('?') ? SITE0 : SITE0.replace(/\/?$/, '/'), NAME = process.env.BROWSER || 'chromium';
+const SITE = /[?&]bigios=/.test(SITE1) ? SITE1 : SITE1 + (SITE1.includes('?') ? '&' : '?') + 'bigios=1';
 const WD = process.env.WD || 'http://127.0.0.1:4444', LIMIT = +(process.env.LIMIT_MS || 900000);
 const PAGE_JS = fs.readFileSync(path.join(__dirname, 'big_page.js'), 'utf8');
 const list = JSON.parse(fs.readFileSync(process.env.PHOTOS || 'photos.json', 'utf8'));

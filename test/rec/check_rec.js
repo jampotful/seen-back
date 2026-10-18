@@ -17,9 +17,9 @@ const here = __dirname, PORT = process.env.PORT || 8782, ORIGIN = 'http://127.0.
 const SLOT = process.env.SLOT || 'test/rec/models/standin';
 // The species service is off (svc=off) unless a check names a service file, so that a service.json at the site's root changes nothing in the other checks.
 // The full database is off too (big=off) unless a check names its slot, so that a models/naturalist/ at the site's root changes nothing in the other checks.
-// A check that names a slot lifts the gate for iOS (bigios=1, build 38) unless it says otherwise: WebKit gives a Mac's user agent, and a Mac's
-// user agent with more than one touch point is how the page knows an iPad.
-const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (/[?&]big=/.test(q || '') ? (/[?&]bigios=/.test(q || '') ? '' : '&bigios=1') : '&big=off') + (q || '');
+// In WebKit a check that names a slot also lifts the gate for iOS (bigios=1, build 38) unless it says otherwise: WebKit gives a Mac's user agent,
+// and a Mac's user agent with more than one touch point is how the page knows an iPad.
+const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (/[?&]big=/.test(q || '') ? (ENGINE === 'webkit' && !/[?&]bigios=/.test(q || '') ? '&bigios=1' : '') : '&big=off') + (q || '');
 const BIG_PORT = +(process.env.BIG_PORT || 8788), BIG_ORIGIN = 'http://127.0.0.1:' + BIG_PORT, BIG = 'test/rec/models/standin-big';
 const bctl = (q) => new Promise((res, rej) => http.get(BIG_ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => { try { res(JSON.parse(b)); } catch (e) { rej(e); } }); }).on('error', rej));
 const SVC_PORT = +(process.env.SVC_PORT || 8784);
