@@ -8,7 +8,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '34';
+  var BUILD = '36';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;

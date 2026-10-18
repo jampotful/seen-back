@@ -73,7 +73,7 @@
   "made_from": "kind phrases"
  },
  "species": {
-  "count": 427187,
+  "count": 427182,
   "dtype": "int8",
   "parts": [
    {
@@ -92,31 +92,31 @@
     "sha256": "88cd6fe3f10803f991c3e3447e0c3c14d73832650b70295da7b023b4a7596686"
    },
    {
-    "url": "https://raw.githubusercontent.com/jampotful/seen-back/dfc71544f1ccf699ab67ef612bb68c79b9feffed/rows.i8.part03",
-    "bytes": 58079616,
-    "sha256": "16338f3a1828e3d41667cef159abcf28daf662285c4f337339280e4a215e53ca"
+    "url": "https://raw.githubusercontent.com/jampotful/seen-back/fffd315798f6bccd856645db61de335a9f5e5849/rows.i8.part03",
+    "bytes": 58075776,
+    "sha256": "bfda920b828a2deb390762a75f253a73f62daca5e6033d82e7e9d6cd07957bed"
    }
   ],
-  "bytes": 328079616,
-  "sha256": "fa975a20de87f4226362a401b2d101e778d19cf25913267c715fd610feb3f3e7",
+  "bytes": 328075776,
+  "sha256": "4bbae5c8233fb6eb1e05c642ed1cc45e2467a1a9832be872245a5bfe1c924425",
   "scale": {
-   "url": "https://raw.githubusercontent.com/jampotful/seen-back/dfc71544f1ccf699ab67ef612bb68c79b9feffed/scale.f32",
-   "bytes": 1708748,
-   "sha256": "e0a01a697db8daec25dd030ecfa0eb0b37811ab8cd2303a8f1e8427982d9c41f"
+   "url": "https://raw.githubusercontent.com/jampotful/seen-back/fffd315798f6bccd856645db61de335a9f5e5849/scale.f32",
+   "bytes": 1708728,
+   "sha256": "bdd68613e0fd9f1c00dfad93b9e12ac84029a05bd4277e62cf6bcdf4ebbbbbd3"
   },
   "table": {
-   "url": "https://raw.githubusercontent.com/jampotful/seen-back/dfc71544f1ccf699ab67ef612bb68c79b9feffed/table.json",
-   "bytes": 20956944,
-   "sha256": "20978b9d0b1235a29f83dee5753106cada61945f127907f94c44d6c64f8a7c69"
+   "url": "https://raw.githubusercontent.com/jampotful/seen-back/fffd315798f6bccd856645db61de335a9f5e5849/table.json",
+   "bytes": 20956616,
+   "sha256": "0bf4c9df86bc21db66a44054d8dda540c135c91891f731732a02afdbfb8fcf4b"
   },
   "names_from": "GBIF backbone (scientific names, tools/world/names.py); iNaturalist taxonomy (English names)",
   "rows_from": "one sentence a species, 'a photo of <name>.', BioCLIP 2's text half (tools/coverage/text.py), one byte a number (tools/world/pack.py)",
-  "everyday": "174 species people keep (tools/species/EVERYDAY.md): 24 new rows at the end, made as the others were; the table's home list gives each a share that holds in every cell (beta 30 times its iNaturalist observations marked captive or cultivated over all of iNaturalist's observations). Files that changed: pub/naturalist-everyday at dfc71544f1cc, kept by pin/naturalist-everyday-dfc7154."
+  "everyday": "174 species people keep (tools/species/EVERYDAY.md): 19 new rows at the end, made as the others were; the table's home list gives each a share that holds in every cell (beta 100 times its iNaturalist observations marked captive or cultivated over all of iNaturalist's observations). A species GBIF lists as a synonym takes the world row of the species GBIF accepts for it when that row carries the same English name (the domestic dog takes Canis lupus). Files that changed: pub/naturalist-everyday2 at fffd315798f6, kept by pin/naturalist-everyday2-fffd315."
  },
  "place": {
-  "url": "https://raw.githubusercontent.com/jampotful/seen-back/dfc71544f1ccf699ab67ef612bb68c79b9feffed/place.bin",
-  "bytes": 13216114,
-  "sha256": "aa19542d587ca26ce098ddfaad7e0a5cf570a5a72706241448f7080aafdd2798",
+  "url": "https://raw.githubusercontent.com/jampotful/seen-back/fffd315798f6bccd856645db61de335a9f5e5849/place.bin",
+  "bytes": 13216109,
+  "sha256": "26acab7295f72984d43127fe6c4495c07f014886e5e43122af5787f299d30249",
   "zones": {
    "url": "https://raw.githubusercontent.com/jampotful/seen-back/9ae08068166814ef9522c15a225a1b5e1e1f2df3/zones.json",
    "bytes": 1228487,
@@ -232,24 +232,25 @@
     "test": 3534,
     "missing": 0
    },
-   "beta": 30.0,
+   "beta": 100.0,
+   "rule": "accepted",
    "made_by": "tools/species/everyday_build.py",
    "test_own_zone": {
-    "kind_right": 0.9706,
-    "species_right": 0.7564,
-    "named": 0.6344,
-    "named_right": 0.9206
+    "kind_right": 0.9759,
+    "species_right": 0.7875,
+    "named": 0.6814,
+    "named_right": 0.9302
    },
    "test_alachua": {
-    "kind_right": 0.9714,
-    "species_right": 0.7637,
-    "named": 0.6454,
-    "named_right": 0.922
+    "kind_right": 0.9779,
+    "species_right": 0.7883,
+    "named": 0.6924,
+    "named_right": 0.9313
    },
    "world_test_drop_points": {
     "none": 0.11,
-    "zone": 0.26,
-    "zone+3": 0.23
+    "zone": 0.66,
+    "zone+3": 0.57
    }
   }
  },
