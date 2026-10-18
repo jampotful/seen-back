@@ -21,6 +21,7 @@
   async function persisted() { try { return navigator.storage && navigator.storage.persisted ? await navigator.storage.persisted() : 'no persisted()'; } catch (e) { return 'error ' + e; } }
   async function cachesNow() {
     var o = {};
+    if (W.__bigNoCaches) return { skipped: 'NOCACHES: WebKit reads a kept body into the page on every match' };
     try {
       var ks = await caches.keys();
       for (var i = 0; i < ks.length; i++) {
@@ -116,7 +117,7 @@
       samples: samples.filter(function (x, k) { return k % step === 0 || k === samples.length - 1; }), big: bigNow(), diag: diagOf(/^large/) };
     R.resources = res();
     R.after = { estimate: await est(), persisted: await persisted(), caches: await cachesNow() };
-    R.steps.push(now() + ' ready ' + !!tReady);
+    R.steps.push(now() + ' ready ' + !!tReady); R.wm = (W.__wm || []).slice();
     if (!tReady) return;
     // the photo in hand is looked at as soon as the model is ready
     var g0 = /offer/.test(R.path) && B.S.eyes ? await until(function () { var l = B.big.about().last; return l ? l : null; }, 120000, 100) : null;
@@ -124,6 +125,7 @@
     R.photos = [];
     for (var k = 0; k < o.photos.length; k++) { R.photos.push(await onePhoto(o.photos[k], 240000)); R.steps.push(now() + ' photo ' + o.photos[k].name); }
     R.epochPhotosEnd = Date.now(); R.end = { big: bigNow(), estimate: await est(), diag: diagOf(/^large/) };
+    R.wm = (W.__wm || []).slice();                // webkitmem trial: the marks of each step of the larger model's load
   }
   async function phaseAgain(o, R) {
     try { performance.setResourceTimingBufferSize(2000); } catch (e) {}
@@ -134,9 +136,10 @@
     noCamera(); R.begun = await toAsk(); R.epochPhoto = Date.now();
     R.photo = await onePhoto(o.photos[0], 300000);
     R.epochPhotoEnd = Date.now();
-    R.resources = res(); R.diag = diagOf(/^large/);
+    R.resources = res(); R.diag = diagOf(/^large/); R.wm = (W.__wm || []).slice();
   }
   W.__bigRun = function (phase, o) {
+    W.__bigNoCaches = !!(o && o.noCaches);
     var R = W.__big = { phase: phase, started: now(), done: false, steps: [] };
     (phase === 'get' ? phaseGet : phaseAgain)(o || {}, R).catch(function (e) { R.error = String(e && e.stack || e).slice(0, 600); }).then(function () { R.done = true; R.finished = now(); });
     return 'started';
