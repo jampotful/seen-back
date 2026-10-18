@@ -102,7 +102,7 @@ def prior_log(rows, month, floor):
         return np.log(np.maximum(w / whole, floor))
 
 
-def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, species_bias=None, kind_bias_list=None):
+def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, species_bias=None, kind_bias_list=None, emb=None):
     f = manifest["fusion"]
     rule = f.get("rule", "product")
     if rule not in ("product", "mix"):
@@ -168,6 +168,13 @@ def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, s
     # not sure is an answer: under kind_at no kind is asserted and no species named, and the three likeliest kinds are offered
     kind_at = f.get("kind_at")
     sure = not (kind_at is not None and kinds[0]["p"] < kind_at)
+    # the slot's probe for photos with nothing alive in them (fusion.nonlife; tools/world/NONLIFE.md): an asserted living kind becomes not sure
+    nl, nonlife = f.get("nonlife"), None
+    if nl and emb is not None and len(emb) == len(nl["w"]):
+        z = float(nl["b"]) + float(np.dot(np.asarray(nl["w"], dtype=np.float64), np.asarray(emb, dtype=np.float64)))
+        nonlife = 1.0 / (1.0 + math.exp(-z))
+        if sure and kind not in ("none", "person") and nonlife >= nl["at"]:
+            sure = False
     kind_offers = [] if sure else [k["key"] for k in kinds if k["key"] != "none"][:3]
     if species and kind not in ("none", "person"):
         if sure and species[0]["p"] >= f["name_at"] and species[0]["kind"] == kind:
@@ -177,7 +184,7 @@ def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, s
             three = [{"sci": rows[j]["sci"], "en": rows[j]["en"], "p": float(s[j]), "kind": rows[j]["kind"]} for j in pool[:3]]
             if sum(t["p"] for t in three) >= f["offer_at"]:
                 offers = three
-    return {"kind": kind, "kindP": kinds[0]["p"], "sure": sure, "kinds": kinds, "kindOffers": kind_offers, "species": species, "named": named, "offers": offers}
+    return {"kind": kind, "kindP": kinds[0]["p"], "sure": sure, "kinds": kinds, "kindOffers": kind_offers, "species": species, "named": named, "offers": offers, "nonlife": nonlife}
 
 
 def load_slot(where):

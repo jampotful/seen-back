@@ -1,4 +1,6 @@
-# Photos with nothing alive: the pocket head's answers, and a rule that was not shipped
+# Photos with nothing alive: the pocket head's answers, the rule build 35 did not ship, and the rule build 39 ships
+
+Build 39 ships a rule measured on real photographs: see "Real photographs" below. The sections before it are build 35's work on drawn pictures, kept as they were.
 
 Burst 12, item 2, 18 October 2026. Scripts: `tools/world/nonlife.py` (the measurement and the rules) and `tools/world/nonlife_make.py` (the photos made for it). Full output: `tools/world/nonlife-report.json`.
 
@@ -61,4 +63,60 @@ The marks on the test photos, read once: every pass mark of `docs/tracks/head.md
 
 Added after the photos were fetched and before any measurement on them was read (run 1 of `nonlife.yml` measured all 1,525 fetched photos; its results were set aside unread): the search let through photos that are not what the set is for, so every photo was looked at by eye and given a verdict in `tools/world/nonlife-real-review.csv`. 1,000 are kept (496 tune, 504 test). Left out: 361 in which something alive can be seen (people or hands, plants, trees, grass, the stained cells and bacteria the query "stain" brings, one millipede, one mite, one fly), 148 that are not photographs (paintings, prints, documents, patent drawings, rendered textures) and 16 likenesses of people or animals (dolls, mannequins, toy animals, an animal relief). The kept photos are the measurement; the same marks and the same choice apply to them. Run 1's numbers on all photos are reported beside them.
 
-Added after run 2 chose the probe at 0.9 on the tuning photos and passed the three marks on the test photos, and before run 3: the creature photos the head work uses include COCO's own animals (cats, dogs and the farm animals filed as `deer`), which the marks above count only through COCO's balanced share. Run 3 reports, for the same rule with nothing chosen again, the share of those photos the rule sends to the sheet, with the county list and alone. The 5% applies to them too: the rule ships only if at most 5% of COCO's animal photos are sent to the sheet on the test photos, both ways.
+Added after run 2 chose the probe at 0.9 on the tuning photos and passed the three marks on the test photos, and before run 3: the creature photos the head work uses include COCO's own animals (cats, dogs, and the horses, cows and sheep filed as `deer`), which the marks above count only through COCO's balanced share. Run 3 reports, for the same rule with nothing chosen again, the share of those photos the rule sends to the sheet, with the county list and alone. The 5% applies to them too: the rule ships only if at most 5% of COCO's animal photos are sent to the sheet on the test photos, both ways.
+
+### What the pocket model answers on real photos
+
+Run 2 of `nonlife.yml` (`runs/nonlife/2-pocket` on `ci`), the page as build 38 runs it (`models/pocket`, `kind_at` 0.87), on the 1,000 kept photos. A photo counts when the page asserts a living kind for it, which today means "this creature" (`other`) almost every time.
+
+| Photos | Tune | Test |
+|---|---:|---:|
+| Kept photos | 496 | 504 |
+| Living kind asserted, head alone (away from the county) | 35 (32 `other`) | 34 (33 `other`) |
+| Living kind asserted, with the county list | 8 | 8 |
+
+That is about 7% with the head alone and under 2% with the list, far from the half of the drawn pictures. By family, both halves together, head alone: coins 23 of 64, rust 14 of 71, stains 8 of 52, stones 8 of 62, walls 7 of 66, and at most 2 in each of the ten other families (none at all for bricks, food, toys or furniture). Run 1, on all 1,525 fetched photos before the review, gave 66 of 746 and 70 of 779 with the head alone and 21 and 18 with the list.
+
+### The rule chosen on the tuning photos
+
+Every rule of the grid, scored on the tuning photos (the probe's scores out of fold), keeping only rules that hold every pass mark and send at most 5% of real creatures to the sheet. The fewest living kinds left on the 35 real tuning photos (head alone) and 8 (with the list): the head's `none` at 0.02 leaves 31 and 8; the fused `none` at 0.01, 25 and 8; the gap at 0.88, 30 and 8; `other` under 0.89, 30 and 8 (it asks about 3.5% of the creatures called "this creature"); nearness to a species, nothing passes; the probe at 0.9, 8 and 0. The probe at 0.9 is chosen. Below 0.9 it fails COCO's balanced share (0.9343 at 0.85, against the mark of 0.9367).
+
+### The test photos
+
+Read once for the choice (run 2) and once more for the same rule, with nothing chosen, to count COCO's animals (run 3; the probe file of both runs is the same byte for byte).
+
+| On the test photos | Today | With the probe at 0.9 | Mark |
+|---|---:|---:|---|
+| Real photos with a living kind, head alone | 34 of 504 | 10 | at least a quarter fewer: 71% fewer, passes |
+| Real photos with a living kind, county list | 8 | 4 | |
+| COCO rooms with a living kind, list / alone | 3 / 4 of 500 | 3 / 4 | |
+| World creatures called "this creature" sent to the sheet | | 3 of 3,483 (0.09%) | at most 5%, passes |
+| All world test photos sent to the sheet | | 0.03% | at most 5%, passes |
+| Alachua test photos sent to the sheet | | 0 | |
+| COCO animals sent to the sheet | | 12 of 340 (3.5%): cats 2 of 77, dogs 0 of 63, horses, cows and sheep 10 of 200 (5.0%) | at most 5%, passes |
+| Every pass mark of `docs/tracks/head.md` | pass | pass | COCO balanced 0.9445 with the list and 0.9415 alone (today 0.9597 and 0.9567, mark 0.9367); old kinds 0.0 points on world and Alachua photos; groups named unchanged |
+
+The cost lands on animals photographed at home and on farms, which is where the probe's idea of a room, a floor and a wall meets a real creature: 3.5% of COCO's animals overall, and on its horses, cows and sheep exactly the 5% mark (5.4% on the tuning photos). Wild creatures are almost untouched.
+
+The probe was fitted on vectors from onnxruntime on the CPU for the real photos and from the phone's WASM runtime for the world photos, which could have let it learn the runtime. It did not: on the 6,000 Alachua 2025 photos the lab holds in both forms, its mean logit differs by 0.06 between them and 8 photos reach 0.9 in each.
+
+### What the larger model answers on them
+
+Run 1 of `nonlife.yml` (`runs/nonlife/1-big` on `ci`, `big-photos.jsonl` photo by photo): BioCLIP 2's vectors from the original weights in torch, and the page's arithmetic for the full database (`models/naturalist`, every file its manifest names, checked by SHA-256; its kinds head from kind phrases, `kind_at` 0.5), with no time zone and in Alachua County's. Split by the review afterwards:
+
+| Kept photos | No time zone | Alachua's zone |
+|---|---:|---:|
+| Living kind asserted, tune (496) | 163 | 158 |
+| Living kind asserted, test (504) | 182 | 187 |
+| "Nothing alive" asserted | 0 | 0 |
+| Not sure | 655 | 655 |
+
+So the larger model asserts a living kind for about a third of these photos (225 `other`, 85 `plant`, 16 `insect`, 14 `bird` among the 1,000 with no zone), and it never asserts `none`: its kind phrase for nothing alive does not win on any of them. By family, with no zone: rust 48 of 71, food 49 of 85, stones 35 of 62, stains 30 of 52, coins 26 of 64, walls 24 of 66, bricks 23 of 76, floors 22 of 73, furniture 22 of 88, screens 18 of 78, toys 17 of 67, sky 14 of 70, clothing 7 of 57, signs 6 of 32, cars 4 of 59. On all 1,525 fetched photos it is the same, 531 (34.8%).
+
+This matters for the rule below. Where the full database is kept, a pocket answer that is not sure is handed to the larger model before the person is asked. Of the 24 test photos the probe turns to not sure (head alone), the larger model asserts `other` for 12 and is not sure of 12; so on a phone that keeps the full database the probe's gain is about halved, and the larger model needs a rule of its own (its vectors of these photos are on `ci` beside its answers).
+
+### Decision: the probe at 0.9 ships in build 39
+
+All three marks hold on the test photos, so the rule ships: `fusion.nonlife` in `models/pocket/manifest.json` (512 weights, a bias and the level 0.9, 7.7 KB more in the manifest), applied in `fuseWith` of `src/cam.rec.js` and in `tools/fusion/fuse.py`, with 150 cases of `tools/fusion/parity.py` that use it (8 of them turned from sure to not sure, 0 differ between the page and the reference). Where the probe is at least 0.9 and the page would assert a living kind, the answer becomes not sure, and the page asks what was photographed (or, where the full database is kept, asks it first, as for any answer that is not sure). The larger model is unchanged.
+
+The plainest reading of these numbers: the drawn pictures overstated the trouble, since on real photos the pocket head errs about 7% of the time alone and 2% with the list, mostly on coins, rust, stains, stones and walls. The probe removes most of those at the price of about one horse, cow or sheep in twenty and one cat in forty. The cause is still there: the 1,000 kept photos (or their tuning half) belong in the next fit of the head as `none` rows, after which the probe may no longer be needed.

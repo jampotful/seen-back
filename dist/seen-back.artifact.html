@@ -421,7 +421,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '38';
+  var BUILD = '39';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -2900,6 +2900,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (f.rule !== undefined && f.rule !== 'product' && f.rule !== 'mix') throw err('unfit', 'a combination rule this page does not know');
       if (f.guard !== undefined && !(num(f.guard) && f.guard > 0)) throw err('unfit', 'fusion.guard is not a positive number');
       if (f.kind_at !== undefined && f.kind_at !== null && !num(f.kind_at)) throw err('unfit', 'fusion.kind_at is not a number');
+      if (f.nonlife !== undefined && f.nonlife !== null && !(Array.isArray(f.nonlife.w) && f.nonlife.w.length === m.width && f.nonlife.w.every(num) && num(f.nonlife.b) && num(f.nonlife.at))) throw err('unfit', 'fusion.nonlife does not match the encoder');
       // a model in parts: every part with its length, the lengths adding up to the whole
       if (v.parts !== undefined) {
         var sum = 0;
@@ -3295,7 +3296,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       }
       return best;
     }
-    function fuseWith(c, kd, sd, month) {
+    function fuseWith(c, kd, sd, month, emb) {
       var f = c.f, labels = c.labels, table = c.table, n = labels.length, z, i, p = null, q = {}, s = null, order = [], comb, kinds = [], species = [];
       if (c.head) {
         var nr = c.rowAt.length, pr;
@@ -3337,6 +3338,15 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       // Not sure is an answer. Under fusion.kind_at no kind is asserted and no species named: the three likeliest kinds of living thing are
       // offered instead (the species offers are worked out as ever). Without fusion.kind_at every answer is asserted, as before build 8.
       var kind = kinds[0].key, named = null, offers = [], sure = !(num(f.kind_at) && kinds[0].p < f.kind_at), kindOffers = [];
+      // A photo the slot's probe takes for one with nothing alive in it (fusion.nonlife: a line on the photo's unit vector, fitted on real
+      // photos of coins, stones, rust and the like against the world's creatures; tools/world/NONLIFE.md): an asserted living kind becomes
+      // not sure, so that the page asks what was photographed. tools/fusion/fuse.py does the same.
+      var nl = f.nonlife, nonlife = null;
+      if (nl && emb && emb.length === nl.w.length) {
+        var zl = nl.b; for (i = 0; i < nl.w.length; i++) zl += nl.w[i] * emb[i];
+        nonlife = 1 / (1 + Math.exp(-zl));
+        if (sure && kind !== 'none' && kind !== 'person' && nonlife >= nl.at) sure = false;
+      }
       if (!sure) kindOffers = kinds.filter(function (k) { return k.key !== 'none'; }).slice(0, 3).map(function (k) { return k.key; });
       if (species.length && kind !== 'none' && kind !== 'person') {
         if (sure && species[0].p >= f.name_at && species[0].kind === kind) named = species[0];
@@ -3347,7 +3357,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
           if (three.reduce(function (a, r) { return a + r.p; }, 0) >= f.offer_at) offers = three;
         }
       }
-      return { kind: kind, kindP: kinds[0].p, sure: sure, kinds: kinds, kindOffers: kindOffers, species: species, named: named, offers: offers };
+      return { kind: kind, kindP: kinds[0].p, sure: sure, kinds: kinds, kindOffers: kindOffers, species: species, named: named, offers: offers, nonlife: nonlife };
     }
     // The photo's pixels for the encoder. The canvas the page shows was brought down to 1280 by the browser's own scaling, which differs
     // from one browser to the next; so a photo chosen as a file is read again at its full size where a canvas can hold it (16 million
@@ -3380,7 +3390,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
             // far from the species list's place: a slot with a kinds head leaves the list out; one without still takes the kind from it, with no month's weight
             // a database for the world names anywhere, with the prior of its place (placeOf); a county's list only near the county
             var t = performance.now(), month = new Date().getMonth(), away = pocket.local === false, local = cur.place ? true : !away && !!cur.table;
-            var r = fuseWith(cur, m.kinds, local || !cur.head ? m.species : null, local ? month : null);
+            var r = fuseWith(cur, m.kinds, local || !cur.head ? m.species : null, local ? month : null, m.emb);
             r.month = month; r.local = local;                // local: the species list of this slot's region was consulted for a name
             r.kindAt = num(cur.f.kind_at) ? cur.f.kind_at : null;
             r.ms = { load: wasReady ? 0 : Math.round(tRun - tAsk), pre: Math.round(m.ms.pre), run: Math.round(m.ms.run), post: Math.round((m.ms.post + performance.now() - t) * 10) / 10 };
@@ -3407,7 +3417,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     }
     api = {
       usable: function () { return !cannot; }, whyNot: function () { return SAY[cannot] || ''; },
-      recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month) { return fuseWith(cur, kd, sd, month); },
+      recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month, emb) { return fuseWith(cur, kd, sd, month, emb); },
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
       place: function () { return (M && M.species && typeof M.species.place === 'string' && clip(M.species.place, 60)) || 'Gainesville, Florida'; },   // where the species list is from
       listed: function () { return !!(cur && cur.table); },
@@ -3442,7 +3452,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         place: function () { return cur && cur.place ? cur.place.test : null; },
         // the scoring with settings given by a check, through the same readers as a real slot (tools/fusion/parity.py)
         world: function (m, rows, sb) { worlds.push(slotOf(readManifest(JSON.stringify(m)), rows ? readTable(new TextEncoder().encode(JSON.stringify({ species: rows })).buffer, rows.length) : null, sb ? Float64Array.from(sb) : null)); return worlds.length - 1; },
-        fuseIn: function (w, kd, sd, month) { return fuseWith(worlds[w], kd, sd, month); } }
+        fuseIn: function (w, kd, sd, month, emb) { return fuseWith(worlds[w], kd, sd, month, emb); } }
     };
     return api;
   }

@@ -10,7 +10,8 @@ Three kinds of case:
   "worlds"  scores fed to settings made up here and handed to the page through the same readers a real slot goes through
             (pocket.test.world): each rule, biases for the kinds, the species, both or neither, temperatures from 1e-4 to 1e5,
             weights of 0 and 1, floors and guards, a table whose rows lack monthly weights, a month with no records at all,
-            no month, kinds with no species rows, species of kinds outside the labels, ties, zeros, one head sure against the other.
+            no month, kinds with no species rows, species of kinds outside the labels, ties, zeros, one head sure against the other,
+            and settings with the probe for photos with nothing alive (fusion.nonlife) fed the photo's vector as well.
   "photos"  the stand-in's trained-head slot (manifest.trained.json: rows that are not unit vectors, kinds.bias, species.bias_url, the
             mixing rule) run on the test photos in the page from pixels to answer. The page hands back its own embedding, its
             row scores and its answer; the reference must get the row scores from the embedding and the files (to 1e-5: the
@@ -132,6 +133,19 @@ def make(path):
         kd = [0.0] * n; kd[a] = kd[(a + 1) % n] = 0.7
         cases.append({"world": w, "kd": kd, "sd": sd([0.3] * k), "month": 0})                            # two kinds tied, every species tied
         cases.append({"world": w, "kd": (rs.uniform(-0.3, 1, n)).tolist(), "sd": None, "month": 6})      # the species head left out, as when the person is far from the list's place
+    # ---- the probe for photos with nothing alive (fusion.nonlife, tools/world/NONLIFE.md): settings with a probe, cases with the photo's vector
+    rs2 = np.random.RandomState(20261018)                           # a stream of its own, so that the cases above stay as they were
+    for at in (0.3, 0.5, 0.9):
+        for labels in (full, shared):
+            f = {"t_kind": 1, "t_species": 100, "alpha_prior": 0.5, "w_kind": 0.7, "name_at": 0.6, "offer_at": 0.3, "rule": "mix", "kind_at": 0.5,
+                 "nonlife": {"w": [float(v) for v in np.round(rs2.randn(4) * 3, 4)], "b": float(np.round(rs2.randn(), 4)), "at": at}}
+            worlds.append({"manifest": page_manifest(labels, f, None, len(t)), "table": t, "sb": None})
+            w, n = len(worlds) - 1, len(labels)
+            for i in range(24):
+                e = rs2.randn(4)
+                cases.append({"world": w, "kd": (rs2.uniform(-0.3, 1, n) * [1, 5, 30][i % 3]).tolist(), "sd": rs2.uniform(-0.3, 1, ns).tolist() if i % 4 else None,
+                              "month": int(rs2.randint(0, 12)), "emb": (e / np.linalg.norm(e)).tolist()})
+            cases.append({"world": w, "kd": rs2.uniform(-0.3, 1, n).tolist(), "sd": None, "month": 1})   # no vector: the probe is left out
     photos = {"slot": "test/rec/models/standin/manifest.trained.json", "names": sorted(json.loads((STANDIN / "expect.json").read_text())["photos"])}
     pathlib.Path(path).write_text(json.dumps({"cases": cases, "worlds": worlds, "photos": photos}))
     print(len(cases), "cases in", len(worlds), "made-up settings and the loaded slot;", len(photos["names"]), "photos through the trained-head slot")
@@ -148,6 +162,8 @@ def differences(r, g):
     if [k["head"] is None for k in r["kinds"]] != [k["head"] is None for k in g["kinds"]]: why.append("which answers have a kinds head")
     if [s["sci"] for s in r["offers"]] != [s["sci"] for s in g["offers"]]: why.append("offers")
     if [k["list"] is None for k in r["kinds"]] != [k["list"] is None for k in g["kinds"]]: why.append("which kinds the list speaks for")
+    rn, gn = r.get("nonlife"), g.get("nonlife")
+    if (rn is None) != (gn is None) or (rn is not None and not abs(rn - gn) <= 1e-6): why.append("nonlife %s / %s" % (rn, gn))
     nums = [abs(a["p"] - b["p"]) for a, b in zip(r["kinds"], g["kinds"])] + [abs(a["head"] - b["head"]) for a, b in zip(r["kinds"], g["kinds"]) if a["head"] is not None and b["head"] is not None]
     nums += [abs(a["list"] - b["list"]) for a, b in zip(r["kinds"], g["kinds"]) if a["list"] is not None and b["list"] is not None]
     nums += [abs(a["p"] - b["p"]) for a, b in zip(r["species"], g["species"])] + [abs(r["kindP"] - g["kindP"])]
@@ -164,9 +180,11 @@ def check(cases_path, page_path):
         if "world" in c:
             w = worlds[c["world"]]
             kb = (w["manifest"].get("kinds") or {}).get("bias")
-            r = fuse(w["manifest"], w["table"], c["month"], c["kd"], c["sd"], kind_bias=kb, species_bias=w["sb"], kind_bias_list=(w["manifest"].get("kinds") or {}).get("county_bias"))
+            r = fuse(w["manifest"], w["table"], c["month"], c["kd"], c["sd"], kind_bias=kb, species_bias=w["sb"], kind_bias_list=(w["manifest"].get("kinds") or {}).get("county_bias"),
+                     emb=c.get("emb"))
             tag = (w["manifest"]["fusion"].get("rule", "product") if "kinds" in w["manifest"] else "no kinds head") + (", biases" if w["sb"] is not None or kb is not None else ", no biases")
             tag += ", kind_at" if w["manifest"]["fusion"].get("kind_at") is not None else ""
+            tag += ", nonlife probe" if w["manifest"]["fusion"].get("nonlife") else ""
             unsure += not r["sure"]
         else:
             r = fuse(m, t, c["month"], c["kd"], c["sd"]); tag = "the loaded slot (product, no biases)"
