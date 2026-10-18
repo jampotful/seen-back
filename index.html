@@ -2775,6 +2775,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = big ? 120000 : 45000, netWaitMs = 6000, api;
     // the full database only: what of it is kept, the download under way, and the rest it takes after a minute with nothing to do
     var have = '', gone = false, keptBytes = 0, partGot = 0, getP = null, getCtl = null, getFail = '', surveyP = null, idleMs = 60000, idleTimer = 0, queue = Promise.resolve(), asked = 0;
+    var noStore = false;                               // the worker could not read the parts from the store once: the page reads them from then on
 
     function err(code, detail) { var e = new Error(SAY[code] || code); e.code = code; e.sentence = SAY[code] || SAY.died; e.detail = String(detail || ''); return e; }
     function abs(u, b) { try { return new URL(u, b || location.href).href; } catch (e) { return u; } }
@@ -2791,6 +2792,17 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     function kept(cache, url) {
       function one(c) { try { return c.match(url, { ignoreVary: true }).then(function (hit) { return hit || null; }, function () { return null; }); } catch (e) { return Promise.resolve(null); } }
       return (cache ? one(cache) : Promise.resolve(null)).then(function (hit) { return hit || (window.caches ? one(caches) : null); });
+    }
+    // Is it kept? Asked with keys(), which answers without the body: WebKit reads a kept body into the page's memory on every match,
+    // so a 90 MB part would be read only to learn that it is there (docs/ENGINES.md, 18 October 2026).
+    function has(cache, url) {
+      function one(c) { try { return c.keys(url, { ignoreVary: true }).then(function (k) { return !!(k && k.length); }, function () { return false; }); } catch (e) { return Promise.resolve(false); } }
+      return (cache ? one(cache) : Promise.resolve(false)).then(function (yes) {
+        if (yes || !window.caches) return yes;
+        return caches.keys().then(function (names) {
+          return names.reduce(function (p, n) { return p.then(function (y) { return y || caches.open(n).then(one, function () { return false; }); }); }, Promise.resolve(false));
+        }, function () { return false; });
+      });
     }
     function unkeep(url) {                             // out of every store of this site
       if (!window.caches) return Promise.resolve();
@@ -2972,7 +2984,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
           var m = ev.data || {}, p;
           if (m.op === 'hello') { hello = true; return; }
           if (m.op === 'ready') { settled = true; clearTimeout(timer); info = { backend: m.backend, threads: m.threads, ms: m.ms }; res(); return; }
-          if (m.op === 'fail' && !m.id) { no(m.stage === 'runtime' ? 'network' : m.stage === 'browser' ? 'browser' : m.stage === 'unfit' ? 'unfit' : m.stage === 'session' ? sessionCode : 'died', m.stage + ' ' + m.name + ' ' + m.message); return; }
+          if (m.op === 'fail' && !m.id) { no(m.stage === 'runtime' ? 'network' : m.stage === 'browser' ? 'browser' : m.stage === 'unfit' ? 'unfit' : m.stage === 'session' ? sessionCode : m.stage === 'store' || m.stage === 'damaged' ? m.stage : 'died', m.stage + ' ' + m.name + ' ' + m.message); return; }
           p = pending[m.id]; if (!p) return;
           delete pending[m.id]; clearTimeout(p.timer);
           if (m.op === 'done') p.res(m); else p.rej(err('photo', m.message));
@@ -3023,7 +3035,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (!cache || !M) return;                        // all of the model it names is kept and its wholes verified, and never before
       var now = {}, mine = allParts(M).map(partKey).concat(groupsOf(M).filter(function (g) { return wholeKept(g.V); }).map(function (g) { return wholeKey(g.V); }));
       mine.forEach(function (k) { now[k.split('?')[0]] = 1; });
-      Promise.all(mine.map(function (k) { return kept(cache, k); })).then(function (hits) {
+      Promise.all(mine.map(function (k) { return has(cache, k); })).then(function (hits) {
         if (!hits.every(Boolean)) return;
         return cache.keys().then(function (keys) {
           keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
@@ -3056,7 +3068,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       }
       return next().then(function () {
         if (!V.sha256 || (P.length === 1 && P[0].sha256 === V.sha256)) return;
-        return kept(cache, wholeKey(V)).then(function (ok) {
+        return has(cache, wholeKey(V)).then(function (ok) {
           if (ok) return;
           return sha256(V.sha256)(buf.buffer).then(function () { if (cache) return cache.put(wholeKey(V), new Response('verified')).catch(function () {}); },
             function (e) { return unkeepParts().then(function () { throw e; }); });      // every part passed and the whole does not: nothing of it can be trusted
@@ -3091,7 +3103,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (!surveyP) surveyP = keepOpen().then(function (cache) {
         return (M ? Promise.resolve() : manifestText(cache).then(adopt)).then(function () {
           var P = allParts(M);
-          return Promise.all(P.map(function (p) { return kept(cache, partKey(p)); })).then(function (hits) {
+          return Promise.all(P.map(function (p) { return has(cache, partKey(p)); })).then(function (hits) {
             var n = 0; keptBytes = 0; hits.forEach(function (h, i) { if (h) { keptBytes += P[i].bytes; n++; } });
             have = n === P.length ? 'kept' : n ? 'partial' : 'absent';
             staleParts(cache);
@@ -3124,7 +3136,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         function next() {
           if (i >= P.length) return Promise.resolve();
           var part = P[i++], key = partKey(part);
-          return kept(cache, key).then(function (hit) {
+          return has(cache, key).then(function (hit) {
             if (hit) return;                           // already here: not fetched again
             if (halted()) throw err('stopped');
             partGot = 0; notify();
@@ -3190,14 +3202,21 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       }).then(function () {
         var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, sp = M.species, nS = sp ? sp.count : 0, c = cacheRef, i8 = !!sp && sp.dtype === 'int8';
         var inParts = big || !!V.parts, modelUrl = inParts ? '' : encV(V) ? withV(abs(V.url, base), encV(V)) : u(V.url);
+        // The full database's encoder (or its weights, where they are a file of their own) and its species rows in parts are read by the
+        // worker straight from the store (vendor/rec-worker.js: intoHeap, rowsFromStore), unless that has failed once in this page. The
+        // page itself then never holds those bytes: in WebKit every kept body the page reads stays in its memory until the collector runs.
+        // The first time, the worker works out each whole's checksum on the way, and the page then marks the whole as verified.
+        var byWorker = big && !!c && !noStore, verify = false, rowsByWorker = byWorker && !!sp && Array.isArray(sp.parts), rowsVerify = false;
+        function sizeOk() { if (sp.bytes !== nS * M.width * (i8 ? 1 : 2)) throw err('damaged', 'species rows of the wrong length'); return null; }
         function rowsLen(buf) { if (buf && buf.byteLength !== nS * M.width * (i8 ? 1 : 2)) throw err('damaged', 'species rows of the wrong length'); return buf; }
-        return (inParts ? Promise.resolve(true) : kept(c, modelUrl)).then(function (hit) {
+        return (byWorker ? Promise.all([has(c, wholeKey(V)), rowsByWorker ? has(c, wholeKey(sp)) : true]).then(function (ok) { verify = !ok[0]; rowsVerify = !ok[1]; return true; })
+          : inParts ? Promise.resolve(true) : kept(c, modelUrl)).then(function (hit) {
           fromKeep.model = !!hit;
           return Promise.all([
             file(c, withV(abs(ORT.dir + ORT.wasm), ORT.v), ORT.wasmBytes),
-            inParts ? joined(c, V) : file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
+            byWorker ? null : inParts ? joined(c, V) : file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
             M.kinds ? file(c, u(M.kinds.url), nK * M.width * 2) : null,
-            sp ? (Array.isArray(sp.parts) ? joined(c, sp) : file(c, u(sp.url), nS * M.width * (i8 ? 1 : 2))).then(rowsLen) : null,
+            sp ? (rowsByWorker ? Promise.resolve().then(sizeOk) : (Array.isArray(sp.parts) ? joined(c, sp) : file(c, u(sp.url), nS * M.width * (i8 ? 1 : 2))).then(rowsLen)) : null,
             sp ? (far(sp.table) ? joined(c, sp.table) : file(c, u(sp.table), 0)) : null,
             sp && sp.bias_url ? file(c, u(sp.bias_url), nS * 4) : null,
             i8 ? (far(sp.scale) ? joined(c, sp.scale) : null) : null,
@@ -3215,7 +3234,13 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
             wasmBinary: b[0], model: b[9] || b[1], weights: b[9] ? b[1] : null, weightsName: b[9] ? V.weights_name : '', vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS, speciesType: i8 ? 'int8' : 'f16', speciesScale: i8 ? b[6] : null };
           // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
-          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : [], b[9] ? [b[9]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
+          function store(G, check) { return { keep: KEEP, verify: check, sha256: G.sha256 || '', parts: partsOf(G).map(function (p) { return { key: partKey(p), bytes: p.bytes }; }) }; }
+          if (byWorker) { init.store = store(V, verify); init.store.ext = !!b[9]; }
+          if (rowsByWorker) init.rows = store(sp, rowsVerify);
+          return startWorker(init, [b[0]].concat(b[1] ? [b[1]] : [], b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : [], b[9] ? [b[9]] : []), inParts && V.sha256 ? 'browser' : 'damaged').then(function () {
+            return Promise.all([byWorker && verify ? c.put(wholeKey(V), new Response('verified')).catch(function () {}) : null,
+              rowsByWorker && rowsVerify ? c.put(wholeKey(sp), new Response('verified')).catch(function () {}) : null]);
+          }, function (e) {
             // a kept model that will not start is thrown away, so the next try fetches it afresh
             if (e.code === 'damaged' && c) return (inParts ? unkeepParts() : unkeep(modelUrl)).then(function () { throw e; });
             throw e;
@@ -3226,6 +3251,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         tire();
         diag(big ? 'large-ready' : 'pocket-ready', M.id + ' ' + Math.round(loadMs) + 'ms ' + (fromKeep.model ? 'kept' : 'fetched'));
       }, function (e) {
+        // the worker could not read the parts from the store: once more, with their bytes read here and handed over as before
+        if (e && e.code === 'store' && !noStore) { noStore = true; diag('large-store', String(e.detail || '').slice(0, 160)); return load(); }
         if (!e || !e.code) e = err('died', e && e.message);
         if (state !== 'failed' || !why) { state = 'failed'; why = e.code; lastFail = e.code + (e.detail ? ': ' + e.detail : ''); }
         loadP = null;
