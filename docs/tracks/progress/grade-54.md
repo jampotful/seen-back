@@ -1,0 +1,131 @@
+# Grade review 54
+
+Checked: 254 records with grade m (latest version after recheck-53). Downgraded to g: 123. Retracted: 0. Left as m: 131.
+
+Rule applied: m only when the quote gives this one species its own value; group, several-species, "all" of a set, cited-study and cross-species comparison readings are g. Records that recheck-53 replaced are superseded by their recheck-53-fixed line. The audit-34 fault list file was not present in the repository; the task description of the fault was applied.
+
+Downgraded (id, taxon, trait, reason):
+
+- recheck-42-fixed:2 | Trigonisca pipioli | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:4 | Scaura argyrea | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:6 | Tetragona ziegleri | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:8 | Paratrigona opaca | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:10 | Tetragona perangulata | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:12 | Trigona fulviventris | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:14 | Partamona orizabaensis | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:15 | Ptilotrigona occidentalis | eye_topography | Quote gives no species; group sentence
+- recheck-42-fixed:18 | Oxalis stricta | diel | Cites another study, not measured
+- recheck-42-fixed:21 | Geum urbanum | sense_light_nonvisual | Quote says "all plants" tested
+- recheck-43-fixed:1 | Chrysemys picta | opsin_genes | Quote names several species together
+- recheck-43-fixed:2 | Chrysemys picta | opsin_status | Quote names several species together
+- recheck-43-fixed:3 | Chrysemys picta | opsin_status | Quote names several species together
+- recheck-43-fixed:4 | Chrysemys picta | opsin_status | Quote names several species together
+- recheck-43-fixed:5 | Chrysemys picta | opsin_status | Quote names several species together
+- recheck-43-fixed:6 | Chrysemys picta | opsin_status | Quote names several species together
+- recheck-43-fixed:7 | Chelonia mydas | opsin_genes | Quote names several species together
+- recheck-43-fixed:8 | Chelonia mydas | opsin_status | Quote names several species together
+- recheck-43-fixed:9 | Chelonia mydas | opsin_status | Quote names several species together
+- recheck-43-fixed:10 | Chelonia mydas | opsin_status | Quote names several species together
+- recheck-43-fixed:11 | Chelonia mydas | opsin_status | Quote names several species together
+- recheck-43-fixed:12 | Chelonia mydas | opsin_status | Quote names several species together
+- recheck-43-fixed:23 | Alligator mississippiensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:24 | Crocodylus porosus | opsin_status | Quote covers all four species
+- recheck-43-fixed:25 | Gavialis gangeticus | opsin_status | Quote covers all four species
+- recheck-43-fixed:27 | Alligator mississippiensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:28 | Alligator sinensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:29 | Crocodylus porosus | opsin_status | Quote covers all four species
+- recheck-43-fixed:30 | Gavialis gangeticus | opsin_status | Quote covers all four species
+- recheck-43-fixed:31 | Alligator mississippiensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:32 | Alligator sinensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:33 | Crocodylus porosus | opsin_status | Quote covers all four species
+- recheck-43-fixed:34 | Gavialis gangeticus | opsin_status | Quote covers all four species
+- recheck-43-fixed:35 | Alligator mississippiensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:36 | Alligator mississippiensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:37 | Alligator sinensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:38 | Alligator sinensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:39 | Crocodylus porosus | opsin_status | Quote covers all four species
+- recheck-43-fixed:40 | Crocodylus porosus | opsin_status | Quote covers all four species
+- recheck-43-fixed:41 | Gavialis gangeticus | opsin_status | Quote covers all four species
+- recheck-43-fixed:42 | Gavialis gangeticus | opsin_status | Quote covers all four species
+- recheck-43-fixed:43 | Chrysemys picta | opsin_status | Quote covers all four species
+- recheck-43-fixed:44 | Chrysemys picta | opsin_status | Quote covers all four species
+- recheck-43-fixed:45 | Chelonia mydas | opsin_status | Quote covers all four species
+- recheck-43-fixed:46 | Chelonia mydas | opsin_status | Quote covers all four species
+- recheck-43-fixed:47 | Pelodiscus sinensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:48 | Pelodiscus sinensis | opsin_status | Quote covers all four species
+- recheck-43-fixed:49 | Apalone spinifera | opsin_status | Quote covers all four species
+- recheck-43-fixed:50 | Apalone spinifera | opsin_status | Quote covers all four species
+- recheck-44-fixed:8 | Rhus typhina | diel | Quote covers all five trees
+- recheck-44-fixed:10 | Calendula arvensis | diel | Cites another study, not measured
+- recheck-44-fixed:11 | Calendula arvensis | sense_light_nonvisual | Generic claim about flowers, cited
+- recheck-45-fixed:1 | Menemerus bivittatus | opsin_expression | Quote covers all three species
+- recheck-45-fixed:2 | Habrocestum africanum | opsin_expression | Quote covers all three species
+- recheck-45-fixed:4 | Hasarius adansoni | opsin_localization | Quote covers all three species
+- recheck-45-fixed:5 | Hasarius adansoni | opsin_localization | Quote covers all three species
+- recheck-45-fixed:6 | Hasarius adansoni | opsin_localization | Quote covers all three species
+- recheck-45-fixed:7 | Hasarius adansoni | opsin_localization | Quote covers all three species
+- recheck-45-fixed:8 | Habrocestum africanum | opsin_localization | Quote covers all three species
+- recheck-45-fixed:9 | Habrocestum africanum | opsin_localization | Quote covers all three species
+- recheck-45-fixed:10 | Habrocestum africanum | opsin_localization | Quote covers all three species
+- recheck-45-fixed:11 | Habrocestum africanum | opsin_localization | Quote covers all three species
+- recheck-45-fixed:12 | Menemerus bivittatus | opsin_localization | Quote covers all three species
+- recheck-45-fixed:13 | Menemerus bivittatus | opsin_localization | Quote covers all three species
+- recheck-45-fixed:14 | Menemerus bivittatus | opsin_localization | Quote covers all three species
+- recheck-45-fixed:15 | Menemerus bivittatus | opsin_localization | Quote covers all three species
+- recheck-45-fixed:49 | Caretta caretta | eye_role | Quote covers both species jointly
+- recheck-45-fixed:50 | Caretta caretta | sense_chemical | Quote covers both species jointly
+- recheck-45-fixed:51 | Dermochelys coriacea | eye_role | Quote covers both species jointly
+- recheck-45-fixed:52 | Dermochelys coriacea | sense_chemical | Quote covers both species jointly
+- recheck-45-fixed:55 | Dendrobates auratus | opsin_gene_recovery | Quote covers whole family sample
+- recheck-45-fixed:56 | Epipedobates tricolor | opsin_gene_recovery | Quote covers whole family sample
+- recheck-45-fixed:57 | Oophaga pumilio | opsin_gene_recovery | Quote covers whole family sample
+- recheck-45-fixed:58 | Ranitomeya imitator | opsin_gene_recovery | Quote covers whole family sample
+- recheck-45-fixed:59 | Arthroleptis poecilonotus | opsin_gene_recovery | Quote names several species together
+- recheck-45-fixed:60 | Leptopelis aubryi | opsin_gene_recovery | Quote names several species together
+- recheck-45-fixed:63 | Ophiocoma wendtii | sense_light_nonvisual | Quote names several species together
+- recheck-45-fixed:64 | Ophiocoma pumila | sense_light_nonvisual | Quote names several species together
+- recheck-46-fixed:1 | Fukomys mechowii | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:2 | Fukomys mechowii | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:3 | Fukomys mechowii | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:4 | Fukomys mechowii | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:5 | Fukomys mechowii | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:6 | Fukomys mechowii | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:7 | Fukomys mechowii | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:9 | Heliophobius argenteocinereus | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:10 | Heliophobius argenteocinereus | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:11 | Heliophobius argenteocinereus | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:12 | Heliophobius argenteocinereus | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:13 | Heliophobius argenteocinereus | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:14 | Heliophobius argenteocinereus | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:15 | Heliophobius argenteocinereus | behaviour_vision | Quote covers both species jointly
+- recheck-46-fixed:33 | Rhododendron catawbiense | sense_light_nonvisual | Quote names several species together
+- recheck-47-fixed:61 | Anolis carolinensis | fovea | Quote names no single species
+- recheck-47-fixed:62 | Anolis carolinensis | oil_droplets | Quote names no single species
+- recheck-47-fixed:63 | Anolis cristatellus | fovea | Quote names no single species
+- recheck-47-fixed:64 | Anolis cristatellus | oil_droplets | Quote names no single species
+- recheck-47-fixed:65 | Anolis sagrei | fovea | Quote names no single species
+- recheck-47-fixed:66 | Anolis sagrei | oil_droplets | Quote names no single species
+- recheck-47-fixed:68 | Anolis cristatellus | oil_droplets | Quote names several species together
+- recheck-47-fixed:69 | Anolis sagrei | oil_droplets | Quote names several species together
+- recheck-47-fixed:82 | Stellaria media | sense_light_nonvisual | Quote names no single species
+- recheck-47-fixed:84 | Ribes sativum | sense_light_nonvisual | Value from three cultivars only
+- recheck-48-fixed:10 | Amaranthus retroflexus | diel | Quote names several species together
+- recheck-49-fixed:3 | Aphelocoma californica | eye_movement | Value compares with another species
+- recheck-49-fixed:4 | Corvus brachyrhynchos | eye_movement | Value compares with another species
+- recheck-49-fixed:14 | Otus asio | retinal_composition | Quote covers both species jointly
+- recheck-49-fixed:15 | Bubo virginianus | retinal_composition | Quote covers both species jointly
+- recheck-49-fixed:16 | Otus asio | dark_adaptation_time_min | Quote covers both species jointly
+- recheck-49-fixed:17 | Bubo virginianus | dark_adaptation_time_min | Quote covers both species jointly
+- recheck-49-fixed:18 | Otus asio | dark_adaptation_time_min | Quote covers both species jointly
+- recheck-49-fixed:19 | Bubo virginianus | dark_adaptation_time_min | Quote covers both species jointly
+- recheck-49-fixed:20 | Otus asio | dark_adaptation | Quote covers both species jointly
+- recheck-49-fixed:21 | Bubo virginianus | dark_adaptation | Quote covers both species jointly
+- recheck-49-fixed:31 | Pseudemys nelsoni | behaviour_vision | Quote names several species together
+- recheck-49-fixed:32 | Trachemys scripta | behaviour_vision | Quote names several species together
+- recheck-49-fixed:33 | Pseudemys nelsoni | behaviour_vision | Quote names no single species
+- recheck-50-fixed:69 | Neofelis nebulosa | tapetum | Quote names several species together
+- recheck-50-fixed:70 | Panthera leo | tapetum | Quote names several species together
+- recheck-52-fixed:44 | Crotalus durissus | fovea | Quote names no single species
+- recheck-52-fixed:45 | Crotalus durissus | fovea | Quote names no single species
+- recheck-52-fixed:46 | Bothrops jararaca | fovea | Quote names several species together
+- recheck-52-fixed:47 | Crotalus durissus | fovea | Quote names several species together
