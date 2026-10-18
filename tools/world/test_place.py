@@ -78,6 +78,15 @@ def main():
     # the encounter rule
     P = P1.posterior(None, [0, 1, 2])
     check(P[cg] > 100 * P[cl] and P[cg] > 100 * P[cs], "three species of Gainesville bring the world to Gainesville")
+
+    # a home share (tools/species/EVERYDAY.md): added to a species' share wherever the phone is, and no evidence of the place
+    home = np.zeros(R.S)
+    home[1] = 0.01
+    Ph = place.Place(R, zones=P1.zones, alias=P1.alias, home=home)
+    f0, fh = P1.log_share(P1.first_guess("US/Eastern")), Ph.log_share(Ph.first_guess("US/Eastern"))
+    check(abs(np.exp(fh[1]) - np.exp(f0[1]) - 0.01) < 1e-12 and np.allclose(np.delete(fh, 1), np.delete(f0, 1)),
+          "a home share adds to its species' share alone")
+    check(np.allclose(Ph.posterior(None, [0, 1, 2]), P1.posterior(None, [0, 2])), "the encounter rule skips a species with a home share")
     P = P1.posterior(None, [10, 11])
     check(P[cl] > 100 * P[cg], "two of London's bring it to London")
     Pa = P1.posterior(None, [3, 25, 12])
