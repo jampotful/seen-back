@@ -81,7 +81,7 @@ The rules applied are those of the launch prompt and `docs/tracks/prompts/oa-rea
 | first draw (seed 1019) | 40 | 30 | 1 | 0 | 0 | 1 | 3.3% | 0.1% to 17.2% |
 | with the extension | 50 | 39 | 1 | 0 | 0 | 1 | 2.6% | 0.1% to 13.5% |
 
-The interval is Clopper-Pearson, the one audit 39 used. The point estimate is under 5%, and the upper end of the interval is above it in both rows, so this many records cannot show the pool is under 5%. No value, taxon, grade or `partial` flag was found wrong in the 39 verifiable records; the one error is a quote.
+The interval is Clopper-Pearson, the one audit 39 used. The point estimate is under 5%, and the upper end of the interval is above it in both rows, so this many records cannot show the pool is under 5%. No value, taxon, grade or `partial` flag was found wrong in the 39 verifiable records; the one error is a quote. One verdict depends on reading: `oa-audit.md` lists "a figure" among the sources that need `partial`, while `oa-read.md` limits that to a value read off a figure and not stated in text. oa-10:43 is a legend sentence describing the paper's own maps, confirmed here under the second reading; under the first it is a `correct` (partial missing), which makes 2 errors: 6.7% of 30 (0.8% to 22.1%) and 5.1% of 39 (0.6% to 17.3%).
 
 ## Metadata and other faults (not counted)
 
