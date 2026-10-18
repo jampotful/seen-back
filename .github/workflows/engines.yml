@@ -12,6 +12,7 @@ name: engines
 # home-screen questions, Firefox, WebKit) and two macOS jobs (Playwright's WebKit and real Safari; Safari on an iPhone simulator).
 # run/engines/bigwm-<anything>: the larger model's memory, page against page (ci/engines/bigwm.sh, the pages in ci/engines/wm-variants.txt):
 # WebKit on Linux, and Playwright's WebKit and Safari on macOS (no simulator).
+# run/engines/ffx-<anything>: the recognizer's runtime alone in Firefox (ci/engines/ffbench.sh, test/engines/ffbench.js), one variant a job.
 # Results come back on the `ci` branch under runs/engines/<run number>-<job>: log.txt, summary.json, reports and small JPEGs.
 on:
   push:
@@ -23,7 +24,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   linux:
-    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/mac') && !startsWith(github.ref_name, 'run/engines/big') }}
+    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/mac') && !startsWith(github.ref_name, 'run/engines/big') && !startsWith(github.ref_name, 'run/engines/ffx') }}
     strategy:
       fail-fast: false
       matrix:
@@ -45,7 +46,7 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh engines out linux-${{ matrix.part }}
   macos:
-    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/linux') && !startsWith(github.ref_name, 'run/engines/big') }}
+    if: ${{ !startsWith(github.ref_name, 'run/engines/live') && !startsWith(github.ref_name, 'run/engines/linux') && !startsWith(github.ref_name, 'run/engines/big') && !startsWith(github.ref_name, 'run/engines/ffx') }}
     runs-on: macos-latest
     timeout-minutes: 55
     steps:
@@ -107,3 +108,22 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh engines out big-${{ matrix.part }}
+  ffx:
+    if: ${{ startsWith(github.ref_name, 'run/engines/ffx') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        v: [ff-default, ff-headed, ff-ion, ff-base, ff-lazy, ff-opt, ff-wb, ff-coi, chromium]
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: the runtime alone, ${{ matrix.v }}
+        env:
+          V: ${{ matrix.v }}
+        run: bash ci/engines/ffbench.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh engines out ffx-${{ matrix.v }}
