@@ -1,0 +1,89 @@
+{
+ "label": "ff-ion",
+ "browser": "firefox",
+ "prefs": {
+  "javascript.options.wasm_baselinejit": false
+ },
+ "headed": false,
+ "cases": [
+  {
+   "case": "pocket:all:5",
+   "url": "http://127.0.0.1:8790/test/engines/ffbench.html?model=pocket&opt=all&reps=5&threads=1",
+   "notes": [
+    "console: wasm streaming compile failed: Error: no WebAssembly compiler available",
+    "console: falling back to ArrayBuffer instantiation",
+    "console: failed to asynchronously prepare wasm: Error: no WebAssembly compiler available",
+    "console: Aborted(Error: no WebAssembly compiler available)"
+   ],
+   "done": true,
+   "steps": [
+    [
+     260,
+     "fetched in 104 ms"
+    ]
+   ],
+   "features": {
+    "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0",
+    "coi": false,
+    "cores": 4,
+    "sab": "undefined",
+    "simd": true,
+    "relaxedSimd": false,
+    "sharedMemory": true
+   },
+   "result": {
+    "model": "pocket",
+    "opt": "all",
+    "threads": 1,
+    "wb": false,
+    "t": {
+     "runs": [],
+     "fetch": 104
+    }
+   },
+   "error": "no available backend found. ERR: [wasm] RuntimeError: Aborted(Error: no WebAssembly compiler available). Build with -sASSERTIONS for more info.",
+   "wallMs": 2652,
+   "timedOut": false
+  },
+  {
+   "case": "big:all:2",
+   "url": "http://127.0.0.1:8790/test/engines/ffbench.html?model=big&opt=all&reps=2&threads=1",
+   "notes": [
+    "console: wasm streaming compile failed: Error: no WebAssembly compiler available",
+    "console: falling back to ArrayBuffer instantiation",
+    "console: failed to asynchronously prepare wasm: Error: no WebAssembly compiler available",
+    "console: Aborted(Error: no WebAssembly compiler available)"
+   ],
+   "done": true,
+   "steps": [
+    [
+     1256,
+     "fetched in 1207 ms"
+    ]
+   ],
+   "features": {
+    "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0",
+    "coi": false,
+    "cores": 4,
+    "sab": "undefined",
+    "simd": true,
+    "relaxedSimd": false,
+    "sharedMemory": true
+   },
+   "result": {
+    "model": "big",
+    "opt": "all",
+    "threads": 1,
+    "wb": false,
+    "t": {
+     "runs": [],
+     "fetch": 1207
+    }
+   },
+   "error": "no available backend found. ERR: [wasm] RuntimeError: Aborted(Error: no WebAssembly compiler available). Build with -sASSERTIONS for more info.",
+   "wallMs": 2181,
+   "timedOut": false
+  }
+ ],
+ "version": "142.0.1"
+}
