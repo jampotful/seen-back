@@ -1,0 +1,64 @@
+
+=== 20:20:34 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Apple M1 (Virtual)
+3
+7516192768
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.21.0
+Python 3.12.10
+
+=== 20:20:34 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 33 | index.html 680724 bytes | artifact 676826 bytes | selftest.js 50303 bytes
+build ok
+681010 index.html
+50303 selftest.js
+
+=== 20:20:35 iPhone simulator: boot it now, it takes a while
+iPhone 17: 10B884BF-749F-4E8B-AFCD-26AB8F1DBD01
+
+=== 20:21:44 the shipped slot: models/pocket (tinyclip-39m-16), and four photos from test/rec/photos
+
+=== 20:21:44 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 000
+8782 -> 000
+
+=== 20:21:53 playwright 1.56.0 and WebKit
+added 2 packages in 42s
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 20:25:05 self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop
+20:27:31 webkit-phone 26.0 done=true ok=true fails=0 checks=241 webgl2=true float=true Apple GPU 145024ms
+20:29:02 webkit-desktop 26.0 done=true ok=true fails=0 checks=241 webgl2=true float=true Apple GPU 90908ms
+
+=== 20:29:02 self-test with the recognizer phase: real Safari through safaridriver
+safaridriver --enable: exit 0
+20:29:36 error session not created: Could not create a session: The session timed out while connecting to a Safari instance. The following asynchronous operation timed out: Finding or launching a compatible local Safari and waiting for its RWIApplication to appear and become ready.
+20:29:36 safari undefined done=undefined ok=undefined fails=- 
+safari.js: exit 0
+ci/engines/macos.sh: line 140: 18898 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 20:29:37 iPhone simulator: Safari opens the self-test with the recognizer phase and posts its report
+Device already booted, nothing to do.
+
+openurl: exit 0
+report arrived after 91 s
+iphone-01.json iphone-02.json iphone-03.json iphone-04.json iphone-05.json iphone.json webkit-desktop-01.json webkit-desktop-02.json webkit-desktop-03.json webkit-desktop-04.json webkit-desktop-05.json webkit-desktop.json webkit-phone-01.json webkit-phone-02.json webkit-phone-03.json webkit-phone-04.json webkit-phone-05.json webkit-phone.json 
+
+=== 20:35:45 summary
+safari desktop done None ok None fails 0 webgl2 None float None None
+webkit desktop done True ok True fails 0 webgl2 True float True Apple GPU
+webkit phone done True ok True fails 0 webgl2 True float True Apple GPU
+check4 {}
+iphone True True ['iphone-01.json', 'iphone-02.json', 'iphone-03.json', 'iphone-04.json', 'iphone-05.json', 'iphone.json']
+
+=== 20:35:46 shrink pictures
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+pictures: 28 total bytes: 843895
+952K	/Users/runner/work/seen-back/seen-back/out
