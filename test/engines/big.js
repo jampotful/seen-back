@@ -11,7 +11,7 @@ const WD = process.env.WD || 'http://127.0.0.1:4444', LIMIT = +(process.env.LIMI
 const PAGE_JS = fs.readFileSync(path.join(__dirname, 'big_page.js'), 'utf8');
 const list = JSON.parse(fs.readFileSync(process.env.PHOTOS || 'photos.json', 'utf8'));
 const asB64 = (p) => ({ name: p.name, type: p.type, truth: p.truth || '', b64: fs.readFileSync(p.path).toString('base64') });
-const opts = { offerPhotos: [asB64(list[0])], photos: list.slice(1).map(asB64), limitMs: LIMIT };
+const opts = { offerPhotos: [asB64(list[0])], photos: list.slice(1).map(asB64), limitMs: LIMIT, noCaches: process.env.NOCACHES === '1' };   // NOCACHES=1: no census of the caches (in WebKit it reads every kept body into the page)
 fs.mkdirSync(OUT, { recursive: true });
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), NAME, ...a);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

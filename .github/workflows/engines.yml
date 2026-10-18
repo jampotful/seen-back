@@ -10,6 +10,8 @@ name: engines
 # other macOS-less Linux run also does at its end.
 # run/engines/big-<anything>: the larger model from the live address (ci/engines/big.sh, test/engines/big.js): one Linux job (Chromium with the
 # home-screen questions, Firefox, WebKit) and two macOS jobs (Playwright's WebKit and real Safari; Safari on an iPhone simulator).
+# run/engines/bigwm-<anything>: the larger model's memory, page against page (ci/engines/bigwm.sh, the pages in ci/engines/wm-variants.txt):
+# WebKit on Linux, and Playwright's WebKit and Safari on macOS (no simulator).
 # Results come back on the `ci` branch under runs/engines/<run number>-<job>: log.txt, summary.json, reports and small JPEGs.
 on:
   push:
@@ -91,7 +93,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: ${{ fromJSON(startsWith(github.ref_name, 'run/engines/big-wk') && '["mac-ws"]' || '["mac-ws", "mac-sim"]') }}
+        part: ${{ fromJSON((startsWith(github.ref_name, 'run/engines/big-wk') || startsWith(github.ref_name, 'run/engines/bigwm')) && '["mac-ws"]' || '["mac-ws", "mac-sim"]') }}
     runs-on: macos-latest
     timeout-minutes: 75
     steps:
