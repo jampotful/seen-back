@@ -735,7 +735,7 @@ async function meet(page, name) {
       all('unsure', r.unsure.state === s3.eyes + '|' + s3.shown + '|page' && r.unsure.line === '' && r.unsure.last.sure === false && r.unsure.last.kindOffers.join() === E('small.png').kindOffers.join());
       all('person', !r.person.eyes && r.person.notice === 'That’s a human. You already see the world as one. Try photographing another creature.' && !r.person.asked);   // a human: no view (build 22), and the larger model is not asked
       all('heron', r.heron.small === 'Great Blue Heron' && r.heron.after === 'great blue heron|device-large');
-      // sure of the kind and unsure of the species (build 33): the species name the small model gave does not stand, and the kind's does.
+      // sure of the kind and unsure of the species (build 34): the species name the small model gave does not stand, and the kind's does.
       // The larger model's answer is set by hand here, since the stand-in is sure of the heron's species.
       await page.evaluate(() => { const b = window.__seenBack.big; b.__recognize = b.recognize; b.recognize = function () { return Promise.resolve({ kind: 'wader', kindP: 0.9, sure: true, kinds: [{ key: 'wader', p: 0.9 }], kindOffers: [], species: [{ sci: 'Ardea herodias', en: 'Great Blue Heron', p: 0.4, kind: 'wader' }, { sci: 'Ardea alba', en: 'Great Egret', p: 0.3, kind: 'wader' }], named: null, offers: [], local: true, kindAt: 0.5, ms: { load: 0, pre: 0, run: 0, post: 0 }, model: 'by hand', at: Date.now() }); }; });
       await meet(page, 'heron.png');
