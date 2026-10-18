@@ -24,6 +24,7 @@ case "$V" in
   ff-coi) COI=1; CASES="pocket:all:5:t4 big:all:2:t4" ;;
   ff-pwopt) PREFS='{"javascript.options.wasm_optimizingjit":true,"javascript.options.wasm_baselinejit":true}'; CASES="pocket:all:5" ;;
   ff-plain*) CASES="pocket:all:5 big:all:2" ;;
+  ff-page*) CASES="the page's own flow" ;;
   *) CASES="pocket:all:3" ;;
 esac
 if [ "$HEADED" = 1 ]; then sudo apt-get install -y -q xvfb > /dev/null 2>&1; Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & export DISPLAY=:99; sleep 1; fi
@@ -42,6 +43,59 @@ http.server.ThreadingHTTPServer(('127.0.0.1', port), H).serve_forever()
 PY
 sleep 2
 step "variant $V: $B, headed $HEADED, prefs $PREFS, cases $CASES"
+# ff-page: the page's own flow (test/engines/big_page.js: the offer, "Get it", the photos) in a Firefox started by hand on Xvfb with no
+# automation attached; the page, served from this commit, drives itself (pageauto.html) and posts window.__big to ci/engines/serve.py.
+# ff-pagepw: the same page and flow through Playwright (test/engines/big.js), as runs engines/39 did against the live address.
+case "$V" in ff-page*)
+  python3 -I ci/engines/big_photos.py /tmp/bigphotos | tail -5
+  mkdir -p "$ROOT/tmpphotos"; python3 -I - /tmp/bigphotos/photos.json "$ROOT/tmpphotos/opts.json" <<'PY'
+import base64, json, sys
+L = json.load(open(sys.argv[1])); b = lambda p: {"name": p["name"], "type": p["type"], "truth": p.get("truth", ""), "b64": base64.b64encode(open(p["path"], "rb").read()).decode()}
+json.dump({"offerPhotos": [b(L[0])], "photos": [b(p) for p in L[1:]], "limitMs": 900000, "noCaches": True}, open(sys.argv[2], "w"))
+PY
+  sudo apt-get install -y -q xvfb > /dev/null 2>&1; Xvfb :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & export DISPLAY=:99; sleep 1
+  pkill -f 'python3 -I - 8790' 2>/dev/null; sleep 1
+  python3 -I ci/engines/serve.py 8790 "$ROOT" "$OUT/reports" > "$OUT/serve.txt" 2>&1 & sleep 2
+  if [ "$V" = ff-pagepw ]; then
+    ( export BROWSER=firefox OUT="$OUT" PHOTOS=/tmp/bigphotos/photos.json SITE=http://127.0.0.1:8790/ HOME_CHECKS=0 NOCACHES=1 HEADED=1 LIMIT_MS=900000; timeout 1500 node test/engines/big.js ); echo "big.js: exit $?"
+    python3 -I ci/engines/bigsum.py "$OUT" 2>&1 | head -30; exit 0
+  fi
+  { cat index.html; cat <<'JS'
+<script>
+(function () {   // ff-page: the page drives itself with test/engines/big_page.js and posts what it has to /report/page every 3 s
+  function post() { try { fetch('/report/page', { method: 'POST', body: JSON.stringify({ at: Date.now(), big: window.__big || null }) }); } catch (e) {} }
+  window.addEventListener('load', function () { setTimeout(function () {
+    fetch('test/engines/big_page.js').then(function (r) { return r.text(); }).then(function (src) { (0, eval)(src); return fetch('tmpphotos/opts.json').then(function (r) { return r.json(); }); })
+      .then(function (o) { window.__bigRun('get', o); var iv = setInterval(function () { post(); if (window.__big && window.__big.done) clearInterval(iv); }, 3000); })
+      .catch(function (e) { fetch('/report/page', { method: 'POST', body: JSON.stringify({ error: String(e) }) }); });
+  }, 1500); });
+})();
+</script>
+JS
+  } > "$ROOT/pageauto.html"
+  FX=$(command -v firefox || true); if [ -z "$FX" ] || ! "$FX" --version > /dev/null 2>&1; then
+    curl -s -L -o /tmp/fx.tar.xz 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' && mkdir -p /tmp/fx && tar -xf /tmp/fx.tar.xz -C /tmp/fx && FX=/tmp/fx/firefox/firefox; fi
+  echo "firefox: $FX, $("$FX" --version 2>&1 | head -1)"
+  P=$(mktemp -d /tmp/fxp-XXXX)
+  printf '%s\n' 'user_pref("browser.shell.checkDefaultBrowser", false);' 'user_pref("browser.startup.homepage_override.mstone", "ignore");' 'user_pref("datareporting.policy.dataSubmissionEnabled", false);' \
+    'user_pref("toolkit.telemetry.reportingpolicy.firstRun", false);' 'user_pref("browser.aboutwelcome.enabled", false);' 'user_pref("app.update.disabledForTesting", true);' > "$P/user.js"
+  "$FX" --no-remote --profile "$P" --width 390 --height 844 "http://127.0.0.1:8790/pageauto.html" > "$OUT/fx-page.txt" 2>&1 & FP=$!
+  t=0; while [ $t -lt 1500 ]; do sleep 5; t=$((t + 5)); python3 -I -c "import json,sys; j=json.load(open(sys.argv[1])); sys.exit(0 if j.get('error') or (j.get('big') or {}).get('done') else 1)" "$OUT/reports/page.json" 2>/dev/null && break; done
+  kill $FP 2>/dev/null; sleep 2; pkill -f "$P" 2>/dev/null
+  python3 -I - "$OUT/reports/page.json" <<'PY'
+import json, sys
+j = json.load(open(sys.argv[1])); B = j.get("big") or {}; D = B.get("download") or {}
+print("error", j.get("error"), B.get("error"), "| done", B.get("done"), "| build", B.get("build"), "| ua", B.get("ua"))
+print("pocket", B.get("pocketReady"), B.get("pocketReadyMs"), "ms | path", B.get("path"), "| getFail", B.get("getFail"))
+print("download", D.get("downloadMs"), "ms | ready", D.get("readyMs"), "ms after Get it (", D.get("afterDownloadMs"), "ms after the last byte)")
+print("big", json.dumps(D.get("big"))[:600]); print("diag", json.dumps(D.get("diag"))[:400])
+p0 = B.get("photo0") or {}; print("photo in hand", p0.get("at"), "ms after ready |", json.dumps(p0.get("large"))[:300])
+for p in B.get("photos") or []:
+    print("photo", p.get("name"), "|", (p.get("truth") or "")[:40], "| small", json.dumps(p.get("small"))[:200], "| large", json.dumps(p.get("large"))[:260], "| wall", p.get("wallMs"), "ms, after the small one", p.get("afterSmallMs"), "ms | fail", p.get("fail"))
+print("steps", B.get("steps"))
+PY
+  (top -b -n 1 | head -12) 2>/dev/null; exit 0 ;;
+esac
 # ff-plain: the machine's own Firefox (or Mozilla's latest release), started by hand with no automation attached, on a fresh profile;
 # ff-plainpw: Playwright's Firefox started the same way. The page posts its figures to ci/engines/serve.py, case after case.
 case "$V" in ff-plain*)
