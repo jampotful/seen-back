@@ -109,6 +109,16 @@ I checked 6 of the 26 lines against a page I opened (lines 3, 12, 13, 14, 18 and
 
 Faults, listed outside the count: authors are blank on 26 of 26 lines; years are blank on 8 (3, 12, 13, 14, 15, 16, 17, 19); DOIs are blank on 8 (6, 8, 12, 13, 14, 15, 17, 19), two of those with an OpenAlex id that agrees with the harvest data. Of the 6 lines checked on an opened page, 0 are contradicted, and the table above fills most of their blanks (line 3 gains only its year, and line 13 has no DOI to give). Line 13 is a dead lead. Three lines duplicate entries already on main: line 2 (Li et al. 2015 on phytochrome diversity, in wanted/canon.jsonl with evidence in canon-3 and canon-13; Botrypus is not among the logged taxa), line 19 (above) and line 21 (the mock-viper pupil paper, in wanted/sweep-64.jsonl).
 
+## Extension under UPDATE 10: 15 more records
+
+The desk's UPDATE 10 rule asks an audit that finds an error to check 15 more records before it gives a verdict. The coordinator asked for the extension on 18 October 2026, after the first report was pushed (ca008f1b).
+
+**Draw.** The 17 search-record lines outside the first sample are 2, 4, 5, 8, 9, 11, 21, 22, 23, 26, 27, 29, 31, 32, 33, 35 and 37. `random.seed(4301)` and `random.sample(<those 17 line numbers in ascending order>, 15)` gave, in draw order: 27, 4, 22, 9, 31, 11, 29, 5, 26, 33, 35, 2, 37, 23, 8. Sorted: 2, 4, 5, 8, 9, 11, 22, 23, 26, 27, 29, 31, 33, 35, 37. The two lines left out are 21 (Cocculus diel) and 32 (Masticophis fov_h_deg). This draw was committed before the first extension search.
+
+The 15 fall in 7 genera: Heliotropium 2; Cistothorus 4, 5, 8; Botrypus 9, 11; Cocculus 22, 23; Riparia 26, 27, 29; Masticophis 31, 33; Lerema 35; Pyrgus 37. Five are plant lines (2, 9, 11, 22, 23) and ten are animal lines.
+
+The checks follow below as I finish them.
+
 ## Counts and rate
 
 - I checked 20 of the 37 records.
