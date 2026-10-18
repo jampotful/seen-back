@@ -9,6 +9,7 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 | 2 | Hall, Kamilar and Kirk 2012, eye shape and the nocturnal bottleneck of mammals (Proc R Soc B 279: 4962-4968) | Europe PMC PDF, published version | 4 | 2 | 2 | 0 | 4 |
 | 13 | Wald, Brown and Kennedy 1957, the visual system of the alligator (J Gen Physiol 40: 703-713) | Europe PMC PDF (scanned, OCR text layer), published version | 7 | 5 | 2 | 0 | 3 |
 | 33 | Itahara and Kano 2024, gaze tracking of large-billed crows (J Exp Biol 227: jeb246514) | Europe PMC full-text XML, published version | 37 | 34 | 3 | 0 | 19 |
+| 35 | Coli et al. 2018, retinal ganglion cells in diurnal and nocturnal raptors (Int J Morphol 36: 955-961) | SciELO PDF, published version | 14 | 11 | 3 | 0 | 6 |
 
 ## Notes by paper
 
@@ -18,6 +19,8 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 
 - Entry 33. Corvus macrorhynchos, own measurements (`m`): binocular field 48.4 deg at rest and 50.2 deg with eye movement induced, three blind-area widths, eye-movement amplitude per eye at rest (16.1, 17.3 deg) and induced (33.9, 33.8 deg), optical-axis azimuth and elevation per eye, head saccades as 8.0% of tracked data, and three behaviour records from the motion-capture study (binocular field for moving targets, lateral fields near the optical axes for still ones, right-eye preference on the ground). The roughly 15 deg eye shift that the Discussion infers from head-tracking heatmaps is `g` (inferred, eyes not tracked). Cited records, all `partial`: the area centralis and the dorso-temporal high-density region from Rahman et al. (2006); the corvid ranges for binocular overlap and eye movement (Corvidae, `g`, species not named); pigeon eye movement within 5 deg (Wohlschläger et al. 1993); and fourteen behaviour records for eleven named species from the Introduction (pigeon, large-billed and New Caledonian crows, chicken, zebra finch, starling, peafowl, gull-billed tern, goshawk, gyrfalcon, peregrine). Not logged: the eye-laterality findings for magpies, jays, jackdaws and tits and the gaze-following and caching studies (cognition, not what is seen), and the saccade statistics in the supplement (Fig. S2C), which is not in the text. New trait key `optic_axis_azimuth_deg`; `blind_area_deg` and `optic_axis_elevation_deg` reuse keys in other logs.
 
+- Entry 35. One right eye of each of four species. The ganglion-cell densities are drawn only in Figs 2 to 4 (images with no numbers in the text), so the records are the topography the text states: buzzard temporal and central density peaks read as two foveae with a horizontal streak (`m`); the same pattern for the kestrel only as part of the pooled "diurnal raptors" sentence (`g`); for little owl and tawny owl a peak in the peripheral temporal field, higher density ventrally (V3 in the little owl, V1 in the tawny owl) and a dorsal tapetum lucidum seen when the eyes were opened (all `m`). Cited, `partial`: owls up to 65,000 ganglion cells/mm2 and humans 38,000 (Güntürkün 2000), owls' single temporal fovea (Jones et al. 2007) and radial streak (Lisney et al. 2012), and the diurnal raptors' central and temporal foveae (Inzunza et al. 1991; Jones et al. 2007), filed under Accipitriformes and Falconiformes as `g` because "diurnal raptors" spans both orders. Not logged: soma-size classes (not a trait of seeing), the eye-to-skull volume figure, Table I (diet), and owls named by common name only (barred, northern saw-whet, barn owl).
+
 ## Next
 
-Entries 35, 18, 45, 19.
+Entries 18, 45, 19.
