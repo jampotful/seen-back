@@ -567,7 +567,7 @@
  "rows_draft": {
   "version": 1,
   "model": "claude-sonnet-5-5",
-  "made": "2026-10-16",
+  "made": "2026-10-17",
   "rule": "docs/views/VOICE.md",
   "rows": [
    {
@@ -582,8 +582,15 @@
      "i": 0.949
     },
     "species": 1200,
-    "text": "Unless you belong to one of the few species that have been tested, nobody has measured how fast a light can flash before you stop seeing it flicker. A human stops seeing flicker at about 60 flashes a second. A blue tit still sees it at about 130, a European starling at about 100, a house sparrow at about 55 and a great horned owl at about 45.",
+    "text": "A lamp that looks steady to a human can look like it is flashing to a European pied flycatcher, which sees flicker at up to about 145 flashes a second, where a human stops seeing it at about 60. A blue tit has been measured at about 130 flashes a second and an Anna's hummingbird at 70 to 80. For most other birds, nobody has measured how fast you see, so if you are not one of these three, your number is not known.",
     "cites": [
+     {
+      "id": "birds#89",
+      "taxon": "Ficedula hypoleuca",
+      "trait": "cff_hz",
+      "grade": "m",
+      "source": "Boström 2016"
+     },
      {
       "id": "birds#91",
       "taxon": "Cyanistes caeruleus",
@@ -592,28 +599,14 @@
       "source": "Boström 2016"
      },
      {
-      "id": "methods#250",
-      "taxon": "Sturnus vulgaris",
+      "id": "birds#138",
+      "taxon": "Calypte anna",
       "trait": "cff_hz",
       "grade": "m",
-      "source": "Healy 2013"
-     },
-     {
-      "id": "oa-6#72",
-      "taxon": "Passer domesticus",
-      "trait": "cff_hz",
-      "grade": "m",
-      "source": "Lafitte 2022"
-     },
-     {
-      "id": "methods#225",
-      "taxon": "Bubo virginianus",
-      "trait": "cff_hz",
-      "grade": "m",
-      "source": "Healy 2013"
+      "source": "Goller 2019"
      }
     ],
-    "note": "Left out other measured species (hummingbird, flycatcher, cowbird) for length; the human figure of 60 comes from the brief.",
+    "note": "Left out the compiled values (starling, cowbird, sparrow, owls) to keep the row short; they could be added as \"a review reports\".",
     "attempt": 1
    },
    {
@@ -629,7 +622,7 @@
      "i": 1.0
     },
     "species": 1200,
-    "text": "Birds that have been measured differ widely in how sharply they see. A house sparrow sees about a sixth of the detail a human sees, a mallard about two fifths, and a magpie or a jackdaw about as much as a human. Nobody has measured how sharply most other birds see, so if you are none of these, your own sharpness is unknown.",
+    "text": "For most birds, nobody has measured how sharply you see. If you are a house sparrow, you read about 5 cycles a degree, and if you are a mallard, about 12 (an estimate from the density of cells in the retina), where a human reads about 30 on an eye chart. If you are a Eurasian magpie or a western jackdaw, a compilation of behavior tests gives about 30, close to a human.",
     "cites": [
      {
       "id": "birds#68",
@@ -660,8 +653,8 @@
       "source": "Caves 2024"
      }
     ],
-    "note": "No record gives interreceptor angle for any bird, so it is left out.",
-    "attempt": 1
+    "note": "No record for spacing of light-sensing cells (interreceptor_deg), so it is left out; figures stay with the species named.",
+    "attempt": 2
    },
    {
     "title": "Ultraviolet",
@@ -676,15 +669,8 @@
      "i": 0.496
     },
     "species": 1200,
-    "text": "Ultraviolet is light that humans cannot see at all, and in the blue tit, the European starling and the Eurasian blackbird a cone cell senses it best at about 370 nanometers. If you are a songbird, you very likely sense ultraviolet too, and a blue tit's cornea and lens let it through. Birds are not all alike here: the mallard's cone of this kind peaks in violet, and in the pied cormorant the cornea and lens block ultraviolet.",
+    "text": "Ultraviolet is light that humans cannot see at all. In the blue tit, the European starling and the Eurasian blackbird, one kind of color-sensing cell peaks in it, between 360 and 375 nanometers, and a review table gives 315 nanometers as the point where the blue tit's lens and cornea pass half the light, so if you are a songbird you very likely sense ultraviolet. If you are a mallard, the matching cell peaks at 415 nanometers, in violet, and if you are a cormorant you very likely get almost no ultraviolet, since the lens and cornea of the pied cormorant block it.",
     "cites": [
-     {
-      "id": "birds#1",
-      "taxon": "Anas platyrhynchos",
-      "trait": "lambda_max_nm",
-      "grade": "m",
-      "source": "Hart 2001"
-     },
      {
       "id": "birds#17",
       "taxon": "Cyanistes caeruleus",
@@ -707,22 +693,29 @@
       "source": "Hart 2001"
      },
      {
-      "id": "recheck-5-fixed#11",
-      "taxon": "Phalacrocorax varius",
-      "trait": "spectral_range_nm",
-      "grade": "m",
-      "source": "Heswall 2026"
-     },
-     {
       "id": "recheck-5-fixed#13",
       "taxon": "Cyanistes caeruleus",
       "trait": "spectral_range_nm",
       "grade": "m",
       "source": "Lind 2014"
+     },
+     {
+      "id": "birds#1",
+      "taxon": "Anas platyrhynchos",
+      "trait": "lambda_max_nm",
+      "grade": "m",
+      "source": "Hart 2001"
+     },
+     {
+      "id": "recheck-5-fixed#11",
+      "taxon": "Phalacrocorax varius",
+      "trait": "spectral_range_nm",
+      "grade": "m",
+      "source": "Heswall 2026"
      }
     ],
-    "note": "Nothing is stated for turkey vultures or woodpeckers; ocular-media claims are kept to blue tit and pied cormorant by name.",
-    "attempt": 1
+    "note": "Replaced \"reports\" with \"a review table gives\". Left out the house sparrow (R13 is not its ultraviolet cell), the goldfinch's 399 nm and the great cormorant's 405 nm cell to keep the row short.",
+    "attempt": 2
    },
    {
     "title": "Field of view",
@@ -737,7 +730,7 @@
      "i": 0.869
     },
     "species": 1200,
-    "text": "If you are a red-winged blackbird, your two eyes together cover about 315 degrees of the circle around you, and about 50 degrees of that in front is seen by both eyes at once. If you are a mallard, each eye alone covers about 185 degrees, and the two eyes overlap by about 20 degrees. For most other birds, nobody has measured either width.",
+    "text": "If you are a red-winged blackbird, your two eyes together take in about 315 degrees, nearly a full circle, and they overlap over about 50 degrees in front of you. If you are a mallard, the overlap in front is about 20 degrees. For most other birds, including house sparrows and American robins, nobody has measured how wide you see.",
     "cites": [
      {
       "id": "recheck-15-fixed#1",
@@ -754,13 +747,6 @@
       "source": "Fernández-Juricic 2019"
      },
      {
-      "id": "oa-6#519",
-      "taxon": "Anas platyrhynchos",
-      "trait": "fov_h_deg",
-      "grade": "m",
-      "source": "Martin 1999"
-     },
-     {
       "id": "birds#77",
       "taxon": "Anas platyrhynchos",
       "trait": "binocular_deg",
@@ -768,7 +754,7 @@
       "source": "Cantlay 2023"
      }
     ],
-    "note": "Left out a human comparison because no record gives a human field width.",
+    "note": "Kept to species with measured records; other measured species (mallard total, goldfinch, grebe, anhinga) left out for length.",
     "attempt": 1
    }
   ]

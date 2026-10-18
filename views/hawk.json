@@ -263,7 +263,7 @@
  "rows_draft": {
   "version": 1,
   "model": "claude-sonnet-5-5",
-  "made": "2026-10-16",
+  "made": "2026-10-17",
   "rule": "docs/views/VOICE.md",
   "rows": [
    {
@@ -279,7 +279,7 @@
      "i": 1.0
     },
     "species": 302,
-    "text": "If you are a red-tailed hawk, you read about 17 cycles a degree, a little over half of the 30 a human reads on an eye chart. Only a few other hawks, eagles, falcons and vultures have been measured, and their figures differ widely from species to species. If yours is not one of them, nobody has measured how sharply you see.",
+    "text": "If you are a red-tailed hawk, a compilation of measurements puts you at about 17 cycles a degree, where a human reads about 30 on an eye chart. A black kite in that compilation reads about 35, and the eagle Aquila audax up to 140. Nobody has measured how sharply you see if you are a bald eagle, an osprey or most other species in your group.",
     "cites": [
      {
       "id": "canon-5#37",
@@ -296,22 +296,15 @@
       "source": "Caves 2024"
      },
      {
-      "id": "intake-2#5",
-      "taxon": "Buteo buteo",
+      "id": "birds#50",
+      "taxon": "Aquila audax",
       "trait": "acuity_cpd",
       "grade": "m",
-      "source": "Potier 2020"
-     },
-     {
-      "id": "intake-2#8",
-      "taxon": "Gyps fulvus",
-      "trait": "acuity_cpd",
-      "grade": "m",
-      "source": "Potier 2020"
+      "source": "Caves 2018"
      }
     ],
-    "note": "Left out the 160 cycles a degree (R13) and the eagle and Egyptian vulture figures (R2, R4) because they belong to other species or have no named hawk. Nothing on interreceptor angle was recorded.",
-    "attempt": 1
+    "note": "Rounded 33 to 35 and 138 to 140. Left out the 160 book figure (R13) because it names no species, and left out interreceptor_deg because no record has it.",
+    "attempt": 2
    },
    {
     "title": "Speed",
@@ -325,7 +318,7 @@
      "i": 0.848
     },
     "species": 302,
-    "text": "If you are a peregrine falcon, you can see a light flicker even when it flashes at least 125 times a second, and a saker falcon sees it at about 100, where a human stops seeing flicker at about 60. If you are a Harris's hawk, the figure is about 80. Nobody has measured how fast you see in any other hawk, eagle or falcon.",
+    "text": "A light flashing 80 times a second looks steady to a human, who stops seeing flicker at about 60 flashes a second. If you are a peregrine falcon, you see flicker at 125 flashes a second at least, if you are a saker falcon, at 100, and if you are a Harris's hawk, at 80. If you are a kestrel or another falcon of the genus Falco, you very likely see flicker at a fast rate like your relatives the peregrine and the saker, and for any other hawk, eagle or kite nobody has measured it.",
     "cites": [
      {
       "id": "birds#96",
@@ -349,7 +342,7 @@
       "source": "Potier 2020"
      }
     ],
-    "note": "Left out a carried claim for other Falco species, since numbers may not travel between species.",
+    "note": "Peregrine figure is a lower bound (\"at least 129\"), so I rounded down to 125. No numbers given for carried falcons.",
     "attempt": 1
    },
    {
@@ -365,12 +358,19 @@
      "i": 0.497
     },
     "species": 302,
-    "text": "Straight ahead of you is a wedge that both eyes see at once. If you are a red-tailed hawk or an American kestrel, that wedge is about 35 degrees wide, and if you are a bald eagle, it is about 40. For most hawks, eagles and falcons nobody has measured how much of the full circle your two eyes take in together.",
+    "text": "Straight ahead, your two eyes look at the same patch of the world, and in the birds measured that patch is about 35 degrees wide in the red-tailed hawk, American kestrel and Cooper's hawk, 40 in the bald eagle, and 45 in the crested caracara. Behind your head the red-tailed hawk has a blind area of about 80 degrees and Cooper's hawk one of about 60. For most hawks, eagles and falcons, nobody has measured how wide the whole field is, and for many nobody has measured the overlap either.",
     "cites": [
      {
       "id": "birds#81",
       "taxon": "Buteo jamaicensis",
       "trait": "binocular_deg",
+      "grade": "m",
+      "source": "O'Rourke 2010"
+     },
+     {
+      "id": "birds#82",
+      "taxon": "Buteo jamaicensis",
+      "trait": "fov_h_deg",
       "grade": "m",
       "source": "O'Rourke 2010"
      },
@@ -382,14 +382,28 @@
       "source": "O'Rourke 2010"
      },
      {
+      "id": "sweep-5#2",
+      "taxon": "Astur cooperii (as Accipiter cooperii)",
+      "trait": "binocular_deg",
+      "grade": "m",
+      "source": "O'Rourke 2010"
+     },
+     {
       "id": "oa-1#2486",
       "taxon": "Haliaeetus leucocephalus",
       "trait": "binocular_deg",
       "grade": "m",
       "source": "Potier 2023"
+     },
+     {
+      "id": "oa-1#2447",
+      "taxon": "Caracara plancus",
+      "trait": "binocular_deg",
+      "grade": "m",
+      "source": "Potier 2023"
      }
     ],
-    "note": "Left out total field widths (R2 278, R30 300): their quotes give blind areas, not those values.",
+    "note": "Left out total field widths (278 and 300 degrees): their quotes give only the blind areas, not those values.",
     "attempt": 1
    }
   ]

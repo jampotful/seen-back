@@ -78,115 +78,108 @@ Written by `tools/views/voice_check.py` and `tools/views/rows.py`; each tool own
 <!-- rows-pipeline:start -->
 ## Rows pipeline (burst 10)
 
-`tools/views/rows.py` drafted 62 rows of 16 views with claude-sonnet-5-5, from 20371 evidence records (the audit and the burst 9 decisions applied). Spent $0.69 at batch prices.
+`tools/views/rows.py` drafted 49 rows of 14 views with claude-sonnet-5-5, from 20371 evidence records (the audit and the burst 9 decisions applied). Spent $0.73 at batch prices.
 
 A draft passes when `voice_check.py` finds nothing in it, every number in it is in a record it cites, and the records cited belong to a species of the view or a relative of one. A draft that fails is sent once more with the errors; what still fails is listed. The first eight views are the ones with the most evidence records; the rest followed.
 
 | view | rows | passed first time | passed after the retry | failed |
 |---|---:|---:|---:|---:|
-| bird | 4 | 4 | 0 | 0 |
-| insect | 3 | 3 | 0 | 0 |
-| spider | 6 | 4 | 2 | 0 |
-| jumper | 7 | 7 | 0 | 0 |
+| bird | 4 | 2 | 2 | 0 |
+| insect | 3 | 2 | 1 | 0 |
+| jumper | 7 | 5 | 2 | 0 |
 | dog | 4 | 2 | 2 | 0 |
-| cat | 7 | 6 | 1 | 0 |
-| bee | 4 | 4 | 0 | 0 |
-| plant | 3 | 3 | 0 | 0 |
+| bee | 4 | 3 | 0 | 1 |
+| plant | 3 | 1 | 2 | 0 |
 | alligator | 4 | 3 | 1 | 0 |
-| deer | 4 | 3 | 1 | 0 |
-| frog | 3 | 2 | 0 | 1 |
-| hawk | 3 | 3 | 0 | 0 |
+| deer | 4 | 0 | 4 | 0 |
+| frog | 3 | 1 | 2 | 0 |
+| hawk | 3 | 2 | 1 | 0 |
 | rabbit | 1 | 0 | 1 | 0 |
 | reptile | 1 | 0 | 1 | 0 |
-| squirrel | 3 | 3 | 0 | 0 |
-| wader | 5 | 3 | 2 | 0 |
-| the first eight | 38 | 33 (87%) | 5 | 0 |
-| all | 62 | 50 (81%) | 11 | 1 |
+| squirrel | 3 | 2 | 1 | 0 |
+| wader | 5 | 2 | 3 | 0 |
+| the first eight | 25 | 15 (60%) | 9 | 1 |
+| all | 49 | 25 (51%) | 23 | 1 |
 
-Pass rate on the first attempt: 81%. After the retry: 98%.
+Pass rate on the first attempt: 51%. After the retry: 98%.
 
 ### Rows that failed the first time, and why
 
 The reasons are found again by checking the batch's first replies with the checker as it stands now, which no longer counts 'slider' (a turtle) or 'camera-type eye' as talk about the app; the reptile row that this fixed still shows as passing only on its second attempt in the counts above.
 
-- **alligator, Field of view, sharpness, dim light and depth**: voice check app: view
-- **cat, Sharpness**: voice check numbers: 23
-- **deer, Field of view**: voice check app: views
-- **dog, Sharpest spot**: voice check app: view; voice check app: this view; voice check app: last sentence: Nobody has measured this in the other species that share thi
-- **dog, Sharpness**: voice check length: 4 sentences
-- **frog, Movement**: voice check app: view
-- **rabbit, The whole view**: voice check numbers: 24
-- **spider, Color**: voice check numbers: 26
-- **spider, Sharpness**: voice check voice_words: answer
+- **alligator, Pupil**: voice check voice_words: report
+- **bee, Red**: voice check contrast: Y, not X: None of them peaks in red, not even in the large red-tailed bumblebee.
+- **bird, Sharpness**: voice check voice_words: reports; voice check length: 4 sentences
+- **bird, Ultraviolet**: voice check voice_words: reports
+- **deer, Color**: voice check voice_words: reports
+- **deer, Field of view**: voice check app: view; voice check voice_words: reports
+- **deer, Pupil**: the number 13 is in none of the cited records
+- **deer, Sharpness, dim light and depth**: voice check voice_words: reports
+- **dog, Field of view, dim light and depth**: voice check numbers: 539
+- **dog, Sharpness**: voice check voice_words: reports
+- **frog, Movement**: voice check voice_words: reports
+- **frog, Speed**: voice check voice_words: reports
+- **hawk, Sharpness**: voice check voice_words: reports; voice check numbers: 33; voice check numbers: 138
+- **insect, Sharpness**: voice check voice_words: reports; voice check numbers: 0.7; voice check numbers: 0.5
+- **jumper, Eye movement**: voice check app: view; voice check app: this view; voice check app: last sentence: Of the jumping spiders that borrow this view, only the bold 
+- **jumper, Sharpness**: the number 60 is in none of the cited records
+- **plant, Green and time**: voice check voice_words: reports
+- **plant, Neighbors**: voice check voice_words: reports; voice check voice_words: reports
+- **rabbit, The whole view**: voice check voice_words: reports; voice check grade_words: an i row that does not say that nobody knows
+- **reptile, The whole view**: voice check voice_words: reports
+- **squirrel, Speed**: voice check voice_words: reports
 - **wader, Head movement**: voice check spelling: grey
-- **wader, Speed**: voice check app: view; voice check app: this view
+- **wader, Sharpness**: voice check voice_words: reports
+- **wader, Speed**: voice check voice_words: reports
 
 ### Rows that still fail after the retry
 
-- **frog, Movement** (grade i): voice check length: 4 sentences
-  - last draft: If you are a cane toad, you strike at a moving model of an insect. If you are a bullfrog, you start to avoid an object coming straight at you when it looks about 20 degrees wide to you. If you are a European toad, the nerve cells that pick out moving prey respond less when a black and white textured background moves along with the prey at the same speed. Nobody has measured how most other frogs and toads detect movement.
+- **bee, Red** (grade g): voice check voice_words: reports
+  - last draft: In the honey bee, three kinds of color-sensing cell have been measured, peaking in ultraviolet, blue and green, and a review reports the same three kinds in the buff-tailed bumblebee, the large red-tailed bumblebee and the European wool carder bee. None of the three kinds peaks in red, even in the large red-tailed bumblebee. If you are another bee, you very likely have these same three kinds.
 
 ### Ten drafts beside the live rows
 
 **bird, Ultraviolet** (draft grade `g`; of the species' records 0% measured, 50% carried, 50% unknown)
 
-- Draft: Ultraviolet is light that humans cannot see at all, and in the blue tit, the European starling and the Eurasian blackbird a cone cell senses it best at about 370 nanometers. If you are a songbird, you very likely sense ultraviolet too, and a blue tit's cornea and lens let it through. Birds are not all alike here: the mallard's cone of this kind peaks in violet, and in the pied cormorant the cornea and lens block ultraviolet.
+- Draft: Ultraviolet is light that humans cannot see at all. In the blue tit, the European starling and the Eurasian blackbird, one kind of color-sensing cell peaks in it, between 360 and 375 nanometers, and a review table gives 315 nanometers as the point where the blue tit's lens and cornea pass half the light, so if you are a songbird you very likely sense ultraviolet. If you are a mallard, the matching cell peaks at 415 nanometers, in violet, and if you are a cormorant you very likely get almost no ultraviolet, since the lens and cornea of the pied cormorant block it.
 - Live: `g` Ultraviolet: A starling, a blue tit and a blackbird have a short-wave cone that peaks in the ultraviolet, between 360 and 375 nanometers, and gulls have the same type. A mallard, a pigeon and a chicken have the violet type instead, which peaks between 410 and 420. If you are a duck or a vulture, you very likely see little ultraviolet, and if you are a songbird or a gull, you very likely see it.
-- Cites: birds#1 (Anas platyrhynchos), birds#17 (Cyanistes caeruleus), birds-met#21 (Sturnus vulgaris), birds-met#25 (Turdus merula), recheck-5-fixed#11 (Phalacrocorax varius), recheck-5-fixed#13 (Cyanistes caeruleus)
-
-**cat, Pupil** (draft grade `m`; of the species' records 100% measured, 0% carried, 0% unknown)
-
-- Draft: If you are a domestic cat, an African wildcat, an ocelot, a serval or a fishing cat, the pupil in the middle of each eye is a vertical slit. If you are a lion, tiger, leopard, jaguar, mountain lion or cheetah, your pupil is round. If you are a bobcat, a caracal, a Canada lynx or an Iberian lynx, it is nearly round, and if you are a Eurasian lynx, it is oval to diamond-shaped.
-- Live: `m` Pupil: A cat’s pupil closes to a narrow vertical slit, a shape common in animals that hunt by ambush. A slit like this smears out-of-focus things up and down, and this view does the same.
-- Cites: cat-dog#20 (Felis catus), oa-2#2289 (Felis silvestris), oa-2#2325 (Leopardus pardalis), sweep-66#3 (Leptailurus serval), oa-2#2307 (Prionailurus viverrinus), cat-dog#103 (Panthera leo), cat-dog#49 (Panthera tigris), oa-2#2311 (Puma concolor), oa-2#2351 (Panthera onca), oa-2#2353 (Panthera pardus), oa-2#2315 (Acinonyx jubatus), oa-2#2323 (Lynx rufus), oa-2#2339 (Caracal caracal), oa-2#2321 (Lynx canadensis), oa-2#2317 (Lynx pardinus), cat-dog#50 (Lynx lynx)
-
-**cat, Sharpness** (draft grade `i`; of the species' records 38% measured, 2% carried, 60% unknown)
-
-- Draft: If you are a domestic cat, you read about 10 cycles a degree, a third of the 30 that a human reads on an eye chart. If you are a cheetah, you read about 25. If you are a wildcat of the same genus as the domestic cat, such as a sand cat, you very likely see about as sharply as it does, but for the other cats nobody has measured how sharply you see.
-- Live: `m` Sharpness: Cats see about a fifth to a tenth as much detail as people do. This view is blurred to match.
-- Cites: cat-dog#17 (Felis catus), cat-dog#94 (Acinonyx jubatus)
+- Cites: birds#17 (Cyanistes caeruleus), birds-met#21 (Sturnus vulgaris), birds-met#25 (Turdus merula), recheck-5-fixed#13 (Cyanistes caeruleus), birds#1 (Anas platyrhynchos), recheck-5-fixed#11 (Phalacrocorax varius)
 
 **dog, Color** (draft grade `m`; of the species' records 42% measured, 36% carried, 21% unknown)
 
-- Draft: If you are a domestic dog, a red fox or an arctic fox, you have two kinds of color-sensing cell, where humans have three. In the domestic dog, one kind senses light most strongly at about 430 nanometers, a violet-blue, and the other at about 555 nanometers, a yellow-green.
+- Draft: You have two kinds of color-sensing cell, where a human has three. This has been measured in the domestic dog, the red fox and the arctic fox, and each has two kinds.
 - Live: `i` Colour: Dogs have two kinds of colour-sensing cells, where people have three. This view shows colours as a person with two kinds would see them.
-- Cites: cat-dog#40 (Vulpes vulpes), cat-dog#64 (Canis lupus familiaris), cat-dog#65 (Canis lupus familiaris), intake-4#12 (Vulpes lagopus)
+- Cites: cat-dog#64 (Canis lupus familiaris), cat-dog#40 (Vulpes vulpes), intake-4#12 (Vulpes lagopus)
 
 **bee, Speed** (draft grade `i`; of the species' records 0% measured, 26% carried, 74% unknown)
 
-- Draft: If you are a honeybee, you can see a light flicker even when it flashes 200 times a second, where a human stops seeing flicker at about 60. In the bumblebee Bombus hortorum the limit is about 130 flashes a second. Nobody has measured it in wasps, carpenter bees or most other bees.
+- Draft: If you are a honeybee, a lamp that looks steady to a human can look like it is flashing to you, because you can see flicker up to about 200 flashes a second, where a human stops at about 60. If you are a bumblebee, you very likely see flicker up to about 130 flashes a second, since that is what was measured in a relative, Bombus hortorum. If you are any other kind of bee or a wasp, nobody has measured how fast you see.
 - Live: `m` Speed: In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to suggest the difference.
 - Cites: bee#156 (Apis mellifera), bee#262 (Bombus hortorum)
 
 **insect, Ultraviolet** (draft grade `g`; of the species' records 2% measured, 62% carried, 37% unknown)
 
-- Draft: Monarchs, cabbage whites, small tortoiseshells and LD moths each have a color-sensing cell that senses ultraviolet best, and so do the drone fly, the seven-spotted ladybird, a dragonfly, a damselfly and the brown marmorated stink bug. You very likely have one as well. Ultraviolet is light that humans cannot see at all.
+- Draft: Ultraviolet is light that humans cannot see at all. In the monarch, the cabbage white, the small tortoiseshell, the drone fly, the seven-spotted ladybird beetle and the green darner dragonfly, one kind of color-sensing cell is most sensitive to ultraviolet, and you very likely have such a cell too.
 - Live: `i` Ultraviolet: Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in for it.
-- Cites: insect#8 (Danaus plexippus), insect#24 (Pieris rapae crucivora), methods#476 (Aglais urticae), methods#535 (Lymantria dispar), insect#167 (Eristalis tenax), insect#190 (Coccinella septempunctata), insect#109 (Anax junius), insect#125 (Ischnura elegans), oa-8#52 (Halyomorpha halys)
+- Cites: insect#8 (Danaus plexippus), insect#24 (Pieris rapae crucivora), methods#476 (Aglais urticae), insect#167 (Eristalis tenax), insect#190 (Coccinella septempunctata), insect#109 (Anax junius)
 
 **jumper, Color** (draft grade `i`; of the species' records 0% measured, 22% carried, 78% unknown)
 
-- Draft: If you are a regal jumping spider, your big front eyes have three kinds of color-sensing cell, and one kind senses ultraviolet. If you are a Plexippus validus, you have only two kinds, green and ultraviolet, and if you are a Habronattus pyrrithrix, you have three, with the red-sensing kind in a small patch at the center of the eye. Nobody has measured how many kinds you have if you are any other jumping spider.
+- Draft: In every jumping spider measured, the big front eyes have cells that sense ultraviolet and cells that sense green. A regal jumping spider has three kinds of color-sensing cell, and Habronattus pyrrithrix gets a third color channel, for red, only in a small patch at the center of the retina, while Plexippus validus has just two kinds. Nobody has measured how many kinds of color-sensing cell you have unless you are one of those species.
 - Live: `m` Colour: Most jumping spiders, Phidippus among them, see ultraviolet and green. Habronattus also sees red, in a small patch at the centre of each front eye, and this view adds red there when it knows the genus.
-- Cites: jumper#163 (Phidippus regius), jumper#165 (Phidippus regius), jumper#21 (Plexippus validus), jumper#106 (Habronattus pyrrithrix), jumper#107 (Habronattus pyrrithrix)
-
-**spider, The web** (draft grade `i`; of the species' records 22% measured, 0% carried, 78% unknown)
-
-- Draft: If you are a golden silk spider, the insects caught in your web shake it 5 to 30 times a second, while air stirred by a flying insect seldom makes you attack and often makes you lift your forelegs. If you are a six-spotted fishing spider, you jump away from a striking frog, and the fine hairs called trichobothria that sense moving air are necessary and sufficient for that jump. For most other spiders, nobody has measured how you sense vibration or moving air.
-- Live: `m` The web: A Golden Silk Spider feels its prey through the silk, and a trapped insect shakes the web 5 to 30 times a second. The shaking arrives ten to thirty times stronger on some legs than on others, which gives the direction.
-- Cites: spider#43 (Trichonephila clavipes), spider#246 (Trichonephila clavipes, Zygiella x-notata), spider#34 (Zygiella x-notata, Nephila clavipes), spider#161 (Dolomedes triton)
+- Cites: jumper#102 (Habronattus pyrrithrix), jumper#106 (Habronattus pyrrithrix), jumper#107 (Habronattus pyrrithrix), jumper#12 (Saitis barbipes), jumper#163 (Phidippus regius), jumper#165 (Phidippus regius), jumper#21 (Plexippus validus)
 
 **plant, Neighbors** (draft grade `i`; of the species' records 1% measured, 0% carried, 99% unknown)
 
-- Draft: If you are a wood strawberry, your daughter plants grow more root over live substrate than over dead substrate, so you detect the state of a patch before you touch it. You also sense red and far-red light through a protein called phytochrome B. For nearly every other plant that borrows this row, nobody has measured whether you sense your neighbors by chemicals or by light.
+- Draft: If you are a wood strawberry, you sense red and far-red light with a protein called phytochrome B, and according to a review, your daughter plants grow more root over live ground than over dead ground. If you are a common selfheal, a review found that strong far-red light slowed the growth of your plantlets in a lab. For most of you, nobody has measured whether you sense a neighbor by its light or by its scent.
 - Live: `m` Neighbours: Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, even before the neighbour shades it. Phone cameras capture very little far-red light.
-- Cites: harvest-11#2 (Fragaria vesca), harvest-13#7 (Fragaria vesca)
+- Cites: harvest-11#2 (Fragaria vesca), harvest-13#7 (Fragaria vesca), harvest-15#1 (Prunella vulgaris)
 
 **deer, Field of view** (draft grade `i`; of the species' records 2% measured, 6% carried, 92% unknown)
 
-- Draft: Your eyes sit on the sides of your head, so each one looks out in a different direction. Nobody has measured how wide an area you see at once, or how much of it both of your eyes see together in front of you. Both have been measured in cattle, goats, giraffes and horses, but in no deer.
+- Draft: Your eyes sit on the sides of your head, and a book on deer says they let you watch almost a complete circle, about 310 degrees. The book does not say how that was found, and nobody has measured how much of the space around you both of your eyes see at once. In goats, which are not deer, a review states a field of 320 to 340 degrees, with 20 to 60 degrees seen by both eyes together.
 - Live: `g` Field of view: Reindeer grazing with their eyes turned level are given a combined field of about 360 degrees along the ground, and horses a field of about 320. Nobody has measured the field of a white-tailed deer, so you very likely see most of the way around you without turning your head.
-- Cites: squirrel-deer-rabbit#120 (Cervidae (deer, as the page states it)), intake-3#4 (Bos taurus), intake-3#5 (Bos taurus), intake-5#31 (Capra hircus), intake-5#32 (Capra hircus), intake-6#14 (Giraffa camelopardalis), squirrel-deer-rabbit#148 (Equus caballus), squirrel-deer-rabbit#92 (Equus caballus), sweep-29#6 (Giraffa camelopardalis)
+- Cites: squirrel-deer-rabbit#120 (Cervidae (deer, as the page states it)), intake-5#31 (Capra hircus), intake-5#32 (Capra hircus)
 <!-- rows-pipeline:end -->
 
 <!-- burst10-before-after:start -->
@@ -200,3 +193,72 @@ The same checker run over the views on main before the corrections and over the 
 | before | 443 | 346 | 1168 | 50 | 635 | 14 | 0 | 0 | 7 | 156 | 4 | 160 | 0 | 0 | 142 |
 | after | 444 | 341 | 1139 | 46 | 614 | 14 | 0 | 0 | 7 | 156 | 4 | 159 | 0 | 0 | 139 |
 <!-- burst10-before-after:end -->
+
+<!-- live-disagreement:start -->
+## Live rows against the evidence (burst 11b)
+
+`tools/views/rows_live.py` sets each live row beside the evidence. The grade is the one `rows.py` computes for the row (the grade most of the species' records fall under, the carry rules applied; partial records count as measured). A value is flagged when a number of 10 or more in the live text is in no record of the row's traits for a species of the view or a relative of one (a flag is a prompt to read the row, not a verdict, since a row may rest on a paper outside the evidence logs). No live row was changed.
+
+| view | live rows | compared | grade differs | a number unsupported |
+|---|---:|---:|---:|---:|
+| alligator | 4 | 4 | 3 | 0 |
+| bee | 5 | 4 | 3 | 0 |
+| bird | 4 | 4 | 2 | 0 |
+| cat | 7 | 7 | 4 | 0 |
+| deer | 4 | 4 | 3 | 0 |
+| dog | 4 | 4 | 2 | 0 |
+| frog | 3 | 3 | 2 | 0 |
+| hawk | 3 | 3 | 2 | 1 |
+| insect | 3 | 3 | 3 | 0 |
+| jumper | 14 | 1 | 1 | 0 |
+| plant | 3 | 3 | 2 | 0 |
+| rabbit | 1 | 1 | 0 | 0 |
+| reptile | 1 | 1 | 0 | 0 |
+| spider | 8 | 4 | 4 | 0 |
+| squirrel | 3 | 3 | 1 | 0 |
+| wader | 5 | 5 | 4 | 0 |
+| all | 72 | 54 | 36 | 1 |
+
+### The rows that differ
+
+| view | row | live grade | evidence grade (shares m / g / i) | numbers not found | live text |
+|---|---|---|---|---|---|
+| alligator | Sharpest spot | g | i (5 / 0 / 95%) | - | Crocodiles see most sharply along a band level with the horizon. It lets them scan the waterline without turning their heads. |
+| alligator | Colour | g | m (63 / 23 / 14%) | - | Crocodiles have three kinds of colour-sensing cells, as people do, so this view leaves colours as your camera shows them. |
+| alligator | Pupil | g | m (63 / 0 / 37%) | - | An alligator’s pupil is a vertical slit. It smears out-of-focus things up and down, and this view does the same. |
+| bee | Sharpness | g | i (18 / 32 / 50%) | - | Most insects see less than a sixtieth as much detail as people do. |
+| bee | Red | m | g (27 / 37 / 36%) | - | Bees have no colour-sensing cells for red, so red flowers and objects look dark to them. |
+| bee | Speed | m | i (0 / 26 / 74%) | - | In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to sugge |
+| bird | Speed | g | i (4 / 1 / 95%) | - | Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. T |
+| bird | Sharpness | g | i (0 / 0 / 100%) | - | Most birds see half as much detail as people do, or less. |
+| cat | Sharpness | m | i (38 / 2 / 60%) | - | Cats see about a fifth to a tenth as much detail as people do. This view is blurred to match. |
+| cat | Colour | m | i (35 / 4 / 60%) | - | Cats have two kinds of colour-sensing cells in their eyes, where people have three. Reds and greens are hard for them to tell apart, so reds look olive or grey  |
+| cat | Field of view | m | i (35 / 2 / 63%) | - | A cat takes in about 200 degrees around itself, and a person about 180. A phone camera sees far less than either, so this view bends the picture at its edges to |
+| cat | Dim light | m | i (35 / 0 / 65%) | - | Cats can see in light six to eight times dimmer than people need. This view brightens the shadows to show it. |
+| deer | Colour | m | g (32 / 65 / 3%) | - | White-tailed deer have two kinds of colour-sensing cells, where people have three. Reds and oranges look yellow or grey to them. |
+| deer | Field of view | g | i (2 / 6 / 92%) | - | Reindeer grazing with their eyes turned level are given a combined field of about 360 degrees along the ground, and horses a field of about 320. Nobody has meas |
+| deer | Pupil | g | m (48 / 7 / 45%) | - | Grazing animals have pupils shaped like horizontal bars. The shape widens their view along the ground and cuts glare from the sky. It also smears out-of-focus t |
+| dog | Sharpest spot | m | i (42 / 0 / 58%) | - | Dogs with long noses see most sharply along a band level with the horizon. Dogs with short noses see most sharply in one central spot. This view shows the band. |
+| dog | Colour | i | m (42 / 36 / 21%) | - | Dogs have two kinds of colour-sensing cells, where people have three. This view shows colours as a person with two kinds would see them. |
+| frog | Movement | m | i (10 / 18 / 71%) | - | A frog takes little notice of the parts of its world that stay still, and it can starve beside food that never moves. This view shows only what changes, so hold |
+| frog | Speed | g | i (1 / 2 / 97%) | - | A cane toad can see a light flicker only about 7 times a second, a ninth as often as a person can. Anything that moves smears into a trail. |
+| hawk | Sharpness | g | i (0 / 0 / 100%) | - | Eagles see more than twice as much detail as people do. A phone camera can’t capture that much detail, so this view magnifies the centre to suggest it. |
+| hawk | Speed | m | i (3 / 12 / 85%) | 50 | A peregrine falcon can see a light flicker up to 129 times a second, and a Harris’s hawk up to 77. People see flicker up to 50 or 60 times a second. This view r |
+| insect | Sharpness | g | i (4 / 8 / 88%) | - | Most insects see less than a sixtieth as much detail as people do. |
+| insect | Speed | g | i (0 / 0 / 100%) | - | Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then ju |
+| insect | Ultraviolet | i | g (2 / 62 / 37%) | - | Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in fo |
+| jumper | Colour | m | i (0 / 22 / 78%) | - | Most jumping spiders, Phidippus among them, see ultraviolet and green. Habronattus also sees red, in a small patch at the centre of each front eye, and this vie |
+| plant | No picture | g | i (0 / 0 / 100%) | - | A plant has nothing like a lens to focus light into an image. It senses how much light there is, what colour it is, and which direction it comes from. |
+| plant | Neighbours | m | i (1 / 0 / 99%) | - | Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, |
+| spider | The web | m | i (22 / 0 / 78%) | - | A Golden Silk Spider feels its prey through the silk, and a trapped insect shakes the web 5 to 30 times a second. The shaking arrives ten to thirty times strong |
+| spider | Eyes | g | i (0 / 0 / 100%) | - | Most spiders have eight eyes and few see well. Most register little more than changes between light and dark, and spiders that build webs lean on the shaking of |
+| spider | Sharpness | g | i (0 / 0 / 100%) | - | A wandering spider resolves nothing finer than about 2 degrees, under a hundredth of your sharpness. The picture borrows that figure for web builders. |
+| spider | Pace | g | i (0 / 0 / 100%) | - | A wandering spider stops following flicker between 4.3 and 8.6 times a second, a seventh of your rate or less, so movement smears into trails. |
+| squirrel | Speed | g | i (13 / 12 / 75%) | - | A golden-mantled ground squirrel can follow a light flickering at more than 100 times a second, and a yellow-pine chipmunk does about the same. An American red  |
+| wader | Head movement | m | i (11 / 6 / 83%) | - | Herons, egrets, cranes, pigeons and chickens hold their heads still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch |
+| wader | Speed | g | i (7 / 3 / 91%) | - | In pigeons, each dart forward takes about a tenth of a second. |
+| wader | Sharpness | g | i (0 / 0 / 100%) | - | Most birds see half as much detail as people do, or less. |
+| wader | Ultraviolet | g | i (0 / 0 / 100%) | - | A whooping crane’s shortest-wave cone peaks near 405 nanometers and a pigeon’s near 410, both in the violet. The gene for that cone is the violet type in a gray |
+
+Live rows with no matching row in `rows.py` (not compared): bee: How the colours are shown; jumper: Eight eyes, one picture, The side eyes, Living things stand out, The front eyes, Jumps and scans, Looking away on purpose, Sleep, How the picture is drawn, Living movement, How the colours are shown, Hearing, Colours it cannot tell apart, A moment slowed; spider: Knocks and low sounds, Hearing through silk, Wolf spiders, Being tried: web and air.
+<!-- live-disagreement:end -->
