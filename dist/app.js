@@ -418,7 +418,10 @@
     '  float rd = u_dof * min(abs(v.y - u_focus) * 2.0, 1.2);',   // GUESSED depth: height in the frame stands in for distance
     '  vec2 rad = sqrt(vec2(ra * ra) + (rd * u_aniso) * (rd * u_aniso)) + vec2(outside * 0.22 * longPx);',
     '  float pxTex = u_texLong / (longPx * u_zoom * zmag);',
-    '  float lod = clamp(log2(max(sqrt(rad.x * rad.y) * pxTex * 0.7, 1.0)), 0.0, u_maxLod);',
+    // the coarsest level read keeps four texels or more across, so that a blur wider than the picture (a millipede's, or a snail's on a phone)
+    // still changes with where it is centered, as a disc that wide over the mirrored picture does. Read from the last level, one texel, the
+    // whole picture is one flat color; in WebKit the self-test found millipede and snail flat (burst 12), and this is the likely cause
+    '  float lod = clamp(log2(max(sqrt(rad.x * rad.y) * pxTex * 0.7, 1.0)), 0.0, max(u_maxLod - 2.0, 0.0));',
     '  vec2 toUv = 1.0 / (u_res.y * span * u_zoom * mag * zmag);',
     '  vec3 acc = vec3(0.0); float trail = 0.0;',
     '  for (int i = 0; i < 16; i++) {',
