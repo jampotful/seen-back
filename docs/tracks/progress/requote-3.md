@@ -11,7 +11,7 @@ Counts: fixed 63, retracted 0, table rows 20, unfixed 14.
 - oa-1:9336-9351: the sentence opens "Both genes" and the genes are not named inside it; the record's trait and value stand, but the quote depends on the preceding sentence for its referent.
 - Lariguet and Dunand 2005, J Mol Evol (rero.ch PDF): oa-2:9552, 9553, 9554, 9555, 9558. oa-2:9558 `where` corrected to p.560. oa-2:9555 keeps the "ﬁ" ligature of the original record.
 - Frontiers in Plant Science 2016 (Viscum album): harvest-c4:38. The sentence is in a figure caption in the Results, Circadian Rhythm subsection; the page extraction named Figure 8, the old `where` said Figure 4 and Table 3, so `where` now says "figure caption" only.
-- Bristol record for Rosenthal-type cuttlefish abstract (Curr Biol 22): oa-5:1257.
+- Bristol research-information record of the cuttlefish polarisation paper (Curr Biol 22): oa-5:1257.
 
 ## Table rows (20, nothing written)
 
