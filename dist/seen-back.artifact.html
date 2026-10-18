@@ -421,7 +421,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '33';
+  var BUILD = '34';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -2687,7 +2687,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   }
   // ---------- whether this device can hold the full database (burst 12). On build machines the largest browser process reached 1,501 MiB
   // (Chromium) to 2,598 MiB (WebKit on Linux) while it ran (docs/ENGINES.md), and a phone that runs out of memory kills the page without a word.
-  // Where the browser says how much memory the device has (navigator.deviceMemory, in GiB, rounded down to a power of two and at most 8; Chromium
+  // Where the browser says how much memory the device has (navigator.deviceMemory, in GiB, rounded to a power of two and at most 8; Chromium
   // only), the device must have twice the worst peak: in practice it reports 8. Where it says nothing (Safari, Firefox), the page asks for the
   // WebAssembly heap the model needs, 1 GiB (the live form's heap is 821 MiB), and lets it go at once; a browser that refuses it would refuse the
   // model. A device that does not fit is told nothing: the full database is simply not offered there, and the pocket model answers alone.
@@ -2842,7 +2842,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (pl) { g.push({ key: 'place', V: pl }); g.push({ key: 'zones', V: pl.zones }); }
       return g;
     }
-    function allParts(m) { var out = []; groupsOf(m).forEach(function (g) { out = out.concat(partsOf(g.V)); }); return out; }
+    function allParts(m) {                             // all that is kept of the slot: the graph first, where the weights are a file of their own, then every group's parts
+      var out = m.vision && m.vision.graph ? [m.vision.graph] : []; groupsOf(m).forEach(function (g) { out = out.concat(partsOf(g.V)); }); return out;
+    }
     function bytesOf(m) { return allParts(m).reduce(function (a, p) { return a + p.bytes; }, 0); }
     function okGroup(V) {                              // parts that add up to the whole, each with its length
       var sum = 0, P = partsOf(V);
@@ -2874,6 +2876,10 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         if (!Array.isArray(v.parts) || !v.parts.length || !num(v.bytes) || !v.parts.every(function (p) { sum += p && p.bytes; return p && okPart(p.url) && num(p.bytes) && p.bytes > 0 && (p.sha256 === undefined || typeof p.sha256 === 'string'); }) || sum !== v.bytes) throw err('unfit', 'the parts do not add up to the whole');
       }
       if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the full database without its length' : 'a model in parts in the pocket slot');
+      // the full database may come as a small graph beside its weights as a file of their own: the graph with its length and checksum, and the
+      // name the graph gives that file; vision.parts, vision.bytes and vision.sha256 then describe the weights
+      if (v.graph !== undefined && !(big && v.graph && okPart(v.graph.url) && num(v.graph.bytes) && v.graph.bytes > 0 && typeof v.graph.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(v.graph.sha256)
+        && typeof v.weights_name === 'string' && /^[A-Za-z0-9_][A-Za-z0-9_.-]{0,119}$/.test(v.weights_name))) throw err('unfit', big ? 'the graph or the name of its weights is not as it should be' : 'a model in two files in the pocket slot');
       return m;
     }
     function readTable(buf, count) {                   // rows: [scientific, English, kind, twelve monthly weights], or the same as objects
@@ -2977,15 +2983,20 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     // A part is kept under an address of this slot made from its checksum, so the same bytes are never fetched twice, wherever they came from.
     function partKey(p) { return base + 'part/' + (p.sha256 ? String(p.sha256).toLowerCase() : fingerprint(String(p.url))) + '?bytes=' + p.bytes; }
     function wholeKey(V) { return base + 'whole/' + String(V.sha256 || '').toLowerCase(); }
+    function wholeKept(V) { var P = partsOf(V); return !!V.sha256 && !(P.length === 1 && P[0].sha256 === V.sha256); }   // joined() keeps a mark of a verified whole for such a group
     function unkeepParts() {
       have = 'absent'; keptBytes = 0;
       return Promise.all(allParts(M).map(function (p) { return unkeep(partKey(p)); }).concat(groupsOf(M).map(function (g) { return unkeep(wholeKey(g.V)); })));
     }
-    function staleParts(cache) {                       // parts of a model this slot no longer names
-      if (!cache || !M) return;
-      var now = {}; allParts(M).forEach(function (p) { now[partKey(p).split('?')[0]] = 1; }); groupsOf(M).forEach(function (g) { now[wholeKey(g.V)] = 1; });
-      cache.keys().then(function (keys) {
-        keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
+    function staleParts(cache) {                       // parts of a model this slot no longer names (an older form of it among them): let go once
+      if (!cache || !M) return;                        // all of the model it names is kept and its wholes verified, and never before
+      var now = {}, mine = allParts(M).map(partKey).concat(groupsOf(M).filter(function (g) { return wholeKept(g.V); }).map(function (g) { return wholeKey(g.V); }));
+      mine.forEach(function (k) { now[k.split('?')[0]] = 1; });
+      Promise.all(mine.map(function (k) { return kept(cache, k); })).then(function (hits) {
+        if (!hits.every(Boolean)) return;
+        return cache.keys().then(function (keys) {
+          keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
+        });
       }).catch(function () {});
     }
     function readInto(res, buf, at, n) {               // a kept part, straight into its place in the whole
@@ -3021,6 +3032,16 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         });
       }).then(function () { return buf.buffer; });
     }
+    function graphOf(cache, V) {                       // the graph, where the weights are a file of their own: small, so verified each time it is read
+      var g = V.graph;
+      return kept(cache, partKey(g)).then(function (res) {
+        if (!res) { have = ''; throw err('missing', 'a part is no longer kept on this device'); }
+        return res.arrayBuffer().then(function (b) {
+          if (b.byteLength !== g.bytes) throw err('damaged', 'the kept graph is ' + b.byteLength + ' bytes, not ' + g.bytes);
+          return sha256(g.sha256)(b).then(function () { return b; });
+        }).catch(function (e) { have = ''; return unkeep(partKey(g)).then(function () { throw e && e.code ? e : err('damaged', 'the kept graph could not be read'); }); });
+      });
+    }
     function room(need) {                              // is there room to keep it? Where the browser will not say, the download finds out
       try {
         if (navigator.storage && navigator.storage.estimate) return navigator.storage.estimate().then(function (e) {
@@ -3042,7 +3063,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
           return Promise.all(P.map(function (p) { return kept(cache, partKey(p)); })).then(function (hits) {
             var n = 0; keptBytes = 0; hits.forEach(function (h, i) { if (h) { keptBytes += P[i].bytes; n++; } });
             have = n === P.length ? 'kept' : n ? 'partial' : 'absent';
-            if (have !== 'kept') staleParts(cache);
+            staleParts(cache);
             return have;
           });
         });
@@ -3094,9 +3115,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         }
         return room(Math.max(0, bytesOf(M) - keptBytes)).then(next);
       }).then(function () {
-        have = 'kept'; staleParts(store); notify();
+        have = 'kept'; notify();
         return ready();
-      }).then(function () { getP = null; getCtl = null; diag('large-kept', M.id + ' ' + bytesOf(M)); notify(); }, function (e) {
+      }).then(function () { getP = null; getCtl = null; staleParts(store); diag('large-kept', M.id + ' ' + bytesOf(M)); notify(); }, function (e) {
         getP = null; getCtl = null;
         if (!e || !e.code) e = err('died', e && e.message);
         if (have !== 'kept') have = keptBytes ? 'partial' : 'absent';
@@ -3150,7 +3171,8 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
             sp && sp.bias_url ? file(c, u(sp.bias_url), nS * 4) : null,
             i8 ? (far(sp.scale) ? joined(c, sp.scale) : null) : null,
             M.place ? joined(c, M.place) : null,
-            M.place ? joined(c, M.place.zones) : null
+            M.place ? joined(c, M.place.zones) : null,
+            inParts && V.graph ? graphOf(c, V) : null
           ]);
         }).then(function (b) {
           cur = slotOf(M, sp ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
@@ -3159,10 +3181,10 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
           total = got;                                 // the downloads are over; what remains is starting the encoder
           notify();
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
-            wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
+            wasmBinary: b[0], model: b[9] || b[1], weights: b[9] ? b[1] : null, weightsName: b[9] ? V.weights_name : '', vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS, speciesType: i8 ? 'int8' : 'f16', speciesScale: i8 ? b[6] : null };
           // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
-          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
+          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : [], b[9] ? [b[9]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
             // a kept model that will not start is thrown away, so the next try fetches it afresh
             if (e.code === 'damaged' && c) return (inParts ? unkeepParts() : unkeep(modelUrl)).then(function () { throw e; });
             throw e;
