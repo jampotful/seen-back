@@ -1,5 +1,6 @@
 """Looks up every DOI cited in the evidence logs on Crossref, so the desk can compare authors, year, volume and
 pages with the logged records without spending model allowance. Usage: python3 -I ci/crossref/crossref.py OUT_DIR
+When ci/crossref/dois.txt exists (put it on the run branch only), it looks up those DOIs instead.
 Writes OUT_DIR/crossref.jsonl: one line per DOI with title, authors as printed (family, given), year, journal,
 volume, issue, page and type, or an error. Run by .github/workflows/crossref.yml."""
 import glob, json, os, sys, time, urllib.error, urllib.parse, urllib.request
@@ -8,7 +9,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 out = sys.argv[1]
 os.makedirs(out, exist_ok=True)
 dois = set()
-for p in glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl')):
+only = os.path.join(ROOT, 'ci/crossref/dois.txt')  # a run branch may name its own DOIs, one a line (for example a wanted list's)
+if os.path.exists(only):
+    dois = {l.strip().lower() for l in open(only, encoding='utf-8') if l.strip().lower().startswith('10.')}
+for p in ([] if dois else glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl'))):
     for l in open(p, encoding='utf-8'):
         try: r = json.loads(l)
         except ValueError: continue
