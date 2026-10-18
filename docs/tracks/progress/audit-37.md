@@ -2,7 +2,7 @@
 
 Scope: the latest version of each record in `docs/views/evidence/recheck-42-fixed.jsonl` to `recheck-52-fixed.jsonl`. A record retracted in `docs/views/audit/ALL.jsonl` is replaced by its correction in recheck-53-fixed (journal), recheck-54-fixed (grade), recheck-55-fixed (strict review) or recheck-56-fixed (journal names, issues, pages), and a retraction with no correction removes the record. The rebuilt population is 493 records, one per origin record in files 42 to 52, ordered by origin file and line. `docs/views/fixes/requote-partial.jsonl` was applied as a `partial: true` override (it lists origin ids). The worktree was cut from `research/repair-crossref` (af1e917c).
 
-Draw: `random.seed(37)`, `random.sample(range(493), 493)` as the order. Skipped: Kott et al. 2010 and any record whose origin family appears in audits 33 to 36 (the files for 34 to 36 were read with `git show`; audit 33 names records as `recheck-N Lline`). The first 20 usable records fall in nine origin files (42, 43, 45, 46, 47, 49, 50, 51, 52). Because errors were found, the next 15 usable records were also checked (35 in all, 8 more origin files already counted; 48 joins the list). Records are named by latest id, with the origin id in brackets.
+Draw: `random.seed(37)`, `random.sample(range(493), 493)` as the order. Skipped: Kott et al. 2010 and any record whose origin family appears in audits 33 to 36 (the files for 34 to 36 were read with `git show`; audit 33 names records as `recheck-N Lline`). The first 20 usable records fall in nine origin files (42, 43, 45, 46, 47, 49, 50, 51, 52). Because errors were found, the next 15 usable records were also checked (35 in all; the extension adds origin file 48). Records are named by latest id, with the origin id in brackets.
 
 Method as in audit 16: WebSearch on the title, then WebFetch on a page the search or the record returned. The fetch tool returns about 125 characters per quote, so every quote was read back in consecutive pieces. No library login, proxy, Sci-Hub, LibGen, academia.edu or ResearchGate page was opened, and no paper text is committed. Open-access publisher, university-repository and journal pages only.
 
@@ -67,7 +67,7 @@ Extension: 0 unverifiable, 15 verifiable, 3 errors (all journal-only).
 1. **Journal field lacks the issue** (recheck-43-fixed:26, 54-fixed:34, 43-fixed:53, 54-fixed:15, 43-fixed:18). All five are Emerling 2017, printed "Molecular Biology and Evolution 34: 666-676"; the paper is 34(3). Audit 34 found the same string on other Emerling records; recheck-53, 54 and 56 did not reach them. One correction (add "(3)") would clear every record of this paper.
 2. **Reference number carried into the quote** (recheck-53-fixed:109). "(10)" is inserted after "organism" in a figure-caption sentence; the caption has no such number.
 3. Noted, not counted:
-   - Page numbers in `where` are off by one on four records (53-fixed:Emerling 43-fixed:53 says 669 for 668; 43-fixed:18 and 54-fixed:15 say 667 for 666; 55-fixed:87 says 823 for 824).
+   - Page numbers in `where` are off by one on four records (43-fixed:53 says 669 for 668; 43-fixed:18 and 54-fixed:15 say 667 for 666; 55-fixed:87 says 823 for 824).
    - `partial: true` stands on the Emerling research article, which was read in full (five records).
    - The quote leaves the antecedent outside it for 54-fixed:34 ("Both genes") and 51-fixed:17 ("This specialization").
    - 50-fixed:72 (Megalopta) could carry `m`; `g` is the cautious grade.
