@@ -64,6 +64,18 @@ const st = page => page.evaluate(() => { const b = window.__seenBack; return Obj
 const hidden = (page, id) => page.evaluate(i => { const e = document.getElementById(i); return e.hidden || getComputedStyle(e).display === 'none'; }, id);
 const text = (page, id) => page.evaluate(i => document.getElementById(i).textContent, id);
 const shot = (page, name) => page.screenshot({ path: path.join(shots, name + '.png'), scale: 'css' });
+// What the view's canvas shows, from a screenshot of it decoded in the page: the mean and the spread of its brightness (0 to 255).
+// A spread under 1 is a canvas of one flat color, a view that draws nothing (burst 12).
+const canvasStats = async (page) => {
+  const png = await page.locator('#gl').screenshot({ scale: 'css' }).catch(() => null);
+  if (!png) return { mean: null, sd: null, blank: true };
+  return page.evaluate((b64) => new Promise((res) => { const im = new Image(); im.onload = () => {
+    const c = document.createElement('canvas'); c.width = Math.min(160, im.width); c.height = Math.max(1, Math.round(im.height * c.width / im.width));
+    const x = c.getContext('2d'); x.drawImage(im, 0, 0, c.width, c.height); const d = x.getImageData(0, 0, c.width, c.height).data; let n = 0, sum = 0, sq = 0;
+    for (let i = 0; i < d.length; i += 4) { const v = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]; sum += v; sq += v * v; n++; }
+    const mean = sum / n, sd = Math.sqrt(Math.max(0, sq / n - mean * mean)); res({ mean: +mean.toFixed(1), sd: +sd.toFixed(2), blank: sd < 1 }); };
+    im.onerror = () => res({ mean: null, sd: null, blank: true }); im.src = 'data:image/png;base64,' + b64; }), png.toString('base64'));
+};
 const overflow = page => page.evaluate(() => [document.documentElement.scrollWidth - window.innerWidth, document.documentElement.scrollHeight - window.innerHeight]);
 const say = async (page, name) => { await page.waitForSelector('#claim', { state: 'visible', timeout: 8000 }); await page.locator('#claimName').fill(name); await page.locator('#claimForm button[type=submit]').tap(); };
 
@@ -322,21 +334,31 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
     // on (test/assets/scene.json says where everything is). Small screenshots go to test/shots/engine/.
     const dir = path.join(here, 'shots', 'engine'); fs.mkdirSync(dir, { recursive: true });
     const keys = (process.env.TRY || 'jumper,reef,shark,spider').split(',');
-    out.try = {}; const bad = [];
-    for (const key of keys) {
-      const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
-      page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
-      await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
-      await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
-      await page.goto(HTTP + '&try=' + key + (process.env.GENUS ? '&genus=' + process.env.GENUS : '') + (process.env.EXTRA || '')); await page.waitForTimeout(500);
-      const r = out.try[key] = {};
-      await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
-      r.prompt = await text(page, 'askViewH');
+    // CAM=1 (burst 12): each view on the browser's fake camera (the launch flags above), as a phone opens a view being tried, in place of the clip
+    const CAM = process.env.CAM === '1', camCtx = () => Object.assign({}, phone, CAM ? { permissions: ['camera'] } : {});
+    const toView = async (page) => {
+      await page.locator('#btnBegin').tap();
+      if (CAM) { await page.waitForFunction(() => window.__seenBack.S.screen === 'animal' && window.__seenBack.S.src === 'cam', null, { timeout: 15000 }); return ''; }
+      await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
+      const prompt = await text(page, 'askViewH');
       await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
       await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+      return prompt;
+    };
+    out.try = {}; const bad = [];
+    // OPTIONS=only (burst 12) skips this first pass and runs the drawing options alone, for a second run after one with OPTIONS=0
+    for (const key of (process.env.OPTIONS === 'only' ? [] : keys)) {
+      const ctx = await browser.newContext(camCtx()); const page = patient(await ctx.newPage()); const errors = [];
+      try {   // a view that throws (a crash, a wait that runs out) fails alone, and the others are still tried (burst 12)
+      page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
+      await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
+      if (!CAM) await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+      await page.goto(HTTP + '&try=' + key + (process.env.GENUS ? '&genus=' + process.env.GENUS : '') + (process.env.EXTRA || '')); await page.waitForTimeout(500);
+      const r = out.try[key] = {};
+      r.prompt = await toView(page);
       // Software graphics draw a few frames a second, so the clip is slowed (PLAYBACK, 0.15) until each drawn frame is about one of the
       // clip's frames after the last, as a phone's camera delivers them. The movement map keeps to the clip's own clock.
-      await page.evaluate((x) => { document.getElementById('vid').playbackRate = x; }, +(process.env.PLAYBACK || .15));
+      if (!CAM) await page.evaluate((x) => { document.getElementById('vid').playbackRate = x; }, +(process.env.PLAYBACK || .15));
       await page.waitForTimeout(1200); await page.evaluate(() => window.__seenBack.pose(null));
       const P = await page.evaluate((k) => { const p = window.__seenBack.params(k); return { sal: p.sal, gaze: !!p.gz, zoned: !!(p.zones && p.zones.length), slow: p.slowMode || '' }; }, key);   // a view with no zones (zones: []) need not compile the zone programs
       const trace = [], t0 = Date.now(), SECS = +(process.env.TRY_SECS || 30);
@@ -362,6 +384,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       r.eyes = (await st(page)).eyes; r.reads = last.reads; r.maxE = Math.max.apply(null, trace.map((x) => x.maxE)); r.maxL = Math.max.apply(null, trace.map((x) => x.maxL));
       r.jumps = (gs.gazes || []).map((g) => g[3]); r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
       r.slow = await page.evaluate(() => window.__seenBack.engine.slowState && window.__seenBack.engine.slowState());   // module 12: frames kept in the store
+      r.pix = await canvasStats(page); if (r.pix.blank) errors.push('the view drew nothing: ' + JSON.stringify(r.pix));
       const scene = (process.env.CLIP || 'scene.webm') === 'scene.webm' ? JSON.parse(fs.readFileSync(path.join(here, 'assets', 'scene.json'), 'utf8')) : null;
       r.landed = {};
       if (scene) gs.log.forEach(([x, y, at, media]) => {   // the first gaze's fixations, against where test/make_scene.py drew everything at that clip time
@@ -384,6 +407,7 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
       const ok = r.eyes === key && r.rows === want && !errors.length && (!P.zoned || r.probe.zones) && !r.probe.zErr && (!P.sal || (r.reads > 3 && r.maxE > 0)) && (!P.gaze || r.jumps.some((j) => j >= (+process.env.MIN_JUMPS || 1)))
         && (!/^(hour|exposure)$/.test(P.slow) || (r.slow && r.slow.mode === P.slow && r.slow.n > 1)) && (!P.slow || r.probe.zones);
       if (!ok) bad.push(key);
+      } catch (e) { out.try[key] = Object.assign(out.try[key] || {}, { threw: String(e && e.message || e).split('\n')[0].slice(0, 200), errors }); bad.push(key + ' (threw)'); await ctx.close().catch(() => {}); }
     }
     // Every drawing option a spec names (its "draw" block, past each category's first, which is the default the run above used): the view is
     // loaded again with &draw=<option> and must still be the same view, with no error and no GL error, and the sheet must show every row
@@ -396,23 +420,24 @@ const toFinder = async (page) => { await page.locator('#btnBegin').tap(); await 
         const d = sp.draw && !Array.isArray(sp.draw) ? sp.draw : {}, opts = [];
         Object.keys(d).forEach((c) => (Array.isArray(d[c]) ? d[c] : []).slice(1).forEach((o) => { if (o && o.name && opts.indexOf(o.name) < 0) opts.push(o.name); }));
         for (const opt of opts) {
-          const ctx = await browser.newContext(Object.assign({}, phone)); const page = patient(await ctx.newPage()); const errors = [];
+          const ctx = await browser.newContext(camCtx()); const page = patient(await ctx.newPage()); const errors = [];
+          try {
           page.on('pageerror', (e) => errors.push(e.message)); page.on('console', m => { if (m.type() === 'error' && !/favicon/.test(m.text())) errors.push('console: ' + m.text()); });
           await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: fontCss() }));
-          await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
+          if (!CAM) await page.addInitScript(() => { if (navigator.mediaDevices) navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('no', 'NotAllowedError')); });
           await page.goto(HTTP + '&try=' + key + '&draw=' + opt + (process.env.GENUS ? '&genus=' + process.env.GENUS : '')); await page.waitForTimeout(500);
           const r = out.options[key + ':' + opt] = {};
-          await page.locator('#btnBegin').tap(); await page.waitForSelector('#askView', { state: 'visible', timeout: 8000 });
-          await page.locator('#inViewPick').setInputFiles(path.join(here, 'assets', process.env.CLIP || 'scene.webm'));
-          await page.waitForFunction(() => window.__seenBack.S.screen === 'animal', null, { timeout: 15000 });
+          await toView(page);
           await page.waitForTimeout(+(process.env.OPTION_SECS || 3) * 1000);
           r.probe = await page.evaluate(() => window.__seenBack.engine.probe());
           r.eyes = (await st(page)).eyes;
+          r.pix = await canvasStats(page); if (r.pix.blank) errors.push('the view drew nothing: ' + JSON.stringify(r.pix));
           await page.locator('#btnWho').tap(); await page.waitForSelector('#info', { state: 'visible' }); await page.waitForTimeout(200);
           r.rows = await page.evaluate(() => [...document.querySelectorAll('#rows li')].length); r.rowsWanted = want;
           if (r.probe.glErr) errors.push('GL error ' + r.probe.glErr);
           r.errors = errors; await ctx.close();
           if (!(r.eyes === key && r.rows === want && !errors.length && !r.probe.zErr)) bad.push(key + ':' + opt);
+          } catch (e) { out.options[key + ':' + opt] = Object.assign(out.options[key + ':' + opt] || {}, { threw: String(e && e.message || e).split('\n')[0].slice(0, 200), errors }); bad.push(key + ':' + opt + ' (threw)'); await ctx.close().catch(() => {}); }
         }
       }
     }
