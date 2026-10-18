@@ -584,14 +584,14 @@
      "cff_hz",
      "corner_hz"
     ],
-    "grade": "i",
+    "grade": "m",
     "shares": {
      "m": 0.0,
      "g": 0.258,
      "i": 0.742
     },
     "species": 1200,
-    "text": "If you are a honeybee, a lamp that looks steady to a human can look like it is flashing to you, because you can see flicker up to about 200 flashes a second, where a human stops at about 60. If you are a bumblebee, you very likely see flicker up to about 130 flashes a second, since that is what was measured in a relative, Bombus hortorum. If you are any other kind of bee or a wasp, nobody has measured how fast you see.",
+    "text": "If you are a honeybee, you can see a light flicker even when it flashes 200 times a second. Humans stop seeing flicker at about 60 flashes a second, so a lamp that looks steady to a human can look like it is flashing to you.",
     "cites": [
      {
       "id": "bee#156",
@@ -599,17 +599,11 @@
       "trait": "cff_hz",
       "grade": "m",
       "source": "Srinivasan 1984"
-     },
-     {
-      "id": "bee#262",
-      "taxon": "Bombus hortorum",
-      "trait": "cff_hz",
-      "grade": "m",
-      "source": "Meyer-Rochow 1981"
      }
     ],
-    "note": "Left out the photoreceptor speed records (R2, R3, R5): they give impulse-response half-widths, not a flicker limit, and R5 is a fly.",
-    "attempt": 1
+    "note": "The approved Flicker row of VOICE.md, measured in the honeybee in bright light (Srinivasan 1984). No other bee's figure is given, since numbers never travel.",
+    "rewrite": "control room 18 Oct",
+    "rewrite_reason": "Use VOICE.md's approved Flicker row. The draft gives all bumblebees the garden bumblebee's 130 (numbers never travel) under its Latin name."
    },
    {
     "title": "Ultraviolet",
@@ -617,39 +611,95 @@
      "lambda_max_nm",
      "spectral_range_nm"
     ],
-    "grade": "i",
+    "grade": "m",
     "shares": {
      "m": 0.0,
      "g": 0.007,
      "i": 0.993
     },
     "species": 1200,
-    "text": "If you are a honeybee, you have a kind of color-sensing cell for ultraviolet, which is light that humans cannot see at all, and it senses light most strongly at about 345 nanometers. The same cell peaks at about 335 nanometers in the buff-tailed bumblebee and about 345 in the common eastern bumblebee. Nobody has measured how far into the ultraviolet your sensitivity reaches, so only the peak is known.",
+    "text": "If you are a honeybee or a bumblebee, you have three kinds of color-sensing cell, as a human does. Yours pick up ultraviolet, blue and green, where a human's pick up blue, green and red. Ultraviolet is light that humans cannot see at all.",
     "cites": [
      {
-      "id": "bee#1",
-      "taxon": "Apis mellifera (worker, female)",
-      "trait": "lambda_max_nm",
+      "id": "canon-3#312",
+      "taxon": "Apis mellifera",
+      "trait": "receptor_classes",
       "grade": "m",
-      "source": "van 2021"
+      "source": "Briscoe 2001"
      },
      {
-      "id": "bee#10",
-      "taxon": "Bombus terrestris terrestris",
-      "trait": "lambda_max_nm",
+      "id": "oa-4#54",
+      "taxon": "Apis mellifera",
+      "trait": "receptor_classes",
       "grade": "m",
-      "source": "van 2021"
+      "source": "Vorobyev 1998"
      },
      {
-      "id": "bee#7",
+      "id": "oa-8#12",
       "taxon": "Bombus impatiens",
-      "trait": "lambda_max_nm",
+      "trait": "receptor_classes",
+      "grade": "m",
+      "source": "Skorupski 2010"
+     },
+     {
+      "id": "canon-3#292",
+      "taxon": "Bombus terrestris",
+      "trait": "receptor_classes",
+      "grade": "m",
+      "source": "Briscoe 2001"
+     }
+    ],
+    "note": "The approved Colors row of VOICE.md, limited to the bees measured: some wasps have two classes (Vespa basalis, bee#261) and a few bees and sawflies four (bee#34, bee#234).",
+    "rewrite": "control room 18 Oct",
+    "rewrite_reason": "Use VOICE.md's approved Colors row. The draft's nanometer peaks have no job, and live talks about the phone camera."
+   },
+   {
+    "title": "Red",
+    "traits": [
+     "lambda_max_nm",
+     "receptor_classes"
+    ],
+    "grade": "g",
+    "shares": {
+     "m": 0.27,
+     "g": 0.366,
+     "i": 0.364
+    },
+    "species": 1200,
+    "text": "Honeybees and bumblebees have no color-sensing cell for red, so red flowers and other red things look dark to them. You very likely have none either.",
+    "cites": [
+     {
+      "id": "canon-3#312",
+      "taxon": "Apis mellifera",
+      "trait": "receptor_classes",
+      "grade": "m",
+      "source": "Briscoe 2001"
+     },
+     {
+      "id": "canon-3#292",
+      "taxon": "Bombus terrestris",
+      "trait": "receptor_classes",
+      "grade": "m",
+      "source": "Briscoe 2001"
+     },
+     {
+      "id": "oa-8#12",
+      "taxon": "Bombus impatiens",
+      "trait": "receptor_classes",
+      "grade": "m",
+      "source": "Skorupski 2010"
+     },
+     {
+      "id": "bee#70",
+      "taxon": "Hymenoptera",
+      "trait": "receptor_classes",
       "grade": "m",
       "source": "van 2021"
      }
     ],
-    "note": "Left out wasps: the record for Dolichovespula norwegica (R14) lists only blue and green cells, so an ultraviolet claim would not fit every species here.",
-    "attempt": 1
+    "note": "Graded g as rows.py computes it (27% measured, 37% carried, 36% unknown), so the approved m row is recast with its relatives named. Not every bee lacks a red cell: Callonychium petuniae has one peaking at 593 nm (bee#34).",
+    "rewrite": "control room 18 Oct",
+    "rewrite_reason": "Use VOICE.md's approved Red row; live says 'them' and 'colour'. The REPORT grades the evidence g, so check the m."
    }
   ]
  }
