@@ -10,7 +10,8 @@ docs/views/evidence/ compared with origin/main. Exit status 1 when any record fa
   quote-shape      the quote does not start mid-sentence (a lower-case first letter, unless it begins with a mark of a cut
                    "…", a species epithet or a unit), and every cut is marked with … or ...
   quote-in-text    with --text: every piece of the quote between cut marks is in the text (spaces normalized)
-  grade-m          `m` only for a taxon written as one species (Genus species, optionally a subspecies)
+  (grades: `m` for a value on the record's own taxon, a species or the group it names, own or cited; `g` for a taxon
+                   mismatch, a presumption or a prediction; docs/views/audit/SAMPLE.md. Not checked here: it needs the passage.)
   partial          a note that says review, compilation, compiled, cited, after, from <Author>, Table S or "read from Fig"
                    requires partial: true
   source           authors, year, title, journal, doi or url present; a journal string carries a volume (a number) unless
@@ -26,7 +27,7 @@ WORDS = {"one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": 
          "ten": "10", "eleven": "11", "twelve": "12", "single": "1", "half": "0.5", "both": "2", "twice": "2", "double": "2",
          "dichromatic": "2", "trichromatic": "3", "tetrachromatic": "4", "monochromatic": "1"}
 PARTIAL_WORDS = re.compile(r"\b(review|compilation|compiled|cited|citing|after [A-Z]|from [A-Z][a-z]+ (?:et al|and|\()|table s\d|read from fig|secondary)\b", re.I)
-SPECIES = re.compile(r"^[A-Z][a-z]+ (?:\([A-Z][a-z]+\) )?[a-z][a-z\-]+(?: [a-z][a-z\-]+)?$")
+SPECIES = re.compile(r"^[A-Z][a-z]+ (?:\([A-Z][a-z]+\) )?(?:x |× )?[a-z][a-z\-]+(?: (?:(?:subsp|ssp|var|f|cv)\. )?[a-z][a-z\-]+)?$")
 
 
 def nums(s, words=False):
@@ -61,8 +62,6 @@ def check(r, text=None):
             if piece not in tn:
                 errs.append("quote-in-text: %r not found" % piece[:60])
                 break
-    if r.get("grade") == "m" and not SPECIES.match((r.get("taxon") or "").strip()):
-        errs.append("grade-m: %r is not one species" % r.get("taxon"))
     if PARTIAL_WORDS.search(r.get("note") or "") and not r.get("partial"):
         errs.append("partial: the note says the value is not this paper's own measurement")
     s = r.get("source") or {}
