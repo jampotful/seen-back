@@ -70,6 +70,12 @@ def main():
                 jn = re.sub(r'\s*\((?:volume|vol\.?)[^)]*unconfirmed\)', '', j).strip()
                 add = m['volume'] + (f"({m['issue']})" if m.get('issue') else '') + (f": {pages(m)}" if pages(m) else '')
                 new['journal'] = f'{jn} {add}'; why.append(f"journal field had no volume; Crossref gives {add}")
+            elif j and m.get('volume') and m.get('issue') and '(' not in j:
+                # a volume without its issue: add the issue when Crossref's volume is the one logged
+                mm = re.match(r'^(.*?)\s+(\d+)(\s*:\s*)(\S.*)$', j.strip())
+                if mm and mm.group(2) == str(m['volume']):
+                    new['journal'] = f"{mm.group(1)} {mm.group(2)}({m['issue']}): {mm.group(4)}"
+                    why.append(f"journal field had a volume without its issue; Crossref gives issue {m['issue']}")
             ca = m.get('authors') or []
             if ca and s.get('authors'):
                 logged = [a.strip() for a in re.split(r',\s*', str(s['authors'])) if a.strip()]
