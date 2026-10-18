@@ -8,6 +8,8 @@ name: everyday
 #                       for where people live, and the measurements on the captive and cultivated photos and on the
 #                       world test (tools/species/everyday_build.py). A label starting with build-pub also publishes the
 #                       extended files to pub/naturalist-everyday. Results on ci as runs/everyday/<run>-build.
+#   pocket-<anything>   the pocket model's kind on the same photos, away from the county and in it
+#                       (tools/species/everyday_pocket.py). Results on ci as runs/everyday/<run>-pocket.
 on:
   push:
     branches: ['run/everyday/**']
@@ -104,3 +106,34 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh everyday out build
+
+  pocket:
+    if: startsWith(github.ref_name, 'run/everyday/pocket')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: the pocket model's kind on the photos
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          set -o pipefail
+          mkdir -p out work/photos
+          python3 -I tools/lab/fetch_photos.py data/everyday/photos.csv work/photos --threads 16 2>&1 | tail -5 | tee out/log.txt
+          python3 -I tools/species/everyday_pocket.py --species data/everyday/species.csv --photos data/everyday/photos.csv \
+            --photos-dir work/photos --out out 2>&1 | tee -a out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out pocket
