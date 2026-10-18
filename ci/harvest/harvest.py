@@ -240,10 +240,28 @@ PLANT_TRAIT_QUERIES = {  # plant traits -> queries the plant word list misses (a
 }
 
 
+def extras_done():
+    """(genus, query) pairs an earlier run's genus_extra lines hold without an error, so a rerun sends only the rest."""
+    import subprocess, zlib
+    names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'origin/ci', 'runs/harvest'], capture_output=True, text=True).stdout.split()
+    done = set()
+    for n in names:
+        if not n.endswith(('harvest.jsonl.gz', 'harvest.jsonl')): continue
+        raw = subprocess.run(['git', 'show', 'origin/ci:' + n], capture_output=True).stdout
+        if n.endswith('.gz'): raw = zlib.decompressobj(16 + zlib.MAX_WBITS).decompress(raw)
+        for l in raw.decode('utf-8', 'replace').splitlines():
+            try: d = json.loads(l)
+            except ValueError: continue
+            if d.get('type') == 'genus_extra':
+                for q in d.get('queries', []):
+                    if not q.get('error'): done.add((d['genus'], q.get('q')))
+    return done
+
+
 def plant_traits_main(out, shard, nshard):
     """PLANTTRAITS=1 in ci/harvest/params.env: for plant genera already harvested, one query per open trait's words in
     PLANT_TRAIT_QUERIES, written as 'genus_extra' lines that tools/views/harvest_get.py shows under the genus."""
-    before = harvested_before()
+    before = harvested_before(); have = extras_done()  # a rerun sends only the queries no earlier run completed
     mine = [t for i, t in enumerate([t for t in targets() if t['genus'] in before and t['views'] == {'plant'}]) if i % nshard == shard]
     n_err = 0; start = time.time(); done = 0; nq = 0
     os.makedirs(out, exist_ok=True)
@@ -252,7 +270,10 @@ def plant_traits_main(out, shard, nshard):
             for i, t in enumerate(mine, 1):
                 fill_family(t)
                 words = [w for tr in sorted(t['traits']) for w in PLANT_TRAIT_QUERIES.get(tr, [])]
-                works = {}; queries = [search(f"{t['genus']} {w}", works) for w in words]
+                qs = [f"{t['genus']} {w}" for w in words if (t['genus'], f"{t['genus']} {w}") not in have]
+                works = {}; queries = []
+                for q in qs:
+                    queries.append(search(q, works)); time.sleep(0.5)  # run r12 lost 40% of its queries to rate limits
                 nq += len(queries); n_err += sum(1 for q in queries if q.get('error'))
                 if queries:
                     extra = {'type': 'genus_extra', 'genus': t['genus'], 'queries': queries, 'works': works}
