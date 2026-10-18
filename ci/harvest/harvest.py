@@ -223,6 +223,40 @@ def supplement_main(out, shard, nshard):
     print(open(os.path.join(out, 'summary.txt')).read())
 
 
+PLANT_TRAIT_QUERIES = {  # plant traits -> queries the plant word list misses (audit 41: a diel and a photoperiod paper missed)
+    'diel': ['flower opening time', 'nyctinasty'],
+    'sense_light_nonvisual': ['photoperiod', 'circadian rhythm'],
+    'sense_chemical': ['volatile signalling'],
+}
+
+
+def plant_traits_main(out, shard, nshard):
+    """PLANTTRAITS=1 in ci/harvest/params.env: for plant genera already harvested, one query per open trait's words in
+    PLANT_TRAIT_QUERIES, written as 'genus_extra' lines that tools/views/harvest_get.py shows under the genus."""
+    before = harvested_before()
+    mine = [t for i, t in enumerate([t for t in targets() if t['genus'] in before and t['views'] == {'plant'}]) if i % nshard == shard]
+    n_err = 0; start = time.time(); done = 0; nq = 0
+    os.makedirs(out, exist_ok=True)
+    try:
+        with open(os.path.join(out, 'harvest.jsonl'), 'w', encoding='utf-8') as f:
+            for i, t in enumerate(mine, 1):
+                fill_family(t)
+                words = [w for tr in sorted(t['traits']) for w in PLANT_TRAIT_QUERIES.get(tr, [])]
+                works = {}; queries = [search(f"{t['genus']} {w}", works) for w in words]
+                nq += len(queries); n_err += sum(1 for q in queries if q.get('error'))
+                if queries:
+                    extra = {'type': 'genus_extra', 'genus': t['genus'], 'queries': queries, 'works': works}
+                    if t.get('family_source'): extra.update(family=t['family'], family_source=t['family_source'])
+                    f.write(json.dumps(extra, ensure_ascii=False) + '\n')
+                f.flush(); done = i
+    except KeyboardInterrupt:
+        print('stopped by the time limit; keeping what was done', flush=True)
+    with open(os.path.join(out, 'summary.txt'), 'w') as s:
+        s.write(f'plant traits shard {shard}/{nshard}: {done} of {len(mine)} plant genera done, {nq} queries, '
+                f'{calls} OpenAlex calls, {n_err} failed queries, {time.time() - start:.0f} s\n')
+    print(open(os.path.join(out, 'summary.txt')).read())
+
+
 def harvested_families():
     import subprocess, zlib
     names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'origin/ci', 'runs/harvest'], capture_output=True, text=True).stdout.split()
@@ -248,6 +282,8 @@ def main():
     pp = os.path.join(ROOT, 'ci/harvest/params.env')
     if os.path.exists(pp) and re.search(r'^SUPPLEMENT=1\s*$', open(pp).read(), re.M):
         return supplement_main(out, shard, nshard)
+    if os.path.exists(pp) and re.search(r'^PLANTTRAITS=1\s*$', open(pp).read(), re.M):
+        return plant_traits_main(out, shard, nshard)
     before = harvested_before()
     allt = [t for t in targets() if t['genus'] not in before]; todo = allt[:top]
     mine = [t for i, t in enumerate(todo) if i % nshard == shard]
