@@ -54,7 +54,7 @@ def check(r, text=None):
         if n not in qn and n2 not in qn:
             errs.append("value-in-quote: %s is not in the quote" % n)
     qs = q.strip()
-    if qs and qs[0].islower() and not qs.startswith(("…", "...")):
+    if qs and qs[0].islower() and qs[0].isascii() and not qs.startswith(("…", "...")):   # Greek symbols (β-ionone, α-lobe) may open a sentence
         errs.append("quote-shape: starts mid-sentence (%r)" % qs[:30])
     if text is not None:
         tn = norm(text)
