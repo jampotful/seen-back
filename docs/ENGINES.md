@@ -78,6 +78,64 @@ That change is written and waits on the branch `agent/rec-b`. In headless Chromi
 
 A trial on build machines then served that branch's own page and ran the larger-model check on it (`run/engines/bigb-a`, commit `2fecb34`; `runs/engines/53-big-mac-ws`). In Safari 26.6 and in WebKit 26.0 on macOS the new form was fetched from `raw.githubusercontent.com`, verified, kept and run, with the same names as the live form (Little Blue Heron at 0.988 for the first photo), ready 16.4 and 14.8 seconds after "Get it". The largest process still peaked at 2,044 MiB in Safari and 2,046 MiB in WebKit on the first visit, against 2,077 and 2,178 MiB for the live form: in WebKit the weight lies outside the WASM heap, and this form does not remove it. The iPhone simulator's job could not start Safari (`runs/engines/53-big-mac-sim`), and the Linux job had not returned when this was written (`runs/engines/53-big-linux`). The new form is therefore correct in three engines and lighter in one, and the form that five engines have run stays live.
 
+## Where WebKit's memory goes with the larger model (18 October 2026, builds 34 to 37)
+
+Sources: runs `81`, `84`, `85`, `86`, `87` and `88` on `ci` (`runs/engines/<run>-big-mac-ws` and `<run>-big-linux`), from the trial branches `run/engines/bigwm-1` to `bigwm-6`. A branch named `run/engines/bigwm-<label>` builds the pages named in `ci/engines/wm-variants.txt` on the build machine (`main` is a build of `origin/main`; any other name is the pushed commit's page, which may read `?wm=<name>`), serves each on a port of its own so that nothing one kept is found by the next, and runs `test/engines/big.js` on each: in Playwright's WebKit 26.0 and in Safari 26.6.2 on macOS 26.6.2 (a machine with 7 GB of memory), and in Playwright's WebKit 26.0 (the WPE port) on Linux (`ci/engines/bigwm.sh`). The model is the live one, with the world's species rows in four parts (328 MB) and 675 MB in all. Its encoder was one file in four parts (310 MB) in build 34 (runs 81 and 84, and the fix of runs 85 to 87) and is a 2 MB graph with its weights in four parts (308 MB) from build 35 (`main` in runs 85 to 88, and the fix of run 88). `ci/engines/memwatch2.py` reads every browser process four times a second. On macOS it reads the physical footprint and the footprint's lifetime maximum, which the kernel keeps (`proc_pid_rusage`); the footprint is the figure iOS counts against an app's memory limit (Apple, WWDC 2018 session 416, "iOS Memory Deep Dive"). On Linux it reads the resident size and its peak (`VmHWM`). `ci/engines/bigwmsum.py` prints the tables. The trial pages of runs 81 and 84 put marks of each step of the load, with the size of the runtime's heap, in `window.__wm`.
+
+### Two corrections to the earlier figures
+
+- The figures above this section are resident sizes read with `ps`. On macOS the system compresses pages a process has not touched lately; they leave the resident size and stay in the footprint. In run 81, Safari's largest process peaked at 1,703 MiB resident and 2,993 MiB of footprint on the same first visit, and the kernel's record of its peak said 3,348 MiB. The earlier figures for WebKit and Safari are lower bounds for what an iPhone would count.
+- `test/engines/big.js` took a census of the caches after the model was ready and again on the later visit (`cachesNow` in `big_page.js`). In WebKit a kept body that is matched with `cache.match()` is brought into the page's memory, so the census itself added about 470 MiB to the Linux web process in run 81. `NOCACHES=1` now skips it, and runs 84 to 88 were made without it.
+
+### What the measurements show
+
+- The page read the encoder's four kept parts from Cache Storage, joined them into one buffer, checked the whole's checksum and handed the buffer to the worker. In Linux WebKit the web process rose from 1,015 MiB to 2,713 MiB while the parts were read (run 81). The worker then copied the buffer into the runtime's heap, which grew to 818 MiB for a model of 310 MB while the session was made.
+- The hand-over itself is a move: the page's buffer reads 0 bytes after `postMessage` in WebKit and Safari.
+- The runtime's heap is 818 MiB once the session is made, in every variant of build 34, and it did not grow while photos were answered. On macOS `vmmap` shows no region of its own for it; the region "WebKit Malloc", where WebKit's own allocations are counted, grew by about that much while the session was made. JavaScript's buffers are the region "JS VM Gigacage".
+- At the end of the load in Playwright's WebKit on macOS (run 81, `vmmap`), build 34's page held 1,359 MB in "WebKit Malloc" and 714 MB in "JS VM Gigacage". With the encoder read by the worker straight into the heap the figures were 1,244 MB and 258 MB.
+- The web process ran 16 to 24 threads on macOS and 37 to 42 on Linux in every variant. The runtime runs one thread (`numThreads` 1, since the page is not cross-origin isolated), so threads do not explain the memory.
+- Build 35's external-data form, with its weights still read into the page and handed over, peaked about as high as build 34 in WebKit (`main` in runs 85 to 88), as run 53 had found on 11 October.
+
+### What each change did, one at a time (build 34)
+
+The peak of the largest web-content process on the first visit, in MiB: the footprint and, in brackets, the kernel's lifetime maximum on macOS; the resident size and, in brackets, `VmHWM` on Linux. Run 81 still had the census; run 84 did not. The answers were the same in every variant and engine.
+
+| Change | Safari (81) | Safari (84) | WebKit, macOS (81) | WebKit, macOS (84) | WebKit, Linux (84) |
+|---|---:|---:|---:|---:|---:|
+| None (the page of build 34) | 2,993 (3,348) | 3,116 (3,151) | 2,958 (2,958) | 2,346 (2,346) | 2,713 (2,882) |
+| `nodig`: no checksum of the joined whole | 3,506 (3,508) | | 2,948 (2,949) | | |
+| `xfree`: every buffer let go with `transfer(0)` once used | 3,141 (3,146) | 2,120 (2,156) | 2,895 (2,896) | 2,222 (2,227) | 2,667 (2,671) |
+| `keys`: presence asked with `cache.keys()`, which returns no body | | 3,311 (3,311) | | 3,241 (3,241) | 2,678 (2,678) |
+| `wheap`: the worker reads the encoder's parts from Cache Storage straight into the runtime's heap, and the runtime makes the session from there without copying it | 2,059 (2,107) | 1,926 (1,929) | 2,685 (2,685) | 1,884 (1,885) | 2,440 (2,441) |
+| `wkeys`: `wheap` and `keys` | | 1,772 (1,849) | | 1,927 (1,936) | 2,423 (2,424) |
+
+The same page measured twice on macOS differed by as much as 600 MiB between runs (build 34's page in WebKit: 2,958 and 2,346 in runs 81 and 84), so only a change that holds in every run counts. `wheap` lowered the peak in every run and engine; `nodig`, `xfree` and `keys` did not do so consistently. Reading the species rows in the worker as well lowered the peak a little further (run 86: Safari 1,909 to 1,799, WebKit on macOS 1,945 to 1,821, Linux 2,466 to 2,397).
+
+### The cause, as far as the evidence shows it
+
+The encoder's 310 MB passed through JavaScript on their way into the runtime's heap. In WebKit a kept body that the page matches is brought whole into the web process (the census of the caches alone added about 470 MiB), and what the page read stayed in the process's footprint through the load, beside the joined buffer and then beside the heap the runtime filled from it. When the bytes stay out of JavaScript the peak falls by about 900 to 1,200 MiB in Safari, 600 MiB in WebKit on macOS and 500 MiB on Linux (runs 85 to 88), which is two to four times the encoder's size. Letting buffers go by hand (`xfree`) did not do as much, which suggests that the copies that mattered were WebKit's own, behind the kept bodies, and out of JavaScript's reach; that is an inference, since no breakdown separates them. Chromium was not measured in these runs. The rest of the footprint is needed by the design: the runtime's heap (818 MiB for the single file, which never shrinks), the species rows (328 MB, which the worker scores every photo against), the species table and the place files, and the page with the pocket model (about 400 to 750 MiB of footprint before and during the download).
+
+### What shipped (build 37)
+
+- The page asks whether a part is kept with `cache.keys()` (`has` in `src/cam.rec.js`), in `survey()`, `get()` and `staleParts()`; `staleParts()` in build 35 matched every kept part to learn that it was there.
+- The worker reads the larger model's parts from Cache Storage itself, one chunk at a time (`readParts` in `vendor/rec-worker.js`). A single-file encoder goes straight into a block of the runtime's heap, and the runtime makes the session from that block: it takes a model that already lies in its heap without copying it, and frees the block once the session is made (`intoHeap`; the runtime's module object is noted when it first sets its view of the heap, and the runtime is started first with a model of 67 bytes so that the heap exists). Weights of their own (the live form) go into one buffer of the worker, handed to the runtime as its external data and let go with `transfer(0)` as soon as the session is made. The species rows in parts go into the worker's memory. The page never holds these bytes.
+- The first load after a download checks each whole against the manifest's checksum as before. The worker works it out as the parts stream in, with a streaming SHA-256, because WebCrypto needs the whole in one buffer and a block of the runtime's heap is shared memory, which `digest()` refuses. A mismatch fails as damaged and the page lets every part go (`check_rec.js large`, `badWhole`).
+- If the worker cannot read the parts (no store in the worker, no access to the runtime's heap, a part gone), the page loads them as before, once.
+
+The page of `main` against the page with these changes, on the same machines and the same model, in MiB: the highest sample of the largest web-content process, with the process's own record of its peak in brackets where there is one. The later visit is a reload of the page with the model kept.
+
+| | `main` (build 35), first visit | Build 37's page, first visit | `main`, later visit | Build 37's page, later visit |
+|---|---:|---:|---:|---:|
+| Safari 26.6.2, macOS: footprint (the kernel's lifetime maximum on the first visit) | 2,946 (2,947) | 1,564 (1,761) | 2,302 | 1,722 |
+| WebKit 26.0, macOS: footprint (lifetime maximum) | 2,460 (2,467) | 1,729 (1,976) | 2,628 | 1,773 |
+| WebKit 26.0, Linux: resident size (`VmHWM`) | 2,938 (2,981) | 2,166 (2,170) | 3,263 (3,348) | 2,322 (2,327) |
+
+These are run 88. The first-visit peaks fell by 1,186 MiB in Safari, 491 MiB in WebKit on macOS and 811 MiB on Linux, counting each process's own record of its peak, which also catches what falls between two samples. The first two changes, and then all of them, on build 34's single-file form (runs 85 to 87) gave 1,758 to 1,913 MiB in Safari, 1,821 to 1,974 MiB in WebKit on macOS and 2,397 to 2,466 MiB on Linux, against 2,612 to 2,973, 2,523 to 2,605 and 2,916 to 2,994 MiB for `main`.
+
+Every engine named the same species with both pages in every run (a Little Blue Heron, an American Bird Grasshopper, a Green Treefrog, and on the Apple engines the plant as Small-Flower Pawpaw). Checked: `test/rec/check_rec.js` in every section, `test/rec/check_ext.js`, `python3 build.py --check`, `node test/check4.js try`.
+
+What this does not settle: no iPhone has run the larger model, and the simulator borrows the Mac's memory. With the fix the footprint still peaks near 1.7 to 1.9 GiB on macOS. The page's own test of whether a device can hold the model (`bigFits`) still assumes a peak of 2,600 MiB. The next levers are the pocket model's worker, which stays alive beside the larger one, and the species table, which the page parses into one object a species. The runtime's loader asks for a shared memory with a maximum of 4 GiB. That reserves address space, which the footprint does not count; a phone has less address space, and a smaller maximum was not tried.
+
 ## Home screen
 
 Chromium 141 against the live address (`runs/engines/40-big-linux`): the browser reports no reason against installing; the manifest gives the name "Seen Back", a standalone display, and icons of 192 and 512 pixels with a maskable one. Installing on a phone has not been tried.
