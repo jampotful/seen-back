@@ -207,14 +207,14 @@
           "eye_type",
           "eye_role"
         ],
-        "grade": "i",
+        "grade": "g",
         "shares": {
           "m": 0.0,
           "g": 0.0,
           "i": 1.0
         },
         "species": 122,
-        "text": "Most spiders have eight eyes, and only a few families, Dysderidae, Sicariidae and Oonopidae, have six, so you very likely have eight. The secondary eyes of spiders are regarded as motion detectors, and you very likely have some of these. Nobody has measured how your eyes are built or what each of them does for you.",
+        "text": "Most spiders have eight eyes, and you very likely have eight as well. Only a few families, among them the recluse spiders, the woodlouse hunters and the goblin spiders, have six, and they lack the middle pair at the front.",
         "cites": [
           {
             "id": "spider#91",
@@ -222,17 +222,11 @@
             "trait": "eyes_count",
             "grade": "g",
             "source": "Land 1985"
-          },
-          {
-            "id": "spider#131",
-            "taxon": "Araneae",
-            "trait": "eye_role",
-            "grade": "g",
-            "source": "Stafstrom 2017"
           }
         ],
-        "note": "Left out R1-R5 and R8 (single species or genus findings); R5 only applies to the Giant Lichen Orbweaver.",
-        "attempt": 1
+        "note": "Land 1985: six eyes in Sicariidae, Dysderidae and Oonopidae, with the principal eyes missing. The claim about what the side eyes do is left out, since the sources hedge it. Graded g, as live: the count rests on an order-level record; rows.py computes i because no species of the view is measured.",
+        "rewrite": "control room 18 Oct",
+        "rewrite_reason": "Draft uses Latin family names (recluse and goblin spiders), hedges ('regarded as'), and overstates that nobody has measured how your eyes are built."
       },
       {
         "title": "Sharpness",
@@ -247,7 +241,7 @@
           "i": 1.0
         },
         "species": 122,
-        "text": "Nobody has measured how sharply you see. The few spiders that have been measured differ widely: the big front eyes of a Portia jumping spider read about 12 cycles a degree, where a human reads about 30, while the large rear middle eyes of the net-casting spider Dinopis read about a third of a cycle a degree. Neither figure can be carried over to you.",
+        "text": "Nobody has measured how sharply you see. Among the few spiders measured, a Portia jumping spider sees about a fifth of the detail a human sees with its big front eyes, and a net-casting spider sees less than a hundredth with its big rear middle eyes.",
         "cites": [
           {
             "id": "jumper#72",
@@ -264,8 +258,9 @@
             "source": "Blest 1977"
           }
         ],
-        "note": "No record covers any listed species or its genus, so no figure is carried; the row names only the measured spiders.",
-        "attempt": 2
+        "note": "One baseline, a human's 60 cycles a degree, as in the approved jumper rows: Portia 12.4, Dinopis subrufus 0.34. The ogre-faced spider of the county is a Deinopis, the same genus as Dinopis, but numbers never travel.",
+        "rewrite": "control room 18 Oct",
+        "rewrite_reason": "Draft's 'a human reads about 30' makes Portia two-fifths of a human; VOICE.md's approved jumper row says a fifth. Pick one baseline."
       },
       {
         "title": "Pace",
@@ -386,7 +381,7 @@
           "i": 0.781
         },
         "species": 122,
-        "text": "If you are a golden silk spider, the insects caught in your web shake it 5 to 30 times a second, while air stirred by a flying insect seldom makes you attack and often makes you lift your forelegs. If you are a six-spotted fishing spider, you jump away from a striking frog, and the fine hairs called trichobothria that sense moving air are necessary and sufficient for that jump. For most other spiders, nobody has measured how you sense vibration or moving air.",
+        "text": "If you are a golden silk spider, you feel your prey through the silk, and a trapped insect shakes your web 5 to 30 times a second. Around the middle of your web, the shaking is ten to thirty times stronger on the side nearest the insect, which tells you which way to go. Nobody has measured this in most other spiders.",
         "cites": [
           {
             "id": "spider#43",
@@ -396,29 +391,98 @@
             "source": "Landolfa 1996"
           },
           {
-            "id": "spider#246",
-            "taxon": "Trichonephila clavipes, Zygiella x-notata",
-            "trait": "sense_airflow",
+            "id": "spider#44",
+            "taxon": "Trichonephila clavipes",
+            "trait": "sense_vibration",
             "grade": "m",
-            "source": "Klärner 1982"
-          },
-          {
-            "id": "spider#34",
-            "taxon": "Zygiella x-notata, Nephila clavipes",
-            "trait": "sense_airflow",
-            "grade": "m",
-            "source": "Barth 1993"
-          },
-          {
-            "id": "spider#161",
-            "taxon": "Dolomedes triton",
-            "trait": "sense_airflow",
-            "grade": "m",
-            "source": "Suter 2003"
+            "source": "Landolfa 1996"
           }
         ],
-        "note": "Left out the orb weaver and web builder statements (R12-R14) because they are grade g and this row is graded i.",
-        "attempt": 1
+        "note": "Landolfa 1996: prey vibrations peak at 5 to 30 Hz; amplitude gradients of 20 to 30 dB (ten to thirty times) around the hub give the direction. Between the spider's own legs the gradient is about 17 dB, so the live 'on some legs' is moved to the hub.",
+        "rewrite": "control room 18 Oct",
+        "rewrite_reason": "Keep live's measured golden silk spider facts, in 'you'; the draft's fishing spider sentence is about moving air, not the web."
+      },
+      {
+        "title": "Hearing through silk",
+        "traits": [
+          "sense_hearing",
+          "sense_vibration"
+        ],
+        "grade": "x",
+        "shares": {
+          "m": 0.0,
+          "g": 0.0,
+          "i": 1.0
+        },
+        "species": 122,
+        "text": "If you are a bridge spider, your web moves with the air, so it works as a listening surface up to 10,000 times larger than your body. A tone played from a loudspeaker three meters away can make you crouch, stretch out or turn.",
+        "cites": [
+          {
+            "id": "spider#253",
+            "taxon": "Larinioides sclopetarius",
+            "trait": "sense_hearing",
+            "grade": "g",
+            "source": "Zhou 2022"
+          },
+          {
+            "id": "spider#128",
+            "taxon": "Larinioides sclopetarius",
+            "trait": "sense_hearing",
+            "grade": "m",
+            "source": "Zhou 2022"
+          },
+          {
+            "id": "spider#127",
+            "taxon": "Larinioides sclopetarius",
+            "trait": "sense_hearing",
+            "grade": "m",
+            "source": "Zhou 2022"
+          }
+        ],
+        "note": "Zhou 2022. At 68 dB the only response was crouching; at 88 dB the spiders crouched, stretched out, displayed a foreleg or turned, so 'turns toward' is softened.",
+        "rewrite": "control room 18 Oct",
+        "rewrite_reason": "True and vivid; recast as 'If you are a bridge spider, you turn ...' with US 'meters'."
+      },
+      {
+        "title": "Wolf spiders",
+        "traits": [
+          "tapetum",
+          "eye_role"
+        ],
+        "grade": "x",
+        "shares": {
+          "m": 0.0,
+          "g": 0.0,
+          "i": 1.0
+        },
+        "species": 122,
+        "text": "If you are a wolf spider, all your eyes but the middle pair in front are backed by a mirror layer. It reflects light back through your eyes, and it makes them shine green in a flashlight beam.",
+        "cites": [
+          {
+            "id": "spider#150",
+            "taxon": "Lycosidae, Pisauridae",
+            "trait": "tapetum",
+            "grade": "m",
+            "source": "Benson 2013"
+          },
+          {
+            "id": "spider#68",
+            "taxon": "Lycosidae, Oxyopidae, Thomisidae",
+            "trait": "tapetum",
+            "grade": "m",
+            "source": "Land 1985"
+          },
+          {
+            "id": "spider#91",
+            "taxon": "Araneae",
+            "trait": "eyes_count",
+            "grade": "g",
+            "source": "Land 1985"
+          }
+        ],
+        "note": "The grate-shaped mirror layer is in the secondary eyes (all but the front middle pair), and its green eyeshine was measured in county wolf spiders such as Gladicosa pulchra and Rabidosa punctulata. No record says it helps them see movement in dim light, so that clause is left out.",
+        "rewrite": "control room 18 Oct",
+        "rewrite_reason": "Recast as 'If you are a wolf spider, ...' and drop 'This picture leaves that out' (rule 3)."
       }
     ]
   }

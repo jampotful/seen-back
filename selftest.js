@@ -1,4 +1,4 @@
-// Seen Back self-test, build 32: fetched by the page only for ?selftest=1. Made by build.py from src/cam.selftest.js.
+// Seen Back self-test, build 36: fetched by the page only for ?selftest=1. Made by build.py from src/cam.selftest.js.
 (function (I) {
   if (!I) return;
   var $ = I['$'], BUILD = I['BUILD'], EYES = I['EYES'], Engine = I['Engine'], HUMAN = I['HUMAN'], HUMAN_CPD = I['HUMAN_CPD'], ORDER = I['ORDER'], S = I['S'], calm = I['calm'], canvas = I['canvas'], clamp = I['clamp'], coarse = I['coarse'], decode = I['decode'], engine = I['engine'], fxNow = I['fxNow'], go = I['go'], hasCamera = I['hasCamera'], lerp = I['lerp'], makeCanvas = I['makeCanvas'], mix = I['mix'], paramsOf = I['paramsOf'], pocket = I['pocket'], setEyes = I['setEyes'], showStill = I['showStill'], vid = I['vid'];

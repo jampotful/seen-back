@@ -1,0 +1,171 @@
+name: everyday
+# The species people photograph at home (docs/tracks/prompts/burst13-everyday.md, tools/species/EVERYDAY.md).
+# Start it by pushing a commit to run/everyday/<label>:
+#   resolve-<anything>  GBIF's match, the kind of eye, the iNaturalist taxon, the count of captive or cultivated
+#                       observations and a manifest of their photos for every query of tools/species/everyday_list.csv
+#                       (tools/species/everyday.py resolve). Results on ci as runs/everyday/<run>-resolve.
+#   build-<anything>    BioCLIP 2's text rows for the new names, the full database extended with them and with a prior
+#                       for where people live, and the measurements on the captive and cultivated photos and on the
+#                       world test (tools/species/everyday_build.py). A label starting with build-pub also publishes the
+#                       extended files to pub/naturalist-everyday. Results on ci as runs/everyday/<run>-build.
+#   again-<anything>    as build, with the photos' vectors of run 4 (runs/everyday/4-build on ci) in place of the embed
+#                       job; again-pub publishes to pub/naturalist-everyday2. Results on ci as runs/everyday/<run>-again.
+#   pocket-<anything>   the pocket model's kind on the same photos, away from the county and in it, by species, and photo
+#                       by photo for the dog and the cat (tools/species/everyday_pocket.py). Results on ci as
+#                       runs/everyday/<run>-pocket.
+on:
+  push:
+    branches: ['run/everyday/**']
+permissions:
+  contents: write
+concurrency:
+  group: everyday-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  resolve:
+    if: startsWith(github.ref_name, 'run/everyday/resolve')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: resolve
+        run: |
+          set -o pipefail
+          mkdir -p out
+          only=""; [ -f ci/everyday/only.txt ] && only=$(cat ci/everyday/only.txt)
+          python3 -I tools/species/everyday.py resolve --out out --only "$only" 2>&1 | tee out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out resolve
+
+  embed:
+    if: startsWith(github.ref_name, 'run/everyday/build')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: photos and vectors
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          set -o pipefail
+          mkdir -p vec work/photos
+          python3 -I tools/lab/fetch_photos.py data/everyday/photos.csv work/photos --shard "${{ matrix.shard }}/6" --mode block --threads 16 2>&1 | tail -5 | tee vec/log.txt
+          python3 -I tools/species/everyday_build.py --embed-shard "${{ matrix.shard }}/6" --species data/everyday/species.csv --photos data/everyday/photos.csv \
+            --photos-dir work/photos --slot none --out vec 2>&1 | tee -a vec/log.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: vec-${{ matrix.shard }}
+          path: vec/
+          retention-days: 5
+
+  build:
+    if: startsWith(github.ref_name, 'run/everyday/build')
+    needs: embed
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: vec-*
+          path: vecs
+      - name: build and measure
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PUBLISH: ${{ startsWith(github.ref_name, 'run/everyday/build-pub') && '1' || '0' }}
+        run: bash ci/everyday/build.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out build
+
+  again:
+    if: startsWith(github.ref_name, 'run/everyday/again')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: build and measure
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PUBLISH: ${{ startsWith(github.ref_name, 'run/everyday/again-pub') && '1' || '0' }}
+          PUB_BRANCH: pub/naturalist-everyday2
+          PHOTO_VECTORS: runs/everyday/4-build
+        run: bash ci/everyday/build.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out again
+
+  pocket:
+    if: startsWith(github.ref_name, 'run/everyday/pocket')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: the pocket model's kind on the photos
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          set -o pipefail
+          mkdir -p out work/photos
+          python3 -I tools/lab/fetch_photos.py data/everyday/photos.csv work/photos --threads 16 2>&1 | tail -5 | tee out/log.txt
+          python3 -I tools/species/everyday_pocket.py --species data/everyday/species.csv --photos data/everyday/photos.csv \
+            --photos-dir work/photos --out out --detail 5219200,2435035 2>&1 | tee -a out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out pocket

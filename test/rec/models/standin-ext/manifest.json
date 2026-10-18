@@ -1,0 +1,60 @@
+{
+ "id": "standin-ext",
+ "licence": "none: random weights made by test/rec/make_standin.py",
+ "source": "test/rec/make_standin.py",
+ "vision": {
+  "graph": {
+   "url": "http://127.0.0.1:8807/test/rec/models/standin-ext/vision.graph.onnx",
+   "bytes": 4518,
+   "sha256": "1ce94291ca7fa1432063fa3fc2b3dab9347bd13d6e51ebf4e7fb21d7377e5bc8"
+  },
+  "weights_name": "vision.weights.bin",
+  "parts": [
+   {
+    "url": "http://127.0.0.1:8807/test/rec/models/standin-ext/vision.weights.bin.part00",
+    "bytes": 281282,
+    "sha256": "15e95d76744113fd2b8a778a17b79da31fb71702060680094bb89b92d1c1fb5f"
+   },
+   {
+    "url": "http://127.0.0.1:8807/test/rec/models/standin-ext/vision.weights.bin.part01",
+    "bytes": 281288,
+    "sha256": "72008717270d6044b43979de82abcca6b1f20053e48d8b52700228c2afd946cd"
+   },
+   {
+    "url": "http://127.0.0.1:8807/test/rec/models/standin-ext/vision.weights.bin.part02",
+    "bytes": 281278,
+    "sha256": "305fe0501795feddde8c5d7a0b272597773d2b3c6308f82b6e35dec05d5e6171"
+   }
+  ],
+  "bytes": 843848,
+  "sha256": "c025b0acbcd34fcf0219b288c9d5133b2055460fdd98bc47e09993ec8b855668",
+  "input": "pixel_values",
+  "output": "image_embeds",
+  "size": 224,
+  "mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ],
+  "resize": "shortest-bicubic-antialias",
+  "crop": "center"
+ },
+ "width": 512,
+ "species": {
+  "url": "species.f16.bin",
+  "table": "species.json",
+  "count": 19
+ },
+ "fusion": {
+  "t_species": 100,
+  "alpha_prior": 0.5,
+  "name_at": 0.6,
+  "offer_at": 0.3,
+  "kind_at": 0.8
+ }
+}

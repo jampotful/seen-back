@@ -564,6 +564,9 @@
       S.named = named; noteMeeting(S.eyes, named); paintUI(); renewName();
       S.svc = { t: t, state: 'said', text: 'The full database says ' + named.common + '.' };
       svcTimer = setTimeout(function () { if (S.svc && S.svc.state === 'said') { S.svc = null; paintSvc(); } }, 10000);
+    } else if (r.sure && r.kind === S.eyes && S.named && S.named.by === 'page' && S.named.scientific) {
+      // the same kind of eye, and no species the full database is sure of: the small model's species name does not stand; the kind's does
+      S.named = { common: handName(S.eyes), scientific: '', by: 'device-large', local: false }; noteMeeting(S.eyes, S.named); paintUI(); renewName();
     } else if (r.sure && r.kindAt !== null && r.kind !== S.eyes && r.kind !== 'person' && r.kind !== 'none') {
       // another kind of creature, and the full database is sure enough by its slot's own setting: the change is offered, never made
       if (r.kind === 'other') S.svc = { t: t, state: 'said', text: 'It looks like ' + (named ? aAn(named.common) : 'another creature') + '. Regards doesn\u2019t have the ability to view the world as ' + (named ? 'one' : 'it') + ' right now.' };

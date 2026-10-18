@@ -677,14 +677,21 @@
      "i": 0.213
     },
     "species": 37,
-    "text": "Your eyesight is much blurrier than a human's. If you are a domestic dog, a review cites an estimate of 20/75 for a typical dog, which means you must stand 20 feet from what a human can make out from 75 feet. If you are a red fox, the cells in your retina allow about 6 cycles a degree, a fifth of a human's 30, and if you are an arctic fox the estimate is about 9.",
+    "text": "Your eyesight is much blurrier than a human's. If you are a domestic dog, you see about a third or less of the fine detail a human sees.",
     "cites": [
      {
-      "id": "cat-dog#173",
-      "taxon": "Vulpes vulpes",
+      "id": "cat-dog#172",
+      "taxon": "Canis lupus familiaris",
       "trait": "acuity_cpd",
       "grade": "m",
-      "source": "Malkemper 2017"
+      "source": "Lind 2017"
+     },
+     {
+      "id": "cat-dog#118",
+      "taxon": "Canis lupus familiaris",
+      "trait": "acuity_cpd",
+      "grade": "m",
+      "source": "Kanizsar 2017"
      },
      {
       "id": "cat-dog#29",
@@ -694,6 +701,13 @@
       "source": "Byosiere 2018"
      },
      {
+      "id": "cat-dog#173",
+      "taxon": "Vulpes vulpes",
+      "trait": "acuity_cpd",
+      "grade": "m",
+      "source": "Malkemper 2017"
+     },
+     {
       "id": "intake-4#8",
       "taxon": "Vulpes lagopus",
       "trait": "acuity_cpd",
@@ -701,22 +715,23 @@
       "source": "Malkemper 2018"
      }
     ],
-    "note": "Left out coyotes, wolves, jackals and other foxes (carried grade g) and the unmeasured species to stay within three sentences.",
-    "attempt": 2
+    "note": "The approved row of VOICE.md said 'a quarter or less'; Lind 2017 tested dogs and humans in one apparatus and found humans about three times sharper (cat-dog#172), and reviews give four to seven times (cat-dog#118), so 'a third or less' covers the measurements. Red fox 6.3 and arctic fox 9.2 cycles a degree support the first sentence.",
+    "rewrite": "control room 18 Oct",
+    "rewrite_reason": "Use VOICE.md's approved dog Sharpness row. The draft's 20/75 explanation and 'a review cites an estimate' run long on a phone."
    },
    {
     "title": "Sharpest spot",
     "traits": [
      "fovea"
     ],
-    "grade": "i",
+    "grade": "m",
     "shares": {
      "m": 0.422,
      "g": 0.0,
      "i": 0.578
     },
     "species": 37,
-    "text": "If you are a domestic dog with a long skull, as a wolf has, you see most sharply along a horizontal band level with the horizon, and if you have a short nose like a pug, you see most sharply in one spot in the middle. A red fox has a distinct spot plus a moderate band, and an Arctic fox has a distinct spot. Nobody has measured this in the other members of the dog family, so if you are a coyote, a jackal or another relative, nobody knows where your eyes see most sharply.",
+    "text": "If you have a long nose, like a wolf, a red fox or a whippet, you see most sharply along a band level with the horizon. If you have a short nose, like a pug, you see most sharply in one spot in the middle.",
     "cites": [
      {
       "id": "cat-dog#36",
@@ -726,22 +741,30 @@
       "source": "McGreevy 2003"
      },
      {
-      "id": "cat-dog#39",
+      "id": "cat-dog#38",
+      "taxon": "Canis lupus",
+      "trait": "fovea",
+      "grade": "m",
+      "source": "Peichl 1992"
+     },
+     {
+      "id": "intake-4#17",
       "taxon": "Vulpes vulpes",
       "trait": "fovea",
       "grade": "m",
       "source": "Malkemper 2018"
      },
      {
-      "id": "cat-dog#42",
-      "taxon": "Vulpes lagopus",
-      "trait": "fovea",
+      "id": "cat-dog#168",
+      "taxon": "Canis lupus familiaris (whippet)",
+      "trait": "acuity_cpd",
       "grade": "m",
-      "source": "Malkemper 2018"
+      "source": "Lind 2017"
      }
     ],
-    "note": "Left out the Arctic fox's streak and all cell-density numbers: the Arctic fox quote states only the spot, and the numbers had no comparison job.",
-    "attempt": 1
+    "note": "The approved row of VOICE.md with 'greyhound' replaced by species and a breed the records name (the wolf in McGreevy 2003, the red fox in Malkemper 2018, the whippet in Lind 2017). The arctic fox also has a band (intake-4#18). No record covers the gray fox. Graded m as approved; rows.py computes i (42% measured, 58% unknown), since the coyote and gray fox are unmeasured.",
+    "rewrite": "control room 18 Oct",
+    "rewrite_reason": "Use VOICE.md's approved row. The draft gives the Arctic fox only a spot; its record and the fox view give it a strong band."
    },
    {
     "title": "Color",
@@ -756,7 +779,7 @@
      "i": 0.213
     },
     "species": 37,
-    "text": "You have two kinds of color-sensing cell, where a human has three. This has been measured in the domestic dog, the red fox and the arctic fox, and each has two kinds.",
+    "text": "You have two kinds of color-sensing cell, where humans have three. A blue-green that looks like a clear color to a human looks gray to you.",
     "cites": [
      {
       "id": "cat-dog#64",
@@ -778,10 +801,19 @@
       "trait": "receptor_classes",
       "grade": "m",
       "source": "Malkemper 2018"
+     },
+     {
+      "id": "cat-dog#68",
+      "taxon": "Canis lupus familiaris",
+      "trait": "colour_vision",
+      "grade": "m",
+      "source": "Miller 2001"
      }
     ],
-    "note": "Left out wavelengths (429 and 555 nm) and any claim about which colors look gray, since no record states what dogs or foxes see as gray.",
-    "attempt": 1
+    "note": "The approved row of VOICE.md. The record the drafter lacked is logged already: cat-dog#68 (Miller 2001, trait colour_vision) gives the dog's neutral point near 480 nm, seen as white or gray.",
+    "live_title": "Colour",
+    "rewrite": "control room 18 Oct",
+    "rewrite_reason": "Use VOICE.md's approved Color row; the draft's second sentence repeats the first. Log a record for 'blue-green looks gray'; the drafter found none."
    },
    {
     "title": "Field of view, dim light and depth",

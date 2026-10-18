@@ -42,6 +42,10 @@ def load():
                 # a later run's failed review ("gave up") never hides an earlier run's completed one
                 old = families.get(d['family'])
                 if not (old and not (old.get('query') or {}).get('error') and (d.get('query') or {}).get('error')): families[d['family']] = d
+    for g in genera.values():  # a query a later run completed drops the same query's earlier failure
+        ok = {q.get('q') for x in g.get('extra', []) for q in x.get('queries', []) if not q.get('error')}
+        for x in g.get('extra', []):
+            x['queries'] = [q for q in x.get('queries', []) if not (q.get('error') and q.get('q') in ok)]
     return ','.join(map(str, sorted(runs))), genera, families, summaries
 
 

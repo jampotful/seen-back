@@ -102,29 +102,39 @@ GBIF_CLASS = {'insect': 'Insecta', 'bee': 'Insecta', 'bird': 'Aves', 'wader': 'A
               'deer': 'Mammalia', 'squirrel': 'Mammalia', 'dog': 'Mammalia', 'cat': 'Mammalia', 'rabbit': 'Mammalia'}
 
 
+GBIF_MISS = {}
+
+
 def gbif_family(t):
     """The family the GBIF backbone gives a genus the queue lists without one, or None. The match must be exact, at genus
-    rank, and inside the group the genus's views imply (a genus name can belong to a plant and an animal, as Aquarius does)."""
+    rank, and inside the group the genus's views imply (a genus name can belong to a plant and an animal, as Aquarius
+    does); when the name is a homonym, GBIF's alternatives are searched for the one inside that group. GBIF_MISS counts
+    the reasons a lookup gave nothing, for the run's summary."""
     views = set(t['views'])
     if views == {'plant'}: hint = {'kingdom': 'Plantae'}
     elif views == {'reptile'}: hint = {'kingdom': 'Animalia', 'phylum': 'Chordata'}
     else:
         cls = {GBIF_CLASS.get(v) for v in views}
-        if len(cls) != 1 or None in cls: return None
+        if len(cls) != 1 or None in cls: GBIF_MISS['mixed views'] = GBIF_MISS.get('mixed views', 0) + 1; return None
         hint = {'kingdom': 'Animalia', 'class': cls.pop()}
-    url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode(dict(name=t['genus'], rank='GENUS', strict='true', **hint))
-    for attempt in range(4):
+    url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode(dict(name=t['genus'], rank='GENUS', verbose='true', **hint))
+    for attempt in range(5):
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'regards-harvest (github.com/jampotful/seen-back)'})
             with urllib.request.urlopen(req, timeout=30) as r:
-                d = json.loads(r.read()); time.sleep(0.1); break
+                d = json.loads(r.read()); time.sleep(0.2); break
         except Exception:
-            time.sleep(2 ** attempt)
+            time.sleep(2 + 2 ** attempt)
     else:
-        return None
-    if d.get('matchType') != 'EXACT' or d.get('rank') != 'GENUS' or not d.get('family'): return None
-    if any(d.get(k) != v for k, v in hint.items()): return None
-    return d['family']
+        GBIF_MISS['network'] = GBIF_MISS.get('network', 0) + 1; return None
+    for c in [d] + list(d.get('alternatives') or []):
+        if c.get('matchType') != 'EXACT' or c.get('rank') != 'GENUS' or not c.get('family'): continue
+        if (c.get('canonicalName') or c.get('scientificName') or '').split(' ')[0] != t['genus']: continue
+        if any(c.get(k) != v for k, v in hint.items()): continue
+        return c['family']
+    why = 'no exact genus match in the group (%s)' % (d.get('matchType') or 'none')
+    GBIF_MISS[why] = GBIF_MISS.get(why, 0) + 1
+    return None
 
 
 def fill_family(t):
@@ -219,21 +229,39 @@ def supplement_main(out, shard, nshard):
         print('stopped by the time limit; keeping what was done', flush=True)
     with open(os.path.join(out, 'summary.txt'), 'w') as s:
         s.write(f'supplement shard {shard}/{nshard}: {done} of {len(mine)} genera done, {len(fam_done)} family reviews, '
-                f'{calls} OpenAlex calls, {n_err} failed queries, {n_fill} families from GBIF, {time.time() - start:.0f} s\n')
+                f'{calls} OpenAlex calls, {n_err} failed queries, {n_fill} families from GBIF (misses: {GBIF_MISS or 0}), {time.time() - start:.0f} s\n')
     print(open(os.path.join(out, 'summary.txt')).read())
 
 
 PLANT_TRAIT_QUERIES = {  # plant traits -> queries the plant word list misses (audit 41: a diel and a photoperiod paper missed)
-    'diel': ['flower opening time', 'nyctinasty'],
+    'diel': ['flower opening time', 'nyctinasty', 'anthesis', 'pollination biology'],  # audit 43: an anthesis-hours paper missed
     'sense_light_nonvisual': ['photoperiod', 'circadian rhythm'],
     'sense_chemical': ['volatile signalling'],
 }
 
 
+def extras_done():
+    """(genus, query) pairs an earlier run's genus_extra lines hold without an error, so a rerun sends only the rest."""
+    import subprocess, zlib
+    names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'origin/ci', 'runs/harvest'], capture_output=True, text=True).stdout.split()
+    done = set()
+    for n in names:
+        if not n.endswith(('harvest.jsonl.gz', 'harvest.jsonl')): continue
+        raw = subprocess.run(['git', 'show', 'origin/ci:' + n], capture_output=True).stdout
+        if n.endswith('.gz'): raw = zlib.decompressobj(16 + zlib.MAX_WBITS).decompress(raw)
+        for l in raw.decode('utf-8', 'replace').splitlines():
+            try: d = json.loads(l)
+            except ValueError: continue
+            if d.get('type') == 'genus_extra':
+                for q in d.get('queries', []):
+                    if not q.get('error'): done.add((d['genus'], q.get('q')))
+    return done
+
+
 def plant_traits_main(out, shard, nshard):
     """PLANTTRAITS=1 in ci/harvest/params.env: for plant genera already harvested, one query per open trait's words in
     PLANT_TRAIT_QUERIES, written as 'genus_extra' lines that tools/views/harvest_get.py shows under the genus."""
-    before = harvested_before()
+    before = harvested_before(); have = extras_done()  # a rerun sends only the queries no earlier run completed
     mine = [t for i, t in enumerate([t for t in targets() if t['genus'] in before and t['views'] == {'plant'}]) if i % nshard == shard]
     n_err = 0; start = time.time(); done = 0; nq = 0
     os.makedirs(out, exist_ok=True)
@@ -242,7 +270,10 @@ def plant_traits_main(out, shard, nshard):
             for i, t in enumerate(mine, 1):
                 fill_family(t)
                 words = [w for tr in sorted(t['traits']) for w in PLANT_TRAIT_QUERIES.get(tr, [])]
-                works = {}; queries = [search(f"{t['genus']} {w}", works) for w in words]
+                qs = [f"{t['genus']} {w}" for w in words if (t['genus'], f"{t['genus']} {w}") not in have]
+                works = {}; queries = []
+                for q in qs:
+                    queries.append(search(q, works)); time.sleep(0.5)  # run r12 lost 40% of its queries to rate limits
                 nq += len(queries); n_err += sum(1 for q in queries if q.get('error'))
                 if queries:
                     extra = {'type': 'genus_extra', 'genus': t['genus'], 'queries': queries, 'works': works}

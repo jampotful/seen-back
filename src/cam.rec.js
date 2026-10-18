@@ -118,7 +118,7 @@
       var w = new Float64Array(n), W, sw = 0, out = new Float64Array(S), j, mm, cell, acc, sp;
       for (j = 0; j < n; j++) { w[j] = P[j] / (N[j] + S); sw += w[j]; }
       W = discSum(w); p = P0;
-      for (sp = 0; sp < S; sp++) { mm = vint(); cell = 0; acc = 0; for (j = 0; j < mm; j++) { cell += vint(); acc += vint() * W[cell]; } out[sp] = Math.log(acc + sw); }
+      for (sp = 0; sp < S; sp++) { mm = vint(); cell = 0; acc = 0; for (j = 0; j < mm; j++) { cell += vint(); acc += vint() * W[cell]; } out[sp] = Math.log(acc + sw + (table[sp].h || 0)); }   // a home share holds in every cell
       return out;
     }
     // the creatures met, kept on this device: {id (the meeting's), sci, zone, at}
@@ -128,7 +128,7 @@
     function keep(list) { try { localStorage.setItem(PLACE_KEY, JSON.stringify({ v: 1, met: list.slice(-PLACE_KEEP) })); } catch (e) {} }
     function metHere(z) {                              // the rows of the creatures met in this time zone, each species once, in the order met
       var seen = {}, out = [];
-      kept().forEach(function (x) { var r = x.zone === z ? row(x.sci) : -1; if (r >= 0 && !seen[r]) { seen[r] = 1; out.push(r); } });
+      kept().forEach(function (x) { var r = x.zone === z ? row(x.sci) : -1; if (r >= 0 && !seen[r] && !(table[r].h > 0)) { seen[r] = 1; out.push(r); } });   // a species people keep says nothing of the place
       return out;
     }
     function now() {
@@ -152,6 +152,30 @@
       about: function () { var c = now(); return { zone: c.zone, known: c.known, met: c.met, cells: n, res: res }; },
       test: { firstGuess: firstGuess, update: update, logShare: logShare, now: function () { return now().P; }, row: row, discSum: discSum, N: N, T: T }
     };
+  }
+  // ---------- whether this device can hold the full database (burst 12). On build machines the largest browser process reached 1,501 MiB
+  // (Chromium) to 2,598 MiB (WebKit on Linux) while it ran (docs/ENGINES.md), and a phone that runs out of memory kills the page without a word.
+  // Where the browser says how much memory the device has (navigator.deviceMemory, in GiB, rounded to a power of two and at most 8; Chromium
+  // only), the device must have twice the worst peak: in practice it reports 8. Where it says nothing (Safari, Firefox), the page asks for the
+  // WebAssembly heap the model needs, 1 GiB (the live form's heap is 821 MiB), and lets it go at once; a browser that refuses it would refuse the
+  // model. A device that does not fit is told nothing: the full database is simply not offered there, and the pocket model answers alone.
+  // test/rec/fits_test.js runs this function in Node with made-up devices; it must stay free of anything outside its own arguments.
+  /* bigFits:start */
+  function bigFits(dev) {                            // dev: { memory: navigator.deviceMemory, tryHeap: function (MiB) -> true | false }
+    var PEAK_MIB = 2600, HEAP_MIB = 1024, m = dev && dev.memory;
+    if (typeof m === 'number' && isFinite(m) && m > 0) return m * 1024 >= 2 * PEAK_MIB ? { ok: true, by: 'memory', gib: m } : { ok: false, by: 'memory', gib: m };
+    var t = false; try { t = !!(dev && typeof dev.tryHeap === 'function' && dev.tryHeap(HEAP_MIB)); } catch (e) { t = false; }
+    return { ok: t, by: 'heap', mib: HEAP_MIB };
+  }
+  /* bigFits:end */
+  function heapTry(mib) {                            // reserve a WebAssembly heap of that size and drop it; nothing is written to it
+    try { var w = new WebAssembly.Memory({ initial: mib * 16, maximum: mib * 16 }); return !!(w && w.buffer && w.buffer.byteLength >= mib * 1048576); } catch (e) { return false; }
+  }
+  // On this machine a check may play a device: ?bigmem=<GiB> for one that says how much memory it has, ?bigmem=heap-no or heap-yes for one that does not.
+  function deviceNow() {
+    var q = onThisMachine ? /[?&]bigmem=([0-9.]+|heap-no|heap-yes)/.exec(location.search || '') : null;
+    if (q) return q[1] === 'heap-no' ? { tryHeap: function () { return false; } } : q[1] === 'heap-yes' ? { tryHeap: function () { return true; } } : { memory: +q[1] };
+    return { memory: navigator.deviceMemory, tryHeap: heapTry };
   }
   function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the full database
     var big = !!o.big, slot = o.slot;
@@ -178,6 +202,14 @@
       SAY.room = 'There is not enough storage on this device for the full database.';
       SAY.keep = 'The full database could not be kept on this device.';
       SAY.stopped = 'The download has been stopped.';
+      SAY.memory = 'This device does not have enough memory for the full database.';   // never shown by the page today: survey() says 'none'
+    }
+    var fitDone = false;
+    function fitCheck() {                              // asked once, the first time the full database is surveyed or fetched, never at the page's start
+      if (!big || cannot || fitDone) return; fitDone = true;
+      var f = bigFits(deviceNow());
+      diag('large-fits', (f.ok ? 'yes ' : 'no ') + f.by + ' ' + (f.by === 'memory' ? f.gib : f.mib));
+      if (!f.ok) { cannot = 'memory'; state = 'failed'; why = 'memory'; }
     }
     var KEEP = 'keep-v1', EPS = 1e-9;
     var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
@@ -278,7 +310,9 @@
       if (pl) { g.push({ key: 'place', V: pl }); g.push({ key: 'zones', V: pl.zones }); }
       return g;
     }
-    function allParts(m) { var out = []; groupsOf(m).forEach(function (g) { out = out.concat(partsOf(g.V)); }); return out; }
+    function allParts(m) {                             // all that is kept of the slot: the graph first, where the weights are a file of their own, then every group's parts
+      var out = m.vision && m.vision.graph ? [m.vision.graph] : []; groupsOf(m).forEach(function (g) { out = out.concat(partsOf(g.V)); }); return out;
+    }
     function bytesOf(m) { return allParts(m).reduce(function (a, p) { return a + p.bytes; }, 0); }
     function okGroup(V) {                              // parts that add up to the whole, each with its length
       var sum = 0, P = partsOf(V);
@@ -310,16 +344,24 @@
         if (!Array.isArray(v.parts) || !v.parts.length || !num(v.bytes) || !v.parts.every(function (p) { sum += p && p.bytes; return p && okPart(p.url) && num(p.bytes) && p.bytes > 0 && (p.sha256 === undefined || typeof p.sha256 === 'string'); }) || sum !== v.bytes) throw err('unfit', 'the parts do not add up to the whole');
       }
       if (big ? !(num(v.bytes) && v.bytes > 0 && partsOf(v).every(function (p) { return okPart(p.url); })) : v.parts !== undefined) throw err('unfit', big ? 'the full database without its length' : 'a model in parts in the pocket slot');
+      // the full database may come as a small graph beside its weights as a file of their own: the graph with its length and checksum, and the
+      // name the graph gives that file; vision.parts, vision.bytes and vision.sha256 then describe the weights
+      if (v.graph !== undefined && !(big && v.graph && okPart(v.graph.url) && num(v.graph.bytes) && v.graph.bytes > 0 && typeof v.graph.sha256 === 'string' && /^[0-9a-f]{64}$/i.test(v.graph.sha256)
+        && typeof v.weights_name === 'string' && /^[A-Za-z0-9_][A-Za-z0-9_.-]{0,119}$/.test(v.weights_name))) throw err('unfit', big ? 'the graph or the name of its weights is not as it should be' : 'a model in two files in the pocket slot');
       return m;
     }
     function readTable(buf, count) {                   // rows: [scientific, English, kind, twelve monthly weights], or the same as objects
       var t, rows; try { t = JSON.parse(new TextDecoder('utf-8').decode(buf)); } catch (e) { throw err('damaged', 'species table is not JSON'); }
       rows = Array.isArray(t) ? t : t && t.species;
       if (!Array.isArray(rows) || rows.length !== count) throw err('unfit', 'species table has ' + (rows ? rows.length : 0) + ' rows, not ' + count);
-      return rows.map(function (r) {
+      var out = rows.map(function (r) {
         var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = knownKind(a[2]) ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
         return { sci: clip(a[0], 80), en: clip(a[1], 60), kind: kind, m: m };
       });
+      // home: [[row, share], ...], the share of a species people keep (pets, livestock, houseplants, gardens) wherever people are
+      // (tools/species/EVERYDAY.md); placeOf adds it to the row's share in every cell
+      if (t && Array.isArray(t.home)) t.home.forEach(function (x) { if (Array.isArray(x) && x[0] === Math.floor(x[0]) && x[0] >= 0 && x[0] < out.length && num(x[1]) && x[1] > 0) out[x[0]].h = +x[1]; });
+      return out;
     }
     function floats(buf, count) {                      // a trained head's biases for the species: little-endian float32, one for each row
       if (!buf || buf.byteLength !== count * 4) throw err('damaged', 'species biases of the wrong length');
@@ -413,15 +455,20 @@
     // A part is kept under an address of this slot made from its checksum, so the same bytes are never fetched twice, wherever they came from.
     function partKey(p) { return base + 'part/' + (p.sha256 ? String(p.sha256).toLowerCase() : fingerprint(String(p.url))) + '?bytes=' + p.bytes; }
     function wholeKey(V) { return base + 'whole/' + String(V.sha256 || '').toLowerCase(); }
+    function wholeKept(V) { var P = partsOf(V); return !!V.sha256 && !(P.length === 1 && P[0].sha256 === V.sha256); }   // joined() keeps a mark of a verified whole for such a group
     function unkeepParts() {
       have = 'absent'; keptBytes = 0;
       return Promise.all(allParts(M).map(function (p) { return unkeep(partKey(p)); }).concat(groupsOf(M).map(function (g) { return unkeep(wholeKey(g.V)); })));
     }
-    function staleParts(cache) {                       // parts of a model this slot no longer names
-      if (!cache || !M) return;
-      var now = {}; allParts(M).forEach(function (p) { now[partKey(p).split('?')[0]] = 1; }); groupsOf(M).forEach(function (g) { now[wholeKey(g.V)] = 1; });
-      cache.keys().then(function (keys) {
-        keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
+    function staleParts(cache) {                       // parts of a model this slot no longer names (an older form of it among them): let go once
+      if (!cache || !M) return;                        // all of the model it names is kept and its wholes verified, and never before
+      var now = {}, mine = allParts(M).map(partKey).concat(groupsOf(M).filter(function (g) { return wholeKept(g.V); }).map(function (g) { return wholeKey(g.V); }));
+      mine.forEach(function (k) { now[k.split('?')[0]] = 1; });
+      Promise.all(mine.map(function (k) { return kept(cache, k); })).then(function (hits) {
+        if (!hits.every(Boolean)) return;
+        return cache.keys().then(function (keys) {
+          keys.forEach(function (req) { var here = req.url.split('?')[0]; if ((here.indexOf(base + 'part/') === 0 || here.indexOf(base + 'whole/') === 0) && !now[here]) cache.delete(req); });
+        });
       }).catch(function () {});
     }
     function readInto(res, buf, at, n) {               // a kept part, straight into its place in the whole
@@ -457,6 +504,16 @@
         });
       }).then(function () { return buf.buffer; });
     }
+    function graphOf(cache, V) {                       // the graph, where the weights are a file of their own: small, so verified each time it is read
+      var g = V.graph;
+      return kept(cache, partKey(g)).then(function (res) {
+        if (!res) { have = ''; throw err('missing', 'a part is no longer kept on this device'); }
+        return res.arrayBuffer().then(function (b) {
+          if (b.byteLength !== g.bytes) throw err('damaged', 'the kept graph is ' + b.byteLength + ' bytes, not ' + g.bytes);
+          return sha256(g.sha256)(b).then(function () { return b; });
+        }).catch(function (e) { have = ''; return unkeep(partKey(g)).then(function () { throw e && e.code ? e : err('damaged', 'the kept graph could not be read'); }); });
+      });
+    }
     function room(need) {                              // is there room to keep it? Where the browser will not say, the download finds out
       try {
         if (navigator.storage && navigator.storage.estimate) return navigator.storage.estimate().then(function (e) {
@@ -468,6 +525,7 @@
     // What of the full database is on this device: 'none' (there is no such model, or it cannot be used here), 'absent', 'partial', 'getting', 'kept'.
     // The manifest is asked for the first time this is called, and never before.
     function survey(fresh) {
+      fitCheck();
       if (cannot || gone) return Promise.resolve('none');
       if (!fresh && getP) return Promise.resolve('getting');
       if (!fresh && have) return Promise.resolve(have);
@@ -477,7 +535,7 @@
           return Promise.all(P.map(function (p) { return kept(cache, partKey(p)); })).then(function (hits) {
             var n = 0; keptBytes = 0; hits.forEach(function (h, i) { if (h) { keptBytes += P[i].bytes; n++; } });
             have = n === P.length ? 'kept' : n ? 'partial' : 'absent';
-            if (have !== 'kept') staleParts(cache);
+            staleParts(cache);
             return have;
           });
         });
@@ -491,6 +549,7 @@
     // Fetch what is missing, one part after another, each verified and kept before the next is asked for; then start the encoder once, which
     // verifies the whole and shows that it runs on this device. Stopped by halt(); a later call carries on from the parts already kept.
     function get() {
+      fitCheck();
       if (cannot) return Promise.reject(err(cannot));
       if (getP) return getP;
       var ctl = typeof AbortController === 'function' ? new AbortController() : null, store = null;
@@ -528,9 +587,9 @@
         }
         return room(Math.max(0, bytesOf(M) - keptBytes)).then(next);
       }).then(function () {
-        have = 'kept'; staleParts(store); notify();
+        have = 'kept'; notify();
         return ready();
-      }).then(function () { getP = null; getCtl = null; diag('large-kept', M.id + ' ' + bytesOf(M)); notify(); }, function (e) {
+      }).then(function () { getP = null; getCtl = null; staleParts(store); diag('large-kept', M.id + ' ' + bytesOf(M)); notify(); }, function (e) {
         getP = null; getCtl = null;
         if (!e || !e.code) e = err('died', e && e.message);
         if (have !== 'kept') have = keptBytes ? 'partial' : 'absent';
@@ -584,7 +643,8 @@
             sp && sp.bias_url ? file(c, u(sp.bias_url), nS * 4) : null,
             i8 ? (far(sp.scale) ? joined(c, sp.scale) : null) : null,
             M.place ? joined(c, M.place) : null,
-            M.place ? joined(c, M.place.zones) : null
+            M.place ? joined(c, M.place.zones) : null,
+            inParts && V.graph ? graphOf(c, V) : null
           ]);
         }).then(function (b) {
           cur = slotOf(M, sp ? readTable(b[4], nS) : null, b[5] ? floats(b[5], nS) : null);
@@ -593,10 +653,10 @@
           total = got;                                 // the downloads are over; what remains is starting the encoder
           notify();
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
-            wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
+            wasmBinary: b[0], model: b[9] || b[1], weights: b[9] ? b[1] : null, weightsName: b[9] ? V.weights_name : '', vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS, speciesType: i8 ? 'int8' : 'f16', speciesScale: i8 ? b[6] : null };
           // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
-          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
+          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : [], b[9] ? [b[9]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
             // a kept model that will not start is thrown away, so the next try fetches it afresh
             if (e.code === 'damaged' && c) return (inParts ? unkeepParts() : unkeep(modelUrl)).then(function () { throw e; });
             throw e;

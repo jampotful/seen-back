@@ -33,7 +33,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'zone', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'zone', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer', 'memory']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -633,6 +633,26 @@ async function meet(page, name) {
       r.world.sameAsPython = sameP;
     }
   };
+  if (want.includes('memory')) await section('memory', async () => {   // burst 12: a device that cannot hold the full database is never offered it, and is told nothing
+    const slot = await bigUp(), r = {}; let ok = true; sofar = r;
+    for (const [name, mem, offer] of [['2GiB', '2', false], ['4GiB', '4', false], ['noFigureHeapRefused', 'heap-no', false], ['noFigureHeapGranted', 'heap-yes', true], ['8GiB', '8', true]]) {
+      await ctl('reset=1'); await bctl('reset=1');
+      const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + slot + '&bigmem=' + mem); await ready(page); await begin(page);
+      const s = await meet(page, 'stripes.png');
+      const line = offer ? await offered(page) : (await page.waitForTimeout(1500), await svcLine(page));
+      const fits = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'large-fits').map((d) => d.code).slice(-1)[0] || '');
+      const parts = (await partsAsked()).length;
+      await toAbout(page); await page.waitForTimeout(400);
+      const about = await page.locator('#bigBox').isVisible();
+      const words = await page.evaluate(() => document.body.innerText);
+      r[name] = { eyes: s.eyes, line, about, parts, fits, errors: errors.slice(), saysMemory: /enough memory/.test(words) };
+      const good = s.eyes === 'insect' && parts === 0 && !errors.length && !r[name].saysMemory && /^(yes|no) (memory|heap)/.test(fits) && (fits.indexOf('yes') === 0) === offer
+        && (offer ? line === 'Download the full database of species?' && about : line === '' && !about);
+      if (!good) { ok = false; (r.failed = r.failed || []).push(name); }
+      await ctx.close();
+    }
+    done('memory', r, ok);
+  });
   if (want.includes('large')) await section('large', async () => {    // consent, progress, a reload mid-way, stopping, deleting; the answer in the background; another kind offered, never taken; failures in words
     const slot = await bigUp(), Q = '&nosw=1&rec=' + SLOT + '&big=' + slot, r = {}; let ok = true; sofar = r; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
     const MB = Math.max(1, Math.round(JSON.parse(fs.readFileSync(path.join(here, 'models', 'standin-big', 'manifest.json'), 'utf8')).vision.bytes / 1e6));
@@ -735,6 +755,13 @@ async function meet(page, name) {
       all('unsure', r.unsure.state === s3.eyes + '|' + s3.shown + '|page' && r.unsure.line === '' && r.unsure.last.sure === false && r.unsure.last.kindOffers.join() === E('small.png').kindOffers.join());
       all('person', !r.person.eyes && r.person.notice === 'That’s a human. You already see the world as one. Try photographing another creature.' && !r.person.asked);   // a human: no view (build 22), and the larger model is not asked
       all('heron', r.heron.small === 'Great Blue Heron' && r.heron.after === 'great blue heron|device-large');
+      // sure of the kind and unsure of the species (build 34): the species name the small model gave does not stand, and the kind's does.
+      // The larger model's answer is set by hand here, since the stand-in is sure of the heron's species.
+      await page.evaluate(() => { const b = window.__seenBack.big; b.__recognize = b.recognize; b.recognize = function () { return Promise.resolve({ kind: 'wader', kindP: 0.9, sure: true, kinds: [{ key: 'wader', p: 0.9 }], kindOffers: [], species: [{ sci: 'Ardea herodias', en: 'Great Blue Heron', p: 0.4, kind: 'wader' }, { sci: 'Ardea alba', en: 'Great Egret', p: 0.3, kind: 'wader' }], named: null, offers: [], local: true, kindAt: 0.5, ms: { load: 0, pre: 0, run: 0, post: 0 }, model: 'by hand', at: Date.now() }); }; });
+      await meet(page, 'heron.png');
+      const kindOnly = await page.waitForFunction(() => { const n = window.__seenBack.S.named; return !!n && n.by === 'device-large' && n.scientific === ''; }, null, { timeout: 20000 }).then(() => true, () => false);
+      r.kindOnly = await page.evaluate(() => { const b = window.__seenBack, S = b.S, l = b.rec.about().last; b.big.recognize = b.big.__recognize; delete b.big.__recognize; return { eyes: S.eyes, common: S.named && S.named.common, sci: S.named && S.named.scientific, by: S.named && S.named.by, want: b.EYES.wader.who.replace(/^an? /, ''), small: l.named && l.named.en }; });
+      all('kindOnly', kindOnly && r.kindOnly.small === 'Great Blue Heron' && r.kindOnly.eyes === 'wader' && r.kindOnly.common === r.kindOnly.want && r.kindOnly.sci === '' && r.kindOnly.by === 'device-large');
       all('nothingAsked', r.askedOfServers.parts === 0 && r.askedOfServers.photos.length === 0);
       // a minute with nothing to do (shortened here): its worker is let go, and the next photo starts it again
       await page.evaluate(() => window.__seenBack.big.test.idle(300)); await page.waitForFunction(() => !window.__seenBack.big.test.running(), null, { timeout: 8000 });

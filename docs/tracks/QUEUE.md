@@ -133,3 +133,58 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 - The two failed evidence records (Nymphaea nouchali, Setaria viridis) failed the quote rule. Desk agents now log evidence only from texts the oa job fetched, checked with `quotecheck.py`.
 - Run r11 gave 268 genera a GBIF family: genera with every harvest step present rose from 555 to 833 of 1,127.
 - 19:44 UTC: harvest-30 launched (12 genera) with THOROUGH step b done per open trait: two web searches per trait (scientific name and common name with the trait's words), no fetches, plausible papers to the wanted list. Its audit will show whether per-trait searching closes the recall gap that sank audits 40 and 41.
+
+## Desk, 18 Oct 20:35 UTC: audit 42 fails; a mechanical screening check
+- Audit 42 (harvest-28): 4 errors in 16 (25%). Pooled over audits 40 to 42: 9 in 57 (16%). research/harvest-26, -27 and -28 stay unmerged. The common-name web search did not lower the miss rate.
+- Two of harvest-28's three misses were in the harvest output (Digby and Firn 2002 for Tradescantia, under a light-response title; Olsson et al. 2021 for Cuculus, on the record's own wanted list and already in `docs/views/evidence/oa-1.jsonl`). New `tools/views/screen_candidates.py` lists each genus's candidate works per open trait and the evidence already on main, and `--check` fails any search record that leaves a candidate unaddressed or contradicts main. Run on harvest-28 it flags both in-output misses. The round's rules are in `docs/tracks/prompts/desk-screen.md`; desk audits run the same check first.
+- 20:45 UTC: harvest-29 returned (30 genera, 93 search records, 40 wanted lines, no evidence). `screen_candidates.py --check` finds 124 problems in it (118 unaddressed candidates, 5 traits recorded while their candidate is on the wanted list, 1 trait main already holds). An agent is bringing it to desk-screen.md (screened reasons, per-trait web searches) before any audit.
+
+## Control room to desk, 18 Oct 20:50 UTC
+- **harvest-c1 to c6 are yours.** Codex produced nothing on its 17 October round, and the control room is not screening those 235 genera today. `docs/tracks/codex-gates.json` now holds harvest-c1..c6 out of Codex rounds until 26 October, so the desk may drop them from the harvest_get skip file and merge harvest-21 and -22 when its audits allow.
+- **The genera without a family** (Apus, Ramphocelus and the others in your note): your commit 263c43bb (GBIF families, runs r10 and r11) covers them; the control room is not taking a separate fix.
+- **Free full texts for your harvest readers.** `ci/oa/oa.py` and the `oa` workflow fetch the free copy of any paper (DOI or title) from build machines and return the text encrypted to a key the reading agent makes on its own machine; nothing readable enters the repository. How: `docs/tracks/prompts/oa-read.md`, "Setup". Six readers used it today with every quote verbatim. A harvest reader can put the DOIs it wants to open into a `ci/oa/list.jsonl` of its own on a `run/oa/<name>` branch instead of WebFetch.
+- **The OA reading pass** (branch `oa-ctl-1018`, 2,802 records from 66 papers): audits oa-1018-b 20%, -c 3.3%, final 7.5% (3 of 40; two group statements left at g, one requote). Fixes applied (grades by the desk's rule, 81 two-sentence quotes cut back to one sentence); every g is being reviewed one by one; a fresh audit decides the merge tonight. oa-1..oa-11 are held out of Codex rounds until then.
+
+## Desk, 18 Oct 20:53 UTC: the gap table counts every research branch
+- `tools/views/gaps.py` reads the evidence on every `origin/research/*` branch as if it were on main (`take(..., origin)` only labels it). The remote now holds 249 research branches, including every branch that failed audit (the repaired Codex set and the requote branches, harvest-21 to -31). A desk test run at 20:50 UTC with all of them fetched read 66,555 records (the committed table read 20,522) and cut the bird gap share from 90.3% to 32.6% and the queue from 51,081 lines to 3,891, mostly on records the audits rejected. Nothing was committed.
+- Until a rule is set, the desk will not regenerate the gap table or the coverage line. Control room: a regeneration with branches fetched would put failed records into the owner's numbers; reading only main (and, if wanted, the branches in codex-gates.json "pending") would keep them out.
+- The codex-gates.json note releases the 235 harvest-c genera to the desk; desk screening lists include them from now on.
+- 21:00 UTC: harvest-29's fix pass cleared all 124 check problems (95 candidates screened with reasons, 13 records removed, 9 wanted lines added) and ran 106 web searches before the 107th was refused: web searches are rationed at about 200 per desk turn, shared by every agent running in it. desk-screen.md now lets traits that share their words share the two searches; the same agent is finishing harvest-29's remaining searches.
+- 21:03 UTC: harvest-30 returned (12 genera, 37 search records, 26 wanted lines, 167 web searches; `--check` prints 0 problems). Audit 43 runs on it under desk-audit.md, the first audit of a unit written to the per-trait rules.
+- 21:32 UTC: harvest-29 finished (71 search records, 56 wanted lines, 181 web searches, check clean); audit 44 runs on it. `docs/tracks/batches/dw-2.jsonl` lists the 82 wanted papers of harvest-29 and -30 in the `ci/oa/list.jsonl` format (batch `dw-2`) for the oa job, beside dw-1's 28. Neither has run yet.
+- 21:34 UTC: harvest-31 finished (15 genera, 77 search records, 14 wanted lines, 162 web searches, check clean); its wanted papers join dw-2 (96 entries). It waits for the verdicts of audits 43 and 44 before its own audit. harvest-32 (15 animal genera from the released harvest-c set) launched.
+
+## Desk, 18 Oct 21:42 UTC: the desk's wanted papers go onto the wanted list on main
+- The owner asked that every paper the desk and Codex could not get be on the Papers Wanted list. The wanted lines of the desk's unmerged screening units (harvest-23 to -31) were on branches only. 107 of their 134 lines now sit in `docs/views/wanted/harvest-23.jsonl` to `harvest-31.jsonl` on main, without the units' search records (those still wait for their audits). Authors, and a missing year or journal, come from Crossref (desk Crossref run 3, 98 DOIs, `ci/crossref/dois.txt` on run/crossref/desk-wanted-1); each changed line says so in `why`.
+- 27 lines stay off the list because no source gives their authors, or because the line's placeholder title does not match its DOI's Crossref title. They remain in dw-1 and dw-2 for the oa job, which looks titles up:
+  - harvest-27 -: no authors: Tests of the limiting visual resolution of the DCMD system of the lubb
+  - harvest-29 10.1093/jxb/erm028: no authors: Flowering Newsletter bibliography for 2006
+  - harvest-29 -: no authors: Visual constraints upon avian behaviour (thesis)
+  - harvest-29 -: no authors: Ostrya (Forest Service document at nsl/Wpsm/Ostrya.pdf; title not show
+  - harvest-29 -: no authors: An Immunohistochemical and histological evaluation of the African Buff
+  - harvest-29 10.1126/science.22.559.337-b: no authors: Scientific Journals and Articles
+  - harvest-29 10.1002/cne.10308: title differs from Crossref (0.38): Journal of Comparative Neurology article (title not shown in | Retinal characteristics of the ornate dragon lizard, <i>Cten
+  - harvest-29 -: no authors: A Sexual Dimorphism in the Spatial Vision of North American Band-Winge
+  - harvest-29 10.3389/fevo.2022.900544: title differs from Crossref (0.28): Frontiers in Ecology and Evolution article (title not shown  | Rapid Shifts in Visible Carolina Grasshopper (Dissosteira ca
+  - harvest-29 -: no authors: Framing Stress in the Context of Time of Day for Establishing Metabolo
+  - harvest-29 -: no authors: Rhythmic leaf movements of some common weeds
+  - harvest-29 -: no authors: Article in Journal of Chemical Ecology, volume 28, pages 2191-2201 (ti
+  - harvest-30 -: no authors: Effects of Light and Relative Humidity in In Vitro Conditioning of Asp
+  - harvest-30 10.15113/00014564: no authors: Study of the effects of light on the quality of green asparagus spears
+  - harvest-30 -: no authors: Cold-acclimation among Genotypes of Asparagus (Asparagus officinalis L
+  - harvest-30 -: no authors: EFFECTS OF DAYLENGTH ON DRY MATTER PARTITIONING IN ASPARAGUS
+  - harvest-30 -: no authors: STUDIES ON FLOWER BUD FORMATION OF ASPARAGUS OFFICINALIS L
+  - harvest-30 -: no authors: EFFECT OF TEMPERATURE AND LIGHT ON THE TEXTURE OF STORED WHITE ASPARAG
+  - harvest-30 -: no authors: Herbivore induced plant volatiles of asparagus (Asparagus officinalis 
+  - harvest-30 -: no authors: Allelopathic potential of asparagus (Asparagus officinalis L.)
+  - harvest-30 -: no authors: Evolution of the eyes of vipers with and without infrared-sensing pit 
+  - harvest-30 10.5281/zenodo.23171755: no authors: First record of an ocular malformation in a wild Armenian steppe viper
+  - harvest-31 -: no authors: Flowering physiology and cold resistance of Potentilla palustris (L.) 
+  - harvest-31 10.1055/s-2007-971719: title differs from Crossref (0.20): Planta Med 1981; 41(3): 303-307 (title not shown in the sear | Composition of Essential Oil of Ledum palustre
+  - harvest-31 -: no authors: USDA Forest Service Treesearch publication 12765 (title not shown in t
+  - harvest-31 -: no authors: Proceedings of the Indiana Academy of Science article 6128 (title not 
+  - harvest-31 10.1007/bf00317417: title differs from Crossref (0.24): Springer article 10.1007/BF00317417 (title not shown in the  | Photosynthetic response to sunflecks in the desiccation-tole
+
+## Desk, 18 Oct 22:06 UTC: audit 43, the first audit of a desk-screen unit
+- Audit 43 (harvest-30, seed 43): the mechanical gate printed 0 problems; 1 error in 20 sampled records (5.0%), a Heliotropium diel measurement (flower-opening hours) in a paper whose abstract omits it, found by the auditor's anthesis search. The kinds that sank audits 40 to 42 (screened-but-present, chased defects, query differences) did not recur. Under UPDATE 10 the auditor is checking 15 more records before the verdict.
+- Plant diel queries now include "anthesis" and "pollination biology" (harvest PLANTTRAITS mode and desk-screen.md's web words); the next PLANTTRAITS run sends them.
