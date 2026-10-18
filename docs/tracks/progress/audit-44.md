@@ -128,3 +128,14 @@ The leads left unread are the Banks et al. 2015 species table S1 (Kobus, Basilis
 ## Searches
 
 I ran 72 WebSearch calls (63 for the sampled records and 9 for the wanted lines), none refused for the limit, and 31 WebFetch calls on URLs my searches returned. All 20 sampled records were finished.
+
+## Addendum: sample of the 51 retained records (desk request)
+
+The desk will merge only the 51 records that cite no errored run-12 query and hold the other 20. My first sample holds 13 of the 51 (lines 1, 4, 7, 8, 11, 20, 23, 29, 33, 41, 45, 67, 69), where the request assumed 16, because 7 of my 20 lines (15, 37, 38, 49, 50, 53, 55) are among the 20 held. A sample of 20 from the 51 therefore needs 7 more records, and I draw them in two steps, the line numbers written here before any check.
+
+The pool is the 38 retained records not yet sampled, in file order: 2, 3, 5, 6, 9, 10, 12, 13, 14, 18, 19, 21, 22, 24, 25, 26, 27, 28, 30, 34, 35, 36, 40, 42, 43, 44, 46, 59, 60, 61, 62, 63, 64, 65, 66, 68, 70, 71.
+
+- Draw 1, as requested: `random.seed(4401)`, then `random.sample(pool, 4)`, which gives lines 62, 18, 10, 34 in draw order (sorted 10, 18, 34, 62).
+- Draw 2, for the three records the miscount left out: from the 34 pool records still unsampled, in file order, `random.seed(4402)`, then `random.sample(remaining, 3)`, which gives lines 22, 24, 40 in draw order (sorted 22, 24, 40).
+
+Verdicts follow in the next commit.
