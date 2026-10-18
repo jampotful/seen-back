@@ -264,3 +264,4 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-33 -: no authors: THE ELECTRORETINOGRAM IN THE COMPOUND EYE OF THE DESERT LOCU
   - harvest-33 -: no authors: Measurements of different parameters of the compound eye of 
   - harvest-33 10.1007/bf01052226: placeholder title; the Crossref title (Visual behaviors of the migratory grasshopper,Melanoplus san) names no genus the 
+- 23:47 UTC: audit 45 (harvest-31 without Comarum and Phalaris): 0 errors in 20. 70 records are on main; Chelone joins the held genera (failed plant queries appeared during the audit). Pooled over audits 43 to 46 (desk-screen units): 1 error in 102 sampled records.
