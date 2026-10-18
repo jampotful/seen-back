@@ -4,7 +4,8 @@ output, or a record already on main, reported the measurement).
 For each genus it lists, per open trait, the harvest works (genus queries, extra queries, citation step and family
 review) whose title or abstract holds a word of that trait, and the evidence already on main for a species of the genus
 and that trait. With --check it reads a searched file and fails every record that calls a trait searched while one of
-those candidates is unaddressed or main already holds a value for it.
+those candidates is unaddressed, main already holds a value for it, or one of the genus's harvest steps failed
+(audit 44: records listed queries that had returned "gave up").
 
 Usage:
   python3 -I tools/views/screen_candidates.py Genus [Genus ...]
@@ -132,6 +133,13 @@ def check(path, wanted):
         g = str(r.get('taxon', '')).split(' ')[0]; d = genera.get(g)
         if not d: continue
         screened = {k.lower() if k.startswith('10.') else k for k in (r.get('screened') or {})}
+        failed = {q.get('q') for q in d.get('queries', []) if q.get('error')}
+        failed |= {q.get('q') for x in d.get('extra', []) for q in x.get('queries', []) if q.get('error')}
+        failed |= {'citation step (cites %s)' % c.get('cited_doi') for c in d.get('chase', []) if c.get('error')}
+        fam = families.get(d.get('family')) if d.get('family') else None
+        if fam and (fam.get('query') or {}).get('error'): failed.add((fam.get('query') or {}).get('q'))
+        for q in sorted(x for x in failed if x):
+            bad += 1; print('%s:%d %s: harvest step "%s" failed on the build machine, so the record waits for a rerun' % (path, i, g, q))
         for t in trait_list(r.get('trait')):
             for wid, w, step, found in candidates(d, families, t):
                 k = key(wid, w)
