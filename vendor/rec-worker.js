@@ -5,13 +5,24 @@
                       speciesType, speciesScale}
                      (kinds may be absent where there are species: a slot without a kinds head; speciesType 'int8' gives the rows at one byte
                      a number, row after row, with speciesScale one little-endian float32 a row, the row's value being scale * byte)
+                     (store {keep, parts:[{key, bytes, sha256}], verify} in place of model: the model's parts as the page keeps them in
+                     Cache Storage, read here straight into the runtime's heap; verify asks for each part's checksum on the way)
                      {op:'run', id, rgba, w, h, wantPre}          rgba: the photo's pixels, 4 bytes each, rows from the top
    and it answers:   {op:'hello'}  {op:'ready', ms, backend, threads}  {op:'done', id, kinds, species, emb, ms, pre?}  {op:'fail', id?, stage, name, message}
+                     (stage 'store': the parts could not be read into the heap here, and the page sends the model's bytes instead)
 
    The resize follows Pillow's Image.resize(size, Image.BICUBIC) step for step (8-bit, two passes, its fixed-point
    weights and its rounding), because the label vectors were made from photos prepared by Pillow. */
 'use strict';
 var session = null, V = null, width = 0, K = null, nK = 0, SP = null, SP8 = null, SC = null, nS = 0, backend = '', trip = '';
+// The runtime's own module object, noted when the runtime first sets its view of the heap on it (an assignment no other code here
+// makes), so that a model can be read into the heap before the session is made. See intoHeap.
+var ORTMOD = null;
+try {
+  Object.defineProperty(Object.prototype, 'HEAPU8', { configurable: true, set: function (v) {
+    Object.defineProperty(this, 'HEAPU8', { value: v, writable: true, configurable: true, enumerable: true }); ORTMOD = this;
+  } });
+} catch (e) {}
 
 function now() { return (self.performance && performance.now) ? performance.now() : Date.now(); }
 function fail(stage, e, id) { self.postMessage({ op: 'fail', id: id, stage: stage, name: String((e && e.name) || ''), message: String((e && e.message) || e || '').slice(0, 300) }); }
@@ -112,6 +123,61 @@ function dots8(Q, scale, n, e) {                     // rows at one byte a numbe
   return out;
 }
 
+// ---------- the larger model, from the page's store into the runtime's heap
+// Where the model's 310 MB pass through JavaScript, WebKit holds them in memory more than once besides the heap: the page's joined copy
+// (moved to this worker) outlives the session until the collector comes round, and so does each kept part the page reads
+// (docs/ENGINES.md, 18 October 2026). Here each part goes from Cache Storage straight into a block of the runtime's heap, one chunk at a
+// time, and the session is made from that block: the runtime takes a model that already lies in its heap without copying it, and frees
+// the block once the session is made. The runtime is started first with a model of 67 bytes (one Identity node), so that its heap exists.
+var TINY = 'CAgSADo3ChAKAXgSAXkiCElkZW50aXR5EgFnWg8KAXgSCgoICAESBAoCCAFiDwoBeRIKCggIARIECgIIAUIECgAQDQ==';
+function storeErr(e) { var x = new Error(String((e && e.message) || e || 'the model could not be read into the heap')); x.store = true; return x; }
+function hex(d) { return Array.prototype.map.call(new Uint8Array(d), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
+function let_go(v) {                                 // a chunk copied into the heap is let go at once, not when the collector comes round
+  try { if (v && v.buffer instanceof ArrayBuffer && v.byteOffset === 0 && v.byteLength === v.buffer.byteLength && v.buffer.transfer) v.buffer.transfer(0); } catch (e) {}
+}
+function intoHeap(st, opts) {
+  var tiny = atob(TINY), u = new Uint8Array(tiny.length), i, total = 0, ptr = 0, M;
+  for (i = 0; i < tiny.length; i++) u[i] = tiny.charCodeAt(i);
+  st.parts.forEach(function (p) { total += p.bytes; });
+  return self.ort.InferenceSession.create(u, opts).then(function (s0) { return s0.release(); }).then(function () {
+    M = ORTMOD;
+    if (!M || typeof M._malloc !== 'function' || typeof M._free !== 'function' || !M.HEAPU8 || typeof caches === 'undefined') throw storeErr('the runtime\'s heap or the store is out of reach');
+    ptr = M._malloc(total) >>> 0;
+    if (!ptr) throw storeErr('no room in the heap for ' + total + ' bytes');
+    return caches.open(st.keep);
+  }).then(function (c) {
+    var k = 0, at = 0;
+    function next() {
+      if (k >= st.parts.length) return Promise.resolve();
+      var p = st.parts[k++], start = ptr + at; at += p.bytes;
+      return c.match(p.key, { ignoreVary: true }).then(function (res) {
+        if (!res) throw storeErr('a part is no longer kept');
+        if (st.verify) return res.arrayBuffer().then(function (b) {        // the first time: each part's checksum, as the page did for the whole
+          if (b.byteLength !== p.bytes) throw storeErr('a kept part is ' + b.byteLength + ' bytes, not ' + p.bytes);
+          return crypto.subtle.digest('SHA-256', b).then(function (d) {
+            if (hex(d) !== String(p.sha256).toLowerCase()) throw storeErr('a kept part is damaged');
+            M.HEAPU8.set(new Uint8Array(b), start); let_go(new Uint8Array(b));
+          });
+        });
+        var reader = res.body.getReader(), done = 0;
+        function pump() {
+          return reader.read().then(function (r) {
+            if (r.done) { if (done !== p.bytes) throw storeErr('a kept part is ' + done + ' bytes, not ' + p.bytes); return; }
+            if (done + r.value.length > p.bytes) throw storeErr('a kept part is longer than ' + p.bytes + ' bytes');
+            M.HEAPU8.set(r.value, start + done); done += r.value.length; let_go(r.value); return pump();
+          });
+        }
+        return pump();
+      }).then(next);
+    }
+    return next();
+  }).then(function () {
+    var view = new Uint8Array(M.HEAPU8.buffer, ptr, total);
+    ptr = 0;                                           // from here the runtime owns the block, and frees it once the session is made
+    return view;
+  }, function (e) { if (ptr) try { M._free(ptr); } catch (x) {} throw e && e.store ? e : storeErr(e); });
+}
+
 // ---------- the encoder
 function init(m) {
   var t0 = now(), t1, t2;
@@ -132,7 +198,10 @@ function init(m) {
   ort.env.wasm.proxy = false;
   ort.env.wasm.wasmPaths = { mjs: m.ort.mjs, wasm: m.ort.wasm };
   if (m.wasmBinary) ort.env.wasm.wasmBinary = m.wasmBinary;
-  ort.InferenceSession.create(new Uint8Array(m.model), { executionProviders: [backend], graphOptimizationLevel: 'all' }).then(function (s) {
+  var opts = { executionProviders: [backend], graphOptimizationLevel: 'all' };
+  (m.store ? intoHeap(m.store, opts) : Promise.resolve(new Uint8Array(m.model))).then(function (bytes) {
+    return ort.InferenceSession.create(bytes, opts);
+  }).then(function (s) {
     session = s; t2 = now(); m.model = null;           // the session has its own copy by now: a large model's bytes are let go
     if (s.inputNames.indexOf(V.input) < 0) throw new Error('the model has no input named ' + V.input);
     // one pass over an empty picture, so the first real photo does not pay for warming up
@@ -143,6 +212,7 @@ function init(m) {
     // the runtime failing to start is not the model's fault: its loader could not be fetched, or this browser cannot run it
     var text = String((e && e.message) || e || ''), had = !!session;
     session = null;
+    if (e && e.store) { fail('store', e); return; }
     fail(had ? 'session' : /dynamically imported module|Importing a module script failed|importScripts|NetworkError/i.test(text) ? 'runtime' : /no available backend|WebAssembly|wasm/i.test(text) && !/ERROR_CODE/.test(text) ? 'browser' : 'session', e);
   });
 }
