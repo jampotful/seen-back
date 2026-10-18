@@ -113,7 +113,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        v: ${{ fromJSON(startsWith(github.ref_name, 'run/engines/ffx-s') && '["same-1", "same-2", "same-3"]' || startsWith(github.ref_name, 'run/engines/ffx-g') && '["ff-page", "ff-pagepw"]' || startsWith(github.ref_name, 'run/engines/ffx-p') && '["ff-plain", "ff-plainpw", "ff-pwopt"]' || '["ff-default", "ff-headed", "ff-ion", "ff-base", "ff-lazy", "ff-opt", "ff-wb", "ff-coi", "chromium"]') }}
+        v: ${{ fromJSON(startsWith(github.ref_name, 'run/engines/ffx-v') && '["vers", "vers-pw"]' || startsWith(github.ref_name, 'run/engines/ffx-s') && '["same-1", "same-2", "same-3"]' || startsWith(github.ref_name, 'run/engines/ffx-g') && '["ff-page", "ff-pagepw"]' || startsWith(github.ref_name, 'run/engines/ffx-p') && '["ff-plain", "ff-plainpw", "ff-pwopt"]' || '["ff-default", "ff-headed", "ff-ion", "ff-base", "ff-lazy", "ff-opt", "ff-wb", "ff-coi", "chromium"]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 50
     steps:

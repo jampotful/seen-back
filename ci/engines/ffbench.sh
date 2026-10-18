@@ -24,6 +24,7 @@ case "$V" in
   ff-coi) COI=1; CASES="pocket:all:5:t4 big:all:2:t4" ;;
   ff-pwopt) PREFS='{"javascript.options.wasm_optimizingjit":true,"javascript.options.wasm_baselinejit":true}'; CASES="pocket:all:5" ;;
   ff-plain*|same*) CASES="pocket:all:5 big:all:2" ;;
+  vers*) CASES="pocket:all:4" ;;
   ff-page*) CASES="the page's own flow" ;;
   *) CASES="pocket:all:3" ;;
 esac
@@ -106,6 +107,7 @@ plain_cases() {   # plain_cases <firefox binary> <tag>: each case in a fresh Fir
     k=$((k + 1)); IFS=: read -r model opt reps _ <<< "$c"; P=$(mktemp -d /tmp/fxp-XXXX)
     printf '%s\n' 'user_pref("browser.shell.checkDefaultBrowser", false);' 'user_pref("browser.startup.homepage_override.mstone", "ignore");' 'user_pref("datareporting.policy.dataSubmissionEnabled", false);' \
       'user_pref("toolkit.telemetry.reportingpolicy.firstRun", false);' 'user_pref("browser.aboutwelcome.enabled", false);' 'user_pref("app.update.disabledForTesting", true);' > "$P/user.js"
+    [ -n "${EXTRA:-}" ] && cat "$EXTRA" >> "$P/user.js"
     name="$tag-case$k"; url="http://127.0.0.1:8790/test/engines/ffbench.html?model=$model&opt=$opt&reps=$reps&report=$name"
     "$FX" --headless --no-remote --profile "$P" "$url" > "$OUT/fx-$name.txt" 2>&1 & FP=$!
     lim=$([ "$model" = big ] && echo 1200 || echo 300); t=0
@@ -120,6 +122,31 @@ print(sys.argv[2], sys.argv[3], '| fetch', t.get('fetch'), 'ms | session', t.get
 system_firefox() { local FX; FX=$(command -v firefox || true); if [ -z "$FX" ] || ! "$FX" --version > /dev/null 2>&1; then
     curl -s -L -o /tmp/fx.tar.xz 'https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US' && mkdir -p /tmp/fx && tar -xf /tmp/fx.tar.xz -C /tmp/fx && FX=/tmp/fx/firefox/firefox; fi; echo "$FX"; }
 pw_firefox() { ls -d "$HOME"/.cache/ms-playwright/firefox-*/firefox/firefox | head -1; }
+# vers: Mozilla's own builds of several releases from archive.mozilla.org, each started by hand on this machine; vers-pw: what
+# Playwright's build of Firefox sets by default, and that build started by hand with the optimizing compiler asked for in user.js.
+mozilla_firefox() {   # mozilla_firefox <major, or <major>esr>: the newest release of that major, unpacked under /tmp/fx-<major>
+  local M="$1" A=https://archive.mozilla.org/pub/firefox/releases/ v f
+  v=$(curl -s "$A" | grep -o -E 'releases/[0-9][0-9.]*(esr)?/' | sed -E 's#releases/##; s#/##' | grep -E "^${M%esr}\.[0-9.]*$( [ "${M%esr}" != "$M" ] && echo esr)$" | sort -V | tail -1)
+  [ -n "$v" ] || return 1
+  for f in "firefox-$v.tar.xz" "firefox-$v.tar.bz2"; do curl -s -f -L -o "/tmp/$f" "$A$v/linux-x86_64/en-US/$f" && break; done
+  mkdir -p "/tmp/fx-$M" && tar -xf "/tmp/$f" -C "/tmp/fx-$M" 2>/dev/null && echo "/tmp/fx-$M/firefox/firefox"
+}
+case "$V" in vers*)
+  pkill -f 'python3 -I - 8790' 2>/dev/null; sleep 1
+  python3 -I ci/engines/serve.py 8790 "$ROOT" "$OUT/reports" > "$OUT/serve.txt" 2>&1 & sleep 2
+  if [ "$V" = vers-pw ]; then
+    D=$(dirname "$(pw_firefox)"); echo "Playwright's Firefox: $D"; ls "$D" | head -40
+    for f in "$D"/defaults/pref/*.js "$D"/*.cfg; do [ -f "$f" ] && { echo "--- $f"; grep -n -i -E "wasm|jit|ion|debug|javascript" "$f" | head -40; }; done
+    for j in "$D/omni.ja" "$D/browser/omni.ja"; do echo "--- $j"; unzip -p "$j" greprefs.js defaults/preferences/firefox.js 2>/dev/null | grep -n -i -E "wasm|optimizingjit|baselinejit|ion\b" | head -40; done
+    P=$(pw_firefox)
+    plain_cases "$P" vers-pw-plain
+    cp "$(dirname "$P")"/defaults/pref/*.js /tmp/ 2>/dev/null; echo 'user_pref("javascript.options.wasm_optimizingjit", true);' > /tmp/extra-user.js; EXTRA=/tmp/extra-user.js plain_cases "$P" vers-pw-plain-ionpref
+  else
+    for M in 140esr 142 143 144 146 148 150 152 154 156; do F=$(mozilla_firefox $M) && plain_cases "$F" "vers-$M" || echo "vers-$M: no build found"; rm -rf "/tmp/fx-$M" /tmp/firefox-*.tar.*; done
+    plain_cases "$(system_firefox)" vers-system
+  fi
+  (top -b -n 1 | head -12) 2>/dev/null; exit 0 ;;
+esac
 case "$V" in ff-plain*|same*)
   pkill -f 'python3 -I - 8790' 2>/dev/null; sleep 1
   python3 -I ci/engines/serve.py 8790 "$ROOT" "$OUT/reports" > "$OUT/serve.txt" 2>&1 & sleep 2
