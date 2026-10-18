@@ -208,7 +208,7 @@ The same checker run over the views on main before the corrections and over the 
 | deer | 4 | 4 | 3 | 0 |
 | dog | 4 | 4 | 2 | 0 |
 | frog | 3 | 3 | 2 | 0 |
-| hawk | 3 | 3 | 2 | 1 |
+| hawk | 3 | 3 | 2 | 0 |
 | insect | 3 | 3 | 3 | 0 |
 | jumper | 14 | 1 | 1 | 0 |
 | plant | 3 | 3 | 2 | 0 |
@@ -218,13 +218,13 @@ The same checker run over the views on main before the corrections and over the 
 | squirrel | 3 | 3 | 1 | 0 |
 | wader | 5 | 5 | 4 | 0 |
 | bat | 10 | 9 | 7 | 0 |
-| bigcat | 9 | 9 | 4 | 1 |
+| bigcat | 9 | 9 | 3 | 1 |
 | centipede | 8 | 7 | 5 | 0 |
 | cephalopod | 8 | 7 | 5 | 0 |
 | crab | 9 | 9 | 7 | 0 |
 | duck | 8 | 7 | 3 | 0 |
 | fish | 11 | 7 | 5 | 0 |
-| flyingfox | 8 | 7 | 4 | 1 |
+| flyingfox | 8 | 7 | 3 | 1 |
 | fox | 8 | 6 | 1 | 1 |
 | fungus | 13 | 9 | 7 | 1 |
 | harvestman | 7 | 6 | 4 | 0 |
@@ -243,16 +243,16 @@ The same checker run over the views on main before the corrections and over the 
 | whale | 8 | 6 | 5 | 1 |
 | woodlouse | 9 | 7 | 5 | 1 |
 | worm | 9 | 7 | 6 | 0 |
-| all | 306 | 247 | 168 | 19 |
+| all | 306 | 247 | 166 | 18 |
 
 ### The rows that differ
 
 | view | row | live grade | evidence grade (shares m / g / i) | numbers not found | live text |
 |---|---|---|---|---|---|
-| alligator | Sharpest spot | g | i (5 / 0 / 95%) | - | Crocodiles see most sharply along a band level with the horizon. It lets them scan the waterline without turning their heads. |
+| alligator | Sharpest spot | g | i (12 / 5 / 83%) | - | Crocodiles see most sharply along a band level with the horizon. It lets them scan the waterline without turning their heads. |
 | alligator | Colour | g | m (63 / 23 / 14%) | - | Crocodiles have three kinds of colour-sensing cells, as people do, so this view leaves colours as your camera shows them. |
 | alligator | Pupil | g | m (63 / 0 / 37%) | - | An alligator’s pupil is a vertical slit. It smears out-of-focus things up and down, and this view does the same. |
-| bee | Sharpness | g | i (18 / 32 / 50%) | - | Most insects see less than a sixtieth as much detail as people do. |
+| bee | Sharpness | g | i (18 / 33 / 50%) | - | Most insects see less than a sixtieth as much detail as people do. |
 | bee | Red | m | g (27 / 37 / 36%) | - | Bees have no colour-sensing cells for red, so red flowers and objects look dark to them. |
 | bee | Speed | m | i (0 / 26 / 74%) | - | In bright light, a honeybee can see a light flicker up to 200 times a second, where people stop at about 60. This view runs slowly and then jumps ahead to sugge |
 | bird | Speed | g | i (4 / 1 / 95%) | - | Birds can see a light flicker 40 to 140 times a second, and the fastest fliers are at the top of that range. People see flicker up to about 60 times a second. T |
@@ -269,11 +269,11 @@ The same checker run over the views on main before the corrections and over the 
 | frog | Movement | m | i (10 / 18 / 71%) | - | A frog takes little notice of the parts of its world that stay still, and it can starve beside food that never moves. This view shows only what changes, so hold |
 | frog | Speed | g | i (1 / 2 / 97%) | - | A cane toad can see a light flicker only about 7 times a second, a ninth as often as a person can. Anything that moves smears into a trail. |
 | hawk | Sharpness | g | i (0 / 0 / 100%) | - | Eagles see more than twice as much detail as people do. A phone camera can’t capture that much detail, so this view magnifies the centre to suggest it. |
-| hawk | Speed | m | i (3 / 12 / 85%) | 50 | A peregrine falcon can see a light flicker up to 129 times a second, and a Harris’s hawk up to 77. People see flicker up to 50 or 60 times a second. This view r |
+| hawk | Speed | m | i (3 / 12 / 85%) | - | A peregrine falcon can see a light flicker up to 129 times a second, and a Harris’s hawk up to 77. People see flicker up to 50 or 60 times a second. This view r |
 | insect | Sharpness | g | i (4 / 8 / 88%) | - | Most insects see less than a sixtieth as much detail as people do. |
 | insect | Speed | g | i (0 / 0 / 100%) | - | Flies and dragonflies can see a light flicker more than 100 times a second, and one beetle up to 400. People stop at about 60. This view runs slowly and then ju |
 | insect | Ultraviolet | i | g (2 / 62 / 37%) | - | Bees and some other insects can see ultraviolet light, which people can’t. Phone cameras capture very little of it, so the violet tint in this view stands in fo |
-| jumper | Colour | m | i (0 / 22 / 78%) | - | Most jumping spiders, Phidippus among them, see ultraviolet and green. Habronattus also sees red, in a small patch at the centre of each front eye, and this vie |
+| jumper | Colour | m | i (0 / 31 / 69%) | - | Most jumping spiders, Phidippus among them, see ultraviolet and green. Habronattus also sees red, in a small patch at the centre of each front eye, and this vie |
 | plant | No picture | g | i (0 / 0 / 100%) | - | A plant has nothing like a lens to focus light into an image. It senses how much light there is, what colour it is, and which direction it comes from. |
 | plant | Neighbours | m | i (1 / 0 / 99%) | - | Plants compare red light with far-red light, a colour just past the edge of what people can see. The balance tells a plant that a neighbour is growing close by, |
 | spider | The web | m | i (22 / 0 / 78%) | - | A Golden Silk Spider feels its prey through the silk, and a trapped insect shakes the web 5 to 30 times a second. The shaking arrives ten to thirty times strong |
@@ -281,7 +281,7 @@ The same checker run over the views on main before the corrections and over the 
 | spider | Sharpness | g | i (0 / 0 / 100%) | - | A wandering spider resolves nothing finer than about 2 degrees, under a hundredth of your sharpness. The picture borrows that figure for web builders. |
 | spider | Pace | g | i (0 / 0 / 100%) | - | A wandering spider stops following flicker between 4.3 and 8.6 times a second, a seventh of your rate or less, so movement smears into trails. |
 | squirrel | Speed | g | i (13 / 12 / 75%) | - | A golden-mantled ground squirrel can follow a light flickering at more than 100 times a second, and a yellow-pine chipmunk does about the same. An American red  |
-| wader | Head movement | m | i (11 / 6 / 83%) | - | Herons, egrets, cranes, pigeons and chickens hold their heads still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch |
+| wader | Head movement | m | i (11 / 3 / 86%) | - | Herons, egrets, cranes, pigeons and chickens hold their heads still while they walk, so their eyes stay fixed on the world. Then the head darts forward to catch |
 | wader | Speed | g | i (7 / 3 / 91%) | - | In pigeons, each dart forward takes about a tenth of a second. |
 | wader | Sharpness | g | i (0 / 0 / 100%) | - | Most birds see half as much detail as people do, or less. |
 | wader | Ultraviolet | g | i (0 / 0 / 100%) | - | A whooping crane’s shortest-wave cone peaks near 405 nanometers and a pigeon’s near 410, both in the violet. The gene for that cone is the violet type in a gray |
@@ -292,7 +292,7 @@ The same checker run over the views on main before the corrections and over the 
 | bat | Sharpness | g | i (13 / 16 / 71%) | - | Daubenton’s bat, an insect-eating relative, resolves about 0.6 cycles per degree to your 60, a hundredth of yours. The screen is blurred to match. |
 | bat | Dim light | m | i (1 / 7 / 92%) | - | In one test a big brown bat could no longer tell things apart by sight once the light fell to between 0 and 0.0008 lux. Shadows are lifted to suggest it. |
 | bat | Colour | g | i (0 / 0 / 100%) | - | Some bats have a cone for ultraviolet and some have lost it, and no phone records ultraviolet. In two leaf-nosed bats only 2 to 4 in a hundred light receptors a |
-| bigcat | Clouded leopard | i | g (37 / 63 / 0%) | 200 | Nobody agrees on a clouded leopard’s pupil. A survey of more than 200 species lists it as a vertical slit, while a study of a preserved eye found it round at re |
+| bigcat | Clouded leopard | i | i (37 / 0 / 63%) | 200 | Nobody agrees on a clouded leopard’s pupil. A survey of more than 200 species lists it as a vertical slit, while a study of a preserved eye found it round at re |
 | bigcat | Lens | m | i (0 / 0 / 100%) | - | A tiger's lens focuses every colour at the same depth, where a house cat's lens has zones for several. Why the large cats lack those zones is unknown. |
 | bigcat | Colour | m | i (0 / 9 / 91%) | - | Lions, tigers, leopards and cheetahs have two kinds of colour-sensing cells, as house cats do, where people have three. This view shows colours the way a person |
 | bigcat | Dim light | m | i (0 / 0 / 100%) | - | In a study of the eyes of three kinds of wild cat, the lions had the largest tapetum, the mirror-like layer behind the retina that gives light a second pass. Th |
@@ -313,7 +313,7 @@ The same checker run over the views on main before the corrections and over the 
 | crab | Pace | m | i (0 / 0 / 100%) | - | In daylight a fiddler crab’s eye follows flicker to about 74 a second, a little past your 60. Once its eye has adapted to the dark, it follows only about 35 to  |
 | crab | Night | m | i (0 / 1 / 99%) | - | At night a fiddler crab’s dark-adapted eye answers to light about a thousand times dimmer than the same dark-adapted eye does by day. |
 | crab | Crayfish | m | i (0 / 0 / 100%) | - | Crayfish and slipper lobsters have superposition eyes, a design suited to dim water. A crayfish has one set of light cells most sensitive to violet and another  |
-| duck | All the way around | m | i (31 / 10 / 59%) | - | A mallard sees all the way around itself and over its head. Its two eyes overlap in a narrow strip, about 22 degrees wide, that runs from the bill up over the c |
+| duck | All the way around | m | i (34 / 11 / 55%) | - | A mallard sees all the way around itself and over its head. Its two eyes overlap in a narrow strip, about 22 degrees wide, that runs from the bill up over the c |
 | duck | Colour | m | i (0 / 0 / 100%) | - | Ducks have four kinds of colour-sensing cells, one more than people, and the fourth responds to violet light. A mallard's eye blocks most ultraviolet light befo |
 | duck | Sharpness | i | m (41 / 25 / 34%) | - | This part of the view is a guess. It assumes that a duck sees about a fifth as much detail as a person, the middle value for birds. |
 | fish | Sharpness | m | i (13 / 15 / 72%) | - | A bluegill resolves about 5 cycles per degree and a pumpkinseed about 3.6, against your 60. The screen is blurred to what such an eye would keep of it. |
@@ -322,8 +322,7 @@ The same checker run over the views on main before the corrections and over the 
 | fish | Where it is sharp | g | i (1 / 1 / 98%) | - | A golden shiner sees most sharply a little ahead and above, at 2.9 cycles per degree, and at 1.2 toward the edges. |
 | fish | Pace | g | i (16 / 5 / 79%) | - | A spiny damselfish follows flicker to 89 a second, and the bony fish in one survey average 46. You stop near 60, so the picture keeps your pace. |
 | flyingfox | No calls | m | i (0 / 0 / 100%) | - | Flying foxes make no echolocation calls and find their way by sight and smell. |
-| flyingfox | Colour | m | i (0 / 0 / 100%) | - | Flying foxes have two cone types, a blue and a green, as most mammals do. Cones are about one in two hundred of their light receptors, so colour is muted here. |
-| flyingfox | One cone | g | i (1 / 11 / 88%) | - | Rousettes, epauletted fruit bats and the genus of the straw-coloured fruit bat have only the green cone and see no colour. The picture follows the flying foxes. |
+| flyingfox | Colour | m | g (0 / 66 / 34%) | - | Flying foxes have two cone types, a blue and a green, as most mammals do. Cones are about one in two hundred of their light receptors, so colour is muted here. |
 | flyingfox | Dim light | g | i (0 / 0 / 100%) | 300,000, 800,000 | Bats pack 300,000 to 800,000 rods into each square millimetre of retina, two to five times your densest. Shadows are lifted to suggest it. |
 | fox | Night eyes | m | i (0 / 0 / 100%) | - | A red fox's retina holds more rods for each cone than an Arctic fox's, the mark of an eye built for night in woodland. This view brightens the shadows. |
 | fox | Hearing | x | m (71 / 0 / 29%) | 4,000 | A red fox hears sounds from about 51 to 48,000 vibrations a second, and at 4,000 a second its hearing is keener than a house cat's. This view leaves sound out. |
@@ -338,10 +337,10 @@ The same checker run over the views on main before the corrections and over the 
 | harvestman | Rough images | m | i (0 / 0 / 100%) | - | A harvestman's eyes probably give only a rough picture of light and dark. A large dark object makes a species of Leiobunum flee, and in the laboratory harvestme |
 | harvestman | Colour and dim light | g | i (0 / 0 / 100%) | - | In two cave harvestmen from New Zealand the eyes respond to ultraviolet, blue and green light, over a range of brightness of at least a hundred thousand to one. |
 | harvestman | Touch and taste | m | i (0 / 0 / 100%) | - | Harvestmen find food, mates and enemies mostly by touching and tasting them with their first pair of legs and their palps, and they sense little from a distance |
-| mammal | Colour | m | i (0 / 44 / 56%) | - | A domestic pig has two kinds of colour sensor, most sensitive near 439 and 556 nanometres, and you have three. We show colours the way a person with only two ki |
+| mammal | Colour | m | i (1 / 44 / 55%) | - | A domestic pig has two kinds of colour sensor, most sensitive near 439 and 556 nanometres, and you have three. We show colours the way a person with only two ki |
 | mammal | Bears and otters | m | g (0 / 69 / 31%) | - | An American black bear has a blue-sensitive cone and a red-green one, with at least three red-green cones to each blue. Sea otters carry genes for the same pair |
 | mammal | Kangaroos | m | g (1 / 99 / 0%) | - | The tammar wallaby, a small kangaroo, has only two kinds of cone. Some other Australian marsupials have a third. |
-| mammal | Platypus and echidnas | g | i (0 / 0 / 100%) | - | The platypus and echidnas carry genes for two kinds of cone pigment, as most mammals do. |
+| mammal | Platypus and echidnas | g | i (14 / 0 / 86%) | - | The platypus and echidnas carry genes for two kinds of cone pigment, as most mammals do. |
 | mammal | Sharpness | m | i (27 / 6 / 67%) | - | A tammar wallaby resolves about 4.8 cycles per degree, a twelfth of your 60. A western grey kangaroo’s retina could carry about 11. We blur the picture to about |
 | mammal | Elephants | m | m (100 / 0 / 0%) | 11 | Asian elephants make out a gap of 8 to 11 minutes of arc near the tip of the trunk, about a tenth of your sharpness. One African elephant managed only 48 minute |
 | mammal | Dim light | g | i (0 / 0 / 100%) | - | Bears, otters and other carnivores have a reflecting layer behind the retina that gives light a second pass. Pigs and red kangaroos have none, so the shadows ar |
@@ -355,7 +354,7 @@ The same checker run over the views on main before the corrections and over the 
 | owl | Eyes that face forward | m | i (3 / 22 / 75%) | - | An owl's eyes face forward, so their views overlap across about 45 degrees in front, more than in most birds. Its whole view spans about 200 degrees. |
 | owl | Fixed eyes | m | i (4 / 27 / 68%) | - | An owl's eyes barely move in their sockets, by less than one degree, so the owl turns its whole head to look, as far as about 270 degrees. |
 | owl | Night vision | m | i (3 / 22 / 75%) | - | A tawny owl's eye works close to the limit that any vertebrate eye can reach in dim light. This view brightens the shadows. |
-| owl | Colour | m | i (0 / 0 / 100%) | - | Owls have lost the colour-sensing cells for violet and ultraviolet light that other birds have, and only about one cone in ten carries a coloured droplet of oil |
+| owl | Colour | m | i (3 / 22 / 75%) | - | Owls have lost the colour-sensing cells for violet and ultraviolet light that other birds have, and only about one cone in ten carries a coloured droplet of oil |
 | owl | Hearing | m | i (3 / 0 / 97%) | 10,000 | Owls can find and catch prey by sound alone. A barn owl hears faint sounds about 20 decibels quieter than other birds can, and hears pitches above 10,000 vibrat |
 | primate | Colour | m | i (1 / 40 / 60%) | - | A cynomolgus monkey has three kinds of cone, most sensitive near 430, 531 and 561 nanometres. Macaques share this three-cone plan with people and apes, so colou |
 | primate | Other monkeys see less colour | g | i (0 / 39 / 60%) | - | Owl monkeys and bushbabies have a single kind of cone for medium and long light and lack colour vision. Male marmosets have two kinds of cone, and howler monkey |
