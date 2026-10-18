@@ -180,6 +180,14 @@
       SAY.stopped = 'The download has been stopped.';
     }
     var KEEP = 'keep-v1', EPS = 1e-9;
+    // webkitmem trial only (run/engines/bigwm*): ?wm=<variant> on this machine, and marks of each step of the larger model's load in window.__wm
+    var WM = big && onThisMachine ? ((/[?&]wm=(\w+)/.exec(location.search || '') || [])[1] || '') : '';
+    function wmark(what, x) { if (big && onThisMachine) (window.__wm = window.__wm || []).push([Date.now(), what, x === undefined ? '' : String(x)]); }
+    function wfree(v) {                                // xfree: a buffer that is done with is let go at once, not when the collector comes round
+      if (WM !== 'xfree' || !v) return;
+      var b = v instanceof ArrayBuffer ? v : (v.buffer instanceof ArrayBuffer && v.byteOffset === 0 && v.byteLength === v.buffer.byteLength ? v.buffer : null);
+      try { if (b && b.transfer) b.transfer(0); } catch (e) {}
+    }
     var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
     var got = 0, total = 0, pending = {}, nextId = 1, last = null, lastFail = '', onProgress = null, watchMs = big ? 120000 : 45000, netWaitMs = 6000, api;
     // the full database only: what of it is kept, the download under way, and the rest it takes after a minute with nothing to do
@@ -216,7 +224,8 @@
         return reader.read().then(function (r) {
           if (r.done) return;
           var c = r.value;
-          if (buf && n + c.length <= buf.length) buf.set(c, n); else { if (buf) { chunks.push(buf.slice(0, n)); buf = null; } chunks.push(c); }
+          if (buf && n + c.length <= buf.length) { buf.set(c, n); n += c.length; count(c.length); wfree(c); return pump(); }
+          if (buf) { chunks.push(buf.slice(0, n)); buf = null; } chunks.push(c);
           n += c.length; count(c.length); return pump();
         });
       }
@@ -374,6 +383,7 @@
         w.onmessage = function (ev) {
           var m = ev.data || {}, p;
           if (m.op === 'hello') { hello = true; return; }
+          if (m.op === 'mark') { wmark('w-' + m.what, m.heap + (m.x ? ' ' + m.x : '')); return; }
           if (m.op === 'ready') { settled = true; clearTimeout(timer); info = { backend: m.backend, threads: m.threads, ms: m.ms }; res(); return; }
           if (m.op === 'fail' && !m.id) { no(m.stage === 'runtime' ? 'network' : m.stage === 'browser' ? 'browser' : m.stage === 'unfit' ? 'unfit' : m.stage === 'session' ? sessionCode : 'died', m.stage + ' ' + m.name + ' ' + m.message); return; }
           p = pending[m.id]; if (!p) return;
@@ -381,6 +391,7 @@
           if (m.op === 'done') p.res(m); else p.rej(err('photo', m.message));
         };
         w.postMessage(init, transfer);
+        wmark('posted', (init.model ? init.model.byteLength : -1) + ' ' + (init.wasmBinary ? init.wasmBinary.byteLength : -1));
       });
     }
     // The manifest: the network first, so that a new model is noticed; the kept copy where there is no network, where the server is
@@ -436,7 +447,7 @@
         return reader.read().then(function (r) {
           if (r.done) { if (done !== n) throw wrong(done); return; }
           if (done + r.value.length > n) throw wrong(done + r.value.length);
-          buf.set(r.value, at + done); done += r.value.length; return pump();
+          buf.set(r.value, at + done); done += r.value.length; wfree(r.value); return pump();
         });
       }
       return pump();
@@ -453,10 +464,12 @@
         }).then(next);
       }
       return next().then(function () {
+        if (V === M.vision) wmark('read', V.bytes);
         if (!V.sha256 || (P.length === 1 && P[0].sha256 === V.sha256)) return;
         return kept(cache, wholeKey(V)).then(function (ok) {
           if (ok) return;
-          return sha256(V.sha256)(buf.buffer).then(function () { if (cache) return cache.put(wholeKey(V), new Response('verified')).catch(function () {}); },
+          if (WM === 'nodig' && V === M.vision) { wmark('nodigest'); return; }
+          return sha256(V.sha256)(buf.buffer).then(function () { if (V === M.vision) wmark('digest'); if (cache) return cache.put(wholeKey(V), new Response('verified')).catch(function () {}); },
             function (e) { return unkeepParts().then(function () { throw e; }); });      // every part passed and the whole does not: nothing of it can be trusted
         });
       }).then(function () { return buf.buffer; });
@@ -520,7 +533,7 @@
             }).then(function (b) {
               if (b.byteLength !== part.bytes) throw err('damaged', part.url + ' is ' + b.byteLength + ' bytes, not ' + part.bytes);
               return sha256(part.sha256)(b).then(function () {
-                return cache.put(key, new Response(b, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(b.byteLength) } })).catch(function (e) {
+                return cache.put(key, new Response(b, { headers: { 'Content-Type': 'application/octet-stream', 'Content-Length': String(b.byteLength) } })).then(function () { wfree(b); }, function (e) {
                   throw err(e && e.name === 'QuotaExceededError' ? 'room' : 'keep', e && e.message);
                 });
               });
@@ -577,11 +590,13 @@
         var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, sp = M.species, nS = sp ? sp.count : 0, c = cacheRef, i8 = !!sp && sp.dtype === 'int8';
         var inParts = big || !!V.parts, modelUrl = inParts ? '' : encV(V) ? withV(abs(V.url, base), encV(V)) : u(V.url);
         function rowsLen(buf) { if (buf && buf.byteLength !== nS * M.width * (i8 ? 1 : 2)) throw err('damaged', 'species rows of the wrong length'); return buf; }
-        return (inParts ? Promise.resolve(true) : kept(c, modelUrl)).then(function (hit) {
+        var wheap = WM === 'wheap' && big && inParts && !!c, verify = false;
+        wmark('load', WM);
+        return (inParts ? (wheap ? kept(c, wholeKey(V)).then(function (ok) { verify = !ok; return true; }) : Promise.resolve(true)) : kept(c, modelUrl)).then(function (hit) {
           fromKeep.model = !!hit;
           return Promise.all([
             file(c, withV(abs(ORT.dir + ORT.wasm), ORT.v), ORT.wasmBytes),
-            inParts ? joined(c, V) : file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
+            wheap ? null : inParts ? joined(c, V) : file(c, modelUrl, num(V.bytes) ? V.bytes : 0, sha256(V.sha256)),
             M.kinds ? file(c, u(M.kinds.url), nK * M.width * 2) : null,
             sp ? (Array.isArray(sp.parts) ? joined(c, sp) : file(c, u(sp.url), nS * M.width * (i8 ? 1 : 2))).then(rowsLen) : null,
             sp ? (far(sp.table) ? joined(c, sp.table) : file(c, u(sp.table), 0)) : null,
@@ -599,8 +614,14 @@
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
             wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS, speciesType: i8 ? 'int8' : 'f16', speciesScale: i8 ? b[6] : null };
+          if (big && onThisMachine) init.wm = WM;
+          if (wheap) { init.keep = KEEP; init.verify = verify; init.parts = partsOf(V).map(function (p) { return { key: partKey(p), bytes: p.bytes, sha256: p.sha256 }; }); }
+          wmark('files');
           // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
-          return startWorker(init, [b[0], b[1]].concat(b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : []), inParts && V.sha256 ? 'browser' : 'damaged').catch(function (e) {
+          return startWorker(init, [b[0]].concat(b[1] ? [b[1]] : [], b[2] ? [b[2]] : [], b[3] ? [b[3]] : [], i8 ? [b[6]] : []), inParts && V.sha256 ? 'browser' : 'damaged').then(function () {
+            wmark('ready');
+            if (wheap && verify) return c.put(wholeKey(V), new Response('verified')).catch(function () {});
+          }, function (e) {
             // a kept model that will not start is thrown away, so the next try fetches it afresh
             if (e.code === 'damaged' && c) return (inParts ? unkeepParts() : unkeep(modelUrl)).then(function () { throw e; });
             throw e;

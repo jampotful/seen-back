@@ -12,6 +12,19 @@
    weights and its rounding), because the label vectors were made from photos prepared by Pillow. */
 'use strict';
 var session = null, V = null, width = 0, K = null, nK = 0, SP = null, SP8 = null, SC = null, nS = 0, backend = '', trip = '';
+// webkitmem trial only: the runtime's WebAssembly memory and exports are noted as they are made, so that marks can say the heap's size
+var MEMS = [], EX = null;
+(function () {
+  try {
+    var M0 = WebAssembly.Memory, I0 = WebAssembly.instantiate;
+    var M1 = function Memory(d) { var mm = new M0(d); MEMS.push(mm); return mm; };
+    M1.prototype = M0.prototype; WebAssembly.Memory = M1;
+    WebAssembly.instantiate = function () { return I0.apply(WebAssembly, arguments).then(function (r) { var i = r && (r.instance || r); if (i && i.exports && !EX) EX = i.exports; return r; }); };
+  } catch (e) {}
+})();
+function heapMem() { var best = null; MEMS.forEach(function (mm) { try { if (!best || mm.buffer.byteLength > best.buffer.byteLength) best = mm; } catch (e) {} }); return best; }
+function heapBytes() { var mm = heapMem(); return mm ? mm.buffer.byteLength : 0; }
+function mark(what, x) { self.postMessage({ op: 'mark', what: what, t: Date.now(), heap: heapBytes(), x: x === undefined ? '' : String(x) }); }
 
 function now() { return (self.performance && performance.now) ? performance.now() : Date.now(); }
 function fail(stage, e, id) { self.postMessage({ op: 'fail', id: id, stage: stage, name: String((e && e.name) || ''), message: String((e && e.message) || e || '').slice(0, 300) }); }
@@ -113,9 +126,59 @@ function dots8(Q, scale, n, e) {                     // rows at one byte a numbe
 }
 
 // ---------- the encoder
+// webkitmem trial, variant wheap: the model's parts are read from the page's store straight into the runtime's heap, and the session is
+// made from there; the runtime takes a model that already lies in its heap without copying it, and frees it once the session is made.
+var TINY = 'CAgSADo3ChAKAXgSAXkiCElkZW50aXR5EgFnWg8KAXgSCgoICAESBAoCCAFiDwoBeRIKCggIARIECgIIAUIECgAQDQ==';
+function unb64(s) { var b = atob(s), u = new Uint8Array(b.length), i; for (i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
+function hex(d) { return Array.prototype.map.call(new Uint8Array(d), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
+function heapModel(m, opts) {
+  var total = 0, names = null, ptr = 0;
+  m.parts.forEach(function (p) { total += p.bytes; });
+  return fetch(m.ort.mjs).then(function (r) { return r.text(); }).then(function (src) {
+    var a = /\._malloc=\w+\.(\w+)/.exec(src); names = a ? a[1] : '';
+    return self.ort.InferenceSession.create(unb64(TINY), opts);          // the runtime starts with a model of 67 bytes
+  }).then(function (s0) {
+    mark('tiny');
+    return s0.release ? s0.release() : null;
+  }).then(function () {
+    if (!EX || !names || typeof EX[names] !== 'function' || !heapMem()) throw new Error('the runtime heap was not found');
+    ptr = EX[names](total) >>> 0;
+    if (!ptr) throw new Error('no room in the heap for ' + total + ' bytes');
+    mark('malloc', ptr);
+    return caches.open(m.keep);
+  }).then(function (c) {
+    var i = 0, at = 0;
+    function next() {
+      if (i >= m.parts.length) return Promise.resolve();
+      var p = m.parts[i++], start = at; at += p.bytes;
+      return c.match(p.key, { ignoreVary: true }).then(function (res) {
+        if (!res) throw new Error('a part is no longer kept');
+        if (m.verify && p.sha256) return res.arrayBuffer().then(function (ab) {
+          if (ab.byteLength !== p.bytes) throw new Error('a kept part is ' + ab.byteLength + ' bytes');
+          return crypto.subtle.digest('SHA-256', ab).then(function (d) {
+            if (hex(d) !== String(p.sha256).toLowerCase()) throw new Error('a kept part is damaged');
+            new Uint8Array(heapMem().buffer, ptr + start, p.bytes).set(new Uint8Array(ab));
+            try { if (ab.transfer) ab.transfer(0); } catch (e) {}
+          });
+        });
+        var reader = res.body.getReader(), done = 0;
+        function pump() {
+          return reader.read().then(function (r) {
+            if (r.done) { if (done !== p.bytes) throw new Error('a kept part is ' + done + ' bytes'); return; }
+            if (done + r.value.length > p.bytes) throw new Error('a kept part is too long');
+            new Uint8Array(heapMem().buffer, ptr + start + done, r.value.length).set(r.value); done += r.value.length; return pump();
+          });
+        }
+        return pump();
+      }).then(next);
+    }
+    return next();
+  }).then(function () { mark('read', total); return new Uint8Array(heapMem().buffer, ptr, total); });
+}
 function init(m) {
   var t0 = now(), t1, t2;
   try { importScripts(m.ort.js); } catch (e) { fail(e && e.name === 'SyntaxError' ? 'browser' : 'runtime', e); return; }
+  mark('ort', m.wm || '');
   try {
     V = m.vision; width = m.width; backend = m.ep || 'wasm';
     if (V.resize !== 'shortest-bicubic-antialias' || (V.crop !== 'center' && V.crop !== 'center-round')) throw new Error('unknown resize or crop rule');
@@ -132,11 +195,19 @@ function init(m) {
   ort.env.wasm.proxy = false;
   ort.env.wasm.wasmPaths = { mjs: m.ort.mjs, wasm: m.ort.wasm };
   if (m.wasmBinary) ort.env.wasm.wasmBinary = m.wasmBinary;
-  ort.InferenceSession.create(new Uint8Array(m.model), { executionProviders: [backend], graphOptimizationLevel: 'all' }).then(function (s) {
+  var opts = { executionProviders: [backend], graphOptimizationLevel: 'all' }, mb = m.model;
+  (m.wm === 'wheap' && m.parts ? heapModel(m, opts) : Promise.resolve(new Uint8Array(m.model))).then(function (bytes) {
+    mark('create', bytes.byteLength);
+    return ort.InferenceSession.create(bytes, opts);
+  }).then(function (s) {
     session = s; t2 = now(); m.model = null;           // the session has its own copy by now: a large model's bytes are let go
+    mark('session');
+    if (m.wm === 'xfree' && mb && mb.transfer) { try { mb.transfer(0); } catch (e) {} mark('freed', mb.byteLength); }
+    mb = null;
     if (s.inputNames.indexOf(V.input) < 0) throw new Error('the model has no input named ' + V.input);
     // one pass over an empty picture, so the first real photo does not pay for warming up
     return run1(new Float32Array(3 * V.size * V.size)).then(function () {
+      mark('warm');
       self.postMessage({ op: 'ready', backend: backend, threads: ort.env.wasm.numThreads, ms: { vectors: t1 - t0, session: t2 - t1, warm: now() - t2 } });
     });
   }).catch(function (e) {
@@ -166,6 +237,7 @@ function run(m) {
     var t2 = now(), kd = K ? dots(K, nK, e) : null, sd = SP ? dots(SP, nS, e) : SP8 ? dots8(SP8, SC, nS, e) : null, t3 = now();
     var msg = { op: 'done', id: m.id, kinds: kd, species: sd, emb: e, ms: { pre: t1 - t0, run: t2 - t1, post: t3 - t2 } };
     if (m.wantPre) msg.pre = u8;
+    mark('run');
     self.postMessage(msg);
   }).catch(function (e) { fail('run', e, m.id); });
 }
