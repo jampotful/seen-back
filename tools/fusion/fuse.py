@@ -7,7 +7,7 @@ This is the reference for what the page computes in `pocket.fuse` (src/cam.rec.j
     slot = load_slot("models/pocket")            # a slot directory, or the path of a manifest inside one
                                                  # -> {"manifest", "table", "kinds", "species", "kind_bias", "species_bias"}; arrays are float64
     out = fuse(slot["manifest"], slot["table"], month, dots(slot["kinds"], e), dots(slot["species"], e),
-               kind_bias=slot["kind_bias"], species_bias=slot["species_bias"])
+               kind_bias=slot["kind_bias"], species_bias=slot["species_bias"], emb=e)
 
 Inputs
   manifest      the slot's manifest.json as a dict (uses manifest["kinds"]["labels"] and manifest["fusion"])
@@ -16,6 +16,8 @@ Inputs
   kind_dots     row . e for each kind row, e being the unit image vector (use dots(rows, e))
   species_dots  the same for each species row, or None
   kind_bias, species_bias   a trained head's biases, or None. The score of a row is t * (row . e) + bias.
+  emb           the unit image vector e itself, for a slot whose fusion has a probe for photos with nothing alive (fusion.nonlife,
+                tools/world/NONLIFE.md); without it the probe is left out, as the page leaves it out without a vector
 Output, the same fields as the page's result
   {"kind", "kindP", "sure", "kinds": [{"key", "p", "head", "list"}] best first, "kindOffers": [keys], "species": top five [{"sci", "en", "p", "kind"}],
    "named": row or None, "offers": [rows]}
