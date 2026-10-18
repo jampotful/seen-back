@@ -169,12 +169,16 @@ def marks(S, rule, tau):
     return out
 
 
+REVIEW = None
+
+
 def made_part(made, part):
-    """The photos made by tools/world/nonlife_make.py, with a month from a hash of the id as for COCO."""
+    """The photos made by tools/world/nonlife_make.py, with a month from a hash of the id as for COCO. With --made-review, only the
+    photos whose verdict is `keep` (tools/world/nonlife-real-review.csv)."""
     man = {r["id"]: r for r in H.read_csv(os.path.join(made, "manifest.csv"))}
     X = H.unit(np.load(os.path.join(made, "nonlife-made.f16.npy")).astype(np.float32))
     ids = json.load(open(os.path.join(made, "nonlife-made.ids.json")))
-    keep = [i for i, j in enumerate(ids) if man[j]["set"] == part]
+    keep = [i for i, j in enumerate(ids) if man[j]["set"] == part and (REVIEW is None or REVIEW.get(j) == "keep")]
     return {"X": X[keep], "y": np.array(["none"] * len(keep), dtype=object), "ids": [ids[i] for i in keep],
             "family": np.array([man[ids[i]]["family"] for i in keep]), "month": np.array([H.h8("month|" + ids[i]) % 12 for i in keep])}
 
@@ -249,15 +253,18 @@ def main():
     ap.add_argument("--tune-only", action="store_true", help="stop before the test photos are loaded")
     ap.add_argument("--probe", action="store_true", help="also try the linear probe fitted on the tuning photos")
     ap.add_argument("--asked-mark", type=float, default=None, help="the most real creatures a chosen rule may send to the sheet")
+    ap.add_argument("--made-review", default=None, help="a CSV of id and verdict: only the made photos marked keep are read")
     a = ap.parse_args()
-    global ASKED_MARK
+    global ASKED_MARK, REVIEW
     ASKED_MARK = a.asked_mark
+    if a.made_review:
+        REVIEW = {r["id"]: r["verdict"] for r in H.read_csv(a.made_review)}
     os.makedirs(a.out, exist_ok=True)
     slot = F.load_slot(a.slot)
     table_rows = slot["table"]
     table = H.Table(slot, table_rows, list(F.KINDS))
     by_key = H.county_keys(a.root)
-    rep = {"slot": a.slot, "kind_at": slot["manifest"]["fusion"]["kind_at"]}
+    rep = {"slot": a.slot, "kind_at": slot["manifest"]["fusion"]["kind_at"], "made": a.made, "made_review": a.made_review, "asked_mark": a.asked_mark}
 
     T = reading(a.root, "tune", slot, table, by_key, a.made)
     rep["parity_tune_differ"] = parity_check(T, slot, table_rows)

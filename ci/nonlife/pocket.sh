@@ -20,6 +20,6 @@ step "county data" fetch pub/data-alachua root/data || exit 1
 step "world photos" fetch pub/data-world root/world || exit 1
 step "the real photos" bash -c 'wc -l work/real/manifest.csv; ls work/real | head'
 step "the rule search on the tuning photos, then the test photos once" python3 -I tools/world/nonlife.py root --made work/real --out out/nonlife \
-  --probe --asked-mark "${ASKED_MARK:-0.05}" || exit 1
+  --probe --asked-mark "${ASKED_MARK:-0.05}" --made-review tools/world/nonlife-real-review.csv || exit 1
 cp out/nonlife/report.json out/report.json
 exit 0

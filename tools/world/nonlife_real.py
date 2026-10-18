@@ -23,7 +23,8 @@ Subcommands:
   big DIR --slot S      the larger model's answers on them with the page's arithmetic (fuseWith of src/cam.rec.js for a slot
                         with a kinds head, through tools/species/everyday_build.py's Slot) on the full database as the page
                         downloads it (models/naturalist/manifest.json; the files in S), with no time zone and in Alachua
-                        County's: DIR/big.json. It chooses nothing.
+                        County's: DIR/big.json, for every photo and, with --review, for the photos the review keeps. It
+                        chooses nothing.
 
 Usage (as the workflow runs it):
   python3 -I tools/world/nonlife_real.py manifest work/real [--per 105]
@@ -234,6 +235,7 @@ def big(a):
     X /= np.linalg.norm(X, axis=1, keepdims=True)
     ids = json.load(open(os.path.join(a.dir, "big.ids.json")))
     meta = {r["id"]: r for r in read_manifest(a.dir)}
+    review = {r["id"]: r["verdict"] for r in csv.DictReader(open(a.review, encoding="utf-8"))} if a.review else {}
     labels = man["kinds"]["labels"]
     out = {"slot": "models/naturalist (the files its manifest names)", "kind_at": man["fusion"]["kind_at"], "photos": len(ids), "conditions": {}}
     detail = []
@@ -250,21 +252,26 @@ def big(a):
         lab_of = np.array(labels, dtype=object)[kind]
         living = sure & ~np.isin(lab_of, ["none", "person"])
         res = {}
-        for part in ("tune", "test", "all"):
-            sel = np.array([part == "all" or meta[i]["set"] == part for i in ids])
+        parts = [("tune", lambda i: meta[i]["set"] == "tune"), ("test", lambda i: meta[i]["set"] == "test"), ("all", lambda i: True)]
+        if review:
+            parts += [("kept " + n, (lambda f: lambda i: f(i) and review.get(i) == "keep")(f)) for n, f in list(parts)]
+        for part, f in parts:
+            sel = np.array([f(i) for i in ids])
             res[part] = {"photos": int(sel.sum()), "living_kind": int(living[sel].sum()), "share": round(float(living[sel].mean()), 4),
                          "none_sure": int((sure & (lab_of == "none"))[sel].sum()), "not_sure": int((~sure)[sel].sum()),
                          "kinds": dict(Counter(lab_of[sel & living]).most_common())}
         fam = defaultdict(lambda: [0, 0])
         for i, x in enumerate(ids):
+            if review and review.get(x) != "keep":
+                continue
             fam[meta[x]["family"]][0] += 1; fam[meta[x]["family"]][1] += int(living[i])
         res["by_family"] = {f: {"photos": n, "living_kind": k} for f, (n, k) in sorted(fam.items())}
         out["conditions"][cond] = res
         for i, x in enumerate(ids):
             if cond == "no zone":
-                detail.append({"id": x, "family": meta[x]["family"], "set": meta[x]["set"]})
+                detail.append({"id": x, "family": meta[x]["family"], "set": meta[x]["set"], "review": review.get(x, "")})
             detail[i][cond] = [labels[kind[i]], round(float(kp[i]), 3), bool(sure[i]), rows[top[i]][1] or rows[top[i]][0], round(float(tp[i]), 3)]
-        print(cond, json.dumps(res["all"]), flush=True)
+        print(cond, json.dumps(res["all"]), json.dumps(res.get("kept all")), flush=True)
     json.dump(out, open(os.path.join(a.dir, "big.json"), "w"), indent=1)
     with open(os.path.join(a.dir, "big-photos.jsonl"), "w") as f:
         for d in detail:
@@ -277,7 +284,7 @@ def main():
     m = sp.add_parser("manifest"); m.add_argument("out"); m.add_argument("--per", type=int, default=105); m.add_argument("--depth", type=int, default=500)
     p = sp.add_parser("pocket"); p.add_argument("dir")
     v = sp.add_parser("bigvec"); v.add_argument("dir")
-    b = sp.add_parser("big"); b.add_argument("dir"); b.add_argument("--slot", required=True)
+    b = sp.add_parser("big"); b.add_argument("dir"); b.add_argument("--slot", required=True); b.add_argument("--review", default="")
     a = ap.parse_args()
     {"manifest": manifest, "pocket": pocket, "bigvec": bigvec, "big": big}[a.cmd](a)
 

@@ -13,6 +13,14 @@ step() {
   return "$rc"
 }
 step "install" python3 -m pip install --quiet requests numpy pillow onnxruntime || exit 1
+label="${GITHUB_REF_NAME#run/nonlife/}"
+[ -f "ci/nonlife/runs/$label.env" ] && . "ci/nonlife/runs/$label.env"
+if [ "${REUSE:-0}" = 1 ]; then
+  # the photos of an earlier run, as published on pub/nonlife-real: no new search, no new fetch
+  step "the photos on pub/nonlife-real" bash -c 'git fetch -q --depth 1 origin pub/nonlife-real && git rev-parse FETCH_HEAD && git archive FETCH_HEAD | tar -x -C work/real && cat work/real/_made.txt && ls work/real/photos | wc -l' || exit 1
+  cp work/real/manifest.csv work/real/_made.txt out/
+  exit 0
+fi
 step "search Wikimedia Commons" python3 -I tools/world/nonlife_real.py manifest work/real --per "${PER:-105}" || exit 1
 cp work/real/manifest.csv work/real/summary.json out/
 step "fetch the photos" python3 -I tools/species/fetch_photos.py work/real/manifest.csv work/real/photos --workers 6 || exit 1

@@ -33,7 +33,7 @@ for u, h in fs:
     assert ok
 PY
 step "BioCLIP 2's vectors" python3 -I tools/world/nonlife_real.py bigvec work/real || exit 1
-step "the larger model's answers" python3 -I tools/world/nonlife_real.py big work/real --slot work/slot || exit 1
+step "the larger model's answers" python3 -I tools/world/nonlife_real.py big work/real --slot work/slot --review tools/world/nonlife-real-review.csv || exit 1
 cp work/real/big.json work/real/big-photos.jsonl work/real/big.ids.json out/
 cp work/real/big.f16.npy out/ 2>/dev/null || true
 exit 0
