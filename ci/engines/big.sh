@@ -5,6 +5,8 @@
 # First the four parts with curl (headers, a preflight, redirects, bytes and seconds, sha256 against the manifest). Memory of the
 # browser processes is sampled once a second into out/mem.jsonl by ci/engines/memwatch.py. Everything goes into out/log.txt.
 set -uo pipefail
+# run/engines/bigwm*: the webkitmem trial (ci/engines/bigwm.sh), one variant of the page after another in WebKit and Safari
+case "${GITHUB_REF_NAME:-}" in run/engines/bigwm*) exec bash ci/engines/bigwm.sh ;; esac
 ROOT="$PWD"; OUT="$ROOT/out"; mkdir -p "$OUT"
 exec > >(tee -a "$OUT/log.txt") 2>&1
 step() { echo; echo "=== $(date -u +%T) $*"; }
