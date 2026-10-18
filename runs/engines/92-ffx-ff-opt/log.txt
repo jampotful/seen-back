@@ -1,0 +1,35 @@
+
+=== 23:11:33 machine (ff-opt)
+Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1069       12539          41        2745       14920
+Swap:           3071           0        3071
+4
+model name	: AMD EPYC 7763 64-Core Processor
+ssse3 fma sse4_1 sse4_2 avx avx2 
+
+=== 23:11:33 playwright 1.56.0
+added 2 packages in 2s
+
+=== 23:11:52 variant ff-opt: firefox, headed 0, prefs {}, cases pocket:disabled:4 pocket:basic:4 pocket:extended:4 big:basic:2
+23:12:22 ff-opt pocket:disabled:4 | fetch 139 ms | session 1275 ms | runs [6354,6378,6298,6286] ms | head [0.012621,0.206709,-0.12929,0.012502,0.301795,0.062037] sum -91.80632 | error  
+23:12:50 ff-opt pocket:basic:4 | fetch 119 ms | session 1364 ms | runs [6308,6343,6284,6291] ms | head [0.012621,0.206709,-0.12929,0.012502,0.301795,0.062037] sum -91.80632 | error  
+23:13:19 ff-opt pocket:extended:4 | fetch 124 ms | session 1170 ms | runs [6244,6245,6210,6205] ms | head [0.011763,0.215329,-0.131141,-0.000086,0.297737,0.082296] sum -89.13024 | error  
+23:15:47 ff-opt big:basic:2 | fetch 1216 ms | session 4374 ms | runs [70793,70559] ms | head [1.175366,1.469653,0.334475,-2.171932,1.187993,-0.914422] sum -186.67211 | error  
+23:15:47 ff-opt version 142.0.1 | features {"ua":"Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0","coi":false,"cores":4,"sab":"undefined","simd":true,"relaxedSimd":false,"sharedMemory":true}
+ffbench.js: exit 0
+top - 23:15:47 up 5 min,  0 user,  load average: 1.00, 0.67, 0.30
+Tasks: 167 total,   1 running, 166 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.3 us,  0.0 sy,  0.0 ni, 95.5 id,  2.3 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15989.7 total,  11682.1 free,    983.1 used,   3706.1 buff/cache     
+MiB Swap:   3072.0 total,   3072.0 free,      0.0 used.  15006.6 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0   22892  14332   9804 S   0.0   0.1   0:03.44 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
