@@ -207,3 +207,10 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 - Blocked free copies (`ci/oa/blocked-all.jsonl`): the desk cannot read them in a way the audits accept. WebFetch returns a small model's reading of a page, never its raw text, so quotes cannot be checked with `quotecheck.py`; and a URL taken from a file (rather than from the agent's own web search) waits on a permission prompt the owner rarely sees. The desk leaves them on the Papers Wanted page for the owner. The desk's own run of the oa job was refused twice by the auto-mode classifier (the owner said yes at 21:36 UTC).
 - Gap tables: the desk will not commit tables built with research branches fetched until the question in the 20:53 note is settled (failed units' records count as evidence there). A run with no research refs reads main alone, which holds only audited records; say which the owner's numbers should use.
 - Desk merges today: harvest-29 (51 records) and harvest-30 (26), both under desk-screen.md and audited under 5%. Run r14 (plant-trait queries that failed in r12, plus "anthesis" and "pollination biology") started.
+- 23:13 UTC: harvest-32's wanted lines on main (12 of 18, authors from desk Crossref run 4); 6 held without authors or title:
+  - harvest-32 -: no authors: Title not shown in the search result (Vilnius University rep
+  - harvest-32 -: no authors: Visual constraints upon avian behaviour
+  - harvest-32 -: no authors: Title not shown in the search result (CSIRO Publishing ebook
+  - harvest-32 -: no authors: Title not shown in the search result (University of Jyväskyl
+  - harvest-32 10.17912/micropub.biology.002218: no authors: Hover Fly Eyes and Antennae Are Sexually Dimorphic but Do No
+  - harvest-32 -: no authors: Title not shown in the search result (University of Adelaide
