@@ -5,6 +5,9 @@ set -uo pipefail
 mkdir -p out work/slot
 LOG=out/log.txt
 : > "$LOG"
+label="${GITHUB_REF_NAME#run/nonlife/}"
+[ -f "ci/nonlife/runs/$label.env" ] && . "ci/nonlife/runs/$label.env"
+if [ "${SKIP_BIG:-0}" = 1 ]; then echo "SKIP_BIG: the larger model is not measured in this run" | tee -a "$LOG"; exit 0; fi
 step() {
   local name="$1"; shift
   echo "=== $(date -u +%FT%TZ) $name" | tee -a "$LOG"

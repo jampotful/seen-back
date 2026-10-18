@@ -153,6 +153,15 @@ def marks(S, rule, tau):
     today_other = ft["living"] & (ft["kind"] == "other") & oth
     out["real_other_asked"] = {"photos": int(today_other.sum()), "asked": int((today_other & asked).sum()),
                                "share": round(float((today_other & asked).sum() / max(1, today_other.sum())), 4), "all_world_asked": round(float(asked.mean()), 4)}
+    # COCO's own creatures (cats, dogs and the farm animals filed as deer): the share the rule sends to the sheet, both ways
+    for name, key in (("coco_asked_list", "ft_list"), ("coco_asked_alone", "ft_alone")):
+        ftc, cy = S["coco"][key], S["coco"]["y"]; askc = gate(ftc, rule, tau); d = {}
+        for k in ("cat", "dog", "deer"):
+            if (cy == k).any():
+                d[k] = {"photos": int((cy == k).sum()), "asked": int(askc[cy == k].sum()), "share": round(float(askc[cy == k].mean()), 4)}
+        liv = ~np.isin(cy, LIVING_NOT)
+        d["all"] = {"photos": int(liv.sum()), "asked": int(askc[liv].sum()), "share": round(float(askc[liv].mean()), 4)}
+        out[name] = d
     a_al = gate(S["alachua"]["ft_list"], rule, tau)
     out["real_other_asked"]["alachua_asked"] = round(float(a_al.mean()), 4)
     if ASKED_MARK is not None:
@@ -254,6 +263,7 @@ def main():
     ap.add_argument("--probe", action="store_true", help="also try the linear probe fitted on the tuning photos")
     ap.add_argument("--asked-mark", type=float, default=None, help="the most real creatures a chosen rule may send to the sheet")
     ap.add_argument("--made-review", default=None, help="a CSV of id and verdict: only the made photos marked keep are read")
+    ap.add_argument("--fixed", default=None, help="RULE:TAU: no search; report this rule on the tuning photos and then the test photos")
     a = ap.parse_args()
     global ASKED_MARK, REVIEW
     ASKED_MARK = a.asked_mark
@@ -288,6 +298,10 @@ def main():
     if a.probe:
         grids["probe"] = np.round(np.r_[np.arange(0.5, 0.95, 0.05), np.arange(0.95, 1.0, 0.01), 0.995, 0.998, 0.999], 3)
     rows, best = [], None
+    if a.fixed:
+        grids = {}
+        best = ((0,), a.fixed.split(":")[0], float(a.fixed.split(":")[1]))
+        rep["fixed"] = a.fixed
     for rule, grid in grids.items():
         for tau in grid:
             mk = marks(T, rule, float(tau))
