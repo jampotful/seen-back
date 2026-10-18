@@ -10,6 +10,7 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 | 13 | Wald, Brown and Kennedy 1957, the visual system of the alligator (J Gen Physiol 40: 703-713) | Europe PMC PDF (scanned, OCR text layer), published version | 7 | 5 | 2 | 0 | 3 |
 | 33 | Itahara and Kano 2024, gaze tracking of large-billed crows (J Exp Biol 227: jeb246514) | Europe PMC full-text XML, published version | 37 | 34 | 3 | 0 | 19 |
 | 35 | Coli et al. 2018, retinal ganglion cells in diurnal and nocturnal raptors (Int J Morphol 36: 955-961) | SciELO PDF, published version | 14 | 11 | 3 | 0 | 6 |
+| 18 | Stavenga and Arikawa 2011, photoreceptor spectral sensitivities of Pieris rapae crucivora (J Comp Physiol A 197: 373-385) | Europe PMC full-text XML, published version | 22 | 17 | 5 | 0 | 16 |
 
 ## Notes by paper
 
@@ -21,6 +22,8 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 
 - Entry 35. One right eye of each of four species. The ganglion-cell densities are drawn only in Figs 2 to 4 (images with no numbers in the text), so the records are the topography the text states: buzzard temporal and central density peaks read as two foveae with a horizontal streak (`m`); the same pattern for the kestrel only as part of the pooled "diurnal raptors" sentence (`g`); for little owl and tawny owl a peak in the peripheral temporal field, higher density ventrally (V3 in the little owl, V1 in the tawny owl) and a dorsal tapetum lucidum seen when the eyes were opened (all `m`). Cited, `partial`: owls up to 65,000 ganglion cells/mm2 and humans 38,000 (Güntürkün 2000), owls' single temporal fovea (Jones et al. 2007) and radial streak (Lisney et al. 2012), and the diurnal raptors' central and temporal foveae (Inzunza et al. 1991; Jones et al. 2007), filed under Accipitriformes and Falconiformes as `g` because "diurnal raptors" spans both orders. Not logged: soma-size classes (not a trait of seeing), the eye-to-skull volume figure, Table I (diet), and owls named by common name only (barred, northern saw-whet, barn owl).
 
+- Entry 18. A modelling paper, so most measured values are the authors' earlier recordings, logged `m` with `partial` and the original studies named: eight photoreceptor classes, the earlier template fits (360, 425, 453, 563 nm), the violet and blue rhodopsins at 420 and 450 nm from expression studies (Wakakuwa et al. 2010), the male fluorescent filter pigment (416 nm, Arikawa et al. 2005), rhabdom tip and base diameters and facet diameter (Qiu et al. 2002), and the tapetum and eye shine. Own measurements (`m`): the pale-red and deep-red screening pigments, peaks about 500 and 535 nm by microspectrophotometry. `g` for what the paper's model yields or assumes: UV and long-wavelength rhodopsins at 350 and 560 nm (concluded in the modelling), the tapetum's gain of at most 50% for R9, the F-number 2.4, and the predicted differences in polarization sensitivity. Cited tapetum statements for Anthocharis (lost), Papilionidae (absent) and butterflies generally (well developed), `m` and `partial`. Not logged: the model's light-flux and absorptance curves, the wing reflectance spectra (a trait of the wings, not of seeing) and the blue-opsin duplication.
+
 ## Next
 
-Entries 18, 45, 19.
+Entries 45, 19.
