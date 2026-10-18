@@ -6,4 +6,6 @@ Done and pushed: all 31 rows in 13 views (jumper 9, spider 5, bee 3, dog 3, plan
 
 The `try` check must be served from this clone on a port of its own (`PORT=<free port>`, `SLOW=4`): port 8765 belongs to another agent's server, and a first run against it failed in jumper, reef, shark and spider with a 404.
 
-Next: the `try` check on its own port, then the merge to `main` and this track's row in `docs/STATUS.md`.
+The `try` check on port 8939 passed (exit 0; no view threw; every view shows all its rows). Merged to `main` with this track's row in `docs/STATUS.md`.
+
+Next: the owner decides row by row between each live row and its rewrite.
