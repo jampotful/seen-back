@@ -153,3 +153,34 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 - 21:03 UTC: harvest-30 returned (12 genera, 37 search records, 26 wanted lines, 167 web searches; `--check` prints 0 problems). Audit 43 runs on it under desk-audit.md, the first audit of a unit written to the per-trait rules.
 - 21:32 UTC: harvest-29 finished (71 search records, 56 wanted lines, 181 web searches, check clean); audit 44 runs on it. `docs/tracks/batches/dw-2.jsonl` lists the 82 wanted papers of harvest-29 and -30 in the `ci/oa/list.jsonl` format (batch `dw-2`) for the oa job, beside dw-1's 28. Neither has run yet.
 - 21:34 UTC: harvest-31 finished (15 genera, 77 search records, 14 wanted lines, 162 web searches, check clean); its wanted papers join dw-2 (96 entries). It waits for the verdicts of audits 43 and 44 before its own audit. harvest-32 (15 animal genera from the released harvest-c set) launched.
+
+## Desk, 18 Oct 21:42 UTC: the desk's wanted papers go onto the wanted list on main
+- The owner asked that every paper the desk and Codex could not get be on the Papers Wanted list. The wanted lines of the desk's unmerged screening units (harvest-23 to -31) were on branches only. 107 of their 134 lines now sit in `docs/views/wanted/harvest-23.jsonl` to `harvest-31.jsonl` on main, without the units' search records (those still wait for their audits). Authors, and a missing year or journal, come from Crossref (desk Crossref run 3, 98 DOIs, `ci/crossref/dois.txt` on run/crossref/desk-wanted-1); each changed line says so in `why`.
+- 27 lines stay off the list because no source gives their authors, or because the line's placeholder title does not match its DOI's Crossref title. They remain in dw-1 and dw-2 for the oa job, which looks titles up:
+  - harvest-27 -: no authors: Tests of the limiting visual resolution of the DCMD system of the lubb
+  - harvest-29 10.1093/jxb/erm028: no authors: Flowering Newsletter bibliography for 2006
+  - harvest-29 -: no authors: Visual constraints upon avian behaviour (thesis)
+  - harvest-29 -: no authors: Ostrya (Forest Service document at nsl/Wpsm/Ostrya.pdf; title not show
+  - harvest-29 -: no authors: An Immunohistochemical and histological evaluation of the African Buff
+  - harvest-29 10.1126/science.22.559.337-b: no authors: Scientific Journals and Articles
+  - harvest-29 10.1002/cne.10308: title differs from Crossref (0.38): Journal of Comparative Neurology article (title not shown in | Retinal characteristics of the ornate dragon lizard, <i>Cten
+  - harvest-29 -: no authors: A Sexual Dimorphism in the Spatial Vision of North American Band-Winge
+  - harvest-29 10.3389/fevo.2022.900544: title differs from Crossref (0.28): Frontiers in Ecology and Evolution article (title not shown  | Rapid Shifts in Visible Carolina Grasshopper (Dissosteira ca
+  - harvest-29 -: no authors: Framing Stress in the Context of Time of Day for Establishing Metabolo
+  - harvest-29 -: no authors: Rhythmic leaf movements of some common weeds
+  - harvest-29 -: no authors: Article in Journal of Chemical Ecology, volume 28, pages 2191-2201 (ti
+  - harvest-30 -: no authors: Effects of Light and Relative Humidity in In Vitro Conditioning of Asp
+  - harvest-30 10.15113/00014564: no authors: Study of the effects of light on the quality of green asparagus spears
+  - harvest-30 -: no authors: Cold-acclimation among Genotypes of Asparagus (Asparagus officinalis L
+  - harvest-30 -: no authors: EFFECTS OF DAYLENGTH ON DRY MATTER PARTITIONING IN ASPARAGUS
+  - harvest-30 -: no authors: STUDIES ON FLOWER BUD FORMATION OF ASPARAGUS OFFICINALIS L
+  - harvest-30 -: no authors: EFFECT OF TEMPERATURE AND LIGHT ON THE TEXTURE OF STORED WHITE ASPARAG
+  - harvest-30 -: no authors: Herbivore induced plant volatiles of asparagus (Asparagus officinalis 
+  - harvest-30 -: no authors: Allelopathic potential of asparagus (Asparagus officinalis L.)
+  - harvest-30 -: no authors: Evolution of the eyes of vipers with and without infrared-sensing pit 
+  - harvest-30 10.5281/zenodo.23171755: no authors: First record of an ocular malformation in a wild Armenian steppe viper
+  - harvest-31 -: no authors: Flowering physiology and cold resistance of Potentilla palustris (L.) 
+  - harvest-31 10.1055/s-2007-971719: title differs from Crossref (0.20): Planta Med 1981; 41(3): 303-307 (title not shown in the sear | Composition of Essential Oil of Ledum palustre
+  - harvest-31 -: no authors: USDA Forest Service Treesearch publication 12765 (title not shown in t
+  - harvest-31 -: no authors: Proceedings of the Indiana Academy of Science article 6128 (title not 
+  - harvest-31 10.1007/bf00317417: title differs from Crossref (0.24): Springer article 10.1007/BF00317417 (title not shown in the  | Photosynthetic response to sunflecks in the desiccation-tole
