@@ -10,7 +10,7 @@ Task: the two weak spots left by build 34 (`tools/species/EVERYDAY.md`, "Where i
 - `run/everyday/again-pub-1` (`runs/everyday/7-again`): every mark passed. Kind right 97.6% and species right 78.8% in each photo's own zone, 97.8% and 78.8% in Alachua's, world-test drops 0.11, 0.66 and 0.57 points, the dog's kind right on 19 of 20.
 - `pub/naturalist-everyday2` at `fffd315`, pinned by `pin/naturalist-everyday2-fffd315`; its files match `stage-parts.json`, and a separate reading of them gave the dog the same numbers. `models/naturalist/manifest.json` points at them. `BUILD` is 36 (`main` held 34 and `agent/hardening` 35).
 - Every check passed on the tree merged with `main` (build 35 from the hardening track): `build.py` and `--check`, `check4.js try` (14 runs, no errors), every section of `check_rec.js`, `check_ext.js`, `fits_test.js`, `check_make_slot.py`, `test_place.py` and `tools/species/test_everyday_build.py`.
-- Merged to `main` as build 36 at 17:50 US Eastern.
+- Merged to `main` as build 36 at 17:43 US Eastern (`0e970d8`).
 
 ## Open
 
