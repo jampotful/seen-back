@@ -163,9 +163,21 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--stage", default="")
     ap.add_argument("--no-world", action="store_true")
+    ap.add_argument("--embed-shard", default="", help="i/n: only the BioCLIP 2 vectors of this block of photos, to --out")
+    ap.add_argument("--photo-vectors", default="", help="a directory of vec-*.f16.npy and vec-*.ids.json from --embed-shard")
     ap.add_argument("--manifest", default=os.path.join(ROOT, "models", "naturalist", "manifest.json"))
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    if a.embed_shard:
+        import lab  # noqa: E402
+        ph = lab.shard_rows(list(csv.DictReader(open(a.photos, encoding="utf-8"))), a.embed_shard, "block")
+        m = lab.load(lab.model_entry("bioclip2-l14"))
+        ids, X, bad, el = lab.embed_rows(m, ph, a.photos_dir)
+        tag = a.embed_shard.replace("/", "of")
+        np.save(os.path.join(a.out, "vec-%s.f16.npy" % tag), X.astype(np.float16))
+        json.dump({"ids": ids, "bad": bad, "seconds": el}, open(os.path.join(a.out, "vec-%s.ids.json" % tag), "w"))
+        log("shard %s: %d embedded, %d missing or unreadable, %.0fs" % (a.embed_shard, len(ids), len(bad), el))
+        return
     man = json.load(open(a.manifest))
     Q, sc, table, pr, zones = read_slot(a.slot, man)
     rows, keys = table["species"], table["keys"]
@@ -217,14 +229,29 @@ def main():
     qn, sn = quantize(vnew)
     Qx = np.concatenate([Q, qn]) if len(new) else Q
     scx = np.concatenate([sc, sn]) if len(new) else sc
-    rows_x = rows + [[s["sci"], s["en"], s["kind"]] for s in new]
+    def english(s):                  # iNaturalist's English name, where its taxon is this name or holds it as a synonym
+        X = chr(0xd7)
+        own = (s.get("inat_name") or "").replace(X + " ", "").replace(X, "") in (s.get("query"), s["sci"])
+        return s["en"] if (own or s.get("inat_via") == "synonym") else ""
+    rows_x = rows + [[s["sci"], english(s), s["kind"]] for s in new]
     keys_x = list(keys) + [int(s["gbif_key"]) for s in new]
     for s in new:
-        log("  new row %d: %s (%s) kind %s" % (s["row"], s["sci"], s["en"], s["kind"]))
+        log("  new row %d: %s (%s) kind %s" % (s["row"], s["sci"], english(s), s["kind"]))
 
     # 2. the photos' vectors
     ph = list(csv.DictReader(open(a.photos, encoding="utf-8")))
-    ids, X, bad, el = lab.embed_rows(m, ph, a.photos_dir)
+    if a.photo_vectors:
+        import glob
+        ids, Xs, bad, el = [], [], [], 0.0
+        for f in sorted(glob.glob(os.path.join(a.photo_vectors, "**", "vec-*.ids.json"), recursive=True)):
+            j = json.load(open(f))
+            ids += j["ids"]
+            bad += j["bad"]
+            el += j["seconds"]
+            Xs.append(np.load(f.replace(".ids.json", ".f16.npy")).astype(np.float32))
+        X = np.concatenate(Xs)
+    else:
+        ids, X, bad, el = lab.embed_rows(m, ph, a.photos_dir)
     log("photos: %d embedded, %d missing or unreadable, %.0fs" % (len(ids), len(bad), el))
     np.save(os.path.join(a.out, "photos.f16.npy"), X.astype(np.float16))
     json.dump(ids, open(os.path.join(a.out, "photos.ids.json"), "w"))

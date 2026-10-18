@@ -33,11 +33,11 @@ for u, n, h in fs:
 PY
 step "place data (pub/world-place)" fetch pub/world-place work/place test.tsv met.tsv || exit 1
 step "vectors (pub/lab-bioclip2-l14)" bash -c 'git fetch -q --depth 1 origin pub/lab-bioclip2-l14 && git rev-parse FETCH_HEAD && for f in images/world-species.f16.npy images/world-species.ids.json; do git show "FETCH_HEAD:$f" > "work/vec/$(basename "$f")" || exit 1; done; ls -la work/vec' || exit 1
-step "photos" python3 -I tools/lab/fetch_photos.py data/everyday/photos.csv work/photos --threads 16 || exit 1
+cat vecs/*/log.txt >> "$LOG" 2>/dev/null
 stage=()
 if [ "${PUBLISH:-0}" = 1 ]; then stage=(--stage work/stage); fi
 step "build and measure" python3 -I tools/species/everyday_build.py --species data/everyday/species.csv --photos data/everyday/photos.csv \
-  --photos-dir work/photos --slot work/slot --place work/place --vectors work/vec/world-species --out out "${stage[@]}" || exit 1
+  --photos-dir work/photos --photo-vectors vecs --slot work/slot --place work/place --vectors work/vec/world-species --out out "${stage[@]}" || exit 1
 if [ "${PUBLISH:-0}" = 1 ]; then
   cp work/stage/parts.json out/stage-parts.json
   cat > work/stage/README.md <<MD
