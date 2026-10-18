@@ -32,6 +32,8 @@ def load():
             try: d = json.loads(l)
             except ValueError: continue  # the last line of a shard that was cut off
             d['run'] = num(n)[0]
+            if d.get('type') == 'genus_extra' and d.get('genus') in genera:  # steps added later by a SUPPLEMENT run (ci/harvest/harvest.py)
+                genera[d['genus']].setdefault('extra', []).append(d); continue
             if d.get('type') == 'genus': genera[d['genus']] = d
             elif d.get('type') == 'family': families[d['family']] = d
     return ','.join(map(str, sorted(runs))), genera, families, summaries
@@ -51,6 +53,12 @@ def show(d, families):
     for c in d['chase']:
         out.append(f"citation step: works citing {c['cited_doi']} that name {d['genus']}: {c.get('n')}" + (f" (error {c['error']})" if c.get('error') else ''))
         for wid in c.get('ids', []): k += 1; out.append(item(wid, k))
+    for ex in d.get('extra', []):
+        for q in ex['queries']:
+            out.append(f"query \"{q['q']}\" (supplement run {ex['run']}): {q.get('n')} hits" + (f" (error {q['error']})" if q.get('error') else ''))
+            for wid in q.get('ids', []):
+                k += 1; x = ex['works'].get(wid, {})
+                out.append(f"  [{k}] {x.get('title')} ({x.get('year')}) {x.get('venue')} | doi {x.get('doi') or '-'} | {x.get('oa_status') or 'closed'} {x.get('oa_url') or ''} {x.get('license') or ''}\n      {(x.get('abstract') or '')[:350]}")
     f = families.get(d['family'])
     if f:
         out.append(f"family review \"{f['query']['q']}\": {f['query'].get('n')} hits")

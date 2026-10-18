@@ -146,6 +146,56 @@ def harvested_before():
     return done
 
 
+def supplement_main(out, shard, nshard):
+    """SUPPLEMENT=1 in ci/harvest/params.env: for genera already harvested, adds the steps the harvest never sent for
+    plants (a query on the English name with 'photoreceptor' and, once per family, '<Family> photoreceptor review')
+    and a '<Family> vision review' for animal families no earlier run holds. Writes 'genus_extra' lines (genus, queries,
+    works) and 'family' lines; tools/views/harvest_get.py shows them under the genus. Genus lines are not rewritten."""
+    before = harvested_before()
+    mine = [t for i, t in enumerate([t for t in targets() if t['genus'] in before]) if i % nshard == shard]
+    have_fam = harvested_families()
+    fam_done = set(); n_err = 0; start = time.time(); done = 0
+    os.makedirs(out, exist_ok=True)
+    try:
+        with open(os.path.join(out, 'harvest.jsonl'), 'w', encoding='utf-8') as f:
+            for i, t in enumerate(mine, 1):
+                genus, fam = t['genus'], t['family']; plant = t['views'] == {'plant'}; works = {}; queries = []
+                if plant:
+                    for en in sorted(t['english'])[:1]:
+                        if en: queries.append(search(f'{en} photoreceptor', works))
+                if queries:
+                    n_err += sum(1 for q in queries if q.get('error'))
+                    f.write(json.dumps({'type': 'genus_extra', 'genus': genus, 'queries': queries, 'works': works}, ensure_ascii=False) + '\n')
+                key = (fam, plant)
+                if fam and key not in fam_done and (plant or fam not in have_fam):
+                    fam_done.add(key); fworks = {}
+                    r = search(f'{fam} photoreceptor review' if plant else f'{fam} vision review', fworks)
+                    n_err += 1 if r.get('error') else 0
+                    f.write(json.dumps({'type': 'family', 'family': fam, 'query': r, 'works': fworks}, ensure_ascii=False) + '\n')
+                f.flush(); done = i
+    except KeyboardInterrupt:
+        print('stopped by the time limit; keeping what was done', flush=True)
+    with open(os.path.join(out, 'summary.txt'), 'w') as s:
+        s.write(f'supplement shard {shard}/{nshard}: {done} of {len(mine)} genera done, {len(fam_done)} family reviews, '
+                f'{calls} OpenAlex calls, {n_err} failed queries, {time.time() - start:.0f} s\n')
+    print(open(os.path.join(out, 'summary.txt')).read())
+
+
+def harvested_families():
+    import subprocess, zlib
+    names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'origin/ci', 'runs/harvest'], capture_output=True, text=True).stdout.split()
+    fams = set()
+    for n in names:
+        if not n.endswith(('harvest.jsonl.gz', 'harvest.jsonl')): continue
+        raw = subprocess.run(['git', 'show', 'origin/ci:' + n], capture_output=True).stdout
+        if n.endswith('.gz'): raw = zlib.decompressobj(16 + zlib.MAX_WBITS).decompress(raw)
+        for l in raw.decode('utf-8', 'replace').splitlines():
+            try: d = json.loads(l)
+            except ValueError: continue
+            if d.get('type') == 'family' and not (d.get('query') or {}).get('error'): fams.add(d['family'])
+    return fams
+
+
 def main():
     import signal
     signal.signal(signal.SIGTERM, lambda *a: (_ for _ in ()).throw(KeyboardInterrupt()))
@@ -153,6 +203,9 @@ def main():
     if '--top' in args: top = int(args[args.index('--top') + 1])
     if '--shard' in args: shard, nshard = map(int, args[args.index('--shard') + 1].split('/'))
     os.makedirs(out, exist_ok=True)
+    pp = os.path.join(ROOT, 'ci/harvest/params.env')
+    if os.path.exists(pp) and re.search(r'^SUPPLEMENT=1\s*$', open(pp).read(), re.M):
+        return supplement_main(out, shard, nshard)
     before = harvested_before()
     allt = [t for t in targets() if t['genus'] not in before]; todo = allt[:top]
     mine = [t for i, t in enumerate(todo) if i % nshard == shard]
