@@ -196,7 +196,7 @@ function init(m) {
   ort.env.wasm.wasmPaths = { mjs: m.ort.mjs, wasm: m.ort.wasm };
   if (m.wasmBinary) ort.env.wasm.wasmBinary = m.wasmBinary;
   var opts = { executionProviders: [backend], graphOptimizationLevel: 'all' }, mb = m.model;
-  (m.wm === 'wheap' && m.parts ? heapModel(m, opts) : Promise.resolve(new Uint8Array(m.model))).then(function (bytes) {
+  (m.parts ? heapModel(m, opts) : Promise.resolve(new Uint8Array(m.model))).then(function (bytes) {
     mark('create', bytes.byteLength);
     return ort.InferenceSession.create(bytes, opts);
   }).then(function (s) {

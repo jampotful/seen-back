@@ -29,7 +29,7 @@ for v in $VARS; do
   port=$((8781 + k)); k=$((k + 1))
   for B in webkit $([ "$PART" = mac-ws ] && echo safari); do
     step "variant $v in $B (port $port)"; mkdir -p "$OUT/$v"
-    ( export BROWSER=$B OUT="$OUT/$v" PHOTOS=/tmp/bigphotos/photos.json SITE="http://127.0.0.1:$port/?wm=$v" HOME_CHECKS=0; limit 900 node test/engines/big.js ); echo "big.js $v $B: exit $?"
+    ( export BROWSER=$B OUT="$OUT/$v" PHOTOS=/tmp/bigphotos/photos.json SITE="http://127.0.0.1:$port/?wm=$v" HOME_CHECKS=0 NOCACHES=1; limit 900 node test/engines/big.js ); echo "big.js $v $B: exit $?"
     if [ "$B" = safari ]; then pkill -x Safari 2>/dev/null; sleep 3; fi
     sleep 5
   done

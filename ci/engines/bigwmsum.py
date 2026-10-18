@@ -11,7 +11,7 @@ for line in open(os.path.join(out, "mem2.jsonl")):
         x = json.loads(line)
         if "p" in x: S.append(x)
     except Exception: pass
-WEB = ("WebContent", "WebKitWebProcess")
+WEB = ("WebContent", "WebKitWebProcess", "WPEWebProcess")
 def web(rows): return [r for r in rows if any(w in r[1] for w in WEB)]
 def window(a, b): return [s for s in S if a and b and a <= s["t"] <= b]
 def peak(a, b):

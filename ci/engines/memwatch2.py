@@ -9,7 +9,7 @@ On a new high of the largest process (200 MB above its last breakdown, at most o
 <out>/mem2-snap.jsonl: on macOS the region summary of `vmmap -summary` (Playwright's WebKit allows it; Safari's processes refuse it), on
 Linux each mapping of /proc/<pid>/smaps with more than 8 MB resident. Stop it by its process id."""
 import ctypes, json, os, re, subprocess, sys, time
-PAT = re.compile(r"WebContent|WebKitWebProcess|WebKitNetworkProcess|Networking|GPU|WebKit|Safari|MiniBrowser|pw_run|chrom|headless_shell|firefox", re.I)
+PAT = re.compile(r"WebContent|WPEWebProcess|WPENetworkProcess|WebKitWebProcess|WebKitNetworkProcess|Networking|GPU|WebKit|Safari|MiniBrowser|chrom|headless_shell|firefox", re.I)
 out = sys.argv[1]; os.makedirs(out, exist_ok=True)
 f = open(os.path.join(out, "mem2.jsonl"), "a"); fs = open(os.path.join(out, "mem2-snap.jsonl"), "a")
 MAC = sys.platform == "darwin"

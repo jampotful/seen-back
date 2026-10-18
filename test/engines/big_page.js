@@ -21,6 +21,7 @@
   async function persisted() { try { return navigator.storage && navigator.storage.persisted ? await navigator.storage.persisted() : 'no persisted()'; } catch (e) { return 'error ' + e; } }
   async function cachesNow() {
     var o = {};
+    if (W.__bigNoCaches) return { skipped: 'NOCACHES: WebKit reads a kept body into the page on every match' };
     try {
       var ks = await caches.keys();
       for (var i = 0; i < ks.length; i++) {
@@ -138,6 +139,7 @@
     R.resources = res(); R.diag = diagOf(/^large/); R.wm = (W.__wm || []).slice();
   }
   W.__bigRun = function (phase, o) {
+    W.__bigNoCaches = !!(o && o.noCaches);
     var R = W.__big = { phase: phase, started: now(), done: false, steps: [] };
     (phase === 'get' ? phaseGet : phaseAgain)(o || {}, R).catch(function (e) { R.error = String(e && e.stack || e).slice(0, 600); }).then(function () { R.done = true; R.finished = now(); });
     return 'started';

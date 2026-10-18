@@ -2738,6 +2738,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     var KEEP = 'keep-v1', EPS = 1e-9;
     // webkitmem trial only (run/engines/bigwm*): ?wm=<variant> on this machine, and marks of each step of the larger model's load in window.__wm
     var WM = big && onThisMachine ? ((/[?&]wm=(\w+)/.exec(location.search || '') || [])[1] || '') : '';
+    var WM_HEAP = WM === 'wheap' || WM === 'wkeys', WM_KEYS = WM === 'keys' || WM === 'wkeys';
     function wmark(what, x) { if (big && onThisMachine) (window.__wm = window.__wm || []).push([Date.now(), what, x === undefined ? '' : String(x)]); }
     function wfree(v) {                                // xfree: a buffer that is done with is let go at once, not when the collector comes round
       if (WM !== 'xfree' || !v) return;
@@ -2764,6 +2765,18 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     function kept(cache, url) {
       function one(c) { try { return c.match(url, { ignoreVary: true }).then(function (hit) { return hit || null; }, function () { return null; }); } catch (e) { return Promise.resolve(null); } }
       return (cache ? one(cache) : Promise.resolve(null)).then(function (hit) { return hit || (window.caches ? one(caches) : null); });
+    }
+    // Is it kept? Asked without reading it (keys variant): WebKit brings a kept body into the page's memory on every match, so a part
+    // of the full database would be read only to learn that it is there.
+    function has(cache, url) {
+      if (!WM_KEYS) return kept(cache, url).then(function (hit) { return !!hit; });
+      function one(c) { try { return c.keys(url, { ignoreVary: true }).then(function (k) { return !!(k && k.length); }, function () { return false; }); } catch (e) { return Promise.resolve(false); } }
+      return (cache ? one(cache) : Promise.resolve(false)).then(function (yes) {
+        if (yes || !window.caches) return yes;
+        return caches.keys().then(function (names) {
+          return names.reduce(function (p, n) { return p.then(function (y) { return y || caches.open(n).then(one, function () { return false; }); }); }, Promise.resolve(false));
+        }, function () { return false; });
+      });
     }
     function unkeep(url) {                             // out of every store of this site
       if (!window.caches) return Promise.resolve();
@@ -3022,7 +3035,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       return next().then(function () {
         if (V === M.vision) wmark('read', V.bytes);
         if (!V.sha256 || (P.length === 1 && P[0].sha256 === V.sha256)) return;
-        return kept(cache, wholeKey(V)).then(function (ok) {
+        return has(cache, wholeKey(V)).then(function (ok) {
           if (ok) return;
           if (WM === 'nodig' && V === M.vision) { wmark('nodigest'); return; }
           return sha256(V.sha256)(buf.buffer).then(function () { if (V === M.vision) wmark('digest'); if (cache) return cache.put(wholeKey(V), new Response('verified')).catch(function () {}); },
@@ -3047,7 +3060,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
       if (!surveyP) surveyP = keepOpen().then(function (cache) {
         return (M ? Promise.resolve() : manifestText(cache).then(adopt)).then(function () {
           var P = allParts(M);
-          return Promise.all(P.map(function (p) { return kept(cache, partKey(p)); })).then(function (hits) {
+          return Promise.all(P.map(function (p) { return has(cache, partKey(p)); })).then(function (hits) {
             var n = 0; keptBytes = 0; hits.forEach(function (h, i) { if (h) { keptBytes += P[i].bytes; n++; } });
             have = n === P.length ? 'kept' : n ? 'partial' : 'absent';
             if (have !== 'kept') staleParts(cache);
@@ -3079,7 +3092,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         function next() {
           if (i >= P.length) return Promise.resolve();
           var part = P[i++], key = partKey(part);
-          return kept(cache, key).then(function (hit) {
+          return has(cache, key).then(function (hit) {
             if (hit) return;                           // already here: not fetched again
             if (halted()) throw err('stopped');
             partGot = 0; notify();
@@ -3146,9 +3159,9 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
         var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, sp = M.species, nS = sp ? sp.count : 0, c = cacheRef, i8 = !!sp && sp.dtype === 'int8';
         var inParts = big || !!V.parts, modelUrl = inParts ? '' : encV(V) ? withV(abs(V.url, base), encV(V)) : u(V.url);
         function rowsLen(buf) { if (buf && buf.byteLength !== nS * M.width * (i8 ? 1 : 2)) throw err('damaged', 'species rows of the wrong length'); return buf; }
-        var wheap = WM === 'wheap' && big && inParts && !!c, verify = false;
+        var wheap = WM_HEAP && big && inParts && !!c, verify = false;
         wmark('load', WM);
-        return (inParts ? (wheap ? kept(c, wholeKey(V)).then(function (ok) { verify = !ok; return true; }) : Promise.resolve(true)) : kept(c, modelUrl)).then(function (hit) {
+        return (inParts ? (wheap ? has(c, wholeKey(V)).then(function (ok) { verify = !ok; return true; }) : Promise.resolve(true)) : kept(c, modelUrl)).then(function (hit) {
           fromKeep.model = !!hit;
           return Promise.all([
             file(c, withV(abs(ORT.dir + ORT.wasm), ORT.v), ORT.wasmBytes),
