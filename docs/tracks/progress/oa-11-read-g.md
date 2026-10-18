@@ -12,6 +12,10 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 | 35 | Coli et al. 2018, retinal ganglion cells in diurnal and nocturnal raptors (Int J Morphol 36: 955-961) | SciELO PDF, published version | 14 | 11 | 3 | 0 | 6 |
 | 18 | Stavenga and Arikawa 2011, photoreceptor spectral sensitivities of Pieris rapae crucivora (J Comp Physiol A 197: 373-385) | Europe PMC full-text XML, published version | 22 | 17 | 5 | 0 | 16 |
 | 45 | Weckström, Hardie and Laughlin 1991, potassium channels in blowfly photoreceptors (J Physiol 440: 635-657) | abstract only (PubMed Central page); full text not fetched | 4 | 4 | 0 | 0 | 4 |
+| 19 | Grof-Tisza et al. 2022, volatile-mediated resistance in sagebrush (J Chem Ecol 48: 730-745) | Europe PMC full-text XML, published version | 8 | 7 | 1 | 0 | 3 |
+| all | six papers read in full, one abstract only | | 96 | 80 | 16 | 0 | 55 |
+
+Every paper read in full holds at least one measurement of a trait in BRIEF's list, so none has `"records": 0`. Six lines were added to `docs/views/sources/oa-11.jsonl` (entries 2, 13, 33, 35, 18, 19); entry 45 has none because only its abstract was read. Every record passes `quotecheck.py` (all verbatim) and `oa_lint.py --text` against its paper's text, and `tools/senses/check.py` passes on `docs/views/evidence/oa-11.jsonl`.
 
 ## Notes by paper
 
@@ -27,6 +31,14 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 
 - Entry 45, not read in full. The job's text (`read` kind html) is the PubMed Central landing page: the abstract, which PMC truncates at 400 words, and the reference list. The scanned full text did not come through (fullTextXML and getPdf both returned 500 in `lookup.jsonl`; the PMC page offers a 2.7 MB PDF of the scan). Following `oa-pass.md` on abstract-only copies, the four membrane values the abstract states for Calliphora vicina photoreceptors (resting potential -60.4 mV, input resistance 32 MΩ, time constant 4.1 ms, capacitance 0.13 nF; the values the wanted entry asks to check against Laughlin and Weckström 1993) are logged as `m` with `partial: true` and `access` "abstract" (the one change to the copied source object), under new trait keys. No line goes in `docs/views/sources/oa-11.jsonl`, so the paper stays wanted: its corner frequencies and light-adaptation results are in the part of the abstract PMC cuts and in the full text.
 
-## Next
+- Entry 19. Artemisia tridentata ssp. vaseyana (the subspecies the Methods name), own measurements (`m`): airborne volatiles from wounded branches induced 3 of 5 defense genes (aggregate log2 fold-change 2.5 against 0.28 for filtered air), leaves of control plants took 1.7x more feeding damage, and in the α-thujone and artemiseole chemotypes the response was stronger to volatiles from the same chemotype (resistance, and a 2.7x higher aggregate gene response). Cited, `partial`: Karban et al. (2014a) on same-chemotype communication in A. tridentata (`m`), plant-to-plant volatile signalling in more than 50 unnamed species (Plantae, `g`), and the lima bean genes of Arimura et al. (2000) (`m`). Not logged: the passive adsorption and re-emission of artemisia ketone (uptake, not perception), the small and partly non-significant changes in induced emissions, and the stick insect's feeding choices, which measure the plant's resistance rather than the insect's senses.
 
-Entry 19.
+## Conventions
+
+- Quotes were cut from the plain text with whitespace collapsed (the form `quotecheck.py` and `oa_lint.py` compare), each cut marked " … "; no quote starts with a cut mark. Quotes keep the files' characters exactly, including the OCR errors of entry 13, the Unicode minus signs of entry 33 and the stray "|" in "(|Dawkins" of entry 33.
+- The `source` objects are copied from `ci/oa/sources-r1.jsonl` unchanged, including the HTML markup in the entry 33 title, except `access` "abstract" on the four entry 45 records.
+- Records reuse new-trait keys already in other logs where one fits (`chromophore`, `blind_area_deg`, `optic_axis_elevation_deg`, `peak_ganglion_cell_density_mm2`, `facet_diameter_um`) and add `dark_adaptation_min`, `photoreceptor_distribution`, `optic_axis_azimuth_deg`, `resting_potential_mv`, `input_resistance_mohm`, `membrane_time_constant_ms` and `membrane_capacitance_nf`, each with "new trait" and its reason in `note`.
+
+## Status
+
+All seven entries done. Nothing left to read in this assignment; entry 45's full text (the PMC scan) is the one gap.
