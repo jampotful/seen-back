@@ -11,6 +11,7 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 | 33 | Itahara and Kano 2024, gaze tracking of large-billed crows (J Exp Biol 227: jeb246514) | Europe PMC full-text XML, published version | 37 | 34 | 3 | 0 | 19 |
 | 35 | Coli et al. 2018, retinal ganglion cells in diurnal and nocturnal raptors (Int J Morphol 36: 955-961) | SciELO PDF, published version | 14 | 11 | 3 | 0 | 6 |
 | 18 | Stavenga and Arikawa 2011, photoreceptor spectral sensitivities of Pieris rapae crucivora (J Comp Physiol A 197: 373-385) | Europe PMC full-text XML, published version | 22 | 17 | 5 | 0 | 16 |
+| 45 | Weckström, Hardie and Laughlin 1991, potassium channels in blowfly photoreceptors (J Physiol 440: 635-657) | abstract only (PubMed Central page); full text not fetched | 4 | 4 | 0 | 0 | 4 |
 
 ## Notes by paper
 
@@ -24,6 +25,8 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 
 - Entry 18. A modelling paper, so most measured values are the authors' earlier recordings, logged `m` with `partial` and the original studies named: eight photoreceptor classes, the earlier template fits (360, 425, 453, 563 nm), the violet and blue rhodopsins at 420 and 450 nm from expression studies (Wakakuwa et al. 2010), the male fluorescent filter pigment (416 nm, Arikawa et al. 2005), rhabdom tip and base diameters and facet diameter (Qiu et al. 2002), and the tapetum and eye shine. Own measurements (`m`): the pale-red and deep-red screening pigments, peaks about 500 and 535 nm by microspectrophotometry. `g` for what the paper's model yields or assumes: UV and long-wavelength rhodopsins at 350 and 560 nm (concluded in the modelling), the tapetum's gain of at most 50% for R9, the F-number 2.4, and the predicted differences in polarization sensitivity. Cited tapetum statements for Anthocharis (lost), Papilionidae (absent) and butterflies generally (well developed), `m` and `partial`. Not logged: the model's light-flux and absorptance curves, the wing reflectance spectra (a trait of the wings, not of seeing) and the blue-opsin duplication.
 
+- Entry 45, not read in full. The job's text (`read` kind html) is the PubMed Central landing page: the abstract, which PMC truncates at 400 words, and the reference list. The scanned full text did not come through (fullTextXML and getPdf both returned 500 in `lookup.jsonl`; the PMC page offers a 2.7 MB PDF of the scan). Following `oa-pass.md` on abstract-only copies, the four membrane values the abstract states for Calliphora vicina photoreceptors (resting potential -60.4 mV, input resistance 32 MΩ, time constant 4.1 ms, capacitance 0.13 nF; the values the wanted entry asks to check against Laughlin and Weckström 1993) are logged as `m` with `partial: true` and `access` "abstract" (the one change to the copied source object), under new trait keys. No line goes in `docs/views/sources/oa-11.jsonl`, so the paper stays wanted: its corner frequencies and light-adaptation results are in the part of the abstract PMC cuts and in the full text.
+
 ## Next
 
-Entries 45, 19.
+Entry 19.
