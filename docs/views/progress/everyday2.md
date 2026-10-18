@@ -9,9 +9,10 @@ Task: the two weak spots left by build 34 (`tools/species/EVERYDAY.md`, "Where i
 - The fix in `tools/species/everyday_build.py`: a synonym takes the world row of its GBIF-accepted species when that row has the same English name (five species, 19 new rows), and beta is chosen on the tune photos among the betas the world test allows (up to 3,000 read; 100 chosen).
 - `run/everyday/again-pub-1` (`runs/everyday/7-again`): every mark passed. Kind right 97.6% and species right 78.8% in each photo's own zone, 97.8% and 78.8% in Alachua's, world-test drops 0.11, 0.66 and 0.57 points, the dog's kind right on 19 of 20.
 - `pub/naturalist-everyday2` at `fffd315`, pinned by `pin/naturalist-everyday2-fffd315`; its files match `stage-parts.json`, and a separate reading of them gave the dog the same numbers. `models/naturalist/manifest.json` points at them. `BUILD` is 36 (`main` held 34 and `agent/hardening` 35).
-- `check4.js try` (14 runs, no errors), `check_make_slot.py` and `test_place.py` passed on the branch.
+- Every check passed on the tree merged with `main` (build 35 from the hardening track): `build.py` and `--check`, `check4.js try` (14 runs, no errors), every section of `check_rec.js`, `check_ext.js`, `fits_test.js`, `check_make_slot.py`, `test_place.py` and `tools/species/test_everyday_build.py`.
+- Merged to `main` as build 36 at 17:50 US Eastern.
 
-## Next
+## Open
 
-- Every section of `check_rec.js`, then fetch `main`, merge, build, check and push to `main`.
-- Left for later: a dog in the pocket's county list (county records and a refit); the chinchilla, rabbit and guinea pig, which the cat still takes on some photos.
+- The pocket's county list needs a dog, which needs county records and a refit: in the county's zone the pocket is right on 18 of 20 dog photos but sure on only 2.
+- The cat still takes some photos of the chinchilla, rabbit and guinea pig, and close relatives with a larger share still take `Rosa chinensis`, `Citrus reticulata`, `Bos indicus` and `Zoysia japonica`.
