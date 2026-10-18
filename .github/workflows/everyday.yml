@@ -30,7 +30,8 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p out
-          python3 -I tools/species/everyday.py resolve --out out 2>&1 | tee out/log.txt
+          only=""; [ -f ci/everyday/only.txt ] && only=$(cat ci/everyday/only.txt)
+          python3 -I tools/species/everyday.py resolve --out out --only "$only" 2>&1 | tee out/log.txt
       - name: return results
         if: always()
         env:

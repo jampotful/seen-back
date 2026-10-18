@@ -75,6 +75,13 @@ def inat_taxon(names):
             got = (t.get("name") or "").replace("× ", "").replace("×", "").lower()
             if got == want and t.get("is_active", True):
                 return t
+        # iNaturalist may know the name only as a synonym of its own: the result it matched on that name, at species rank or below
+        for t in j.get("results", []):
+            mt = (t.get("matched_term") or "").replace("× ", "").replace("×", "").lower()
+            if mt == want and t.get("is_active", True) and t.get("rank") in ("species", "subspecies", "variety", "form", "hybrid"):
+                t = dict(t)
+                t["_via"] = "synonym"
+                return t
     return None
 
 
@@ -114,6 +121,8 @@ def resolve(a):
     rows = list(csv.DictReader(open(os.path.join(HERE, "everyday_list.csv"), encoding="utf-8")))
     if a.limit:
         rows = rows[:a.limit]
+    if a.only:
+        rows = [r for r in rows if r["query"] in set(a.only.split(";"))]
     total = get(INAT + "observations?per_page=0", kind="inat").get("total_results", 0)
     species, photos, dropped, seen = [], [], [], {}
     t0 = time.time()
@@ -135,7 +144,7 @@ def resolve(a):
         seen[key] = q
         kind = eyes.kind_or_group(m.get("kingdom"), m.get("phylum"), m.get("class"), m.get("order"), m.get("family"), m.get("genus"))
         try:
-            t = inat_taxon([q, sci])
+            t = inat_taxon([q, sci] + ([get(GBIF + "species/%d" % int(m["acceptedUsageKey"])).get("canonicalName")] if m.get("acceptedUsageKey") else []))
         except IOError as e:
             t = None
             print("iNaturalist taxa failed for %s: %s" % (q, e), flush=True)
@@ -151,7 +160,7 @@ def resolve(a):
                         "accepted_key": m.get("acceptedUsageKey", "") or "", "kingdom": m.get("kingdom", ""),
                         "phylum": m.get("phylum", ""), "class": m.get("class", ""), "order": m.get("order", ""),
                         "family": m.get("family", ""), "genus": m.get("genus", ""), "kind": kind,
-                        "inat_taxon": tid, "inat_name": (t or {}).get("name", ""), "en": en,
+                        "inat_taxon": tid, "inat_name": (t or {}).get("name", ""), "inat_via": (t or {}).get("_via", "name" if t else ""), "en": en,
                         "captive_obs": count, "photos": len(ph)})
         for p in ph:
             p.update({"id": "e%d" % p["obs"], "set": "tune" if p["obs"] % 3 == 0 else "test", "gbif_key": key, "sci": sci,
@@ -160,7 +169,7 @@ def resolve(a):
         print("%3d/%d %-32s -> %s %s (%s, %s) kind %s, iNat %s %r, captive %s, photos %d (%.0fs)" % (
             i + 1, len(rows), q, key, sci, rank, m.get("status", ""), kind, tid, en, count, len(ph), time.time() - t0), flush=True)
     sf = ["query", "category", "gbif_key", "sci", "rank", "status", "match", "confidence", "accepted_key", "kingdom", "phylum",
-          "class", "order", "family", "genus", "kind", "inat_taxon", "inat_name", "en", "captive_obs", "photos"]
+          "class", "order", "family", "genus", "kind", "inat_taxon", "inat_name", "inat_via", "en", "captive_obs", "photos"]
     with open(os.path.join(a.out, "species.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=sf)
         w.writeheader()
@@ -190,6 +199,7 @@ def main():
     r.add_argument("--photos", type=int, default=30)
     r.add_argument("--per-observer", type=int, default=3)
     r.add_argument("--limit", type=int, default=0)
+    r.add_argument("--only", default="", help="queries to resolve, separated by ';' (the others are left out)")
     a = ap.parse_args()
     if a.cmd == "resolve":
         resolve(a)
