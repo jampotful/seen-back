@@ -7,6 +7,7 @@
                      a number, row after row, with speciesScale one little-endian float32 a row, the row's value being scale * byte)
                      (store {keep, parts:[{key, bytes, sha256}], verify} in place of model: the model's parts as the page keeps them in
                      Cache Storage, read here straight into the runtime's heap; verify asks for each part's checksum on the way)
+                     (rows {keep, parts, verify} in place of species: the species rows' parts, read here from Cache Storage)
                      {op:'run', id, rgba, w, h, wantPre}          rgba: the photo's pixels, 4 bytes each, rows from the top
    and it answers:   {op:'hello'}  {op:'ready', ms, backend, threads}  {op:'done', id, kinds, species, emb, ms, pre?}  {op:'fail', id?, stage, name, message}
                      (stage 'store': the parts could not be read into the heap here, and the page sends the model's bytes instead)
@@ -135,28 +136,22 @@ function hex(d) { return Array.prototype.map.call(new Uint8Array(d), function (x
 function let_go(v) {                                 // a chunk copied into the heap is let go at once, not when the collector comes round
   try { if (v && v.buffer instanceof ArrayBuffer && v.byteOffset === 0 && v.byteLength === v.buffer.byteLength && v.buffer.transfer) v.buffer.transfer(0); } catch (e) {}
 }
-function intoHeap(st, opts) {
-  var tiny = atob(TINY), u = new Uint8Array(tiny.length), i, total = 0, ptr = 0, M;
-  for (i = 0; i < tiny.length; i++) u[i] = tiny.charCodeAt(i);
-  st.parts.forEach(function (p) { total += p.bytes; });
-  return self.ort.InferenceSession.create(u, opts).then(function (s0) { return s0.release(); }).then(function () {
-    M = ORTMOD;
-    if (!M || typeof M._malloc !== 'function' || typeof M._free !== 'function' || !M.HEAPU8 || typeof caches === 'undefined') throw storeErr('the runtime\'s heap or the store is out of reach');
-    ptr = M._malloc(total) >>> 0;
-    if (!ptr) throw storeErr('no room in the heap for ' + total + ' bytes');
-    return caches.open(st.keep);
-  }).then(function (c) {
+// Each part of a group kept by the page, in order: put(bytes, offset) receives every chunk, at its offset in the whole. The first time
+// (st.verify) each part's checksum is checked on the way, as the page did for the whole.
+function readParts(st, put) {
+  if (typeof caches === 'undefined') return Promise.reject(storeErr('this worker has no store'));
+  return caches.open(st.keep).then(function (c) {
     var k = 0, at = 0;
     function next() {
       if (k >= st.parts.length) return Promise.resolve();
-      var p = st.parts[k++], start = ptr + at; at += p.bytes;
+      var p = st.parts[k++], start = at; at += p.bytes;
       return c.match(p.key, { ignoreVary: true }).then(function (res) {
         if (!res) throw storeErr('a part is no longer kept');
-        if (st.verify) return res.arrayBuffer().then(function (b) {        // the first time: each part's checksum, as the page did for the whole
+        if (st.verify) return res.arrayBuffer().then(function (b) {
           if (b.byteLength !== p.bytes) throw storeErr('a kept part is ' + b.byteLength + ' bytes, not ' + p.bytes);
           return crypto.subtle.digest('SHA-256', b).then(function (d) {
             if (hex(d) !== String(p.sha256).toLowerCase()) throw storeErr('a kept part is damaged');
-            M.HEAPU8.set(new Uint8Array(b), start); let_go(new Uint8Array(b));
+            put(new Uint8Array(b), start); let_go(new Uint8Array(b));
           });
         });
         var reader = res.body.getReader(), done = 0;
@@ -164,15 +159,33 @@ function intoHeap(st, opts) {
           return reader.read().then(function (r) {
             if (r.done) { if (done !== p.bytes) throw storeErr('a kept part is ' + done + ' bytes, not ' + p.bytes); return; }
             if (done + r.value.length > p.bytes) throw storeErr('a kept part is longer than ' + p.bytes + ' bytes');
-            M.HEAPU8.set(r.value, start + done); done += r.value.length; let_go(r.value); return pump();
+            put(r.value, start + done); done += r.value.length; let_go(r.value); return pump();
           });
         }
         return pump();
       }).then(next);
     }
     return next();
+  }).catch(function (e) { throw e && e.store ? e : storeErr(e); });
+}
+function total(st) { var n = 0; st.parts.forEach(function (p) { n += p.bytes; }); return n; }
+// the species rows: into one buffer of this worker, so that the page never holds them
+function rowsFromStore(st) {
+  var buf;
+  try { buf = new Uint8Array(total(st)); } catch (e) { return Promise.reject(storeErr('no room for the species rows')); }
+  return readParts(st, function (b, at) { buf.set(b, at); }).then(function () { return buf.buffer; });
+}
+function intoHeap(st, opts) {
+  var tiny = atob(TINY), u = new Uint8Array(tiny.length), i, n = total(st), ptr = 0, M;
+  for (i = 0; i < tiny.length; i++) u[i] = tiny.charCodeAt(i);
+  return self.ort.InferenceSession.create(u, opts).then(function (s0) { return s0.release(); }).then(function () {
+    M = ORTMOD;
+    if (!M || typeof M._malloc !== 'function' || typeof M._free !== 'function' || !M.HEAPU8) throw storeErr('the runtime\'s heap is out of reach');
+    ptr = M._malloc(n) >>> 0;
+    if (!ptr) throw storeErr('no room in the heap for ' + n + ' bytes');
+    return readParts(st, function (b, at) { M.HEAPU8.set(b, ptr + at); });
   }).then(function () {
-    var view = new Uint8Array(M.HEAPU8.buffer, ptr, total);
+    var view = new Uint8Array(M.HEAPU8.buffer, ptr, n);
     ptr = 0;                                           // from here the runtime owns the block, and frees it once the session is made
     return view;
   }, function (e) { if (ptr) try { M._free(ptr); } catch (x) {} throw e && e.store ? e : storeErr(e); });
@@ -180,8 +193,13 @@ function intoHeap(st, opts) {
 
 // ---------- the encoder
 function init(m) {
-  var t0 = now(), t1, t2;
+  var t0 = now();
   try { importScripts(m.ort.js); } catch (e) { fail(e && e.name === 'SyntaxError' ? 'browser' : 'runtime', e); return; }
+  if (!m.rows) { start(m, t0); return; }
+  rowsFromStore(m.rows).then(function (b) { m.species = b; m.rows = null; start(m, t0); }, function (e) { fail('store', e); });
+}
+function start(m, t0) {
+  var t1, t2;
   try {
     V = m.vision; width = m.width; backend = m.ep || 'wasm';
     if (V.resize !== 'shortest-bicubic-antialias' || (V.crop !== 'center' && V.crop !== 'center-round')) throw new Error('unknown resize or crop rule');
