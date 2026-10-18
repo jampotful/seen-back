@@ -31,6 +31,16 @@ assert "RECORDS you may cite" in pupil["user"] and "R1 |" in pupil["user"]
 assert all(r["_id"] in pupil["ids"].values() for r in pupil["row"]["records"])
 assert "colour" not in " ".join(k for k in jobs), list(jobs)
 
+# ---- views behind ?try=: rows from try-rows.json, species from try-species.json, a row about one group, a row not sent
+tsys, tjobs, _ = rows.prepare(rows.ROOT, ["mammal", "bigcat", "fungus"])
+assert "mammal__elephants" in tjobs and "bigcat__pupil" in tjobs and not any("being-tried" in k or "guesses" in k for k in tjobs), list(tjobs)
+ele = tjobs["mammal__elephants"]["row"]["species"]
+assert ele and all(s["family"] == "Elephantidae" for s in ele), [s["sci"] for s in ele][:5]
+assert len(tjobs["mammal__color"]["row"]["species"]) > len(ele)
+assert tjobs["bigcat__lens"].get("skip") and not tjobs["bigcat__pupil"].get("skip")
+assert rows.try_meta(rows.ROOT, "fungus", "No eyes")["live"] == "No picture" and rows.live_grade(rows.ROOT, "fungus", "No eyes") == "g"
+assert rows.view_species(rows.ROOT, "owl", rows.GAPS.Tax())[0]["sci"] == "Bubo virginianus"
+
 
 # ---- the draft checks
 def good(job, text, cites=("R1",)):
