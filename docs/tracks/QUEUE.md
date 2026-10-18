@@ -265,3 +265,8 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-33 -: no authors: Measurements of different parameters of the compound eye of 
   - harvest-33 10.1007/bf01052226: placeholder title; the Crossref title (Visual behaviors of the migratory grasshopper,Melanoplus san) names no genus the 
 - 23:47 UTC: audit 45 (harvest-31 without Comarum and Phalaris): 0 errors in 20. 70 records are on main; Chelone joins the held genera (failed plant queries appeared during the audit). Pooled over audits 43 to 46 (desk-screen units): 1 error in 102 sampled records.
+- 23:54 UTC: harvest-36 returned (15 genera, 81 search records, 9 wanted lines, check clean); audit 48 runs on it. Its wanted lines are on main with registry authors (desk Crossref run 7); held:
+  - harvest-36 -: no authors: jexbio 99 1 473 (file name; title not shown in the search re
+  - harvest-36 -: no authors: Etude comparative de la morphologie de l'oeil chez quatre es
+  - harvest-36 -: no authors: Characteristic response of the compound eyes of Helicoverpa 
+  - harvest-36 -: no authors: Study development on mechanism of photosensitivity and photo
