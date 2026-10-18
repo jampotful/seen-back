@@ -1,0 +1,33 @@
+
+=== 23:11:33 machine (ff-lazy)
+Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1441       12168          40        2742       14548
+Swap:           3071           0        3071
+4
+model name	: AMD EPYC 9V45 96-Core Processor
+ssse3 fma sse4_1 sse4_2 avx avx2 avx512f avx_vnni avx512_vnni 
+
+=== 23:11:33 playwright 1.56.0
+added 2 packages in 1s
+
+=== 23:11:51 variant ff-lazy: firefox, headed 0, prefs {"javascript.options.wasm_lazy_tiering":false}, cases pocket:all:5 big:all:2
+23:12:15 ff-lazy pocket:all:5 | fetch 87 ms | session 618 ms | runs [3996,3941,3802,3999,3920] ms | head [0.011763,0.215329,-0.131141,-0.000086,0.297737,0.082296] sum -89.13024 | error  
+23:13:57 ff-lazy big:all:2 | fetch 6387 ms | session 2569 ms | runs [46394,46192] ms | head [1.13896,1.475898,0.308418,-2.129014,1.126932,-0.788226] sum -170.96748 | error  
+23:13:57 ff-lazy version 142.0.1 | features {"ua":"Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0","coi":false,"cores":4,"sab":"undefined","simd":true,"relaxedSimd":false,"sharedMemory":true}
+ffbench.js: exit 0
+top - 23:13:58 up 2 min,  0 user,  load average: 0.97, 0.52, 0.21
+Tasks: 166 total,   1 running, 165 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15989.7 total,  11757.2 free,    967.3 used,   3644.9 buff/cache     
+MiB Swap:   3072.0 total,   3072.0 free,      0.0 used.  15022.4 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0   22792  14340   9864 S   0.0   0.1   0:02.35 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
