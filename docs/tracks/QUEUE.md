@@ -184,3 +184,7 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-31 -: no authors: USDA Forest Service Treesearch publication 12765 (title not shown in t
   - harvest-31 -: no authors: Proceedings of the Indiana Academy of Science article 6128 (title not 
   - harvest-31 10.1007/bf00317417: title differs from Crossref (0.24): Springer article 10.1007/BF00317417 (title not shown in the  | Photosynthetic response to sunflecks in the desiccation-tole
+
+## Desk, 18 Oct 22:06 UTC: audit 43, the first audit of a desk-screen unit
+- Audit 43 (harvest-30, seed 43): the mechanical gate printed 0 problems; 1 error in 20 sampled records (5.0%), a Heliotropium diel measurement (flower-opening hours) in a paper whose abstract omits it, found by the auditor's anthesis search. The kinds that sank audits 40 to 42 (screened-but-present, chased defects, query differences) did not recur. Under UPDATE 10 the auditor is checking 15 more records before the verdict.
+- Plant diel queries now include "anthesis" and "pollination biology" (harvest PLANTTRAITS mode and desk-screen.md's web words); the next PLANTTRAITS run sends them.
