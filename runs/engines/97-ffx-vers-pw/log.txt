@@ -1,0 +1,196 @@
+
+=== 23:21:08 machine (vers-pw)
+Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1546       12063          40        2744       14443
+Swap:           3071           0        3071
+4
+model name	: AMD EPYC 7763 64-Core Processor
+ssse3 fma sse4_1 sse4_2 avx avx2 
+
+=== 23:21:08 playwright 1.56.0
+added 2 packages in 2s
+
+=== 23:21:27 variant vers-pw: firefox, headed 0, prefs {}, cases pocket:all:4
+Playwright's Firefox: /home/runner/.cache/ms-playwright/firefox-1495/firefox
+application.ini
+browser
+defaults
+dependentlibs.list
+firefox
+firefox-bin
+fonts
+glxtest
+gmp-clearkey
+icons
+libfreeblpriv3.so
+libgkcodecs.so
+liblgpllibs.so
+libmozavcodec.so
+libmozavutil.so
+libmozgtk.so
+libmozsandbox.so
+libmozsqlite3.so
+libmozwayland.so
+libnspr4.so
+libnss3.so
+libnssutil3.so
+libonnxruntime.so
+libplc4.so
+libplds4.so
+libsmime3.so
+libsoftokn3.so
+libssl3.so
+libxul.so
+omni.ja
+pingsender
+platform.ini
+playwright.cfg
+precomplete
+removed-files
+update-settings.ini
+updater
+updater.ini
+vaapitest
+--- /home/runner/.cache/ms-playwright/firefox-1495/firefox/defaults/pref/channel-prefs.js
+--- /home/runner/.cache/ms-playwright/firefox-1495/firefox/playwright.cfg
+15:// Disable it unconditionally since it breaks proxy tests.
+18:pref("datareporting.policy.dataSubmissionEnabled", false);
+19:pref("datareporting.policy.dataSubmissionPolicyAccepted", false);
+20:pref("datareporting.policy.dataSubmissionPolicyBypassNotification", true);
+25:// This preference breaks our authentication flow.
+28:// Disable cross-process iframes, but not cross-process navigations.
+29:pref("fission.webContentIsolationStrategy", 0);
+33:pref("fission.bfcacheInParent", false);
+35:// Disable first-party-based cookie partitioning.
+36:// When it is enabled, we have to retain "thirdPartyCookie^" permissions
+42:// get a new process by default and we have a process isolation
+51:// Isolate permissions by user context.
+52:pref("permissions.isolateBy.userContext", true);
+80:// Allow the application to have focus even it runs in the background
+83:// No ICC color correction. We need this for reproducible screenshots.
+84:// See https://developer.mozilla.org/en/docs/Mozilla/Firefox/Releases/3.5/ICC_color_correction_in_Firefox.
+88:// Always use network provider for geolocation tests so we bypass the
+89:// macOS dialog raised by the corelocation provider
+107:// Disable double-dispatching of "input" event for the text composition.
+109:pref("dom.input_events.dispatch_before_compositionend", false);
+116:pref("extensions.formautofill.creditCards.supported", "off");
+117:pref("extensions.formautofill.addresses.supported", "off");
+123:// There's a security features warning that might be shown on certain Linux distributions & configurations:
+125:// This notification should never be shown in automation scenarios.
+145:// Prevent Remote Settings (firefox.settings.services.mozilla.com) to issue non local connections.
+147:// Prevent location.services.mozilla.com to issue non local connections.
+148:pref("browser.region.network.url", "");
+154:pref("dom.push.connection.enabled", false);
+155:// Prevent contile.services.mozilla.com to issue non local connections.
+189:pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
+197:// slower than production environments (with the b2g emulator being
+198:// the slowest of them all), resulting in the production timeout value
+220:pref("browser.sessionstore.resume_from_crash", false);
+224:// Disable browser animations (tabs, fullscreen, sliding alerts)
+225:pref("toolkit.cosmeticAnimations.enabled", false);
+231:// tests that open additional tabs, the test harness tab itself might get
+233:pref("browser.tabs.disableBackgroundZombification", false);
+243:// Turn off search suggestions in the location bar so as not to trigger
+244:// network connections.
+247:// Do not show datareporting policy notifications which can
+--- /home/runner/.cache/ms-playwright/firefox-1495/firefox/omni.ja
+43:pref("dom.text-recognition.enabled", true);
+58:pref("media.gmp.storage.version.expected", 1);
+71:pref("media.videocontrols.picture-in-picture.video-toggle.position", "right");
+85:  pref("media.peerconnection.video.use_rtx", true);
+86:  pref("media.peerconnection.video.use_rtx.blocklist", "doxy.me,*.doxy.me");
+87:  pref("media.peerconnection.sdp.quirk.duplicate_fingerprint.allowlist", "");
+92:    pref("media.peerconnection.sdp.parser", "sipcc");
+93:    pref("media.peerconnection.sdp.alternate_parse_mode", "never");
+94:    pref("media.peerconnection.sdp.strict_success", false);
+96:    pref("media.peerconnection.sctp.use_dcsctp", false);
+98:  pref("media.peerconnection.sdp.disable_stereo_fmtp", false);
+108:  pref("media.peerconnection.video.vp9_enabled", true);
+109:  pref("media.peerconnection.video.vp9_preferred", false);
+117:  pref("media.peerconnection.video.min_bitrate", 0);
+118:  pref("media.peerconnection.video.start_bitrate", 0);
+119:  pref("media.peerconnection.video.max_bitrate", 0);
+120:  pref("media.peerconnection.video.min_bitrate_estimate", 0);
+121:  pref("media.peerconnection.video.denoising", false);
+123:  pref("media.navigator.permission.disabled", false);
+125:  pref("media.peerconnection.default_iceservers", "[]");
+126:  pref("media.peerconnection.allow_old_setParameters", true);
+127:  pref("media.peerconnection.ice.loopback", false); // Set only for testing in offline environments.
+128:  pref("media.peerconnection.ice.tcp", true);
+129:  pref("media.peerconnection.ice.tcp_so_sock_count", 0); // Disable SO gathering
+130:  pref("media.peerconnection.ice.link_local", false); // Set only for testing IPV6 in networks that don't assign IPV6 addresses
+131:  pref("media.peerconnection.ice.force_interface", ""); // Limit to only a single interface
+132:  pref("media.peerconnection.ice.relay_only", false); // Limit candidates to TURN
+133:  pref("media.peerconnection.use_document_iceservers", true);
+134:  pref("media.peerconnection.identity.timeout", 10000);
+135:  pref("media.peerconnection.ice.stun_client_maximum_transmits", 7);
+136:  pref("media.peerconnection.ice.trickle_grace_period", 5000);
+137:  pref("media.peerconnection.ice.no_host", false);
+138:  pref("media.peerconnection.ice.default_address_only", false);
+140:    pref("media.peerconnection.ice.obfuscate_host_addresses", true);
+142:  pref("media.peerconnection.ice.obfuscate_host_addresses.blocklist", "");
+143:  pref("media.peerconnection.ice.proxy_only_if_behind_proxy", false);
+144:  pref("media.peerconnection.ice.proxy_only", false);
+145:  pref("media.peerconnection.ice.proxy_only_if_pbmode", false);
+146:  pref("media.peerconnection.turn.disable", false);
+147:  pref("media.peerconnection.treat_warnings_as_errors", false);
+grep: write error: Broken pipe
+--- /home/runner/.cache/ms-playwright/firefox-1495/firefox/browser/omni.ja
+11:pref("extensions.getAddons.search.browseURL", "https://addons.mozilla.org/%LOCALE%/firefox/search?q=%TERMS%&platform=%OS%&appver=%VERSION%");
+13:pref("extensions.getAddons.langpacks.url", "https://services.addons.mozilla.org/api/v4/addons/language-tools/?app=firefox&type=language&appversion=%VERSION%");
+14:pref("extensions.getAddons.discovery.api_url", "https://services.addons.mozilla.org/api/v4/discovery/?lang=%LOCALE%&edition=%DISTRIBUTION%");
+19:pref("extensions.systemAddon.update.url", "https://aus5.mozilla.org/update/3/SystemAddons/%VERSION%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%/update.xml");
+50:pref("extensions.update.url", "https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=%APP_VERSION%&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%&compatMode=%COMPATIBILITY_MODE%");
+51:pref("extensions.update.background.url", "https://versioncheck-bg.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=%APP_VERSION%&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%&compatMode=%COMPATIBILITY_MODE%");
+59:pref("browser.uitour.url", "https://www.mozilla.org/%LOCALE%/firefox/%VERSION%/tour/");
+60:pref("browser.uitour.surveyDuration", 7200);
+88:pref("browser.startup.couldRestoreSession.count", 0);
+131:pref("browser.urlbar.deduplication.enabled", true);
+132:pref("browser.urlbar.deduplication.thresholdDays", 0);
+149:pref("browser.urlbar.quicksuggest.dataCollection.enabled", false, sticky);
+171:pref("browser.urlbar.unitConversion.enabled", true);
+176:pref("browser.urlbar.untrimOnUserInteraction.featureGate", false);
+189:pref("browser.urlbar.extension.timeout", 400);
+191:pref("browser.urlbar.keepPanelOpenDuringImeComposition", false);
+210:pref("browser.urlbar.yelp.serviceResultDistinction", false);
+246:pref("browser.search.serpEventTelemetryCategorization.enabled", true);
+255:pref("browser.privateWindowSeparation.enabled", true);
+256:pref("browser.privacySegmentation.preferences.show", false);
+263:pref("permissions.default.desktop-notification", 0);
+265:pref("permissions.desktop-notification.postPrompt.enabled", true);
+266:pref("permissions.desktop-notification.notNow.enabled", false);
+274:pref("browser.link.open_newwindow.restriction", 2);
+310:pref("browser.tabs.groups.smart.topicModelRevision", "latest");
+311:pref("browser.tabs.groups.smart.embeddingModelRevision", "latest");
+334:pref("browser.bookmarks.defaultLocation", "toolbar");
+386:pref("privacy.authPromptSpoofingProtection",         true);
+410:pref("browser.history_swipe_animation.disabled", false);
+412:  pref("mousewheel.with_shift.action", 4);
+413:  pref("mousewheel.with_alt.action", 2);
+415:pref("mousewheel.with_meta.action", 1);
+435:pref("browser.proton.toolbar.version", 0);
+436:pref("browser.backspace_action", 2);
+439:pref("browser.geolocation.warning.infoURL", "https://www.mozilla.org/%LOCALE%/firefox/geolocation/");
+504:pref("toolkit.datacollection.infoURL",
+506:pref("app.support.baseURL", "https://support.mozilla.org/1/firefox/%VERSION%/%OS%/%LOCALE%/");
+510:pref("security.certerrors.mitm.priming.endpoint", "https://mitmdetection.services.mozilla.com/");
+549:pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.feeds.section.topstories", true);
+550:pref("services.sync.prefs.sync.browser.newtabpage.activity-stream.section.topstories.rows", true);
+grep: write error: Broken pipe
+firefox (vers-pw-plain): /home/runner/.cache/ms-playwright/firefox-1495/firefox/firefox, [3227] Sandbox: CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM
+vers-pw-plain pocket:all:4 | fetch 133 ms | session 1266 ms | runs [6307, 6216, 6279, 6283] ms | head [0.011763, 0.215329, -0.131141, -8.6e-05, 0.297737, 0.082296] sum -89.13024 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": false, "sharedMemory": true}
+firefox (vers-pw-plain-ionpref): /home/runner/.cache/ms-playwright/firefox-1495/firefox/firefox, [3489] Sandbox: CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM
+vers-pw-plain-ionpref pocket:all:4 | fetch 147 ms | session 1275 ms | runs [6255, 6266, 6232, 6243] ms | head [0.011763, 0.215329, -0.131141, -8.6e-05, 0.297737, 0.082296] sum -89.13024 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": false, "sharedMemory": true}
+top - 23:22:35 up 2 min,  0 user,  load average: 0.88, 0.38, 0.14
+Tasks: 165 total,   1 running, 164 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  8.7 sy,  0.0 ni, 89.1 id,  2.2 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15989.7 total,  11684.5 free,   1007.1 used,   3678.9 buff/cache     
+MiB Swap:   3072.0 total,   3072.0 free,      0.0 used.  14982.6 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    375 root      20   0    3852   2904   1984 S  27.3   0.0   0:00.19 hv_kvp_+
+   3741 runner    20   0   12384   5508   3368 R   9.1   0.0   0:00.01 top
+      1 root      20   0   22876  14420   9876 S   0.0   0.1   0:03.14 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
