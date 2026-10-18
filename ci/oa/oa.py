@@ -222,6 +222,39 @@ def encrypt(text, pub):
     return len(wrapped).to_bytes(2, "big") + wrapped + nonce + ct
 
 
+def variants(url):
+    """Other addresses for the same free copy: PMC pages to Europe PMC, HAL record to its document, Zenodo and Figshare records to their files."""
+    out = []
+    m = re.search(r"ncbi\.nlm\.nih\.gov/pmc/articles/(?:PMC)?(\d+)", url)
+    if m:
+        pmc = "PMC" + m.group(1)
+        out += [("xml", "https://www.ebi.ac.uk/europepmc/webservices/rest/%s/fullTextXML" % pmc, "Europe PMC " + pmc),
+                ("pdf", "https://europepmc.org/api/getPdf?pmcid=%s" % pmc, "Europe PMC PDF " + pmc)]
+    m = re.search(r"(https?://hal\.[^/]+/[^/?#]+)", url)
+    if m and not url.rstrip("/").endswith("document"):
+        out.append(("pdf", m.group(1) + "/document", "HAL document"))
+    m = re.search(r"zenodo\.org/(?:record|records)/(\d+)", url)
+    if m:
+        j = jget("https://zenodo.org/api/records/" + m.group(1))
+        for f in (j or {}).get("files", [])[:3]:
+            u = (f.get("links") or {}).get("self")
+            if u and (f.get("key", "").lower().endswith(".pdf")):
+                out.append(("pdf", u, "Zenodo file"))
+    m = re.search(r"figshare\.com/articles/(?:[^/]+/)*(\d{5,})", url)
+    if m:
+        j = jget("https://api.figshare.com/v2/articles/" + m.group(1))
+        for f in (j or {}).get("files", [])[:3]:
+            if f.get("name", "").lower().endswith(".pdf") and f.get("download_url"):
+                out.append(("pdf", f["download_url"], "Figshare file"))
+    return out
+
+
+def meta_pdf(raw):
+    m = re.search(r'<meta[^>]+name=["\']citation_pdf_url["\'][^>]+content=["\']([^"\']+)', raw, re.I) or \
+        re.search(r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']citation_pdf_url', raw, re.I)
+    return html.unescape(m.group(1)) if m else None
+
+
 def candidates(oa, epmc, s2r):
     """Free copies in order of preference: (kind, url, note)."""
     c = []
@@ -242,6 +275,8 @@ def candidates(oa, epmc, s2r):
                     c.append((kind, u, "OpenAlex location: " + src + (" (" + (l.get("version") or "") + ")" if l.get("version") else "")))
     if s2r and (s2r.get("openAccessPdf") or {}).get("url"):
         c.append(("pdf", s2r["openAccessPdf"]["url"], "Semantic Scholar openAccessPdf"))
+    for kind, u, n in list(c):
+        c += [v for v in variants(u) if v[1] not in {x[1] for x in c}]
     # html after all pdfs
     c.sort(key=lambda x: {"xml": 0, "pdf": 1, "html": 2}[x[0]])
     return [x for x in c if not any(b in x[1].lower() for b in BANNED)]
@@ -303,7 +338,14 @@ def main():
                     elif data[:5] == b"%PDF-":
                         text = pdf_text(data)
                     else:
-                        text = html_text(data.decode("utf-8", "replace"))
+                        raw = data.decode("utf-8", "replace")
+                        text = html_text(raw)
+                        mp = meta_pdf(raw)
+                        if len(text) < 30000 and mp and not any(b in mp.lower() for b in BANNED):
+                            mp = urllib.parse.urljoin(final, mp)
+                            s2_, ct2, d2, f2 = get(mp, accept="application/pdf,*/*;q=0.8")
+                            if s2_ == 200 and d2[:5] == b"%PDF-":
+                                text, url, note = pdf_text(d2), mp, note + "; PDF named by the page's citation_pdf_url"
                 except Exception as e:
                     rec.setdefault("failed", []).append({"url": url, "error": str(e)[:120]})
                     continue
