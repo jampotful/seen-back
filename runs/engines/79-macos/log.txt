@@ -1,0 +1,64 @@
+
+=== 19:51:32 machine
+ProductName:		macOS
+ProductVersion:		26.6.2
+BuildVersion:		25G83
+Apple M2 Pro (Virtual)
+5
+15032385536
+Xcode 26.6 Build version 17F113 
+Safari 26.6.2
+v24.21.0
+Python 3.12.10
+
+=== 19:51:33 build, with ci/engines/patches/build-selftest-on-demand.patch where build.py does not carry it yet (the self-test becomes selftest.js, fetched only for ?selftest=1)
+build 32 | index.html 677230 bytes | artifact 673332 bytes | selftest.js 50303 bytes
+build ok
+677516 index.html
+50303 selftest.js
+
+=== 19:51:33 iPhone simulator: boot it now, it takes a while
+iPhone 17: 10B884BF-749F-4E8B-AFCD-26AB8F1DBD01
+
+=== 19:51:40 the shipped slot: models/pocket (tinyclip-39m-16), and four photos from test/rec/photos
+
+=== 19:51:40 servers: the self-test's on 8781, the recognizer checks' own on 8782
+8781 -> 000
+8782 -> 000
+
+=== 19:51:52 playwright 1.56.0 and WebKit
+added 2 packages in 1m
+Downloading Webkit 26.0 (playwright build v2215) from https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2215/webkit-mac-15-arm64.zip
+Webkit 26.0 (playwright build v2215) downloaded to /Users/runner/Library/Caches/ms-playwright/webkit-2215
+
+=== 19:53:35 self-test with the recognizer phase: Playwright WebKit (macOS) x phone, desktop
+19:55:05 webkit-phone 26.0 done=true ok=false fails=2 checks=241 webgl2=true float=true Apple GPU 89113ms
+19:56:22 webkit-desktop 26.0 done=true ok=false fails=1 checks=241 webgl2=true float=true Apple GPU 76476ms
+
+=== 19:56:22 self-test with the recognizer phase: real Safari through safaridriver
+safaridriver --enable: exit 0
+19:56:27 session 4F697EA4-D5F0-4421-A5C8-A4C13670CB97 26.6.2
+19:57:46 safari 26.6.2 done=true ok=false fails=1 Apple GPU
+safari.js: exit 0
+ci/engines/macos.sh: line 141: 15294 Terminated: 15          ( sleep "$s"; kill "$p" 2> /dev/null )
+
+=== 19:57:46 iPhone simulator: Safari opens the self-test with the recognizer phase and posts its report
+Device already booted, nothing to do.
+
+openurl: exit 0
+report arrived after 76 s
+iphone-01.json iphone-02.json iphone-03.json iphone-04.json iphone-05.json iphone.json safari-desktop-01.json safari-desktop-02.json safari-desktop-03.json safari-desktop-04.json safari-desktop-05.json safari-desktop.json webkit-desktop-01.json webkit-desktop-02.json webkit-desktop-03.json webkit-desktop-04.json webkit-desktop-05.json webkit-desktop.json webkit-phone-01.json webkit-phone-02.json webkit-phone-03.json webkit-phone-04.json webkit-phone-05.json webkit-phone.json 
+
+=== 20:03:19 summary
+safari desktop done True ok False fails 1 webgl2 True float True Apple GPU
+webkit desktop done True ok False fails 1 webgl2 True float True Apple GPU
+webkit phone done True ok False fails 2 webgl2 True float True Apple GPU
+check4 {}
+iphone True False ['iphone-01.json', 'iphone-02.json', 'iphone-03.json', 'iphone-04.json', 'iphone-05.json', 'iphone.json']
+
+=== 20:03:19 shrink pictures
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: python3.12 -m pip install --upgrade pip
+pictures: 38 total bytes: 1173164
+1.3M	/Users/runner/work/seen-back/seen-back/out
