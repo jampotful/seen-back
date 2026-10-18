@@ -17,7 +17,9 @@ const here = __dirname, PORT = process.env.PORT || 8782, ORIGIN = 'http://127.0.
 const SLOT = process.env.SLOT || 'test/rec/models/standin';
 // The species service is off (svc=off) unless a check names a service file, so that a service.json at the site's root changes nothing in the other checks.
 // The full database is off too (big=off) unless a check names its slot, so that a models/naturalist/ at the site's root changes nothing in the other checks.
-const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (/[?&]big=/.test(q || '') ? '' : '&big=off') + (q || '');
+// In WebKit a check that names a slot also lifts the gate for iOS (bigios=1, build 38) unless it says otherwise: WebKit gives a Mac's user agent,
+// and a Mac's user agent with more than one touch point is how the page knows an iPad.
+const url = (q) => ORIGIN + '/index.html?side=' + (process.env.SIDE || 420) + (/[?&]svc=/.test(q || '') ? '' : '&svc=off') + (/[?&]big=/.test(q || '') ? (ENGINE === 'webkit' && !/[?&]bigios=/.test(q || '') ? '&bigios=1' : '') : '&big=off') + (q || '');
 const BIG_PORT = +(process.env.BIG_PORT || 8788), BIG_ORIGIN = 'http://127.0.0.1:' + BIG_PORT, BIG = 'test/rec/models/standin-big';
 const bctl = (q) => new Promise((res, rej) => http.get(BIG_ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => { try { res(JSON.parse(b)); } catch (e) { rej(e); } }); }).on('error', rej));
 const SVC_PORT = +(process.env.SVC_PORT || 8784);
@@ -647,6 +649,30 @@ async function meet(page, name) {
       const words = await page.evaluate(() => document.body.innerText);
       r[name] = { eyes: s.eyes, line, about, parts, fits, errors: errors.slice(), saysMemory: /enough memory/.test(words) };
       const good = s.eyes === 'insect' && parts === 0 && !errors.length && !r[name].saysMemory && /^(yes|no) (memory|heap)/.test(fits) && (fits.indexOf('yes') === 0) === offer
+        && (offer ? line === 'Download the full database of species?' && about : line === '' && !about);
+      if (!good) { ok = false; (r.failed = r.failed || []).push(name); }
+      await ctx.close();
+    }
+    // build 38: an iPhone or iPad (here, Chromium with its user agent, its touch points and no reported memory, as in Safari) is not offered it until
+    // the owner lifts the gate with ?bigios=1, which the browser keeps; a device played with ?bigmem is no iPhone
+    const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1';
+    const MAC = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15';
+    for (const [name, ua, q, fitsWant, keyWant] of [['iPhone', IPHONE, '&bigios=0', 'no ios-untested', null], ['iPadDesktopSite', MAC, '&bigios=0', 'no ios-untested', null],
+      ['iPhoneLifted', IPHONE, '&bigios=1', 'yes heap 1024', '1'], ['iPhoneHeapYes', IPHONE, '&bigios=0&bigmem=heap-yes', 'yes heap 1024', null]]) {
+      await ctl('reset=1'); await bctl('reset=1');
+      const ctx0 = await browser.newContext(Object.assign({}, phone, { userAgent: ua }));
+      await ctx0.addInitScript(() => { for (const [k, v] of [['deviceMemory', undefined], ['maxTouchPoints', 5]]) try { Object.defineProperty(Navigator.prototype, k, { get: () => v, configurable: true }); } catch (e) {} });
+      const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + slot + q, null, ctx0); await ready(page); await begin(page);
+      const offer = fitsWant.indexOf('yes') === 0, s = await meet(page, 'stripes.png');
+      const line = offer ? await offered(page) : (await page.waitForTimeout(1500), await svcLine(page));
+      const fits = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'large-fits').map((d) => d.code).slice(-1)[0] || '');
+      const key = await page.evaluate(() => { try { return localStorage.getItem('seenback.bigios.v1'); } catch (e) { return 'unreadable'; } });
+      const parts = (await partsAsked()).length;
+      await toAbout(page); await page.waitForTimeout(400);
+      const about = await page.locator('#bigBox').isVisible();
+      const words = await page.evaluate(() => document.body.innerText);
+      r[name] = { eyes: s.eyes, line, about, parts, fits, key, errors: errors.slice(), saysMemory: /enough memory/.test(words) };
+      const good = s.eyes === 'insect' && parts === 0 && !errors.length && !r[name].saysMemory && fits === fitsWant && key === keyWant
         && (offer ? line === 'Download the full database of species?' && about : line === '' && !about);
       if (!good) { ok = false; (r.failed = r.failed || []).push(name); }
       await ctx.close();

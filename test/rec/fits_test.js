@@ -34,5 +34,32 @@ check('deviceMemory Infinity, heap refused', { memory: Infinity, tryHeap: heap(f
 check('no test at all', {}, { ok: false, by: 'heap' });
 check('no device object', undefined, { ok: false, by: 'heap' });
 
+// Build 38: an iPhone, iPad or iPod is refused before either test until a real iPhone has run the model, unless the owner lifted the gate (?bigios=1).
+const UA = {
+  iphone: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1',
+  iphoneChrome: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/141.0.7390.96 Mobile/15E148 Safari/604.1',
+  ipadOld: 'Mozilla/5.0 (iPad; CPU OS 12_5_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.2 Mobile/15E148 Safari/604.1',
+  ipod: 'Mozilla/5.0 (iPod touch; CPU iPhone OS 15_8 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.6 Mobile/15E148 Safari/604.1',
+  mac: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15',
+  android: 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36',
+  windows: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36'
+};
+check('iPhone, heap granted', { ua: UA.iphone, touch: 5, tryHeap: heap(true) }, { ok: false, by: 'ios-untested', asked: [] });
+check('iPhone, Chrome, heap granted', { ua: UA.iphoneChrome, touch: 5, tryHeap: heap(true) }, { ok: false, by: 'ios-untested', asked: [] });
+check('iPad before iPadOS 13, heap granted', { ua: UA.ipadOld, touch: 5, tryHeap: heap(true) }, { ok: false, by: 'ios-untested', asked: [] });
+check('iPod touch, heap granted', { ua: UA.ipod, touch: 5, tryHeap: heap(true) }, { ok: false, by: 'ios-untested', asked: [] });
+check('iPadOS with a Mac user agent and 5 touch points', { ua: UA.mac, touch: 5, tryHeap: heap(true) }, { ok: false, by: 'ios-untested', asked: [] });
+check('iPhone that says 8 GiB (a future browser)', { ua: UA.iphone, touch: 5, memory: 8, tryHeap: heap(true) }, { ok: false, by: 'ios-untested', asked: [] });
+check('iPhone, the switch not exactly true', { ua: UA.iphone, touch: 5, iosTest: 1, tryHeap: heap(true) }, { ok: false, by: 'ios-untested', asked: [] });
+check('iPhone, gate lifted, heap granted', { ua: UA.iphone, touch: 5, iosTest: true, tryHeap: heap(true) }, { ok: true, by: 'heap', asked: [1024] });
+check('iPhone, gate lifted, heap refused', { ua: UA.iphone, touch: 5, iosTest: true, tryHeap: heap(false) }, { ok: false, by: 'heap', asked: [1024] });
+check('iPadOS, gate lifted, heap granted', { ua: UA.mac, touch: 5, iosTest: true, tryHeap: heap(true) }, { ok: true, by: 'heap', asked: [1024] });
+check('Mac, no touch points, heap granted', { ua: UA.mac, touch: 0, tryHeap: heap(true) }, { ok: true, by: 'heap', asked: [1024] });
+check('Mac, one touch point (an emulated touch screen), heap granted', { ua: UA.mac, touch: 1, tryHeap: heap(true) }, { ok: true, by: 'heap', asked: [1024] });
+check('Mac, touch points unknown, heap refused', { ua: UA.mac, tryHeap: heap(false) }, { ok: false, by: 'heap', asked: [1024] });
+check('Android phone, 5 touch points, 8 GiB', { ua: UA.android, touch: 5, memory: 8 }, { ok: true, by: 'memory' });
+check('Windows laptop, 10 touch points, 4 GiB', { ua: UA.windows, touch: 10, memory: 4 }, { ok: false, by: 'memory' });
+check('user agent not a string, heap granted', { ua: 42, touch: 5, tryHeap: heap(true) }, { ok: true, by: 'heap', asked: [1024] });
+
 console.log(bad ? 'FAIL ' + bad + ' case(s)' : 'PASS all cases');
 process.exit(bad ? 1 : 0);

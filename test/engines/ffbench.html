@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Runtime bench</title>
+<!-- The recognizer's runtime alone, with no page around it (docs/ENGINES.md, the Firefox section): test/engines/ffbench.js opens this with
+     ?model=pocket|big&opt=all|extended|basic|disabled&reps=<n>&threads=<n>&wb=1 and reads window.__ff; with &report=<name> the page
+     also posts window.__ff to /report/<name> (ci/engines/serve.py) every few seconds and when done, for a browser run with no automation. -->
+<body><pre id="o"></pre>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search), R = window.__ff = { done: false, steps: [], features: {} }, F = R.features;
+  var rep = q.get('report');
+  function post() { if (rep) try { fetch('/report/' + encodeURIComponent(rep), { method: 'POST', body: JSON.stringify(R) }).catch(function () {}); } catch (e) {} }
+  function step(s) { R.steps.push([Math.round(performance.now()), s]); document.getElementById('o').textContent += s + '\n'; post(); }
+  F.ua = navigator.userAgent; F.coi = !!self.crossOriginIsolated; F.cores = navigator.hardwareConcurrency; F.sab = typeof SharedArrayBuffer;
+  F.simd = WebAssembly.validate(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 96, 0, 1, 123, 3, 2, 1, 0, 10, 10, 1, 8, 0, 65, 0, 253, 15, 253, 98, 11]));
+  F.relaxedSimd = WebAssembly.validate(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 96, 0, 1, 123, 3, 2, 1, 0, 10, 15, 1, 13, 0, 65, 1, 253, 15, 65, 2, 253, 15, 253, 128, 2, 11]));
+  try { new WebAssembly.Memory({ initial: 1, maximum: 2, shared: true }); F.sharedMemory = true; } catch (e) { F.sharedMemory = String(e).slice(0, 100); }
+  var w = new Worker('ffbench_worker.js');
+  w.onmessage = function (ev) { var m = ev.data || {}; if (m.step) step(m.step); if (m.result) R.result = m.result; if (m.error) R.error = m.error; if (m.result || m.error) { R.done = true; post(); } };
+  w.onerror = function (e) { R.error = 'worker: ' + (e.message || e); R.done = true; post(); };
+  post();
+  w.postMessage({ model: q.get('model') || 'pocket', opt: q.get('opt') || 'all', reps: +(q.get('reps') || 3), threads: +(q.get('threads') || 1), wb: q.get('wb') === '1', base: new URL('../../', location.href).href });
+})();
+</script>

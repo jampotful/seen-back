@@ -67,7 +67,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await page.addInitScript(noCamera);
     let BIGQ = 'test/rec/models/standin-big';         // the stand-in's manifest names port 8788; for another, a copy of it is written beside it
     if (BIG_PORT !== 8788) { const fs = require('fs'), d = path.join(__dirname, '..', 'rec', 'models', 'standin-big'); fs.writeFileSync(path.join(d, 'manifest.port.json'), fs.readFileSync(path.join(d, 'manifest.json'), 'utf8').replace(/127\.0\.0\.1:8788/g, '127.0.0.1:' + BIG_PORT)); BIGQ += '/manifest.port.json'; }
-    await page.goto(ORIGIN + '/index.html?side=420&svc=off' + (SW ? '' : '&nosw=1') + '&rec=test/rec/models/standin&big=' + BIGQ, { waitUntil: 'load' });
+    await page.goto(ORIGIN + '/index.html?side=420&svc=off' + (SW ? '' : '&nosw=1') + '&rec=test/rec/models/standin&bigios=1&big=' + BIGQ, { waitUntil: 'load' });   // bigios=1: WebKit with touch points may look like an iPad (build 38)
     await page.waitForFunction(() => window.__seenBack && window.__seenBack.rec.about().state === 'ready', null, { timeout: 60000 });
     await page.evaluate(noCamera); await page.locator('#btnBegin').click(); await page.waitForSelector('#askAnimal', { state: 'visible', timeout: 8000 });
     await page.locator('#inAnimalPick').setInputFiles(path.join(__dirname, '..', 'rec', 'photos', 'stripes.png'));

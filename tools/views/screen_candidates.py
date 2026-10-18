@@ -127,6 +127,12 @@ def check(path, wanted):
             if r.get('doi'): want.add(r['doi'].lower().strip())
             if r.get('openalex'): want.add(r['openalex'])
     bad = 0
+    if wanted and os.path.exists(wanted):  # audit 46: placeholder text in a wanted line's authors reaches the owner's page
+        for j, l in enumerate(open(wanted, encoding='utf-8'), 1):
+            try: w = json.loads(l)
+            except ValueError: continue
+            if re.search(r'not (shown|given|confirmed|listed|available)|unknown|unverified|n/a|et al', str(w.get('authors', '')), re.I):
+                bad += 1; print('%s:%d: authors hold placeholder text (%s); leave the field empty instead' % (wanted, j, str(w.get('authors'))[:60]))
     for i, l in enumerate(open(path, encoding='utf-8'), 1):
         try: r = json.loads(l)
         except ValueError: continue

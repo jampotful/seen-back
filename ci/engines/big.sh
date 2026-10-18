@@ -50,6 +50,8 @@ case "$PART" in
     if [ -n "$ONLY_LX" ]; then if [ "$ONLY_LX" = firefox ]; then run firefox 1500 HEADED=1; else run "$ONLY_LX" 1500; fi
     else
     [ "$ONLY_WK" = 1 ] || run chromium 1500
+    # Playwright's build of Firefox runs WebAssembly about fifteen times slower than Mozilla's builds (docs/ENGINES.md, 18 October, Firefox),
+    # so its times say nothing about Firefox itself; run/engines/ffx-g<label> runs the page's flow in Mozilla's build, started by hand
     [ "$ONLY_WK" = 1 ] || run firefox 1300 HEADED=1
     run webkit 1300
     fi ;;
