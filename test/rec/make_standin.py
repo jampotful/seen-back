@@ -8,8 +8,9 @@ own embeddings of the test photos, so "this photo gives that label" is a real as
 Writes test/rec/models/standin/ (the slot: manifest.json, vision.int8.onnx, kinds.f16.bin, species.f16.bin, species.json),
 test/rec/photos/ (the test photos) and test/rec/models/standin/expect.json (what Python got: the preprocessed pixels'
 checksum, the embedding and the labels expected for each photo). Needs numpy, pillow, onnx, onnxruntime.
+Also test/rec/models/standin-ext (the larger stand-in in its second form); with --ext, only that.
 """
-import hashlib, json, math, pathlib, random
+import hashlib, json, math, pathlib, random, sys
 import numpy as np
 import onnx
 from onnx import TensorProto, helper, numpy_helper
@@ -18,6 +19,47 @@ from onnxruntime.quantization import QuantType, quantize_dynamic
 from PIL import Image, ImageDraw, ImageFilter
 
 here = pathlib.Path(__file__).resolve().parent
+EXT_PORT = 8807                                        # where test/rec/check_ext.js serves the external form's parts from (a second origin)
+
+
+def make_ext():
+    """test/rec/models/standin-ext: the larger stand-in's encoder in the form the larger model may also come in (docs/CONTRACTS.md):
+    a small graph, and its weights as an external data file cut into three parts, with standin-big's species rows. Made from
+    standin-big's parts, so that it can be made by itself: python3 -I test/rec/make_standin.py --ext"""
+    import tempfile
+    big, ext = here / "models" / "standin-big", here / "models" / "standin-ext"
+    ext.mkdir(parents=True, exist_ok=True)
+    mb = json.loads((big / "manifest.json").read_text(encoding="utf-8"))
+    whole = b"".join((big / ("vision.int8.onnx.part%02d" % i)).read_bytes() for i in range(len(mb["vision"]["parts"])))
+    assert hashlib.sha256(whole).hexdigest() == mb["vision"]["sha256"], "standin-big's parts are not its whole"
+    with tempfile.TemporaryDirectory() as tmp:          # every tensor of 1 kB or more moved, unchanged, into one file, as ci/lab/mem_pub.sh does
+        onnx.save_model(onnx.load_from_string(whole), tmp + "/vision.graph.onnx", save_as_external_data=True, all_tensors_to_one_file=True,
+                        location="vision.weights.bin", size_threshold=1024)
+        graph, weights = pathlib.Path(tmp, "vision.graph.onnx").read_bytes(), pathlib.Path(tmp, "vision.weights.bin").read_bytes()
+    (ext / "vision.graph.onnx").write_bytes(graph)
+    at = "http://127.0.0.1:%d/test/rec/models/" % EXT_PORT
+    cut = [0, len(weights) // 3, 2 * len(weights) // 3 + 5, len(weights)]
+    parts = []
+    for i in range(3):
+        piece = weights[cut[i]:cut[i + 1]]
+        (ext / ("vision.weights.bin.part%02d" % i)).write_bytes(piece)
+        parts.append({"url": at + "standin-ext/vision.weights.bin.part%02d" % i, "bytes": len(piece), "sha256": hashlib.sha256(piece).hexdigest()})
+    for f in ("species.f16.bin", "species.json"):
+        (ext / f).write_bytes((big / f).read_bytes())
+    v = {k: x for k, x in mb["vision"].items() if k not in ("parts", "bytes", "sha256")}
+    me = dict(mb, id="standin-ext", vision=dict({"graph": {"url": at + "standin-ext/vision.graph.onnx", "bytes": len(graph), "sha256": hashlib.sha256(graph).hexdigest()},
+                                                 "weights_name": "vision.weights.bin", "parts": parts, "bytes": len(weights), "sha256": hashlib.sha256(weights).hexdigest()}, **v))
+    (ext / "manifest.json").write_text(json.dumps(me, indent=1) + "\n", encoding="utf-8")
+    # the same slot's older form (one file in parts: standin-big's), which a check serves in this slot's place first: its parts must stay
+    # kept until the form above is kept, and go then
+    mo = dict(mb, id="standin-ext-old", vision=dict(mb["vision"], parts=[dict(p, url=p["url"].replace("http://127.0.0.1:8788/test/rec/models/", at)) for p in mb["vision"]["parts"]]))
+    (ext / "manifest.old.json").write_text(json.dumps(mo, indent=1) + "\n", encoding="utf-8")
+    print("  external form: graph %d bytes, weights %d bytes in three parts" % (len(graph), len(weights)))
+
+
+if __name__ == "__main__" and "--ext" in sys.argv:
+    make_ext()
+    sys.exit(0)
 slot = here / "models" / "standin"   # under a models/ directory, so the service worker treats it as it will treat models/pocket/
 photos = here / "photos"
 slot.mkdir(parents=True, exist_ok=True)
@@ -431,3 +473,4 @@ mbk["fusion"] = dict(mb["fusion"], t_kind=100, w_kind=0.5)
 expect["big_kinds"] = {name: answers(load_slot(big / "manifest.kinds.json"), name) for name in MADE}
 (slot / "expect.json").write_text(json.dumps(expect, separators=(",", ":")) + "\n", encoding="utf-8")
 assert all(a["kind"] == "none" and a["sure"] for a in expect["big_kinds"]["wall.png"]) and all(a["named"] == "Great Blue Heron" for a in expect["big_kinds"]["heron.png"]), expect["big_kinds"]["wall.png"][0]
+make_ext()
