@@ -36,9 +36,30 @@ def get(doi):
     return {'error': 'gave up'}
 
 
+def datacite(doi):
+    """Theses, datasets and repository copies carry DataCite DOIs, which Crossref answers with 404."""
+    url = 'https://api.datacite.org/dois/' + urllib.parse.quote(doi, safe='/')
+    for k in range(3):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'seen-back-desk/1.0'}), timeout=30) as f:
+                a = json.load(f)['data']['attributes']
+            return {'doi': doi, 'title': ((a.get('titles') or [{}])[0]).get('title', ''), 'year': a.get('publicationYear'),
+                    'authors': [{'family': c.get('familyName') or c.get('name', ''), 'given': c.get('givenName', '')} for c in a.get('creators', [])],
+                    'journal': a.get('publisher') if isinstance(a.get('publisher'), str) else (a.get('publisher') or {}).get('name', ''),
+                    'type': (a.get('types') or {}).get('resourceTypeGeneral'), 'registry': 'datacite'}
+        except urllib.error.HTTPError as e:
+            if e.code == 404: return None
+            time.sleep(5 * (k + 1))
+        except Exception:
+            time.sleep(5 * (k + 1))
+    return None
+
+
 with open(os.path.join(out, 'crossref.jsonl'), 'w', encoding='utf-8') as fh:
     for i, d in enumerate(dois):
         m = get(d)
+        if 'error' in m and m['error'] == 404 and os.path.exists(only) and (dc := datacite(d)):
+            fh.write(json.dumps(dc, ensure_ascii=False) + '\n'); fh.flush(); time.sleep(0.4); continue
         if 'error' in m:
             rec = {'doi': d, 'error': m['error']}
         else:
