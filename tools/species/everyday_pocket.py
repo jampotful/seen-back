@@ -7,7 +7,10 @@ tools/fusion/fuse.py: away from the county (the kinds head alone with kinds.bias
 and the county list with kinds.county_bias, in the photo's month). The kind is right when it is the kind the app gives
 the species (tools/species/eyes.py), a group without a view of its own counting as other.
 
-Usage: python3 -I tools/species/everyday_pocket.py --species S.csv --photos P.csv --photos-dir DIR --out DIR
+With --detail KEYS (GBIF keys, comma-separated) every photo of those species is written out with the kinds and their
+probabilities, and the county list's first species; by_species gives the kinds said for every species' test photos.
+
+Usage: python3 -I tools/species/everyday_pocket.py --species S.csv --photos P.csv --photos-dir DIR --out DIR [--detail KEYS]
 """
 import argparse
 import csv
@@ -31,7 +34,9 @@ def main():
     ap.add_argument("--photos", required=True)
     ap.add_argument("--photos-dir", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--detail", default="", help="GBIF keys whose photos are written out one by one")
     a = ap.parse_args()
+    detail = {int(x) for x in a.detail.split(",") if x.strip()}
     os.makedirs(a.out, exist_ok=True)
     t0 = time.time()
     slot = fuse.load_slot(os.path.join(ROOT, "models", "pocket"))
@@ -57,7 +62,14 @@ def main():
             else:
                 o = fuse.fuse(m, table, month, kd[i], sd[i], kind_bias=slot["kind_bias"], species_bias=slot["species_bias"],
                               kind_bias_list=slot["kind_bias_list"])
-            res[c].append({"id": r["id"], "set": r["set"], "category": r["category"], "truth": truth, "kind": o["kind"], "sure": bool(o["sure"])})
+            x = {"id": r["id"], "set": r["set"], "category": r["category"], "key": int(r["gbif_key"]), "sci": r["sci"], "truth": truth,
+                 "kind": o["kind"], "sure": bool(o["sure"])}
+            if int(r["gbif_key"]) in detail:
+                x["kinds"] = [(k["key"], round(k["p"], 3), None if k["head"] is None else round(k["head"], 3)) for k in o["kinds"][:4]]
+                x["kindP"] = round(o["kindP"], 3)
+                x["species"] = [(y["sci"], round(y["p"], 3), y["kind"]) for y in o["species"][:2]]
+                x["zone"] = r.get("zone", "")
+            res[c].append(x)
     out = {"model": m["id"], "vectors": "full precision through tools/lab/lab.py", "photos": len(ph), "missing": len(bad), "seconds": round(time.time() - t0)}
     for c, L in res.items():
         for which in ("test", "all"):
@@ -74,8 +86,19 @@ def main():
             d["right"] += int(x["kind"] == x["truth"])
             d["said"][x["kind"]] = d["said"].get(x["kind"], 0) + 1
         out["%s_by_category" % c] = by
+        bs = {}
+        for x in L:
+            if x["set"] != "test":
+                continue
+            d = bs.setdefault(str(x["key"]), {"sci": x["sci"], "truth": x["truth"], "n": 0, "right": 0, "sure": 0, "said": {}})
+            d["n"] += 1
+            d["right"] += int(x["kind"] == x["truth"])
+            d["sure"] += int(x["sure"])
+            d["said"][x["kind"]] = d["said"].get(x["kind"], 0) + 1
+        out["%s_by_species" % c] = bs
+        out["%s_detail" % c] = [x for x in L if x["key"] in detail]
     json.dump(out, open(os.path.join(a.out, "pocket.json"), "w"), indent=1)
-    print(json.dumps({k: v for k, v in out.items() if "by_category" not in k}, indent=1))
+    print(json.dumps({k: v for k, v in out.items() if "by_" not in k and "detail" not in k}, indent=1))
 
 
 if __name__ == "__main__":

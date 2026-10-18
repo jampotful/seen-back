@@ -8,8 +8,9 @@ name: everyday
 #                       for where people live, and the measurements on the captive and cultivated photos and on the
 #                       world test (tools/species/everyday_build.py). A label starting with build-pub also publishes the
 #                       extended files to pub/naturalist-everyday. Results on ci as runs/everyday/<run>-build.
-#   pocket-<anything>   the pocket model's kind on the same photos, away from the county and in it
-#                       (tools/species/everyday_pocket.py). Results on ci as runs/everyday/<run>-pocket.
+#   pocket-<anything>   the pocket model's kind on the same photos, away from the county and in it, by species, and photo
+#                       by photo for the dog and the cat (tools/species/everyday_pocket.py). Results on ci as
+#                       runs/everyday/<run>-pocket.
 on:
   push:
     branches: ['run/everyday/**']
@@ -131,7 +132,7 @@ jobs:
           mkdir -p out work/photos
           python3 -I tools/lab/fetch_photos.py data/everyday/photos.csv work/photos --threads 16 2>&1 | tail -5 | tee out/log.txt
           python3 -I tools/species/everyday_pocket.py --species data/everyday/species.csv --photos data/everyday/photos.csv \
-            --photos-dir work/photos --out out 2>&1 | tee -a out/log.txt
+            --photos-dir work/photos --out out --detail 5219200,2435035 2>&1 | tee -a out/log.txt
       - name: return results
         if: always()
         env:
