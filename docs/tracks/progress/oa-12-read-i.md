@@ -12,5 +12,6 @@ Entries, in launch order: 16, 22, 23, 24, 37, 39, 55, 56, 59, 68. Texts read fro
 | 39 | Troscianko et al. 2012, Nat Commun 3: 1110 | published PDF | 18 | binocular overlap and eye movement for six Corvus species (Table 1), American crow cited; no chough value |
 | 55 | Zhou et al. 2026, Plant Cell Environ 49(9): 6621-6634 | PMC HTML | 2 | no E. sibiricus light measurement; heterologous Arabidopsis result logged as g, cited Arabidopsis transcriptome as partial |
 | 56 | Nolet and Wolyn 2020, Can J Plant Sci 100(4): 380-391 | accepted manuscript PDF | 4 | no light treatment; fall cue statement, inferred soil-temperature sensing (g), two cited studies |
+| 59 | Hu et al. 2018, PLOS ONE 13(9): e0204137 | Europe PMC XML | 2 | no light treatment in radish; vernalization expression (reanalysed, partial), Arabidopsis background |
 
-In progress: entry 59.
+In progress: entry 68.
