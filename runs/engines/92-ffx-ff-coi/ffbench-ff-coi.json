@@ -1,0 +1,138 @@
+{
+ "label": "ff-coi",
+ "browser": "firefox",
+ "prefs": {},
+ "headed": false,
+ "cases": [
+  {
+   "case": "pocket:all:5:t4",
+   "url": "http://127.0.0.1:8790/test/engines/ffbench.html?model=pocket&opt=all&reps=5&threads=4",
+   "done": true,
+   "steps": [
+    [
+     260,
+     "fetched in 71 ms"
+    ],
+    [
+     886,
+     "session in 626 ms"
+    ],
+    [
+     2786,
+     "run 0 in 1898 ms"
+    ],
+    [
+     4627,
+     "run 1 in 1840 ms"
+    ],
+    [
+     6630,
+     "run 2 in 2002 ms"
+    ],
+    [
+     8480,
+     "run 3 in 1846 ms"
+    ],
+    [
+     10406,
+     "run 4 in 1928 ms"
+    ]
+   ],
+   "features": {
+    "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0",
+    "coi": true,
+    "cores": 4,
+    "sab": "function",
+    "simd": true,
+    "relaxedSimd": false,
+    "sharedMemory": true
+   },
+   "result": {
+    "model": "pocket",
+    "opt": "all",
+    "threads": 4,
+    "wb": false,
+    "t": {
+     "runs": [
+      1898,
+      1840,
+      2002,
+      1846,
+      1928
+     ],
+     "fetch": 71,
+     "session": 626
+    },
+    "head": [
+     0.011763,
+     0.215329,
+     -0.131141,
+     -0.000086,
+     0.297737,
+     0.082296
+    ],
+    "sum": -89.13024
+   },
+   "wallMs": 12646,
+   "timedOut": false
+  },
+  {
+   "case": "big:all:2:t4",
+   "url": "http://127.0.0.1:8790/test/engines/ffbench.html?model=big&opt=all&reps=2&threads=4",
+   "done": true,
+   "steps": [
+    [
+     11626,
+     "fetched in 11548 ms"
+    ],
+    [
+     13741,
+     "session in 2115 ms"
+    ],
+    [
+     35659,
+     "run 0 in 21917 ms"
+    ],
+    [
+     57256,
+     "run 1 in 21595 ms"
+    ]
+   ],
+   "features": {
+    "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0",
+    "coi": true,
+    "cores": 4,
+    "sab": "function",
+    "simd": true,
+    "relaxedSimd": false,
+    "sharedMemory": true
+   },
+   "result": {
+    "model": "big",
+    "opt": "all",
+    "threads": 4,
+    "wb": false,
+    "t": {
+     "runs": [
+      21917,
+      21595
+     ],
+     "fetch": 11548,
+     "session": 2115
+    },
+    "head": [
+     1.13896,
+     1.475898,
+     0.308418,
+     -2.129014,
+     1.126932,
+     -0.788226
+    ],
+    "sum": -170.96748
+   },
+   "wallMs": 58288,
+   "timedOut": false
+  }
+ ],
+ "version": "142.0.1"
+}
