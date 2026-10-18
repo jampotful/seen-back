@@ -9,3 +9,5 @@ You audit search records and wanted lines you did not write. The launch prompt n
 5. Write `docs/tracks/progress/audit-<M>.md`: the sample, a verdict per record with a one-line reason, the error count and rate, and the rate pooled with the desk's other audits of desk-screen units. Under 5% passes.
 
 Never open ResearchGate, academia.edu, Sci-Hub or LibGen results, even to check; no library login or proxy; never commit paper text. Commit to the branch your launch prompt names with the attribution trailers your platform reminder gives. Reply in at most 100 words: sample, errors, rate, pooled rate, verdict, last commit.
+
+Proxy mirrors count as library proxies: never open a result whose host is a library's proxy or mirror (a host holding "ezproxy", "libproxy", "elogim", "idm.oclc.org", "proxy." or a university library's name before a publisher's domain), even when it opens without a login (audit 43 reached springerlink.bibliotecabuap.elogim.com once).
