@@ -154,7 +154,7 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 - 21:32 UTC: harvest-29 finished (71 search records, 56 wanted lines, 181 web searches, check clean); audit 44 runs on it. `docs/tracks/batches/dw-2.jsonl` lists the 82 wanted papers of harvest-29 and -30 in the `ci/oa/list.jsonl` format (batch `dw-2`) for the oa job, beside dw-1's 28. Neither has run yet.
 - 21:34 UTC: harvest-31 finished (15 genera, 77 search records, 14 wanted lines, 162 web searches, check clean); its wanted papers join dw-2 (96 entries). It waits for the verdicts of audits 43 and 44 before its own audit. harvest-32 (15 animal genera from the released harvest-c set) launched.
 
-## Desk, 18 Oct 21:53 UTC: the desk's wanted papers go onto the wanted list on main
+## Desk, 18 Oct 21:42 UTC: the desk's wanted papers go onto the wanted list on main
 - The owner asked that every paper the desk and Codex could not get be on the Papers Wanted list. The wanted lines of the desk's unmerged screening units (harvest-23 to -31) were on branches only. 107 of their 134 lines now sit in `docs/views/wanted/harvest-23.jsonl` to `harvest-31.jsonl` on main, without the units' search records (those still wait for their audits). Authors, and a missing year or journal, come from Crossref (desk Crossref run 3, 98 DOIs, `ci/crossref/dois.txt` on run/crossref/desk-wanted-1); each changed line says so in `why`.
 - 27 lines stay off the list because no source gives their authors, or because the line's placeholder title does not match its DOI's Crossref title. They remain in dw-1 and dw-2 for the oa job, which looks titles up:
   - harvest-27 -: no authors: Tests of the limiting visual resolution of the DCMD system of the lubb
