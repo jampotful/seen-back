@@ -447,7 +447,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '37';
+  var BUILD = '38';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -2718,10 +2718,17 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   // only), the device must have twice the worst peak: in practice it reports 8. Where it says nothing (Safari, Firefox), the page asks for the
   // WebAssembly heap the model needs, 1 GiB (the live form's heap is 821 MiB), and lets it go at once; a browser that refuses it would refuse the
   // model. A device that does not fit is told nothing: the full database is simply not offered there, and the pocket model answers alone.
+  // From build 38 an iPhone, iPad or iPod is refused before either test (by: 'ios-untested'). iOS ends a tab that passes its memory limit, a
+  // heap granted says nothing of that limit, and no real iPhone has run the model: since build 37 its peak on a Mac is 1,761 MiB of footprint
+  // in Safari (docs/ENGINES.md, 18 October). Such a device names itself in its user agent, or, since iPadOS asks for desktop sites, gives a
+  // Mac's user agent with more than one touch point. The owner lifts this gate for a test on a real iPhone with ?bigios=1, which the browser
+  // keeps (iosTestNow); the two tests then decide as anywhere else.
   // test/rec/fits_test.js runs this function in Node with made-up devices; it must stay free of anything outside its own arguments.
   /* bigFits:start */
-  function bigFits(dev) {                            // dev: { memory: navigator.deviceMemory, tryHeap: function (MiB) -> true | false }
-    var PEAK_MIB = 2600, HEAP_MIB = 1024, m = dev && dev.memory;
+  function bigFits(dev) {                            // dev: { memory: navigator.deviceMemory, tryHeap: function (MiB) -> true | false,
+                                                     //   ua: navigator.userAgent, touch: navigator.maxTouchPoints, iosTest: true where the owner lifted the gate }
+    var PEAK_MIB = 2600, HEAP_MIB = 1024, m = dev && dev.memory, ua = dev && typeof dev.ua === 'string' ? dev.ua : '';
+    if ((/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && typeof dev.touch === 'number' && dev.touch > 1)) && dev.iosTest !== true) return { ok: false, by: 'ios-untested' };
     if (typeof m === 'number' && isFinite(m) && m > 0) return m * 1024 >= 2 * PEAK_MIB ? { ok: true, by: 'memory', gib: m } : { ok: false, by: 'memory', gib: m };
     var t = false; try { t = !!(dev && typeof dev.tryHeap === 'function' && dev.tryHeap(HEAP_MIB)); } catch (e) { t = false; }
     return { ok: t, by: 'heap', mib: HEAP_MIB };
@@ -2730,11 +2737,21 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
   function heapTry(mib) {                            // reserve a WebAssembly heap of that size and drop it; nothing is written to it
     try { var w = new WebAssembly.Memory({ initial: mib * 16, maximum: mib * 16 }); return !!(w && w.buffer && w.buffer.byteLength >= mib * 1048576); } catch (e) { return false; }
   }
+  // On any address ?bigios=1 lifts the gate for iOS and ?bigios=0 puts it back; the browser keeps the choice under this key until then.
+  var BIGIOS_KEY = 'seenback.bigios.v1';
+  function iosTestNow() {
+    var q = /[?&]bigios=([01])\b/.exec(location.search || '');
+    try {
+      if (q) { if (q[1] === '1') localStorage.setItem(BIGIOS_KEY, '1'); else localStorage.removeItem(BIGIOS_KEY); }
+      return localStorage.getItem(BIGIOS_KEY) === '1';
+    } catch (e) { return !!q && q[1] === '1'; }       // a browser that keeps nothing takes the switch for this visit only
+  }
   // On this machine a check may play a device: ?bigmem=<GiB> for one that says how much memory it has, ?bigmem=heap-no or heap-yes for one that does not.
+  // A device played so is never an iPhone, so ?bigmem=heap-yes still offers the full database to a check in an iPhone's browser.
   function deviceNow() {
     var q = onThisMachine ? /[?&]bigmem=([0-9.]+|heap-no|heap-yes)/.exec(location.search || '') : null;
     if (q) return q[1] === 'heap-no' ? { tryHeap: function () { return false; } } : q[1] === 'heap-yes' ? { tryHeap: function () { return true; } } : { memory: +q[1] };
-    return { memory: navigator.deviceMemory, tryHeap: heapTry };
+    return { memory: navigator.deviceMemory, tryHeap: heapTry, ua: String(navigator.userAgent || ''), touch: navigator.maxTouchPoints, iosTest: iosTestNow() };
   }
   function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the full database
     var big = !!o.big, slot = o.slot;
@@ -2767,7 +2784,7 @@ body:has(#askView:not([hidden])) .reveal, body:has(#askAnimal:not([hidden])) .re
     function fitCheck() {                              // asked once, the first time the full database is surveyed or fetched, never at the page's start
       if (!big || cannot || fitDone) return; fitDone = true;
       var f = bigFits(deviceNow());
-      diag('large-fits', (f.ok ? 'yes ' : 'no ') + f.by + ' ' + (f.by === 'memory' ? f.gib : f.mib));
+      diag('large-fits', (f.ok ? 'yes ' : 'no ') + f.by + (f.by === 'memory' ? ' ' + f.gib : f.by === 'heap' ? ' ' + f.mib : ''));
       if (!f.ok) { cannot = 'memory'; state = 'failed'; why = 'memory'; }
     }
     var KEEP = 'keep-v1', EPS = 1e-9;

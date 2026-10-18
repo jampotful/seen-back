@@ -11,3 +11,5 @@ For each genus in your launch prompt:
 5. Before every commit: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/<unit>.jsonl --wanted docs/views/wanted/<unit>.jsonl` must print "0 problems".
 Write no evidence records in this round; readers log evidence from the oa job's texts with `quotecheck.py`.
 6. A genus whose harvest shows a failed step ("gave up") gets no search record until a rerun repairs it; `--check` fails such a record (audit 44). Leave a wanted line's author field empty when no source shows the authors: placeholder text in it reaches the owner's page.
+
+Proxy mirrors count as library proxies: never open a result whose host is a library's proxy or mirror (a host holding "ezproxy", "libproxy", "elogim", "idm.oclc.org", "proxy." or a university library's name before a publisher's domain), even when it opens without a login (audit 43 reached springerlink.bibliotecabuap.elogim.com once).

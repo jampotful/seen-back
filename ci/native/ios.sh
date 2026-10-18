@@ -138,10 +138,10 @@ for name, kb in sorted(peak.items()):
     print("peak resident memory on the Mac: %s %d MB" % (name, kb // 1024))
 PY
 }
-bigprobe 4-big -probe native-probe/big.js
+bigprobe 4-big -q bigios=1 -probe native-probe/big.js   # since build 38 the page offers the full database on iOS only with bigios=1
 if [ $BIG = 2 ]; then
 step "4b. the larger model once more, after the app is closed and opened again: the parts must come from what the page kept"
-bigprobe 4b-big-again -probe native-probe/big.js
+bigprobe 4b-big-again -q bigios=1 -probe native-probe/big.js
 step "6. Begin inside the app: the page asks for the camera (the simulator has none)"
 xcrun simctl terminate "$UDID" $BID >/dev/null 2>&1; sleep 1
 xcrun simctl launch "$UDID" $BID -js 'document.getElementById("btnBegin").click()' 2>&1
@@ -152,7 +152,7 @@ else
 step "5. the larger model again, with the same app pointed at the page served from this Mac (http://127.0.0.1:8781), where Cache Storage takes http addresses"
 python3 -I ci/engines/serve.py 8781 "$ROOT" "$ROOT/out/reports" > "$OUT/serve-log.txt" 2>&1 &
 sleep 1; curl -s -o /dev/null -w "8781 -> %{http_code}\n" http://127.0.0.1:8781/index.html
-bigprobe 5-big-served -url "http://127.0.0.1:8781/index.html" -probe ci/native/probe-big.js
+bigprobe 5-big-served -url "http://127.0.0.1:8781/index.html?bigios=1" -probe ci/native/probe-big.js
 fi
 fi
 
