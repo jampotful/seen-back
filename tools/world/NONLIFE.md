@@ -48,3 +48,13 @@ The test photos were read after the tuning choice: the made test half once, and 
 ## What would settle it
 
 Real photos of the made subjects (coins, stones, stains, rust, bark, bread, toys) from a phone, a few hundred, with COCO's rooms beside them. Two uses: score the `other` level above on them before anything ships, and add them to the fit as `none` rows (as COCO's rooms are), which addresses the cause, since `other` was fitted without any such texture marked as nothing alive. `tools/world/nonlife_make.py` would need a few lines to encode a folder of photos in place of the drawn families, and `nonlife.py --made` reads its output as it is.
+
+## Real photographs (track nonlife2, 18 October 2026)
+
+Stated before any real photo was fetched or measured (commit on `agent/nonlife2` before the first run of `.github/workflows/nonlife.yml`).
+
+The photos: about 1,500 real photographs from Wikimedia Commons in fifteen families (coins, stones, rust, stains, bricks, food on plates, toys, clothing, furniture, screens, cars, signs, sky and clouds, floors, walls), licensed CC0, CC BY or public domain, with each photo's licence, author and Commons page in `manifest.csv` on `pub/nonlife-real` (`tools/world/nonlife_real.py`). A photo is left out when its title, description or categories name a living thing. Each photo's set (tune or test) is fixed by a hash of its id when the manifest is made, half and half.
+
+The rules: the five rules above, and a linear probe on the photo's vector fitted on the tuning photos only (the real tuning photos against the world tuning photos, scored out of fold on the photos it was fitted on). A rule is chosen on the tuning photos only: the fewest asserted living kinds on COCO's rooms and the real photos, among the rules that hold every pass mark of `docs/tracks/head.md` and send at most 5% of real creatures to the sheet. The 5% stands, since nothing above argues for another level.
+
+The marks on the test photos, read once: every pass mark of `docs/tracks/head.md` as `nonlife.py` scores it; at most 5% of the world test photos of creatures the page calls "this creature" today sent to the sheet, and at most 5% of all world test photos; and at least a quarter fewer living kinds asserted on the real test photos with the head alone. The rule ships only if all three hold. The larger model's answers on the same photos are measured and reported; no rule is chosen with them.

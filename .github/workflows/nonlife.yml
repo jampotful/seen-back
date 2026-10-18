@@ -1,0 +1,89 @@
+name: nonlife
+# Real photographs with nothing alive in them (tools/world/nonlife_real.py, tools/world/NONLIFE.md, track nonlife2).
+# Push a commit to run/nonlife/<label>. The photos job searches Wikimedia Commons, keeps CC0, CC BY and public-domain
+# photographs with their licence and source, fetches them, splits them into tuning and test photos by a hash of the id,
+# makes the pocket encoder's vectors and publishes everything to pub/nonlife-real (never main). The big job gives the
+# larger model's answers on them; the pocket job runs tools/world/nonlife.py on them (the rule search on the tuning
+# photos, then the test photos once). Results come back on ci as runs/nonlife/<run>-photos, -big and -pocket.
+on:
+  push:
+    branches: ['run/nonlife/**']
+permissions:
+  contents: write
+concurrency:
+  group: nonlife-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: search, fetch, encode, publish
+        run: bash ci/nonlife/photos.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: real
+          path: work/real/
+          retention-days: 5
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh nonlife out photos
+
+  big:
+    needs: photos
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: real
+          path: work/real
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: the larger model's answers
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+        run: bash ci/nonlife/big.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh nonlife out big
+
+  pocket:
+    needs: photos
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: real
+          path: work/real
+      - name: install
+        run: python3 -m pip install --quiet numpy scikit-learn
+      - name: the pocket model's answers and the rule search
+        run: bash ci/nonlife/pocket.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh nonlife out pocket
