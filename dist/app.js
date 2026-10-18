@@ -8,7 +8,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '32';
+  var BUILD = '33';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -2269,6 +2269,30 @@
       test: { firstGuess: firstGuess, update: update, logShare: logShare, now: function () { return now().P; }, row: row, discSum: discSum, N: N, T: T }
     };
   }
+  // ---------- whether this device can hold the full database (burst 12). On build machines the largest browser process reached 1,501 MiB
+  // (Chromium) to 2,598 MiB (WebKit on Linux) while it ran (docs/ENGINES.md), and a phone that runs out of memory kills the page without a word.
+  // Where the browser says how much memory the device has (navigator.deviceMemory, in GiB, rounded down to a power of two and at most 8; Chromium
+  // only), the device must have twice the worst peak: in practice it reports 8. Where it says nothing (Safari, Firefox), the page asks for the
+  // WebAssembly heap the model needs, 1 GiB (the live form's heap is 821 MiB), and lets it go at once; a browser that refuses it would refuse the
+  // model. A device that does not fit is told nothing: the full database is simply not offered there, and the pocket model answers alone.
+  // test/rec/fits_test.js runs this function in Node with made-up devices; it must stay free of anything outside its own arguments.
+  /* bigFits:start */
+  function bigFits(dev) {                            // dev: { memory: navigator.deviceMemory, tryHeap: function (MiB) -> true | false }
+    var PEAK_MIB = 2600, HEAP_MIB = 1024, m = dev && dev.memory;
+    if (typeof m === 'number' && isFinite(m) && m > 0) return m * 1024 >= 2 * PEAK_MIB ? { ok: true, by: 'memory', gib: m } : { ok: false, by: 'memory', gib: m };
+    var t = false; try { t = !!(dev && typeof dev.tryHeap === 'function' && dev.tryHeap(HEAP_MIB)); } catch (e) { t = false; }
+    return { ok: t, by: 'heap', mib: HEAP_MIB };
+  }
+  /* bigFits:end */
+  function heapTry(mib) {                            // reserve a WebAssembly heap of that size and drop it; nothing is written to it
+    try { var w = new WebAssembly.Memory({ initial: mib * 16, maximum: mib * 16 }); return !!(w && w.buffer && w.buffer.byteLength >= mib * 1048576); } catch (e) { return false; }
+  }
+  // On this machine a check may play a device: ?bigmem=<GiB> for one that says how much memory it has, ?bigmem=heap-no or heap-yes for one that does not.
+  function deviceNow() {
+    var q = onThisMachine ? /[?&]bigmem=([0-9.]+|heap-no|heap-yes)/.exec(location.search || '') : null;
+    if (q) return q[1] === 'heap-no' ? { tryHeap: function () { return false; } } : q[1] === 'heap-yes' ? { tryHeap: function () { return true; } } : { memory: +q[1] };
+    return { memory: navigator.deviceMemory, tryHeap: heapTry };
+  }
   function recognizer(o) {                             // o.slot: where the manifest is, or 'off'; o.big: the full database
     var big = !!o.big, slot = o.slot;
     var manifestUrl = /\.json$/.test(slot) ? slot : slot.replace(/\/$/, '') + '/manifest.json';
@@ -2294,6 +2318,14 @@
       SAY.room = 'There is not enough storage on this device for the full database.';
       SAY.keep = 'The full database could not be kept on this device.';
       SAY.stopped = 'The download has been stopped.';
+      SAY.memory = 'This device does not have enough memory for the full database.';   // never shown by the page today: survey() says 'none'
+    }
+    var fitDone = false;
+    function fitCheck() {                              // asked once, the first time the full database is surveyed or fetched, never at the page's start
+      if (!big || cannot || fitDone) return; fitDone = true;
+      var f = bigFits(deviceNow());
+      diag('large-fits', (f.ok ? 'yes ' : 'no ') + f.by + ' ' + (f.by === 'memory' ? f.gib : f.mib));
+      if (!f.ok) { cannot = 'memory'; state = 'failed'; why = 'memory'; }
     }
     var KEEP = 'keep-v1', EPS = 1e-9;
     var state = cannot ? 'failed' : 'idle', why = cannot, M = null, ver = '', base = '', cur = null, worlds = [], worker = null, loadP = null, loadMs = 0, info = { backend: '', threads: 0 };
@@ -2584,6 +2616,7 @@
     // What of the full database is on this device: 'none' (there is no such model, or it cannot be used here), 'absent', 'partial', 'getting', 'kept'.
     // The manifest is asked for the first time this is called, and never before.
     function survey(fresh) {
+      fitCheck();
       if (cannot || gone) return Promise.resolve('none');
       if (!fresh && getP) return Promise.resolve('getting');
       if (!fresh && have) return Promise.resolve(have);
@@ -2607,6 +2640,7 @@
     // Fetch what is missing, one part after another, each verified and kept before the next is asked for; then start the encoder once, which
     // verifies the whole and shows that it runs on this device. Stopped by halt(); a later call carries on from the parts already kept.
     function get() {
+      fitCheck();
       if (cannot) return Promise.reject(err(cannot));
       if (getP) return getP;
       var ctl = typeof AbortController === 'function' ? new AbortController() : null, store = null;

@@ -33,7 +33,7 @@ const PHOTOS = process.env.PHOTOS || path.join(here, 'photos');
 const photo = (n) => path.join(PHOTOS, n);
 const slotDir = path.join(here, '..', '..', SLOT);
 const expect = JSON.parse(fs.readFileSync(path.join(slotDir, 'expect.json'), 'utf8'));   // what Python got (make_standin.py, or make_slot.py --photos for a real model)
-const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'zone', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer']
+const want = process.argv.slice(2).length ? process.argv.slice(2) : ['flow', 'nameover', 'camera', 'fuse', 'notsure', 'trained', 'parity', 'progress', 'typeit', 'service', 'large', 'away', 'zone', 'offline', 'version', 'keptcopy', 'missing', 'damaged', 'dying', 'about', 'viewer', 'memory']
   .filter((w) => isChromium || w !== 'camera');                                     // the stand-in camera feed is a Chromium switch
 const ctl = (q) => new Promise((res, rej) => http.get(ORIGIN + '/__ctl?' + q, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(JSON.parse(b))); }).on('error', rej));
 const text = (page, id) => page.evaluate((i) => document.getElementById(i).textContent, id);
@@ -633,6 +633,26 @@ async function meet(page, name) {
       r.world.sameAsPython = sameP;
     }
   };
+  if (want.includes('memory')) await section('memory', async () => {   // burst 12: a device that cannot hold the full database is never offered it, and is told nothing
+    const slot = await bigUp(), r = {}; let ok = true; sofar = r;
+    for (const [name, mem, offer] of [['2GiB', '2', false], ['4GiB', '4', false], ['noFigureHeapRefused', 'heap-no', false], ['noFigureHeapGranted', 'heap-yes', true], ['8GiB', '8', true]]) {
+      await ctl('reset=1'); await bctl('reset=1');
+      const { ctx, page, errors } = await open(browser, '&nosw=1&rec=' + SLOT + '&big=' + slot + '&bigmem=' + mem); await ready(page); await begin(page);
+      const s = await meet(page, 'stripes.png');
+      const line = offer ? await offered(page) : (await page.waitForTimeout(1500), await svcLine(page));
+      const fits = await page.evaluate(() => window.__seenBack.diag().filter((d) => d.what === 'large-fits').map((d) => d.code).slice(-1)[0] || '');
+      const parts = (await partsAsked()).length;
+      await toAbout(page); await page.waitForTimeout(400);
+      const about = await page.locator('#bigBox').isVisible();
+      const words = await page.evaluate(() => document.body.innerText);
+      r[name] = { eyes: s.eyes, line, about, parts, fits, errors: errors.slice(), saysMemory: /enough memory/.test(words) };
+      const good = s.eyes === 'insect' && parts === 0 && !errors.length && !r[name].saysMemory && /^(yes|no) (memory|heap)/.test(fits) && (fits.indexOf('yes') === 0) === offer
+        && (offer ? line === 'Download the full database of species?' && about : line === '' && !about);
+      if (!good) { ok = false; (r.failed = r.failed || []).push(name); }
+      await ctx.close();
+    }
+    done('memory', r, ok);
+  });
   if (want.includes('large')) await section('large', async () => {    // consent, progress, a reload mid-way, stopping, deleting; the answer in the background; another kind offered, never taken; failures in words
     const slot = await bigUp(), Q = '&nosw=1&rec=' + SLOT + '&big=' + slot, r = {}; let ok = true; sofar = r; const all = (name, cond) => { if (!cond) { ok = false; (r.failed = r.failed || []).push(name); } };
     const MB = Math.max(1, Math.round(JSON.parse(fs.readFileSync(path.join(here, 'models', 'standin-big', 'manifest.json'), 'utf8')).vision.bytes / 1e6));
