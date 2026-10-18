@@ -1,0 +1,38 @@
+name: everyday
+# The species people photograph at home (docs/tracks/prompts/burst13-everyday.md, tools/species/EVERYDAY.md).
+# Start it by pushing a commit to run/everyday/<label>:
+#   resolve-<anything>  GBIF's match, the kind of eye, the iNaturalist taxon, the count of captive or cultivated
+#                       observations and a manifest of their photos for every query of tools/species/everyday_list.csv
+#                       (tools/species/everyday.py resolve). Results on ci as runs/everyday/<run>-resolve.
+#   build-<anything>    BioCLIP 2's text rows for the new names, the full database extended with them and with a prior
+#                       for where people live, and the measurements on the captive and cultivated photos and on the
+#                       world test (tools/species/everyday_build.py). A label starting with build-pub also publishes the
+#                       extended files to pub/naturalist-everyday. Results on ci as runs/everyday/<run>-build.
+on:
+  push:
+    branches: ['run/everyday/**']
+permissions:
+  contents: write
+concurrency:
+  group: everyday-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  resolve:
+    if: startsWith(github.ref_name, 'run/everyday/resolve')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: resolve
+        run: |
+          set -o pipefail
+          mkdir -p out
+          python3 -I tools/species/everyday.py resolve --out out 2>&1 | tee out/log.txt
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out resolve
