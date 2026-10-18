@@ -11,7 +11,7 @@ const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path'), { spawn } = require('child_process');
 const here = __dirname, PORT = +(process.env.PORT || 8809), EXT_PORT = 8807, ORIGIN = 'http://127.0.0.1:' + PORT, SLOW = +(process.env.SLOW || 1);
 const EXT = 'test/rec/models/standin-ext', OLD = 'test/rec/models/standin-big';
-const say = { damaged: 'The full database\u2019s download is damaged.' };   // the page's words as of build 34
+const say = { damaged: 'The full database\u2019s download is damaged.' };   // the page's words as of build 35
 const get = (u) => new Promise((res, rej) => http.get(u, (r) => { let b = ''; r.on('data', (d) => b += d); r.on('end', () => res(b)); }).on('error', rej));
 const ctl = (port, q) => get('http://127.0.0.1:' + port + '/__ctl?' + q).then((b) => JSON.parse(b));
 const servers = [];
@@ -34,7 +34,7 @@ function hold(name, cond, detail) { results.push(name); if (!cond) { failed++; c
   async function open(ctx, slot) {
     const page = await ctx.newPage(); page.setDefaultTimeout(30000 * SLOW);
     page.on('pageerror', (e) => errors.push(e.message));
-    await page.goto(ORIGIN + '/index.html?side=420&nosw=1&svc=off&rec=off&bigmem=8&big=' + slot);   // bigmem=8: a device that can hold it (build 33), whatever this machine is
+    await page.goto(ORIGIN + '/index.html?side=420&nosw=1&svc=off&rec=off&bigmem=8&big=' + slot);   // bigmem=8: a device that can hold it (build 35), whatever this machine is
     await page.waitForFunction(() => !!(window.__seenBack && window.__seenBack.big), null, { timeout: 30000 * SLOW });
     return page;
   }
