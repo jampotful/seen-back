@@ -33,9 +33,15 @@ def load():
             except ValueError: continue  # the last line of a shard that was cut off
             d['run'] = num(n)[0]
             if d.get('type') == 'genus_extra' and d.get('genus') in genera:  # steps added later by a SUPPLEMENT run (ci/harvest/harvest.py)
-                genera[d['genus']].setdefault('extra', []).append(d); continue
+                g = genera[d['genus']]
+                if d.get('family') and not g.get('family'): g['family'] = d['family']; g['family_source'] = d.get('family_source', '')
+                if d.get('queries'): g.setdefault('extra', []).append(d)
+                continue
             if d.get('type') == 'genus': genera[d['genus']] = d
-            elif d.get('type') == 'family': families[d['family']] = d
+            elif d.get('type') == 'family':
+                # a later run's failed review ("gave up") never hides an earlier run's completed one
+                old = families.get(d['family'])
+                if not (old and not (old.get('query') or {}).get('error') and (d.get('query') or {}).get('error')): families[d['family']] = d
     return ','.join(map(str, sorted(runs))), genera, families, summaries
 
 
@@ -45,7 +51,8 @@ def show(d, families):
         x = w.get(wid, {})
         oa = f"{x.get('oa_status') or 'closed'} {x.get('oa_url') or ''} {x.get('license') or ''}".strip()
         return f"  [{k}] {x.get('title')} ({x.get('year')}) {x.get('venue')} | doi {x.get('doi') or '-'} | {oa}\n      {(x.get('abstract') or '')[:350]}"
-    out = [f"## {d['genus']} ({d['family']}, {d['order']}) open traits: {', '.join(d['traits'])}; views {', '.join(d['views'])}; harvest run {d['run']}"]
+    src = f" [family from {d['family_source']}]" if d.get('family_source') else ''
+    out = [f"## {d['genus']} ({d['family']}, {d['order']}){src} open traits: {', '.join(d['traits'])}; views {', '.join(d['views'])}; harvest run {d['run']}"]
     k = 0
     for q in d['queries']:
         out.append(f"query \"{q['q']}\": {q.get('n')} hits" + (f" (error {q['error']})" if q.get('error') else ''))

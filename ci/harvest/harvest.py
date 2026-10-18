@@ -98,6 +98,43 @@ def evidence_doi(ref, cache={}):
     except (ValueError, AttributeError): return ''
 
 
+GBIF_CLASS = {'insect': 'Insecta', 'bee': 'Insecta', 'bird': 'Aves', 'wader': 'Aves', 'hawk': 'Aves', 'frog': 'Amphibia',
+              'deer': 'Mammalia', 'squirrel': 'Mammalia', 'dog': 'Mammalia', 'cat': 'Mammalia', 'rabbit': 'Mammalia'}
+
+
+def gbif_family(t):
+    """The family the GBIF backbone gives a genus the queue lists without one, or None. The match must be exact, at genus
+    rank, and inside the group the genus's views imply (a genus name can belong to a plant and an animal, as Aquarius does)."""
+    views = set(t['views'])
+    if views == {'plant'}: hint = {'kingdom': 'Plantae'}
+    elif views == {'reptile'}: hint = {'kingdom': 'Animalia', 'phylum': 'Chordata'}
+    else:
+        cls = {GBIF_CLASS.get(v) for v in views}
+        if len(cls) != 1 or None in cls: return None
+        hint = {'kingdom': 'Animalia', 'class': cls.pop()}
+    url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode(dict(name=t['genus'], rank='GENUS', strict='true', **hint))
+    for attempt in range(4):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'regards-harvest (github.com/jampotful/seen-back)'})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                d = json.loads(r.read()); time.sleep(0.1); break
+        except Exception:
+            time.sleep(2 ** attempt)
+    else:
+        return None
+    if d.get('matchType') != 'EXACT' or d.get('rank') != 'GENUS' or not d.get('family'): return None
+    if any(d.get(k) != v for k, v in hint.items()): return None
+    return d['family']
+
+
+def fill_family(t):
+    """Gives a family-less target its GBIF family, so the family review step can run; returns True when it did."""
+    if t['family']: return False
+    fam = gbif_family(t)
+    if fam: t['family'] = fam; t['family_source'] = 'GBIF backbone'
+    return bool(fam)
+
+
 def targets():
     """Genera to harvest, heaviest first: open cells untouched, or half-searched without a full-protocol record."""
     g = os.path.join(ROOT, 'docs/views/gaps')
@@ -150,22 +187,27 @@ def supplement_main(out, shard, nshard):
     """SUPPLEMENT=1 in ci/harvest/params.env: for genera already harvested, adds the steps the harvest never sent for
     plants (a query on the English name with 'photoreceptor' and, once per family, '<Family> photoreceptor review')
     and a '<Family> vision review' for animal families no earlier run holds. Writes 'genus_extra' lines (genus, queries,
-    works) and 'family' lines; tools/views/harvest_get.py shows them under the genus. Genus lines are not rewritten."""
+    works) and 'family' lines; tools/views/harvest_get.py shows them under the genus. Genus lines are not rewritten. A genus the
+    queue lists without a family gets its family from the GBIF backbone (gbif_family), recorded on its genus_extra line."""
     before = harvested_before()
     mine = [t for i, t in enumerate([t for t in targets() if t['genus'] in before]) if i % nshard == shard]
     have_fam = harvested_families()
-    fam_done = set(); n_err = 0; start = time.time(); done = 0
+    fam_done = set(); n_err = 0; n_fill = 0; start = time.time(); done = 0
     os.makedirs(out, exist_ok=True)
     try:
         with open(os.path.join(out, 'harvest.jsonl'), 'w', encoding='utf-8') as f:
             for i, t in enumerate(mine, 1):
+                filled = fill_family(t)
                 genus, fam = t['genus'], t['family']; plant = t['views'] == {'plant'}; works = {}; queries = []
                 if plant:
                     for en in sorted(t['english'])[:1]:
                         if en: queries.append(search(f'{en} photoreceptor', works))
-                if queries:
+                if queries or filled:
                     n_err += sum(1 for q in queries if q.get('error'))
-                    f.write(json.dumps({'type': 'genus_extra', 'genus': genus, 'queries': queries, 'works': works}, ensure_ascii=False) + '\n')
+                    extra = {'type': 'genus_extra', 'genus': genus, 'queries': queries, 'works': works}
+                    if filled: extra.update(family=fam, family_source=t['family_source'])
+                    f.write(json.dumps(extra, ensure_ascii=False) + '\n')
+                    n_fill += 1 if filled else 0
                 key = (fam, plant)
                 if fam and key not in fam_done and (plant or fam not in have_fam):
                     fam_done.add(key); fworks = {}
@@ -177,6 +219,40 @@ def supplement_main(out, shard, nshard):
         print('stopped by the time limit; keeping what was done', flush=True)
     with open(os.path.join(out, 'summary.txt'), 'w') as s:
         s.write(f'supplement shard {shard}/{nshard}: {done} of {len(mine)} genera done, {len(fam_done)} family reviews, '
+                f'{calls} OpenAlex calls, {n_err} failed queries, {n_fill} families from GBIF, {time.time() - start:.0f} s\n')
+    print(open(os.path.join(out, 'summary.txt')).read())
+
+
+PLANT_TRAIT_QUERIES = {  # plant traits -> queries the plant word list misses (audit 41: a diel and a photoperiod paper missed)
+    'diel': ['flower opening time', 'nyctinasty'],
+    'sense_light_nonvisual': ['photoperiod', 'circadian rhythm'],
+    'sense_chemical': ['volatile signalling'],
+}
+
+
+def plant_traits_main(out, shard, nshard):
+    """PLANTTRAITS=1 in ci/harvest/params.env: for plant genera already harvested, one query per open trait's words in
+    PLANT_TRAIT_QUERIES, written as 'genus_extra' lines that tools/views/harvest_get.py shows under the genus."""
+    before = harvested_before()
+    mine = [t for i, t in enumerate([t for t in targets() if t['genus'] in before and t['views'] == {'plant'}]) if i % nshard == shard]
+    n_err = 0; start = time.time(); done = 0; nq = 0
+    os.makedirs(out, exist_ok=True)
+    try:
+        with open(os.path.join(out, 'harvest.jsonl'), 'w', encoding='utf-8') as f:
+            for i, t in enumerate(mine, 1):
+                fill_family(t)
+                words = [w for tr in sorted(t['traits']) for w in PLANT_TRAIT_QUERIES.get(tr, [])]
+                works = {}; queries = [search(f"{t['genus']} {w}", works) for w in words]
+                nq += len(queries); n_err += sum(1 for q in queries if q.get('error'))
+                if queries:
+                    extra = {'type': 'genus_extra', 'genus': t['genus'], 'queries': queries, 'works': works}
+                    if t.get('family_source'): extra.update(family=t['family'], family_source=t['family_source'])
+                    f.write(json.dumps(extra, ensure_ascii=False) + '\n')
+                f.flush(); done = i
+    except KeyboardInterrupt:
+        print('stopped by the time limit; keeping what was done', flush=True)
+    with open(os.path.join(out, 'summary.txt'), 'w') as s:
+        s.write(f'plant traits shard {shard}/{nshard}: {done} of {len(mine)} plant genera done, {nq} queries, '
                 f'{calls} OpenAlex calls, {n_err} failed queries, {time.time() - start:.0f} s\n')
     print(open(os.path.join(out, 'summary.txt')).read())
 
@@ -206,6 +282,8 @@ def main():
     pp = os.path.join(ROOT, 'ci/harvest/params.env')
     if os.path.exists(pp) and re.search(r'^SUPPLEMENT=1\s*$', open(pp).read(), re.M):
         return supplement_main(out, shard, nshard)
+    if os.path.exists(pp) and re.search(r'^PLANTTRAITS=1\s*$', open(pp).read(), re.M):
+        return plant_traits_main(out, shard, nshard)
     before = harvested_before()
     allt = [t for t in targets() if t['genus'] not in before]; todo = allt[:top]
     mine = [t for i, t in enumerate(todo) if i % nshard == shard]
@@ -214,7 +292,7 @@ def main():
     try:
         with open(plain, 'w', encoding='utf-8') as f:  # one line per genus, flushed, so a run stopped by its time limit keeps what it did
             for i, t in enumerate(mine, 1):
-                works = {}; queries = []; genus = t['genus']
+                fill_family(t); works = {}; queries = []; genus = t['genus']
                 plant = t['views'] == {'plant'}
                 qs = [f'{genus} {w}' for w in PLANT] if plant else [f'{genus} vision', f'{genus} eye']
                 if not plant:
@@ -233,7 +311,8 @@ def main():
                 n_err += sum(1 for q in queries if q.get('error')) + sum(1 for c in chase if c.get('error'))
                 f.write(json.dumps({'type': 'genus', 'genus': genus, 'family': t['family'], 'order': t['order'],
                                     'english': sorted(t['english']), 'views': sorted(t['views']), 'traits': sorted(t['traits']),
-                                    'weight': t['weight'], 'queries': queries, 'chase': chase, 'works': works}, ensure_ascii=False) + '\n')
+                                    'weight': t['weight'], 'queries': queries, 'chase': chase, 'works': works,
+                                    **({'family_source': t['family_source']} if t.get('family_source') else {})}, ensure_ascii=False) + '\n')
                 fam = t['family']
                 if fam and fam not in fam_done and not plant:
                     fam_done.add(fam); fworks = {}
