@@ -11,6 +11,7 @@ Prompt: `docs/tracks/prompts/oa-read.md`, with the texts already fetched and dec
 | 38 | Swanton et al. 2026, light signaling in crop-weed competition (Weed Technology review) | full text (PDF) | 17 |
 | 45 | Sondhi et al. 2024, day-night gene expression in two saturniid moths (Proc R Soc B) | full text (Europe PMC XML) | 2 |
 | 53 | Douma et al. 2019, light quality and plant defence, a model of Brassica nigra (Plant Cell Environ) | full text (Europe PMC XML) | 3 |
+| 58 | Tyrrell and Fernández-Juricic 2017, avian binocular vision and the anterior blind area (PLOS ONE) | full text (Europe PMC XML; S1 Table not included) | 13 |
 
 ## Next
-Entries 58, 64, 70, 71, 74 in that order.
+Entries 64, 70, 71, 74 in that order.
