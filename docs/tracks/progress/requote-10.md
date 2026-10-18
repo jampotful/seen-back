@@ -2,10 +2,10 @@
 
 Chunk: docs/views/repair/chunks/chunk-10.jsonl (97 ids). Output: docs/views/recheck/recheck-50.jsonl.
 
-Counts: fixed 76, retracted 0, table rows 0, unfixed 21.
+Counts: fixed 75, retracted 0, table rows 0, unfixed 22.
 
 Fixed (action "correct"), by paper:
-- Morehouse 2020, Curr Biol (10.1016/j.cub.2020.07.042): oa-5:1211, 1212, 1213, 1215 to 1224, 1226, 1228, 1230, 1231, 1233 to 1246 (31). Read from the author's open PDF through the fetch tool; row 1211, 1216 to 1219, 1222 and 1235 use marked excerpts. The page numbers in `where` are the record's own (row 1222 text sits on R977 on the page).
+- Morehouse 2020, Curr Biol (10.1016/j.cub.2020.07.042): oa-5:1211, 1212, 1213, 1215 to 1224, 1226, 1228, 1230, 1231, 1233 to 1246 (31). Read from the author's open PDF through the fetch tool; rows 1211, 1216 to 1219, 1222 and 1235 use marked excerpts. The page numbers in `where` are the record's own (row 1222 text sits on R977 on the page).
 - Nilsson 2013, Vis Neurosci (10.1017/S0952523813000035): oa-2:3982, 3984 to 3996, 3998 to 4000, 4002 to 4004, 4006, 4007 (22).
 - Stafstrom et al. 2020, Curr Biol (10.1016/j.cub.2020.09.048), open copy at UNL Digital Commons: oa-1:7055 to 7057, 7407 to 7409, 7413, 7419, 7420, 7426 to 7429, 7433, 7434 (15).
 - BMC Vet Res 2026 (10.1186/s12917-026-05480-1): oa-5:1081, 1084, 1087 (3).
