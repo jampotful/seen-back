@@ -11,7 +11,7 @@ Branch `agent/trydrafts-1018`. The task: `rows_draft` rows in the voice of `docs
 - Run 5 of `views-rows` (`run/views-rows/trydrafts-1018`, results in `runs/views-rows/5` on `ci`): 185 rows sent, 100 passed first time (54%), 174 after the retry (94%), 11 failed, 8 not sent, $1.94 at batch prices.
 - Drafts applied to the 26 views (`rows_draft` only; every spec is otherwise unchanged, checked by comparing each file with `main`). The four specs with compact parameter lines (reef, sealife, shark, snail) got the block appended as text so that no other line changed.
 - `docs/views/voice/try-1018.md`: one line for each of the 28 views. The drafts would make nine views ready to offer: bat, duck, fish, flyingfox, fox, harvestman, snail, whale, worm.
-- `python3 build.py --check` passes with `index.html` unchanged; `node test/check4.js try` was run on the rebased branch.
+- `python3 build.py --check` passes with `index.html` unchanged, so `rows_draft` stays out of the page. `node test/check4.js try` passes. Its first run failed `shark` on two timing counts (the movement map read 3 times and no gaze jump) at a load average near 6 on the shared machine; `shark` alone and a second full run passed, and the page is byte for byte the one on `main`.
 
 ## Next
 
