@@ -102,29 +102,39 @@ GBIF_CLASS = {'insect': 'Insecta', 'bee': 'Insecta', 'bird': 'Aves', 'wader': 'A
               'deer': 'Mammalia', 'squirrel': 'Mammalia', 'dog': 'Mammalia', 'cat': 'Mammalia', 'rabbit': 'Mammalia'}
 
 
+GBIF_MISS = {}
+
+
 def gbif_family(t):
     """The family the GBIF backbone gives a genus the queue lists without one, or None. The match must be exact, at genus
-    rank, and inside the group the genus's views imply (a genus name can belong to a plant and an animal, as Aquarius does)."""
+    rank, and inside the group the genus's views imply (a genus name can belong to a plant and an animal, as Aquarius
+    does); when the name is a homonym, GBIF's alternatives are searched for the one inside that group. GBIF_MISS counts
+    the reasons a lookup gave nothing, for the run's summary."""
     views = set(t['views'])
     if views == {'plant'}: hint = {'kingdom': 'Plantae'}
     elif views == {'reptile'}: hint = {'kingdom': 'Animalia', 'phylum': 'Chordata'}
     else:
         cls = {GBIF_CLASS.get(v) for v in views}
-        if len(cls) != 1 or None in cls: return None
+        if len(cls) != 1 or None in cls: GBIF_MISS['mixed views'] = GBIF_MISS.get('mixed views', 0) + 1; return None
         hint = {'kingdom': 'Animalia', 'class': cls.pop()}
-    url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode(dict(name=t['genus'], rank='GENUS', strict='true', **hint))
-    for attempt in range(4):
+    url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode(dict(name=t['genus'], rank='GENUS', verbose='true', **hint))
+    for attempt in range(5):
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'regards-harvest (github.com/jampotful/seen-back)'})
             with urllib.request.urlopen(req, timeout=30) as r:
-                d = json.loads(r.read()); time.sleep(0.1); break
+                d = json.loads(r.read()); time.sleep(0.2); break
         except Exception:
-            time.sleep(2 ** attempt)
+            time.sleep(2 + 2 ** attempt)
     else:
-        return None
-    if d.get('matchType') != 'EXACT' or d.get('rank') != 'GENUS' or not d.get('family'): return None
-    if any(d.get(k) != v for k, v in hint.items()): return None
-    return d['family']
+        GBIF_MISS['network'] = GBIF_MISS.get('network', 0) + 1; return None
+    for c in [d] + list(d.get('alternatives') or []):
+        if c.get('matchType') != 'EXACT' or c.get('rank') != 'GENUS' or not c.get('family'): continue
+        if (c.get('canonicalName') or c.get('scientificName') or '').split(' ')[0] != t['genus']: continue
+        if any(c.get(k) != v for k, v in hint.items()): continue
+        return c['family']
+    why = 'no exact genus match in the group (%s)' % (d.get('matchType') or 'none')
+    GBIF_MISS[why] = GBIF_MISS.get(why, 0) + 1
+    return None
 
 
 def fill_family(t):
@@ -219,7 +229,7 @@ def supplement_main(out, shard, nshard):
         print('stopped by the time limit; keeping what was done', flush=True)
     with open(os.path.join(out, 'summary.txt'), 'w') as s:
         s.write(f'supplement shard {shard}/{nshard}: {done} of {len(mine)} genera done, {len(fam_done)} family reviews, '
-                f'{calls} OpenAlex calls, {n_err} failed queries, {n_fill} families from GBIF, {time.time() - start:.0f} s\n')
+                f'{calls} OpenAlex calls, {n_err} failed queries, {n_fill} families from GBIF (misses: {GBIF_MISS or 0}), {time.time() - start:.0f} s\n')
     print(open(os.path.join(out, 'summary.txt')).read())
 
 
