@@ -10,5 +10,6 @@ Entries, in launch order: 16, 22, 23, 24, 37, 39, 55, 56, 59, 68. Texts read fro
 | 24 | Llorens et al. 2023, Plants 12(18): 3219 | Europe PMC XML | 5 | flowers closed at night (both species); cited insect responses to volatiles (partial); three β-ionone records left out (sentence starts with 'β', fails quote-shape) |
 | 37 | Tao et al. 2026, Plant Commun 7(6): 101848 | Europe PMC XML | 30 | review: all partial; germination, de-etiolation, flowering, shade avoidance and temperature sensing by crop species |
 | 39 | Troscianko et al. 2012, Nat Commun 3: 1110 | published PDF | 18 | binocular overlap and eye movement for six Corvus species (Table 1), American crow cited; no chough value |
+| 55 | Zhou et al. 2026, Plant Cell Environ 49(9): 6621-6634 | PMC HTML | 2 | no E. sibiricus light measurement; heterologous Arabidopsis result logged as g, cited Arabidopsis transcriptome as partial |
 
-In progress: entry 55.
+In progress: entry 56.
