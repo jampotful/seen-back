@@ -1,0 +1,29 @@
+
+=== 23:14:59 machine (ff-plainpw)
+Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1061       12545          41        2747       14928
+Swap:           3071           0        3071
+4
+model name	: AMD EPYC 7763 64-Core Processor
+ssse3 fma sse4_1 sse4_2 avx avx2 
+
+=== 23:14:59 playwright 1.56.0
+added 2 packages in 2s
+
+=== 23:15:19 variant ff-plainpw: firefox, headed 0, prefs {}, cases pocket:all:5 big:all:2
+firefox: /home/runner/.cache/ms-playwright/firefox-1495/firefox/firefox, [3203] Sandbox: CanCreateUserNamespace() unshare(CLONE_NEWPID): EPERM
+ff-plainpw pocket:all:5 | fetch 138 ms | session 1391 ms | runs [6314, 6282, 6345, 6323, 6404] ms | head [0.011763, 0.215329, -0.131141, -8.6e-05, 0.297737, 0.082296] sum -89.13024 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": false, "sharedMemory": true}
+ff-plainpw big:all:2 | fetch 1168 ms | session 5437 ms | runs [70487, 69997] ms | head [1.13896, 1.475898, 0.308418, -2.129014, 1.126932, -0.788226] sum -170.96748 | error  | done True | features {"ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0", "coi": false, "cores": 4, "sab": "undefined", "simd": true, "relaxedSimd": false, "sharedMemory": true}
+top - 23:18:34 up 7 min,  0 user,  load average: 0.94, 0.56, 0.23
+Tasks: 160 total,   1 running, 159 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni, 97.7 id,  2.3 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15989.7 total,  11656.5 free,    984.4 used,   3731.1 buff/cache     
+MiB Swap:   3072.0 total,   3072.0 free,      0.0 used.  15005.3 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0   22844  14404   9872 S   0.0   0.1   0:03.65 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
