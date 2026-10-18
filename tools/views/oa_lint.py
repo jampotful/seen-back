@@ -26,7 +26,7 @@ WORDS = {"one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": 
          "ten": "10", "eleven": "11", "twelve": "12", "single": "1", "half": "0.5", "both": "2", "twice": "2", "double": "2",
          "dichromatic": "2", "trichromatic": "3", "tetrachromatic": "4", "monochromatic": "1"}
 PARTIAL_WORDS = re.compile(r"\b(review|compilation|compiled|cited|citing|after [A-Z]|from [A-Z][a-z]+ (?:et al|and|\()|table s\d|read from fig|secondary)\b", re.I)
-SPECIES = re.compile(r"^[A-Z][a-z]+ (?:\([A-Z][a-z]+\) )?[a-z][a-z\-]+(?: [a-z][a-z\-]+)?$")
+SPECIES = re.compile(r"^[A-Z][a-z]+ (?:\([A-Z][a-z]+\) )?(?:x |× )?[a-z][a-z\-]+(?: (?:(?:subsp|ssp|var|f|cv)\. )?[a-z][a-z\-]+)?$")
 
 
 def nums(s, words=False):
