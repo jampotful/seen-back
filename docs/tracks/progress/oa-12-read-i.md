@@ -6,5 +6,6 @@ Entries, in launch order: 16, 22, 23, 24, 37, 39, 55, 56, 59, 68. Texts read fro
 |---|---|---|---|---|
 | 16 | Kraft 1988, J Physiol 404: 199-213 | abstract only (PMC landing page) | 4 | logged as `access: abstract`, `partial: true`; no sources line |
 | 22 | Fleishman 2024, Front Amphib Reptile Sci 2: 1426675 | published PDF | 36 | review: all partial; Figs. 6 and 7 are images |
+| 23 | Tyrrell et al. 2018, Front Neurosci 12: 16 | Europe PMC XML | 15 | binocular widths pooled for the two species (g); eye movement per species |
 
-In progress: entry 23.
+In progress: entry 24.
