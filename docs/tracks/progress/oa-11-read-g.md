@@ -8,6 +8,7 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 |---|---|---|---|---|---|---|---|
 | 2 | Hall, Kamilar and Kirk 2012, eye shape and the nocturnal bottleneck of mammals (Proc R Soc B 279: 4962-4968) | Europe PMC PDF, published version | 4 | 2 | 2 | 0 | 4 |
 | 13 | Wald, Brown and Kennedy 1957, the visual system of the alligator (J Gen Physiol 40: 703-713) | Europe PMC PDF (scanned, OCR text layer), published version | 7 | 5 | 2 | 0 | 3 |
+| 33 | Itahara and Kano 2024, gaze tracking of large-billed crows (J Exp Biol 227: jeb246514) | Europe PMC full-text XML, published version | 37 | 34 | 3 | 0 | 19 |
 
 ## Notes by paper
 
@@ -15,6 +16,8 @@ Prompt: `docs/tracks/prompts/oa-read.md` as it stands on `main` at 3a573fa8 (gra
 
 - Entry 13. The text layer is OCR of a 1957 scan and garbles units and Greek letters (`),r~= 500 mtt` for λmax = 500 mμ); quotes keep the characters exactly as the file holds them and the notes say what they mean. Logged for Alligator mississippiensis: rod rhodopsin λmax 500 nm from the retinal extract (no cone pigment found), vitamin A1 alone, dark adaptation complete in 5 to 7 minutes by ERG (all `m`, own measurements), and the dorsal tapetum and the rod-dorsal, cone-ventral layout cited from Laurens and Detwiler (1921) (`m`, `partial`). Also the unnamed frog's dark adaptation (30 minutes or longer, `g` under Anura) and vitamin A2 in Pseudemys retinas from the authors' earlier work (`g`, genus only, `partial`). Rhodopsin synthesis rates in solution (alligator, frog, cattle, chicken, scup, butterfish) are biochemistry, not a trait of seeing, and were not logged. New trait keys: `dark_adaptation_min`, `photoreceptor_distribution`; `chromophore` reuses a key other logs already use.
 
+- Entry 33. Corvus macrorhynchos, own measurements (`m`): binocular field 48.4 deg at rest and 50.2 deg with eye movement induced, three blind-area widths, eye-movement amplitude per eye at rest (16.1, 17.3 deg) and induced (33.9, 33.8 deg), optical-axis azimuth and elevation per eye, head saccades as 8.0% of tracked data, and three behaviour records from the motion-capture study (binocular field for moving targets, lateral fields near the optical axes for still ones, right-eye preference on the ground). The roughly 15 deg eye shift that the Discussion infers from head-tracking heatmaps is `g` (inferred, eyes not tracked). Cited records, all `partial`: the area centralis and the dorso-temporal high-density region from Rahman et al. (2006); the corvid ranges for binocular overlap and eye movement (Corvidae, `g`, species not named); pigeon eye movement within 5 deg (Wohlschläger et al. 1993); and fourteen behaviour records for eleven named species from the Introduction (pigeon, large-billed and New Caledonian crows, chicken, zebra finch, starling, peafowl, gull-billed tern, goshawk, gyrfalcon, peregrine). Not logged: the eye-laterality findings for magpies, jays, jackdaws and tits and the gaze-following and caching studies (cognition, not what is seen), and the saccade statistics in the supplement (Fig. S2C), which is not in the text. New trait key `optic_axis_azimuth_deg`; `blind_area_deg` and `optic_axis_elevation_deg` reuse keys in other logs.
+
 ## Next
 
-Entries 33, 35, 18, 45, 19.
+Entries 35, 18, 45, 19.
