@@ -2504,7 +2504,7 @@
           var m = ev.data || {}, p;
           if (m.op === 'hello') { hello = true; return; }
           if (m.op === 'ready') { settled = true; clearTimeout(timer); info = { backend: m.backend, threads: m.threads, ms: m.ms }; res(); return; }
-          if (m.op === 'fail' && !m.id) { no(m.stage === 'runtime' ? 'network' : m.stage === 'browser' ? 'browser' : m.stage === 'unfit' ? 'unfit' : m.stage === 'session' ? sessionCode : m.stage === 'store' ? 'store' : 'died', m.stage + ' ' + m.name + ' ' + m.message); return; }
+          if (m.op === 'fail' && !m.id) { no(m.stage === 'runtime' ? 'network' : m.stage === 'browser' ? 'browser' : m.stage === 'unfit' ? 'unfit' : m.stage === 'session' ? sessionCode : m.stage === 'store' || m.stage === 'damaged' ? m.stage : 'died', m.stage + ' ' + m.name + ' ' + m.message); return; }
           p = pending[m.id]; if (!p) return;
           delete pending[m.id]; clearTimeout(p.timer);
           if (m.op === 'done') p.res(m); else p.rej(err('photo', m.message));
@@ -2706,11 +2706,12 @@
         var V = M.vision, nK = M.kinds ? M.kinds.labels.length : 0, sp = M.species, nS = sp ? sp.count : 0, c = cacheRef, i8 = !!sp && sp.dtype === 'int8';
         var inParts = big || !!V.parts, modelUrl = inParts ? '' : encV(V) ? withV(abs(V.url, base), encV(V)) : u(V.url);
         // the full database's encoder is read by the worker straight from the store into the runtime's heap (vendor/rec-worker.js, intoHeap),
-        // unless that has failed once in this page; the first time, the worker checks each part, and the whole is then marked as verified.
-        // The page itself then never holds those bytes: in WebKit every kept body the page reads stays in its memory until the collector runs
-        var byWorker = big && !!c && !noStore && partsOf(V).every(function (p) { return typeof p.sha256 === 'string'; }), verify = false;
+        // unless that has failed once in this page; the first time, the worker works out the whole's checksum on the way, and the whole is
+        // then marked as verified. The page itself never holds those bytes: in WebKit every kept body the page reads stays in its memory
+        // until the collector runs
+        var byWorker = big && !!c && !noStore, verify = false;
         // and so are the species rows when they come in parts (the database for the world: 328 MB), which only the worker uses
-        var rowsByWorker = byWorker && !!sp && Array.isArray(sp.parts) && partsOf(sp).every(function (p) { return typeof p.sha256 === 'string'; }), rowsVerify = false;
+        var rowsByWorker = byWorker && !!sp && Array.isArray(sp.parts), rowsVerify = false;
         function sizeOk() { if (sp.bytes !== nS * M.width * (i8 ? 1 : 2)) throw err('damaged', 'species rows of the wrong length'); return null; }
         function rowsLen(buf) { if (buf && buf.byteLength !== nS * M.width * (i8 ? 1 : 2)) throw err('damaged', 'species rows of the wrong length'); return buf; }
         return (byWorker ? Promise.all([has(c, wholeKey(V)), rowsByWorker ? has(c, wholeKey(sp)) : true]).then(function (ok) { verify = !ok[0]; rowsVerify = !ok[1]; return true; })
@@ -2736,7 +2737,7 @@
           var init = { op: 'init', ep: ORT.ep, ort: { js: withV(abs(ORT.dir + ORT.js), ORT.v), mjs: withV(abs(ORT.dir + ORT.mjs), ORT.v), wasm: withV(abs(ORT.dir + ORT.wasm), ORT.v) },
             wasmBinary: b[0], model: b[1], vision: { input: V.input || 'pixel_values', output: V.output || 'image_embeds', size: V.size, mean: V.mean, std: V.std, resize: V.resize, crop: V.crop || 'center' },
             width: M.width, kinds: b[2], nKinds: nK, species: b[3], nSpecies: nS, speciesType: i8 ? 'int8' : 'f16', speciesScale: i8 ? b[6] : null };
-          function store(G, check) { return { keep: KEEP, verify: check, parts: partsOf(G).map(function (p) { return { key: partKey(p), bytes: p.bytes, sha256: p.sha256 }; }) }; }
+          function store(G, check) { return { keep: KEEP, verify: check, sha256: G.sha256 || '', parts: partsOf(G).map(function (p) { return { key: partKey(p), bytes: p.bytes }; }) }; }
           if (byWorker) init.store = store(V, verify);
           if (rowsByWorker) init.rows = store(sp, rowsVerify);
           // a model in parts has passed its checksums by now: if the encoder will not take it, the fault is not in the bytes, and they are kept
