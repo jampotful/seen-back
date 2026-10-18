@@ -1,0 +1,96 @@
+
+=== 21:45:40 machine (linux), variants: main fix 
+Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:           15988        1104       12507          40        2740       14884
+Swap:           3071           0        3071
+v22.23.3
+
+=== 21:45:40 build and serve
+build 35 | index.html 687669 bytes | artifact 683771 bytes | selftest.js 50303 bytes
+build 36 | index.html 684609 bytes | artifact 680711 bytes | selftest.js 50303 bytes
+be0f553 Papers Wanted refresh: 80 new papers from the desk's wanted lines (status version 73)
+
+=== 21:45:44 photos
+e000008.jpg 116012 Egretta caerulea | Little Blue Heron | wader | https://www.inaturalist.org/observations/257193030 | CC-BY-NC-4.0
+e000008.jpg 116012 Egretta caerulea | Little Blue Heron | wader | https://www.inaturalist.org/observations/257193030 | CC-BY-NC-4.0
+e000001.jpg 136623 Schistocerca americana | American Bird Grasshopper | insect | https://www.inaturalist.org/observations/257084787 | CC-BY-NC-4.0
+e000017.jpg 206686 Petiveria alliacea | Guinea Hen Weed | plant | https://www.inaturalist.org/observations/257407360 | CC-BY-NC-4.0
+e000153.jpg 65543 Dryophytes cinereus | Green Treefrog | frog | https://www.inaturalist.org/observations/260555675 | CC-BY-NC-4.0
+
+=== 21:45:46 playwright 1.56.0
+added 2 packages in 1s
+
+=== 21:46:23 variant main in webkit (port 8781)
+21:46:33 webkit get 2 s {"done":false,"steps":[],"phase":"get","err":null,"now":"intro |  |  |  |  | 0 | idle | "}
+21:46:53 webkit get 22 s {"done":false,"steps":["9680 yes"],"phase":"get","err":null,"now":"askView | wader |  | page | getting | 579834553 | idle | "}
+21:47:13 webkit get 42 s {"done":false,"steps":["9680 yes"],"phase":"get","err":null,"now":"askView | wader |  | page | getting | 675020269 | loading | "}
+21:47:33 webkit get 62 s {"done":false,"steps":["46221 ready true"],"phase":"get","err":null,"now":"askView | wader | looking | page | kept | 675020269 | ready | "}
+21:47:53 webkit get 82 s {"done":false,"steps":["79042 photo e000001.jpg"],"phase":"get","err":null,"now":"askView | plant | looking | page | kept | 675020269 | ready | "}
+21:48:15 webkit again 2 s {"done":false,"steps":[],"phase":"again","err":null,"now":"intro |  |  |  | kept | 675020269 | idle | "}
+21:48:35 webkit again 22 s {"done":false,"steps":[],"phase":"again","err":null,"now":"askView | wader | looking | page | kept | 675020269 | ready | "}
+21:48:46 webkit version 26.0 | path the offer under the photo | ready 36542 ms | getFail  | photos [["e000008.jpg","Little Blue Heron | Egretta caerulea",10409],["e000001.jpg","American Bird Grasshopper | Schistocerca americana",10880],["e000017.jpg","",10839],["e000153.jpg","Green Treefrog | Dryophytes cinereus",10806]] | again kept Little Blue Heron | Egretta caerulea 26741 | refetched 0 | error 
+big.js main webkit: exit 0
+
+=== 21:48:51 variant fix in webkit (port 8782)
+21:48:55 webkit get 2 s {"done":false,"steps":[],"phase":"get","err":null,"now":"intro |  |  |  |  | 0 | idle | "}
+21:49:15 webkit get 22 s {"done":false,"steps":["10343 yes"],"phase":"get","err":null,"now":"askView | wader |  | page | getting | 272175801 | idle | "}
+21:49:35 webkit get 42 s {"done":false,"steps":["10343 yes"],"phase":"get","err":null,"now":"askView | wader |  | page | getting | 675024462 | loading | "}
+21:49:56 webkit get 62 s {"done":false,"steps":["10343 yes"],"phase":"get","err":null,"now":"askView | wader |  | page | getting | 675024462 | loading | "}
+21:50:16 webkit get 82 s {"done":false,"steps":["68800 ready true"],"phase":"get","err":null,"now":"askView | wader | looking | page | kept | 675024462 | ready | "}
+21:50:36 webkit get 102 s {"done":false,"steps":["102129 photo e000001.jpg"],"phase":"get","err":null,"now":"naming | plant | looking | page | kept | 675024462 | ready | "}
+21:50:56 webkit get 122 s {"done":false,"steps":["113656 photo e000017.jpg"],"phase":"get","err":null,"now":"askView | frog | looking | page | kept | 675024462 | ready | "}
+21:51:02 webkit again 2 s {"done":false,"steps":[],"phase":"again","err":null,"now":"intro |  |  |  | kept | 675024462 | idle | "}
+21:51:22 webkit again 22 s {"done":false,"steps":[],"phase":"again","err":null,"now":"askView | wader | looking | page | kept | 675024462 | ready | "}
+21:51:32 webkit version 26.0 | path the offer under the photo | ready 58453 ms | getFail  | photos [["e000008.jpg","Little Blue Heron | Egretta caerulea",10893],["e000001.jpg","American Bird Grasshopper | Schistocerca americana",10958],["e000017.jpg","",10874],["e000153.jpg","Green Treefrog | Dryophytes cinereus",10770]] | again kept Little Blue Heron | Egretta caerulea 26809 | refetched 0 | error 
+big.js fix webkit: exit 0
+
+=== 21:51:37 summary
+variant  browser   phase         rss-peak  footprint-peak  own-peak(lifetime)  threads
+fix      webkit    first visit    2166 MiB   1977 MiB         2170 MiB          38
+fix      webkit    download       1299 MiB   1110 MiB         1329 MiB          38
+fix      webkit    to ready       2166 MiB   1977 MiB         2170 MiB          37
+fix      webkit    photos         2045 MiB   1856 MiB         2170 MiB          38
+fix      webkit    reload         2322 MiB   2133 MiB         2327 MiB          40
+   answers: ["Little Blue Heron | Egretta caerulea", "American Bird Grasshopper | Schistocerca americana", "", "Green Treefrog | Dryophytes cinereus", "Little Blue Heron | Egretta caerulea"] | error: None | getFail: None | ready ms: 58453
+main     webkit    first visit    2938 MiB   2751 MiB         2981 MiB          41
+main     webkit    download       1328 MiB   1140 MiB         1336 MiB          41
+main     webkit    to ready       2622 MiB   2435 MiB         2719 MiB          40
+main     webkit    photos         2737 MiB   2550 MiB         2981 MiB          40
+main     webkit    reload         3263 MiB   3074 MiB         3348 MiB          41
+   answers: ["Little Blue Heron | Egretta caerulea", "American Bird Grasshopper | Schistocerca americana", "", "Green Treefrog | Dryophytes cinereus", "Little Blue Heron | Egretta caerulea"] | error: None | getFail: None | ready ms: 36542
+
+breakdowns of the largest process at its highs (mem2-snap.jsonl):
+  1792359991083 WPEWebProcess rss 695 foot 518 | rw-p  88M of 63302M anon 88M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 61M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p [heap] 41M of 103M anon 41M; rw-p  35M of 35M anon 35M; rw-p  35M of 40M anon 35M; rw-p  26M of 64M anon 26M; rw-p  24M of 26M anon 24M; rw-p  22M of 43M anon 22M; rw-p  22M of 24M anon 22M; rw-p  21M of 21M anon 21M; rw-p  21M of 43M anon 21M
+  1792360000099 WPEWebProcess rss 917 foot 730 | rw-p  97M of 99M anon 97M; rw-p [heap] 86M of 148M anon 86M; rw-p  85M of 85M anon 85M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p  41M of 63M anon 41M; rw-p  41M of 41M anon 41M; rw-p  36M of 61M anon 36M; rw-p  29M of 29M anon 29M; rw-p  26M of 64M anon 26M; rw-p  17M of 121M anon 17M; rw-p  16M of 19M anon 16M
+  1792360004685 WPEWebProcess rss 1176 foot 989 | rw-p  263M of 263M anon 263M; rw-p  97M of 99M anon 97M; rw-p [heap] 91M of 153M anon 91M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p  42M of 42M anon 42M; rw-p  41M of 63M anon 41M; rw-p  36M of 61M anon 36M; rw-p  33M of 41M anon 33M; rw-p  29M of 29M anon 29M; rw-p  28M of 28M anon 28M; rw-p  26M of 64M anon 26M
+  1792360015728 WPENetworkProcess rss 798 foot 742 | rw-p  257M of 257M anon 257M; rw-p  141M of 141M anon 141M; rw-p  85M of 85M anon 85M; rw-p  85M of 4181M anon 85M; rw-p [heap] 48M of 48M anon 48M; rw-p  39M of 39M anon 39M; rw-p  35M of 35M anon 35M; rw-p  13M of 13M anon 13M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 10M of 84M anon 0M
+  1792360019737 WPEWebProcess rss 2076 foot 1888 | rw-p  606M of 606M anon 606M; rw-p  606M of 606M anon 606M; rw-p  97M of 99M anon 97M; rw-p [heap] 92M of 154M anon 92M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p  41M of 63M anon 41M; rw-p  39M of 63M anon 39M; rw-p  34M of 34M anon 34M; rw-p  33M of 41M anon 33M; rw-p  26M of 64M anon 26M; rw-p  16M of 16M anon 16M
+  1792360034795 WPEWebProcess rss 2484 foot 2296 | rw-p  606M of 606M anon 606M; rw-p  424M of 429M anon 424M; rw-p  211M of 211M anon 211M; rw-p  171M of 171M anon 171M; rw-p  97M of 99M anon 97M; rw-p [heap] 92M of 154M anon 92M; rw-p  80M of 90M anon 80M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p  41M of 63M anon 41M; rw-p  39M of 63M anon 39M; rw-p  35M of 35M anon 35M
+  1792360038874 WPEWebProcess rss 2863 foot 2675 | rw-p  606M of 606M anon 606M; rw-p  424M of 429M anon 424M; rw-p  343M of 343M anon 343M; rw-p  97M of 99M anon 97M; rw-p [heap] 92M of 154M anon 92M; rw-p  85M of 85M anon 85M; rw-p  85M of 85M anon 85M; rw-p  80M of 90M anon 80M; rw-p  72M of 72M anon 72M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p  41M of 63M anon 41M
+  1792360093813 WPENetworkProcess rss 1346 foot 1289 | rw-p  305M of 452M anon 305M; rw-p  257M of 257M anon 257M; rw-p  226M of 384M anon 226M; rw-p  141M of 141M anon 141M; rw-p  85M of 85M anon 85M; rw-p  85M of 4181M anon 85M; rw-p  39M of 39M anon 39M; rw-p  35M of 35M anon 35M; rw-p  32M of 32M anon 32M; rw-p [heap] 31M of 31M anon 31M; rw-p  13M of 13M anon 13M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 11M of 84M anon 0M
+  1792360099333 WPEWebProcess rss 3263 foot 3074 | rw-p  832M of 832M anon 832M; rw-p  240M of 240M anon 240M; rw-p [heap] 171M of 241M anon 171M; rw-p  171M of 171M anon 171M; rw-p  171M of 171M anon 171M; rw-p  171M of 171M anon 171M; rw-p  141M of 141M anon 141M; rw-p  141M of 141M anon 141M; rw-p  107M of 107M anon 107M; rw-p  97M of 99M anon 97M; rw-p  85M of 85M anon 85M; rw-p  85M of 85M anon 85M
+  1792360133502 WPEWebProcess rss 635 foot 458 | rw-p  83M of 64006M anon 83M; rw-p [heap] 71M of 133M anon 71M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 61M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p  29M of 29M anon 29M; rw-p  24M of 28M anon 24M; rw-p  24M of 63M anon 24M; rw-p  23M of 25M anon 23M; rw-p  17M of 40M anon 17M; rw-p  16M of 38M anon 16M; rw-p  15M of 15M anon 15M; rw-p  14M of 16M anon 14M
+  1792360137513 WPEWebProcess rss 894 foot 712 | rw-p  112M of 213M anon 112M; rw-p  97M of 99M anon 97M; rw-p [heap] 71M of 133M anon 71M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 66M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 50M of 130M anon 0M; rw-p  39M of 39M anon 39M; rw-p  29M of 29M anon 29M; rw-p  24M of 63M anon 24M; rw-p  17M of 40M anon 17M; rw-p  16M of 38M anon 16M; rwxp  16M of 1024M anon 16M; rw-p  15M of 39M anon 15M
+  1792360147405 WPEWebProcess rss 1127 foot 938 | rw-p  97M of 99M anon 97M; rw-p [heap] 92M of 155M anon 92M; rw-p  88M of 134M anon 88M; rw-p  85M of 85M anon 85M; rw-p  72M of 72M anon 72M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 51M of 130M anon 0M; rw-p  36M of 36M anon 36M; rw-p  35M of 36M anon 35M; rw-p  28M of 56M anon 28M; rw-p  28M of 54M anon 28M; rw-p  27M of 95M anon 27M
+  1792360168204 WPENetworkProcess rss 931 foot 875 | rw-p  343M of 343M anon 343M; rw-p  343M of 343M anon 343M; rw-p [heap] 63M of 63M anon 63M; rw-p  39M of 39M anon 39M; rw-p  35M of 35M anon 35M; rw-p  13M of 13M anon 13M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 10M of 84M anon 0M
+  1792360176218 WPEWebProcess rss 1545 foot 1356 | rw-p  398M of 398M anon 398M; rw-p  125M of 125M anon 125M; rw-p  97M of 99M anon 97M; rw-p [heap] 92M of 155M anon 92M; rw-p  90M of 96M anon 90M; rw-p  76M of 100M anon 76M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 51M of 130M anon 0M; rw-p  46M of 46M anon 46M; rw-p  35M of 36M anon 35M; rw-p  32M of 32M anon 32M; rw-p  29M of 58M anon 29M
+  1792360181993 WPEWebProcess rss 1915 foot 1726 | rw-p  692M of 692M anon 692M; rw-p  125M of 125M anon 125M; rw-p  97M of 99M anon 97M; rw-p [heap] 92M of 155M anon 92M; rw-p  90M of 96M anon 90M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; rw-p  60M of 60M anon 60M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 51M of 130M anon 0M; rw-p  46M of 46M anon 46M; rw-p  35M of 36M anon 35M; rw-p  32M of 32M anon 32M; rw-p  29M of 58M anon 29M
+  1792360190773 WPEWebProcess rss 2150 foot 1961 | rw-p  961M of 963M anon 961M; rw-p  97M of 99M anon 97M; rw-p [heap] 92M of 155M anon 92M; rw-p  82M of 82M anon 82M; r-xp /lib/libWPEWebKit-2.0.so.1.7.0 68M of 84M anon 0M; r-xp 6_64-linux-gnu/libLLVM.so.20.1 51M of 130M anon 0M; rw-p  46M of 46M anon 46M; rw-p  39M of 39M anon 39M; rw-p  35M of 36M anon 35M; rw-p  32M of 32M anon 32M; rw-p  30M of 30M anon 30M; rwxp  30M of 1024M anon 30M
+1.6M	/home/runner/work/seen-back/seen-back/out
+total 496
+drwxr-xr-x  6 runner runner   4096 Oct 18 21:51 .
+drwxr-xr-x 20 runner runner   4096 Oct 18 21:45 ..
+drwxr-xr-x  2 runner runner   4096 Oct 18 21:51 fix
+-rw-r--r--  1 runner runner  79847 Oct 18 21:46 install-webkit.txt
+-rw-r--r--  1 runner runner  13107 Oct 18 21:51 log.txt
+drwxr-xr-x  2 runner runner   4096 Oct 18 21:51 main
+-rw-r--r--  1 runner runner  56080 Oct 18 21:51 mem.jsonl
+-rw-r--r--  1 runner runner  43927 Oct 18 21:49 mem2-snap.jsonl
+-rw-r--r--  1 runner runner 231611 Oct 18 21:51 mem2.jsonl
+-rw-r--r--  1 runner runner  19458 Oct 18 21:51 mem2.jsonl.gz
+drwxr-xr-x  2 runner runner   4096 Oct 18 21:45 reports-fix
+drwxr-xr-x  2 runner runner   4096 Oct 18 21:45 reports-main
+-rw-r--r--  1 runner runner   2367 Oct 18 21:51 serve-fix.txt
+-rw-r--r--  1 runner runner   2369 Oct 18 21:48 serve-main.txt
+-rw-r--r--  1 runner runner   8247 Oct 18 21:51 wm-summary.txt
