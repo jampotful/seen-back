@@ -113,8 +113,11 @@ class Records:
 
 
 class Place:
-    def __init__(self, records, zones=None, alias=None, radius_km=400.0, eps=0.02):
+    def __init__(self, records, zones=None, alias=None, radius_km=400.0, eps=0.02, home=None):
         self.R, self.g = records, records.grid
+        # home[s]: the share of a species people keep (pets, livestock, houseplants, gardens) wherever people are, added to
+        # its share in every cell; None or 0 for the others (table.json "home", tools/species/EVERYDAY.md)
+        self.home = None if home is None else np.asarray(home, np.float64)
         self.radius, self.eps = float(radius_km), float(eps)
         self.zones, self.alias = zones or {}, alias or {}
         self.N = self.g.disc_sum(self.R.T, self.radius)
@@ -160,6 +163,8 @@ class Place:
     def posterior(self, zone, met=()):
         P = self.first_guess(zone)
         for s in met:
+            if self.home is not None and self.home[s] > 0:   # a species people keep says nothing of where the phone is
+                continue
             P = self.update(P, s)
         return P
 
@@ -168,6 +173,8 @@ class Place:
         w = P / (self.N + self.R.S)
         W = self.g.disc_sum(w, self.radius)
         share = np.bincount(self.R.rows, weights=self.R.counts * W[self.R.cells], minlength=self.R.S) + w.sum()
+        if self.home is not None:
+            share = share + self.home
         return np.log(share)
 
 

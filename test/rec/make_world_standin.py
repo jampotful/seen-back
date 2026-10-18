@@ -71,7 +71,11 @@ for k, piece in enumerate((blob[:half], blob[half:])):
     (out / ("rows.i8.part%02d" % k)).write_bytes(piece)
     parts.append({"url": "http://127.0.0.1:%d/test/rec/models/standin-world/rows.i8.part%02d" % (BIG_PORT, k), "bytes": len(piece), "sha256": hashlib.sha256(piece).hexdigest()})
 sc.astype("<f4").tofile(out / "scale.f32")
-(out / "table.json").write_text(json.dumps({"species": names, "columns": 3}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+# one row that people keep everywhere (a home share, tools/species/EVERYDAY.md): a filler row, so that no answer the checks name changes
+home_row = [i for i in range(S) if names[i][1] not in ("Monarch", "Southern Monarch", "Great Blue Heron") and i not in (southern, hornero)][0]
+HOME = np.zeros(S)
+HOME[home_row] = 0.01
+(out / "table.json").write_text(json.dumps({"species": names, "columns": 3, "home": [[home_row, 0.01]]}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 # the place: 10-degree cells; Gainesville's and Buenos Aires's
 RES = 10.0
@@ -108,7 +112,7 @@ man = {"id": "standin-world", "licence": mb["licence"], "source": "test/rec/make
 
 # what the page must say: the reference arithmetic (tools/world/place.py; the page's fusion for a slot without a kinds head)
 Rp = place.Records(g, cells, rws, cnts, S)
-P = place.Place(Rp, zones={k: (np.array(v[0]), np.array(v[1])) for k, v in zones["zones"].items()}, alias=zones["alias"], **PLACE)
+P = place.Place(Rp, zones={k: (np.array(v[0]), np.array(v[1])) for k, v in zones["zones"].items()}, alias=zones["alias"], home=HOME, **PLACE)
 Rq = q.astype(np.float64) * sc[:, None].astype(np.float64)
 
 
