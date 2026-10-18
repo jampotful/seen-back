@@ -59,13 +59,13 @@ Extension: 9 unverifiable, 6 verifiable (2 confirm, 4 errors).
 
 - First 20: 10 errors in 10 verifiable records.
 - Both draws: **14 errors in 16 verifiable records, 87.5%**; 19 of 35 unverifiable.
-- Without journal-only faults (records 3, 14, 20, 23, 25, 33): 8 errors in 16, 50%. The eight are 7, 9, 10, 11, 15, 16, 19 and 34: five unmarked or incomplete quotes (9, 10, 16, 19, with 7 and 11 also), two tables read without `partial`, one grade.
-- Counting only the three records the repair set a partial flag on that could be opened (harvest-c1:4, oa-2:9634, oa-1:7027 and two Briscoe lines): the flag itself was right in every case. The repair works on the fault it targets; the other faults remain.
+- Without journal-only faults (records 3, 14, 20, 23, 25, 33): 8 errors in 16, 50%. The eight are 7, 9, 10, 11, 16 and 19 (quotes that stop early or start mid-sentence; 19 also has a grade fault) and 15 and 34 (table rows read without `partial`).
+- Every partial flag the repair set on a sampled record (harvest-c1:4, oa-2:9634, oa-1:7027, oa-1:9114, oa-1:8825, oa-2:7626) fits the record's note or source type. The repair works on the fault it targets; the other faults remain.
 - The 5% threshold is not met on any counting. No pull request yet.
 
 ## Remaining systematic faults (counts.json, and heuristic counts from this audit)
 
-1. Unmarked or partial-sentence quotes: `requote:start` 220, `requote:end` 688, `requote:both` 327 (1,235 candidates in `requote-candidates.jsonl`; the repair writes no replacement text). Of the 20 first-draw records, 6 were listed and 3 more (oa-10:255, harvest-c3:13, harvest-c6:2, oa-2:9634) were not; a scan of the added lines finds 84 prose quotes that begin lowercase and 191 that end without terminal punctuation and are absent from the candidate list.
+1. Unmarked or partial-sentence quotes: `requote:start` 220, `requote:end` 688, `requote:both` 327 (1,235 candidates in `requote-candidates.jsonl`; the repair writes no replacement text). Of the 20 first-draw records, 6 were listed and 4 more faulty quotes (oa-10:255, harvest-c3:13, harvest-c6:2, oa-2:9634) were not; a scan of the added lines finds 84 prose quotes that begin lowercase and 191 that end without terminal punctuation and are absent from the candidate list.
 2. Journal field without volume, issue or pages: `journal` 1,194 in `crossref-todo.jsonl` and 189 empty. A scan of the added lines finds about 13,200 journal fields with no issue; 2,010 are Perrin et al. 2025 (`Ecology and Evolution 15: e71923`, should be 15(9)) and 990 are Kraatz et al. 2026 (should be 13(4)), so two lookups fix 3,000 lines. The scan also counts journals that print no issue, so treat it as an upper bound.
 3. Authors: `authors` 1,204 in the Crossref list (shortened or "et al."); oa-5:1085 is one more that the page shows is short.
 4. Table, appendix and supplement reads without `partial: true` that the script missed: 268 Perrin Appendix S3 rows, 339 Simões supplement rows (a scan of `where`; the Simões manuscript includes its SI, so the desk should decide), with `partial_set` 6,275 already set.
