@@ -7,6 +7,8 @@ Prompt: `docs/tracks/prompts/oa-read.md`, with the texts already fetched and dec
 | entry | paper | read | records |
 |---|---|---|---:|
 | 13 | Eckardt 2001, Auxin and the Power of the Proteasome in Plants (Plant Cell) | full text (PMC page) | 3 |
+| 20 | Chan et al. 2024, eye morphology of Lepidoptera (Research Square preprint) | full text (PDF) | 10 |
+| 38 | Swanton et al. 2026, light signaling in crop-weed competition (Weed Technology review) | full text (PDF) | 17 |
 
 ## Next
-Entries 20, 38, 45, 53, 58, 64, 70, 71, 74 in that order.
+Entries 45, 53, 58, 64, 70, 71, 74 in that order.
