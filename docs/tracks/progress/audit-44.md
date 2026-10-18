@@ -1,6 +1,8 @@
 # Audit 44, 18 October 2026: harvest-29 (desk-screen unit)
 
-Unit: branch research/harvest-29, commit a7bc1581 (71 search records in docs/views/searched/harvest-29.jsonl, 56 wanted lines in docs/views/wanted/harvest-29.jsonl). The files were read with `git show a7bc1581:<path>` and saved to /tmp/au44/. The audit worktree /tmp/wsau44 was cut from origin/main and edits only this report.
+The unit is branch research/harvest-29 at commit a7bc1581 (71 search records in docs/views/searched/harvest-29.jsonl, 56 wanted lines in docs/views/wanted/harvest-29.jsonl). I read the files with `git show a7bc1581:<path>` and saved copies to /tmp/au44/. The audit worktree /tmp/wsau44 was cut from origin/main and edits only this report.
+
+The unit was written under older rules and then brought to desk-screen.md by a second pass. Besides the four error tests of desk-audit.md, I therefore looked for `screened` reasons and web searches that were added after the fact without being done. No ResearchGate, academia.edu, Sci-Hub or LibGen result was opened (one search returned an academia.edu page, which I left alone), no library login or proxy was used (one result was a university proxy address, also left alone), and no paper text is committed.
 
 ## Gate
 
@@ -12,6 +14,117 @@ Unit: branch research/harvest-29, commit a7bc1581 (71 search records in docs/vie
 
 53, 67, 15, 23, 49, 29, 38, 4, 69, 8, 37, 1, 7, 11, 50, 33, 45, 20, 55, 41
 
-Sorted: 1, 4, 7, 8, 11, 15, 20, 23, 29, 33, 37, 38, 41, 45, 49, 50, 53, 55, 67, 69.
+In sorted order the sample reads 1, 4, 7, 8, 11, 15, 20, 23, 29, 33, 37, 38, 41, 45, 49, 50, 53, 55, 67, 69.
 
-Verdicts follow in the next commit.
+## Result
+
+**The 20 sampled records hold 0 errors, 0% (exact 95% interval 0% to 16.8%). Pooled with audits 40 to 42 (9 errors in 57; those units predate desk-screen.md), the rate is 9 in 77, 11.7% (5.5% to 21.0%). The unit passes the 5% rule as written.**
+
+One defect falls outside the four error tests and reaches 20 of the 71 records. The plant records of eight genera (Thlaspi, Raphanus, Scutellaria, Ostrya, Pastinaca, Lunaria, Valeriana, Cynoglossum) say that the plant-trait queries of harvest supplement run 12 were screened, and `harvest_get.py` prints every one of those 30 queries as `None hits (error gave up)`. Nothing came back to screen. In 12 of the 20 records the failed queries were aimed at the record's own trait (diel or sense_chemical). If those 12 count as errors, the sample holds 4 (lines 15, 37, 49, 53), which is 20% (5.7% to 43.7%), and the pool is 13 in 77, 16.9% (9.3% to 27.1%).
+
+Verdict: release the 51 records outside the eight plant genera, and hold the 20 plant records until the PLANTTRAITS rerun (main commit a429301d) has filled those queries and the sentence is rewritten from its output.
+
+## (a) and (b): queries and chased
+
+In all 20 sampled records `queries` repeat the lines `python3 -I tools/views/harvest_get.py <Genus>` prints, in its order (genus queries, supplement-run queries with their failure marks, the family review), and the "web: " searches follow. Each `chased` DOI is a citation-step line of the harvest output, and each of those steps found no work naming the genus. A script over all 71 records returned the same: 71 of 71 with identical queries, 71 of 71 with `chased` in a citation step, both searches of every desk-screen entry present in `queries`, and every `screened` key present in the harvest output. Across the unit 40 of the 41 citation steps found nothing (the exception is Sorghum, with 2 works), so the `chased` test is easy to meet and settles little.
+
+## (c) and (d): verdict per record
+
+Nineteen `screened` entries sit in 12 of the 20 records (the other 8 have none). I judged all 19 from the abstract in the harvest output, and for the offshore-platform report, whose abstract reads "ABOUT THE", from its title. Each is plainly outside its trait: radar bioscatter in hurricanes, a citizen-science survey, a report on migrating birds at oil platforms, a moth-eye study of another genus (Lymantria), an insect colour-vision review, hyperspectral crop reflectance, a glutathione-transferase review, an Arabidopsis photoreceptor review, a fat-isotope method, a boreal bird-density dataset, flight calls and building collisions, a hybrid warbler specimen, a reading task with schoolchildren, human open-globe-injury models, a ladybird's host-plant cues, a carrot nutrition review, a saint's reception history, a model of faked infection signals and a mayfly eye (another order).
+
+In the table the first two searches of each row are the pair that desk-screen.md step 2 prescribes (genus form, then common-name form; where the record's pair carries an extra class word such as "antelope", I ran the shorter form), and the third is my own. "Run-12 flaw" refers to the sentence examined in the next section, and "own trait" means that the failed queries were aimed at the record's trait.
+
+| line | genus / trait | my searches and what they returned | verdict |
+|---|---|---|---|
+| 1 | Agama / fov_h_deg | "Agama visual field" returned human visual-field pages and "rock agama visual field" returned species pages. "agamid lizard eyes visual field binocular overlap monocular field measurement Agama" returned no Agama paper. A bioRxiv preprint that surfaced (10.64898/2025.12.19.695568) studies binocular development in Octodon degus and names no Agama or Kobus. The abstract of Fleishman 2024 (wanted line 42) names no Agama | confirm |
+| 4 | Basiliscus / pupil_shape | "Basiliscus pupil shape" returned a Smithsonian PDF and an archive.org biostor PDF. The first is Ruthven 1914, a description of B. barbouri that never mentions the pupil. The archive.org fetch redirected to another host and was refused, so that PDF stayed unread. "basilisk lizard pupil shape" returned fantasy pages. "pupil shape evolution lizards squamates species dataset round vertical slit iguanian" returned amphibian pupil papers, and Thomas et al. 2022 (1,294 amphibian species) names no Basiliscus. Banks et al. 2015 names none in its text, and its species table S1 was not in the PDF | confirm; lead open (Banks S1) |
+| 7 | Ascalapha / corner_hz (screened 1 of 1) | "Ascalapha flicker fusion" returned human flicker pages and patents. "black witch moth flicker fusion" returned Chatterjee et al. 2020, whose repository abstract names no species, and a news item on it. A third search for its species list returned Lafitte et al. 2022 (156 species; the abstract names no Ascalapha). Both compilations are on main already | confirm |
+| 8 | Ascalapha / interommatidial_deg (screened 4 of 4) | "Ascalapha visual acuity" returned European owlfly papers. "black witch moth visual acuity" returned a diurnal-moth eye paper (Histia) and other moth-vision items. "Ascalapha odorata compound eye ommatidia structure photoreceptor" returned the Lu and Kronforst preprint, which I opened: the text returned names no Ascalapha, and its supplementary table S1 was not included | confirm |
+| 11 | Microcrambus / corner_hz (screened 1 of 1) | "Microcrambus flicker fusion" returned human flicker pages. "grass-veneer moth flicker fusion" returned Wikipedia and NDSU pages on Crambus species. "Microcrambus moth eye photoreceptor electroretinogram temporal resolution" returned the fiddler-crab ERG paper of Brodrick et al. 2022, which I opened and which names no Crambidae | confirm |
+| 15 | Thlaspi / diel (screened 2 of 2) | "Thlaspi arvense circadian rhythm flower opening" and the field pennycress form returned flower-opening papers on waterlily, sunflower and Nicotiana, and a Western Illinois note on pennycress (opened: cold and day length decide flowering, and it measures no time of day). A third search on anthesis timing returned sunflower and pollinator-visit items. Nothing reports a Thlaspi daily rhythm | confirm; run-12 flaw, own trait |
+| 20 | Trichodes / corner_hz | "Trichodes flicker fusion" returned human flicker pages and patents, and "checkered beetle flicker fusion" returned Lafitte et al. 2022. The third search returned French 1980 on a fly (abstract page opened, no Trichodes) and a Zoological Studies PDF (31(2): 81) that came back as binary data and stayed unread | confirm |
+| 23 | Elymus / eye_type | "Elymus ocelli epidermal cells light sensing eye" and the couch grass form returned plant-ocelli essays and dictionary pages. A Haberlandt-based third search returned a paper on light and epidermal cell shape in grasses, whose listing page names no genus. The run-12 queries for Elymus returned works (1,005, 1, 436, 1,029 and 90 hits), so its sentence has output behind it | confirm |
+| 29 | Amphicarpaea / eye_type | "hog peanut ocelli ..." returned hogfish skin-vision news, and "Amphicarpaea ocelli ..." returned plant-ocelli essays. A third search on a light-sensing structure returned leaf-movement reviews. Nothing names an Amphicarpaea eye. The genus has no supplement run, and the record claims none | confirm |
+| 33 | Parkesia / acuity_cpd (screened 3 of 3) | "Parkesia visual acuity" returned Parkinson's disease pages. "waterthrush visual acuity" returned a field-identification note on the two waterthrushes, a human water-blur acuity paper and a cormorant vision paper. A third search on warbler retinal cell density returned the Caves et al. acuity dataset (94 bird species, Zenodo 10498392), whose species list the record page does not show | confirm; lead open (dataset species list) |
+| 37 | Scutellaria / diel | "Scutellaria circadian rhythm flower opening leaf movement" and the skullcap form returned the Botany Online page and its mirrors, a Plant Journal PDF from Bern, an Indonesian-journal PDF, the Tokyo thesis and a museum-site PDF without a title, which are the items the record lists. A third search on anthesis timing returned sunflower and pollination items. A BMC Plant Biology page I opened concerns the waterlily and never names Scutellaria | confirm; run-12 flaw, own trait |
+| 38 | Scutellaria / eye_type | "Scutellaria ocelli ..." and "skullcap ocelli ..." returned dictionary and Collembola pages and the plant-ocelli essays. A third search on lens-like epidermal papillae returned a leaf-optics review | confirm; run-12 flaw, other trait |
+| 41 | Seiurus / cff_hz (screened 1 of 1) | "Seiurus flicker fusion" returned Dodt 1954, which I opened (man, cat, guinea pig, pigeon, frog and gecko; no Seiurus). "ovenbird flicker fusion" returned a budgerigar flicker paper and bird-vision popular pages. A third search on songbird flicker fusion returned the Healy et al. 2013 compilation (already in canon), auditory temporal-resolution work and a news item on fast vision in perching birds | confirm |
+| 45 | Kobus / pupil_shape (screened 2 of 2) | "Kobus pupil shape" and "waterbuck pupil shape" returned the Banks et al. 2015 paper under several addresses and species fact sheets. The Banks PDF I opened names no Kobus, and its species table S1 was not in the file. A third search on the waterbuck's pupil returned the Wikipedia page, mammal fact sheets and press coverage of Banks et al. The bioRxiv preprint that the record mentions is the degu study opened for line 1 and names no Kobus | confirm; lead open (Banks S1) |
+| 49 | Ostrya / sense_chemical (screened 1 of 1) | "Ostrya tree response to airborne volatiles from damaged neighbours" returned Yamawo et al. 2025 (Ecol Evol; nine tree saplings, and the abstract page names no genus) and a news note on trees communicating. "hop-hornbeam volatile signalling between trees" returned reviews and papers on volatile signalling. A preprint on plant-plant communication in nine tree species (bioRxiv 2022.04.04.486918) names Betula platyphylla and no Ostrya, and I could not tell whether it shares its species with the 2025 paper, whose full text did not open | confirm; lead open (Yamawo 2025); run-12 flaw, own trait |
+| 50 | Pastinaca / eye_type (screened 1 of 1) | "Pastinaca ocelli ..." and "wild parsnip ocelli ..." returned the Ohio State wild parsnip pages, the reef-forum thread on serpent stars, and the dictionary and Collembola ocelli pages that the record lists. A third search on lens-like leaf cells returned leaf-optics reviews. Nothing names a Pastinaca eye structure | confirm; run-12 flaw, other trait |
+| 53 | Lunaria / sense_chemical (screened 1 of 1) | "Lunaria annua plant response to airborne volatile signals" and "honesty plant Lunaria volatile signals neighbouring plants response" returned general plant-volatile reviews and papers (for example "Airborne signals synchronize the defenses of neighboring plants in response to touch"). A third search on volatile cues and germination in Brassicaceae returned the same reviews. No title names Lunaria | confirm; run-12 flaw, own trait |
+| 55 | Valeriana / eye_type | "Valeriana ocelli ..." and "valerian ocelli ..." returned the plant-ocelli essays, dictionary pages and two repository or journal PDFs without readable titles (unopened). A third search on lens-shaped epidermal cells returned the same essays | confirm; run-12 flaw, other trait |
+| 67 | Euodynerus / cff_hz (screened 1 of 1) | "Euodynerus flicker fusion" returned human flicker pages and patents. "potter wasp flicker fusion" returned Lafitte et al. 2022 and a review of flickering artificial light. A third search on eumenine electroretinograms returned Pinter 1972, which I opened (locust and house cricket) | confirm |
+| 69 | Euodynerus / interommatidial_deg (screened 1 of 1) | "Euodynerus visual acuity" returned a Wikipedia page, a velvet-worm vision paper and acuity compilations. "potter wasp visual acuity" returned Gutierrez Kemenes 2022 on two Vespula species (opened; interommatidial angles of 1.0 to 1.5 degrees, but in Vespula, a different genus). A third search on eumenine eye morphology returned Eggenreich and Kral 1990 on the neuropteran Mantispa (opened) | confirm |
+
+All 20 records pass the four tests of desk-audit.md. I found no measurement of an open trait that a record missed, with the limit that WebSearch returns titles and links only, so a table inside a paper that its title does not announce would not have surfaced.
+
+## Second-pass check: were the additions done?
+
+1. **The web searches look done.** Both searches of every desk-screen entry stand in `queries` (71 of 71). My reruns returned the unusual items the records list. For Scutellaria diel the pair returned the Botany Online page and mirrors, the Bern Plant Journal PDF, an Indonesian-journal PDF, the Tokyo thesis and a titleless museum-site PDF, which is the list that line 37 gives. For Pastinaca the pair returned the Ohio State wild parsnip pages and the reef-forum serpent-star thread that line 50 names. For the waterthrushes the results were field-guide pages, a human acuity paper and cormorant vision, as line 33 says. Where I could compare less closely, the results were of the kinds each `where` describes, with no contradiction.
+
+2. **The `screened` reasons are sound.** All 19 entries I judged hold no measurement of their trait, and the gate confirms that every candidate the tool lists is named.
+
+3. **One sentence was added without being done.** Twenty records carry a `where` entry that begins "harvest supplement run 12 (plant-trait queries ...): titles and abstract starts screened with tools/views/screen_candidates.py; every candidate is named in "screened" or its work is on the wanted list harvest-29". For eight genera the harvest prints every query of that run as `None hits (error gave up)`, and main commit a429301d gives the cause: "Run r12 lost about 40% of its plant-trait queries to OpenAlex rate limits." The gate cannot see this, because a query that returned nothing produces no candidate.
+
+| genus | lines | queries printed as `None hits (error gave up)` |
+|---|---|---|
+| Thlaspi | 15 to 17 | flower opening time; nyctinasty; volatile signalling |
+| Raphanus | 31, 32 | flower opening time; nyctinasty; volatile signalling |
+| Scutellaria | 37 to 39 | flower opening time; nyctinasty; volatile signalling; photoperiod; circadian rhythm |
+| Ostrya | 47 to 49 | flower opening time; nyctinasty; volatile signalling; photoperiod; circadian rhythm |
+| Pastinaca | 50 | flower opening time; nyctinasty; volatile signalling |
+| Lunaria | 51 to 53 | flower opening time; nyctinasty; volatile signalling |
+| Valeriana | 54, 55 | flower opening time; nyctinasty; volatile signalling; photoperiod; circadian rhythm |
+| Cynoglossum | 56 to 58 | volatile signalling; photoperiod; circadian rhythm |
+
+The 12 diel and sense_chemical lines (15, 17, 32, 37, 39, 47, 49, 51, 53, 54, 56, 58) are the ones whose own trait the failed queries were meant to reach. The 8 eye_type lines (16, 31, 38, 48, 50, 52, 55, 57) carry the same sentence without a failed query aimed at their trait. Three other records carry the sentence with working queries (13 Humulus, 22 and 23 Elymus). In the sample the flaw sits on lines 15, 37, 38, 49, 50, 53 and 55. My searches for lines 15, 37, 49 and 53 found no diel or sense_chemical measurement, so the harm is a coverage gap and a false description, and no measurement is known to be missing.
+
+4. **The unit ran more searches than step 2 asks.** Counting the traits that have a search record, step 2 needs 59 search pairs for the 26 genera, and the records list 69. The ten extra pairs are the corner_hz and interommatidial_deg pairs of Ascalapha, Microcrambus, Trichodes and Cisseps (lines 7, 8, 11, 12, 20, 21, 26, 27, worded "photoreceptor temporal resolution" and "interommatidial angle" where the "flicker fusion" and "visual acuity" pairs already serve) and the interreceptor_deg pairs of Parkesia and Seiurus (lines 35 and 42, "retinal ganglion cell density"). That is 20 searches above the minimum in a ration of about 200 shared. Euodynerus follows step 2 exactly, and its corner_hz record says that the flicker pair serves both traits.
+
+## Wanted lines
+
+Step 4 of desk-audit.md lists wanted-line faults without counting them, and I follow it. By field, 50 of the 56 lines leave `authors` blank, 4 leave `year` blank, 7 leave `doi` blank, and 4 titles read "title not shown in the search result". Nine lines repeat four works (the Evolution 2011 paper three times, and Heesy 2004, Martin 2014 and the PLoS ONE 2017 paper twice each).
+
+| line | work | page I opened | result |
+|---|---|---|---|
+| 42 | Lizard visual ecology, Front Amphib Reptile Sci, 10.3389/famrs.2024.1426675 | DOAJ record | Title, year and DOI agree. The only author is Leo J. Fleishman, which the line leaves blank. The abstract names no Agama |
+| 44, 49 | Heesy 2004, Anat Rec A, 10.1002/ar.a.20116 | the reference list of an EcoEvoRxiv preprint (object 3928), since no publisher page surfaced | Author, year, pages (281A(1): 1104-1110) and DOI agree through an indirect page. Whether the paper names a Kobus or Syncerus relative stays unconfirmed, as the lines say |
+| 45, 47 | Martin 2014, Phil Trans R Soc B 369: 20130040, 10.1098/rstb.2013.0040 | Birmingham research portal | Author, year, article number and DOI agree. The page metadata prints two different journal names |
+| 46, 48 | PLoS ONE 2017, 10.1371/journal.pone.0173235 | Purdue news item (the paper's title matched PMC5371358 in the search results, which did not open) | The lines are contradicted. They give "Martin GR", and the page names Luke Tyrrell and Esteban Fernández-Juricic as the authors of the PLoS ONE study (it shows neither the title nor the DOI). The lines copy the author from docs/tracks/batches/dw-1.jsonl entry 16 on main, which carries the same error, and audit 42 found it in harvest-28 |
+| 55 | Rhythmic leaf movements of some common weeds, Weed Science | Cambridge Core page | The page gives Robert N. Andersen and Willard L. Koukkari, Weed Sci 27(4): 401-415, July 1979, 10.1017/S0043174500044295, and the line leaves all of these blank. The abstract names nine species (wild mustard, redroot pigweed, black nightshade, jimson-weed, common lambsquarters, common cocklebur, prickly sida, sicklepod, coffee senna), and wild parsnip is absent from them, so the lead rests on the full text |
+| 52 | 10.3389/fevo.2022.900544 | none; the harvest prints it under Dissosteira and Hierodula | The harvest gives the title, "Rapid Shifts in Visible Carolina Grasshopper (Dissosteira carolina) Coloration During Flights" (Front Ecol Evol 2022), where the line says the title is not shown. The work concerns hindwing coloration and a different genus from Chortophaga |
+| 2, 33, 40 | Evolution 2011 form-function paper, 10.1111/j.1558-5646.2011.01271.x | none | The lines are unverified. Two title searches returned no page for the paper, the bioRxiv full text I opened has no reference list, and the EcoEvoRxiv list does not include it. The authors are blank in the lines |
+| 1 | J Morphol 2022, 10.1002/jmor.21495 | none | The line is unverified: a title search returned no page for the paper, and the authors are blank |
+| 43 | J Comp Neurol, 10.1002/cne.10308 | none | The line is unverified: a search on the DOI returned pages that do not name the paper, so its title, authors and year stay unknown |
+
+In sum, 2 lines are contradicted (46, 48), 2 lines leave blank an author, year or DOI that a page supplied (42, 55), 1 line lacks a title the harvest supplied (52), and 5 lines are unverified (1, 2, 33, 40, 43).
+
+## Counts
+
+- I sampled 20 of the 71 search records and found 0 errors by desk-audit.md (queries that differ, an unsupported `chased`, a screened work that reports the measurement, a missed measurement).
+- The rate is 0 of 20, 0% (0% to 16.8%). The 13 sampled records outside the eight plant genera show 0 of 13 (0% to 24.7%).
+- Pooled with audits 40 to 42 (9 of 57, 15.8%), the rate is 9 of 77, 11.7% (5.5% to 21.0%). Those three units were written before desk-screen.md, so the pool mixes two rule sets.
+- If the unsupported run-12 sentence counts when the failed queries were aimed at the record's trait, the sample holds 4 of 20, 20% (5.7% to 43.7%), and the pool holds 13 of 77, 16.9% (9.3% to 27.1%). Over all 71 records the same test is a count of the whole unit and carries no sampling interval: 12 of 71, 16.9%, with 20 of 71 carrying the sentence.
+- Audits 39 and 42 listed `where` misstatements apart from errors (audit 39 as "weak", audit 42 in its text) and counted an error only where a measurement was missed, and I follow that rule for the headline. Audits 41 and 42 also gave a stricter alternative count, as I do here. The unit meets the 5% line on the headline and misses it on the stricter count.
+
+## Verdict under the 5% rule
+
+**The unit passes as written, at 0 of 20.** A 20-record sample cannot rule out a true rate above 5% (the upper bound is 16.8%), as with every audit of this size. The 13 sampled records outside the plant genera show none of the faults of audits 40 to 42: their queries match the harvest, their `screened` reasons hold, and my searches found no missed measurement. The 20 plant records describe a screening that the harvest output shows did not happen, so they cannot settle their cells yet.
+
+For the desk:
+
+1. Release the 51 records outside the eight plant genera.
+2. Hold lines 15 to 17, 31, 32, 37 to 39 and 47 to 58 until the PLANTTRAITS rerun has filled the 30 failed queries. Then run `screen_candidates.py` on the new works, name each new candidate in `screened`, put any work that may hold a diel or sense_chemical measurement on the wanted list, and rewrite the run-12 sentence from that output. Until then the sentence should say that the run returned nothing.
+3. Correct wanted lines 46 and 48 (Tyrrell and Fernández-Juricic) and entry 16 of dw-1.jsonl on main. Fill the authors of line 42 and the authors, year and DOI of line 55. Replace line 52's "title not shown" with the harvest's title and note that the work concerns another genus.
+4. Treat the 20 searches above step 2's minimum (Ascalapha, Microcrambus, Trichodes, Cisseps, Parkesia, Seiurus) as a ration overrun to avoid in the next unit.
+
+## Blocked pages and unread leads
+
+These fetches failed or were refused and were not retried: archive.org biostor-3896 (the redirect to another host was refused), PMC4643806 (bot check), PMC11739611 (the redirect was not followed) and zoolstud.sinica.edu.tw 31.2/81.pdf (binary data). The host `api.crossref.org` was unreachable through the egress proxy (the CONNECT tunnel was refused with 403), so no DOI lookup went through Crossref, and I did not route around it.
+
+The leads left unread are the Banks et al. 2015 species table S1 (Kobus, Basiliscus; the compilation is on main already), the species list of the Caves et al. acuity dataset (Parkesia, Seiurus; the paper 10.1242/jeb.246063 is on main already), the full text of Yamawo et al. 2025 (Ostrya), the Chatterjee 2020 species list (Ascalapha, Microcrambus), the supplementary table S1 of the Lu and Kronforst preprint (Ascalapha), the authors of the Evolution 2011 paper, and a page for 10.1002/cne.10308 and for 10.1002/jmor.21495.
+
+## Searches
+
+I ran 72 WebSearch calls (63 for the sampled records and 9 for the wanted lines), none refused for the limit, and 31 WebFetch calls on URLs my searches returned. All 20 sampled records were finished.
