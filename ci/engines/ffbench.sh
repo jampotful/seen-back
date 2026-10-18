@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# The recognizer's runtime alone in Firefox (run/engines/ffx-*, docs/ENGINES.md, the Firefox section): test/engines/ffbench.js on
-# test/engines/ffbench.html, served from this commit. V names the variant; each variant is one job of its own on a fresh machine.
+# The recognizer's runtime alone in Firefox (run/engines/ffx-*, docs/ENGINES.md, 18 October, Firefox): test/engines/ffbench.html served
+# from this commit, driven by test/engines/ffbench.js through Playwright or started by hand in a Firefox with no automation attached, where
+# the page posts its figures to ci/engines/serve.py. V names the variant (the list below); each variant is one job on a fresh machine.
+# Lines of the log that start with the variant's name carry the figures: the session, each run, and the answer's first values and sum.
 set -uo pipefail
 ROOT="$PWD"; OUT="$ROOT/out"; mkdir -p "$OUT"
 exec > >(tee -a "$OUT/log.txt") 2>&1

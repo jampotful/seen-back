@@ -12,7 +12,11 @@ name: engines
 # home-screen questions, Firefox, WebKit) and two macOS jobs (Playwright's WebKit and real Safari; Safari on an iPhone simulator).
 # run/engines/bigwm-<anything>: the larger model's memory, page against page (ci/engines/bigwm.sh, the pages in ci/engines/wm-variants.txt):
 # WebKit on Linux, and Playwright's WebKit and Safari on macOS (no simulator).
-# run/engines/ffx-<anything>: the recognizer's runtime alone in Firefox (ci/engines/ffbench.sh, test/engines/ffbench.js), one variant a job.
+# run/engines/ffx-<anything>: the recognizer's runtime alone in Firefox (ci/engines/ffbench.sh, test/engines/ffbench.html), one variant a job:
+# ffx-s*: every browser on one machine, through Playwright and started by hand; ffx-v*: Mozilla's builds of several releases started by hand;
+# ffx-g*: the page's own flow in Mozilla's build started by hand, and through Playwright; ffx-p*: the machine's Firefox and Playwright's started
+# by hand, and Playwright's asked for the optimizing compiler; any other ffx-*: Playwright's Firefox with one setting changed at a time, and
+# Chromium (docs/ENGINES.md, 18 October, Firefox).
 # Results come back on the `ci` branch under runs/engines/<run number>-<job>: log.txt, summary.json, reports and small JPEGs.
 on:
   push:
