@@ -1,0 +1,32 @@
+
+=== 23:11:33 machine (ff-base)
+Linux runnervm8k3b6 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:           15989        1089       12517          41        2747       14899
+Swap:           3071           0        3071
+4
+model name	: AMD EPYC 7763 64-Core Processor
+ssse3 fma sse4_1 sse4_2 avx avx2 
+
+=== 23:11:33 playwright 1.56.0
+added 2 packages in 2s
+
+=== 23:11:53 variant ff-base: firefox, headed 0, prefs {"javascript.options.wasm_optimizingjit":false}, cases pocket:all:3
+23:12:16 ff-base pocket:all:3 | fetch 152 ms | session 1298 ms | runs [6296,6250,6228] ms | head [0.011763,0.215329,-0.131141,-0.000086,0.297737,0.082296] sum -89.13024 | error  
+23:12:16 ff-base version 142.0.1 | features {"ua":"Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0","coi":false,"cores":4,"sab":"undefined","simd":true,"relaxedSimd":false,"sharedMemory":true}
+ffbench.js: exit 0
+top - 23:12:17 up 1 min,  0 user,  load average: 0.79, 0.31, 0.12
+Tasks: 172 total,   1 running, 171 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni, 97.8 id,  2.2 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15989.7 total,  11716.4 free,   1012.0 used,   3641.4 buff/cache     
+MiB Swap:   3072.0 total,   3072.0 free,      0.0 used.  14977.7 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+      1 root      20   0   22900  14400   9872 S   0.0   0.1   0:03.51 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      7 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+

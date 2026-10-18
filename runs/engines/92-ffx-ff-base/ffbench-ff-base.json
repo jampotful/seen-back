@@ -1,0 +1,73 @@
+{
+ "label": "ff-base",
+ "browser": "firefox",
+ "prefs": {
+  "javascript.options.wasm_optimizingjit": false
+ },
+ "headed": false,
+ "cases": [
+  {
+   "case": "pocket:all:3",
+   "url": "http://127.0.0.1:8790/test/engines/ffbench.html?model=pocket&opt=all&reps=3&threads=1",
+   "done": true,
+   "steps": [
+    [
+     350,
+     "fetched in 152 ms"
+    ],
+    [
+     1649,
+     "session in 1298 ms"
+    ],
+    [
+     7947,
+     "run 0 in 6296 ms"
+    ],
+    [
+     14196,
+     "run 1 in 6250 ms"
+    ],
+    [
+     20425,
+     "run 2 in 6228 ms"
+    ]
+   ],
+   "features": {
+    "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0",
+    "coi": false,
+    "cores": 4,
+    "sab": "undefined",
+    "simd": true,
+    "relaxedSimd": false,
+    "sharedMemory": true
+   },
+   "result": {
+    "model": "pocket",
+    "opt": "all",
+    "threads": 1,
+    "wb": false,
+    "t": {
+     "runs": [
+      6296,
+      6250,
+      6228
+     ],
+     "fetch": 152,
+     "session": 1298
+    },
+    "head": [
+     0.011763,
+     0.215329,
+     -0.131141,
+     -0.000086,
+     0.297737,
+     0.082296
+    ],
+    "sum": -89.13024
+   },
+   "wallMs": 22940,
+   "timedOut": false
+  }
+ ],
+ "version": "142.0.1"
+}
