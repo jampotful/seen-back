@@ -118,7 +118,7 @@
       var w = new Float64Array(n), W, sw = 0, out = new Float64Array(S), j, mm, cell, acc, sp;
       for (j = 0; j < n; j++) { w[j] = P[j] / (N[j] + S); sw += w[j]; }
       W = discSum(w); p = P0;
-      for (sp = 0; sp < S; sp++) { mm = vint(); cell = 0; acc = 0; for (j = 0; j < mm; j++) { cell += vint(); acc += vint() * W[cell]; } out[sp] = Math.log(acc + sw); }
+      for (sp = 0; sp < S; sp++) { mm = vint(); cell = 0; acc = 0; for (j = 0; j < mm; j++) { cell += vint(); acc += vint() * W[cell]; } out[sp] = Math.log(acc + sw + (table[sp].h || 0)); }   // a home share holds in every cell
       return out;
     }
     // the creatures met, kept on this device: {id (the meeting's), sci, zone, at}
@@ -128,7 +128,7 @@
     function keep(list) { try { localStorage.setItem(PLACE_KEY, JSON.stringify({ v: 1, met: list.slice(-PLACE_KEEP) })); } catch (e) {} }
     function metHere(z) {                              // the rows of the creatures met in this time zone, each species once, in the order met
       var seen = {}, out = [];
-      kept().forEach(function (x) { var r = x.zone === z ? row(x.sci) : -1; if (r >= 0 && !seen[r]) { seen[r] = 1; out.push(r); } });
+      kept().forEach(function (x) { var r = x.zone === z ? row(x.sci) : -1; if (r >= 0 && !seen[r] && !(table[r].h > 0)) { seen[r] = 1; out.push(r); } });   // a species people keep says nothing of the place
       return out;
     }
     function now() {
@@ -354,10 +354,14 @@
       var t, rows; try { t = JSON.parse(new TextDecoder('utf-8').decode(buf)); } catch (e) { throw err('damaged', 'species table is not JSON'); }
       rows = Array.isArray(t) ? t : t && t.species;
       if (!Array.isArray(rows) || rows.length !== count) throw err('unfit', 'species table has ' + (rows ? rows.length : 0) + ' rows, not ' + count);
-      return rows.map(function (r) {
+      var out = rows.map(function (r) {
         var a = Array.isArray(r) ? r : [r.sci, r.en, r.kind || r.eyes, r.m], kind = knownKind(a[2]) ? a[2] : 'other', m = Array.isArray(a[3]) && a[3].length === 12 ? a[3] : null;
         return { sci: clip(a[0], 80), en: clip(a[1], 60), kind: kind, m: m };
       });
+      // home: [[row, share], ...], the share of a species people keep (pets, livestock, houseplants, gardens) wherever people are
+      // (tools/species/EVERYDAY.md); placeOf adds it to the row's share in every cell
+      if (t && Array.isArray(t.home)) t.home.forEach(function (x) { if (Array.isArray(x) && x[0] === Math.floor(x[0]) && x[0] >= 0 && x[0] < out.length && num(x[1]) && x[1] > 0) out[x[0]].h = +x[1]; });
+      return out;
     }
     function floats(buf, count) {                      // a trained head's biases for the species: little-endian float32, one for each row
       if (!buf || buf.byteLength !== count * 4) throw err('damaged', 'species biases of the wrong length');

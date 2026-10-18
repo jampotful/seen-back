@@ -99,8 +99,25 @@ def evidence_files(root):
     return out
 
 
+def read_fixes(root):
+    """{"<unit>:<line>": {"partial": True}} from docs/views/fixes/*.jsonl, the same file gaps.py reads (the evidence files stay as written)."""
+    fixes = {}
+    fxdir = os.path.join(root, "docs", "views", "fixes")
+    for f in sorted(os.listdir(fxdir)) if os.path.isdir(fxdir) else []:
+        if f.endswith(".jsonl"):
+            for line in open(os.path.join(fxdir, f), encoding="utf-8"):
+                try:
+                    fx = json.loads(line)
+                except ValueError:
+                    continue
+                if isinstance(fx, dict) and fx.get("id"):
+                    fixes.setdefault(fx["id"], {}).update({k: v for k, v in fx.items() if k == "partial"})
+    return fixes
+
+
 def load_evidence(root, tax):
     recs = []
+    fixes = read_fixes(root)
     for unit, path in evidence_files(root):
         for n, line in enumerate(open(path, encoding="utf-8"), 1):
             line = line.strip()
@@ -113,6 +130,7 @@ def load_evidence(root, tax):
             if not isinstance(r, dict) or "trait" not in r:
                 continue
             r["_id"] = "%s#%d" % (unit, n)
+            r.update(fixes.get("%s:%d" % (unit, n), {}))
             recs.append(r)
     index = collections.defaultdict(list)
     for r in recs:
@@ -260,14 +278,17 @@ def short_source(r):
 
 
 def record_line(rid, r):
+    part = " | PARTIAL (read from a compilation, table, appendix, review or abstract)" if r.get("partial") else ""
     v = json.dumps(r.get("value"), ensure_ascii=False)
     q = " ".join(str(r.get("quote") or "").split())
-    return "%s | %s | %s | value %s | eye %s | grade %s | %s | \"%s\" | %s" % (
-        rid, r.get("taxon"), r.get("_trait"), v[:80], r.get("eye") or "-", r.get("grade"), (r.get("method") or "")[:60], q[:220], short_source(r))
+    return "%s | %s | %s | value %s | eye %s | grade %s | %s | \"%s\" | %s%s" % (
+        rid, r.get("taxon"), r.get("_trait"), v[:80], r.get("eye") or "-", r.get("grade"), (r.get("method") or "")[:60], q[:220], short_source(r), part)
 
 
 def rule_text(c):
     if c["state"] == "m":
+        if c.get("rec") is not None and c.get("full") is False:
+            return "measured in this species, as a review, table or abstract reports it (partial)"
         return "measured in this species"
     if c["state"] == "g":
         return "carried by %s from a relative" % (c.get("rule") or "a rule")
@@ -312,6 +333,7 @@ HOW THE GRADE SHOWS IN THE WORDS (the owner's decision):
 - m: say it plainly, and name the species measured: "If you are a barn owl, ...". A figure measured in one species stays with that species.
 - g: name the relatives it comes from and say "you very likely": "Deer, cattle, sheep and horses have two kinds of color-sensing cell, and you very likely have two as well."
 - i: say what can be said and say plainly what nobody has measured: "Nobody has measured how sharply you see."
+- A record marked PARTIAL was read from a compilation, table, appendix, review or abstract. Say so ("a review reports ...") and give only what it states.
 - The grade you are given is the one for the species people meet most. If a few species are measured and most are not, say which are measured.
 
 THE CARRY RULES (so you know what the grades mean): numbers never travel from one species to another; photopigments and the number of color classes may travel within an order; optics, fields, sharpness, flicker speed, the sharp spot and the pupil travel only within a genus.

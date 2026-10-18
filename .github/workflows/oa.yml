@@ -1,0 +1,27 @@
+name: oa
+# Open-access pass, network half (ci/oa/oa.py): look each paper up, read its free copy, return the
+# bibliographic records and the text encrypted to ci/oa/pub.pem. Push a commit to run/oa/<anything>.
+on:
+  push:
+    branches: ['run/oa/**']
+permissions:
+  contents: write
+jobs:
+  oa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        batch: [oa-1, oa-2, oa-3, oa-5, oa-6, oa-9, oa-10, oa-11]
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: sudo apt-get install -y -q poppler-utils >/dev/null && pip install -q cryptography
+      - name: oa
+        run: mkdir -p out && python3 ci/oa/oa.py --batch ${{ matrix.batch }} ci/oa/list.jsonl out 2>&1 | tee out/log.txt || true
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh oa out ${{ matrix.batch }}

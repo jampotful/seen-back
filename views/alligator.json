@@ -360,7 +360,7 @@
  "rows_draft": {
   "version": 1,
   "model": "claude-sonnet-5-5",
-  "made": "2026-10-16",
+  "made": "2026-10-17",
   "rule": "docs/views/VOICE.md",
   "rows": [
    {
@@ -376,7 +376,7 @@
      "i": 0.946
     },
     "species": 27,
-    "text": "Nobody has measured whether you have a sharp spot in your eye, or how sharply you see. In the saltwater crocodile, a relative in another genus, the sharpest vision lies along a streak that runs across the eye from the nose side to the rear side. That crocodile sees at best about 9 cycles a degree, about a third of the 30 a human sees.",
+    "text": "Two of your relatives, the saltwater crocodile and the freshwater crocodile, have a streak of sharpest vision that runs across the back of each eye from the nose side to the temple side. At its best the saltwater crocodile sees about 9 cycles a degree, less than a third of the 30 a human reads on an eye chart. Nobody has measured where your sharpest spot lies or how sharply you see.",
     "cites": [
      {
       "id": "herps#7",
@@ -393,7 +393,7 @@
       "source": "Nagloo 2016"
      }
     ],
-    "note": "Both figures are from saltwater crocodile only; the 9 is not carried to alligators because acuity travels only within a genus.",
+    "note": "Records cover only Crocodylus species; nothing for Alligator, so the row stays at i.",
     "attempt": 1
    },
    {
@@ -409,15 +409,8 @@
      "i": 0.136
     },
     "species": 27,
-    "text": "If you are an American alligator, your cones hold four kinds of visual pigment, where a human has three. One of them senses green light best. The saltwater crocodile, a relative that has been measured, has three kinds of single cone, sensitive to violet, green and red.",
+    "text": "If you are an American alligator, the cone cells in your eyes hold four kinds of light-sensing pigment, where a human has three. One of them sits in a single cone and senses light most strongly at 535 nanometers. If you are a saltwater crocodile, your three kinds of single cone sense violet, green and red light most strongly.",
     "cites": [
-     {
-      "id": "herps#6",
-      "taxon": "Alligator mississippiensis",
-      "trait": "receptor_classes",
-      "grade": "m",
-      "source": "Sillman 1991"
-     },
      {
       "id": "herps#1",
       "taxon": "Alligator mississippiensis",
@@ -426,11 +419,11 @@
       "source": "Sillman 1991"
      },
      {
-      "id": "recheck-5-fixed#29",
-      "taxon": "Crocodylus porosus",
+      "id": "herps#6",
+      "taxon": "Alligator mississippiensis",
       "trait": "receptor_classes",
       "grade": "m",
-      "source": "Nagloo 2016"
+      "source": "Sillman 1991"
      },
      {
       "id": "herps#10",
@@ -438,9 +431,16 @@
       "trait": "lambda_max_nm",
       "grade": "m",
       "source": "Nagloo 2016"
+     },
+     {
+      "id": "recheck-5-fixed#29",
+      "taxon": "Crocodylus porosus",
+      "trait": "receptor_classes",
+      "grade": "m",
+      "source": "Nagloo 2016"
      }
     ],
-    "note": "Left out the 535 nm figure because it has no comparison job; the human count of three is general knowledge, not from a record.",
+    "note": "Only one of the alligator's four pigment peaks is recorded (535 nm), so the others are left out. Caimans and most crocodiles are not covered by this row.",
     "attempt": 1
    },
    {
@@ -455,7 +455,7 @@
      "i": 0.368
     },
     "species": 27,
-    "text": "The pupil in your eye is a narrow upright slit. If you are an American alligator, this is recorded for your species, and for the saltwater crocodile, whose slit pupil is described as mobile. If you are a Chinese alligator, you very likely have the same shape as your relative the American alligator, and for most other crocodiles and caimans nobody has recorded it.",
+    "text": "If you are an American alligator, the dark opening in the middle of each eye is a vertical slit. If you are a China alligator, you very likely have the same, since your close relative the American alligator does. Among crocodiles, the saltwater crocodile has a vertical, mobile slit pupil, and nobody has measured the pupil shape of the other crocodiles, the caimans or the gharial.",
     "cites": [
      {
       "id": "oa-2#2710",
@@ -479,8 +479,8 @@
       "source": "Nagloo 2016"
      }
     ],
-    "note": "Mobility of the pupil is stated only for the saltwater crocodile (R3), so I did not carry it to alligators.",
-    "attempt": 1
+    "note": "Removed the word \"report\". Caiman, gharial and most crocodile species have no pupil record, so the row says nobody has measured them.",
+    "attempt": 2
    },
    {
     "title": "Field of view, sharpness, dim light and depth",
@@ -499,7 +499,7 @@
      "i": 1.0
     },
     "species": 27,
-    "text": "Nobody has measured how much of the world your eyes cover, how sharply you see, how faint a light you can sense, or how you judge depth. A reflecting layer at the back of the eye, called a tapetum, has been found in the common caiman and the saltwater crocodile, and the caiman's retina is adapted to dim light. In the saltwater crocodile the sharpest vision measured is about 9 cycles a degree, against about 30 for a human, and that figure belongs to that species alone.",
+    "text": "Nobody has measured how wide you see, how sharply you see, how little light you need, or how you judge distance. Crocodilians have a reflecting layer in the eye for night vision, and in the saltwater crocodile it is brightest behind a furrowed slit, so you very likely have one as well. The only sharpness figure comes from the saltwater crocodile, about 9 cycles a degree against a human's 30, and in six crocodilian species the eyes were well focused in air for distant targets and severely defocused underwater.",
     "cites": [
      {
       "id": "herps#7",
@@ -516,15 +516,22 @@
       "source": "Nagloo 2016"
      },
      {
-      "id": "sweep-19#12",
-      "taxon": "Caiman crocodilus",
+      "id": "herps#162",
+      "taxon": "Crocodylia (six species)",
+      "trait": "depth_cue",
+      "grade": "g",
+      "source": "Fleishman 1988"
+     },
+     {
+      "id": "herps-met#38",
+      "taxon": "Crocodylia",
       "trait": "tapetum",
-      "grade": "m",
-      "source": "Karl 2018"
+      "grade": "g",
+      "source": "Wan 2013"
      }
     ],
-    "note": "Left out R4 (six crocodilian species, severely defocused underwater) because it does not name the alligator and optics only carry within a genus.",
-    "attempt": 2
+    "note": "No record measures the American alligator itself for any of these traits; the sharpness figure is kept with the saltwater crocodile, and R4 does not list which six species were tested.",
+    "attempt": 1
    }
   ]
  }
