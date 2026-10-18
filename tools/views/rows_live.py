@@ -3,7 +3,8 @@
 
     python3 -I tools/views/rows_live.py [--views a,b] [--no-report]
 
-For each view that rows.py can compute (the fourteen with a gap table, and the jumping spider and the spiders), the grade the evidence
+For each view that rows.py can compute (the fourteen with a gap table, the jumping spider and the spiders, and since 18 October the other
+views behind ?try=, through docs/views/gaps/try-rows.json and try-species.json), the grade the evidence
 gives a row (rows.py's own computation: the grade most of the species' records fall under, carry rules applied) is set beside the grade
 letter of the live row with the same title, and every number in the live row's text is looked for in the records of the row's traits that
 belong to a species of the view or a relative of one (the same test rows.py gives a draft). Writes the block `live-disagreement` of
@@ -23,7 +24,9 @@ R = importlib.util.module_from_spec(spec)
 sys.modules["rows"] = R
 spec.loader.exec_module(R)
 
-VIEWS = "alligator,bee,bird,cat,deer,dog,frog,hawk,insect,jumper,plant,rabbit,reptile,spider,squirrel,wader"
+VIEWS = ("alligator,bee,bird,cat,deer,dog,frog,hawk,insect,jumper,plant,rabbit,reptile,spider,squirrel,wader,"
+         "bat,bigcat,centipede,cephalopod,crab,duck,fish,flyingfox,fox,fungus,harvestman,mammal,millipede,owl,primate,reef,salamander,scorpion,"
+         "sealife,shark,slime,snail,tick,whale,woodlouse,worm")
 
 
 def norm(t):
@@ -74,7 +77,11 @@ def main():
         for title, traits in R.view_rows(ROOT, v).items():
             for old, new in R.US_TITLES:
                 title = title.replace(old, new)
-            computed[norm(title)] = R.compute_row(ROOT, v, title, traits, species[v], index, ord_ev, tax, cls_of, carry)
+            c = R.compute_row(ROOT, v, title, traits, R.row_species(ROOT, v, title, species[v]), index, ord_ev, tax, cls_of, carry)
+            computed[norm(title)] = c
+            live_title = R.try_meta(ROOT, v, title).get("live")
+            if live_title:
+                computed[norm(live_title)] = c
         n_cmp = n_grade = n_val = 0
         for row in live:
             g, title, text = row[0], row[1], row[2]
