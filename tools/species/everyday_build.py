@@ -1,27 +1,33 @@
 #!/usr/bin/env python3
 """The full database extended with the species people photograph at home, and its measurements (tools/species/EVERYDAY.md).
 
-Reads the species tools/species/everyday.py resolved (species.csv, photos.csv), the shipped world slot (the parts, scale,
-table and place files of models/naturalist/manifest.json), the world test's photos (pub/world-place) and their BioCLIP 2
-vectors (pub/lab-bioclip2-l14). On a build machine (.github/workflows/everyday.yml):
+Reads the species tools/species/everyday.py resolved (species.csv, photos.csv), the world slot as it was before these
+species (the parts, scale, table and place files kept by pin/naturalist-world-9ae0806), the world test's photos
+(pub/world-place) and their BioCLIP 2 vectors (pub/lab-bioclip2-l14). On a build machine (.github/workflows/everyday.yml):
 
-  1. The rows. A species the world table already holds (same GBIF key, or the same scientific name) keeps its row; any
-     other gets a new row at the end, made as the world rows were made (tools/coverage/text.py: "a photo of <name>.",
-     BioCLIP 2's text half; tools/world/pack.py: one byte a number with a scale a row). Three existing rows are made
-     again the same way as a check that the route agrees with the shipped rows.
+  1. The rows, under two rules. "own" (build 34): a species the world table already holds (same GBIF key, or the same
+     scientific name) keeps its row, and any other gets a new row at the end, made as the world rows were made
+     (tools/coverage/text.py: "a photo of <name>.", BioCLIP 2's text half; tools/world/pack.py: one byte a number with a
+     scale a row). "accepted" (build 35): as "own", except that a species GBIF lists as a synonym takes the world row of
+     the species GBIF accepts for it (the accepted name's species key, from api.gbif.org) when that row already carries
+     the same English name, as the domestic dog does under Canis lupus. Three existing rows are made again the same way
+     as a check that the route agrees with the shipped rows.
   2. The prior for where people live. Each resolved species' row gets a home share, beta times its iNaturalist
      observations marked captive or cultivated over all of iNaturalist's observations, added to its share in every cell
      (tools/world/place.py); such a row never moves the place (the encounter rule skips it). beta is chosen on the tune
-     photos alone, from BETAS, by the share of species right in the photo's own time zone (the smaller beta on a tie).
+     photos alone, from BETAS, by the share of species right in the photo's own time zone (the smaller beta on a tie),
+     among the betas whose world-test drops are all within the mark.
   3. The measurements, with the page's arithmetic (fuseWith in src/cam.rec.js, here in numpy): on the test photos of the
      resolved species, the kind right and the species right, in the photo's own time zone, in Alachua County's (America/
      New_York) and with no zone; and the world test's 3,500 photos, right species first, before and after, with no prior,
-     with the time zone and with the time zone and three creatures met, at the shipped weight of the prior.
+     with the time zone and with the time zone and three creatures met, at the shipped weight of the prior. The
+     softmax over the rows is taken exactly, with the rows that have no home share summed once a photo and the home rows
+     added for each beta.
   4. With --stage: the files the page downloads that change (the last part of the rows, the scale, the table with its
-     "home" list, the place file), and parts.json with every length and SHA-256.
+     "home" list, the place file), and parts.json with every length and SHA-256, for the rule --rule names.
 
 Usage: python3 -I tools/species/everyday_build.py --species S.csv --photos P.csv --photos-dir DIR --slot DIR
-         --place DIR --vectors PREFIX --out DIR [--stage DIR] [--no-world]
+         --place DIR --vectors PREFIX --out DIR [--photo-vectors DIR] [--stage DIR] [--rule accepted|own] [--no-world]
 """
 import argparse
 import csv
@@ -36,14 +42,19 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, "tools", "world"))
 sys.path.insert(0, os.path.join(ROOT, "tools", "lab"))
 import place  # noqa: E402
 import prior  # noqa: E402
 from pack import quantize  # noqa: E402
 
-BETAS = (0.0, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0)
+BETAS = (0.0, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1000.0, 3000.0)
+BUILD34_BETA = 30.0
+WORLD_MARK = 1.0                       # points: no world-test score may drop by more
+RULES = ("own", "accepted")
 ALACHUA_ZONE = "America/New_York"
+GBIF = "https://api.gbif.org/v1/"
 T0 = time.time()
 
 
@@ -65,12 +76,16 @@ def softmax(z):
     return e / e.sum(1, keepdims=True)
 
 
-class Slot:
-    """Rows (float, scaled to unit length), table and place of the world slot, with the page's fusion settings and its
-    kinds head."""
+def plain(s):
+    return " ".join((s or "").lower().replace("-", " ").split())
 
-    def __init__(self, Qf, rows, place_raw, zones, man, kinds_rows):
-        self.Qf, self.rows, self.man = Qf, rows, man
+
+class Slot:
+    """Rows (float, scaled to unit length), table and place of a world slot, with the page's fusion settings and its
+    kinds head. `base` is a float matrix of the first rows shared between slots; `extra` the rows after them."""
+
+    def __init__(self, base, extra, rows, place_raw, zones, man, kinds_rows, home=None):
+        self.base, self.extra, self.rows, self.man = base, extra, rows, man
         self.f = man["fusion"]
         self.labels = man["kinds"]["labels"]
         self.K = kinds_rows
@@ -80,62 +95,106 @@ class Slot:
         zs = {k: (np.asarray(v[0], np.int64), np.asarray(v[1], np.float64)) for k, v in zones["zones"].items()}
         self.place = place.Place(R, zones=zs, alias=zones.get("alias", {}), radius_km=man["place"]["radius_km"], eps=man["place"]["eps"])
         lab_ix = {k: i for i, k in enumerate(self.labels)}
-        other = lab_ix["other"]
-        self.kind_ix = np.array([lab_ix.get(r[2], other) for r in rows], np.int64)    # knownKind: a group with no view is other
+        self.other = lab_ix["other"]
+        self.kind_ix = np.array([lab_ix.get(r[2], self.other) for r in rows], np.int64)   # knownKind: a group with no view is other
         self.has = np.zeros(len(self.labels), bool)
         self.has[np.unique(self.kind_ix)] = True
-        self.members = [np.nonzero(self.kind_ix == k)[0] for k in range(len(self.labels))]
+        self.home = np.zeros(S) if home is None else np.asarray(home, np.float64)
+        self.H = np.nonzero(self.home > 0)[0]
+        self.hH = self.home[self.H]
+        self.OH = np.zeros((S, len(self.labels)), np.float32)        # one-hot kinds of the rows without a home share
+        self.OH[np.arange(S), self.kind_ix] = 1.0
+        self.OH[self.H] = 0.0
+        self.OHH = np.zeros((len(self.H), len(self.labels)), np.float64)
+        self.OHH[np.arange(len(self.H)), self.kind_ix[self.H]] = 1.0
+        self.noname = np.isin(np.array(self.labels), ["none", "person"])
         self._share = {}
 
-    def share(self, zone, met=(), home=None):
-        """share(s) for every row with no home share, where the phone probably is (the encounter rule skips a met row
-        that has a home share, as the page does)."""
-        met = tuple(x for x in met if home is None or not home[x] > 0)
+    def logshare0(self, zone, met=()):
+        """log share(s) for every row with no home share added, where the phone probably is; the encounter rule skips a
+        met row that has a home share, as the page does."""
+        met = tuple(x for x in met if not self.home[x] > 0)
         key = (zone, met)
         if key not in self._share:
-            if len(self._share) > 32:
+            if len(self._share) > 400:
                 self._share = {}
             self.place.home = None
-            self._share[key] = np.exp(self.place.log_share(self.place.posterior(zone, met)))
+            self._share[key] = self.place.log_share(self.place.posterior(zone, met)).astype(np.float32)
         return self._share[key]
 
-    def dots(self, X, chunk=65536):
-        out = np.empty((X.shape[0], self.Qf.shape[0]), np.float32)
-        for i in range(0, self.Qf.shape[0], chunk):
-            out[:, i:i + chunk] = X @ self.Qf[i:i + chunk].T
-        return out
+    def dots(self, X, base_dots=None):
+        bd = base_dots if base_dots is not None else dot_rows(X, self.base)
+        if self.extra is None or not len(self.extra):
+            return bd
+        return np.concatenate([bd, X @ self.extra.T], axis=1)
 
-    def fuse(self, X, priors, sd):
-        """fuseWith of src/cam.rec.js for a slot with a kinds head and the world's prior: per photo the top row, its
-        probability, the kind, the kind's probability, sure, named."""
+    def split(self, sd, L0):
+        """The rows without a home share, once: their best row and value, and the sum of exp(z - best) for each kind."""
         f = self.f
-        s = softmax(f["t_species"] * sd + f["alpha_prior"] * priors)
-        q = np.zeros((X.shape[0], len(self.labels)), np.float64)
-        for k in range(len(self.labels)):
-            if self.has[k]:
-                q[:, k] = s[:, self.members[k]].sum(1)
+        Z = f["t_species"] * sd
+        if L0 is not None:
+            Z += f["alpha_prior"] * L0
+        if len(self.H):
+            Z[:, self.H] = -np.inf
+        bi = Z.argmax(1)
+        bv = Z[np.arange(len(bi)), bi].astype(np.float64)
+        Z -= bv[:, None].astype(np.float32)
+        np.exp(Z, out=Z)
+        ks = (Z @ self.OH).astype(np.float64)
+        zH = (f["t_species"] * sd[:, self.H]).astype(np.float64) if len(self.H) else None
+        sH = np.exp(L0[:, self.H].astype(np.float64)) if (L0 is not None and len(self.H)) else None
+        return bi, bv, ks, zH, sH
+
+    def at(self, parts, beta, with_prior=True):
+        """The top row, its probability and the species' mass of each kind, at this beta."""
+        bi, bv, ks, zH, sH = parts
+        f = self.f
+        if zH is None:
+            M = bv
+            tot = ks
+            top, tv = bi, bv
+        else:
+            zh = zH + (f["alpha_prior"] * np.log(sH + beta * self.hH[None, :]) if with_prior else 0.0)
+            hm = zh.max(1)
+            M = np.maximum(bv, hm)
+            tot = ks * np.exp(bv - M)[:, None] + np.exp(zh - M[:, None]) @ self.OHH
+            hj = zh.argmax(1)
+            take = hm > bv
+            top = np.where(take, self.H[hj], bi)
+            tv = np.where(take, hm, bv)
+        Zs = tot.sum(1)
+        return top, np.exp(tv - M) / Zs, tot / Zs[:, None]
+
+    def kinds(self, X, q, top, tp):
+        """fuseWith's kind for a slot with a kinds head: the kind, its probability, sure, named."""
+        f = self.f
         p = softmax(f["t_kind"] * (X @ self.K.T).astype(np.float64))
         A = (p * self.has[None, :]).sum(1, keepdims=True)
         comb = np.where(self.has[None, :], f["w_kind"] * p + (1 - f["w_kind"]) * A * q, p)
         comb = comb / comb.sum(1, keepdims=True)
         kind = comb.argmax(1)
         kp = comb[np.arange(len(kind)), kind]
-        top = s.argmax(1)
-        tp = s[np.arange(len(top)), top]
         sure = kp >= f["kind_at"] if f.get("kind_at") is not None else np.ones(len(kind), bool)
-        lab = np.array(self.labels)
-        named = sure & (tp >= f["name_at"]) & (self.kind_ix[top] == kind) & ~np.isin(lab[kind], ["none", "person"])
-        return top, tp, kind, kp, sure, named
+        named = sure & (tp >= f["name_at"]) & (self.kind_ix[top] == kind) & ~self.noname[kind]
+        return kind, kp, sure, named
+
+
+def dot_rows(X, Qf, chunk=65536):
+    out = np.empty((X.shape[0], Qf.shape[0]), np.float32)
+    for i in range(0, Qf.shape[0], chunk):
+        out[:, i:i + chunk] = X @ Qf[i:i + chunk].T
+    return out
 
 
 def read_slot(d, man):
-    parts = [os.path.join(d, os.path.basename(p["url"])) for p in man["species"]["parts"]]
-    raw = b"".join(open(p, "rb").read() for p in parts)
-    Q = np.frombuffer(raw, np.int8).reshape(man["species"]["count"], man["width"])
-    sc = np.fromfile(os.path.join(d, os.path.basename(man["species"]["scale"]["url"])), "<f4")
-    table = json.load(open(os.path.join(d, os.path.basename(man["species"]["table"]["url"])), encoding="utf-8"))
-    pr = prior.read_place(os.path.join(d, os.path.basename(man["place"]["url"])))
-    zones = json.load(open(os.path.join(d, os.path.basename(man["place"]["zones"]["url"]))))
+    names = sorted(x for x in os.listdir(d) if x.startswith("rows.i8.part"))
+    raw = b"".join(open(os.path.join(d, p), "rb").read() for p in names)
+    Q = np.frombuffer(raw, np.int8).reshape(-1, man["width"])
+    sc = np.fromfile(os.path.join(d, "scale.f32"), "<f4")
+    table = json.load(open(os.path.join(d, "table.json"), encoding="utf-8"))
+    pr = prior.read_place(os.path.join(d, "place.bin"))
+    zones = json.load(open(os.path.join(d, "zones.json")))
+    assert len(Q) == len(sc) == len(table["species"]) == pr["S"], "the slot's files disagree on the number of rows"
     return Q, sc, table, pr, zones
 
 
@@ -148,8 +207,42 @@ def write_place(src, dst, n_new):
     open(dst, "wb").write(bytes(b))
 
 
+def with_new_rows(pr, n_new):
+    """The place records of a slot with n_new rows that have no records added at the end."""
+    q = dict(pr)
+    q["S"] = pr["S"] + n_new
+    return q
+
+
 def rate(mask):
     return float(mask.mean()) if len(mask) else float("nan")
+
+
+def accepted_rows(sp, rows, by_key, by_sci, cache, english):
+    """For each species GBIF lists as a synonym: the species GBIF accepts for it, and the world row of that species when
+    the row carries the English name the species' own row would carry (english(s), never empty). GBIF's answers are kept
+    in `cache` (read from and written to accepted.json)."""
+    import everyday  # noqa: E402 - the HTTP helper of the resolve step
+    out = {}
+    for s in sp:
+        if s["status"] != "SYNONYM" or not s.get("accepted_key"):
+            continue
+        k = str(int(s["accepted_key"]))
+        if k not in cache:
+            j = everyday.get(GBIF + "species/%s" % k)
+            cache[k] = {x: j.get(x) for x in ("key", "canonicalName", "rank", "taxonomicStatus", "speciesKey", "species")}
+        a = cache[k]
+        r = None
+        if a.get("speciesKey") is not None and int(a["speciesKey"]) in by_key:
+            r = by_key[int(a["speciesKey"])]
+        elif a.get("species") in by_sci:
+            r = by_sci[a["species"]]
+        en = english(s)
+        same = r is not None and plain(en) != "" and plain(rows[r][1]) == plain(en)
+        out[int(s["gbif_key"])] = {"sci": s["sci"], "en": en, "accepted": a.get("canonicalName"), "accepted_rank": a.get("rank"),
+                                   "species": a.get("species"), "species_key": a.get("speciesKey"), "world_row": r,
+                                   "world_row_name": rows[r][:2] if r is not None else None, "same_english": bool(same)}
+    return out
 
 
 def main():
@@ -162,10 +255,15 @@ def main():
     ap.add_argument("--vectors", default="")
     ap.add_argument("--out", required=True)
     ap.add_argument("--stage", default="")
+    ap.add_argument("--rule", default="accepted", choices=RULES)
     ap.add_argument("--no-world", action="store_true")
     ap.add_argument("--embed-shard", default="", help="i/n: only the BioCLIP 2 vectors of this block of photos, to --out")
-    ap.add_argument("--photo-vectors", default="", help="a directory of vec-*.f16.npy and vec-*.ids.json from --embed-shard")
+    ap.add_argument("--photo-vectors", default="", help="a directory of vec-*.f16.npy and vec-*.ids.json from --embed-shard, "
+                    "or of photos.f16.npy and photos.ids.json from an earlier build")
+    ap.add_argument("--accepted", default=os.path.join(ROOT, "data", "everyday", "accepted.json"),
+                    help="GBIF's accepted names for the synonyms, read if present and written to --out")
     ap.add_argument("--manifest", default=os.path.join(ROOT, "models", "naturalist", "manifest.json"))
+    ap.add_argument("--batch", type=int, default=100)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     if a.embed_shard:
@@ -181,12 +279,13 @@ def main():
     man = json.load(open(a.manifest))
     Q, sc, table, pr, zones = read_slot(a.slot, man)
     rows, keys = table["species"], table["keys"]
+    assert "home" not in table, "the slot must be the world slot from before the species people keep"
     S0 = len(rows)
     log("slot: %d rows, width %d" % Q.shape)
     K = np.frombuffer(open(os.path.join(os.path.dirname(a.manifest), man["kinds"]["url"]), "rb").read(), np.float16)
     K = K.reshape(len(man["kinds"]["labels"]), man["width"]).astype(np.float32)
 
-    # 1. which species have a row already, which need one
+    # 1. which species have a row already, which need one, under each rule
     sp = list(csv.DictReader(open(a.species, encoding="utf-8")))
     summ = json.load(open(os.path.join(os.path.dirname(a.species), "summary.json")))
     by_key = {}
@@ -196,18 +295,37 @@ def main():
     by_sci = {}
     for i, r in enumerate(rows):
         by_sci.setdefault(r[0], i)
-    new = []
-    for s in sp:
-        k = int(s["gbif_key"])
-        if k in by_key:
-            s["row"], s["row_from"] = by_key[k], "key"
-        elif s["sci"] in by_sci:
-            s["row"], s["row_from"] = by_sci[s["sci"]], "name"
-        else:
-            s["row"], s["row_from"] = S0 + len(new), "new"
-            new.append(s)
-    log("species %d: %d have a row (%d by key, %d by name), %d new" % (len(sp), len(sp) - len(new),
-        sum(s["row_from"] == "key" for s in sp), sum(s["row_from"] == "name" for s in sp), len(new)))
+    def english(s):                  # iNaturalist's English name, where its taxon is this name or holds it as a synonym
+        X = chr(0xd7)
+        own = (s.get("inat_name") or "").replace(X + " ", "").replace(X, "") in (s.get("query"), s["sci"])
+        return s["en"] if (own or s.get("inat_via") == "synonym") else ""
+
+    cache = json.load(open(a.accepted)) if os.path.exists(a.accepted) else {}
+    acc = accepted_rows(sp, rows, by_key, by_sci, cache, english)
+    json.dump(cache, open(os.path.join(a.out, "accepted.json"), "w"), indent=1, sort_keys=True)
+    for k, v in acc.items():
+        log("synonym %s (%s): GBIF accepts %s (%s), species %s, world row %s %s%s" % (
+            v["sci"], v["en"], v["accepted"], v["accepted_rank"], v["species"], v["world_row"], v["world_row_name"],
+            ", same English name: takes that row under the rule accepted" if v["same_english"] else ""))
+
+    plan = {}
+    for rule in RULES:
+        row, frm, new = {}, {}, []
+        for s in sp:
+            k = int(s["gbif_key"])
+            if k in by_key:
+                row[k], frm[k] = by_key[k], "key"
+            elif s["sci"] in by_sci:
+                row[k], frm[k] = by_sci[s["sci"]], "name"
+            elif rule == "accepted" and k in acc and acc[k]["same_english"]:
+                row[k], frm[k] = acc[k]["world_row"], "accepted"
+            else:
+                row[k], frm[k] = S0 + len(new), "new"
+                new.append(s)
+        plan[rule] = {"row": row, "from": frm, "new": new}
+        log("rule %s: species %d, %d have a row (%d by key, %d by name, %d by GBIF's accepted name), %d new" % (
+            rule, len(sp), len(sp) - len(new), sum(v == "key" for v in frm.values()), sum(v == "name" for v in frm.values()),
+            sum(v == "accepted" for v in frm.values()), len(new)))
 
     import lab  # noqa: E402 - torch and open_clip are needed from here on
     m = lab.load(lab.model_entry("bioclip2-l14"))
@@ -220,27 +338,39 @@ def main():
         return np.concatenate(out) if out else np.zeros((0, man["width"]), np.float32)
 
     # the route agrees with the shipped rows: three rows made again
-    chk = [i for i in (0, S0 // 2, S0 - 1)]
+    chk = [0, S0 // 2, S0 - 1]
     again = text_rows([rows[i][0] for i in chk])
     shipped = Q[chk].astype(np.float32) * sc[chk][:, None]
     agree = [float(x) for x in (again * shipped).sum(1)]
     log("the route made three shipped rows again, cosine %s" % agree)
-    vnew = text_rows([s["sci"] for s in new])
-    qn, sn = quantize(vnew)
-    Qx = np.concatenate([Q, qn]) if len(new) else Q
-    scx = np.concatenate([sc, sn]) if len(new) else sc
-    def english(s):                  # iNaturalist's English name, where its taxon is this name or holds it as a synonym
-        X = chr(0xd7)
-        own = (s.get("inat_name") or "").replace(X + " ", "").replace(X, "") in (s.get("query"), s["sci"])
-        return s["en"] if (own or s.get("inat_via") == "synonym") else ""
-    rows_x = rows + [[s["sci"], english(s), s["kind"]] for s in new]
-    keys_x = list(keys) + [int(s["gbif_key"]) for s in new]
-    for s in new:
-        log("  new row %d: %s (%s) kind %s" % (s["row"], s["sci"], english(s), s["kind"]))
+    allnew = plan["own"]["new"]                                   # every rule's new rows are among these
+    vq, vs = quantize(text_rows([s["sci"] for s in allnew]))
+    at_new = {int(s["gbif_key"]): i for i, s in enumerate(allnew)}
+    total = float(summ["inat_observations_all"])
+    Qbase = Q.astype(np.float32)
+    Qbase *= sc[:, None]
+    for rule in RULES:
+        P = plan[rule]
+        ix = [at_new[int(s["gbif_key"])] for s in P["new"]]
+        P["qn"], P["sn"] = vq[ix], vs[ix]
+        P["extra"] = P["qn"].astype(np.float32) * P["sn"][:, None]
+        P["rows_x"] = rows + [[s["sci"], english(s), s["kind"]] for s in P["new"]]
+        P["keys_x"] = list(keys) + [int(s["gbif_key"]) for s in P["new"]]
+        h = np.zeros(len(P["rows_x"]), np.float64)
+        for s in sp:
+            r = P["row"][int(s["gbif_key"])]
+            h[r] = max(h[r], float(s["captive_obs"] or 0) / total)
+        P["h"] = h
+        for s in P["new"]:
+            log("  rule %s, new row %d: %s (%s) kind %s" % (rule, P["row"][int(s["gbif_key"])], s["sci"], english(s), s["kind"]))
 
     # 2. the photos' vectors
     ph = list(csv.DictReader(open(a.photos, encoding="utf-8")))
-    if a.photo_vectors:
+    if a.photo_vectors and os.path.exists(os.path.join(a.photo_vectors, "photos.ids.json")):
+        ids = json.load(open(os.path.join(a.photo_vectors, "photos.ids.json")))
+        X = np.load(os.path.join(a.photo_vectors, "photos.f16.npy")).astype(np.float32)
+        bad, el = [r["id"] for r in ph if r["id"] not in set(ids)], 0.0
+    elif a.photo_vectors:
         import glob
         ids, Xs, bad, el = [], [], [], 0.0
         for f in sorted(glob.glob(os.path.join(a.photo_vectors, "**", "vec-*.ids.json"), recursive=True)):
@@ -258,80 +388,60 @@ def main():
     pos = {x: i for i, x in enumerate(ids)}
     ph = [r for r in ph if r["id"] in pos]
     X = X[[pos[r["id"]] for r in ph]].astype(np.float32)
-    row_of = {int(s["gbif_key"]): s["row"] for s in sp}
-    truth = np.array([row_of[int(r["gbif_key"])] for r in ph], np.int64)
 
-    Qf = Qx.astype(np.float32)
-    Qf *= scx[:, None]
-    slot = Slot(Qf, rows_x, pr, zones, man, K)
-    lab_ix = {k: i for i, k in enumerate(slot.labels)}
-    tkind = slot.kind_ix[truth]
-    total = float(summ["inat_observations_all"])
-    h = np.zeros(len(rows_x), np.float64)
-    for s in sp:
-        h[s["row"]] = max(h[s["row"]], float(s["captive_obs"] or 0) / total)
-    zone_of = [r["zone"] if slot.place.zone_name(r["zone"]) else "" for r in ph]
+    slots = {}
+    for rule in RULES:
+        P = plan[rule]
+        slots[rule] = Slot(Qbase, P["extra"], P["rows_x"], with_new_rows(pr, len(P["new"])), zones, man, K, home=P["h"])
+        P["truth"] = np.array([P["row"][int(r["gbif_key"])] for r in ph], np.int64)
+        P["tkind"] = slots[rule].kind_ix[P["truth"]]
+    zone_of = [r["zone"] if slots["own"].place.zone_name(r["zone"]) else "" for r in ph]
     conds = {"own": zone_of, "alachua": [ALACHUA_ZONE] * len(ph), "nozone": [""] * len(ph)}
 
-    def measure(betas, which):
-        idx = np.array([i for i, r in enumerate(ph) if r["set"] == which], np.int64)
-        acc = {(b, c): [[] for _ in range(6)] for b in betas for c in conds}
-        for b0 in range(0, len(idx), 100):
-            bi = idx[b0:b0 + 100]
-            sd = slot.dots(X[bi])
-            for c, zl in conds.items():
-                base = np.stack([slot.share(zl[i]) for i in bi])
-                for b in betas:
-                    o = slot.fuse(X[bi], np.log(base + b * h[None, :]).astype(np.float32), sd)
-                    for L, v in zip(acc[(b, c)], o):
-                        L.append(v)
+    def measure(idx, betas):
+        """Every rule, condition and beta on the photos idx: per photo the top row, the kind, sure and named."""
+        acc_ = {(rule, b, c): [[] for _ in range(6)] for rule in RULES for b in betas for c in conds}
+        for b0 in range(0, len(idx), a.batch):
+            bi = idx[b0:b0 + a.batch]
+            Xb = X[bi]
+            based = dot_rows(Xb, Qbase)
+            for rule in RULES:
+                sl = slots[rule]
+                sd = sl.dots(Xb, based)
+                for c, zl in conds.items():
+                    L0 = np.stack([sl.logshare0(zl[i]) for i in bi])
+                    parts = sl.split(sd, L0)
+                    for b in betas:
+                        top, tp, q = sl.at(parts, b)
+                        kind, kp, sure, named = sl.kinds(Xb, q, top, tp)
+                        for L, v in zip(acc_[(rule, b, c)], (top, tp, kind, kp, sure, named)):
+                            L.append(v)
+            log("  photos %d/%d" % (min(len(idx), b0 + a.batch), len(idx)))
         res = {}
-        for b in betas:
-            res[b] = {}
-            for c in conds:
-                top, tp, kind, kp, sure, named = (np.concatenate(v) for v in acc[(b, c)])
-                t, tk = truth[idx], tkind[idx]
-                res[b][c] = {"photos": int(len(idx)), "kind_right": rate(kind == tk), "kind_sure": rate(sure),
-                             "kind_right_when_sure": rate((kind == tk)[sure]), "species_right": rate(top == t),
-                             "named": rate(named), "named_right": rate((top == t)[named]), "_top": top, "_kind": kind}
+        for (rule, b, c), v in acc_.items():
+            top, tp, kind, kp, sure, named = (np.concatenate(x) for x in v)
+            t, tk = plan[rule]["truth"][idx], plan[rule]["tkind"][idx]
+            res.setdefault(rule, {}).setdefault(b, {})[c] = {
+                "photos": int(len(idx)), "kind_right": rate(kind == tk), "kind_sure": rate(sure),
+                "kind_right_when_sure": rate((kind == tk)[sure]), "species_right": rate(top == t), "named": rate(named),
+                "named_right": rate((top == t)[named]), "_top": top, "_tp": tp, "_kind": kind, "_named": named}
         return res
 
-    tune = {}
-    allr = measure(BETAS, "tune")
-    for b in BETAS:
-        r = allr[b]
-        tune[b] = {c: {k: v for k, v in x.items() if not k.startswith("_")} for c, x in r.items()}
-        log("tune beta %-5g own: kind %.3f species %.3f | alachua: kind %.3f species %.3f" % (
-            b, r["own"]["kind_right"], r["own"]["species_right"], r["alachua"]["kind_right"], r["alachua"]["species_right"]))
-    best = max(BETAS, key=lambda b: (round(tune[b]["own"]["species_right"], 6), -b))
-    log("beta chosen on the tune photos: %g" % best)
-    tb = measure(sorted({best, 0.0}), "test")
-    test_best, test_zero = tb[best], tb[0.0]
-    marks = {}
-    for c in ("own", "alachua"):
-        marks[c] = {"kind_right>=0.85": test_best[c]["kind_right"] >= 0.85, "species_right>=0.60": test_best[c]["species_right"] >= 0.60}
-    # by species, in the own zone, for the record
-    te = np.array([i for i, r in enumerate(ph) if r["set"] == "test"], np.int64)
-    per = {}
-    for j, i in enumerate(te):
-        k = int(ph[i]["gbif_key"])
-        d = per.setdefault(k, {"sci": ph[i]["sci"], "kind": ph[i]["kind"], "n": 0, "kind_right": 0, "species_right": 0, "said": {}})
-        d["n"] += 1
-        d["kind_right"] += int(test_best["own"]["_kind"][j] == tkind[i])
-        d["species_right"] += int(test_best["own"]["_top"][j] == truth[i])
-        said = rows_x[int(test_best["own"]["_top"][j])][0]
-        d["said"][said] = d["said"].get(said, 0) + 1
-    for d in per.values():
-        d["said"] = sorted(d["said"].items(), key=lambda x: -x[1])[:3]
+    def strip(x):
+        return {c: {k: v for k, v in y.items() if not k.startswith("_")} for c, y in x.items()}
 
-    out = {"species": len(sp), "rows_new": len(new), "rows_kept": len(sp) - len(new), "route_check_cosine": agree,
-           "photos": {"tune": int(sum(r["set"] == "tune" for r in ph)), "test": int(sum(r["set"] == "test" for r in ph)), "missing": len(bad)},
-           "home_denominator": total, "betas": list(BETAS), "beta": best, "tune": tune,
-           "test": {c: {k: v for k, v in x.items() if not k.startswith("_")} for c, x in test_best.items()},
-           "test_beta0": {c: {k: v for k, v in x.items() if not k.startswith("_")} for c, x in test_zero.items()},
-           "marks": marks, "by_species": per}
+    tune_ix = np.array([i for i, r in enumerate(ph) if r["set"] == "tune"], np.int64)
+    test_ix = np.array([i for i, r in enumerate(ph) if r["set"] == "test"], np.int64)
+    allr = measure(tune_ix, BETAS)
+    tune = {rule: {b: strip(allr[rule][b]) for b in BETAS} for rule in RULES}
+    for rule in RULES:
+        for b in BETAS:
+            r = tune[rule][b]
+            log("tune %-8s beta %-5g own: kind %.3f species %.3f | alachua: kind %.3f species %.3f" % (
+                rule, b, r["own"]["kind_right"], r["own"]["species_right"], r["alachua"]["kind_right"], r["alachua"]["species_right"]))
 
-    # 3. the world test, before and after, at the shipped weight of the prior
+    # 3. the world test, before and after, at the shipped weight of the prior, for every rule and beta
+    world, drops = None, {}
     if not a.no_world and a.place and a.vectors:
         V = np.load(a.vectors + ".f16.npy").astype(np.float32)
         V /= np.linalg.norm(V, axis=1, keepdims=True)
@@ -344,69 +454,146 @@ def main():
             met.setdefault(r["id"], []).append(int(r["row"]))
         wtruth = np.array([int(r["row"]) for r in wt], np.int64)
         XW = V[[vpos[r["id"]] for r in wt]]
-        old = Slot(Qf[:S0], rows, pr, zones, man, K)
-        hb = best * h
-        world = {"before": {}, "after": {}}
-        tops = {(n, c): [] for n in world for c in ("none", "zone", "zone+3")}
+        old = Slot(Qbase, None, rows, pr, zones, man, K)
+        CW = ("none", "zone", "zone+3")
+        tops = {("before", None, c): [] for c in CW}
+        for rule in RULES:
+            tops[(rule, None, "none")] = []
+            for b in BETAS:
+                for c in CW[1:]:
+                    tops[(rule, b, c)] = []
         for b0 in range(0, len(wt), 125):
-            bi = range(b0, min(len(wt), b0 + 125))
-            sd = slot.dots(XW[b0:b0 + 125])
-            for c in ("none", "zone", "zone+3"):
-                for n, sl in (("before", old), ("after", slot)):
-                    Z = sl.f["t_species"] * sd[:, :len(sl.rows)]
-                    if c != "none":
-                        mets = [tuple(met.get(wt[i]["id"], [])[:3]) if c == "zone+3" else () for i in bi]
-                        if n == "before":
-                            P = np.stack([np.log(sl.share(wt[i]["zone"], m3)) for i, m3 in zip(bi, mets)])
-                        else:
-                            P = np.stack([np.log(sl.share(wt[i]["zone"], m3, hb) + hb) for i, m3 in zip(bi, mets)])
-                        Z = Z + sl.f["alpha_prior"] * P.astype(np.float32)
-                    tops[(n, c)].append(Z.argmax(1))
+            bi = list(range(b0, min(len(wt), b0 + 125)))
+            based = dot_rows(XW[b0:b0 + 125], Qbase)
+            sds = {rule: slots[rule].dots(XW[b0:b0 + 125], based) for rule in RULES}
+            for c in CW:
+                mets = [tuple(met.get(wt[i]["id"], [])[:3]) if c == "zone+3" else () for i in bi]
+                Z = old.f["t_species"] * based
+                if c != "none":
+                    Z = Z + old.f["alpha_prior"] * np.stack([old.logshare0(wt[i]["zone"], m3) for i, m3 in zip(bi, mets)])
+                tops[("before", None, c)].append(Z.argmax(1))
+                for rule in RULES:
+                    sl, sd = slots[rule], sds[rule]
+                    if c == "none":
+                        tops[(rule, None, c)].append((sl.f["t_species"] * sd).argmax(1))
+                        continue
+                    L0 = np.stack([sl.logshare0(wt[i]["zone"], m3) for i, m3 in zip(bi, mets)])
+                    parts = sl.split(sd, L0)
+                    for b in BETAS:
+                        tops[(rule, b, c)].append(sl.at(parts, b)[0])
             log("world test %d/%d" % (min(len(wt), b0 + 125), len(wt)))
-        home_rows = [s_["row"] for s_ in sp]
-        for (n, c), v in tops.items():
+        world = {"photos": len(wt), "before": {}}
+        for (rule, b, c), v in tops.items():
             top = np.concatenate(v)
-            world[n][c] = {"photos": len(wt), "top1": rate((top == wtruth) & (wtruth >= 0)), "taken_by_a_home_row": int(np.isin(top, home_rows).sum())}
-            log("world test %s %s: top1 %.4f" % (n, c, world[n][c]["top1"]))
+            home_rows = np.nonzero(slots[rule].home > 0)[0] if rule != "before" else np.zeros(0, np.int64)
+            x = {"top1": rate((top == wtruth) & (wtruth >= 0)), "taken_by_a_home_row": int(np.isin(top, home_rows).sum())}
+            if rule == "before":
+                world["before"][c] = x
+            elif b is None:
+                world.setdefault(rule, {})["none"] = x
+            else:
+                world.setdefault(rule, {}).setdefault(str(b), {})[c] = x
+        for rule in RULES:
+            for b in BETAS:
+                d = {"none": round(100 * (world["before"]["none"]["top1"] - world[rule]["none"]["top1"]), 2)}
+                for c in CW[1:]:
+                    d[c] = round(100 * (world["before"][c]["top1"] - world[rule][str(b)][c]["top1"]), 2)
+                drops.setdefault(rule, {})[b] = d
+                log("world test %-8s beta %-5g drop (points): %s, home rows took %d and %d" % (
+                    rule, b, d, world[rule][str(b)]["zone"]["taken_by_a_home_row"], world[rule][str(b)]["zone+3"]["taken_by_a_home_row"]))
+        log("world test before: %s" % json.dumps(world["before"]))
+
+    # beta: the best on the tune photos among those the world test allows
+    def allowed(rule, b):
+        return not drops or all(v <= WORLD_MARK for v in drops[rule][b].values())
+    best = {rule: max([b for b in BETAS if allowed(rule, b)] or [0.0], key=lambda b: (round(tune[rule][b]["own"]["species_right"], 6), -b)) for rule in RULES}
+    log("beta chosen on the tune photos, within the world test's mark: %s" % best)
+
+    tb = measure(test_ix, sorted(set(best.values()) | {0.0, BUILD34_BETA}))
+    out = {"species": len(sp), "rule": a.rule, "rules": {}, "route_check_cosine": agree, "synonyms": {str(k): v for k, v in acc.items()},
+           "photos": {"tune": int(len(tune_ix)), "test": int(len(test_ix)), "missing": len(bad)},
+           "home_denominator": total, "betas": list(BETAS), "tune": {r: {str(b): x for b, x in tune[r].items()} for r in RULES}}
+    for rule in RULES:
+        b = best[rule]
+        P = plan[rule]
+        t = P["truth"]
+        rr = {"rows_new": len(P["new"]), "rows_kept": len(sp) - len(P["new"]), "beta": b,
+              "test": strip(tb[rule][b]), "test_beta0": strip(tb[rule][0.0]), "test_beta30": strip(tb[rule][BUILD34_BETA]),
+              "marks": {c: {"kind_right>=0.85": tb[rule][b][c]["kind_right"] >= 0.85, "species_right>=0.60": tb[rule][b][c]["species_right"] >= 0.60}
+                        for c in ("own", "alachua")}}
+        if drops:
+            rr["world_drop_points"] = drops[rule][b]
+            rr["world_drop_points_by_beta"] = {str(x): drops[rule][x] for x in BETAS}
+            rr["marks"]["world_test_no_drop_over_1_point"] = allowed(rule, b)
+        per = {}
+        for bb in sorted({b, BUILD34_BETA}):
+            T = tb[rule][bb]["own"]
+            for j, i in enumerate(test_ix):
+                k = int(ph[i]["gbif_key"])
+                d = per.setdefault(str(bb), {}).setdefault(k, {"sci": ph[i]["sci"], "kind": ph[i]["kind"], "row": int(t[i]), "n": 0, "kind_right": 0,
+                                                                "species_right": 0, "named": 0, "said": {}, "kinds_said": {}})
+                d["n"] += 1
+                d["kind_right"] += int(T["_kind"][j] == P["tkind"][i])
+                d["species_right"] += int(T["_top"][j] == t[i])
+                d["named"] += int(T["_named"][j])
+                said = P["rows_x"][int(T["_top"][j])][0]
+                d["said"][said] = d["said"].get(said, 0) + 1
+                kn = slots[rule].labels[int(T["_kind"][j])]
+                d["kinds_said"][kn] = d["kinds_said"].get(kn, 0) + 1
+            for d in per[str(bb)].values():
+                d["said"] = sorted(d["said"].items(), key=lambda x: -x[1])[:3]
+        rr["by_species"] = per
+        out["rules"][rule] = rr
+        log("rule %s at beta %g, test: %s" % (rule, b, json.dumps({c: {k: round(v, 4) for k, v in x.items()} for c, x in rr["test"].items()})))
+        log("rule %s marks: %s" % (rule, json.dumps(rr["marks"])))
+        dog = per[str(b)].get(5219200)
+        if dog:
+            log("rule %s, the dog at beta %g: kind right %d of %d, species right %d, named %d, said %s, kinds %s" % (
+                rule, b, dog["kind_right"], dog["n"], dog["species_right"], dog["named"], dog["said"], dog["kinds_said"]))
+    if world:
         out["world_test"] = world
-        out["world_drop_points"] = {c: round(100 * (world["before"][c]["top1"] - world["after"][c]["top1"]), 2) for c in world["before"]}
-        out["marks"]["world_test_no_drop_over_1_point"] = all(v <= 1.0 for v in out["world_drop_points"].values())
+    chosen = out["rules"][a.rule]
+    out["beta"], out["test"], out["marks"] = chosen["beta"], chosen["test"], chosen["marks"]
+    out["rows_new"] = chosen["rows_new"]
+    if drops:
+        out["world_drop_points"] = chosen["world_drop_points"]
 
     # 4. the files that change, for the page
     if a.stage:
+        P, b = plan[a.rule], best[a.rule]
         os.makedirs(a.stage, exist_ok=True)
-        last = man["species"]["parts"][-1]
-        lp = os.path.join(a.slot, os.path.basename(last["url"]))
-        with open(os.path.join(a.stage, os.path.basename(last["url"])), "wb") as f:
-            f.write(open(lp, "rb").read())
-            f.write(qn.tobytes())
+        names = sorted(x for x in os.listdir(a.slot) if x.startswith("rows.i8.part"))
+        last = names[-1]
+        with open(os.path.join(a.stage, last), "wb") as f:
+            f.write(open(os.path.join(a.slot, last), "rb").read())
+            f.write(P["qn"].tobytes())
+        scx = np.concatenate([sc, P["sn"]])
         scx.astype("<f4").tofile(os.path.join(a.stage, "scale.f32"))
         tx = dict(table)
-        tx["species"], tx["keys"] = rows_x, keys_x
-        tx["home"] = [[int(r), float("%.6g" % (best * v))] for r, v in enumerate(h) if v > 0]
-        tx["home_from"] = ("tools/species/everyday_build.py: beta %g times the species' iNaturalist observations marked captive or "
-                           "cultivated over all iNaturalist observations (%d), added to its share in every cell" % (best, total))
+        tx["species"], tx["keys"] = P["rows_x"], P["keys_x"]
+        tx["home"] = [[int(r), float("%.6g" % (b * v))] for r, v in enumerate(P["h"]) if v > 0]
+        tx["home_from"] = ("tools/species/everyday_build.py, rule %s: beta %g times the species' iNaturalist observations marked "
+                           "captive or cultivated over all iNaturalist observations (%d), added to its share in every cell" % (a.rule, b, total))
         json.dump(tx, open(os.path.join(a.stage, "table.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-        write_place(os.path.join(a.slot, os.path.basename(man["place"]["url"])), os.path.join(a.stage, "place.bin"), len(new))
+        write_place(os.path.join(a.slot, "place.bin"), os.path.join(a.stage, "place.bin"), len(P["new"]))
         whole = hashlib.sha256()
-        for p in man["species"]["parts"][:-1]:
-            whole.update(open(os.path.join(a.slot, os.path.basename(p["url"])), "rb").read())
-        whole.update(open(os.path.join(a.stage, os.path.basename(last["url"])), "rb").read())
+        for p in names[:-1]:
+            whole.update(open(os.path.join(a.slot, p), "rb").read())
+        whole.update(open(os.path.join(a.stage, last), "rb").read())
 
         def one(n):
             p = os.path.join(a.stage, n)
             return {"name": n, "bytes": os.path.getsize(p), "sha256": sha(p)}
-        pj = {"count": len(rows_x), "width": man["width"], "rows_bytes": int(Qx.size), "rows_sha256": whole.hexdigest(),
-              "last_part": one(os.path.basename(last["url"])), "scale": one("scale.f32"), "table": one("table.json"),
-              "place": one("place.bin"), "beta": best, "new_rows": len(new)}
+        pj = {"count": len(P["rows_x"]), "width": man["width"], "rows_bytes": int((len(Q) + len(P["new"])) * man["width"]),
+              "rows_sha256": whole.hexdigest(), "last_part": one(last), "scale": one("scale.f32"), "table": one("table.json"),
+              "place": one("place.bin"), "beta": b, "rule": a.rule, "new_rows": len(P["new"])}
         json.dump(pj, open(os.path.join(a.stage, "parts.json"), "w"), indent=1)
         out["stage"] = pj
         log("stage: %s" % json.dumps(pj))
-        # the extended slot read back as the page reads it
-        pr2 = prior.read_place(os.path.join(a.stage, "place.bin"))
-        assert pr2["S"] == len(rows_x) and len(pr2["rows"]) == len(pr["rows"])
+        pr2 = prior.read_place(os.path.join(a.stage, "place.bin"))              # the extended slot read back as the page reads it
+        assert pr2["S"] == len(P["rows_x"]) and len(pr2["rows"]) == len(pr["rows"])
     json.dump(out, open(os.path.join(a.out, "everyday.json"), "w"), indent=1, default=float)
-    log("marks: %s" % json.dumps(out["marks"]))
+    log("marks (rule %s): %s" % (a.rule, json.dumps(out["marks"])))
 
 
 if __name__ == "__main__":

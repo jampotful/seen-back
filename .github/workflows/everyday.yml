@@ -8,6 +8,8 @@ name: everyday
 #                       for where people live, and the measurements on the captive and cultivated photos and on the
 #                       world test (tools/species/everyday_build.py). A label starting with build-pub also publishes the
 #                       extended files to pub/naturalist-everyday. Results on ci as runs/everyday/<run>-build.
+#   again-<anything>    as build, with the photos' vectors of run 4 (runs/everyday/4-build on ci) in place of the embed
+#                       job; again-pub publishes to pub/naturalist-everyday2. Results on ci as runs/everyday/<run>-again.
 #   pocket-<anything>   the pocket model's kind on the same photos, away from the county and in it, by species, and photo
 #                       by photo for the dog and the cat (tools/species/everyday_pocket.py). Results on ci as
 #                       runs/everyday/<run>-pocket.
@@ -107,6 +109,35 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
         run: bash ci/return.sh everyday out build
+
+  again:
+    if: startsWith(github.ref_name, 'run/everyday/again')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install
+        run: |
+          python3 -m pip install --quiet --upgrade pip
+          python3 -m pip install --quiet --index-url https://download.pytorch.org/whl/cpu torch==2.8.0 torchvision==0.23.0
+          python3 -m pip install --quiet open_clip_torch timm "transformers>=4.49,<5" numpy pillow huggingface_hub safetensors ftfy regex
+      - name: build and measure
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_PROGRESS_BARS: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PUBLISH: ${{ startsWith(github.ref_name, 'run/everyday/again-pub') && '1' || '0' }}
+          PUB_BRANCH: pub/naturalist-everyday2
+          PHOTO_VECTORS: runs/everyday/4-build
+        run: bash ci/everyday/build.sh
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh everyday out again
 
   pocket:
     if: startsWith(github.ref_name, 'run/everyday/pocket')

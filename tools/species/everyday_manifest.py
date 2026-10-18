@@ -3,9 +3,10 @@
 
 The first parts of the rows and the zones stay where they are (the commit kept by pin/naturalist-world-9ae0806), so a
 phone that holds the full database fetches again only the files that changed: the last part of the rows, the scale,
-the table and the place file, from the commit of pub/naturalist-everyday given here (kept by its own pin/ branch).
+the table and the place file, from the commit of the pub/ branch given here (kept by its own pin/ branch).
 
 Usage: python3 -I tools/species/everyday_manifest.py --parts stage-parts.json --commit SHA --results everyday.json
+         [--branch pub/naturalist-everyday2]
 """
 import argparse
 import json
@@ -21,6 +22,7 @@ def main():
     ap.add_argument("--parts", required=True)
     ap.add_argument("--commit", required=True)
     ap.add_argument("--results", required=True)
+    ap.add_argument("--branch", default="pub/naturalist-everyday")
     a = ap.parse_args()
     p, r = json.load(open(a.parts)), json.load(open(a.results))
     m = json.load(open(MAN))
@@ -33,13 +35,17 @@ def main():
     for k in ("scale", "table"):
         sp[k].update({"url": RAW % (a.commit, p[k]["name"]), "bytes": p[k]["bytes"], "sha256": p[k]["sha256"]})
     m["place"].update({"url": RAW % (a.commit, p["place"]["name"]), "bytes": p["place"]["bytes"], "sha256": p["place"]["sha256"]})
+    rule = r.get("rule", "own")
+    took = (" A species GBIF lists as a synonym takes the world row of the species GBIF accepts for it when that row carries the "
+            "same English name (the domestic dog takes Canis lupus)." if rule == "accepted" else "")
+    pin = a.branch.replace("pub/", "pin/", 1)
     sp["everyday"] = ("%d species people keep (tools/species/EVERYDAY.md): %d new rows at the end, made as the others were; the "
                       "table's home list gives each a share that holds in every cell (beta %g times its iNaturalist observations "
-                      "marked captive or cultivated over all of iNaturalist's observations). Files that changed: pub/naturalist-everyday "
-                      "at %s, kept by pin/naturalist-everyday-%s." % (r["species"], r["rows_new"], r["beta"], a.commit[:12], a.commit[:7]))
+                      "marked captive or cultivated over all of iNaturalist's observations).%s Files that changed: %s "
+                      "at %s, kept by %s-%s." % (r["species"], r["rows_new"], r["beta"], took, a.branch, a.commit[:12], pin, a.commit[:7]))
     t = r["test"]
     m.setdefault("evaluation", {})["everyday"] = {
-        "photos": r["photos"], "beta": r["beta"], "made_by": "tools/species/everyday_build.py",
+        "photos": r["photos"], "beta": r["beta"], "rule": rule, "made_by": "tools/species/everyday_build.py",
         "test_own_zone": {k: round(t["own"][k], 4) for k in ("kind_right", "species_right", "named", "named_right")},
         "test_alachua": {k: round(t["alachua"][k], 4) for k in ("kind_right", "species_right", "named", "named_right")},
         "world_test_drop_points": r.get("world_drop_points")}
