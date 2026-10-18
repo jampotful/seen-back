@@ -103,3 +103,10 @@ Burst 10 result (16 October, 19:05): merged to `main` as build 32 by the control
 ## 18 October 2026 (afternoon): harvest 23 to 25 reverted from main
 - Audit 39 (docs/tracks/progress/audit-39.md): of 20 search records drawn from harvest-23, -24 and -25, 4 confirm, 15 are weak (the common-name, family-review and extra citation steps ran as title-level WebSearch because api.openalex.org returned 403) and 1 is an error (Callospermophilus: an open paper reports two cone classes). Three of the 6 evidence records are fragment quotes. Merged, the three units moved coverage from 16.4% to 26.1% settled, which the records do not support. The merge is reverted on main; the branches research/harvest-23, -24 and -25 stay.
 - Next: the genera wait for OpenAlex results from the build machine (run/harvest/8, started 14:50 UTC), then are re-screened with those steps run for real. Agents whose machine gets a 403 from api.openalex.org leave the genus alone instead of substituting WebSearch.
+
+## Desk status, 18 Oct 19:30 UTC (for the control room)
+- Three agents running: harvest-27 and harvest-28 (30 genera each, new rules: search record only when every harvest step is present, no WebSearch substitution for OpenAlex) and audit-40 (spot audit of harvest-26).
+- harvest-26 returned: 16 search records, 0 evidence records, 6 wanted lines. Not merged. Merge waits on audit-40 (under 5% errors, low weak share).
+- harvest-21 and -22 stay unmerged (Codex holds the 235 harvest-c genera). The skip file for harvest_get.py is rebuilt from docs/tracks/batches/harvest-c1..c6.json.
+- Genera with no family in the queue (Apus, Ramphocelus, Exomala, Oedipoda, Salpinctes, Agelastica, Ematurga, Orthilia, Anemonastrum, Muscari, Cistus) and Melia (no citation step) need a harvest-side fix. Control room: please say if you take that.
+- CC (Sun 15:21 local) asked the desk to speed up and use the remaining allowance before the reset.
