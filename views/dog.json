@@ -662,7 +662,7 @@
  "rows_draft": {
   "version": 1,
   "model": "claude-sonnet-5-5",
-  "made": "2026-10-16",
+  "made": "2026-10-17",
   "rule": "docs/views/VOICE.md",
   "rows": [
    {
@@ -677,7 +677,7 @@
      "i": 0.213
     },
     "species": 37,
-    "text": "Your eyesight is much blurrier than a human's, and if you are a domestic dog, you see about a quarter of the fine detail a human sees. If you are a red fox, you read about 6 cycles a degree, and if you are an arctic fox, about 9, where a human reads about 30.",
+    "text": "Your eyesight is much blurrier than a human's. If you are a domestic dog, a review cites an estimate of 20/75 for a typical dog, which means you must stand 20 feet from what a human can make out from 75 feet. If you are a red fox, the cells in your retina allow about 6 cycles a degree, a fifth of a human's 30, and if you are an arctic fox the estimate is about 9.",
     "cites": [
      {
       "id": "cat-dog#173",
@@ -701,7 +701,7 @@
       "source": "Malkemper 2018"
      }
     ],
-    "note": "Left out the claim that only three species are measured, since no record supports it. Dog figure is 20/75 Snellen turned into about a quarter of a human's 20/20. Red fox figure comes from ganglion cell maps.",
+    "note": "Left out coyotes, wolves, jackals and other foxes (carried grade g) and the unmeasured species to stay within three sentences.",
     "attempt": 2
    },
    {
@@ -716,7 +716,7 @@
      "i": 0.578
     },
     "species": 37,
-    "text": "If you are a domestic dog with a long skull, as in a wolf, you see most sharply along a band level with the horizon, and if your skull is short, like a pug's, you see most sharply in one spot in the middle. If you are a red fox or an Arctic fox, you have one spot of sharpest sight and a streak of sharp sight running beside it. Nobody has measured this in coyotes, jackals or the other wild relatives, so nobody knows which pattern you have.",
+    "text": "If you are a domestic dog with a long skull, as a wolf has, you see most sharply along a horizontal band level with the horizon, and if you have a short nose like a pug, you see most sharply in one spot in the middle. A red fox has a distinct spot plus a moderate band, and an Arctic fox has a distinct spot. Nobody has measured this in the other members of the dog family, so if you are a coyote, a jackal or another relative, nobody knows where your eyes see most sharply.",
     "cites": [
      {
       "id": "cat-dog#36",
@@ -740,8 +740,8 @@
       "source": "Malkemper 2018"
      }
     ],
-    "note": "Left out the ganglion and cone density figures because they stay with the red fox and Arctic fox and have no comparison job here.",
-    "attempt": 2
+    "note": "Left out the Arctic fox's streak and all cell-density numbers: the Arctic fox quote states only the spot, and the numbers had no comparison job.",
+    "attempt": 1
    },
    {
     "title": "Color",
@@ -756,15 +756,8 @@
      "i": 0.213
     },
     "species": 37,
-    "text": "If you are a domestic dog, a red fox or an arctic fox, you have two kinds of color-sensing cell, where humans have three. In the domestic dog, one kind senses light most strongly at about 430 nanometers, a violet-blue, and the other at about 555 nanometers, a yellow-green.",
+    "text": "You have two kinds of color-sensing cell, where a human has three. This has been measured in the domestic dog, the red fox and the arctic fox, and each has two kinds.",
     "cites": [
-     {
-      "id": "cat-dog#40",
-      "taxon": "Vulpes vulpes",
-      "trait": "receptor_classes",
-      "grade": "m",
-      "source": "Malkemper 2018"
-     },
      {
       "id": "cat-dog#64",
       "taxon": "Canis lupus familiaris",
@@ -773,11 +766,11 @@
       "source": "Neitz 1989"
      },
      {
-      "id": "cat-dog#65",
-      "taxon": "Canis lupus familiaris",
-      "trait": "lambda_max_nm",
+      "id": "cat-dog#40",
+      "taxon": "Vulpes vulpes",
+      "trait": "receptor_classes",
       "grade": "m",
-      "source": "Neitz 1989"
+      "source": "Malkemper 2018"
      },
      {
       "id": "intake-4#12",
@@ -787,7 +780,7 @@
       "source": "Malkemper 2018"
      }
     ],
-    "note": "Left out which colors look gray, since no record states it. Fox peak values cover only one pigment, so only the dog's two peaks are given.",
+    "note": "Left out wavelengths (429 and 555 nm) and any claim about which colors look gray, since no record states what dogs or foxes see as gray.",
     "attempt": 1
    },
    {
@@ -806,14 +799,14 @@
      "i": 1.0
     },
     "species": 37,
-    "text": "If you are a domestic dog, your eyes take in an estimated 240 degrees around you, where a human's take in about 180, and what both eyes see overlaps across roughly 30 to 60 degrees. You also have more rod cells than a human, even in the center of your retina where a human has none, and a layer called the tapetum behind the retina, which was full-sized in 7 of 10 dogs examined. Nobody has measured the field of view of most wild relatives such as foxes and jackals, and nobody has measured how any of you judge depth.",
+    "text": "If you are a domestic dog, a review estimates that you take in about 240 degrees around you, where a human takes in 180, and that your two eyes overlap by 30 to 60 degrees. In dim light you have more rods than a human, even in the center of the retina where a human has none, and about 7 in 10 dogs examined had a full-sized tapetum, the mirror layer behind the retina, while a few had none. Nobody has measured how well you judge depth.",
     "cites": [
      {
-      "id": "cat-dog#119",
+      "id": "cat-dog#79",
       "taxon": "Canis lupus familiaris",
-      "trait": "absolute_sensitivity",
+      "trait": "fov_h_deg",
       "grade": "m",
-      "source": "Kanizsar 2017"
+      "source": "Miller 2001"
      },
      {
       "id": "cat-dog#32",
@@ -823,11 +816,11 @@
       "source": "Byosiere 2018"
      },
      {
-      "id": "cat-dog#79",
+      "id": "cat-dog#119",
       "taxon": "Canis lupus familiaris",
-      "trait": "fov_h_deg",
+      "trait": "absolute_sensitivity",
       "grade": "m",
-      "source": "Miller 2001"
+      "source": "Kanizsar 2017"
      },
      {
       "id": "cat-dog#87",
@@ -837,8 +830,8 @@
       "source": "Granar 2011"
      }
     ],
-    "note": "Left out the coyote night threshold (R3) and the dog and cat focusing range (R5, not a depth cue record) to keep the row short.",
-    "attempt": 1
+    "note": "Dropped the 539 count and the 2 percent figure. The depth sentence rests on no record, because R5 is a cat record on focusing range.",
+    "attempt": 2
    }
   ]
  }
