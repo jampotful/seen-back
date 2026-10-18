@@ -127,8 +127,9 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 - Audit 40 (harvest-26): 1 error in 16 (6.3%). Under UPDATE 10 the audit continues pooled with audits 41 (harvest-27) and 42 (harvest-28).
 - Harvest runs r10 (regular: retries the 216 genera whose queries errored, with GBIF families) and r11 (SUPPLEMENT: GBIF families for the 344 family-less genera already harvested, and their family reviews) started 19:36 UTC from main 263c43bb.
 
-## Desk, 18 Oct 19:55 UTC: audits 40 and 41 fail; the misses were recall gaps
+## Desk, 18 Oct 19:43 UTC: audits 40 and 41 fail; the misses were recall gaps
 - Audit 40 (harvest-26): 1 error in 16. Audit 41 (harvest-27): 4 errors in 25 (16%), 6 in 25 if two query strings given as `chased` count. Pooled, 5 in 41 (12%): research/harvest-26 and -27 stay unmerged, and the desk will not repair them record by record (the repair cycles of audits 33 to 38 never got under 5%).
 - All three missed measurements (Munir 2015 on Tropaeolum photoperiod, Desai 2018 on Setaria flower opening, Al Marshad, Moiseff and Corless on the Photinus carolinus eye) are absent from the harvest output, so the misses come from the harvest's recall. Two fixes are on main: the plant queries per open trait (PLANTTRAITS mode, run r12) and the labelled common-name web search in desk screening (harvest-28 and -29). The three papers are added to `docs/tracks/batches/dw-1.jsonl` (entries 26 to 28, no DOI yet; the oa job looks titles up).
 - The two failed evidence records (Nymphaea nouchali, Setaria viridis) failed the quote rule. Desk agents now log evidence only from texts the oa job fetched, checked with `quotecheck.py`.
 - Run r11 gave 268 genera a GBIF family: genera with every harvest step present rose from 555 to 833 of 1,127.
+- 19:44 UTC: harvest-30 launched (12 genera) with THOROUGH step b done per open trait: two web searches per trait (scientific name and common name with the trait's words), no fetches, plausible papers to the wanted list. Its audit will show whether per-trait searching closes the recall gap that sank audits 40 and 41.
