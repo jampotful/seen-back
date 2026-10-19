@@ -6,7 +6,10 @@ volume, issue, page and type, or an error. Run by .github/workflows/crossref.yml
 When ci/crossref/titles.jsonl exists (run branch only; one {"key", "title", "year"} a line, for wanted lines that
 carry no DOI), it also asks Crossref's bibliographic search for each title and writes OUT_DIR/titles.jsonl: the key,
 the best candidate whose title matches at 0.92 or better (and whose year is within one of a given year), and the
-top three candidates, so the desk can fill a line only when the registry's title is the same work."""
+top three candidates, so the desk can fill a line only when the registry's title is the same work.
+When ci/crossref/openalex.txt exists (run branch only; one OpenAlex work id such as W2595380620 a line, for wanted lines
+that carry no DOI, often theses), it asks the OpenAlex API for each work and writes OUT_DIR/openalex.jsonl: the id, title,
+year, authors as OpenAlex displays them, venue, DOI, type and open-access address."""
 import glob, json, os, sys, time, urllib.error, urllib.parse, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -17,7 +20,8 @@ only = os.path.join(ROOT, 'ci/crossref/dois.txt')  # a run branch may name its o
 if os.path.exists(only):
     dois = {l.strip().lower() for l in open(only, encoding='utf-8') if l.strip().lower().startswith('10.')}
 titles_in = os.path.join(ROOT, 'ci/crossref/titles.jsonl')
-for p in ([] if dois or os.path.exists(titles_in) else glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl'))):
+openalex_in = os.path.join(ROOT, 'ci/crossref/openalex.txt')
+for p in ([] if dois or os.path.exists(titles_in) or os.path.exists(openalex_in) else glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl'))):
     for l in open(p, encoding='utf-8'):
         try: r = json.loads(l)
         except ValueError: continue
@@ -122,3 +126,31 @@ if os.path.exists(titles_in):
             r = search_title(q.get('title', ''), q.get('year'))
             fh.write(json.dumps({'key': q.get('key'), 'query_title': q.get('title'), **r}, ensure_ascii=False) + '\n'); fh.flush()
             time.sleep(1.0)
+
+
+def openalex(wid):
+    url = 'https://api.openalex.org/works/' + urllib.parse.quote(wid)
+    for k in range(4):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'seen-back-desk/1.0'}), timeout=30) as f:
+                m = json.load(f)
+            loc = m.get('primary_location') or {}
+            return {'id': wid, 'title': m.get('display_name') or m.get('title') or '', 'year': m.get('publication_year'),
+                    'authors': [(a.get('author') or {}).get('display_name') or a.get('raw_author_name') or '' for a in m.get('authorships', [])],
+                    'venue': ((loc.get('source') or {}).get('display_name')) or '', 'doi': (m.get('doi') or '').replace('https://doi.org/', ''),
+                    'type': m.get('type'), 'oa_url': ((m.get('open_access') or {}).get('oa_url')) or ''}
+        except urllib.error.HTTPError as e:
+            if e.code == 404: return {'id': wid, 'error': 404}
+            time.sleep(5 * (k + 1))
+        except Exception:
+            time.sleep(5 * (k + 1))
+    return {'id': wid, 'error': 'gave up'}
+
+
+if os.path.exists(openalex_in):
+    with open(os.path.join(out, 'openalex.jsonl'), 'w', encoding='utf-8') as fh:
+        for l in open(openalex_in, encoding='utf-8'):
+            wid = l.strip()
+            if not wid.startswith('W'): continue
+            fh.write(json.dumps(openalex(wid), ensure_ascii=False) + '\n'); fh.flush()
+            time.sleep(0.5)
