@@ -288,3 +288,4 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-38 -: no authors: Visual constraints upon avian behaviour
   - harvest-38 -: no authors: Morphologische, biochemische und molekularbiologische Unters
   - harvest-38 -: no authors: มญชวทยาของระบบประสาทและอวยวะรบความรสกของผเสอ หนอนคนธรรมดา Ca
+- 01:39 UTC: correction to the 01:23 note. The committed queue (docs/views/gaps/queue.jsonl, last regenerated 18 Oct 01:40 UTC) still lists cells that later search records cover, so most of the '280 cells' were already searched. harvest_get.py now takes a genus's open traits from harvest.targets() (the queue less cells with a full-protocol record), cached per committed state in the temp folder because targets() takes about a minute. SUPPLEMENT run r17 used targets() too and so added few trait queries.

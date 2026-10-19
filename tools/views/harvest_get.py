@@ -42,16 +42,23 @@ def load():
                 # a later run's failed review ("gave up") never hides an earlier run's completed one
                 old = families.get(d['family'])
                 if not (old and not (old.get('query') or {}).get('error') and (d.get('query') or {}).get('error')): families[d['family']] = d
-    qp = os.path.join(ROOT, 'docs/views/gaps/queue.jsonl')  # the queue's open traits now, which can differ from the harvest's
-    if os.path.exists(qp):
-        now = {}
-        for l in open(qp, encoding='utf-8'):
-            try: c = json.loads(l)
-            except ValueError: continue
-            now.setdefault(c.get('genus'), set()).add(c.get('trait'))
+    try:  # open traits now: the queue's cells less those a full-protocol search record already covers (harvest.targets)
+        sys.path.insert(0, os.path.join(ROOT, 'ci', 'harvest'))
+        cwd = os.getcwd(); os.chdir(ROOT)
+        import glob as _glob, hashlib as _hl, tempfile as _tf
+        key = _hl.sha1(git('rev-parse', 'HEAD:docs/views/searched', 'HEAD:docs/views/gaps/queue.jsonl').encode()).hexdigest()[:16]  # committed state
+        cache = os.path.join(_tf.gettempdir(), 'regards-targets-%s.json' % key)  # targets() takes about a minute; agents call this often
+        if os.path.exists(cache):
+            now = {g: set(t) for g, t in json.load(open(cache)).items()}
+        else:
+            import harvest as _hv
+            now = {t['genus']: set(t['traits']) for t in _hv.targets()}
+            json.dump({g: sorted(t) for g, t in now.items()}, open(cache, 'w'))
+        os.chdir(cwd)
         for g, d in genera.items():
-            if g in now:
-                d['harvest_traits'] = list(d.get('traits', [])); d['traits'] = sorted(now[g])
+            d['harvest_traits'] = list(d.get('traits', [])); d['traits'] = sorted(now.get(g, set()))
+    except Exception as e:  # keep the harvest's own list when the targets cannot be read
+        print('open traits from the harvest run (targets unreadable: %s)' % e, file=sys.stderr)
     for g in genera.values():  # a query a later run completed drops the same query's earlier failure
         ok = {q.get('q') for x in g.get('extra', []) for q in x.get('queries', []) if not q.get('error')}
         for x in g.get('extra', []):
