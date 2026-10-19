@@ -13,3 +13,4 @@ Write no evidence records in this round; readers log evidence from the oa job's 
 6. A genus whose harvest shows a failed step ("gave up") gets no search record until a rerun repairs it; `--check` fails such a record (audit 44). Leave a wanted line's author field empty when no source shows the authors: placeholder text in it reaches the owner's page.
 
 Proxy mirrors count as library proxies: never open a result whose host is a library's proxy or mirror (a host holding "ezproxy", "libproxy", "elogim", "idm.oclc.org", "proxy." or a university library's name before a publisher's domain), even when it opens without a login (audit 43 reached springerlink.bibliotecabuap.elogim.com once).
+7. `queries` lists every harvest query that ran without an error, zero-hit ones included, word for word and in the harvest's order, then the "web: " searches. Only a failed query ("gave up") stays out, and then the genus waits (point 6).
