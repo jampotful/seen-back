@@ -148,7 +148,11 @@ def taxonomy_main(out, shard, nshard):
     docs/views/gaps/queue.jsonl listed with neither (audit 51: 1,964 of 3,820 genera, so gaps.py finds them no measured
     relative and the harvest's citation step never runs for them). Writes OUT_DIR/taxonomy.tsv in the columns of
     docs/views/gaps/taxonomy-extra.tsv and OUT_DIR/taxonomy-miss.tsv (genus, views, reason) for the genera GBIF does not
-    place; nothing in the repository changes until rows are added to taxonomy-extra.tsv and gaps.py runs again."""
+    place; nothing in the repository changes until rows are added to taxonomy-extra.tsv and gaps.py runs again. Genera
+    already in taxonomy-extra.tsv or in the desk's proposal file docs/views/gaps/taxonomy-gbif.tsv are skipped. The
+    backbone ranks Squamata, Testudines and Crocodylia as classes with no order beneath them (run 18: 321 reptile
+    genera came back with a family and no order), so a reptile's order is taken from that class, which is the order
+    the queue already gives the reptiles it places."""
     views = {}
     for l in open(os.path.join(ROOT, 'docs/views/gaps/queue.jsonl'), encoding='utf-8'):
         if not l.strip(): continue
@@ -156,22 +160,26 @@ def taxonomy_main(out, shard, nshard):
         if c.get('family') or c.get('order'): continue
         views.setdefault(c['genus'], set()).add(c['view'])
     have = set()
-    tp = os.path.join(ROOT, 'docs/views/gaps/taxonomy-extra.tsv')
-    if os.path.exists(tp):
-        have = {l.split('\t')[0] for l in open(tp, encoding='utf-8') if l.strip()}
+    for tp in ('docs/views/gaps/taxonomy-extra.tsv', 'docs/views/gaps/taxonomy-gbif.tsv'):
+        if os.path.exists(os.path.join(ROOT, tp)):
+            have |= {l.split('\t')[0] for l in open(os.path.join(ROOT, tp), encoding='utf-8') if l.strip()}
     mine = [g for i, g in enumerate(sorted(g for g in views if g not in have)) if i % nshard == shard]
     day = time.strftime('%Y-%m-%d', time.gmtime()); start = time.time(); n_ok = 0; why = {}
     os.makedirs(out, exist_ok=True)
+    reptile_classes = {'Squamata', 'Testudines', 'Crocodylia', 'Rhynchocephalia', 'Sphenodontia'}
     with open(os.path.join(out, 'taxonomy.tsv'), 'w', encoding='utf-8') as f, \
          open(os.path.join(out, 'taxonomy-miss.tsv'), 'w', encoding='utf-8') as m:
         f.write('genus\tfamily\torder\tsource\n'); m.write('genus\tviews\treason\n')
         for g in mine:
             c, reason = gbif_match({'genus': g, 'views': views[g]})
-            if c and not c.get('order'): c, reason = None, 'GBIF gives a family and no order'
+            note = ''
+            if c and not c.get('order') and views[g] == {'reptile'} and c.get('class') in reptile_classes:
+                c = dict(c, order=c['class']); note = '; order from the backbone class'
+            if c and not c.get('order'): c, reason = None, 'GBIF gives a family and no order (class %s)' % c.get('class')
             if c:
                 n_ok += 1
                 f.write(f"{g}\t{c['family']}\t{c['order']}\tGBIF backbone species/match {day} (usageKey {c.get('usageKey')}, "
-                        f"class {c.get('class') or c.get('kingdom')})\n")
+                        f"class {c.get('class') or c.get('kingdom')}{note})\n")
             else:
                 why[reason] = why.get(reason, 0) + 1
                 m.write(f"{g}\t{','.join(sorted(views[g]))}\t{reason}\n")
