@@ -293,6 +293,7 @@ PLANT_TRAIT_QUERIES = {  # plant traits -> queries the plant word list misses (a
     'diel': ['flower opening time', 'nyctinasty', 'anthesis', 'pollination biology'],  # audit 43: an anthesis-hours paper missed
     'sense_light_nonvisual': ['photoperiod', 'circadian rhythm'],
     'sense_chemical': ['volatile signalling'],
+    'eye_type': ['epidermal lens cells', 'epidermal focusing leaf optics'],  # audit 54: no plant eye query; the lens-cell work went unseen
 }
 
 

@@ -32,8 +32,9 @@ WORDS = {
     'field': r'visual field|binocular|field of view|eye position|ophthalmoscop|panoramic|blind (area|spot)|eye placement',
     'diel': r'nocturnal|diurnal|crepuscular|cathemeral|activity (pattern|rhythm|time)|daily activity|circadian|time of day|'
             r'flower(ing)? open|anthesis|nyctinast|at night|night-time|nighttime|daytime',
-    'eye': r'\beyes?\b|ocell|compound eye|camera eye|superposition|apposition|stemmata|eyespot|eyeless',
-    'chemical': r'olfact|chemorecept|chemosens|odou?r|pheromon|antenna|volatile|gustat|taste|smell|vomeronasal|sensill',
+    'eye': r'\beyes?\b|ocell|compound eye|camera eye|superposition|apposition|stemmata|eyespot|eyeless|'
+           r'\blens|epiderm\w* (cell|focus)|light[- ]focuss?ing|focuss?ing (of )?light',  # audit 54: plant lens-cell work matched no eye word
+    'chemical': r'olfact|chemorecept|chemosens|odou?r|pheromon|antenna|volatile|gustat|taste|smell|vomeronasal|sensill|scent',
     'light_nonvisual': r'photoperiod|phototrop|circadian|\blight\b|phytochrome|cryptochrome|phototropin|gravitrop|shade|'
                        r'blue light|red light|photomorpho|flowering time|day ?length|short-day|long-day|extraocular|'
                        r'dermal photo|photosensitiv',
