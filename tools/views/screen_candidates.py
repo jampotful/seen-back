@@ -86,15 +86,24 @@ def candidates(d, families, trait):
     return hits
 
 
+def evidence_paths():
+    """The stores tools/views/rows.py reads (audit 51): the corrected copies of the audited logs, then the evidence logs
+    that have no corrected copy."""
+    cdir, edir = os.path.join(ROOT, 'docs/views/audit/corrected'), os.path.join(ROOT, 'docs/views/evidence')
+    out = sorted(glob.glob(os.path.join(cdir, '*.jsonl'))); seen = {os.path.basename(p) for p in out}
+    return out + [p for p in sorted(glob.glob(os.path.join(edir, '*.jsonl'))) if os.path.basename(p) not in seen]
+
+
 def main_evidence():
     ev = {}
-    for p in sorted(glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl'))):
+    for p in evidence_paths():
+        unit = ('corrected/' if '/audit/corrected/' in p else '') + os.path.basename(p)[:-6]
         for i, l in enumerate(open(p, encoding='utf-8'), 1):
             try: r = json.loads(l)
             except ValueError: continue
             g = str(r.get('taxon', '')).split(' ')[0]
             for t in trait_list(r.get('trait')):
-                ev.setdefault((g, t), []).append('%s:%d %s %s%s' % (os.path.basename(p)[:-6], i, r.get('taxon'), r.get('value'),
+                ev.setdefault((g, t), []).append('%s:%d %s %s%s' % (unit, i, r.get('taxon'), r.get('value'),
                                                                  ' (partial)' if r.get('partial') else ''))
     return ev
 
