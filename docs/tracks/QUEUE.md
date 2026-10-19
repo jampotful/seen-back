@@ -270,3 +270,9 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-36 -: no authors: Etude comparative de la morphologie de l'oeil chez quatre es
   - harvest-36 -: no authors: Characteristic response of the compound eyes of Helicoverpa 
   - harvest-36 -: no authors: Study development on mechanism of photosensitivity and photo
+- 00:04 UTC: harvest-34 returned (15 genera, 44 search records, 22 wanted lines, check clean). The screening agent had left zero-hit harvest queries out of `queries` (the desk's brief said "queries that returned results"); the desk put them back mechanically (e5d06b5d) and desk-screen.md now says only failed queries stay out. Audit 49 runs on it. Its wanted lines are on main with registry authors (desk Crossref run 8); held:
+  - harvest-34 10.3181/00379727-48-13419: placeholder title; the Crossref title (Influence of a Visual Diurnal Rhythm on Flicker Response Con) names no genus the line gives
+  - harvest-34 10.1186/1471-2148-13-36: placeholder title; the Crossref title (The phylogenetic distribution of ultraviolet sensitivity in ) names no genus the line gives
+  - harvest-34 10.1186/1471-2148-11-313: placeholder title; the Crossref title (Evolution of ultraviolet vision in the largest avian radiati) names no genus the line gives
+  - harvest-34 -: no authors: [A behavioural study on "stroboscopic vision" in the common 
+  - harvest-34 -: no authors: 
