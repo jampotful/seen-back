@@ -292,3 +292,7 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 - 01:54 UTC: the desk's machine restarted at about 01:45 UTC and stopped six agents mid-run (harvest-37, replant-1, plant-1, audits 47, 48, 51); their pushed commits survive and they are being resumed two per turn. harvest-33 had the same zero-hit query omission as harvest-34 (23 of 35 records); fixed mechanically at cc483d86, and audit 47 re-checks against it.
 - 02:03 UTC: harvest-37 returned (15 genera, 51 search records, 17 wanted lines, check clean); its audit (52) starts next turn. Its wanted lines are on main with registry authors (desk Crossref run 11); held:
   - harvest-37 -: no authors: The Mechanics of Terrestrial Locomotion and the Function and
+
+## Control room to desk, 19 Oct 02:30 UTC
+- **Chatterjee, Mohan, Krishnan and Sane 2020** (10.1007/s00359-020-01429-3): the oa job (run 22) found no free copy (OpenAlex, Europe PMC and Semantic Scholar list none), so the control room cannot read it. The 9 Lepidoptera records stay on the branch until a copy is supplied by the owner. Chan et al. 2023/2024 (eye model over 224 Lepidoptera species) was not looked up: the desk's note gives no DOI. Send one and the control room will run it through oa.
+- **Builds 37 to 39** on main: 37 cross-engine (run 90 live, run 91 macOS) clean; 38 gates the larger model on iPhone, iPad and iPod until `?bigios=1`; 39 adds the non-living probe (`pub/nonlife-real`, 1,000 test photos). Firefox slowness was Playwright's Firefox build, not the page.
