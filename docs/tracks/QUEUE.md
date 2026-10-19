@@ -300,3 +300,19 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 ## Desk to control room, 19 Oct 02:39 UTC
 - Chatterjee, Mohan, Krishnan and Sane 2020 is in the owner's papers folder on Drive ("Chatterjee 2020 Flicker fusion frequency Lepidoptera.pdf"), and intake-3 logged 9 records from it. Main also holds its species through two compilations (Lafitte et al. 2022, PLOS ONE 10.1371/journal.pone.0279718, and a 2026 thesis, 10.22215/etd/2026-16964): 40 genera, none of them Nymphalis, Hylephila, Hypena or Polyommatus. The desk counts that lead closed and releases the 5 harvest-32 records that waited on it alone (Nymphalis cff_hz and corner_hz, Hylephila cff_hz, Hypena cff_hz, Polyommatus corner_hz).
 - Chan et al. 2024: Research Square preprint, DOI 10.21203/rs.3.rs-4203706/v1 ("Morphological traits of the eyes of Lepidoptera indicate selection for...", Wei-Ping Chan and colleagues; on the wanted list in harvest-30, -32 and -33). The 4 harvest-32 and 6 harvest-34 records that wait on it stay held until it is read.
+- 02:59 UTC: replant-1 (the 15 held plant genera) returned 24 search records and 84 wanted lines; audit 53 checks all 24. plant-1 (15 common plants) returned 14 search records and 175 wanted lines; audit 54 checks all 14 and judges a sample of the wanted lines before they go on the owner's page. replant-1's wanted lines are on main with registry authors (desk Crossref run 12); five the screening agent marked priority 1 are priority 2 until the oa job finds no free copy; held:
+  - replant-1 -: no authors: Studies on the Essential Oil Composition of Cynoglossum lanc
+  - replant-1 -: no authors: South Tyrol (Italy) Pastinaca sativa L. subsp. sativa Essent
+  - replant-1 -: no authors: Chemical Composition and Insecticidal Activity of Pastinaca 
+  - replant-1 -: no authors: Antimicrobial potential of essential oil from Pastinaca sati
+  - replant-1 -: no authors: Endemic Balkan Parsnip Pastinaca hirsuta: the Chemical Profi
+  - replant-1 -: no authors: Pollination Biology Characters of Scutellaria baicalensis
+  - replant-1 -: no authors: Floral Biology and Breeding System of Endangered Plant Scute
+  - replant-1 -: no authors: Interactions between heavy metals and glucosinolates as defe
+  - replant-1 -: no authors: 
+  - replant-1 -: no authors: The ecology of common heliotrope (Heliotropium europaeum L.)
+  - replant-1 -: no authors: Interactions plantes-pollinisateurs et reproduction de Comar
+  - replant-1 10.1055/s-2007-971719: placeholder title; the Crossref title (Composition of Essential Oil of Ledum palustre) names no genus the line gives
+  - replant-1 -: no authors: Growth and development in Phalaris. 2. The role of photoperi
+  - replant-1 10.1017/cbo9780511693670.010: no authors: SENSITIVENESS OF PLANTS TO LIGHT: ITS TRANSMITTED EFFECTS
+  - replant-1 -: no authors: Invloed van daglengte op ontwikkeling en bloei van vaste pla
