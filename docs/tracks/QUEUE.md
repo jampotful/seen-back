@@ -316,3 +316,4 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - replant-1 -: no authors: Growth and development in Phalaris. 2. The role of photoperi
   - replant-1 10.1017/cbo9780511693670.010: no authors: SENSITIVENESS OF PLANTS TO LIGHT: ITS TRANSMITTED EFFECTS
   - replant-1 -: no authors: Invloed van daglengte op ontwikkeling en bloei van vaste pla
+- 03:25 UTC: audit 47 (harvest-33 at the query fix): 0 errors in 20, 1 in 35 with the extension (Grus fov_h_deg: Martin and Shaw 2010 measured the blue crane). 34 records are on main; the Grus visual-field record stays on the branch. Pooled over the desk-screen audits on main: 2 errors in 177 records checked.
