@@ -7,7 +7,7 @@ This is the reference for what the page computes in `pocket.fuse` (src/cam.rec.j
     slot = load_slot("models/pocket")            # a slot directory, or the path of a manifest inside one
                                                  # -> {"manifest", "table", "kinds", "species", "kind_bias", "species_bias"}; arrays are float64
     out = fuse(slot["manifest"], slot["table"], month, dots(slot["kinds"], e), dots(slot["species"], e),
-               kind_bias=slot["kind_bias"], species_bias=slot["species_bias"])
+               kind_bias=slot["kind_bias"], species_bias=slot["species_bias"], emb=e)
 
 Inputs
   manifest      the slot's manifest.json as a dict (uses manifest["kinds"]["labels"] and manifest["fusion"])
@@ -16,6 +16,8 @@ Inputs
   kind_dots     row . e for each kind row, e being the unit image vector (use dots(rows, e))
   species_dots  the same for each species row, or None
   kind_bias, species_bias   a trained head's biases, or None. The score of a row is t * (row . e) + bias.
+  emb           the unit image vector e itself, for a slot whose fusion has a probe for photos with nothing alive (fusion.nonlife,
+                tools/world/NONLIFE.md); without it the probe is left out, as the page leaves it out without a vector
 Output, the same fields as the page's result
   {"kind", "kindP", "sure", "kinds": [{"key", "p", "head", "list"}] best first, "kindOffers": [keys], "species": top five [{"sci", "en", "p", "kind"}],
    "named": row or None, "offers": [rows]}
@@ -102,7 +104,7 @@ def prior_log(rows, month, floor):
         return np.log(np.maximum(w / whole, floor))
 
 
-def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, species_bias=None, kind_bias_list=None):
+def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, species_bias=None, kind_bias_list=None, emb=None):
     f = manifest["fusion"]
     rule = f.get("rule", "product")
     if rule not in ("product", "mix"):
@@ -168,6 +170,13 @@ def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, s
     # not sure is an answer: under kind_at no kind is asserted and no species named, and the three likeliest kinds are offered
     kind_at = f.get("kind_at")
     sure = not (kind_at is not None and kinds[0]["p"] < kind_at)
+    # the slot's probe for photos with nothing alive in them (fusion.nonlife; tools/world/NONLIFE.md): an asserted living kind becomes not sure
+    nl, nonlife = f.get("nonlife"), None
+    if nl and emb is not None and len(emb) == len(nl["w"]):
+        z = float(nl["b"]) + float(np.dot(np.asarray(nl["w"], dtype=np.float64), np.asarray(emb, dtype=np.float64)))
+        nonlife = 1.0 / (1.0 + math.exp(-z))
+        if sure and kind not in ("none", "person") and nonlife >= nl["at"]:
+            sure = False
     kind_offers = [] if sure else [k["key"] for k in kinds if k["key"] != "none"][:3]
     if species and kind not in ("none", "person"):
         if sure and species[0]["p"] >= f["name_at"] and species[0]["kind"] == kind:
@@ -177,7 +186,7 @@ def fuse(manifest, table, month, kind_dots, species_dots=None, kind_bias=None, s
             three = [{"sci": rows[j]["sci"], "en": rows[j]["en"], "p": float(s[j]), "kind": rows[j]["kind"]} for j in pool[:3]]
             if sum(t["p"] for t in three) >= f["offer_at"]:
                 offers = three
-    return {"kind": kind, "kindP": kinds[0]["p"], "sure": sure, "kinds": kinds, "kindOffers": kind_offers, "species": species, "named": named, "offers": offers}
+    return {"kind": kind, "kindP": kinds[0]["p"], "sure": sure, "kinds": kinds, "kindOffers": kind_offers, "species": species, "named": named, "offers": offers, "nonlife": nonlife}
 
 
 def load_slot(where):

@@ -30,6 +30,17 @@ time do not change: a rule is a comparison on numbers the page already has.
 tau is chosen on the tuning photos only (the most COCO `none` photos kept from a living kind with every mark held there); the test
 photos are read once, after.
 
+Track nonlife2 (18 October 2026) adds, for real photographs (tools/world/nonlife_real.py, read through --made):
+  probe      a linear probe on the photo's vector, fitted on the tuning photos only (logistic regression, the made photos'
+             tuning half against the world tuning photos, every photo weighted so that the two sides weigh the same): an
+             asserted living kind is sent to the sheet where the probe's probability of nothing alive is at least tau. A
+             photo the probe was fitted on is scored by a probe fitted without its fold (five folds), so that tau is chosen on
+             scores the probe did not see; the test photos are scored by the probe fitted on every tuning photo.
+  --asked-mark M  a rule is chosen only if it also sends at most M of the real creatures to the sheet on the tuning photos:
+             of the world photos of creatures the page calls "this creature" today, and of all world creature photos. On the
+             test photos the same mark is a pass mark, with a third: the rule must remove at least a quarter of the living
+             kinds the page asserts on the made test photos with the head alone (test_pass).
+
 Usage: python3 -I tools/world/nonlife.py ROOT --out OUT   (ROOT laid out as for head.py: data/, lab/tinyclip-39m-16/images/, world/)
 """
 import argparse, json, os, sys
@@ -96,7 +107,7 @@ def gate(ft, rule, tau):
     if rule == "other_conf":
         return ft["living"] & (ft["kind"] == "other") & (ft["prob"] < tau)
     v = ft[rule]
-    hit = v >= tau if rule in ("head_none", "fused_none") else v < tau
+    hit = v >= tau if rule in ("head_none", "fused_none", "probe") else v < tau
     return ft["living"] & hit
 
 
@@ -105,6 +116,9 @@ def boot_diff(diff, seed=H.SEED, n=2000):
     idx = rng.integers(0, len(diff), size=(n, len(diff)))
     means = diff[idx].mean(axis=1)
     return float(diff.mean()), float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5))
+
+
+ASKED_MARK = None
 
 
 def marks(S, rule, tau):
@@ -139,6 +153,20 @@ def marks(S, rule, tau):
     today_other = ft["living"] & (ft["kind"] == "other") & oth
     out["real_other_asked"] = {"photos": int(today_other.sum()), "asked": int((today_other & asked).sum()),
                                "share": round(float((today_other & asked).sum() / max(1, today_other.sum())), 4), "all_world_asked": round(float(asked.mean()), 4)}
+    # COCO's own creatures (cats, dogs and the farm animals filed as deer): the share the rule sends to the sheet, both ways
+    for name, key in (("coco_asked_list", "ft_list"), ("coco_asked_alone", "ft_alone")):
+        ftc, cy = S["coco"][key], S["coco"]["y"]; askc = gate(ftc, rule, tau); d = {}
+        for k in ("cat", "dog", "deer"):
+            if (cy == k).any():
+                d[k] = {"photos": int((cy == k).sum()), "asked": int(askc[cy == k].sum()), "share": round(float(askc[cy == k].mean()), 4)}
+        liv = ~np.isin(cy, LIVING_NOT)
+        d["all"] = {"photos": int(liv.sum()), "asked": int(askc[liv].sum()), "share": round(float(askc[liv].mean()), 4)}
+        out[name] = d
+    a_al = gate(S["alachua"]["ft_list"], rule, tau)
+    out["real_other_asked"]["alachua_asked"] = round(float(a_al.mean()), 4)
+    if ASKED_MARK is not None:
+        r = out["real_other_asked"]
+        out["asked_pass"] = bool(r["share"] <= ASKED_MARK and r["all_world_asked"] <= ASKED_MARK)
     ok &= out["other_view"]["pass"]
     # the harm: COCO none photos and the made photos given a living kind, both ways
     for name, d, key in (("nonlife_list", c, "ft_list"), ("nonlife_alone", c, "ft_alone"), ("made_list", S["made"], "ft_list"), ("made_alone", S["made"], "ft_alone")):
@@ -150,12 +178,16 @@ def marks(S, rule, tau):
     return out
 
 
+REVIEW = None
+
+
 def made_part(made, part):
-    """The photos made by tools/world/nonlife_make.py, with a month from a hash of the id as for COCO."""
+    """The photos made by tools/world/nonlife_make.py, with a month from a hash of the id as for COCO. With --made-review, only the
+    photos whose verdict is `keep` (tools/world/nonlife-real-review.csv)."""
     man = {r["id"]: r for r in H.read_csv(os.path.join(made, "manifest.csv"))}
     X = H.unit(np.load(os.path.join(made, "nonlife-made.f16.npy")).astype(np.float32))
     ids = json.load(open(os.path.join(made, "nonlife-made.ids.json")))
-    keep = [i for i, j in enumerate(ids) if man[j]["set"] == part]
+    keep = [i for i, j in enumerate(ids) if man[j]["set"] == part and (REVIEW is None or REVIEW.get(j) == "keep")]
     return {"X": X[keep], "y": np.array(["none"] * len(keep), dtype=object), "ids": [ids[i] for i in keep],
             "family": np.array([man[ids[i]]["family"] for i in keep]), "month": np.array([H.h8("month|" + ids[i]) % 12 for i in keep])}
 
@@ -176,6 +208,40 @@ def reading(root, part, slot, table, by_key, made):
     return {"world": w, "alachua": a, "coco": c, "made": md}
 
 
+def probe_fit(Xp, Xn, seed=H.SEED):
+    from sklearn.linear_model import LogisticRegression
+    X = np.concatenate([Xp, Xn]).astype(np.float64); y = np.r_[np.ones(len(Xp)), np.zeros(len(Xn))]
+    w = np.where(y == 1, 0.5 / max(1, len(Xp)), 0.5 / max(1, len(Xn))) * len(y)
+    return LogisticRegression(C=1.0, max_iter=2000, random_state=seed).fit(X, y, sample_weight=w)
+
+
+def probe_attach(T, S=None, folds=5):
+    """Scores of the probe (probability of nothing alive) on every photo of T (tuning, out of fold where fitted on) or of S (test,
+    the probe fitted on all of T). Returns the probe fitted on all of T."""
+    Xp, Xn = T["made"]["X"], T["world"]["X"]
+    full = probe_fit(Xp, Xn)
+    if S is None:
+        rng = np.random.default_rng(H.SEED)
+        fp, fn = rng.integers(0, folds, len(Xp)), rng.integers(0, folds, len(Xn))
+        sp, sn = np.zeros(len(Xp)), np.zeros(len(Xn))
+        for k in range(folds):
+            m = probe_fit(Xp[fp != k], Xn[fn != k])
+            sp[fp == k] = m.predict_proba(Xp[fp == k].astype(np.float64))[:, 1]
+            sn[fn == k] = m.predict_proba(Xn[fn == k].astype(np.float64))[:, 1]
+        scores = {"made": sp, "world": sn}
+        for name in ("alachua", "coco"):
+            scores[name] = full.predict_proba(T[name]["X"].astype(np.float64))[:, 1]
+        R = T
+    else:
+        scores = {name: full.predict_proba(S[name]["X"].astype(np.float64))[:, 1] for name in ("made", "world", "alachua", "coco")}
+        R = S
+    for name, v in scores.items():
+        for key in ("ft_list", "ft_alone"):
+            if key in R[name]:
+                R[name][key]["probe"] = v
+    return full
+
+
 def parity_check(S, slot, table_rows):
     """head.answer against fuse.fuse on 60 photos of each set, as head.py does."""
     m = slot["manifest"]; bad = 0
@@ -194,18 +260,28 @@ def main():
     ap.add_argument("root"); ap.add_argument("--out", required=True); ap.add_argument("--slot", default="models/pocket")
     ap.add_argument("--made", required=True, help="the output directory of tools/world/nonlife_make.py")
     ap.add_argument("--tune-only", action="store_true", help="stop before the test photos are loaded")
+    ap.add_argument("--probe", action="store_true", help="also try the linear probe fitted on the tuning photos")
+    ap.add_argument("--asked-mark", type=float, default=None, help="the most real creatures a chosen rule may send to the sheet")
+    ap.add_argument("--made-review", default=None, help="a CSV of id and verdict: only the made photos marked keep are read")
+    ap.add_argument("--fixed", default=None, help="RULE:TAU: no search; report this rule on the tuning photos and then the test photos")
     a = ap.parse_args()
+    global ASKED_MARK, REVIEW
+    ASKED_MARK = a.asked_mark
+    if a.made_review:
+        REVIEW = {r["id"]: r["verdict"] for r in H.read_csv(a.made_review)}
     os.makedirs(a.out, exist_ok=True)
     slot = F.load_slot(a.slot)
     table_rows = slot["table"]
     table = H.Table(slot, table_rows, list(F.KINDS))
     by_key = H.county_keys(a.root)
-    rep = {"slot": a.slot, "kind_at": slot["manifest"]["fusion"]["kind_at"]}
+    rep = {"slot": a.slot, "kind_at": slot["manifest"]["fusion"]["kind_at"], "made": a.made, "made_review": a.made_review, "asked_mark": a.asked_mark}
 
     T = reading(a.root, "tune", slot, table, by_key, a.made)
     rep["parity_tune_differ"] = parity_check(T, slot, table_rows)
     if rep["parity_tune_differ"]:
         sys.exit("the vectorized rule disagrees with tools/fusion/fuse.py")
+    if a.probe:
+        probe = probe_attach(T)
     rep["tune_today"] = marks(T, None, 0)
 
     # the distributions behind the rules: COCO none photos given a living kind, against living photos rightly asserted
@@ -219,7 +295,13 @@ def main():
     grids = {"head_none": np.round(np.arange(0.02, 0.61, 0.02), 2), "fused_none": np.round(np.arange(0.01, 0.13, 0.01), 2),
              "gap": np.round(np.arange(0.88, 1.0, 0.01), 2), "life": np.round(np.percentile(al["life"][good], [0.1, 0.25, 0.5, 1, 2, 3, 5, 8]), 3),
              "other_conf": np.round(np.arange(0.88, 0.99, 0.01), 2)}
+    if a.probe:
+        grids["probe"] = np.round(np.r_[np.arange(0.5, 0.95, 0.05), np.arange(0.95, 1.0, 0.01), 0.995, 0.998, 0.999], 3)
     rows, best = [], None
+    if a.fixed:
+        grids = {}
+        best = ((0,), a.fixed.split(":")[0], float(a.fixed.split(":")[1]))
+        rep["fixed"] = a.fixed
     for rule, grid in grids.items():
         for tau in grid:
             mk = marks(T, rule, float(tau))
@@ -228,11 +310,12 @@ def main():
                  "nonlife_alone": mk["nonlife_alone"]["living_kind"], "old_alachua": mk["old_alachua"]["diff_points"],
                  "old_alachua_lo": mk["old_alachua"]["ci_points"][0], "old_world": mk["old_world"]["diff_points"],
                  "old_world_lo": mk["old_world"]["ci_points"][0], "coco_list": mk["coco_list"]["balanced"], "coco_alone": mk["coco_alone"]["balanced"],
-                 "real_other_asked": mk["real_other_asked"]["share"],
+                 "real_other_asked": mk["real_other_asked"]["share"], "all_world_asked": mk["real_other_asked"]["all_world_asked"],
+                 "alachua_asked": mk["real_other_asked"]["alachua_asked"], "asked_pass": mk.get("asked_pass", True),
                  "groups": {g: [v["named"], v["right_when_called"]] for g, v in mk["groups"].items()}}
             rows.append(r)
             key = (r["nonlife_list"] + r["nonlife_alone"] + r["made_list"] + r["made_alone"], -r["old_alachua"], -r["coco_list"])
-            if r["all_pass"] and (best is None or key < best[0]):
+            if r["all_pass"] and r["asked_pass"] and (best is None or key < best[0]):
                 best = (key, rule, float(tau))
     rep["tune_grid"] = rows
     if a.tune_only:
@@ -246,9 +329,16 @@ def main():
         rep["chosen"] = {"rule": best[1], "tau": best[2]}
         rep["tune_chosen"] = marks(T, best[1], best[2])
         S = reading(a.root, "test", slot, table, by_key, a.made)                                # read once, after the choice
+        if a.probe:
+            probe_attach(T, S)
+            np.save(os.path.join(a.out, "probe.f32.npy"), np.r_[probe.coef_[0], probe.intercept_].astype(np.float32))
         rep["parity_test_differ"] = parity_check(S, slot, table_rows)
         rep["test_today"] = marks(S, None, 0)
         rep["test_chosen"] = marks(S, best[1], best[2])
+        if ASKED_MARK is not None:
+            t0, t1 = rep["test_today"]["made_alone"]["living_kind"], rep["test_chosen"]["made_alone"]["living_kind"]
+            rep["test_removed_share"] = round(1 - t1 / max(1, t0), 4)
+            rep["test_pass"] = bool(rep["test_chosen"]["all_pass"] and rep["test_chosen"]["asked_pass"] and t1 <= 0.75 * t0)
         rep["decision"] = ("the chosen rule holds every mark on the test photos" if rep["test_chosen"]["all_pass"] else "the chosen rule fails a mark on the test photos") + \
             "; whether it ships is decided in tools/world/NONLIFE.md, with real_other_asked beside the marks"
     json.dump(rep, open(os.path.join(a.out, "report.json"), "w"), indent=1)

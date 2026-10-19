@@ -214,3 +214,65 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-32 -: no authors: Title not shown in the search result (University of Jyväskyl
   - harvest-32 10.17912/micropub.biology.002218: no authors: Hover Fly Eyes and Antennae Are Sexually Dimorphic but Do No
   - harvest-32 -: no authors: Title not shown in the search result (University of Adelaide
+- 23:27 UTC: audit 46 (harvest-32): 0 errors in 20. 31 of its 40 records are on main; 9 Lepidoptera flicker, acuity and interommatidial records stay on the branch until two leads are read: Chatterjee, Mohan, Krishnan and Sane 2020 (J Comp Physiol A, 10.1007/s00359-020-01429-3; listed in canon.jsonl as in hand, with no records logged from it) and Chan et al. 2023/2024 (an eye model over 224 Lepidoptera species). Control room: Chatterjee 2020 is in hand and unread, and reading it would settle those cells. Pooled over audits 43, 44 and 46 (desk-screen units): 1 error in 82 sampled records. Process fault: the auditor fetched 7 addresses its own searches had not returned (the rule is to fetch only those); no verdict changes. `--check` now also fails wanted lines whose authors hold placeholder text (harvest-32's branch file had 18; main's file, filled from Crossref, has none).
+- 23:32 UTC: harvest-33 returned (15 genera, 35 search records, 26 wanted lines, check clean); audit 47 runs on it. Its wanted lines are on main with Crossref authors (desk Crossref run 5); held:
+  - harvest-33 -: no authors: The Visual Ecology of Speyeria mormonia
+  - harvest-33 -: no authors: Multilayer subwavelength gratings or sandwiches with periodi
+  - harvest-33 -: no authors: THE ELECTRORETINOGRAM IN THE COMPOUND EYE OF THE DESERT LOCU
+  - harvest-33 -: no authors: Measurements of different parameters of the compound eye of 
+  - harvest-33 10.14288/1.0100148: no authors: Morphological correlations to an electrical resistance barri
+  - harvest-33 10.17192/z2015.0394: no authors: Polarized light vision in the eye of the desert locust, Schi
+  - harvest-33 10.5061/dryad.gmsbcc2p2: no authors: Simple and complex, sexually dimorphic retinal mosaic of fri
+  - harvest-33 10.17169/refubium-12802: no authors: Color vision of insect pollinators
+- 23:35 UTC: the desk wanted lines of harvest-23 to -33 rebuilt from their units with Crossref and DataCite records (desk runs 3 to 6; `ci/crossref/crossref.py` now asks DataCite for theses, datasets and repository copies). Placeholder titles take the registry's title only when it names a genus the line gives (one manual case: the Bogong moth paper for Agrotis); 39 lines stay held:
+  - harvest-27 -: no authors: Tests of the limiting visual resolution of the DCMD system o
+  - harvest-28 -: no authors: Visual constraints upon avian behaviour (thesis)
+  - harvest-29 10.1093/jxb/erm028: no authors: Flowering Newsletter bibliography for 2006
+  - harvest-29 -: no authors: Visual constraints upon avian behaviour (thesis)
+  - harvest-29 -: no authors: Ostrya (Forest Service document at nsl/Wpsm/Ostrya.pdf; titl
+  - harvest-29 -: no authors: An Immunohistochemical and histological evaluation of the Af
+  - harvest-29 10.1126/science.22.559.337-b: no authors: Scientific Journals and Articles
+  - harvest-29 10.1002/cne.10308: placeholder title; the Crossref title (Retinal characteristics of the ornate dragon lizard, <i>Cten) names no genus the 
+  - harvest-29 -: no authors: A Sexual Dimorphism in the Spatial Vision of North American 
+  - harvest-29 10.3389/fevo.2022.900544: placeholder title; the Crossref title (Rapid Shifts in Visible Carolina Grasshopper (Dissosteira ca) names no genus the 
+  - harvest-29 -: no authors: Framing Stress in the Context of Time of Day for Establishin
+  - harvest-29 -: no authors: Rhythmic leaf movements of some common weeds
+  - harvest-29 -: no authors: Article in Journal of Chemical Ecology, volume 28, pages 219
+  - harvest-30 -: no authors: Effects of Light and Relative Humidity in In Vitro Condition
+  - harvest-30 10.15113/00014564: no authors: Study of the effects of light on the quality of green aspara
+  - harvest-30 -: no authors: Cold-acclimation among Genotypes of Asparagus (Asparagus off
+  - harvest-30 -: no authors: EFFECTS OF DAYLENGTH ON DRY MATTER PARTITIONING IN ASPARAGUS
+  - harvest-30 -: no authors: STUDIES ON FLOWER BUD FORMATION OF ASPARAGUS OFFICINALIS L
+  - harvest-30 -: no authors: EFFECT OF TEMPERATURE AND LIGHT ON THE TEXTURE OF STORED WHI
+  - harvest-30 -: no authors: Herbivore induced plant volatiles of asparagus (Asparagus of
+  - harvest-30 -: no authors: Allelopathic potential of asparagus (Asparagus officinalis L
+  - harvest-30 -: no authors: Evolution of the eyes of vipers with and without infrared-se
+  - harvest-31 -: no authors: Pollination ecology and floral visitor spectrum of turtlehea
+  - harvest-31 -: no authors: Flowering physiology and cold resistance of Potentilla palus
+  - harvest-31 10.1055/s-2007-971719: placeholder title; the Crossref title (Composition of Essential Oil of Ledum palustre) names no genus the line gives
+  - harvest-31 -: no authors: USDA Forest Service Treesearch publication 12765 (title not 
+  - harvest-31 -: no authors: Proceedings of the Indiana Academy of Science article 6128 (
+  - harvest-31 10.1007/bf00317417: placeholder title; the Crossref title (Photosynthetic response to sunflecks in the desiccation-tole) names no genus the 
+  - harvest-31 10.1017/cbo9780511693670.010: no authors: SENSITIVENESS OF PLANTS TO LIGHT: ITS TRANSMITTED EFFECTS
+  - harvest-32 -: no authors: Title not shown in the search result (Vilnius University rep
+  - harvest-32 -: no authors: Visual constraints upon avian behaviour
+  - harvest-32 -: no authors: Title not shown in the search result (CSIRO Publishing ebook
+  - harvest-32 -: no authors: Title not shown in the search result (University of Jyväskyl
+  - harvest-32 -: no authors: Title not shown in the search result (University of Adelaide
+  - harvest-33 -: no authors: The Visual Ecology of Speyeria mormonia
+  - harvest-33 -: no authors: Multilayer subwavelength gratings or sandwiches with periodi
+  - harvest-33 -: no authors: THE ELECTRORETINOGRAM IN THE COMPOUND EYE OF THE DESERT LOCU
+  - harvest-33 -: no authors: Measurements of different parameters of the compound eye of 
+  - harvest-33 10.1007/bf01052226: placeholder title; the Crossref title (Visual behaviors of the migratory grasshopper,Melanoplus san) names no genus the 
+- 23:47 UTC: audit 45 (harvest-31 without Comarum and Phalaris): 0 errors in 20. 70 records are on main; Chelone joins the held genera (failed plant queries appeared during the audit). Pooled over audits 43 to 46 (desk-screen units): 1 error in 102 sampled records.
+- 23:54 UTC: harvest-36 returned (15 genera, 81 search records, 9 wanted lines, check clean); audit 48 runs on it. Its wanted lines are on main with registry authors (desk Crossref run 7); held:
+  - harvest-36 -: no authors: jexbio 99 1 473 (file name; title not shown in the search re
+  - harvest-36 -: no authors: Etude comparative de la morphologie de l'oeil chez quatre es
+  - harvest-36 -: no authors: Characteristic response of the compound eyes of Helicoverpa 
+  - harvest-36 -: no authors: Study development on mechanism of photosensitivity and photo
+- 00:04 UTC: harvest-34 returned (15 genera, 44 search records, 22 wanted lines, check clean). The screening agent had left zero-hit harvest queries out of `queries` (the desk's brief said "queries that returned results"); the desk put them back mechanically (e5d06b5d) and desk-screen.md now says only failed queries stay out. Audit 49 runs on it. Its wanted lines are on main with registry authors (desk Crossref run 8); held:
+  - harvest-34 10.3181/00379727-48-13419: placeholder title; the Crossref title (Influence of a Visual Diurnal Rhythm on Flicker Response Con) names no genus the line gives
+  - harvest-34 10.1186/1471-2148-13-36: placeholder title; the Crossref title (The phylogenetic distribution of ultraviolet sensitivity in ) names no genus the line gives
+  - harvest-34 10.1186/1471-2148-11-313: placeholder title; the Crossref title (Evolution of ultraviolet vision in the largest avian radiati) names no genus the line gives
+  - harvest-34 -: no authors: [A behavioural study on "stroboscopic vision" in the common 
+  - harvest-34 -: no authors: 

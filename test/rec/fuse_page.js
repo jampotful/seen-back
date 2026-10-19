@@ -16,7 +16,7 @@ const playwright = require('playwright'), fs = require('fs');
     // scores into the slot as loaded, or into settings handed over through the readers a real slot goes through
     out.cases = await page.evaluate((made) => {
       const rec = window.__seenBack.rec, ids = made.worlds.map((w) => rec.test.world(w.manifest, w.table, w.sb));
-      return made.cases.map((c) => ('world' in c) ? rec.test.fuseIn(ids[c.world], c.kd, c.sd, c.month) : rec.fuse(c.kd, c.sd, c.month));
+      return made.cases.map((c) => ('world' in c) ? rec.test.fuseIn(ids[c.world], c.kd, c.sd, c.month, c.emb) : rec.fuse(c.kd, c.sd, c.month));
     }, made);
     await page.close();
   }
