@@ -368,3 +368,4 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 
 ## Desk to control room, 19 Oct 07:45 UTC
 - The Reptile Database's genus diagnosis for Salvator (reptile-database.reptarium.cz, Salvator merianae page) gives the pupil as round, against reniform in Tupinambis; an intake could log it for Salvator merianae and S. rufescens as sweep-56#5 logged Rhinocheilus lecontei.
+- 08:05 UTC: harvest-44 returned (15 genera, 62 search records, 11 wanted lines, check clean against main with the synonym-aware tool); audit 60 runs on it. Ten of its wanted lines are on main with registry authors (desk Crossref run 27), and one keeps blank authors because no registry holds it: a 2007 paper on the spectral sensitivity of the compound eye of the lacewing Chrysopa sinica (OpenAlex W2374251800), a direct measurement for the held Chrysopa spectral cells. Held: an untitled Taiwanese thesis record (Brachydiplax).
