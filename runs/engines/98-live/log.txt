@@ -1,0 +1,256 @@
+
+=== 04:03:00 response headers, as a browser that accepts gzip and br would get them
+--- https://jampotful.github.io/seen-back/
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:26 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de2-a8f3e"
+expires: Mon, 19 Oct 2026 04:13:00 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 207219
+bytes on the wire: 207219
+--- https://jampotful.github.io/seen-back/index.html
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:25 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de1-a8f3e"
+expires: Mon, 19 Oct 2026 04:13:00 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 207219
+bytes on the wire: 207219
+--- https://jampotful.github.io/seen-back/sw.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:26 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de2-13b9"
+expires: Mon, 19 Oct 2026 04:13:00 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 1971
+bytes on the wire: 1971
+--- https://jampotful.github.io/seen-back/manifest.webmanifest
+HTTP/2 200 
+content-type: application/manifest+json; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:25 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de1-264"
+expires: Mon, 19 Oct 2026 04:13:00 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 279
+bytes on the wire: 279
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.wasm
+HTTP/2 200 
+content-type: application/wasm
+last-modified: Mon, 19 Oct 2026 03:26:25 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de1-d94899"
+expires: Mon, 19 Oct 2026 04:13:00 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 3722335
+bytes on the wire: 3722335
+--- https://jampotful.github.io/seen-back/vendor/ort/ort.wasm.min.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:25 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de1-c414"
+expires: Mon, 19 Oct 2026 04:13:01 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 16193
+bytes on the wire: 16193
+--- https://jampotful.github.io/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:25 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de1-5f3d"
+expires: Mon, 19 Oct 2026 04:13:01 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 9095
+bytes on the wire: 9095
+--- https://jampotful.github.io/seen-back/vendor/rec-worker.js
+HTTP/2 200 
+content-type: application/javascript; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:25 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de1-53b0"
+expires: Mon, 19 Oct 2026 04:13:01 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 8234
+bytes on the wire: 8234
+--- https://jampotful.github.io/seen-back/models/pocket/manifest.json
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+last-modified: Mon, 19 Oct 2026 03:26:26 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de2-3c2e"
+expires: Mon, 19 Oct 2026 04:13:01 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 0
+content-length: 5906
+bytes on the wire: 5906
+--- the model named by the manifest: https://jampotful.github.io/seen-back/models/pocket/vision.int8-per-channel.onnx
+HTTP/2 200 
+content-type: application/octet-stream
+last-modified: Mon, 19 Oct 2026 03:26:26 GMT
+access-control-allow-origin: *
+etag: W/"6ad58de2-27146d9"
+expires: Mon, 19 Oct 2026 04:13:02 GMT
+cache-control: max-age=600
+content-encoding: gzip
+age: 2
+via: 1.1 varnish
+x-cache: MISS
+x-cache-hits: 0
+content-length: 35342999
+bytes on the wire: 35342999, in 1.978305 s
+--- the same, asked for without compression
+HTTP/2 200 
+content-length: 40978137
+bytes on the wire: 40978137, in 0.822138 s
+--- the same, asked for a byte range (does a resumed download work?)
+HTTP/2 206 
+content-range: bytes 0-1023/40978137
+content-length: 1024
+bytes on the wire: 1024
+--- https://jampotful.github.io/seen-back/models/pocket/species.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 5096319
+bytes on the wire: 5096319
+--- https://jampotful.github.io/seen-back/models/pocket/kinds.f16.bin
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 34175
+bytes on the wire: 34175
+--- https://jampotful.github.io/seen-back/models/pocket/species.json
+HTTP/2 200 
+cache-control: max-age=600
+content-encoding: gzip
+content-length: 162087
+bytes on the wire: 162087
+
+=== 04:03:06 playwright 1.56.0, Chromium, Firefox and WebKit
+added 2 packages in 2s
+install chromium (try 1): exit 0
+install webkit (try 1): exit 0
+install firefox (try 1): exit 0
+
+=== 04:04:00 the page in Chromium, Firefox and WebKit
+04:05:27 chromium 141.0.7390.37 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"]] slot present ready
+live.js chromium: exit 0
+04:06:07 webkit 26.0 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"],[200,true,null,"ready","wader"],[200,true,null,"ready","wader"]] slot present ready
+live.js webkit: exit 0
+04:07:08 firefox 142.0.1 status 200 sw true second controlled true offline [[200,true,null,"ready","wader"]] slot present ready
+live.js firefox: exit 0
+{
+ "chromium": {
+  "version": "141.0.7390.37",
+  "status": 200,
+  "build": "Regards, build 40.",
+  "sw_registered": true,
+  "sw_active": true,
+  "controlled_first": true,
+  "controlled_second": true,
+  "crossOriginIsolated": false,
+  "offline": {
+   "console": [],
+   "status": 200,
+   "fromServiceWorker": true,
+   "online": true,
+   "controlled": true,
+   "screen": "intro",
+   "build": "Regards, build 40.",
+   "rec": "ready",
+   "recognized": {
+    "ready": "ready",
+    "readyMs": 0,
+    "about": {
+     "state": "ready",
+     "why": "",
+     "fail": "",
+     "model": "tinyclip-39m-16",
+     "rule": "mix",
+     "trained": true,
+     "backend": "wasm",
+     "threads": 1,
+     "loadMs": 1963,
+     "start": {
+      "vectors": 56.30000000001746,
+      "session": 1084.5,
+      "warm": 725.2999999999884
+     },
+     "last": null,
+     "got": 0,
+     "total": 0,
+     "slot": "models/pocket/manifest.json",
+     "fitted": {
+      "rule": "Rows were fitted only on photos in the public domain (CC0, no known copyright restrictions, United States Government work) or shared under CC BY or CC BY-NC; photos under any licence with ND or SA terms were left out.",
+      "licence_rule": "nc",
+      "photos": 181853,
+      "by_licence": {
+       "CC-BY-NC": 142533,
+       "CC-BY": 29698,
+       "CC0": 7853,
+       "CC-BY-2.0": 974,
+       "CC-BY-NC-2.0": 795
+      },
+      "by_set": {
+       "world photos (pub/data-world), fit split": 98518,
+       "train/alachua-pre2025": 81566,
+       "extra/coco-kinds": 1769
+      },
+      "list": "https://raw.githubusercontent.com/jampotful/seen-back/76739ca32137d0d8dade8e00add7705c0a0798e4/fitted_on.csv",
+      "sources": "pub/data-world and train/alachua-pre2025: iNaturalist observations (open-data files); extra/coco-kinds: COCO 2017 images from Flickr. Each row of the list gives the address and the licence.",
+      "not_listed": "Settings (temperatures, thresholds, the county bias, the offsets of the groups) were chosen on the tuning photos of the world, Alachua and COCO sets; no row was fitted on them, and the test photos were read after the settings were fixed (tools/world/head.py, docs/tracks/head.md).",
+      "list_note": "The list is published on the branch pub/heads-world-c1; its commit is kept by the branch pin/heads-world-c1-76739ca.",
+      "list_mb": 32
+     },
+     "have": "",
+     "keptBytes": 0,
+     "bytes": 40978137,
+     "getFail": "",
+     "place": null
+    },
+    "photo": {
+     "kind": "wader",
+     "p": 0.712,
+     "species1": null,
+     "ms": {
+      "load": 0,
+      "pre": 74,
+      "run": 596,
+      "post": 8.3
+     },
+     "wall": 4713
+    }
+   },
+   "kept": {
+    "keep-v1": [
+     "/seen-back/models/pocket/species.bias.f32.bin?v=dcce2b0b94256bb8",
+     "/seen-back/models/pocket/species.json?v=dcce2b0b94256bb8",
+     "/seen-back/models/pocket/kinds.f16.bin?v=dcce2b0b94256bb8",
+     "/seen-back/models/pocket/species.f16.bin?v=dcce2b0b94256bb8",
+     "/seen-back/vendor/ort/ort-wasm-simd-threaded.mjs?v=1.30
+pictures: 4 total bytes: 287627
