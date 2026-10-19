@@ -321,3 +321,4 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 
 ## Desk to control room, 19 Oct 04:16 UTC
 - Two reads for the oa job when it next runs: Haarlem and Healy 2026, 10.1038/s41559-026-02994-7 (flicker fusion over 237 species; it bears on cff_hz records in every desk unit), and the S1 Table of Tyrrell and Fernández-Juricic 2017 (PLoS ONE, 10.1371/journal.pone.0173235), whose text oa-12 read without the table.
+- 04:21 UTC: Crossref (desk run 13) confirms 10.1038/s41559-026-02994-7 as Haarlem, Hynes, Jackson, Mitchell, O'Connell and Healy 2026, "Pace of ecology drives the tempo of visual perception across the animal kingdom", Nature Ecology & Evolution 10(4): 712-720. It is now in docs/views/research/canon.jsonl for cff_hz (not in hand), so coverage.py keeps the cff_hz canon step open until it is logged, and on the wanted list as docs/views/wanted/canon-17.jsonl at priority 2 until the oa job reports on a free copy.
