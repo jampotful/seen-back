@@ -230,6 +230,44 @@ def names_main(out, shard, nshard):
     print(open(os.path.join(out, 'summary.txt')).read())
 
 
+def taxcheck_main(out, shard, nshard):
+    """TAXCHECK=1 in ci/harvest/params.env: each row of docs/views/gaps/taxonomy-extra.tsv, all of them written from general
+    knowledge ('own'), against the GBIF backbone's exact genus matches (audit 60: the file places Drymomantis, a tree frog,
+    in Mantidae). Writes OUT_DIR/taxcheck.tsv (genus, stated family and order, GBIF family, order, class and kingdom of
+    each exact genus match, verdict)."""
+    rows = []
+    for l in open(os.path.join(ROOT, 'docs/views/gaps/taxonomy-extra.tsv'), encoding='utf-8'):
+        c = l.rstrip('\n').split('\t')
+        if len(c) >= 3 and c[0] != 'genus': rows.append(c)
+    mine = [r for i, r in enumerate(rows) if i % nshard == shard]
+    os.makedirs(out, exist_ok=True); verdicts = {}
+    with open(os.path.join(out, 'taxcheck.tsv'), 'w', encoding='utf-8') as f:
+        f.write('genus\tstated_family\tstated_order\tgbif_matches\tverdict\n')
+        for g, fam, order, *_ in mine:
+            url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode({'name': g, 'rank': 'GENUS', 'verbose': 'true'})
+            d = None
+            for attempt in range(5):
+                try:
+                    req = urllib.request.Request(url, headers={'User-Agent': 'regards-harvest (github.com/jampotful/seen-back)'})
+                    with urllib.request.urlopen(req, timeout=30) as r:
+                        d = json.loads(r.read()); time.sleep(0.2); break
+                except Exception:
+                    time.sleep(2 + 2 ** attempt)
+            if d is None: f.write(f'{g}\t{fam}\t{order}\t\tnetwork\n'); verdicts['network'] = verdicts.get('network', 0) + 1; continue
+            hits = []
+            for c in [d] + list(d.get('alternatives') or []):
+                if c.get('matchType') == 'EXACT' and c.get('rank') == 'GENUS' and (c.get('canonicalName') or '') == g:
+                    h = '%s/%s/%s/%s/%s' % (c.get('family', ''), c.get('order', ''), c.get('class', ''), c.get('kingdom', ''), c.get('status', ''))
+                    if h not in hits: hits.append(h)
+            fams = {h.split('/')[0] for h in hits}
+            v = 'no exact genus' if not hits else ('agrees' if fam in fams else 'family differs')
+            verdicts[v] = verdicts.get(v, 0) + 1
+            f.write(f"{g}\t{fam}\t{order}\t{'; '.join(hits)}\t{v}\n"); f.flush()
+    with open(os.path.join(out, 'summary.txt'), 'w') as s:
+        s.write(f'taxcheck shard {shard}/{nshard}: {len(mine)} rows, {verdicts}\n')
+    print(open(os.path.join(out, 'summary.txt')).read())
+
+
 def fill_family(t):
     """Gives a family-less target its GBIF family, so the family review step can run; returns True when it did."""
     if t['family']: return False
@@ -417,6 +455,8 @@ def main():
         return taxonomy_main(out, shard, nshard)
     if os.path.exists(pp) and re.search(r'^NAMES=1\s*$', open(pp).read(), re.M):
         return names_main(out, shard, nshard)
+    if os.path.exists(pp) and re.search(r'^TAXCHECK=1\s*$', open(pp).read(), re.M):
+        return taxcheck_main(out, shard, nshard)
     before = harvested_before()
     allt = [t for t in targets() if t['genus'] not in before]; todo = allt[:top]
     mine = [t for i, t in enumerate(todo) if i % nshard == shard]
