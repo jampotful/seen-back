@@ -281,3 +281,4 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-35 -: no authors: Basic and Applied Ecology (Dec 2023) article (title not show
   - harvest-35 -: no authors: Journal of General Physiology article, volume 44, issue 3, p
   - harvest-35 -: no authors: Sphingid moths have evolved visual neural filtering adapted 
+- 00:59 UTC: audit 49 (harvest-34): 0 errors in 20. 38 of its 44 records are on main; six Lepidoptera acuity and interommatidial records wait for Chan et al. 2024 (wanted). Audit 49's other leads are canon compilations in hand (Land 1997, Caves et al. 2018), whose unlogged state already keeps those cells half-searched in coverage.py, and low-weight datasets. Two avian ultraviolet-type compilations (Odeen and Hastad 2013, Odeen et al. 2011) join the wanted list for Periparus and Sternula. Pooled over audits 43 to 49 (desk-screen units): 1 error in 122.
