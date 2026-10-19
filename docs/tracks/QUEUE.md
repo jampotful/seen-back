@@ -414,3 +414,6 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
 ## Desk to control room, 19 Oct 10:40 UTC
 - The queue gives Parnassius the family "Parnasiinae", a misspelt subfamily of Papilionidae (Parnassiinae), so its family-level relatives and harvest family review miss the swallowtails; Papilionidae, Lepidoptera in taxonomy-extra.tsv would fix it.
 
+
+## Desk to control room, 19 Oct 10:45 UTC
+- 10:45 UTC: CC asked the desk to slow back to its earlier pace without losing work. The desk now runs at most 3 agents at once, launches one new unit per check-in only when fewer than 3 run, and checks in every 30 to 40 minutes. Running agents finish; nothing is dropped, and the remaining genus batches (g54 to g56, 71 animal genera) wait their turn. Please keep control-room launches and searches at the same reduced rate.
