@@ -199,7 +199,7 @@ def supplement_main(out, shard, nshard):
     and a '<Family> vision review' for animal families no earlier run holds. Writes 'genus_extra' lines (genus, queries,
     works) and 'family' lines; tools/views/harvest_get.py shows them under the genus. Genus lines are not rewritten. A genus the
     queue lists without a family gets its family from the GBIF backbone (gbif_family), recorded on its genus_extra line."""
-    before = harvested_before()
+    before = harvested_before(); have_q = extras_done()
     mine = [t for i, t in enumerate([t for t in targets() if t['genus'] in before]) if i % nshard == shard]
     have_fam = harvested_families()
     fam_done = set(); n_err = 0; n_fill = 0; start = time.time(); done = 0
@@ -212,6 +212,10 @@ def supplement_main(out, shard, nshard):
                 if plant:
                     for en in sorted(t['english'])[:1]:
                         if en: queries.append(search(f'{en} photoreceptor', works))
+                else:  # trait queries for traits the queue opened after the genus was harvested
+                    for keys, words in GROUPS:
+                        q = f'{genus} {words}'
+                        if keys & t['traits'] and (genus, q) not in have_q: queries.append(search(q, works))
                 if queries or filled:
                     n_err += sum(1 for q in queries if q.get('error'))
                     extra = {'type': 'genus_extra', 'genus': genus, 'queries': queries, 'works': works}
@@ -241,7 +245,7 @@ PLANT_TRAIT_QUERIES = {  # plant traits -> queries the plant word list misses (a
 
 
 def extras_done():
-    """(genus, query) pairs an earlier run's genus_extra lines hold without an error, so a rerun sends only the rest."""
+    """(genus, query) pairs an earlier run's genus or genus_extra lines hold without an error, so a rerun sends only the rest."""
     import subprocess, zlib
     names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'origin/ci', 'runs/harvest'], capture_output=True, text=True).stdout.split()
     done = set()
@@ -252,7 +256,7 @@ def extras_done():
         for l in raw.decode('utf-8', 'replace').splitlines():
             try: d = json.loads(l)
             except ValueError: continue
-            if d.get('type') == 'genus_extra':
+            if d.get('type') in ('genus_extra', 'genus'):
                 for q in d.get('queries', []):
                     if not q.get('error'): done.add((d['genus'], q.get('q')))
     return done

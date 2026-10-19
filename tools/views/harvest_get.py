@@ -42,6 +42,16 @@ def load():
                 # a later run's failed review ("gave up") never hides an earlier run's completed one
                 old = families.get(d['family'])
                 if not (old and not (old.get('query') or {}).get('error') and (d.get('query') or {}).get('error')): families[d['family']] = d
+    qp = os.path.join(ROOT, 'docs/views/gaps/queue.jsonl')  # the queue's open traits now, which can differ from the harvest's
+    if os.path.exists(qp):
+        now = {}
+        for l in open(qp, encoding='utf-8'):
+            try: c = json.loads(l)
+            except ValueError: continue
+            now.setdefault(c.get('genus'), set()).add(c.get('trait'))
+        for g, d in genera.items():
+            if g in now:
+                d['harvest_traits'] = list(d.get('traits', [])); d['traits'] = sorted(now[g])
     for g in genera.values():  # a query a later run completed drops the same query's earlier failure
         ok = {q.get('q') for x in g.get('extra', []) for q in x.get('queries', []) if not q.get('error')}
         for x in g.get('extra', []):
@@ -56,7 +66,9 @@ def show(d, families):
         oa = f"{x.get('oa_status') or 'closed'} {x.get('oa_url') or ''} {x.get('license') or ''}".strip()
         return f"  [{k}] {x.get('title')} ({x.get('year')}) {x.get('venue')} | doi {x.get('doi') or '-'} | {oa}\n      {(x.get('abstract') or '')[:350]}"
     src = f" [family from {d['family_source']}]" if d.get('family_source') else ''
-    out = [f"## {d['genus']} ({d['family']}, {d['order']}){src} open traits: {', '.join(d['traits'])}; views {', '.join(d['views'])}; harvest run {d['run']}"]
+    later = sorted(set(d['traits']) - set(d.get('harvest_traits', d['traits'])))
+    late = f" (opened since the harvest, so no trait query of the harvest names them: {', '.join(later)})" if later else ''
+    out = [f"## {d['genus']} ({d['family']}, {d['order']}){src} open traits: {', '.join(d['traits'])}{late}; views {', '.join(d['views'])}; harvest run {d['run']}"]
     k = 0
     for q in d['queries']:
         out.append(f"query \"{q['q']}\": {q.get('n')} hits" + (f" (error {q['error']})" if q.get('error') else ''))
