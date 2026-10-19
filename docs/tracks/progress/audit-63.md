@@ -15,3 +15,7 @@ The draw order is 29, 61, 19, 17, 31, 43, 6, 25, 48, 55, 5, 56, 13, 59, 51, 41, 
 Sorted, the lines are 4, 5, 6, 13, 15, 17, 19, 20, 25, 29, 31, 40, 41, 43, 48, 51, 55, 56, 59 and 61.
 
 If the audit finds an error, the extension draws 15 more with `random.seed(6301)` and `random.sample(<the 41 remaining line numbers in ascending order>, 15)`.
+
+## Verdicts (sample of 20), first pass
+
+All 20 are "confirm" on the four tests of desk-audit.md step 4 (queries, `chased`, screened works, my own searches). Line 45 (Conistra spectral_range_nm, outside the sample) holds a measurement the record missed under desk-screen.md point 9 on main (Nowinszky et al. 2022, Table 1, row 302, Conistra vaccinii), so the extension (seed 6301: lines 2, 8, 12, 14, 16, 18, 23, 26, 32, 47, 49, 50, 52, 53 and 58) runs before the verdict. The full table follows in the finished report.
