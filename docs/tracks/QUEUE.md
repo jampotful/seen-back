@@ -276,3 +276,8 @@ The owner: Codex is a helper; when it drops work, the control room picks it up. 
   - harvest-34 10.1186/1471-2148-11-313: placeholder title; the Crossref title (Evolution of ultraviolet vision in the largest avian radiati) names no genus the line gives
   - harvest-34 -: no authors: [A behavioural study on "stroboscopic vision" in the common 
   - harvest-34 -: no authors: 
+- 00:10 UTC: harvest-35 returned (15 genera, 54 search records, 15 wanted lines, check clean); audit 50 runs on it. Its wanted lines are on main with registry authors (desk Crossref run 9); held:
+  - harvest-35 -: no authors: PubMed Central article PMC8991095 (title not shown in the se
+  - harvest-35 -: no authors: Basic and Applied Ecology (Dec 2023) article (title not show
+  - harvest-35 -: no authors: Journal of General Physiology article, volume 44, issue 3, p
+  - harvest-35 -: no authors: Sphingid moths have evolved visual neural filtering adapted 
