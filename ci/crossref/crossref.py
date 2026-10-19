@@ -2,7 +2,11 @@
 pages with the logged records without spending model allowance. Usage: python3 -I ci/crossref/crossref.py OUT_DIR
 When ci/crossref/dois.txt exists (put it on the run branch only), it looks up those DOIs instead.
 Writes OUT_DIR/crossref.jsonl: one line per DOI with title, authors as printed (family, given), year, journal,
-volume, issue, page and type, or an error. Run by .github/workflows/crossref.yml."""
+volume, issue, page and type, or an error. Run by .github/workflows/crossref.yml.
+When ci/crossref/titles.jsonl exists (run branch only; one {"key", "title", "year"} a line, for wanted lines that
+carry no DOI), it also asks Crossref's bibliographic search for each title and writes OUT_DIR/titles.jsonl: the key,
+the best candidate whose title matches at 0.92 or better (and whose year is within one of a given year), and the
+top three candidates, so the desk can fill a line only when the registry's title is the same work."""
 import glob, json, os, sys, time, urllib.error, urllib.parse, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -12,7 +16,8 @@ dois = set()
 only = os.path.join(ROOT, 'ci/crossref/dois.txt')  # a run branch may name its own DOIs, one a line (for example a wanted list's)
 if os.path.exists(only):
     dois = {l.strip().lower() for l in open(only, encoding='utf-8') if l.strip().lower().startswith('10.')}
-for p in ([] if dois else glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl'))):
+titles_in = os.path.join(ROOT, 'ci/crossref/titles.jsonl')
+for p in ([] if dois or os.path.exists(titles_in) else glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl'))):
     for l in open(p, encoding='utf-8'):
         try: r = json.loads(l)
         except ValueError: continue
@@ -71,3 +76,49 @@ with open(os.path.join(out, 'crossref.jsonl'), 'w', encoding='utf-8') as fh:
         fh.write(json.dumps(rec, ensure_ascii=False) + '\n'); fh.flush()
         if i % 100 == 0: print(i, len(dois), flush=True)
         time.sleep(0.4)
+
+
+def norm(t):
+    import re, unicodedata
+    t = unicodedata.normalize('NFKD', t or '').encode('ascii', 'ignore').decode().lower()
+    return re.sub(r'<[^>]+>', ' ', re.sub(r'[^a-z0-9<>/ ]+', ' ', t)).split()
+
+
+def search_title(title, year):
+    import difflib
+    q = urllib.parse.urlencode({'query.bibliographic': title, 'rows': 5,
+                                'select': 'DOI,title,author,issued,container-title,volume,issue,page,type'})
+    for k in range(4):
+        try:
+            with urllib.request.urlopen(urllib.request.Request('https://api.crossref.org/works?' + q,
+                                        headers={'User-Agent': 'seen-back-desk/1.0'}), timeout=30) as f:
+                items = json.load(f)['message']['items']; break
+        except Exception:
+            time.sleep(5 * (k + 1))
+    else:
+        return {'error': 'gave up'}
+    cands = []
+    for m in items:
+        t = (m.get('title') or [''])[0]
+        yr = ((m.get('issued') or {}).get('date-parts') or [[None]])[0][0]
+        score = difflib.SequenceMatcher(None, ' '.join(norm(title)), ' '.join(norm(t))).ratio()
+        cands.append({'doi': m.get('DOI', '').lower(), 'title': t, 'year': yr, 'score': round(score, 3),
+                      'authors': [{'family': a.get('family', a.get('name', '')), 'given': a.get('given', '')} for a in m.get('author', [])],
+                      'journal': (m.get('container-title') or [''])[0], 'volume': m.get('volume'), 'issue': m.get('issue'),
+                      'page': m.get('page'), 'type': m.get('type')})
+    def near(a, b):
+        try: return abs(int(a) - int(b)) <= 1
+        except (TypeError, ValueError): return True
+    ok = [c for c in cands if c['score'] >= 0.92 and near(c['year'], year)]
+    return {'match': max(ok, key=lambda c: c['score']) if ok else None,
+            'candidates': [{k: c[k] for k in ('doi', 'title', 'year', 'score')} for c in cands[:3]]}
+
+
+if os.path.exists(titles_in):
+    with open(os.path.join(out, 'titles.jsonl'), 'w', encoding='utf-8') as fh:
+        for l in open(titles_in, encoding='utf-8'):
+            try: q = json.loads(l)
+            except ValueError: continue
+            r = search_title(q.get('title', ''), q.get('year'))
+            fh.write(json.dumps({'key': q.get('key'), 'query_title': q.get('title'), **r}, ensure_ascii=False) + '\n'); fh.flush()
+            time.sleep(1.0)
