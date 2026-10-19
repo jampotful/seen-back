@@ -189,6 +189,47 @@ def taxonomy_main(out, shard, nshard):
     print(open(os.path.join(out, 'summary.txt')).read())
 
 
+def names_main(out, shard, nshard):
+    """NAMES=1 in ci/harvest/params.env: the GBIF backbone's accepted name for every species name in main's evidence (the
+    audited logs and the evidence logs, as tools/views/rows.py reads them). Audit 48 found a record for Occidryas that
+    called a pigment peak absent while main held the peak under Euphydryas chalcedona, the species' older name; with this
+    table tools/views/screen_candidates.py also finds main's rows under a name the backbone treats as a synonym. Writes
+    OUT_DIR/names.tsv (taxon, match type, status, accepted species, accepted genus, usage key)."""
+    import glob
+    files = sorted(glob.glob(os.path.join(ROOT, 'docs/views/audit/corrected/*.jsonl'))); seen = {os.path.basename(p) for p in files}
+    files += [p for p in sorted(glob.glob(os.path.join(ROOT, 'docs/views/evidence/*.jsonl'))) if os.path.basename(p) not in seen]
+    names = set()
+    for p in files:
+        for l in open(p, encoding='utf-8'):
+            try: t = str(json.loads(l).get('taxon') or '').strip()
+            except (ValueError, AttributeError): continue
+            if re.fullmatch(r'[A-Z][a-z]+ [a-z][a-z-]+( [a-z][a-z-]+)?', t): names.add(t)
+    mine = [n for i, n in enumerate(sorted(names)) if i % nshard == shard]
+    start = time.time(); kinds = {}
+    os.makedirs(out, exist_ok=True)
+    with open(os.path.join(out, 'names.tsv'), 'w', encoding='utf-8') as f:
+        f.write('taxon\tmatch\tstatus\taccepted_species\taccepted_genus\tusage_key\n')
+        for n in mine:
+            url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode({'name': n, 'strict': 'true'})
+            d = None
+            for attempt in range(5):
+                try:
+                    req = urllib.request.Request(url, headers={'User-Agent': 'regards-harvest (github.com/jampotful/seen-back)'})
+                    with urllib.request.urlopen(req, timeout=30) as r:
+                        d = json.loads(r.read()); time.sleep(0.1); break
+                except Exception:
+                    time.sleep(2 + 2 ** attempt)
+            if d is None: kinds['network'] = kinds.get('network', 0) + 1; f.write(f'{n}\tnetwork\t\t\t\t\n'); continue
+            mt, st = d.get('matchType') or 'NONE', d.get('status') or ''
+            kinds[mt] = kinds.get(mt, 0) + 1
+            ok = mt == 'EXACT' and d.get('rank') in ('SPECIES', 'SUBSPECIES', 'VARIETY', 'FORM')
+            f.write(f"{n}\t{mt}\t{st}\t{d.get('species', '') if ok else ''}\t{d.get('genus', '') if ok else ''}\t{d.get('usageKey', '')}\n")
+            f.flush()
+    with open(os.path.join(out, 'summary.txt'), 'w') as s:
+        s.write(f'names shard {shard}/{nshard}: {len(mine)} species names, match types {kinds}, {time.time() - start:.0f} s\n')
+    print(open(os.path.join(out, 'summary.txt')).read())
+
+
 def fill_family(t):
     """Gives a family-less target its GBIF family, so the family review step can run; returns True when it did."""
     if t['family']: return False
@@ -374,6 +415,8 @@ def main():
         return plant_traits_main(out, shard, nshard)
     if os.path.exists(pp) and re.search(r'^TAXONOMY=1\s*$', open(pp).read(), re.M):
         return taxonomy_main(out, shard, nshard)
+    if os.path.exists(pp) and re.search(r'^NAMES=1\s*$', open(pp).read(), re.M):
+        return names_main(out, shard, nshard)
     before = harvested_before()
     allt = [t for t in targets() if t['genus'] not in before]; todo = allt[:top]
     mine = [t for i, t in enumerate(todo) if i % nshard == shard]

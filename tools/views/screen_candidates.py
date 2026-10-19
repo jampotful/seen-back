@@ -95,17 +95,32 @@ def evidence_paths():
     return out + [p for p in sorted(glob.glob(os.path.join(edir, '*.jsonl'))) if os.path.basename(p) not in seen]
 
 
+def accepted_names():
+    """taxon -> (accepted species, accepted genus) from docs/views/gaps/gbif-names.tsv, the GBIF backbone's accepted name
+    for each species name in main's evidence (ci/harvest/harvest.py NAMES mode). Audit 48: a record for Occidryas missed
+    main's 565 nm row filed under Euphydryas chalcedona, the species' older name."""
+    p = os.path.join(ROOT, 'docs/views/gaps/gbif-names.tsv'); out = {}
+    if not os.path.exists(p): return out
+    for l in open(p, encoding='utf-8'):
+        c = l.rstrip('\n').split('\t')
+        if len(c) >= 5 and c[0] != 'taxon' and c[4]: out[c[0]] = (c[3], c[4])
+    return out
+
+
 def main_evidence():
-    ev = {}
+    ev = {}; acc = accepted_names()
     for p in evidence_paths():
         unit = ('corrected/' if '/audit/corrected/' in p else '') + os.path.basename(p)[:-6]
         for i, l in enumerate(open(p, encoding='utf-8'), 1):
             try: r = json.loads(l)
             except ValueError: continue
-            g = str(r.get('taxon', '')).split(' ')[0]
+            taxon = str(r.get('taxon', '')).strip(); g = taxon.split(' ')[0]
+            a_sp, a_g = acc.get(taxon, ('', ''))
             for t in trait_list(r.get('trait')):
-                ev.setdefault((g, t), []).append('%s:%d %s %s%s' % (unit, i, r.get('taxon'), r.get('value'),
-                                                                 ' (partial)' if r.get('partial') else ''))
+                row = '%s:%d %s %s%s' % (unit, i, r.get('taxon'), r.get('value'), ' (partial)' if r.get('partial') else '')
+                ev.setdefault((g, t), []).append(row)
+                if a_g and a_g != g:  # the same row under the genus of the backbone's accepted name
+                    ev.setdefault((a_g, t), []).append(row + ' [GBIF accepted name %s]' % a_sp)
     return ev
 
 
