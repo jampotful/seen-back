@@ -883,6 +883,7 @@
       if (document.readyState === 'complete') soon(); else window.addEventListener('load', soon);
     }
     api = {
+      nonlifeAt: function () { return cur && cur.f && cur.f.nonlife && num(cur.f.nonlife.at) ? cur.f.nonlife.at : null; },   // the level of the slot's probe for nothing alive (fusion.nonlife), or null
       usable: function () { return !cannot; }, whyNot: function () { return SAY[cannot] || ''; },
       recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month, emb) { return fuseWith(cur, kd, sd, month, emb); },
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way

@@ -122,3 +122,23 @@ All four marks hold on the test photos (the three stated before measuring and th
 `tools/world/head.py` scores "today's page" with a vectorized copy of the rule that does not apply the probe, so a later run of it reads the page as it was before build 39; `nonlife.py --fixed probe:0.9 --probe` gives the page with it (the probe is fitted again on the same photos and comes out the same).
 
 The plainest reading of these numbers: the drawn pictures overstated the trouble, since on real photos the pocket head errs about 7% of the time alone and 2% with the list, mostly on coins, rust, stains, stones and walls. The probe removes most of those at the price of about one horse, cow or sheep in twenty and one cat in forty. The cause is still there: the 1,000 kept photos (or their tuning half) belong in the next fit of the head as `none` rows, after which the probe may no longer be needed.
+
+
+## The larger model (build 40, 18 October 2026)
+
+Build 39 left the larger model alone, and where the full database is kept it asserted a living kind for 182 of the 504 test photos (187 in Alachua's zone), so the pocket probe's gain was about halved. Build 40 holds the full database to the probe's verdict when it answers a photo for the first time: in `firstLook` of `src/cam.c2.js`, where the pocket model was not sure (which includes every photo the probe turned to not sure) or said nothing alive, a larger-model answer that asserts a living kind (not `none`, not `person`) becomes not sure when the pocket probe on that photo is at least `fusion.nonlife.at` (0.9, as shipped; nothing was chosen again). The person's own press of "Look more closely" is not held to it, so the question cannot loop, and the background look that follows a pocket answer the probe let through (probe under 0.9) is unchanged. Only page code changed: the pocket model, its heads and the marks of `docs/tracks/head.md` are as in build 39.
+
+Measured by `tools/world/nonlife_big.py` (the page's arithmetic for `models/naturalist` in numpy, every file checked by SHA-256, the probe of `models/pocket` on the pocket encoder's unit vector of the same photo). Test photos; BioCLIP 2's vectors are the laboratory's (torch), the pocket's the phone's WASM vectors where the laboratory holds them.
+
+| On the test photos | Larger model today | With the probe's verdict | Limit |
+|---|---:|---:|---|
+| Real photos with nothing alive given a living kind, no zone (of 504) | 182 | 32 | |
+| The same, Alachua's zone | 187 | 32 | |
+| The same on the 496 tuning photos | 163 | 23 | |
+| COCO rooms given a living kind (of 500) | 183 | 54 | |
+| Alachua 2025 wild creatures sent to the question (of 4,197 photos, 4,122 asserted) | | 0 | at most 5% |
+| World creatures held in both encoders' vectors (98 test, 110 tuning) | | 0 | at most 5% |
+| World test creatures the probe would hold at all, any answer (pocket vectors, 10,200) | | 9 (0.09%) | at most 5% |
+| COCO pets and farm animals sent to the question (of 340, 294 asserted) | | 14 (4.1%): cats 4 of 77, dogs 0 of 63, horses, cows and sheep 10 of 200 | at most 5% |
+
+What the numbers do not settle: the world test photos with both encoders' vectors are only 208, so the 0.09% (every world test photo, the probe alone, an upper bound on what the rule can send) carries the wild-creature claim for the world; cats are at 5.2% and the farm animals at exactly 5.0% taken alone, the overall 4.1% being the mark as it was stated for build 39; levels other than 0.9 were looked at on these test photos (the larger model keeps 107 of 504 at 0.99 and 53 at 0.95, and sends 0.99: no animal, 0.95: 5 of 340), but 0.9 was the level shipped before and is the one that stands. The page path itself (`firstLook` with the verdict) is not covered by the stand-in checks, which have no probe in their pocket slot; the checks that ran (`check_rec.js` all sections, `check4.js try`, `fits_test.js`, `build.py --check`) show that nothing else moved.

@@ -8,7 +8,7 @@
   var hasCamera = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
   var coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
   var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var BUILD = '39';
+  var BUILD = '40';
   // Sharpness is drawn against the viewer's own eye: the long side of the screen is taken to fill
   // this many degrees of their view (a phone at arm's length, a laptop on a desk). An assumption.
   var VIEW_DEG = coarse ? 24 : 34;
@@ -3003,6 +3003,7 @@
       if (document.readyState === 'complete') soon(); else window.addEventListener('load', soon);
     }
     api = {
+      nonlifeAt: function () { return cur && cur.f && cur.f.nonlife && num(cur.f.nonlife.at) ? cur.f.nonlife.at : null; },   // the level of the slot's probe for nothing alive (fusion.nonlife), or null
       usable: function () { return !cannot; }, whyNot: function () { return SAY[cannot] || ''; },
       recognize: recognize, line: line, warm: warm, ready: ready, fuse: function (kd, sd, month, emb) { return fuseWith(cur, kd, sd, month, emb); },
       fetching: function () { return state === 'loading' && total > got; },      // the first download is under way
@@ -3295,6 +3296,7 @@
     if (!capsSettled) { go('naming'); msg('Looking\u2026'); }     // Claude's part of the page may still be arriving
     capsReady.then(function () { if (t === S.token) recognize(t); });
   }
+  var pocketNl = { t: 0, yes: false };            // the pocket slot's probe took this photo (photo t) for one with nothing alive in it; the full database is held to that verdict (build 40)
   function recognizeHere(t) {                      // outside Claude: the page's own small model, on this device
     go('naming'); msg(pocket.line()); paintType();
     pocket.progress(function () { if (t === S.token && S.screen === 'naming' && !S.eyes && !anySheet()) msg(pocket.line()); paintType(); });
@@ -3306,6 +3308,7 @@
         large.survey().then(function (h) { if (t !== S.token || S.eyes) return; if (h === 'kept' && !large.broken()) firstLook(t, false); else tell('We can\u2019t find a creature in your photo. Try again.'); });
         return;
       }
+      pocketNl = { t: t, yes: typeof r.nonlife === 'number' && pocket.nonlifeAt() !== null && r.nonlife >= pocket.nonlifeAt() };
       pocket.offers = r.offers.map(function (o) { return { sci: o.sci, en: o.en, kind: o.kind, local: true }; });
       pocket.kindOffers = r.kindOffers || [];
       if (!r.sure) {
@@ -3771,7 +3774,7 @@
   }
   // Nothing has a name yet: the small model was not sure, or the person asked from the sheet that asks for a name. The full database's
   // answer is waited for, and taken; if it is not sure either, its three likeliest kinds are offered.
-  function firstLook(t, unsure) {
+  function firstLook(t, unsure, asked) {          // asked: the person pressed the button for the full database, whose answer is then taken as it comes
     var photo = S.animalPhoto; if (!photo || t !== S.token) return;
     closeSheets(); go('naming'); msg(SVC_SAY.looking); paintType();
     large.recognize(photo, pocket.file).then(function (r) {
@@ -3779,6 +3782,12 @@
       S.closer = t; noteLarge(r);
       if (r.local && r.species.length) pocket.offers = five(r);
       if (r.sure && r.kind === 'none') { pocket.kindOffers = []; tell('We can\u2019t find a creature in your photo. Try again.'); return; }     // a larger slot with a kinds head can say so
+      if (r.sure && !asked && pocketNl.t === t && pocketNl.yes && r.kind !== 'person') {
+        // the small model's probe takes the photo for one with nothing alive in it, and the full database, which never says so itself, asserts a living kind: the person is asked
+        diag('nonlife-large', r.kind + ' ' + r.kindP.toFixed(3));
+        pocket.kindOffers = (r.kinds || []).filter(function (k) { return k.key !== 'none'; }).slice(0, 3).map(function (k) { return k.key; });
+        askName('We’re not sure what kind of creature that is.'); return;
+      }
       if (r.sure) { reveal(r.kind, largeName(r) || { common: r.kind === 'person' ? 'a human' : handName(r.kind), scientific: '', by: 'device-large', local: false }); return; }
       pocket.kindOffers = r.kindOffers || [];
       askName(unsure ? 'We’re not sure what kind of creature that is.' : 'We’re not sure what kind of creature that is.');
@@ -3827,7 +3836,7 @@
   }
   $('claimAsk').addEventListener('click', function () {
     var t = S.token, c = naturalist.cfg();
-    if (claimAskHow === 'device') { diag('large-asked', ''); firstLook(t, false); return; }
+    if (claimAskHow === 'device') { diag('large-asked', ''); firstLook(t, false, true); return; }
     if (claimAskHow !== 'service' || !c) return;
     if (naturalist.choice() === 'yes') { closeSheets(); firstService(t); return; }
     $('askSub').textContent = 'This photo will be temporarily sent to this project\u2019s server, ' + c.where + '.';
