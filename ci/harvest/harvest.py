@@ -105,17 +105,16 @@ GBIF_CLASS = {'insect': 'Insecta', 'bee': 'Insecta', 'bird': 'Aves', 'wader': 'A
 GBIF_MISS = {}
 
 
-def gbif_family(t):
-    """The family the GBIF backbone gives a genus the queue lists without one, or None. The match must be exact, at genus
-    rank, and inside the group the genus's views imply (a genus name can belong to a plant and an animal, as Aquarius
-    does); when the name is a homonym, GBIF's alternatives are searched for the one inside that group. GBIF_MISS counts
-    the reasons a lookup gave nothing, for the run's summary."""
+def gbif_match(t):
+    """(the GBIF backbone's genus record, None) for a genus, or (None, the reason there is none). The match must be exact,
+    at genus rank, and inside the group the genus's views imply (a genus name can belong to a plant and an animal, as
+    Aquarius does); when the name is a homonym, GBIF's alternatives are searched for the one inside that group."""
     views = set(t['views'])
     if views == {'plant'}: hint = {'kingdom': 'Plantae'}
     elif views == {'reptile'}: hint = {'kingdom': 'Animalia', 'phylum': 'Chordata'}
     else:
         cls = {GBIF_CLASS.get(v) for v in views}
-        if len(cls) != 1 or None in cls: GBIF_MISS['mixed views'] = GBIF_MISS.get('mixed views', 0) + 1; return None
+        if len(cls) != 1 or None in cls: return None, 'mixed views'
         hint = {'kingdom': 'Animalia', 'class': cls.pop()}
     url = 'https://api.gbif.org/v1/species/match?' + urllib.parse.urlencode(dict(name=t['genus'], rank='GENUS', verbose='true', **hint))
     for attempt in range(5):
@@ -126,15 +125,60 @@ def gbif_family(t):
         except Exception:
             time.sleep(2 + 2 ** attempt)
     else:
-        GBIF_MISS['network'] = GBIF_MISS.get('network', 0) + 1; return None
+        return None, 'network'
     for c in [d] + list(d.get('alternatives') or []):
         if c.get('matchType') != 'EXACT' or c.get('rank') != 'GENUS' or not c.get('family'): continue
         if (c.get('canonicalName') or c.get('scientificName') or '').split(' ')[0] != t['genus']: continue
         if any(c.get(k) != v for k, v in hint.items()): continue
-        return c['family']
-    why = 'no exact genus match in the group (%s)' % (d.get('matchType') or 'none')
+        return c, None
+    return None, 'no exact genus match in the group (%s)' % (d.get('matchType') or 'none')
+
+
+def gbif_family(t):
+    """The family the GBIF backbone gives a genus the queue lists without one, or None (gbif_match). GBIF_MISS counts the
+    reasons a lookup gave nothing, for the run's summary."""
+    c, why = gbif_match(t)
+    if c: return c['family']
     GBIF_MISS[why] = GBIF_MISS.get(why, 0) + 1
     return None
+
+
+def taxonomy_main(out, shard, nshard):
+    """TAXONOMY=1 in ci/harvest/params.env: the GBIF backbone's family and order for every genus of
+    docs/views/gaps/queue.jsonl listed with neither (audit 51: 1,964 of 3,820 genera, so gaps.py finds them no measured
+    relative and the harvest's citation step never runs for them). Writes OUT_DIR/taxonomy.tsv in the columns of
+    docs/views/gaps/taxonomy-extra.tsv and OUT_DIR/taxonomy-miss.tsv (genus, views, reason) for the genera GBIF does not
+    place; nothing in the repository changes until rows are added to taxonomy-extra.tsv and gaps.py runs again."""
+    views = {}
+    for l in open(os.path.join(ROOT, 'docs/views/gaps/queue.jsonl'), encoding='utf-8'):
+        if not l.strip(): continue
+        c = json.loads(l)
+        if c.get('family') or c.get('order'): continue
+        views.setdefault(c['genus'], set()).add(c['view'])
+    have = set()
+    tp = os.path.join(ROOT, 'docs/views/gaps/taxonomy-extra.tsv')
+    if os.path.exists(tp):
+        have = {l.split('\t')[0] for l in open(tp, encoding='utf-8') if l.strip()}
+    mine = [g for i, g in enumerate(sorted(g for g in views if g not in have)) if i % nshard == shard]
+    day = time.strftime('%Y-%m-%d', time.gmtime()); start = time.time(); n_ok = 0; why = {}
+    os.makedirs(out, exist_ok=True)
+    with open(os.path.join(out, 'taxonomy.tsv'), 'w', encoding='utf-8') as f, \
+         open(os.path.join(out, 'taxonomy-miss.tsv'), 'w', encoding='utf-8') as m:
+        f.write('genus\tfamily\torder\tsource\n'); m.write('genus\tviews\treason\n')
+        for g in mine:
+            c, reason = gbif_match({'genus': g, 'views': views[g]})
+            if c and not c.get('order'): c, reason = None, 'GBIF gives a family and no order'
+            if c:
+                n_ok += 1
+                f.write(f"{g}\t{c['family']}\t{c['order']}\tGBIF backbone species/match {day} (usageKey {c.get('usageKey')}, "
+                        f"class {c.get('class') or c.get('kingdom')})\n")
+            else:
+                why[reason] = why.get(reason, 0) + 1
+                m.write(f"{g}\t{','.join(sorted(views[g]))}\t{reason}\n")
+    with open(os.path.join(out, 'summary.txt'), 'w') as s:
+        s.write(f'taxonomy shard {shard}/{nshard}: {n_ok} of {len(mine)} genera placed by the GBIF backbone, misses {why or 0}, '
+                f'{time.time() - start:.0f} s\n')
+    print(open(os.path.join(out, 'summary.txt')).read())
 
 
 def fill_family(t):
@@ -319,6 +363,8 @@ def main():
         return supplement_main(out, shard, nshard)
     if os.path.exists(pp) and re.search(r'^PLANTTRAITS=1\s*$', open(pp).read(), re.M):
         return plant_traits_main(out, shard, nshard)
+    if os.path.exists(pp) and re.search(r'^TAXONOMY=1\s*$', open(pp).read(), re.M):
+        return taxonomy_main(out, shard, nshard)
     before = harvested_before()
     allt = [t for t in targets() if t['genus'] not in before]; todo = allt[:top]
     mine = [t for i, t in enumerate(todo) if i % nshard == shard]
