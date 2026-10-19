@@ -131,6 +131,8 @@ def check(path, wanted):
         for j, l in enumerate(open(wanted, encoding='utf-8'), 1):
             try: w = json.loads(l)
             except ValueError: continue
+            if re.search(r'title not shown|not shown in the|\(title', str(w.get('title', '')), re.I):
+                bad += 1; print('%s:%d: title holds placeholder text (%s); leave it empty or give the real title' % (wanted, j, str(w.get('title'))[:60]))
             if re.search(r'not (shown|given|confirmed|listed|available)|unknown|unverified|n/a|et al', str(w.get('authors', '')), re.I):
                 bad += 1; print('%s:%d: authors hold placeholder text (%s); leave the field empty instead' % (wanted, j, str(w.get('authors'))[:60]))
     for i, l in enumerate(open(path, encoding='utf-8'), 1):
