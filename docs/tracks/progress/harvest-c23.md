@@ -20,3 +20,4 @@ Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records w
 - Pelecyphora (harvest run 16): diel, eye_type, sense_chemical; sense_light_nonvisual has evidence on main.
 - Cota (harvest run 10): diel, eye_type; sense_chemical wanted (Plant Biotechnology Reports 10.1007/s11816-014-0331-6, title unseen); sense_light_nonvisual wanted (PanAmerican Seed grower guide).
 - Calendula (harvest run 3): eye_type; diel, sense_chemical and sense_light_nonvisual wait on five harvest works put on the wanted list (phenology study, inflorescence-scent study, service-plant volatile thesis from the citation step, 1978 photoperiod study, end-of-day red/far-red study), so no web searches were spent on those three cells.
+- Cephalanthera (harvest run 16): diel, eye_type, sense_chemical; sense_light_nonvisual has evidence on main.
