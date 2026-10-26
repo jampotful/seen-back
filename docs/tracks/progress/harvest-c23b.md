@@ -17,3 +17,14 @@ OpenAlex refused this machine (proxy 403), as it did for harvest-c23, so no Open
 - Sesuvium: eye_type, sense_chemical, sense_light_nonvisual; diel has evidence on main (sweep-100:2).
 - Themeda: diel, eye_type; sense_chemical wanted (Australian Journal of Botany review of T. triandra seed quality, BT24011, found by a follow-up smoke and gibberellin germination search); sense_light_nonvisual wanted ("The seed biology of Themeda triandra Forsk. in relation to fire", FRAMES catalogue 35329, found by a follow-up light and darkness germination search).
 - Mentha (harvest run 10): diel (five harvest candidates screened), eye_type; sense_chemical wanted (two harvest works: methyl jasmonate on Mentha spp., 10.3390/horticulturae11101243; smoke water and karrikinolide on M. arvensis, 10.3389/fpls.2023.1129130); sense_light_nonvisual has evidence on main (sweep-100:1).
+- Oncosiphon: diel, eye_type, sense_chemical, sense_light_nonvisual.
+
+## Stopped
+
+WebSearch ration: 98 of 100 used (two per open trait, the floral-scent search for insect-pollinated genera, and four follow-ups named in their records and wanted lines: Eriophorum tundra shading, Themeda smoke or gibberellin germination, Themeda light and darkness germination, and none other). Two searches remained, too few for the next genus, so the unit stopped between genera with everything committed.
+
+Genera left for a later unit: Stylophorum, Cyclamen, Delphinium (all four plant cells each; none is in a harvest run).
+
+Totals: 37 search records, 9 wanted lines (authors empty throughout; DOIs only where a search result or the harvest printed them), check 0 problems. No page was opened (WebFetch not used), no proxy, ResearchGate or academia.edu result was followed, and no evidence was written.
+
+Forks left for the owner or the auditor: the Armoracia hairy-root phytochrome work (wanted) and whether hairy-root cultures count as living plants; whether the three Himantoglossum scent works sampled living or cut flowers (audit 80's desk ruling); the Eriophorum neighbour-removal paper (named in the record, read as a microclimate change with no set light levels); the untitled Frontiers article 10.3389/fpls.2023.1106394 in the Sesuvium light search.
