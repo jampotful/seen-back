@@ -21,3 +21,12 @@ Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records w
 - Cota (harvest run 10): diel, eye_type; sense_chemical wanted (Plant Biotechnology Reports 10.1007/s11816-014-0331-6, title unseen); sense_light_nonvisual wanted (PanAmerican Seed grower guide).
 - Calendula (harvest run 3): eye_type; diel, sense_chemical and sense_light_nonvisual wait on five harvest works put on the wanted list (phenology study, inflorescence-scent study, service-plant volatile thesis from the citation step, 1978 photoperiod study, end-of-day red/far-red study), so no web searches were spent on those three cells.
 - Cephalanthera (harvest run 16): diel, eye_type, sense_chemical; sense_light_nonvisual has evidence on main.
+- Armoracia (harvest run 3): diel, eye_type; sense_chemical and sense_light_nonvisual not done (ration spent). The harvest lists a horseradish hairy-root phytochrome A study (10.5511/plantbiotechnology.20.13) that the next unit should weigh for sense_light_nonvisual, with the hairy-root fork.
+
+## Stopped
+
+WebSearch ration: 99 of 100 used (two per open trait, plus five follow-ups named in the records and wanted lines). Stopped between genera with everything committed.
+
+Genera left for a later unit: Armoracia (sense_chemical, sense_light_nonvisual), Bellardia, Eriophorum, Desmanthus, Sapindus, Helleborus, Dermatophyllum, Himantoglossum, Sesuvium, Themeda, Mentha, Oncosiphon, Stylophorum, Cyclamen, Delphinium. Of these only Armoracia and Mentha are in a harvest run; Mentha's sense_light_nonvisual cell has evidence on main (sweep-100:1).
+
+Totals: 38 search records, 13 wanted lines (authors empty throughout), check 0 problems. No page was opened (WebFetch not used), no proxy or ResearchGate result was followed, and no evidence was written.
