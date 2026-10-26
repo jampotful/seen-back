@@ -16,3 +16,4 @@ Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records w
 - Genista (harvest run 16): diel, eye_type, sense_light_nonvisual; sense_chemical wanted (Acta Physiologiae Plantarum 10.1007/s11738-011-0799-4 on G. tinctoria in vitro, title unseen).
 - Pulicaria (harvest run 10): diel, eye_type, sense_chemical; sense_light_nonvisual wanted (Ben-Gurion University photoperiod and red/far-red work, title cut short).
 - Nonea (harvest run 16): diel, eye_type, sense_chemical, sense_light_nonvisual.
+- Hylodesmum (harvest run 10): diel, eye_type, sense_chemical, sense_light_nonvisual.
