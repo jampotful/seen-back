@@ -24,8 +24,20 @@ Prompt: `docs/tracks/prompts/oa-read.md`, with the desk's launch prompt for oa-1
 - sws1_opsin_type (entries 151, 154) follows the earlier oa-4 key and is graded g because the class is predicted from sequence.
 - The 134-species SWS1 comparison of entry 154 (Chapter IV) and the compiled Table 6-1 of entry 113 were not logged species by species; both would add many records.
 
+## Entry 1 and point 10(c): records kept under spectral_range_nm
+
+The coordinator asked on 26 October that the 604 light-trap records of entry 1 be moved to a behaviour trait under desk-screen point 10(c). I re-read points 9 and 10(c) on `main` before changing anything. Point 9 says a light-trap table comparing catches at lamps of different spectra "counts under spectral_range_nm for every species it lists", an "E" row included, and names this table (canon-22). Point 10(c) moves only activity comparisons under lamps (Briolat et al. 2026) to behaviour and ends "point 9's light-trap catch tables still count". The 604 records therefore stay under spectral_range_nm, and no corrected file was written. If the owner reads 10(c) the other way, a script can rewrite the trait on the lines whose source DOI is 10.5772/intechopen.102718 and whose `where` names Table 1 before the branch is merged. None of the other papers has the same fault: the two other lamp comparisons (entries 126 and 132) pool species and are logged as behaviour_vision.
+
+## Second session (26 October, after the coordinator's message)
+
+- Papers read: 50 more, entries 171 to 294 in lookup order (positions 71 to 120 of the 159). Entries 296 onward (39 papers) are unread. The private key and the decrypted run 25 texts were still on the machine.
+- Records added: 66 (m 54, g 12; partial 14). Totals for the branch: 120 papers read, 1,095 records, m 1,016, g 79, partial 180.
+- Papers with no BRIEF measurement in this session: 17 (`"records": 0` lines), mostly plant chemistry of extracts or harvested tissue (desk-screen point 10a), gene-function work, pollination studies with no sensory value, and two copies that held no text (entry 197, a truncated portal abstract; entry 219, front matter and references of a book).
+- Entries 242 and 243 are repository pages with abstracts only. Entry 242 (an image-analysis method) has no value; entry 243's four tapetum records carry `access: abstract` and `partial: true`, and neither has a sources line, as earlier readers did for abstract-only copies.
+- Preprints and a Turkish journal paper (entries 210, 236, 273) had the journal string filled from their own first pages, in the records and in `ci/oa/sources-r1.jsonl`.
+
 ## Next
 
-1. Read entries 171 to 370 of the lookup that have a free copy (89 papers), in lookup order, from the same decrypted run 25 texts.
+1. Read entries 296 to 370 of the lookup that have a free copy (39 papers), in lookup order, from the same decrypted run 25 texts.
 2. Log entry 154's Chapter IV SWS1 table and entry 113's Table 6-1 if the desk wants them.
 3. Fetch the Dryad CSV files of entries 9 and 12, which hold λmax values for many species.
