@@ -13,3 +13,4 @@ OpenAlex refused this machine (proxy 403), so no OpenAlex step was run here. For
 - Lagurus (plant cells only; harvest run 3): eye_type, sense_chemical; diel wanted (bioRxiv 2026 night-time carbohydrate turnover in 41 pooid grasses; fork on whether a daily physiological rhythm counts as diel); sense_light_nonvisual wanted (grass epidermis and light environment).
 
 Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records written before I saw that both are in harvest run 3); the next commit replaces those records and the check prints 0 problems.
+- Genista (harvest run 16): diel, eye_type, sense_light_nonvisual; sense_chemical wanted (Acta Physiologiae Plantarum 10.1007/s11738-011-0799-4 on G. tinctoria in vitro, title unseen).
