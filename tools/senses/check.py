@@ -40,6 +40,8 @@ def problems(r):
         if src.get("access") not in ("open", "abstract", "closed", "book"):
             out.append("source.access must be open, abstract, closed or book")
     q = str(r.get("quote", ""))
+    if not q.strip():
+        out.append("quote is empty")
     if len(q.split()) > MAX_QUOTE_WORDS:
         out.append("quote is %d words (at most %d)" % (len(q.split()), MAX_QUOTE_WORDS))
     if r.get("opened") is not True and r.get("grade") != "i":

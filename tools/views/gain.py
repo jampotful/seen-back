@@ -75,7 +75,7 @@ def main():
             if j.get('skipped') or not j.get('read'): continue
             if (j.get('doi') or '').strip(): read.add(j['doi'].lower().strip())
             elif j.get('title'): read_titles.add(norm(j['title']))
-    data = list(csv.DictReader(open(src, encoding='utf-8'))); fields = list(data[0].keys())
+    data = list(csv.DictReader(open(src, encoding='utf-8'))); fields = list(data[0].keys()) if data else []
     # A reference compilation of canon.jsonl not yet logged or marked n/a keeps every cell of its traits from being
     # exhausted (coverage.py), so it ranks first in priority 1, by the open weight of all its traits' cells.
     from coverage import canon_missing, canon_all

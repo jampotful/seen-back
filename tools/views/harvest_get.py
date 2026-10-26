@@ -37,7 +37,12 @@ def load():
                 if d.get('family') and not g.get('family'): g['family'] = d['family']; g['family_source'] = d.get('family_source', '')
                 if d.get('queries'): g.setdefault('extra', []).append(d)
                 continue
-            if d.get('type') == 'genus': genera[d['genus']] = d
+            if d.get('type') == 'genus':
+                # a later run's failed harvest never hides an earlier run's completed one (as for families below)
+                old = genera.get(d['genus'])
+                if old and not any(q.get('error') for q in old.get('queries', [])) and any(q.get('error') for q in d.get('queries', [])):
+                    continue
+                genera[d['genus']] = d
             elif d.get('type') == 'family':
                 # a later run's failed review ("gave up") never hides an earlier run's completed one
                 old = families.get(d['family'])

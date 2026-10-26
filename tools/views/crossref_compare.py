@@ -97,6 +97,11 @@ def main():
                     report.append(f'{rid}\t{s.get("doi")}\tauthors differ\tlogged: {s["authors"]}\tcrossref: {", ".join(cr_names)}')
             if m.get('year') and s.get('year') and int(s['year']) != int(m['year']):
                 report.append(f'{rid}\t{s.get("doi")}\tyear logged {s["year"]} crossref {m["year"]}')
+            if m.get('title') and s.get('title'):  # report only: a title that differs may be another work under a wrong DOI
+                import difflib
+                tn = lambda t: re.sub(r'[^a-z0-9]+', ' ', strip_accents(str(t)).lower()).strip()
+                if difflib.SequenceMatcher(None, tn(s['title']), tn(m['title'])).ratio() < 0.8:
+                    report.append(f'{rid}\t{s.get("doi")}\ttitle differs\tlogged: {str(s["title"])[:90]}\tcrossref: {str(m["title"])[:90]}')
             if why and num:
                 nr = {k: v for k, v in r.items() if k not in ('rechecked', 'audit')}
                 nr['source'] = new
