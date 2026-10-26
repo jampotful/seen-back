@@ -1,6 +1,6 @@
 # harvest-c22 (26 October 2026)
 
-Branch research/harvest-c22, cut from origin/main 0d88da37. Desk screening unit for the 40 plant genera of docs/tracks/batches/harvest-c22.json, screened under docs/tracks/prompts/desk-screen.md points 1 to 10 (point 10: the owner's readings of 25 October 2026) and the plant paragraph of round4-harvest.md, after reading audits 77 and 78. Files: docs/views/searched/harvest-c22.jsonl (18 search records) and docs/views/wanted/harvest-c22.jsonl (9 lines). No evidence records. Gate: `screen_candidates.py --check` prints 0 problems before every commit.
+Branch research/harvest-c22, cut from origin/main 0d88da37. Desk screening unit for the 40 plant genera of docs/tracks/batches/harvest-c22.json, screened under docs/tracks/prompts/desk-screen.md points 1 to 10 (point 10: the owner's readings of 25 October 2026) and the plant paragraph of round4-harvest.md, after reading audits 77 and 78. Files: docs/views/searched/harvest-c22.jsonl (28 search records) and docs/views/wanted/harvest-c22.jsonl (10 lines). No evidence records. Gate: `screen_candidates.py --check` prints 0 problems before every commit.
 
 ## Method
 
@@ -17,3 +17,7 @@ Every genus here except Elymus and the run-3 and run-7 genera is "in no harvest 
 | Caladenia (C. major) | diel, eye_type, sense_light_nonvisual | sense_chemical: evidence on main (sweep-47:3 and 4; recheck-codex-b-fixed:2911 and 2912). |
 | Scaevola (S. taccada) | diel, eye_type, sense_chemical | sense_light_nonvisual: two untitled University of Tennessee master's theses and an untitled NC State horticulture library entry came back for the Scaevola light search; all three go on the wanted list. |
 | Alopecurus (A. pratensis) | eye_type, sense_chemical | diel: an untitled Frontiers in Plant Science article (10.3389/fpls.2018.01585) came back for both diel searches and goes on the wanted list. sense_light_nonvisual: the grass epidermis paper (10.1086/683278) came back again and its wanted line names A. pratensis too. |
+| Viscaria (V. vulgaris) | eye_type, sense_chemical, sense_light_nonvisual | diel: the untitled Frontiers article 10.3389/fpls.2018.01585 came back for the Viscaria diel search too; its wanted line names both genera. |
+| Elymus | none | Both open cells (sense_chemical, sense_light_nonvisual) hold evidence on main (oa-12:387 to 393; oa-12:215, 378 to 384 and 444; recheck-1-fixed:11), so point 4 gives them no record and no search was run. |
+| Staphylea (S. trifolia) | diel, eye_type, sense_chemical, sense_light_nonvisual | none. The ESA 2005 abstract on the Agropyron wanted line came back for the bladdernut chemical search as well, which suggests it is a general induced-volatile abstract; the line stays until it is read. |
+| Hylotelephium (H. maximum) | diel, eye_type, sense_chemical | sense_light_nonvisual: a Michigan State floriculture PDF on lighting for flowering (file "Runkle-Blanchard-UseofLighting") came back for the orpine light search and goes on the wanted list. |
