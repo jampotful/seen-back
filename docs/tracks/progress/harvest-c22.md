@@ -1,0 +1,15 @@
+# harvest-c22 (26 October 2026)
+
+Branch research/harvest-c22, cut from origin/main 0d88da37. Desk screening unit for the 40 plant genera of docs/tracks/batches/harvest-c22.json, screened under docs/tracks/prompts/desk-screen.md points 1 to 10 (point 10: the owner's readings of 25 October 2026) and the plant paragraph of round4-harvest.md, after reading audits 77 and 78. Files: docs/views/searched/harvest-c22.jsonl (8 search records) and docs/views/wanted/harvest-c22.jsonl (2 lines). No evidence records. Gate: `screen_candidates.py --check` prints 0 problems before every commit.
+
+## Method
+
+Every genus here except Elymus and the run-3 and run-7 genera is "in no harvest run yet", so `harvest_get.py` and `screen_candidates.py` list no works, and the queue (docs/views/gaps/queue.jsonl) gives the open cells. For each open trait the record holds the two desk-screen.md web searches, "<Genus> <trait words>" and "<common name> <trait words>", with the words: diel "flower opening time anthesis"; eye_type "plant ocelli lens-like epidermal cells focusing light" (reading 10b: the search looks for epidermal focusing, which would go under sense_light_nonvisual); sense_chemical "volatile emission herbivore induced response methyl jasmonate" (audit 78: hormone and elicitor responses count, so the words name them); sense_light_nonvisual "photoperiod phototropism light response flowering". WebSearch returns titles and links only, so results were judged by title; nothing was fetched (WebFetch forbidden for this unit). No OpenAlex query, citation step or family review was run: with no fetch allowed they could only run as web searches, and the ration of 100 searches does not cover them; each record says so. A trait whose searches showed a work that may hold a measurement for a species of the genus stays out of the record and the work goes on the wanted list (point 3); a trait with evidence on main gets no record (point 4); a trait for which main's wanted lists already hold a possible measurement stays out too.
+
+## Genera
+
+| Genus | Records | Left out, and why |
+|---|---|---|
+| Phlomoides (P. tuberosa) | diel, eye_type, sense_chemical | sense_light_nonvisual: a University of Minnesota record, "The impact of photoperiod and irradiance on flowering of several ..." (title cut off), came back for the common-name search and goes on the wanted list. Two extra searches were spent on it ("Phlomis tuberosa" photoperiod flowering long-day; the title in quotes) and neither showed its species. |
+| Erysimum (E. capitatum) | eye_type, sense_light_nonvisual | diel and sense_chemical: main's sweep-47 wanted line 10.1674/0003-0031-169.2.259 (four E. capitatum populations, phenotype and pollination) may hold flower timing or floral scent by its own reason, so those cells wait for it; no diel search was run. One extra search ("Erysimum floral scent volatiles pollinator attraction") found no Erysimum title. |
+| Centaurium (C. erythraea) | diel, eye_type, sense_chemical | sense_light_nonvisual: an untitled Thieme PDF (10.1055/s-2007-978494) came back for the Centaurium light search and goes on the wanted list. |
