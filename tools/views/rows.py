@@ -129,13 +129,33 @@ def read_fixes(root):
     return fixes
 
 
+def read_retracted(root):
+    """{"<unit>:<line>"} the audit retracted (docs/views/audit/ALL.jsonl). The corrected copies already leave them out; a log that was
+    not audited as a unit is read as written, so its retracted lines (a recheck's corrected copy supersedes the original) are dropped here."""
+    out = set()
+    p = os.path.join(root, "docs", "views", "audit", "ALL.jsonl")
+    if os.path.exists(p):
+        for line in open(p, encoding="utf-8"):
+            try:
+                v = json.loads(line)
+            except ValueError:
+                continue
+            if isinstance(v, dict) and v.get("verdict") == "retract":
+                out.add("%s:%s" % (v.get("unit"), v.get("line")))
+    return out
+
+
 def load_evidence(root, tax):
     recs = []
     fixes = read_fixes(root)
+    retracted = read_retracted(root)
     for unit, path in evidence_files(root):
+        raw = os.sep + os.path.join("audit", "corrected") + os.sep not in path
         for n, line in enumerate(open(path, encoding="utf-8"), 1):
             line = line.strip()
             if not line:
+                continue
+            if raw and "%s:%d" % (unit, n) in retracted:
                 continue
             try:
                 r = json.loads(line)
