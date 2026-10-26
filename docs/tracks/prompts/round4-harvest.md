@@ -13,3 +13,6 @@ For each genus, in the order given:
 6. If a work you need will not open from your machine, put it on the wanted list with its open-access link in `get`; the next Codex round reads it.
 
 Final message, at most 150 words: genera done, cells closed by a measurement, search records written, wanted lines added, and the last commit.
+
+
+Plant batches (harvest-c7 and up, 26 October 2026): screen them under `docs/tracks/prompts/desk-screen.md` points 1 to 10 as well, in particular point 10 (the owner's readings of plant sense_chemical, eye_type and the moth lamp fork) and points 4 to 7 on `screened` and `queries`. A genus the harvest has no record for yet (`harvest_get.py` prints none) is skipped and listed in your final message; the build machines harvest it and a later round takes it. Audits 53 and 54 under `docs/tracks/progress/` list the faults earlier plant units made.
