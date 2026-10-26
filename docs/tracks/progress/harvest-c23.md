@@ -18,3 +18,4 @@ Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records w
 - Nonea (harvest run 16): diel, eye_type, sense_chemical, sense_light_nonvisual.
 - Hylodesmum (harvest run 10): diel, eye_type, sense_chemical, sense_light_nonvisual.
 - Pelecyphora (harvest run 16): diel, eye_type, sense_chemical; sense_light_nonvisual has evidence on main.
+- Cota (harvest run 10): diel, eye_type; sense_chemical wanted (Plant Biotechnology Reports 10.1007/s11816-014-0331-6, title unseen); sense_light_nonvisual wanted (PanAmerican Seed grower guide).
