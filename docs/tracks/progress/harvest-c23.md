@@ -17,3 +17,4 @@ Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records w
 - Pulicaria (harvest run 10): diel, eye_type, sense_chemical; sense_light_nonvisual wanted (Ben-Gurion University photoperiod and red/far-red work, title cut short).
 - Nonea (harvest run 16): diel, eye_type, sense_chemical, sense_light_nonvisual.
 - Hylodesmum (harvest run 10): diel, eye_type, sense_chemical, sense_light_nonvisual.
+- Pelecyphora (harvest run 16): diel, eye_type, sense_chemical; sense_light_nonvisual has evidence on main.
