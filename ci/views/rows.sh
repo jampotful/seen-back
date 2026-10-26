@@ -15,7 +15,7 @@ fi
 export ROWS_MAX_USD="${ROWS_MAX_USD:-6}" ROWS_WAIT_MIN="${ROWS_WAIT_MIN:-200}" ROWS_MODEL="${ROWS_MODEL:-claude-sonnet-5-5}"
 
 python3 -I tools/views/rows.py plan --views "$ROWS_VIEWS" --out out 2>&1 | tee out/plan.txt
-status=0
+status="${PIPESTATUS[0]}"   # the plan's own exit status (plan-only runs end with it)
 if [ "${ROWS_PLAN_ONLY:-0}" != "1" ]; then
   direct=""; [ "${ROWS_DIRECT:-0}" = "1" ] && direct="--direct"
   python3 -I tools/views/rows.py run --views "$ROWS_VIEWS" --out out $direct 2>&1 | tee out/run.log.txt
@@ -23,6 +23,6 @@ if [ "${ROWS_PLAN_ONLY:-0}" != "1" ]; then
   rm -rf out/_work/*.jsonl.tmp
   mkdir -p rows-draft
   cp out/*.rows_draft.json out/stats.json rows-draft/ 2>/dev/null || true
-  bash ci/put_branch.sh pub/rows-draft rows-draft "row drafts, ${GITHUB_REF_NAME:-local}"
+  bash ci/put_branch.sh pub/rows-draft rows-draft "row drafts, ${GITHUB_REF_NAME:-local}" || { [ "$status" -ne 0 ] || status=1; }
 fi
 exit "$status"

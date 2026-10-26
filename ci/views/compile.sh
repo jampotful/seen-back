@@ -25,7 +25,7 @@ jobs=""
 for j in $(echo "$COMPILE_JOBS" | tr ',' ' '); do jobs="$jobs${jobs:+,}tools/views/compile/$j.json"; done
 
 python3 -I tools/views/compile.py plan --jobs "$jobs" --table lit-table --out plan --models "$COMPILE_MODELS" 2>&1 | tee out/plan.txt
-status=0
+status="${PIPESTATUS[0]}"   # the plan's own exit status (plan-only runs end with it)
 if [ "${COMPILE_PLAN_ONLY:-0}" != "1" ]; then
   direct=""; [ "${COMPILE_DIRECT:-0}" = "1" ] && direct="--direct"
   python3 -I tools/views/compile.py run --jobs "$jobs" --table lit-table --out out --models "$COMPILE_MODELS" $direct 2>&1 | tee out/run.log.txt
@@ -42,6 +42,6 @@ if [ "${COMPILE_PLAN_ONLY:-0}" != "1" ]; then
   cp out/*.json out/*.md views-draft/"$label"/ 2>/dev/null || true
   rm -f views-draft/"$label"/*.reply.json
   cp -R tools/views/compile views-draft/jobs 2>/dev/null || true
-  bash ci/put_branch.sh pub/views-draft views-draft "view drafts, $label"
+  bash ci/put_branch.sh pub/views-draft views-draft "view drafts, $label" || { [ "$status" -ne 0 ] || status=1; }
 fi
 exit "$status"

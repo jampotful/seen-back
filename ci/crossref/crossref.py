@@ -67,7 +67,7 @@ def datacite(doi):
 with open(os.path.join(out, 'crossref.jsonl'), 'w', encoding='utf-8') as fh:
     for i, d in enumerate(dois):
         m = get(d)
-        if 'error' in m and m['error'] == 404 and os.path.exists(only) and (dc := datacite(d)):
+        if 'error' in m and m['error'] == 404 and (dc := datacite(d)):
             fh.write(json.dumps(dc, ensure_ascii=False) + '\n'); fh.flush(); time.sleep(0.4); continue
         if 'error' in m:
             rec = {'doi': d, 'error': m['error']}

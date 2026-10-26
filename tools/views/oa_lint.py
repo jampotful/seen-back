@@ -47,7 +47,7 @@ def norm(t):
 def check(r, text=None):
     errs = []
     q = r.get("quote") or ""
-    qn = set(nums(q, words=True))
+    qn = set(nums(q, words=True)) | set(NUM.findall(q))  # a CSV row such as "104,44,18.7" holds the numbers as printed as well
     qn |= {n.rstrip("0").rstrip(".") for n in qn if "." in n}
     for n in nums(r.get("value", "")):
         n2 = n.rstrip("0").rstrip(".") if "." in n else n

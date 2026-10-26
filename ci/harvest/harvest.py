@@ -91,6 +91,8 @@ def evidence_doi(ref, cache={}):
     unit, n = m.group(1), int(m.group(2))
     if unit not in cache:
         p = os.path.join(ROOT, 'docs/views/evidence', unit + '.jsonl')
+        if not os.path.exists(p):  # an audited unit (methods, for one) lives only as its corrected copy
+            p = os.path.join(ROOT, 'docs/views/audit/corrected', unit + '.jsonl')
         cache[unit] = open(p, encoding='utf-8').read().splitlines() if os.path.exists(p) else []
     lines = cache[unit]
     if not 0 < n <= len(lines): return ''

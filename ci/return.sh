@@ -27,7 +27,7 @@ mkdir -p "$dir"
 size_kb=$(du -sk "$dir" | cut -f1)
 if [ "$size_kb" -gt 25600 ]; then
   echo "results are ${size_kb} kB, over the 25 MB limit; returning only text files" >&2
-  find "$dir" -type f ! \( -name '*.txt' -o -name '*.json' -o -name '*.md' -o -name '*.csv' -o -name '*.log' \) -delete
+  find "$dir" -type f ! \( -name '*.txt' -o -name '*.json' -o -name '*.md' -o -name '*.csv' -o -name '*.log' -o -name '*.jsonl' -o -name '*.jsonl.gz' \) -delete
   echo "oversize=${size_kb}kB, binary files dropped" >> "$dir/_meta.txt"
 fi
 src="$(cd "$dir" && pwd)"
@@ -48,7 +48,7 @@ for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15; do
       git checkout -q --orphan ci
     fi
     mkdir -p "$dest"
-    cp -R "$src"/. "$dest/" 2>/dev/null || true
+    cp -R "$src"/. "$dest/" || exit 8   # a failed copy must not be committed as a returned result
     echo "$line" >> INDEX.txt
     git add -A
     git commit -qm "results: $dest (${JOB_STATUS:-unknown})"

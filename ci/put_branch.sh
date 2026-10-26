@@ -9,8 +9,9 @@ case "$branch" in main|ci|gh-pages) echo "refusing to replace $branch" >&2; exit
 sha="${GITHUB_SHA:-$(git rev-parse HEAD)}"
 origin_url="$(git remote get-url origin)"
 auth="$(git config --get-all http.https://github.com/.extraheader || true)"
+[ -d "$dir" ] && [ -n "$(ls -A "$dir" 2>/dev/null)" ] || { echo "nothing to publish: $dir is missing or empty" >&2; exit 2; }
 tmp="$(mktemp -d)"
-cp -R "$dir"/. "$tmp/"
+cp -R "$dir"/. "$tmp/" || { echo "could not copy $dir" >&2; rm -rf "$tmp"; exit 3; }
 cd "$tmp"
 git init -q -b "$branch" .
 git config user.name "github-actions[bot]"

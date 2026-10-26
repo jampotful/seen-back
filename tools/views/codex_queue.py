@@ -52,7 +52,9 @@ def oa_items():
         k = re.findall(r'oa-(\d+)\.json$', path)[0]
         papers = json.load(open(path, encoding='utf-8'))['papers']
         seen_doi, seen_title = set(), set()
-        for name in (f'oa-{k}.jsonl', f'oa-none-{k}.jsonl'):
+        # a paper read or ruled out in any batch counts as done in every batch that lists it
+        names = {os.path.basename(x) for x in glob.glob(P('docs/views/sources', 'oa-*.jsonl'))} | {f'oa-{k}.jsonl', f'oa-none-{k}.jsonl'}
+        for name in sorted(names):
             for j in lines(P('docs/views/sources', name)) + pending_lines(f'docs/views/sources/{name}'):
                 if (j.get('doi') or '').strip(): seen_doi.add(j['doi'].lower().strip())
                 if j.get('title'): seen_title.add(norm(j['title']))

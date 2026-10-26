@@ -1,7 +1,7 @@
 """Checks that each record's quote is in the paper, for free, before any model is asked.
 Usage: python3 -I tools/views/quotecheck.py PAPER.pdf|PAPER.txt RECORDS.jsonl
 A quote passes "verbatim" when it is in the text after normalising both sides (case, ligatures, dashes, quotation marks,
-hyphens at line ends, whitespace); a quote with an ellipsis passes when each part of 15 characters or more is present.
+hyphens at line ends, whitespace); a quote with an ellipsis passes when each part of 15 characters or more, and each shorter part that holds a digit, is present in the quote's order.
 Agents often quote a table row as a reworded line ("Columba livia Feral pigeon: UVS/VS 409, SWS 453 ..."); such a
 quote passes "table" when a line of the `pdftotext -layout` text (or the line after it) names the record's taxon and
 holds every number of the quote. Everything else FAILs and goes to a stronger model or is dropped. Given a PDF, the
@@ -18,8 +18,15 @@ def norm(t):
 
 def found(quote, normtext):
     parts = [p.strip(' .,;:') for p in re.split(r'\.\.\.|…|\[\.\.\.\]', norm(quote))]
-    parts = [p for p in parts if len(p) >= 15] or [norm(quote)]
-    return bool(parts[0]) and all(p in normtext for p in parts)
+    # a short piece is dropped as too weak to prove anything, unless it holds a digit: a number must be in the text too
+    parts = [p for p in parts if len(p) >= 15 or re.search(r'\d', p)] or [norm(quote)]
+    if not parts[0]: return False
+    pos = 0
+    for p in parts:  # the pieces must come in the quote's order
+        i = normtext.find(p, pos)
+        if i < 0: return False
+        pos = i + len(p)
+    return True
 
 NUM = r'(?<![\d.])\d+(?:\.\d+)?(?![\d])'
 def table_found(quote, taxon, lines):
@@ -28,7 +35,9 @@ def table_found(quote, taxon, lines):
     if not nums or not tax: return False
     for i, ln in enumerate(lines):
         if tax in re.sub(r'\s+', ' ', ln.lower()):
-            near = set(re.findall(NUM, ln + ' ' + (lines[i + 1] if i + 1 < len(lines) else '')))
+            nxt = lines[i + 1] if i + 1 < len(lines) else ''
+            if re.match(r'\s*[A-Z][a-z]+ [a-z]{3,}\b', nxt): nxt = ''  # the next line is another taxon's row: its numbers are not this row's
+            near = set(re.findall(NUM, ln + ' ' + nxt))
             if nums <= near: return True
     return False
 
