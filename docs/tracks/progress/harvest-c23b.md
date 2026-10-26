@@ -13,3 +13,5 @@ OpenAlex refused this machine (proxy 403), as it did for harvest-c23, so no Open
 - Sapindus: eye_type, sense_chemical, sense_light_nonvisual; diel wanted (Industrial Crops and Products study of flower development in S. mukorossi, ScienceDirect pii S0926669025012701).
 - Helleborus: diel, eye_type, sense_chemical, sense_light_nonvisual.
 - Dermatophyllum: diel, eye_type, sense_chemical, sense_light_nonvisual.
+- Himantoglossum: eye_type, sense_light_nonvisual; sense_chemical and diel wanted (three floral-scent works from MDPI journals: 10.3390/compounds2010004 on spatial and temporal variability of Barlia robertiana scent, which also serves diel; 10.3390/d14121125; 10.3390/compounds1030015; each with the cut-flower fork of audit 80).
+- Sesuvium: eye_type, sense_chemical, sense_light_nonvisual; diel has evidence on main (sweep-100:2).
