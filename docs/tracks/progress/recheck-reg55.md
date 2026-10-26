@@ -2,7 +2,7 @@
 
 Registry run 55 (`ci` branch, `runs/crossref/55/crossref.jsonl.gz`) returned 317 distinct DOIs of the 321 lines in `ci/crossref/dois.txt` (the list holds 4 repeats). 288 records come from Crossref, 26 from DataCite and 3 are 404 errors. 43 of the DOIs are cited by live evidence records (3585 live records); 302 are cited by 331 wanted lines. Live means not retracted in `docs/views/audit/ALL.jsonl`; every superseded copy already appears there.
 
-## Evidence records corrected (94)
+## Evidence records corrected (94 proposed; 73 merged, see the desk note at the end)
 
 Files: `docs/views/recheck/recheck-reg55.jsonl` (94 rows, action `correct`), `docs/views/evidence/recheck-reg55-fixed.jsonl` (94 records, only `source` changed; `check.py` reports 0 problems), `docs/tracks/codex-findings/2026-10-26-audit-lines-reg55.jsonl` (94 retract lines for the superseded copies, to be appended to `ALL.jsonl` by the desk).
 
