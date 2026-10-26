@@ -137,3 +137,45 @@ Drawn with `random.Random(1026)` after the record sample.
 ## Recommendation
 
 Merge the unit after three repairs and one cut: requote oa-13:693 and oa-13:874, set oa-13:701 to 4, and drop the six repeated-row records oa-13:79–82 and 473–474. Hold the Hoplodrina respersa cell (oa-13:402, 403, 406) for the owner. If the desk applies the 5% rule mechanically instead, drop the 20 records of entries 30, 41 and 106.
+
+## Extension: 15 more records (desk rule after errors were found)
+
+Sample, drawn before checking: `random.seed(2026)`; for every paper other than entries 1, 30, 41 and 106, in entry order, `random.sample` of up to 2 of its records not among the first 40 (pool 142); then `random.sample(pool, 15)`. Ids as `oa-13:<line>` (entry): 1068 (236), 744 (70), 1082 (260), 952 (138), 705 (42), 1043 (210), 749 (82), 742 (70), 970 (142), 1041 (209), 1031 (185), 752 (80), 1086 (269), 860 (97), 1029 (170).
+
+All 15 pass `quotecheck.py` verbatim.
+
+| id | entry | taxon / trait | grade, partial | verdict | reason |
+|---|---|---|---|---|---|
+| oa-13:1068 | 236 | Ctenotus / receptor_classes | g, false | **requote** | The quote ends with "…" before the gene list ("–RH1, which mediates scotopic vision, and four cone opsins … (SWS1, SWS2, RH2, LWS)"), and the value names the rod opsin and four cone opsins, so the value says more than the quote. Quote the whole sentence |
+| oa-13:744 | 70 | Geoclemys reevesii / lambda_max_nm | m, false | confirm | Cone-extract difference maxima 650, 560, 480 mμ; 480 logged, and the note states the method's limits |
+| oa-13:1082 | 260 | Heliotropium amplexicaule / sense_thermal | m, true | confirm | Review sentence verbatim, reference 6 named |
+| oa-13:952 | 138 | Odonata / spectral_range_nm | m, true | confirm | Introduction sentence with cited studies; form note: a bandwidth of 32 nm is logged under a key that asks for `[low, high]` |
+| oa-13:705 | 42 | Oxalis corniculata / sense_thermal | m, false | confirm | 88.3%, 84.7%, 75.8% verbatim |
+| oa-13:1043 | 210 | Hypericum adenotrichum / sense_light_nonvisual | m, false | confirm | English abstract sentence verbatim; the note says the treatment factors are confounded |
+| oa-13:749 | 82 | Asparagus officinalis / sense_light_nonvisual | m, false | confirm | Abstract sentence verbatim |
+| oa-13:742 | 70 | Geoclemys reevesii / lambda_max_nm | m, false | confirm | 650 from the same sentence as 744 |
+| oa-13:970 | 142 | Lyrurus tetrix / lambda_max_nm | m, false | confirm | SWS1 393 ± 2 nm, in-vitro pigment of the species' own opsin |
+| oa-13:1041 | 209 | Hypericum perforatum / sense_light_nonvisual | m, false | confirm | Abstract sentence verbatim |
+| oa-13:1031 | 185 | Prunus persica / sense_light_nonvisual | m, false | confirm | Abstract sentence verbatim |
+| oa-13:752 | 80 | Asparagus officinalis / sense_light_nonvisual | m, false | confirm | Results 3.4.2 sentence verbatim |
+| oa-13:1086 | 269 | Drosophila melanogaster / lambda_max_nm | m, true | confirm | Review: R1–R6 use Rh1 (~480 nm) in the D. melanogaster eye named a sentence earlier |
+| oa-13:860 | 97 | Ficedula hypoleuca / cff_hz | m, true | confirm | 146 Hz, Boström et al. 2016, in a review |
+| oa-13:1029 | 170 | Vaccinium corymbosum / sense_light_nonvisual | m, false | confirm | Trailing cut marked; the value takes only the growth half of the sentence |
+
+Extension: 1 error in 15 (requote). The fault repeats pattern 1, a value that carries words the quote cuts off.
+
+### Pooled count, non-entry-1
+
+**55 records: confirm 51, requote 3, correct 1, retract 0. Errors 4 of 55, 7.3%** (95% interval roughly 3% to 17%). Entry 1 stays at 0 of 8. The extension adds entry 236 (Ford MJR, Ludington AJ, Bradford T, Sanders KL, Hutchinson MN, Simões BF 2024, "Retention of the full visual opsin repertoire in Australia’s cryptozoic lizards", 10.1101/2024.02.19.581082) to the papers with errors.
+
+## Lines to drop at the merge
+
+Lines of `docs/views/evidence/oa-13.jsonl` on 80e4a889, matched by the records' `source` against `ci/oa/sources-r1.jsonl`:
+
+- entry 30 (6 records): 692, 693, 694, 695, 696, 697
+- entry 41 (6 records): 699, 700, 701, 702, 703, 704
+- entry 106 (8 records): 869, 870, 871, 872, 873, 874, 875, 876
+- entry 236 (2 records, found in the extension): 1067, 1068
+- entry 1, repeated table rows (6 records): 79, 80, 81, 82, 473, 474
+
+That is 28 lines in all (22 without entry 236). Line numbers hold only for the file as it stands at 80e4a889, so drop them in a single pass, from the highest number down.
