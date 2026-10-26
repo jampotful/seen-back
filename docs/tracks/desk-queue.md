@@ -10,14 +10,13 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - Cost rules: screening and audits on Sonnet; the desk session on Sonnet except for judgment calls; no unit kind that settles fewer than about 5 cells per 100k tokens (recheck-2 settled 9 for 230k, so rechecks are folded into plant and re-screen units as extra cells instead of running alone).
 
 ## Running
-- oa-13 (fetch of 370 wanted papers; oa job retry with apt-get update on its run branch)
-- plant-screen-1 (plant batch 1)
+- oa-13 read (agent reading the 159 free copies via own-key run run/oa/read-r13; branch research/oa-13-read)
+- (plant-screen-1 merged 26 Oct, audit 77: 0 of 5; registry run desk-wanted-53 pending, then fill 18 DOI lines)
 - audits 75 and 76 (recheck-2, rescreen-1)
 
 ## Next, in order
 - merge recheck-2 and rescreen-1 after audits 75 and 76
 - plant batches 2 onward (below), one unit each
-- oa reading units, once oa-13's free copies return
 - release or rescreen of held plant-1 and replant-1 records under desk-screen.md point 10
 - rescreen-2 (with any recheck cells folded in): Iris (no harvest entry), Scoparia (Crambidae review), Parnassius acuity_cpd and interommatidial_deg; audit 62's two Sphenomorphus cells
 - carry the oa.yml apt-get update fix to main once it works
@@ -29,7 +28,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 | recheck-1 | 80k | none (branch name taken; restarted as recheck-2) | - |
 | recheck-2 | 230k | 9 search records, 2 wanted lines, 7 cells found on main | pending audit 75 |
 | rescreen-1 | 261k | 18 search records, 16 wanted lines | pending audit 76 |
-| oa-13 build | 168k | 370-entry batch; oa job failed (run 23) | - |
+| oa-13 build | 168k | run 24 succeeded (159 of 370 have free copies); oa.yml fix on main | - |
 
 ## Plant batches (15 genera each, ordered by Alachua County records)
 1. Bidens Callicarpa Tillandsia Ardisia Liquidambar Parthenocissus Cnidoscolus Vitis Magnolia Pleopeltis Tradescantia Sabal Smilax Erythrina Ruellia (plant-screen-1, running)
