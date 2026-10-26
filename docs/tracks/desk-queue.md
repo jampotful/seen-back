@@ -2,6 +2,13 @@
 
 The research desk keeps its work queue here so it survives a recycled session. Every check-in reads it, launches the next item when fewer than 3 units run, and appends a yield line when a unit returns. Order: audits of returned units, then plant screening, then re-screens and rechecks, then oa reading units.
 
+## Pacing (Max plan; nothing beyond it)
+- Week runs from Sun 25 Oct 21:59 EDT (26 Oct 01:59 UTC) to Sun 1 Nov 21:59 EST (2 Nov 02:59 UTC), 169 hours because clocks fall back on 1 Nov.
+- Even pace: target % used = hours since 26 Oct 01:59 UTC / 169 x 100 (about 0.6% an hour, 14% a day).
+- Readings from CC: 26 Oct 03:57 UTC, 2% used at hour 2 (target 1.2%), so ahead of pace; tonight's Opus reorganizing is a one-off.
+- Dial: 2 units until the next reading (ahead of pace), then up to 4 if behind or down to 1 if still ahead. Fallback check-in every 90 minutes; units wake the desk when they finish.
+- Cost rules: screening and audits on Sonnet; the desk session on Sonnet except for judgment calls; no unit kind that settles fewer than about 5 cells per 100k tokens (recheck-2 settled 9 for 230k, so rechecks are folded into plant and re-screen units as extra cells instead of running alone).
+
 ## Running
 - oa-13 (fetch of 370 wanted papers; oa job retry with apt-get update on its run branch)
 - plant-screen-1 (plant batch 1)
@@ -12,7 +19,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - plant batches 2 onward (below), one unit each
 - oa reading units, once oa-13's free copies return
 - release or rescreen of held plant-1 and replant-1 records under desk-screen.md point 10
-- rescreen-2: Iris (no harvest entry), Scoparia (Crambidae review), Parnassius acuity_cpd and interommatidial_deg; audit 62's two Sphenomorphus cells
+- rescreen-2 (with any recheck cells folded in): Iris (no harvest entry), Scoparia (Crambidae review), Parnassius acuity_cpd and interommatidial_deg; audit 62's two Sphenomorphus cells
 - carry the oa.yml apt-get update fix to main once it works
 - triage of Codex findings (branches codex/findings-*) when they appear
 
