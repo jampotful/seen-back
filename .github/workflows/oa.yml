@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: tools
-        run: sudo apt-get install -y -q poppler-utils >/dev/null && pip install -q cryptography
+        run: sudo apt-get update -q >/dev/null && sudo apt-get install -y -q poppler-utils >/dev/null && pip install -q cryptography
       - name: oa
         run: mkdir -p out && python3 ci/oa/oa.py --batch ${{ matrix.batch }} ci/oa/list.jsonl out 2>&1 | tee out/log.txt || true
       - name: return results
