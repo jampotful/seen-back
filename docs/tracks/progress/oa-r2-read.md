@@ -8,5 +8,13 @@ Run branch `run/oa/read-r2` (commit 47baf9a4) carries this unit's own public key
 
 `docs/views/sources/oa-none-r2.jsonl` lists the 35 entries of the three batches whose lookup located a free copy that then failed to give its text and that no sources file on `main` lists yet.
 
-## Status
-- 06:27 UTC: run branch pushed; waiting for the job.
+## Result (run 26, all three batch jobs succeeded at 06:27 to 06:28 UTC)
+
+| entry | paper | outcome |
+|---|---|---|
+| oa-10 31 | Ishida, Kono and Sakai 2009, brood-site pollination in Macaranga | read whole (Europe PMC PDF); visitor counts, pollen loads and nectary feeding, no BRIEF trait; 0 records |
+| oa-12 29 | Yamashita and Tsuihiji 2022, hard and soft eye tissues in lizards | read whole (Europe PMC XML); museum-specimen dimensions (scleral ring, lens, pupil diameter, eyeball) and regressions, no BRIEF trait; 0 records |
+| oa-12 48 | Shenkutie, Nagano and Hughes 2024, Sorghum phyB crystallization | read whole (Europe PMC XML); recombinant protein from E. coli, no living-plant response (point 10a); 0 records |
+| oa-12 73 | Guillén, Rico and Castroviejo 2005, Potentilla reproductive biology | not read: the Dialnet PDF is a different paper of the same issue (Gasteromycetes of Costa Rica) and never names Potentilla; listed in `oa-none-r2.jsonl` |
+
+Papers read: 3. Records: 0 (no grades, no partials), so no evidence file and no new `ci/oa/sources-r1.jsonl` lines (all four entries already have one). `docs/views/sources/oa-r2.jsonl` holds the three read papers with `"records": 0`; `oa-none-r2.jsonl` holds 36 lines (35 earlier retrieval failures and the Potentilla mismatch). The 60 entries already logged on `main` were not reread, as the launch prompt asked.
