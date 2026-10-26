@@ -9,3 +9,7 @@ OpenAlex refused this machine (proxy 403), as it did for harvest-c23, so no Open
 - Armoracia: sense_chemical (20 harvest candidates screened); sense_light_nonvisual wanted (phytochrome A in horseradish hairy roots, 10.5511/plantbiotechnology.20.13, with the hairy-root fork).
 - Bellardia: diel, eye_type, sense_chemical, sense_light_nonvisual.
 - Eriophorum: diel, eye_type, sense_chemical, sense_light_nonvisual (one follow-up search on tundra shading trials; the 1985 neighbour-removal paper is named in the record).
+- Desmanthus: diel, eye_type, sense_chemical, sense_light_nonvisual.
+- Sapindus: eye_type, sense_chemical, sense_light_nonvisual; diel wanted (Industrial Crops and Products study of flower development in S. mukorossi, ScienceDirect pii S0926669025012701).
+- Helleborus: diel, eye_type, sense_chemical, sense_light_nonvisual.
+- Dermatophyllum: diel, eye_type, sense_chemical, sense_light_nonvisual.
