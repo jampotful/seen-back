@@ -10,7 +10,7 @@ OpenAlex refused this machine (proxy 403), so no OpenAlex step was run here. For
 - Sidalcea: diel, eye_type, sense_chemical; sense_light_nonvisual wanted (MSU long-day perennials sheet).
 - Cochemiea: diel, eye_type, sense_chemical.
 - Antennaria: diel, eye_type, sense_chemical (harvest run 3, candidates screened); sense_light_nonvisual wanted (Minnesota photoperiod and irradiance study of herbaceous ornamentals).
-- Lagurus (plant cells only; harvest run 3): eye_type, sense_chemical; diel wanted (bioRxiv 2026 night-time carbohydrate turnover in 41 pooid grasses; fork on whether a daily physiological rhythm counts as diel); sense_light_nonvisual wanted (grass epidermis and light environment).
+- Lagurus (plant cells only; harvest run 3): eye_type, sense_chemical; sense_light_nonvisual wanted (grass epidermis and light environment); diel left without a record because the harvest lists the bioRxiv 2026 preprint on night-time carbohydrate turnover in 41 pooid grasses (10.64898/2026.06.02.729567), already on main (replant-1 wanted, oa-13b:477 Pooideae row); whether Lagurus ovatus is among its species is unchecked.
 
 Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records written before I saw that both are in harvest run 3); the next commit replaces those records and the check prints 0 problems.
 - Genista (harvest run 16): diel, eye_type, sense_light_nonvisual; sense_chemical wanted (Acta Physiologiae Plantarum 10.1007/s11738-011-0799-4 on G. tinctoria in vitro, title unseen).
@@ -19,3 +19,4 @@ Commit 4958ab46 went up with 32 check problems (Antennaria and Lagurus records w
 - Hylodesmum (harvest run 10): diel, eye_type, sense_chemical, sense_light_nonvisual.
 - Pelecyphora (harvest run 16): diel, eye_type, sense_chemical; sense_light_nonvisual has evidence on main.
 - Cota (harvest run 10): diel, eye_type; sense_chemical wanted (Plant Biotechnology Reports 10.1007/s11816-014-0331-6, title unseen); sense_light_nonvisual wanted (PanAmerican Seed grower guide).
+- Calendula (harvest run 3): eye_type; diel, sense_chemical and sense_light_nonvisual wait on five harvest works put on the wanted list (phenology study, inflorescence-scent study, service-plant volatile thesis from the citation step, 1978 photoperiod study, end-of-day red/far-red study), so no web searches were spent on those three cells.
