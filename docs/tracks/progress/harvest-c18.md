@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-This round is a partial protocol pass: 4 genera web-screened for this round (Malosma, Symphytum, Empetrum, Holcus), 0 full-protocol genera completed, 0 evidence records, 0 searched records, and 24 new wanted lines. The remaining 36 genera start at Petasites. Malosma and Symphytum still need missing OpenAlex common-name steps before any null result can be recorded. OpenAlex is unavailable for this round: the coordinator's initial probe returned HTTP 429 (free IP budget exhausted). It was not retried. No full-protocol completion or exhaustion is claimed. Only the search engine and stored harvest titles/abstracts were read; no source pages were fetched and no evidence was written, following desk-screen points 3 and 5.
+This round is a partial protocol pass: 6 genera web-screened for this round (Malosma, Symphytum, Empetrum, Holcus, Petasites, Calypso), 0 full-protocol genera completed, 0 evidence records, 0 searched records, and 27 new wanted lines. The remaining 34 genera start at Epigaea. Malosma and Symphytum still need missing OpenAlex common-name steps before any null result can be recorded. OpenAlex is unavailable for this round: the coordinator's initial probe returned HTTP 429 (free IP budget exhausted). It was not retried. No full-protocol completion or exhaustion is claimed. Only the search engine and stored harvest titles/abstracts were read; no source pages were fetched and no evidence was written, following desk-screen points 3 and 5.
 
 Required AGENTS, codex-round, round4-harvest, desk-screen points 1–10, THOROUGH, BRIEF Round 2, round3-sweep and audits 53/54 were consulted. The coordinator refreshed main and origin/ci and provided the shared branch; no checkout, pushes, PRs, tool changes or operational-state changes were made. Canon lists no plant-trait compilation applicable here. Existing wanted/evidence was checked; thin sweep searches were not treated as current coverage. Owner n/a sources and issue-28/c22/c23 work are excluded from adoption.
 
@@ -79,4 +79,36 @@ Required harvest_get and screen_candidates ran and their stored results were scr
 - `web: Holcus light perception photoperiod`
 - `web: velvetgrass light perception photoperiod`
 
-New primary leads cover anthesis, growth regulators, light/dark and red/far-red/nitrate germination, light pollution and living volatile emission. The Canadian weeds review and pollen-periodicity snippets corroborate daily anthesis leads, but no values were extracted. The dried-grass GC-MS headspace survey (`10.1556/1326.2022.01099`) is tissue chemistry, not a living plant signal. Generic plant-ocelli and unrelated animal eyes in web results supply no Holcus eye measurement; focusing would instead belong under sense_light_nonvisual. Harvest Poaceae review was screened; independent family review web search remains to do at this checkpoint. Missing OpenAlex common-name steps also remain unavailable. No null records or evidence written.
+New primary leads cover anthesis, growth regulators, light/dark and red/far-red/nitrate germination, light pollution and living volatile emission. The Canadian weeds review and pollen-periodicity snippets corroborate daily anthesis leads, but no values were extracted. The dried-grass GC-MS headspace survey (`10.1556/1326.2022.01099`) is tissue chemistry, not a living plant signal. Generic plant-ocelli and unrelated animal eyes in web results supply no Holcus eye measurement; focusing would instead belong under sense_light_nonvisual. Harvest Poaceae review was screened; independent `web: Poaceae photoreceptor review` search also ran and its titles/snippets showed general plant-photoreceptor reviews, without a new Holcus-specific lead. Missing OpenAlex common-name steps also remain unavailable. No null records or evidence written.
+
+### Petasites: web-screened; OpenAlex incomplete
+
+Required harvest_get and screen_candidates ran and their stored results were screened. Successful harvested queries in order: `Petasites phytochrome photoreceptor`; `Petasites light perception`; `Petasites phototropism`; `Petasites volatile signalling`. Exact additional web searches:
+
+- `web: Petasites seed germination light dark`
+- `web: Petasites germination gibberellin OR smoke OR dormancy`
+- `web: Petasites floral scent volatiles`
+- `web: Petasites chemical response volatile signal`
+- `web: butterbur chemical response volatile signal`
+- `web: Asteraceae photoreceptor review`
+
+Only sense_chemical is currently open in screen_candidates. Two direct living-plant leads are wanted: field floral headspace signalling and gibberellic-acid rootstock response. Essential oil and flower-stalk constituent papers concern tissue chemistry and are excluded under owner reading 10(a). The Ostrinia paper measures moth sex pheromone, not Petasites response; the Centaurea root-volatile study concerns another genus; butterbur broomrape is Orobanche, not Petasites. No source page fetched, evidence written or null record made; OpenAlex completion remains unavailable.
+
+### Calypso: web-screened; OpenAlex incomplete
+
+Required harvest_get and screen_candidates ran and their stored results were screened. Successful harvested queries in order: `Calypso phytochrome photoreceptor`; `Calypso light perception`; `Calypso phototropism`; `Calypso flower opening time`; `Calypso nyctinasty`; `Calypso volatile signalling`; `Calypso photoperiod`; `Calypso circadian rhythm`; `Calypso anthesis`; `Calypso pollination biology`; `Calypso epidermal lens cells`; `Calypso epidermal focusing leaf optics`. Exact additional web searches:
+
+- `web: Calypso seed germination light dark`
+- `web: Calypso germination gibberellin OR smoke OR dormancy`
+- `web: Calypso floral scent volatiles`
+- `web: Calypso flower opening time anthesis`
+- `web: fairy slipper flower opening time anthesis`
+- `web: Calypso bulbosa chemical response volatile signal`
+- `web: fairy slipper chemical response volatile signal`
+- `web: Calypso bulbosa light perception photoperiod`
+- `web: fairy slipper light perception photoperiod`
+- `web: Calypso bulbosa plant ocelli epidermal focusing leaf optics`
+- `web: fairy slipper plant ocelli epidermal focusing leaf optics`
+- `web: Orchidaceae photoreceptor review`
+
+The required genus-first germination searches were heavily contaminated by Calypso bean, cilantro and ornamental cultivar names. Full scientific name Calypso bulbosa disambiguated the subsequent paired trait searches. Perfume brands, mango/bean cultivars, Poa bulbosa, hermit crabs, human gut and vitiligo papers, and other orchid genera do not establish Calypso measurements. The embryo-development paper times ovule development relative to anthesis and the bumblebee-learning paper manipulates seasonal flowering dates, not demonstrated daily opening hours on the supplied abstracts. One seven-year forest-cover/light-environment lead is wanted. Search snippets also showed a University of Washington propagation protocol (https://courses.washington.edu/esrm412/protocols/2010/CABU.pdf), but no experiment comparing light or hormone treatments was supplied in the snippet. Generic ocelli/leaf-lens results do not name a Calypso focusing measurement; plant eye_type follows the owner none reading. No pages fetched, evidence written or null records made. Missing OpenAlex common-name steps remain unavailable.
