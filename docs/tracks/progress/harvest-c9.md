@@ -1,3 +1,23 @@
+# harvest-c9 — issue38 FINAL COORDINATOR CHECKPOINT
+
+## 2026-10-27 — dispatch regards-issue-38-20261027T125741334Z
+
+48 total GPT-6.1 Sol / High workers completed across this round; no further worker was launched after the cap. Fetched/rechecked main: bbc35ff2050022e029b68875e3d219aab8f0ddd4. Branch: codex/round-2026-10-27-issue-38.
+
+This batch: **17 new genus web screens; 0 additional whole-genus adoptions; 172 new wanted lines; 0 new searched/null rows; 0 evidence records or measurement closures.** All new screens remain protocol-partial: OpenAlex returned429 and missing API steps were not treated as zero hits. Existing canon/evidence/search/wanted holdings and source/species forks were adopted at the scope recorded below. Papers, methods and tables await legal intake and desk audit/application.
+
+New web-screened genera: Plantago, Sassafras, Raphanus, Teucrium, Eryngium, Galium, Tilia, Rudbeckia, Ceratophyllum, Hibiscus, Liriodendron, Eclipta, Hedera, Lantana, Sonchus, Juncus, Conoclinium.
+
+Additional whole-genus adoptions: none. Prior covered/adopted main genus positions: 23.
+
+**Remaining round screening candidates: 0. Exact next: none.** No unreviewed genus candidate remains in this batch.
+
+Remaining means not yet web-screened/adopted in this round; it does not erase older per-trait coverage. Before assigning any listed genus, reconcile its actual-species evidence, substantive cross-unit searches/wanted and owner dispositions. Do not repeat completed web queries or assume physiological carry from congeners. Unrun/failed service steps and source-reading holds remain separate work.
+
+Raw queue initially reoffered 37 entries for this unit because codex_queue counts its same-unit searched/evidence, not all progress/wanted/cross-unit coverage. Queue/gates/OA holds were not changed, and no null row was manufactured to empty it. All exact source/query histories, handoffs, refused-service/review notes and provisional counts are retained below; this coordinator checkpoint is current.
+
+---
+
 # harvest-c9
 
 Final checkpoint (coordinator reconciliation,2026-10-27): **23 genera available-source screened (3 full plus20 API-skipped);6 search records;234 wanted lines;0 evidence/measurement closures;264 web queries including2 metadata-verification queries.17 genera not yet screened, next Plantago.** All later plant full protocols remain API-incomplete; source-by-source history below is preserved.
@@ -665,3 +685,8 @@ Exact DOI/URL/title comparison of all worker28 additions against every other-uni
 ## 2026-10-27 — issue38 coordinator shared-source scope
 
 Expanded this round's existing floral-signal request DOI10.3389/fevo.2020.571454 for Heracleum sphondylium, explicitly named in the retained source title. Kept the source-collection/plant-emission eligibility fork and previous Hedera target, no duplicate line or measurement. Queue-derived ranking recomputed.
+
+
+## 2026-10-27 — issue38 coordinator source-identity validation
+
+Annotated 5 new wanted source labels to prevent title-only identity collisions. Unavailable article titles remain explicitly unverified: display labels contain only observed source URLs, and source_title preserves the unknown original. For distinct same-titled Holodiscus accounts, host suffixes identify the source while source_title retains its observed title. No paper title, author, DOI, year, species or measured value guessed; no new line or evidence. Empty target lists are deliberate species-identification holds with records0, not inferred target membership. Tooling issue reported for desk review; merger/queue/gates unchanged.

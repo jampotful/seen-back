@@ -1,3 +1,25 @@
+# harvest-c18 — issue38 FINAL COORDINATOR CHECKPOINT
+
+## 2026-10-27 — dispatch regards-issue-38-20261027T125741334Z
+
+48 total GPT-6.1 Sol / High workers completed across this round; no further worker was launched after the cap. Fetched/rechecked main: bbc35ff2050022e029b68875e3d219aab8f0ddd4. Branch: codex/round-2026-10-27-issue-38.
+
+This batch: **10 new genus web screens; 0 additional whole-genus adoptions; 41 new wanted lines; 0 new searched/null rows; 0 evidence records or measurement closures.** All new screens remain protocol-partial: OpenAlex returned429 and missing API steps were not treated as zero hits. Existing canon/evidence/search/wanted holdings and source/species forks were adopted at the scope recorded below. Papers, methods and tables await legal intake and desk audit/application.
+
+New web-screened genera: Malosma, Symphytum, Empetrum, Holcus, Petasites, Calypso, Epigaea, Agrimonia, Oemleria, Eutrochium.
+
+Additional whole-genus adoptions: none. Prior covered/adopted main genus positions: 0.
+
+**Remaining round screening candidates: 30. Exact next: Torilis.** Torilis, Sequoia, Briza, Chelone, Paris, Comarum, Daphne, Microstegium, Lilium, Sitobolium, Pulmonaria, Phalaris, Schinus, Melampyrum, Scutellaria, Anthoxanthum, Betonica, Comptonia, Cocos, Lobularia, Valeriana, Cynoglossum, Parnassia, Mercurialis, Ballota, Dodonaea, Heliotropium, Ophrys, Coptis, Borago
+
+Remaining means not yet web-screened/adopted in this round; it does not erase older per-trait coverage. Before assigning any listed genus, reconcile its actual-species evidence, substantive cross-unit searches/wanted and owner dispositions. Do not repeat completed web queries or assume physiological carry from congeners. Unrun/failed service steps and source-reading holds remain separate work.
+
+Known existing cross-unit records to preserve during that preflight: Chelone: rescreen-2.jsonl:13 (eye_type); rescreen-2.jsonl:14 (sense_chemical) | Comarum: replant-1.jsonl:11 (eye_type); rescreen-2.jsonl:25 (sense_chemical) | Sitobolium: harvest-31.jsonl:52 (diel); harvest-31.jsonl:53 (eye_type); harvest-31.jsonl:54 (sense_chemical) | Phalaris: rescreen-2.jsonl:12 (eye_type) | Scutellaria: rescreen-2.jsonl:6 (eye_type) | Valeriana: rescreen-2.jsonl:8 (eye_type) | Cynoglossum: replant-1.jsonl:1 (diel); rescreen-2.jsonl:2 (eye_type) | Heliotropium: rescreen-2.jsonl:11 (eye_type). These are trait/source pointers, not an assertion of complete target-species coverage.
+
+Raw queue initially reoffered 40 entries for this unit because codex_queue counts its same-unit searched/evidence, not all progress/wanted/cross-unit coverage. Queue/gates/OA holds were not changed, and no null row was manufactured to empty it. All exact source/query histories, handoffs, refused-service/review notes and provisional counts are retained below; this coordinator checkpoint is current.
+
+---
+
 # harvest-c18 progress
 
 ## 2026-10-27

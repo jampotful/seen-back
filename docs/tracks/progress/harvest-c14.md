@@ -1,3 +1,25 @@
+# harvest-c14 — issue38 FINAL COORDINATOR CHECKPOINT
+
+## 2026-10-27 — dispatch regards-issue-38-20261027T125741334Z
+
+48 total GPT-6.1 Sol / High workers completed across this round; no further worker was launched after the cap. Fetched/rechecked main: bbc35ff2050022e029b68875e3d219aab8f0ddd4. Branch: codex/round-2026-10-27-issue-38.
+
+This batch: **32 new genus web screens; 0 additional whole-genus adoptions; 229 new wanted lines; 0 new searched/null rows; 0 evidence records or measurement closures.** All new screens remain protocol-partial: OpenAlex returned429 and missing API steps were not treated as zero hits. Existing canon/evidence/search/wanted holdings and source/species forks were adopted at the scope recorded below. Papers, methods and tables await legal intake and desk audit/application.
+
+New web-screened genera: Symplocarpus, Fragaria, Erythronium, Anemone, Carnegiea, Saponaria, Corylus, Rhamnus, Argentina, Convallaria, Filipendula, Reynoutria, Chimaphila, Cypripedium, Epipactis, Vaccinium, Frangula, Jacobaea, Lactuca, Rabelera, Heracleum, Matricaria, Trillium, Eriogonum, Cytisus, Aralia, Berteroa, Elaeagnus, Geum, Calluna, Cymbalaria, Conium.
+
+Additional whole-genus adoptions: none. Prior covered/adopted main genus positions: 0.
+
+**Remaining round screening candidates: 8. Exact next: Crataegus.** Crataegus, Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia
+
+Remaining means not yet web-screened/adopted in this round; it does not erase older per-trait coverage. Before assigning any listed genus, reconcile its actual-species evidence, substantive cross-unit searches/wanted and owner dispositions. Do not repeat completed web queries or assume physiological carry from congeners. Unrun/failed service steps and source-reading holds remain separate work.
+
+Known existing cross-unit records to preserve during that preflight: Primula: plant-1.jsonl:7 (eye_type). These are trait/source pointers, not an assertion of complete target-species coverage.
+
+Raw queue initially reoffered 40 entries for this unit because codex_queue counts its same-unit searched/evidence, not all progress/wanted/cross-unit coverage. Queue/gates/OA holds were not changed, and no null row was manufactured to empty it. All exact source/query histories, handoffs, refused-service/review notes and provisional counts are retained below; this coordinator checkpoint is current.
+
+---
+
 # harvest-c14
 
 ## 2026-10-27
@@ -673,3 +695,8 @@ Queries actually run (all delivered titles/snippets screened, fewer than20 whene
 Worker46 natural context checkpoint: **5 newly web-screened genera**, Elaeagnus, Geum, Calluna, Cymbalaria, Conium; these are web-query screens for this round, **not full-protocol exhaustion**. Added **45 wanted,0 searched,0 evidence** (Elaeagnus16, Geum5, Calluna13, Cymbalaria4, Conium7). Batch totals **229 wanted,0 searched,0 new evidence**; incoming184 wanted lines verified byte-for-byte preserved, plus27 earlier web screens. Actual-species adoptions: Geum urbanum illumination oa-14#15; Geum rivale/urbanum in existing c14#118 mcs253, primary-confirmed in snippets without changing old record prefix; Calluna vulgaris abstract light-response/upgrade source retained. Berteroa c13#36 source-target incana pointer remains unverified per c13 owner; correction above governs previous claimed adoption. No plant physiological congener carry. Elaeagnus root-exudate10.7150/jgen.93243 concerns bacterial exoproteome, not automatically a plant receiver response or volatile signal; broad thesis1773/21977 and canopy leaf-angle dataset10.1007/s13595-018-0730-x remain unresolved method/species pointers rather than fabricated measurement assignments.
 
 **8 genuinely unreviewed genera remain; exact next Crataegus**, then Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia. No research on these8 begun by worker46. Primula retains inherited actual-species/trait preflight requirement and plant-1 eye screen to adopt where applicable; no repeat of completed screens. OpenAlex still skipped due inherited429; no new refusal. No pages/papers fetched, no paper text or evidence written. Checker0 before each serialized own-file commit.
+
+
+## 2026-10-27 — issue38 coordinator source-identity validation
+
+Annotated 1 new wanted source labels to prevent title-only identity collisions. Unavailable article titles remain explicitly unverified: display labels contain only observed source URLs, and source_title preserves the unknown original. For distinct same-titled Holodiscus accounts, host suffixes identify the source while source_title retains its observed title. No paper title, author, DOI, year, species or measured value guessed; no new line or evidence. Empty target lists are deliberate species-identification holds with records0, not inferred target membership. Tooling issue reported for desk review; merger/queue/gates unchanged.

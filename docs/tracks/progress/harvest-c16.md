@@ -1,3 +1,23 @@
+# harvest-c16 — issue38 FINAL COORDINATOR CHECKPOINT
+
+## 2026-10-27 — dispatch regards-issue-38-20261027T125741334Z
+
+48 total GPT-6.1 Sol / High workers completed across this round; no further worker was launched after the cap. Fetched/rechecked main: bbc35ff2050022e029b68875e3d219aab8f0ddd4. Branch: codex/round-2026-10-27-issue-38.
+
+This batch: **18 new genus web screens; 0 additional whole-genus adoptions; 70 new wanted lines; 0 new searched/null rows; 0 evidence records or measurement closures.** All new screens remain protocol-partial: OpenAlex returned429 and missing API steps were not treated as zero hits. Existing canon/evidence/search/wanted holdings and source/species forks were adopted at the scope recorded below. Papers, methods and tables await legal intake and desk audit/application.
+
+New web-screened genera: Mycelis, Dryopteris, Clintonia, Dicentra, Struthiopteris, Centranthus, Actaea, Lathyrus, Ornithogalum, Phlox, Solidago, Gleditsia, Cakile, Clinopodium, Hylocomium, Holodiscus, Dasiphora, Ampelopsis.
+
+Additional whole-genus adoptions: none. Prior covered/adopted main genus positions: 0.
+
+**Remaining round screening candidates: 22. Exact next: Phleum.** Phleum, Ferocactus, Spiraea, Prosopis, Galanthus, Sarracenia, Hypopitys, Angelica, Echinocystis, Silybum, Origanum, Spinulum, Houstonia, Dianthus, Leonurus, Buddleja, Verbena, Hepatica, Medeola, Viscum, Helminthotheca, Ulex
+
+Remaining means not yet web-screened/adopted in this round; it does not erase older per-trait coverage. Before assigning any listed genus, reconcile its actual-species evidence, substantive cross-unit searches/wanted and owner dispositions. Do not repeat completed web queries or assume physiological carry from congeners. Unrun/failed service steps and source-reading holds remain separate work.
+
+Raw queue initially reoffered 40 entries for this unit because codex_queue counts its same-unit searched/evidence, not all progress/wanted/cross-unit coverage. Queue/gates/OA holds were not changed, and no null row was manufactured to empty it. All exact source/query histories, handoffs, refused-service/review notes and provisional counts are retained below; this coordinator checkpoint is current.
+
+---
+
 # harvest-c16 progress
 
 ## 2026-10-27
@@ -346,7 +366,7 @@ Exact web queries in execution order (spore/protonemal and spore-release/circadi
 - `web: "Hylocomium" light perception phototropism spore germination`
 - `web: "stair-step moss" light perception phototropism spore germination`
 
-Screened returned titles/snippets/passages as delivered, without claiming 20 per query. 6 wanted added: moss chemical secretion recruiting Nostoc, heterocyte stimulation (living versus extract fork), species-specific subarctic VOC emission, CO2/light response, photoprotection, and isoprenoid exchange (community-attribution fork). No cue/physiology is carried from Hamatocaulis, Sphagnum, Physcomitrium/Physcomitrella, Pleurozium or other moss genera. 
+Screened returned titles/snippets/passages as delivered, without claiming 20 per query. 6 wanted added: moss chemical secretion recruiting Nostoc, heterocyte stimulation (living versus extract fork), species-specific subarctic VOC emission, CO2/light response, photoprotection, and isoprenoid exchange (community-attribution fork). No cue/physiology is carried from Hamatocaulis, Sphagnum, Physcomitrium/Physcomitrella, Pleurozium or other moss genera.
 
 The harvest Bryophytes can recognize their neighbours through volatile organic compounds experiment names Hamatocaulis/Sphagnum in the supplied abstract, not Hylocomium. Seasonal nitrogen-fixation/nifH papers measure associated cyanobacteria and do not establish moss chemical sensing. Interannual and Seasonal Dynamics of Volatile Organic Compound Fluxes From the Boreal Forest Floor (10.3389/fpls.2019.00191) has a diurnal keyword but community-floor flux is not a Hylocomium diel rhythm without species attribution. Autoclaved-gametophyte fungal degradation is not a living moss response; heavy-metal biomonitoring can measure tissue accumulation without sensing; extracted moss antibacterials are excluded under 10(a). Family-review hits were general animal/fungal photoreceptors and an uninformative Acta Biologica volume, not a species measurement. Eye results were cell anatomy, taxonomy and moss photographs; owner none reading applies.
 
@@ -445,3 +465,8 @@ Worker 48 running counts: 6 new genera web-screened (Cakile, Clinopodium, Hyloco
 Stopped between completed web screens after Ampelopsis at the context checkpoint; no Phleum search has been started. Newly screened six genera: Cakile, Clinopodium, Hylocomium, Holodiscus, Dasiphora, Ampelopsis. New records: 32 wanted, 0 searched, 0 evidence; none full-protocol/exhaustion complete. All prior 38 wanted lines and earlier progress/search histories preserved as byte-identical prefixes. Batch cumulative 18 genuinely web-screened, 70 wanted, 0 searched/evidence from issue38 continuation. OpenAlex remains skipped for round-wide 429; no other refused service encountered, no page fetching performed.
 
 Remaining 22, in order: Phleum, Ferocactus, Spiraea, Prosopis, Galanthus, Sarracenia, Hypopitys, Angelica, Echinocystis, Silybum, Origanum, Spinulum, Houstonia, Dianthus, Leonurus, Buddleja, Verbena, Hepatica, Medeola, Viscum, Helminthotheca, Ulex. Exact next Phleum. Preserve all exact query lists and adopted shared-source provenance above; raw wanted-only queue output must not trigger repeated screening of the completed 18.
+
+
+## 2026-10-27 — issue38 coordinator source-identity validation
+
+Annotated 2 new wanted source labels to prevent title-only identity collisions. Unavailable article titles remain explicitly unverified: display labels contain only observed source URLs, and source_title preserves the unknown original. For distinct same-titled Holodiscus accounts, host suffixes identify the source while source_title retains its observed title. No paper title, author, DOI, year, species or measured value guessed; no new line or evidence. Empty target lists are deliberate species-identification holds with records0, not inferred target membership. Tooling issue reported for desk review; merger/queue/gates unchanged.

@@ -1,3 +1,23 @@
+# harvest-c8 — issue38 FINAL COORDINATOR CHECKPOINT
+
+## 2026-10-27 — dispatch regards-issue-38-20261027T125741334Z
+
+48 total GPT-6.1 Sol / High workers completed across this round; no further worker was launched after the cap. Fetched/rechecked main: bbc35ff2050022e029b68875e3d219aab8f0ddd4. Branch: codex/round-2026-10-27-issue-38.
+
+This batch: **17 new genus web screens; 1 additional whole-genus adoptions; 278 new wanted lines; 0 new searched/null rows; 0 evidence records or measurement closures.** All new screens remain protocol-partial: OpenAlex returned429 and missing API steps were not treated as zero hits. Existing canon/evidence/search/wanted holdings and source/species forks were adopted at the scope recorded below. Papers, methods and tables await legal intake and desk audit/application.
+
+New web-screened genera: Cercis, Erechtites, Chamaecrista, Celtis, Rivina, Sphagneticola, Pteridium, Lonicera, Asplenium, Ipomoea, Nandina, Ligustrum, Zanthoxylum, Geranium, Lepidium, Melothria, Commelina.
+
+Additional whole-genus adoptions: Centrosema. Prior covered/adopted main genus positions: 19.
+
+**Remaining round screening candidates: 3. Exact next: Lygodium.** Lygodium, Ludwigia, Monotropa
+
+Remaining means not yet web-screened/adopted in this round; it does not erase older per-trait coverage. Before assigning any listed genus, reconcile its actual-species evidence, substantive cross-unit searches/wanted and owner dispositions. Do not repeat completed web queries or assume physiological carry from congeners. Unrun/failed service steps and source-reading holds remain separate work.
+
+Raw queue initially reoffered 22 entries for this unit because codex_queue counts its same-unit searched/evidence, not all progress/wanted/cross-unit coverage. Queue/gates/OA holds were not changed, and no null row was manufactured to empty it. All exact source/query histories, handoffs, refused-service/review notes and provisional counts are retained below; this coordinator checkpoint is current.
+
+---
+
 # harvest-c8 progress
 
 
