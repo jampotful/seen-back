@@ -27,6 +27,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 | recheck-2 | 230k | 9 search records, 2 wanted lines, 7 cells found on main | pending audit 75 |
 | rescreen-1 | 261k | 18 search records, 16 wanted lines | pending audit 76 |
 | oa-13 build | 168k | run 24 succeeded (159 of 370 have free copies); oa.yml fix on main | - |
+| codex round 2 (issue 38, PR 40) | Codex allowance | 1,056 wanted lines with registry authors, progress notes, findings 1 to 8; no search records, no closed cells | merged 27 Oct; raw queue still 559 |
 
 ## Plant batches (15 genera each, ordered by Alachua County records)
 1. Bidens Callicarpa Tillandsia Ardisia Liquidambar Parthenocissus Cnidoscolus Vitis Magnolia Pleopeltis Tradescantia Sabal Smilax Erythrina Ruellia (plant-screen-1, running)
