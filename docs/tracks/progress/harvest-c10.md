@@ -1,5 +1,61 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker43 Taraxacum checkpoint
+
+This worker:1 newly available-source-screened genus (Taraxacum),25 actual web queries,14 wanted lines,0 search records,0 evidence. Cumulative batch:15 genera screened through Taraxacum at the available-source boundary,220 actual round28 web queries,132 wanted lines,0 search records,0 evidence.25 untouched genera remain, beginning Capsella, Persicaria and Leucaena. Missing OpenAlex steps remain unrun after shared429; no full-protocol or exhaustion claim. Earlier source history and wanted-only screens preserved.
+
+Read AGENTS.md first, exact worker43 queue, current guide/scope and round4-harvest, THOROUGH, BRIEF, round3-sweep and desk-screen1–10 including10(e). Cloud runtime/network skill applied; current unrestricted policy enforced, observations current, VPN false. No OpenAlex/MDPI/UChicago/SANBI request, paid API, source/full-paper-page fetch, evidence, branch/gate or29/30 changes. GitHub-only harvest-cache refresh is distinct from a scientific API query. No web quota refusal.
+
+### Taraxacum — original open light, diel and eye traits
+
+Original queue T. officinale has91727 records,Asteraceae/Asterales, with sense_light_nonvisual,diel and eye_type open. Global wanted,searched,evidence/corrected and papers-status checked. canon-3#673 already holds living airborne-volatile receiver chemical evidence from10.1111/ele.12205; preserve it and do not flood the chemical trait with new hormone/essential-oil work. Old harvest-10#1 has three scientific light queries and no paired web, and incorrectly includes diel/eye/light despite its own unrequested plausible LED/COP1/spectral candidates. Preserve legacy file; do not accept it as completion. Relevant plant light/angiosperm-diel canons remain not in hand; in-hand Animal Eyes covers Metazoa. Owner's eye_type none/focusing-to-light rule applies.
+
+Fresh harvest_get and screen_candidates ran with network permission; outputs work/worker43-Taraxacum-harvest.txt and -candidates.txt. Live traits print empty because the thin old search suppresses targets; original gaps govern this repair. Actual complete current hg.load metadata saved in work/worker43-Taraxacum-genus.json and -family.json; run2 has40 unique genus/citation works and no supplements, family run17 has15 listed works. Successful genus queries in order:
+
+- `Taraxacum phytochrome photoreceptor` (63hits)
+- `Taraxacum light perception` (1649hits)
+- `Taraxacum phototropism` (41hits)
+
+All40 genus titles/available abstract starts and all15 family titles/available starts screened. Three unrequested cached direct light experiments added:2012 LED germination/growth,2024-online COP1-HY5 blue/red comparison,2026 T. coreanum spectra. Existing10.4081/pb.2016.6281 on harvest-10 wanted preserved without duplication. T. kok-saghyz seed-establishment thesis retained under10(e), with light soils explicitly meaning texture, not a light measurement. Gene-overexpression TkPEL-like10.3389/fpls.2023.1228961 has homology,genetic/transcriptomic/metabolite evidence; no actual controlled-light contrast identified in available starts/snippets, so not a new response request. Genomic motifs alone do not measure a response. Grazing transcriptomics,capitulum post-anthesis mechanical avoidance,pollination/self-incompatibility,pollen protection and root-explant propagation do not identify the open light/daily trait in displayed starts. Extract sunscreen,oil/latex composition,meat/bakery additives,cyclotide extraction and rat pharmacology do not establish a living cue response. Arabidopsis,Lemna,Alstroemeria,Thymus,lettuce,Narcissus,Phyllanthus and Cyathea studies concern other genera. Robotics/art/furniture and teaching text provide no named Taraxacum experiment in available abstracts. Historical phototropism lists/BHL movement books and generic heliotropism reviews remain citation pointers with no genus-specific response identified in their partial metadata; no unread table declared negative.
+
+Citation chase of10.1126/science.aaf9793 returns one2019 flower/stem-temperature review10.34078/1814-0998-2019-1-38-47: ambient solar warming/hollow stems, no Taraxacum light/daily experiment identified in available start. No new generic background request. Family review `Asteraceae photoreceptor review` has581hits/15listed; Pelargonium,Vernonia,Synedrella,Lomatozona and Gerbera experiments are other genera; retinal supplements measure humans/cells; bee/beetle/butterfly visitation measures animals. Broad crop/blue-light/metabolic/Kansas shade/genetic-assimilation reviews identify no specific Taraxacum response in displayed starts; no whole-paper absence claim.
+
+Exact25 executed web queries, in order:
+
+- `web: Taraxacum seed germination light dark`
+- `web: Taraxacum germination gibberellin OR smoke OR dormancy`
+- `web: Taraxacum floral scent volatiles`
+- `web: Taraxacum photoperiod light perception phototropism`
+- `web: dandelion photoperiod light perception phototropism`
+- `web: Taraxacum flower opening time anthesis`
+- `web: dandelion flower opening time anthesis`
+- `web: Taraxacum epidermal lens cells eye type`
+- `web: dandelion epidermal lens cells eye type`
+- `web: "Environmental Factors Controlling Capitulum Opening" authors doi`
+- `web: "On the Movements of Petals" 1905`
+- `web: "Taraxacum" "LED" "731" Ryu`
+- `web: "Taraxacum" "14542" light`
+- `web: "Seed germination strategies of five perennial weeds"`
+- `web: "Germination ecology in Taraxacum"`
+- `web: "Studies on the variability of germination" Taraxacum`
+- `web: "Effects of Different Practices on Seed Germination of Some Weeds Which is used as Medical"`
+- `web: "Seed germination strategies of five perennial weeds" "doi"`
+- `web: "A comparative study of the germination ecology" Taraxacum`
+- `web: "Germination of Dandelion Seed on a Thermogradient Plate" authors`
+- `web: "Responses of sexual and apomictic genotypes" light`
+- `web: "Responses of sexual and apomictic genotypes" doi`
+- `web: "Effects of LED" "Taraxacum coreanum" "Photoperiod" 2016`
+- `web: "Light, temperature and duration of storage" Letchamo Gosselin`
+- `web: "pseudo-etiolated-in-light-like" Taraxacum light dark treatments`
+
+Raw web outputs work/worker43-Taraxacum-web1.json through -web7.json; all returned grouped titles/snippets screened, with no claim of20 per individual query. NCSU/Cornell/USDA confirm common name dandelion. Primary journal/repository/PubMed-linked text anchors retained leads; incidental ResearchGate,Wikipedia,encyclopedia/library-catalog and OpenAlex-domain search results were not opened or used as evidence. No source year inferred from a relative search timestamp; unknown years null,authors/DOIs empty.
+
+Ten additional web leads:light/dark germination variability;Letchamo/Gosselin1996 light-storage experiment;five-perennial-weeds1978 factorial study;Taraxacum microspecies1981 germination ecology;1974 thermogradient germination;Hensel1905 daily petal movements;1987 controlled capitulum light/temperature opening;2016 photoperiod/intensity growth;1999 sexual/apomictic light-level comparison;T. coreanum shading response. Together with the four cached leads this makes14; the seed-establishment thesis also appeared in web results. Thermogradient and seed-establishment candidates are retained under10(e) for methods review, not claimed to prove illumination response from temperature/texture. Hensel's T. taraxacum identity needs intake confirmation before assigning its daily timing to T. officinale. COP1 paper uses source-verified online2024; current Wiley issue listing is2025. No cross-species borrowing or measurement logged.
+
+Concurrent global duplicate check found the2015 light-duration/pH/salt germination study already on harvest-c12 wanted#131, so its shared request is preserved without a new copy. Shared existing plant-1 wanted10.1006/anbo.1997.0520 explicitly names Taraxacum light dependence but its for[] currently lists Stellaria; existing10.1093/jxb/eru327 flower-opening review has indexed Taraxacum daily closure examples but no Taraxacum for[]. Parent informed for optional owner-coordinated target expansion; no duplicate request or edit outside c10. Eye web results are ordinary ovule/integument/floral epidermal anatomy,animal lenses,pollen morphology and microscope teaching; no Taraxacum focusing experiment identified. Diel developmental anthesis measured in days after germination and seasonal flowering dates are not daily opening hours. Hensel and1987 primary candidates keep diel/light unresolved. Hydrodistilled oils,supercritical extracts,tissue headspace and bee-pollen chemistry are excluded under10(a),and the chemical trait already has real evidence. No null while candidates and missing API steps remain.
+
+Precommit screen_candidates --check finished with exit0 and printed0 problems (work/worker43-Taraxacum-check.txt) before commit. The initial local duplicate check caught the c12 shared paper before append; removed that planned duplicate, then validated the actual14 appended lines. Next untouched genus Capsella; no later genus started at this checkpoint.
+
 ## 2026-10-27 — worker37 Modiola handover
 
 This worker cumulative:2 newly available-source-screened genera (Pluchea and Modiola),50 actual web queries,10 wanted lines,0 search records,0 evidence. This checkpoint:Modiola,26 queries,2 wanted. Cumulative batch:14 genera screened through Modiola at the available-source boundary,195 actual round28 web queries,118 wanted lines,0 search records,0 evidence.26 untouched genera remain, beginning Taraxacum, Capsella and Persicaria. Stop between genera for fresh-context continuation. Missing API steps remain explicitly unrun after shared429, including earlier Hamamelis repairs; no full-protocol/exhaustion claim. Preserve genuine earlier wanted-only screens when raw codex_queue reoffers them.
