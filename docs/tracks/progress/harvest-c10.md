@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-This worker: 1 complete live-trait screening (Hamamelis), 2 additional genera web-screened with OpenAlex steps blocked (Apios, Nothoscordum), 0 evidence, 0 null search records, 11 wanted leads. Cumulative own batch: same. Remaining: Apios/Nothoscordum missing API steps blocked and37 untouched genera; next untouched Clematis. Existing globally covered work preserved; no source refusals.
+This worker: 1 complete live-trait screening (Hamamelis), 3 additional genera web-screened with OpenAlex steps blocked (Apios, Nothoscordum, Clematis), 0 evidence, 0 null search records, 34 wanted leads. Cumulative own batch: same. Remaining: Apios/Nothoscordum/Clematis missing API steps blocked and36 untouched genera; next untouched Carpinus. Existing globally covered work preserved; no source refusals.
 
 Read AGENTS.md, round28 worker guide, round4-harvest.md, THOROUGH.md, BRIEF Round2 and record rules, round3-sweep.md, desk-screen1–10 including10(e); audit53/54 fault summaries. No evidence written per desk-screen5. Canon file checked; chemical compilations 10.1016/j.tree.2009.09.010 and10.1111/ele.12205 are not in hand. Corrected/evidence, searched, wanted and owner status searched for Hamamelis; no duplicate of the three leads found. The harvest live target has only sense_chemical open; the original gap queue lists four traits and older global searches cover the other three. Those records are untouched. Extra web pairs for those three were run before resolving this live-target difference and are listed honestly below.
 
@@ -97,3 +97,48 @@ Sources/dispositions:10.26786/1920-7603(2020)585 scented living N. bivalve flowe
 Keyword candidate W7217718689 (Introducción al estudio fitofenológico de los pastizales de la depresión del Salado) describes seasonal phases over1974–1976, not daily anthesis.10.1093/botlinnean/boae066 is Crinum, not Nothoscordum.10.1007/s00359-025-01751-8 is lepidopteran eye structure, not plant eye.10.13128/caryologia-670 is Zephyranthes megagametophytes, not Nothoscordum chemical sensing.10.4236/aim.2018.85028 tests extracted N. bivalve material against bacteria, excluded under10(a). Taxonomic/cytology papers describe morphology, ITS and plastomes rather than chemical/light response.1952 endopolyploidy paper10.1080/00087114.1952.10797537 uses sodium2,4-D on monocot roots but its available abstract names no Nothoscordum; unresolved species relevance, no chemical null written. Web eye results were mostly animal/human histology; false-garlic common-name searches returned Allium chemistry and breeding, not Nothoscordum. Botanical descriptions of no garlic odour are not signal-emission experiments.
 
 Missing common-name OpenAlex queries not executed because parent reported actual HTTP429 earlier this round. No new nulls, including eye_type, until missing protocol steps can be repaired. No evidence or paper text committed. Next untouched genus: Clematis.
+
+### Clematis (cached harvest + web screened; missing common-name OpenAlex blocked)
+
+Live traits diel, eye_type, sense_chemical, sense_light_nonvisual; target species C. vitalba, C. virginiana and C. terniflora. Global evidence/corrected, searched, wanted and papers-status checked; no existing genus evidence or duplicates of the added leads found. Shared OpenAlex HTTP429 remains in force, no retry. Canon file checked for the4 traits; plant relevant compilations are not in hand. No null or evidence records written.
+
+Successful harvest queries copied in order (run4, supplements12/14/20):
+- `Clematis phytochrome photoreceptor`
+- `Clematis light perception`
+- `Clematis phototropism`
+- `Clematis flower opening time`
+- `Clematis nyctinasty`
+- `Clematis volatile signalling`
+- `Clematis photoperiod`
+- `Clematis circadian rhythm`
+- `Clematis anthesis`
+- `Clematis pollination biology`
+- `Clematis epidermal lens cells`
+- `Clematis epidermal focusing leaf optics`
+
+All145 unique returned titles screened. Genus-named plausible sources' available abstract starts read explicitly. Other sources include Arabidopsis, tomato, pepper, kratom, lettuce, insects, human pharmacology, furniture/light projection and mathematical models, which provide no named Clematis measurement in their available title/abstract. Generic760-species light meta-analysis and plant-light reviews may contain genus tables beyond their abstracts; no negative claim made for them. Harvest citation step citing10.1093/oxfordjournals.aob.a087596 returned10.1111/j.1095-8339.2009.01017.x (Floral development in Anemoneae): organ development, not eye or chemical/light response; other chases10.1016/s0031-9422(02)00119-x and10.1111/j.1469-8137.2010.03317.x returned0. Cached family review `Ranunculaceae photoreceptor review` titles/available abstract starts read, dominated by pollinator colour, Anemone/Papaver and broad light reviews. No named Clematis eye measurement in returned abstracts.
+
+Exact web queries:
+- `web: Clematis seed germination light dark`
+- `web: Clematis germination gibberellin OR smoke OR dormancy`
+- `web: Clematis floral scent volatiles`
+- `web: Clematis flower opening time anthesis`
+- `web: clematis flower opening time anthesis`
+- `web: Clematis epidermal lens cells eye type`
+- `web: clematis epidermal lens cells eye type`
+- `web: Clematis photoperiod light perception phototropism`
+- `web: virgin's bower photoperiod light perception phototropism`
+- `web: Clematis chemical perception volatile signalling`
+- `web: virgin's bower chemical perception volatile signalling`
+- `web: virgin's bower flower opening time anthesis`
+- `web: virgin's bower epidermal lens cells eye type`
+
+Scientific/common pairs use Clematis/virgin's bower; redundant case-only clematis pairs were sent before resolving the common name and are retained above as actually executed. All returned result titles and snippets screened; no claim that20 results were delivered for each combined query. Primary sources and legal repositories listed in wanted provide bibliographic/snippet provenance. No DOI inferred from article-number patterns. Unknown metadata stays empty/0.
+
+Added 23 wanted leads: sixteen harvest experiments and seven web leads, less any cross-unit duplicate removed immediately before append. Harvest covers hormone effects on flowering, BAP/TDZ explant regeneration, PEG seed germination, floral volatiles, shade/irradiance, UV-B, photoperiod and rooting hormones. Web germination leads explicitly include light/dark and GA3 for C. dilatata, GA response across six Korean species, GA3 for C. hirsutissima, darkness/KNO3 in C. vitalba, GA/chilling in C. vitalba, and C. integrifolia seed pretreatments. New2023 dynamic-headspace scent comparison also wanted. Positive leads block chemical/light exhaustion.
+
+Diel candidates screened cautiously: hormone/flower-opening-duration experiment retained; W2278388607 is a photograph labelled flower at anthesis, not hour-of-day data; W2618719354 is C. udayanii taxonomic morphology and post-anthesis anther position; Arabidopsis diurnal regulation, human green-wall perceptions and honeybee olfactory circadian study concern other organisms. Web flowering pages give seasonal pruning/bloom periods without daily hours. No diel null while missing steps blocked. Eye candidates are insect colour review and pollinator perception of green flowers; epidermal micromorphology study (PMC11397135/PubMed39282113) describes stomata, trichomes and cell walls, no optical focusing in snippet. No eye_type null while protocol incomplete. Owner's none reading preserved.
+
+Excluded chemistry includes cut-stem blockage, preservatives/sugar in cut Clematis flowers, C. flammula essential-oil pharmacology, extracted C. wightiana antioxidants, mouthwash/animal carcinoma studies and stem/root volatile-composition studies: these do not demonstrate a living-plant chemical response under10(a). Nectar-yeast and e-nose sampling boundaries are explicitly flagged on wanted entries for the reader; no measurements assumed.
+
+No paper fetched or evidence logged, per desk-screen5. OpenAlex missing common-name steps remain incomplete. Clean next untouched genus: Carpinus, then Cocculus, Sagittaria. All later batch genera remain untouched in this worker.
