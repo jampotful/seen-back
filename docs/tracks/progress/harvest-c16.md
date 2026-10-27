@@ -409,3 +409,33 @@ Additional unresolved leads for later primary verification: Technology of hydrop
 Other results include USDA ARS fixed light/dark germination protocols and ecological shade preference, not a measured contrasting response; FEIS laboratory germination ranges and fire table clock times need context and were not interpreted as anthesis hours. Ethylene inhibition of Potentilla norvegica germination concerns another genus/species after the taxonomic split, not D. fruticosa. B. dasyphylla, Oenothera, Anigozanthos and generic smoke reviews supply no Dasiphora measurement. Extract antimicrobial studies and pharmacognostic leaf chemistry are excluded under 10(a). Eye hits describe epidermal cell walls, stomata/hairs and pollen morphology, not optical focusing; owner none rule applies. No pages fetched, no evidence or null rows.
 
 Worker 48 running counts: 5 new genera web-screened, 0 full protocol complete, 0 searched, 28 wanted added, 0 evidence. Cumulative batch 17 web-screened and 66 wanted; 23 remain, exact next Ampelopsis.
+
+### Ampelopsis — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: not in any supplied run, no successful genus harvest queries/candidates. Checked canon/global evidence/wanted/searched and owner status for actual queue A. glandulosa and all four traits, including older A. brevipedunculata name. No actual-species evidence found. UConn/UMD and NYBG institutional search passages explicitly link the older porcelainberry name with A. glandulosa (var. brevipedunculata). Legacy records about Ampelopsis arborea/Nekemias are not same-species coverage.
+
+Exact web queries in execution order (final two are source chases for candidate study/species identity):
+- `web: Ampelopsis seed germination light dark`
+- `web: Ampelopsis germination gibberellin OR smoke OR dormancy`
+- `web: Ampelopsis floral scent volatiles`
+- `web: "Ampelopsis" flower opening time anthesis`
+- `web: "porcelainberry" flower opening time anthesis`
+- `web: "Ampelopsis" eye type epidermal lens cells`
+- `web: "porcelainberry" eye type epidermal lens cells`
+- `web: "Ampelopsis" light perception phototropism germination`
+- `web: "porcelainberry" light perception phototropism germination`
+- `web: "Ampelopsis" chemical signalling volatile response`
+- `web: "porcelainberry" chemical signalling volatile response`
+- `web: Vitaceae photoreceptor review`
+- `web: "Ampelopsis glandulosa" germination light`
+- `web: "Ampelopsis brevipedunculata" germination gibberellin light`
+- `web: "Induction of defense responses" "Ampelopsis" "Rhizobium vitis"`
+- `web: "Comparative Ecophysiology of Four Invasive Temperate Lianas" Ampelopsis`
+
+Screened delivered titles/snippets/passages, without claiming 20 per query. 4 wanted added: four-liana controlled-light thesis, Ampelopsis-strain pathogen/chemical-defence study (species/mechanism fork), pioneer germination heat experiment (light/chemical contrast unverified), and named light/nutrient seedling experiment via USDA reference. The institutional thesis abstract confirms A. brevipedunculata was an experimental subject, not just a cited shade-intolerance example; A. glandulosa keyword confirms target identity. The thermal germination response is not asserted to measure light/chemical sensing.
+
+Diel pair returned seasonal flowering, weeks of development before anthesis, protandry and floral morphology, not daily opening clock hours. Vegetative and floral development in Ampelopsis brevipedunculata is an unresolved USDA-reference title; displayed passages give weeks/seasons, no diel measurement. Vitaceae family alternative produced general photoreceptor reviews rather than a direct Ampelopsis study. Vitis anthesis cannot carry to Ampelopsis (audit 54). Eye queries mostly returned human keratinocyte/eye pharmacology; extracted A. japonica inflammatory-reaction work is also explicitly retracted and does not report plant sensing. Owner eye-none reading applies; no epidermal-focusing result displayed.
+
+Tea/infusion aroma, high-temperature re-roasting, dried leaf/branch volatiles and distilled A. megalophylla oil are removed-tissue chemistry excluded under 10(a). Cultured A. grossedentata cell aroma (10.1016/j.foodres.2025.118161) needs living-emission/signalling and current taxon assessment; no extension to A. glandulosa. Historical Darwin Effect of Light Ampelopsis notes (https://darwin-online.org.uk/converted/manuscripts/Darwin_C_R_CUL-DAR209.7.1.html) and Bose Life Movements in Plants II (https://www.gutenberg.org/files/40050/40050-h/40050-h.htm) describe phototropism but do not identify the measured current species in displayed passages; other historical Ampelopsis veitchii results warn of Parthenocissus nomenclature, so no historical genus carry was adopted. Generic current herbicide advice is not a controlled measurement of chemical response; original experiments remain for reading. No source pages opened, OpenAlex skipped, no evidence/null rows.
+
+Worker 48 running counts: 6 new genera web-screened (Cakile, Clinopodium, Hylocomium, Holodiscus, Dasiphora, Ampelopsis), 0 full protocol complete, 0 searched, 32 wanted added, 0 evidence. Cumulative batch 18 web-screened and 70 wanted. Remaining 22 genuinely unreviewed genera; exact next Phleum.
