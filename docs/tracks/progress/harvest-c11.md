@@ -1276,3 +1276,43 @@ Exact successful connected queries, executed order:
 All actually returned titles/snippets read from retained responses in sequential slices, variable counts without claiming20each; raw Achillea-web1–6.json and required-tool outputs in /workspace/work/w25-c11. Family review alternative returns general plant/fungal photoreceptor reviews10.1146/annurev-arplant-042809-112259/10.1002/wmts.36,insect/algal reviews,and no named target daily behavior in available excerpts. Cached Asteraceae shade thesis already requested c18/c22b and no target identity established; no duplicate background. No page/paper fetch,evidence,credentials/proxy/TLS change,purchase,operational edit or new refusal. Mandatory validator pending checkpoint.
 
 Worker25 Achillea mandatory real validator printed **0 problems**. Current157wanted/25searched; searched byte-identical to incoming25lines and original135wanted prefix preserved. New22wanted, shared3source adoptions,0searched/evidence. Next Mahonia.
+
+## 2026-10-27 — issue38 worker25 Mahonia
+
+NEW Mahonia available-web-screened,22successful connected queries,14new wanted/0searched/0evidence. Worker25 cumulative2genera,40queries,36new wanted,0searched/evidence. Current171wanted/25searched;30of40genera now available-web-screened across rounds;10remain, exact next Apocynum, then Bromus,Marchantia,Vachellia,Poa,Parkinsonia,Panicum,Artemisia,Polystichum,Ailanthus. Prior8issue38 screens and original20preserved; Packera unseen-tail caveat persists. Protocol-partial: OpenAlex429 skipped, no failed service counted as zero hits, no null searched while API/source steps incomplete, no full-protocol/exhaustion claim.
+
+Preflight: original queue M.aquifolium,M.nervosa,M.repens,M.bealei has eye_type/chemical/light cells; retained corrected-first evidence recheck5#37–38 measures only M.japonica scent rhythm/photoperiod. Existing sweep8 full-text request10.1016/s0031-9422(02)00119-x adopted, no duplicate. Do not carry these chemical/light results to queued congeners. Diel already outside this genus's assigned open traits, so no unnecessary diel searches. Required harvest_get.py/screen_candidates.py explicitly report no Mahonia harvest. Canon pertrait checked as for Achillea; no in-hand named target source. Global wanted,evidence,corrected,searched and owner status checked by title/DOI/URL; retained new sources have no existing request/status match. A scratch duplicate-title normalizer initially collapsed Japanese/Chinese text to an empty ASCII string; corrected to Unicode alphanumeric comparison before final additions. Both non-Latin titles have genuine primary indexed provenance and no matching existing title. No legacy prefix edited.
+
+Adopted before genuinely unfinished queries: worker17Tecoma-web2 primary OUP result explicitly names M.repens epidermal replicas, Thermopsis montana and Smilacina stellata; first new wanted is that original replica-optics experiment10.1093/jxb/42.5.581,1991, bibliographic identity verified in Mahonia-web4. Focusing belongs under light, not eye_type10(b). Optical replicas are not invented living sensory thresholds. No cue carry to M.aquifolium or other congeners. Existing c18wanted10.1111/j.1365-2435.2009.01632.x Floral volatiles controlling ant behaviour adopted after primary Wiley indexed table in Mahonia-web6 explicitly lists M.aquifolium. Original methods must distinguish living floral signal emission from rubbed/excised tissues and insect responses alone. No duplicate or other-unit edit; parent informed. Existing sweep8M.japonica2002request also covers actual source reading, but not automatic physiology for other species.
+
+Fourteen new wanted: replica optics; aquifoliumGA3/cold-stratification; Nepal37species light/dark germination; J-STAGE low-shrub germination; USDA genus seed-manual chapter; Soft Caress micropropagation; three-Mahonia light-response-curve models; M.repens shaded/exposed xanthophyll study; M.oiwakensis light induction; M.bealei UV+darkness proteomics; M.bealei UV-B phosphoproteomics; separate japonica headspace-identification title; five-shrub fresh-flower volatiles naming M.bealei; IPPS35germination report naming aquifolium/repens. Each exact title,retrieval URL,query and limit retained in wanted. No DOI inferred from PII/structured journal URL, no year from relative index age. Unknown author/year retained blank/null. Living GA3 effects for aquifolium are explicitly in primary indexed abstract; acid-scarification result is for Koelreuteria and is not transferred. Fixed photoperiod alone is not a light comparison. Nepal primary snippet says Mahonia but species/table remains unread; excluded RG species wording is not used to invent target identity. Seed-manual table daily-light column is an original-reading lead, not already a measurement. Germination/dormancy titles retained10(e), actual source comparisons pending.
+
+M.bealei UV-related endogenous SA/GA shifts are light responses, not applied-hormone evidence. M.oiwakensis/M.japonica are named congeners, not substitutes for queued species. Soft Caress living microcuttings/cytokinin/auxin response is a culture candidate; exact parentage/accepted identity and light experiment require original methods. Fresh-flower M.bealei headspace is held explicitly for attached/living emission or signaling; picked-tissue chemistry alone fails10(a). Separate japonica headspace2003-looking source may overlap the2002emission experiment; reader checks overlap, no assumed independent data. Dried/hexane-organ profiles,essential oils,root alkaloids,cosmetic SA-plus-Mahonia creams and endophytic-fungus GA biosynthesis are not a living Mahonia cue-response assay. Patent elicitation text names no actual target experiment in returned text; not requested as genus measurement. Oregon grape common-name pairs returned many Vitis/grape-wine papers; they are other genera. General plant ocelli,animal eyes and leaf anatomy do not change eye_type none; direct M.repens focusing source is retained under light.
+
+Exact successful connected queries:
+- `web: Mahonia seed germination light dark`
+- `web: Mahonia germination gibberellin OR smoke OR dormancy`
+- `web: Mahonia floral scent volatiles`
+- `web: Mahonia plant ocelli lens epidermal focusing eye`
+- `web: Oregon grape plant ocelli lens epidermal focusing eye`
+- `web: Mahonia chemical sensing volatiles`
+- `web: Oregon grape chemical sensing volatiles`
+- `web: Mahonia photoperiod phototropism light response`
+- `web: Oregon grape photoperiod phototropism light response`
+- `web: Berberidaceae photoreceptor review`
+- `web: "Mahonia" "dormancy-breaking"`
+- `web: "Effect of light on seed germination" "Mahonia" -site:researchgate.net`
+- `web: "Mahonia" jasmonate gibberellin auxin`
+- `web: "Characterization of Plant Epidermal Lens Effects"`
+- `web: "Mahonia" "germination" "light" -site:researchgate.net -site:promessedefleurs.ie -site:theeyrye.com`
+- `web: "FLORAL SCENT IN A WHOLE-PLANT CONTEXT"`
+- `web: "Mahonia" "salicylic acid" elicitor`
+- `web: "Mahonia" "auxin" micropropagation`
+- `web: "Floral volatiles controlling ant behaviour" Mahonia`
+- `web: "Effect of light on seed germination of some tropical and temperate species of Nepal"`
+- `web: "Micropropagation of Mahonia" "Soft Caress" -site:researchgate.net`
+- `web: "Effects of dormancy-breaking treatments" Mahonia GA3 aquifolium`
+
+All returned title/snippet text read in sequential retained-response slices, variable delivered counts without claiming20each. Family alternative Berberidaceae query returns general photoreceptor reviews10.1002/wmts.36/10.1007/s44372-025-00446-3,wood-anatomy and Berberis chemistry reviews, no named queued-target treatment in available excerpts; no generic background duplicate. Raw Mahonia-web1–6.json and required-tool outputs in /workspace/work/w25-c11. No source-page/paper fetch,evidence,credentials/proxy/TLS change,purchase,operational edit or new service refusal. Validator pending checkpoint; next Apocynum.
+
+Worker25 Mahonia mandatory real validator printed **0 problems**. Current171wanted/25searched; next Apocynum. Original135wanted prefix preserved and searched byte-identical to incoming25lines.
