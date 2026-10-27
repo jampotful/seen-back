@@ -1495,3 +1495,36 @@ Exact actual web queries, in execution order:
 
 NEW this genus: 9 wanted,0 searched,0 evidence. Adopted existing wanted: [("Contribution à l'étude exigences thermiques préalables et du phototropisme chez différentes espèces de Phanérogames. Seconde liste d'espèces et symbolisation des résultats", 'harvest-30')].
 Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Ficaria-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
+
+
+## 2026-10-27 — issue38 worker34: Urtica
+
+Target set dioica,gracilis,urens checked against global actual evidence:oa-13b#86–87 measure only urens seed light response; not carried to dioica/gracilis. Old thin sweep-4 and harvest-8 remain untouched,not accepted as full current screens. Mandatory tools:run2 plus supplement12,60 printed work occurrences and stored abstract starts,15 printed Urticaceae family-review titles(all read; query reports16 total hits,not16 delivered). Exact cached queries: Urtica phytochrome photoreceptor; Urtica light perception; Urtica phototropism; Urtica volatile signalling; Urticaceae photoreceptor review. Citation step citing10.1111/ele.12205 returned0 printed works. Target Biological Flora review in cached family step supplies available review alternative. No successful live API implied.
+
+Direct dioica seed-light and hormone/callus sources retained10(d,e); gracilis remains without direct light/chemical/diel evidence beyond bibliographic/propagation leads. No unsupported copy of urens physiology to gracilis. Shared23-species study explicitly has target dioica nitrate-in-light special analysis; exclusion of dioica from some viable-seed pooled plots does not prove no experiments. Nettle IAA paper has actual Urtica light-condition experiments,so retained for light; reporter activity and metabolite isolation alone would not count chemical sensing. Herbivore/mechanical trichome induction candidate left as chemical-versus-mechanical fork,not numerical evidence. Constant constitutive sting chemistry,distilled hydrolate10.3390/molecules27123912,dried-leaf volatile profiling,food sensory/chocolate/yoghurt,cancer extracts and livestock nutrition fail10(a). Vast urticae search hits concern spider mites on lima bean,tomato,torenia,etc.,not Urtica plant. Cuscuta,Philodendron,Rhaponticum,Medicago and Arabidopsis phytohormones do not establish target response.
+
+Diel pair gives seasonal bloom/months and long-day flowering,not daily opening hours; no null while mandatory API incomplete. Eye pair gives needle-like stinging trichomes,cystoliths,epidermal cell anatomy and human dermatologic urtica/wheals,not target eye/focusing assays. Owner eye_type none; focusing belongs under light10(b). No chemical/null placeholders. Remaining1,next Larrea.
+
+Exact actual web queries, in execution order:
+- `web: Urtica seed germination light dark`
+- `web: Urtica germination gibberellin OR smoke OR dormancy`
+- `web: Urtica floral scent volatiles`
+- `web: Urtica light photoperiod phototropism`
+- `web: stinging nettle light photoperiod phototropism`
+- `web: Urtica volatile emission herbivore induced response methyl jasmonate`
+- `web: stinging nettle volatile emission herbivore induced response methyl jasmonate`
+- `web: Urtica flower opening time anthesis`
+- `web: stinging nettle flower opening time anthesis`
+- `web: Urtica eye type epidermal focusing`
+- `web: stinging nettle eye type epidermal focusing`
+- `web: "Urtica dioica" methyl jasmonate salicylic acid elicitor`
+- `web: "Urtica gracilis" germination light photoperiod`
+- `web: "Urtica dioica" gibberellin germination`
+- `web: "Urtica" "Sulfonation of IAA"`
+- `web: "Study on the Application of methyl jasmonate and salicylic acid" "Urtica" -site:researchgate.net`
+- `web: "The stinging nettle" "increases trichome density"`
+- `web: "Urtica gracilis" "volatile" "anthesis"`
+- `web: "Geographic distribution and seed propagation of Urtica dioica"`
+
+NEW this genus: 9 wanted,0 searched,0 evidence. Adopted existing wanted: [('Growth and morphogenesis of sun and shade plants', 'harvest-c7'), ('Seed enhancing treatments: comparative analysis of germination characteristics of 23 key herbaceous species used in European restoration programmes', 'harvest-c12')].
+Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Urtica-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
