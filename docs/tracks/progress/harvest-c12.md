@@ -300,3 +300,41 @@ Fifteen web queries read returned titles/snippets, first20 where available; targ
 Under10(a), the2011 volatile field experiment is retained since it includes living intercropped plants despite also testing fresh detached tissues; the actual intact versus detached comparison needs reading. Mosquito host-plant and root-exudate leads need method checks for living release versus extraction and microbial production. The2023 synthetic-lure study10.1093/jme/tjad077 describes hexane floral/foliar extracts, so it was not automatically requested as plant signalling. The2024 bacteria-root-exudate work10.3389/fitd.2024.1359774 chiefly tests isolated bacteria; retained as provenance of the primary root study, without an extra speculative wanted line. Methanol-extract phytotoxicity to Eleusine/Digitaria/crops, distilled oils and human dermatitis do not show living Parthenium chemical response. Applied Fusarium filtrate germination and incoming Artemisia/grass extracts are secondary possible chemical routes, with direct hormone/germination lead prioritized; they are not grounds for a chemical null. Guayule(P.argentatum) light/GA/smoke studies name a different species without an allowed chemical carry to the queued P.hysterophorus, so not added solely to inflate genus leads. Pyrethrum/Tanacetum parthenium floral scent sources name a different genus.
 
 Diel remains held:the reproductive study and1992-looking DOI pollen-release source identify actual target anthesis; no year inferred from DOI digits. Seasonal flowering, age-to-bloom and continuous reproduction are distinct from daily flower timing. Eye_type alone has a full null under owner10(b), with explicit trichome-anatomy/human-dermatitis/retinal-cell screened reasons. No epidermal focusing candidate found. Cached family results mostly treat other Asteraceae/crops, model flowering networks, human retinal protection and general reviews; no direct target eye measurement. No source/full-paper pages fetched, no evidence written. Service exclusions remain OpenAlex429/MDPI429/UChicago403/SANBI403; no retries and no web quota refusal. Local raw provenance:work/harvest-c12/Parthenium-*-worker25 files.
+
+
+## 2026-10-27 — worker25 continuation: Andropogon
+
+This-worker cumulative:3 genera completed(Botrypus,Parthenium,Andropogon),2 search records,12 new wanted,0 evidence. Batch cumulative:10/40 genera completed,8 search records,107 wanted,0 evidence;30 remain, next Cynodon. No measured cells closed.
+
+Harvest_get and screen_candidates report no genus harvest. Original species/gaps independently checked:Andropogon gerardi has light,diel,eye_type,chemical open. Existing measured short-day classifications for gayanus/virginicus are actual main evidence, preserved with species limits; they cannot silently settle gerardi chemical/light. Former scoparius measurements belong to Schizachyrium. Thin sweep-34 two-query record was not treated as a completed protocol. Global evidence/wanted/status checked. Poaceae cached family result reused from real ci metadata held in neighboring worker scratch, copied to own scratch; all15 titles/stored abstracts screened, with a new web family review query too. No new in-hand plant canon measurement.
+
+Exact successful cached and executed web queries, in order:
+- `Poaceae photoreceptor review`
+- `web: Andropogon seed germination light dark`
+- `web: Andropogon germination gibberellin OR smoke OR dormancy`
+- `web: Andropogon jasmonate herbivore`
+- `web: Andropogon light photoperiod phototropism`
+- `web: big bluestem light photoperiod phototropism`
+- `web: Andropogon flower opening time anthesis`
+- `web: big bluestem flower opening time anthesis`
+- `web: Andropogon eye type epidermal focusing`
+- `web: big bluestem eye type epidermal focusing`
+- `web: Andropogon volatile emission herbivore induced response methyl jasmonate`
+- `web: big bluestem volatile emission herbivore induced response methyl jasmonate`
+- `web: Poaceae photoreceptor review`
+- `web: "Andropogon gerardii" germination gibberellic acid light`
+- `web: "Andropogon gerardii" anthesis "morning"`
+- `web: "Andropogon gerardii" chemical response volatile ethylene salicylic`
+- `web: "Andropogon gerardii" "photoperiod" McMillan flowering ecotypes`
+- `web: "Evolutionary Implications" "Cytotypes" "Andropogon" -site:researchgate.net`
+- `web: "Andropogon" "Knapp" "solar radiation"`
+
+Eighteen web queries read returned titles/snippets, up to first20 where available. Genus germination searches initially mostly returned gayanus and other congeners, so follow-ups target gerardii spelling used by primary papers. Five new wanted candidates:target-species GA pretreatment/germination trial, target ecology/germination thesis, two A.gerardii irradiance response/acclimation sources, and the1997 reproductive cytotype study for possible anthesis timing. The Knapp1984 source is identified by real title/DOI/reference metadata. For the other irradiance paper the title is kept as indexed in the EPA bibliography(including Poacea spelling), and year/authors remain empty/null; no year inferred from DOI. All five candidates passed exact normalized title/DOI checks against existing wanted/status; no existing paper/evidence was rewritten.
+
+No light null while these candidates wait. The field irradiance studies require separation of light effects from temperature/water/fire covariates; sun/shade anatomy is a candidate living response, not claimed photoreceptor mechanism. McMillan ecotype references found in later drought/photoperiod papers were followed as citations but no unsupported primary title was invented. Rice1950 already appears in main evidence under Schizachyrium with big bluestem named in its group note; it was not duplicated as a new request. The switchgrass photoperiod-extension paper cites prior big-bluestem studies but its own species is Panicum; it is not an A.gerardi measurement.
+
+No chemical null:Cracking the case explicitly describes GA seed pretreatment and includes A.gerardii. General JA searches mostly return Iva,cotton,Nicotiana,Arabidopsis,Quercus and other non-targets. Gayanus GA/cytokinin experiments and general grass germination are real congener sources but do not close the queued species chemical cell and were not requested solely for volume. The nearby-plant phytochemical field experiment10.1093/aobpla/plaf071, nutrient/mycorrhizal trials and tissue-culture protocol are additional possible routes, but the direct hormone-germination source was prioritized; no claim that they prove absence. Ammonia volatilization during drought quantifies N loss without a demonstrated signalling function in snippets, so not treated as chemical communication. Bacterial ACC-deaminase genomic potential alone is not living target response.
+
+No diel null:the reproductive cytotype paper has before-anthesis and next-morning methods, enough to retain for checking native opening observations; scheduled crossing by itself would not establish daily activity. Other hits describe seasonal flowering, cultivar phenology, first anthesis dates or gayanus spikelet opening, not a gerardi daily class. Eye_type alone gets a null under owner10(b), with anatomical flora/taxonomic epidermal studies/stomatal review screened explicitly. No optical-focusing candidate found. Family metadata covers grass stomata, phytochrome signalling/shade pathways, cereal/rice and general carotenoid reviews; none identifies direct Andropogon eye measurement. No source/full-paper pages fetched and no evidence logged. OpenAlex429/MDPI429/UChicago403/SANBI403 skipped throughout; no new refusal or actual web-quota refusal. Local provenance:work/harvest-c12/Andropogon-*-worker25 and Poaceae-cache-worker25 files.
+
+Worker25 final checkpoint:combined candidate validation printed `0 problems` for all8 searched/107 wanted lines; own-file whitespace check passed. All12 this-worker sources were also checked against global main evidence by normalized title/DOI, with no matches. No unknown-year numeric0 values exist in the batch wanted file. Stop between genera for fresh-context continuation at Cynodon; preceding Botrypus commit d32c34a9, Parthenium commit03991b96.
