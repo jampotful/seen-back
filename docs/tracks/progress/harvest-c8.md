@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 3/40 genera screened here (Albizia, Ambrosia, Diospyros); 3 eye_type search records; 36 wanted lines; 0 evidence records; 0 cells closed by measurement. Rubus is next. Of the 37 batch genera after this checkpoint, Pilea is complete in harvest-c4 and its provenance must be reused, leaving 36 genera requiring new work. Current service refusals: desk-wide OpenAlex 429, MDPI 429, UChicago 403 and SANBI 403; skip those fetching routes. Worker11 stopped between Diospyros and Rubus for fresh-context continuation.
+**Current checkpoint:** 4/40 genera screened here (Albizia, Ambrosia, Diospyros, Rubus); 4 eye_type search records; 60 wanted lines; 0 evidence records; 0 cells closed by measurement. Baccharis is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving 35 genera requiring new work. Current service refusals remain OpenAlex 429, MDPI 429, UChicago 403 and SANBI 403; no further request made to these services. Worker16 completed Rubus and continues at Baccharis.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -105,3 +105,30 @@ The 30 wanted leads retain exact source URLs/DOIs from the cached metadata or re
 Dispositions outside those leads: 10.1139/b85-258 uses geological clay lenses, while the other three tool-listed eye candidates concern human/animal eye treatment; all four are individually screened in the eye_type record under the owner's plant-eye reading. Optical-coherence-tomography disease imaging uses human instruments and measures no plant eye. Persimmon vinegar, dried-fruit sensory tests, essential oils and volatile profiles of collected/extracted fruit/flower material measure product/tissue chemistry, excluded under 10(a). The Korean flower/calix VOC paper (https://www.ksbec.org/articles/article/RaGo/) compares dissected organs for fragrance use, so no living-signal measurement is claimed. The bee-attractive-flower VOC study remains wanted because its snippet does not establish whether flowers were attached or collected. The 109-species living-VOC survey 10.1038/s41598-017-10975-x is already wanted in plant-screen-1; no duplicate line added, and its Diospyros species list still needs intake. Phytochrome-marker phylogenetics and genetic pathway enrichment alone are not a light/clock response measurement. Seasonal flowering dates, fruit-development days after anthesis, embryo-sac development and pollination elapsed hours are not flower-opening hours. Broad reviews whose stored abstracts do not identify a Diospyros measurement were not used to claim one.
 
 No null is written for diel, sense_chemical or sense_light_nonvisual while these plausible sources await intake. Only eye_type has a completed negative search record under owner reading 10(b). The actual screen_candidates.check implementation, using legitimate hg.load data via the scratch cache wrapper, printed **0 problems** on this unit's searched/wanted files before commit. This is research screening validation; no app check/build/server, gate change, #29 or #30 change was made.
+
+
+## 2026-10-27 — worker16 continuation
+
+Completed Rubus screening. **This worker so far: 1 genus, 1 eye_type search record, 24 wanted lines, 0 evidence and 0 measured closures. Cumulative harvest-c8: 4 genera, 4 search records, 60 wanted lines, 0 evidence and 0 measured closures.** Pilea's completed harvest-c4 coverage is preserved; 35 genera still require new work, starting Baccharis, Morella, Nephrolepis.
+
+Read AGENTS.md first, exact worker16 fresh queue line, current worker guide, batch and original queue order, round4-harvest.md, THOROUGH.md, BRIEF.md Round 2, round3-sweep.md and desk-screen.md points 1–10 including plant 10(e), and audit53/54 context. Consulted the cloud-runtime skill and enforced unrestricted network status. Official harvest_get.show and screen_candidates.show using the legitimate cached hg.load data for coordinator-fetched ci 55a1f658a687c5d355ae11d9eec65def211f4033 report Rubus in no harvest run across runs1–24. No failed or zero-hit API query is invented. The old sweep-1 two-query combined record lacks a completed web protocol and does not settle the original four traits. Global queue/searched/wanted/accepted evidence/corrected and papers-status checked by genus, then prospective wanted items checked by exact DOI, normalized title and URL: none duplicated. Canon metadata checked; eye_type compilations concern animal eyes.
+
+Connected web searches, word for word in execution order:
+- `Rubus seed germination light dark`
+- `Rubus germination gibberellin OR smoke OR dormancy`
+- `Rubus floral scent volatiles`
+- `Rubus flower opening time anthesis`
+- `blackberry flower opening time anthesis`
+- `Rubus eye type`
+- `blackberry eye type`
+- `Rubus chemical sense volatile response`
+- `blackberry chemical sense volatile response`
+- `Rubus light photoperiod phototropism`
+- `blackberry light photoperiod phototropism`
+- `Rosaceae photoreceptor review`
+
+Read all exposed original-source titles/snippets and available returned abstracts; fewer than20 results were exposed for individual queries where applicable. Saved complete outputs under work/harvest-c8/Rubus-web0.txt through Rubus-web3.txt and recovered omitted output sections; no truncated stretch was treated as reviewed. No source/fullpaper page fetched. OpenAlex API remains skipped after desk-wide429; no MDPI/UChicago/SANBI fetch, paid API, unauthorized copy or proxy used. Returned results on ResearchGate, Wikipedia and unattributed third-party full-text hosts were not opened or used as source records.
+
+Added24 wanted candidates:10 germination/dormancy sources (including the USDA seed-handbook chapter as a route to its original trials);3 living floral/herbivore volatile candidates;2 daily anthesis/nectar timing candidates; and9 light/photoperiod experiments or plausible studies. Empty authors/years/titles remain empty where original-source snippets do not expose them. In particular, the 2019 International Journal of Chemical Studies PDF explicitly shows Table4, Time of anthesis in Rubus macilentus C., but its exact article title was not exposed by the original-source result; the journal title/volume/pages are available in that result. The Chinese journal figure snippet explicitly names Rubus setchuenensis nectar secretion rhythms; exact article title and daily values await intake. Spontaneous floral aroma leads require original methods to establish living attached emission and signalling; removed-tissue chemistry alone is excluded. The Rubus seed anatomy title describes low germination generally and was not promoted to a light/chemical experiment. Postharvest/juice/fruit-extract chemistry, human eye cosmetics and developmental days-to-anthesis studies were not mistaken for plant chemical sensing, plant eyes or daily opening time.
+
+The family query returned Rosaceae anthocyanin-review metadata/abstract (10.1002/fsn3.72269), alongside general photoreceptor and animal-eye reviews; all returned material was screened, without fetching. Its environmental signalling is a light trait, and its returned material reports no plant-eye measurement. One eye_type search record holds all12 exact queries and the owner's none reading; no null for diel, chemical or light while their candidates await intake. No measurement cell closes in desk screening.
