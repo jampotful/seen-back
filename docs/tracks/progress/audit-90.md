@@ -1,6 +1,6 @@
 # Audit 90: desk-c12 (16 plant genera; branch origin/research/desk-c12, head 47867368)
 
-Status: in progress (gate, queries and chased done; searches running).
+Status: in progress (gate, queries, chased and evidence done; found so far: missed measurements at search lines 2, 4, 6, 10, 21 and an unsupported chased at line 18; wanted lines and write-up pending).
 
 ## Lines judged
 
