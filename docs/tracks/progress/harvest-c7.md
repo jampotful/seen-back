@@ -99,3 +99,11 @@ Phytolacca completed: this worker 1 genus, 1 eye_type search record, 20 wanted l
 Worker19 cached harvest inspection shows Phytolacca absent from runs 1–17,20,23,24; no repeat history/API query. Family photoreceptor search returned general plant reviews, no Phytolaccaceae-specific review. Canon, corrected-first accepted-name main evidence, global searches/wanted and papers-status reviewed; thin sweep-5 not treated as done. No source fetched or evidence written; no OpenAlex/MDPI/UChicago/SANBI calls. Eye record covers 1 queued cell, cumulative 37. Remaining 26 genera beginning Sambucus. Gate outcome follows before commit.
 
 Phytolacca checkpoint gate printed `0 problems`; `git diff --check` passed before commit.
+
+### Sambucus checkpoint
+
+This worker now 2 genera, 2 eye_type search records, 29 wanted lines, 0 evidence/measurements; cumulative 15 genera, 16 search records, 190 wanted lines, 0 measurements. Sambucus adds 9 light/dark germination, applied gibberellin/ethephon and floral/leaf emission leads. Chemically mediated thrips pollination study is also a possible daily anthesis lead, so no diel null claimed; seasonal-only S. australis dates explicitly screened as no daily measurement. Dry flowers, processed drinks/juice, hydroethanolic extracts and insect responses to extracts screened under 10(a). Intact versus excised material is unresolved for several emission titles and is clearly flagged. Existing Tilia/Sambucus/Rubus after-ripening request in harvest-c8 preserved without duplication.
+
+All 12 required distinct web wordings copied verbatim, titles and snippets screened; family-review query returned general reviews, no Viburnaceae-specific one. Worker19 cached history confirms Sambucus absent from harvest runs 1–17,20,23,24. Canon, corrected-first accepted-name-aware evidence, global searches/wanted and papers-status reviewed; old thin sweep-3 not treated as done. No source fetched/evidence written, no refused-source API calls. Unknown years are null. Eye record covers 4 queued cells, cumulative 41. Remaining 25 genera beginning Oxalis. Gate outcome follows before commit.
+
+Sambucus checkpoint gate printed `0 problems`; `git diff --check` passed before commit.
