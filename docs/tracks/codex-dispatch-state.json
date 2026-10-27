@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 4,
-  "updated_at": "2026-10-27T03:38:31.814Z",
+  "generation": 5,
+  "updated_at": "2026-10-27T04:31:34.344Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -31,8 +31,8 @@
       "dispatch_key": "regards-issue-28-20261027",
       "state": "running",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
-      "observed_status": "Working; checkpoints pushed on the round branch. First screened batches have six paper leads; freed worker slots refilled. Coordinator preserves wanted-only screening despite queue limitation.",
-      "observed_at": "2026-10-27T03:38:31.814Z",
+      "observed_status": "Working in the existing chat; checkpoint branch pushed. Latest reported checkpoint: 69 search records and 900 wanted lines, no new evidence values; 41 workers dispatched of 48. OpenAlex skipped after HTTP 429; cached harvest and other sources continue. No follow-up sent.",
+      "observed_at": "2026-10-27T04:31:34.344Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -44,15 +44,25 @@
         "batches": 20,
         "genera": 644
       },
-      "last_checkpoint_comment_id": 6433026366
+      "last_checkpoint_comment_id": 6433026366,
+      "last_task_observation": {
+        "status": "Working",
+        "checkpoint_search_records": 69,
+        "checkpoint_wanted_lines": 900,
+        "new_evidence_values": 0,
+        "workers_dispatched": 41,
+        "worker_limit": 48,
+        "service_constraint": "OpenAlex HTTP 429; coordinator skipped service and continued permitted sources",
+        "observed_at": "2026-10-27T04:31:34.344Z"
+      }
     },
     "29": {
       "issue": 29,
       "dispatch_key": "regards-issue-29-20261027",
       "state": "result-ready",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
-      "observed_status": "Terminal response confirms PR #35, ready for research-desk review; open and unmerged.",
-      "observed_at": "2026-10-27T03:38:31.814Z",
+      "observed_status": "Terminal response reconfirmed; PR #35 remains open, non-draft, unmerged with no desk disposition. No continuation or repeat notice.",
+      "observed_at": "2026-10-27T04:31:34.344Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -80,10 +90,10 @@
     "30": {
       "issue": 30,
       "dispatch_key": "regards-issue-30-20261027",
-      "state": "running",
+      "state": "result-ready",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
-      "observed_status": "Working on codex/data-1 at verified fetched base; all 211 B1 wanted records accounted for, proposal append underway, registry verification continues.",
-      "observed_at": "2026-10-27T03:38:31.814Z",
+      "observed_status": "Terminal response confirms PR #36, ready for research-desk review; open, non-draft and unmerged. Same recovered task completed; no replacement or continuation.",
+      "observed_at": "2026-10-27T04:31:34.344Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -105,11 +115,40 @@
           "signature": "sandbox-network-mode",
           "result": "Supported with_additional_permissions and network.enabled=true succeeded; resumed same task."
         }
-      ]
+      ],
+      "result": {
+        "pr_number": 36,
+        "pr_url": "https://github.com/jampotful/seen-back/pull/36",
+        "commit": "fec70c1df81d76d5e5e3a2405dfa4bb0a0fd2a56",
+        "draft": false,
+        "merged": false,
+        "files_scope_verified": true,
+        "rows": {
+          "synonyms": 86,
+          "homonyms": 26,
+          "homonym_genera": 16,
+          "wanted_appended": 211,
+          "wanted_total": 212
+        },
+        "validation_reported": {
+          "view_test_scripts": "all four at task base pass",
+          "diff_check": "pass",
+          "proposal_checks": "pass",
+          "senses_check": "nine unchanged baseline missing-source problems"
+        },
+        "desk_review": "pending",
+        "review_qualifications": [
+          "30 synonym rows need species-scope review and registry disagreements reconciled",
+          "Wanted proposals require source-line review because consumer matches broad surname/year pairs",
+          "Noncanonical trait fallbacks require desk confirmation"
+        ]
+      },
+      "result_comment_id": 6433362806,
+      "last_notification_signature": "result-ready:36:fec70c1df81d76d5e5e3a2405dfa4bb0a0fd2a56"
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-10-27T03:38:31.814Z",
+    "observed_at": "2026-10-27T04:31:34.344Z",
     "eligible_open_issues": [
       28,
       29,
@@ -123,10 +162,15 @@
       30
     ],
     "decisions": {
-      "28": "adopt existing running task",
-      "29": "adopt existing completed task and published PR #35; await desk",
-      "30": "adopt existing running task; corrected blocker remains superseded"
+      "28": "no-op duplicate suppression: adopt existing Working task; no prompt sent",
+      "29": "no-op duplicate suppression: adopt completed task and existing PR #35; await desk",
+      "30": "no-op duplicate suppression: adopt completed original task and existing PR #36; result receipt already posted"
     },
-    "full_result_review_cycle_verified": false
+    "issue_comments_posted": 0,
+    "material_changes": [
+      "30: result-ready PR #36"
+    ],
+    "full_result_review_cycle_verified": false,
+    "documentation_note": "Current main runbook remains historical; activation documentation PR #34 is open awaiting desk review."
   }
 }
