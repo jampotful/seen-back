@@ -1235,3 +1235,62 @@ Exact actual web queries, in execution order:
 All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Hypoxis-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
 
 NEW this genus: 6 wanted,0 searched,0 evidence.
+
+
+## 2026-10-27 — issue38 worker27: Carex
+
+Target C.lurida remains species-open. Adopted corrected recheck-15-fixed#5 plus sweep-97#1 and oa-12#432 as actual brevior,pensylvanica,acutiformis light records without extending them to lurida. Existing10.1093/aob/mcl170,10.21273/horttech.24.3.301 and10.1093/aob/mch197 not re-requested. Old thin sweep-97 searches preserved. Both mandatory tools ran and Carex DOES have cached run7 and supplements15/20. All187 printed work occurrences/titles and stored abstract starts, plus15 family-review titles, screened; duplicates not called unique works, and full abstracts not claimed. Citation alternatives:0 cached works citing10.1016/j.tree.2009.09.010;27 hits citing10.1093/aob/mcl170 (25printed titles),not zero or exhaustive beyond delivered titles. Cyperaceae family query cached50hits,15printed titles; no live API success or20results falsely claimed.
+
+Exact successful cached queries (before the actual web queries below):
+- `Carex phytochrome photoreceptor`
+- `Carex light perception`
+- `Carex phototropism`
+- `Carex flower opening time`
+- `Carex nyctinasty`
+- `Carex anthesis`
+- `Carex pollination biology`
+- `Carex volatile signalling`
+- `Carex photoperiod`
+- `Carex circadian rhythm`
+- `Carex epidermal lens cells`
+- `Carex epidermal focusing leaf optics`
+- `Cyperaceae photoreceptor review`
+
+Mandatory10(e) queries first, full four-trait scientific/common-name pairs newly run plus target followups. Direct lurida light-germination leads found in indexed first and second Deno supplements; both shared sources already globally wanted,not duplicated. Bond thesis explicitly includes lurida and light/dark treatments,held for original table reading. Broad Carex germination sources retained under10(e),with exact species/readout unverified where not printed;14-wetland-species list from primary Smithsonian excludes lurida. Existing congener experiments therefore do not close it.
+
+Living arenaria root VOC/bacteria-attraction source now retained as strong congener chemical lead; not lurida sensing. Silver study directly includes lurida,with primary indexed positive leaf-growth context,held for cue/physiological response versus toxicant scope. No numeric extraction. GA-AgNP in that paper means gum-arabic-coated silver,not gibberellic acid; no invented GA response. Independently indexed three-species GA/sulfuric title names angustior,capillacea,limosa but only ResearchGate discovery metadata returned; original journal/bibliography still unresolved and is not treated as target coverage. No ResearchGate page fetched or legal route invented.
+
+Diel: moth/sedge anthesis synchrony and tundra gas/metabolite timing are reading leads; plant flowering months,inflorescence-development phases,alpine snowmelt phenology and first-year flowering are not daily clock-hour measurements. Habitat plant records,animal deer/mosquito/caddisfly rhythms,clinical lightbox/depression trials and generic clock reviews do not show target activity. Chemical tool hits glossary/epithet taste,extracted tricin/resveratrol/antifungal drugs,fungal-bacterial volatile experiments and extremophile CAREX acronym do not establish target living cue response10(a). Broader extreme-environment VOC review is held for explicit species/table check,not declared lurida. Ordinary native drought metabolites and genome annotations alone do not measure chemical communication.
+
+Eye: SEM leaf/achene/silica/papillae and pavement-cell shape are anatomy,not measured eyes or focusing. Mapania structural photonic silica and iridescent helicoidal walls concern another genus and leaf coloration,not Carex eye. Root-hair Flavobacterium hormonal paper lacks demonstrated target Carex from printed abstract; Lens crop in salinity review is lentil. Broad epidermal focusing source10.1111/j.1399-3054.1996.tb00674.x already globally wanted; no new target membership asserted. Owner eye_type none,any actual focusing belongs under light10(b). Unknown/garbled whole-issue entries not treated as negative experiments. Remaining8,exact next Alliaria; stopping after Carex for fresh context, no research yet on those8 by this worker.
+
+Exact actual web queries, in execution order:
+- `web: Carex seed germination light dark`
+- `web: Carex germination gibberellin OR smoke OR dormancy`
+- `web: Carex floral scent volatiles`
+- `web: Carex light photoperiod phototropism`
+- `web: sedge light photoperiod phototropism`
+- `web: Carex volatile emission herbivore induced response methyl jasmonate`
+- `web: sedge volatile emission herbivore induced response methyl jasmonate`
+- `web: Carex flower opening time anthesis`
+- `web: sedge flower opening time anthesis`
+- `web: Carex eye type epidermal focusing`
+- `web: sedge eye type epidermal focusing`
+- `web: "Carex lurida" germination light gibberellin`
+- `web: "Carex lurida" volatile photoperiod anthesis`
+- `web: "The effects of sulfuric acid and gibberellin treatments" Carex`
+- `web: "Calling from distance" "Carex"`
+- `web: "Carex lurida" "AgNPs"`
+- `web: "Germination Ecology of Carex"`
+- `web: "The effects of sulfuric acid and gibberellin treatments on the seed germination of three Carex species" -site:researchgate.net`
+- `web: "Carex" "AN INVESTIGATION OF CAREX"`
+- `web: "Effects of Silver Nanoparticle Exposure on Germination and Early Growth"`
+- `web: "The effects of sulfuric acid" "Carex" journal`
+- `web: "Germination ecology of Carex" "Bond"`
+- `web: "An Investigation of Carex" dormancy lawn`
+
+All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Carex-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
+
+NEW this genus: 36 wanted,0 searched,0 evidence.
+
+Carex additional mandatory10(e) wanted: the indexed three-species sulfuric/GA title is now retained as a bibliographic lookup candidate with blank URL/DOI and journal-via-library get instructions. Species angustior,capillacea,limosa explicit; no invented legal URL or target lurida hormone claim. Thus Carex NEW37 wanted,0 searched,0 evidence (supersedes36 immediately above).
