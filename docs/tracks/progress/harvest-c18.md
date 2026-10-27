@@ -199,3 +199,8 @@ Corrected this round's DOI10.11118/beskyd201609010031 target from queued Holcus 
 ## 2026-10-27 — issue38 shared grassland source, c13 targets
 
 Expanded existing DOI10.1002/ece3.9157 request for Dactylis glomerata and Leucanthemum vulgare after worker24 independently verified indexed primary methods (and retained worker14 PMC9352868 snippet lists both). Preserved the Leucanthemum attrition caveat: too few survivors for total-biomass analysis, no species-level light outcome inferred; other measurements/tableS1 need reading. Indexed source points to dataset10.6084/m9.figshare.20304039, which was not fetched/read. Queue ranking recomputed; no new wanted line or evidence. c13 adopts the shared experimental lead without duplicating it.
+
+
+## 2026-10-27 — issue38 coordinator named-study taxon check
+
+Title/target comparison caught this round's Empetrum wanted lines10–12 mapped to queued E.hermaphroditum although the study titles explicitly use E.nigrum var.japonicum (10) and E.nigrum (11–12). Retargeted to those original study names, records0, preserving source metadata and why provenance. Accepted-name/subspecies applicability stays unresolved for intake, no congeneric cue carry or target measurement asserted. No source page fetched; these are new round records, not legacy main edits. Wanted remains41; no searched/evidence rows.
