@@ -753,3 +753,52 @@ Chemical exclusions:lanigera analgesic,hydropiper methanol pharmacology,maculosa
 Diel:flora/flowering-time pages give months,developmental anthesis stages or visual open-flower definitions,not measured within-day hours. P.amphibia review is retained as a cautious timing/scent trail,not a confirmed hourly measurement. Dai/Galloway dichogamy DOI10.1111/j.1365-2435.2010.01795.x lacks verified Persicaria membership in returned text; no genus assignment invented.10.2307/2656892 is Burchardia pollen quality,other genus. Eye:leaf-taxonomic studies describe epidermal outlines,stomata,cavities and trichomes,not focusing in snippets. Lens-shaped seeds are morphology; other eye results concern animals. No null while API steps are unrun and candidates remain.
 
 Precommit candidate/wanted gate and whitespace check are recorded with this checkpoint. Next untouched Leucaena.
+
+
+## 2026-10-27 — issue38 worker13 Leucaena checkpoint
+
+This checkpoint:1 newly web-screened genus(Leucaena),12 actual web queries,11 wanted,0 searched,0 evidence. Worker13 cumulative:2 newly screened(Persicaria,Leucaena),32queries,27wanted; own current wanted99(initial main72+27),searched0. Adopted17 previous genera(first16 plus Amphicarpaea) separately;21 untouched eligible genera remain,next Amorpha,then Carica,Thelypteris. API-dependent steps remain incomplete after shared OpenAlex429; no full-protocol/exhaustion claim.
+
+### Leucaena — diel,eye_type,chemical; existing light evidence adopted
+
+Original queue L.leucocephala,12639 records,Fabaceae/Fabales. Adopt sweep-31#2 abstract-only Hillman/Koukkari1967 phytochrome/leaflet closure10.1104/pp.42.10.1413 and its recorded Leucaena glauca synonym; no repeated light trait pair. Sweep-31's genuine prior query and opened-source trail preserved; its thin null does not replace the three missing paired traits. Global evidence/corrected,wanted,searched,owner status and canon checked. Relevant plant canon sources not in hand; Animal Eyes Metazoa only. Owner none/focusing-to-light eye rule retained.
+
+Fresh harvest_get/screen_candidates outputs and cached descriptor saved work/w13-c10/. Genus run2,supplements12/14/20:121 unique titles/available starts screened; Fabaceae run17 family review440hits/15listed screened. Citation steps citing10.1016/j.tree.2009.09.010 and10.3390/plants11030239 both0. Exact successful harvest queries,in order:
+
+- `Leucaena phytochrome photoreceptor`
+- `Leucaena light perception`
+- `Leucaena phototropism`
+- `Leucaena flower opening time`
+- `Leucaena nyctinasty`
+- `Leucaena anthesis`
+- `Leucaena pollination biology`
+- `Leucaena volatile signalling`
+- `Leucaena epidermal lens cells`
+- `Leucaena epidermal focusing leaf optics`
+
+Exact12 actual new web queries,in executed order:
+
+- `web: Leucaena seed germination light dark`
+- `web: Leucaena germination gibberellin OR smoke OR dormancy`
+- `web: Leucaena floral scent volatiles`
+- `web: Leucaena flower opening time anthesis`
+- `web: white leadtree flower opening time anthesis`
+- `web: Leucaena chemical perception volatile signalling`
+- `web: white leadtree chemical perception volatile signalling`
+- `web: Leucaena epidermal lens cells eye type`
+- `web: white leadtree epidermal lens cells eye type`
+- `web: "BIOLOGIA FLORAL" "Leucaena" anthesis`
+- `web: "Leucaena" "leaf-closing" substance`
+- `web: "Leucaena" "Mimosine accumulation"`
+
+All delivered titles/snippets read; grouped outputs do not establish20 per query. Raw provenance work/w13-c10/Leucaena-web.json. UF/IFAS/USA-NPN confirm white leadtree common name. No page/paper fetched,MDPI/SANBI/OpenAlex request,paid API,evidence or legacy edits. Unknown DOI/authors/year left empty/null; source-verified1997 floral volume/authors and2015 germination bibliography retained. Global exact DOI/normalized-title checks found no duplicates among11 appended candidates; no n/a re-request.
+
+Eleven new wanted leads:3 cached direct chemical sources(four-jasmonate leaf response and2001/2002 leaf-closing factor); elicitor/UV mimosine experiment;salicylic-acid/mimosine regulation source;GA germination;ecological germination;pretreatment/light experiment;hot-water/light-dark experiment;light-quality/dormancy experiment;1997 floral biology. Germination chemistry versus physical seed-coat scarification is flagged,not automatically treated as receptor sensing. The light-only germination candidates are possible full-source upgrades of the existing partial light evidence,not missing coverage.2001/2002 factor studies may overlap; deduplicate actual values in intake. Primary PDF snippet's one-day anthesis is relative duration,not an extracted time-of-day.
+
+Cached light sources mainly Maesopsis,Albizia,Cannabis,Sudan grass,Shorea,Senna,citrus,onion,Eucalyptus and millet/maize/coconut agronomy,not new Leucaena light physiology in available starts. SoilRich fertilizer experiment reports nutrient growth,not a specified chemical signal in abstract; no extra request. L.diversifolia thermal-gradient germination concerns another species and no chemical/light contrast identified in available start. Genome/staminal-colour inheritance,sterility breeding,pollen fertility,taxonomy,seed yield,forage and pea/coffee/cocoa intercropping do not identify daily L.leucocephala anthesis in available starts. Climate phenology source10.1007/s40415-025-01116-0 studies population seasons; no within-day timing shown. Melilotus photonasty,Swartzia anthesis,Desmodium beetles,orchid mimicry,broad phytochrome/legume/isoflavonoid/biocrystal reviews and rhizobial reviews are family background,not assumed Leucaena measurements; unread tables remain unresolved.
+
+Chemical exclusions:pyrolysis,bark adhesives,polyurethane/seed-oil chemistry,tannins,galactomannan,silages,biosorbents,culinary tempeh panels and extracted-leaf cucumber/weedy-rice tests concern removed tissue or another recipient.2025 Taramba/Wondergraze GC-MS source's title alone does not establish intact emission; no extra chemistry request. Heteropsylla olfactory discrimination senses are the insect's; no plant-cue response inferred. Direct jasmonate and leaf-factor bioassays keep chemical open. Broad nyctinasty10.2183/pjab.102.002 mainly Samanea and review10.1002/tcr.20102 do not give a verified genus result beyond the direct factor papers in displayed starts; no redundant review wanted.
+
+Eye candidates include seed lens/strophiole/hilum anatomy10.21608/djs.2013.139574 and hilar-lens water entry,which are water-gap structures rather than optical eyes; other Lens papers concern lentils,Ipomoea/Desmanthus/Acacia seed coats or vertebrate histology. Leucaena ordinary epidermal anatomy10.33794/qjas.2024.146140.1159 describes cell walls/stomata,no focusing in snippets. Focusing would belong to light. Diel web results otherwise give seasonal flower months,definitions or guava,Quisqualis,Lagerstroemia timing; no other-genus hour assigned. Direct1997 floral source held for reading. No eye/diel null during incomplete API protocol.
+
+Candidate/wanted gate and whitespace check run before this checkpoint commit. Next untouched Amorpha; plant scope only,excluding homonymous moth Amorpha juglandis.
