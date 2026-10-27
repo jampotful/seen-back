@@ -185,3 +185,39 @@ Queries actually run (connected web search; all available result titles/snippets
 - `Ruscaceae photoreceptor review`
 
 Round checkpoint: 10 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 36 wanted, 0 evidence lines. Next Filipendula; 30 unreviewed.
+
+### Filipendula
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates run: run 4; no failed genus queries. All harvested titles and relevant genus abstract starts screened, including family Rosaceae photoreceptor review. Three wanted leads: light/dark germination thesis, foliar growth-regulator trial, living defense response candidate. Deno-derived genus germination account preserved as light lead; not null-screened. Essential oils, solvent extracts, tea infusions, and radish response to Filipendula extract are not living Filipendula responses, so excluded under 10(a); Sargassum filipendula and Zygaena filipendulae are different organisms. Ecophysiology field comparisons do not establish a controlled light response from snippet alone. Diel sources seasonal phenology or rat body-temperature effects of extracts, no plant daily measurement established. Eye results animal lenses. Canon checked; no null claims.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Filipendula seed germination light dark`
+- `Filipendula germination gibberellin OR smoke OR dormancy`
+- `Filipendula floral scent volatiles`
+- `Filipendula photoperiod phototropism light sensing`
+- `meadowsweet photoperiod phototropism light sensing`
+- `Filipendula flower opening time anthesis`
+- `meadowsweet flower opening time anthesis`
+- `Filipendula volatile chemical signalling`
+- `meadowsweet volatile chemical signalling`
+- `Filipendula epidermal lens cells eye`
+- `meadowsweet epidermal lens cells eye`
+
+### Reynoutria
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates run: run 2 genus, family Polygonaceae photoreceptor review present; no failed genus queries. Harvest titles/relevant genus abstract starts screened. Adopted genus light evidence. Germination/light titles (Grab to fill the gap, Interpopulation variation in seed traits of five Polygonaceae) preserved as light leads under adopted coverage. Four wanted chemical leads: three distinct giant-knotweed applied jasmonate/herbivory/biosynthetic studies and a new R. japonica receiver test behind a research-news report. Kept exact titles/URLs without inventing DOI/authors/year. Extracts acting on wheat/courgette, pig diet, steam oils and isolated metabolites do not establish living knotweed chemical responses. Fallopia baldschuanica floral VOC harvest work is another genus/species; Bacillus and Cornus candidate hits also other genera. Diel results seasonal dates, not daily opening hours. Eye anatomy hits do not show a focusing measurement; animal lens hits excluded. Canon checked, no null claims.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Reynoutria seed germination light dark`
+- `Reynoutria germination gibberellin OR smoke OR dormancy`
+- `Reynoutria floral scent volatiles`
+- `Reynoutria flower opening time anthesis`
+- `Japanese knotweed flower opening time anthesis`
+- `Reynoutria volatile chemical signalling`
+- `Japanese knotweed volatile chemical signalling`
+- `Reynoutria epidermal lens cells eye`
+- `Japanese knotweed epidermal lens cells eye`
+
+Round checkpoint: 12 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 43 wanted, 0 evidence lines. Next Chimaphila; 28 unreviewed.
