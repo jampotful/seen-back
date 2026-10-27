@@ -443,3 +443,5 @@ Queries actually run (connected web search; every returned title/snippet screene
 - `wakerobin volatile chemical signalling`
 - `Trillium epidermal lens cells eye`
 - `wakerobin epidermal lens cells eye`
+
+Shared-source adoption after Trillium: existing harvest-c13 wanted title The Influence of Sunflecks on the Photosynthesis of Two Forest Herbs was detected before append and adopted without duplicate (Trillium exact species remains unresolved). Trillium added12 wanted, not13; no searched/evidence. New own c14#129 now also targets primary-indexed Anthriscus sylvestris/Aegopodium podagraria, shared with coordinator/w39; DOI metadata confirmed by that primary-source match. Collection-method fork unchanged; no living-emission assumption.
