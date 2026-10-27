@@ -12,8 +12,8 @@ Unfinished, no searches run (the shared 200-search limit per turn ran out at Hem
 - Panicum virgatum sense_chemical x2 (10.3389/fpls.2019.01144 herbivory and MeJA volatiles; Sarath 2006 NO donor and ABA, no DOI on page) and sense_light_nonvisual (Aiken and Springer 1995)
 - Ailanthus altissima sense_light_nonvisual x2 (10.13133/2239-3129/18231, 10.1111/1442-1984.12286)
 
-## Search records (searched/desk-d1.jsonl, 10)
-Marchantia diel, eye_type; Vachellia karroo sense_light_nonvisual (species level), Vachellia sense_chemical, eye_type; Poa eye_type; Parkinsonia diel, eye_type; Panicum eye_type; Artemisia diel, eye_type; Ailanthus diel, eye_type. (Counts per file below.)
+## Search records (searched/desk-d1.jsonl, 13)
+Marchantia diel, eye_type; Vachellia karroo sense_light_nonvisual (species level), Vachellia sense_chemical, eye_type; Poa eye_type; Parkinsonia diel, eye_type; Panicum eye_type; Artemisia diel, eye_type; Ailanthus diel, eye_type.
 
 ## Wanted lines (wanted/desk-d1.jsonl)
 Stone et al. 2003 acacia pollination (Vachellia diel); Grana 1980 Poa annua anthesis; Saberi et al. 2021 Parkinsonia GA3/KNO3 germination; proso millet crossing paper and Johannesburg 1935 anthesis note (Panicum diel); Int J Plant Sci Polystichum acrostichoides antheridiogen paper (10.1086/297488); Torrey 2019 dormancy paper (Ailanthus).
