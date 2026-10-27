@@ -1205,3 +1205,33 @@ Exact actual web queries, in execution order:
 All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Hexastylis-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
 
 NEW this genus: 6 wanted,0 searched,0 evidence.
+
+
+## 2026-10-27 — issue38 worker27: Hypoxis
+
+Target H.hirsuta has no species-matched substantive light/chemical evidence in preflight. sweep-46#8 GA/light germination is explicitly hemerocallidea; adopt congener source as logged without treating it as target light or chemical coverage, and do not re-request10.4314/ajtcam.v11i2.17. Old thin sweep-46#20 preserved. Both mandatory tools report no harvest genus. Full scientific/common-name four-trait pairs and family review newly run,10(e) first. Family review returns plant/fungal/algal photoreceptors,vertebrate retina hypoxia,nonvisual animal opsins,insect vision and physiology reviews; no family-specific target hirsuta measurement shown.
+
+Target hirsuta germination indexed Deno entry and SEED GERMINATION manual are provenance leads; Deno source already globally wanted, not duplicated. Nursery/Native Plant Society light-required prescriptions do not establish a read primary trial, and several online aggregators mix decumbens/hirsuta synonyms without verified taxonomy. Target pollination original explicitly identified through author/university index and retained for timing reading. Southern African thesis chapter gives sunny/cloudy daily hours but names acuminata,hemerocallidea,obtusa,galpinii,ludwigii,sobolifera; it does not close hirsuta. Cameroonian pollination study and secondary hemerocallidea midday closure are other species.
+
+Chemical: existing congener GA response is retained; new hemerocallidea seed trials,culture and nutrients are valid living-response candidates10(d),with species/culture fork explicit. Extracted corm/terpenoid oils,pre-distillation drying,transcriptomic terpene annotation and pharmacology are not demonstrated living signalling10(a). Apparent floral scent largely from other Hypoxis species or Empodium, no target measurement. Broad MeJA results cotton,Iva,Cymbopogon,Nicotiana,cucumber,Arabidopsis,oak and grass Digitaria photoperiod are other genera. Eye searches show ordinary hairs/epidermis/seed surfaces,eye-catching flower adjectives and Sisyrinchium/Xyris/Aletris common-name matches. Owner eye_type none; no actual focusing lead, which would belong under light10(b). Remaining9, exact next Carex.
+
+Exact actual web queries, in execution order:
+- `web: Hypoxis seed germination light dark`
+- `web: Hypoxis germination gibberellin OR smoke OR dormancy`
+- `web: Hypoxis floral scent volatiles`
+- `web: Hypoxis light photoperiod phototropism`
+- `web: yellow star grass light photoperiod phototropism`
+- `web: Hypoxis volatile emission herbivore induced response methyl jasmonate`
+- `web: yellow star grass volatile emission herbivore induced response methyl jasmonate`
+- `web: Hypoxis flower opening time anthesis`
+- `web: yellow star grass flower opening time anthesis`
+- `web: Hypoxis eye type epidermal focusing`
+- `web: yellow star grass eye type epidermal focusing`
+- `web: Hypoxidaceae photoreceptor review`
+- `web: "Hypoxis hirsuta" germination light gibberellin`
+- `web: "Comparative pollen-pistil interactions and insect pollination"`
+- `web: "Hypoxis hirsuta" growth hormone light`
+
+All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Hypoxis-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
+
+NEW this genus: 6 wanted,0 searched,0 evidence.
