@@ -225,3 +225,27 @@ Six wanted lines added: GA/light germination of P. pilosa, P. drummondii growth 
 Diel pair otherwise returned seasons and flower longevity in days, not daily anthesis hours. Eye matches are floral pigment eyes/cultivar names (including Red Eyes), taxonomic cytology and non-Phlox pollinator eyes; owner none reading applies. Harvest 10.1093/jxb/eru327 is a general opening review without a Phlox timing result in its supplied abstract; RHODOPSIN7 is Drosophila, linalool review centres on Clarkia, diurnal VOC result is Ficus, scent variation result is Lilium, and cut Narcissus is both another genus and harvested material. Cut Phlox NO/ethylene/1-MCP studies are excluded under 10(a); culture propagation remains explicitly uncertain rather than screened out. Web PhLOX/Phlox2 oxylipin results are red-algal enzymes, not genus Phlox. Family search returned general plant/algal photoreceptor reviews and Polemoniaceae phylogenetics; no direct new Phlox measurement. OpenAlex skipped and no null rows.
 
 Worker 9 counts: 2 new genera web-screened, 0 full protocol complete, 0 searched, 10 wanted added, 0 evidence. Cumulative 10 web-screened, 20 wanted; remaining 30, exact next Solidago.
+
+### Solidago — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py. Checked canon catalog/effective main evidence, earlier wanted and owner status. Adopted existing chemical receiver evidence canon-3:668, recheck-17-fixed:4, recheck-quotes-3-fixed:166 and sweep-5:10 plus harvest-29 request for Insect Herbivory Selects for Volatile-Mediated Plant-Plant Communication; did not repeat paired chemical searches or request more chemical-only sources. Current light/diel/eye traits remain open.
+
+Harvest query order: `Solidago phytochrome photoreceptor`; `Solidago light perception`; `Solidago phototropism`; citation works citing `10.1111/ele.12205` naming Solidago (five supplied results); supplement `Solidago volatile signalling`; family review `Asteraceae photoreceptor review`. Screened supplied titles/abstract starts; web returned titles/snippets/passages only; no pages fetched.
+
+Exact web queries, in execution order:
+- `web: Solidago seed germination light dark`
+- `web: Solidago germination gibberellin OR smoke OR dormancy`
+- `web: Solidago floral scent volatiles`
+- `web: "Solidago" flower opening time anthesis`
+- `web: "goldenrod" flower opening time anthesis`
+- `web: "Solidago" eye type epidermal lens cells`
+- `web: "goldenrod" eye type epidermal lens cells`
+- `web: "Solidago" light perception phototropism germination`
+- `web: "goldenrod" light perception phototropism germination`
+- `web: Asteraceae photoreceptor review`
+
+Seven wanted lines added for direct light/germination leads: S. chilensis germination behaviour, green-light sensitivity, comparative series parts 1 and 3, Brazilian arnica reproduction/photoblastism, growing-plant LED/shade-net experiment, and S. gigantea karrikin/dark germination. Adopted existing harvest-c18/c22b request for the Kansas shade thesis (10.58809/eiky9994), with no duplicate wanted line. Its related conference result at https://scholars.fhsu.edu/sacad/vol2018/iss2018/3/ names S. ulmifolia in controlled light fractions; full title and relationship to thesis remain unresolved for oa reading. Search results for S. gigantea hormone effects (10.1007/s11738-016-2179-6), floral emissions and gall-fly priming bear on adopted chemical coverage; no duplicate requests. The 1985 aspen-forest germination survey is an additional unresolved light lead at https://digitalcommons.usu.edu/aspen_bib/3847/; snippet names S. spathulata, but species-specific treatment contrasts require reading.
+
+Anthesis pair returned flowering months, growing-degree phenology and flower-development dates, not clock hours. The anthochron harvest review concerns development/thermal time; no daily anthesis result was assigned to Solidago. Eye results describe taxonomic epidermis/oil glands or medicinal effects on animal eyes; owner plant-none rule applies. Broad family review gave general plant/algal photoreceptors and crop flowering reviews. Harvest light candidates in maize, spinach, Phaseolus, Halophila, white clover, Potamogeton, Cryptocoryne and Arabidopsis do not measure Solidago; they do not support a null while direct genus light leads wait. Extract antinociception and isolated diterpenoids are removed-tissue chemistry under 10(a). OpenAlex skipped; no null rows and no evidence.
+
+Worker 9 counts: 3 new genera web-screened, 0 full protocol complete, 0 searched, 17 wanted added, 0 evidence. Cumulative 11 web-screened, 27 wanted; remaining 29, exact next Gleditsia.
