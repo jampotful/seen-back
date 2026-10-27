@@ -392,3 +392,42 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - `Rosaceae photoreceptor review` (stored family review)
 
 Checkpoint: 12 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 72 wanted lines total, 0 evidence. Remaining unreviewed 28; exact next Orthilia.
+
+### Orthilia (2026-10-27 continuation)
+
+Web screening finished for this round with two new leads: pyroloid seed-culture light/chemical experiments and the named flower-biology source behind BSBI protandry observations (daily opening hour unverified). No existing Orthilia evidence or wanted request found locally. Common-name wintergreen queries produce Gaultheria and generic methyl-salicylate information, which was not assigned to Orthilia. Harvest light hit on site preparation is vegetation/silviculture rather than a controlled Orthilia light response. Pollen morphology light microscopy is an instrument, not light sensing. The already-requested chloroplast-movement thesis in this batch remains an unverified broad Ericaceae table/source lead, not a demonstrated Orthilia experiment. Harvest family eye hits concern human retinal protection and Vaccinium extract; the diel hit concerns animal visual transitions. No genus-specific focusing experiment surfaced; plant eye_type is none under10(b). Harvest Oidiodendron, seaweed, Calendula/Fagopyrum, Vaccinium, Sedum, Pseudorchis and Campanula results concern other organisms or ecological occurrence. Herbicide-toxicity thesis returned by photoperiod query names no Orthilia treatment in its stored abstract, so no negative response claim is based on it. Family web query returned broad photoreceptor reviews rather than a new genus-specific experiment. Floral-scent and chemical web searches returned general reviews without a verified Orthilia emission assay.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Orthilia seed germination light dark`
+- `web: Orthilia germination gibberellin OR smoke OR dormancy`
+- `web: Orthilia floral scent volatiles`
+- `web: Orthilia flower opening time anthesis`
+- `web: sidebells wintergreen flower opening time anthesis`
+- `web: Orthilia plant ocelli lens-like epidermal cells eye`
+- `web: sidebells wintergreen plant ocelli lens-like epidermal cells eye`
+- `web: Orthilia response to airborne volatile signals`
+- `web: sidebells wintergreen response to airborne volatile signals`
+- `web: Orthilia light response photoperiod`
+- `web: sidebells wintergreen light response photoperiod`
+- `web: Ericaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Orthilia phytochrome photoreceptor`
+- `Orthilia light perception`
+- `Orthilia phototropism`
+- `Orthilia flower opening time`
+- `Orthilia nyctinasty`
+- `Orthilia volatile signalling`
+- `Orthilia photoperiod`
+- `Orthilia circadian rhythm`
+- `Orthilia anthesis`
+- `Orthilia pollination biology`
+- `Orthilia epidermal lens cells`
+- `Orthilia epidermal focusing leaf optics`
+- `Ericaceae photoreceptor review` (stored family review)
+
+Checkpoint: 13 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 74 wanted lines total, 0 evidence. Remaining unreviewed 27; exact next Viola.
