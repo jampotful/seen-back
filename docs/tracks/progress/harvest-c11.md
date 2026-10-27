@@ -1509,3 +1509,37 @@ Cached successful queries,exact delivered order:
 - `Poa epidermal lens cells`
 - `Poa epidermal focusing leaf optics`
 - `Poaceae photoreceptor review`
+
+## 2026-10-27 — issue38 worker31 Parkinsonia and clean context handoff
+
+NEW Parkinsonia available-web-screened;15successful connected queries,12new wanted/0searched/0evidence. Worker31finaltotal **5new available-web-screened genera Bromus,Marchantia,Vachellia,Poa,Parkinsonia;78successful connected queries;105new wanted;0new searched/evidence/measurements**. Current **298wanted/25searched**,incoming193/25;issue38/mainbaseline54/25. Acrossrounds **36of40genera available-web-screened;4genuinely unreviewed remain;exactnext Panicum**,then Artemisia,Polystichum,Ailanthus. Context handoff stops between genera. Preserve prior28first20 plus11earlierissue38screens Foeniculum–Apocynum and worker31five;no repeat. PriorPackera unseen-tail caveat remains. No full-protocol/exhaustion claim for newfive:OpenAlex429skipped,allnewnullsearched withheld whilemandatoryAPI/source steps unfinished. SharedPanicumvirgatumERDCsource10.21079/11681/45961alreadyplant-screen-1wanted;Artemisiavulgarisfive-perennialweeds10.1007/BF00344576alreadyc10/c13wanted:futureworkeradopt,no duplicate or legacyedits.
+
+Required harvest_get.py/screen_candidates.py executed for Parkinsonia:noharvestrunyet,no cachedresultset;absence not APIzerohits. QueueP.aculeataall4traits11094records. Canonpertrait,global evidence/corrected/wanted/searched/ownerstatus checked by genus andretainedexacttitles/DOIs/URLs:no targetphysiologyevidencefound,no retainedduplicate/n-asource. Oldsweep-34onequerynull notcurrentcompletion;familyphysiologycannotcarry. Retained12sources separately identify9germination/dormancy studies(oneP.praecoxlightdark,oneP.microphylladiversifiedgermination,otherstargetP.aculeata),targetAustralianweedsreview,and2targetfloralbiology/antherresidenceleads. Originaltitlemetadataunresolvedwhereonlybibliographicindex;unknownauthors/year/DOIleftblankor0,noguessingfromrelativeindexingage. Allpapersunread/outcomesunextracted.
+
+Primarywetheatandseedbankstudiesexplicitlystatehard-seeddormancy,target light-null discussed throughEveritt1983;originalEveritttitleunknown,notinvented. A different Characterization...2 environmental-factors title explicitlyhaslight/temperature/waterpotential comparison and retainedasa directtargetsource. Comparing dormancy breaking treatments has an institutionalindex and indexedGAstimulant description:appliedhormonequalifies10(d),butphysicaltesta scarification/leaching/boiling alone doesnotestablishchemicalsensing. Germinationtitlesretain10(e)despitephysicalmechanisms. P.praecox/P.microphyllasourcesonlytheirnamedcongeners,no targetcarry. Reproductive biology and1994Antherresidence/pollengermination JIndianBotSoc73(3-4):327-328needoriginalwithin-daymethods;pollencounts,seasonalfloweringmonths,elapsedflowerlifetime andpollinatoractivity alone arenotplantdiel. No dailyhourinferredfromunrelatedguava/cactus/Barringtonia/Parkia results. JerusalemthorncommonnamealsorefersPaliurusspina-christi;thoseflorahitsareseparategenus,notParkinsoniaevidence.
+
+Sequestration of Exogenous Volatiles by Plant Cuticular Waxes...10.3389/fpls.2020.00121 is explicitlyreconstitutedP.praecoxwaxlayersandfungalconidiabioassaysintheprimaryindexedmethods:passiveadsorptionisolatedwax,notlivingParkinsoniaresponse;fails10(a),notwanted. PerfumeryfragranceandIMPPATphytochemistry similarlylacklivingreceiver/donorsignaling. Parkinsondiseasehumansebum/VOCbiomarkerhitsarenotgenusplants. Eye_type none10(b),epidermalfocusingbelongstononvisuallight;genericocelli/focusingpapershavenoreturnedtargetmeasurement. Fabaceaefamilyreviewalternative10.1093/jxb/erag313 discussescropcladesandgeneralphotoperiodnetwork,notreturnedParkinsoniameasurement. Genericreviewnotduplicated;plantcanonnotinhand,targetnotinopenedcanon. No sourcepage/paperfetch,evidence,proxy/TLS/credentialschange,purchase,operationaledit ornewservicerefusal.
+
+Exact successful connected queries in executed order:
+- `web: Parkinsonia seed germination light dark`
+- `web: Parkinsonia germination gibberellin OR smoke OR dormancy`
+- `web: Parkinsonia floral scent volatiles`
+- `web: Parkinsonia flower opening time anthesis`
+- `web: Jerusalem thorn flower opening time anthesis`
+- `web: Parkinsonia plant ocelli lens epidermal focusing eye`
+- `web: Jerusalem thorn plant ocelli lens epidermal focusing eye`
+- `web: Parkinsonia chemical sensing volatiles`
+- `web: Jerusalem thorn chemical sensing volatiles`
+- `web: Parkinsonia photoperiod phototropism light response`
+- `web: Jerusalem thorn photoperiod phototropism light response`
+- `web: Fabaceae photoreceptor review`
+- `web: "Parkinsonia aculeata" jasmonate auxin gibberellic`
+- `web: "Parkinsonia" "Reproductive biology" anthesis`
+- `web: "Comparing dormancy breaking treatments" Parkinsonia`
+
+Allactuallydeliveredtitle/snippettextreadinretainedresponses,variablecountswithout20-perqueryclaim.RawParkinsonia-web1–4.jsonandtooloutputs/workspace/work/w31-c11. Mandatoryvalidatorandprefixchecksbelow;exactnextPanicum.
+
+
+Worker31 final mandatory validator printed **0 problems** (also passed at each genus checkpoint). All incoming 193 wanted lines are preserved as an exact byte prefix; the 25 searched lines are byte-identical to incoming. Final counts: 298 wanted / 25 searched; NEW 105 wanted / 0 searched / 0 evidence.
+
+Clean handoff: **Panicum is the exact next genuinely unreviewed genus**, followed by Artemisia, Polystichum and Ailanthus (4 remaining). The five new screens are Bromus, Marchantia, Vachellia, Poa and Parkinsonia; all remain partial under the full protocol because OpenAlex HTTP429 is skipped and original sources await reading. No additional service refusal occurred. Do not repeat any completed screen or change legacy source metadata.
