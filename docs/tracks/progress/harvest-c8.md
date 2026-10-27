@@ -1155,3 +1155,72 @@ Read every exposed result title/snippet and indexed abstract at actual delivered
 Diel leads are actual anthesis in carnea,marcellia/aff.marcellia10.1093/aobpla/plv127,asarifolia,eriocalyx,andone-daynil10.1093/pcp/pcaf108 (elapsed development versusendogenous timing for intake). Seasonal flowering,days afteranthesis,coflowering dates and plant guides are not measured dielpatterns. I.cairica's repeated seasonalbloom description does not close targetdiel;its anthesis/nectary leads remain. Humanmorning-glory-disc anomaly causes most common-nameeye hits;taxonomic epidermal anatomy and surfaceoptics do not establish eyes. Allplants eye_typenone10(b),actualepidermalfocusing belongs underlight. No congenerphysiologicalcarry and no numeric claim.
 
 Worker32 Ipomoea validation: required screen_candidates checker printed **0 problems** at252wanted/23searched; first219wanted and all23searched byte-identical2c770fd2, JSONL parse valid and git diff --check passed after EOF whitespace cleanup. Only own wanted/progress paths edited.
+
+
+## 2026-10-27 — issue38 worker32: Nandina fresh web screen and context checkpoint
+
+NEW this entry: **Nandina only; +9 wanted, +0 searched, +0 evidence. Worker32 total: Ipomoea/Nandina2 newly web-screened genera,42wanted added,0searched/evidence; c8 actual261wanted/23searched.** Both are **protocol-partial**: uncached mandatoryOpenAlex common-name/other omitted protocol steps remain skipped after round-wide429, so no null searched rows or exhaustion claims. Cached Nandina scientific/citation/family steps are adopted below, not described as missing or zero-hit failure. **9 remain; exact next Ligustrum**, thenZanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Ligustrum wholly unstarted by this worker. Prior first18/Pilea/Centrosema, nine screens throughAsplenium, Ipomoea and Zanthoxylum per-trait adoption boundary preserved. Checkpoint between genera for context exhaustion.
+
+Preflight checked corrected-first accepted-name main_evidence, global wanted/searched, actual queued species and papers-status before web research. Target isNandina domestica; no accepted evidence or globalwanted leads before this screen. sweep-28#36 has one compound query and no current paired-trait completion. Berberidaceae/other Ranunculales physiology and photoreceptor gene presence cannot establish target physiology. Canon read/adopted as forIpomoea; no plant eye measurement from animal-eye canon. No paper source n/a rerequested.
+
+Official harvest_get.py and screen_candidates.py succeeded with current supported authorized network. Nandina is **harvest run5**, supplements12/14/20, not the prior no-harvest cases. Every displayed work title/abstract-start occurrence, including repeated titles and unrelated works, was screened. Initial long tool output was display-truncated; official read-only output was recovered into session memory and printed in five bounded slices, without source fetch or scratch-cache write. Repeated official descriptor reads were for this display recovery, not new external API trait searches. Exact successful harvest queries/hit counts and citation/family steps in emitted order (no gave-up query):
+- query "Nandina phytochrome photoreceptor": 3 hits
+- query "Nandina light perception": 102 hits
+- query "Nandina phototropism": 4 hits
+- citation step: works citing 10.1016/s0031-9422(02)00119-x that name Nandina: 0
+- citation step: works citing 10.1016/s0031-9422(02)00119-x that name Nandina: 0
+- query "Nandina flower opening time" (supplement run 12): 527 hits
+- query "Nandina nyctinasty" (supplement run 12): 0 hits
+- query "Nandina volatile signalling" (supplement run 12): 80 hits
+- query "Nandina photoperiod" (supplement run 12): 58 hits
+- query "Nandina circadian rhythm" (supplement run 12): 19 hits
+- query "Nandina anthesis" (supplement run 14): 26 hits
+- query "Nandina pollination biology" (supplement run 14): 92 hits
+- query "Nandina epidermal lens cells" (supplement run 20): 13 hits
+- query "Nandina epidermal focusing leaf optics" (supplement run 20): 0 hits
+- family review "Berberidaceae photoreceptor review": 22 hits
+
+New connected web queries: **27 actual query transmissions /23 distinct strings**. Required10(e) first, all scientific/common4trait pairs, family review, source/method clarifications; the four eye/diel queries were repeated once solely because the first combined display omitted a section. The full recovery response was stored in session memory and read in bounded slices; this does not reopen an already-completed prior genus. Exact execution order, repeats retained:
+- `Nandina seed germination light dark`
+- `Nandina germination gibberellin OR smoke OR dormancy`
+- `Nandina floral scent volatiles`
+- `Nandina flower opening time anthesis`
+- `heavenly bamboo flower opening time anthesis`
+- `Nandina eye type lens-like epidermal cells`
+- `heavenly bamboo eye type lens-like epidermal cells`
+- `Nandina light photoperiod phototropism`
+- `heavenly bamboo light photoperiod phototropism`
+- `Nandina volatile chemical hormone response`
+- `heavenly bamboo volatile chemical hormone response`
+- `Berberidaceae photoreceptor review`
+- `"Nandina" epidermal focusing papillae lens leaf optics`
+- `"Nandina" anthesis diurnal circadian stomata`
+- `"Non-deep simple morphophysiological dormancy" "10."`
+- `Nandina flower opening time anthesis`
+- `heavenly bamboo flower opening time anthesis`
+- `Nandina eye type lens-like epidermal cells`
+- `heavenly bamboo eye type lens-like epidermal cells`
+- `"Non-deep simple morphophysiological dormancy" "Nandina" doi`
+- `"Nandina" "Dehgan" "1984" germination`
+- `"Effects of Light Length on the Growth and Development of Plants" Nandina`
+- `"In vitro Conservation and Cryopreservation of Nandina" hormones light`
+- `"Nandina" "Non-deep" "10.1016"`
+- `"Nandina" "중부지방" 광`
+- `"Establishment of a Highly Efficient In Vitro Regeneration System" doi`
+- `"Nandina" "Replication of Leaf Surface Structures"`
+
+Read exposed returned titles/snippets and indexed original-source passages at actual delivered extent;no20-per-query claim. Initial display-truncated eye/diel batch was replaced for screening by a complete rerun/recovery batch, rather than claimed fully read. Some search snippets contain long original methods/results; these remain search results, not direct page fetches or evidence. Returned ResearchGate,Wikipedia,mirror/encyclopedia and opportunistic-copy links left unopened and not primary sources. DOI/year/authors retained only if exposed by original/author repository metadata; otherwise blank/null.
+
+**Nine globally absent wanted sources:**2016Rhie/Kim/Lee/Kim chemical seed response10.1016/j.scienta.2016.07.022;1999controlled shade10.21273/hortsci.34.3.554e (the audit54missedlead explicitly retained);1993targetcultivar shade/interior trial10.21273/hortsci.28.9.946;2018targetstreetlight/nonstreetlightcomparison10.29306/jseg.2018.10.1.30 (KCIoriginalabstract confirmsNandina,not Arabidopsis carry);2011Koreanwinterlightfieldstudy (noDOI exposed);2025BA/IBA living shootresponse10.3390/plants14030421;2013livingcultureconservation10.15835/nbha4129335 (actuallight/hormonecontrast versusfixedculture/cryoprotection unresolved);USFSFEISspeciesreview;2010formaldehydechambers10.21273/hortsci.45.10.1489 (targetpresence confirmed in original2016abstract,passiveuptake versuscue-response eligibility held).
+
+**Germination disagreement retained:**2016original indexed abstract explicitly reports appliedGA3 substitute for warmstratification. OlderUSFSreview describes negativeGA trials and cites Dehgan1984 *Germination of Nandina domestica seed as influenced by GA3 and stratification* plus *Studies on seed dormancy in Nandina domestica, Howea forsteriana and Elateocarpus reticaulatus* (spelling/title as exposed). These mandatory10(e) original-title leads are held together via the one requested review for original recovery,not three duplicate reviewURLs or invented original metadata. USFSalso explicitly describes target light-treatment growth trials and photoinjury,so lightbelongs on its wantedrow. No chemical absence inferred from oldernegative result; negative responses remain measurements of tested cues. GA andlivingBA/IBA qualify10(d). Fungal/cellcryoprotectantstorage alone,physicalscarification,fixedphotoperiod and hormoneabundance do not establish sensing. Patentfixed culture schedules do not create unreported treatment comparisons.
+
+**Other candidate dispositions (no negative searched rows):**10.1038/srep43363 iswheatnitrogen/anthesis,notNandina diel;10.3389/fimmu.2023.1253964 is humanhepatocellularimmuneNETs,ocellsubstringnotplanteyes. Target floralstructure10.1093/botlinnean/boad074 measures floraldevelopment/epidermaldifferentiation/stigmapapillae,not dailyanthesistiming or focusing. Landscape performance/fertility2006/2014/2021/2024 sources timeflowers inmonths/seasons andfruit/viability,not hours. Anthesismorphology,late-springbloom,elapsedweeks andyearroundpollinatorvisitation titles alone are not targetdielmeasurements. No within-day target result established; no exhaustiveabsence claimed.
+
+Light candidates:1999shade and1993shadeexperiment retained. 2018KCIstreetlightfield comparison nowactualspecies-confirmed. Juglanshydraulicthesis isanothergenus. 2017Epimediumlight10.1371/journal.pone.0182348,2025EpimediumMaxEnt10.3389/fpls.2025.1534608,ArabidopsisSDR6 andgardencatalogues establish noNandinaresponse. Frosthardiness10.1080/03015521.1988.10425646 applies temperature,not demonstrated lightcue. Opticalreplica10.1038/srep14281 tablesPMMA replicas copied fromNandinaleafsurfaces,notlivingplant focusing orresponse;originalindexedmethods explicitlysay cured/detachedPMMAandtablecaptionleaf-mimickingpolymer. Do not mistake PMMAsheetoptics for Nandinaeyes or a living photoreceptor experiment. Any actualfocusing belongsunderlight10(b).
+
+Chemical candidates:hydrodistilledfloral oil antibacterialstudyPMID18541324,fruitessentialoil10.1080/14786419.2015.1057584,andcancerchemicalprofiling fail10(a),notlivingcueemission. HarvestrocketpostharvestVOCs,Citrusdriedpeelessentialoil,Curcumametabolites,Juniperusnaturalproducts,Corymbia/Cymbopogonoilfungicides,Lamprocapnosculturereview andzebrafishberberinetoxicitydonotestablishtargetchemicalresponse. Broadterpenoid/forestVOCreviewabstractsdonotnametargetmeasurements. Formaldehyderemovalheldforintakebecauseactualtargetexposureisconfirmed,butadsorption/metabolismaloneisnotdefinedassensoryperception. No existingcorrectedtargetchemicalrecordorwholegenusadoption invented.
+
+Services: inheritedOpenAlex429,MDPI429,UChicago403,SANBI403 skipped; no newrefusal. Returned indexed snippets from these hosts are incidentalengineoutputs,not directrequests or servicebypass. No directpaperfetch,evidencelog,unauthorizedhost,proxychange,operational/gates/branch edit or permissionrequest. Currentcloud-environment-runtime network observations remain the supported environment; no newskill-drivenblock. GlobalDOI/Unicode-preservingexacttitle/URLdedupe found0existingmatches for9rows; no oldlineedited.
+
+Worker32 final validation: the required screen_candidates checker printed **0 problems** at 261 wanted / 23 searched. All JSONL parses. The original 219 wanted lines and all 23 searched lines are byte-identical to 2c770fd2. git diff --check passed. Only own wanted/progress files changed; no evidence or paper assets. Two new web screens remain protocol-partial, with 42 added wanted leads. Exact next genus: **Ligustrum**; nine genera remain.
