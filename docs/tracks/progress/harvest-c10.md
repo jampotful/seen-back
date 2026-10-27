@@ -947,3 +947,66 @@ Chemical exclusions:Thelypteris meeboldii aqueous whitefly insecticide,fern anti
 Diel:nonflowering fern seasonal spore maturity,developmental germination in days,spore morphology/antherozoid release mechanisms andgeneric photoperiod reviews do not establish a measured within-day schedule. Marsilea morning/noon leaf-angle experiment concerns another genus. No diel candidate invented or null licensed. Eye:Dryopteris thelypteris sinuous-cell geometry describes epidermal shape,not focusing;hand lens is observer equipment;fern vascular/hair/spore morphology is anatomical. No measured Thelypteris optical focusing in returned snippets;owner none reading applies. No negative claim about unread full texts.
 
 Final gate before commit must print0problems;all initial72wanted bytes and previous700-line progress prefix preserved. No raw search pages/full paper assets committed. Exact next Fagus;do not repeat these5 completed available-source screens merely because raw queue still lists wanted-only genera.
+
+
+## 2026-10-27 — issue38 worker20 Fagus checkpoint
+
+This checkpoint:1 new available-source web screen(Fagus),23 actual web queries,17 new wanted,0 searched,0 evidence. c10 current144wanted(initial main72+worker13 55+worker20 17),searched remains empty. Prior28 first16 screens and issue38 Persicaria,Leucaena,Amorpha,Carica,Thelypteris preserved;Amphicarpaea adopted harvest-29,not repeated.17 eligible untouched remain,exact next Eleusine,then Stellaria,Typha,Pueraria,Thunbergia,Morus,Symphyotrichum,Melinis,Nyssa,Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. All available-source screens remain protocol-partial because missing API/common-name steps cannot run after shared OpenAlex429. No exhausted cells or completed full-protocol claims.
+
+Read AGENTS first,issue38 worker guide and named round4-harvest,desk-screen1–10,round3-sweep,THOROUGH and BRIEF including Round2;audits53/54 fault summaries and prior c10 query/provenance checkpoints adopted. Cloud-environment-runtime/network reference applied;current observations_current=true,unrestricted HTTP policy enforced,VPN false,no configured credentials. No OpenAlex scientific API request,MDPI request,paid service,source/page/paper fetch,evidence,legacy/other-unit edits or branch/gate changes. Own scratch /workspace/work/w20-c10/. Shared descriptor Fagus.json absent from coordinator cache,so required harvest_get.py/screen_candidates.py ran successfully with documented supported networking;full current local harvest descriptor saved Fagus-cache.json. Network calls in those tools fetch GitHub ci metadata,not OpenAlex. Preserve original127 wanted bytes and all previous progress text.
+
+### Fagus — original four traits,existing two light measurements adopted
+
+Original targets F.grandifolia62092 records and F.sylvatica28946,Fagaceae/Fagales. grandifolia original light,chemical,diel,eye open;sylvatica chemical,diel,eye open. Main harvest-13#1/2 partial light evidence for sylvatica/crenata is adopted without duplicate requests;no carry to grandifolia assumed. Legacy harvest-13#15 three-query null for chemical/diel/eye preserved,not accepted as current protocol completion:direct chemical-signal papers now found. Global wanted/evidence/corrected/searched/owner status and canon checked before append. Relevant plant light/chemical/angiosperm-diel canon entries not in hand;Animal Eyes covers Metazoa. Owner eye_type=none applies;epidermal focusing belongs to light.
+
+Real cache run4,supplement12;85 displayed genus/query/citation entries including duplicates,77 unique genus works,and15 family works. All titles/available abstract starts screened. Cached scientific/supplement queries executed successfully,in order:
+
+- `Fagus phytochrome photoreceptor`
+- `Fagus light perception`
+- `Fagus phototropism`
+- `Fagus photoperiod`
+- `Fagus circadian rhythm`
+
+Cached citation step citing10.1111/nph.13510 naming Fagus returned10 works. Family run17 `Fagaceae photoreceptor review` returned50hits/15listed;all titles/available starts read. Family oak/Quercus genome atlas/divergence,Castanea grafting,Brassica/Arachis experiments,tomato peer-review andbeetle/wasp trapping concern other taxa. Generic photoperiod-temperature,ALAN,UV,flavonoid,bud-outgrowth andlight-intensity reviews identify no new target response in available starts;unread species tables unresolved. No irrelevant family carry or background-only request.
+
+Exact23 new web queries,in executed order:
+
+- `web: Fagus seed germination light dark`
+- `web: Fagus germination gibberellin OR smoke OR dormancy`
+- `web: Fagus floral scent volatiles`
+- `web: Fagus photoperiod light perception phototropism`
+- `web: beech photoperiod light perception phototropism`
+- `web: Fagus flower opening time anthesis`
+- `web: beech flower opening time anthesis`
+- `web: Fagus chemical perception volatile signalling`
+- `web: beech chemical perception volatile signalling`
+- `web: Fagus epidermal lens cells eye type`
+- `web: beech epidermal lens cells eye type`
+- `web: "Fagus grandifolia" "supplemental light"`
+- `web: "Electrophysiological Responses of the Beech Leaf-Mining Weevil" DOI`
+- `web: "Fagus" "seed" "germination" "gibberellic" Nicolas 1996`
+- `web: "Volatile organic compounds emitted from beech leaves" DOI`
+- `web: "Effects of Extended Photoperiod and Light Quality" Fagus`
+- `web: "Differences in pigment circadian rhythmicity" "Fagus"`
+- `web: "Effect of gibberellic acid and ethephon on the germination" beech DOI`
+- `web: "Pregermination Treatment and Germination Characteristics" Fagus treatments`
+- `web: "Effective distance of volatile cues" "Fagus crenata"`
+- `web: "Volatile-mediated plant" "natural beech forests" "Fagus"`
+- `web: "GA3-Induced Expression of a New Functional" "2002"`
+- `web: "Fagus grandifolia" "Silvics" "light"`
+
+All actually delivered grouped titles/snippets read;no20-per-query claim. Raw results Fagus-web1.json through-web6.json. Beech common name verified by NCSU/USDA and RHS. Germination pair and scent ran first under10(e). Last12 queries resolve target-species primary experiment,seed hormone source identities,emission DOI/species anddaily-pigment reference boundary. No source page opened;incidental ResearchGate,encyclopedia,unauthorized redistribution andOpenAlex-domain snippets were not treated as measured evidence. Actual DOI/title duplicates checked globally;unknown authors/DOI empty,unconfirmed years null. No year inferred solely from DOI text or relative search date.
+
+17newwanted:2001 direct grandifolia light-quality/extended-photoperiod seedling experiment;1997 sylvatica ABA-responsive seed experiment;2003 hormone/dormancy bud-cutting candidate;2009 adult-beech ozone-fumigation comparison;2006 PP2A seed treatment;2004 GA/ethylene seed treatment;2002 AAA-ATPase seed treatment;1996 ABA/GA seed dormancy;2010 GA/ethephon beechnuts;2010 orientalis pregermination;2026-indexed sylvatica belowground signal/aboveground VOC study(year left null);2020 crenata within-plant signal;2021 crenata distance communication;2024 crenata natural-forest communication;2020 grandifolia VOC collection/weevil antennal response;undated sylvatica leaf VOC emission;2011 branch-enclosure monoterpene emission. Only actual queue taxa contribute records counts;orientalis/crenata imply no carry. Orientalis title retained under10(e),actual light/chemical comparisons unread. Bud-cutting culture scope remains explicit;no invented whole-plant method. Negative/inhibitory2010 chemical results remain controlled trials,not rejected because no stimulation. Hormone-gene studies include actual applied seed treatment,response not mere sequence homology. Ozone effects show physiological exposure contrasts,not assumed receptor recognition. Emission sources require intact/living sampling and signalling review under10(a);animal antenna response alone is not plant perception.2024 forest source includes defense hormone/leaf-damage responses,not accepted simply because removed leaf tissue was chemically assayed.1996 VOC DOI found only secondary indexes,so retained primary route with DOI/year blank/null. No measured values extracted.
+
+Shared requests adopted without duplication:harvest-c8#60 DOI10.1111/gcb.14599 currently forAesculus only,but primary title/snippet also tests F.sylvatica;harvest-c14#25 Hormonal Regulation of Seed Dormancy in Hazel(Corylus avellana L.) and Beech(Fagus sylvatica L.) currently forCorylus only. Coordinator informed of metadata target-expansion opportunities;no other-unit edit.1966 hazel versus beech hormone methods remain for intake confirmation. Existing partial sylvatica/crenata photoperiod papers retained as evidence,no re-request;grandifolia gets its own direct cached light experiment. USDA Silvics American Beech chapter also reports supplemental-light dormancy/growth andcites Growth of tree seedlings as affected by light intensity,an exact-original-reference trail for future intake. No second generic handbook request with direct2001 experiment already queued.
+
+Diel:paired anthesis search returns spring catkin/leaf-out seasons,developmental bud-opening films andgeneric flower-opening review,not measured daily Fagus opening. Circadian pigment paper10.1007/s11676-022-01528-8 cites Fagus photosynthesis but indexed primary snippet does not establish Fagus as measured species;unresolved,not a ruled-out full text. Woody-organ respiration thesis10.53846/goediss-2293 concerns carbon flux/time-space variation;daily behavioural schedule not demonstrated in available start. Seasonal/annual masting,temperature/GWAS/model phenology andwood formation do not establish hour-of-day activity. Bears/dormice/Clusia/Casearia/rocket studies are other taxa. No diel null while API incomplete.
+
+Eye:paired snippets mostly animal ocular lenses/histology,ordinary Fagus wood/leaf/pollen anatomy andmycorrhizal epidermis. Actual epidermal-optics paper10.3732/ajb.94.7.1061 names Begonia,Citrus,Ficus,Colocasia,Impatiens,not Fagus. Stem/root vascular light conduction10.1093/jxb/erg167 is not an eye;generic leaf structural-optics review does not identify a Fagus focusing experiment in displayed snippet. Focusing would belong under light. No eye null andno inference about unread whole texts.
+
+Other cached dispositions:barley,Scutellaria,sorghum,Pinus experiments concern other genera;forest LiDAR/crown-geometry/model papers describe physical light environment rather than new target cue response in available starts;biomechanical tension-wood/thinning work concerns touch/posture,not automatically light.1996 geographic bud dormancy lacks an available abstract;not asserted negative. Direct chemical/live-emission leads override old blanket absence. Only source titles/snippets/cached abstract starts read,no full text or evidence logged.
+
+Parent subsequently expanded own issue38 c14#25 targets to precise Corylus avellana and Fagus sylvatica in commitf2493a2d,with methods warning retained;adopt without duplicate. Legacy c8#60 remains unchanged under main-prefix preservation,with target pointer retained for desk review.
+
+Precommit screen_candidates --check printed0problems;exact next untouched Eleusine.
