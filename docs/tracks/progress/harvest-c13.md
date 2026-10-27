@@ -26,4 +26,11 @@ Main sense_light_nonvisual coverage adopted. Harvest run 4/supplements: 110 dist
 
 Web queries (verbatim): ["Lythrum seed germination light dark", "Lythrum germination gibberellin OR smoke OR dormancy", "Lythrum floral scent volatiles", "Lythrum flower opening time anthesis", "purple loosestrife flower opening time anthesis", "Lythrum response to airborne volatile signals", "purple loosestrife response to airborne volatile signals", "Lythrum plant ocelli lens-like epidermal cells eye", "purple loosestrife plant ocelli lens-like epidermal cells eye"]
 
-Counts this round so far: 3 genera web-screened / protocol partial; 0 full-protocol genera; 0 search rows; 9 wanted lines; 0 evidence rows. Next genus: Pinus. Remaining: 37 untouched genera.
+
+### Pinus — web-screened, protocol partial
+
+Main sense_light_nonvisual evidence and existing wanted 10.4236/ajps.2013.43061 adopted. Harvest run 2/supplements: 70 distinct titles screened; chemical candidate abstracts examined. Harvest queries (verbatim): ["Pinus phytochrome photoreceptor", "Pinus light perception", "Pinus phototropism", "Pinus volatile signalling", "Pinaceae photoreceptor review"]. Zero-hit citation step on 10.1007/s00239-004-0294-2 and Pinaceae family review screened. Germination searches found light comparisons in multiple Pinus species and applied gibberellin/smoke experiments. Chemical leads include MeJA treatments, induced emissions and receiver-plant volatile responses. Retained one explicit diurnal-anthesis study for diel. Extract-only chemistry of removed pine material and pine-nut peptide powder spoilage were excluded; reviews and unrelated Populus/Arabidopsis receiver experiments do not establish Pinus measurements. Generic plant-ocelli and insect-eye results do not change the owner’s plant eye_type reading. Missing OpenAlex common-name work remains incomplete, so no null rows. No pages fetched.
+
+Web queries (verbatim): ["Pinus seed germination light dark", "Pinus germination gibberellin OR smoke OR dormancy", "Pinus jasmonate herbivore", "Pinus response to airborne volatile signals", "pine response to airborne volatile signals", "Pinus flower opening time anthesis", "pine flower opening time anthesis", "Pinus plant ocelli lens-like epidermal cells eye", "pine plant ocelli lens-like epidermal cells eye"]
+
+Counts this round so far: 4 genera web-screened / protocol partial; 0 full-protocol genera; 0 search rows; 25 wanted lines; 0 evidence rows. Next genus: Phragmites. Remaining: 36 untouched genera.
