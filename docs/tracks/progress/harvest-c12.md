@@ -1294,3 +1294,63 @@ All delivered titles/snippets read (up to20/query where delivered, no invented c
 NEW this genus: 36 wanted,0 searched,0 evidence.
 
 Carex additional mandatory10(e) wanted: the indexed three-species sulfuric/GA title is now retained as a bibliographic lookup candidate with blank URL/DOI and journal-via-library get instructions. Species angustior,capillacea,limosa explicit; no invented legal URL or target lurida hormone claim. Thus Carex NEW37 wanted,0 searched,0 evidence (supersedes36 immediately above).
+
+
+## 2026-10-27 — issue38 worker27: Alliaria
+
+Continued after Carex checkpoint with room for one more complete web screen; prior Carex next-Alliaria handoff superseded. Target A.petiolata has no substantive global species evidence or wanted; old sweep-4/harvest-12 thin searches preserved and do not establish modern four-trait completion. Both mandatory tools ran:cached run2 plus supplement14,47 printed work occurrences/titles and stored abstract starts,15 Brassicaceae family-review titles screened. Citation step on10.1016/j.tree.2009.09.010 returned1printed kin-recognition review,held for references; on10.5586/aa.2012.059 returned0. No API failure presented as zero hits.
+
+Exact successful cached queries before web queries:
+- `Alliaria phytochrome photoreceptor`
+- `Alliaria light perception`
+- `Alliaria phototropism`
+- `Alliaria volatile signalling`
+- `Brassicaceae photoreceptor review`
+
+Full scientific/common-name four-trait pairs newly run with10(e) first; cached family-review alternative adopted without repeating live API. Strong direct target light+nutrient experiment Meekins2000 and JA defense-cost2012 source retained; GA/ascorbate/salicylate2015 and GA/scarification2009 target germination sources clearly meet10(d,e),no chemical null. Other mandatory target germination/seedbank sources retained even where cold/temperature or light treatment is unresolved. Root/kin competitor and pathogen-induced allelopathy candidates require mechanism reading,not an assertion that allelopathy means the producer senses neighbours.
+
+Crucial cache false positives resolved by primary indexed metadata:Specialist Insect Herbivore and Light Availability10.1371/journal.pone.0139234 actually Alternanthera philoxeroides,not Alliaria. Metabolic Integration10.3390/plants11202768 actually Solidago altissima and cites the target JA source; source not requested for target measurement. Nicotiana undecane,cabbage Brassica rapa/oleracea/juncea VOCs,tea volatiles,parasitoids,butterfly pheromone,Allium garlic bulb/clock studies and Cuscuta/Adiantum plants are other taxa. Broad biochemical root-catabolite work not automatically assigned to Alliaria. Free and Bound Volatiles of Garlic Mustard is explicitly hydrodistillation/O-glycoside hydrolysis,so fails living-signal10(a). In vitro antioxidant extract assays,garlic-scented crushed leaves,constitutive cyanogenic chemistry and clinical food uses do not establish target sensing.
+
+Diel:all delivered Alliaria floral results concern season/two-year lifecycle,relative inflorescence stages and fruit maturation,not experimental opening hour. Bothalia dusk-hour source is unrelated southern African flora,Solanum alliariifolium is a name substring,Allium reproductive review not target. No daily null while API protocol skipped. Eye searches mostly human skin/eye/dermoscopy,botanical flora and names; no actual target focusing lead. Owner eye_type none; actual focusing would belong under light10(b). Family reviews mostly crop microgreens,Arabidopsis light/flavoprotein/flowering genetics and Brassica physiology; no target eye measurement.
+
+Remaining7,exact next Prunella,then Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. No new web screening of these7 by worker27; target Daucus eye plant-1#3 substantive and Prunella rescreen-1 is bird homonym,not plant. Stop between entries for fresh context.
+
+Exact actual web queries, in execution order:
+- `web: Alliaria seed germination light dark`
+- `web: Alliaria germination gibberellin OR smoke OR dormancy`
+- `web: Alliaria floral scent volatiles`
+- `web: Alliaria light photoperiod phototropism`
+- `web: garlic mustard light photoperiod phototropism`
+- `web: Alliaria volatile emission herbivore induced response methyl jasmonate`
+- `web: garlic mustard volatile emission herbivore induced response methyl jasmonate`
+- `web: Alliaria flower opening time anthesis`
+- `web: garlic mustard flower opening time anthesis`
+- `web: Alliaria eye type epidermal focusing`
+- `web: garlic mustard eye type epidermal focusing`
+- `web: "Breaking seed dormancy of Alliaria petiolata with phytohormones"`
+- `web: "Expression and costs of induced defense traits in Alliaria"`
+- `web: "Alliaria" "Seed Germination" "Baskin"`
+- `web: "Metabolic Integration of Spectral and Chemical Cues" "Alliaria"`
+- `web: "Seed Longevity and Dormancy State Suggest Management Strategies"`
+- `web: "Impact of global warming on Alliaria petiolata"`
+- `web: "Alliaria" "flower" "anthesis" hour`
+- `web: "Breaking seed dormancy" "Alliaria" site:link.springer.com`
+- `web: "Specialist Insect Herbivore and Light Availability"`
+- `web: "Expression of constitutive and inducible chemical defenses" "Alliaria"`
+- `web: "Alliaria" "Laboratory Methods for Breaking Dormancy"`
+- `web: "The effects of leaf litter nutrient pulses on Alliaria petiolata performance"`
+
+All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Alliaria-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
+
+NEW this genus: 16 wanted,0 searched,0 evidence.
+
+
+## 2026-10-27 — issue38 worker27 final checkpoint
+
+NEW worker27:6 web-screened genera Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria;79 wanted(4+10+6+6+37+16),0 searched,0 evidence or measured closures. Files now16 searched/292 wanted; takeover e5d6b6ba213 wanted and original main111 wanted remain exact byte prefixes,as do searched/progress prefixes. Prior26 screens+Asparagus adoption+these6=33/40 covered. All6 are full-protocol partial because OpenAlex429 remains skipped; no null/exhaustion claim.
+
+Alliaria17 proposed candidates yielded16 new wanted:Kin recognition in plants10.1093/jxb/erq250 is already wanted/harvest-29,adopted without duplicate. Field/table references in that source remain unread. All new Alliaria for-pointers specify A.petiolata.
+
+Exact next Prunella; remaining7 Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. None newly web-searched by this worker. Preserve all prior28 first18 screens,Ficus/Lespedeza/Salix,Asparagus adoption,Coccoloba/Cenchrus/Olea/Cerastium/Hemerocallis and these6. Adopt species-matched substantive evidence before any pair. Prunella rescreen-1 bird optics are not plant coverage; harvest-15 plant far-red culture evidence is species vulgaris. Daucus plant-1#3 eye screen substantive,plus recheck-17-fixed#5 target light evidence. Hypoxis/Carex source species limits explicitly maintained.
+
+Checks before commit:screen_candidates combined --check0 problems;JSONL parse16/292;exact prefixes from takeover e5d6b6ba and main bbc35ff preserved for all3 owned paths. Own-file git diff --check clean. No source-page/paper fetches,evidence,full-paper assets,other-unit edits,branch changes or operational state mutations. Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 remain;no new service/quota refusal. Raw tool provenance remains scratch work/w27-c12,not git. Stop between entries for fresh context.
