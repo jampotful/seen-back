@@ -396,3 +396,27 @@ Exact web queries, in order:
 - web: Fabaceae photoreceptor review
 
 Worker42 checkpoint: 5 newly web-screened genera (Betula, Thuja, Linnaea, Lindera, Lupinus), all protocol partial;48 new wanted,0 searched,0 evidence. Cumulative15 web-screened genera and118 wanted lines.25 remain, exact next Picea. No new service refusal.
+
+### Picea: web-screened, protocol partial
+
+Required harvest_get and screen_candidates report no harvest. Actual-species evidence preflight adopted P. abies light evidence recheck-5-fixed#17 / sweep-11#3, its living methyl-jasmonate chemical measurements from 10.1104/pp.103.021196 (oa-4 and corrected recheck records), and existing P. abies diel evidence. Existing sweep-11 wanted request for that same jasmonate paper adopted without repeat. None measures the queue's P. glauca or P. sitchensis. There is no diel open trait in the current queue, so no diel pair repeated.
+
+Thirteen new wanted sources added after cross-unit/owner-status title/DOI scan found no matches. White-spruce germination source explicitly compares light with darkness, providing a P. glauca light lead. Other leads cover P. glehnii/P. polita germination, P. abies light/LED/dormancy/growth experiments, P. pungens night-break response, supplemental-light and GA treatment, two sapling/fungal-volatile chemical trials and a White-Engelmann provenance source whose hybrid/species attribution needs reading. Genus-only labels explicitly defer species attribution; no carry from P. abies to P. sitchensis/P. glauca. P. sitchensis own light/chemical response remains unestablished in displayed results. New jasmonic-acid paper is distinct from the existing methyl-jasmonate source.
+
+Metadata leads: “Comparative data regarding the growth of spruce (Picea abies l) and black locust (Robinia pseudoacacia l) plantlets and their content in assimilating pigments in the 40st day of in situ or in vitro seed germination exposed to diferent wavelenght led ligh” appeared on Studia Universitatis with explicit red/yellow/green/blue versus white LED seedling comparisons; original title has spelling/truncation uncertainty so not fabricated into a polished citation. Its search URL is https://www.studiauniversitatis.ro/2014/11/17/comparative-data-regarding-the-growth-of-spruce-picea-abies-l-and-black-locust-robinia-pseudoacacia-l-plantlets-and-their-content-in-assimilating-pigments-in-the-40st-day-of-in-situ-or-in-vitro-seed-g/ . “The effects of light intensity, photoperiod, soil moisture potential, and temperature on bud morphogenesis in Picea species” appeared only on ResearchGate and was not opened. USFS Picea seed manual https://www.fs.usda.gov/nsl/Wpsm/Picea.pdf provides further original germination citations (Farmer et al1984 black spruce; Gosling and Rigg1990 Sitka spruce priming/chilling); snippets alone do not establish Sitka light or chemical cue contrasts. Fagus detects belowground stress from Picea neighbors: receiver is Fagus, not Picea, and displayed snippet does not establish the donor's individual chemical response, so no Picea-receiver inference.
+
+Eye searches give general ocelli/Boquila speculation, animal pineal organs, ordinary cone/pollen anatomy, cone colours and generic lens surveys, no Picea focusing measurement. Family review search returns broad photoreceptors and Pinaceae photosynthetic/genomic reviews; genomic photoreceptor presence is not a physiological measurement. Seed-cone colours and Douglas-fir photosynthetic specialization do not establish a spruce chemical/light response beyond the sources already retained. Angiosperm chemical/diel canon does not cover gymnosperms; plant light canon remains not in hand. Common name spruce verified by USFS and all experimental titles. OpenAlex still skipped, missing steps prohibit null records; no fetching/evidence.
+
+Exact web queries, in order:
+- web: Picea seed germination light dark
+- web: Picea germination gibberellin OR smoke OR dormancy
+- web: Picea jasmonate herbivore
+- web: Picea photoperiod phototropism light response
+- web: spruce photoperiod phototropism light response
+- web: Picea chemical response volatile signaling
+- web: spruce chemical response volatile signaling
+- web: Picea plant ocelli lens-like epidermal cells eye
+- web: spruce plant ocelli lens-like epidermal cells eye
+- web: Pinaceae photoreceptor review
+
+Worker42 final checkpoint, stopping cleanly between entries for context: 6 newly web-screened genera (Betula, Thuja, Linnaea, Lindera, Lupinus, Picea), all protocol partial;61 new wanted lines,0 searched rows,0 evidence. Cumulative16 web-screened genera,131 wanted lines.24 genuinely unreviewed genera remain, exact next Encelia: Encelia, Symphoricarpos, Malva, Knautia, Anaphalis, Asimina, Sherardia, Matteuccia, Mertensia, Drosera, Sedum, Alnus, Echinocereus, Humulus, Thlaspi, Thalictrum, Arbutus, Anacamptis, Campanula, Pastinaca, Barbarea, Carduus, Tragopogon, Nicotiana. Continue preserving all original prefixes/query provenance and the adopted proper screens noted above. OpenAlex unavailable after coordinator429; no other service rejected a request in this continuation.
