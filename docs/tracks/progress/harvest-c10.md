@@ -1307,3 +1307,63 @@ Excluded chemical leads: crude ethanolic stem/leaf antifungal extract work, macr
 Eye: original target anatomy describes ordinary epidermal, mesophyll, collenchyma and vascular structure, with no lens/focusing claim in returned starts. Gardenia domatia are another genus; Brodersen/Vogelmann 2007 actually names Begonia, Citrus, Ficus, Colocasia and Impatiens. No epidermal-outline-to-lens inference. Owner plant eye_type none applies; focusing would belong under light. Seasonal flowering/greenhouse bloom months, ordinary flower structure, insect visits and UV-reflective pollinator pattern do not establish target daily anthesis or plant photoreception. T. erecta morning observation retained as an actual named species lead; NParks T. fragrans daytime entry remains a secondary pointer, not a new measurement request.
 
 DOI/normalized Unicode-title duplicate and owner-status checks found no existing request for the six appended sources. Prior 220 wanted lines unchanged, main72 prefix untouched. No prohibited host opened; incidental ResearchGate, Wikipedia, scribd/unauthorized redistributor and a proxy mirror search result were not used as sources. Search results only, no source/full-text fetch.
+
+
+## 2026-10-27 — issue38 worker33 Morus checkpoint
+
+1 newly available-source-screened genus (plant Morus),31 actual new web queries,10 new wanted,0 searched,0 evidence. Worker33 cumulative2 genera,64 queries,16 new wanted. Current c10 236 wanted (main72 + prior issue38 148 + worker33 16),searched empty;29/40 available-source-screened/adopted.11 eligible untouched remain: exact next Symphyotrichum,then Melinis,Nyssa,Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. No full-protocol/exhaustion claim: missing OpenAlex scientific/common-name additions remain unrun after shared429; no null placeholders.
+
+### Morus — actual plant target and homonym separation
+
+Global queue/wanted/searched/evidence/audits/canon and owner status checked before queries;preflight outputs saved work/worker33/Morus-{gaps,wanted,searched,evidence,audit}.txt. Plant target is M.alba16000records,Moraceae/Rosales,with light/diel/eye/chemical gaps. rescreen-1#9–10 and gannet eye evidence concern bird Morus bassanus/serrator,Sulidae/Suliformes,and establish no plant coverage. Legacy sweep-13#24 has only one combined plant query,not current paired protocol. No prior proper paired plant trait screen found. Original harvest_get/screen_candidates both report no Morus harvest,not zero API results; outputs saved in scratch. Relevant plant light/chemical/diel canons not in hand; Animal Eyes covers Metazoa.
+
+Existing harvest-c7 wanted#76 DOI10.1080/15592324.2021.1950899 names Broussonetia papyrifera AND M.alba circadian electrical signals but for[] only Broussonetia. Original Taylor & Francis indexed abstract verifies both actual species measured in natural day/night cycles. Adopt source pointer without duplicate; parent notified. This is inside c7 original main112 prefix and remains untouched. Parent explicitly cautioned that a circadian physiological variable alone does not establish qualifying diel behavior: retain reader's trait/method fork,not an accepted diel measurement. Actual M.alba causal light-response applicability also remains for reader. Because neither establishes target paired behavioral screening,current light/diel pairs ran once.
+
+First10(e)germination pair and floral scent preceded other trait pairs;additional jasmonate/herbivore query followsactual hormonal lead. NCSU/USFS verify white mulberry=M.alba. Exact31queries in executed order (all actually delivered titles/snippets read;grouped response counts,not20 per individual query):
+- `web: Morus seed germination light dark`
+- `web: Morus germination gibberellin OR smoke OR dormancy`
+- `web: Morus floral scent volatiles`
+- `web: Morus flower opening time anthesis`
+- `web: white mulberry flower opening time anthesis`
+- `web: Morus photoperiod light perception phototropism`
+- `web: white mulberry photoperiod light perception phototropism`
+- `web: Morus chemical perception volatile signalling`
+- `web: white mulberry chemical perception volatile signalling`
+- `web: Morus epidermal lens cells eye type`
+- `web: white mulberry epidermal lens cells eye type`
+- `web: Moraceae photoreceptor review`
+- `web: "Morus" "jasmonate" herbivore`
+- `web: "Effect of controlled conditions on the germination of five Morus alba"`
+- `web: "Studies on anthesis and flowering pattern" mulberry`
+- `web: "Efecto de condiciones controladas" "Morus" site:scielo.sld.cu`
+- `web: "Effect of Growth Regulators on the dormancy of Mulberry"`
+- `web: "Bioactive Compounds Produced in Leaves of Mulberry" doi`
+- `web: "Studies on anthesis and flowering pattern" "Tikader"`
+- `web: "Morus alba" "Sánchez-Rendón" "2017" germinación`
+- `web: "Studies on anthesis and flowering pattern" authors`
+- `web: "Chemical analysis of mulberry" "jasmonates" doi`
+- `web: "Biotic stress-induced expression of mulberry cystatins" doi`
+- `web: "Efecto de condiciones controladas" site:redalyc.org`
+- `web: "Studies on anthesis and flowering pattern" site:isgpb.org/journal/index.php/IJGPB/article/view/1728`
+- `web: "Breaking seed dormancy in black mulberry" "2005"`
+- `web: "Electrophysiological Responses and Reproductive Behavior" "Morus alba"`
+- `web: "269158176004" "luz"`
+- `web: "Effects of proline and temperature applications on germination of black mulberry seeds"`
+- `web: "Effect of seed rates on seed germination and seedling growth of Mulberry" site:nopr.niscpr.res.in`
+- `web: "Chemical analysis of mulberry" "sprayed"`
+
+Moraceae photoreceptor review returned generic plant/fungal/photoreceptor reviews,Moraceae/Ficeae floristics and insect vision. No actual Morus treatment identified in available family-review starts;no unseen-table absence claim. No page/paper fetches,OpenAlex retry,paid API,evidence or new service refusal. Raw Morus-web1–8.json and new candidate/query JSON saved under work/worker33.
+
+Ten appended wanted:2017 five M.alba varieties controlled light/dark germination;1988 target winter-bud GA3/urea/NAA/ABA response;2005 M.nigra GA3 germination;2022 target rooted-transplant LED comparison;2004 Morus sp.daily anther timing;2025 target jasmonate/coronatine spray response;2015 M.atropurpurea cystatin MeJA response;2020 M.nigra proline germination;Morus sp.seed-rate germination;and2017 companion M.alba seed-physiology/dormancy study. Two original germination/dormancy titles with unshown cue experiments remain explicitly10(e)method leads,not proof density/morphology/desiccation is chemical/light sensing. Unknown author/year/DOI fields remain blank/null. Original redalyc journal and institutional citations verify2017,original abcbot and author institution verify2005,original Korean KISS date1988.12 verifies1988 rather than relative timestamp1989,and original DergiPark PDF colophon verifies2020. Publisher/PubMed confirm2022/2025/2015 DOI identities; original IJGPB confirms2004 authors/year and has blank DOI link,not a DOI to invent.
+
+Actual light study2022 measures controlled LEDs in rooted transplants after node propagation;read rooted status/treatment stage,do not treat an isolated node or subsequent ethanol extract as the plant trial. Germination source2017 explicitly has light/dark alternation. USDA seed-manual fixed light-period germination conditions alone are not a comparative light response. Google patentCN105766132A contains a possible light/dark M.alba seed comparison,retained as secondary intake pointer here,no separate patent request because actual target peer-reviewed light trial already found.
+
+Chemical:1988 bud hormone trial and2025 foliar MeJA/coronatine spraying are potential living responses under10(d);attached versus excised stem/bud and postharvest versus intact spray methods remain explicit intake forks,not whole-plant assertions.2015 original abstract explicitly measures MeJA response in M.atropurpurea,not M.alba. M.nigra GA3/proline trials retain actual species and records0;no congener physiological carry. Proline nutrient/osmotic versus signal mechanism remains for desk.2014 M.notabilis jasmonate-pathway gene catalog and2026 dormancy/VIGS paper do not establish applied cue response merely from pathway association;not requested as actual target chemical/light proof.2022 M.alba silkworm-defense transcriptome is a damage/herbivory expression pointer whose chemical-versus-mechanical cue remains unresolved;not an automatic hormone experiment.
+
+Chemical exclusions:fruit/leaf free/bound aroma profiles,HS-SPME of ground/dried material,food sensory evaluation,distilled essential oils,silage additives and postharvest melatonin fruit treatments are removed tissue/food under10(a). Silkworm BmOr56/GR/neuron responses concern insects,not mulberry receivers.2016 webworm host-volatile paper PMC4931431 and2009 silkworm odor receptor PubMed19427209 are source/method pointers;the available starts do not verify intact emitting mulberry versus harvested foliage/synthetic odors,so no live-plant emission claim or new wanted entry from insect physiology alone.2018 BVOC-damage thesis found only on commercial thesis aggregator,without original author/institution verified;not requested as an invented bibliography.
+
+Diel:original2004 journal explicitly times daily anther dehiscence,distinct from Jan–Apr flowering dates and1–4days per catkin. It names Morus sp.germplasm without resolved species/accessions,so for[Morus],records0 and no M.alba assertion.2009 stigma/reproductive survey and Biology of mulberry flower snippets show seasons/days,not daily hours;no extra timing request on broad titles alone.2006 explosive pollen-release duration/dry-air trigger already noted in legacy sweep;not a light/clock response.
+
+Eye:ordinary Morus epidermal cell/stomatal/cystolith anatomy and M.nigra papillose outline do not claim lens/focusing in returned starts. Human mulberry corneal dystrophy and silkworm larval lens-shaped organelles are animals. Owner none applies;actual epidermal focusing would belong under light. A2024 white-mulberry review erroneously calls Shiraz,Pinot Noir and Sangiovese mulberry varieties in its general light section;these names alone cannot support a Morus light experiment,so no grape data imported.
+
+Normalized Unicode-title/DOI duplicate check across all wanted/evidence/audit and owner-status check found no existing request for10new sources. Prior226 wanted prefix unchanged;main72 untouched. Parent c7 legacy-target pointer preserved for desk only. Incidental RG,Wikipedia,commercial text redistributors,library-signed URL and OpenAlex-indexed web search result not opened/used as primary sources;no API retry or unauthorized copy.
