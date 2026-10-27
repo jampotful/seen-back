@@ -179,3 +179,27 @@ Exact web queries in order; returned titles/displayed passages screened, no page
 The germination-first search directly recovered light/dark studies in L. latifolius and L. aphaca, plus a smoke-solution study in L. sativus. Adopted the existing trait coverage rather than requesting more papers for it. Likewise the scent studies (10.1093/pcp/pcaa100; 10.3390/plants13233272) bear on existing chemical coverage; cut-flower ethylene work does not count under owner point 10(a). The remaining diel search returned flowering seasons, plant developmental dates and a Bruchus/L. latifolius interaction paper whose displayed passage describes insect day/night visits and flower age in days, not measured plant anthesis clock hours; the full source remains unresolved at https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers20-07/31763.pdf and was not screened as proof of absence. Main's photoperiod evidence was not relabelled as diel. The eye pair returned petal/leaf epidermal taxonomic microscopy, not image-forming organs; any focusing belongs under nonvisual light and the owner plant-none reading applies. Of the three harvest diel candidates, 10.1104/pp.84.2.318 measures Melilotus, 10.1093/aobpla/plac041 measures Swartzia, and 10.1111/j.1365-294x.2006.03051.x is a broad phytochrome review with no Lathyrus daily-timing measurement in the supplied abstract. Harvest eye candidate list was empty. OpenAlex supplements skipped; no null rows.
 
 Cumulative counts: 8 genera web-screened (Mycelis, Dryopteris, Clintonia, Dicentra, Struthiopteris, Centranthus, Actaea, Lathyrus), 0 full protocol complete, 0 searched rows, 10 wanted lines, 0 evidence rows. Remaining 32 unreviewed; exact next genus Ornithogalum. Stopped between genera at the context checkpoint; all work committed. Required OpenAlex supplements/citation steps remain skipped, and wanted sources await oa reading.
+
+### Worker 9 continuation — 2026-10-27
+
+Adopted Worker 4's eight finished web screens and ten wanted lines without repeating their queries. Read required protocols and audits; supported network policy is enforced/unrestricted, VPN false, no credentials configured. Used cloud-environment-runtime skill; kept inherited proxy/TLS settings. OpenAlex remains skipped following the coordinator's HTTP 429 budget refusal. No page/paper fetching, evidence writing or null searched rows.
+
+### Ornithogalum — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py. Checked canon/evidence/wanted and owner-status files for new lead identifiers. Existing sweep-20:5–6 light/diel rows are Wikipedia-based; left untouched under the no-legacy-repair instruction and told coordinator. Current tool opens eye_type and sense_chemical. Plant eye_type follows owner none reading, with focusing assigned to nonvisual light.
+
+Harvest queries in order: `Ornithogalum phytochrome photoreceptor`; `Ornithogalum light perception`; `Ornithogalum phototropism`; supplement `Ornithogalum volatile signalling`; `Ornithogalum epidermal lens cells`; `Ornithogalum epidermal focusing leaf optics`; family review `Asparagaceae photoreceptor review`. No citation harvest listed. Screened supplied harvest titles/abstract starts and the returned web titles/passages, up to twenty delivered per query; no claim of twenty where fewer were supplied.
+
+Exact web queries in execution order:
+- `web: Ornithogalum seed germination light dark`
+- `web: Ornithogalum germination gibberellin OR smoke OR dormancy`
+- `web: Ornithogalum floral scent volatiles`
+- `web: "Ornithogalum" eye type epidermal lens cells`
+- `web: "star of Bethlehem" eye type epidermal lens cells`
+- `web: "Ornithogalum" chemical signalling volatile response`
+- `web: "star of Bethlehem" chemical signalling volatile response`
+- `web: Asparagaceae photoreceptor review`
+
+Four wanted leads added: named O. arabicum dormancy/germination study, the living-cultivar vernalization/PGR trial, the Ornithogalum flowering/PGR title, and GA-linked O. umbellatum fruit epidermal growth. Species/culture details and absent metadata remain for source reading. The bulb NMR dormancy abstract uses storage temperature, not a demonstrated light/chemical manipulation; no chemical null is inferred. Cut-spike calcium/ethylene gravitropism and phenylalanine-induced fragrance of cut flowers are excluded by 10(a). Extract polysaccharides, OSW-1 cancer pharmacology and tissue metabolomics concern removed tissue/animal responses, not living plant sensing. Eye results concern ovary cuticles, lipotubuloids and taxonomic leaf anatomy, not image-forming organs; unrelated Gagea, Hippobroma, Episcia and astronomical Star-of-Bethlehem results do not cover this genus. Family web review results were broad plant/algal photoreceptor reviews rather than a direct Ornithogalum measurement. Harvest chemical candidates 10.21273/hortsci.35.3.406a (cut apples), the Origanum thesis and Eucomis LED cultures concern other taxa; aromatic-volatiles Viewpoint and nectar review did not identify a direct Ornithogalum measurement in the displayed passages. Held chemical for reading; OpenAlex supplement/citation protocol incomplete, so zero null rows.
+
+Worker 9 counts: 1 new genus web-screened, 0 full-protocol complete, 0 searched, 4 wanted added, 0 evidence. Cumulative 9 web-screened, 14 wanted; remaining 31, exact next Phlox.
