@@ -33,7 +33,8 @@ import urllib.request
 import xml.etree.ElementTree as ET
 
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 seen-back-oa/1"
-BANNED = ("researchgate.net", "academia.edu", "sci-hub", "libgen", "z-lib", "zlibrary", "booksc", "pdfdrive")
+BANNED = ("researchgate.net", "academia.edu", "sci-hub", "libgen", "z-lib", "zlibrary", "booksc", "pdfdrive",
+          "ezproxy", "libproxy", "elogim", "idm.oclc.org", "proxy.")  # library proxies never opened
 CAP = 30 * 1024 * 1024
 
 
