@@ -404,3 +404,24 @@ Queries actually run (connected web search; every returned title/snippet screene
 - `Heracleum epidermal lens cells eye`
 - `cow parsnip epidermal lens cells eye`
 - `Apiaceae photoreceptor review`
+
+### Matricaria
+
+Web-query screen completed for round, full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates report no harvest. Checked canon catalog, global evidence/wanted/status and actual queue target M. discoidea; no congener physiology carried. Existing1997 Matricaria inodora paper belongs to Tripleurospermum inodorum; cut-flower Matricaria manuals belong to Tanacetum parthenium, not target. New target review10.3389/fagro.2026.1888735 displays explicit light/dark-versus-dark germination original data in search result; also retained target short-flash datasheet and synonym chemical-method fork. Other new leads are chamomilla/recutita-only, with cultures/headspace method forks. Essential oils, tea/infusion chemistry and human corneal-extract response excluded10(a). Pineapple Ananas results are another genus. Eye focusing paper10.3732/ajb.94.7.1061 names other genera; no target focusing measurement. Diel primary anthesis study is congener-only; historical Floral Clock lists M. suaveolens but exact original observation/name mapping unresolved, no measured claim. Adopted already-run Asteraceae family-review query/results from Jacobaea. No fetched page, null rows or evidence.
+
+Queries actually run (connected web search; every returned title/snippet screened, fewer than20 whenever fewer delivered):
+
+- `Matricaria seed germination light dark`
+- `Matricaria germination gibberellin OR smoke OR dormancy`
+- `Matricaria floral scent volatiles`
+- `Matricaria photoperiod phototropism light sensing`
+- `pineappleweed photoperiod phototropism light sensing`
+- `Matricaria flower opening time anthesis`
+- `pineappleweed flower opening time anthesis`
+- `Matricaria volatile chemical signalling`
+- `pineappleweed volatile chemical signalling`
+- `Matricaria epidermal lens cells eye`
+- `pineappleweed epidermal lens cells eye`
+- `Matricaria discoidea seed germination light dark`
+- `Matricaria discoidea germination gibberellin dormancy`
+- `Matricaria jasmonate herbivore`
