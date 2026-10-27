@@ -21,7 +21,7 @@ OpenAlex refused this machine (proxy 403), as it did for harvest-c23, so no Open
 
 ## Stopped
 
-WebSearch ration: 98 of 100 used (two per open trait, the floral-scent search for insect-pollinated genera, and four follow-ups named in their records and wanted lines: Eriophorum tundra shading, Themeda smoke or gibberellin germination, Themeda light and darkness germination, and none other). Two searches remained, too few for the next genus, so the unit stopped between genera with everything committed.
+WebSearch ration: 98 of 100 used (two per open trait, the floral-scent search for insect-pollinated genera, and three follow-ups named in their records and wanted lines: Eriophorum tundra shading, Themeda smoke or gibberellin germination, Themeda light and darkness germination). Two searches remained, too few for the next genus, so the unit stopped between genera with everything committed.
 
 Genera left for a later unit: Stylophorum, Cyclamen, Delphinium (all four plant cells each; none is in a harvest run).
 
