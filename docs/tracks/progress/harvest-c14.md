@@ -535,7 +535,7 @@ Incoming 184 wanted-line prefix and all 27 earlier web-query screens retained. B
 
 ### Elaeagnus
 
-Web-query screen completed for round; full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates, harvest title/abstract starts through105 (including supplements), citation zero hits and five family alternatives reviewed. Canon/global evidence/wanted/status preflight finds target umbellata diel sweep-11#5 only; no congener physiology carry. Added15 wanted leads: actual target light-germination/Shafroth trial, hormone germination for both targets, floral-headspace conditional methods, oviposition response, and leaf optics. Passive reflection/structural coloration alone is not assumed to be light sensing, and the convex-lens indexing hit is left for the reader to resolve under light, never eye_type. Living versus picked floral material is explicit for headspace studies. Extracts, steam-distilled flower oils, juice fermentation, antioxidant food chemistry and animal retina/cancer experiments excluded10(a); microscopy lenses and trichome anatomy do not establish eyes. Elaeagnus rhamnoides/Hippophae sources not carried to umbellata/angustifolia. Mollis light/germination source exists in snippets but only RG/secondary title and no permissible primary method confirmation; unresolved source pointer https://ouci.dntb.gov.ua/en/works/4vobbAwl/ for reader, not target adoption. Family hits mainly Hippophae floral gene expression and medicinal chemistry, no target carry. The LED propagation hybrid is explicitly ×ebbingei only.
+Web-query screen completed for round; full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates, harvest title/abstract starts through105 (including supplements), citation zero hits and five family alternatives reviewed. Canon/global evidence/wanted/status preflight finds target umbellata diel sweep-11#5 only; no congener physiology carry. Added16 wanted leads (including final harvest recheck gas-exchange/light candidate10.1007/s11099-006-0036-3): actual target light-germination/Shafroth trial, hormone germination for both targets, floral-headspace conditional methods, oviposition response, and leaf optics. Passive reflection/structural coloration alone is not assumed to be light sensing, and the convex-lens indexing hit is left for the reader to resolve under light, never eye_type. Living versus picked floral material is explicit for headspace studies. Extracts, steam-distilled flower oils, juice fermentation, antioxidant food chemistry and animal retina/cancer experiments excluded10(a); microscopy lenses and trichome anatomy do not establish eyes. Elaeagnus rhamnoides/Hippophae sources not carried to umbellata/angustifolia. Mollis light/germination source exists in snippets but only RG/secondary title and no permissible primary method confirmation; unresolved source pointer https://ouci.dntb.gov.ua/en/works/4vobbAwl/ for reader, not target adoption. Family hits mainly Hippophae floral gene expression and medicinal chemistry, no target carry. The LED propagation hybrid is explicitly ×ebbingei only.
 
 Queries actually run (connected web search; every delivered title/snippet screened, fewer than20 whenever fewer delivered; germination pair and eye pair reissued only because combined-output truncation hid earlier results):
 
@@ -635,3 +635,41 @@ Queries actually run (all delivered titles/snippets screened, fewer than20 whene
 - `"Pollinator attractors" "Cymbalaria muralis"`
 - `"Linaria cymbalaria" germination light nitrate`
 - `"Aspects of dispersal in Cymbalaria" schweizerbart`
+
+### Conium
+
+Web-query screen completed for round; full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates: not in harvest. Canon/global evidence/wanted/status preflight found no measured target and old thin sweep only. Added7 wanted: direct maculatum light/dark germination and2018 light-dependent seed test, induced live cell-culture chemistry (two sources), herbivory-versus-constitutive defense fork and primary turnover/review leads for diel alkaloid physiology. Living elicited cultures are not discarded as extracts, but culture-versus-whole-plant boundary remains explicit for desk. Geographic herbivory covariance does not prove induction by itself. Oils/hydrodistillates, isolated coniine pharmacology, cancer extracts, molecular docking, sheep/mouse/human toxicity and homeopathy excluded10(a); poisonous volatile compounds do not automatically establish communication. Litter-cutting allelopathy proceedings https://www.cal-ipc.org/wp-content/uploads/2017/12/Proceedings_1999NoNames-reduced.pdf concern cut debris/recipient plants, not living Conium perception. Seasonal seed regression title is an unresolved source pointer (RG title and secondary KhmerResearch index only), not primary-confirmed light assignment. All anthesis-pair hits are annual dates or other Conium species, not daily flower-opening hour; primary temporal alkaloid leads preserve the possible metabolic diel response. Microscopy lenses/epidermal growth-factor cancer results and plant-induced human phototoxicity are not plant eyes/focusing. Apiaceae family review alternative inherited from completed Heracleum screen (exact query in earlier progress), no physiological carry from other umbellifers. No fetched pages, null searched records or evidence.
+
+Queries actually run (all delivered titles/snippets screened, fewer than20 whenever fewer delivered):
+
+- `Conium seed germination light dark`
+- `Conium germination gibberellin OR smoke OR dormancy`
+- `Conium floral scent volatiles`
+- `Conium photoperiod phototropism light sensing`
+- `poison hemlock photoperiod phototropism light sensing`
+- `Conium flower opening time anthesis`
+- `poison hemlock flower opening time anthesis`
+- `"Conium" volatile chemical signalling`
+- `"poison hemlock" volatile chemical signalling`
+- `"Conium" epidermal lens cells eye`
+- `"poison hemlock" epidermal lens cells eye`
+- `"Conium" gibberellic acid jasmonate elicitor`
+- `"Conium maculatum" diurnal alkaloid rhythm`
+- `"Conium maculatum" anthesis flower opening daily`
+- `"Conium" herbivory induced volatiles`
+- `"Conium" "diurnal" "Cromwell"`
+- `"Conium" "gibberellic acid"`
+- `"Conium" "flower" "anthesis" "hour"`
+- `"Characteristics of seed material and seedlings of Conium"`
+- `"Conium" "cell suspension" elicitation`
+- `"Conium" "alkaloids" "light" "dark"`
+- `"Seasonal changes of seed germination" "Conium"`
+- `"Seed germination ecology of poison hemlock" doi`
+- `"Conium" "rapid turnover" "light"`
+- `"Conium" "Elicitation of furanocoumarins" doi`
+- `"Geographic Variation in Alkaloid Production" Conium doi`
+- `"Conium" "diurnal" "alkaloids" Cromwell Fairbairn`
+
+Worker46 natural context checkpoint: **5 newly web-screened genera**, Elaeagnus, Geum, Calluna, Cymbalaria, Conium; these are web-query screens for this round, **not full-protocol exhaustion**. Added **45 wanted,0 searched,0 evidence** (Elaeagnus16, Geum5, Calluna13, Cymbalaria4, Conium7). Batch totals **229 wanted,0 searched,0 new evidence**; incoming184 wanted lines verified byte-for-byte preserved, plus27 earlier web screens. Actual-species adoptions: Geum urbanum illumination oa-14#15; Geum rivale/urbanum in existing c14#118 mcs253, primary-confirmed in snippets without changing old record prefix; Calluna vulgaris abstract light-response/upgrade source retained. Berteroa c13#36 source-target incana pointer remains unverified per c13 owner; correction above governs previous claimed adoption. No plant physiological congener carry. Elaeagnus root-exudate10.7150/jgen.93243 concerns bacterial exoproteome, not automatically a plant receiver response or volatile signal; broad thesis1773/21977 and canopy leaf-angle dataset10.1007/s13595-018-0730-x remain unresolved method/species pointers rather than fabricated measurement assignments.
+
+**8 genuinely unreviewed genera remain; exact next Crataegus**, then Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia. No research on these8 begun by worker46. Primula retains inherited actual-species/trait preflight requirement and plant-1 eye screen to adopt where applicable; no repeat of completed screens. OpenAlex still skipped due inherited429; no new refusal. No pages/papers fetched, no paper text or evidence written. Checker0 before each serialized own-file commit.
