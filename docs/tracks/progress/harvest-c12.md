@@ -1137,3 +1137,37 @@ Exact actual web queries, in execution order:
 All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Chromolaena-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
 
 NEW this genus: 4 wanted,0 searched,0 evidence.
+
+
+## 2026-10-27 — issue38 worker27: Cyanthillium
+
+No substantive target evidence or wanted found in global preflight under Cyanthillium or Vernonia cinerea; old sweep-47#5 thin screen preserved. Both mandatory tools report no harvest genus. Full scientific/common-name light,chemical,diel,eye pairs newly run,10(e) first. Adopted this worker's already-screened Asteraceae photoreceptor review query/results from Chromolaena as family alternative; no repeated family query. Synonym expansion materially changes old null:2004 primary fecundity study reports target light/dark contrast, two additional species-named germination trials and several culture hormone responses now retained. Every new lead requires original reading; no measurement or exhausted trait claimed.
+
+Initial scent hits are essential-oil/volatile tissue chemistry, including new bergamotenal, and extraction/anti-smoking/cytotoxicity/medicinal claims; no demonstrated living emission/sensing from these descriptions10(a). Cymbidium fragrance, Iva/cotton/cucumber/Arabidopsis/cranberry/oak MeJA responses and generic seed hormone reviews are other taxa. NParks and Kew indexed results corroborate synonym V.cinerea; Vernonia gigantea,acaulis,angustifolia and New York ironweed garden pages are not target. Eye results include ordinary epidermal/midrib taxonomy and microscopy, herbal kajal treating human eyes and insect ocelli; none demonstrates target eyes/focusing. Owner eye_type none; any focusing would belong under light. Diel sources on seasonal bloom, seed life cycle and phenophase definitions give no clock hour; primary target pollen/anthesis source held for reading. The visible GA32.5% outcome in low-maintenance wildflower abstract is Cleome, not target. Fixed photoperiods for culture/pathogen/rat housing are not target light responses. Remaining11, exact next Hexastylis.
+
+Exact actual web queries, in execution order:
+- `web: Cyanthillium seed germination light dark`
+- `web: Cyanthillium germination gibberellin OR smoke OR dormancy`
+- `web: Cyanthillium floral scent volatiles`
+- `web: Cyanthillium light photoperiod phototropism`
+- `web: little ironweed light photoperiod phototropism`
+- `web: Cyanthillium volatile emission herbivore induced response methyl jasmonate`
+- `web: little ironweed volatile emission herbivore induced response methyl jasmonate`
+- `web: Cyanthillium flower opening time anthesis`
+- `web: little ironweed flower opening time anthesis`
+- `web: Cyanthillium eye type epidermal focusing`
+- `web: little ironweed eye type epidermal focusing`
+- `web: "Vernonia cinerea" seed germination light dark`
+- `web: "Vernonia cinerea" gibberellin photoperiod`
+- `web: "Vernonia cinerea" flower opening anthesis`
+- `web: "Vernonia cinerea" methyl jasmonate`
+- `web: "Vernonia cinerea" "anthesis" "2017"`
+- `web: "In Vitro Micropropagation of Vernonia cinerea"`
+- `web: "Cyanthillium" "light" germination study`
+- `web: "Secondary pollen presentation and psychophily"`
+- `web: "Seed Germination of Selected Wild Flowering Species for Low Maintenance Planting Designs"`
+- `web: "Bio indices for 2,4-D sensitivity"`
+
+All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Cyanthillium-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
+
+NEW this genus: 10 wanted,0 searched,0 evidence.
