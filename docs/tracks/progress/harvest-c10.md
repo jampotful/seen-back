@@ -1447,3 +1447,50 @@ No additional Asplenium genus screen repeated. Parent specifically authorized so
 OriginalHEP indexed table explicitly names Asplenium nidus red/far-red treatment andRaghavan1971. Added ONLY actualA.nidus tofor[],retained Thelypteris kunthii,all previousqueries/sourcefields andranking0;A.nidus absent currentqueue contributes0. Appended both exactqueries/sourceprovenance andmethod caveat. HEP ruta-muraria passage instead identifies germination temperatureoptimum viaPangua1994;this does not verify a light experiment,so ruta-muraria NOT added aslighttarget. Parent notified of species/method limit forw29_c8 deskfollowup. Noevidence,value or fulltextfetched.
 
 NormalizedUnicode-title/DOI duplicate checks including nested evidence source identities andownerstatuscheck passed beforeappend;8new sources distinct. Prior236wantedprefix unchanged exceptparent-authorized additiveNEWrow122;main72byteprefix untouched. IncidentalRG/Wikipedia/unauthorizedtextredistributors/libraryproxymirror results notopened/used;primaryoriginalpublisher/institution snippets provide identities.
+
+
+## 2026-10-27 — issue38 worker40 Melinis checkpoint
+
+Incoming244 wanted/0searched preserved; main72 byte-prefix untouched. Prior28 first16/current13new through Symphyotrichum and Amphicarpaea adoption not repeated. NEW this worker: Melinis web-screened for available-source round,6 wanted,0 searched,0 evidence. Now250wanted. Full protocol remains partial: no OpenAlex retry after coordinator429; no null searched rows. Remaining9: Nyssa(next),Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon.
+
+### Melinis — original diel,eye_type,chemical; actual target light adopted
+
+Official harvest_get.py says in no harvest run yet across runs1-24; screen_candidates.py says not in harvest. Global actual-species evidence preflight adopts sweep-42#8 DOI10.1614/WS-D-11-00028.1 for queue target M.repens light only. Original open traits diel/eye/chemical remain separately screened. Queue familyPoaceae;9327records. Canon chemical compilations10.1016/j.tree.2009.09.010 and10.1111/ele.12205 checked with global evidence/wanted identities; no new canon duplicate. All new requested papers concern actual M.minutiflora and therefore rank0,with no physiological carry to M.repens.
+
+Read every returned title/snippet actually delivered in six search bundles (not a claim of20hits per query); raw search responses retained only in scratch work/w40_c10. Search tool also returned incidental OpenAlex result URLs; none was opened or queried. Family-review alternative Poaceae photoreceptor review returned generic photoreceptor structure/signaling reviews and other taxa,not actual target data. All work desk-only: no pages or papers fetched,no evidence.
+
+Exact executed queries in order (three shared-source verification queries below belong to parent-authorized182 expansion):
+- `web: Melinis seed germination light dark`
+- `web: Melinis germination gibberellin OR smoke OR dormancy`
+- `web: Melinis floral scent volatiles`
+- `web: Melinis photoperiod light perception phototropism`
+- `web: natalgrass flower opening time anthesis`
+- `web: Melinis flower opening time anthesis`
+- `web: Melinis chemical perception volatile signalling`
+- `web: natalgrass chemical perception volatile signalling`
+- `web: Melinis epidermal lens cells eye type`
+- `web: natalgrass epidermal lens cells eye type`
+- `web: Poaceae photoreceptor review`
+- `web: "Environmental signals for seed germination" "holostea"`
+- `web: "Fire cues and germination of invasive and native grasses" doi authors`
+- `web: "Molasses Grass Induces Direct and Indirect Defense" doi`
+- `web: "Dormência e armazenabilidade" "Melinis" doi`
+- `web: "Rabelera holostea" "Stellaria holostea" site:powo.science.kew.org`
+- `web: "10.1111/j.1365-2435.2008.01385.x" "holostea" "light"`
+- `web: "Airborne volatiles from melinis minutiflora"`
+- `web: "Fire cues and germination" "Gorgone"`
+- `web: "Melinis" "Efeito do local" "10.1590"`
+- `web: "Melinis" "Fire cues" "2020" "Novaes"`
+- `web: "Airborne Volatiles from Melinis minutiflora" "10."`
+- `web: "Effects of molasses grass" "10.1023"`
+- `web: "Molasses Grass Induces" "2019" "Tolosa"`
+
+Six new wanted:2020 smoke-water grass seed trial (null smoke response remains measured comparison);2010 dormancy/storage and2009 seed-collection study (bundled light/temperature/KNO3 method forks,not independently isolated chemical effect);2019 intact molasses-grass sender/maize receiver trial;2003 parasitoid-choice trial with actual grass emission;2000 airborne-volatiles original identity awaiting intact-plant collection verification. DOI/title normalized duplicate and ownerstatus checks passed,including nested evidence source identities/audit sources. Unknown authors/DOI blank. Primary indexed SciELO,PubMed,icipe,Cardiff andUnB metadata used; incidentalResearchGate/academia/Wikipedia/unauthorizedredistributors notopened/used.
+
+Excluded2019/2023 molasses-grass essentialoil characterization andsteam-distilled acaricide chemistry: removedmaterial10(a),not living cue. Institutional thesis headspace-versus-oil comparison retained as method pointer,not duplicate paper request. Field anti-tick plots DOI10.1023/B:APPA.0000023233.63268.cc cannot isolate chemical versus habitat effects in shown abstract; pointer only,no unverified signal claim. USFS molasses-grass review mentions sunlight experiment but primary experiment identity unverified; background pointer only. Generalphototropism,Arabidopsis signaling andothergrass receiver responses not borrowed.
+
+Diel results are seasonal flowering/year-round seed production,grass reproductive stages,flower-arrangement harvesting andgenericanthesis definitions,not actualMelinis daily anthesis hours. Eye pair mainly animal lens histology;indexed leaf-lens experiment10.3732/ajb.94.7.1061 namesBegonia,Citrus,Ficus,Colocasia,Impatiens,notMelinis. Genericplantoptics discussion doesnot establish target focusing. Ownerplantnoneapplies;actualfocusing wouldbelongunderlight. No absence/exhaustion claim.
+
+### Parent-authorized own-NEW c10#182 actual Rabelera target
+
+Additive metadata exception authorized by parent in launch. Original Wiley indexed text/figure2 explicitly names S.holostea light/dark germination and reports no light difference;KewPOWO confirms Stellariaholostea synonym ofRabeleraholostea. Added actualR.holostea only aslight target,retainingall earlierfor/traits/queries/fields. Explicittarget_traits andwhy limit addition tolight:shared nitrate result forS.graminea/M.trinervia isnot verifiedforRabelera,noassumedchemicalresponse. NoRabelera genusscreen repeated,nomeasurement logged,main72unchanged.
