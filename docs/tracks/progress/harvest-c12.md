@@ -188,3 +188,48 @@ No diel null: continuous day/night green-ash sap flow, the six-month sap-flow st
 Eye searches returned taxonomic leaflet/epidermal SEM, organ microscopy, stomatal ridges resembling eyes, pollen morphology, tree identification and horticultural anatomy; these do not measure image-forming eyes. The sole tool-listed eye candidate is Halopteris thallus development, a different genus of brown algae; it is explicitly screened. The single eye_type null follows owner10(b). Returned generic plant-photoreceptor reviews and cached Oleaceae review results add no Fraxinus eyes; no new null is written for light, chemical or diel while candidates remain unread. Source excerpts stay at search/cache level. Raw web responses:work/harvest-c12/Fraxinus-web1–4-worker18.json. Cross-file exact DOI/title duplicate check found0 matches among the46 candidates before appending; no n/a source re-requested.
 
 Next:Adiantum, then Botrypus, original genus order. Required candidate validation completed before commit: `0 problems`. Own-file whitespace check passed.
+
+## 2026-10-27 — worker18 Adiantum and handoff checkpoint
+
+This worker total:2 genera screened (Fraxinus, Adiantum),2 null search records,61 wanted lines,0 evidence/measurement closures,24 actual web protocol queries. Cumulative:7/40 genera screened;6 null search records;95 wanted lines;0 evidence. Remaining33, next Botrypus, then Parthenium, then Andropogon. Stopping between genera for fresh context. Preserve all seven completed genera, including wanted-only Cardamine and Rumex, if the raw queue reoffers them.
+
+Adiantum harvest run4 plus supplements12,14,20 and Pteridaceae family metadata were screened:167 unique pooled titles and all stored abstract excerpts. There is no cached citation step; the family review supplies the chase10.1562/2006-02-27-ir-817. The15 family-review entries include general photomovement, evolutionary/genomic/clonality, facilitation, shade/drought, cultural-law and ABA stomatal work. None licenses a genus eye measurement. Existing main canon-3/oa-2/oa-12/sweep-13/corrected plant-fungus-slime light records and oa-9#171–172 antheridiogen records were checked with global searches, wanted and papers-status. The latter measure A.radicans, not all batch species. Original open species are A.pedatum, A.aleuticum and A.capillus-veneris; existing capillus-veneris photoreceptor measurements are preserved with their actual species limits. Thin sweep-13 stays untouched and did not suppress the newer complete searches. Relevant plant canon is checked; the known receptor compilations are already logged for capillus-veneris. No extra canon wanted entry.
+
+Successful cached queries followed by actual web queries, exact order (first20 returned titles/snippets where available):
+- `Adiantum phytochrome photoreceptor`
+- `Adiantum light perception`
+- `Adiantum phototropism`
+- `Adiantum flower opening time`
+- `Adiantum nyctinasty`
+- `Adiantum volatile signalling`
+- `Adiantum photoperiod`
+- `Adiantum circadian rhythm`
+- `Adiantum anthesis`
+- `Adiantum pollination biology`
+- `Adiantum epidermal lens cells`
+- `Adiantum epidermal focusing leaf optics`
+- `Pteridaceae photoreceptor review`
+- `web: Adiantum seed germination light dark`
+- `web: Adiantum germination gibberellin OR smoke OR dormancy`
+- `web: Adiantum jasmonate herbivore`
+- `web: Adiantum flower opening time anthesis`
+- `web: maidenhair fern flower opening time anthesis`
+- `web: Adiantum eye type epidermal focusing`
+- `web: maidenhair fern eye type epidermal focusing`
+- `web: Adiantum light photoperiod phototropism`
+- `web: maidenhair fern light photoperiod phototropism`
+- `web: Pteridaceae photoreceptor review`
+- `web: Adiantum volatile emission herbivore induced response methyl jasmonate`
+- `web: maidenhair fern volatile emission herbivore induced response methyl jasmonate`
+
+Fifteen new wanted candidates preserve real titles/DOIs/URLs from cache and indexed results. One duplicate candidate, ABA stomatal kinetics10.1111/nph.15736, is already wanted in harvest-c8 and was not re-requested. Unknown metadata remains empty/null. The repository microtubule/morphogenesis result exposes only a truncated title, retained exactly with an explicit metadata limitation; its snippet identifies colchicine effects in living capillus-veneris leaflet cells. The16 screened candidates were checked against global wanted and papers-status; the15 appended candidates had no exact DOI/title match.
+
+Germination leads are retained under10(e):axenic dark/red-light spore protocol, A.reniforme light/macronutrient/sucrose trial, Taiwan multi-species irradiance/temperature/density thesis, UV/blue inhibition of red-induced germination and phytochrome nuclear relocation. The Taiwan dark-germination snippet and the red-light protocol should be interpreted in their species and treatment conditions, not flattened into a genus light requirement. Further new light candidates include A.flabellulatum transcriptional response, flabellulatum/capillus-veneris biomass allocation under three light levels, A.cuneatum leaf phototropism and2024 low-light phy3/neo growth. Existing main capillus-veneris source measurements were not called absent or requested repeatedly:2003 Nature,2005 PNAS,2015 TPJ,2016 Wada review and canon photoreceptor sources already have records. Other primary phototropic/chloroplast sources mainly concern the same measured capillus-veneris response; their actual cached metadata remains in scratch for future source-level upgrades.
+
+Chemical is held without a null. The2026 A.trapeziforme culture paper explicitly reports benzyladenine inhibition and other regulator treatments, A.raddianum fertilization reports living growth at N/P/K levels, sucrose/macronutrient germination and colchicine responses need reading under10(a,d), and the Selaginella-titled GLV survey actually samples monilophytes too, requiring its species-table check for Adiantum. It was not screened out just for its title. GA-signalling conservation, Remorin response-element predictions and native gene/transgenic flowering comparisons alone do not identify a direct living chemical response from their printed metadata. Extract/essential-oil pharmacology, antioxidant/antibacterial assays, dried powder taste and extracted allelopathy applied to lettuce/tomato are not Adiantum cue responses. Paired JA/VOC searches mostly return Pteridium, Asplenium, Selaginella, cotton, Iva, Nicotiana, oak and other genera; these are not silently carried to Adiantum.
+
+No diel null:the sporangium exposure/spore-release paper10.1371/journal.pone.0138495 remains a lead to inspect for timing, despite its abstract emphasizing passive desiccation/hydraulic actuation rather than a daily schedule. The GI thesis10.6845/nchu.2013.00602 explicitly has native fern circadian gene expression, retained for nonvisual light rather than assuming daily activity. Cached remaining diel matches concern marine diatoms, Arabidopsis, mammals, Citrus, coral algae, Japanese cedar, carnation, CAM cacti or book-index terms. General light-entrained genes and a response after hours in darkness are not by themselves a diel activity class. Ferns lack flowers; anthesis web queries chiefly yielded botanical/houseplant descriptions, seasonal spore dates, and unrelated flower-opening reviews. These do not establish daily activity.
+
+Eye_type alone is null under owner10(b). All six tool-listed eye candidates receive explicit screened reasons:animal cryptochromes; Adiantum pharmacognostic epidermis; two Vallisneria chloroplast papers; Metasequoia anatomy; Magnolia epidermal morphogenesis. Additional Nepalese epidermal taxonomy and leaflet cytoskeletal morphogenesis report no image-forming eyes in returned descriptions. No Adiantum epidermal optical-focusing lead was found. No source-page/full-text fetches or evidence writes. Raw web and cache outputs are local work/harvest-c12/Adiantum-*-worker18 files. Blocked sources remain OpenAlex429, MDPI429, UChicago403 and SANBI403, no retry. No actual web quota refusal.
+
+Required combined candidate validation completed before commit: `0 problems`. Own-file whitespace check passed. Next first incomplete genus:Botrypus.
