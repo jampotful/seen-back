@@ -1,5 +1,58 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker21 Richardia checkpoint and handover
+
+This worker cumulative: 2 newly available-source-screened genera (Sagittaria and Richardia), 22 actual web queries, 17 wanted lines, 0 search records, 0 evidence. This checkpoint: Richardia, 11 queries, 8 wanted. Cumulative batch: 8 genera screened through Richardia at the available-source boundary, 95 actual round28 web queries, 65 wanted lines, 0 search records, 0 evidence. 32 untouched genera remain, starting Veronica, then Oenothera and Tridax. Stop is between genera for fresh-context continuation. OpenAlex missing steps remain unrun after429, including original-genus Hamamelis repairs; this is not8 complete unrestricted protocols, and no cell is claimed exhausted. Prior genuine full protocols/evidence and thin-sweep corrections remain preserved.
+
+### Richardia — all original four traits
+
+Original queue species R. grandiflora,7334 records, family Rubiaceae/order Gentianales; no carry rule moves R. brasiliensis light evidence to it. Preserved corrected main `recheck-16-fixed#1` (`10.1590/1519-6984.281402`) and historical sweep98 original; no duplicate wanted request for that read paper. Global wanted/status checked for each new title/DOI, no duplicate/status mark found. Same original-trait canon check as Sagittaria; relevant plant compilations not in hand. Owner eye_type=none applies; no invented null to compensate for missing common-name API steps. No paper/source page fetched and no evidence logged.
+
+Real cached genus run7; supplement15 and eye supplement20. Exact successful queries, in their saved order:
+
+- `Richardia phytochrome photoreceptor`
+- `Richardia light perception`
+- `Richardia phototropism`
+- `Richardia flower opening time`
+- `Richardia nyctinasty`
+- `Richardia anthesis`
+- `Richardia pollination biology`
+- `Richardia volatile signalling`
+- `Richardia photoperiod`
+- `Richardia circadian rhythm`
+- `Richardia epidermal lens cells`
+- `Richardia epidermal focusing leaf optics`
+
+No cached query failed; phototropism, nyctinasty and focusing have actual0 results. Cached citation steps citing `10.1590/1519-6984.281402` and `10.1002/pei3.70022` both return0 Richardia works. Family run17 `Rubiaceae photoreceptor review` returns111hits/15listed; titles and available abstracts read. These concern Argostemma, Ophiorrhiza, Coccocypselum, other plant senses, plant phenolics, tissue-culture review, human/animal pharmacology, birds, butterflies, insect pigments, beetle pollination and European green-flower reflectance. No named Richardia response appears in available abstract starts; no assertion about unread species tables. Cached104 displayed results (including duplicates) all screened by title/available abstract. Scratch rendered harvest is `work/worker21-Richardia-harvest.txt`; fresh harvest_get/screen_candidates invoked too and outputs retained separately. Cached real queries were not sent again to OpenAlex.
+
+Exact11 new web queries, executed in order:
+
+- `web: Richardia seed germination light dark`
+- `web: Richardia germination gibberellin OR smoke OR dormancy`
+- `web: Richardia floral scent volatiles`
+- `web: Richardia photoperiod light perception phototropism`
+- `web: largeflower pusley photoperiod light perception phototropism`
+- `web: Richardia flower opening time anthesis`
+- `web: largeflower pusley flower opening time anthesis`
+- `web: Richardia chemical perception volatile signalling`
+- `web: largeflower pusley chemical perception volatile signalling`
+- `web: Richardia epidermal lens cells eye type`
+- `web: largeflower pusley epidermal lens cells eye type`
+
+All delivered titles/snippets read. Tool groups results; no claim20 titles per individual query. Raw search outputs `work/worker21-Richardia-web1.json` through `-web3.json`. Largeflower pusley is the original R. grandiflora common name shown by actual UF/IFAS search listings, rather than common purslane/Portulaca. No query refused.
+
+Eight new wanted leads: Cambridge Florida pusley/R. scabra germination partsI(light/storage) andII(GA3/cyclicAMP); environmental-factor germination experiment `10.1016/j.sajb.2018.04.009` (named R. brasiliensis, irradiance/aluminum/salinity/pH) and related2015thesis; direct R. grandiflora pollinator/floral-biology study `10.1007/s13744-014-0252-7`; R. brasiliensis anthesis/cleistogamy monitoring `10.1080/17550874.2024.2329741`; glyphosate physiological response `10.51694/advweedsci/2026;44:0029`; and the low-priority90-genera plant-volatile/mosquito preprint `10.64898/2026.06.19.733381`. Last genus membership and living-emission method are explicitly unconfirmed, not presented as a measured Richardia signal. Herbicide physiology lead is a living chemical response but does not establish chemical recognition; no receptor mechanism inferred from toxicity. Cambridge web upload dates do not establish original publication years, so year=null. Cached source years are preserved; unknown authors remain empty. Actual paper metadata and DOI for the pollinator paper come from cached harvest; incidental ResearchGate anthesis numbers were not used as evidence or copied into wanted. No prohibited source fetched.
+
+Diel candidate dispositions: `10.53660/clm-306-317` and `10.55905/revconv.16n.7-016` are floral/fruit morphoanatomy and taxonomy, not timed opening in their available abstracts; ontogeny thesis studies Psychotria, Spermacoce petal development `10.1093/aob/mcl209` and Ludwigia flowering `10.3390/biology10020114` are other genera. BHL seed catalogues/books give general horticulture and historical calla names; their abstract starts do not establish a Rubiaceae Richardia daily measurement. Positive primary anthesis leads above hold diel, so no negative conclusion about unread content. Pollinator-network/pollenDNA/cocoa/pumpkin/Citrus papers measure insects/networks rather than a named Richardia daily response in their available starts. R. stellaris flora says cleistogamy but gives no daily-hour measurement.
+
+Light dispositions: calla hormone thesis, `10.21273/jashs.127.2.290`, `10.21273/horttech.10.2.267` and virus work refer to Zantedeschia (historical Richardia synonyms), not queue Rubiaceae. Amaranthus/Prunus/soybean/Commelina studies are other genera. Surveys of weed flora, consultant perception, intercropping, starch identification, urban rain-garden immersion (`10.1002/pei3.70088`) and conservation/root-fungi colonisation show no controlled Richardia light response in the available abstracts. Genuine germination leads retained; no light null. Broad review in vitro light+regulators `10.3390/plants11070844` names no Richardia in its abstract; canon and unread broad-table uncertainty remain visible.
+
+Chemical dispositions: Luculia scent is another genus, as are Montrichardia, Barringtonia, Petunia and Kalanchoe web examples. Cerrado ethanolic fungicide extracts (`10.1590/1519-6984.263114`), tick immersion with plant extracts (`10.1590/s1984-29612013000400013`), geopropolis, essential-oil/extraction theses and Rubiaceae metabolite reviews are removed-tissue chemistry/animal effects in available methods, not living-plant signalling under10(a). Tuta, whitefly, Diptera, bee-forage and pollenDNA studies measure insects; no plant-signal measurement is established from the displayed abstracts. Additional herbicide management/tolerance `10.1590/s0100-83582019370100098`/`10.1590/s0100-83582018360100137` and cassava control papers are unresolved treatment/control leads; direct chemical-response GA and physiological sources already retained, and no null is written. Generic VOC reviews do not establish a named Richardia experiment in snippets.
+
+Eye dispositions: cached Cephalanthus pollen and leaf-anatomy/restinga functional-type studies concern anatomy; Arundo cuticle/herbicide uptake is another genus; botanical textbooks' starts do not identify focusing experiments. New web eyes are vertebrate, planarian and octopus, and `10.3732/ajb.94.7.1061` measures leaf optics in Begonia/Citrus/Ficus/Colocasia/Impatiens rather than Richardia. Focusing belongs under sense_light_nonvisual per owner10(b). White-Eye in `10.1590/s0100-83582018360100137` is a Richardia common name, not an eye structure; butterfly/European-green-flower family results concern animal vision/reflectance. Chamaeleo habitat/activity thesis (W3013856083) concerns a reptile rather than plant daily activity. No eye measurement inferred and no null while API steps missing.
+
+Sagittaria chunk committed `ba147d80`, with candidate/wanted gate0problems and whitespace check passed. Parent-requested metadata cleanup converted20 unknown-year0 placeholders across c10 to null, preserving verified years. Final Richardia candidate/wanted gate printed `0 problems`; `git diff --check` passed. Fresh tools completed successfully and the candidate listing agrees with the preserved cached sources. Next untouched entry Veronica; no later entry started.
+
 ## 2026-10-27 — worker21 continuation at Sagittaria
 
 This worker: 1 newly available-source-screened genus (Sagittaria), 11 actual web queries, 9 wanted lines, 0 search records, 0 evidence. Cumulative batch: 7 genera screened through Sagittaria at the available-source boundary, 84 actual round28 web queries, 57 wanted lines, 0 search records, 0 evidence. 33 untouched genera remain, starting Richardia, then Veronica and Oenothera. Earlier skipped API steps remain skipped, not null results or completed full protocols; first blocked original entry remains Hamamelis. No existing genuine query was repeated word for word.
