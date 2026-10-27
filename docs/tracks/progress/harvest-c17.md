@@ -470,3 +470,8 @@ Stopped between genera at context checkpoint. Remaining genuinely untouched: 26.
 ## 2026-10-27 — issue38 coordinator shared Deno target
 
 Worker17 c11 germination search returned indexed Deno1.pdf text naming Senecio aureus and a germination light requirement (retained Packera-web5.json). UTK Smart Yards title explicitly pairs Packera aurea with Senecio aureus. Expanded existing wanted line16 for Packera aurea, preserving Lysichiton/Diplacus requests, original source metadata and all prior provenance. No new wanted line, source-page fetch or measurement. Packera queue count used for ranking; source-level species/table verification stays with the reader. Wanted count81, searched/evidence0.
+
+
+## 2026-10-27 — issue38 coordinator shared-source scope
+
+Expanded this round's existing Deno1.pdf request for Conoclinium coelestinum, using c9 worker28's indexed historical Eupatorium coelestinum entry and accepted-name preflight. Retained all previous targets and light-only scope. Original table/key and identity require intake; no new line, fetched source or value.

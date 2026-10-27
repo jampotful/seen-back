@@ -660,3 +660,8 @@ Final precommit verification:0 problems. Baseline220-line wanted byte prefix at 
 ### Worker28 final shared-source reconciliation,2026-10-27
 
 Exact DOI/URL/title comparison of all worker28 additions against every other-unit wanted file found one duplicate:Sonchus comparative phototropism source10.5962/p.254614 is already requested in harvest-30 line1 and replant-1 line50. Removed only this worker's new duplicate line;adopt existing request as an unseen-species-list lead instead. No old220-line prefix or other-unit record touched. **Final corrected worker28 total:+40 wanted (Eclipta5,Hedera4,Lantana9,Sonchus12,Juncus10,Conoclinium0),current260 wanted/5 searched;6 new available-source screens,68 actual web queries,0 searched/evidence/closures,0 untouched assigned genera.** Earlier worker28 checkpoints were provisional totals before this duplicate reconciliation. Both shared Deno source for Conoclinium and comparative phototropism source for Sonchus remain adoptions,not new requests or measurements. Source-specific row/scope and species table still require reading;no Sonchus species guessed. Precommit gate rerun below;baseline220-line prefix unchanged.
+
+
+## 2026-10-27 — issue38 coordinator shared-source scope
+
+Expanded this round's existing floral-signal request DOI10.3389/fevo.2020.571454 for Heracleum sphondylium, explicitly named in the retained source title. Kept the source-collection/plant-emission eligibility fork and previous Hedera target, no duplicate line or measurement. Queue-derived ranking recomputed.

@@ -548,3 +548,8 @@ Connected web executed143 queries across these nine screens (141 distinct wordin
 OpenAlex skipped throughout after coordinator HTTP429 exhausted-network-budget notice;API/common-name/family/citation obligations left incomplete where not cached. No failed service labelled zero hits,no fallback credentials/purchases/new permissions or refusal retries. No source/paper page fetched,full text downloaded or committed,or evidence extracted. MDPI/UChicago/SANBI direct accesses remained unused. All current null searched rows held entirely under issue38 conservative rule. All checkpoints used serialized commit helper and screening gate0;final gate and diff result are recorded immediately below before commit.
 
 Final Juniperus/worker10 gate printed `0 problems`;owned-path `git diff --check` passed. Verified170 wanted/29 searched,58 new wanted,byte-prefix preservation and unchanged searched. No app checks,builds,servers or tests run. Final commit uses only owned c7 wanted/searched/progress paths under shared flock;coordinator handles push/PR.
+
+
+## 2026-10-27 — issue38 coordinator shared-source scope
+
+Expanded this round's existing second-edition Deno request for Arisaema triphyllum light and Caltha palustris chemical germination leads observed by c13 workers. Explicit target_traits keeps the per-species scope separate. Original Mitchella request/source fields retained; queue-derived ranking recomputed. Edition/key/source methods remain intake work, no measurement/evidence and no new wanted line.
