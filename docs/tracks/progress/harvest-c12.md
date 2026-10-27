@@ -49,3 +49,40 @@ Nine new wanted leads preserve actual titles and DOI metadata from the cache or 
 Other candidate dispositions:10.1111/tpj.16699 is nuclear autofluorescence imaging, not living chemical sensing;10.1002/mnfr.201700990 concerns human taste/flavor;10.30574/wjbphs.2026.27.2.0428 is botanical-name etymology. Extract antidiabetes/anti-inflammatory work (10.1021/acsomega.3c01034;10.3389/fchem.2022.1077581), animal feeding10.3389/fnut.2022.996932, and detached-tissue metabolite/speciation papers (10.1039/d0mt00216j;10.3390/metabo12111024;10.3390/agronomy13112760;10.54598/000340) do not alone meet chemical-response10(a). New genome10.1038/s41421-021-00286-x and rhizosphere-strain10.1155/2014/108562 abstracts do not identify a direct plant cue-response assay beyond the other retained response studies. No paper text fetched.
 
 Additional paired eye/diel web searches returned botanical identification and seasonal phenology, and two observational diel leads: Pennsylvania flora says C.concatenata opens on warm sunny days (https://www.paenflowered.org/apgii/brassicales/brassicaceae/cardamine/cardamine-concatenata); UCANR says C.californica closes petals in late afternoon (https://ucanr.edu/blog/coastal-gardener/article/cardamine-edible-not-so-tasty). These are secondary descriptions, not extracted measurements. Existing globally completed eye/diel records are preserved, and no new null is added for these traits.
+
+### Rumex and handoff checkpoint
+
+This worker/cumulative:3/40 genera screened (Equisetum, Cardamine, Rumex);2 null search records;17 new wanted lines;0 evidence/measurement closures. Remaining37, first incomplete Centaurea. The batch continues in its original order after Centaurea. Stop is between genera for fresh-context handoff; no tool web-limit rejection occurred. OpenAlex remains skipped after HTTP429; no retry was made.
+
+Rumex current harvest traits were diel, sense_chemical and sense_light_nonvisual; main already has the latter two (oa-13b and sweep-6). Existing plant-1 eye_type fully screened record remains unchanged. The family review and all cached title metadata were screened, together with stored abstracts for plausible diel sources. No new null is appropriate: two new diel candidates are in harvest-c12 wanted; existing plant-1 also has10.1139/b74-282 and10.1139/cjb-2014-0123. Existing chemical/light evidence and wanted are preserved without duplication.
+
+Successful cached queries, exact order:
+- `Rumex phytochrome photoreceptor`
+- `Rumex light perception`
+- `Rumex phototropism`
+- `Rumex flower opening time`
+- `Rumex nyctinasty`
+- `Rumex volatile signalling`
+- `Rumex photoperiod`
+- `Rumex circadian rhythm`
+- `Rumex anthesis`
+- `Rumex pollination biology`
+- `Polygonaceae photoreceptor review`
+The failed initial run’s genus queries were superseded by successful later runs; they are not represented as failed executed search successes. Cached citation steps cite10.3390/plants11233212 (zero hits) and10.1007/BF00393317 (eight listed hits), and the Polygonaceae family-review list was screened. No live OpenAlex call was attempted for Rumex.
+
+Web queries, exact order:
+- `web: Rumex seed germination light dark`
+- `web: Rumex germination gibberellin OR smoke OR dormancy`
+- `web: Rumex floral scent volatiles`
+- `web: Rumex flower opening time anthesis`
+- `web: dock sorrel flower opening time anthesis`
+- `web: Rumex eye type epidermal focusing`
+- `web: dock sorrel eye type epidermal focusing`
+
+The first two queries exposed many light/GA/ethephon germination studies, including existing main evidence10.1155/2015/170176 and existing wanted10.1111/j.1438-8677.1992.tb01340.x. Main already reports red/far-red germination and nitrate response in this genus, so these were not falsely screened as absent or redundantly requested. The third query’s living-herbivory VOC paper is consistent with existing oa-13b chemical evidence; dietary extracted volatiles/essential oils do not alone count10(a).
+
+Diel candidates screened without a null claim: Sorghum/Arabidopsis circadian ethylene studies, rose opening studies, Pseudoplusia larval diet papers, mosquito rhythms, human circulatory/skin studies, Tillandsia epithelium, wheat nitrogen and azalea hormone studies do not measure Rumex daily activity. Rumex leaf/flower removal and seed-maturity studies measure seed development/seasonal phenology; their anthesis word alone is not a daily-opening measurement. RP-ACS1 rhythmic ethylene and R.acetosa flower longevity/opening-count studies remain plausible and are wanted. Common-name sorrel search results about Hibiscus sabdariffa are a different genus and were excluded. Botanical Rumex anatomy, pollen, plant identification and seasonal flowering profiles under eye/diel queries do not report image-forming eyes or a daily opening time. No optical focusing source was found. The existing global eye_type screening is preserved.
+
+Validation history: the Equisetum checkpoint checker returned0 before its commit. At Cardamine, the checker was started before commit but its0-problems result arrived after commit13b269d3 (sequencing mistake); it found0 problems and the final combined checkpoint is checked again to completion before its commit. No failed validation was bypassed. No app tests/builds/servers run.
+
+Final combined validation returned `0 problems` before the handoff commit; cross-file wanted DOI/title scan found no duplicates. This worker used26 web protocol queries total (10 Equisetum,9 Cardamine,7 Rumex); raw tool results are available in work/harvest-c12 for local takeover, outside committed deliverables.
