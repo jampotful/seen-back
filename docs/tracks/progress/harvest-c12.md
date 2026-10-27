@@ -1354,3 +1354,29 @@ Alliaria17 proposed candidates yielded16 new wanted:Kin recognition in plants10.
 Exact next Prunella; remaining7 Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. None newly web-searched by this worker. Preserve all prior28 first18 screens,Ficus/Lespedeza/Salix,Asparagus adoption,Coccoloba/Cenchrus/Olea/Cerastium/Hemerocallis and these6. Adopt species-matched substantive evidence before any pair. Prunella rescreen-1 bird optics are not plant coverage; harvest-15 plant far-red culture evidence is species vulgaris. Daucus plant-1#3 eye screen substantive,plus recheck-17-fixed#5 target light evidence. Hypoxis/Carex source species limits explicitly maintained.
 
 Checks before commit:screen_candidates combined --check0 problems;JSONL parse16/292;exact prefixes from takeover e5d6b6ba and main bbc35ff preserved for all3 owned paths. Own-file git diff --check clean. No source-page/paper fetches,evidence,full-paper assets,other-unit edits,branch changes or operational state mutations. Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 remain;no new service/quota refusal. Raw tool provenance remains scratch work/w27-c12,not git. Stop between entries for fresh context.
+
+
+## 2026-10-27 — issue38 worker34: Prunella
+
+Adopted target vulgaris light evidence harvest-15#1 and oa-12#329–330; partial culture evidence kept at actual scope, no congener carry. Bird rescreen-1 optical records do not cover the plant. Old thin sweep-3 preserved. Harvest run2 has80 printed work occurrences under bird-style queries; all titles/abstract starts screened,15 Lamiaceae family-review titles read. Exact cached queries: Prunella vision; Prunella eye; Prunella spectral sensitivity opsin; Prunella flicker fusion temporal resolution; Prunella olfaction chemoreception; Prunella nocturnal diurnal activity; Prunella visual acuity; Prunella visual field; Lamiaceae photoreceptor review. Cached citation steps on10.1111/een.12947 and10.1016/j.isci.2022.104455 each returned0; these bird-oriented steps are not invented plant searches. Family climate/Lamiaceae review10.3389/fpls.2024.1370810 supplies available family alternative.
+
+New hormone/priming sources preserve living response10(d,e); culture candidates explicitly flagged for desk. Essential-oil composition10.1080/0972060X.2006.10643500,steam-distillation antitumour work and gas-purge extracted parts10.13386/j.issn1002-0306.2019.13.029 do not establish living signals10(a). Perfumery Prunella may mean synthetic plum base; rejected as plant physiology. Bird migration/compass/singing,artist Prunella Clough and machine vision are homonyms. Clinical myopia/glaucoma/retina/skin drugs and cosmetic eye masks report animal or human eyes; trichome/epidermal anatomy has no focusing assay. Owner eye_type none; any real epidermal focusing belongs under light10(b). Generic opening-hour hits concern plum,guava,waterlily and other genera; no target timing carried from them. Target nectar and floral biology leads retained without a daily null. Remaining6,next Cichorium.
+
+Exact actual web queries, in execution order:
+- `web: Prunella seed germination light dark`
+- `web: Prunella germination gibberellin OR smoke OR dormancy`
+- `web: Prunella floral scent volatiles`
+- `web: Prunella volatile emission herbivore induced response methyl jasmonate`
+- `web: selfheal volatile emission herbivore induced response methyl jasmonate`
+- `web: Prunella flower opening time anthesis`
+- `web: selfheal flower opening time anthesis`
+- `web: Prunella eye type epidermal focusing`
+- `web: selfheal eye type epidermal focusing`
+- `web: Prunella vulgaris methyl jasmonate salicylic acid elicitor`
+- `web: "Comparative study of the physiological responses" "Prunella" -site:researchgate.net -site:openalex.org`
+- `web: "Floral biology of gynodioecious Prunella vulgaris" -site:researchgate.net`
+- `web: "Prunella" "Diurnal and seasonal dynamics of nectar"`
+- `web: "Prunella" "Factors influencing in vitro seed germination"`
+
+NEW this genus: 13 wanted,0 searched,0 evidence. Adopted existing wanted: [('Seed Germination Ecology and Dormancy Release in Some Native and Underutilized Plant Species with Agronomic Potential', 'harvest-c11'), ('Seed Germination Theory and Practice, 1st Supplement', 'harvest-c15')].
+Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Prunella-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
