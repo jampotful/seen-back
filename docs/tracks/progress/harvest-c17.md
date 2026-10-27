@@ -93,3 +93,40 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - `Asteraceae photoreceptor review` (stored family review)
 
 Round checkpoint: 3 genera web-screened for round; 0 full-protocol complete; 0 search rows; 10 wanted lines; 0 evidence. Remaining unreviewed: 37; next Goodyera.
+
+### Goodyera
+
+Web screening finished for this round. Five new reading leads: floral scent, original light/dark germination study, irradiance/carbon-nitrogen exchange experiment, USFS germination review leading to its source, and harvested orchid germination/light review. Chloroplast-movement thesis already requested in this batch is adopted as a broad candidate rather than requested again; its Goodyera species coverage needs verification. Diel searches supplied seasonal flowering periods, not a daily opening hour. Eye searches supplied general ocelli discussions and Goodyerinae anatomy, not a verified Goodyera focusing experiment. Harvest keyword candidates on Cattleya, Cucumis, Calanthe, Disa, Ludisia, Cymbidium, Spathoglottis, Paphiopedilum, Spiranthes, Cypripedium and Macodes concern different genera; the 1899 rattlesnake-plantain item has a journal-editorial abstract, so that abstract gives no chemical result. Rostellum review discusses post-pollination ethylene generally without naming a Goodyera experiment in the stored text. Family-review web search found Physiological diversity of orchids (10.1016/j.pld.2018.06.003); no Goodyera measurement visible in returned snippet. Canon checked locally. Required OpenAlex missing steps skipped; full protocol incomplete and no null searched rows.
+
+Queries run, word for word:
+
+- `web: Goodyera seed germination light dark`
+- `web: Goodyera germination gibberellin OR smoke OR dormancy`
+- `web: Goodyera floral scent volatiles`
+- `web: Goodyera flower opening time anthesis`
+- `web: rattlesnake plantain flower opening time anthesis`
+- `web: Goodyera plant ocelli lens-like epidermal cells eye`
+- `web: rattlesnake plantain plant ocelli lens-like epidermal cells eye`
+- `web: Goodyera response to airborne volatile signals`
+- `web: rattlesnake plantain response to airborne volatile signals`
+- `web: Goodyera light response photoperiod`
+- `web: rattlesnake plantain light response photoperiod`
+- `web: Orchidaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Goodyera phytochrome photoreceptor`
+- `Goodyera light perception`
+- `Goodyera phototropism`
+- `Goodyera flower opening time`
+- `Goodyera nyctinasty`
+- `Goodyera anthesis`
+- `Goodyera pollination biology`
+- `Goodyera volatile signalling`
+- `Goodyera photoperiod`
+- `Goodyera circadian rhythm`
+- `Goodyera epidermal lens cells`
+- `Goodyera epidermal focusing leaf optics`
+- `Orchidaceae photoreceptor review` (stored family review)
+
+Round checkpoint: 4 genera web-screened for round; 0 full-protocol complete; 0 search rows; 15 wanted lines; 0 evidence. Remaining unreviewed: 36; next Lysichiton.
