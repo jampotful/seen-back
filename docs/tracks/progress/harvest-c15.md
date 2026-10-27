@@ -420,3 +420,53 @@ Exact web queries, in order:
 - web: Pinaceae photoreceptor review
 
 Worker42 final checkpoint, stopping cleanly between entries for context: 6 newly web-screened genera (Betula, Thuja, Linnaea, Lindera, Lupinus, Picea), all protocol partial;61 new wanted lines,0 searched rows,0 evidence. Cumulative16 web-screened genera,131 wanted lines.24 genuinely unreviewed genera remain, exact next Encelia: Encelia, Symphoricarpos, Malva, Knautia, Anaphalis, Asimina, Sherardia, Matteuccia, Mertensia, Drosera, Sedum, Alnus, Echinocereus, Humulus, Thlaspi, Thalictrum, Arbutus, Anacamptis, Campanula, Pastinaca, Barbarea, Carduus, Tragopogon, Nicotiana. Continue preserving all original prefixes/query provenance and the adopted proper screens noted above. OpenAlex unavailable after coordinator429; no other service rejected a request in this continuation.
+
+
+### 2026-10-27 continuation: worker47
+
+Adopted all16 previously web-screened genera through Picea and all131 wanted lines unchanged. OpenAlex still skipped after coordinator HTTP429; missing common-name API/citation steps remain incomplete, so no null searched rows or full-protocol exhaustion. No page/paper fetching or evidence records. Actual-genus/species evidence and whole wanted/status preflight performed before screening. Plant light/chemical/diel canon checked in current canon.jsonl: applicable plant compilations are not in hand; no plant eye_type canon applies. Genomic presence and congener physiological measurements do not establish a queue species response. Web response sizes vary; only actually delivered titles/snippets screened, never a claim of20 per query.
+
+### Encelia: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran. Read128 printed harvest occurrences (including repeats), candidate list and15 family-review titles. No existing actual-genus evidence or prior wanted source found. Six new wanted source leads after whole wanted/status checks: seed viability/germination, a two-species photosynthetic light comparison, experimental Atacama seedling light levels, E. farinosa photon-flux response during drought, E. californica normal/increased-PAR student experiment, and the USFS review's explicit GA germination passage. The review is a route to Padgett et al1999 reference190, not a second independent GA experiment; original title remains unverified. The Atacama stored abstract truncates the species epithet, so genus attribution only; no carry to queue E. farinosa/E. californica.
+
+Harvest diel candidates concern Mojave grasses, maize, Agave and Cistus; Encelia phenology sources give dates/rainfall responses, no daily opening hour. Floral UV reflectance is an advertisement to pollinators, not a plant light-perception measurement. Eye candidates are unrelated basal-angiosperm/Origanum/Croton/Quercus anatomy, human macular health and petal reflectance; pubescent leaves reflect light, no focusing established. Chemical harvest candidates are Piper oils, maize root-herbivore response, gymnosperm essential oils and extracts; no living Encelia response established there. Removed-leaf leachate, essential-oil/chemotaxonomy, animal medicinal effects and resin collection by assassin bugs do not demonstrate a living Encelia chemical response under10(a). Broad review speculation about photoperiod/gibberellins names Arabidopsis as its measured example, so not carried to Encelia. Family review screened as supplied in harvest, no repeat web review needed. Common name brittlebush verified by USFS/BLM/NASA search results. Initial unquoted searches produced broad off-genus results (including Encyclia orchids); quoted-name follow-ups retained word for word below. No fetched source or null row.
+
+Successful harvest queries, verbatim in order:
+- Encelia phytochrome photoreceptor
+- Encelia light perception
+- Encelia phototropism
+- Encelia flower opening time
+- Encelia nyctinasty
+- Encelia anthesis
+- Encelia pollination biology
+- Encelia volatile signalling
+- Encelia photoperiod
+- Encelia circadian rhythm
+- Encelia epidermal lens cells
+- Encelia epidermal focusing leaf optics
+- family review: Asteraceae photoreceptor review
+
+Exact web queries, in order:
+- web: Encelia seed germination light dark
+- web: Encelia germination gibberellin OR smoke OR dormancy
+- web: Encelia floral scent volatiles
+- web: Encelia photoperiod phototropism light response
+- web: brittlebush photoperiod phototropism light response
+- web: Encelia flower opening time anthesis
+- web: brittlebush flower opening time anthesis
+- web: "Encelia" plant ocelli lens-like epidermal cells eye
+- web: "brittlebush" plant ocelli lens-like epidermal cells eye
+- web: "Encelia" chemical response volatile signaling
+- web: "brittlebush" chemical response volatile signaling
+- web: "Encelia" seed germination light dark
+- web: "Encelia" germination gibberellin OR smoke OR dormancy
+- web: "Encelia" floral scent volatiles
+- web: "Encelia" photoperiod phototropism light response
+- web: "brittlebush" photoperiod phototropism light response
+- web: "Encelia" flower opening time anthesis
+- web: "brittlebush" flower opening time anthesis
+- web: "Encelia" plant ocelli lens-like epidermal cells eye
+- web: "brittlebush" plant ocelli lens-like epidermal cells eye
+
+Worker47 checkpoint:1 newly web-screened genus, protocol partial;6 new wanted,0 searched,0 evidence. Cumulative17 web-screened genera,137 wanted lines.23 unreviewed genera remain; exact next Symphoricarpos (required tools have run, no web searches yet).
