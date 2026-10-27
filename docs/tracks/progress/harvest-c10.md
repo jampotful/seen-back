@@ -1,5 +1,44 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker32 Tridax checkpoint
+
+This worker:1 newly available-source-screened genus (Tridax),14 actual web queries,6 wanted lines,0 search records,0 evidence. Cumulative batch:11 genera screened through Tridax at the available-source boundary,133 actual round28 web queries,99 wanted lines,0 search records,0 evidence.29 untouched genera remain, beginning Momordica, Pluchea and Modiola. Missing OpenAlex/API steps remain explicitly unrun after the shared429, including earlier Hamamelis repairs; no unrestricted full-protocol or exhaustion claim. Genuine earlier wanted-only screens are preserved and need no repeat merely because raw codex_queue reoffers them.
+
+Read AGENTS first, current service/scope guide, exact worker32 queue, original batch/order and round4-harvest, THOROUGH, BRIEF, round3-sweep and desk-screen1–10 including10(e). Cloud-runtime/network reference applied: current unrestricted HTTP policy enforced, observations current, VPN false. No OpenAlex/MDPI/UChicago/SANBI request, paid API, plant source/full-paper-page fetch, evidence write, branch/gate or29/30 change.
+
+### Tridax — original diel, eye_type and sense_chemical
+
+Original queue species T. procumbens has17215 records, Asteraceae/Asterales. Genuine partial light-response evidence sweep-25#6 (corrected store#4), Chauhan/Johnson2008, is preserved; its source is independently identified in sweep-42#11 as10.1614/WS-07.200.1. No additional request for that already-evidenced light paper. Thin sweep-25 queries and old source dispositions are preserved, with no repeat of their exact combined strings. Original chemical, diel and eye traits remain in scope. Global evidence, corrected, searched, wanted and papers-status checked before append; no retained normalized title duplicate found. Relevant chemical and angiosperm-diel canon sources are not in hand; in-hand Animal Eyes is Metazoa. No species result inferred from canon tables not read.
+
+Fresh harvest_get reports in no harvest run yet and screen_candidates not in the harvest (work/worker32-Tridax-harvest.txt and -candidates.txt). Cached c10 genus record is null. No successful genus API queries invented. Cached family run17 `Asteraceae photoreceptor review` returned581hits/15listed; all titles and available abstract starts screened (work/worker32-Tridax-family.json). Specific experimental papers name Pelargonium, Vernonia, Synedrella, Lomatozona or Gerbera; retinal supplements concern humans. Broad crop flowering, blue-light/floral development, medicinal-light metabolism, Kansas shade, beetle/butterfly pollination and genetic-assimilation reviews do not identify a Tridax target experiment in their available starts; unread tables are not declared negative. This genuine family step is reused without a new API request.
+
+Exact14 new web queries in executed order:
+
+- `web: Tridax seed germination light dark`
+- `web: Tridax germination gibberellin OR smoke OR dormancy`
+- `web: Tridax floral scent volatiles`
+- `web: Tridax flower opening time anthesis`
+- `web: coat buttons flower opening time anthesis`
+- `web: Tridax chemical perception volatile signalling`
+- `web: coat buttons chemical perception volatile signalling`
+- `web: Tridax epidermal lens cells eye type`
+- `web: coat buttons epidermal lens cells eye type`
+- `web: "Psychophilous and Melittophilous" Tridax journal`
+- `web: "Tridax" "Light and KNO3"`
+- `web: "Tridax" "Ecological Factors" "chemical" germination`
+- `web: "Psychophilous" "Tridax" site:tapro.sljol.info`
+- `web: "Germinação e dormência de sementes de Tridax procumbens" Ikeda`
+
+All delivered titles/snippets screened; grouped result output does not establish20 per individual query. Raw work/worker32-Tridax-web1.json through -web4.json. Coat buttons is the common name in the existing primary paper title; coat button also appears in primary emergence-study keywords. Last5 searches resolve the identified germination/pollination source identities and chemical endpoints. No web refusal occurred. No open/fetch command was used.
+
+Six new wanted leads:5 living-seed chemical-treatment reports (ecological pH/salinity, emergence GA/nitrate,2021-URL KNO3 study,2008 light/KNO3 experiment and2006 Embrapa folder) plus2013 Taprobanica pollination/anthesis lead. Unknown years=null and authors/DOIs empty unless explicitly shown;2006/2008/2013 have direct bibliographic support. The KNO3 publisher snippet reports a null treatment comparison, which remains a living controlled-response experiment; no positive effect asserted. Embrapa folder may overlap the2008 paper and is marked for de-duplication of values. Already-evidenced Chauhan/Johnson title is not added again, though salinity in it may be worth intake review for the chemical trait.
+
+Chemical exclusions under owner10(a): hydro-distilled floral oil (Joshi/Badakar2012), leaf essential-oil city comparisons, coronopifolia essential-oil insect repellency, ethanolic extracts, morphoanatomy/essential-oil toxicology and Lepidium/Tridax volatile-extract antimicrobial assays study removed material or other organisms. They establish no living Tridax cue response or emitted signal. Generic volatile-perception reviews and unrelated Nicotiana smoke trials are background, not wanted. Temperature-only germination paper holds light constant and identifies no chemical contrast in returned text; no extra light-background request. The retained seed experiments hold chemical open.
+
+Diel: primary2013 PDF search metadata confirms real title/authors/year and species-specific pollination scope; exact within-day anthesis remains to be read. ResearchGate copies were neither fetched nor evidence. University of Indonesia inflorescence-development abstract describes bud-to-senescence categories without daily timing; no diel value inferred. Annual/monthly flowering floras, plant attractions and insect visits do not establish a daily schedule. Eye results are vertebrate histology, ordinary leaf pharmacognosy and generic epidermal descriptions; no focused-light experiment identified. Owner eye_type=none is preserved; focusing would belong to light under10(b). No null record while required API protocol remains incomplete and plausible chemical/diel candidates remain.
+
+Candidate/wanted validator printed `0 problems`; `git diff --check` passed. Next untouched genus Momordica.
+
 ## 2026-10-27 — worker27 Oenothera handover
 
 This worker cumulative:2 newly available-source-screened genera (Veronica and Oenothera),24 actual web queries,28 wanted lines,0 search records,0 evidence. This checkpoint:Oenothera,11 queries,19 wanted. Cumulative batch:10 genera screened through Oenothera at the available-source boundary,119 actual round28 web queries,93 wanted lines,0 search records,0 evidence.30 untouched genera remain, beginning Tridax, Momordica and Pluchea. Stop between genera for fresh-context continuation. OpenAlex/API steps remain explicitly unrun after the shared429, including original Hamamelis repairs; no unrestricted-protocol or exhaustion claim. Raw codex_queue may still reoffer these wanted-only screens; reuse their genuine prior searches and source dispositions.
