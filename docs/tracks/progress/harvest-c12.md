@@ -1461,3 +1461,37 @@ Exact actual web queries, in execution order:
 
 NEW this genus: 10 wanted,0 searched,0 evidence. Adopted existing wanted: [('Seed enhancing treatments: comparative analysis of germination characteristics of 23 key herbaceous species used in European restoration programmes', 'harvest-c12')].
 Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Chamaenerion-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
+
+
+## 2026-10-27 — issue38 worker34: Ficaria
+
+No substantive target species evidence/wanted found globally under Ficaria/Ranunculus ficaria. Thin sweep-5 and old harvest-9 lack modern paired web protocol and do not establish completion. Mandatory tools:cached run2 plus supplement12 print41 work occurrences/abstract starts and15 Ranunculaceae family-review titles,all read. Exact cached queries: Ficaria phytochrome photoreceptor; Ficaria light perception; Ficaria phototropism; Ficaria volatile signalling; Ranunculaceae photoreceptor review. Three cached citation steps citing10.1016/s0031-9422(02)00119-x,10.1111/j.1469-8137.2010.03317.x,10.1093/oxfordjournals.aob.a087596 each returned0. Cached family review and optical/thermal references supply available family alternative; live API skipped.
+
+Direct night-closure2016 and target seed-germination2026 leads retained; light/dark/PGR scope must be read,not inferred from cold/seed maturity. Historical leaf-light original Wager1909 identified through publisher and BHL metadata after a Scribd discovery label; no Scribd or unauthorized page fetched or used as evidence. Epidermal focusing candidate under light10(b),not an eye. Glossy thin-film reflection,starch/pigment layers and structural leaf variegation do not alone establish focusing or sensing; optical review10.1093/aob/mcy119 distinguishes Antirrhinum focusing from Ficaria flat epidermal reflection. Cached anther-volatiles10.3732/ajb.91.12.1969 use thermal desorption of removed anthers; fails10(a) alone. Serratia ficaria bacterial papers,Ficus floral scent,Portuguese ficaria text fragments,skin cosmetics with salicylate,kochii antioxidant extracts and generic cotton/tobacco/oak/cranberry jasmonate studies are not target living chemical responses. Say it with flowers10.4161/psb.28258 is a root-communication reference with no target species in printed abstract; no Ficaria measurement inferred. General flower-opening review explicitly names Ficaria morning-temperature response,held as reference context to original target experimental leads. No chemical/light/diel/eye null while API incomplete. Remaining2,next Urtica.
+
+Exact actual web queries, in execution order:
+- `web: Ficaria seed germination light dark`
+- `web: Ficaria germination gibberellin OR smoke OR dormancy`
+- `web: Ficaria floral scent volatiles`
+- `web: Ficaria light photoperiod phototropism`
+- `web: lesser celandine light photoperiod phototropism`
+- `web: Ficaria volatile emission herbivore induced response methyl jasmonate`
+- `web: lesser celandine volatile emission herbivore induced response methyl jasmonate`
+- `web: Ficaria flower opening time anthesis`
+- `web: lesser celandine flower opening time anthesis`
+- `web: Ficaria eye type epidermal focusing`
+- `web: lesser celandine eye type epidermal focusing`
+- `web: "Ranunculus ficaria" gibberellin germination`
+- `web: "Ficaria" salicylic jasmonate response`
+- `web: "Light Perception in Plant Leaves" Ranunculus`
+- `web: "Say it with flowers" "Ficaria"`
+- `web: "Wager" "light perception" leaves`
+- `web: "Ranunculus ficaria" "Taylor" "Markham" 1978`
+- `web: "Ficaria" "germination" "s41598-026-73128-z"`
+- `web: Wager 1909 "perception of light" plants`
+- `web: "An eco-physiological study of Ranunculus ficaria"`
+- `web: "Ranunculus Ficaria" "epidermal" Wager`
+- `web: "Say it with flowers" "Pisum"`
+
+NEW this genus: 9 wanted,0 searched,0 evidence. Adopted existing wanted: [("Contribution à l'étude exigences thermiques préalables et du phototropisme chez différentes espèces de Phanérogames. Seconde liste d'espèces et symbolisation des résultats", 'harvest-30')].
+Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Ficaria-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
