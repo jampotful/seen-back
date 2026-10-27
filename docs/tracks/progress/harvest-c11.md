@@ -1466,3 +1466,46 @@ Exact successful connected queries in executed order:
 
 All delivered titles/snippets read,variable counts without20-perquery claim; raw Vachellia-web1–5.json and tool output /workspace/work/w31-c11. No page/paper fetch,evidence,credentials/proxy/TLS change or new refusal.34of40available-web-screened across rounds;6remain, exact next Poa. Validator pending checkpoint.
 
+
+## 2026-10-27 — issue38 worker31 Poa
+
+NEW Poa available-web-screened;15successful connected queries,23new wanted/0searched/0evidence. Current286wanted/25searched; worker31total93new wanted across4new screens,63queries. Required harvest_get.py/screen_candidates.py executed: cached run6,supplement14/20 plus Poaceae family review;140numbered result occurrences and15family-title occurrences read with all delivered abstract starts (sequential retained slices including initially truncated tails),not full text. Cached successful0-hit citation10.1016/j.tree.2009.09.010 retained as actual cached outcome; no current API hit claim. Cached query order copied below. No failed/gave-up step used as zero hits. Queueonly targetP.annua/P.bulbosa diel,eye_type,sense_chemical: existing sweep-20#9 P.annua photoperiod abstract and#10 P.bulbosa10.1093/aob/mcu037 adopted for their own species; no redundant new light pair or physiological carry. Global canon/evidence/corrected/wanted/searched and owner status checked by genus and retained exact titles/DOIs/URLs; no retained n/a or duplicate. OpenAlex429 skipped,mandatoryAPIsteps incomplete;all null searched withheld,no full-protocol/exhaustion claim.
+
+Adopted existing Effects of Light and Temperature on Anthesis of Holcus Lanatus,Festuca Rubra and Poa Annua10.1080/00173138009424984 harvest-c18wanted#16: directP.annua dailyanthesis primary cached abstract,not another plant's trait carry. Adopted c18wanted#24 five-grasses light/nitrate germination; c12wanted#79 fourturfgrass acidgermination; c10wanted#183 directP.annua redlight/exogenousgibberellin; c12wanted#66 comparative dailyanthesis/pollenrelease10.1080/00173139209427828 (exactPoa species list unverified); c13wanted#156 Daily rhythm anthesis grasses already noted under Bromus includesP.angustifolia. No legacy metadata edits or duplicates.
+
+New23wanted include direct targetP.annua appliedethylene whole-shoot growth10.1104/pp.001198 and intact-vs-clipped plantvolatile/insectreceiver experiment;P.bulbosa appliedABA dormancy10.1034/j.1399-3054.1998.1020202.x and Regulation of Summer Dormancy by Water Deficit and ABA source with direct appliedABA/shortday versus longday figure; targetP.annua flowering-characteristics timedfloret source;PGR/herbicide dissertation andP.annua aqueousextract livingreceiver germination trial. Extracts applied to livingP.annua seeds/seedlings qualify10(a)receiver response,without showing living donor emission. Whole-shoot ethylene source delivered abstract namesannua/trivialis among4species;remaining exactspecies requireoriginal,not inferred. Living hormone/regulator10(d)and germination10(e)leads retained. CongenerP.pratensis/P.palustris/P.nemoralis/P.labillardierei sources only for named species,never target physiology carry. Five-Poa waterpotential germination source names4species in displayed abstract; fifth not invented. Institutional nativegrass project pages are described as project results,not imaginary journal papers. Measured negative germination/clock results remain positive leads. Lightphenology/seasonaldormancy months do not establish dailyactivity. TitleOnlyP.bulbosa environmentalcontrol/dormancyreview hits with alreadysettled light alone were adopted as background,not used for openchemical/diel facts.
+
+CachedP.pratensis ethylene-pathogenesis source10.1104/pp.75.2.462 and silicon/salinity10.21273/hortsci.45.12.1876 require distinction between living cue response, endogenous stress correlation and nutrition. ArtificiallightatnightP.pratensis10.3389/fevo.2021.732959 retained for actuallight/within-day experimental outcomes. Tallfescue,Melilotus,tobacco,Arabidopsis,Fragaria,Pinus,and insect/mammal papers do not supply targetPoa traits;POAprimaryorganic-aerosol/optimization/production-orientedlanguage acronyms are not genusplants. Epidermal hitLensculinaris and contactlens papers lackPoa focusing;eye_type none10(b),focusing belongsnonvisual light. Generic ocelli papers show no returned namedtargetfocusing. Familyreviewalternative returns broadplant10.1146/annurev-arplant-042809-112259,10.1111/tpj.70817,10.1002/wmts.36 plus cachedgrass stomata/shade/flowering reviews; no target-specific outcome extracted or genericduplicate requested. Photosyntheticenergy versus sensing and elapsed floral-duration versus within-dayphase require originals.
+
+Exact successful connected queries in executed order:
+- `web: Poa seed germination light dark`
+- `web: Poa germination gibberellin OR smoke OR dormancy`
+- `web: Poa jasmonate herbivore`
+- `web: Poa flower opening time anthesis`
+- `web: bluegrass flower opening time anthesis`
+- `web: Poa plant ocelli lens epidermal focusing eye`
+- `web: bluegrass plant ocelli lens epidermal focusing eye`
+- `web: Poa chemical sensing volatiles`
+- `web: bluegrass chemical sensing volatiles`
+- `web: Poaceae photoreceptor review`
+- `web: "Poa bulbosa" germination hormone anthesis`
+- `web: "Poa bulbosa" "ABA" dormancy Ofir Kigel`
+- `web: "Poa annua" gibberellic acid germination`
+- `web: "Poa annua" flower anthesis hour`
+- `web: "Ethylene Emission and Responsiveness" Poa`
+
+All delivered connected titles/snippets read,variable counts without20-perquery claim. RawPoa-web1–4.json and requiredtool outputs /workspace/work/w31-c11. No page/paperfetch,evidence,proxy/TLS/credentialchange or new refusal.35of40available-web-screened acrossrounds;5remain,exactnext Parkinsonia. Validator pending checkpoint.
+
+
+Cached successful queries,exact delivered order:
+- `Poa phytochrome photoreceptor`
+- `Poa light perception`
+- `Poa phototropism`
+- `Poa flower opening time`
+- `Poa nyctinasty`
+- `Poa anthesis`
+- `Poa pollination biology`
+- `Poa volatile signalling`
+- `Poa epidermal lens cells`
+- `Poa epidermal focusing leaf optics`
+- `Poaceae photoreceptor review`
