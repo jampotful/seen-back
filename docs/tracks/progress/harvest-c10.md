@@ -1622,3 +1622,84 @@ Chemicalexclusions:Potentillaextractsagainsthuman/rodentdiabetes,cataract,pain,s
 Harvestedfloralvolatiles10.1093/aob/mcy193actuallyIpomopsisandhybrids,10.1002/ajb2.1846actualspeciesnotverifiedintheabstract,10.1002/ecs2.3254buckwheat;targetPotentillamentionsarereferencestoBurkle/Glennyoriginalsabovewhichwerechased. Rootcockchaferthesisspeciesnotshown,noassumedtargetemission. Artemisialiqueur/orangepeels/halophytefoodchemistry,QuercusLED,Myrsinelight,Trifoliumblue/PAR,ArabidopsisBR,CardaminegenesandPotamogetonforagingconcernotherplants. Soilfungalnecro/microbiota,botanicalepithet/glossaries,philosophicalcognitionandtaxonomicuncertaintieslackeligibleactualtargetresponseindisplayedstarts. Rosaceaereviewstargetpear/apple/strawberry/fungalMonilinia,notcurrentPotentillatreatments.
 
 Diel:seasonalMay-Augustfloweringandbud-to-flowerdaysdonotestablishdailyanthesis. RHSobservationalpageexplicitlydescribesP.reptansnight/cloudclosure https://www.rhs.org.uk/weeds/creeping-cinquefoil ;keptassecondarydaily/lightpointer,notanoriginalresearch-paperrequest. ShrubbyP.fruticosaflowerpaperrepresentscurrentDasiphora,notcarrytoherbaceousqueue;retainedasout-of-scopegenuspointer,notrescreened. Pollinator/anthospheremicrobiomeofP.indicaisnotfloweropeningtiming. EyequeriesreturnP.chinensisconicalpetalpapillae,P.bifurca/Conostylaeleafshape/stomata,embryonicP.niveacellsandpharmacologicalanimal-lensstudy;noshowntargetfocusingmeasurement. Conicalcellmorphologyalonenotafocusingexperiment. Ownerplantnoneapplies;anyactualfocusingunderlight. Noabsence/fullprotocolexhaustionclaim.
+
+
+## 2026-10-27 — issue38 worker40 Populus final handover
+
+NEW worker40: four genera web-screened for this round (Melinis, Nyssa, Potentilla, Populus), 61 wanted added, zero searched rows and zero evidence. Total wanted 305, searched0. Every available-source screen remains protocol-partial because missing OpenAlex steps are skipped after the coordinator's429. No absence/exhaustion claim or null searched placeholder. Incoming244 preserved except parent-authorized additiveNEWrow182; main72 byte-prefix identical. All previous progress and queries preserved.
+
+Remaining six, exact next Lolium: Lolium, Agave, Verbascum, Calystegia, Tipularia, Sideroxylon. Amphicarpaea was adopted before this worker and is excluded. Stop between genera for clean context handoff; do not repeat the four completed web screens. Shared c9#35 P.recta metadata pointer was sent to parent; no other-unit edit.
+
+### Populus — all four original traits; pure species and hybrids separated
+
+Queue: P.tremuloides36263, P.deltoides22074, P.tremula21825, P.alba11348, P.grandidentata10518, P.fremontii8116, Salicaceae/Malpighiales. Global evidence/audit/wanted preflight found hybrid light recheck-19-fixed#6/harvest-11#3 (P.tremulaxP.tremuloides,10.1007/s11103-010-9619-2) and canonical hybrid chemical records canon-3#632/656. These cannot establish pure-parent physiological coverage. Existing harvest-15#1 is a P.trichocarpa gene-family study despite six pure-species for-targets; existing harvest-15#2 is hybrid-aspen communication despite those targets. Adopt identities without duplication, do not assume all six are measured. Both legacy target-list issues left unchanged.
+
+Official harvest run2:46 listed work occurrences including repeats, all titles/available abstract starts read. Citation step citing10.1111/ele.12205 yielded existing hybrid2017 source; this supplies the citation alternative, not a claim to have run a missing family review. Exact successful harvest queries: Populus phytochrome photoreceptor; Populus light perception; Populus phototropism. Candidate tool currently shows diel/eye only, but original queue light/chemical gaps also screened. Canon chemical/light compilations checked against global actual-species evidence; no congener/hybrid carry exception invented.
+
+Exact new web queries in execution order:
+- `web: Populus seed germination light dark`
+- `web: Populus germination gibberellin OR smoke OR dormancy`
+- `web: Populus floral scent volatiles`
+- `web: "Populus" photoperiod light perception phototropism`
+- `web: "poplar" photoperiod light perception phototropism`
+- `web: "Populus" flower opening time anthesis`
+- `web: "poplar" flower opening time anthesis`
+- `web: "Populus" chemical perception volatile signalling`
+- `web: "poplar" chemical perception volatile signalling`
+- `web: "Populus" epidermal lens cells eye type`
+- `web: "poplar" epidermal lens cells eye type`
+- `web: "Populus tremuloides" "photoperiod" "light"`
+- `web: "Populus deltoides" "photoperiod" "light"`
+- `web: "Populus alba" "seed" "light" germination`
+- `web: "Populus tremula" "photoperiod" "light"`
+- `web: "Populus tremuloides" jasmonate volatiles`
+- `web: "Populus deltoides" airborne signalling`
+- `web: "Populus grandidentata" light photoperiod`
+- `web: "Populus fremontii" germination light`
+- `web: "ZEITLUPE Promotes ABA" "Populus" species`
+- `web: "Temporal dynamics of protein" "Populus" "deltoides"`
+- `web: "Phytochrome B and PHYTOCHROME INTERACTING FACTOR8" "tremula"`
+- `web: "SPL16 and SPL23" "tomentosa"`
+- `web: "Polyphenol oxidase and herbivore defense" "tremuloides" doi`
+- `web: "A Kunitz trypsin inhibitor gene family" "10."`
+- `web: "Photoperiod Control of Poplar Bark Storage Protein" "10."`
+- `web: "Effect of light availability on survival and growth of Populus fremontii"`
+- `web: "Proteome analysis reveals an energy-dependent central process" Populus doi`
+- `web: "Seed Collection in Temperate Trees" "Populus" "2024"`
+- `web: "Seed dispersal, germination and early seedling establishment of Populus alba" -site:researchgate.net`
+- `web: "Germination" "Fremont cottonwood" "Young" "2003"`
+- `web: "The control of autumn senescence in European aspen" doi`
+- `web: "The effect of some environmental factors" "Aspen" "Bate"`
+- `web: "A Kunitz trypsin inhibitor gene family from trembling aspen" site:pubmed.ncbi.nlm.nih.gov`
+- `web: "Seed dispersal, germination and early seedling establishment of Populus alba" "doi"`
+- `web: "10.1371/journal.pone.0209973" "Populus" "717"`
+- `web: "Initial characterization of shade avoidance response" "trichocarpa"`
+- `web: "ZEITLUPE Promotes ABA" "tremula"`
+- `web: "Autumn senescence in aspen is not triggered by day length" authors`
+- `web: "829121" "tremuloides"`
+- `web: "Phytochrome B and PHYTOCHROME INTERACTING FACTOR8" "T89" -site:researchgate.net`
+- `web: "Growth and Physiological Response" "Populus deltoides" "2023"`
+- `web: "Proteome analysis reveals an energy-dependent" "2017.03.008" site:pubmed.ncbi.nlm.nih.gov`
+- `web: "Comparative Analysis of VOC Profiles" "Harvard" "2025"`
+
+Read all returned titles/snippets actually delivered in twelve bundles; no20-results-per-query claim. Primary exact queries sometimes returned extended indexed passages; no open/fetch commands used and no paper/full text asset committed. Incidental OpenAlex search URLs were not opened or used. No service refusal beyond inherited OpenAlex429; no API retry or access bypass.
+
+New wanted include direct pure-species P.deltoides photoperiod/bark protein and26clone trial, P.tremuloides controlled light/carbon exchange, P.tremula controlled-light senescence and later light-trigger disagreement, P.tremula UV-B, P.fremontii factorial light/water/heat, pure P.tremuloides exogenous JA/PPO/Kunitz experiments, P.deltoides diurnal proteomics, pure-species induced-defense method forks, P.alba/Fremont germination leads, and actual hybrid/congener studies listed on wanted. Genus-only for=Populus with records0 explicitly means source species unverified, not coverage of the six queue species. All stated hybrid records have records0; any parent in the hybrid name is not independently counted.
+
+P.tremula2009senescence paper and2018daylength-specific disagreement both retained: bud set, senescence and genotype/site effects must not be collapsed. Daily molecular rhythms/stomatal timing do not establish daily anthesis, but may inform broader diel physiology; reader must keep endpoint explicit. No universal seasonal/daylength response inferred. P.tremuloides JA2005 and2001 PPO/Kunitz are actual applied-cue experiments, not a hybrid carry or a gene sequence alone. Pure P.deltoides2026 barkVOC paper and pureP.tremula herbivore biochemistry retain intact-emission/removed-tissue/induced-defense forks; sender function is not proven merely byVOCpresence.
+
+Mandatory10(e) seed leads: P.xcanadensis ABA/CHX experiment explicitlychemical; fixed-dark germination does not establish light response. P.alba water-table/substrate and P.fremontii temperature germination studies retained as method leads, not proof of eligible light/chemical cues in shown abstract. P.deltoides BioProtocol2024 DOI10.21769/BioProtoc.4927 is seed extraction/viability under fixed illumination, no shown light/chemical contrast; retained method pointer only. Populus seed-longevity/cryostorage paper fixes light while varying seed water/temperature in P.davidiana/P.koreana; no inferred sensing. PatentCN112715365 alternates machine-translated euphratica/tremuloides identities: not evidence of actualpureP.tremuloides treatment, no guessedtarget.
+
+Harvested plausible light/chemical leads were requested with actual species when verified, otherwise genus-only records0. PIF8 T89 hybrid verified from original Wiley methods; SPL16/23 actual P.tomentosa and publisher print2024 verified over harvest2023 metadata. 2019photo/gravitropism study actual hybrid7171B4 verified from originalPLOSmethods. 2022ZEITLUPE original first species mention truncates afterP.tremulaL.; a second primaryindexedquery confirms xP.tremuloides, so preserve hybrid. Genome/homology references toP.tremula do not establish pure-species physiological trials.
+
+Other harvested starts: Gossypium genes, Arabidopsis phyB/proteins/PDFL, Pinus phototropism, rice root hormones and UVR8Arabidopsis target other genera. Gene-only black-cottonwood phylogenies/genomes, natural seasonal transcriptomes, auxin family inventories, low-temperature/P.euphratica transcriptomes, cell-death program, doubled-haploid leaf histology, aquaporins and osmotic phosphorelay do not by themselves verify a light/external-chemical comparison for a pure queue species. MYC2-Laccaria root-regulation source10.1111/nph.19609 remains background/external-cue fork until actual hormone exposure/species methods read; not automatically an appliedJAexperiment. 1999endodormancy title looks review/conference background with unverified actual species in shown start; pointer10.21273/hortsci.34.7.1174b, not fabricated target request. B3 gene-family P.albaxglandulosa study does not establish pureP.alba chemical responses.
+
+Additional searched originals retained as pointers rather than duplicate experiments: PttGI2018, core-clock2024, hybrid clock/cytokinin daily growth,2010hybrid transcriptome/metabolome, hybrid chilling/GA2011, hybrid tyloses, fungal VOC2026 and2015Laccaria studies. Requested entries above cover eligible explicit cue methods; unrequested new gene/clock references remain background where actual cue treatment/species not verified. 2025PIF4 study includes hybridT89 plus pureP.tremula promoter edits; no raw sequence/edit alone treated as a sensory measurement. Existing c12#152 DOI10.1111/j.1399-3054.1980.tb03252.x also mentions aspen in its title but current actualtargets Salixhybrid; pointer only without verified aspen species.
+
+Excluded removed-material chemistry: quaking-aspen flower hydrosol, male/female harvested flower-bud HS-SPME P.xtomentosa, perfumeryresins, spatial tissue VOC metabolomics and isolated aromatic enzyme biosynthesis are not automatically living senders10(a). Actual intact/hormone/airborne response studies retained separately. Isoprene null feeding preferences in hybridcanescens still constitute an explicit sender/animal interaction experiment; the measured insect behavior is not a plant sensory threshold. Bacterial LuxR/LuxI circuits in P.deltoides microbiome are bacterial reception, not hostchemical sensing. Water/salt/metal toxicity and mycorrhizal nutrient exchange alone not automatically externalcue recognition.
+
+Diel pair mainly seasonal catkin emergence, years-to-flower, bud-initiation trajectories and daily weather records; none establishes pure-species daily flower opening in shown starts. Yellow-poplar Liriodendron is a different genus. Daily proteomics P.deltoides retained explicitly as molecular physiology. P.grandidentata species-focused results mainly floras/silvics/phenology, no unverified hybrid-to-parent carry. Eye pairs retrieve epidermal atlases, trichomes, developmental cell anatomy, microscope objectives and animal cataracts, not demonstrated target focusing. Owner plant eye_type none applies; any genuine focusing belongs under light. No unread table declared negative.
+
+All new DOI/title identities normalized and checked globally, including nested evidence source objects and audit sources, and checked against owner n/a status before append. Unknown authors/DOIs/years remain blank/null. Gate required before commit; no evidence records, source-page fetches or operational changes.
+
+Final citation verification: primary INTA institutional indexed first page confirms the 2026 bark-VOC article is Stresses6(1):6, DOI10.3390/stresses6010006, with all ten authors verified. Corrected the uncommitted new row journal from Ecologies; no earlier row or other-unit metadata edited. Global DOI/title search found no duplicate. This remains an intact-emission versus excised-bark method fork, not verified chemical signalling.
