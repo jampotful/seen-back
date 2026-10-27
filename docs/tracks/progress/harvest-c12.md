@@ -116,3 +116,30 @@ Cached family review10.3390/plants7040111 supplies the review chase; other15-res
 Next:Ratibida, then Fraxinus, then Adiantum, in original batch order.
 
 Worker13 Centaurea checkpoint validator completed before commit: `0 problems`.
+
+## 2026-10-27 — worker13 Ratibida and handoff checkpoint
+
+This worker total:2 genera screened (Centaurea, Ratibida),2 null search records,17 new wanted lines,0 evidence/measurement closures,23 web protocol queries. Cumulative:5/40 genera screened (Equisetum, Cardamine, Rumex, Centaurea, Ratibida),4 null search records,34 wanted lines,0 evidence. Remaining35, next Fraxinus, then Adiantum, then Botrypus. Stop is between genera for fresh-context takeover. No web usage-limit refusal occurred.
+
+Ratibida harvest_get and screen_candidates report no genus in any cached harvest run1–17,20,23,24. No failed/unrun API step is claimed. The successful cached `Asteraceae photoreceptor review`15-result titles and stored abstracts already read for Centaurea supply this genus's family step;10.3390/plants7040111 is the review chase. No live OpenAlex or blocked-source retry. Global normal/corrected evidence, wanted, searched and papers-status checked; no Ratibida evidence or wanted sources found, thin sweep-15 stays intact. Canon checked as for Centaurea; no relevant plant compilation in hand and no new canon wanted.
+
+Eleven Ratibida web queries, exact order (first20 returned titles/snippets where available):
+- `web: Ratibida seed germination light dark`
+- `web: Ratibida germination gibberellin OR smoke OR dormancy`
+- `web: Ratibida floral scent volatiles`
+- `web: Ratibida light photoperiod phototropism`
+- `web: prairie coneflower light photoperiod phototropism`
+- `web: Ratibida volatile emission herbivore induced response methyl jasmonate`
+- `web: prairie coneflower volatile emission herbivore induced response methyl jasmonate`
+- `web: Ratibida flower opening time anthesis`
+- `web: prairie coneflower flower opening time anthesis`
+- `web: Ratibida eye type epidermal focusing`
+- `web: prairie coneflower eye type epidermal focusing`
+
+One new wanted source:the Texas A&M thesis result “EXPLORING THE POTENTIAL COMMERCIAL SIGNIFICANCE OF RATIBIDA”. The original Seed Germination Theory and Practice supplement cited by the indexed Ratibida germination entry is already wanted in harvest-c11 and was not duplicated. Unknown author/year/DOI metadata left empty/null. The thesis snippet explicitly describes R.columnifera seed-treatment trials and sequential flower opening; per10(e) it remains a lead, with no assumed light/GA result. The existing supplement source's indexed dark germination description conflicts with nursery recommendations for light; the original experiment is needed, so no light null. Light/chemical and potential flowering timing remain pending this source reading; the present work does not establish chemical sensing or a daily rhythm from hydration or sequential floret development.
+
+Other returned results:smoke/GA studies on Nicotiana, Anigozanthos, Avena and lettuce, MeJA/VOC work on cotton, Iva, oak, cranberry, Trifolium and bracken, and photoperiod studies on Echinacea/Rudbeckia/Coreopsis/Stellaria concern other genera. They supply no Ratibida measurement. Ratibida xanthanolides in S0031942200815022 concern aerial-part chemistry, not living chemical response10(a). Illinois Wildflowers describes little/no R.pinnata floral scent and crushed-seedhead anise odor; this secondary description is not an emitted signalling measurement. USFS germination/stratification review, SDSU native-plant notes, the Tallgrass seed-production guide and nursery germination instructions are retained as provenance leads in raw results, not substituted for the original candidate trials. Seasonal growth/bloom months, flowering order up the column and seed maturity are not by themselves diel measurements.
+
+Eye searches returned Ratibida taxonomy/morphology, flora and horticultural descriptions; no optical focusing lead. Other coneflower results explicitly name Echinacea or Rudbeckia and bee UV vision, not Ratibida eyes. Eye_type null alone follows owner10(b). All candidate sources stayed at title/snippet level under desk-screen3; no full text or evidence written. Raw tool responses preserved in work/harvest-c12/Ratibida-web1–4-worker13.json. Source skips remain OpenAlex429,MDPI429,UChicago403,SANBI403 with no further requests.
+
+Worker13 final cumulative validator completed before commit: `0 problems`; own-file `git diff --check` passed. Existing supplement wanted in harvest-c11 was detected and not duplicated; Ratibida adds1 wanted, worker13 adds17, cumulative34.
