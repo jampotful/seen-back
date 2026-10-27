@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 15,
-  "updated_at": "2026-10-27T13:00:35.396Z",
+  "generation": 16,
+  "updated_at": "2026-10-27T13:13:05.498Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -237,7 +237,7 @@
     "38": {
       "issue": 38,
       "dispatch_key": "regards-issue-38-20261027T125741334Z",
-      "state": "accepted",
+      "state": "blocked",
       "owner": "Regards Codex dispatcher",
       "run": "2026-10-27T12:57:41.334Z",
       "claimed_at": "2026-10-27T12:57:41.334Z",
@@ -245,8 +245,8 @@
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "repository_execution_verified": false,
-      "recovery_attempts": 0,
-      "observed_status": "Working (1m29s). Task reports Git fetch proxy failures and is diagnosing; no terminal blocker or repository execution confirmation yet. Do not interrupt.",
+      "recovery_attempts": 1,
+      "observed_status": "Terminal after 2m49s; fetch failed three times, no research or PR. One bounded same-chat diagnostic recovery reserved.",
       "overlap_check": {
         "observed_at": "2026-10-27T12:57:41.334Z",
         "recent_history": "No newer matching chat; earlier assignments terminal",
@@ -262,7 +262,7 @@
       },
       "task_url": "https://chatgpt.com/local/01a17d71-1460-7402-a4bf-558d544640f9",
       "accepted_at": "2026-10-27T12:59:03.422Z",
-      "observed_at": "2026-10-27T13:00:35.396Z",
+      "observed_at": "2026-10-27T13:13:05.498Z",
       "branch": "codex/round-2026-10-27-issue-38",
       "claim_commit": "d1ecc613ba013720eb8eca8e3c2b210d2bff5221",
       "last_task_observation": {
@@ -274,7 +274,18 @@
       "receipt_pending": false,
       "receipt_comment_id": 6442496014,
       "last_notification_signature": "accepted:regards-issue-38-20261027T125741334Z",
-      "last_blocker_signature": null
+      "last_blocker_signature": "fetch-proxy-refused:network-mode-unverified",
+      "blocker_signature": "fetch-proxy-refused:network-mode-unverified",
+      "blocker_comment_id": 6442531598,
+      "recovery_history": [
+        {
+          "signature": "fetch-proxy-refused:network-mode-unverified",
+          "attempt": 1,
+          "reserved_at": "2026-10-27T13:13:05.498Z",
+          "status": "reserved",
+          "basis": "Prior #30 correction established supported execution-mode recovery; current task must verify its own documentation and honor approval"
+        }
+      ]
     }
   },
   "last_reconciliation": {
