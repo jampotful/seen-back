@@ -1129,3 +1129,64 @@ All delivered titles/snippets read, variable counts rather than assumed20. No pa
 Mandatory validator pending checkpoint.
 
 Worker17 Nasturtium mandatory real gate printed **0 problems**. Current103wanted/25searched. Next Tecoma.
+
+
+## 2026-10-27 — issue38 worker17 Tecoma
+
+NEW Tecoma web-screened,24 successful exact web queries,15wanted/0searched/0evidence. Worker17 total4 available-web-screened genera (Packera,Cortaderia,Nasturtium,Tecoma),78queries,32wanted/0searched/0evidence. Current118wanted/25searched; across rounds27of40 genera web-screened.13 remain; exact next Cosmos, then Achillea,Mahonia,Apocynum,Bromus,Marchantia,Vachellia,Poa,Parkinsonia,Panicum,Artemisia,Polystichum,Ailanthus. Packera initial unseen result-tail caveat persists; subsequent all delivered result titles/snippets read with variable counts, no assumed20/query. OpenAlex429 skip persists; no null searched rows/full protocol completion/exhaustion. No newly refused service.
+
+Pre-query global evidence/corrected/wanted/searched and owner-status checked by genus/common names and retained candidate titles/DOI/URLs. Existing sweep44#1 Torres/Lopez2011 full-source target photoperiod experiment adopted; no duplicate10.21273/hortsci.46.3.416 request. Thin sweep44 open-trait search remains preserved, not current protocol completion. Canon catalog checked, no in-hand named target source settles open traits. No Wikipedia evidence used or repaired.
+
+Mandatory harvest_get.py and screen_candidates.py completed. Tecoma present run7/supp15/20:100 displayed genus result occurrences plus15 family titles; all delivered titles/stored abstract starts screened, repeated works recognized. Cached descriptor /workspace/work/w17-c11/Tecoma-context.json; family abstracts also read. No failed query or citation step; two cached chases on10.1603/022.038.0629 and10.1111/een.12947 each returned0, not unrun API claims. Those cached queries in order:
+- Tecoma phytochrome photoreceptor
+- Tecoma light perception
+- Tecoma phototropism
+- Tecoma flower opening time
+- Tecoma nyctinasty
+- Tecoma anthesis
+- Tecoma pollination biology
+- Tecoma volatile signalling
+- Tecoma epidermal lens cells
+- Tecoma epidermal focusing leaf optics
+- Bignoniaceae photoreceptor review
+
+Fifteen new sources after global exact DOI/title/status checks. Germination2008light/dark,2018light-quality/dormancy,2014emergence and seed-mass sun/shade sources retained10(e/d); related2007Unesp thesis is alternative source route, not duplicate whole-study request. UV-C2026seedling culture is direct light-treatment candidate; distinguish culture/defence from photoreceptor identity.2015Biobrio primary PDF and publisher issue index verify IAA/IBA/NAA/GA3 experiment, not reliance on excluded RG result.2021auxin rooting controlled trial counts10(d) for living vegetative cuttings; cut-flower vase chemistry exclusion is different.2025SA/chemical dry-matter, indexed SA/phenotypic paper and brassinolide study are applied-regulator candidates; reader must check same-trial/publication relationships, no duplicate study extraction. IOP brassinolide and2025Euphrates journal version share one request with alternative original route. No result measurements extracted.
+
+Diel primary2009JoTT10.11609/jott.o1871.126-27 explicitly states two daily anthesis schedules in cached and returned primary abstracts. Earlier2005Rao/Aluri/Victor paperW2568477768 may be underlying/related observations; retained as citation route within2009line rather than duplicate request.2007Brazil floral biology10.1590/s1519-566x2007000300002,2011two-species floral traits10.1007/s00606-011-0436-0 and2023UFRA floral-biology thesis are conditional daily-timing sources, not measured hours from seasonal flowering/bee activity alone. Genus2024review10.1186/s40529-024-00412-4 covers source/citation trail, not a claim all its plant chemistry qualifies. UFRA thesis describes pollinator-attracting fragrance; attached living collection/observational scent basis remains to verify.
+
+All17 tool-listed candidate dispositions: dielW2568477768/JoTT are retained; Melocactus10.1111/1442-1984.12399,Jatropha10.1590/0001-3765202220201814,Pagamea10.1590/s1676-06032012000400010,Hechtia10.15517/rbt.v56i1.5524 and carpenter-bee10.1371/journal.pone.0168452 concern other taxa, not target daily flowering. Eye10.1074/jbc.ra119.007808 concerns animal rod opsin, bee eye paper insect vision. Owner10(b) plant eye none; general ocelli/epidermal focusing belongs to light, no named Tecoma focusing experiment in delivered snippets. Incidental primary replica-optics paper https://academic.oup.com/jxb/article-abstract/42/5/581/471190 names Mahonia repens (also Thermopsis/Smilacina), not Tecoma; next Mahonia worker should check shared coverage before using that already-returned lead, no repeat search needed.
+
+Chemical BHL books10.5962/bhl.title.19769/99188 have narrative/gardening snippets, no target living cue experiment. Pagamea odour is other genus.2012mosquito paper10.1186/1756-3305-5-234 tested Parthenium,Bidens,Ricinus; Tecoma appears in background feeding literature, not a source-headspace target.2026mosquito preprint10.64898/2026.06.19.733381 already wanted c10#33 (Richardia), available abstract starts do not verify Tecoma; shared source acknowledged as uncertain table/citation lead only, no duplicate or unsupported target expansion. Essential-oil review10.1002/fsn3.70825 and pharmacognostic10.22271/phyto.2024.v13.i4d.15027 do not show living target response; latter names Adenocalymma/Turbinaria. Florivory10.3389/fpls.2022.813418 resolved by targeted primary snippets to Pyrostegia venusta, not Tecoma, no carry.
+
+Additional exclusions: Tecoma fulva2020volatile components10.37761/rsqp.v86i3.298 explicitly use maceration/dried extracts/steam distillation;2019T.stans volatile oils hydrodistilled; chemical encapsulation,cytotoxicity,analgesic rodent assays,alkaloid profiling and nanoparticles from extracts fail10(a).2025NMR10.1002/mrc.5538 text confirms culture-extract analysis but no tested live elicitor response in delivered abstract, so not promoted from metabolites alone.2006cutting-location10.21273/hortsci.41.3.500f gives fixed hormone dipping and age-position comparison; no hormone-control contrast established, not independently requested as measured chemical sensing. Water-stress/gas-exchange and street-pollution correlations do not establish a tested chemical cue from the available snippets. Ascorbic-acid paper10.36632/mejas/2021.11.2.39 names T.capensis, not target T.stans; current genus/species applicability unresolved for desk, no target request or invented carry. Yellow bells also yields Fritillaria,Kirengeshoma,Antirrhinum,Capsicum and Sarracenia; these are not Tecoma. Proxy mirror springerlink.fh-diploma.de result was left unopened; legal primary/PMC snippets independently resolve the2012mosquito article.
+
+Exact connected queries:
+- `web: Tecoma seed germination light dark`
+- `web: Tecoma germination gibberellin OR smoke OR dormancy`
+- `web: Tecoma floral scent volatiles`
+- `web: Tecoma flower opening time anthesis`
+- `web: yellow bells flower opening time anthesis`
+- `web: Tecoma plant ocelli lens epidermal focusing eye`
+- `web: yellow bells plant ocelli lens epidermal focusing eye`
+- `web: Tecoma chemical sensing volatiles`
+- `web: yellow bells chemical sensing volatiles`
+- `web: Bignoniaceae photoreceptor review`
+- `web: "Tecoma" "EFFECT OF CERTAIN PHYTOHORMONES" -site:researchgate.net`
+- `web: "Tecoma stans" methyl jasmonate salicylic acid gibberellin`
+- `web: "Tecoma" "1756-3305-5-234" headspace`
+- `web: "Tecoma" "2026.06.19.733381"`
+- `web: "Tecoma stans" "Nano zinc" "salicylic" -site:researchgate.net`
+- `web: "NMR and Chemometric Analysis" "Tecoma"`
+- `web: "Germination and emergence of trumpet flower"`
+- `web: "INFLUENCE OF STEM CUTTING LOCATION" "Tecoma" IBA`
+- `web: "Florivory and Pollination Intersection" species`
+- `web: "Steady state flowering pattern" "Tecoma" -site:researchgate.net`
+- `web: "Effect of Foliar Application" "Dwarf Tecoma" -site:researchgate.net`
+- `web: "Effect of Date Palm Compost and Brassinolides"`
+- `web: "Tecoma" "ascorbic acid" "irrigation intervals"`
+- `web: "Florivory and Pollination Intersection" "Pyrostegia"`
+
+No page/paper fetch, evidence, credentials/proxy/TLS changes, purchase or operational edits. Raw successful responses /workspace/work/w17-c11/Tecoma-web1–7.json; full retained web text was read in sequential slices so no hidden display-truncated tail. Mandatory validator pending checkpoint.
+
+
+Worker17 Tecoma mandatory real validator printed **0 problems**. Current118wanted/25searched; next Cosmos.
