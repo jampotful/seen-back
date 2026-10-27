@@ -357,7 +357,7 @@ def main():
                 if not ok and kind == "html":
                     rec.setdefault("failed", []).append({"url": url, "status": s, "title_match": False})
                     continue
-                rec.update({"read": {"kind": kind, "url": url, "final_url": final, "note": note}, "title_match": ok,
+                rec.update({"read": {"kind": kind, "url": url, "final_url": final.split("?")[0] if final and "X-Amz-" in final or final and "AWSAccessKeyId" in final else final, "note": note}, "title_match": ok,
                             "chars": len(text), "text_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()})
                 (out / "enc" / ("%s-%s.bin" % (r["batch"], r["entry"]))).write_bytes(encrypt(text, pub))
                 break
