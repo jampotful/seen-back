@@ -1,0 +1,21 @@
+name: gbif
+# Looks up the rows of ci/gbif/ on GBIF and returns the registry answers on the ci branch as runs/gbif/<run>/gbif.jsonl.
+# No Claude allowance. Start it by pushing a commit to a branch named run/gbif/<anything>.
+on:
+  push:
+    branches: ['run/gbif/**']
+permissions:
+  contents: write
+jobs:
+  gbif:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: look up
+        run: python3 -I ci/gbif/gbif.py out
+      - name: return results
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: bash ci/return.sh gbif out
