@@ -1120,3 +1120,20 @@ Scent search exposed2026 Shaman petal volatilomics and2024 sixty-variety aroma s
 Fresh-context exact next:Chromolaena, then Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. Do not repeat the prior18 completed screens, Ficus/Lespedeza/Salix, Asparagus full adoption, or this worker's5 screens. None of the13 remaining genera has been newly web-searched by this worker. Adopt species-matched existing trait coverage first; Chromolaena light/diel/chemical inventory sweep-42#11–13 still needs target/species check; Hypoxis/Carex/Urtica have congener/species forks; Daucus eye plant-1#3 is substantive; Prunella rescreen-1 bird optics are not plant. Preserve all old prefixes/provenance.
 
 Worker21 final validation completed before commit: combined screen_candidates --check returned `0 problems`; both JSONL files parse at16 searched/213 wanted; baseline bbc35ff2050022e029b68875e3d219aab8f0ddd4 bytes are exact prefixes of all three owned files; own-file git diff --check passed. New wanted title/status scan found no status-title match, and per-entry normalized-title/DOI scans avoided duplicates. Only own wanted/progress changed; no evidence, paper assets, other-unit files, application/operational state or old prefix edits.
+
+
+## 2026-10-27 — issue38 worker27: Chromolaena
+
+Target C.odorata matches sweep-42#11–13 exactly. Adopted target light and diel records; existing chemical floral-VOC record retained as logged, though methods unresolved in that record and no new living-emission claim made. No repeated paired light/diel searches. Old eye sweep has no scientific/common-name eye pair, so eye pair newly run. Both mandatory tools report no harvest genus; no cached queries/chase invented. Family review query returned general plant/algal photoreceptors, insect colour vision, UV-B and Asteraceae capitulum reviews, no target eye measurement. Owner10(b): eye_type none; epidermal focusing if found belongs under light. Foliar-anatomy result reports epidermal arrangements/vascular bundles, no focusing; taxonomy and photographic sensor/focus metadata are not eyes. Essential-oil constituents/aerial-part extract chemistry and aqueous leaf extract on cereal germination fail target living-response10(a); smoke experiments are a different valid target chemical lead. Existing floral source not re-requested. Mandatory germination sources added for reading; no measured closure asserted. Remaining12, exact next Cyanthillium.
+
+Exact actual web queries, in execution order:
+- `web: Chromolaena seed germination light dark`
+- `web: Chromolaena germination gibberellin OR smoke OR dormancy`
+- `web: Chromolaena floral scent volatiles`
+- `web: Chromolaena eye type epidermal focusing`
+- `web: Siam weed eye type epidermal focusing`
+- `web: Asteraceae photoreceptor review`
+
+All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Chromolaena-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
+
+NEW this genus: 4 wanted,0 searched,0 evidence.
