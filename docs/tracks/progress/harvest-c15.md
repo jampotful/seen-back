@@ -370,3 +370,29 @@ Exact web queries, in order:
 - web: spicebush chemical response volatile signaling
 
 Worker42 checkpoint: 4 newly web-screened genera (Betula, Thuja, Linnaea, Lindera), all protocol partial;33 new wanted,0 searched,0 evidence. Cumulative14 web-screened genera and103 wanted lines.26 remain, exact next Lupinus. OpenAlex still skipped after coordinator429; no additional service refusal.
+
+### Lupinus: web-screened, protocol partial
+
+Required harvest_get and screen_candidates report no harvest. Adopted existing L. polyphyllus chemical evidence canon-3#652 (10.1111/ele.12205), plus L. nanus canon-3#663; the latter is not evidence for the queue's L. texensis or L. arboreus. Existing generic light class from 10.3389/fpls.2015.00207 and the L. luteus/L. angustifolius experimental/model records do not establish the queue species' own responses. Existing sweep-9 wanted “About flowering biology of alien species: 1. Lupinus polyphyllus Lindl.” adopted; old thin sweep not treated as current completion.
+
+Fifteen new wanted sources added after cross-unit wanted/owner-status DOI/title scan found no matches. Leads include controlled illumination/darkness germination, smoke-water treatment, dormancy and pregermination experiments, fixed-beam and polarized light leaf movement, original photoperiod studies and an applied-GA/anther-dehiscence study. The long-day/day-extension conference abstract explicitly names L. polyphyllus, so provides a species-specific queue lead without carrying from cultivated congeners. Other taxa stay explicitly named; L. texensis/L. arboreus remain without their own established light/chemical source from these snippets. Seed water-gap “lenses” and papillose epidermal anatomy are structural descriptions, not optical focusing. Dormancy/physical scarification sources need method review to distinguish a treatment from chemical-cue perception. No full-text extraction, dosage or invented species attribution.
+
+Metadata leads: “Factors Influencing Seed Germination of Lupinus perennis” appeared only on ResearchGate and was not opened; “Extending photoperiod and increasing illuminance hastens flowering of narrow-leafed lupin (Lupinus angustifolius)” likewise only on ResearchGate. Ball Seed GrowerFacts https://www.ballseed.com/utility/seedcolumnpdf.aspx?txtphid=039901304006060 reports L. polyphyllus not requiring light at germination but is a commercial protocol, not a verified paper title. Pherobase L. polyphyllus floral-volatiles page supplies a source-finding lead rather than an original measurement. “Changes in colour, tocopherols and carotenoids during the germination of lupin seeds” (https://www.sciencedirect.com/science/article/abs/pii/S0889157523005562) reports dark-germinated L. mutabilis food-composition changes over time; it remains an unverified light/chemical-method lead, no response measurement assumed. Chemical uptake by isolated epidermal cells (https://pubmed.ncbi.nlm.nih.gov/17269069/) is not automatically a whole-plant cue response. Mechanical-damage alkaloid profiling has no explicit chemical stimulus in snippets. Food off-flavour, harvest-residue chemistry and cosmetics/pharmacology are excluded under10(a).
+
+Diel web hits give anthesis developmental stages, season/date or days after flower setting, no daily opening hour. The daily-hour legume result is T. lupinaster, not Lupinus, and is excluded. Eye results are general ocelli/animal-eye discussions and ordinary Lupinus papillae/cuticle anatomy. Family review search identifies 10.1093/jxb/erag313, which explicitly discusses lupin photoperiod regulation, but its snippets identify no additional queue species measurement; ordinary DOI/PMC result used for provenance, library proxy 0-academic-oup-com.legcat.gov.ns.ca was not opened. Other family results are broad photoreceptors or Glycine/generic phylogeny. Common name lupine verified by USFS/wild-lupine and experimental source titles. Canon as above; no null searched row while API steps remain unavailable.
+
+Exact web queries, in order:
+- web: Lupinus seed germination light dark
+- web: Lupinus germination gibberellin OR smoke OR dormancy
+- web: Lupinus floral scent volatiles
+- web: Lupinus photoperiod phototropism light response
+- web: lupine photoperiod phototropism light response
+- web: Lupinus flower opening time anthesis
+- web: lupine flower opening time anthesis
+- web: Lupinus plant ocelli lens-like epidermal cells eye
+- web: lupine plant ocelli lens-like epidermal cells eye
+- web: Lupinus chemical response volatile signaling
+- web: lupine chemical response volatile signaling
+- web: Fabaceae photoreceptor review
+
+Worker42 checkpoint: 5 newly web-screened genera (Betula, Thuja, Linnaea, Lindera, Lupinus), all protocol partial;48 new wanted,0 searched,0 evidence. Cumulative15 web-screened genera and118 wanted lines.25 remain, exact next Picea. No new service refusal.
