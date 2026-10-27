@@ -470,3 +470,26 @@ Exact web queries, in order:
 - web: "brittlebush" plant ocelli lens-like epidermal cells eye
 
 Worker47 checkpoint:1 newly web-screened genus, protocol partial;6 new wanted,0 searched,0 evidence. Cumulative17 web-screened genera,137 wanted lines.23 unreviewed genera remain; exact next Symphoricarpos (required tools have run, no web searches yet).
+
+
+### Symphoricarpos: web-screened, protocol partial
+
+Required harvest_get and screen_candidates report no harvest. Actual-genus evidence/wanted preflight found no existing source; old sweep-12#14 has only two broad non-web queries and is not current completion. All four trait pairs completed. Six new wanted sources added after global wanted/owner-status DOI/title check: S. orbiculatus GA germination trial (negative GA effect still a treatment comparison), S. microphyllus explicit light-quality/darkness germination, S. orbiculatus increasing-light/CO2 symposium experiment, S. albus fruit-volatile attraction study, and two western-snowberry management/photoperiod reports. The latter are source-finding routes to original treatments; no invented measurements or carry from S. occidentalis/S. microphyllus to queue species. Fruit collection method needs checking before living-sender attribution; fly receiver response is not plant perception. Light used as an incubation condition in the orbiculatus dormancy paper is not assumed independently tested.
+
+Extract/cell-culture dermatology, methanolic berry extract and botanical-herbicide donor extract studies excluded under10(a). Burning/regeneration is not automatically a smoke-cue trial. Eye snippets describe ordinary fruit cell anatomy, pollen exine and eye-catching fruit; no focusing measurement. Diel results report months, seasonal anthesis, days to flower opening or floral longevity, no daily opening hours. Common-name Coreopsis/Amelanchier/Chiococca snowberry results are other genera. Family review search returned broad photoreceptor/UVR8 and insect-vision reviews, no genus-specific physiological measurement. Common name snowberry verified in NC State/USFS/NZ Flora. Canon as worker47 introduction; OpenAlex missing steps prevent full protocol/null rows. No pages fetched/evidence.
+
+Exact web queries, in order:
+- web: "Symphoricarpos" seed germination light dark
+- web: "Symphoricarpos" germination gibberellin OR smoke OR dormancy
+- web: "Symphoricarpos" floral scent volatiles
+- web: "Symphoricarpos" photoperiod phototropism light response
+- web: "snowberry" photoperiod phototropism light response
+- web: "Symphoricarpos" flower opening time anthesis
+- web: "snowberry" flower opening time anthesis
+- web: "Symphoricarpos" plant ocelli lens-like epidermal cells eye
+- web: "snowberry" plant ocelli lens-like epidermal cells eye
+- web: "Symphoricarpos" chemical response volatile signaling
+- web: "snowberry" chemical response volatile signaling
+- web: Caprifoliaceae photoreceptor review
+
+Worker47 checkpoint:2 newly web-screened genera (Encelia, Symphoricarpos), both protocol partial;12 new wanted,0 searched,0 evidence. Cumulative18 web-screened genera,143 wanted lines.22 unreviewed genera remain; exact next Malva. No new service refusal.
