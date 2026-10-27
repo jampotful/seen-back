@@ -13,6 +13,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - No desk unit is running. Codex rounds for issues 28, 29, 30 and 38 are all reviewed and merged through branches; the dispatcher ledger shows all four as reviewed.
 - Raw plant queue: 559 entries (85 are prior-covered residue per Codex round 2). Remaining batches harvest-c13 to c21 (40 each), c22 (27), c23 (14).
 - Papers Wanted holds 2,973 papers (1,797 needed) after the round 2 refresh.
+- Desk units resumed plant screening on 27 Oct (OpenAlex returns a proxy 403 to agents, so their new steps are labelled web searches). Merged: desk-c7 (audit 86) and desk-c8 (audit 87). Running: desk-c9 (19 genera), desk-c11 (20), desk-c12 (26). `codex_queue.py` still lists these genera as left because it counts only records with explicit "harvest run N" provenance; do not send them to Codex.
 
 ## Next, in order
 - audit any new Codex plant unit with a fresh Opus unit (audit 86 onward), merge what passes, registry-fill wanted lines (run/crossref/desk-wanted-62 onward), refresh Papers Wanted
