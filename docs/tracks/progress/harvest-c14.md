@@ -484,3 +484,25 @@ Queries actually run (connected web search; every returned title/snippet screene
 - `Cytisus epidermal lens cells eye`
 - `Scotch broom epidermal lens cells eye`
 - `"Morphological characterization" "Cytisus aeolicus" germination`
+
+### Aralia
+
+Web-query screen completed for round, full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates: absent harvest. Global canon/evidence/wanted/status and queue show nudicaulis target; Hedera/Oplopanax family records do not carry. New target FEIS seed-digestion source retained as physical-versus-chemical method fork, plus congener-specific elata/cordata hormone/light/smoke and hispida anthesis leads. The generic Diurnal fluctuations of endogenous IAA content in aralia leaves is actually Fatsia japonica (publisher search index DOI10.1007/BF02925873), excluded from Aralia target; Aechmea nudicaulis germination results likewise another genus. Japanese/false aralia Fatsia/Polyscias/Dizygotheca sources not assigned to genus. Floral-scent results mainly distilled shoots, absolutes, extracted oils or medicinal effects on animal cells, excluded10(a). Eye paper10.3732/ajb.94.7.1061 measures other genera; Aralia extract cataract/corneal studies measure animal tissue, no plant focusing. Diel target hits seasonal dates; hispida primary lead requires actual daily schedule. Family alternative found Phenotypic and transcriptional features of Araliaceae species under distinct light environments (10.1111/jse.13043), species list not displayed so unresolved family source pointer, not measured Aralia assignment. Thesis University of Alberta TC-AEU-31371.pdf contains target seed light/temperature trials in snippet but no readable title; unresolved source pointer https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/AEU/TC-AEU-31371.pdf retained for reader. No pages fetched, null records or evidence.
+
+Queries actually run (connected web search; every returned title/snippet screened, fewer than20 whenever fewer delivered):
+
+- `Aralia seed germination light dark`
+- `Aralia germination gibberellin OR smoke OR dormancy`
+- `Aralia floral scent volatiles`
+- `Aralia photoperiod phototropism light sensing`
+- `wild sarsaparilla photoperiod phototropism light sensing`
+- `Aralia flower opening time anthesis`
+- `wild sarsaparilla flower opening time anthesis`
+- `Aralia volatile chemical signalling`
+- `wild sarsaparilla volatile chemical signalling`
+- `Aralia epidermal lens cells eye`
+- `wild sarsaparilla epidermal lens cells eye`
+- `Araliaceae photoreceptor review`
+- `Aralia nudicaulis seed germination light dark`
+- `"Temporal Patterns of Nectar and Pollen Production in Aralia"`
+- `"Diurnal fluctuations of endogenous IAA content" aralia species`
