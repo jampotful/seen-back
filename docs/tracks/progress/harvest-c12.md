@@ -1430,3 +1430,34 @@ Exact actual web queries, in execution order:
 
 NEW this genus: 26 wanted,0 searched,0 evidence. Adopted existing wanted: [('Variable seed bed microsite conditions and light influence germination in Australian winter annuals', 'harvest-c11'), ('The Diurnal Nodding of the Wild Carrot and Other Plants', 'plant-1'), ('Root-Emitted Volatile Organic Compounds from Daucus carota Modulate Chemotaxis in Phasmarhabditis and Oscheius Nematodes', 'plant-1'), ('Effect of Light on Germination of Light-Sensitive Seeds', 'harvest-c9'), ('Seed Germination Theory and Practice, 2nd ed.', 'harvest-c7')].
 Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Daucus-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
+
+
+## 2026-10-27 — issue38 worker34: Chamaenerion
+
+No target substantive evidence or wanted found globally under Chamaenerion,Chamerion or Epilobium angustifolium. Old thin sweep-5 preserved. Mandatory tools read:cached run2 has failed/gave-up three genus searches and citation step on10.1007/s13580-011-0058-z; failure explicitly uncompleted,never zero hits. Successful cached family query Onagraceae photoreceptor review lists15 titles; all read with screen-candidate dispositions. Available family alternative supplies target scent2021 and flower-opening update reference lead; no retry of failed OpenAlex steps.
+
+Seed illumination and blue-depletion sources explicitly name target synonym; scent headspace air-control study directly concerns living floral emission10(a). CO2 nectar response held for cue-versus-nutrition scope. No smoke/GA response inferred from general fire ecology,name fireweed or general dormancy reviews. Fireweed can refer to Senecio,Crassocephalum and Erechtites; excluded. Oenothera,Clarkia,Capparis,Callitriche,orchid,hawkmoth,cotton,oak,tobacco and cranberry findings do not establish target plant traits. No hormone carry from Epilobium hirsutum. Essential oils/skin-permeation and anti-inflammatory extracts10.3390/molecules26237188/PMC5045895 are tissue chemistry10(a),not living sensing. Eye pair mainly floral/seed morphology and eye-catcher metaphors; no actual focusing measurement. Owner eye_type none; focusing belongs under light10(b). Daily flowering candidates retained at their real scope; multi-day protandry,fruit capsule opening,bottom-up racemes and seasonal bloom are not daily-clock plant activity. Remaining3,next Ficaria.
+
+Exact actual web queries, in execution order:
+- `web: Chamaenerion seed germination light dark`
+- `web: Chamaenerion germination gibberellin OR smoke OR dormancy`
+- `web: Chamaenerion floral scent volatiles`
+- `web: Chamaenerion light photoperiod phototropism`
+- `web: fireweed light photoperiod phototropism`
+- `web: Chamaenerion volatile emission herbivore induced response methyl jasmonate`
+- `web: fireweed volatile emission herbivore induced response methyl jasmonate`
+- `web: Chamaenerion flower opening time anthesis`
+- `web: fireweed flower opening time anthesis`
+- `web: Chamaenerion eye type epidermal focusing`
+- `web: fireweed eye type epidermal focusing`
+- `web: "Epilobium angustifolium" photoperiod light germination`
+- `web: "Epilobium angustifolium" gibberellin jasmonate response`
+- `web: "Biology of germination of medicinal plant seeds" "XXII"`
+- `web: "Nectary and gender-biased nectar" -site:researchgate.net`
+- `web: "Epilobium" "blue light depletion"`
+- `web: "Chamaenerion" "seed" "enhancing treatments"`
+- `web: "Chamaenerion" "Biological Characteristic"`
+- `web: "Elevated carbon dioxide increases nectar production"`
+
+NEW this genus: 10 wanted,0 searched,0 evidence. Adopted existing wanted: [('Seed enhancing treatments: comparative analysis of germination characteristics of 23 key herbaceous species used in European restoration programmes', 'harvest-c12')].
+Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Chamaenerion-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
