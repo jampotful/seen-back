@@ -233,3 +233,39 @@ No diel null:the sporangium exposure/spore-release paper10.1371/journal.pone.013
 Eye_type alone is null under owner10(b). All six tool-listed eye candidates receive explicit screened reasons:animal cryptochromes; Adiantum pharmacognostic epidermis; two Vallisneria chloroplast papers; Metasequoia anatomy; Magnolia epidermal morphogenesis. Additional Nepalese epidermal taxonomy and leaflet cytoskeletal morphogenesis report no image-forming eyes in returned descriptions. No Adiantum epidermal optical-focusing lead was found. No source-page/full-text fetches or evidence writes. Raw web and cache outputs are local work/harvest-c12/Adiantum-*-worker18 files. Blocked sources remain OpenAlex429, MDPI429, UChicago403 and SANBI403, no retry. No actual web quota refusal.
 
 Required combined candidate validation completed before commit: `0 problems`. Own-file whitespace check passed. Next first incomplete genus:Botrypus.
+
+
+## 2026-10-27 — worker25 continuation: Botrypus
+
+This worker:1 genus completed,0 search records,1 new wanted,0 evidence. Cumulative:8/40 genera completed,6 search records,96 wanted,0 evidence;32 remain, next Parthenium. No measured cells closed.
+
+Read AGENTS.md first and all specified protocols. Runtime networking verified with the cloud-environment skill; no external source/full-paper page was fetched. Harvest and candidate tools read the cached ci metadata:run6, supplements15/20 and Ophioglossaceae family review. All stored titles/abstracts screened. The sole live-tool open trait is light, corroborated against original gaps and main:the old sweep-31#3 is an actual family-level review record, retained without rewriting or treating it as a species measurement. Existing replant-1 eye_type/diel/chemical screenings are substantive available-source protocols and were preserved without repeating their paired searches. Canon plant list checked, no relevant in-hand compilation found.
+
+Exact successful cached and executed web queries, in order:
+- `Botrypus phytochrome photoreceptor`
+- `Botrypus light perception`
+- `Botrypus phototropism`
+- `Botrypus flower opening time`
+- `Botrypus nyctinasty`
+- `Botrypus anthesis`
+- `Botrypus pollination biology`
+- `Botrypus volatile signalling`
+- `Botrypus photoperiod`
+- `Botrypus circadian rhythm`
+- `Botrypus epidermal lens cells`
+- `Botrypus epidermal focusing leaf optics`
+- `Ophioglossaceae photoreceptor review`
+- `web: Botrypus seed germination light dark`
+- `web: Botrypus germination gibberellin OR smoke OR dormancy`
+- `web: Botrypus jasmonate herbivore`
+- `web: Botrypus light photoperiod phototropism`
+- `web: rattlesnake fern light photoperiod phototropism`
+- `web: Botrychium virginianum spores germination dark light`
+- `web: Botrychium virginianum Whittier 1973 germination light`
+- `web: Ophioglossaceae photoreceptor review`
+- `web: "Spore germination and young gametophytes" "virginianum"`
+- `web: "Botrychium virginianum" germination Whittier Peck 1990`
+
+Ten new web queries read returned titles/snippets (up to first20 where returned). Required seed-name queries and JA query mostly returned generic model-plant seed/hormone results, so a species-synonym germination query followed. Scientific/common light searches locate species germination citations under Botrychium virginianum. One new wanted entry retains Whittier1985, explicitly a possible meeting abstract, with real bibliographic reference-list provenance and no invented DOI. Whittier1973 actually treats B.dissectum (now Sceptridium), so its darkness experiment is not silently carried to Botrypus. Peck1990 germination percentage is cited secondhand by conservation assessments, with no verified light-treatment detail; not independently requested. The2022 belowground-methods paper10.1002/aps3.11469 explicitly includes Botrypus but repeats general Botrychium darkness statements already represented by main; its indexed methods/structure-density result does not establish a new species light treatment. The broad2023 circadian fern panel and2024 nonflowering-plant photoperiod review have no Botrypus experiment identified by returned snippets, so no speculative species-table request.
+
+Other cached candidates are phytochrome genomics (already wanted/canon and logged at order level), HGT, KAI2 receptor evolution, oxygen-sensing enzymes, phylogenetic markers, general anatomy and vegetation inventories; none identifies a new direct Botrypus light-response trial in stored abstracts. Leaf epidermal microscopy10.3724/cbb-t99-047 has no focusing measurement; existing eye disposition retained. Family review metadata includes phylogeny/classification and GA experiments in Osmunda/Athyrium; no target-species light measurement. Broad stomatal review is background. The existing2025 Botrypus phenology wanted10.1640/0002-8444-115.4.296 remains, no duplicate. No null is written while species germination and prior phenology leads await reading. Blocked services remain OpenAlex429/MDPI429/UChicago403/SANBI403, no retry; no web quota refusal. Local provenance:work/harvest-c12/Botrypus-*-worker25 files.
