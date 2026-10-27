@@ -108,3 +108,40 @@ Queries actually run (connected web search; all available result titles/snippets
 - `Caryophyllaceae photoreceptor review`
 
 Round checkpoint: 6 genera screened for round, all partial full protocol owing to unavailable OpenAlex; 0 searched, 17 wanted, 0 evidence lines. Next Corylus; 34 unreviewed.
+
+### Corylus
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates: no harvest; no genus evidence. Fifteen wanted lines: eleven germination/dormancy leads (10(e)), three light physiology trials, one volatile host-cue article with title/authors absent from snippet and blank fields. The strongest chemical snippets describe applied gibberellin, growth retardants, kinetin and thiourea; strongest light snippet says light breaks dormancy after testa removal. Endogenous hormone chemistry titles retained as leads under 10(e), with experiments to be checked by reader. Roasted/raw nut volatilomics and distilled bud/leaf oil chemistry excluded under owner reading. Diel results give seasons/months or flowering dates, not daily opening hour. Eye hits are human anatomy and hazel iris colour. Family query returned general photoreceptor works, no Betulaceae review. Canon checked; no null records.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Corylus seed germination light dark`
+- `Corylus germination gibberellin OR smoke OR dormancy`
+- `Corylus floral scent volatiles`
+- `Corylus photoperiod phototropism light sensing`
+- `hazel photoperiod phototropism light sensing`
+- `Corylus flower opening time anthesis`
+- `hazel flower opening time anthesis`
+- `Corylus volatile chemical signalling`
+- `hazel volatile chemical signalling`
+- `Corylus epidermal lens cells eye`
+- `hazel epidermal lens cells eye`
+- `Betulaceae photoreceptor review`
+
+### Rhamnus
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates run; run 2 genus data and run 17 family review Rhamnaceae photoreceptor review screened. Adopted existing genus light evidence; germination light leads (R. persicifolia temperature/light/pre-chill, thermal-niche modelling, Rhamnus spp temperature/depth, Deno light trials) held as light coverage leads, not null-screened. Two new wanted chemical studies: floral VOC profiles and living pathogen response in accepted Frangula alnus (both named in batch); companion commentary not duplicated. Other chemical harvest candidates concern Piper, Artemisia, barley, honey or human perceptions; bark extracts excluded. Diel web results seasonal blooming/fruiting dates and Hippophae sea buckthorn, not Rhamnus daily opening. Eye anatomical snippet gives polygonal/irregular epidermal cells, no focusing; other eye hits animals. No null rows. Canon checked.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Rhamnus seed germination light dark`
+- `Rhamnus germination gibberellin OR smoke OR dormancy`
+- `Rhamnus floral scent volatiles`
+- `Rhamnus flower opening time anthesis`
+- `common buckthorn flower opening time anthesis`
+- `Rhamnus volatile chemical signalling`
+- `common buckthorn volatile chemical signalling`
+- `Rhamnus epidermal lens cells eye`
+- `common buckthorn epidermal lens cells eye`
+
+Round checkpoint: 8 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 34 wanted, 0 evidence lines. Next Argentina; 32 unreviewed.
