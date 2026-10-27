@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 9/40 genera screened here through Aesculus;9 search records;118 wanted lines;0 evidence and measured closures. Cephalanthus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving30 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker24 stopped between Aesculus and Cephalanthus for fresh-context continuation.
+**Current checkpoint:** 10/40 genera screened here through Cephalanthus;10 search records;120 wanted lines;0 evidence and measured closures. Bignonia is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving29 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker29 continuation is current.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -302,3 +302,51 @@ Mandatory10(e) germination/dormancy leads retained: A. indica stratification (In
 Reused existing wanted: mature-bud daylength bagging study10.1111/nph.13510 in c12 (Fagus-only measurement in harvest-13 is not an accepted Aesculus measurement); Effects of Photoperiod on Growth of Trees10.1086/335918 in c11. No duplicate added. Aesculus chinensis bark solvent extracts, harvested-flower metals/polyphenols and chestnut food-product chemistry are excluded under10(a); Castanea sweet-chestnut clocks/culture papers are a different genus; phenological model fits alone are not manipulated light responses. New horse-chestnut bud-scale optical/photosystem observations expose no manipulated environmental response in snippets and were not claimed as light-sensing evidence. Seed hilum resembling an eye and horse leg callosities are not plant eyes. Plant-focused lens/ocelli reviews belong under sense_light_nonvisual by10(b), and none exposes Aesculus-specific focusing.
 
 Only1 eye_type null written under owner's plant-none reading. Light,chemical,diel have plausible leads and no null. Actual current screen_candidates.check using legitimate cached hg.load returned **0 problems** before commit; no substitute checker, evidence,app check,branch/gate/#29/#30 change. Stop between genera for fresh-context takeover; Cephalanthus is unstarted.
+
+## 2026-10-27 — worker29 continuation
+
+**This worker:1 genus (Cephalanthus),1 eye_type search record,2 wanted lines,0 evidence/measurement closures. Cumulative:10/40 genera screened here,10 search records,120 wanted lines,0 evidence/measurement closures.** Pilea coverage remains in c4;29 genera need new work, starting Bignonia,Platanus,Euonymus.
+
+Read AGENTS.md first, exact fresh assignment and worker guide, original batch/queue order, round4-harvest, THOROUGH, BRIEF including Round2/wanted/records, round3-sweep and desk-screen1–10 including10(e). Cloud-environment-runtime skill applied: current connected environment, unrestricted policy enforced, no secrets/identities. No branch/gates/#29/#30 changes or app checks. Legitimate serialized hg.load data from fetched ci55a1f658a687c5d355ae11d9eec65def211f4033 used by the official harvest_get.show/screen_candidates functions. No thin/hg open-trait filtering was used to suppress original cells. Cephalanthus occidentalis original gaps contain all4 traits; corrected-first accepted-name evidence has no Cephalanthus measurement. Old sweep-13 single combined query is incomplete.
+
+Read106 unique harvest titles and entire stored abstracts (up to700 characters), including15 Rubiaceae family works, in bounded sections. Genus run4,supplements12/14/20 and family17 have no failed steps. Citation steps citing10.1590/1519-6984.281402 and10.1002/pei3.70022 each returned0hits. Successful cached queries, word for word in harvest order:
+- `Cephalanthus phytochrome photoreceptor`
+- `Cephalanthus light perception`
+- `Cephalanthus phototropism`
+- `Cephalanthus flower opening time`
+- `Cephalanthus nyctinasty`
+- `Cephalanthus volatile signalling`
+- `Cephalanthus photoperiod`
+- `Cephalanthus circadian rhythm`
+- `Cephalanthus anthesis`
+- `Cephalanthus pollination biology`
+- `Cephalanthus epidermal lens cells`
+- `Cephalanthus epidermal focusing leaf optics`
+- `Rubiaceae photoreceptor review`
+
+Connected web searches, word for word in execution order:
+- `Cephalanthus seed germination light dark`
+- `Cephalanthus germination gibberellin OR smoke OR dormancy`
+- `Cephalanthus floral scent volatiles`
+- `Cephalanthus flower opening time anthesis`
+- `buttonbush flower opening time anthesis`
+- `Cephalanthus eye type`
+- `buttonbush eye type`
+- `Cephalanthus chemical sense volatile response`
+- `buttonbush chemical sense volatile response`
+- `Cephalanthus light photoperiod phototropism`
+- `buttonbush light photoperiod phototropism`
+- `Rubiaceae photoreceptor review`
+- `Cephalanthus epidermal lens cells focusing light`
+- `buttonbush epidermal lens cells focusing light`
+- `"Cephalanthus naucleoides" "volatile"`
+- `"Cephalanthus" "Floral scents in butterfly-pollinated plants"`
+- `"Cephalanthus" germination light Deno`
+
+Read all exposed search titles/snippets and returned abstracts; fewer than20 exposed per individual query are not counted as20. Raw results in work/harvest-c8/Cephalanthus-web0–4.txt; full106-work cached screen in Cephalanthus-full-screen.txt. Missouri conservation and university results confirm buttonbush name. Family web review10.1002/tax.13167 is phylogenetic classification, not a measured plant eye; family harvest reviews mainly other genera, animal photoreceptors or medicinal compounds. No source/fullpaper-page fetch; no further OpenAlex/MDPI/UChicago/SANBI call, paid fallback or library mirror.
+
+Added2 wanted after global DOI,normalized-title,URL and paper-status checks: target C. occidentalis floral phenology/pollen-presentation study10.1002/j.1537-2197.1993.tb13818.x (alternate DOI10.2307/2445386, no duplicate); and NCL-indexed2015 C. naucleoides floral-volatile emission study by 林群雅,鄭森松,張上鎮, a real congeneric chemical-signal lead that does not license carry to C. occidentalis. Abstract clearly describes dynamic headspace/SPME emissions; intake must confirm attached/living material. Neither source is asserted to give daily anthesis hours until read. Unknown metadata empty/null; no values logged.
+
+Reused existing sweep-20 wanted source Floral scents in butterfly-pollinated plants: possible convergence in chemical composition,2002; cached source DOI10.1046/j.1095-8339.2002.00068.x. Brooklyn Botanic Garden genus bibliography explicitly lists it and independent Luculia original-journal/PMC search snippets identify C. occidentalis monoterpene scent. No duplicate wanted line. Existing Deno Seed Germination Theory and Practice2nd ed. globally wanted in c7/c11 is an especially strong light lead: indexed1993 p116 Cephalanthus entry explicitly contrasts light/dark germination. Reuse original book request, no duplicate; no evidence from the indexed quotation. USDA Woody Plant Seed Manual already globally wanted; no duplicate. Chemistry of removed tissues/oils does not establish10(a), and colleter mucilage histochemistry alone does not establish airborne signaling. Seedling/vegetation and seasonal leaf-out studies expose no manipulated light/daily comparison in the cached abstracts.
+
+Only eye_type negative written under owner10(b), individually disposing all5 official candidates. Anther epidermal remnants are not eyes; bird lenses,butterfly eyes and pollinator colour modelling are animal perception; focusing belongs under sense_light_nonvisual. Diel/chemical/light have plausible leads, so no null written for them. Actual current screen_candidates.check using the legitimate cache printed **0 problems** before commit. Continuing Bignonia next.
