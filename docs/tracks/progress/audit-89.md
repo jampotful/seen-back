@@ -57,7 +57,7 @@ Every line is graded m, partial and abstract-level. In each case I opened a page
 
 | Line | Record | Verdict |
 |---|---|---|
-| 1 | Asclepias curassavica sense_chemical | ok. Dryad page opened: Meier and Hunter 2019. The quote is verbatim. The page names A. curassavica, A. incarnata and Aphis nerii. Herbicide-induced volatiles of living plants count under 10(a). |
+| 1 | Asclepias curassavica sense_chemical | ok. Dryad page opened: Meier and Hunter 2019. The quote is verbatim. The page names A. curassavica, A. incarnata and Aphis nerii. Herbivore-induced volatiles of living plants count under 10(a). |
 | 2 | Asclepias incarnata sense_chemical | ok. Same page and sentence ("in both species"). |
 | 3 | Asclepias syriaca sense_chemical | ok. Springer page opened: Agrawal, Hastings, Patrick and Knight 2014, J Chem Ecol 40: 717-729. The quote is verbatim, and herbivore-induced resistance counts. |
 | 4 | Erigeron speciosus sense_light_nonvisual | ok. USU aspen bibliography page opened: Hoffman 1985, Bull Torrey Bot Club 112(4): 409-413. The words "germinated less in dark than in light" are there. |
