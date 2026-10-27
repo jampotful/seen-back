@@ -39,3 +39,9 @@ Ran harvest_get.py and screen_candidates.py: Sabal absent from runs 1–17,20,23
 ### Smilax checkpoint
 
 This worker now 2 genera, 2 search records, 14 wanted lines, 0 measurements; cumulative 7 genera, 8 search records, 54 wanted lines, 0 measurements. Smilax has 8 new light leads (germination/light comparisons and seedling propagation), so no light null; chemical/diel main evidence and the existing Suetsugu wanted request are preserved. Smilax is absent from the same harvest runs. Eight executed web queries copied verbatim in its eye_type record. The Smilacaceae photoreceptor review search returned general plant reviews, no family review; no source fetched. Main evidence, global searched/wanted and paper-status checked. Remaining 33 genera beginning Erythrina.
+
+### Erythrina checkpoint
+
+This worker now 3 genera, 3 search records, 35 wanted lines, 0 measurements; cumulative 8 genera, 9 search records, 75 wanted lines, 0 measurements. Erythrina adds 1 eye_type record and 21 wanted leads. Direct light/germination, applied-phytohormone and anthesis candidates keep light, chemical and diel out of null records. Extracted/distilled oils (EPA flower-oil record and SciELO essential-oil profile) were screened as removed-tissue chemistry under owner reading 10(a), while the live seed gibberellin and live phytohormone treatments remain wanted under 10(d/e). Some bibliographic search results exposed only prohibited-host copies; no such host was opened, and wanted lines request a legal original by title with empty URL.
+
+Erythrina absent from harvest runs 1–17,20,23,24. Twelve exact executed web queries copied in eye_type record. Fabaceae review alternative: 10.1093/jxb/erag313. Canon catalog, corrected-first accepted-name main evidence, global wanted and paper-status checked. No source fetched or evidence written. Remaining 32 genera beginning Ruellia.
