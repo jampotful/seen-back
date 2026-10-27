@@ -260,3 +260,29 @@ Exact web queries, in order:
 Worker 7 final continuation additions: 4 newly web-screened genera (Athyrium, Dipterostemon, Arctostaphylos, Papaver), all protocol partial; 33 wanted leads, 0 searched rows and 0 evidence records. Cumulative batch: 10 web-screened genera, 70 wanted lines; 30 genera remain unreviewed, exact next Betula. Stopping cleanly between genera for fresh context after the lengthy Athyrium and Papaver harvests. Earlier checkpoints are historical. OpenAlex remains skipped; no additional service refusal.
 
 Coordinator future-scope adoption: Humulus eye_type already harvest-29 line 13; Thlaspi eye_type rescreen-2 line 7; Campanula eye_type plant-1 line 2; Pastinaca diel replant-1 line 5 and eye_type rescreen-2 line 4. Future workers should adopt these substantive completed paired-query screens and only run genuinely unfinished trait steps. Cross-unit cache /workspace/work/issue38-cross-unit-candidates.json is a guide, not exhaustive; verify taxonomic homonyms.
+
+### 2026-10-27 continuation: worker 42
+
+Adopted all ten previous web screens and 70 wanted lines unchanged. Global preflight compared actual-species evidence, corrected/audit records, wanted and searched coverage for the 30 assigned remaining genera. Congeneric physiological measurements are not treated as coverage for another species. The previously documented Humulus/Thlaspi/Campanula eye screens and Pastinaca eye/diel screens remain adopted. Canon checked against current file: the five plant light compilations and two angiosperm chemical compilations are not in hand; the two angiosperm diel compilations are not in hand and no plant eye canon applies. No page/paper fetching or evidence records. OpenAlex remains skipped after the coordinator's HTTP 429; common-name API/citation steps remain incomplete and no null searched row is authorized. Titles and snippets actually delivered by web search were screened, with no claim of 20 results per query.
+
+### Betula: web-screened, protocol partial
+
+Required harvest_get and screen_candidates report no harvest. Existing B. pendula light record sweep-7#1 (10.1093/treephys/26.8.1013) and B. papyrifera sweep-7#2 (10.1007/s00442-002-0957-x) adopted; neither covers the queue's B. alleghaniensis. Added 15 wanted leads: explicit germination/dormancy experiments, the yellow-birch USFS light/dormancy synthesis, and living methyl-salicylate, mimicked-herbivory and plant-plant signalling experiments. In the isoprene field study birch is the measured sender and Arabidopsis the receiver; no birch-receiver claim. No matching prior wanted or owner-status title/DOI found for these requests. Search snippets do not establish the exact species for the generic birch studies, so their wanted lines leave genus scope for the reader.
+
+Additional metadata leads with incomplete title information: the paper-birch light/temperature germination article at https://bsapubs.onlinelibrary.wiley.com/doi/abs/10.1002/j.1537-2197.1986.tb12076.x ; the paper-birch photoperiod/temperature growth-dormancy article at https://onlinelibrary.wiley.com/doi/10.1002/j.1537-2197.1981.tb12413.x ; and the USFS note at https://www.nrs.fs.usda.gov/pubs/rn/frn_ne124.pdf whose title is truncated after “BIRCH SEEDS WILL GERMINATE UNDER A”. Do not invent missing titles. The Betula nana GA/stratification title appeared only on ResearchGate and was not opened. Wood odorants, bud hydrodistillates and hardwood volatile extracts excluded under 10(a). Daily-opening searches mostly give seasonal catkin calendars, dates and flowering phenology, not time of day. Eye queries returned general ocelli and animal-eye discussions, no genus focusing measurement. Family review query returned broad plant photoreceptor reviews, UVR8 signalling, insect vision, and Betulaceae phylogenomics, no additional genus-specific response shown. Common name birch verified by the Forest Service and NC State results.
+
+Exact web queries, in order:
+- web: Betula seed germination light dark
+- web: Betula germination gibberellin OR smoke OR dormancy
+- web: Betula floral scent volatiles
+- web: Betula photoperiod phototropism light response
+- web: birch photoperiod phototropism light response
+- web: Betula flower opening time anthesis
+- web: birch flower opening time anthesis
+- web: Betula plant ocelli lens-like epidermal cells eye
+- web: birch plant ocelli lens-like epidermal cells eye
+- web: Betula chemical response volatile signaling
+- web: birch chemical response volatile signaling
+- web: Betulaceae photoreceptor review
+
+Worker42 checkpoint: 1 newly web-screened genus, protocol partial; 15 new wanted lines, 0 searched rows, 0 evidence. Cumulative 11 web-screened genera, 85 wanted; 29 remain, exact next Thuja. Thuja mandatory germination/JA web searches have started and will be completed before its checkpoint.
