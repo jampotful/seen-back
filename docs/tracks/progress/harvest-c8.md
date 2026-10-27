@@ -1103,3 +1103,55 @@ Eye results are epidermal cell/stomatal taxonomic anatomy,hand lenses/microscopy
 Routine dedupe correction before commit:first append was stopped before writing by the existing1954c15DOI. A later ASCII-only title-normalization false match on Chinese title was recognized immediately;direct DOI/Unicode-preserving exact-title/URL checks found no match,and that candidate was added correctly. No old row changed. Final checker/prefix validation follows.
 
 Worker29 Asplenium validation:current required screen_candidates checker printed **0 problems** at219wanted/23searched. All JSONL parses;first198wanted lines byte-for-byte0702f379 and all23searched unchanged;git diff --check passed. Only own wanted/progress paths edited,no evidence/paper assets. Context checkpoint between completed Asplenium web screen and entirely unstarted Ipomoea;11remain.
+
+
+## 2026-10-27 — issue38 worker32: Ipomoea fresh web screen
+
+NEW: **Ipomoea only; 1 newly web-screened genus, protocol-partial; +33 wanted, +0 searched, +0 evidence. Actual c8 becomes252 wanted/23 searched** (219 wanted and all23 searched prefix preserved from2c770fd2). Prior first18, Pilea/Centrosema adoptions and nine fresh screens throughAsplenium preserved. **10 remain; exact next Nandina**, thenLigustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Zanthoxylum's earlier external3diel/eye/light adoption is preserved; bungeanum chemical does not resolve targetclava-herculis.
+
+Read AGENTS and worker guide/protocols, canon, papers-status and own progress before research. Main already fetched/branch owned by coordinator; no checkout/push. Applied cloud-environment-runtime skill: current connected/enforced unrestricted policy, noVPN or credential binding. Official read-only harvest_get.py and screen_candidates.py on supported authorized network succeeded: **Ipomoea in no harvest run yet/not in harvest**, not a successful zero-hit API query. Round-wideOpenAlex429 skipped without request or fallback; inheritedMDPI429,UChicago403,SANBI403 skipped. No new service refusal. No source/page fetch, evidence, app checks, proxy change, permission request, cache or operational edit; earlier mixed network/scratch-write refusal not retried/bypassed.
+
+Preflight checked corrected-first screen_candidates.main_evidence with GBIF accepted-name mapping, global wanted/searched and owner papers-status. No accepted physiological evidence for Ipomoea. Five queued species areI.purpurea,pes-caprae,indica,cordatotriloba,cairica. sweep-7#27 is an older three-query compound screen, not current full paired-trait screening. Animal-eye canon has no plant measurement; transcriptome/photoreceptor gene presence is not physiological sensing. Uncached mandatoryOpenAlex scientific/common/family/citation steps remain incomplete, so **no null searched rows or exhaustion claims**.
+
+Required10(e) searches first, all four scientific/common-name trait pairs, family-review alternative, then target-species/method/source clarifications: **27 actual connected queries**, exact execution order:
+- `Ipomoea seed germination light dark`
+- `Ipomoea germination gibberellin OR smoke OR dormancy`
+- `Ipomoea floral scent volatiles`
+- `Ipomoea flower opening time anthesis`
+- `morning glory flower opening time anthesis`
+- `Ipomoea eye type lens-like epidermal cells`
+- `morning glory eye type lens-like epidermal cells`
+- `Ipomoea light photoperiod phototropism`
+- `morning glory light photoperiod phototropism`
+- `Ipomoea volatile chemical hormone response`
+- `morning glory volatile chemical hormone response`
+- `Convolvulaceae photoreceptor review`
+- `Ipomoea indica cordatotriloba cairica photoperiod light response`
+- `Ipomoea pes-caprae seed germination light gibberellin`
+- `Ipomoea purpurea shade jasmonic acid twining`
+- `"Light Adaptations of Ipomoea purpurea" doi`
+- `"The pigment-scent connection" "10."`
+- `"Annual changes in temperature and light requirements" "10."`
+- `"Effects of photoperiod on growth, flower bud appearance" Ipomoea purpurea`
+- `"Ipomoea indica" light shade hormone response`
+- `"Ipomoea cordatotriloba" germination light gibberellin`
+- `"Ipomoea cairica" light shade hormone response`
+- `"Induced twining in Convolvulaceae" doi`
+- `"Impacts of environmental factors on the climbing behaviors" Ipomoea doi`
+- `"Dominant Fungal Epiphytes Promote Growth" Ipomoea`
+- `"Floral biology and breeding system of three Ipomoea weeds" species doi`
+- `"Ipomoea" "Seed Dormancy and Germination Ecology" DOI`
+
+Read every exposed result title/snippet and indexed abstract at actual delivered extent, including incidental irrelevant results; no claim of20 per query when fewer delivered. Search-engine results include publisher/PMC/J-STAGE/author-repository original passages, but no direct source fetch was used. ResearchGate,Wikipedia,Scribd,encyclopedias,library proxies/mirrors and opportunistic republishers were left unopened and not used as primary evidence. DOI/year/authors retained only when exposed; otherwise blank/null. Original article DOI/title/Unicode-preserving exact title/URL checked globally before append; no owner n/a source re-request.
+
+**Cross-unit adoption without duplicate:**harvest-c13#93,10.1139/b08-037,Atala/Gianoli2008. Indexed author-repository full abstract at https://epublications.marquette.edu/liana_articles/198/ explicitly namesI.purpurea and reports appliedJA enhanced living twining. c13 row currently namesConvolvulus arvensis; coordinator notified of target expansion. Also adopt c13#85,TurkishConvolvulus/Ipomoea triloba GA3germination title,as congener-only (not any queued species). Neither constitutes a logged measurement or whole-genus physiological carry.
+
+**New target leads:**purpurea annual light-germination requirements;2010pigment/scent original,10.1016/j.sajb.2010.07.006 (confirm attached-living scent method);2014living volatile receiver/twining;2025optical leaf/petal-interface study10.3390/plants14060862 (introductory lens/heliotropism claims separated from actual measurements);sun/shade support-response original recovered only as review bibliography lead,original DOI unexposed. pes-caprae germination10.11833/j.issn.2095-0756.2011.01.025;targetcairica/pes-caprae included in2006germination/dormancy10.1002/fedr.200511102;targetcairica in three-species floral anthesis and10.1111/plb.12038 circadian nectary metabolism;targetcordatotriloba regeneration10.5376/mpb.cn.2011.09.0117 (living culture/hormone contrast unresolved);targetcairica epiphyte-defense study10.3390/microorganisms12112130 (rooted living/elicitor response versus colonization mechanism unresolved). No targetindica physiological result established; horticultural sun preferences and fixed chamber lighting are not experiments.
+
+**Mandatory10(e) germination-title holds:**2026three-morningglory review10.3390/seeds5010003 (keep published version,not duplicate preprint);lacunosa environmental/light germination,water-gap anatomy,seed development and cycling10.1093/aob/mcm285;asarifolia nitrate/light experiment;2013Convolvulaceae light/dark study (two exactIpomoea species unresolved);fourcongenerIpomoea/Merremia dormancy-breaking;Embrapacynanchifolia storage/scarification;PeruIpomoea/Merremia seedling/germination title;2026aquatica LED germination/growth. Physical sulfuric-acid scarification,water permeability,temperature/storage and fixed culture photoperiod alone do not establish light or chemical sensing;uncertain candidates explicitly held for intake per10(e),not invented measurements.
+
+**Other species retained separately:**nil quality/daylength10.2525/ecb1963.41.211,photoperiod/GA10.1007/s10725-017-0344-6 andethylene-dependentInEKO1;batatasDMNT volatile receiver/signalling;nil/triloba shade-twining10.1002/ece3.3479 (original abstract names exact congeners,none of five targets);fourmorningglory photoperiodJ-STAGE source with exact species unresolved. EndogenousGA abundance alone is not applied-cue sensing. Targetcordatotriloba microtubule reporter has fixedshortday conditions,no testedlightcontrast,so no extra request. Extracts assayed on mosquitoes/algae and harvested sweetpotato food aromas excluded10(a).
+
+Diel leads are actual anthesis in carnea,marcellia/aff.marcellia10.1093/aobpla/plv127,asarifolia,eriocalyx,andone-daynil10.1093/pcp/pcaf108 (elapsed development versusendogenous timing for intake). Seasonal flowering,days afteranthesis,coflowering dates and plant guides are not measured dielpatterns. I.cairica's repeated seasonalbloom description does not close targetdiel;its anthesis/nectary leads remain. Humanmorning-glory-disc anomaly causes most common-nameeye hits;taxonomic epidermal anatomy and surfaceoptics do not establish eyes. Allplants eye_typenone10(b),actualepidermalfocusing belongs underlight. No congenerphysiologicalcarry and no numeric claim.
+
+Worker32 Ipomoea validation: required screen_candidates checker printed **0 problems** at252wanted/23searched; first219wanted and all23searched byte-identical2c770fd2, JSONL parse valid and git diff --check passed after EOF whitespace cleanup. Only own wanted/progress paths edited.
