@@ -431,3 +431,31 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - `Ericaceae photoreceptor review` (stored family review)
 
 Checkpoint: 13 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 74 wanted lines total, 0 evidence. Remaining unreviewed 27; exact next Viola.
+
+### Viola (2026-10-27 continuation)
+
+Web screening finished for this round. Only sense_chemical is open in the required tool output; seven reading leads added for GA3 seed response, timed living floral emission, V. etrusca in-vivo scent, CaCl2 treatment, GA signalling, and two mandatory germination-title leads whose chemical treatments need verification. Existing canon-3#672 receiver experiment for V. odorata is adopted; its species-specific effect direction is only partial. The old genus-level photoperiod row sweep-5#15 is explicitly retracted in audit ALL, so it is not treated as valid measured evidence; existing pansy light evidence harvest-9#1 is distinct. No null record is written for a trait already bearing evidence. Viola music, violist, Bill Viola art and software-name results are unrelated. Extracts, hydrolates, absolutes and food sensory profiles are excluded under10(a). Borage/pansy food-volatiles paper has no stored abstract, so it is not used as negative evidence; the verified in-vivo emission leads are retained instead. Other harvest scent keywords include other organisms, fluorescence wording, general methods, a broad pathogen review, and an existing canon meta-analysis. Family web query returned general plant photoreceptor reviews and Viola taxonomy rather than another specific chemical-response experiment. No additional searches were run on already-covered trait groups.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Viola seed germination light dark`
+- `web: Viola germination gibberellin OR smoke OR dormancy`
+- `web: Viola floral scent volatiles`
+- `web: Viola response to airborne volatile signals`
+- `web: violet response to airborne volatile signals`
+- `web: Violaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Viola phytochrome photoreceptor`
+- `Viola light perception`
+- `Viola phototropism`
+- `Viola volatile signalling`
+- `Violaceae photoreceptor review` (stored family review)
+- citation step: works citing 10.1111/ele.12205 that name Viola: 0
+- citation step: works citing 10.1093/aobpla/plag030 that name Viola: 0
+- citation step: works citing 10.1038/144514b0 that name Viola: 2
+
+Checkpoint: 14 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 81 wanted lines total, 0 evidence. Remaining unreviewed 26; exact next Anemonastrum.
