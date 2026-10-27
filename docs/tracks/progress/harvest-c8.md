@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 13/40 genera screened here through Euonymus;14 search records;152 wanted lines;0 evidence and measured closures. Calyptocarpus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving26 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker36 checkpoint after Euonymus.
+**Current checkpoint:** 14/40 genera screened here through Calyptocarpus;16 search records;154 wanted lines;0 evidence and measured closures. Lorinseria is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving25 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker36 stopped between Calyptocarpus and Lorinseria for fresh context.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -492,3 +492,66 @@ Reused globally wanted Deno main book and1st Supplement (c7/c11), plus Woody Pla
 Source-rule fork: harvest-13 screened out10.1093/aob/mcad081 as floral-scent emission without plant reception. Current owner10(a) expressly includes living-plant signal emission. Legacy file preserved, current real scent lead requested; no chemical negative invented. The2019 weevil study is requested for plant VOC emission, not animal antennal sensitivity, and living/attached sampling needs intake. The2002 weevil study exposes tested cuttings; detached material would not establish10(a), so it was not requested as a confirmed living-signal source.2020 E. sanguineus SPME petal/disk chemistry and E. europaeus seed oil/methanol extracts likewise do not establish living-plant sensing by themselves. Long-term aril suspension-cell chemistry is not asserted to establish a plant response; no redundant preprint versions requested. Nectary morphology and developmental flower lifespan are not daily timing; moth,aphid,rabbit,deer rhythms belong to animals. Cached ALAN/BVOC2026 trees are Quercus,Liquidambar,Ginkgo, not Euonymus. No generic/background crop request.
 
 Only eye_type negative written; automated original eye candidates number0, and extra web epidermal-optics candidates have explicit dispositions. Target2002 lens paper is correctly retained under sense_light_nonvisual while its eye disposition follows10(b); general47-species optics survey not assumed to contain Euonymus. Family photoreceptor search returned general ALAN reviews and phytochrome-based phylogeny, not an eligible eye measurement or family-specific review. Light,chemical,diel all have plausible target leads, so no negatives for them. Actual current screen_candidates.check with legitimate cache printed **0 problems** before commit; initial scratch-script unmatched-parenthesis error was corrected before any append.
+
+
+### Calyptocarpus completed; worker36 checkpoint
+
+**This worker total:2 genera (Euonymus,Calyptocarpus),3 search records,19 wanted lines,0 evidence/measurement closures. Cumulative harvest-c8:14/40 genera screened here,16 search records,154 wanted lines,0 evidence/measurement closures.** Pilea coverage remains in c4;25 genera need new work, starting Lorinseria,Osmundastrum,Nuttallanthus. Stop between genera for fresh-context takeover.
+
+Calyptocarpus original target C. vialis has all4 gaps; no corrected-first accepted-name evidence exists. Old sweep-19 and harvest-18 have thin protocols and did not suppress current work. Official harvest_get.show/screen_candidates.show used legitimate hg.load cache; read28 unique titles/entire stored abstract starts including15 Asteraceae family works, no failed step. Full screen saved in work/harvest-c8/Calyptocarpus-full-screen.txt. Cached citation steps citing10.1016/j.tree.2009.09.010 and10.1126/science.aaf9793 each0hits. Successful cached queries, word for word:
+- `Calyptocarpus phytochrome photoreceptor`
+- `Calyptocarpus light perception`
+- `Calyptocarpus phototropism`
+- `Calyptocarpus volatile signalling`
+- `Asteraceae photoreceptor review`
+
+Connected web queries, word for word in execution order:
+- `Calyptocarpus seed germination light dark`
+- `Calyptocarpus germination gibberellin OR smoke OR dormancy`
+- `Calyptocarpus floral scent volatiles`
+- `Calyptocarpus flower opening time anthesis`
+- `straggler daisy flower opening time anthesis`
+- `Calyptocarpus eye type`
+- `straggler daisy eye type`
+- `Calyptocarpus chemical sense volatile response`
+- `straggler daisy chemical sense volatile response`
+- `Calyptocarpus light photoperiod phototropism`
+- `straggler daisy light photoperiod phototropism`
+- `Calyptocarpus epidermal lens cells focusing light`
+- `straggler daisy epidermal lens cells focusing light`
+- `"Calyptocarpus" germination hormone`
+- `"Calyptocarpus" Estes 2018 anthesis`
+- `"Calyptocarpus" germination light`
+- `"Calyptocarpus" allelopathic response hormone`
+- `"Calyptocarpus" "anther" "afternoon"`
+- `Asteraceae photoreceptor review`
+- `"Nature of phytotoxic interference" "root"`
+- `"Calyptocarpus" "Anther Number" "ray"`
+- `"Calyptocarpus" "germination" "light" -site:wikipedia.org`
+- `"Influence Of Shaded Conditions" "species" Kansas`
+- `"Calyptocarpus" "2,4-D"`
+- `"Calyptocarpus" "gibberellin"`
+- `"Anther Number, Anther Apical Appendages" "flower"`
+- `"Influence Of Shaded Conditions On Development" "Echinacea"`
+- `"Weed diversity and microbial responses to glyphosate"`
+- `"Calyptocarpus" "flower" "late afternoon"`
+- `"d270144" "Calyptocarpus"`
+- `"Nature of phytotoxic interference" "residue" -site:researchgate.net`
+- `"Calyptocarpus" "Shaded Conditions" Kansas`
+- `"Calyptocarpus" germination photoperiod hormone -site:researchgate.net -site:wikipedia.org`
+- `site:smujo.id/biodiv "d270144" "Calyptocarpus"`
+- `site:ojs.library.okstate.edu "Anther Number" "afternoon"`
+- `site:scholars.fhsu.edu "Influence Of Shaded" species`
+- `"Calyptocarpus" "chemical" "germination" -site:researchgate.net -site:wikipedia.org`
+
+All exposed titles/snippets and returned abstracts read; fewer than20 results per query not counted as20. Raw results: work/harvest-c8/Calyptocarpus-web0–9.txt, with exact queries in Calyptocarpus-queries.json. Initial display of cached entries24–28 was truncated and recovered explicitly before screening. Existing Asteraceae_photoreceptor_review.json is a previous worker's actual OpenAlex metadata, not a web search; the full shade-thesis abstract was reconstructed from that already-local inverted index and read without a new API call. Its entire abstract describes six native-Kansas Asteraceae species but names no Calyptocarpus, so no target measurement inferred from family membership. Current actual family web search also completed. No source/fullpaper-page fetch, OpenAlex/MDPI/UChicago/SANBI request, paid API or unauthorized copy. Incidental blocked/restricted-host results were not directly opened; ResearchGate was not used as a primary measurement source. Primary-journal snippets were sought to verify the two retained leads.
+
+Added2 globally absent target leads after DOI,normalized-title,URL and papers-status checks. Estes2018, Anther Number, Anther Apical Appendages, and Pollination Biology of Calyptocarpus vialis Lessing, is confirmed by original Oklahoma Native Plant Record18 p45; indexed original-journal snippet specifically says buds open often in late afternoon. Old sweep-19 itself noted that timing but called diel absent. Retained for proper intake under the current anthesis wording; no daily null or timing value logged.
+
+Rismayanti,Sumekar,Widayat,Yuwariah,Murtilaksono2026,10.13057/biodiv/d270144, Weed diversity and microbial responses to glyphosate dissipation in amended coffee soils: original-journal abstract describes replicated glyphosate-dose treatments and biomass analysis. A targeted original-journal PDF search explicitly exposes Calyptocarpus sp. in Table4 with before/after relative density/frequency; target identity is only genus, not assumed C. vialis. Retained narrowly as an unresolved target living chemical-response lead, not a confirmed physiological sense. The same primary snippet explicitly says species/community SDR data are descriptive at site level and not intended to test treatment effects. That table alone supports no causal glyphosate response or sensing conclusion; intake must determine whether an eligible direct target response exists elsewhere. No chemical negative while this actual target-genus experiment remains unresolved, no numerical values logged or species carry.
+
+Only eye_type and light negatives written, with individual dispositions for all automatic candidates plus relevant web optics/other entries. Synedrella nodiflora light/germination is another species; C. vialis is also called Synedrella vialis, and that synonym does not make nodiflora a congener carry. Vernonia,Lomatozona,Pelargonium experiments are other genera; Lens culinaris in a Hyptis-biomass title is lentil, not an eye lens. Tagetes lutein/macular-health and retinal-cell studies concern animal eyes. General epidermal focusing is under sense_light_nonvisual10(b), and no target Calyptocarpus focusing measurement was exposed. Canopy-openness distributions and coffee herbaceous diversity are observational community surveys; habitat preference/cultivation light advice is not a controlled target growth or germination experiment. No target seed-germination/dormancy experiment was exposed by mandatory10(e) and refined searches; Calycophyllum,Calotropis,Campanulaceae and succulent seed trials are other taxa. Oklahoma2021 issue editorial describes unnamed native-seed stratification and seasonal phenology; no target light comparison was identified.
+
+Chemical exclusions were checked against actual original-journal/PubMed abstract:2021 Nature of phytotoxic interference10.1007/s10661-021-09092-0 measures C. vialis leachates/residue-amended soil effects on Brassica nigra,Triticum aestivum,Avena sativa. No target receiving a chemical cue or living volatile emission is established by that abstract. Target extracts used for antioxidant,antibacterial,nanoparticle and corrosion chemistry likewise fail10(a), and do not justify new wanted requests. No requests for those already-evidenced crop recipients. Generic flavonoid/rice reviews mainly cite the same residue study. Broadleaf-herbicide gardening recommendations expose no original target trial; they were not asserted as measurements. The community field experiment above was verified independently on its original source before retention. Asteraceae general reviews concern crop photoperiod/floral-development knowledge and do not prove a target response. Straggler daisy common name independently confirmed by NC State/CSIRO/ITIS sources.
+
+Actual current screen_candidates.check with the legitimate cache printed **0 problems** before commit. No evidence,app checks,branch/gate/#29/#30 edits. Lorinseria is unstarted.
