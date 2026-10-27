@@ -534,3 +534,44 @@ Eye_type alone has a completed null under owner10(b), explicitly screening all t
 OpenAlex429/MDPI429/UChicago403/SANBI403 round-wide restrictions respected; no retry, paid API, unauthorized copy, source fetch, evidence log, app check, branch/gate or issue29/30 change. No new service or actual web quota refusal. Managed runtime skill read for current network policy; policy enforced/unrestricted, no credentials bound, no configuration changed. Parent retains audit/application and push/PR responsibilities.
 
 Worker41 Ranunculus checkpoint: actual combined screen_candidates --check completed with `0 problems` for12 searched/151 wanted. Own-file whitespace check passed; unknown-year metadata null. Ready to commit.
+
+
+## 2026-10-27 — worker41 continuation: Datura and handoff
+
+Worker41 cumulative:2 genera completed(Ranunculus,Datura),2 search records,25 new wanted,0 evidence/measurement closures. Batch cumulative:15/40 genera screened,13 search records,165 wanted,0 evidence;25 remain, next Lunaria. Ranunculus commit8950581b. Stop between genera after validation/commit for fresh-context takeover; no actual web quota refusal.
+
+Original queue targets D.wrightii(22,076 records) and D.stramonium(19,909), both light/chemical/eye_type. Existing sweep-10#10 is D.wrightii diel(abstract), not a chemical or light measurement. Its CO2/nectar-emission source may also be relevant to the chemical row, but is already in evidence and not re-requested. Original queue has no Datura diel gap, so no new daily-opening protocol claimed and no duplicate CO2/diel request. No existing evidence or legacy null altered. Global evidence/corrected evidence/searched/wanted/papers-status checked; thin sweep-10 is not full completion. Canon has no relevant in-hand plant response measurement.
+
+harvest_get.py and screen_candidates.py were run for Datura; no genus harvest exists. All15 cached Solanaceae family-review run17 titles and entire stored abstracts were screened. Family results cover tomato/potato/tobacco/pepper light studies and genomic evolution, Nicotiana/Jaborosa/Solanaceae floral-colour signals and general phytochrome reviews. They are other taxa or background, not target plant-eye measurements; no duplicate crop/model/background request.
+
+Exact successful cached query and actual web queries, in order:
+- `Solanaceae photoreceptor review`
+- `web: Datura seed germination light dark`
+- `web: Datura germination gibberellin OR smoke OR dormancy`
+- `web: Datura floral scent volatiles`
+- `web: Datura light photoperiod phototropism`
+- `web: jimsonweed sacred datura light photoperiod phototropism`
+- `web: Datura volatile emission herbivore induced response methyl jasmonate`
+- `web: jimsonweed sacred datura volatile emission herbivore induced response methyl jasmonate`
+- `web: Datura eye type epidermal focusing`
+- `web: jimsonweed sacred datura eye type epidermal focusing`
+- `web: "Datura wrightii" germination light dormancy`
+- `web: "Datura wrightii" light shade photosynthesis experiment`
+- `web: "Datura" "Feeding-induced rearrangement of green leaf volatiles reduces moth oviposition"`
+- `web: "Datura" "Effects of light conditions on growth and defense compound contents"`
+- `web: "Datura stramonium" "Preliminary studies of seed dormancy"`
+- `web: "Datura" "Variation in herbivore and methyl jasmonate-induced volatiles"`
+
+Fifteen actual web queries screened all returned titles/snippets, up to first20 where returned. Four targeted follow-ups resolve exact primary titles, DOI correction and species identity. Cache metadata in work/harvest-c12/worker41-Datura-cache.json; raw tool output worker41-Datura-web1..4.json. No source/full-paper page fetched, no live OpenAlex request. No display-truncated search result left unread.
+
+Fourteen new wanted lines passed global normalized-title/DOI duplicate checks against wanted/status/evidence/corrected evidence. Target stramonium: light-environment/phytochrome seed study;1998 burial/light sensitivity study; physical/chemical dormancy treatment; preliminary dormancy/endosperm/GA/benzyladenine study; Dormancy-breaking Seed Treatments with GA; older PubMed gibberellin/germination study; germination response to pH/salinity/temperature;2019 three-light-condition growth study; and native/non-native induced-leaf-damage VOC study. Target wrightii:2007 herbivore/MeJA-induced genetic-line volatiles; field ontogeny/season MeJA responses; constitutive/jasmonate-inducible traits; feeding/oral-secretions/GLV study comparing100%,20–10%,0% light; and floral-scent attraction/oviposition study. These are direct target primary cue/response experiments, not model-crop background.
+
+The wrightii feeding paper gives a direct controlled-light lead missed by broad photoperiod searches. Its DOI10.7554/eLife.00421 is independently indexed in the legal eLife/PMC correction, which readers should consult. Other compound profiles need intact-versus-detached headspace methods verified before living emission is logged10(a). Seed pH/salinity trials and GA responses count as living chemical-treatment candidates10(d,e), while set12h/16h culture lighting alone does not establish a light response. The const/jasmonate source includes genuine negative treatment contrasts; these are measurements rather than proof that there is no chemical sensing. Unknown years/authors/journals stay null/empty. Year2019 verified by Japanese Botanical Society issue listing and legal bibliographic citations,2007 by PMC bibliography,2006 by author university bibliography,1998 by Wiley label. The older PubMed title has indexed typo PF; preserved rather than silently inventing corrected metadata. No year inferred from DOI/PMID digits or elapsed publication-age labels; no new year0.
+
+Other dispositions: ferox seed phytochrome/GA/expansin papers, inoxia/innoxia seed studies and tissue cultures, metel medicinal results and Brugmansia do not fill these queued species. Tobacco/cotton/cranberry model HIPV papers and plant-communication reviews are background; named direct target experiments prioritized. Datura genome/gene-annotation predictions alone do not establish cue response; comparative herbivory transcriptome work is related primary context but direct target volatile response sources already retained. Essential oils, extracted tropane alkaloids, historical human drug effects, anticholinergic pupil dilation and corneal toxicity do not show plant chemical perception or plant eyes. Practical germination guides, commercial seed pages, weed identification and shade recommendations are not substituted for primary experimental evidence. Variable-impact herbivory source has set germination-chamber lighting but no confirmed light contrast; target feeding/light experiment is retained. Pepperdine student flower-water-stress/light-hypothesis project is adjacent context; the direct controlled-light GLV experiment takes priority. No chemical/light null while target leads remain unread.
+
+Eye_type alone gets completed null under10(b). Explicit screened dispositions cover leaf epidermal identification(stomata/trichomes/crystals/palisade ratio), stem/ovary histology, human pupil/corneal cases and Datura-juice toxicity. No lenslike epidermal focusing source found. Ordinary epidermal cells, human implanted lenses and moth olfactory imaging are not plant image-forming eyes. The existing diel source and all old sweep records remain untouched, with species limitations preserved.
+
+OpenAlex429/MDPI429/UChicago403/SANBI403 remain skipped. Indexed UChicago/MDPI/OpenAlex search hits were not opened or fetched; no request to those services, paid API, proxy/library mirror, full paper text, evidence entry, app check, branch/gate or issue29/30 change. Actual web usage total for this worker:38 successful queries(23 Ranunculus,15 Datura). Parent retains research desk audit/application and push/PR.
+
+Worker41 Datura checkpoint: actual harvest_get/screen_candidates confirm no genus harvest. Combined screen_candidates --check completed with `0 problems` for13 searched/165 wanted; own-file whitespace and metadata counts passed.
