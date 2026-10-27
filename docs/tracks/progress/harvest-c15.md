@@ -286,3 +286,25 @@ Exact web queries, in order:
 - web: Betulaceae photoreceptor review
 
 Worker42 checkpoint: 1 newly web-screened genus, protocol partial; 15 new wanted lines, 0 searched rows, 0 evidence. Cumulative 11 web-screened genera, 85 wanted; 29 remain, exact next Thuja. Thuja mandatory germination/JA web searches have started and will be completed before its checkpoint.
+
+### Thuja: web-screened, protocol partial
+
+Required harvest_get and screen_candidates report no harvest. No existing actual-genus evidence or prior wanted found. Added eight wanted leads after whole wanted/owner-status DOI/title check: two seed-germination studies with light-regime details requiring method review, T. occidentalis GA/long-photoperiod cone induction summarized by USFS, T. plicata photoperiod extension, exogenous methyl-jasmonate response, and three volatile emission/receiver studies. Volatile collection from living plants versus removed tissue is explicitly left for the reader where uncertain. Insect antennal response establishes an insect receiver, not a Thuja receiver. The paper on red/far-red germination of introduced trees names Thuja orientalis (now Platycladus), so no physiological carry to T. occidentalis or T. plicata. The paper “Identification of Genes in Thuja plicata Foliar Terpenoid Defenses” displays biosynthetic-gene work and no applied-cue response in snippets, so not assumed sensing. Essential-oil extraction/GC-MS alone excluded under10(a).
+
+AJB source 10.3732/ajb.90.2.167 discusses T. plicata weak photoperiod responses and cites Silim and Lavender1994, but its title and the cited original title are not shown; retained as metadata lead, not fabricated citation. Seasonal pollen dispersal and cone calendars returned in diel searches give months, not daily hours. Eye queries give general ocelli reviews, art optics and insect eyes, no Thuja focusing source. The apparent springerlink.fh-diploma.de mirror result was not opened; ordinary publisher URL used for the wanted citation. Family query returned broad photoreceptor/UVR8 reviews, Cupressaceae taxonomy, wood/fossil anatomy and Cephalotaxus systematics, no further displayed Thuja response measurement. Common name arborvitae verified by NC State and Ohio DNR results. Canon as above (angiosperm chemical/diel compilations do not establish gymnosperm coverage). OpenAlex unavailable; no null searched row.
+
+Exact web queries, in order:
+- web: Thuja seed germination light dark
+- web: Thuja germination gibberellin OR smoke OR dormancy
+- web: Thuja jasmonate herbivore
+- web: Thuja photoperiod phototropism light response
+- web: arborvitae photoperiod phototropism light response
+- web: Thuja flower opening time anthesis
+- web: arborvitae flower opening time anthesis
+- web: Thuja plant ocelli lens-like epidermal cells eye
+- web: arborvitae plant ocelli lens-like epidermal cells eye
+- web: Thuja chemical response volatile signaling
+- web: arborvitae chemical response volatile signaling
+- web: Cupressaceae photoreceptor review
+
+Worker42 checkpoint: 2 newly web-screened genera (Betula, Thuja), both protocol partial; 23 wanted, 0 searched and 0 evidence added. Cumulative12 web-screened genera,93 wanted lines. 28 remain, exact next Linnaea. Its required harvest tools have run, but no new web queries yet. Old Linnaea harvest-17 screens lack paired web queries and do not establish current completion; all four traits need the current web pairs despite the narrower descriptor.
