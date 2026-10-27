@@ -301,3 +301,27 @@ Screened returned titles/snippets/passages as delivered, fewer than 20 per indiv
 Anthesis results chiefly give seasons, weeks from emergence and morphology, not daily opening hours. Eye hits describe epidermal anatomy/cutin or seed tissues; owner plant-none reading applies, with optical focusing reserved for light. Extract pharmacology/molecular docking, antibacterial extracts and rat/cancer-cell assays are removed-tissue/animal effects excluded under 10(a). Harvest light experiments in Arabidopsis, Beta, Cymodocea, Portulaca, Erysimum and Glechoma are other genera; review titles do not prove Cakile-specific measurements. Family search returned Brassicaceae floral phytochrome plasticity and general phytochrome reviews without a displayed Cakile experiment. No physiological carry from family/congener. OpenAlex skipped following round-wide 429; no null searched rows or evidence.
 
 Worker 48 running counts: 1 new genus web-screened, 0 full protocol complete, 0 searched, 9 wanted, 0 evidence. Cumulative batch 13 web-screened and 47 wanted; 27 remain, exact next Clinopodium.
+
+### Clinopodium — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: not in any harvest run, hence no successful harvest queries/candidates to copy. Checked global canon/evidence/wanted/searched, owner status, and queue C. vulgare separately across all four traits; no same-species evidence found. Adopted harvest-c18 request for Influence of Some Physicochemical Treatments to Stimulate Seed Germination of Agrimonia eupatoria L. and Clinopodium vulgare L.; its displayed result explicitly compares C. vulgare potassium nitrate and GA3 responses, though the earlier request lists Agrimonia as beneficiary. No duplicate request; oa reader should retain both species.
+
+Exact web queries in execution order:
+- `web: Clinopodium seed germination light dark`
+- `web: Clinopodium germination gibberellin OR smoke OR dormancy`
+- `web: Clinopodium floral scent volatiles`
+- `web: "Clinopodium" flower opening time anthesis`
+- `web: "wild basil" flower opening time anthesis`
+- `web: "Clinopodium" eye type epidermal lens cells`
+- `web: "wild basil" eye type epidermal lens cells`
+- `web: "Clinopodium" light perception phototropism germination`
+- `web: "wild basil" light perception phototropism germination`
+- `web: "Clinopodium" chemical signalling volatile response`
+- `web: "wild basil" chemical signalling volatile response`
+- `web: Lamiaceae photoreceptor review`
+
+Screened returned titles/snippets/passages as delivered (not an asserted 20 per query). Six wanted lines added for C. odorum GA3, C. sandalioticum germination, C. mexicanum germination, C. rouyanum biogenic defence emissions (living-versus-oil fork), C. pulegium carbon-source effects (culture fork), and C. macrostemum stress-explant effects (culture/treatment fork). Congener physiology is not carried to C. vulgare. Additional unresolved lead: Volatile Organic Constituents of Clinopodium gilliesii (Benth.) Kuntze: Analysis by HS-SPME and classic hydrodistillation, https://revistas.sena.edu.co/index.php/recia/article/view/351 ; the displayed title alone does not establish living-plant emission or a response.
+
+Diel hits give flowering months or bud counts, not opening clock hours. Eye hits describe taxonomic epidermis/stomata/trichomes and naked-eye microscopy; none displayed optical focusing, and owner none rule applies. Wild basil also returned Ocimum gratissimum, O. basilicum and O. campechianum; these are other genera and do not provide Clinopodium trait coverage. Cheminopodium/Chenopodium germination and Conopodium scent are likewise spelling/taxon mismatches. Essential oils, alcoholates, extract effects on neutrophils and pharmacology review are removed-tissue/animal work excluded under 10(a). Family review search returned general photoreceptor and medicinal-light reviews, with displayed measurements in Salvia, Scutellaria and other genera; no Clinopodium-specific result adopted. OpenAlex skipped; no null rows, evidence or fetched pages.
+
+Worker 48 running counts: 2 new genera web-screened, 0 full protocol complete, 0 searched, 15 wanted added, 0 evidence. Cumulative batch 14 web-screened and 53 wanted; 26 remain, exact next Hylocomium.
