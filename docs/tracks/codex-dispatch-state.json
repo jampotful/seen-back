@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 7,
-  "updated_at": "2026-10-27T06:50:15.577Z",
+  "generation": 8,
+  "updated_at": "2026-10-27T07:41:58.949Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -11,7 +11,7 @@
     "mode": "hourly_poll",
     "timezone": "America/New_York",
     "native_issue_webhook_supported": false,
-    "activation_note": "Accepted engineering and data tasks produced results reviewed and incorporated by desk; repeated delivery suppressed. Plant PR #37 awaits source audit. Continue reconciliation of authorized requests."
+    "activation_note": "All three accepted assignments produced results reviewed by desk; repeated delivery suppressed. Continue monitoring genuinely new eligible issue assignments; never restart these completed assignments."
   },
   "policy": {
     "allowed_author": "jampotful",
@@ -29,10 +29,10 @@
     "28": {
       "issue": 28,
       "dispatch_key": "regards-issue-28-20261027",
-      "state": "result-ready",
+      "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
-      "observed_status": "Terminal response: PR #37 ready for desk audit; round stopped at authorized 48-worker cap. No restart.",
-      "observed_at": "2026-10-27T06:50:15.577Z",
+      "observed_status": "Chat terminal. Desk audits 83–85 incorporated selected search records and verified-author wanted lines through branch; PR #37 closed/unmerged. Do not restart.",
+      "observed_at": "2026-10-27T07:41:58.949Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -47,7 +47,7 @@
       "last_checkpoint_comment_id": 6433026366,
       "last_task_observation": {
         "status": "terminal",
-        "observed_at": "2026-10-27T06:50:15.577Z",
+        "observed_at": "2026-10-27T07:41:58.949Z",
         "workers_dispatched": 48,
         "worker_limit": 48,
         "search_records": 103,
@@ -62,7 +62,7 @@
         "merged": false,
         "files_scope_verified": true,
         "changed_files": 28,
-        "desk_review": "pending",
+        "desk_review": "partially incorporated",
         "validation_reported": {
           "candidate_checks": "nine checks; zero problems",
           "jsonl_metadata_whitespace": "pass",
@@ -79,10 +79,30 @@
           "genera": 557,
           "note": "includes wanted-only and other-unit coverage; not wholly untouched genera"
         },
-        "stopping_reason": "48-worker cap"
+        "stopping_reason": "48-worker cap",
+        "pr_state": "closed"
       },
       "result_comment_id": 6434465530,
-      "last_notification_signature": "result-ready:37:818d827b552251db507d8eaac787d5a4bfd1d8f5"
+      "last_notification_signature": "desk-reviewed:37:6436061297",
+      "desk_disposition": {
+        "comment_url": "https://github.com/jampotful/seen-back/pull/37#issuecomment-6436061297",
+        "audits": [
+          83,
+          84,
+          85
+        ],
+        "accepted_search_records": 100,
+        "submitted_search_records": 103,
+        "by_group": {
+          "c7": "29/31",
+          "c4/c6/c8/c9": "30/31",
+          "c11/c12": "41/41"
+        },
+        "wanted": "Lines with registry authors incorporated; remainder retained on branch",
+        "findings": "incorporated unverified",
+        "summary": "Desk incorporated through branch and closed PR without merging; future-batch suggestion is not a new eligible issue assignment"
+      },
+      "desk_status_comment_id": 6436429226
     },
     "29": {
       "issue": 29,
@@ -90,7 +110,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
       "observed_status": "Chat remains terminal. Desk reviewed all six fixes and incorporated result; GitHub PR #35 closed/merged.",
-      "observed_at": "2026-10-27T06:50:15.577Z",
+      "observed_at": "2026-10-27T07:41:58.949Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -127,7 +147,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
       "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
-      "observed_at": "2026-10-27T06:50:15.577Z",
+      "observed_at": "2026-10-27T07:41:58.949Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -197,7 +217,7 @@
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-10-27T06:50:15.577Z",
+    "observed_at": "2026-10-27T07:41:58.949Z",
     "eligible_open_issues": [
       28,
       29,
@@ -211,19 +231,22 @@
       30
     ],
     "decisions": {
-      "28": "no-op duplicate suppression: terminal capped round; PR #37 unchanged and awaiting desk audit; do not restart",
-      "29": "no-op duplicate suppression: terminal task; reviewed/incorporated PR #35 unchanged",
-      "30": "no-op duplicate suppression: terminal task; reviewed/partially incorporated PR #36 unchanged despite merged=false"
+      "28": "adopt reviewed/partially incorporated PR #37 despite merged=false; no new dispatch from comment",
+      "29": "no-op duplicate suppression: reviewed/incorporated PR #35 unchanged",
+      "30": "no-op duplicate suppression: reviewed/partially incorporated PR #36 unchanged"
     },
-    "issue_comments_posted": 0,
-    "material_changes": [],
+    "issue_comments_posted": 1,
+    "material_changes": [
+      "28: desk audited and partially incorporated PR #37"
+    ],
     "full_result_review_cycle_verified": true,
     "cycle_evidence": [
       "PR #35 desk comment 6433803841",
       "PR #36 desk comment 6434084485",
-      "Repeated delivery of issues 28–30 suppressed with zero sends"
+      "Repeated delivery of issues 28–30 suppressed with zero sends",
+      "PR #37 desk comment 6436061297"
     ],
-    "documentation_note": "PR #34 incorporated through branch; current main contains activation runbook. Plant audit remains pending; concurrency stress testing not claimed.",
+    "documentation_note": "Main activation runbook retains historical verification wording; operational ledger now records desk dispositions for all three assignments.",
     "task_access": "All three existing signed-in chats inspected; terminal responses unchanged",
     "new_eligible_requests": []
   }
