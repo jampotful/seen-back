@@ -2,9 +2,9 @@
 
 ## 2026-10-27
 
-This round is a partial protocol pass: 6 genera web-screened for this round (Malosma, Symphytum, Empetrum, Holcus, Petasites, Calypso), 0 full-protocol genera completed, 0 evidence records, 0 searched records, and 27 new wanted lines. The remaining 34 genera start at Epigaea. Malosma and Symphytum still need missing OpenAlex common-name steps before any null result can be recorded. OpenAlex is unavailable for this round: the coordinator's initial probe returned HTTP 429 (free IP budget exhausted). It was not retried. No full-protocol completion or exhaustion is claimed. Only the search engine and stored harvest titles/abstracts were read; no source pages were fetched and no evidence was written, following desk-screen points 3 and 5.
+This round is a partial protocol pass: 10 genera web-screened for this round (Malosma, Symphytum, Empetrum, Holcus, Petasites, Calypso, Epigaea, Agrimonia, Oemleria, Eutrochium), 0 full-protocol genera completed, 0 evidence records, 0 searched records, and 41 new wanted lines. The remaining 30 genera start at Torilis. All 10 reviewed genera still need missing OpenAlex common-name steps before any null result can be recorded. OpenAlex is unavailable for this round: the coordinator's initial probe returned HTTP 429 (free IP budget exhausted). It was not retried. No full-protocol completion or exhaustion is claimed. Only the search engine and stored harvest titles/abstracts were read; no source pages were fetched and no evidence was written, following desk-screen points 3 and 5.
 
-Required AGENTS, codex-round, round4-harvest, desk-screen points 1–10, THOROUGH, BRIEF Round 2, round3-sweep and audits 53/54 were consulted. The coordinator refreshed main and origin/ci and provided the shared branch; no checkout, pushes, PRs, tool changes or operational-state changes were made. Canon lists no plant-trait compilation applicable here. Existing wanted/evidence was checked; thin sweep searches were not treated as current coverage. Owner n/a sources and issue-28/c22/c23 work are excluded from adoption.
+Required AGENTS, codex-round, round4-harvest, desk-screen points 1–10, THOROUGH, BRIEF Round 2, round3-sweep and audits 53/54 were consulted. The coordinator refreshed main and origin/ci and provided the shared branch; no checkout, pushes, PRs, tool changes or operational-state changes were made. The current canon file was checked. Relevant broad plant compilations include sense_chemical `10.1016/j.tree.2009.09.010` and `10.1111/ele.12205`; sense_light_nonvisual `10.1007/s00239-004-0294-2`, `10.1038/ncomms8852`, `10.5061/dryad.5rs50`, `10.1007/s10265-016-0785-4` and `10.1038/s41586-019-1693-2`; and diel `10.1002/ece3.71923` and `10.5061/dryad.4b8gtht8x`. They are marked not in hand and were not requested again or claimed read; no null record depends on their completion. Existing wanted/evidence was checked; thin sweep searches were not treated as current coverage. Owner n/a sources and issue-28/c22/c23 work are excluded from adoption.
 
 ### Malosma: web-screened; OpenAlex incomplete
 
@@ -112,3 +112,78 @@ Required harvest_get and screen_candidates ran and their stored results were scr
 - `web: Orchidaceae photoreceptor review`
 
 The required genus-first germination searches were heavily contaminated by Calypso bean, cilantro and ornamental cultivar names. Full scientific name Calypso bulbosa disambiguated the subsequent paired trait searches. Perfume brands, mango/bean cultivars, Poa bulbosa, hermit crabs, human gut and vitiligo papers, and other orchid genera do not establish Calypso measurements. The embryo-development paper times ovule development relative to anthesis and the bumblebee-learning paper manipulates seasonal flowering dates, not demonstrated daily opening hours on the supplied abstracts. One seven-year forest-cover/light-environment lead is wanted. Search snippets also showed a University of Washington propagation protocol (https://courses.washington.edu/esrm412/protocols/2010/CABU.pdf), but no experiment comparing light or hormone treatments was supplied in the snippet. Generic ocelli/leaf-lens results do not name a Calypso focusing measurement; plant eye_type follows the owner none reading. No pages fetched, evidence written or null records made. Missing OpenAlex common-name steps remain unavailable.
+
+### Epigaea: web-screened; OpenAlex incomplete
+
+Required harvest_get and screen_candidates ran and their stored results were screened. Successful harvested queries in order: `Epigaea phytochrome photoreceptor`; `Epigaea light perception`; `Epigaea phototropism`; `Epigaea flower opening time`; `Epigaea nyctinasty`; `Epigaea volatile signalling`; `Epigaea photoperiod`; `Epigaea circadian rhythm`; `Epigaea anthesis`; `Epigaea pollination biology`; `Epigaea epidermal lens cells`; `Epigaea epidermal focusing leaf optics`. Exact additional web searches:
+
+- `web: Epigaea seed germination light dark`
+- `web: Epigaea germination gibberellin OR smoke OR dormancy`
+- `web: Epigaea floral scent volatiles`
+- `web: Epigaea flower opening time anthesis`
+- `web: trailing arbutus flower opening time anthesis`
+- `web: Epigaea plant ocelli epidermal focusing leaf optics`
+- `web: trailing arbutus plant ocelli epidermal focusing leaf optics`
+- `web: Epigaea chemical response volatile signal`
+- `web: trailing arbutus chemical response volatile signal`
+- `web: Epigaea light perception photoperiod`
+- `web: trailing arbutus light perception photoperiod`
+
+A direct GA3/light-dark germination experiment is now wanted. The same-family Ericaceae photoreceptor review web search already run for Empetrum was adopted; it returned general reviews, not a new Epigaea measurement. Harvest habitat/burning study W202636360 reports canopy association and fire/litter removal, without identifying a controlled light or chemical stimulus in the supplied abstract. The histology search result describes epidermal cell size, not focusing; Arbutus, Episcia, fungal Diversispora epigaea and Stephania epigaea are different genera. Floral scent descriptions on horticultural/perfumery pages do not provide an experimental living-plant signal measurement. No pages fetched, evidence extracted or null records written. Missing OpenAlex common-name steps remain unavailable.
+
+### Agrimonia: web-screened; OpenAlex incomplete
+
+Required harvest_get and screen_candidates ran and their stored results were screened. Successful harvested queries in order: `Agrimonia phytochrome photoreceptor`; `Agrimonia light perception`; `Agrimonia phototropism`; `Agrimonia flower opening time`; `Agrimonia nyctinasty`; `Agrimonia volatile signalling`; `Agrimonia photoperiod`; `Agrimonia circadian rhythm`; `Agrimonia anthesis`; `Agrimonia pollination biology`; `Agrimonia epidermal lens cells`; `Agrimonia epidermal focusing leaf optics`. Exact additional web searches:
+
+- `web: Agrimonia seed germination light dark`
+- `web: Agrimonia germination gibberellin OR smoke OR dormancy`
+- `web: Agrimonia floral scent volatiles`
+- `web: Agrimonia flower opening time anthesis`
+- `web: agrimony flower opening time anthesis`
+- `web: Agrimonia plant ocelli epidermal focusing leaf optics`
+- `web: agrimony plant ocelli epidermal focusing leaf optics`
+- `web: Agrimonia chemical response volatile signal`
+- `web: agrimony chemical response volatile signal`
+- `web: Agrimonia light perception photoperiod`
+- `web: agrimony light perception photoperiod`
+- `web: Rosaceae photoreceptor review`
+
+New wanted leads cover controlled light/dark seed germination, GA3/nitrate treatments and shade plasticity. The harvested natural-light-gradient thesis is also retained. Distilled oils, infusions, dried leaves/roots and pharmacological effects in rats are tissue/extract chemistry, not living Agrimonia chemical responses. The single eye candidate is a hepatocellular-carcinoma paper whose match lies inside that word; epidermal morphology papers and generic ocelli essays supply no focusing measurement. The Agrimonia striata image is a flower just past anthesis, not an hour-of-day experiment; Senecio and hemp agrimony are different genera. No pages fetched, evidence extracted or null records written. Missing OpenAlex common-name steps remain unavailable.
+
+### Oemleria: web-screened; OpenAlex incomplete
+
+Required harvest_get and screen_candidates ran and their stored results were screened. Successful harvested queries in order: `Oemleria phytochrome photoreceptor`; `Oemleria light perception`; `Oemleria phototropism`; `Oemleria flower opening time`; `Oemleria nyctinasty`; `Oemleria anthesis`; `Oemleria pollination biology`; `Oemleria volatile signalling`; `Oemleria photoperiod`; `Oemleria circadian rhythm`; `Oemleria epidermal lens cells`; `Oemleria epidermal focusing leaf optics`. Exact additional web searches:
+
+- `web: Oemleria seed germination light dark`
+- `web: Oemleria germination gibberellin OR smoke OR dormancy`
+- `web: Oemleria floral scent volatiles`
+- `web: Oemleria flower opening time anthesis`
+- `web: Indian plum flower opening time anthesis`
+- `web: Oemleria plant ocelli epidermal focusing leaf optics`
+- `web: Indian plum plant ocelli epidermal focusing leaf optics`
+- `web: Oemleria chemical response volatile signal`
+- `web: osoberry chemical response volatile signal`
+- `web: Oemleria light perception photoperiod`
+- `web: osoberry light perception photoperiod`
+
+Adopted the Rosaceae family review web search run for Agrimonia; general photoreceptor and animal-opsin reviews yielded no Oemleria-specific lead. Indian plum queries returned unrelated Prunus/Syzygium work, so the chemical/light common-name pair used the verified synonym osoberry. Two light-linked reproductive studies and the harvested flowering-pattern study are wanted. The marula germination paper concerns Sclerocarya, and the Vallisneria/Shepherdia resource-allocation works concern other genera; horticultural germination guidance alone did not identify a new controlled light or chemical study. No pages fetched, evidence extracted or null records written. Missing OpenAlex common-name steps remain unavailable.
+
+### Eutrochium: web-screened; OpenAlex incomplete
+
+Required harvest_get and screen_candidates ran and their stored results were screened. Successful harvested queries in order: `Eutrochium phytochrome photoreceptor`; `Eutrochium light perception`; `Eutrochium phototropism`; `Eutrochium flower opening time`; `Eutrochium nyctinasty`; `Eutrochium volatile signalling`; `Eutrochium photoperiod`; `Eutrochium circadian rhythm`; `Eutrochium anthesis`; `Eutrochium pollination biology`; `Eutrochium epidermal lens cells`; `Eutrochium epidermal focusing leaf optics`. Exact additional web searches:
+
+- `web: Eutrochium seed germination light dark`
+- `web: Eutrochium germination gibberellin OR smoke OR dormancy`
+- `web: Eutrochium floral scent volatiles`
+- `web: Eutrochium flower opening time anthesis`
+- `web: Joe Pye weed flower opening time anthesis`
+- `web: Eutrochium plant ocelli epidermal focusing leaf optics`
+- `web: Joe Pye weed plant ocelli epidermal focusing leaf optics`
+- `web: Eutrochium chemical response volatile signal`
+- `web: Joe Pye weed chemical response volatile signal`
+- `web: Eutrochium light perception photoperiod`
+- `web: Joe Pye weed light perception photoperiod`
+
+Adopted the Asteraceae review web search already run for Petasites. New wanted leads cover controlled germination light levels, seed stratification, shaded growth, container photoperiod and induced resistance. The original germination/production titles were only exposed by search metadata including a ResearchGate result; that host was not opened or used for full text, no unsupported DOI/author/year was filled, and the owner can use the titles to locate legal copies. Joe-Pye old names Eupatorium purpureum/maculatum were distinguished from Eupatorium adenophorum (Ageratina) and boneset; their methyl-jasmonate papers cannot be silently assigned to Eutrochium. The flower-bud gallmaker paper describes seasonal gall development rather than daily plant anthesis; the awareness program and macular lutein review do not establish a plant eye. No pages fetched, evidence extracted or null records written. Missing OpenAlex common-name steps remain unavailable.
+
+Checkpoint: 109 real web queries ran in this worker (shared family review results reused for Ericaceae/Rosaceae/Asteraceae); 0 source-page fetches and 0 measurements extracted. Stopping between genera at Torilis with the first 10 web-screened, rather than claiming any full-protocol completion. The 30 untouched genera are Torilis, Sequoia, Briza, Chelone, Paris, Comarum, Daphne, Microstegium, Lilium, Sitobolium, Pulmonaria, Phalaris, Schinus, Melampyrum, Scutellaria, Anthoxanthum, Betonica, Comptonia, Cocos, Lobularia, Valeriana, Cynoglossum, Parnassia, Mercurialis, Ballota, Dodonaea, Heliotropium, Ophrys, Coptis and Borago.
