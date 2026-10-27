@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 2 genera web-screened, 0 protocol-complete, 0 search records, 6 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 3 genera web-screened, 0 protocol-complete, 0 search records, 22 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -46,4 +46,24 @@ Exact web searches (in order):
 - web: wintergreen chemical response volatile signaling
 - web: Ericaceae photoreceptor review
 
-Next genus: Berberis; 38 genera remain unreviewed.
+
+
+### Berberis: web-screened, protocol partial
+
+Required harvest_get and screen_candidates show no harvest. Four open traits in queue; no genus evidence or prior wanted found. Plant canon checked as above. Germination searches yielded ten distinct light/GA3/dormancy trials: added wanted rather than screening out. Berberis lycium anthesis has measured daily opening hours and is wanted for diel. Added floral-volatile dataset lead (original method needed), and four light/acclimation/growth-response sources. Tissue extract, fruit aroma chemistry and mammal pharmacology excluded under owner reading; epidermal morphology studies report shape, cuticle and stomata rather than focusing. General ocelli papers do not establish a Berberis optical measurement. Family review query returned broad photoreceptor and pharmacology reviews, no genus light-response source beyond leads already added. Common name barberry verified by USFS and RHS results. OpenAlex unavailable; no null row or exhaustion claim.
+
+Exact web searches (in order):
+- web: Berberis seed germination light dark
+- web: Berberis germination gibberellin OR smoke OR dormancy
+- web: Berberis floral scent volatiles
+- web: Berberis photoperiod phototropism light response
+- web: barberry photoperiod phototropism light response
+- web: Berberis flower opening time anthesis
+- web: barberry flower opening time anthesis
+- web: Berberis plant ocelli lens-like epidermal cells eye
+- web: barberry plant ocelli lens-like epidermal cells eye
+- web: Berberis chemical response volatile signaling
+- web: barberry chemical response volatile signaling
+- web: Berberidaceae photoreceptor review
+
+Next genus: Abies; 37 genera remain unreviewed.
