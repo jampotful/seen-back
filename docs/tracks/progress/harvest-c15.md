@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 6 genera web-screened, 0 protocol-complete, 0 search records, 37 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 8 genera web-screened, 0 protocol-complete, 0 search records, 45 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -142,3 +142,62 @@ Exact web searches (in order):
 Next genus: Athyrium; 34 genera remain unreviewed.
 
 Stopping cleanly between genera after the large Epilobium harvest screening consumed this worker context. Next genuinely unreviewed genus is Athyrium. Full OpenAlex protocol remains unavailable for the six web-screened genera. Final round additions: 37 wanted leads, 0 searched rows, 0 evidence records; 34 genera unreviewed. Paper-status scan found no matching owner n/a, partial or full source among newly requested lines. Known queue species record counts added to wanted ranking fields; zero denotes taxa absent from this queue.
+
+
+### 2026-10-27 continuation: worker 7
+
+Adopted the first six completed web screens and all 37 prior wanted lines unchanged. Continued at Athyrium; OpenAlex remains skipped after coordinator's HTTP 429 daily-budget refusal. Missing API steps prohibit full-protocol null searched rows. No page or paper fetched, no evidence written. Every actually returned web title/snippet was read (results varied by query; no claim that each delivered 20). Canon checked against current file: fern light compilations 10.1007/s00239-004-0294-2, 10.1038/ncomms8852, 10.5061/dryad.5rs50, 10.1007/s10265-016-0785-4 and 10.1038/s41586-019-1693-2 are not in hand; chemical compilations are angiosperm-scoped and not in hand; no plant eye_type canon applies. Angiosperm diel compilations do not establish fern timing.
+
+### Athyrium: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran with supported network mode; run 4 plus supplements prints 140 listed work occurrences, including repeats, and two family-review works. Titles and stored abstract starts screened. Existing A. filix-femina light evidence recheck-2-fixed#3 / sweep-11#7 (10.5209/BOCM.74725) adopted. Existing wanted harvest-c22b requests 10.1111/j.1095-8339.2009.00956.x; its stored abstract explicitly grows A. filix-femina gametophytes on nutrient agar enriched with APOGEE, so this is also an Athyrium chemical-response lead, not requested again. Hornych antheridiogen review 10.1111/nph.16836 already has oa-9 evidence and wanted requests; no repeated request and no unverified Athyrium table value invented.
+
+New wanted cover explicit light/dark spore germination and shade-response experiments, and living metal/fungicide response trials. Culture-stage and tolerance-versus-cue interpretation are for the reader. Leaf/extract chemistry and cancer assays excluded under 10(a). The five-French-ferns volatile profile appears with plant-extract indexing; living emission is not established by the displayed snippets, so retained only as uncertain method lead (10.1177/1934578X1000501028), not asserted as sensing. Jasmonate searches returned bracken/Pteridium, Arabidopsis, Nicotiana and grasses, not an Athyrium measurement. Eye searches returned general ocelli essays, eyelid-shaped indusia, and epidermal taxonomy, not focusing. Diel harvest candidate 10.1093/plphys/kiad036 tests 21 fern/lycophyte species but the displayed abstract does not identify Athyrium; species-list verification remains a metadata lead. Other diel matches are Chrysanthemum, Trillium and Solanum/drought work. The 1954 Light-sensitivity against the Germination is an additional light lead (10.15281/jplantres1887.67.51), but the stored abstract truncates before its Athyrium passage; no invented species value. A phototropism title appeared only on ResearchGate and was left unopened. Common name lady fern verified by NC State/Illinois results. Family-review harvest results concern fern clonality and phylogeny, with no displayed genus response measurement. No null searched row.
+
+Successful harvest queries, verbatim and in recorded order:
+- Athyrium phytochrome photoreceptor
+- Athyrium light perception
+- Athyrium phototropism
+- Athyrium flower opening time
+- Athyrium nyctinasty
+- Athyrium volatile signalling
+- Athyrium photoperiod
+- Athyrium circadian rhythm
+- Athyrium anthesis
+- Athyrium pollination biology
+- Athyrium epidermal lens cells
+- Athyrium epidermal focusing leaf optics
+- family review: Athyriaceae photoreceptor review
+
+Exact web queries, in order:
+- web: Athyrium seed germination light dark
+- web: Athyrium germination gibberellin OR smoke OR dormancy
+- web: Athyrium photoperiod phototropism light response
+- web: lady fern photoperiod phototropism light response
+- web: Athyrium flower opening time anthesis
+- web: lady fern flower opening time anthesis
+- web: Athyrium plant ocelli lens-like epidermal cells eye
+- web: lady fern plant ocelli lens-like epidermal cells eye
+- web: Athyrium chemical response volatile signaling
+- web: lady fern chemical response volatile signaling
+- web: Athyrium jasmonate herbivore
+
+### Dipterostemon: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran. Current descriptor opens only sense_chemical, unlike the older raw queue. Harvest has four successful genus queries (three zero-hit, one index result), and family review returns 15 work titles. All titles and stored abstract starts screened: the two chemical candidates concern other genera (Asparagaceae mammal-pollinated nectar and Eucomis LED culture), not Dipterostemon. Current evidence and wanted scans found no Dipterostemon record/lead. Web searches returned general germination and volatile reviews, other taxa and a horticultural seed seller; no displayed controlled light/chemical germination experiment or living signal-response source for the genus. Common name blue dicks verified in the Klamath Siskiyou Native Seeds result. No new wanted source with a verified measurement-bearing title; no null searched row because missing OpenAlex common-name/API steps remain incomplete. Plant chemical canon checked as above. Existing family-review harvest fulfills the review screening alternative but does not repair absent API searches.
+
+Successful harvest queries, verbatim and in recorded order:
+- Dipterostemon phytochrome photoreceptor
+- Dipterostemon light perception
+- Dipterostemon phototropism
+- Dipterostemon volatile signalling
+- family review: Asparagaceae photoreceptor review
+
+Exact web queries, in order:
+- web: Dipterostemon seed germination light dark
+- web: Dipterostemon germination gibberellin OR smoke OR dormancy
+- web: Dipterostemon floral scent volatiles
+- web: Dipterostemon chemical response volatile signaling
+- web: blue dicks chemical response volatile signaling
+
+Continuation checkpoint: 2 newly web-screened genera (Athyrium, Dipterostemon), 8 new wanted leads; 8 genera web-screened cumulatively, 45 wanted lines, 0 searched rows, 0 evidence records. 32 genera remain unreviewed; exact next genus Arctostaphylos.
