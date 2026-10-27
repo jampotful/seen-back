@@ -909,3 +909,61 @@ Added5 globally absent sources after normalized-title,DOI,URL and owner n/a chec
 
 Eye results include lens-shaped ovaries/seeds,seedcoat anatomy and microscope observations; none establishes a plant eye,any focusing belongs under light10(b). Diel results show months/year-round flowers,developmental anthesis morphology and fixed culture cycles; no exposed within-day target rhythm. Morning-flower wording on a multi-species garden page is not assigned to Rivina. Viola riviniana and other similarly named taxa are distinct. Extract/berry-juice chemistry,light-driven silver synthesis in removed extracts and rat pharmacology fail10(a); donor-extract trials on crops do not show a living donor signal or Rivina receiving a cue. No new eye/diel negative while API completion remains held. All new wanted leads await authorized intake.
 
+
+
+## 2026-10-27 — issue38 worker23 continuation
+
+### Pteridium web screen
+
+**New this worker:1 newly web-screened genus (Pteridium),13 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:172 wanted,23 searched.** Existing159 wanted and23 searched prefixes preserved. This is web-screened-for-round,**protocol-partial** because mandatory uncached OpenAlex steps remain skipped after round-wide429; no null searched row or exhaustion claim. **13 genera remain,exact next Lonicera**,then Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Prior first18 and Pilea,Centrosema adoptions,current Cercis/Erechtites/Chamaecrista/Celtis/Rivina/Sphagneticola screens remain preserved.
+
+Read AGENTS.md first,worker guide and named protocol/desk-screen1–10/THOROUGH/BRIEF Round2/round3/round4 and audit53/54 context,own prior progress and worker18 preflight. Cloud-environment-runtime skill applied,current connected unrestricted/enforced network,no VPN. No source/page fetch,evidence,app checks,operational/gates/branch edits. Earlier automatic-review scratch-write rejection respected; no rejected command,cache write,permission request or bypass repeated. Official read-only harvest_get.py and screen_candidates.py succeeded using supported authorized networking. Global corrected-first accepted-name evidence,searched/wanted,papers-status and canon checked for all14 remaining genera before fresh queries. No accepted Pteridium measurement. Old harvest-8 three-query and sweep-4 two-query nulls are thin,not completed web protocol; no original trait suppressed by current harvest's filtered open list.
+
+**Cross-unit adoption:** existing c10 new wanted10.1007/s10265-015-0736-5 jointly measures P.aquilinum/Thelypteris dentata. Exact-title original PMC4550647/Springer indexed Fig4 explicitly gives both species' response against PPFD at fixed ambient CO2. Adopt as target light lead without duplication;c10 owner notified to expand ownNEW row. Zanthoxylum preflight adopts external-3 lines1–3 diel/eye/light searches,but external-3#1/recheck-codex-b-fixed#12 chemical evidence is Z.bungeanum only; queued Z.clava-herculis has no species chemical carry. Its chemical remainder is still unsearched in this worker. Existing Asplenium antheridiogen,Lonicera congeneric light,Geranium,Lepidium,Commelina,Lygodium evidence retained for trait-specific adoption later; no whole-genus completion invented.
+
+Read all56 unique harvest titles/full stored abstract starts,including3 family works;run8 with volatile supplement12 and family17. Successful cached queries in order:
+- `Pteridium phytochrome photoreceptor`
+- `Pteridium light perception`
+- `Pteridium phototropism`
+- `Pteridium volatile signalling`
+- `Dennstaedtiaceae photoreceptor review`
+Citation chase on10.1038/ncomms8852 is successful0hits,no failed harvest step. Full stored abstracts recovered by read-only works_of slices; no scratch cache or source text written. Family works concern epiphytic clonality,cyanogenic-biosynthetic enzyme and fern phylogeny,not a target eye measurement. Canon photoreceptor transcriptomes/genetic diversity do not establish a measured target response without intake.
+
+Mandatory10(e) searches first,then all4 scientific/common trait pairs,family review,fern-specific diel/spore refinements and actual-lead metadata searches. Exact29 executed connected queries in order (initial3 repeated once solely to recover a display-truncated response;not counted as extra coverage):
+- `Pteridium seed germination light dark`
+- `Pteridium germination gibberellin OR smoke OR dormancy`
+- `Pteridium jasmonate herbivore`
+- `"Pteridium" flower opening time anthesis`
+- `"bracken fern" flower opening time anthesis`
+- `"Pteridium" eye type lens-like epidermal cells`
+- `"bracken fern" eye type lens-like epidermal cells`
+- `"Pteridium" light photoperiod phototropism`
+- `"bracken fern" light photoperiod phototropism`
+- `"Pteridium" volatile chemical hormone response`
+- `"bracken fern" volatile chemical hormone response`
+- `Dennstaedtiaceae photoreceptor review`
+- `"Pteridium" diurnal circadian spore release stomata`
+- `"Pteridium" germination light dark gibberellin spores`
+- `"Rapid response of leaf photosynthesis" "Pteridium"`
+- `"Some effects of volatile fungal metabolites" Pteridium`
+- `"The effect of light quality on the induction of apogamy" Pteridium`
+- `"Photocontrol of growth pattern" bracken`
+- `Pteridium seed germination light dark`
+- `Pteridium germination gibberellin OR smoke OR dormancy`
+- `Pteridium jasmonate herbivore`
+- `"Periodic cell divisions" "Pteridium"`
+- `"Effects of meteorological factors" "Pteridium" "2009"`
+- `"Pteridium" "Effect of illumination and exogenous"`
+- `"Pteridium" "Photocontrol" "1969"`
+- `site:ahs.ac.cn "Effect of Illumination" "Pteridium"`
+- `"Is Riboflavin the Photoreceptor" "Pteridium"`
+- `"INTERACTION OF CELL ELONGATION AND CELL DIVISION" "1971"`
+- `"Biological Flora" "Pteridium" "Marrs" "Watt"`
+
+All exposed titles/snippets and indexed original abstracts read;retained response tails recovered from session store,no claim of20 when fewer exposed. Initial3 repeat yielded one extra generic extension result;all returned results read. No paper/source page fetched;automatically returned original-source passages remain search snippets,no evidence. No paid/API fallback,OpenAlex/MDPI/UChicago/SANBI request,new service refusal or unauthorized/library-proxy opening. ResearchGate,Wikipedia,Scribd,DOKUMEN and unauthorized-copy search results were not used as primary sources or opened.
+
+Added13 globally absent sources after exact DOI/normalized-title/URL/status checks:2012 living-frond jasmonate/emission10.1371/journal.pone.0048050;1967 fungal-volatile recipient response10.1016/S0007-1536(67)80039-1;1975 phototropic gametophyte10.1093/oxfordjournals.pcp.a075172;1969 culture photocontrol10.1093/oxfordjournals.pcp.a074428;1971 light/apogamy10.1007/BF00388249;1971 daily light-cycle cell division10.1002/j.1537-2197.1971.tb09965.x;1968 riboflavin/photomorphogenesis10.1104/pp.43.7.1165;red/blue RNA-protein study10.1007/BF00385513 (year unresolved);2002 illumination/GA3/6-BA target-spore trial at original Acta Horticulturae Sinica issue;2006 Biological Flora10.1111/j.1365-2745.2006.01177.x;2012 Colorado target-terpenoid dissertation;2009 hourly airborne-spore distribution10.1007/s00484-009-0208-5;congeneric P.caudatum spore-development studyPMID23176817 (date/cue eligibility unresolved). Unexposed author/year/DOI stay empty/null,not derived from approximate age or DOI suffix. Target living-culture eligibility explicitly left to intake. The airborne-spore paper involves long-range wind transport;its within-day distribution is not automatically endogenous release rhythm. Daily white-light-entrained cell divisions likewise do not prove a circadian oscillator.
+
+Exclusions:rhizome fatty-acid methanol extraction tested on wheat,bracken extracts tested on chick embryos/toxicology,medicinal GCMS and tissue hormone/phytoecdysone content fail10(a) for living target responses. Cyanogenic enzyme/genome descriptions alone do not demonstrate chemical sensing. Other-fern Lygodium,Cyathea,Osmunda/Equisetum experiments are not Pteridium carry. Ferns have spores,not anthesis;seasonal frond emergence,third-year spore maturation and insect timing do not prove a daily plant rhythm. Epidermal anatomy/silicon deposition,microscope lenses,vessels and spermatozoid ultrastructure are not eyes;any actual focusing belongs under light10(b). No new eye/diel null while missing API protocol is held. Existing antheridiogen review10.1111/nph.16836 is already read globally and adds no duplicate;its Pteridium donor role alone is not a target receiver measurement.
+
+Pteridium validation: required current screen_candidates checker printed **0 problems**. All159 starting wanted lines byte-for-byte7efadc6c;all23 searched unchanged. c10 owner confirmed shared PPFD target expansion in commit61e72d08,without duplicate. Only owned wanted/progress files edited;no paper assets. Continuing Lonicera next.
