@@ -708,3 +708,57 @@ Executed mandatory10(e) first and all four scientific/common trait pairs, family
 All exposed result titles/snippets read, omitted display tails recovered from retained tool response; no claim of20 when fewer actually supplied. Added3 original target/congener seed sources:1997 Zayat/Ranal living E.valerianaefolia light/dark and chemical trials;2017 White/Zhang/Pruski target E.hieraciifolius GA,nitrate/light trial10.1017/wsc.2016.21 (2017 issue independently verified; DOI-year suffix is not publication date);1996 Baskin/Baskin target buried-seed light comparison10.1139/b96-240. Original university/Embrapa/publisher and EPA metadata verified citations; no remembered DOI, author or year. Species spelling is retained and no congener figure transferred. These direct living-seed results prevent chemical/light negatives. Seeds remaining dormant under specified light conditions can be an assay result; absence of germination is not absence of sensing.
 
 Distilled Erechtites leaf/bark oils and historical fireweed remedies fail owner10(a), with no living emitter/recipient result exposed. PubMed original hydrodistillation abstract and Sage title were screened without fetching. Generic corn,cowpea,Arabidopsis/Phaseolus elicitor reviews do not measure target. Eye results concern insect/mite/dinoflagellate organs or broad plant optics and expose no target eye; owner10(b) applies, focusing goes under light. Diel results give month/year-round flowering, seedbank seasonal dormancy, days after anthesis or capitulum development rather than a measured within-day target rhythm. Chamerion/Epilobium fireweed and Euonymus burning bush are different genera; neither their anthesis nor their response is carried to American burnweed. No paper/source-page fetch, evidence, fulltext asset, banned proxy, paid API or new service refusal. Existing skipped services persist. Automatic-review refusal remains the resolved scratch-cache-write case recorded above; no repeat request.
+
+### Issue38 worker11 — Chamaecrista web screen
+
+**This worker cumulative:3 newly web-screened genera (Cercis,Erechtites,Chamaecrista),1 separately adopted genus (Centrosema),36 wanted lines,0 searched lines,0 evidence/measurement closures. Actual c8 files:133 wanted and23 searched.** The new Nod-factor source is a joint Cercis/Chamaecrista request and counted once. Prior97 wanted and23 searched prefix lines remain byte-for-byte; historical181 wanted count remains historical. **17 genera still need new work, exact next Celtis; no Celtis web search started at this checkpoint.** All3 fresh screens remain protocol-partial rather than full-protocol exhaustion because uncached required OpenAlex steps are skipped after429.
+
+Before fresh searching adopted actual congener light evidence oa-9#56,`10.1002/ece3.71923`, C.concinna germination under measured photoperiods; no duplicate request for the already-read compilation. Queue target C.fasciculata still lacks its own light result and no automatic light genus carry is invented. Legacy sweep-20#8 diel is explicitly Wikipedia through a summarizer, not primary evidence, and is preserved unchanged but not accepted as research provenance for a new measurement. This was reported to coordinator. New primary congener anthesis sources will permit a source-based replacement after intake. Other global wanted/papers-status by normalized title/DOI and canon metadata were checked before additions; no same-source request or n/a mark found.
+
+Official harvest_get/screen_candidates succeeded on legitimate ci: run5, supplements12/20,2 successful zero-hit citation steps on10.3389/fpls.2015.00207 and10.1016/j.tree.2009.09.010, and Fabaceae review run17. Read all **94 unique titles and full stored abstract starts** including15 family works; long official display omissions recovered with read-only works_of slices0–24,25–49,50–78 and reused full family15 already read for Cercis. No failed harvest step. Successful harvest queries in actual order:
+- `Chamaecrista phytochrome photoreceptor`
+- `Chamaecrista light perception`
+- `Chamaecrista phototropism` (0)
+- `Chamaecrista volatile signalling`
+- `Chamaecrista photoperiod`
+- `Chamaecrista circadian rhythm`
+- `Chamaecrista epidermal lens cells`
+- `Chamaecrista epidermal focusing leaf optics`
+- `Fabaceae photoreceptor review`
+
+Executed mandatory10(e) searches first, full scientific/common-name pairs for4 traits (diel included to replace weak legacy provenance), family review and focused real-lead refinements. The late quoted light refinements repaired broad unquoted results on Pisum; no Pisum measurement assigned to partridge pea. Actual connected queries in execution order:
+- `Chamaecrista seed germination light dark`
+- `Chamaecrista germination gibberellin OR smoke OR dormancy`
+- `Chamaecrista jasmonate herbivore`
+- `Chamaecrista flower opening time anthesis`
+- `partridge pea flower opening time anthesis`
+- `Chamaecrista eye type lens-like epidermal cells`
+- `partridge pea eye type lens-like epidermal cells`
+- `Chamaecrista volatile chemical signal hormone elicitor response`
+- `partridge pea volatile chemical signal hormone elicitor response`
+- `Fabaceae photoreceptor review`
+- `"Chamaecrista" "Extrafloral nectar production induced"`
+- `"Chamaecrista" "Seed anatomical studies"`
+- `"Fire-related cues break seed dormancy"`
+- `"Chamaecrista" "Floral polymorphism"`
+- `"Chamaecrista" "Cytokinin" "Pseudonodule"`
+- `"Bacterial-induced calcium oscillations" "Cercis"`
+- `"Floral volatiles controlling ant behaviour" Chamaecrista`
+- `"Chamaecrista" "Floral polymorphism" "2013"`
+- `"Chamaecrista fasciculata" "seed" "light" "Philips"`
+- `"Seed anatomical studies on dormancy and germination in Chamaecrista absus" "2016"`
+- `"Extrafloral nectar production induced by simulated herbivory" "2022"`
+- `Chamaecrista photoperiod phototropism phytochrome light response`
+- `partridge pea photoperiod phototropism phytochrome light response`
+- `"Chamaecrista" photoperiod light`
+- `"partridge pea" photoperiod light`
+
+All exposed titles/snippets read, retained response tails recovered after display cuts. Actual result counts vary; no claim of20 where fewer delivered. No direct source/paper-page fetch; search-indexed passages only, no raw text committed. No new refusal or alternate OpenAlex request; excluded MDPI,UChicago,SANBI and OpenAlex remain skipped. No paid API, banned proxy or unauthorized copy used. The one earlier scratch-write approval rejection remains recorded above and was not retried.
+
+Added17 specific sources. Direct chemical candidates: living C.nictitans jasmonic-acid nectar response2022,`10.1093/biolinnean/blab159`; C.rotundifolia BAP-induced pseudonodule2019,`10.3389/fpls.2018.01901`; C.fasciculata bacterial Nod-factor calcium response2015,`10.1111/nph.13464`, also an assay-specific negative in C.siliquastrum (supplemental already-authorized Cercis lead, joint request); C.absus GA/ethrel germination2016,`10.31018/jans.v8i2.888`; plus original congener smoke/nitrate/heat trial2003. Primary PMC figure legends establish exact Nod/BAP species; no molecular predictions treated as measurements. Candidate negative hormone/chemical assays stay assay-specific. Original metadata verifies published2019 despite2018 DOI suffix for the cytokinin study.
+
+Mandatory10(e) seed titles retain C.dentata,nomame,rotundifolia,debilis,glandulosa var.mirabilis under their actual taxa, not as C.fasciculata measurements; physical/thermal-only dormancy removal, maturity, soil pH/nutrients and culture light do not automatically qualify as chemical/light responses. Rotundifolia same-title UFRA thesis and Brazilian Journal article are one request, with thesis as alternate provenance; no duplicate dataset/edition. Target Philips2018 prairie thesis and2019 primitive-symbiosis thesis remain narrow experimental leads whose actual light/cue treatments must be confirmed. No author/DOI/year from memory; unresolved metadata stays empty/null.
+
+Direct diel candidates: primary C.flexuosa anthesis2013,`10.1093/aob/mct188`; C.debilis floral-visitation source; C.ramosa/Comolia pollination source with timed stigma receptivity, species attribution explicit; C.semaphora2016 original light-dependence curves plus actual daily water-potential course. No clock inferred from a daily physiological course, and no congener hour assigned to C.fasciculata. Missouri botanical nyctinasty agrees with legacy claim but is not a new primary measurement. Seasonal flowering pulses2015,`10.1111/1365-2745.12362`, weeks of flowering, anatomical anthesis stages, garden/full-sun advice, inferred photoperiod genes from2025 student poster and climate/population comparisons do not independently establish within-day response or a controlled light measurement.
+
+Eye/anatomy candidates expose stomata,papillae,secretory trichomes,seed water-gap lenses,UV bullseye flower pigmentation and human-eye traditional use. None establishes a plant eye; any actual focusing belongs under light by10(b). Cached Senna sleeping behaviour is another genus; animal ram circadian,moth/mosquito/damselfly behaviour, bee learning, Marsdenia morning/night colour and Syne[d]rella/Calliandra germination cannot carry to Chamaecrista. The Cercideae gland paper10.1590/0001-3765201520140151 explicitly finds glands only in Bauhinia despite sampling one Cercis; no Cercis living volatile emission inferred. Floral-volatiles review10.1111/j.1365-2435.2009.01632.x reports acacia ant-repellent experiments; target mentions are defensive morphology/other cited EFN work, not a target volatile measurement. Medical extracts/oils, microbial volatile production alone, Solanum scent, Xyris fungal pseudoflowers and crop/model-legume signal reviews do not measure target sensing. No null record is added while plausible actual target leads await intake and protocol API steps remain incomplete.
