@@ -381,3 +381,26 @@ Queries actually run (connected web search; returned titles/snippets screened, f
 - `greater stitchwort epidermal lens cells eye`
 
 Worker35 checkpoint: **6 newly web-screened genera** (Epipactis, Vaccinium, Frangula, Jacobaea, Lactuca, Rabelera); all six full protocols remain partial because OpenAlex is skipped. Added **54 wanted lines**, **0 searched**, **0 evidence**; batch total **119 wanted, 0 searched, 0 new evidence**. Earlier 14 screens and all incoming 65 wanted lines, including coordinator source #25 Fagus target, preserved. **20 genuinely unreviewed genera remain; exact next Heracleum**, then Matricaria, Trillium, Eriogonum, Cytisus, Aralia, Berteroa, Elaeagnus, Geum, Calluna, Cymbalaria, Conium, Crataegus, Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia. Do not repeat the six new web-query screens. Primula preflight still shows extensive existing plant-1 wanted/eye search plus species-specific measured cues; next worker should inspect for adoption before any search. No service beyond the inherited OpenAlex 429 was rejected. All source retrieval remains for the legal OA reader; no paper assets committed.
+
+## 2026-10-27 — issue38 worker41 continuation
+
+Preserve the first20 web screens through Rabelera and all119 incoming wanted lines, source25 Fagus expansion included. Continue only assigned tail. Desk only, no page fetching/evidence; null searched rows withheld while OpenAlex remains unavailable from round-wide429. Canon catalog, actual species/traits, global evidence and shared wanted/status are checked before requests; physiology does not carry between congeners. Runtime skill and current enforced network policy checked; no new service rejection.
+
+### Heracleum
+
+Official harvest_get and screen_candidates: absent from harvest. Global canon/evidence/wanted/owner status and queue checked. No existing genus physiological evidence. Adopted harvest-c9 wanted #227 (10.3389/fevo.2020.571454), explicitly including H. sphondylium floral emissions; coordinator notified to add its shared target. Thirteen new wanted leads cover seed dormancy/germination, GA3 responses, light acclimation, floral emissions, fruit VOCs and reproductive timing; species restricted to displayed title/snippet, with picked-fruit/headspace and germination-method forks held for reader. Essential oils/distilled/dried-shoot analyses excluded under10(a), phytodermatitis in people/animals is not target light sensing. Eye results overwhelmingly bovine lenses, no genus focusing measurement. Anthesis results mostly seasonal/lifespan; one H. sibiricum primary-title lead retained without invented daily hour. Family alternative found broad Apiaceae review 10.1093/hr/uhac076, not a confirmed photoreceptor-specific review; no full text fetched. All web-query snippets actually delivered screened, no nulls/evidence; full protocol partial while OpenAlex skipped.
+
+Queries actually run (connected web search; every returned title/snippet screened, fewer than20 whenever fewer delivered):
+
+- `Heracleum seed germination light dark`
+- `Heracleum germination gibberellin OR smoke OR dormancy`
+- `Heracleum floral scent volatiles`
+- `Heracleum photoperiod phototropism light sensing`
+- `cow parsnip photoperiod phototropism light sensing`
+- `Heracleum flower opening time anthesis`
+- `cow parsnip flower opening time anthesis`
+- `Heracleum volatile chemical signalling`
+- `cow parsnip volatile chemical signalling`
+- `Heracleum epidermal lens cells eye`
+- `cow parsnip epidermal lens cells eye`
+- `Apiaceae photoreceptor review`
