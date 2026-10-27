@@ -2,7 +2,7 @@
 
 ## TOP/current — 2026-10-27
 
-Cumulative **19 of40 genera screened,23 search records,150 wanted,0 evidence/0 measured cells**. **21 remain; next Lobelia**. Worker46 adds **2 genera,2 searches,6 wanted,34 successful web queries,0 evidence**. Dioscorea chemical/diel applicability and Vinca source/taxon applicability remain unresolved; no physiological null. Prior taxonomy/donor/service limitations below persist.
+Cumulative **20 of40 genera screened,25 search records,152 wanted,0 evidence/0 measured cells**. **20 remain; next Foeniculum**. Remaining order: Foeniculum, Hypochaeris, Sorghastrum, Packera, Cortaderia, Nasturtium, Tecoma, Cosmos, Achillea, Mahonia, Apocynum, Bromus, Marchantia, Vachellia, Poa, Parkinsonia, Panicum, Artemisia, Polystichum, Ailanthus. Worker46 adds **3 genera,4 searches,8 wanted,50 successful web queries,0 evidence**. Dioscorea chemical/diel applicability and Vinca source/taxon applicability remain unresolved; no physiological null there. Lobelia eye/diel screened, two chemical leads wanted, existing light evidence preserved. Prior taxonomy/donor/service limits below persist.
 
 ## 2026-10-27 — round 28
 
@@ -851,3 +851,46 @@ Volatile oils/n-hexane extracts of V.major hirsuta (Dergipark1685115), herbacea/
 Raw search responses work/harvest-c11/Vinca-web1–6.json. No actual access/quota refusal. Previous Dioscorea and batch limitations preserved. Required validator pending before commit; next Lobelia.
 
 Worker46 Vinca required final gate printed **0 problems**.20 successful queries/4wanted/1eye search; no source access or quota refusal. Commit checkpoint before Lobelia dispositions.
+
+## 2026-10-27 — worker46 Lobelia continuation
+
+Adds1 genus screened,2 searches(eye_type,diel),2 wanted,16 successful queries,0 evidence/0 measured cells. Worker46 cumulative3 genera/4 searches/8 wanted/50 web queries/0 evidence. Cumulative c11:20 of40 genera,25 searches,152 wanted,0 evidence;20 remain,next Foeniculum. Vinca checkpoint97f4013d followed required real gate0problems.
+
+Required harvest_get.py/screen_candidates.py run with network permission; outputs saved in work/harvest-c11/Lobelia-harvest.txt and Lobelia-candidates.txt. Main actual evidence oa-7#379–382(cardinalis),#399–402(inflata),#417–420(siphilitica) already records seed light/dark trials in10.1093/aob/mct250. The remaining42 congener light records are also preserved. All three original queue species have open diel/eye/chemical only; prior sweep-8 two queries did not finish these. Genus germination and paired light searches are still run under10(e)/full protocol, but the already-measured light and photoperiod/genus background are not requested again. Global actual/corrected evidence, wanted/status checked by genus and both retained titles/URLs; no duplicate/n-a request found. Canon catalog checked; no in-hand compilation settles open Lobelia diel/chemical. Both new wanted publication years null and unknown authors blank.
+
+Exact executed queries:
+- `web: Lobelia seed germination light dark`
+- `web: Lobelia germination gibberellin OR smoke OR dormancy`
+- `web: Lobelia floral scent volatiles`
+- `web: Lobelia flower opening time anthesis`
+- `web: cardinal flower OR great blue lobelia OR Indian tobacco flower opening time anthesis`
+- `web: Lobelia plant ocelli lens epidermal focusing eye`
+- `web: cardinal flower OR great blue lobelia OR Indian tobacco plant ocelli lens epidermal focusing eye`
+- `web: Lobelia chemical sensing volatiles`
+- `web: cardinal flower great blue lobelia Indian tobacco chemical sensing volatiles`
+- `web: Lobelia photoperiod phototropism light response`
+- `web: cardinal flower great blue lobelia Indian tobacco photoperiod phototropism light response`
+- `web: Campanulaceae photoreceptor review`
+- `web: Lobelia jasmonate herbivore`
+- `web: Lobelia cardinalis gibberellin growth regulator germination`
+- `web: Lobelia siphilitica jasmonate herbivore induced defense`
+- `web: Lobelia inflata gibberellin growth regulator germination`
+
+Two specific unresolved chemical sources/provenance:
+- cardinalflower; https://tallgrassprairiecenter.org/native-seed-production-manual/species-production-guides/forbs/cardinalflower. The institutional native-seed production guide explicitly reports L.cardinalis seeds responding to gibberellic acid, with optimal concentration/normal seedling outcome not yet established. Read the named-species GA response and underlying production trials under10(d); do not duplicate its already-measured light requirement. Query `web: Lobelia cardinalis gibberellin growth regulator germination`.
+- Studies on the alkaloid production of genetically transformed and non-transformed cultures of Lobelia inflata L.; https://agris.fao.org/search/en/providers/122436/records/675acdd90ce2cede71d1a39b. AGRIS/DOAJ snippets describe living callus, organized and root cultures, and changes in alkaloid production after synthetic growth-regulator plus amino-acid treatments. Read applied regulator response of living organized tissues/plant cultures, not a removed-tissue extract profile. Establish viable responding material and treatment controls before any sense_chemical record. Query `web: Lobelia inflata gibberellin growth regulator germination`.
+
+The L.cardinalis institutional production guide explicitly reports GA3 seed response; this is a named living seed chemical target, not generic seed background. The L.inflata organized/callus/root cultures article reports effects of applied synthetic regulators and amino-acid precursors on living cultures; the source reader must establish viable responsive material and controls before logging. The separate indexed hairy-root regulator/biomass title and amino-acid-only study are not additionally requested, because the retained culture paper is the direct combined original lead and no duplicate target material is needed. Deno secondary web entry suggests inflata GA soak but no original page was read or shared request duplicated/expanded without primary provenance. Family131-taxon study states a nine-taxon GA/nitrate experiment, but the snippets do not identify those species; its already-intaken light study is not re-requested on speculation that the chemical subset includes the queue species.
+
+No Lobelia daily-opening measurement surfaced: cardinalis floras give August/late-summer opening season and acropetal progression, not clock hours.10.1002/ece3.10746 examines latitudinal mating-system/protandry stages; this developmental sequence is not itself diel. The1999 xspeciosa cold/photoperiod response,2022 DLI experiment and inflata bolting studies control seasonal day length; an experimental12h/12h culture schedule is not a measured daily plant rhythm. laxiflora hummingbird work describes observation slots for birds and floral morphology, not a diel plant-response measurement. The drought-VOC result10.1093/aob/mcy193 cites L.siphilitica water-availability work alongside a Gymnadenia diel scent paper; it is not promoted to Lobelia daily scent. Those titles/snippets are screened explicitly in the diel disposition.
+
+L.siphilitica2012 latex/flowering correlation PMID22662205 is the old sweep-8 lead: the available abstract measures constitutive genetic/phenotypic association and escape in flowering season, not a chemical elicitor treatment, induced volatile signal or daily timing. Never replace that with an invented induced-defense result. Tissue dry-weight VOC profile of L.dortmanna (2024 Inland Water Biology), L.chinensis/inflata HPLC-MS extract profiling, crude oils/lobeline pharmacology and general tobacco (Nicotiana) hormone studies do not show the target living response under10(a). General Campanula scent signals and Rhazya/Arabidopsis/Nicotiana jasmonate responses are other genera; no crop/general review requested. Eye epidermal studyPMID28322478 is morphological microscopy of22 species, not focusing/vision. Generic ocelli belongs under nonvisual light per10(b).
+
+All16 connected queries succeeded; all returned titles/snippets screened, with variable result counts and no claim that20 were returned. No access/quota refusal, no OpenAlex/MDPI/UChicago/SANBI source call, paid API, plant source/fullpaper-page fetch, evidence write, branch/gates or engineering29/data30 changes. Raw successful responses work/harvest-c11/Lobelia-web1–5.json. Prior Dioscorea chemical/diel and Vinca applicability limits, Chenopodium taxonomy, sunflower living-disk donor and all original service refusals remain preserved. Required validator pending before commit.
+
+
+Worker46 Lobelia real required gate printed **0 problems**. harvest_get.py and screen_candidates.py both explicitly report Lobelia absent; no cached scientific/common/family queries silently omitted. Corrected congener count in this note from48 to42 (54 existing Lobelia light records less12 for the three queue targets). No data/evidence correction made.
+
+Shared-source handoff from c12 worker47,2026-10-27: initial forwarded scratch path omitted harvest-c12 and produced FileNotFoundError; located actual work/harvest-c12/worker47-Castilleja-web7.json with rg and inspected its stored result. The indexed Deno original Ch20p113 explicitly names Castilleja miniata and its light comparison. Expanded ONLY existing wanted#34 for/traits/why for C.miniata light, preserving book title/authors/year/DOI/URL/get and all prior target provenance. No quantities or chemical result inferred, no source fetched, no duplicate line/evidence/query added. Wanted count remains152. Existing first-supplement Modiola expansion is untouched. Rerunning mandatory real gate after shared metadata expansion before commit.
+
+Worker46 final shared-source/Lobelia validator printed **0 problems**. Final own counts:3 genera screened(Dioscorea,Vinca,Lobelia),4 search records,8 new wanted,one existing shared-book target expansion,50 successful connected web queries,0 evidence/0 measured cells. Cumulative20/40 genera,25search,152wanted,0evidence. Stop between genera with next **Foeniculum**,20 remaining in TOP/current order. No tool/quota refusal or newly refused service; source-reading and target-applicability limitations above are unresolved and are not counted as measured/exhausted. Original service refusals, prior completed provenance, Chenopodium taxonomy and sunflower donor issues preserved. No further fresh workers available under parent48-worker cap; this is a committed context checkpoint, not completion of the remaining queue.
