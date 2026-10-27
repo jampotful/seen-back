@@ -1367,3 +1367,83 @@ Diel:original2004 journal explicitly times daily anther dehiscence,distinct from
 Eye:ordinary Morus epidermal cell/stomatal/cystolith anatomy and M.nigra papillose outline do not claim lens/focusing in returned starts. Human mulberry corneal dystrophy and silkworm larval lens-shaped organelles are animals. Owner none applies;actual epidermal focusing would belong under light. A2024 white-mulberry review erroneously calls Shiraz,Pinot Noir and Sangiovese mulberry varieties in its general light section;these names alone cannot support a Morus light experiment,so no grape data imported.
 
 Normalized Unicode-title/DOI duplicate check across all wanted/evidence/audit and owner-status check found no existing request for10new sources. Prior226 wanted prefix unchanged;main72 untouched. Parent c7 legacy-target pointer preserved for desk only. Incidental RG,Wikipedia,commercial text redistributors,library-signed URL and OpenAlex-indexed web search result not opened/used as primary sources;no API retry or unauthorized copy.
+
+
+## 2026-10-27 — issue38 worker33 Symphyotrichum final handover
+
+1 newly available-source-screened genus (Symphyotrichum),33 genus web queries,8 new wanted,0 searched,0 evidence. Worker33 total3 new genera (Thunbergia,Morus,Symphyotrichum),97 genus queries plus2 separately authorized shared-source queries=99 actual new web queries,24 new wanted and1 source-supported additive target expansion. Current c10 244 wanted (main72 + prior issue38 148 + worker33 24),searched empty.30/40 genera available-source-screened/adopted,not full protocol/exhaustion.10 eligible untouched remain: exact next Melinis,then Nyssa,Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. Melinis not started. Stop between entries at context boundary; preserve all prior completed/adopted27 plus these3 without repeating screens. OpenAlex additional scientific/common-nameAPIsteps remain unrun after shared429,no nullsearched rows. No source page/paper fetching,evidence,new service refusal or alternate paid/API path.
+
+### Symphyotrichum — actual two queue species and source adoption
+
+Global corrected-first evidence/audit,wanted/searched,canon and owner papers-status checked beforequeries. Actual targets S.novae-angliae24706records (diel/eye/chemical gaps) and S.lateriflorum8284records (light/diel/eye/chemical gaps). Existing sweep-14#2 species-specific partial photoperiod record applies ONLY to S.novae-angliae September Ruby,original Aster novae-angliae;adopt it without repeating a New England aster light pair or borrowing to S.lateriflorum. Legacy two-query sweep-14 searched row preserved,not accepted as current protocol. Actual queue species and current name connections checked through NCSU/MOBOT/Waterloo/Kew snippets,not assumed from generic aster horticulture. Calico aster specifically means S.lateriflorum; New England aster can also retrieve S.novi-belgii,so actual species identities always retained.
+
+Official harvest_get and screen_candidates ran with successful cached run10 plus supplement14,and citation output0 works citing10.17660/ActaHortic.2006.711.41 naming Symphyotrichum. Asteraceae family review already ran in harvest;do not repeat it as a new web query. Read all printed titles/abstract starts (including later44 and family list);source/species forks below. Exact successful harvest query order:
+- `Symphyotrichum phytochrome photoreceptor`
+- `Symphyotrichum light perception`
+- `Symphyotrichum phototropism`
+- `Symphyotrichum photoperiod`
+- `Symphyotrichum circadian rhythm`
+- `Asteraceae photoreceptor review`
+
+Missing original diel/eye/chemical harvest trait groups are explicitly noted by tool as opened since harvest;API completion cannot be claimed. Relevant plant light/chemical/diel canons not in hand;Animal Eyes covers Metazoa. First required germination pair/scent query preceded other trait pairs. Paired scientific/calico-aster queries cover light,chemical,diel,eye;New England aster gets additional common-name chemical/diel/eye searches because it is the second actual target,while its measured light trait is adopted. All actually delivered web titles/snippets read;long grouped output recovered in stored slices when combined tool rendering truncated it. No claim of20results for every individual query. Exact33genus web queries in executed order:
+- `web: Symphyotrichum seed germination light dark`
+- `web: Symphyotrichum germination gibberellin OR smoke OR dormancy`
+- `web: Symphyotrichum floral scent volatiles`
+- `web: Symphyotrichum flower opening time anthesis`
+- `web: calico aster flower opening time anthesis`
+- `web: Symphyotrichum photoperiod light perception phototropism`
+- `web: calico aster photoperiod light perception phototropism`
+- `web: Symphyotrichum chemical perception volatile signalling`
+- `web: calico aster chemical perception volatile signalling`
+- `web: Symphyotrichum epidermal lens cells eye type`
+- `web: calico aster epidermal lens cells eye type`
+- `web: "New England aster" flower opening time anthesis`
+- `web: "New England aster" chemical perception volatile signalling`
+- `web: "New England aster" epidermal lens cells eye type`
+- `web: "Symphyotrichum" jasmonate herbivore`
+- `web: "Factors Affecting Seed Germination" "Symphyotrichum" authors`
+- `web: "Effects of seed age and dormancy-breaking treatments" doi`
+- `web: "EFFECT OF DAMINOZIDE AND FERTILIZER" aster`
+- `web: "Germination performance of alien and native species" Symphyotrichum`
+- `web: "Seed Cryostorage and Micropropagation" "Symphyotrichum"`
+- `web: "Symphyotrichum ericoides" "255046"`
+- `web: "Symphyotrichum" "p00-056" germination`
+- `web: "EFFECT OF DAMINOZIDE" "HEIGHT AND DIAMETER"`
+- `web: "Aster lateriflorus" germination light`
+- `web: "Symphyotrichum lateriflorum" germination light experiment`
+- `web: "Aster novae-angliae" flowers close night`
+- `web: "Aster lateriflorus" anthesis`
+- `web: "NUMBER OF BUDS AND INFLORESCENCES" "ASTER" site:jcea.agr.hr`
+- `web: "255046" "night"`
+- `web: "Influence of daminozide and fertilizer application" site:hrcak.srce.hr`
+- `web: "HEIGHT AND DIAMETER OF POTTED NEW ENGLAND ASTER" site:hrcak.srce.hr`
+- `web: "Symphyotrichum ericoides" site:li01.tci-thaijo.org/index.php/joacmu/article/view/255046`
+- `web: "NUMBER OF BUDS AND INFLORESCENCES" "2001"`
+
+Raw Symphyotrichum-web1–9.json,official tool outputs and new candidate/query JSON saved under work/worker33. Final web9 additionally holds the2separate authorized fern-review queries below. One exact bibliographicID+night query returned unrelated jobs/furniture/Orostachys;read and excluded,not treated as genus data or a successful source lookup.
+
+Eight new wanted:2022 S.lanceolatum light/dark+KNO3 germination;S.laurentianum GA3/kinetin seed dormancy trial;2013 S.georgianum culture/IBA regeneration;2023 S.novi-belgii temperature/interseed germination trial;2023 S.ericoides living greenhouse night-break;target S.novae-angliae daminozide height/diameter paper;separate target daminozide buds/inflorescences paper;and2002 S.novi-belgii container-grown daminozide. Each actual species retained;congener-only studies records0,no physiological carry to either queue target. Germination trial with temperature/interseed effects but unshown eligible cue remains10(e)method lead,not proof of light or chemical sensing. Controlled greenhouse/crop destination as a cut flower does not make an attached potted plant a cut-flower experiment. Fertilizer-only uptake not automatically chemical recognition;daminozide actual growth-regulator trial counts10(d).
+
+Culture fork:2013Georgia aster original ASHS/EPA abstract has whole-seed germination and live shoot cultures withBAP/GA/IBA;isolated explant versus intact plant eligibility explicit,no whole-plant assertion. H2O2 sterilization/cryopreservation alone does not establish chemical sensing. Authors/year/DOI from original ASHS/journal citation;newThai trial original journal confirms actual species,2023-01-31 date andThai author names,not invented transliterations. Original Hrčak confirms2002Aster novi-belgii authors/date. Unknown dates/DOIs staynull/blank:height paper harvest2003metadata not independently checked,numberbuds treatmentyears1992–94 not publicationyear,laurentianumDOIyear not automatically publicationyear. Original title/DOI identity of laurentianum corroborated in article supplement address and IslandScholar;no DOI fabricated.
+
+Existing sources adopted without duplicate:
+- DOI10.17660/ActaHortic.2006.711.41 existing S.novae-angliae light evidence also explicitly has daminozide concentrations in original harvested abstract;reader can add species-specific chemical comparison after reading. No duplicate paper request.
+- DOI10.1186/1471-2229-14-173 Helms2014 currently logged for Solidago altissima only. Original Springer/PMC/PubMed indexed methods explicitly name chamber-grown S.lateriflorum,fly-emission exposure/control,and no change in subsequent herbivore feeding. That is an actual target null-treatment comparison,not absence of an experiment or a Solidago carry. Reader should assess defense proxy/direct insect deterrence fork;no chemical measurement extracted here. Parent notified of missing actual target intake pointer.
+- DOI10.58809/eiky9994 FHSU shade thesis already requested in c18 and c22b;species not verified in shown abstract,so preserve pointer without another request or guessed Symphyotrichum targets.
+- 2001CanadianWeeds113 DOI10.4141/P00-056 actually names S.lanceolatum/S.lateriflorum;original harvested abstract only begins morphology/distribution. Keep review pointer for seed ecology/reference chasing,not claim unseen treatment table or request from mere title.
+
+Other harvested works:Cardamine selenium,Rosa LED,African violet regeneration,Myriophyllum/Ceratophyllum/Potamogeton selenite,Solanum symbiosis,Salsola light/salt,Luffa osmoregulation,Synedrella germination,Lomatozona culture,Vernonia vitroplants,Pelargonium night break,Gerbera development andwheat aphid-volatiles concernothergenera;none imported. Tagetes lutein/zeaxanthin retinalwork concernsanimal eyes,not plant focusing. General Asteraceae photoperceptor/flowering reviews,crops/metabolite reviews,flora/ethnobotany,community restoration/green roof/fire succession,pollen nutrition,butterfly/bee foraging,smallmammals/DNAcontent/floralorgan development lack actual targetcue measurements in available starts;no claim about unread full-text species tables. S.novi-belgii powderymildew transgenic thesis is molecular disease resistance,not an inferred applied chemical/light experiment. S.subspicatum new-crop summary and S.squamatum/ciliatum invasivetraits study remain genus ecology pointers with no new targetcue comparison in shown starts.
+
+Diel:current paired searches mostly flowering seasons,months,first-flower dates,days per bud andordinary pollen/reproductive morphology;these do not establish daily schedules. Callistephus chinensis China-aster anthesis hours belong toanothergenus. NewEnglandaster night-closing description found at nativeflora/gardenia and direct nursery observational noteBeeHappyPlants;secondary garden observations remain explicit pointers,not original timed experiment or new research-paper request. Noabsenceclaim or nullrow.
+
+Chemical exclusions:2013leaf-essential-oil paper explicitly hydrodistills Rudbeckia and S.novae-angliae removed leaves;floral oil/HS-SPME/E-nose Aster profiles use removedmaterial or actualdifferentgenera,not intacttarget plant signals. Crushedaromaticaster foliage smell andnaturalpollinator attraction alone do not establish measured livingemission/receiver response. Solidago priming results are not borrowed toSymphyotrichum;target exposure/control methods above are separately retained. Eye searches return lens-shaped phyllaryzones,handlens instructions andordinary epidermal/leafmorphology;none claims focusing in shown starts. Owner plantnoneapplies;actualfocusing belongsunderlight.
+
+### Parent-authorized own-NEW c10#122 expansion
+
+No additional Asplenium genus screen repeated. Parent specifically authorized source-supported additive metadata expansion of NEW wanted#122 DOI10.1007/s11515-015-1342-6 while preserving provenance. Two exact source-identity web queries:
+- `web: "Fern spore germination in response to environmental factors" "Asplenium nidus"`
+- `web: "Fern spore germination in response to environmental factors" "ruta-muraria"`
+
+OriginalHEP indexed table explicitly names Asplenium nidus red/far-red treatment andRaghavan1971. Added ONLY actualA.nidus tofor[],retained Thelypteris kunthii,all previousqueries/sourcefields andranking0;A.nidus absent currentqueue contributes0. Appended both exactqueries/sourceprovenance andmethod caveat. HEP ruta-muraria passage instead identifies germination temperatureoptimum viaPangua1994;this does not verify a light experiment,so ruta-muraria NOT added aslighttarget. Parent notified of species/method limit forw29_c8 deskfollowup. Noevidence,value or fulltextfetched.
+
+NormalizedUnicode-title/DOI duplicate checks including nested evidence source identities andownerstatuscheck passed beforeappend;8new sources distinct. Prior236wantedprefix unchanged exceptparent-authorized additiveNEWrow122;main72byteprefix untouched. IncidentalRG/Wikipedia/unauthorizedtextredistributors/libraryproxymirror results notopened/used;primaryoriginalpublisher/institution snippets provide identities.
