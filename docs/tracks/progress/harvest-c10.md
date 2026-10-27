@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-This worker: 1 complete live-trait screening (Hamamelis), 3 additional genera web-screened with OpenAlex steps blocked (Apios, Nothoscordum, Clematis), 0 evidence, 0 null search records, 34 wanted leads. Cumulative own batch: same. Remaining: Apios/Nothoscordum/Clematis missing API steps blocked and36 untouched genera; next untouched Carpinus. Existing globally covered work preserved; no source refusals.
+This worker: 1 complete live-trait screening (Hamamelis), 4 additional genera web-screened with OpenAlex steps blocked (Apios, Nothoscordum, Clematis, Carpinus), 0 evidence, 0 null search records, 43 wanted leads. Cumulative own batch: same. Remaining: Apios/Nothoscordum/Clematis/Carpinus missing API steps blocked and35 untouched genera; next untouched Cocculus. Existing globally covered work preserved. Parent relayed OpenAlex/MDPI HTTP429 source refusals; no subsequent calls to either source.
 
 Read AGENTS.md, round28 worker guide, round4-harvest.md, THOROUGH.md, BRIEF Round2 and record rules, round3-sweep.md, desk-screen1–10 including10(e); audit53/54 fault summaries. No evidence written per desk-screen5. Canon file checked; chemical compilations 10.1016/j.tree.2009.09.010 and10.1111/ele.12205 are not in hand. Corrected/evidence, searched, wanted and owner status searched for Hamamelis; no duplicate of the three leads found. The harvest live target has only sense_chemical open; the original gap queue lists four traits and older global searches cover the other three. Those records are untouched. Extra web pairs for those three were run before resolving this live-target difference and are listed honestly below.
 
@@ -142,3 +142,32 @@ Diel candidates screened cautiously: hormone/flower-opening-duration experiment 
 Excluded chemistry includes cut-stem blockage, preservatives/sugar in cut Clematis flowers, C. flammula essential-oil pharmacology, extracted C. wightiana antioxidants, mouthwash/animal carcinoma studies and stem/root volatile-composition studies: these do not demonstrate a living-plant chemical response under10(a). Nectar-yeast and e-nose sampling boundaries are explicitly flagged on wanted entries for the reader; no measurements assumed.
 
 No paper fetched or evidence logged, per desk-screen5. OpenAlex missing common-name steps remain incomplete. Clean next untouched genus: Carpinus, then Cocculus, Sagittaria. All later batch genera remain untouched in this worker.
+
+### Carpinus (cached scientific harvest + all required web; common-name OpenAlex blocked)
+
+Live open trait sense_chemical only. Existing other-trait global coverage preserved; no duplicate nulls. Corrected/evidence, wanted, searched and owner status checked before screening; existing10.1016/j.scitotenv.2024.177358 on replant-1 wanted retained without duplication. Its abstract explicitly reports living ozone exposure and stomatal light responses in Carpinus/Ostrya; follow existing lead rather than request again. Canon chemical compilations10.1016/j.tree.2009.09.010 and10.1111/ele.12205 checked; neither is in hand.
+
+Exact successful harvest queries (run2, supplement14):
+- `Carpinus phytochrome photoreceptor`
+- `Carpinus light perception`
+- `Carpinus phototropism`
+- `Carpinus volatile signalling`
+
+Citation steps citing10.1016/j.tree.2009.09.010,10.1093/treephys/26.8.1013 and10.2478/foecol-2023-0013 each return0 Carpinus works. Cached family `Betulaceae photoreceptor review` titles screened: mainly tree phenology, Alnus/Betula light studies, insects, pollinator colour, and a Carpinus light-intensity/endogenous-hormone experiment (light response already outside live trait). No chemical null is written; broad reviews remain unresolved beyond available abstracts.
+
+Exact web queries:
+- `web: Carpinus seed germination light dark`
+- `web: Carpinus germination gibberellin OR smoke OR dormancy`
+- `web: Carpinus jasmonate herbivore`
+- `web: Carpinus chemical perception volatile signalling`
+- `web: hornbeam chemical perception volatile signalling`
+
+Screened all returned web titles/snippets and all cached harvest titles, with genus response abstracts read explicitly. Added 9 wanted leads:2 cached living-chemical experiments (methyl jasmonate induction and NO2 response/recovery) and7 germination/dormancy studies, including GA-treated Carpinus laxiflora, a two-Carpinus GA pretreatment study, and species C. cordata, C. caucasica, C. orientalis and C. viminea. Unknown publication years/DOIs/authors left0/empty. Repository date2022 for branch-localized induction is kept as the observed harvest metadata, with source-year uncertainty explicitly on the wanted line; PubMed33180276 independently gives same title and methyl-jasmonate experimental method.
+
+Dispositions:10.3389/fmicb.2019.01110 describes the phyllomicrobiome, not a measured plant receptor response in its available abstract. Truffle aroma concerns fungi; Schinus fruit-extract anticancer study is other genus/tissue chemistry; grapevine disease-volatiles work not Carpinus. Root-volatiles/cockchafer thesis and broad forest-VOC reviews do not name a Carpinus measurement in title/available abstract; no negative conclusion beyond that.10.1111/nph.14671 web meta-analysis mentions isolating hexenal from600kg of removed hornbeam leaves, excluded as tissue chemistry under10(a), not plant-signal evidence. USDA Silvics Carpinus caroliniana page mentions improved germination after GA; source is a review of prior studies, retained here as a citation trail (https://www.srs.fs.usda.gov/pubs/misc/ag_654/volume_2/carpinus/caroliniana.htm), not a duplicate needed to block the chemical null already held by direct experiments. USDA Woody Plant Seed Manual has germination table5 for Carpinus; not reopened or extracted.
+
+No OpenAlex retry after shared429. Missing common-name API steps remain blocked; no complete-protocol claim. No paper fetched, no evidence or null records written. Clean handover at next untouched genus Cocculus;35 untouched genera remain through Sideroxylon. Scratch raw searches and cache in work/; committed note contains exact provenance, no full text.
+
+### This-worker handover counts and checks
+
+Five genera received screening: Hamamelis complete for its live chemical trait before the refusal; Apios, Nothoscordum, Clematis and Carpinus retain explicitly blocked OpenAlex steps and are not claimed full protocols. Own cumulative/this-worker outputs43 wanted lines,0 null records,0 evidence. Missing API steps must be repaired when service is usable; do not repeat completed web searches or duplicate these wanted leads. Next unstarted genus Cocculus, then Sagittaria and Richardia;35 unstarted genera remain. Source refusals relayed by parent: OpenAlex HTTP429 and direct MDPI HTTP429; no subsequent calls to either. Web search remained usable (56 actual queries across these5 genera); no search refused. Gate printed0 problems for each committed chunk and is rerun before final commit.
