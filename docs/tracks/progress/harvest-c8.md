@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 2/40 genera screened (Albizia, Ambrosia); 2 eye_type search records; 6 wanted lines; 0 evidence records; 0 cells closed by measurement. Thirty-eight genera remain, starting with Diospyros. Ambrosia’s diel, chemical and unmeasured-species light cells remain pending intake. Pilea is covered by the c4 worker under the coordinator; reuse its provenance when reached. The initial ci/OpenAlex access problems below were resolved. Current outside-service refusals are the desk-wide OpenAlex 429 (reported by coordinator), MDPI 429 and UChicago 403; skip those fetching routes. Next: Diospyros, Rubus, Baccharis, using current ci and available web/other sources. Stop here between genera for a fresh continuation.
+**Current checkpoint:** 3/40 genera screened here (Albizia, Ambrosia, Diospyros); 3 eye_type search records; 36 wanted lines; 0 evidence records; 0 cells closed by measurement. Rubus is next. Of the 37 batch genera after this checkpoint, Pilea is complete in harvest-c4 and its provenance must be reused, leaving 36 genera requiring new work. Current service refusals: desk-wide OpenAlex 429, MDPI 429, UChicago 403 and SANBI 403; skip those fetching routes. Worker11 stopped between Diospyros and Rubus for fresh-context continuation.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -56,3 +56,52 @@ Completed the remaining web pairs: `Ambrosia flower opening time anthesis`; `rag
 Added four further wanted lines after checking main/status for DOI/title duplicates: Bianchi and colleagues 1959 (publisher abstract states anther opening at 06:30–08:00; full text requires access), Hall and colleagues 2023 (SLU institutional abstract directly reports living ragweed root responses to exudates; full text awaits intake), Effects of Photoperiod on Sex Expression in Ambrosia trifida 1942 (harvest abstract; own publisher fetch 403, authors not shown so blank), and Schutte 2007 (institutional thesis metadata/abstract read; germination/dormancy title is a required candidate, actual light/chemical methods need reading). The latter is explicitly a candidate rather than a claimed light/chemical measurement. No further UChicago fetch after its 403. No further MDPI fetch after its 429. No sense_light_nonvisual null: main already measures A. artemisiifolia; A. trifida remains pending the wanted papers. No chemical or diel null while their candidates await intake.
 
 Round totals: **2 of 40 genera screened**, **2 eye_type search records**, **6 wanted lines**, **0 evidence records**, **0 cells closed by measurement**. Albizia and Ambrosia screening protocols are complete; all wanted-derived measurements remain unclosed. Remaining 38 genera start with Diospyros and Rubus; Pilea is being covered by c4 and the coordinator will account for that provenance. Stop here between genera for a fresh continuation rather than abbreviate the next genus’s protocol. Next: start Diospyros with its mandatory germination searches, use the saved ci snapshot and web/other sources while the OpenAlex and MDPI refusals stand, then Rubus and Baccharis. The scratch harvest cache is work/harvest-c8/harvest-cache.pkl (105 Ambrosia works in its full-genus/family data); it is not a deliverable and is never committed.
+
+
+## 2026-10-27 — worker11 continuation
+
+Completed Diospyros screening only in this continuation. **This worker: 1 genus, 1 eye_type search record, 30 wanted lines, 0 evidence records, 0 measured closures. Cumulative harvest-c8: 3 genera, 3 search records, 36 wanted lines, 0 evidence and 0 measured closures.** Pilea's completed harvest-c4 protocol is preserved and is not repeated. Rubus is next, then Baccharis and Morella; 36 genera require new work after reusing Pilea.
+
+Read AGENTS.md, the worker guide and exact fresh assignment, batch/queue order, THOROUGH.md, BRIEF.md, round3-sweep.md and desk-screen.md including plant 10(a–e), with audit 53/54 context. Used worker05's legitimate serialized hg.load data from the coordinator-fetched ci commit 55a1f658a687c5d355ae11d9eec65def211f4033. Official harvest_get.show and screen_candidates functions ran on that snapshot. Diospyros has no failed harvest step: run 4, supplements 12/14/20, family review (10 returned works), and two zero-hit citation steps on 10.1111/ele.12205 and 10.25066/agrotec.v35i1.10254. Read all 157 unique titles and the complete stored abstracts (up to 700 characters each), including the entire family result set. Recovered omitted stretches from shell output in subsequent reads; no truncated stretch was treated as a complete screen. Checked main's global searched, wanted, accepted evidence/corrected stores and papers-status by genus and candidate DOI/title, plus canon metadata. No accepted Diospyros evidence exists in those stores. Its old sweep-15 line is a thin search, not a completed protocol.
+
+Successful cached harvest queries, word for word, in order:
+- `Diospyros phytochrome photoreceptor`
+- `Diospyros light perception`
+- `Diospyros phototropism`
+- `Diospyros flower opening time`
+- `Diospyros nyctinasty`
+- `Diospyros volatile signalling`
+- `Diospyros photoperiod`
+- `Diospyros circadian rhythm`
+- `Diospyros anthesis`
+- `Diospyros pollination biology`
+- `Diospyros epidermal lens cells`
+- `Diospyros epidermal focusing leaf optics`
+- `Ebenaceae photoreceptor review`
+
+Connected web searches, word for word, in actual execution order:
+- `Diospyros seed germination light dark`
+- `Diospyros germination gibberellin OR smoke OR dormancy`
+- `Diospyros floral scent volatiles`
+- `Diospyros flower opening time anthesis`
+- `persimmon flower opening time anthesis`
+- `Diospyros eye type`
+- `persimmon eye type`
+- `Diospyros chemical sense volatile response`
+- `persimmon chemical sense volatile response`
+- `Diospyros light photoperiod phototropism`
+- `persimmon light photoperiod phototropism`
+- `Ebenaceae photoreceptor review`
+- `Diospyros seed germination light dark`
+- `Diospyros germination gibberellin OR smoke OR dormancy`
+- `Diospyros floral scent volatiles`
+
+The final three queries repeat the initial three solely to recover tool-output truncation; their full saved result was read in two parts, without claiming extra protocol coverage. The family web result also had a truncated middle; its visible general-photoreceptor results add no claim of an Ebenaceae review, and the completely screened cached family review and citation steps supply the required citation/review step. Every scientific/common trait pair was fully read at the extent actually exposed by the web tool; genuinely fewer results were not counted as 20. Common name was persimmon because harvest english is empty. OpenAlex API calls were skipped after the desk-wide 429; no unrun API query is represented as executed. MDPI and UChicago fetches were skipped.
+
+Before the coordinator reiterated desk-screen point 3, an initial recovery call opened returned metadata/reference pages at Eurekamag, AGRIS, TFRI and the Korean flower journal, a PROSEA page and a general dormancy review. It also encountered SANBI https://pza.sanbi.org/diospyros-natalensis as actual `(403) Forbidden`; reported this to the coordinator and made no further SANBI fetch. Several guessed recovery reference IDs returned only Internal Error; none was treated as a source. No further page opening after the coordinator's point-3 reminder. No paper text is committed, and no evidence is logged. No library/proxy mirror, ResearchGate or other unauthorized source was opened.
+
+The 30 wanted leads retain exact source URLs/DOIs from the cached metadata or returned web snippets, with unknown fields empty and no invented dates/DOIs/authors. Strong examples are 10.1603/022.038.0512 (living D. kaki tree emissions after wax-scale attack or methyl jasmonate), Oh/Kim/Ahn 1988 at AGRIS 6471cc19f762bd4124ec594d (light/dark and GA seed germination), Everitt 1984 (D. texana light/dark seeds), 10.4308/hjb.33.2.278-287 (light color/intensity at night in D. discolor seedlings), LED scion production and the long-day Saijo experiment. Applied hormone and regeneration experiments are retained under owner reading 10(d), including nodal/leaf explants; no response magnitude is logged. Mandatory germination/dormancy candidates whose abstracts show only temperature, maturity or moisture were retained under 10(e), explicitly saying that a light/chemical experiment is unconfirmed. The Uniben project PDF has no exposed complete title or author/year, so those fields remain empty. The repeat search exposed the original journal source for the D. hispida germination work; its ResearchGate result was never opened. Floral biology 10.3390/plants11192535 and D. dumetorum sap flow 10.3390/f16030387 remain diel leads; no anthesis hour is claimed.
+
+Dispositions outside those leads: 10.1139/b85-258 uses geological clay lenses, while the other three tool-listed eye candidates concern human/animal eye treatment; all four are individually screened in the eye_type record under the owner's plant-eye reading. Optical-coherence-tomography disease imaging uses human instruments and measures no plant eye. Persimmon vinegar, dried-fruit sensory tests, essential oils and volatile profiles of collected/extracted fruit/flower material measure product/tissue chemistry, excluded under 10(a). The Korean flower/calix VOC paper (https://www.ksbec.org/articles/article/RaGo/) compares dissected organs for fragrance use, so no living-signal measurement is claimed. The bee-attractive-flower VOC study remains wanted because its snippet does not establish whether flowers were attached or collected. The 109-species living-VOC survey 10.1038/s41598-017-10975-x is already wanted in plant-screen-1; no duplicate line added, and its Diospyros species list still needs intake. Phytochrome-marker phylogenetics and genetic pathway enrichment alone are not a light/clock response measurement. Seasonal flowering dates, fruit-development days after anthesis, embryo-sac development and pollination elapsed hours are not flower-opening hours. Broad reviews whose stored abstracts do not identify a Diospyros measurement were not used to claim one.
+
+No null is written for diel, sense_chemical or sense_light_nonvisual while these plausible sources await intake. Only eye_type has a completed negative search record under owner reading 10(b). The actual screen_candidates.check implementation, using legitimate hg.load data via the scratch cache wrapper, printed **0 problems** on this unit's searched/wanted files before commit. This is research screening validation; no app check/build/server, gate change, #29 or #30 change was made.
