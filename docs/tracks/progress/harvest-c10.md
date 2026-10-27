@@ -1253,3 +1253,57 @@ Eye:ordinarykudzuleafcuticle/stomatalfrequency/palisademorphology,includingEmbra
 Parentexplicitlyauthorizedsource-supportedSagittariasagittifoliaadditiontoNEWc10wanted#192 DOI10.1111/plb.13385. OriginalWileyindexedtext(Typha-web4)explicitlynamesS.sagittifoliaandT.latifoliaasethylenetreatedseeds. Expandedfor[]toincludeS.sagittifoliaandappendedprovenancetowhy;queriesandallsourcemetadatapreserved. ActualcurrentgapqueuecontainsT.latifolia26373recordsbutnoS.sagittifoliaentry,sothelattercontributes0,rankingstays26373. Initialscratchattemptlookedupmissingqueuekey,raisedKeyErrorBEFOREanyfilewrite;correctedbyexplicitabsent-species0rule,noinventedcountorpartialrow. NorerunSagittariaqueries,noevidence/valueassertion,nolegacyedit. Thisisthesolemodificationoftheprevious204wantedlines;first181pre-workerprefixremainsbyte-identical.
 
 Typhacheckpointcd03d8c6passed0problemsbeforecommit. Puerariafinalcheckerfinishedexit0andprinted0problems(work/worker26/Pueraria-check.txt);whitespacecheckpassed. ExactnextThunbergia.
+
+
+## 2026-10-27 — issue38 worker33 Thunbergia checkpoint
+
+1 newly available-source-screened genus (Thunbergia), 33 actual new web queries, 6 new wanted, 0 searched, 0 evidence. Current c10 226 wanted (main72 + previous issue38 148 + worker33 6), searched empty. Prior 27 completed/adopted genera preserved; now 28/40 available-source-screened/adopted. Exact next Morus; 12 eligible untouched remain: Morus, Symphyotrichum, Melinis, Nyssa, Potentilla, Populus, Lolium, Agave, Verbascum, Calystegia, Tipularia, Sideroxylon. OpenAlex scientific/common-name additions remain unrun after shared 429; no full-protocol/exhaustion claim or null searched rows. No page/paper fetches or evidence, no new service refusal.
+
+### Thunbergia — species-level light and chemical leads
+
+Global wanted/searched/evidence/audited corrections, canon and owner papers-status checked before queries. Actual queue target T. alata 8767 records, Acanthaceae/Lamiales, has light/diel/eye/chemical gaps. No existing species measurement or wanted lead found. Existing thin sweep-43#32 two combined queries preserved, not repeated and not treated as completed paired trait work. Original tool runs report no harvest and no candidates (work/worker33/Thunbergia-harvest.txt and -candidates.txt); no failed API claimed as zero hits. Relevant light/chemical/angiosperm diel canon sources are not in hand; Animal Eyes covers Metazoa.
+
+First mandatory germination pair and scent query preceded other trait pairs. Common name verified by NCSU/Wisconsin as black-eyed Susan vine; Rudbeckia black-eyed Susan is a separate genus and was not imported. Paired scientific/common-name searches covered all four original gaps; Acanthaceae photoreceptor review alternative returned general plant/fungal/algal photoreceptor reviews and Blepharis C4 phylogeny rather than an actual Thunbergia experiment. No claim about unseen review species tables. All actually delivered titles/snippets were read (grouped result counts, not a claim of 20 per query). Raw web1–web9 and query/candidate JSON saved under work/worker33. Exact executed queries, in order:
+- `web: Thunbergia seed germination light dark`
+- `web: Thunbergia germination gibberellin OR smoke OR dormancy`
+- `web: Thunbergia floral scent volatiles`
+- `web: Thunbergia flower opening time anthesis`
+- `web: black-eyed Susan vine flower opening time anthesis`
+- `web: Thunbergia photoperiod light perception phototropism`
+- `web: black-eyed Susan vine photoperiod light perception phototropism`
+- `web: Thunbergia chemical perception volatile signalling`
+- `web: black-eyed Susan vine chemical perception volatile signalling`
+- `web: Thunbergia epidermal lens cells eye type`
+- `web: black-eyed Susan vine epidermal lens cells eye type`
+- `web: Acanthaceae photoreceptor review`
+- `web: "Functional traits of invasive species Thunbergia alata" doi`
+- `web: "Thunbergia" "gibberellic"`
+- `web: "Thunbergia" anthesis pollination daily`
+- `web: "Thunbergia alata" photoperiod growth flowering experiment`
+- `web: "Thunbergia" "jasmonate" OR "auxin" OR "salicylic"`
+- `web: "Thunbergia" "IJCSPAA20046"`
+- `web: "Thunbergia" "986" "anthesis"`
+- `web: "Effects of wounding and salicylic acid on hydroxycinnamoylmalic acids in Thunbergia alata"`
+- `web: "The impact of photoperiod and irradiance on flowering of several herbaceous ornamentals" doi`
+- `web: "De Novo Transcriptome Assembly" "Thunbergia" 202607`
+- `web: "Floral biology of lesser known" "986"`
+- `web: "Effects of wounding and salicylic acid" site:sciencedirect.com`
+- `web: "Pectinase and hydrogen peroxide have differential effects" Thunbergia`
+- `web: "De Novo Transcriptome" "Thunbergia" site:mdpi.com/2037-0164`
+- `web: "The impact of photoperiod" "Thunbergia" site:hortscans.ces.ncsu.edu`
+- `web: "Housti" "2002" "01427"`
+- `web: "10.21829/abm128.2021.1870" "Quijano"`
+- `web: "Thunbergia" "pollination biology" "2003"`
+- `web: "10.1016/j.scienta.2004.08.018" "Thunbergia" -site:researchgate.net`
+- `web: "Thunbergia alata" "Mattson" "Erwin" -site:researchgate.net`
+- `web: "Effects of wounding and salicylic acid" site:revistas.javeriana.edu.co`
+
+Six new wanted leads: 2021 T. alata light-intensity germination study; 2002 target salicylic-acid/wounding response; 2004 target pectinase/H2O2 elicitation; 2005 controlled photoperiod/irradiance trial with actual target inclusion verified via MSU institutional thesis and Purdue/MSU table; 2026 final target light-versus-shade transcriptome/phenotype paper; and 2022 T. erecta morning anthesis. The congener diel source retains T. erecta and records0; it supplies no chemical/light carry to T. alata. No physiological congener carry. A high or nonsignificantly different germination result still represents a measured light comparison. Photoperiod days-to-flower does not establish daily anthesis. Final 2026 journal version requested once; preprint and transcriptomic dataset not separately duplicated.
+
+Original journal/SciELO verifies germination authors/year/DOI (2021 publication, not 2022 mirror indexing). Original Taylor & Francis indexed text verifies pectinase identity/year/authors; MDPI issue indexed text verifies final 2026 authors/date/DOI. Salicylic-acid source metadata independently appears in original Universitas Scientiarum ref19 and Frontiers; publisher ScienceDirect Topics snippet supports actual elicited plant response. Its systemic/attached-leaf methods still need reading; removed tissue chemistry alone would fail 10(a). Mattson/Erwin source metadata comes from original Elsevier; actual target species is explicitly linked in MSU institutional thesis, with Purdue table as corroboration. No metadata inferred from query timestamps. DOI absent for 2022 nectar/anthesis source remains blank; original journal index/PDF confirms authors/year and morning anthesis.
+
+Excluded chemical leads: crude ethanolic stem/leaf antifungal extract work, macrophage/ERK/STAT3 pharmacology, detached oil/GC-MS composition, Gardenia thunbergia rootstock hormone trials and Pinus thunbergii hormone/seed experiments. These are removed tissue, animals or different genera. Generic floral/VOC reviews returned no actual Thunbergia emission trial in shown snippets; no unseen-table absence asserted. The target salicylic acid and elicitor experiments are living responses under 10(d), not screened out as phytochemistry.
+
+Eye: original target anatomy describes ordinary epidermal, mesophyll, collenchyma and vascular structure, with no lens/focusing claim in returned starts. Gardenia domatia are another genus; Brodersen/Vogelmann 2007 actually names Begonia, Citrus, Ficus, Colocasia and Impatiens. No epidermal-outline-to-lens inference. Owner plant eye_type none applies; focusing would belong under light. Seasonal flowering/greenhouse bloom months, ordinary flower structure, insect visits and UV-reflective pollinator pattern do not establish target daily anthesis or plant photoreception. T. erecta morning observation retained as an actual named species lead; NParks T. fragrans daytime entry remains a secondary pointer, not a new measurement request.
+
+DOI/normalized Unicode-title duplicate and owner-status checks found no existing request for the six appended sources. Prior 220 wanted lines unchanged, main72 prefix untouched. No prohibited host opened; incidental ResearchGate, Wikipedia, scribd/unauthorized redistributor and a proxy mirror search result were not used as sources. Search results only, no source/full-text fetch.
