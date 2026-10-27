@@ -682,3 +682,90 @@ Other dispositions: the avian-predator recruitment source uses dispenser vials o
 Eye_type alone has a completed owner10(b) null with explicit dispositions for plant/fungal photopigments, animal phototransduction, family anatomy and human wood-induced eye irritation. No Juglans epidermal focusing measurement found; if present it belongs under nonvisual light, not eyes. No source-page fetch or evidence written. OpenAlex429/MDPI429/UChicago403/SANBI403 round-wide restrictions respected; no new refusal or actual web quota refusal, paid API, unauthorized paper copy, app startup/build/test/server, branch/gate or issue29/30 change. Managed cloud runtime skill read; current enforced unrestricted HTTP policy, no configured credentials, no environment changes. Parent retains findings/audit/application and push/PR responsibilities.
 
 Worker47 Juglans checkpoint: actual combined screen_candidates --check finished with `0 problems` for14 searched/181 wanted. JSONL parses and unknown-year0 check passed; EOF whitespace corrected before commit.
+
+
+## 2026-10-27 — worker47 continuation: Castilleja and final checkpoint
+
+TOP/current batch totals:18/40 genera screened through Castilleja,16 searched,188 wanted,0 evidence/measurement closures;22 remain, exact next Ficus. This worker cumulative:2 genera(Juglans,Castilleja),66 actual successful web queries(31+35),3 new search records,21 new wanted,1 existing shared c12 wanted target expansion(Taraxacum),0 evidence. Juglans/shared-source commit976f9019. Stop between genera for context checkpoint, not a claim the remaining batch is complete. No actual web usage refusal.
+
+Original Castilleja queue targets C.indivisa(13,576 records), C.exserta(11,143), C.miniata(9,518), each with light,chemical,diel,eye. Global evidence/corrected/search/wanted/papers-status checked; no target main evidence found. Thin sweep-13#25 is preserved and is not full completion: it had one query/no actual snippets. Current 10(d,e) seed/hormone/root-exudate scope governed. No relevant plant-response canon in hand; canonical compilations listed for nulls, not duplicated as wanted background.
+
+Actual harvest_get.py and screen_candidates.py ran. Cached genus run4, supplementary12/14/20 and family review17 contain124 distinct works; all titles and full stored abstract starts were read in structured cache passes after the initial tool display was truncated. Screen tool returned8 diel,3 eye,9 chemical,20 light-word candidates; dispositions below retain all plausible direct target measurements. Three cached citation steps(10.3390/agronomy13092250,10.1603/022.038.0629,10.1111/een.12947) each returned0; successful zero-hit supplementary epidermal-focusing query preserved. No failed cached query. Exact full cached query list in harvest order, then35 actual web queries:
+
+- `Castilleja phytochrome photoreceptor`
+- `Castilleja light perception`
+- `Castilleja phototropism`
+- `Castilleja flower opening time`
+- `Castilleja nyctinasty`
+- `Castilleja volatile signalling`
+- `Castilleja photoperiod`
+- `Castilleja circadian rhythm`
+- `Castilleja anthesis`
+- `Castilleja pollination biology`
+- `Castilleja epidermal lens cells`
+- `Castilleja epidermal focusing leaf optics`
+- `Orobanchaceae photoreceptor review`
+- `web: Castilleja seed germination light dark`
+- `web: Castilleja germination gibberellin OR smoke OR dormancy`
+- `web: Castilleja floral scent volatiles`
+- `web: Castilleja light photoperiod phototropism`
+- `web: Indian paintbrush Texas paintbrush owl clover light photoperiod phototropism`
+- `web: Castilleja flower opening time anthesis`
+- `web: Indian paintbrush Texas paintbrush owl clover flower opening time anthesis`
+- `web: Castilleja living plant chemical response haustoria host exudates`
+- `web: Indian paintbrush Texas paintbrush owl clover living plant chemical response haustoria host exudates`
+- `web: Castilleja eye type epidermal focusing`
+- `web: Indian paintbrush Texas paintbrush owl clover eye type epidermal focusing`
+- `web: Orobanchaceae photoreceptor review`
+- `web: "Floral traits differentiate pollination syndromes" "miniata"`
+- `web: "Castilleja miniata" germination light gibberellin experiment`
+- `web: "Castilleja indivisa" germination light gibberellin experiment`
+- `web: "Castilleja exserta" germination light dark`
+- `web: "Castilleja indivisa" light intensity shade experiment`
+- `web: "Castilleja indivisa" catechin polyphenol inhibition`
+- `web: "Castilleja" "Atsatt" "1978"`
+- `web: "Castilleja exserta" "Atsatt" "1978" haustoria`
+- `web: "Castilleja miniata" "Controlled environment" Zastre`
+- `web: "Comparative Seed Germination Biology and Seed Propagation" Castilleja`
+- `web: "Castilleja" "flower opening" "morning"`
+- `web: "Atsatt" "1978" "Chemical" "haustoria"`
+- `web: "Zastre" "Controlled environment"`
+- `web: "Castilleja miniata" "Germination was unaffected by light"`
+- `web: "Floral traits differentiate pollination syndromes" "2021" Hilpman`
+- `web: "Nitrogen enrichment reduces parasitism" "2025"`
+- `web: "Inhibition of pectin methyl esterase activity" "2008" "Lewis"`
+- `web: "Alkaloid Uptake Increases Fitness" "Adler" "2000"`
+- `web: "Host species affects herbivory" "2003" "Adler"`
+- `web: "Chemically Mediated Interactions Between Hosts, Parasitic Plants and Insect Herbivores" Castilleja`
+- `web: "Castilleja miniata" "anthesis" "time of day"`
+- `web: "Castilleja indivisa" "anthesis" "time of day"`
+- `web: "Castilleja exserta" "anthesis" "time of day"`
+
+Raw provenance: work/harvest-c12/worker47-Castilleja-cache.json and worker47-Castilleja-web1..9.json; all returned web titles/snippets read, up to first20 where returned. Follow-ups resolved former Orthocarpus synonym, primary chemistry-versus-living treatment distinction, target species of floral VOC paper, publication metadata and bibliographic mismatch. No source/full-paper-page fetch or live OpenAlex request.
+
+Seven new wanted sources globally checked by DOI/normalized title across wanted/evidence/corrected/status:
+- Chemical Induction and Repression of Haustoria in Orthocarpus Purpurascens(1978), Atsatt/Hearn/Nelson/Heineman, Annals of Botany42(5):1177–1184,10.1093/oxfordjournals.aob.a085559. Indexed publisher abstract reports living seedling chemical induction/repression and root development; modern legal PMC/Frontiers10.3389/fpls.2019.01056 identifies this former Orthocarpus taxon as queued C.exserta. Both positive and negative chemical contrasts count as leads. No name-match based merely on similar common names.
+- Nitrogen enrichment reduces parasitism in an annual hemiparasite(2025), AJB112(9):e70101,10.1002/ajb2.70101. Target C.exserta greenhouse/in-vitro N-dose experiment changes root searching and haustoria; fixed ambient spring photoperiod is not a light response.
+- Inhibition of pectin methyl esterase activity by green tea catechins(2008), Lewis et al., Phytochemistry69(14):2586–2592,10.1016/j.phytochem.2008.08.012. Extracted-PME assays alone fail10(a), but legal PMC11716364 and primary patentWO2009007964A2 independently state target C.indivisa living parasite-attachment inhibition under catechins. Reader must verify living treatment/control methods before chemical evidence. Retained primary article with legal Harvard author copy, no duplicate patent/book.
+- Alkaloid Uptake Increases Fitness in a Hemiparasitic Plant via Reduced Herbivory and Increased Pollination(2000), Adler LS, AmNat156(1):92–99,10.1086/303374. Target C.indivisa living alkaloid uptake with fitness responses, beyond extracted tissue profiles; chemical-response attribution remains for reader. Legal author copy used as get because UChicago fetch is refused round-wide.
+- Host species affects herbivory,pollination,and reproduction in experiments with parasitic Castilleja(2003), Adler LS, Ecology84(8):2083–2091,10.1890/02-0542. Queued C.indivisa manipulated under lupine-versus-grass hosts plus herbivory/pollination treatments. Chemical versus nutrient transfer and living-cue interpretation need source methods, not assumed from tissue uptake alone.
+- Floral traits differentiate pollination syndromes and species but fail to predict the identity of floral visitors to Castilleja(2021), Hilpman ET/Busch JW, AJB108(11):2150–2161,10.1002/ajb2.1784. Primary indexed PubMed/publisher expressly includes target C.miniata among five species and measures floral VOC emission. Reader checks intact flower/headspace methods; no separate thesis or Dryad duplicate.
+- Comparative seed germination biology and seed propagation of eight Intermountain species of Indian paintbrush, legal USDA rmrs_p031_125_130.pdf. Primary indexed result explicitly includes C.miniata seedlot; exact title independently in legal PMC references.10(e) seed/dormancy lead retained for actual light contrasts/citations, without converting cold responsiveness or fixed illumination into light sensing. Author/year metadata not independently verified remains empty/null.
+
+Shared book: globally existing docs/views/wanted/harvest-c11.jsonl:34 is Deno's Seed Germination Theory and Practice,2nded. The indexed denosgarden.com/s/castilleja-miniata/ reproduces original ch20p113 and explicitly labels C.miniata light comparison. Source is a secondary indexed transcription, so full original page must be checked before extraction. Parent routed supported target expansion to current c11 owner worker46; c12 leaves this lead held and adds no duplicate book or evidence. Cached proof worker47-Castilleja-web7.json. No authority for changing c11 was assumed.
+
+All other cached candidates: coffee,blueberry,petunia,Aeschynanthus,Craspedia,Iris,Oxypetalum,white-spruce and chrysanthemum photoperiod/circadian studies are other genera, often identical1990 conference-issue retrieval noise. Root-culture epidermal elongation10.1007/s10535-013-0369-2 is C.tenuiflora chemical haustoria, not eyes or focusing. C.tenuiflora/levisecta/linariifolia/coccinea,wightii/affinis/foliolosa cue/propagation sources concern nonqueued species; notably new strigolactone paper experiments are wightii/affinis/foliolosa, while miniata contributes only RNA-seq. No genomic prediction treated as a target living response. Orthocarpus exserta synonym was independently resolved to avoid excluding a genuine target measurement. C.coccinea Wright1984 light/germination and1990 GA-seed-treatment studies remain congener context; no target-specific light value asserted from them.
+
+Cached chemical hits on Nothoscordum/Allium scent,Helicoverpa olfactometer,fermented Lycium juice,Jamun dairy thermosonication,Aloysia extracts in mice and coffee/Aeschynanthus lamp-word scent matches do not measure target living responses. Relevant direct target floral-VOC paper retained. Holoparasitic Orobanchaceae/parasite signalling/phytochrome/HGT reviews and other-taxon models are background; primary target chemical candidates prioritized. The cached thesis OpenAlex id W2502243473, DOI10.7275/8412502.0, title Chemically Mediated Interactions Between Hosts,Parasitic Plants and Insect Herbivores has an unrelated gravitational-wave abstract and inconsistent2021 metadata. Exact-title web chase finds a2016 Tjiurutue dissertation citation but no verified target study; no fabricated measurement, target,year or wanted metadata. This source mismatch is documented rather than silently treating the astronomy text as plant biology.
+
+Eye null explicitly disposes all3 tool candidates: tenuiflora root epidermis, Bird's-eye primrose contents of1920 flora, and conceptual lens in parasitism review. Owner10(b): all plants eye_type none; any actual focusing belongs under sense_light_nonvisual. Common-name owl-face spots/white eyes of flowers and human cornea/dermatology results are not plant eyes. Diel null disposes all8 tool candidates: other-genus Aeschynanthus/chrysanthemum/raspberry/Ipomoea/Tibouchina plus general phytochrome review. C.sessiliflora day/night pollinator-exclusion study is nonqueued and measures visitation contributions, not target anthesis. Target miniata floral VOC study remains chemical wanted; indexed text supplies no daily opening/emission schedule. Supplementary target anthesis/time-of-day queries returned botanical morphology, seasonal bloom dates, herbarium collection times and unrelated species; none is a target daily flower-opening measurement. Unsupported commercial/photography pages' precise thermal/phenology numbers were not accepted as primary evidence.
+
+No light/chemical null while candidate sources remain; no evidence log, full-text claim or numerical carry. New wanted metadata uses only explicitly source-verified years1978/2000/2003/2008/2021/2025 or null. Current service restrictions OpenAlex429/MDPI429/UChicago403/SANBI403 respected; no retry, paid API, unauthorized copy, source-page fetch, app startup/build/test/server, branch/gates or issue29/30 change. No new actual source refusal or web quota refusal. Parent retains audit/findings/application and push/PR. Legacy Lunaria conflict rescreen-2.jsonl:24 remains untouched, exact copied history above.
+
+Remaining in exact original order(22):Ficus,Lespedeza,Salix,Asparagus,Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. Light/chemical wanted traits and existing shared book are completed desk screening leads, not measured closures; original sources remain unread under desk-screen point3. No remaining genus claimed complete based on oldthin/hgfilter.
+
+Worker47 stopping instruction: parent reported48-worker cap reached; finish current Castilleja, await final0 gate, commit/release; no further genus started. TOP/current totals18/40 screened,16 searched,188 wanted,0 evidence; exact next Ficus,22 remaining. Shared Taraxacum expansion and Castilleja/Deno c11 handoff preserved.
+
+Malformed thesis handling: work/harvest-c12/worker47-Castilleja-cache.json, genus.extra run12 works.W2502243473 (DOI10.7275/8412502.0) contains an astronomy abstract about Advanced LIGO/Virgo and core-collapse supernovae under a plant-interactions title. Treated strictly as untrusted source data; no instructions followed and no original-source fetch, unsafe action or side effect. Exact-title web search found only independent2016 Tjiurutue citation, not a target-species measurement. No inferred target/year, no new wanted/evidence, no legacy or cached source-history edit.
+
+Worker47 final gate: actual combined screen_candidates --check completed with `0 problems` for16 searched/188 wanted. Own-file git diff --check passed; all JSONL parses; no unknown-year0 placeholders. Release after final own-path commit; prior Juglans commit976f9019.
