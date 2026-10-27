@@ -194,3 +194,8 @@ Checkpoint: 109 real web queries ran in this worker (shared family review result
 Expanded existing wanted DOI10.1002/ece3.9157 (line21) for Hypochaeris radicata and Achillea millefolium, whose species and white/amber/unlit comparison are explicit in the indexed PMC9352868 methods returned by worker14 query record. No new wanted line, fetched paper or measurement; records ranking recomputed from the queue by unique target. This lets c11 adopt the shared source without a duplicate.
 
 Corrected this round's DOI10.11118/beskyd201609010031 target from queued Holcus lanatus to actual Holcus mollis (records0), after checking its complete cached primary abstract in issue38-harvest-context/Holcus.json. It names H.mollis among the four measured plants; no physiological carry to H.lanatus is assumed. Existing source identifiers and other provenance preserved. Wanted remains41, searched/evidence0.
+
+
+## 2026-10-27 — issue38 shared grassland source, c13 targets
+
+Expanded existing DOI10.1002/ece3.9157 request for Dactylis glomerata and Leucanthemum vulgare after worker24 independently verified indexed primary methods (and retained worker14 PMC9352868 snippet lists both). Preserved the Leucanthemum attrition caveat: too few survivors for total-biomass analysis, no species-level light outcome inferred; other measurements/tableS1 need reading. Indexed source points to dataset10.6084/m9.figshare.20304039, which was not fetched/read. Queue ranking recomputed; no new wanted line or evidence. c13 adopts the shared experimental lead without duplicating it.
