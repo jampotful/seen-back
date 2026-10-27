@@ -86,3 +86,33 @@ Diel candidates screened without a null claim: Sorghum/Arabidopsis circadian eth
 Validation history: the Equisetum checkpoint checker returned0 before its commit. At Cardamine, the checker was started before commit but its0-problems result arrived after commit13b269d3 (sequencing mistake); it found0 problems and the final combined checkpoint is checked again to completion before its commit. No failed validation was bypassed. No app tests/builds/servers run.
 
 Final combined validation returned `0 problems` before the handoff commit; cross-file wanted DOI/title scan found no duplicates. This worker used26 web protocol queries total (10 Equisetum,9 Cardamine,7 Rumex); raw tool results are available in work/harvest-c12 for local takeover, outside committed deliverables.
+
+## 2026-10-27 — worker13 Centaurea continuation
+
+This worker:1 genus screened (Centaurea),1 null search record,16 new wanted lines,0 evidence/measurement closures. Cumulative:4/40 genera screened (Equisetum, Cardamine, Rumex, Centaurea),3 null search records,33 wanted lines,0 evidence. Remaining36, next Ratibida. Preserve completed Cardamine/Rumex screening even though wanted-only outcomes remain in the raw queue.
+
+Read AGENTS.md and all round28/round4/THOROUGH/BRIEF/round3/desk-screen protocols, including10(e). Runtime network policy inspected through the cloud environment skill: unrestricted and enforced; no VPN configured. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain source skips with no direct requests or API retries. No paper/source pages fetched. harvest_get and screen_candidates report Centaurea absent from every available cached harvest run (1–17,20,23,24). The independent Asteraceae cached family review was read:15 titles and all stored abstracts, successful query `Asteraceae photoreceptor review`. No genus API query was run or represented as successful. Global normal/corrected evidence, searched, wanted and papers-status were checked; no existing Centaurea evidence found, and the thin sweep-5 record stays untouched. Canon review found no plant compilation marked in hand for these traits; no extra canon requests written.
+
+Exact web queries, in execution order, with first20 titles/snippets where returned (some queries return fewer):
+- `web: Centaurea seed germination light dark`
+- `web: Centaurea germination gibberellin OR smoke OR dormancy`
+- `web: Centaurea floral scent volatiles`
+- `web: Centaurea light photoperiod phototropism`
+- `web: knapweed light photoperiod phototropism`
+- `web: Asteraceae photoreceptor review`
+- `web: Centaurea volatile emission herbivore induced response methyl jasmonate`
+- `web: knapweed volatile emission herbivore induced response methyl jasmonate`
+- `web: Centaurea flower opening time anthesis`
+- `web: knapweed flower opening time anthesis`
+- `web: Centaurea eye type epidermal focusing`
+- `web: knapweed eye type epidermal focusing`
+
+Results and dispositions:16 actual titled candidates and source URLs are saved in wanted, with unknown authors/years/DOIs left empty or null. The moncktonii, hermannii, iberica, cyanus, endemic Phalolepis, solstitialis and nigra germination leads follow10(e); even neutral/no-effect light treatments remain measurements to inspect. The23-species seed-treatment candidate requires species-table confirmation. NASA20170010193 retains the yellow-starthistle daylength/irradiance lead;20160013415 appears related and was not requested separately. Photoperiodic After-Effects10.1086/335088 and the Auburn table12 specifically name C.cyanus/C.montana. The historically named C.repens Russian-knapweed light study was not used to carry a result to current Centaurea species (the result also identifies Acroptilon repens). The neighbor-identity MeJA study is a direct chemical-response lead; in-situ volatile collection and damaged-leaf emission papers require intact-plant/species/signalling confirmation. The secretory petal study remains a candidate pending distinction of living floral scent from extracted tissue chemistry. Distilled essential-oil composition of capitula (including S0305197818305878,ffj.1585 and essential oils of atropurpurea/orientalis/kilaea/cuneifolia) alone does not establish a living response under10(a). ResearchGate results were not opened or used as source records.
+
+Diel is held, with no null: already wanted10.1002/ajb2.16179 in harvest-c6 is titled “Pollinator visitation closely tracks diurnal patterns in pollen release”; the returned AJB snippet explicitly names Centaurea jacea and a daily pollen/flowering schedule. Do not duplicate that global wanted source. Flowerhead lifespan, seedhead reopening after drying, seasonal bloom months, cut-flower harvest stages and degree-days to anthesis in the other results are not daily opening measurements. The Centaurea lydia phenology result lacked a daily-clock statement and full title; no daily result was inferred. Botanical identification/anatomical and medicinal-organ microscopy sources report no image-forming eyes. Eye searches found no optical focusing work; eye_type null follows owner10(b), with relevant anatomical/retinal-nutrition false positives named in screened.
+
+Cached family review10.3390/plants7040111 supplies the review chase; other15-result-family entries concern Kansas shade responses, Vernonia, Pelargonium, Synedrella, Lomatozona, Gerbera, human retinal-cell nutrition, butterfly/beetle visitors, broad secondary metabolism, genetic assimilation and blue-light reviews. None of their printed metadata reports Centaurea eyes or displaces the retained light/chemical/diel candidates. Available-source family web search returned broad photoreceptor reviews (including canon Li/Mathews2016), not a new Centaurea eye measurement. Raw tool responses are saved locally in work/harvest-c12/Centaurea-web1–4-worker13.json; no full text committed.
+
+Next:Ratibida, then Fraxinus, then Adiantum, in original batch order.
+
+Worker13 Centaurea checkpoint validator completed before commit: `0 problems`.
