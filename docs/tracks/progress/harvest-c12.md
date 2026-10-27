@@ -480,3 +480,57 @@ Eye_type has the completed null under owner10(b), with botanical epidermal authe
 Service restrictions remain OpenAlex429/MDPI429/UChicago403/SANBI403, with no retries. No paid API, library/proxy mirror, plant source/fullpaper-page fetch, paper-text commit or app builds/tests/servers. Actual research desk audit/application ownership stays with parent; no branch/gate/issue29/30 changes.
 
 Worker31 final checkpoint:actual harvest_get.py Senecio and screen_candidates.py Senecio completed, reporting no genus harvest; reconstructed cached family metadata was screened as described. Combined screen_candidates --check completed with `0 problems` before commit for all11 searched/140 wanted lines. Own-file whitespace check passed; batch has no year0 placeholders. This worker used58 successful web queries(18Cynodon,25Glechoma,15Senecio); one initial malformed uncounted call is documented above. No source/full-paper page fetched. Stop between genera at Ranunculus;27 remain.
+
+
+## 2026-10-27 — worker41 continuation: Ranunculus
+
+Worker41 cumulative:1 genus completed,1 search record,11 new wanted,0 evidence/measurement closures. Batch cumulative:14/40 genera screened,12 search records,151 wanted,0 evidence;26 remain, next Datura. Prior completed real protocols preserved; no wanted-only completed genus repeated.
+
+Authoritative original gaps target R.repens(37,621 records), R.acris(18,569), R.sceleratus(10,878), R.abortivus(9,960), each light/chemical/diel/eye_type. harvest_get.py and screen_candidates.py actually ran; the current open-trait filter prints only light because thin older nulls suppress other traits. That filter was not treated as completion. Cached genus run4, supplementary run12, all five citation-step works citing10.3389/fpls.2020.597823 and all15 Ranunculaceae family-review titles and complete stored abstracts were screened. Existing sweep-6#31 light evidence measures R.asiaticus only; it cannot carry to these targets. No legacy record altered, and no living-chemical source-rule conflict identified. Canon checked; no relevant in-hand plant measurement.
+
+Exact successful cached queries, in original order:
+- `Ranunculus phytochrome photoreceptor`
+- `Ranunculus light perception`
+- `Ranunculus phototropism`
+- `Ranunculus photoperiod`
+- `Ranunculus circadian rhythm`
+- `Ranunculaceae photoreceptor review`
+
+Exact actual web queries, in order:
+- `web: Ranunculus seed germination light dark`
+- `web: Ranunculus germination gibberellin OR smoke OR dormancy`
+- `web: Ranunculus floral scent volatiles`
+- `web: Ranunculus light photoperiod phototropism`
+- `web: buttercup light photoperiod phototropism`
+- `web: Ranunculus volatile emission herbivore induced response methyl jasmonate`
+- `web: buttercup volatile emission herbivore induced response methyl jasmonate`
+- `web: Ranunculus flower opening time anthesis`
+- `web: buttercup flower opening time anthesis`
+- `web: Ranunculus eye type epidermal focusing`
+- `web: buttercup eye type epidermal focusing`
+- `web: "Ranunculus repens" light shade photoperiod germination gibberellic`
+- `web: "Ranunculus acris" germination light dormancy gibberellic`
+- `web: "Ranunculus abortivus" germination light dormancy`
+- `web: "Anthecology" "Ranunculus acris"`
+- `web: "Ranunculus abortivus" "seed" germination study`
+- `web: "Ranunculus repens" "Population dynamics" "light" 1987`
+- `web: "Spatial fragrance patterns" "Ranunculus acris" DOI`
+- `web: "Anthecology of gynodioecious" Ranunculus journal`
+- `web: "Germination studies of Ranunculus abortivus and Ranunculus bulbosus"`
+- `web: "Anthecology" "Ranunculus acris" "opening"`
+- `web: "Ranunculus repens" "light" "ethylene" gibberellin`
+- `web: "10.2307/2260434"`
+
+Twenty-three web queries; returned titles/snippets screened, up to first20 where returned. Any display-truncated result tail and cache abstract segment were read separately from saved raw metadata. Provenance:work/harvest-c12/worker41-Ranunculus-cache.json and worker41-Ranunculus-web1..6.json. No source/full-paper page fetched; no live OpenAlex request.
+
+Eleven target-specific wanted sources passed global DOI/normalized-title comparison against wanted/status/evidence/corrected evidence. R.sceleratus: Korean GA/light/dark seed experiment; intact-plant ethylene/1-MCP/salinity study;1981 long/short-day flowering and GA/ethylene stem responses. R.acris:58-plant sun/shade epidermal experiment; salt/germination response;1995 headspace spatial floral fragrance; primary anthecology/opening study;2023 native-flora germination trial; and plant-diversity/herbivory induced-response experiment. R.repens:1987 high/low light and nutrient factorial experiment. R.abortivus:1976 germination study, retained under10(e), with exact citation and no invented treatment results.
+
+The1976 source is a genuine indexed citation in EurekaMag bibliographies, not an obtained primary paper; get explicitly requests the exact Newsletter of the Association of Official Seed Analysts50(3):56–58 citation. Authors Lincoln WJ/McGuigan M and year1976 are indexed. The1987 repens paper's part number varies II versus III in indexes; III follows the detailed bibliographic entry, with the identical DOI/year/pages independently corroborated. No claim depends on the part numeral. The1995 scent source's DOI/year/pages are verified in a legal PMC reference list and authors in PalDat; primary methods still need checking for intact versus detached material. The anthecology title is indexed in DOAJ; opening sequence, seasonal male/female synchrony and daily anthesis must be distinguished by the reader. Unknown publication years/authors remain null/empty, never inferred from DOI digits or search-relative age. No new year0.
+
+Other dispositions: R.asiaticus horticultural photoperiod studies already have species light evidence and do not fill these targets; auricomus/kuepferi/adoneus/hirtellus/aquatilis/trichophyllus/kadzusensis studies concern other species and are not requested for volume. Cached salt-melatonin asiaticus study is a real living response but outside the queued species. Cut-Ranunculus TDZ/1-MCP vase treatment10.3389/fhort.2023.1183754 is excluded10(a). R.multifidus animal trypanosome assays, medicinal extracts, antimicrobial chemistry and metabolite profiles without experimental cue responses do not establish target sensing. General auxin, LED, insect pollination/colour vision, thermal ecology and plant VOC reviews do not warrant duplicate background requests when direct target sources are available. Korean cantoniensis/chinensis and Mediterranean pond Ranunculus germination sources are outside these targets. No light/chemical/diel null while direct or plausible target candidates remain unread.
+
+Eye_type alone has a completed null under owner10(b), explicitly screening all three cached eye-word hits(Arabidopsis epidermal/stomatal study,insect vision review,green-flower perception study). Glossy-petal reflectance and microscopy focusing are not image-forming eyes. Kew's flower-dish concentration of sun/heat is classified with the required focusing-belongs-under-light phrase; no optical-focusing sensory measurement is asserted from that botanical account. Direct-light epidermal-plasticity source is wanted and does not block an eye-only record.
+
+OpenAlex429/MDPI429/UChicago403/SANBI403 round-wide restrictions respected; no retry, paid API, unauthorized copy, source fetch, evidence log, app check, branch/gate or issue29/30 change. No new service or actual web quota refusal. Managed runtime skill read for current network policy; policy enforced/unrestricted, no credentials bound, no configuration changed. Parent retains audit/application and push/PR responsibilities.
+
+Worker41 Ranunculus checkpoint: actual combined screen_candidates --check completed with `0 problems` for12 searched/151 wanted. Own-file whitespace check passed; unknown-year metadata null. Ready to commit.
