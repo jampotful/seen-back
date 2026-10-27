@@ -803,3 +803,45 @@ Eye results show anatomy/cystoliths, epidermal cells, gland dots visible with a 
 All four fresh genera have full required web-query screening recorded here and wanted leads preserved, but not the skipped API completion; do not repeat these web screens merely because raw queue lacks searched rows. Their wanted measurements still await authorized intake. This worker used **88 executed connected web queries** across the4 newly screened genera; Centrosema had0 new queries. The single mixed scratch-write automatic-review rejection was reported immediately and is quoted exactly above. Read-only official-harvest inspection and authorized batch-file writes were successful narrower alternatives; no retry/permission/bypass of the refused mixed command.
 
 Final worker11 validation: actual required screen_candidates checker completed with **0 problems** on the final wanted state; JSONL syntax valid. Starting97 wanted lines and all23 searched lines independently verified byte-for-byte against c393d225 parent. Only owned wanted/progress files changed; no evidence or paper assets. Shared c12 handoff expanded this worker’s newly added wanted line123 for queued Lespedeza cuneata with primary Korean title provenance and explicit unresolved cue eligibility, retaining original citation/ranking; no duplicate source. Final stop is between Celtis and unsearched Rivina at context exhaustion; all49 new wanted requests remain candidate leads awaiting intake.
+
+
+## 2026-10-27 — issue38 worker18 continuation
+
+### Rivina web screen
+
+**New this worker:1 newly web-screened genus (Rivina),5 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:151 wanted,23 searched.** Existing146 wanted and23 searched prefixes preserved. This is web-screened-for-round, protocol-partial because required uncached OpenAlex steps remain skipped after429; no null/negative record is licensed. **15 genera remain; exact next Sphagneticola**, then Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum (adopt external-3 diel/eye/light first),Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Prior Pilea and Centrosema adoptions remain preserved.
+
+Read AGENTS.md first, current worker guide, entire own progress and named protocols including desk-screen1–10,THOROUGH,BRIEF Round2,round3/round4 and audits53/54. Runtime skill applied; current environment unrestricted/enforced,no VPN. No operational/gates/branch edits, app checks,source/page fetch or evidence. Prior worker's scratch-write review rejection is respected; no scratch cache written or rejected command repeated. Official read-only harvest_get.py and screen_candidates.py succeeded with authorized supported network mode: Rivina absent across runs1–24; read-only hg.load confirms neither old Phytolaccaceae nor current Petiveriaceae family review present. No absence of harvest was treated as0hits. Kew/Bishop original indexed metadata confirms current Petiveriaceae; original queue uses older Phytolaccaceae. Family review query below was screened, returning general reviews rather than a family-specific review; no invented citation chase or family carry.
+
+Global corrected-first accepted-name evidence,all searched/wanted,papers-status and canon checked before queries. No accepted Rivina measurement exists. Sweep-27#35 is an old thin two-query absence and does not establish completed web protocol. **Adopted existing joint Vora1989 wanted line141 for R.humilis chemical seed-treatment coverage, with no duplicate.** Canon eye compilations cover animals; plant light/chemical/diel compilations do not establish a target measurement without intake. Other genera's work was not repeated.
+
+Mandatory10(e) searches first,then four scientific/common pairs,family review and focused actual-lead metadata refinements. Exact22 connected queries in execution order:
+- `Rivina seed germination light dark`
+- `Rivina germination gibberellin OR smoke OR dormancy`
+- `Rivina floral scent volatiles`
+- `"Rivina" flower opening time anthesis`
+- `"rougeplant" flower opening time anthesis`
+- `"Rivina" eye type lens-like epidermal cells`
+- `"rougeplant" eye type lens-like epidermal cells`
+- `"Rivina" light photoperiod phototropism`
+- `"rougeplant" light photoperiod phototropism`
+- `"Rivina" volatile chemical hormone response`
+- `"rougeplant" volatile chemical hormone response`
+- `Petiveriaceae photoreceptor review`
+- `"Plastic responses that confer invasiveness"`
+- `"Seed Biology of Ten Common Roadside"`
+- `site:devagirijournals.com "Rivina"`
+- `"Rivina" "spectral dependence"`
+- `"Rivina" "Devagiri" "7"`
+- `"Rivina" "Chlorophyll deficiencies"`
+- `"Rivina" "BIOTROPICA" "496"`
+- `"The Spectral Dependence of Flowering and Elongation"`
+- `"Rivina" "anthesis" "morning"`
+- `"Rivina" "circadian" "diurnal"`
+
+Read all exposed titles/snippets and indexed original abstracts, including retained response tails after display cuts; genuinely fewer than20 results were not claimed as20. Retained responses in session store only; no raw paper assets committed. Search sometimes automatically returns long original-source passages; those remain indexed snippets,not directly fetched paper/evidence. No ResearchGate,Scribd,Wikipedia,library proxy or unauthorized mirror used as a primary source or opened. No OpenAlex,MDPI,UChicago,SANBI fetch or paid/API fallback; no new refusal.
+
+Added5 globally absent sources after normalized-title,DOI,URL and owner n/a checks:2020 controlled whole-plant light/pH study10.1016/j.chnaes.2020.01.001;2021-published/2020-volume seed symposium abstract with actual target GA,smoke,KAR1,pH/salt trials;1959 spectral-elongation experiment10.1111/j.1438-8677.1959.tb00534.x;2021 nodal hormone-regeneration source (culture eligibility left to intake);2011 fragmentation/germination10.1111/j.1744-7429.2010.00721.x retained under mandatory10(e),cue eligibility unresolved. Exact dates verified in original publisher/university metadata,not DOI suffix or approximate age. No numerical response,evidence or species carry claimed. Constant culture photoperiod alone is no manipulated-light experiment; fragmentation/genetic maternal effects alone are no cue response. Applied mutagens alter genomes and the exposed chlorophyll-mutation studies do not establish a sensed chemical cue,so no new request for them.
+
+Eye results include lens-shaped ovaries/seeds,seedcoat anatomy and microscope observations; none establishes a plant eye,any focusing belongs under light10(b). Diel results show months/year-round flowers,developmental anthesis morphology and fixed culture cycles; no exposed within-day target rhythm. Morning-flower wording on a multi-species garden page is not assigned to Rivina. Viola riviniana and other similarly named taxa are distinct. Extract/berry-juice chemistry,light-driven silver synthesis in removed extracts and rat pharmacology fail10(a); donor-extract trials on crops do not show a living donor signal or Rivina receiving a cue. No new eye/diel negative while API completion remains held. All new wanted leads await authorized intake.
+
