@@ -1190,3 +1190,53 @@ No page/paper fetch, evidence, credentials/proxy/TLS changes, purchase or operat
 
 
 Worker17 Tecoma mandatory real validator printed **0 problems**. Current118wanted/25searched; next Cosmos.
+
+
+## 2026-10-27 — issue38 worker17 Cosmos and context handoff
+
+NEW Cosmos web-screened,26 successful exact connected queries,17wanted/0searched/0evidence. Worker17 final total **5 newly available-web-screened genera: Packera,Cortaderia,Nasturtium,Tecoma,Cosmos;104 queries;49new wanted;0new searched/evidence/measurements**. Current **135wanted/25searched**, from worker17 start86/25 and issue38/main baseline54/25. All original54wanted and25search line prefixes preserved; earlier historical counts not refilled. Across rounds28of40 genera web-screened; **12 remain; exact next Achillea**, then Mahonia,Apocynum,Bromus,Marchantia,Vachellia,Poa,Parkinsonia,Panicum,Artemisia,Polystichum,Ailanthus. Context handoff stops between genus screens. Achillea light target already explicitly adopted in shared c18 wanted10.1002/ece3.9157 by coordinator; do not duplicate. Prior genus/extract/taxonomic/culture/source limits persist.
+
+Protocol-partial: OpenAlex429 skipped for round, no live API rerun/fallback/refusal workaround. Null searched rows withheld for all5 new genera; source reading/API completion outstanding, no full protocol or exhausted claim. Packera initial three-query result batch had an unseen display-truncated tail not persisted; that one screen has an explicit result-delivery limitation and cannot be called complete result exhaustion. Every subsequent displayed search title/snippet was read, with longer responses retained and read in sequential slices, variable delivered counts without claiming20 each. No new service refusal. No paper/source-page fetch, evidence, credentials/proxy/TLS changes, purchase or operational edit.
+
+Cosmos pre-query: global evidence/corrected/wanted/searched/status checked by target species/genus and every retained title/DOI/URL. Existing sweep43#15 Warner2006 (10.17660/ActaHortic.2006.711.35) abstract-only Cosmos bipinnatus photoperiod response adopted; its year-from-DOI/source limitation retained explicitly, not silently repaired or re-requested. Thin sweep43 open-trait null is preserved, not a current protocol screen. Mandatory harvest_get.py and screen_candidates.py both explicitly report Cosmos absent, so no cached genus query/candidate omitted. Canon catalog checked through stored per-trait list; no named in-hand open-trait source. Family alternative Asteraceae query returns general photoreceptor reviews10.1146/annurev-arplant-042809-112259/10.1002/wmts.36, capitulum review10.1111/nph.19590 and algae/insects, no named target chemical/diel measurement in available text.
+
+Seventeen new wanted: applied neoagaro-oligosaccharide seed experiment10.1038/s41598-025-21473-w, rac-GR24 strigolactone10.11924/j.issn.1000-6850.casb2024-0647, MeJA growth/Cd2024low10.1186/s12870-024-05526-2, MeJA pectin10.1016/j.envpol.2024.123503, MeJA photosynthesis10.1016/j.ibiod.2024.105976, MeJA hemicellulose title,2017MeJA seed germination,1974GA3 study, ABA10.1016/j.ecoenv.2023.115101, organic-acid growth/antioxidant10.7235/HORT.20220041 and later accumulation/cell-wall article, calcium/Cd remodeling study, chocolate-cosmos Choca Mocha scent,2012pollinator/floral biology10.1007/s11284-011-0908-2, Deno2ndSupplement original-entry lead and controlled UV seedling study. Paclobutrazol growth/flowering indexed exact title is the17th source. These are living treatment/germination candidates under10(a/d/e), with culture, toxicity and actual comparator to be checked rather than claimed receptor measurements. Fixed16h light of NAOS assay alone does not establish a light treatment. Seed sources stay potential light leads under10(e) pending methods. MeJA/ABA and organic-acid papers may share materials/data; source reader must check overlap before extraction, not combine endpoints or invent independent replicates.
+
+Metadata provenance: all DOIs in new lines came from primary indexed pages/cached source or explicitly identified legal indexed original references. ABA2023DOI/year corroborated via indexed PMC12595809 reference; organic-acid2022 DOI from indexed original PDF header. MeJA2017 title/authors/year corroborated by legal HST-j reference, original journal/DOI unavailable; exact source kept wanted. GA1974 title/authors/year from bibliographic-index and legal textbook/reference snippets, no DOI inferred. No years inferred from DOI/PII digits for later2024/2026-looking sources. Some DOI-less records intentionally retain null year/blank authors. Deno index explicitly says2ndSupplement, distinct from existing first-supplement/second-edition requests; original target light/dark table still needed, index storage shorthand is not measurement.
+
+Scent/species/source limits: J-STAGE2025 Choca Mocha dynamic-headspace article is a plausible live flower-emission study, attached living sampling and hybrid identity unverified. It cannot close chemical for queued C.bipinnatus without actual species match. Edible Cosmos/Borage/Calendula/Viola volatile sensory paper describes food-flower chemistry; no living emission/signal established, so excluded10(a). Essential-oil/perfume catalogues and COSMOS gas-detector/optical-sensor brands are not plant sensing sources. Cut-flower conditioning and harvesting time advice do not establish living chemical response or daily anthesis.
+
+Diel pair mostly returned flowering seasons, crop duration, harvest advice and generic flower-opening definitions. Exact target query found2012floral-colour/pollination study; target identity/DOI verified at Wiley/FAO, while diurnal-anthesis wording was shown only by excluded RG snippet, so no measurement extracted from it; original reading retained as candidate.1942photoperiodic after-effects10.1086/335088 describes daylength induction/days to anthesis, not hour of opening. Petal-water-barrier protocol concerns excised ray petals days after anthesis, not diel timing. Generic evening-opening Scientific Reports s41598-025-21168-2/cactus/other-species snippets do not establish Cosmos daily rhythm. Plant eye_type none follows10(b); general plant-ocelli/focusing essays returned no named target focusing result, focusing belongs to light. No Wikipedia or excluded-repository result used as evidence.
+
+Exact Cosmos queries:
+- `web: Cosmos seed germination light dark`
+- `web: Cosmos germination gibberellin OR smoke OR dormancy`
+- `web: Cosmos floral scent volatiles`
+- `web: Cosmos flower opening time anthesis`
+- `web: garden cosmos flower opening time anthesis`
+- `web: Cosmos plant ocelli lens epidermal focusing eye`
+- `web: garden cosmos plant ocelli lens epidermal focusing eye`
+- `web: Cosmos chemical sensing volatiles`
+- `web: garden cosmos chemical sensing volatiles`
+- `web: Asteraceae photoreceptor review`
+- `web: "Cosmos bipinnatus" jasmonate cadmium`
+- `web: "Cosmos bipinnatus" "anthesis" morning`
+- `web: "Cosmos bipinnatus" germination gibberellic acid`
+- `web: "Cosmos" seed germination light experiment`
+- `web: "Pollinator response to flower color polymorphism" "Cosmos" -site:researchgate.net`
+- `web: "effects of gibberellin A3" "Cosmos"`
+- `web: "effect of cadmium on germination" "Cosmos"`
+- `web: "Identifications of Odor-active Compounds" "Cosmos"`
+- `web: "The effects of gibberellin A3" "Cosmos" doi`
+- `web: "Cosmos" "107078117"`
+- `web: "Methyl jasmonate regulation of pectin polysaccharides" DOI`
+- `web: "Enhancing cadmium tolerance and photosynthesis in Cosmos" DOI`
+- `web: "Cosmos bipinnatus" "gibberellin A3" "Molder" "Owens"`
+- `web: "Cosmos bipinnatus" "Abscisic acid" "alleviates"`
+- `web: "The effect of cadmium on germination" Cosmos Liu Feng`
+- `web: "Effects of Exogenous Organic Acids" "Cosmos"`
+
+Raw successful results /workspace/work/w17-c11/Cosmos-web1–7.json. Mandatory validator pending final checkpoint. Next worker must preserve all completed old20 plus new Foeniculum/Hypochaeris/Sorghastrum and worker17 five screens; do not repeat those searches. For next Mahonia, Tecoma-web2 already returns primary replica-optics https://academic.oup.com/jxb/article-abstract/42/5/581/471190 explicitly naming M.repens; check shared coverage and original source before any new target query. All remaining12 are untouched by worker17.
+
+
+Worker17 final mandatory real gate printed **0 problems**. Byte-prefix verification preserved all86 incoming wanted lines; searched file byte-identical to incoming25lines. Current135wanted/25searched, NEW49wanted/0searched/0evidence across5 available-web-screened protocol-partial genera; Packera unseen-tail caveat explicitly retained. Clean context handoff:12remaining, exact next Achillea.
