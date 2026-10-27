@@ -78,3 +78,23 @@ Ran harvest_get.py and screen_candidates.py: genus in no harvest run. Checked ca
 Added the USDA species review (Meyer 2005) to wanted: its returned passage states a controlled sunlight/shade comparison and a day-length response of C. uniflora. The same result names the primary study Germination and growth of bird-dispersed plants: effects of seed size and light on seedling vigor and biomass allocation, attributed to Piper by the review; full bibliographic metadata remains to be read there. The germination searches also returned a C. udensis germination-time-course title on ResearchGate; that host was not opened or used to supply a DOI, author or year. Deno germination-book results named Clintonia but the supplied passage did not resolve its treatment/results. Those are remaining leads for the reader, not screened negatives. Fragrance/perfumery descriptions do not establish a measured living-plant signal; steroidal glycosides isolated from rhizomes and root extracts are tissue chemistry under owner point 10(a). Flower results give seasons, not anthesis hours; eye matches concern medicinal use or flora, not image-forming organs. Family-review results were broad plant-photoreceptor reviews (including the canon overview), not a Clintonia-specific measurement. OpenAlex required supplements/citation step skipped, so no null records.
 
 Cumulative counts: 3 genera web-screened, 0 full protocol complete, 0 searched rows, 2 wanted lines, 0 evidence rows. Remaining 37 unreviewed, next Dicentra.
+
+### Dicentra — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: in no harvest run. Checked canon catalog/effective main evidence and prior wanted: no genus evidence or prior wanted line. Exact queries, in order; only returned titles and displayed result passages screened, with no page fetch:
+- `web: Dicentra seed germination light dark`
+- `web: Dicentra germination gibberellin OR smoke OR dormancy`
+- `web: Dicentra floral scent volatiles`
+- `web: "Dicentra" flower opening time anthesis`
+- `web: "Dutchman's breeches" flower opening time anthesis`
+- `web: "Dicentra" eye type epidermal lens cells`
+- `web: "Dutchman's breeches" eye type epidermal lens cells`
+- `web: "Dicentra" light perception phototropism`
+- `web: "Dutchman's breeches" light perception phototropism`
+- `web: "Dicentra" chemical signalling volatile response`
+- `web: "Dutchman's breeches" chemical signalling volatile response`
+- `web: Papaveraceae photoreceptor review`
+
+Added the publisher-title lead on supplemental irradiance and STS in potted Dicentra species. Its reader must resolve species identity; the title alone does not establish which current Dicentra species was measured. Year is 0 (unset), authors/journal/DOI empty because search did not supply them. The D. spectabilis GA3 and photoperiod leads concern a former Dicentra now named Lamprocapnos spectabilis (confirmed by University of Wisconsin/Vermont extension search snippets); they do not establish a measurement for current Dicentra. The Dicentra chrysantha smoke title appeared only at ResearchGate; that host was not opened or used to supply metadata. Germination-book snippets name Dicentra but do not identify a measured species or the experiment; retained as unresolved leads, not screened negatives. Dutchman's breeches also names Thamnosma texana in a Texas source, so its scent/toxicity results were excluded from Dicentra. Extract pharmacology/animal analgesic responses do not satisfy living-plant sense_chemical. Anthesis results were seasonal flowering descriptions. Papaveraceae review search returned Papaver colour/reflectance work and broad photoreceptor reviews, not a Dicentra measurement. Owner plant-eye-none reading applies. OpenAlex steps skipped; no null rows.
+
+Cumulative counts: 4 genera web-screened, 0 full protocol complete, 0 searched rows, 3 wanted lines, 0 evidence rows. Remaining 36 unreviewed, next Struthiopteris.
