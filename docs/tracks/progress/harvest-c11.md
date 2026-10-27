@@ -392,3 +392,53 @@ New wanted provenance (all titles/metadata from cached harvest or returned web, 
 Final metadata cleanup: unknown year0 placeholders in59 c11 wanted lines changed to JSON null at parent request; observed source-verified years preserved. Iris eye disposition explicitly scoped with view plant and the two plant species, preserving mantis records. Final combined gate is rerun after metadata cleanup.
 
 Final worker17 combined validation after all annotations/year cleanup: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems**. No incomplete genus or plausible wanted trait called exhausted. Clean handoff: Tropaeolum, then Chasmanthium onward,31 remain. Prior continuation commit36ff9434.
+
+## 2026-10-27 — worker23 continuation
+
+Tropaeolum complete: **1 genus,1 search,9 wanted,0 evidence,0 measured cells** this worker. Cumulative **10 genera,13 searches,93 wanted,0 evidence**; **30 remain**, next Chasmanthium. No branch/gate/app changes. Read AGENTS, round28 guide, THOROUGH, BRIEF including Round2, round3/round4 and desk-screen1-10 including plant10(e). Required harvest and screening tools completed. Managed network status ready/unrestricted; no credentials used.
+
+12 successful connected web queries; no quota refusal. No OpenAlex/MDPI/UChicago/SANBI or plant source-page requests. Cached run5 with supplements12/14/20 has160 displayed result occurrences,8 family-review titles,137 unique works; titles and available abstract starts screened. Canon catalog checked: no in-hand plant compilation supplies Tropaeolum data. Owner eye_type rule applied; other original gaps are not suppressed by old sweep26.
+
+Exact cached queries:
+- `Tropaeolum phytochrome photoreceptor`
+- `Tropaeolum light perception`
+- `Tropaeolum phototropism`
+- `Tropaeolum flower opening time`
+- `Tropaeolum nyctinasty`
+- `Tropaeolum volatile signalling`
+- `Tropaeolum photoperiod`
+- `Tropaeolum circadian rhythm`
+- `Tropaeolum anthesis`
+- `Tropaeolum pollination biology`
+- `Tropaeolum epidermal lens cells`
+- `Tropaeolum epidermal focusing leaf optics`
+- `Tropaeolaceae photoreceptor review`
+
+Exact web queries:
+- `web: Tropaeolum seed germination light dark`
+- `web: Tropaeolum germination gibberellin OR smoke OR dormancy`
+- `web: Tropaeolum floral scent volatiles`
+- `web: Tropaeolum flower opening time anthesis`
+- `web: nasturtium flower opening time anthesis`
+- `web: Tropaeolum plant ocelli lens epidermal focusing eye`
+- `web: nasturtium plant ocelli lens epidermal focusing eye`
+- `web: Tropaeolum chemical sensing volatiles`
+- `web: nasturtium chemical sensing volatiles`
+- `web: Tropaeolum photoperiod phototropism light response`
+- `web: nasturtium photoperiod phototropism light response`
+- `web: Tropaeolaceae photoreceptor review`
+
+New wanted provenance:
+- Application of phytohormones as attenuators of salt stress in Tropaeolum majus L. (Tropaeolaceae); https://hrcak.srce.hr/file/400168. Living nasturtium hormone treatments under salt stress compare jasmonic acid, salicylic acid, cytokinin and polyamine with controls. This tests applied chemical responses under plant10(d). Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum light perception"`.
+- Effect of Naphthaleneacetic Acid (NAA) and 6-Benzylamino Purine (BAP) on In-Vitro Propagation of "Mashua" (Tropaeolum tuberosum Ruíz & Pavón) Morphotypes from Peru; https://phcogj.com/sites/default/files/PharmacognJ-15-4-563.pdf. NAA and BAP treatments are compared for micropropagation of living mashua seedlings, a growth regulator response under plant10(d). Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum photoperiod"`.
+- Growth, Gas Exchange, and Phytochemical Quality of Nasturtium (Tropaeolum majus L.) Subjected to Proline Concentrations and Salinity; https://www.mdpi.com/2223-7747/14/3/301/pdf?version=1737442579. Applied proline concentrations and salinity are compared for living nasturtium growth, gas exchange and physiology; read the responses and conditions. Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum photoperiod"`.
+- Seed Germination of the Herbaceous Vine Tropaeolum pentaphyllum Lam. (Tropaeolaceae): A Neglected Geophyte with High Agricultural Potential; https://journaljeai.com/index.php/JEAI/article/download/1900/3806. Controlled seed germination compares natural light with darkness. Web result also describes a light-dependent germination result; source reading is still needed. Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum light perception"`.
+- Flowering time response of Nasturtium (Tropaeolum majus L.) cultivar ‘Empress of India’ to photoperiod, light integral and temperature using photo-thermal model; https://doaj.org/article/d8576fcf894546ea8e307f3807b9765d. Controlled flowering experiments compare photoperiods, shade levels and temperatures in Empress of India nasturtium; a direct light-response experiment, not daily anthesis. Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum photoperiod"`.
+- Continuous Lighting and High Daily Light Integral Enhance Yield and Quality of Mass-Produced Nasturtium (Tropaeolum majus L.) in Plant Factories; https://www.mdpi.com/2223-7747/10/6/1203/pdf. Continuous lighting and daily light integral treatments test nasturtium growth, secondary metabolites and light-use efficiency. Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum photoperiod"`.
+- Morphological, biochemical and physiological responses of Indian cress (Tropaeolum majus) to elevated UV-B radiation; https://doi.org/10.18054/pb.2015.117.3.2858. Outdoor enhanced UV-B treatments test nasturtium physiology and secondary metabolites. Harvest also indexes the same title under DOI10.18054/pb.v117i3.2858 with a conflicting year; obtain one copy and verify bibliographic metadata. Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum volatile signalling"`.
+- Floral biology of Tropaeolum majus L. (Tropaeolaceae) and its relation with Astylus variegatus activity (Germar 1824) (Coleoptera: Melyridae); https://www.scielo.br/j/aabc/a/KsRx7LyHKHNZhnNYnkhG8Zw/?lang=en&format=pdf. Floral biology study observes flowers and insects during daylight; returned SciELO web snippet explicitly describes daytime anthesis. Read the flower observations for within-day timing. Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum anthesis"`.
+- 10. Friedrich Oehlkers: Zur reizphysiologischen Analyse der postfloralen Krümmungen des Blütenstiels von Tropaeolum majus; https://doi.org/10.1111/j.1438-8677.1920.tb07352.x. Experimental stimulus physiology of postfloral pedicel curvature in nasturtium, returned by the phototropism query. Verify which stimuli were manipulated and whether light-direction response was measured. Cached harvest title/abstract and returned web snippets screened 2026-10-27; source not fetched/read, no evidence logged. Query: `query "Tropaeolum phototropism"`.
+
+Global wanted/evidence/status checked before append. Existing1938 leaf light/gravity response10.1093/oxfordjournals.aob.a084037 is already requested in harvest26;1990 photoperiod/tuber study W1579049020/W2588713156 already requested in plant1. Preserve these requests without duplication. UV-B record has two cached DOI/year variants; one wanted copy, year null until verified. Authors absent in cache remain empty.
+
+Tropaeolum extracts/essential oils/hydrosols and floral tissues/processed juice (including10.3390/life15071053,10.1021/jf902946v,10.3389/fnut.2022.912680,10.17113/ftb.60.04.22.7667) do not establish a living sender/receiver response. Chromoplast/nectar-spur gene expression alone does not measure sensing. Rose, Brassica, Hymenaea and Chelidonium studies concern other genera. Reproductive stage/season and floral longevity alone were not converted into daily hours. Stacked-scattering paper measures collected-petal reflection; no light perception inferred. Generic plant-ocelli and focusing survey goes under light when a genus measurement is established, never eye_type. Darwin1878 manuscript search snippet contains actual leaf-orientation observation, retained as a historical corroborating lead in this note; existing1938 experimental request already targets the same open light trait. Other broad physiology books/reviews have no Tropaeolum measurement identified in available abstracts and were not requested as background.
