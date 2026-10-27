@@ -933,3 +933,49 @@ Extract/seed-oil profiles, distillation/extraction, aromatherapy candles, tea va
 Mandatory validator pending before checkpoint.
 
 Worker14 Foeniculum mandatory real gate printed **0 problems**. Checkpoint preserves all original file prefixes; next Hypochaeris.
+
+
+## 2026-10-27 — issue38 worker14 Hypochaeris continuation
+
+NEW: one genus web-screened (Hypochaeris),27 successful connected web queries,12 wanted leads,0 searched rows,0 evidence/0 measured cells. Worker14 cumulative2 genera (Foeniculum,Hypochaeris),44 queries,28 wanted. Retained c11 files82 wanted/25 searched (baseline54/25);22/40 genera web-screened across rounds;18 remain, exact next **Sorghastrum**. Historical152 wanted remains a historical pre-desk count. OpenAlex remains skipped after the round-wide429, and all newly screened traits remain protocol-partial with no null searched rows. Foeniculum checkpoint3097c534 had mandatory gate0problems.
+
+Adoption before queries: prior sweep-19 thin combined searched row is preserved but not a full screen. Existing sweep-19#19/#20 diel/light entries explicitly cite Wikipedia, so they are not adopted as proper primary completion. Parent notified; legacy data is outside authorized edits and remains unchanged. Primary diel/light upgrade leads are retained here. Existing shared wanted harvest-c18#21 (10.1002/ece3.9157) is adopted for H.radicata light: indexed methods name it alongside Achillea millefolium among experimental white/amberLED/control grassland taxa. No duplicate request added. Parent notified to coordinate expansion of c18 target metadata; our adoption is progress-only, and source reading must examine species-level outcomes. Global wanted/evidence/corrected/status checks by genus, Hypochoeris spelling and each retained title/identifier found no other duplicate/n/a source. Canon catalog checked; no in-hand compilation resolves the open target chemical/eye traits.
+
+harvest_get.py and screen_candidates.py executed; run7 plus14/20 supplements. All52 delivered work entries and15 family-review titles screened; no failed step shown. Successful harvest queries in exact order: `Hypochaeris phytochrome photoreceptor`; `Hypochaeris light perception`; `Hypochaeris phototropism`; citation step citing10.1016/j.tree.2009.09.010 naming Hypochaeris(0 delivered); `Hypochaeris volatile signalling`; `Hypochaeris epidermal lens cells`; `Hypochaeris epidermal focusing leaf optics`(0 delivered); family review `Asteraceae photoreceptor review`. Delivered counts differ from total reported hits. Exact connected searches, all returned titles/snippets read, in executed order:
+- `web: Hypochaeris seed germination light dark`
+- `web: Hypochaeris germination gibberellin OR smoke OR dormancy`
+- `web: Hypochaeris floral scent volatiles`
+- `web: Hypochaeris flower opening time anthesis`
+- `web: cat's ear flower opening time anthesis`
+- `web: Hypochaeris plant ocelli lens epidermal focusing eye`
+- `web: cat's ear plant ocelli lens epidermal focusing eye`
+- `web: Hypochaeris chemical sensing volatiles`
+- `web: cat's ear chemical sensing volatiles`
+- `web: Hypochaeris photoperiod phototropism light response`
+- `web: cat's ear photoperiod phototropism light response`
+- `web: Asteraceae photoreceptor review`
+- `web: Hypochaeris radicata gibberellin growth regulator germination`
+- `web: Hypochaeris radicata jasmonate herbivore volatile`
+- `web: Hypochaeris radicata catsear light response`
+- `web: "Street light choice matters" Hypochaeris`
+- `web: "Long-term effects of artificial nighttime lighting" Hypochaeris`
+- `web: "Turning plant interactions upside down" Hypochaeris`
+- `web: "Germination Characteristics of Cat" light gibberellin`
+- `web: "10.3732/ajb.93.2.234"`
+- `web: "Hypochoeris" germination gibberellin smoke dormancy`
+- `web: "Hypochaeris" "Germination and performance of seven"`
+- `web: "Hypochaeris" "Honeybees generalize among pollen scents"`
+- `web: "Antimicrobial stress compounds from Hypochoeris radicata"`
+- `web: "Growth and reproduction of Hypochoeris radicata"`
+- `web: "Germination Characteristics" "Hypochaeris" light`
+- `web: "Street light choice matters" site:biorxiv.org`
+
+The first paired common-name queries were dominated by cats, ears and generic plant phototropism. Targeted radicata/catsear and historical Hypochoeris spelling follow-ups resolve target ambiguity rather than treating unrelated results as absence. Primary2006 self-incompatibility paper10.3732/ajb.93.2.234 returned an explicit daily-opening statement and four named species, replacing reliance on encyclopedic wording as a lead only; no values logged. Street-light preprint title came from harvest and target identity was confirmed via J-GLOBAL indexed abstract, with no ResearchGate page opened/used as a source. Vertical-lift primary source's afternoon closing snippet is a reading lead with experimental/background distinction unresolved. The Korean seed paper, seven-wildflower germination experiment, nutraceutical seed ecology, Doi2006 and broadleaved-weed conference germination titles remain under10(e), with light comparison explicitly unverified where the snippet omits it. Australian winter-annual H.glabra and temperate-grassland H.maculata measurements do not carry light to H.radicata. Germination/UV-B response does count as nonvisual light under10(d).
+
+The1995 cupric-chloride leaf-exudate study is a conditional chemical candidate, not a claim that isolated terpenes prove sensing: source reader must establish living responsive leaves and stress comparator. The returned2019 pollen-scent paper10.1242/jeb.201335 uses bee PER conditioning with pollen samples; snippets give no attached living-flower emission or plant response, so no chemical request from bee learning alone. The remaining listed chemical candidates are a sensory botanical-epithet lexicon10.30574/wjbphs.2026.27.2.0428, Xanthium insect/pathogen study10.1101/2020.01.17.910240, Catha leaf extract10.12688/f1000research.163345.1 and generic blue-light floral review10.3390/crops5050072; none establishes target living chemical response in returned abstracts. Tissue extracts/analgesic rodent tests, khat profiles, cat-urine/ear sensing, other-genus jasmonate trials and general VOC reviews are excluded rather than promoted to target leads. Allelopathy thesis snippet concerns Hypochaeris as donor, with no live secretion/cue-response assay established; no speculative signal asserted.
+
+The light-signals-from-below review10.1111/pce.13886 names H.glabra in a stature/coexistence photograph, not a target controlled photoreceptor measurement in returned text, so no standalone request. Artificial-light grassland species-level light responses remain requested through c18's existing source, while the new streetlight study is separate. Eye candidateW7220607642 concerns human macular health, not a plant eye. General ocelli/epidermal-focusing reviews name no Hypochaeris in snippets; plant eye_type none follows10(b), focusing belongs to light. Family review web results cover general photoreceptor biology/algae and do not resolve target traits. One search result uses a publisher mirror host springerlink.fh-diploma.de; it was left unopened, and the independently returned PMC original is used for the same germination study.
+
+No source/paper page fetch, evidence, API fallback, service bypass or new access refusal. Raw successful results work/w14-c11/Hypochaeris-web1–7.json; harvest/candidates there too. All actual returned titles/snippets screened, variable counts without claiming20 per query. Source reading, API completion and conditional applicability remain outstanding, no trait declared exhausted. Mandatory validator pending checkpoint.
+
+Worker14 Hypochaeris mandatory real gate printed **0 problems**. Current82wanted/25searched,28new wanted total,0new searched/evidence. Checkpoint before Sorghastrum;18 remaining.
