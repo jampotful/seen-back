@@ -15,10 +15,10 @@ Skipped: Lonicera. `harvest_get.py Lonicera` shows its first query ("Lonicera ph
 - Commelina benghalensis: sense_light_nonvisual, Matsuo et al. 2004.
 - Ludwigia: sense_light_nonvisual (L. hyssopifolia, L. perennis: Jayasuriya and Phartyal 2024; L. ravenii shade levels: Krings and Miller 2026).
 
-## Search records (docs/views/searched/desk-c8.jsonl): 43 lines
+## Search records (docs/views/searched/desk-c8.jsonl): 47 lines
 Written only for the traits left open after the above and after the wanted leads: see the file. Chamaecrista and Geranium sense_light_nonvisual get no record because main already holds a value.
 
-## Wanted lines (docs/views/wanted/desk-c8.jsonl): 17
+## Wanted lines (docs/views/wanted/desk-c8.jsonl): 21
 Centrosema pubescens GA3/KNO3 (Kumar et al. 2014); Celtis australis GA3 (Zarafshar et al. 2012); Celtis caucasica shade trial; Erechtites hieraciifolius dormancy (Weed Science 65(2)); Ipomoea lacunosa and I. asarifolia germination; Zanthoxylum x5; Asplenium nidus GA3 thesis (1982) and fern spore germination review; Sphagneticola trilobata monoterpene release; Pteridium bracken jasmonate volatiles and P. caudatum fire; Nandina shading trials x2; Lepidium virginicum hormones (no authors on the page); Pilea melatonin/AVG in darkness and Pilea photoperiod/light quality; Ludwigia elegans anthesis.
 
 ## Faults and limits to know
