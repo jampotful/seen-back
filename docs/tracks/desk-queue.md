@@ -9,18 +9,16 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - Dial: 2 units until the next reading (ahead of pace), then up to 4 if behind or down to 1 if still ahead. Fallback check-in every 90 minutes; units wake the desk when they finish.
 - Cost rules: screening and audits on Sonnet; the desk session on Sonnet except for judgment calls; no unit kind that settles fewer than about 5 cells per 100k tokens (recheck-2 settled 9 for 230k, so rechecks are folded into plant and re-screen units as extra cells instead of running alone).
 
-## Running
-- oa-13 read (agent reading the 159 free copies via own-key run run/oa/read-r13; branch research/oa-13-read)
-- (plant-screen-1 merged 26 Oct, audit 77: 0 of 5; registry run desk-wanted-53 pending, then fill 18 DOI lines)
-- audits 75 and 76 (recheck-2, rescreen-1)
+## Running (as of 27 Oct 18:40 UTC)
+- No desk unit is running. Codex rounds for issues 28, 29, 30 and 38 are all reviewed and merged through branches; the dispatcher ledger shows all four as reviewed.
+- Raw plant queue: 559 entries (85 are prior-covered residue per Codex round 2). Remaining batches harvest-c13 to c21 (40 each), c22 (27), c23 (14).
+- Papers Wanted holds 2,973 papers (1,797 needed) after the round 2 refresh.
 
 ## Next, in order
-- merge recheck-2 and rescreen-1 after audits 75 and 76
-- plant batches 2 onward (below), one unit each
-- release or rescreen of held plant-1 and replant-1 records under desk-screen.md point 10
-- rescreen-2 (with any recheck cells folded in): Iris (no harvest entry), Scoparia (Crambidae review), Parnassius acuity_cpd and interommatidial_deg; audit 62's two Sphenomorphus cells
-- carry the oa.yml apt-get update fix to main once it works
-- triage of Codex findings (branches codex/findings-*) when they appear
+- audit any new Codex plant unit with a fresh Opus unit (audit 86 onward), merge what passes, registry-fill wanted lines (run/crossref/desk-wanted-62 onward), refresh Papers Wanted
+- fixes-needed-a A3, A4 and B1; the cannot-tell lines (57 B, 7 A); triage-A ci script changes on research/codex-triage-a (merge only if a CI run proves them)
+- oa-1 to oa-13 stay held until 29 October; more oa reading through own-key jobs if new free copies appear
+- the Danum Valley table (10.30880/jsunr.2023.04.02.002, 165 records, entry 56 of oa-14) waits for CC's decision
 
 ## Yield (tokens as reported by the unit at return)
 | unit | tokens | output | merged |
