@@ -74,3 +74,37 @@ Queries actually run (connected web search; all available result titles/snippets
 - `Ranunculaceae photoreceptor review`
 
 Round checkpoint: 4 genera screened for the round, all 4 partial full protocol owing to unavailable OpenAlex; 0 searched lines, 13 wanted lines, 0 evidence lines. Next genus Carnegiea; 36 unreviewed genera.
+
+### Carnegiea
+
+Web screen complete for round; full protocol partial (OpenAlex unavailable). harvest_get/screen_candidates report no harvest. Three light records and one diel record adopted. One new GA3 germination chemical lead. Alkaloid ecology in Drosophila and volatile-oil health benefits do not demonstrate living cactus signalling or response; no request. Eye hits describe cactus morphology/epidermal browning or mammalian lenses; no eye inference. Cactaceae germination review surfaced (Seed traits and germination in the Cactaceae family: a review across the Americas), but no pages fetched and no genus claim made from it. Canon catalog checked. No searched null rows.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Carnegiea seed germination light dark`
+- `Carnegiea germination gibberellin OR smoke OR dormancy`
+- `Carnegiea floral scent volatiles`
+- `Carnegiea volatile chemical signalling`
+- `saguaro volatile chemical signalling`
+- `Carnegiea epidermal lens cells eye`
+- `saguaro epidermal lens cells eye`
+- `Cactaceae photoreceptor review`
+
+### Saponaria
+
+Web screen complete for round; full protocol partial (OpenAlex unavailable). harvest_get/screen_candidates report no harvest. Adopted two diel records; no redundant diel pair. Three new wanted leads for GA3 seed trials, floral headspace, and light/germination exact-title acquisition. Germination hits on Sapindus saponaria belong to another genus. Distilled essential oils 10.1080/14786419.2017.1350668, biosynthetic tissue surveys, human skin models and cosmetic callus do not establish a living response and were not requested. The conference compilation is not separately requested for the overlapping floral emission lead. Family search returned broad Caryophyllales/pigment reviews and general photoreceptor reviews, no confirmed family-specific review. Eye results human lenses; no plant eye null claim. Canon checked.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Saponaria seed germination light dark`
+- `Saponaria germination gibberellin OR smoke OR dormancy`
+- `Saponaria floral scent volatiles`
+- `Saponaria photoperiod phototropism light sensing`
+- `soapwort photoperiod phototropism light sensing`
+- `Saponaria volatile chemical signalling`
+- `soapwort volatile chemical signalling`
+- `Saponaria epidermal lens cells eye`
+- `soapwort epidermal lens cells eye`
+- `Caryophyllaceae photoreceptor review`
+
+Round checkpoint: 6 genera screened for round, all partial full protocol owing to unavailable OpenAlex; 0 searched, 17 wanted, 0 evidence lines. Next Corylus; 34 unreviewed.
