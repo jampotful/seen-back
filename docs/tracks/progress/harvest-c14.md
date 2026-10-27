@@ -445,3 +445,25 @@ Queries actually run (connected web search; every returned title/snippet screene
 - `wakerobin epidermal lens cells eye`
 
 Shared-source adoption after Trillium: existing harvest-c13 wanted title The Influence of Sunflecks on the Photosynthesis of Two Forest Herbs was detected before append and adopted without duplicate (Trillium exact species remains unresolved). Trillium added12 wanted, not13; no searched/evidence. New own c14#129 now also targets primary-indexed Anthriscus sylvestris/Aegopodium podagraria, shared with coordinator/w39; DOI metadata confirmed by that primary-source match. Collection-method fork unchanged; no living-emission assumption.
+
+### Eriogonum
+
+Web-query screen completed for round; full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates: no harvest; global canon/evidence/wanted/status checked, no genus measured cue evidence. Five new wanted sources: target fasciculatum legal district report explicitly shows light/dark germination comparisons and original-source pointers; umbellatum germination source remains comparison-method fork; heracleoides smoke inhibition and abertianum/desert annual light trials restricted to named congeners. The old sweep's dismissal of all dormancy work cannot establish current exhaustion under10(e); broad Utah chilling study is preserved via Western Forbs references for reader, no invented title/DOI. Fire Response and Germination Patterns of a... thesis snippet supplies an incomplete title and no focal genus experimental species, unresolved source pointer https://depts.washington.edu/uwbg/research/theses/Sarah_Shank_MEH_2019.pdf, not a fabricated request. Deno book snippets also require actual species/table mapping. Eriogonum heracleoides essential-oil analysis and ovalifolium oil compositions excluded10(a). Fagopyrum and Fallopia/Polygonum convolvulus common-name hits are other genera. Wild buckwheat pairs were too ambiguous, so completed light/diel common-name searches using verified California buckwheat instead. Eye hits animal lenses/dinoflagellates; no target focusing lead. Diel hits seasonal dates and Fagopyrum anthesis, no target hour established. Adopted Polygonaceae family-review search already present under Reynoutria, no repeat. No pages fetched, searched nulls or evidence.
+
+Queries actually run (connected web search; every returned title/snippet screened, fewer than20 whenever fewer delivered):
+
+- `Eriogonum seed germination light dark`
+- `Eriogonum germination gibberellin OR smoke OR dormancy`
+- `Eriogonum floral scent volatiles`
+- `Eriogonum photoperiod phototropism light sensing`
+- `wild buckwheat photoperiod phototropism light sensing`
+- `Eriogonum flower opening time anthesis`
+- `wild buckwheat flower opening time anthesis`
+- `Eriogonum volatile chemical signalling`
+- `California buckwheat volatile chemical signalling`
+- `Eriogonum epidermal lens cells eye`
+- `California buckwheat epidermal lens cells eye`
+- `California buckwheat photoperiod phototropism light sensing`
+- `California buckwheat flower opening time anthesis`
+- `Eriogonum fasciculatum germination light dark Montalvo McMillan`
+- `Eriogonum chilling requirements germination Meyer Paulsen`
