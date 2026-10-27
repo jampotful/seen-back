@@ -1,5 +1,57 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker37 Pluchea checkpoint
+
+This worker:1 newly available-source-screened genus (Pluchea),24 actual web queries,8 wanted lines,0 search records,0 evidence. Cumulative batch:13 genera screened through Pluchea at the available-source boundary,169 actual round28 web queries,116 wanted lines,0 search records,0 evidence.27 untouched genera remain, beginning Modiola, Taraxacum and Capsella. Earlier genuine wanted-only screens remain preserved. Missing OpenAlex/common-name API steps remain unrun after shared429; no full-protocol/exhaustion claim.
+
+Read AGENTS.md first, current service/scope guide, exact worker37 queue, original batch/order and round4-harvest, THOROUGH, BRIEF, round3-sweep and desk-screen1–10 including10(e). Applied cloud-runtime/network references: current unrestricted HTTP policy enforced, observations current, VPN false. No OpenAlex/MDPI/UChicago/SANBI request, paid API, source/full-paper-page fetch, evidence, branch/gate or29/30 change. An initial web tool call used the wrong argument key, returning empty content/isError=true; it executed no search. Corrected documented argument ran successfully; no quota/service refusal occurred.
+
+### Pluchea — original four open traits
+
+Original P. odorata has7958 records, Asteraceae/Asterales, with sense_light_nonvisual, sense_chemical, diel and eye_type open. Global wanted, evidence/corrected, searched and papers-status checked before append; no new normalized-title/DOI duplicate found. Thin sweep-48#12 one combined query is preserved, not repeated and not accepted as completed paired protocol. Relevant plant light/chemical/angiosperm-diel canon sources are not in hand; in-hand Animal Eyes is Metazoa, no plant measurement inferred. Owner eye_type=none/focusing-to-light rule applies.
+
+Fresh harvest_get and screen_candidates invoked with network permission; actual outputs work/worker37-Pluchea-harvest.txt and -candidates.txt. Cached genus run3 has successful queries `Pluchea phytochrome photoreceptor` (3hits), `Pluchea light perception` (104hits), `Pluchea phototropism` (3hits); citation step citing10.1016/j.tree.2009.09.010 naming Pluchea returned0. All19 cached titles/available abstract starts screened (work/worker37-Pluchea-genus.json). Tomato Cd/phytochrome, Artemisia light, Pisum nodulation and Syzygium morphology concern other genera; cancer-cell/mouse, anti-inflammatory, anthelmintic and skin-oil work tests removed compounds or animals under10(a). Human comfort, ethnobotany, soap sensory preference, handbook/index and taxonomy identify no target response in returned abstracts; missing/partial abstracts remain unread, not a whole-paper absence claim. `On Weed Science Vol.44` is an index pointer with no available abstract. No background-only wanted request.
+
+Cached family run17 `Asteraceae photoreceptor review` (581hits/15listed) reused, all titles/available abstract starts screened (work/worker37-Pluchea-family.json). Same family source set as predecessor Tridax checkpoint: experimental targets are Pelargonium, Vernonia, Synedrella, Lomatozona or Gerbera; retinal supplements are human studies. Crop/blue-light development, Kansas shade, beetle/butterfly, genetic assimilation and medicinal-light reviews do not identify a Pluchea response experiment in displayed starts. No negative inference about unread species tables.
+
+Exact24 successful web queries, executed order:
+
+- `web: Pluchea seed germination light dark`
+- `web: Pluchea germination gibberellin OR smoke OR dormancy`
+- `web: Pluchea floral scent volatiles`
+- `web: Pluchea photoperiod light perception phototropism`
+- `web: sweetscent photoperiod light perception phototropism`
+- `web: Pluchea flower opening time anthesis`
+- `web: sweetscent flower opening time anthesis`
+- `web: Pluchea chemical perception volatile signalling`
+- `web: sweetscent chemical perception volatile signalling`
+- `web: Pluchea epidermal lens cells eye type`
+- `web: sweetscent epidermal lens cells eye type`
+- `web: "Pluchea" "germination" "gibberellic"`
+- `web: "Pluchea carolinensis" germination light`
+- `web: "Some Ecological Characteristics" "Pluchea ovalis" authors`
+- `web: "Pluchea" "anthesis" pollination`
+- `web: "Pluchea carolinensis" germination "temperature" light`
+- `web: "Pluchea dioscoridis" "germination" salinity`
+- `web: "Some Ecological Characteristics" "Gil" 2025 Pluchea`
+- `web: "Genome size and gas chromatography" "Pluchea" doi`
+- `web: "Germinación y dormancia de arbustos" Sierra Rosario Pluchea`
+- `web: "Variations in Achene Traits" Pluchea light doi`
+- `web: "The biology of Egyptian woody" "Pluchea" germination`
+- `web: "Some Ecological Characteristics" "10.3390" "28" Pluchea`
+
+- `web: "Tropical Freshwater Marsh Seed Resilience" Pluchea`
+
+Raw outputs work/worker37-Pluchea-web1.json through -web6.json; final Pluchea query is in work/worker37-Modiola-web4.json, separated from its three Modiola queries. Grouped returned titles/snippets screened; these do not establish20 results per individual query. NCSU and Florida Wildflower Foundation confirm sweetscent for P. odorata. Last13 queries identify seed-response papers and chase primary metadata/reference trails. No source page opened. Incidental ResearchGate/encyclopedia/library-catalog results were not fetched or used as evidence; primary publisher/repository/PubMed-linked text anchors retained leads. Unknown authors/DOIs stay empty; no DOI inferred from URL patterns. Ovalis year2025/DOI explicit in indexed MDPI bibliography listing; lanceolata issue2023 and online2022 both explicitly returned, wanted uses issue2023.
+
+First five new wanted leads:ovalis light/temperature germination experiment; carolinensis2015 dormancy/photoblastism study; dioscoridis2022 achene germination paper and2007 species review with germination figure; lanceolata BAP/GA3 somatic-embryo germination. The two less-specific dioscoridis germination leads stay candidates under10(e), with light/chemical comparison unconfirmed; aridity/habitat variation alone is insufficient. No carry from congeners to P. odorata. The carolinensis paper is a plausible identity for ovalis reference61, explicitly flagged for intake confirmation. The hormone/embryo paper requires living embryo/plantlet versus removed-tissue methods reading; its GC-MS/genome measurements alone do not qualify.
+
+Fresh harvest output additionally exposes successful supplement15 queries `Pluchea flower opening time` (176hits), `Pluchea nyctinasty` (0), `Pluchea anthesis` (56), `Pluchea pollination biology` (181), `Pluchea volatile signalling` (251), `Pluchea photoperiod` (125), `Pluchea circadian rhythm` (11), and supplement20 `Pluchea epidermal lens cells` (15), `Pluchea epidermal focusing leaf optics` (2). These are actual cached executions, all copied word for word ahead of web queries in this worker's wanted lines. Screened all124 displayed entries including repeated works, plus family titles/abstract starts and candidate output. New real leads from these supplements add3 wanted:2014 lanceolata auxin/cytokinin regeneration,2026 indica manure-response trial,2025 Wetlands storage/salinity/flooding seed trial. The last names original P. odorata among9 species in indexed result text; primary species/chemical methods require confirmation. Germination dioscoridis DOI10.21608/ejbo.2021.72086.1670 is supplied by cached primary metadata; wanted issue2022 is explicit in indexed primary PDF.
+
+Supplement dispositions:metal-content ecocatalysis is removed-leaf analysis; extract wound/gel/larva/antibacterial/antifungal/tea/tempeh studies measure removed substances or other organisms. Pluchea allelopathy sources test Brassica/Zea/Allium/cotton receivers and do not measure a Pluchea response or intact volatile signal. Other plant response papers name wheat/lambsquarter/canarygrass, Stevia, Portulaca, Thymus or Tamarix; taxonomy/anatomy concerns Calea, Stephanodoria, Pulicaria/Iphionopsis, Jatropha, Vernonia, Ocimum or nonfocusing Pluchea. Snail migration, bees, ants, birds and mouse/human pharmacology are other-organism endpoints. Phenology, bee-flora, urban floral traits, mistletoe climate interactions and sexual specialization sources identify no within-day Pluchea schedule in available abstract starts. Canopy opening paper has only repository imprint; old wildflower books, Oklahoma volume, pollination ecology, salinity bibliography and general heredity/taxonomic books remain sparse citation pointers, not declared exhausted whole texts or automatically requested background. Generic plant flavonoid/symbiosis and flower-development reviews display no specific Pluchea experiment. All supplemental candidate dispositions remain in progress because no null is permitted with incomplete common-name API protocol and plausible leads.
+
+Chemical boundary:flower essential-oil10.1080/10412905.2009.9700105 and indica/basil oil antioxidant assays measure removed oils; dioscoridis/Anthemis volatile composition may likewise be extract work, with sampling method unresolved from displayed title. They establish no intact signal or plant receiver response. Texas flora scent-on-touch and Florida butterfly-attraction observations are real natural-history pointers without controlled emission/signalling measurements; no invented primary volatile paper requested. Generic VOC signalling reviews identify no Pluchea experiment in returned snippets; Sweetscent mosquito lure is a synthetic vertebrate-odor product, not the plant. Diel results show seasonal floras, morphology after anthesis and unrelated Passiflora/Browneopsis; no daily Pluchea schedule established. Eye results are ordinary anatomical/barcoding descriptions, animal eye histology and generic ocelli review without a Pluchea focusing experiment. No null while missing API paired protocol persists and light/chemical candidates remain.
+
 ## 2026-10-27 — worker32 Momordica handover
 
 This worker cumulative:2 newly available-source-screened genera (Tridax and Momordica),26 actual web queries,15 wanted lines,0 search records,0 evidence. This checkpoint:Momordica,12 queries,9 wanted. Cumulative batch:12 genera screened through Momordica at the available-source boundary,145 actual round28 web queries,108 wanted lines,0 search records,0 evidence.28 untouched genera remain, beginning Pluchea, Modiola and Taraxacum. Stop between genera for fresh-context continuation. OpenAlex/API gaps remain explicitly unrun after the shared429, including original Hamamelis repairs; no unrestricted full-protocol/exhaustion claim. Preserve genuine earlier wanted-only screens even if codex_queue reoffers them.
