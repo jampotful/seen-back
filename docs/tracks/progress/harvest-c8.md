@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 11/40 genera screened here through Bignonia;12 search records;121 wanted lines;0 evidence and measured closures. Platanus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving28 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker29 stopped between Bignonia and Platanus for fresh-context continuation.
+**Current checkpoint:** 12/40 genera screened here through Platanus;13 search records;135 wanted lines;0 evidence and measured closures. Euonymus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving27 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker34 stopped between Platanus and Euonymus for fresh-context continuation.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -389,3 +389,47 @@ Added1 real, globally absent wanted: Maeda,Tamotsu,Yamaoka,Ozaki2015,10.3389/fni
 Wrote eye_type and diel nulls with explicit screened dispositions. Morning anthesis in the AGRIS Singh2009 paper is Pyrostegia venusta (old Bignonia venusta), not accepted Bignonia; family florivory10.3389/fpls.2022.813418 likewise explicitly identifies Pyrostegia. Pachyptera floral maturation, Tecoma and Jacaranda seed studies are other accepted genera. Family flowering-colour phenology is seasonal and butterfly/bee diurnality belongs to animals. Nogueira2020 temporal production of new tissues/ant attendance exposes no daily plant rhythm. Institutional Museu Goeldi/UFRA Gama thesis abstracts address gland ontogeny/histochemistry in B. aequinoctialis, not a diel timing assay; morning ant visitors would describe animals. A targeted title search unexpectedly exposed extensive ResearchGate text; it was not fetched, used as a primary source, cited for a measurement or committed. Legal institutional abstracts were used for the anatomy-scope check. Anatomical epidermal-cell shape does not establish an eye; optical focusing belongs under sense_light_nonvisual10(b). B. nocturna extracted essential oils, pharmacological extracts and other removed-tissue chemistry excluded under10(a), no speculative wanted. No Bignonia daily flowering/scent/leaf rhythm was exposed by the full set of searches.
 
 Actual current screen_candidates.check with the legitimate hg.load cache printed **0 problems** before commit. No evidence,app checks,branch/gate/#29/#30 edits. Platanus is unstarted.
+
+
+## 2026-10-27 — worker34 continuation
+
+**This worker:1 genus (Platanus),1 eye_type search record,14 wanted lines,0 evidence/measurement closures. Cumulative harvest-c8:12/40 genera screened here,13 search records,135 wanted lines,0 evidence/measurement closures.** Pilea protocol remains covered by c4;27 genera require new work, starting Euonymus,Calyptocarpus,Lorinseria. Stopped between genera for fresh context.
+
+Read AGENTS.md first, exact worker34 assignment, round28 worker guide, batch/original queue, round4-harvest, THOROUGH, BRIEF including Round2/records/wanted, round3-sweep and desk-screen points1–10 including10(e); audit53/54 context reviewed. Cloud-environment-runtime skill applied; current connected environment has unrestricted network policy enforced and no secrets/outbound identities. No branch/gate/#29/#30 changes, app checks or evidence writes. Cache provenance is legitimate hg.load data from coordinator-fetched ci55a1f658a687c5d355ae11d9eec65def211f4033. Official harvest_get.show and screen_candidates.show report no Platanus genus harvest; cache also has no Platanaceae family. No failed or unrun API queries represented as executed. Global original gaps list all4 traits for P. occidentalis and P. racemosa; corrected-first accepted-name evidence has no Platanus records. The old sweep-11 combined two-query record is thin and was not treated as completed work.
+
+Connected web queries, word for word in execution order (the trailing space in the tree-regulator title query is preserved in JSON):
+- `Platanus seed germination light dark`
+- `Platanus germination gibberellin OR smoke OR dormancy`
+- `Platanus floral scent volatiles`
+- `Platanus flower opening time anthesis`
+- `American sycamore flower opening time anthesis`
+- `Platanus eye type`
+- `American sycamore eye type`
+- `Platanus chemical sense volatile response`
+- `American sycamore chemical sense volatile response`
+- `Platanus light photoperiod phototropism`
+- `American sycamore light photoperiod phototropism`
+- `Platanaceae photoreceptor review`
+- `Platanus epidermal lens cells focusing light`
+- `American sycamore epidermal lens cells focusing light`
+- `"Platanus" "diurnal" pollen release`
+- `"EFFECTS OF RED AND FAR-RED LIGHT" "PLATANUS"`
+- `"Warmer temperatures determine the germination window" Platanus`
+- `"Gibberellin-induced dormancy" Platanus`
+- `"Platanus" "seed" Bonner 1976 gibberellin`
+- `"Gibberellin-induced dormancy" "Platanus" jstage`
+- `"Germinating and dynamics of germination seeds" Platanus`
+- `"Tree Growth Regulator Effect on Phototropism" `
+- `"Urban lighting alters chlorophyll metabolism"`
+- `"PaAIL1 Genes Modulate" "short" Platanus`
+- `"Integrated of metabolome" "Platanus" light 2025`
+- `"Seasonal, diurnal, and moderate drought" Platanus`
+- `"The effect of light quality on growth, photosynthesis, leaf anatomy and volatile isoprenoids"`
+
+All exposed titles/snippets and returned abstracts read; genuinely fewer than20 results per individual query were not claimed as20. Raw results saved in work/harvest-c8/Platanus-web0–6.txt. Initial output truncation of web0 was recovered from the complete stored tool response before screening; no omitted stretch counted as read. The four required trait pairs include American sycamore as common name, independently confirmed by USDA, NC State and other university results. Platanaceae photoreceptor review search exposed general reviews, not a family-specific review; no nearest measured relative exists in original gaps. General plant photoreceptor review10.1146/annurev-arplant-042809-112259 and optical review10.3390/plants10071455 were screened at snippet/abstract level. No source/fullpaper page fetched; no OpenAlex/MDPI/UChicago/SANBI request, paid API/copy or unauthorized mirror used. ResearchGate and other restricted/unauthorized full-text listings exposed incidentally in search were not used as primary measurement sources.
+
+Added14 globally absent real target leads after DOI/normalized-title/URL and papers-status checks:2025 riparian seed ecophysiology10.1111/1442-1984.70004;2021 red/far-red seed germination in official Agrosym proceedings;2019 warmer-temperature germination poster via Catania/SIMASEED;2002 P. occidentalis/P. acerifolia germination in Plant Introduction;1979 gibberellin-induced winter-bud dormancy;1999 sycamore tree-regulator/phototropism10.48044/jauf.1999.007;2021 daily chlorophyll/CO2 urban-lighting experiment;2026 diurnal London-plane BVOC emissions;2016 oriental-plane growth/emission under differing light qualities;2018 street-light phenology;2025 ALAN leaf-senescence10.1186/s12870-025-07179-1;PaAIL1 experimentally measured short-day expression/dormancy study via PMC;geographic/photoperiod growing-season study via PubMed;1974 GA-soaked sycamore seed germination. Unknown metadata empty/null. Targeted queries verified legal source identities and experiments; no tomato,Tilia,poplar or other background-crop requests appended. Congeneric papers do not license species carry. Gene-study snippet specifically exposes measured leaves under controlled SD/LT treatments, rather than genomic prediction alone; intake must still confirm eligible physiological scope. Temperature/storage germination paper remains a mandatory10(e) candidate with no claimed light/chemical result. Urban-light and emission papers provide plausible diel candidates, so no daily null. Emission sources must confirm living/attached sampling and signal interpretation under10(a); no removed-tissue oil analysis substituted.
+
+Reused existing global Woody Plant Seed Manual request (already here for Morella) rather than duplicating the book. USDA Silvics/FEIS search snippets explicitly contrast P. occidentalis light/dark germination, and manual snippet explicitly gives sycamore GA treatment, supporting its relevance. No numeric measurement logged from those snippets. Pollen transport/concentration alone is influenced by wind/turbulence; London1991 snippet itself says anthesis timing unknown, so atmospheric pollen cycles were not asserted to measure a plant clock. Seasonal canopy flowering/pollen-onset dates are not within-day timing. SPME chemistry of harvested Platanus leaves and distilled leaf constituents fail10(a); fungal culture emissions10.1111/efp.12618 belong to Ceratocystis; sycamore-lace-bug chemosensory work belongs to the insect. Sycamore maple light studies are Acer pseudoplatanus, not Platanus. Those do not suppress the actually relevant living chemical-response candidates.
+
+Only eye_type negative written under owner10(b), with explicit screened dispositions for general epidermal-lens/focusing papers, animal eye-lens differentiation/transparency and descriptive eye-catching bark. Focusing belongs under sense_light_nonvisual; known species in the Brodersen/Vogelmann comparison are other genera. No light/chemical/diel negative while target candidates await intake. Actual current screen_candidates.check using the legitimate cache printed **0 problems** before commit. Euonymus is unstarted.
