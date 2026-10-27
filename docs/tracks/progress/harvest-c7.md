@@ -1,3 +1,23 @@
+# harvest-c7 — issue38 FINAL COORDINATOR CHECKPOINT
+
+## 2026-10-27 — dispatch regards-issue-38-20261027T125741334Z
+
+48 total GPT-6.1 Sol / High workers completed across this round; no further worker was launched after the cap. Fetched/rechecked main: bbc35ff2050022e029b68875e3d219aab8f0ddd4. Branch: codex/round-2026-10-27-issue-38.
+
+This batch: **9 new genus web screens; 1 additional whole-genus adoptions; 58 new wanted lines; 0 new searched/null rows; 0 evidence records or measurement closures.** All new screens remain protocol-partial: OpenAlex returned429 and missing API steps were not treated as zero hits. Existing canon/evidence/search/wanted holdings and source/species forks were adopted at the scope recorded below. Papers, methods and tables await legal intake and desk audit/application.
+
+New web-screened genera: Gaillardia, Serenoa, Acer, Monarda, Taxodium, Mitchella, Euphorbia, Eupatorium, Juniperus.
+
+Additional whole-genus adoptions: Nekemias. Prior covered/adopted main genus positions: 30.
+
+**Remaining round screening candidates: 0. Exact next: none.** No unreviewed genus candidate remains in this batch.
+
+Remaining means not yet web-screened/adopted in this round; it does not erase older per-trait coverage. Before assigning any listed genus, reconcile its actual-species evidence, substantive cross-unit searches/wanted and owner dispositions. Do not repeat completed web queries or assume physiological carry from congeners. Unrun/failed service steps and source-reading holds remain separate work.
+
+Raw queue initially reoffered 12 entries for this unit because codex_queue counts its same-unit searched/evidence, not all progress/wanted/cross-unit coverage. Queue/gates/OA holds were not changed, and no null row was manufactured to empty it. All exact source/query histories, handoffs, refused-service/review notes and provisional counts are retained below; this coordinator checkpoint is current.
+
+---
+
 # harvest-c7
 
 ## Current totals — 2026-10-27 worker45
@@ -243,3 +263,313 @@ All64 distinct cached Ilex works including family corpus screened from every tit
 Stop between genera under the parent’s48-worker round cap and context boundary;10 remain: Gaillardia,Serenoa,Acer,Monarda,Nekemias,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Nekemias replant-1 substantive screening must be preserved when reached. No source pages fetched/evidence written; no new OpenAlex/MDPI/UChicago/SANBI calls or paid API. Web-query accounting is reconciled below; no actual web-tool refusal. Parent handles push/findings; no branch,gates,#29/#30,app startup/tests changed. Final gate outcome follows before commit.
 
 Final worker45 gate after metadata cleanup printed `0 problems`; `git diff --check` passed for all three owned paths. Five own-round uncertain publication-year assignments were normalized to null rather than inferring a year from a DOI suffix, volume, or relative posting age; real cached/reference-verified years preserved. JSONL counts31 searched/327 wanted and106 actual web queries across the five worker45 records verified. Earlier26 searched/260 wanted lines preserved byte-for-byte against the pre-worker45 revision; source provenance and all historical progress remain. This worker wrote0 evidence records;67 wanted-only leads remain unresolved until reading. Final next genus Gaillardia,10 remaining as TOP lists; no further genus started under48-worker round cap. All checkpoint commits staged and committed only harvest-c7 paths under shared flock; parent handles push/PR and findings pass. No app/build/server/test checks run.
+
+## 2026-10-27 issue38 worker10 continuation
+
+Starting main file baseline: **112 wanted and29 searched**; these byte prefixes and all historical progress above preserved. Historical issue28 screening remains30/40 genera despite desk registry-author incorporation reducing wanted counts; no old missing lines refilled. Salvia/Rhus excluded. This round skips OpenAlex after coordinator HTTP429; no failed service is called zero hits. Under conservative issue38 rule **no new null searched records** while required OpenAlex steps incomplete; eye_type remains owner-defined none, focusing belongs to nonvisual light. No sources fetched/evidence written.
+
+### Gaillardia checkpoint
+
+New web-screened genus1; full protocol remains partial. Required harvest_get/screen_candidates show genus absent from cached runs1-17,20,23,24. Canon catalog,corrected-first accepted-name evidence (none for Gaillardia),global wanted/search and paper-status checked. All actually returned titles/snippets read,without claiming20 per query. Seven new wanted leads target original queued G.pulchella/G.aristata germination/light and live GA3/nitrate/smoke response. Source spelling aristate retained as a reader flag. Hybrid G.grandiflora photoperiod and ray-corolla hormones are real but unqueued; no new congener-only request. Water-distilled oils10.1080/10412905.2008.9700078 excluded10(a); static-headspace harvested-flower study10.1080/22297928.2018.1548302 cannot establish living target emission and was not requested. Seasonal bloom pages,cut-flower harvest stages and flower lifespan are not daily timing. No diel/chemical/light/eye null. Family-review query returned general algae/insect works,no Asteraceae-specific photoreceptor review; no invented review completion.
+
+Exact executed web queries (16 distinct, mandatory germination pair first):
+- `Gaillardia seed germination light dark`
+- `Gaillardia germination gibberellin OR smoke OR dormancy`
+- `Gaillardia floral scent volatiles`
+- `Gaillardia light response photoperiod`
+- `blanket flower light response photoperiod`
+- `Gaillardia response to airborne volatile signals`
+- `blanket flower response to airborne volatile signals`
+- `Gaillardia flower opening time anthesis`
+- `blanket flower flower opening time anthesis`
+- `Gaillardia plant ocelli lens-like epidermal cells eye`
+- `blanket flower plant ocelli lens-like epidermal cells eye`
+- `Asteraceae photoreceptor review`
+- `"Gaillardia pulchella" germination light gibberellic`
+- `"Gaillardia" anthesis "morning"`
+- `"Gaillardia aristata" smoke germination Krock`
+- `"Seed ecology of some Florida ecotypes of native wildflowers"`
+
+Current round additions:1 newly web-screened genus,7 wanted,0 searched,0 evidence. Current files119 wanted/29 searched; historical screening coverage31/40 with9 still unreviewed beginning Serenoa. Gate required before commit below.
+
+Gaillardia checkpoint screening gate printed `0 problems`. Coordinator cross-unit reconciliation: Nekemias is adopted from substantive replant-1 diel/eye/light protocols and wanted54/55 chemical coverage,not new work. Original ten-name tail therefore contains nine newly eligible genera; after Gaillardia eight eligible genera remain plus Nekemias adopted0new. Historical records/flags remain untouched.
+
+### Serenoa checkpoint
+
+Newly web-screened genus2,full protocol partial. Required harvest_get/screen_candidates run; all103 distinct cached works (family/citation included) read from every title and all available abstract text. Harvest run3 plus supplements15/20 has11 successful genus queries and family review; no failed step. Cached citation10.3375/043.038.0104 returns one work,Are Native Palms Pollinator Hogs(10.3375/043.040.0205): Angadenia reproductive response beside flowering palms,not Serenoa daily timing. Family-review alternative Twenty-five years of progress in understanding pollination mechanisms in palms(10.1093/aob/mcr192) used as snippet/cached-abstract context,no source fetch. Cached phytochrome-gene family phylogeny is not target functional measurement.
+
+Canon,corrected-first accepted-name evidence,global searched/wanted and owner status checked. Existing main scent sweep-46:10 preserved; no repeat chemical pair or duplicate scent request. New germination leads are deliberately uncertain about whether light was experimentally compared; fixed14h culture is not called a light response. Direct floral-biology titles are unresolved daily-timing candidates,no hours invented. Medical extracts,processed berries,hair-loss trials and pharmacology concern human/animal responses and fail10(a); camera lens ghost-orchid paper10.1653/024.102.0401 and human-eye review10.3389/fphar.2024.1270073 do not measure a plant eye. Owner eye_type none,focusing belongs to light; no new eye/null rows while API steps incomplete.
+
+Exact cached successful queries in source order:
+- `Serenoa phytochrome photoreceptor`
+- `Serenoa light perception`
+- `Serenoa phototropism`
+- `Serenoa flower opening time`
+- `Serenoa nyctinasty`
+- `Serenoa anthesis`
+- `Serenoa pollination biology`
+- `Serenoa photoperiod`
+- `Serenoa circadian rhythm`
+- `Serenoa epidermal lens cells`
+- `Serenoa epidermal focusing leaf optics`
+- `Arecaceae photoreceptor review`
+
+Exact executed web queries (13 distinct,first germination pair first):
+- `Serenoa seed germination light dark`
+- `Serenoa germination gibberellin OR smoke OR dormancy`
+- `Serenoa floral scent volatiles`
+- `Serenoa light response photoperiod`
+- `saw palmetto light response photoperiod`
+- `Serenoa flower opening time anthesis`
+- `saw palmetto flower opening time anthesis`
+- `Serenoa plant ocelli lens-like epidermal cells eye`
+- `saw palmetto plant ocelli lens-like epidermal cells eye`
+- `Arecaceae photoreceptor review`
+- `"Serenoa repens" light shade seedlings`
+- `"Seed germination of Serenoa repens"`
+- `"Temperature and imbibition effects" "Serenoa"`
+
+Four new wanted leads (existing Pollination Ecology request preserved without duplication); current issue38 worker10 additions2 new web-screened genera,11 wanted,0 searched,0 evidence. Files123 wanted/29 searched; baseline112/29 preserved byte-for-byte. Adopted Nekemias0new preserved. Seven newly eligible genera remain:Acer,Monarda,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Acer. Historical screened coverage includes30 prior genera plus2 new plus1 adopted=33/40,with API/full-protocol completion not claimed for current round. No OpenAlex/MDPI/UChicago/SANBI calls or source fetches.
+
+Serenoa checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Acer checkpoint
+
+Newly web-screened genus3,full protocol partial. Required harvest_get/screen_candidates confirm absent from cached harvest runs1-17,20,23,24. Canon catalog,corrected-first accepted-name evidence,global wanted/search and owner status checked. Existing canon-3:633 A.saccharum airborne-neighbour response preserved,not treated as all13 queued species measured. All actually returned web titles/snippets read; no20-per-query claim. Thirteen new wanted leads cover actual target live GA/ABA/kinetin/auxin/MeJA,chemical and photoperiod responses,light/dark viable embryo and daily photosynthetic time courses. Endogenous dormancy hormone profiles are not called applied-cue measurements; required10(e) germination titles retained with uncertainties. Numbers never carried among Acer species.
+
+Other-genus Arabidopsis ACER-gene herbivory results excluded; aceroleira is not Acer. Confirmed two-maple light paper10.3389/fpls.2022.999026 names A.mono/A.pseudosieboldianum,neither original target,so no speculative target request. A.tegmentosum/A.acuminatum light/GA studies similarly unqueued; A.ginnala→A.tataricum synonym fork left unresolved without invented carry. Eye searches mainly general ocelli/Boquila/insect essays,no target optical measurement; focusing belongs to light. Anthesis results mainly seasonal phenology,not within-day opening. Sapindaceae photoreceptor searches returned no specific review to assess; family/citation API alternatives remain incomplete because OpenAlex429 skip. No null records for any trait,no papers fetched/evidence written.
+
+Exact executed web queries (18 distinct;germination pair first):
+- `Acer seed germination light dark`
+- `Acer germination gibberellin OR smoke OR dormancy`
+- `Acer jasmonate herbivore`
+- `Acer light response photoperiod`
+- `maple light response photoperiod`
+- `Acer response to airborne volatile signals`
+- `maple response to airborne volatile signals`
+- `Acer flower opening time anthesis`
+- `maple flower opening time anthesis`
+- `Acer plant ocelli lens-like epidermal cells eye`
+- `maple plant ocelli lens-like epidermal cells eye`
+- `Sapindaceae photoreceptor review`
+- `"Acer negundo" germination light gibberellin`
+- `"Acer platanoides" germination light gibberellin`
+- `"Acer" "flower" "anthesis" "hour"`
+- `"Effect of light intensities on the photosynthesis, growth and physiological performances of two maple species"`
+- `"Sapindaceae" "photoreceptor" review`
+- `"Acer" "diurnal" "photosynthesis"`
+
+This worker cumulative3 new web-screened genera,24 wanted additions,0 searched,0 evidence; current136 wanted/29 searched against112/29 starting baseline. Nekemias adopted0new. Six newly eligible genera remain:Monarda,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Monarda. Historical screened coverage30 prior+3 new+1 adopted=34/40; current-round full protocol completion/exhaustion remains0.
+
+Acer checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Monarda checkpoint
+
+Newly web-screened genus4,full protocol partial. Required harvest_get/screen_candidates confirm absent from cached harvest runs1-17,20,23,24. Canon,corrected-first accepted-name evidence (none),global searched/wanted and owner statuses checked. All returned titles/snippets read,not claimed20 each. Four new wanted lines and the existing Deno first-supplement request retain primary M.fistulosa light/dark germination,direct0800–2000 flower-opening timing,M.citriodora live foliar bio-regulator response,M.punctata germination-book trail and M.fistulosa negative smoke response. Extracts applied to living Monarda recipients qualify10(d); oils/Monarda extracts tested on bees,mammals or microbes do not10(a). Smoke-apparatus paper10.3732/apps.1300097 lists plants burned to make smoke; a donor-material list alone does not establish Monarda seed response,so not requested. Agency smoke-response statement is a separate explicit negative trial lead. Seasonal bloom/cut-flower maturity and UGA thesis10AM–2PM sampling window do not themselves establish daily rhythms; no speculative diel requests. Unsupported precise dawn figures on photography site not treated as source evidence.
+
+Family photoreceptor query returned general plant/insect reviews and medicinal light-metabolism review,no specific family photoreceptor review. General family context Integrative Perspectives on Light-Regulated Metabolism in Medicinal Plants (MDPI2218-1989/16/7/479) viewed only as snippet,not fetched. Eye returns mainly bees/general ocelli; plant eye_type none and epidermal focusing belongs to nonvisual light. No null rows while API protocol incomplete,no source fetch/evidence. Original queued targets fistulosa/citriodora/punctata distinguished from didyma/hybrids.
+
+Exact executed web queries (22 distinct;germination pair first):
+- `Monarda seed germination light dark`
+- `Monarda germination gibberellin OR smoke OR dormancy`
+- `Monarda floral scent volatiles`
+- `Monarda light response photoperiod`
+- `bee balm light response photoperiod`
+- `Monarda response to airborne volatile signals`
+- `bee balm response to airborne volatile signals`
+- `Monarda flower opening time anthesis`
+- `bee balm flower opening time anthesis`
+- `Monarda plant ocelli lens-like epidermal cells eye`
+- `bee balm plant ocelli lens-like epidermal cells eye`
+- `Lamiaceae photoreceptor review`
+- `Monarda jasmonate salicylic gibberellin growth regulator`
+- `"Monarda fistulosa" "smoke" germination`
+- `"Monarda citriodora" "anthesis"`
+- `"Monarda fistulosa" "nectar" "morning"`
+- `"Monarda citriodora" "growth regulators"`
+- `"Monarda punctata" germination light`
+- `"Monarda" "floral scent" emission headspace`
+- `"Monarda citriodora" "moringa" "pomegranate"`
+- `"An effective system to produce smoke solutions" Monarda`
+- `"Monarda fistulosa" "flower opening" nectar`
+
+This worker cumulative4 new web-screened genera,28 wanted additions,0 searched,0 evidence. Current140 wanted/29 searched vs112/29 baseline. Nekemias adopted0new,all historical flags preserved. Five newly eligible genera remain:Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Taxodium. Historical screened coverage30 prior+4 new+1 adopted=35/40; current-round complete/exhausted genera0 because API steps skipped.
+
+Monarda checkpoint gate printed `0 problems`; existing Deno first-supplement request preserved without duplication (new wanted4). Owned-path `git diff --check` passed before commit.
+
+### Taxodium checkpoint
+
+Newly web-screened genus5,full protocol partial. Required harvest_get/screen_candidates confirm absent from cached runs1-17,20,23,24. Canon,corrected-first accepted-name evidence,global wanted/search and owner statuses checked. Main partial light evidence sweep-27:1 (daylength/xylogenesis10.1029/2025JG009004) preserved; no unnecessary repeat light pair,no claim full-text measurement. Four new target leads:germination thesis,live GA/kinetin/nitrate/thiourea seed trial,GA dormancy after-effect and live salinity/daily gas exchange. Fixed germination photoperiod is not itself light comparison; uncertain methods explicit. Mucronatum light/GA studies are real but unqueued; no invented carry to distichum. Flowering-season/cone-opening pages do not establish diel. Chemical paired queries yielded general plant/Thuja/aspen work,not Taxodium measures; specific target seed/GA/gas-exchange leads retained instead. Cut wood,extracts and other-plant jasmonate studies do not count10(a). Eye results general plant/insect essays;focusing belongs to light,eye_type owner none.
+
+Family photoreceptor query returned generic reviews and family conifer morphology,no specific family photoreceptor review. API/citation step remains incomplete under OpenAlex429 skip; no new null rows. No source pages fetched,evidence written,or forbidden/refused service called.
+
+Exact executed web queries (14 distinct;germination pair first):
+- `Taxodium seed germination light dark`
+- `Taxodium germination gibberellin OR smoke OR dormancy`
+- `Taxodium jasmonate herbivore`
+- `Taxodium response to airborne volatile signals`
+- `bald cypress response to airborne volatile signals`
+- `Taxodium flower opening time anthesis`
+- `bald cypress flower opening time anthesis`
+- `Taxodium plant ocelli lens-like epidermal cells eye`
+- `bald cypress plant ocelli lens-like epidermal cells eye`
+- `Cupressaceae photoreceptor review`
+- `"Taxodium distichum" "gibberellic acid"`
+- `"Germination Promotion of Loblolly Pine and Baldcypress Seeds by Stratification and Chemical Treatments"`
+- `"Taxodium distichum" "diurnal" "photosynthesis"`
+- `"Regeneration of cypress" "Gunderson"`
+
+This worker cumulative5 new web-screened genera,32 wanted additions,0 searched,0 evidence. Current144 wanted/29 searched vs112/29 baseline. Nekemias adopted0new. Four newly eligible genera remain:Mitchella,Euphorbia,Eupatorium,Juniperus. Next Mitchella. Historical coverage30 prior+5 new+1 adopted=36/40; current full-protocol/exhaustion0.
+
+Taxodium checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Mitchella checkpoint
+
+Newly web-screened genus6,full protocol partial. Required tools run; all93 distinct cached works,including family/citation corpus,read from every title/all available abstract text (initial large display was reread in bounded sections after truncation). Harvest run4 plus supplements14/20:11 successful genus queries plus family review,no failed step; cached citation10.1590/1519-6984.281402 returned0. Family-review alternative Phylogeny and classification of the coffee family:Overview and outlook10.1002/tax.13167 used from web snippets as taxonomy context,not a target photoreceptor measurement. Canon,corrected-first accepted-name evidence,global wanted/search and statuses checked. Existing partial scent evidence recheck-5-fixed:15/sweep-11:1 preserved; no chemical pair or duplicate scent request. Nectar/floral VOC changes over1–5 days are ageing,not within-day rhythm. Partridgeberry often confuses Vaccinium/common-name cranberry and Mitchella winery,explicitly excluded.
+
+Five provisional light wanted leads assembled before global dedup:direct target light-environment/lightfleck responses,experimental-shading species table,propagation thesis and germination-book trail. No invented species-level community effect; metadata conflicts explicit and years null when uncertain. Intumescence review10.7831/ras.12.0_182 describes hypertrophied cells,not plant eyes; butterfly10.1101/2023.10.05.561098 and pollinator-vision10.1093/aob/mcae213 concern animal vision. Plant eye_type none,focusing belongs to light. No credible new within-day lead established by paired searches; no null written because API steps incomplete. No paper/source fetched/evidence written.
+
+Exact cached successful queries in source order:
+- `Mitchella phytochrome photoreceptor`
+- `Mitchella light perception`
+- `Mitchella phototropism`
+- `Mitchella flower opening time`
+- `Mitchella nyctinasty`
+- `Mitchella anthesis`
+- `Mitchella pollination biology`
+- `Mitchella photoperiod`
+- `Mitchella circadian rhythm`
+- `Mitchella epidermal lens cells`
+- `Mitchella epidermal focusing leaf optics`
+- `Rubiaceae photoreceptor review`
+
+Exact executed web queries (12 distinct;germination pair first):
+- `Mitchella seed germination light dark`
+- `Mitchella germination gibberellin OR smoke OR dormancy`
+- `Mitchella floral scent volatiles`
+- `Mitchella light response photoperiod`
+- `partridgeberry light response photoperiod`
+- `Mitchella flower opening time anthesis`
+- `partridgeberry flower opening time anthesis`
+- `Mitchella plant ocelli lens-like epidermal cells eye`
+- `partridgeberry plant ocelli lens-like epidermal cells eye`
+- `Rubiaceae photoreceptor review`
+- `"The propagation and culture of Mitchella repens"`
+- `"Mitchella repens" "light" "photosynthesis" study`
+
+Checkpoint new wanted count after dedup and cumulative counts follow below. Three newly eligible genera remain:Euphorbia,Eupatorium,Juniperus. Next Euphorbia. Historical coverage30 prior+6 new+1 adopted=37/40; full protocol remains partial for current work.
+
+Mitchella added5 wanted; this worker cumulative6 new web-screened genera,37 wanted additions,0 searched,0 evidence. Current149 wanted/29 searched vs112/29 starting baseline. Gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Euphorbia checkpoint
+
+Newly web-screened genus7,full protocol partial. Required tools run;all73 distinct cached works including family/citation corpus read from every title/all available abstract text. Run2 plus successful chemical supplement14:four genus queries and family review;cached citation10.1016/j.tree.2009.09.010 returned0. Family context Divergence of flowering-related genes to control flowering in five Euphorbiaceae genomes10.3389/fpls.2022.1015114 names Ricinus,Jatropha,Vernicia,Manihot,Hevea,not target Euphorbia;no functional inference. Canon,corrected-first accepted-name evidence,global searched/wanted and statuses checked. Actual main light evidence E.pulcherrima/E.paralias is unqueued and preserves only its own species; it does not suppress original ten target species' light pairs or create genus carry.
+
+Eight provisional target wanted leads assembled before dedup:amygdaloides subsp.arbuscula/maculata/heterophylla light-dark germination,hirta/peplus living culture light/2,4-D,reproductive biology of three queued weeds and cyparissias floral timing. Culture viability/species forks explicit. Light-positive and light-negative heterophylla trials both retained,not combined into false uniformity. Other-genus and unqueued esula/kansui/milii/pulcherrima hormone/photoperiod trials are real but no target-specific request invented;virgultosa and virgata not equated. Steam-volatiles10.1002/ffj.1148,propolis10.3390/antibiotics13030230,latex10.2172/6124450,extract insecticide10.33545/2618060x.2022.v5.i2b.114 and mammalian pharmacology fail10(a) as target sensing evidence. Human-eye extract10.3390/ph17091193 not plant eye;animal vision/fluorescent lamp word matches similarly excluded. Eye_type owner none,epidermal focusing light. No null records while API steps incomplete,no source fetch/evidence written.
+
+Exact cached successful queries in source order:
+- `Euphorbia phytochrome photoreceptor`
+- `Euphorbia light perception`
+- `Euphorbia phototropism`
+- `Euphorbia volatile signalling`
+- `Euphorbiaceae photoreceptor review`
+
+Exact executed web queries (18 distinct;germination pair first):
+- `Euphorbia seed germination light dark`
+- `Euphorbia germination gibberellin OR smoke OR dormancy`
+- `Euphorbia floral scent volatiles`
+- `Euphorbia light response photoperiod`
+- `spurge light response photoperiod`
+- `Euphorbia response to airborne volatile signals`
+- `spurge response to airborne volatile signals`
+- `Euphorbia flower opening time anthesis`
+- `spurge flower opening time anthesis`
+- `Euphorbia plant ocelli lens-like epidermal cells eye`
+- `spurge plant ocelli lens-like epidermal cells eye`
+- `Euphorbiaceae photoreceptor review`
+- `"Euphorbia maculata" germination light gibberellin`
+- `"Euphorbia" "Response of four medical plants"`
+- `"Temperature and storage time" "Euphorbia" "amygdaloides"`
+- `"Reproductive biology of four weedy Euphorbia species from Ile-Ife"`
+- `"Pollen production, flowering and insect visits" "Euphorbia"`
+- `"Euphorbia heterophylla" "germination" "gibberellic"`
+
+New wanted count after dedup/cumulative counts follow below. Two newly eligible genera remain:Eupatorium,Juniperus. Next Eupatorium. Historical coverage30 prior+7 new+1 adopted=38/40; current-round full protocol/exhaustion remains0.
+
+Euphorbia added8 wanted;this worker cumulative7 new web-screened genera,45 wanted additions,0 searched,0 evidence. Current157 wanted/29 searched vs112/29 starting baseline. Gate printed `0 problems`;owned-path `git diff --check` passed before commit.
+
+### Eupatorium checkpoint
+
+Newly web-screened genus8,full protocol partial. Required tools confirm absent from cached runs1-17,20,23,24. Canon,corrected-first accepted-name evidence(none),global wanted/search and owner statuses checked. All returned titles/snippets read,no20-per-query claim. Four provisional actual-target leads:capillifolium primary light-sensitive germination,cannabinum dormancy/germination,serotinum primary light/stratification reference,and cannabinum floral-VOC database primary-source trail. Cannabinum VOC source not assumed living emission until methods checked. Perfoliatum medicinal-grinding odor is removed-tissue chemistry10(a),not living signal; targeted GA query gave no direct applied-hormone study. No chemical/diel/light/eye null because API/full protocol incomplete.
+
+Historical Eupatorium adenophorum = Ageratina adenophora and Joe Pye Eupatorium purpureum/fistulosum now Eutrochium were identified as different current genera in source snippets; their abundant light/MeJA/diurnal results do not carry to queued Eupatorium. Photoperiod thesis names only genus and may cover reclassified plant,so no speculative target request. Seasonal bloom,cut-flower stage and multi-day developmental phases do not establish within-day activity. General eye essays/animal ocelli do not measure plant eyes;eye_type none,focusing belongs to light. Asteraceae family review query again returned general algae/insect/plant photoreceptor reviews,no specific family alternative. No source pages fetched or evidence written.
+
+Exact executed web queries (15 wordings;germination pair first):
+- `Eupatorium seed germination light dark`
+- `Eupatorium germination gibberellin OR smoke OR dormancy`
+- `Eupatorium floral scent volatiles`
+- `Eupatorium light response photoperiod`
+- `boneset light response photoperiod`
+- `Eupatorium response to airborne volatile signals`
+- `boneset response to airborne volatile signals`
+- `Eupatorium flower opening time anthesis`
+- `boneset flower opening time anthesis`
+- `Eupatorium plant ocelli lens-like epidermal cells eye`
+- `boneset plant ocelli lens-like epidermal cells eye`
+- `Asteraceae photoreceptor review`
+- `"Eupatorium perfoliatum" gibberellin auxin germination`
+- `"Eupatorium serotinum" germination light`
+- `"Eupatorium cannabinum" "floral" "volatiles"`
+
+Checkpoint wanted/cumulative totals follow below. Last newly eligible genus remains Juniperus,next. Historical coverage30 prior+8 new+1 adopted=39/40; current-round full protocol/exhaustion0.
+
+Eupatorium added4 wanted;this worker cumulative8 new web-screened genera,49 wanted additions,0 searched,0 evidence. Current161 wanted/29 searched vs112/29 baseline. Own new Serenoa supplement label corrected to15 and Euphorbia to14 from actual cached descriptors;historical content unchanged. Gate printed `0 problems`;owned-path `git diff --check` passed before commit.
+
+### Juniperus checkpoint
+
+Newly web-screened genus9,last eligible tail genus;full protocol partial. Required tools run;all72 distinct cached works including family/citation corpus read from every title/all available abstract text in bounded chunks. Run2 plus successful chemical supplement12:four genus queries plus family review;cached citation10.1029/2025JG009004 returned0. Family query gives generic plant photoreceptor/cold-acclimation context,no functional target measurements. Canon,corrected-first accepted-name evidence (none for genus),global wanted/search and paper statuses checked. Prior Pistacia evidence sweep-36:1 mentions Juniperus collectively but is not a named Juniperus species measurement;no automatic target coverage inferred.
+
+Nine provisional wanted leads assembled before dedup:actual communis/virginiana light responses,oxycedrus daily fluorescence/emission,living communis BVOCs and virginiana applied GA/auxin/acid seed/cutting responses. Fixed cultures and live-vs-excised forks explicit. Communis germination review negative/variable effects preserved;no procera/drupacea/monosperma study silently carried to original four species. No clear target ashei jasmonate result established;its absence is not exhaustion. Hydrodistilled/extracted leaf oils10.1139/v69-334,10.1139/v68-619,10.1139/v68-115,10.1038/s41598-026-60630-7 and10.3390/plants11081025 excluded10(a). Extract pharmacology,tick-repellent oils and beverage syrup are not living plant sensing. Elicitor-mediated Juniperus review10.3390/plants15172593 is a legitimate live-culture reference trail but target species not established in abstract;no speculative target request. Seasonal pollen/cone opening is not within-day anthesis. Oxycedrus epidermal anatomy describes morphology,not focusing;eye_type owner none,focusing belongs to light. No source/paper fetches,evidence writes or new API/refused-service calls.
+
+Exact cached successful queries in source order:
+- `Juniperus phytochrome photoreceptor`
+- `Juniperus light perception`
+- `Juniperus phototropism`
+- `Juniperus volatile signalling`
+- `Cupressaceae photoreceptor review`
+
+Exact executed web queries (15 wordings;germination pair first):
+- `Juniperus seed germination light dark`
+- `Juniperus germination gibberellin OR smoke OR dormancy`
+- `Juniperus jasmonate herbivore`
+- `Juniperus light response photoperiod`
+- `juniper light response photoperiod`
+- `Juniperus response to airborne volatile signals`
+- `juniper response to airborne volatile signals`
+- `Juniperus flower opening time anthesis`
+- `juniper flower opening time anthesis`
+- `Juniperus plant ocelli lens-like epidermal cells eye`
+- `juniper plant ocelli lens-like epidermal cells eye`
+- `Cupressaceae photoreceptor review`
+- `"Juniperus virginiana" germination gibberellin`
+- `"Juniperus oxycedrus" "diurnal" emission`
+- `"Juniperus ashei" "jasmonate"`
+
+Final dedup/counts,gates and prefix checks follow below. Newly eligible tail remaining0. Nekemias adopted0new from replant-1;all earlier records/flags untouched. Historical web-screened/adopted coverage30 prior+9 newly reviewed+1 adopted=40/40;this explicitly does not claim current full protocol completion/exhaustion after OpenAlex skip.
+
+### Issue38 worker10 final reconciliation
+
+**Nine newly web-screened genera:Gaillardia,Serenoa,Acer,Monarda,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Nekemias adopted0new** from replant-1's substantive diel/eye/light protocols and held chemical wanted54/55,with all records/flags preserved. Salvia/Rhus not repeated. No eligible genus remains;next none. Historical coverage is now40/40 screened/adopted (30 prior,9 new,1 adopted),not40 full protocols completed in this dispatch.
+
+New additions: **58 wanted,0 searched,0 evidence,0 measurements,0 new full-protocol/exhausted genera**. By genus7/4/13/4/4/5/8/4/9 respectively. Main baseline112 wanted/29 searched becomes170 wanted/29 searched. Historical issue28 wanted327 is preserved provenance,not a missing-main refill target. All112 baseline wanted lines remain a byte prefix;searched file is byte-identical to baseline29 lines;entire origin/main historical progress is a byte prefix. No old logs,branches,legacy records,gates,tools or operational state changed.
+
+Connected web executed143 queries across these nine screens (141 distinct wordings;Asteraceae and Cupressaceae family queries each reused for a second genus). Every actually returned title/snippet read;no claim20 returned per query. Cached full title/available-abstract corpora read:Serenoa103,Mitchella93,Euphorbia73,Juniperus72;other five absent from cached harvest. All exact query wordings and candidate/source/fork dispositions are above. Global wanted/status/corrected-first evidence/accepted-name checks performed for every genus,plus final normalized-title/DOI and extended-title similarity check;existing sources preserved without duplication. No unknown year inferred from URL or memory;unknown authors/metadata empty/null.
+
+OpenAlex skipped throughout after coordinator HTTP429 exhausted-network-budget notice;API/common-name/family/citation obligations left incomplete where not cached. No failed service labelled zero hits,no fallback credentials/purchases/new permissions or refusal retries. No source/paper page fetched,full text downloaded or committed,or evidence extracted. MDPI/UChicago/SANBI direct accesses remained unused. All current null searched rows held entirely under issue38 conservative rule. All checkpoints used serialized commit helper and screening gate0;final gate and diff result are recorded immediately below before commit.
+
+Final Juniperus/worker10 gate printed `0 problems`;owned-path `git diff --check` passed. Verified170 wanted/29 searched,58 new wanted,byte-prefix preservation and unchanged searched. No app checks,builds,servers or tests run. Final commit uses only owned c7 wanted/searched/progress paths under shared flock;coordinator handles push/PR.
+
+
+## 2026-10-27 — issue38 coordinator shared-source scope
+
+Expanded this round's existing second-edition Deno request for Arisaema triphyllum light and Caltha palustris chemical germination leads observed by c13 workers. Explicit target_traits keeps the per-species scope separate. Original Mitchella request/source fields retained; queue-derived ranking recomputed. Edition/key/source methods remain intake work, no measurement/evidence and no new wanted line.

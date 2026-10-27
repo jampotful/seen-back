@@ -1,4 +1,88 @@
+# harvest-c8 — issue38 FINAL COORDINATOR CHECKPOINT
+
+## 2026-10-27 — dispatch regards-issue-38-20261027T125741334Z
+
+48 total GPT-6.1 Sol / High workers completed across this round; no further worker was launched after the cap. Fetched/rechecked main: bbc35ff2050022e029b68875e3d219aab8f0ddd4. Branch: codex/round-2026-10-27-issue-38.
+
+This batch: **17 new genus web screens; 1 additional whole-genus adoptions; 278 new wanted lines; 0 new searched/null rows; 0 evidence records or measurement closures.** All new screens remain protocol-partial: OpenAlex returned429 and missing API steps were not treated as zero hits. Existing canon/evidence/search/wanted holdings and source/species forks were adopted at the scope recorded below. Papers, methods and tables await legal intake and desk audit/application.
+
+New web-screened genera: Cercis, Erechtites, Chamaecrista, Celtis, Rivina, Sphagneticola, Pteridium, Lonicera, Asplenium, Ipomoea, Nandina, Ligustrum, Zanthoxylum, Geranium, Lepidium, Melothria, Commelina.
+
+Additional whole-genus adoptions: Centrosema. Prior covered/adopted main genus positions: 19.
+
+**Remaining round screening candidates: 3. Exact next: Lygodium.** Lygodium, Ludwigia, Monotropa
+
+Remaining means not yet web-screened/adopted in this round; it does not erase older per-trait coverage. Before assigning any listed genus, reconcile its actual-species evidence, substantive cross-unit searches/wanted and owner dispositions. Do not repeat completed web queries or assume physiological carry from congeners. Unrun/failed service steps and source-reading holds remain separate work.
+
+Raw queue initially reoffered 22 entries for this unit because codex_queue counts its same-unit searched/evidence, not all progress/wanted/cross-unit coverage. Queue/gates/OA holds were not changed, and no null row was manufactured to empty it. All exact source/query histories, handoffs, refused-service/review notes and provisional counts are retained below; this coordinator checkpoint is current.
+
+---
+
 # harvest-c8 progress
+
+
+
+### Issue38 worker18 — Sphagneticola web screen and context checkpoint
+
+**Worker18 totals:2 newly web-screened genera (Rivina,Sphagneticola),13 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:159 wanted,23 searched.** Original146 wanted and all23 searched prefix lines preserved. Both new screens remain **protocol-partial**, with required uncached OpenAlex steps skipped after round-wide429; no null searched records or exhaustion claim. Rivina's existing Vora1989 lead adopted without duplication; Sphagneticola's accepted light evidence adopted. Prior Pilea/Centrosema adoption remains preserved. **14 genera still need new screening: Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Exact next Pteridium,unstarted.** Stop between entries at this worker's context boundary; no active partial genus. Zanthoxylum external-3 diel/eye/light must be adopted before its chemical remainder.
+
+Before queries checked original queue,global searched/wanted,papers-status,canon and corrected-first accepted-name main_evidence. Accepted S.trilobata light response is already in recheck-1-fixed#10 and recheck-quotes-3-fixed#134,10.32615/ps.2022.051; adopted without repeat light pair or duplicate source. Original target's three residual gaps are diel,eye_type,chemical. Sweep-25#28 is a single thin combined query,not a completed research protocol; it explicitly saw PMC4111383 only by title and missed the current chemical-recipient candidate below. The official Novon taxonomic harvest10.2307/3392050 verifies Wedelia trilobata within Sphagneticola; government Queensland/NSW names Singapore daisy.
+
+Official harvest_get.py and screen_candidates.py succeeded on current ci using supported authorized networking. Read **92 unique titles and full stored abstract starts**,including15 family works,from run6 with supplements12/20 and family17. Read-only works_of slices recovered omitted official display stretches,including indices0–2. One initial read-only list/dict inspection error was corrected before records; it was not a network refusal or a failed harvest step. Harvest has no failed step; citation chase on10.1016/j.tree.2009.09.010 is successful0hits. Successful cached queries in actual order:
+- `Sphagneticola phytochrome photoreceptor`
+- `Sphagneticola light perception`
+- `Sphagneticola phototropism`
+- `Sphagneticola flower opening time`
+- `Sphagneticola nyctinasty`
+- `Sphagneticola anthesis`
+- `Sphagneticola pollination biology`
+- `Sphagneticola volatile signalling`
+- `Sphagneticola epidermal lens cells`
+- `Sphagneticola epidermal focusing leaf optics`
+- `Asteraceae photoreceptor review`
+
+Required10(e) searches first,then scientific/common diel,eye,chemical pairs and family review;targeted old-name and actual-lead metadata searches followed. Exact31 connected queries in execution order:
+- `Sphagneticola seed germination light dark`
+- `Sphagneticola germination gibberellin OR smoke OR dormancy`
+- `Sphagneticola jasmonate herbivore`
+- `"Sphagneticola" flower opening time anthesis`
+- `"Singapore daisy" flower opening time anthesis`
+- `"Sphagneticola" eye type lens-like epidermal cells`
+- `"Singapore daisy" eye type lens-like epidermal cells`
+- `"Sphagneticola" volatile chemical hormone response`
+- `"Singapore daisy" volatile chemical hormone response`
+- `Asteraceae photoreceptor review`
+- `"Sphagneticola" "seed" "germination"`
+- `"Roles of hormone signaling on defense responses"`
+- `"The Synergistic Effects of Jasmonic Acid" "Sphagneticola"`
+- `"Sphagneticola" "Atlas of pollen and plants"`
+- `"Sphagneticola" "Divergence of Phyllosphere" "sampling"`
+- `"Inhibitor treatment and subcellular localization analysis"`
+- `"Active defense strategies for invasive plants"`
+- `"Sphagneticola" "own seeds"`
+- `"Atlas of pollen and plants used by bees" Embrapa`
+- `"Sphagneticola" "germination" -"extract" -"lettuce"`
+- `"Wedelia trilobata" "seed germination"`
+- `"Atlas of pollen and plants used by bees" "2018"`
+- `"Roles of hormone signaling" "2025" DOI`
+- `"Light limitation and litter of an invasive clonal plant"`
+- `"The Synergistic Effects of Jasmonic Acid" doi`
+- `"Potential Seawater Dispersal of Cypselas"`
+- `"Atlas of pollen and plants used by bees" site:rcpol.mn.ufrj.br`
+- `"Potential Seawater Dispersal of Cypselas" site:jstage.jst.go.jp`
+- `"Pathogen resistance in Sphagneticola trilobata"`
+- `"Different Responses of an Invasive Clonal Plant Wedelia trilobata"`
+- `"Atlas of pollen and plants used by bees" "ISBN"`
+
+All exposed titles/snippets and returned indexed abstracts read;long response tails recovered from session store,no repeat web query for display recovery. No claim of20 when fewer delivered. No direct source/page fetch,evidence,app checks,new service refusal,paid/API fallback or proxy change. OpenAlex429,MDPI429,UChicago403,SANBI403 remain skipped; incidental indexed results for those hosts were not direct fetches. ResearchGate,Scribd,academia.edu,library mirrors and unauthorized hosts were not opened or used as primary sources. Only allowed wanted/progress files edited; earlier review-refused scratch-write command not repeated or bypassed.
+
+Added8 globally absent candidates after exact DOI/normalized-title/URL and owner n/a checks:2014 living target seeds responding to conspecific extract/light10.1093/aob/mcu075;2016 applied GA3 target clonal growth10.1007/s10886-016-0670-6;2025 continuous monoterpene emission/inhibitor10.1016/j.jare.2025.01.047;2025 JA/AMF/herbicide10.3390/microorganisms13122817;2025 hormone response to pathogen/herbivore10.1016/j.pmpp.2025.102722;2022 infection/recognition differential-response10.1007/s10709-021-00147-1 (chemical cue vs mechanical injury unresolved);2013 seawater-exposed cypsela germination10.18942/apg.KJ00008580364 (viability versus cue eligibility unresolved);2020 RCPol pollen/plant atlas p132 explicitly listing target diurnal anthesis. Exact original publication dates verified;2013 versus2017 J-STAGE upload and2022 versus2021 DOI suffix kept distinct. Atlas first-edition2020/ISBN confirmed from catalog and original palynological society announcement;2018 query was a hypothesis,not the date adopted. Unknown hormone/JA-source authors remain empty rather than inferred. No response values,evidence or numeric/species carry logged. All leads await intake.
+
+Important exclusions:2024 phyllosphere VOC source10.3390/genes15070955 uses powdered samples in salt solution per original indexed methods;excluded as removed-tissue chemistry10(a),not living signal emission.2024 active-defense comparison10.3389/fpls.2024.1428752 compares baseline tissue composition and animal feeding/field distribution in exposed material;no target chemical-cue response established,so no extra request.2026 stage-dependent defense source exposes mechanical wounding and donor extracts tested on lettuce/pakchoi,not a demonstrated chemical recipient response in target;no extra request. Extracts/oils,cosmetic fibroin preparations,nanoparticle synthesis,mouse asthma/human cancer work and other-species crop germination do not measure Sphagneticola chemical sensing. The2014 autotoxicity study is distinct because living target seeds themselves receive extract. Exposed fixed culture lighting,seasonal bloom and pollinator visit times are not plant daily timing. Ipomoea bahiensis anthesis is another genus; general family floral reviews supply no target carry. Eye candidates are human eye cosmetics,bee pupal eye colour and macular supplements; epidermal anatomy/papillae/microscope ocular terms are not plant eyes,any focusing belongs under light10(b). Atlas is a real diel lead,so no absence claim while it awaits intake. No null record for any trait while required API steps remain incomplete.
+
+This worker executed **53 connected queries** across the two new genera (22Rivina,31Sphagneticola),without quota refusal. Final checker/prefix validation and commit follow this checkpoint.
+
+Final worker18 validation: actual required screen_candidates checker completed with **0 problems** on159wanted/23searched. All JSONL parses. Eight new sources each match only their own global wanted line by normalized title/DOI; no owner n/a duplicate. First151 wanted lines are byte-for-byte ce8fb8eb,including the146-line handoff prefix;all23searched lines unchanged. Only owned wanted/progress files changed;no evidence or paper assets. Clean context stop between completed Sphagneticola web screen and entirely unstarted Pteridium.
 
 ## 2026-10-27
 
@@ -629,3 +713,891 @@ Only eye_type negative written for Melilotus. Actual cached M. indicus pulvinule
 
 
 Final validation: actual required command `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c8.jsonl --wanted docs/views/wanted/harvest-c8.jsonl` completed in session21462 against current fetched ci with **0 problems** before the final commit. Independent same-tool check using the legitimate full cached harvest also printed **0 problems**; no reduced/filtered substitute or gate change. Owned diff verified as1 new search line,21 new wanted lines and current/provenance progress updates; earlier160 wanted lines preserved byte-for-byte. Stop between Melilotus and entirely unstarted Cercis under the48-worker cap. No source access or web quota blocker newly encountered.
+
+## 2026-10-27 — issue38 worker11, Cercis web screen and cross-unit adoption
+
+This continuation starts from **97 wanted lines and 23 searched lines actually present on main**, not historical 181 wanted lines. Prior record prefixes and progress sections are preserved; the main desk incorporated a registry-verified subset, and no older missing authorless line is refilled. **New so far: Cercis web-screened, 16 wanted lines, 0 searched lines, 0 evidence/measurement closures. Actual files now: 113 wanted, 23 searched.** This is a web screen for issue38, **not full-protocol exhaustion**: OpenAlex's round-wide HTTP429 remains skipped and no negative/null searched row is licensed where the required protocol is incomplete. Pilea remains adopted from harvest-c4.
+
+Read AGENTS.md first, the issue38 worker guide and named protocols (desk-screen1–10, THOROUGH, BRIEF Round2, round3/round4, audits53/54 context) before research. No branch, gate, hold, prior unit or operational state was changed. Runtime skill applied; current status is unrestricted/enforced, no VPN. No direct source/paper fetch and no evidence record was made; automatically returned indexed passages were treated as search snippets only. No banned library/proxy/copy was opened or relied on as a primary measurement. Original publisher, university, USDA, PubMed and AGRIS metadata supported the wanted leads. All exposed titles/snippets were screened; the tool supplies variable result counts and no claim of20 per query is made. No new service refusal occurred.
+
+Before searches, reviewed global searched/wanted, accepted-name corrected-first evidence, owner papers-status and canon catalog for the21 authorized genera. Cercis has no accepted in-hand measurement or wanted lead; sweep-12#9 is an old two-query thin screen and does not establish current protocol completion. **Centrosema is adopted without any fresh search**: external-2 searched lines8–10 give substantive scientific/common Europe PMC searches, available abstracts and a family review chase10.3389/fpls.2015.00207 for diel,eye_type,light; external-2#2 and recheck-codex-b-fixed#11 give assay-specific chemical evidence for C.molle,10.7554/eLife.81050. This supersedes sweep-97's old chemical-null claim; no duplicate wanted/evidence/null is added. Adopted Centrosema coverage is not counted as a newly web-screened genus. Zanthoxylum external-3 lines1–3 also provide substantive diel/eye/light coverage and will be adopted for those traits if its chemical remainder is reached. Other owned genera's existing evidence is preserved for trait-specific adoption.
+
+Official `harvest_get.py Cercis` and `screen_candidates.py Cercis` succeeded through the supported additional-network mode: Cercis is absent across runs1–24. Read-only hg.load inspected all15 Fabaceae family review titles and complete stored abstract starts (run17,`Fabaceae photoreceptor review`); no failed family step. They concern Melilotus leaf movement; Swartzia anthesis/volatiles; Diuris pollinator mimicry; Desmodium beetle host location; Lablab/Vigna crop gene studies; phytochrome evolution and legume photoperiod reviews; flavonoid oxidation/medical chemistry; Bombus visitation; rhizobial polysaccharides; biomineralization. None exposes a Cercis measurement. The current connected family query also returned10.1093/jxb/erag313 describing crop legumes, not target Cercis; no trait carry from that family review is inferred.
+
+Cercis mandatory10(e) searches ran first, then all four required scientific/common trait pairs, family review and focused metadata refinements. Actual queries in execution order:
+- `Cercis seed germination light dark`
+- `Cercis germination gibberellin OR smoke OR dormancy`
+- `Cercis floral scent volatiles`
+- `Cercis flower opening time anthesis`
+- `eastern redbud flower opening time anthesis`
+- `Cercis plant ocelli lens-like epidermal cells eye`
+- `eastern redbud plant ocelli lens-like epidermal cells eye`
+- `Cercis photoperiod phototropism phytochrome light response`
+- `eastern redbud photoperiod phototropism phytochrome light response`
+- `Cercis volatile chemical signal hormone elicitor response`
+- `eastern redbud volatile chemical signal hormone elicitor response`
+- `Fabaceae photoreceptor review`
+- `"Cercis" "anthesis" "hour"`
+- `"Germination" "Cercis" Hosokawa Jones Geneve 1975`
+- `"Leaf gas exchange of eastern redbud"`
+- `"Regulation of Seed Dormancy in Cercis canadensis"`
+- `"Genecology of Eastern Redbud" Donselman Flint`
+- `"Cercis" "Seed treatments to break dormancy and stimulate germination"`
+- `"Cercis" "kinetin" 1980`
+- `"Leaf Gas Exchange of Eastern Redbud" Norcini`
+- `"Cercis" "Regulation of Seed Dormancy" Hamilton Carpenter`
+- `"Cercis" "Effects of dormancy breaking methods"`
+- `"Cercis" "germination" "gibberellin" "1998"`
+- `"Cercis" "Breaking of Judas tree seed dormancy"`
+- `"Cercis" "Methods for breaking the dormancy of eastern"`
+
+The16 wanted leads hold chemical/light for intake: Hosokawa1977 directly reports living target seed hormone and light/dark trials; Donselman/Flint1982 directly reports target photoperiodic growth; Norcini/Knox/Andersen1991 compares whole target plants under sun/shade; direct congener GA/kinetin/dormancy studies retain their own species rather than borrowing numbers to C.canadensis. Dormancy/omics and scarification-only leads are retained under10(e) with cue eligibility explicitly unresolved. Applied GA qualifies10(d); endogenous hormone correlations, mechanical seedcoat opening, cold response or culture lighting alone do not. The new gas-exchange methods paper10.1111/nph.70949 mixes measured target leaf patches and simulated canopies, so intake must separate them. Unexposed authors/DOI/year fields stay empty/null and are never supplied from memory. Duplicate DOI/title/URL and owner n/a checks found no existing request for these16 sources.
+
+Eye results show target leaf epidermal micromorphology10.1111/j.1095-8339.2008.00877.x and seed water-gap lens terminology, without an optical eye. Any focusing belongs under light by owner10(b); eye_type remains none. Diel results give spring/month flowering dates, clusters opening sequentially and days since anthesis, without an exposed target within-day rhythm. The unrelated flower-bending paper and bee visitation timing do not establish a redbud rhythm. These are screening dispositions only: no new eye/diel negative record while the required missing API steps are skipped. Scent studies on distilled bark oil or flavonoid/removed-tissue profiles fail10(a); generic lima-bean/Arabidopsis volatile reviews do not measure Cercis. The original-source contradictory nodulation statements in Missouri and USDA botanical snippets do not establish target chemical perception.
+
+One concrete mixed command was rejected by automatic approval review; no retry, permission request or indirect execution of that command occurred. Exact rejection:
+> This action was rejected due to unacceptable risk.
+> Reason: Although the harvest lookup is relevant and read-oriented, the command also writes `/workspace/work/w11-c8/harvest.json`, outside the explicitly authorized batch files, violating the task’s file restrictions.
+> Do not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.
+
+The rejected scratch cache is not needed. Continued with successful **read-only** official harvest inspection and writes confined to authorized batch files; coordinator was notified immediately. This is a narrower safe alternative; no remaining action depends on the refused cache write.
+
+Checkpoint: Cercis newly web-screened; Centrosema adopted separately. **19 authorized genera still need new screening, next Erechtites**, then Chamaecrista,Celtis,Rivina,Sphagneticola,Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum (chemical remainder only),Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. No Erechtites web search has started at this checkpoint.
+
+### Issue38 worker11 — Erechtites web screen
+
+**New cumulative this worker: 2 newly web-screened genera (Cercis,Erechtites), 1 separately adopted genus (Centrosema), 19 wanted lines, 0 searched lines, 0 evidence/measurement closures. Actual c8 files:116 wanted,23 searched; prior prefixes untouched.** Erechtites screen remains protocol-partial because the required uncached OpenAlex steps are skipped after the round-wide429; no null search row is added. **18 genera still need new work, exact next Chamaecrista.**
+
+Official harvest_get and screen_candidates ran with supported networking: Erechtites is absent across runs1–24, not a zero-hit query. Read all15 Asteraceae family titles and complete cached abstract starts from actual successful run17,`Asteraceae photoreceptor review`. These cover Arabidopsis/crop flowering, Kansas shade responses, Pelargonium NIL, Vernonia culture, Synedrella germination, Lomatozona media/LED, beetle/butterfly visits, Gerbera meristems, plant light-metabolism reviews, genetic assimilation and medical retinal/flavonoid compounds. No cached abstract names target Erechtites response; no family trait carry inferred. Canon catalog and global corrected-first evidence/wanted/papers-status checked: old sweep-16#27 is thin and no target measurement/request existed. Normalized-title/DOI checks excluded duplicate or owner n/a requests before adding3 real sources.
+
+Executed mandatory10(e) first and all four scientific/common trait pairs, family review and focused original-lead metadata searches. Actual queries in execution order:
+- `Erechtites seed germination light dark`
+- `Erechtites germination gibberellin OR smoke OR dormancy`
+- `Erechtites floral scent volatiles`
+- `Erechtites flower opening time anthesis`
+- `American burnweed flower opening time anthesis`
+- `Erechtites plant ocelli lens-like epidermal cells eye`
+- `American burnweed plant ocelli lens-like epidermal cells eye`
+- `Erechtites photoperiod phototropism phytochrome light response`
+- `American burnweed photoperiod phototropism phytochrome light response`
+- `Erechtites volatile chemical signal hormone elicitor response`
+- `American burnweed volatile chemical signal hormone elicitor response`
+- `Asteraceae photoreceptor review`
+- `"Investigation of Potential Seed Dormancy Mechanisms" "Erechtites"`
+- `"Role of temperature and light" "Erechtites"`
+- `"Erechtites" "anthesis" "time"`
+- `"Investigation of Potential Seed Dormancy Mechanisms" Zhang DOI`
+- `"Erechtites" "Baskin" "1996" light DOI`
+
+All exposed result titles/snippets read, omitted display tails recovered from retained tool response; no claim of20 when fewer actually supplied. Added3 original target/congener seed sources:1997 Zayat/Ranal living E.valerianaefolia light/dark and chemical trials;2017 White/Zhang/Pruski target E.hieraciifolius GA,nitrate/light trial10.1017/wsc.2016.21 (2017 issue independently verified; DOI-year suffix is not publication date);1996 Baskin/Baskin target buried-seed light comparison10.1139/b96-240. Original university/Embrapa/publisher and EPA metadata verified citations; no remembered DOI, author or year. Species spelling is retained and no congener figure transferred. These direct living-seed results prevent chemical/light negatives. Seeds remaining dormant under specified light conditions can be an assay result; absence of germination is not absence of sensing.
+
+Distilled Erechtites leaf/bark oils and historical fireweed remedies fail owner10(a), with no living emitter/recipient result exposed. PubMed original hydrodistillation abstract and Sage title were screened without fetching. Generic corn,cowpea,Arabidopsis/Phaseolus elicitor reviews do not measure target. Eye results concern insect/mite/dinoflagellate organs or broad plant optics and expose no target eye; owner10(b) applies, focusing goes under light. Diel results give month/year-round flowering, seedbank seasonal dormancy, days after anthesis or capitulum development rather than a measured within-day target rhythm. Chamerion/Epilobium fireweed and Euonymus burning bush are different genera; neither their anthesis nor their response is carried to American burnweed. No paper/source-page fetch, evidence, fulltext asset, banned proxy, paid API or new service refusal. Existing skipped services persist. Automatic-review refusal remains the resolved scratch-cache-write case recorded above; no repeat request.
+
+### Issue38 worker11 — Chamaecrista web screen
+
+**This worker cumulative:3 newly web-screened genera (Cercis,Erechtites,Chamaecrista),1 separately adopted genus (Centrosema),36 wanted lines,0 searched lines,0 evidence/measurement closures. Actual c8 files:133 wanted and23 searched.** The new Nod-factor source is a joint Cercis/Chamaecrista request and counted once. Prior97 wanted and23 searched prefix lines remain byte-for-byte; historical181 wanted count remains historical. **17 genera still need new work, exact next Celtis; no Celtis web search started at this checkpoint.** All3 fresh screens remain protocol-partial rather than full-protocol exhaustion because uncached required OpenAlex steps are skipped after429.
+
+Before fresh searching adopted actual congener light evidence oa-9#56,`10.1002/ece3.71923`, C.concinna germination under measured photoperiods; no duplicate request for the already-read compilation. Queue target C.fasciculata still lacks its own light result and no automatic light genus carry is invented. Legacy sweep-20#8 diel is explicitly Wikipedia through a summarizer, not primary evidence, and is preserved unchanged but not accepted as research provenance for a new measurement. This was reported to coordinator. New primary congener anthesis sources will permit a source-based replacement after intake. Other global wanted/papers-status by normalized title/DOI and canon metadata were checked before additions; no same-source request or n/a mark found.
+
+Official harvest_get/screen_candidates succeeded on legitimate ci: run5, supplements12/20,2 successful zero-hit citation steps on10.3389/fpls.2015.00207 and10.1016/j.tree.2009.09.010, and Fabaceae review run17. Read all **94 unique titles and full stored abstract starts** including15 family works; long official display omissions recovered with read-only works_of slices0–24,25–49,50–78 and reused full family15 already read for Cercis. No failed harvest step. Successful harvest queries in actual order:
+- `Chamaecrista phytochrome photoreceptor`
+- `Chamaecrista light perception`
+- `Chamaecrista phototropism` (0)
+- `Chamaecrista volatile signalling`
+- `Chamaecrista photoperiod`
+- `Chamaecrista circadian rhythm`
+- `Chamaecrista epidermal lens cells`
+- `Chamaecrista epidermal focusing leaf optics`
+- `Fabaceae photoreceptor review`
+
+Executed mandatory10(e) searches first, full scientific/common-name pairs for4 traits (diel included to replace weak legacy provenance), family review and focused real-lead refinements. The late quoted light refinements repaired broad unquoted results on Pisum; no Pisum measurement assigned to partridge pea. Actual connected queries in execution order:
+- `Chamaecrista seed germination light dark`
+- `Chamaecrista germination gibberellin OR smoke OR dormancy`
+- `Chamaecrista jasmonate herbivore`
+- `Chamaecrista flower opening time anthesis`
+- `partridge pea flower opening time anthesis`
+- `Chamaecrista eye type lens-like epidermal cells`
+- `partridge pea eye type lens-like epidermal cells`
+- `Chamaecrista volatile chemical signal hormone elicitor response`
+- `partridge pea volatile chemical signal hormone elicitor response`
+- `Fabaceae photoreceptor review`
+- `"Chamaecrista" "Extrafloral nectar production induced"`
+- `"Chamaecrista" "Seed anatomical studies"`
+- `"Fire-related cues break seed dormancy"`
+- `"Chamaecrista" "Floral polymorphism"`
+- `"Chamaecrista" "Cytokinin" "Pseudonodule"`
+- `"Bacterial-induced calcium oscillations" "Cercis"`
+- `"Floral volatiles controlling ant behaviour" Chamaecrista`
+- `"Chamaecrista" "Floral polymorphism" "2013"`
+- `"Chamaecrista fasciculata" "seed" "light" "Philips"`
+- `"Seed anatomical studies on dormancy and germination in Chamaecrista absus" "2016"`
+- `"Extrafloral nectar production induced by simulated herbivory" "2022"`
+- `Chamaecrista photoperiod phototropism phytochrome light response`
+- `partridge pea photoperiod phototropism phytochrome light response`
+- `"Chamaecrista" photoperiod light`
+- `"partridge pea" photoperiod light`
+
+All exposed titles/snippets read, retained response tails recovered after display cuts. Actual result counts vary; no claim of20 where fewer delivered. No direct source/paper-page fetch; search-indexed passages only, no raw text committed. No new refusal or alternate OpenAlex request; excluded MDPI,UChicago,SANBI and OpenAlex remain skipped. No paid API, banned proxy or unauthorized copy used. The one earlier scratch-write approval rejection remains recorded above and was not retried.
+
+Added17 specific sources. Direct chemical candidates: living C.nictitans jasmonic-acid nectar response2022,`10.1093/biolinnean/blab159`; C.rotundifolia BAP-induced pseudonodule2019,`10.3389/fpls.2018.01901`; C.fasciculata bacterial Nod-factor calcium response2015,`10.1111/nph.13464`, also an assay-specific negative in C.siliquastrum (supplemental already-authorized Cercis lead, joint request); C.absus GA/ethrel germination2016,`10.31018/jans.v8i2.888`; plus original congener smoke/nitrate/heat trial2003. Primary PMC figure legends establish exact Nod/BAP species; no molecular predictions treated as measurements. Candidate negative hormone/chemical assays stay assay-specific. Original metadata verifies published2019 despite2018 DOI suffix for the cytokinin study.
+
+Mandatory10(e) seed titles retain C.dentata,nomame,rotundifolia,debilis,glandulosa var.mirabilis under their actual taxa, not as C.fasciculata measurements; physical/thermal-only dormancy removal, maturity, soil pH/nutrients and culture light do not automatically qualify as chemical/light responses. Rotundifolia same-title UFRA thesis and Brazilian Journal article are one request, with thesis as alternate provenance; no duplicate dataset/edition. Target Philips2018 prairie thesis and2019 primitive-symbiosis thesis remain narrow experimental leads whose actual light/cue treatments must be confirmed. No author/DOI/year from memory; unresolved metadata stays empty/null.
+
+Direct diel candidates: primary C.flexuosa anthesis2013,`10.1093/aob/mct188`; C.debilis floral-visitation source; C.ramosa/Comolia pollination source with timed stigma receptivity, species attribution explicit; C.semaphora2016 original light-dependence curves plus actual daily water-potential course. No clock inferred from a daily physiological course, and no congener hour assigned to C.fasciculata. Missouri botanical nyctinasty agrees with legacy claim but is not a new primary measurement. Seasonal flowering pulses2015,`10.1111/1365-2745.12362`, weeks of flowering, anatomical anthesis stages, garden/full-sun advice, inferred photoperiod genes from2025 student poster and climate/population comparisons do not independently establish within-day response or a controlled light measurement.
+
+Eye/anatomy candidates expose stomata,papillae,secretory trichomes,seed water-gap lenses,UV bullseye flower pigmentation and human-eye traditional use. None establishes a plant eye; any actual focusing belongs under light by10(b). Cached Senna sleeping behaviour is another genus; animal ram circadian,moth/mosquito/damselfly behaviour, bee learning, Marsdenia morning/night colour and Syne[d]rella/Calliandra germination cannot carry to Chamaecrista. The Cercideae gland paper10.1590/0001-3765201520140151 explicitly finds glands only in Bauhinia despite sampling one Cercis; no Cercis living volatile emission inferred. Floral-volatiles review10.1111/j.1365-2435.2009.01632.x reports acacia ant-repellent experiments; target mentions are defensive morphology/other cited EFN work, not a target volatile measurement. Medical extracts/oils, microbial volatile production alone, Solanum scent, Xyris fungal pseudoflowers and crop/model-legume signal reviews do not measure target sensing. No null record is added while plausible actual target leads await intake and protocol API steps remain incomplete.
+
+### Issue38 worker11 — Celtis web screen and final checkpoint
+
+**Worker11 issue38 totals:4 newly web-screened genera (Cercis,Erechtites,Chamaecrista,Celtis),1 separately adopted genus (Centrosema),49 wanted lines,0 searched lines,0 evidence/measurement closures. Actual c8 files:146 wanted and23 searched.** First97 wanted and all23 searched lines from this worker's starting main remain byte-for-byte. Historical counts above remain history, not missing material to refill. This screen is **protocol-partial**, not exhausted: missing required API steps remain held because OpenAlex429 is skipped. Pilea remains independently completed in harvest-c4. **16 genera still need new web screening: Rivina,Sphagneticola,Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Exact next Rivina; no Rivina web query has run.** Rivina already has a new joint Vora seed-treatment lead below, which must be adopted before searches. Zanthoxylum has substantive external-3 diel/eye/light coverage to adopt before its chemical remainder. Stop between Celtis and Rivina at this worker's context checkpoint; no active partial genus.
+
+Celtis queue targets C.laevigata and C.occidentalis have8 open species-trait cells; no accepted main genus measurement or prior wanted source found. Sweep-18#2 is an old thin screen, not completion. Official harvest_get/screen_candidates succeeded: Celtis absent across runs1–24, not an empty search result. Read all15 full stored Cannabaceae family titles/abstract starts in actual successful run17 query,`Cannabaceae photoreceptor review`. Most describe Cannabis/Humulus production/metabolites/photobiology, with beetle mimicry,bee foraging,thionin sequences,autumn colours,medical flavonoids and human eye therapies. None exposes a target Celtis measurement; no family carry. Current taxonomy confirmed Cannabaceae by original PlantNET/Morton metadata, rather than copying the old Ulmaceae placement.
+
+All mandatory10(e) queries ran first, then quoted scientific/common trait pairs and family review, with focused original-lead metadata queries. Actual connected queries:
+- `Celtis seed germination light dark`
+- `Celtis germination gibberellin OR smoke OR dormancy`
+- `Celtis floral scent volatiles`
+- `"Celtis" flower opening time anthesis`
+- `"hackberry" flower opening time anthesis`
+- `"Celtis" eye type lens-like epidermal cells`
+- `"hackberry" eye type lens-like epidermal cells`
+- `"Celtis" light photoperiod phototropism`
+- `"hackberry" light photoperiod phototropism`
+- `"Celtis" volatile chemical hormone response`
+- `"hackberry" volatile chemical hormone response`
+- `Cannabaceae photoreceptor review`
+- `"Celtis laevigata" Vora germination`
+- `"Celtis" "Effects of hormone balance"`
+- `"Celtis" "street lighting" "2211647"`
+- `"Seed germination characteristics of selected native plants" Vora`
+- `"Celtis" "EFFECT OF PRE-SOWING TREATMENTS"`
+- `"Celtis" "3000" "70032"`
+- `"Celtis" "ІНТЕНСИВНОСТІ ОСВІТЛЕННЯ"`
+- `"Celtis" "gall-inducing" "2010"`
+- `"Celtis" "Seed Storage Behavior"`
+
+All exposed titles/snippets screened, long display tails recovered and final retained-response title/snippet summary reviewed; no claim of20 where fewer delivered. Search snippets sometimes returned indexed original-paper passages automatically; no direct paper/source page fetched, no evidence/value/quote logged and no paper text committed. SANBI appeared in general results but no direct SANBI request was made after its existing403. Service skip list unchanged (OpenAlex429,MDPI429,UChicago403,SANBI403); no new service or quota refusal. Original publisher/university/USDA/forestry metadata support the wanted items; banned proxy/mirror/ResearchGate/Scribd copies were not opened or used as primary sources.
+
+Added13 sources after global normalized-title/DOI/URL and papers-status checks. Direct chemical leads include congener applied-GA seed studies in C.sinensis,koraiensis,tournefortii; original2016 Korean-hackberry hormone-balance source verifies both authors and DOI; original2020 C.tournefortii publication explicitly differs from2019 issue/DOI label, and both dates are stated accurately; applied-auxin rooting of living C.australis stem propagules is kept distinct from excluded cut-flower preservatives. Germination/dormancy titles for C.sinensis and C.australis remain10(e) candidates where light or chemical cue is unresolved; storage/thermal/seedcoat effects alone do not prove sensing. Taiwan original indexed first page verifies2006 despite misleading search publication-age labels. The2015 Ukrainian original journal issue verifies that light-intensity seedling study. No year inferred from approximate age, DOI suffix or current access date.
+
+Original Vora1989 target/C.pallida/Rivina living-seed treatment comparison is one joint wanted request; original Arizona journal indexed title/abstract and USDA reference verify author/year/pages. DOI from an unauthorized-copy search result was not adopted, so DOI remains blank. Exact per-species treatments need intake; no-benefit results can still be valid assay-specific results. No new request for other unassigned taxa named in the same study. **Adopt existing harvest-c12 wanted line52,`10.1002/pei3.70032`, for the common-hackberry light-treatment lead**: original indexed source defines CH as C.occidentalis. It is already requested globally for Fraxinus, so no duplicate item added and its original file is unchanged. New target-specific streetlighting study,`10.1080/23818107.2023.2211647`, plus original sun/shade C.ehrenbergiana and Ukrainian Celtis seedling light comparisons hold light for intake. Galls/phytohormones,`10.1080/17429145.2010.484552`, remain an explicitly uncertain living-host interaction candidate: removed-tissue chemistry alone fails10(a), and recognition must not be inferred from hormone abundance or a gall association.
+
+Eye results show anatomy/cystoliths, epidermal cells, gland dots visible with a human lens and eyes of the hackberry's psyllid insects; none establishes plant eyes, and any actual focusing belongs under light10(b). Diel results show March–May anthesis/seasonal leafing, fruit retention and floral developmental stages, without an exposed within-day plant rhythm; no null is logged while required API steps remain incomplete. Plant volatile oils,pharmacological extract reviews, donor seed extract tested on cabbage and medicinal human-eye uses fail10(a) for the source Celtis. No emitter measurement inferred from tissue VOC composition. Garden light preferences and cross-site ecological context are not controlled target light experiments. No new negative row or species carry was invented.
+
+All four fresh genera have full required web-query screening recorded here and wanted leads preserved, but not the skipped API completion; do not repeat these web screens merely because raw queue lacks searched rows. Their wanted measurements still await authorized intake. This worker used **88 executed connected web queries** across the4 newly screened genera; Centrosema had0 new queries. The single mixed scratch-write automatic-review rejection was reported immediately and is quoted exactly above. Read-only official-harvest inspection and authorized batch-file writes were successful narrower alternatives; no retry/permission/bypass of the refused mixed command.
+
+Final worker11 validation: actual required screen_candidates checker completed with **0 problems** on the final wanted state; JSONL syntax valid. Starting97 wanted lines and all23 searched lines independently verified byte-for-byte against c393d225 parent. Only owned wanted/progress files changed; no evidence or paper assets. Shared c12 handoff expanded this worker’s newly added wanted line123 for queued Lespedeza cuneata with primary Korean title provenance and explicit unresolved cue eligibility, retaining original citation/ranking; no duplicate source. Final stop is between Celtis and unsearched Rivina at context exhaustion; all49 new wanted requests remain candidate leads awaiting intake.
+
+
+## 2026-10-27 — issue38 worker18 continuation
+
+### Rivina web screen
+
+**New this worker:1 newly web-screened genus (Rivina),5 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:151 wanted,23 searched.** Existing146 wanted and23 searched prefixes preserved. This is web-screened-for-round, protocol-partial because required uncached OpenAlex steps remain skipped after429; no null/negative record is licensed. **15 genera remain; exact next Sphagneticola**, then Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum (adopt external-3 diel/eye/light first),Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Prior Pilea and Centrosema adoptions remain preserved.
+
+Read AGENTS.md first, current worker guide, entire own progress and named protocols including desk-screen1–10,THOROUGH,BRIEF Round2,round3/round4 and audits53/54. Runtime skill applied; current environment unrestricted/enforced,no VPN. No operational/gates/branch edits, app checks,source/page fetch or evidence. Prior worker's scratch-write review rejection is respected; no scratch cache written or rejected command repeated. Official read-only harvest_get.py and screen_candidates.py succeeded with authorized supported network mode: Rivina absent across runs1–24; read-only hg.load confirms neither old Phytolaccaceae nor current Petiveriaceae family review present. No absence of harvest was treated as0hits. Kew/Bishop original indexed metadata confirms current Petiveriaceae; original queue uses older Phytolaccaceae. Family review query below was screened, returning general reviews rather than a family-specific review; no invented citation chase or family carry.
+
+Global corrected-first accepted-name evidence,all searched/wanted,papers-status and canon checked before queries. No accepted Rivina measurement exists. Sweep-27#35 is an old thin two-query absence and does not establish completed web protocol. **Adopted existing joint Vora1989 wanted line141 for R.humilis chemical seed-treatment coverage, with no duplicate.** Canon eye compilations cover animals; plant light/chemical/diel compilations do not establish a target measurement without intake. Other genera's work was not repeated.
+
+Mandatory10(e) searches first,then four scientific/common pairs,family review and focused actual-lead metadata refinements. Exact22 connected queries in execution order:
+- `Rivina seed germination light dark`
+- `Rivina germination gibberellin OR smoke OR dormancy`
+- `Rivina floral scent volatiles`
+- `"Rivina" flower opening time anthesis`
+- `"rougeplant" flower opening time anthesis`
+- `"Rivina" eye type lens-like epidermal cells`
+- `"rougeplant" eye type lens-like epidermal cells`
+- `"Rivina" light photoperiod phototropism`
+- `"rougeplant" light photoperiod phototropism`
+- `"Rivina" volatile chemical hormone response`
+- `"rougeplant" volatile chemical hormone response`
+- `Petiveriaceae photoreceptor review`
+- `"Plastic responses that confer invasiveness"`
+- `"Seed Biology of Ten Common Roadside"`
+- `site:devagirijournals.com "Rivina"`
+- `"Rivina" "spectral dependence"`
+- `"Rivina" "Devagiri" "7"`
+- `"Rivina" "Chlorophyll deficiencies"`
+- `"Rivina" "BIOTROPICA" "496"`
+- `"The Spectral Dependence of Flowering and Elongation"`
+- `"Rivina" "anthesis" "morning"`
+- `"Rivina" "circadian" "diurnal"`
+
+Read all exposed titles/snippets and indexed original abstracts, including retained response tails after display cuts; genuinely fewer than20 results were not claimed as20. Retained responses in session store only; no raw paper assets committed. Search sometimes automatically returns long original-source passages; those remain indexed snippets,not directly fetched paper/evidence. No ResearchGate,Scribd,Wikipedia,library proxy or unauthorized mirror used as a primary source or opened. No OpenAlex,MDPI,UChicago,SANBI fetch or paid/API fallback; no new refusal.
+
+Added5 globally absent sources after normalized-title,DOI,URL and owner n/a checks:2020 controlled whole-plant light/pH study10.1016/j.chnaes.2020.01.001;2021-published/2020-volume seed symposium abstract with actual target GA,smoke,KAR1,pH/salt trials;1959 spectral-elongation experiment10.1111/j.1438-8677.1959.tb00534.x;2021 nodal hormone-regeneration source (culture eligibility left to intake);2011 fragmentation/germination10.1111/j.1744-7429.2010.00721.x retained under mandatory10(e),cue eligibility unresolved. Exact dates verified in original publisher/university metadata,not DOI suffix or approximate age. No numerical response,evidence or species carry claimed. Constant culture photoperiod alone is no manipulated-light experiment; fragmentation/genetic maternal effects alone are no cue response. Applied mutagens alter genomes and the exposed chlorophyll-mutation studies do not establish a sensed chemical cue,so no new request for them.
+
+Eye results include lens-shaped ovaries/seeds,seedcoat anatomy and microscope observations; none establishes a plant eye,any focusing belongs under light10(b). Diel results show months/year-round flowers,developmental anthesis morphology and fixed culture cycles; no exposed within-day target rhythm. Morning-flower wording on a multi-species garden page is not assigned to Rivina. Viola riviniana and other similarly named taxa are distinct. Extract/berry-juice chemistry,light-driven silver synthesis in removed extracts and rat pharmacology fail10(a); donor-extract trials on crops do not show a living donor signal or Rivina receiving a cue. No new eye/diel negative while API completion remains held. All new wanted leads await authorized intake.
+
+
+
+## 2026-10-27 — issue38 worker23 continuation
+
+### Pteridium web screen
+
+**New this worker:1 newly web-screened genus (Pteridium),13 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:172 wanted,23 searched.** Existing159 wanted and23 searched prefixes preserved. This is web-screened-for-round,**protocol-partial** because mandatory uncached OpenAlex steps remain skipped after round-wide429; no null searched row or exhaustion claim. **13 genera remain,exact next Lonicera**,then Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Prior first18 and Pilea,Centrosema adoptions,current Cercis/Erechtites/Chamaecrista/Celtis/Rivina/Sphagneticola screens remain preserved.
+
+Read AGENTS.md first,worker guide and named protocol/desk-screen1–10/THOROUGH/BRIEF Round2/round3/round4 and audit53/54 context,own prior progress and worker18 preflight. Cloud-environment-runtime skill applied,current connected unrestricted/enforced network,no VPN. No source/page fetch,evidence,app checks,operational/gates/branch edits. Earlier automatic-review scratch-write rejection respected; no rejected command,cache write,permission request or bypass repeated. Official read-only harvest_get.py and screen_candidates.py succeeded using supported authorized networking. Global corrected-first accepted-name evidence,searched/wanted,papers-status and canon checked for all14 remaining genera before fresh queries. No accepted Pteridium measurement. Old harvest-8 three-query and sweep-4 two-query nulls are thin,not completed web protocol; no original trait suppressed by current harvest's filtered open list.
+
+**Cross-unit adoption:** existing c10 new wanted10.1007/s10265-015-0736-5 jointly measures P.aquilinum/Thelypteris dentata. Exact-title original PMC4550647/Springer indexed Fig4 explicitly gives both species' response against PPFD at fixed ambient CO2. Adopt as target light lead without duplication;c10 owner notified to expand ownNEW row. Zanthoxylum preflight adopts external-3 lines1–3 diel/eye/light searches,but external-3#1/recheck-codex-b-fixed#12 chemical evidence is Z.bungeanum only; queued Z.clava-herculis has no species chemical carry. Its chemical remainder is still unsearched in this worker. Existing Asplenium antheridiogen,Lonicera congeneric light,Geranium,Lepidium,Commelina,Lygodium evidence retained for trait-specific adoption later; no whole-genus completion invented.
+
+Read all56 unique harvest titles/full stored abstract starts,including3 family works;run8 with volatile supplement12 and family17. Successful cached queries in order:
+- `Pteridium phytochrome photoreceptor`
+- `Pteridium light perception`
+- `Pteridium phototropism`
+- `Pteridium volatile signalling`
+- `Dennstaedtiaceae photoreceptor review`
+Citation chase on10.1038/ncomms8852 is successful0hits,no failed harvest step. Full stored abstracts recovered by read-only works_of slices; no scratch cache or source text written. Family works concern epiphytic clonality,cyanogenic-biosynthetic enzyme and fern phylogeny,not a target eye measurement. Canon photoreceptor transcriptomes/genetic diversity do not establish a measured target response without intake.
+
+Mandatory10(e) searches first,then all4 scientific/common trait pairs,family review,fern-specific diel/spore refinements and actual-lead metadata searches. Exact29 executed connected queries in order (initial3 repeated once solely to recover a display-truncated response;not counted as extra coverage):
+- `Pteridium seed germination light dark`
+- `Pteridium germination gibberellin OR smoke OR dormancy`
+- `Pteridium jasmonate herbivore`
+- `"Pteridium" flower opening time anthesis`
+- `"bracken fern" flower opening time anthesis`
+- `"Pteridium" eye type lens-like epidermal cells`
+- `"bracken fern" eye type lens-like epidermal cells`
+- `"Pteridium" light photoperiod phototropism`
+- `"bracken fern" light photoperiod phototropism`
+- `"Pteridium" volatile chemical hormone response`
+- `"bracken fern" volatile chemical hormone response`
+- `Dennstaedtiaceae photoreceptor review`
+- `"Pteridium" diurnal circadian spore release stomata`
+- `"Pteridium" germination light dark gibberellin spores`
+- `"Rapid response of leaf photosynthesis" "Pteridium"`
+- `"Some effects of volatile fungal metabolites" Pteridium`
+- `"The effect of light quality on the induction of apogamy" Pteridium`
+- `"Photocontrol of growth pattern" bracken`
+- `Pteridium seed germination light dark`
+- `Pteridium germination gibberellin OR smoke OR dormancy`
+- `Pteridium jasmonate herbivore`
+- `"Periodic cell divisions" "Pteridium"`
+- `"Effects of meteorological factors" "Pteridium" "2009"`
+- `"Pteridium" "Effect of illumination and exogenous"`
+- `"Pteridium" "Photocontrol" "1969"`
+- `site:ahs.ac.cn "Effect of Illumination" "Pteridium"`
+- `"Is Riboflavin the Photoreceptor" "Pteridium"`
+- `"INTERACTION OF CELL ELONGATION AND CELL DIVISION" "1971"`
+- `"Biological Flora" "Pteridium" "Marrs" "Watt"`
+
+All exposed titles/snippets and indexed original abstracts read;retained response tails recovered from session store,no claim of20 when fewer exposed. Initial3 repeat yielded one extra generic extension result;all returned results read. No paper/source page fetched;automatically returned original-source passages remain search snippets,no evidence. No paid/API fallback,OpenAlex/MDPI/UChicago/SANBI request,new service refusal or unauthorized/library-proxy opening. ResearchGate,Wikipedia,Scribd,DOKUMEN and unauthorized-copy search results were not used as primary sources or opened.
+
+Added13 globally absent sources after exact DOI/normalized-title/URL/status checks:2012 living-frond jasmonate/emission10.1371/journal.pone.0048050;1967 fungal-volatile recipient response10.1016/S0007-1536(67)80039-1;1975 phototropic gametophyte10.1093/oxfordjournals.pcp.a075172;1969 culture photocontrol10.1093/oxfordjournals.pcp.a074428;1971 light/apogamy10.1007/BF00388249;1971 daily light-cycle cell division10.1002/j.1537-2197.1971.tb09965.x;1968 riboflavin/photomorphogenesis10.1104/pp.43.7.1165;red/blue RNA-protein study10.1007/BF00385513 (year unresolved);2002 illumination/GA3/6-BA target-spore trial at original Acta Horticulturae Sinica issue;2006 Biological Flora10.1111/j.1365-2745.2006.01177.x;2012 Colorado target-terpenoid dissertation;2009 hourly airborne-spore distribution10.1007/s00484-009-0208-5;congeneric P.caudatum spore-development studyPMID23176817 (date/cue eligibility unresolved). Unexposed author/year/DOI stay empty/null,not derived from approximate age or DOI suffix. Target living-culture eligibility explicitly left to intake. The airborne-spore paper involves long-range wind transport;its within-day distribution is not automatically endogenous release rhythm. Daily white-light-entrained cell divisions likewise do not prove a circadian oscillator.
+
+Exclusions:rhizome fatty-acid methanol extraction tested on wheat,bracken extracts tested on chick embryos/toxicology,medicinal GCMS and tissue hormone/phytoecdysone content fail10(a) for living target responses. Cyanogenic enzyme/genome descriptions alone do not demonstrate chemical sensing. Other-fern Lygodium,Cyathea,Osmunda/Equisetum experiments are not Pteridium carry. Ferns have spores,not anthesis;seasonal frond emergence,third-year spore maturation and insect timing do not prove a daily plant rhythm. Epidermal anatomy/silicon deposition,microscope lenses,vessels and spermatozoid ultrastructure are not eyes;any actual focusing belongs under light10(b). No new eye/diel null while missing API protocol is held. Existing antheridiogen review10.1111/nph.16836 is already read globally and adds no duplicate;its Pteridium donor role alone is not a target receiver measurement.
+
+Pteridium validation: required current screen_candidates checker printed **0 problems**. All159 starting wanted lines byte-for-byte7efadc6c;all23 searched unchanged. c10 owner confirmed shared PPFD target expansion in commit61e72d08,without duplicate. Only owned wanted/progress files edited;no paper assets. Continuing Lonicera next.
+
+
+### Issue38 worker23 — Lonicera web screen and context checkpoint
+
+**Worker23 totals:2 newly web-screened genera (Pteridium,Lonicera),39 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:198 wanted,23 searched.** First159 starting wanted and23 searched lines preserved. Both screens are **protocol-partial**,not exhausted;uncached OpenAlex steps remain skipped after429,and Lonicera has3unrepaired failed genus-harvest queries. **12 genera remain;exact next Asplenium**,then Ipomoea,Nandina,Ligustrum,Zanthoxylum (adopt external-3 diel/eye/light;target Z.clava-herculis chemical still genuinely missing),Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Stop between completed Lonicera web screen and unstarted Asplenium at context boundary,no active partial genus. Prior adoptions/screens remain preserved.
+
+Preflight preserved accepted oa-12#322 congeneric L.macranthoides light evidence10.21203/rs.3.rs-7740322/v1 (a cited study,partial). It supplies no species light carry to original queued8Lonicera,so scientific/common light pair remained necessary. Old sweep-3 two-query compound absence is thin and not a completed protocol. Global corrected-first accepted-name evidence,searched/wanted/papers-status/canon checked;no duplicate target sources or owner n/a marks found. Eye canon covers animals;plant photoreceptor/chemical compilations are not invented target measurements.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded through supported network mode. Lonicera run2's exact failed queries are `Lonicera phytochrome photoreceptor`,`Lonicera light perception`,`Lonicera phototropism`,all"gave up";none represented as successful0hits. Reported failures to coordinator;no rerun of blocked OpenAlex. No genus works or citation chase are present. **Successful family17 query`Caprifoliaceae photoreceptor review`:43hits,15stored works**,all15titles/full stored abstract starts read via official works_of. Family contents:plant phenolics,ALAN overview,pollinator colour vision,flower-opening review,melatonin/pharmacology,Tibouchina floral colour,flower-colour overview,bee constancy,phenotypic plasticity,Campanula cues,floral evo-devo,Stevia germination,760-species light meta-analysis,horizontal transfer,Crotalaria-extract nanoparticles. No source page fetched and no broad family carry inferred. The failed genus steps independently prohibit new null rows even without the current OpenAlex skip.
+
+Mandatory10(e) searches first,then all4scientific/common trait pairs,family review,and only actual-lead metadata/method clarifications. Exact31 connected queries in execution order:
+- `Lonicera seed germination light dark`
+- `Lonicera germination gibberellin OR smoke OR dormancy`
+- `Lonicera floral scent volatiles`
+- `"Lonicera" flower opening time anthesis`
+- `"honeysuckle" flower opening time anthesis`
+- `"Lonicera" eye type lens-like epidermal cells`
+- `"honeysuckle" eye type lens-like epidermal cells`
+- `"Lonicera" light photoperiod phototropism`
+- `"honeysuckle" light photoperiod phototropism`
+- `"Lonicera" volatile chemical hormone response`
+- `"honeysuckle" volatile chemical hormone response`
+- `Caprifoliaceae photoreceptor review`
+- `"Why does the flower of Lonicera japonica" open dusk`
+- `"Dormancy-breaking and germination requirements of seeds of four Lonicera" 2000`
+- `"Missing LOX genes" honeysuckle`
+- `"Why does the flower of Lonicera japonica open at dusk" "10."`
+- `"Effect of exogenous GA" "Lonicera" "2018"`
+- `"Regulatory mechanisms and biosynthesis" "Lonicera" 2025`
+- `"Missing LOX genes help honeysuckle" "doi"`
+- `"Lonicera" "uhag078"`
+- `"Volatile Constituents from the Flowers of Japanese Honeysuckle" "headspace"`
+- `"Species-specific environmental requirements to break seed dormancy" Lonicera`
+- `"Dormancy and Germination in Lonicera involucrata"`
+- `"10.1002/ffj.2730090609" "living"`
+- `"Effect of exogenous GA" "DPC" Lonicera`
+- `"Dynamic Responses of Photosynthetic Parameters" "2026"`
+- `"De novo transcriptomic analysis of light-induced flavonoid" DOI`
+- `site:epublications.marquette.edu/liana_articles/521/ "Survival and growth"`
+- `site:epublications.marquette.edu/liana_articles/28/ "Vine photosynthesis"`
+- `"s12870-026-08373-5" "Lonicera caerulea"`
+- `"Lonicera" "30717525"`
+
+All exposed titles/snippets and indexed original abstracts read at actual delivered extent,including response tails recovered from session store;no20-results claim where fewer delivered. Some engine results automatically expose long original-source passages;these are indexed snippets,not directly fetched papers or evidence. No OpenAlex,MDPI,UChicago,SANBI request,paid/API fallback,new refusal,proxy change or permission request. No banned mirror,ResearchGate,Wikipedia,Scribd,DOKUMEN opened or used as primary source. Returned legcat.gov.ns.ca and springerlink.fh-diploma.de library mirrors were left unopened;original Oxford/Springer metadata supplied the citations. The earlier scratch-write review rejection is not repeated or bypassed.
+
+Added26globally absent candidates after unicode-normalized title,DOI,URL and owner-status checks. Ten germination/dormancy titles are retained under10(e):2000four-species Hidayati/Baskin/Baskin10.1017/S0960258500000507 (target L.japonica/L.maackii light/dark and GA3);L.insularis10.3389/fpls.2024.1484114;L.hypoglaucaPMID26767281;L.macranthoidesPMID28845639;2019four-Korean-species10.1186/s41610-019-0121-8;L.maackii LmABI5PMID42288142;L.caerulea var.emphyllocalyx;L.involucrata var.ledebourii IPPS;three-species Iberian dormancy at original Castilla-La Mancha;and original Korean L.chrytsantha title (spelling retained pending intake). Fixed culture lighting,thermal stratification and endogenous GA/ABA alone do not establish sensing;those uncertainties are explicit. Unknown species in broad multigenus/genus studies are not silently assigned to queue targets,and unknown fields stay empty/null.
+
+Strong chemical/diel leads:2023target scent/anthesis10.1111/jse.12916;1994target living-flower headspace10.1002/ffj.2730090609;1998Miyake/Yahara dusk-opening via original Kyushu;target Uzbekistan anthecology viaAGRIS;L.oblata reproductive source10.1186/s12870-022-03466-3 (diel applicability unresolved);2018target sprayedGA3/DPC10.19540/j.cnki.cjcmm.20181106.007;2026targetJA/LOX10.1093/hr/uhag078;2025target inducer/culture review10.3389/fpls.2025.1567140;target coastal-salinity phytohormone study;2026L.caerulea sprayedmelatonin10.1186/s12870-026-08373-5. Living cultures and recipient tests qualify as candidates under10(d),with scope for intake. JA-study transgenic Arabidopsis tests are distinct from target treatment;elapsed bud-opening delay alone is not diel timing. Melatonin's constant greenhouse photoperiod does not prove light-response treatment.
+
+**Resolved method fork:**1994Ikeda abstract initially showed flower-concrete extraction;targeted original Wiley indexed abstract explicitly also reports dynamic headspace from **living flowers** across the day. It must be retained for that component rather than wholly excluded10(a). Distilled oils,heated headspace vials,solvent extracts,dried-flower products and cats responding to honeysuckle tissue do not establish living target signaling. The ACS1996volatile-constituent source10.1021/jf950275b exposes constituent profiles and an extracted-tissue interpretation;no additional living-method measurement was established,so no new request for it.2022flower-volatile/metabolomics profiles have unresolved living/attached methods and do not automatically meet10(a);the direct living-emission sources above remain the substantive leads. Endogenous hormone abundance and predicted GRAS/circadian pathways alone are not a measured chemical response or plant clock.
+
+Light leads:target light-induced flavonoid study10.1007/s00468-019-01916-4 (date2019/issue unresolved);2026abrupt-light photosynthetic inductionPMID42884794;2018LED cultivation byJiang/Wang/Yuan (species unresolved);target winter-leaf photoprotectionPMC6271606;1988Carter/Teramura comparative vine photosynthesis;1996Baars/Kelly graded-irradiance growth. Original indexed Marquette full metadata verify1988/1996 and complete titles,not2020repository upload. Original PubMed verifies24Sept2026 photosynthetic induction,December2018GA3/DPC,and24Feb2026melatonin dates. Cambridge/Kentucky explicitly verify2000seed-paper issue despite misleading search age. Unverified dates remain null rather than inferred from DOI suffix or URL. Generic nutrient/soil supply and CO2substrate effects remain separate from chemical-cue interpretation;no values logged.
+
+Eye results show one-layer epidermis,stomata,trichomes,microscopy,pollen anatomy,medicinal human-eye effects and pollinator eyes;none establishes plant eyes,and actual focusing belongs under light10(b). Seasonal flowering,days-to-colour change,flower longevity and bee/hawkmoth timing alone are not diel measurements. Primary living-flower/day-night sources are preserved without assigning their results to other Lonicera species. No new negative record for eye or any other trait while protocol steps are incomplete. All39worker23wanted leads remain for authorized intake;none is evidence or a closed measurement.
+
+Worker23 executed **60connected queries** total (29Pteridium,31Lonicera;3Pteridium repetitions solely to recover truncated display). Exact next Asplenium remains entirely unstarted;its existing oa-9 chemical evidence must be adopted before fresh searches. Zanthoxylum target chemical remains species-specific as recorded above. Final checker/prefix validation follows this checkpoint.
+
+Final worker23 validation: actual required screen_candidates checker completed with **0 problems** at198wanted/23searched. AllJSONL parses;first159wanted lines are byte-for-byte7efadc6c and all23searched lines unchanged. git diff --check passed on owned files. Only owned wanted/progress paths changed;no evidence or paper assets. Context stop between Lonicera and entirely unstarted Asplenium. Asplenium oa-9 chemical includes queued A.ruta-muraria/A.scolopendrium assay-specific no-response results,plus other congeners;do not infer chemical carry to other queued Asplenium species.
+
+
+## 2026-10-27 — issue38 worker29 continuation
+
+### Asplenium web screen
+
+**New this worker:1 newly web-screened genus (Asplenium),21 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:219 wanted,23 searched.** First198 wanted and all23 searched prefix lines preserved. Asplenium is web-screened-for-round,**protocol-partial**,because all required uncached OpenAlex steps remain skipped after round-wide429. No null searched record or exhaustion claim. Prior first18/Pilea/Centrosema and new8 screens remain preserved. **11 genera remain;exact next Ipomoea**,then Nandina,Ligustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa.
+
+Preflight checked corrected-first accepted-name main_evidence,original queue,global wanted/searched,owner papers-status and canon before queries. Accepted oa-9#173–181 chemical records are assay/species-specific. Queued A.ruta-muraria/A.scolopendrium no-response to Pteridium antheridiogen are adopted without repeat source or whole-genus chemical carry. Queued A.trichomanes/A.platyneuron/A.ceterach still require their own chemical leads. Sweep-5#21 is an old3query compound screen,not current paired-trait web completion. Animal-eye canon establishes no plant measurement;fern photoreceptor/transcriptome canon does not establish target physiology from gene presence.
+
+Cloud-environment-runtime skill applied;current connected network unrestricted/enforced,no VPN. Official read-only harvest_get.py and screen_candidates.py succeeded using authorized supported networking,reporting **Asplenium in no harvest run yet/not in the harvest**. Therefore no cached Asplenium query/abstract/citation result exists to adopt;not a failed query or successful0hits. No uncached OpenAlex request made. No source/page fetch,evidence,app checks,cache write,operational/gates/branch edit,proxy change or new permission request. Earlier mixed network/scratch-write review rejection respected and not retried/bypassed.
+
+Required10(e)3searches first,then scientific/common4trait pairs,family review,fern spore/diel refinements and actual-lead metadata/method clarifications. **47 connected queries**,in exact execution order:
+- `Asplenium seed germination light dark`
+- `Asplenium germination gibberellin OR smoke OR dormancy`
+- `Asplenium jasmonate herbivore`
+- `"Asplenium" flower opening time anthesis`
+- `"spleenwort" flower opening time anthesis`
+- `"Asplenium" eye type lens-like epidermal cells`
+- `"spleenwort" eye type lens-like epidermal cells`
+- `"Asplenium" light photoperiod phototropism`
+- `"spleenwort" light photoperiod phototropism`
+- `"Asplenium" volatile chemical hormone response`
+- `"spleenwort" volatile chemical hormone response`
+- `Aspleniaceae photoreceptor review`
+- `"Asplenium" spore germination growth regulators`
+- `"Asplenium" diurnal circadian stomata spore release`
+- `"Asplenium platyneuron" hormone germination`
+- `"Do fern gametophytes have the capacity for irradiance acclimation" doi`
+- `"Lipid Fatty Acid Profile of Asplenium" 2024`
+- `"Spore germination and gametophyte development in three species of Asplenium"`
+- `"Effects of Light upon the Germination of Spores of Ferns I"`
+- `"Spore Germination and Gametophyte Development" "Asplenium" DOI 1994`
+- `"Light, rather than circadian rhythm" doi 2023`
+- `"Volatile emissions of six New Zealand" 2020 doi`
+- `"Leaf physiological and structural plasticity of two Asplenium"`
+- `"Rehydration Process in Rustyback Fern" headspace samples`
+- `"Asplenioideae Species as a Reservoir" fresh leaves`
+- `"Species-specific stomatal ABA responses" "Asplenium" 2023`
+- `"Asplenium trichomanes" "antheridiogen"`
+- `"Asplenium trichomanes" hormone response germination`
+- `"Asplenium ceterach" gibberellin OR auxin OR elicitor`
+- `"Effects of Light upon the Germination" "Oohusa" 1954`
+- `"Asplenium platyneuron" "Patterson" "Freeman" 1963`
+- `"Aspects of spore release of Asplenium ruta-muraria"`
+- `"Role of Light-Induced Membrane Potential Changes" Asplenium`
+- `"Phytochrome Control of Germination" "Asplenium" 1971`
+- `site:pakbs.org "In vitro propagation of bird" "2008"`
+- `"The Role of Light-Induced Membrane" "10.1093"`
+- `"Asplenium" "Patterson" "Growth" "1963"`
+- `"ASPLENIUM AND PTERIS FERN SPORE GERMINATION"`
+- `"Standardization of spore germination technique in Asplenium nidus"`
+- `site:pmc.ncbi.nlm.nih.gov/articles/PMC8301159/ "cut" "fronds"`
+- `"In vitro propagation of bird’s nest fern" "Khan"`
+- `"Asplenium" "Patterson" "Freeman" "Effects"`
+- `"Effects of Light upon the Germination" "10.15281"`
+- `"Rehydration Process in Rustyback Fern" "fronds" "collected" "jars"`
+- `"Asplenioideae Species as a Reservoir" "solid" "cut"`
+- `"Photoperiodic control of growth and reproduction in non-flowering plants" "2025" authors`
+- `"Effect of Light Quality on the Composition" "10.1104"`
+
+All exposed returned titles/snippets and indexed original abstracts read at actual delivered extent;no20-results claim when fewer supplied. One display-truncated response section recovered from session store without repeat query. Some exact-title results automatically expose long original-source passages;these remain indexed search results,not direct paper fetches or evidence. No new service refusal;OpenAlex429,MDPI429,UChicago403,SANBI403 remain skipped. Returned OpenAlex/MDPI/UChicago/SANBI snippets are incidental engine results,not direct requests. No banned mirror,ResearchGate,Wikipedia,Scribd,Studocu,encyclopedia or unauthorized host opened/used as primary source;legcat.gov.ns.ca publisher mirror left unopened.
+
+**Cross-unit adoptions without duplicate:**harvest-c10#122,10.1007/s11515-015-1342-6,originalHEP review explicitly tables A.nidus red/far-red germination and cites A.ruta-muraria germination;harvest-c15#38,10.15281/jplantres1887.67.193,originalJ-STAGE abstract explicitly names Asplenium illuminating-period dependence (species not exposed). Coordinator notified for owner-row expansion. Existing2021antheridiogen review already read globally,no rerequest.
+
+Added21 globally absent candidates after DOI/URL/Unicode-preserving-title/owner-status checks. Target light leads:2012irradiance acclimation10.1007/s10535-012-0097-z (trichomanes/scolopendrium/Ceterach officinarum mapping);2025spectral-lipid response10.1002/cbdv.202402260 (2024online distinct);2019field sun/shade plasticity (trichomanes/ceterach);1999target light-induced membrane/guttation10.1093/oxfordjournals.pcp.a029516,with applied ion-channel/proton-pump inhibitors also a chemical candidate;2025photoperiod review10.1093/jxb/erae471 explicitly describes target platyneuron experiments,citingPatterson/Freeman1963. Original-study details unresolved rather than invented.
+
+Congener leads remain species-specific:2023A.inaequilaterale gas exchange/diel-versus-constant-light10.1093/plphys/kiad036;2020A.bulbiferum/oblongifolium JA/herbivory living emissions10.20417/nzjecol.44.5;2023target A.scolopendrium ABA10.1111/nph.19215;1971A.nidus phytochrome germination10.1104/pp.48.1.100;1985A.australasicum grown under altered light10.1104/pp.78.3.561;2010A.nidus callose inhibitor/stomatal study10.1111/j.1469-8137.2010.03206.x (intact versus excised eligibility unresolved). A.gas-exchange no-rhythm result is not carried to any queued species.
+
+Mandatory10(e)germination titles retained:1994three-target Pangua/Lindsay/Dyer10.1006/anbo.1994.1073;1976Kofranek UC Extension Asplenium/Pteris light requirement (species unresolved);A.nidus standardization (original metadata unverified);2008Khan/Raziq/Kayani PJB spore culture;Chinese A.nidus6-BA/NAA propagation10.16590/j.cnki.1001-4705.2021.05.084;CSIC A.adiantum-nigrum nanoceria germination;ActaHort Mindanao A.nidus spore cultures;Embrapa A.nidus in-vitro germination;LaPlata A.dareoides germination. Fixed culture light,temperature/nutrition/toxicity and germination observation alone are not proven sensed cues;eligibility explicit for intake. Unexposed authors/year/DOI remain empty/null,not derived from URL,DOI suffix or approximate search age.
+
+**Emission-method fork:**2021target ceterach rehydration/VOC sourcePMC8301159 is retained with explicit eligibility hold:original indexed methods describe collected dormant mature sporophytes revived in jars and frond headspace monitoring,but attachment/living-signal versus removed-frond stress chemistry is unresolved. Water response and VOC composition do not by themselves establish chemical sensing. French Asplenioideae/fern perfumery profiles expose fresh aerial-part chemistry without a living signal test;no extra request. Target extracts tested on rat gastric muscle/human estrogen/cancer and distilled/extracted preparations fail10(a). Endogenous hormone abundance is not applied-cue response.
+
+Eye results are epidermal cell/stomatal taxonomic anatomy,hand lenses/microscopy,pectic wall protuberances,iridescent structural colour and medicinal human eyes;none establishes plant eyes,and any actual focusing belongs under light10(b). Ferns have spores,not anthesis. Seasonal spore maturity,days-to-germination and long-day growth are not within-day timing. Spore-release title lacked exposed daily timing,so not requested merely from physical release. Actual congener diel/constant-light source retained without target carry. No new negative while API steps are incomplete. Target platyneuron/ceterach chemical response remains unresolved despite congenerJA/ABA;no absent-trait declaration.
+
+Routine dedupe correction before commit:first append was stopped before writing by the existing1954c15DOI. A later ASCII-only title-normalization false match on Chinese title was recognized immediately;direct DOI/Unicode-preserving exact-title/URL checks found no match,and that candidate was added correctly. No old row changed. Final checker/prefix validation follows.
+
+Worker29 Asplenium validation:current required screen_candidates checker printed **0 problems** at219wanted/23searched. All JSONL parses;first198wanted lines byte-for-byte0702f379 and all23searched unchanged;git diff --check passed. Only own wanted/progress paths edited,no evidence/paper assets. Context checkpoint between completed Asplenium web screen and entirely unstarted Ipomoea;11remain.
+
+
+## 2026-10-27 — issue38 worker32: Ipomoea fresh web screen
+
+NEW: **Ipomoea only; 1 newly web-screened genus, protocol-partial; +33 wanted, +0 searched, +0 evidence. Actual c8 becomes252 wanted/23 searched** (219 wanted and all23 searched prefix preserved from2c770fd2). Prior first18, Pilea/Centrosema adoptions and nine fresh screens throughAsplenium preserved. **10 remain; exact next Nandina**, thenLigustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Zanthoxylum's earlier external3diel/eye/light adoption is preserved; bungeanum chemical does not resolve targetclava-herculis.
+
+Read AGENTS and worker guide/protocols, canon, papers-status and own progress before research. Main already fetched/branch owned by coordinator; no checkout/push. Applied cloud-environment-runtime skill: current connected/enforced unrestricted policy, noVPN or credential binding. Official read-only harvest_get.py and screen_candidates.py on supported authorized network succeeded: **Ipomoea in no harvest run yet/not in harvest**, not a successful zero-hit API query. Round-wideOpenAlex429 skipped without request or fallback; inheritedMDPI429,UChicago403,SANBI403 skipped. No new service refusal. No source/page fetch, evidence, app checks, proxy change, permission request, cache or operational edit; earlier mixed network/scratch-write refusal not retried/bypassed.
+
+Preflight checked corrected-first screen_candidates.main_evidence with GBIF accepted-name mapping, global wanted/searched and owner papers-status. No accepted physiological evidence for Ipomoea. Five queued species areI.purpurea,pes-caprae,indica,cordatotriloba,cairica. sweep-7#27 is an older three-query compound screen, not current full paired-trait screening. Animal-eye canon has no plant measurement; transcriptome/photoreceptor gene presence is not physiological sensing. Uncached mandatoryOpenAlex scientific/common/family/citation steps remain incomplete, so **no null searched rows or exhaustion claims**.
+
+Required10(e) searches first, all four scientific/common-name trait pairs, family-review alternative, then target-species/method/source clarifications: **27 actual connected queries**, exact execution order:
+- `Ipomoea seed germination light dark`
+- `Ipomoea germination gibberellin OR smoke OR dormancy`
+- `Ipomoea floral scent volatiles`
+- `Ipomoea flower opening time anthesis`
+- `morning glory flower opening time anthesis`
+- `Ipomoea eye type lens-like epidermal cells`
+- `morning glory eye type lens-like epidermal cells`
+- `Ipomoea light photoperiod phototropism`
+- `morning glory light photoperiod phototropism`
+- `Ipomoea volatile chemical hormone response`
+- `morning glory volatile chemical hormone response`
+- `Convolvulaceae photoreceptor review`
+- `Ipomoea indica cordatotriloba cairica photoperiod light response`
+- `Ipomoea pes-caprae seed germination light gibberellin`
+- `Ipomoea purpurea shade jasmonic acid twining`
+- `"Light Adaptations of Ipomoea purpurea" doi`
+- `"The pigment-scent connection" "10."`
+- `"Annual changes in temperature and light requirements" "10."`
+- `"Effects of photoperiod on growth, flower bud appearance" Ipomoea purpurea`
+- `"Ipomoea indica" light shade hormone response`
+- `"Ipomoea cordatotriloba" germination light gibberellin`
+- `"Ipomoea cairica" light shade hormone response`
+- `"Induced twining in Convolvulaceae" doi`
+- `"Impacts of environmental factors on the climbing behaviors" Ipomoea doi`
+- `"Dominant Fungal Epiphytes Promote Growth" Ipomoea`
+- `"Floral biology and breeding system of three Ipomoea weeds" species doi`
+- `"Ipomoea" "Seed Dormancy and Germination Ecology" DOI`
+
+Read every exposed result title/snippet and indexed abstract at actual delivered extent, including incidental irrelevant results; no claim of20 per query when fewer delivered. Search-engine results include publisher/PMC/J-STAGE/author-repository original passages, but no direct source fetch was used. ResearchGate,Wikipedia,Scribd,encyclopedias,library proxies/mirrors and opportunistic republishers were left unopened and not used as primary evidence. DOI/year/authors retained only when exposed; otherwise blank/null. Original article DOI/title/Unicode-preserving exact title/URL checked globally before append; no owner n/a source re-request.
+
+**Cross-unit adoption without duplicate:**harvest-c13#93,10.1139/b08-037,Atala/Gianoli2008. Indexed author-repository full abstract at https://epublications.marquette.edu/liana_articles/198/ explicitly namesI.purpurea and reports appliedJA enhanced living twining. c13 row currently namesConvolvulus arvensis; coordinator notified of target expansion. Also adopt c13#85,TurkishConvolvulus/Ipomoea triloba GA3germination title,as congener-only (not any queued species). Neither constitutes a logged measurement or whole-genus physiological carry.
+
+**New target leads:**purpurea annual light-germination requirements;2010pigment/scent original,10.1016/j.sajb.2010.07.006 (confirm attached-living scent method);2014living volatile receiver/twining;2025optical leaf/petal-interface study10.3390/plants14060862 (introductory lens/heliotropism claims separated from actual measurements);sun/shade support-response original recovered only as review bibliography lead,original DOI unexposed. pes-caprae germination10.11833/j.issn.2095-0756.2011.01.025;targetcairica/pes-caprae included in2006germination/dormancy10.1002/fedr.200511102;targetcairica in three-species floral anthesis and10.1111/plb.12038 circadian nectary metabolism;targetcordatotriloba regeneration10.5376/mpb.cn.2011.09.0117 (living culture/hormone contrast unresolved);targetcairica epiphyte-defense study10.3390/microorganisms12112130 (rooted living/elicitor response versus colonization mechanism unresolved). No targetindica physiological result established; horticultural sun preferences and fixed chamber lighting are not experiments.
+
+**Mandatory10(e) germination-title holds:**2026three-morningglory review10.3390/seeds5010003 (keep published version,not duplicate preprint);lacunosa environmental/light germination,water-gap anatomy,seed development and cycling10.1093/aob/mcm285;asarifolia nitrate/light experiment;2013Convolvulaceae light/dark study (two exactIpomoea species unresolved);fourcongenerIpomoea/Merremia dormancy-breaking;Embrapacynanchifolia storage/scarification;PeruIpomoea/Merremia seedling/germination title;2026aquatica LED germination/growth. Physical sulfuric-acid scarification,water permeability,temperature/storage and fixed culture photoperiod alone do not establish light or chemical sensing;uncertain candidates explicitly held for intake per10(e),not invented measurements.
+
+**Other species retained separately:**nil quality/daylength10.2525/ecb1963.41.211,photoperiod/GA10.1007/s10725-017-0344-6 andethylene-dependentInEKO1;batatasDMNT volatile receiver/signalling;nil/triloba shade-twining10.1002/ece3.3479 (original abstract names exact congeners,none of five targets);fourmorningglory photoperiodJ-STAGE source with exact species unresolved. EndogenousGA abundance alone is not applied-cue sensing. Targetcordatotriloba microtubule reporter has fixedshortday conditions,no testedlightcontrast,so no extra request. Extracts assayed on mosquitoes/algae and harvested sweetpotato food aromas excluded10(a).
+
+Diel leads are actual anthesis in carnea,marcellia/aff.marcellia10.1093/aobpla/plv127,asarifolia,eriocalyx,andone-daynil10.1093/pcp/pcaf108 (elapsed development versusendogenous timing for intake). Seasonal flowering,days afteranthesis,coflowering dates and plant guides are not measured dielpatterns. I.cairica's repeated seasonalbloom description does not close targetdiel;its anthesis/nectary leads remain. Humanmorning-glory-disc anomaly causes most common-nameeye hits;taxonomic epidermal anatomy and surfaceoptics do not establish eyes. Allplants eye_typenone10(b),actualepidermalfocusing belongs underlight. No congenerphysiologicalcarry and no numeric claim.
+
+Worker32 Ipomoea validation: required screen_candidates checker printed **0 problems** at252wanted/23searched; first219wanted and all23searched byte-identical2c770fd2, JSONL parse valid and git diff --check passed after EOF whitespace cleanup. Only own wanted/progress paths edited.
+
+
+## 2026-10-27 — issue38 worker32: Nandina fresh web screen and context checkpoint
+
+NEW this entry: **Nandina only; +9 wanted, +0 searched, +0 evidence. Worker32 total: Ipomoea/Nandina2 newly web-screened genera,42wanted added,0searched/evidence; c8 actual261wanted/23searched.** Both are **protocol-partial**: uncached mandatoryOpenAlex common-name/other omitted protocol steps remain skipped after round-wide429, so no null searched rows or exhaustion claims. Cached Nandina scientific/citation/family steps are adopted below, not described as missing or zero-hit failure. **9 remain; exact next Ligustrum**, thenZanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Ligustrum wholly unstarted by this worker. Prior first18/Pilea/Centrosema, nine screens throughAsplenium, Ipomoea and Zanthoxylum per-trait adoption boundary preserved. Checkpoint between genera for context exhaustion.
+
+Preflight checked corrected-first accepted-name main_evidence, global wanted/searched, actual queued species and papers-status before web research. Target isNandina domestica; no accepted evidence or globalwanted leads before this screen. sweep-28#36 has one compound query and no current paired-trait completion. Berberidaceae/other Ranunculales physiology and photoreceptor gene presence cannot establish target physiology. Canon read/adopted as forIpomoea; no plant eye measurement from animal-eye canon. No paper source n/a rerequested.
+
+Official harvest_get.py and screen_candidates.py succeeded with current supported authorized network. Nandina is **harvest run5**, supplements12/14/20, not the prior no-harvest cases. Every displayed work title/abstract-start occurrence, including repeated titles and unrelated works, was screened. Initial long tool output was display-truncated; official read-only output was recovered into session memory and printed in five bounded slices, without source fetch or scratch-cache write. Repeated official descriptor reads were for this display recovery, not new external API trait searches. Exact successful harvest queries/hit counts and citation/family steps in emitted order (no gave-up query):
+- query "Nandina phytochrome photoreceptor": 3 hits
+- query "Nandina light perception": 102 hits
+- query "Nandina phototropism": 4 hits
+- citation step: works citing 10.1016/s0031-9422(02)00119-x that name Nandina: 0
+- citation step: works citing 10.1016/s0031-9422(02)00119-x that name Nandina: 0
+- query "Nandina flower opening time" (supplement run 12): 527 hits
+- query "Nandina nyctinasty" (supplement run 12): 0 hits
+- query "Nandina volatile signalling" (supplement run 12): 80 hits
+- query "Nandina photoperiod" (supplement run 12): 58 hits
+- query "Nandina circadian rhythm" (supplement run 12): 19 hits
+- query "Nandina anthesis" (supplement run 14): 26 hits
+- query "Nandina pollination biology" (supplement run 14): 92 hits
+- query "Nandina epidermal lens cells" (supplement run 20): 13 hits
+- query "Nandina epidermal focusing leaf optics" (supplement run 20): 0 hits
+- family review "Berberidaceae photoreceptor review": 22 hits
+
+New connected web queries: **27 actual query transmissions /23 distinct strings**. Required10(e) first, all scientific/common4trait pairs, family review, source/method clarifications; the four eye/diel queries were repeated once solely because the first combined display omitted a section. The full recovery response was stored in session memory and read in bounded slices; this does not reopen an already-completed prior genus. Exact execution order, repeats retained:
+- `Nandina seed germination light dark`
+- `Nandina germination gibberellin OR smoke OR dormancy`
+- `Nandina floral scent volatiles`
+- `Nandina flower opening time anthesis`
+- `heavenly bamboo flower opening time anthesis`
+- `Nandina eye type lens-like epidermal cells`
+- `heavenly bamboo eye type lens-like epidermal cells`
+- `Nandina light photoperiod phototropism`
+- `heavenly bamboo light photoperiod phototropism`
+- `Nandina volatile chemical hormone response`
+- `heavenly bamboo volatile chemical hormone response`
+- `Berberidaceae photoreceptor review`
+- `"Nandina" epidermal focusing papillae lens leaf optics`
+- `"Nandina" anthesis diurnal circadian stomata`
+- `"Non-deep simple morphophysiological dormancy" "10."`
+- `Nandina flower opening time anthesis`
+- `heavenly bamboo flower opening time anthesis`
+- `Nandina eye type lens-like epidermal cells`
+- `heavenly bamboo eye type lens-like epidermal cells`
+- `"Non-deep simple morphophysiological dormancy" "Nandina" doi`
+- `"Nandina" "Dehgan" "1984" germination`
+- `"Effects of Light Length on the Growth and Development of Plants" Nandina`
+- `"In vitro Conservation and Cryopreservation of Nandina" hormones light`
+- `"Nandina" "Non-deep" "10.1016"`
+- `"Nandina" "중부지방" 광`
+- `"Establishment of a Highly Efficient In Vitro Regeneration System" doi`
+- `"Nandina" "Replication of Leaf Surface Structures"`
+
+Read exposed returned titles/snippets and indexed original-source passages at actual delivered extent;no20-per-query claim. Initial display-truncated eye/diel batch was replaced for screening by a complete rerun/recovery batch, rather than claimed fully read. Some search snippets contain long original methods/results; these remain search results, not direct page fetches or evidence. Returned ResearchGate,Wikipedia,mirror/encyclopedia and opportunistic-copy links left unopened and not primary sources. DOI/year/authors retained only if exposed by original/author repository metadata; otherwise blank/null.
+
+**Nine globally absent wanted sources:**2016Rhie/Kim/Lee/Kim chemical seed response10.1016/j.scienta.2016.07.022;1999controlled shade10.21273/hortsci.34.3.554e (the audit54missedlead explicitly retained);1993targetcultivar shade/interior trial10.21273/hortsci.28.9.946;2018targetstreetlight/nonstreetlightcomparison10.29306/jseg.2018.10.1.30 (KCIoriginalabstract confirmsNandina,not Arabidopsis carry);2011Koreanwinterlightfieldstudy (noDOI exposed);2025BA/IBA living shootresponse10.3390/plants14030421;2013livingcultureconservation10.15835/nbha4129335 (actuallight/hormonecontrast versusfixedculture/cryoprotection unresolved);USFSFEISspeciesreview;2010formaldehydechambers10.21273/hortsci.45.10.1489 (targetpresence confirmed in original2016abstract,passiveuptake versuscue-response eligibility held).
+
+**Germination disagreement retained:**2016original indexed abstract explicitly reports appliedGA3 substitute for warmstratification. OlderUSFSreview describes negativeGA trials and cites Dehgan1984 *Germination of Nandina domestica seed as influenced by GA3 and stratification* plus *Studies on seed dormancy in Nandina domestica, Howea forsteriana and Elateocarpus reticaulatus* (spelling/title as exposed). These mandatory10(e) original-title leads are held together via the one requested review for original recovery,not three duplicate reviewURLs or invented original metadata. USFSalso explicitly describes target light-treatment growth trials and photoinjury,so lightbelongs on its wantedrow. No chemical absence inferred from oldernegative result; negative responses remain measurements of tested cues. GA andlivingBA/IBA qualify10(d). Fungal/cellcryoprotectantstorage alone,physicalscarification,fixedphotoperiod and hormoneabundance do not establish sensing. Patentfixed culture schedules do not create unreported treatment comparisons.
+
+**Other candidate dispositions (no negative searched rows):**10.1038/srep43363 iswheatnitrogen/anthesis,notNandina diel;10.3389/fimmu.2023.1253964 is humanhepatocellularimmuneNETs,ocellsubstringnotplanteyes. Target floralstructure10.1093/botlinnean/boad074 measures floraldevelopment/epidermaldifferentiation/stigmapapillae,not dailyanthesistiming or focusing. Landscape performance/fertility2006/2014/2021/2024 sources timeflowers inmonths/seasons andfruit/viability,not hours. Anthesismorphology,late-springbloom,elapsedweeks andyearroundpollinatorvisitation titles alone are not targetdielmeasurements. No within-day target result established; no exhaustiveabsence claimed.
+
+Light candidates:1999shade and1993shadeexperiment retained. 2018KCIstreetlightfield comparison nowactualspecies-confirmed. Juglanshydraulicthesis isanothergenus. 2017Epimediumlight10.1371/journal.pone.0182348,2025EpimediumMaxEnt10.3389/fpls.2025.1534608,ArabidopsisSDR6 andgardencatalogues establish noNandinaresponse. Frosthardiness10.1080/03015521.1988.10425646 applies temperature,not demonstrated lightcue. Opticalreplica10.1038/srep14281 tablesPMMA replicas copied fromNandinaleafsurfaces,notlivingplant focusing orresponse;originalindexedmethods explicitlysay cured/detachedPMMAandtablecaptionleaf-mimickingpolymer. Do not mistake PMMAsheetoptics for Nandinaeyes or a living photoreceptor experiment. Any actualfocusing belongsunderlight10(b).
+
+Chemical candidates:hydrodistilledfloral oil antibacterialstudyPMID18541324,fruitessentialoil10.1080/14786419.2015.1057584,andcancerchemicalprofiling fail10(a),notlivingcueemission. HarvestrocketpostharvestVOCs,Citrusdriedpeelessentialoil,Curcumametabolites,Juniperusnaturalproducts,Corymbia/Cymbopogonoilfungicides,Lamprocapnosculturereview andzebrafishberberinetoxicitydonotestablishtargetchemicalresponse. Broadterpenoid/forestVOCreviewabstractsdonotnametargetmeasurements. Formaldehyderemovalheldforintakebecauseactualtargetexposureisconfirmed,butadsorption/metabolismaloneisnotdefinedassensoryperception. No existingcorrectedtargetchemicalrecordorwholegenusadoption invented.
+
+Services: inheritedOpenAlex429,MDPI429,UChicago403,SANBI403 skipped; no newrefusal. Returned indexed snippets from these hosts are incidentalengineoutputs,not directrequests or servicebypass. No directpaperfetch,evidencelog,unauthorizedhost,proxychange,operational/gates/branch edit or permissionrequest. Currentcloud-environment-runtime network observations remain the supported environment; no newskill-drivenblock. GlobalDOI/Unicode-preservingexacttitle/URLdedupe found0existingmatches for9rows; no oldlineedited.
+
+Worker32 final validation: the required screen_candidates checker printed **0 problems** at 261 wanted / 23 searched. All JSONL parses. The original 219 wanted lines and all 23 searched lines are byte-identical to 2c770fd2. git diff --check passed. Only own wanted/progress files changed; no evidence or paper assets. Two new web screens remain protocol-partial, with 42 added wanted leads. Exact next genus: **Ligustrum**; nine genera remain.
+
+
+## 2026-10-27 — issue38 worker37: Ligustrum fresh web screen
+
+NEW: **Ligustrum only; 1 newly web-screened genus, protocol-partial; +16 wanted, +0 searched, +0 evidence. Actual c8 becomes277 wanted/23 searched.** Original261wanted and all23searched prefix preserved frome3eb1ddd. Prior first18, Pilea/Centrosema adoptions and eleven fresh screens throughNandina preserved. **8 remain; exact next Zanthoxylum**, thenGeranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Zanthoxylum external-3 diel/eye/light adoption remains; bungeanum chemical cannot carry toclava-herculis.
+
+Read AGENTS, worker guide, named protocols/BRIEF Round2/THOROUGH, audit53/54 findings and own progress. Coordinator already owns latest-main branch; no checkout/push. Applied cloud-environment-runtime skill: current connected/enforced unrestricted policy, noVPN/credential bindings. Official read-only harvest_get.py and screen_candidates.py using current supported authorized network succeeded: **Ligustrum in no harvest run yet/not in harvest**, not a successful zero-hit API search. OpenAlex429 and inheritedMDPI429/UChicago403/SANBI403 skipped without requests/fallback. No new refusal, direct source/page fetch, evidence, operational edit, proxy change or permission request. Earlier mixed network/scratch-cache refusal not retried/bypassed.
+
+Preflight used corrected-first screen_candidates.main_evidence with accepted-name mapping; **no accepted Ligustrum evidence**. Four actual queued species areL.sinense,lucidum,vulgare,obtusifolium. Global wanted/searched and owner papers-status checked; no target source owner n/a re-requested. sweep-9#17 is an older thin compound screen and explicitly left the rhythmic fragrance title unopened. Canon files include no plant eye; gene-presence compilations and other-family physiology cannot supply target physiological measurements. Mandatory uncached OpenAlex protocol steps remain incomplete, so no null searched rows/exhaustion claim.
+
+Required10(e) searches first, scientific/common four-trait pairs, family review alternative, then exact source/method/species clarifications: **39 actual connected queries**, execution order:
+- `Ligustrum seed germination light dark`
+- `Ligustrum germination gibberellin OR smoke OR dormancy`
+- `Ligustrum floral scent volatiles`
+- `Ligustrum flower opening time anthesis`
+- `privet flower opening time anthesis`
+- `Ligustrum eye type lens-like epidermal cells`
+- `privet eye type lens-like epidermal cells`
+- `Ligustrum light photoperiod phototropism`
+- `privet light photoperiod phototropism`
+- `Ligustrum volatile chemical hormone response`
+- `privet volatile chemical hormone response`
+- `Oleaceae photoreceptor review`
+- `Ligustrum sinense lucidum vulgare obtusifolium hormone jasmonate gibberellin response`
+- `"Landscape Performance and Fruiting of 12 Privet Selections"`
+- `"Further observations on rhythmic emission of fragrance" Ligustrum`
+- `"Ligustrum" "Landscape Performance" "10.21273"`
+- `"Further observations on rhythmic emission" "Ligustrum" "vulgare"`
+- `"Ligustrum sinense" jasmonic acid salicylic acid growth`
+- `"Ligustrum lucidum" gibberellin seed germination shade`
+- `"Landscape Performance and Fruiting of 12 Privet" site:journals.ashs.org`
+- `"Mountain invasions on the way" Ligustrum doi`
+- `"Further observations on rhythmic emission of fragrance in flowers" species`
+- `"Ligustrum vulgare" cytokinins abscission`
+- `"Ligustrum obtusifolium" "gibberellin"`
+- `"Ligustrum vulgare" "chemical defoliation"`
+- `"Ligustrum sinense" "growth regulators"`
+- `"Ligustrum lucidum" "salicylic acid"`
+- `"Effect of Exogenous Salicylic Acid" "Ligustrum" site:journals.ashs.org`
+- `"chemical defoliation" "Ligitstrum" site:pbsociety.org.pl`
+- `"The involvement of a floral scent in plant-honeybee interaction" doi`
+- `"Identification of floral volatiles from Ligustrum japonicum" doi`
+- `"Ligustrum" "LIGHT INTENSITY AS IT AFFECTS GROWTH"`
+- `"Landscape Performance and Fruiting of 12 Privet Selections" "2014"`
+- `"chemical defoliation" "Ligustrum" "Acta"`
+- `"Ligustrum lucidum" "Composition and germination"`
+- `"Ligustrum" "caws.org.nz" "Germination" "Kohen"`
+- `"Ligustrum" "Pre-sowing treatment for improving seed germination"`
+- `"Light regulation to chlorophyll synthesis" "doi"`
+- `"The chemical defoliation of Ligitstrum" "10."`
+
+Read every exposed title/snippet and indexed original-source passage at actual delivered extent; no20-per-query claim. No direct source fetch. Incidental search results from refused services are engine outputs only. Wikipedia,ResearchGate,Scribd,encyclopedia/library-proxy and opportunistic-copy pages unopened and not primary sources. DOI/year/authors used only when exposed; unknown metadata blank/null. Global DOI/Unicode-normalized exacttitle/URL dedupe before append found two cross-unit sources, adopted without duplication: **c14#91 The Woody Plant Seed Manual** has an indexed originalLigustrum chapter stating light not required for germination; recover exact tested taxa and original design. **c16#38 10.1093/jpe/rtv064 Mountain invasions** original indexed results identifyL.lucidum light/dark versuspermanent-dark germination, including nonsignificant light effect. Negative treatment outcomes remain leads. Coordinator notified of both target expansions; existing rows concernFraxinus andGleditsia/Pyracantha,so adoption is source reuse,not physiological carry.
+
+Added16globally absent sources. Targetlight:lucidum2007J-STAGE habitat/germination,2009lightenvironment10.7211/jjsrt.35.45,2014sinense/lucidum/japonicum germination originalUFpdf,2024sinense seasonal lightcurves,obtusifolium var.regelianumKnox dissertation. Targetgermination holds per10(e):vulgare2007presowing proceedings (ISBN978-80-86461-82-3),lucidum2012composition/germination10.4025/actascibiolsci.v34i3.10641,2003earlyinvasion and2000acidrain10.11707/j.1001-7488.20000622. Thermalstratification,seedchemistry,habitatcorrelation andfixedlightalone do not establish sensing; unresolved light/chemical manipulations held explicitly. Added2020globalLucidumreview10.1007/s12229-020-09228-w for originalgermination/light references,includingBurrows/Kohen1983originaltitle only incompletelyexposed; recover original viareview rather than invent a full citation.
+
+Targetchemical:2018lucidum appliedSA10.21273/HORTSCI12949-18 counts10(d);vulgare nursery ethephon defoliationDOAJlead must confirm rootedliving treatment versusinjury. Distinct1998vulgarecytokinin/auxin/GApetiole abscission and1985CEPAwork useisolated/cutshoots in exposed summaries; no extra request orlivingtargetclosure inferred. Obtusifolium1957gibberellin title appeared only in an opportunistic secondaryindex; retained as an unresolved title lead here (*Growth substances. Gibberellin and higher plants: XI. Responses of certain woody ornamental plants*) pending lawfuloriginal bibliographic recovery,not promoted to verifiedmeasurement. No actualsinensechemicalresponse established;essentialoils,drug/cosmeticextracts,pollen leachates andmothdigestiveglycine fail10(a). Herbicidelethality alone does not establish cueperception.
+
+Congeners kept separate:foliosum2017GA3/lightgermination10.11623/frj.2017.25.3.05;hybridvicaryi2010lightregulation10.1111/j.1744-7909.2010.00979.x (vulgareparentage isnot carry);quihouivar.aureaphylla dynamicheadspaceVOCs10.11833/j.issn.2095-0756.2012.01.023 (attachedlivingversuspickedmaterial unresolved);compactum2022floralnonanal10.1007/s00114-022-01802-z (livingcollectionmethod verify). The latterabstract's within-day nectarcorrelation belongs toSapium,notLigustrum; no diel claim. Japonicum1998butterflyattraction10.1023/A:1020750029362 usesextract/syntheticartificialflowerbioassays; no additionalplantchemicallead absent livingemission confirmation. Japonicum/ovalifolium1980/1981essentialoilconstituents are tissuechemistry10(a).
+
+Diel: originalPubMedabstract10.1007/BF00193995 namesHoya,Stephanotis,Odontoglossum,Citrus,**noLigustrum**,so the legacyunopenedtitle is resolved as anothergenus,not a missedprivetclock. Anthesisinmonths/seasons,leafretention,guava/Jatropha/Sesbania flowerhours andSetariapeakanthesis are nottargetdiel. Eye:foliosumtaxonomicmicromorphology,privetleafcrosssections andlensshapedlenticels describe anatomy,not focusing oreyes. Humancontactlenses/retina hits unrelated. Allplant eye_typenone10(b); actualepidermalfocusing belongsunderlight. Oleaceaephotoreceptorreviewquery returned generalplant/algal/insectreviewresults; no genusphysiologicalcarry.
+
+Worker37 Ligustrum validation follows; only own wanted/progress paths edited, no paper assets/evidence.
+
+Worker37 Ligustrum validation: required checker printed **0 problems** at277wanted/23searched. JSONL parses; first261wanted lines and all23searched byte-identical toe3eb1ddd; git diff --check passed. Only owned wanted/progress files changed.
+
+
+## 2026-10-27 — issue38 worker37: Zanthoxylum chemical remainder and context checkpoint
+
+NEW this entry: **Zanthoxylum chemical remainder only; +19 wanted,+0 searched,+0 evidence. Worker37 total: Ligustrum/Zanthoxylum2 newly web-screened genera,35wanted added,0searched/evidence; c8 actual296wanted/23searched.** Protocol-partial because mandatory uncachedOpenAlex steps remain skipped after round-wide429; no null searched records or exhaustion claims. **7 remain; exact next Geranium**, thenLepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Geranium entirely unstarted; stop between genera at context boundary. Prior first18,Pilea/Centrosema adoptions and eleven screens throughNandina preserved; currentnew screens become13throughZanthoxylum. Baseline97wanted/23searched, original261handoffprefix, and allprevious progress retained.
+
+Preflight re-read external-3#1–3 and corrected-first accepted-name main_evidence, globalwanted/searched, queue and ownerpapers-status. Actual target **Z.clava-herculis**. **Adopt external-3 diel/eye/light screens without repeating their pairs** as directed by coordinator. Existing external-3#1/recheck-codex-b-fixed#12chemical evidence isbungeanum ethylene,partial; physiologicalchemicaltraits cannot carry frombungeanum toclava-herculis. sweep-100#38's thin combinedscreen andoldcold-hormonepaper do not resolve targetchemical. No existingtargetchemicalevidence/globalwanted source before screen; noownern/asource re-request. CanonchemicalTable1/metaanalysis and plantgenomicschecked/adopted: no acceptedtargetcue finding orplant-eyephysiology inferred.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded using current supported authorized network: **Zanthoxylum in no harvest run yet/not inharvest**. No successfulzero-hitAPIsearch implied. SkippedOpenAlex429,MDPI429,UChicago403,SANBI403; no new refusal,requests tothese services, directpaper/pagefetch,evidence,credential/API fallback,proxychange,operationaledit orpermissionrequest. Earlier mixednetwork/scratch-cache refusal not retried/bypassed. Incidentalindexedresults fromskippedhosts belongtosearchengineoutputs.
+
+Required10(e) searches first, scientific/commonchemicalpair and family-reviewalternative, then exacttarget/synonym andsource/method clarifications: **27 actualconnectedqueries**, exactexecutionorder:
+- `Zanthoxylum seed germination light dark`
+- `Zanthoxylum germination gibberellin OR smoke OR dormancy`
+- `Zanthoxylum jasmonate herbivore`
+- `Zanthoxylum volatile chemical hormone response`
+- `prickly ash volatile chemical hormone response`
+- `Rutaceae photoreceptor review`
+- `"Zanthoxylum clava-herculis" germination gibberellin chemical`
+- `"Zanthoxylum clava-herculis" hormone ethylene jasmonate response`
+- `"Zanthoxylum clava-herculis" seed germination treatment`
+- `"Fagara clava-herculis" germination hormone`
+- `"Zanthoxylum clava-herculis" "volatile" living`
+- `"GERMINATION RESPONSE OF ZANTHOXYLUM CAPENSE" DOI`
+- `"Exogenous gibberellin weakens lipid breakdown" DOI species`
+- `"Proteomic analysis of Zanthoxylum nitidum seeds dormancy release" doi`
+- `"Influence of pre-sowing treatments" "Timroo" doi`
+- `"Transcriptome Analysis" "Zanthoxylum Seeds" "bungeanum"`
+- `"Effects of Scarification, Phytohormones" "Zanthoxylum"`
+- `"Exogenous methyl jasmonate induces CHS" "10.1016"`
+- `"Monoterpene synthases contribute" "10."`
+- `"Effects of Different Compound Treatments" "Zanthoxylum"`
+- `"Fruit and Seeds Development and Seed Germination of Andaliman Pepper"`
+- `"What is the cause of low seed germination of Zanthoxylum rhoifolium"`
+- `"Seed germination methods for native Caribbean"`
+- `"Monoterpene synthases contribute" "cultivation" "volatile"`
+- `"Effects of substrate and pre-sowing treatment on Fagara"`
+- `"Investigation on the Germination of Zanthoxylum gilletii"`
+- `"Fruit Development and Seed Physiological Maturity of Andaliman"`
+
+Read every exposed title/snippet andindexedoriginal-sourcepassage atactualdeliveredextent; no20-per-queryclaim. No directsourcefetch. Some snippets include originalabstracts/methods; these remainsearchresults,notintakeevidence. Search output included unauthorized/opportunisticcopy,ResearchGate,Scribd,Wikipedia andonelegcatlibrarymirror; all leftunopened andnotprimarysources. Unknown DOI/year/authors remainblank/null. FreshglobalDOI/Unicode-normalizedexacttitle/URLdedupe found0matchesfor19newrows andnoownerstatusmatch; existingmanualsource adoptedbelow.
+
+**Targetchemical remainsunresolved.** OriginalUSFSWoodyPlantSeedManual (existingc14#91,alreadyadoptedforLigustrum) explicitly describesclava-herculis seedcoatdormancy andsulfuricacidscarification withalternatingtemperaturegermination. This is physicalcoatremoval,notdemonstratedchemical-cueperception; keep10(e)originalrecoveryholdviatheexistingmanual,notduplicatebookrow. NewWageningen2014Caribbeangerminationreport explicitlylistsclava-herculis,coriaceum,fagara; requestedfororiginalreferences/methods,notafalsehormoneresponse. Fagaraclava-herculis synonymconfirmedbyoriginalKew/NCextensionmetadata; synonymquerysurfacednorelevanttargethormonetrial. Retailseedsoakingadvice,medicinalbarkusages,treecatalogues andtissueterms arenotexperiments. Targetleaf/barkessentialoils,seasonalGC-MSprofile,herculinisolation,MRSAandcattletoxicity all fail10(a);Papiliocresphontesantennalresponsesuseessentialoilsandexaminebutterflysensing,notlivingtargetplantemission orcueperception. Noabsenceconclusionorwholegenuschemicalclosure.
+
+**Nineteennewsourceleads:**capense2015light/darkandGA;2017shellremoval/exogenousGAand2019lipidbreakdownGA10.1016/j.plantsci.2018.08.013 (exactspeciesunresolved,notassumedbungeanum);nitidum2018GAproteomics and2023germination10.1080/15592324.2023.2251750 (the2023studyprofilesendogenoushormonesunderfixedphotoperiod,whichalonecountsneitherchemicalnortestedlightsensing);armatum2017GA/kinetin10.1016/j.jarmap.2017.06.004,2024IAAgermination and2026temperaturestratification/metabolomics;acanthopodium2026seedtreatment/germination and2023fruit/seedmaturity;piperitum1997GA/kinetin;fagara2021phytohormones10.3390/plants10081489 and2022combinedGA/IBA/acid/stratification;rhoifolium2022dormancy;zanthoxyloidespresowing/substrates;gilletii2011NaOHwashing/temperature10.1007/978-90-481-2543-2_69;Caribbean2014report; bungeanumexogenousMeJA10.1016/j.indcrop.2024.119682 (publicationyearunresolved,DOIsuffixnotyear);ailanthoides2023monoterpenes/cultivationmethods (attachedlivingemission orappliedcueversusdetachedtissue/recombinantassays unresolved). Allcongenersremainseparatefromtarget.
+
+Mandatory10(e)germination/dormancytitleholdsretainedratherthan screenedout forfixedculturelighting,seedmaturity,seedcoatoil/acidwashing,thermalstratification orendogenoushormonechemistry; noneofthosealoneisclaimedassensing. NearzerofagaragerminationafterGA/IBA stillidentifiesatestedcue/source,notanunsearchedabsence. CompanionUTRGVthesisabstractandshortergilletiiSEKUrecord535sharethepaper/chapterwork; adoptwithoutadditionalduplicatefile. Physicalscarificationitselfnotgradedchemical. HormoneMeJA,GA,IAA,kinetinresponsesmaycount10(d)onlyinactualexperimentalspeciesandlivingmaterial.
+
+Bungeanumcoldstress10.3389/fpls.2022.847202 quantifiesendogenoushormonesaftertemperature,notanappliedchemicalcue;existingthinsearchdoesnotturnthatintotargetevidence. Driedfruitflavor,pericarpoil,alkylamidehumanpungency,ratanxietyHPAaxis andelectronicnoseresponsesarenotplantchemicalperception. Ailanthoidesmonoterpenesourceheldformethodclarification,nomeasurementorheadspacecollectioninvented. FamilyreviewqueryreturnsRutaceaetaxonomy/generalplantphotoreceptorreviews,insectcolorvision andchemicalpharmacology,notatargetphysiologicalcarry.
+
+Worker37 checkpoint is between completedZanthoxylumchemicalwebscreen andentirelyunstartedGeranium. Allscreensstillprotocol-partial;35wantedleadsawaitintake; noactualmeasurementclosure/evidence. Requiredchecker,prefixvalidationandcommitfollow.
+
+Worker37 final validation: required screen_candidates checker printed **0 problems** at 296 wanted / 23 searched. All JSONL parses. Original 261 wanted lines and all 23 searched lines are byte-identical to e3eb1ddd; git diff --check passed. Only owned wanted/progress files changed; no evidence or paper assets. New rows now use known queue record counts where the exact species matches; ailanthoides is scoped to Neighbours only. Worker37 adds 35 wanted leads across two new protocol-partial web screens. Exact next genus: **Geranium**, entirely unstarted; seven remain.
+
+
+## 2026-10-27 — issue38 worker43: Geranium
+
+NEW: **Geranium one newly web-screened genus; +24 wanted, +0 searched, +0 evidence; cumulative320 wanted/23 searched. Protocol-partial**, with mandatory uncached OpenAlex steps skipped after the round-wide429, and no null/exhaustion claim. Preserve original97wanted/23searched baseline, prior18, Pilea/Centrosema adoptions and13new throughZanthoxylum. Current issue38 new screens become14 throughGeranium. **Six remain; exact next Lepidium**, thenMelothria,Commelina,Lygodium,Ludwigia,Monotropa.
+
+Read AGENTS.md first and worker guide/protocols, own prior checkpoints, canon and actual-species queue; preflight global wanted/searched, corrected-first accepted-name evidence and owner papers-status. Geranium has11 actual target species: robertianum,maculatum,pratense,sylvaticum,molle,dissectum,sanguineum,carolinianum,lucidum,sibiricum,pyrenaicum. Adopt pyrenaicum light recheck-codex-b-fixed#19 (10.1002/pld3.66); other species do not inherit physiological light/chemical/diel traits. main_evidence also displays harvest-15#3 robertianum partial light, but audit ALL#5227 retracts its paraphrased quote. No corrected-store replacement found; notified coordinator and preserved legacy files without repairing or treating it as secure closure. Previous harvest-1/6/15 and sweep-1 searches lack current paired web/germination coverage, so no thin-sweep completion adopted. Canon chemical plant-communication compilations and plant-photoreceptor/genomic reviews checked as metadata; no target plant-eye or physiological carry inferred.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded with currently documented authorized network mode. Geranium run1 holds **42 unique titles and all full stored abstract starts** (up to700characters), read in two works_of slices, no supplement/citation/family data and no failed step. Empty official open-trait display reflects old stored descriptor, not absence of current queue gaps. Successful historical queries, copied word-for-word:
+- `Geranium phytochrome photoreceptor`
+- `Geranium light perception`
+- `Geranium phototropism`
+
+Required10(e) searches first; then all four scientific/common-name trait pairs and Geraniaceae family-review alternative. **39 actual connected queries**, execution order:
+- `Geranium seed germination light dark`
+- `Geranium germination gibberellin OR smoke OR dormancy`
+- `Geranium floral scent volatiles`
+- `Geranium flower opening time anthesis`
+- `cranesbill flower opening time anthesis`
+- `Geranium volatile chemical hormone response`
+- `cranesbill volatile chemical hormone response`
+- `Geranium eye type lens-like epidermal cells`
+- `cranesbill eye type lens-like epidermal cells`
+- `Geranium light photoperiod phototropism`
+- `cranesbill light photoperiod phototropism`
+- `Geraniaceae photoreceptor review`
+- `"Geranium" "germination" "gibberellic"`
+- `"Geranium sanguineum" "Burger" "2021"`
+- `"Pollination adaptations of group-by-group stamen movement"`
+- `"Effect of Environmental Factors" "Carolina" "doi"`
+- `"Geranium" "seed" "germination" "maculatum" "light"`
+- `"Geranium" "seed" "germination" "pratense" gibberellin`
+- `"Geranium" "seed" "germination" "molle" light`
+- `"Geranium" "Physical dormancy in Geraniaceae seeds" DOI`
+- `"Some eco-physiological aspects of seed dormancy" DOI`
+- `"Germination ecology of eleven species" DOI`
+- `"Floral Cues of Non-host Plants" "headspace"`
+- `"Geranium carolinianum" "10.1017/wsc.2019.17"`
+- `"Geranium robertianum" "jasmonate" "tpc.16.00790"`
+- `"Geranium sylvaticum" "Kallio" "Piiroinen" "1959"`
+- `"Geranium" "273" "70225"`
+- `"Effect of gibberellin on the termination of dormancy in some seeds" Nature`
+- `"A combined physical and physiological dormancy" "light"`
+- `"Geranium pratense" "Experiment on seed germination and seedling growth"`
+- `"Pollination adaptations" "close" "15" "Geranium"`
+- `"Acquisition of physical dormancy" "doi"`
+- `"The autumn effect" "doi"`
+- `"Why do so many petals have conical epidermal cells" doi`
+- `"Experiment on seed germination and seedling growth of Geranium pratense" GA3`
+- `"Investigating the effects of temperature on seed germination of cutleaf geranium" -site:researchgate.net`
+- `"Geranium sylvaticum" "spores" "germination" journal`
+- `"Seed Germination Ecology and Dormancy Release" "Geranium macrorrhizum"`
+- `"Effects of canopy light gap and early emergence" Geranium`
+
+Read exposed titles/snippets and indexed original abstract/method passages only; no20-per-query claim. Initial combined display was clipped by tool-output budget; later multi-query outputs were retained in session store and omitted stretches recovered without repeating searches. These are web-screened leads, not a complete/exhausted protocol. No direct source/paper fetch, evidence, credentials/API/model fallback, proxy change or request to skipped services. OpenAlex429,MDPI429,UChicago403,SANBI403 skipped. Incidental indexed skipped-host results are search-engine output. ResearchGate,academia.edu,Scribd,documentsdelivered,commercial copies,librarycatalog/proxy andWikipedia results left unopened and unused as primary citations. Runtime environment skill read for supported networking; policy remains enforced/unrestricted and no runtime credentials configured. The earlier rejected mixed network/scratch-cache command was not retried or bypassed.
+
+**Adoptions without duplicate requests:** c10#167 (10.1017/wsc.2019.17) already requests2019 Florida germination ecology. Original Cambridge abstract independently confirms carolinianum light/dark treatments; intake must read that species as well as c10's Eleusine scope. c11#139 already requests Native/Underutilized Germination Ecology at mdpi2077-0472/15/20/2139. Original indexed text additionally names actual sanguineum/macrorrhizum zero germination under treatment protocols. Its hormone response candidates stay held even with zero response; no repeat row.
+
+**24 new source holds:**2018 organ-specific hormone paper for previously unlogged exogenous IAA/GA responses in robertianum/pyrenaicum (same source as existing light evidence; chemistry was not logged);2017 molecular-profile methyl-JA/lowR:FR study and2016 shade thesis in both species;carolinianum2018 light/dark trial and1974 dormancy study;robertianum2010 combined dormancy;2002 35-species physical dormancy survey;2006 eleven-species germination ecology;carolinianum2010water-gap,2011acquisition,2012autumn/dissectum and2013thermal dormancy studies;pratense2026germination;1959gibberellin source for sylvaticum;2026sylvaticum,2023pratense and2004robertianum BiologicalFlora reviews;pratense2021eveningclosure;congener sessiliflorum1985flowering observations;sanguineum2021floralheadspace;dissectum2023environmental germination and separate earlier cardinal-temperature trial;sylvaticum2015mycorrhizalspore germination;maculatumcanopy-gap study referenced by USFSreview.
+
+Mandatory10(e) germination/dormancy title holds kept even where indexed methods suggest physical/thermal rather than tested chemical/light cues. Seedcoat scarification, drying, water-gap anatomy and temperature alone are not chemical/light sensing. Fixed culture lighting, soil drought, endogenous hormones, seasonal emergence and flower lifespan in elapsed hours do not establish applied-cue/light experiments or diel timing. Actual1974 carolinianum darkness preference at high temperature and2018 lack of light effect must remain distinct by conditions/population. Sylvaticum1959 summaries differ:2026review says GA alone ineffective but acid+GA effective;1961Nature reference describes stimulation. Original1959paper needed; no invented reconciliation, response values or experiment species. Years/DOIs/authors absent from primary indexed metadata left null/empty. DOI suffix never treated as publicationyear.
+
+Diel: pratense original2021indexed passages explicitly describe evening closure (10.1016/j.pld.2021.04.001). Sessiliflorum1985 quarter-hour observations/afternoon stamen movement retained as congener lead only. Sylvaticum2013nectar and2017lifespan papers mainly compare developmental floral phases or elapsed hours; no daily clock inferred from them. Maculatum2015pollinator sex-ratio discrimination andmonths-onlybloom facts are not plant diel. Chemical: sanguineum2021source collects floral headspace from potted plants or cut inflorescences; actual target collection method needs verification before living-emission eligibility. Chemotaxonomic oils/extracts (purpureum,phaeum andotherGeranium), pharmaceutical effects and cut platypetalum leaves treated with GA fail10(a). Pelargonium hortorum/graveolens/CenturyRose stock/cultivar trials, despite vernacular geranium, are another genus and are not Geranium evidence. Insect antennal/behavioral responses alone do not establish plant perception.
+
+Eye: all plant eye_type none under10(b). Dark floral eyes/petalspots, trichome/stomatal/taxonomic anatomy, seedwatergap lens, other-taxon dinoflagellate ocelloids and animal eyes do not measure Geranium eyes. Conical-petal review10.1093/aob/mcr065 pictures procurrens but experimental functional comparison is Antirrhinum; no target focusing measurement inferred, no duplicate/background request. True epidermal focusing would belong underlight. Geraniaceae family-review search returned general photoreceptor/flower-optics reviews, no family physiological carry or completed missing API step.
+
+All24rows globally absent from wanted by DOI/normalized title (and distinct original sources where review getURL reused); no owner-status match. Existing light evidence for the2018 source was explicitly adopted above, with the new request scoped to unlogged chemical treatments. Known exact target queue record counts used; genericGeranium/congener sessiliflorum remain0. Original296wanted prefix and all23searched retained. Required checker/prefix validation and commit follow.
+
+Worker43 final validation: required checker **0 problems** at320wanted/23searched. JSONL parses; original296wanted prefix and all23searched bytes identical to bd8553ff; git diff --check passed. Only owned wanted/progress files edited; no paper assets or evidence. Context checkpoint between Geranium and entirely unstarted **Lepidium**; six remain.
+
+## 2026-10-27 — issue38 worker45: Lepidium
+
+NEW: **Lepidium one newly web-screened genus; +18 wanted,+0 searched,+0 evidence; cumulative338wanted/23searched. Protocol-partial**, mandatory uncachedOpenAlex steps skipped after round-wide429; no null/exhaustion claim. Prior first18,Pilea/Centrosemaadoptions,14newthroughGeranium and original97wanted/23searched baseline preserved. Current issue38 new screens become15throughLepidium. **Five remain; exact next Melothria**, thenCommelina,Lygodium,Ludwigia,Monotropa.
+
+Read AGENTS first,worker guide,all namedprotocols/BRIEF Round2/THOROUGH,audit53/54findings andownprogress. Cloudruntime connected/enforcedunrestricted,noVPN/credentialbindings. Preflight globalwanted/searched,canon,corrected-first accepted-name main_evidence,actualqueue andownerpapers-status. ActualtargetsL.virginicum/draba. Adopt draba corrected/sweep-21#6 light; accepted sativumcalluslight is a congener,notphysiologicalcarry tovirginicum. Older sweep-21 compoundtwo-queryrecord lacks currentpairedweb/germinationsteps. Canon plantchemical/genomicmetadata checked; no targeteye/genepresencemeasurement inferred.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded with documented supportednetwork: **Lepidium innoharvestrun/notinharvest**. No zero-hitAPIsearch implied. No directsourcefetch,evidence,operationaledit,permissionrequest,proxychange,APIcredentialfallback ornewservicerefusal. OpenAlex429,MDPI429,UChicago403,SANBI403 skipped; incidentalindexedresultsare searchengineoutputs. Earliermixednetwork/scratch-cache refusal not retried/bypassed.
+
+Required10(e)searchesfirst,allfour scientific/commontraitpairs,familyreviewalternative,thenexactsource/targetmetadataqueries. **31actualconnectedqueries**,executionorder:
+- `Lepidium seed germination light dark`
+- `Lepidium germination gibberellin OR smoke OR dormancy`
+- `Lepidium floral scent volatiles`
+- `Lepidium flower opening time anthesis`
+- `peppergrass flower opening time anthesis`
+- `Lepidium eye type lens-like epidermal cells`
+- `peppergrass eye type lens-like epidermal cells`
+- `Lepidium light photoperiod phototropism`
+- `peppergrass light photoperiod phototropism`
+- `Lepidium volatile chemical hormone response`
+- `peppergrass volatile chemical hormone response`
+- `Brassicaceae photoreceptor review`
+- `"Lepidium virginicum" germination light gibberellin`
+- `"Cardaria draba" germination gibberellin hormone`
+- `"Different headspace profiles in wild crucifer species"`
+- `"Lepidium virginicum" "light" "germination" "10." Borthwick`
+- `"Different headspace profiles" "10.1111"`
+- `"Pericarp-mediated chemical dormancy" Lepidium`
+- `"Lepidium draba" "jasmon" OR "ethylene" OR "abscisic"`
+- `"Responses to gibberellin of light-requiring seeds" "10.1104"`
+- `"Interactions of Light and a Temperature Shift" "10.1104"`
+- `"Pericarp-mediated chemical dormancy" "10.1017"`
+- `"Cardaria draba" "770318" "2020"`
+- `"Lepidium virginicum" "germination" "1955"`
+- `"Lepidium" "Dormancy and germination in short-lived" botany`
+- `"Lepidium" "Characterization of Invasiveness" "2023"`
+- `"Lepidium virginicum" "flower" "anthesis" time`
+- `"Photocontrol of Lepidium Seed Germination" "1955"`
+- `"Interaction of Temperature and Light in Germination of Seeds" "1955"`
+- `"Seed Biology of Lepidium apetalum" "2020"`
+- `"More than Just a Shell" "2025" Lepidium`
+
+Read available returnedtitles/snippets andindexed originalabstract/methodpassages atactualdeliveredextent; no20-per-queryclaim. Initialthree-query response exceeded displaybudget,so only exposedportionread; sixintermediate entriesunseen,not claimed ascompleted20-resultscreen. Laterresultsstored insessionandrecoverable; no repeatqueryfordisplayrecovery. No sourcepagesopened. ResearchGate,Wikipedia,Scribd,documentsdelivered,opportunisticcopiesandlibraryproxyresults leftunopened/notprimarysources. Unknownmetadata blank/null,not inferredfromDOIsuffix,URLorrelativeindexdate.
+
+**Sourceadoptions:** existingharvest-c12#5 **10.1111/j.1744-7917.2009.01283.x** compares living **L.virginicum** andCardamineimpatiens volatileemissionafterherbivoryandexogenousJA. OriginalWageningenindexedabstractconfirms target; adoptwithoutduplicate even though currentwantedrowlistsCardamineonly; coordinatornotifiedforintakescope. Existingc11#98 **Quantal Response of Seed Germination in Seven Genera of Cruciferae to White Light of Varying Photon Flux Density and Photoperiod** explicitlyincludesL.sativum,notvirginicum; source reuseonly,notcarry. ExactDOI/normalizedtitle/URLandownerstatusdedupebeforeappendfound eighteennewrowsabsentfromglobalwantedandstatus; nosourcen/are-requested.
+
+**Targetleads:** virginicum1955photocontrol10.1104/pp.30.1.15;1955light/temperature10.1104/pp.30.5.473;1961GA/red/far-red10.1104/pp.36.5.663;1972light/temperature10.1104/pp.49.2.127;2023nine-invasivestudyPMC10005799. ThelastsourcealsoincludesGeranium/Plantago/othergenera; existingtargetresultnotfoundinevidence/wanted,so originalsourceheldonceforthisactualspecies. Noevidenceloggedorvaluequoted. Draba2019washwater/appliedABAdose-response10.1017/wsc.2019.33 islivingtargetseedresponse,beyonddeadpericarp/endogenoushormones;2016GA/KNO3 10.1111/1442-1984.12113;2020GAstudy10.37908/mkutbd.770318 (originalcitation2020versusdownloadheader2021distinguished).2025drought/thermalgerminationtitlesheldper10(e),butthermalstressaloneisnotchemical/lightperception.
+
+**Congeners keptseparate:** apetalum2020GA/light/dark10.3390/plants9030333;perfoliatum2010red/white/darkgermination;papillosumDOG1developmentstudy;sativumDOG1coatdormancy,GID1receptorgerminationandtwoblue/redgrowth/photosynthesisstudies;latifoliumGA3response10.4161/psb.25388. Fixedculturelighting,endogenoushormoneprofilinganddormancygenesalonearenotmeasuredlight/chemicalresponses; mandatorygerminationtitlesremainreaderholds. Existingacceptedcalluslightsourcecoversseparatemonochromaticcallusstudy,so no duplicaterequest. Garden-cressaltered-gravityphotomorphogenesisandrootphototropismtitlesexposedonlythroughResearchGate/unpublisheddatareviewremainunresolvedtitleleads,not fabricatedprimarymetadata.
+
+Dielsearchesreturnseasonalflowerdates,buddevelopmentduration0.5–2days,cropanthesistimesinothergenera,basalleaveswitheredatanthesis andpollinatorvisits; noneestablishactualtargetdailyfloweropening. Leafepidermal2007study/virginicummicromorphologydescribestomataandpapillae,noteyes; lens-poddedfruitandhandlensarefalsematches. Plant eye_typenone10(b);anyactualfocusingbelongsunderlight. Essential-oil/tissuevolatilecompositionoflatifolium,anddrabaextractsappliedtoaniseseeds,fail10(a)forlivingLepidiumresponse; virginicumlivingJAstudydoescount10(d). Brassicaceaereviewresultsincludephytochromeevolutionandflowerdiversity; Arabidopsisphysiology/genepresenceisnot targetcarry. Noabsenceclaimwhilecandidateanduncachedprotocolstepsremain.
+
+Lepidium validation: required screen_candidates checker printed **0 problems** at338wanted/23searched. JSONL parsed, first320wanted/all23searched byte-identical tod1c27393, git diff --check passed. Committed61aa11b6; only owned wanted/progress paths changed.
+
+## 2026-10-27 — issue38 worker45: Melothria
+
+NEW: **Melothria one newly web-screened genus; +8 wanted, +0 searched, +0 evidence. Worker45 totals: Lepidium/Melothria two genera, +26 wanted; cumulative346wanted/23searched.** Both screens remain protocol-partial because mandatory uncached OpenAlex steps are skipped after the round-wide429. No null searched rows or exhaustion claims. Preserve original97wanted/23searched baseline, prior18, Pilea/Centrosema adoptions and14new throughGeranium; current issue38 new screens become16throughMelothria. **Four remain; exact next Commelina**, thenLygodium,Ludwigia,Monotropa.
+
+Preflight actual queue, global searched/wanted, owner papers-status, canon and corrected-first accepted-name main_evidence: actual target **M.pendula**, all four plant traits open, no accepted genus evidence. Old sweep-100#25 is a thin two-query screen and expressly did not open the cited cucurbit scent review. No earlier complete web protocol adopted. Canon entries checked as above; no target physiological or plant-eye carry inferred from family/genomic sources. Official read-only harvest_get.py and screen_candidates.py succeeded using currently documented authorized network mode: **Melothria in no harvest run yet/not in harvest**. No failed request/zero-hit conflation. No direct page/paper fetch, evidence, service refusal, operational edit, proxy change, new permission or API fallback. OpenAlex429, MDPI429, UChicago403 and SANBI403 remain skipped; earlier refused mixed network/scratch-cache command not retried or bypassed.
+
+Required10(e) searches first, then all four scientific/common-name trait pairs, family-review alternative and exact target/source/taxonomic clarification. **38 actual connected queries**, exact execution order:
+- `Melothria seed germination light dark`
+- `Melothria germination gibberellin OR smoke OR dormancy`
+- `Melothria floral scent volatiles`
+- `Melothria flower opening time anthesis`
+- `creeping cucumber flower opening time anthesis`
+- `Melothria eye type lens-like epidermal cells`
+- `creeping cucumber eye type lens-like epidermal cells`
+- `Melothria light photoperiod phototropism`
+- `creeping cucumber light photoperiod phototropism`
+- `Melothria volatile chemical hormone response`
+- `creeping cucumber volatile chemical hormone response`
+- `Cucurbitaceae photoreceptor review`
+- `"Studies on the Seed Germination and Growth Characteristics of Melothria pendula" `
+- `"Melothria pendula" jasmonate gibberellin ethylene`
+- `"Melothria pendula" anthesis morning flower opening`
+- `"Melothria" "germination" "10.1590"`
+- `"Melothria pendula" "hormone" OR "ethylene" OR "salicylic"`
+- `"Melothria" "anthesis" "morning"`
+- `"Melothria scabra" "germination" "gibberellin"`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Melothria" "Anthesis"`
+- `"VIABILIDADE DE SEMENTES" "MELOTHRIA CUCUMIS"`
+- `"Melothria scabra" "floral" "biology"`
+- `"Melothria pendula" "volatile" "living"`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Bankunari" "Melothria"`
+- `"Melothria cucumis" accepted Kew`
+- `"Avaliação da emergência de plântulas de pepininho-silvestre" `
+- `"Melothria scabra" "Provides New Opportunities" journal`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Melothria heterophylla"`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Bankunari" "species"`
+- `"Melothria scabra" "germination" "light" study`
+- `"Melothria pendula" "chemical" "response"`
+- `"Effect of light intensity on the gas exchange characteristics of Melothria pendula"`
+- `"Melothria scabra" "sodium nitroprusside"`
+- `"Melothria scabra" "germination" polyploidization 2024`
+- `"10.1088/1755-1315/269/1/012021" -site:researchgate.net`
+- `"Effects of Sodium Nitroprusside on the Growth and Development of Melothria scabra"`
+- `"Efecto de compuestos de Aluminio, Bismuto, Hierro" Melothria -site:researchgate.net`
+- `"Artificial Polyploidization" Melothria "2024" germination`
+
+Read all exposed titles/snippets and indexed original metadata/abstract passages at actual returned extent, without a20-per-query claim. Most responses are saved in session store mel1–mel10. Search engine sometimes expands an indexed snippet to original methods; this remains desk screening, not a direct fetched or intake-verified text. No Wikipedia, ResearchGate, Scribd, DOKUMEN.PUB, academia.edu, Studocu, unauthorized copies or library mirrors opened or used as primary evidence. Some results expose ResearchGate abstracts; original metadata was recovered independently through original author portals/review references before requesting sources. Unknown DOI/year/authors remain blank/null. Global DOI/Unicode-normalized exact-title/URL and owner-status check found eight new sources absent from wanted/status; no owner n/a source requested.
+
+**Target light leads:** Wu Ming-Tse2025 National Chiayi University thesis,132pages, original Taiwan national thesis abstract explicitly compares light quality during M.pendula germination and reports inhibition under far-red/dark. Publication year2025 and author verified from original indexed metadata, not inferred from degree-year113. The same work tests pH/salinity/herbicides; these can represent tolerance/toxicity, so no target chemical-cue perception claimed. Idris/Linatoc/Bin Abu Bakar2019 **10.1088/1755-1315/269/1/012021** explicitly tests target gas exchange/light-response curves; original UTHM author portal and2024 original review bibliography confirm source metadata. No light/CO2 values logged, and CO2 as photosynthetic substrate is not automatically chemical sensing.
+
+**Congener germination holds:** campestris2016 **10.1590/1983-21252016v29n416rc** tests substrates/temperature; no manipulated light inferred from its general introduction. Cucumis2023 seed-viability/fruit-chemistry paper and2013 four-substrate emergence proceedings retained for10(e) method recovery. Kew original metadata confirms **Melothria cucumis is an accepted congener**, not target pendula. UERGS2020 Aline Marques thesis is the study lineage behind the2023 paper, adopted through the paper's note without a second wanted row. Scabra2023 detergent-germination **10.61117/ipsumtec.v6i2.182** and metal-germination journal paper retained per10(e); toxicity/nutritional effects alone are not established cue perception. Scabra2025 Yibing Yan proceedings tests applied sodium nitroprusside irrigation/spray of living seedlings versus water control, a chemical growth-regulator candidate under10(d), kept separate from pendula. Scabra2024 oryzalin polyploidization **10.3390/horticulturae10010022** exposes fixed photoperiod and induced chromosome changes, not a light response or demonstrated chemical sensing; no extra request for mutagenic manipulation alone.
+
+**Important taxonomy/diel resolution:** original university compendium has a genuine within-day anthesis statement in a chapter labelled Bankunari(Melothria), initially a plausible candidate. Targeted original indexed passage explicitly identifies **Solena amplexicaulis**, synonym **Melothria heterophylla**, before its flower timing. Thus no target/congener diel carry and no wanted row for this other genus. PubMed fruit-volatiles source likewise measures Solena, not M.pendula. General cucumber photoperiod/JA/stomatal/flower-hour results identify **Cucumis sativus**; no family physiological carry. Sphaerocarpa/Cucumeropsis, maderaspatana/Cucumis and japonica patent results also cannot silently be treated as current Melothria. Other diel hits are seasonal flowering, age to bloom, other-genus anthesis, and pollinator activity rather than target daily timing.
+
+Chemical exclusions: pendula phytochemical/antimicrobial extracts, silver nanoparticles, molluscicides, harvested fruit chemistry and animal cytotoxicity fail10(a). Virus-host susceptibility and herbicide resistance/injury alone do not show applied hormone/elicitor sensing. No target volatile signal or chemical response established; no absence claim while germination hold/protocol steps remain. Eye hits concern epidermal trichomes/cell anatomy, animal eyes and hand-lens identification; all plant eye_type none under10(b), any demonstrated focusing belongs under light. Family-review query returns broad plant photoreceptor reviews/cucurbit hormone generalities, not an original target measurement. No full-protocol completion claimed.
+
+Melothria validation: required checker printed **0 problems** at346wanted/23searched. All JSONL parses; first338wanted lines and all23searched unchanged from61aa11b6, original320wanted prefix unchanged fromd1c27393; git diff --check passed. Committedd0f6610a; only owned wanted/progress files changed.
+
+## 2026-10-27 — issue38 worker45: Commelina and context checkpoint
+
+NEW: **Commelina one newly web-screened genus; +29 wanted,+0 searched,+0 evidence. Worker45 total: Lepidium/Melothria/Commelina three genera,+55 wanted; cumulative375wanted/23searched.** All three are protocol-partial because mandatory uncached OpenAlex steps remain skipped after round-wide429; no null searched rows or exhaustion claim. Preserve original97wanted/23searched baseline, prior18, Pilea/Centrosema adoptions and14new throughGeranium. Issue38 new screens now17 throughCommelina. **Three remain; exact next Lygodium**, thenLudwigia,Monotropa. No active partially web-screened genus; stop between entries at context boundary.
+
+Preflight actual queue, global searched/wanted, owner papers-status, canon and corrected-first accepted-name main_evidence. Actual species communis/erecta. **Adopt communis light recheck-5-fixed#1/sweep-12#2 and genus diel sweep-12#3**; no redundant diel pair. Queue has erecta light and both species eye/chemical gaps. Light physiological response cannot carry communis→erecta. Older sweep-12#6 compound two-query screen is not the current complete protocol. Canon metadata checked as before; plant eye none10(b), gene/protein presence and family physiology not target measurements. Official read-only harvest_get.py and screen_candidates.py succeeded using documented authorized network: **Commelina in no harvest run yet/not in harvest**. No zero-hit API inference. No direct source/page fetch, evidence, new service refusal, operational edit, proxy change, permission request or API fallback. OpenAlex429,MDPI429,UChicago403,SANBI403 skipped; earlier mixed network/scratch-cache refusal not retried or bypassed.
+
+Required10(e) first, then scientific/common eye/light/chemical pairs and family-review alternative; exact source and species/method searches followed. **35 actual connected queries**, execution order:
+- `Commelina seed germination light dark`
+- `Commelina germination gibberellin OR smoke OR dormancy`
+- `Commelina floral scent volatiles`
+- `Commelina eye type lens-like epidermal cells`
+- `dayflower eye type lens-like epidermal cells`
+- `Commelina light photoperiod phototropism`
+- `dayflower light photoperiod phototropism`
+- `Commelina volatile chemical hormone response`
+- `dayflower volatile chemical hormone response`
+- `Commelinaceae photoreceptor review`
+- `"Commelina erecta" light germination gibberellin`
+- `"Commelina communis" abscisic acid stomatal closure living leaves`
+- `"Commelina erecta" "light" "shade"`
+- `"Commelina erecta" "ácido giberélico" dormición`
+- `"Características reproductivas de Commelina erecta"`
+- `"Características reproductivas de Commelina erecta" site:revistas.unc.edu.ar`
+- `"Fruit dehiscence mechanism and release" Commelina doi`
+- `"Stomatal Response to Abscisic Acid Is a Function of Current Plant Water Status"`
+- `"Commelina erecta" site:asacim.org.ar/wp-content/uploads/2021/09/Actas_-Malezas-2021_VF.pdf "germination"`
+- `"Características reproductivas" "Commelina erecta" "10.31047"`
+- `"Sensitivity of Stomata to Abscisic Acid" "10.1104"`
+- `"Commelina erecta" "EFECTO DEL ÁCIDO GIBERÉLICO" "2023"`
+- `"Seed germination ecology of Asiatic dayflower" DOI`
+- `"Características reproductivas" "10.31047/1668.298x.v28.n1.2784"`
+- `"Commelina benghalensis" "Effect of temperature, light" doi`
+- `"Germinação de sementes aéreas pequenas" Commelina 2009 doi`
+- `"Commelina erecta" "light" germination "2011"`
+- `"Physiological germination aspects" "Commelina"`
+- `"Seed dormancy and development pattern" "Commelina"`
+- `"ENVIRONMENTAL FACTORS AFFECTING BENGHAL DAYFLOWER" Sabila 2008`
+- `"Características reproductivas de Commelina erecta" site:revistas.unc.edu.ar/index.php/agris/article`
+- `"Commelina benghalensis" "Voll" "162-168" germinação`
+- `"The effect of chemical and heat treatments" "Commelina"`
+- `"Commelina" "The role of temperature in the germination" "1999"`
+- `"Pharmacological evidence" "Commelina" "10."`
+
+Read every exposed title/snippet and indexed original abstract/method passage at actual delivered extent; no20-per-query claim. Responses retained in session store com1–com9. No direct fetch, paper asset or full text saved to git. Some search outputs include expanded original methods; these are still indexed search results, not intake evidence. Wikipedia/ResearchGate/Scribd/encyclopedias/library mirrors and opportunistic copies left unopened and not primary sources. Source metadata recovered from original publisher, author/institution, government proceedings and legitimate bibliographic records; unknown DOI/year/authors blank/null. Global exact DOI/Unicode-normalized title/URL and owner-status dedupe before append found29 new rows absent from wanted/status. No source owner n/a re-requested.
+
+**Erecta target leads:**2011 *Características reproductivas...* original indexed abstract explicitly tests temperature/light requirements for germination; DOI full suffix appeared only in a secondary source, so kept blank.2023 original CONICET/congress abstract *Efecto del ácido giberélico sobre la dormición de semillas ovoides...* tests applied GA in fresh/dry-stored/cold-stratified seeds.2024 Protoplasma **10.1007/s00709-023-01904-z** dimorphic-seed germination/dehiscence candidate retained per10(e); original PubMed metadata distinguishes2024 print from2023-11-01 online date.2021 ASACIM p103 related abstract includes chemical scarification and GA (no GA effect on intact seed); same study lineage adopted through2024 row, not duplicate proceedings wanted.2015 original ASACIM two-population germination abstract held separately. An adjacent dose-response abstract must not be assigned as its hormone experiment. Busitema water/light distribution thesis and horticultural shade preferences are unresolved observational/citation leads, not an actual experimentally demonstrated erecta light closure.
+
+**Communis chemical leads:** eleven original sources retained for methods review:1993ABA/mesophyll **10.1104/pp.102.2.497**;1992ABA/PEG **10.1104/pp.98.2.540**;1995 *How Do Stomata Read ABA Signals?* **10.1104/pp.109.3.803**;auxin stomatal **10.1016/s0168-9452(01)00348-x**;applied labelled-ABA initiation (PMID22471592);externalpH/ABA (16396996);antitranspirantABA/fusicoccinbioassay(24493349);ABAuptake/closure(24408689);xanthoxin/ABA(24435339);apoplasticCO2/mesophyll(23560389);auxin rooting **10.1016/j.plantsci.2003.09.007**. These are living responding guard cells/epidermis, leaf pieces, detached leaves or regenerating material, unlike extracted-compound chemistry; **isolated material eligibility remains explicit, no rooted whole-plant response or evidence inferred**. The1992 field result is maize, not communis;1995 intact-leaf comparator is Phaseolus, not communis. ABA accumulation/metabolism after water or cold stress alone is not an applied cue response; pure1985metabolism and leafstressABA profiles were not separately requested. Cold-response source may contain additional ABA experiments, recover through these references rather than imply cold is chemical sensing. ApoplasticCO2 experiment needs cue-versus-substrate judgment. No chemical null for either species while leads await readers.
+
+**Communis germination upgrade:** original Cambridge **10.1017/wsc.2026.10150** tests light/temperature plus salinity/osmotic/heat/depth/residue; year leftnull unless publication field confirmed, despite DOI suffix. Existing communis light record retained; no carry toerecta. Bibliographic UQ list displayed an adjacent2025 DOI belonging to another title, which was not adopted.
+
+**Congeners:** ten benghalensis germination/dormancy source holds:2009small-aerial **10.1590/S0100-83582009000500006**;2024light/temperature/depth **10.1590/1519-6984.281402**;1985Queensland **10.1111/j.1365-3180.1985.tb00641.x**;1990chemical/heat **10.1111/j.1365-3180.1990.tb01693.x**;1999temperature **10.1080/02571862.1999.10635004**;IRRI/UPLBseed-dormancythesis;2002Voll **Aspectos fisiológicos...** (original Embrapa catalog calls itbiológicos, paper headerfisiológicos, one source);Sabila factor-germination paper (2008UGAthesis adopted as companion, not duplicate);aerial/subterraneangermination UFVsource;2004Matsuo **10.1111/j.1445-6664.2004.00135.x**. Physical scarification, seed weight/viability, temperature and fixed14/10h culture alone do not establish light or chemical perception. Mandatory10(e) holds retained. No-light-effect outcomes remain tested candidates, not unsearched absence. In2024comparison, Richardia is positivephotoblastic andbenghalensisneutral; no species-result swap.
+
+Also retained benghalensis2016 applied light/photoperiod growth **10.1155/2016/5679249**, artificial-light-gradient morphological plasticity and original chemical-library stomatal screen; actual congener only. Laterreviewmentions virginica Klein/Felippe1991photoblastism and forskalae1955sunlight-flowerfork; full original citations not recovered, so unresolved reference leads for readers via existing requested review sources, not invented metadata or targetcarry.
+
+Eye search matches morpho-anatomical epidermis/stomata, petal pigment distribution and trichomes; no optical-focusing experiment established. Retinal-binding protein presence relates to light, not plant eye_type, and is not new target physiology by itself. Allplant eye_typenone10(b). Extract chemistry, anti-inflammatory/antiviral human effects, commelinin crystals, nanoparticle synthesis and plant-medicinal-use reviews fail10(a); colored floral organs/pollinator response do not prove emitted chemical signal. Family results include Commelinaceae phylogeny/systematics, pigment/cell morphology and broad photoreceptor reviews; no genus physiological carry. Prior accepted daily opening source retained without repeating its search. No new diel or eye negative record while mandatory protocol steps remain incomplete.
+
+Context checkpoint: **three newly web-screened genera in worker45,104 connected queries total (31Lepidium+38Melothria+35Commelina),55wanted,0searched/evidence. Exact next Lygodium, unstarted.** Prior sources/prefixes and Geranium audit caveat preserved. Final checker/prefix validation and serialized commit follow.
+
+Worker45 final validation: required screen_candidates checker printed **0 problems** at375wanted/23searched. All JSONL parses; original320wanted lines and all23searched byte-identical tod1c27393, subsequent338/346prefixes preserved byte-for-byte. git diff --check passed. Only owned wanted/progress files changed, no evidence or paper assets. Stop between completed Commelina web screen and entirely unstarted Lygodium at context boundary; three remaining genera unchanged above.
