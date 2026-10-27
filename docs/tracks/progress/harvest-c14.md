@@ -288,3 +288,21 @@ Queries actually run (connected web search; returned titles/snippets screened, f
 - `Epipactis epidermal lens cells eye`
 - `broad-leaved helleborine epidermal lens cells eye`
 - `Orchidaceae photoreceptor review`
+
+### Vaccinium
+
+Web-query screen for round completed; full protocol partial (OpenAlex unavailable). Official harvest_get/screen_candidates run; run 4 genus and run 17 Ericaceae review plus supplement titles checked. Adopted species-specific light records in oa-13b and chemical canon-3#660 for V. corymbosum only. Adopted existing plant-1 wanted #43–58/#118 as source coverage only: #50–58/#118 assign many wild targets to hybrid/corymbosum/darrowi/ashei papers, which does not establish a physiological carry. Old sweep-3 two-query record is not a completed screen. Fourteen new source leads, with exact-title germination paper URL/DOI left blank where search supplied only a ResearchGate listing (never opened). Herbivore-induced Blueberry Volatiles and Intra-plant Signaling (PubMed 22214939/PMC3369640) appears to be a companion account of the 19159981 primary experiment and is not separately requested. Harvest pH culture trial retained with species list and scope warning; gene-family predictions alone not claimed as measured sensing. Eye search returned animal eye protection by extracts, a fly blueberry phenotype and fruit epidermal shape, no focusing measurement established. Hyperspectral thesis snippet cites Brodersen/Vogelmann as background; not assumed to measure Vaccinium epidermal focusing. Diel snippets describe months, flower lifespan and hours since anthesis, not daily opening time. Canon catalog checked. No pages fetched, nulls or evidence.
+
+Queries actually run (connected web search; returned titles/snippets screened, fewer than 20 when fewer were delivered):
+
+- `Vaccinium seed germination light dark`
+- `Vaccinium germination gibberellin OR smoke OR dormancy`
+- `Vaccinium floral scent volatiles`
+- `Vaccinium photoperiod phototropism light sensing`
+- `blueberry photoperiod phototropism light sensing`
+- `Vaccinium flower opening time anthesis`
+- `blueberry flower opening time anthesis`
+- `Vaccinium volatile chemical signalling`
+- `blueberry volatile chemical signalling`
+- `Vaccinium epidermal lens cells eye`
+- `blueberry epidermal lens cells eye`
