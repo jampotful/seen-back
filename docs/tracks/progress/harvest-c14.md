@@ -467,3 +467,20 @@ Queries actually run (connected web search; every returned title/snippet screene
 - `California buckwheat flower opening time anthesis`
 - `Eriogonum fasciculatum germination light dark Montalvo McMillan`
 - `Eriogonum chilling requirements germination Meyer Paulsen`
+
+### Cytisus
+
+Web-query screen completed for round, full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates display no currently open harvest traits, but current queue still has three open target cells. Adopted exact target sweep-15#1 partial chemical emission evidence10.3390/plants15010095; no redundant chemical pair or duplicate source request. Seven new wanted light/germination leads include explicit target review light/dark/red:far-red negative experiment and primary germination/growth response title. WSSA2020 conference germination-light title appears companion to full paper, pointer preserved without duplicate. aeolicus abstract is congener-only and its light/dark result cannot be assigned from Silene/Erysimum results; chemical scarification is a physical-coat versus perception fork. Existing target review snippets report convex epidermal walls, not focusing; seed aril lens/hilum anatomy, pollen and animal lenses are not eyes. Pollinator UV flower-color paper10.25260/ea.20.30.1.0.911 measures animal attraction, not plant visual/light reception. Diel results seasonal flowering or insect-triggered springing, no daily opening hour established. Cytinus scent is a different genus; Cytisus essential oils/hydrodistillation and bioherbicide volatile extracts excluded10(a), no chemical target measurement assigned from recipient weeds. Harvest family Fabaceae alternative and citation zero-hit results reviewed; broad leaf-out thesis remains source pointer without claimed target measurement. Canon/global status checked. No fetched pages/nulls/evidence.
+
+Queries actually run (connected web search; every returned title/snippet screened, fewer than20 whenever fewer delivered):
+
+- `Cytisus seed germination light dark`
+- `Cytisus germination gibberellin OR smoke OR dormancy`
+- `Cytisus floral scent volatiles`
+- `Cytisus photoperiod phototropism light sensing`
+- `Scotch broom photoperiod phototropism light sensing`
+- `Cytisus flower opening time anthesis`
+- `Scotch broom flower opening time anthesis`
+- `Cytisus epidermal lens cells eye`
+- `Scotch broom epidermal lens cells eye`
+- `"Morphological characterization" "Cytisus aeolicus" germination`
