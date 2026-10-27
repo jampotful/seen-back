@@ -629,3 +629,56 @@ Exact legacy candidate-conflict reference: `docs/views/searched/rescreen-2.jsonl
 OpenAlex429/MDPI429/UChicago403/SANBI403 skipped throughout; no paid API, source/full-paper-page fetch, unauthorized paper copy, extracted evidence, app build/test/server, branch/gate or issue29/30 change. Unknown source metadata null/empty; the two new sources have explicitly verified years1964/2023. Parent retains audit/application and push/PR responsibilities.
 
 Worker41 final checkpoint: actual harvest_get/screen_candidates completed for Lunaria; their live trait filter prints no open traits because older records suppress them, so original gaps and current10(d,e) scope governed this correction. Combined screen_candidates --check completed with `0 problems` for13 searched/167 wanted; own-file whitespace check passed, all JSONL parses, no year0. Exact legacy null is rescreen-2.jsonl:24, copied above without modifying its source. Stop at Juglans;24 remain.
+
+
+## 2026-10-27 — worker47 continuation: shared-source correction and Juglans
+
+TOP/current batch checkpoint:17/40 genera screened through Juglans,14 searched,181 wanted,0 evidence/measurement closures;23 remain, exact next Castilleja. This worker:1 genus completed,31 actual successful web queries,1 new search,14 new wanted,1 existing shared wanted target expansion,0 evidence. Previous worker41 totals and Lunaria conflict rescreen-2.jsonl:24 preserved. Original fresh assignment word for word in work/assignment-worker47-c12.txt; only authorized genera researched.
+
+Shared source correction: inspected real work/worker43-Taraxacum-web1.json and web5.json. The original indexed legal repository abstract at https://abakus.inonu.edu.tr/items/8180cf36-1562-48f2-9d78-d034caa28545 explicitly names Taraxacum officinale in the light-duration germination comparison alongside Senecio vulgaris. The indexed original Dergipark https://dergipark.org.tr/tr/download/article-file/212114 and its citation provenance were inspected in those caches, without fetching either page. Expanded ONLY existing harvest-c12 wanted line131 for/traits/why to include T.officinale light, preserving existing Senecio request, rows, records, source history and null/empty uncertain metadata. No duplicate paper/book and no new measured value. This is a candidate target correction, not extraction or a claim of full text. Parent handles any Taraxacum application findings.
+
+Juglans original queue species: J.nigra(20,744 records), J.regia(9,333), all four traits light/chemical/diel/eye. Global evidence/corrected/search/wanted/status checked. Existing oa-12#440 is genus-rank secondary/partial light evidence citing Frak2001; indexed primary Frak2001/2002 methods identify J.nigra x regia hybrids, which do not establish pure target species measurements. Legacy evidence and thin sweep-15#4 remain untouched; the two-query old record is not completed protocol under10(d,e). No relevant in-hand plant response canon. Canon compilations retain their coverage role and are not re-requested as background.
+
+Actual harvest_get.py and screen_candidates.py both return no Juglans genus harvest. A fresh cache inspection also found no Juglandaceae family record(null saved work/harvest-c12/worker47-Juglans-cache.json). No OpenAlex query run or claimed. Available connected web supplied full scientific/common-name trait pairs, mandatory seed-light/hormone and herbivore-first queries, and family-review alternative. Family query returned Heintzen2012 plant/fungal photopigments10.1002/wmts.36 plus animal/retinal/fungal reviews, no Juglandaceae response measurement. All returned titles/snippets up to first20 where returned were read, including all outputs of targeted metadata follow-ups. Raw provenance work/harvest-c12/worker47-Juglans-web1..8.json;31 actual queries word for word:
+
+- `web: Juglans seed germination light dark`
+- `web: Juglans germination gibberellin OR smoke OR dormancy`
+- `web: Juglans jasmonate herbivore`
+- `web: Juglans light photoperiod phototropism`
+- `web: black walnut English walnut light photoperiod phototropism`
+- `web: Juglans flower opening time anthesis`
+- `web: black walnut English walnut flower opening time anthesis`
+- `web: Juglans living plant volatile emission chemical response methyl jasmonate`
+- `web: black walnut English walnut living plant volatile emission chemical response methyl jasmonate`
+- `web: Juglans eye type epidermal focusing`
+- `web: black walnut English walnut eye type epidermal focusing`
+- `web: Juglandaceae photoreceptor review`
+- `web: "Juglans nigra" "light" "photoperiod" experiment`
+- `web: "Juglans regia" "anthesis" "hour"`
+- `web: "Juglans nigra" "anthesis" "hour"`
+- `web: "Ruptura de la dormición" "Juglans nigra"`
+- `web: "Photoperiod and atmospheric" "black walnut"`
+- `web: "Juglans" "pollen" "time of day"`
+- `web: "Methyl Jasmonate Orchestrates" "2025"`
+- `web: "Juglans" "Frak" "2001" "light"`
+- `web: "Juglans nigra" "gibberellic acid" germination`
+- `web: "Juglans regia" "diurnal" photosynthesis`
+- `web: "Characterizing Pathogen-Induced Changes in Black Walnut"`
+- `web: "The Effect of Gibberellic Acid and Chilling Stratification" "Juglans" -site:researchgate.net`
+- `web: "GA 4+7" "Warmund" "2018"`
+- `web: "Juglans regia" "volatiles" "buprestid"`
+- `web: "Juglans regia" "germination" "gibberellin" "Wen 185"`
+- `web: "The Effect of Gibberellic Acid and Chilling Stratification" "229" -site:researchgate.net`
+- `web: "GA" "Soak Before Cold Stratification Enhances" -site:researchgate.net`
+- `web: "Juglans regia" "seed germination" "light" experiment`
+- `web: "Tritrophic interactions with avian predators" "methyl"`
+
+Fourteen new wanted sources passed global normalized-title/DOI duplicate checks across wanted/evidence/corrected/status. Target nigra:2017 light-requirement/dormancy paper(Flores et al., legal Rosario/national repositories); Agraria stratification/GA trial; original GA/chilling paper independently cited in legal TURJAF bibliography;2018 GA4+7 soaking trial in legal American Pomological Society issue; original photoperiod/CO2 seedling-growth paper independently cited in legal USDA/Wiley bibliographies;2025 pathogen/sham-inoculation seedling volatile paper(PubMed plus legal PMC references verifying DOI10.1007/s10886-025-01567-5). Target regia:2025 MeJA/salt-growth response(PubMed/PMC,10.3390/antiox14080974);2023 Wen185 GA/NAA germination trial;2021 Nepal presowing GA experiment10.24925/turjaf.v9i6.1165-1171.4424; PEG seed-germination trial(AGRIS);2020 healthy/buprestid-infested dynamic-headspace10.25100/socolen.v46i1.8649; four-light-environment seedling plasticity experiment; local-irradiance mature-tree mesophyll study; and Wen185/Xinxin2 light saturation plus diurnal photosynthesis study10.11924/j.issn.1000-6850.casb17040092. Original metadata not explicitly verified remains null/empty, never inferred from URL/DOI digits or elapsed-age labels. Sources whose original is known only from a bibliography explicitly request the original and give that provenance, not a new duplicate citing-paper request.
+
+The primary seed/dormancy titles stay as10(e) leads; no light result is inferred from fixed culture photoperiod. PEG trial needs chemical/osmotic-control interpretation; light plasticity and local-irradiance studies need actual cue/response tables checked. Pathogen/buprestid papers concern living seedlings/dynamic headspace, but reader must verify collection methods before treating as living emission. Daily photosynthetic physiology is a plausible diel candidate and holds that trait while unread; season-specific flowering/BBCH dates alone do not count as time-of-day. No light/chemical/diel null or measurement value logged.
+
+Other dispositions: the avian-predator recruitment source uses dispenser vials of synthetic MeJA/MeSA plus clay caterpillars, and measures birds, not walnut perception/emission. The targeted indexed primary methods resolved this false positive; no wanted. Kernel/oil aroma and wood extract chemistry or human eye irritation do not establish living plant chemical response or eyes10(a,b). Allelopathic extracts applied to other species are not target walnut receiving a chemical cue; no request for unrelated target crops. Endogenous growth-regulator content and gene/transcript annotation of photoperiod/circadian homologues alone do not demonstrate external cue response. Seasonal dichogamy, fruit development, BBCH scales, bud-chilling and cultivars with calendar bloom dates are not daily anthesis measurements. J.mandshurica/major/cinerea/hopeiensis and hybrid experiments are other targets, with existing hybrid/genus source history retained. General plant/fungal photoreceptor, model maize/cucumber/tobacco jasmonate, seed-dormancy and tree-communication reviews are background; direct target primary leads prioritized. Practical propagation guides and identification pages are not experimental evidence. Forbidden redistributors/proxy mirrors and ResearchGate/academia were not opened or used as measurement authority.
+
+Eye_type alone has a completed owner10(b) null with explicit dispositions for plant/fungal photopigments, animal phototransduction, family anatomy and human wood-induced eye irritation. No Juglans epidermal focusing measurement found; if present it belongs under nonvisual light, not eyes. No source-page fetch or evidence written. OpenAlex429/MDPI429/UChicago403/SANBI403 round-wide restrictions respected; no new refusal or actual web quota refusal, paid API, unauthorized paper copy, app startup/build/test/server, branch/gate or issue29/30 change. Managed cloud runtime skill read; current enforced unrestricted HTTP policy, no configured credentials, no environment changes. Parent retains findings/audit/application and push/PR responsibilities.
+
+Worker47 Juglans checkpoint: actual combined screen_candidates --check finished with `0 problems` for14 searched/181 wanted. JSONL parses and unknown-year0 check passed; EOF whitespace corrected before commit.
