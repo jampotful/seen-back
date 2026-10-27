@@ -1379,3 +1379,31 @@ Exact successful connected queries,executed order:
 All actually delivered connected titles/snippets read in retained-response slices,including displayed tails,variable counts without20each claim. Raw Apocynum-web1–8.json,harvest/candidates and deduplicated title/abstract-start slices saved in /workspace/work/w25-c11. Family-review alternative returns general plant/fungal photoreceptors,Apocynaceae phytochemistry/pollination,Catharanthus/Rhazya and unrelated animal/other-plant works; no named queuedtarget treatment in available excerpts. No source-page/paper fetch,evidence,credentials/proxy/TLS change,purchase,operational edit or new service refusal. Mandatory validator pending final checkpoint; clean next Bromus.
 
 Worker25 final mandatory real validator printed **0 problems**. Byte-prefix check preserved all incoming135wanted lines; searched byte-identical to incoming25lines. Current193wanted/25searched. NEW58wanted/0searched/0evidence across3available-web-screened protocol-partial genera,68successful connected queries. Context handoff stops cleanly before Bromus;9genuinely unreviewed remain. OpenAlex429skipped; no new service refusal. Prior Packera unseen-tail caveat preserved.
+
+## 2026-10-27 — issue38 worker31 Bromus
+
+NEW Bromus available-web-screened;15 successful connected queries,27new wanted/0searched/0evidence. Incoming193wanted/25searched; now220/25. All31 prior screened genera preserved. Required harvest_get.py and screen_candidates.py ran in supported network mode: Bromus is in no harvest run yet, no cached candidates; absence is not an API zero-hit. OpenAlex429 remains skipped; mandatory API steps incomplete and no new null searched rows or full-protocol/exhaustion claim. Canon checked per trait (plant catalog sources not in hand; eye catalog animal scope), global wanted/evidence/corrected/searched/owner status checked by genus and all retained exact titles/URLs/DOIs. No n/a source re-requested. Legacy sweep-9 one-query null not current protocol completion.
+
+Adopted sweep-9#9 direct B.inermis1946 photoperiod abstract; do not carry physiology to B.tectorum/hordeaceus/catharticus. Adopted existing sweep-9 wanted#1 Pooideae/CCT source PMC9232202 and#8 target B.tectorum floral-induction source, without legacy edits or duplicate. Also adopted exact Daily rhythm of anthesis and pollination in grasses source harvest-c13 wanted#156 (direct synopsis includes B.inermis and Poa angustifolia), no duplicate. New direct-target light candidates include B.catharticus soil-moisture/red-light and four-weeds germination, B.hordeaceus annual-species light germination, B.inermis1984 photoperiod upgrade. Bromus mollis is named as reported, with accepted hordeaceus synonym verification held for reader. Other congeners are candidates for their own named species, never carry. Target B.inermis evening anthesis occurs in primary indexed table10.1111/j.0269-8463.2004.00921.x; source methods unread. B.auleticus flowering-timing source separately retained. Seasonal FEIS/horticultural flowering months do not establish daily hours.
+
+New living herbivory-induced B.inermis VOC source10.1093/jisesa/ieaf016 separates living plant emissions from parasitoid sensory responses. Exogenous MT/MeJA/GA3 seed/seedling trials count10(d). ABA/JA freezing-tolerance source explicitly has cell-culture scope awaiting original; no intact-plant result asserted. Germination/dormancy titles retained10(e) even when hydrothermal/endogenous-gene data alone do not establish light/chemical sensing. Malted-seed volatilome and dried-grass GC-MS fail10(a); Epichloë fungal emissions in potted hosts cannot become a Bromus chemical measurement merely by host name. Eye_type none10(b), focusing belongs under nonvisual light. Generic ocelli papers and Bromus epidermal SEM morphology lack a returned named-target focusing measurement. Family-review alternative returned general plant photoreceptor reviews10.1146/annurev-arplant-042809-112259,10.1111/tpj.70817,10.1002/wmts.36 and10.1007/s44372-025-00446-3; no target-specific family result established. No generic review duplicate requested. All delivered titles/snippets read (variable result counts, no20-perquery claim), including retained response tails. Search output may include forbidden/proxy hosts; none opened or used as retrieval route. No source-page/paper fetch, evidence, credential/proxy/TLS change or new service refusal.
+
+Exact successful connected queries in executed order:
+- `web: Bromus seed germination light dark`
+- `web: Bromus germination gibberellin OR smoke OR dormancy`
+- `web: Bromus floral scent volatiles`
+- `web: Bromus flower opening time anthesis`
+- `web: brome flower opening time anthesis`
+- `web: Bromus plant ocelli lens epidermal focusing eye`
+- `web: brome plant ocelli lens epidermal focusing eye`
+- `web: Bromus chemical sensing volatiles`
+- `web: brome chemical sensing volatiles`
+- `web: Bromus photoperiod phototropism light response`
+- `web: brome photoperiod phototropism light response`
+- `web: Poaceae photoreceptor review`
+- `web: Bromus catharticus hordeaceus germination light gibberellic`
+- `web: Bromus inermis jasmonate elicitor germination`
+- `web: "Sensory and behavioral responses of braconid parasitoids"`
+
+Raw responses Bromus-web1–4.json and required-tool outputs /workspace/work/w31-c11. Current220wanted/25searched;32of40available-web-screened across rounds;8remain, exact next Marchantia. Validator pending checkpoint.
+
