@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 2,
-  "updated_at": "2026-10-27T03:30:13.391Z",
+  "generation": 3,
+  "updated_at": "2026-10-27T03:35:05.189Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
     "title": "Regards Codex dispatcher",
-    "enabled": false,
+    "enabled": true,
     "mode": "hourly_poll",
     "timezone": "America/New_York",
     "native_issue_webhook_supported": false,
-    "activation_note": "Temporarily paused while initial task recovery and verification finish; resume after recording recovery attempts."
+    "activation_note": "Enabled after initial acceptance and data network recovery; first scheduled-pass/result-review validation pending."
   },
   "policy": {
     "allowed_author": "jampotful",
@@ -50,8 +50,8 @@
       "dispatch_key": "regards-issue-29-20261027",
       "state": "accepted",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
-      "observed_status": "Working",
-      "observed_at": "2026-10-27T03:20:26.900Z",
+      "observed_status": "Codex UI Working; no substantive repository progress exposed at last observation.",
+      "observed_at": "2026-10-27T03:35:05.189Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -62,20 +62,32 @@
     "30": {
       "issue": 30,
       "dispatch_key": "regards-issue-30-20261027",
-      "state": "recovering",
+      "state": "running",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
-      "observed_status": "Initial run blocked without edits; one same-chat infrastructure recovery requested.",
-      "observed_at": "2026-10-27T03:21:39.377Z",
+      "observed_status": "Fetched current main; GBIF HTTP 200 through supported network-enabled command execution; original task resumed.",
+      "observed_at": "2026-10-27T03:35:05.189Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
       "branch": "codex/data-1",
       "receipt_comment_id": 6432928724,
-      "repository_execution_verified": false,
-      "blocker_signature": "proxy-unreachable:8080",
-      "recovery_attempts": 1,
+      "repository_execution_verified": true,
+      "blocker_signature": null,
+      "recovery_attempts": 2,
       "recovery_submitted_at": "2026-10-27T03:30:13.391Z",
-      "blocker_comment_id": 6432950889
+      "blocker_comment_id": 6432950889,
+      "base_sha": "96225855ff44ad1bdb15cc365314b3b4e06cb284",
+      "recovery_resolution_comment_id": 6433052434,
+      "recovery_history": [
+        {
+          "signature": "proxy-unreachable:8080",
+          "result": "No documented runtime restart; held."
+        },
+        {
+          "signature": "sandbox-network-mode",
+          "result": "Supported with_additional_permissions and network.enabled=true succeeded; resumed same task."
+        }
+      ]
     }
   }
 }
