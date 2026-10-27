@@ -145,3 +145,43 @@ Queries actually run (connected web search; all available result titles/snippets
 - `common buckthorn epidermal lens cells eye`
 
 Round checkpoint: 8 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 34 wanted, 0 evidence lines. Next Argentina; 32 unreviewed.
+
+### Argentina
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates: absent from harvest; no genus evidence. Country-name homonym swamped Argentina queries, so two scientific-name disambiguation/synonym variants were needed within the germination step. Returned plant listings confirm Argentina anserina = silverweed, formerly Potentilla anserina. One new applied IAA/GA3 seedling lead. Five-Potentilla germination paper names P. argentea/P. inclinata in snippets, not anserina: no genus attribution inferred. Country studies of Trichocereus, Ilex argentina, Jaborosa, Tagetes argentina and Dipsacus excluded. Silverweed results horticultural or seasonal dates; no daily opening measurement established. Eye results animal lenses. Family query yielded general photoreceptor reviews. No null rows; canon checked.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Argentina seed germination light dark`
+- `Argentina germination gibberellin OR smoke OR dormancy`
+- `Argentina floral scent volatiles`
+- `Argentina photoperiod phototropism light sensing`
+- `silverweed photoperiod phototropism light sensing`
+- `Argentina flower opening time anthesis`
+- `silverweed flower opening time anthesis`
+- `Argentina volatile chemical signalling`
+- `silverweed volatile chemical signalling`
+- `Argentina epidermal lens cells eye`
+- `silverweed epidermal lens cells eye`
+- `Argentina anserina seed germination light dark`
+- `Potentilla anserina germination gibberellin OR smoke OR dormancy`
+- `Rosaceae photoreceptor review`
+
+### Convallaria
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates: absent from harvest. Adopted existing chemical evidence; no redundant chemical pair. One seed dormancy/light/GA3 wanted lead with erratum folded. Other light/diel search hits on Lilium and Nymphaea are different genera; Convallaria phenology reports seasonal dates, and cut-flower handling does not establish daily timing. Root anatomy/extract phytochemistry and human lens results do not establish an eye. Queue and local taxonomy files have no family; Pherobase and Flora of Pennsylvania result name historical Ruscaceae, used explicitly for review query. General photoreceptor reviews only; no confirmed family review. No null rows, no full protocol claimed; canon checked.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Convallaria seed germination light dark`
+- `Convallaria germination gibberellin OR smoke OR dormancy`
+- `Convallaria floral scent volatiles`
+- `Convallaria photoperiod phototropism light sensing`
+- `lily of the valley photoperiod phototropism light sensing`
+- `Convallaria flower opening time anthesis`
+- `lily of the valley flower opening time anthesis`
+- `Convallaria epidermal lens cells eye`
+- `lily of the valley epidermal lens cells eye`
+- `Ruscaceae photoreceptor review`
+
+Round checkpoint: 10 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 36 wanted, 0 evidence lines. Next Filipendula; 30 unreviewed.
