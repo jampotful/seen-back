@@ -249,3 +249,29 @@ Seven wanted lines added for direct light/germination leads: S. chilensis germin
 Anthesis pair returned flowering months, growing-degree phenology and flower-development dates, not clock hours. The anthochron harvest review concerns development/thermal time; no daily anthesis result was assigned to Solidago. Eye results describe taxonomic epidermis/oil glands or medicinal effects on animal eyes; owner plant-none rule applies. Broad family review gave general plant/algal photoreceptors and crop flowering reviews. Harvest light candidates in maize, spinach, Phaseolus, Halophila, white clover, Potamogeton, Cryptocoryne and Arabidopsis do not measure Solidago; they do not support a null while direct genus light leads wait. Extract antinociception and isolated diterpenoids are removed-tissue chemistry under 10(a). OpenAlex skipped; no null rows and no evidence.
 
 Worker 9 counts: 3 new genera web-screened, 0 full protocol complete, 0 searched, 17 wanted added, 0 evidence. Cumulative 11 web-screened, 27 wanted; remaining 29, exact next Gleditsia.
+
+### Gleditsia — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py. Checked canon catalog/effective evidence, earlier wanted and owner status; no genus evidence/request found for these direct leads. Harvest uses GBIF Fabaceae with blank order; no taxonomy edits. Harvest query order: `Gleditsia phytochrome photoreceptor`; `Gleditsia light perception`; `Gleditsia phototropism`; supplements `Gleditsia flower opening time`; `Gleditsia nyctinasty`; `Gleditsia volatile signalling`; `Gleditsia photoperiod`; `Gleditsia circadian rhythm`; `Gleditsia anthesis`; `Gleditsia pollination biology`; `Gleditsia epidermal lens cells`; `Gleditsia epidermal focusing leaf optics`; family review `Fabaceae photoreceptor review`. No citation harvest listed. Screened supplied title/abstract starts and web titles/snippets/passages, no paper/page fetch.
+
+Exact web queries, in execution order:
+- `web: Gleditsia seed germination light dark`
+- `web: Gleditsia germination gibberellin OR smoke OR dormancy`
+- `web: Gleditsia floral scent volatiles`
+- `web: "Gleditsia" flower opening time anthesis`
+- `web: "honey locust" flower opening time anthesis`
+- `web: "Gleditsia" eye type epidermal lens cells`
+- `web: "honey locust" eye type epidermal lens cells`
+- `web: "Gleditsia" light perception phototropism germination`
+- `web: "honey locust" light perception phototropism germination`
+- `web: "Gleditsia" chemical signalling volatile response`
+- `web: "honey locust" chemical signalling volatile response`
+- `web: Fabaceae photoreceptor review`
+
+Eleven wanted lines added: seed local adaptation/light experiment; shade/nitrogen seedling experiment; observed flower opening/pollen study; nyctinastic Gleditsia/turgorines paper; circadian root flux study; nocturnal tree movement (species fork); GA/sugar dormancy study; living hormone-treatment/reference-gene paper; short-day bud dormancy study; seedling intensity study; and elevational-invasion germination/light experiment. Clock-time results, response comparisons and preparation/species forks remain for oa readers; no measurements invented. Root-flux preparation has severed shoots but living roots, explicitly held for desk. Extracted turgorines alone are not assigned to chemical sensing.
+
+Additional unresolved light leads returned: Effects of shading on growth and biochemical characteristics of Gleditsia sinensis seedlings (https://www.sciopen.com/article/10.14067/j.cnki.1673-923x.2024.08.008) and the G. sinensis light-quality/intensity thesis (https://www.globethesis.com/?t=2543306815465164); the latter is only a third-party thesis listing, so original institution/author/year need verification. Seed coat colour, water-entry and dormancy/scarification results need physical-versus-physiological mechanism assessment; no chemical measurement is inferred from acid/coat disruption. Harvest salt-stress (10.1038/s41598-026-68202-5) and low-P tolerance (10.1038/s41598-024-82071-w) are additional living chemical-response leads; existing direct hormone/nitrogen candidates already hold that trait for reading.
+
+Anthesis pair mostly returned flowering months or hours since opening, but the direct G. sinensis flower-observation study was retained. Other harvest diel candidates measure Chrysanthemum, Aeschynanthus, apple, bean, muskmelon, raspberry, lily, peach, Macadamia, Melilotus and Swartzia, not Gleditsia. Eye searches describe the seed-coat lens/strophiole and cotyledon areoles, not optical focusing/image-forming organs; owner none reading applies. Dry-eye drug inserts concern animal eyes. Volatile oil administered to rats, steamed-seed flavour profiles, methanol-extracted insect phagostimulants and saponin pharmacology are tissue chemistry/animal responses under 10(a). Gall-midge sex pheromone measures an insect, not its host tree. Family review returned legume photoperiodic regulation/phylogenetics without a Gleditsia experiment in the displayed passages. The 0-academic-oup-com.legcat.gov.ns.ca proxy result was left unopened. OpenAlex skipped; no null search records or evidence.
+
+Worker 9 counts: 4 new genera web-screened (Ornithogalum, Phlox, Solidago, Gleditsia), 0 full protocol complete, 0 searched rows, 28 wanted added, 0 evidence. Cumulative 12 web-screened and 38 wanted lines. Remaining 28 genuinely unreviewed genera; exact next Cakile. Stopped between entries at context checkpoint; existing first eight screens and ten wanted preserved. OpenAlex supplements/citation work remains skipped for the round and source reading remains with the oa job.
