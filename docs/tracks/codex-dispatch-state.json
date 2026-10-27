@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 5,
-  "updated_at": "2026-10-27T04:31:34.344Z",
+  "generation": 6,
+  "updated_at": "2026-10-27T05:44:19.234Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -11,7 +11,7 @@
     "mode": "hourly_poll",
     "timezone": "America/New_York",
     "native_issue_webhook_supported": false,
-    "activation_note": "Reconciliation completed with authenticated task access; issues 28–30 adopted without duplicate submission. Engineering result ready; desk review cycle still pending."
+    "activation_note": "Accepted engineering and data tasks produced results reviewed and incorporated by desk; repeated delivery suppressed. Plant PR #37 awaits source audit. Continue reconciliation of authorized requests."
   },
   "policy": {
     "allowed_author": "jampotful",
@@ -29,10 +29,10 @@
     "28": {
       "issue": 28,
       "dispatch_key": "regards-issue-28-20261027",
-      "state": "running",
+      "state": "result-ready",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
-      "observed_status": "Working in the existing chat; checkpoint branch pushed. Latest reported checkpoint: 69 search records and 900 wanted lines, no new evidence values; 41 workers dispatched of 48. OpenAlex skipped after HTTP 429; cached harvest and other sources continue. No follow-up sent.",
-      "observed_at": "2026-10-27T04:31:34.344Z",
+      "observed_status": "Terminal response: PR #37 ready for desk audit; round stopped at authorized 48-worker cap. No restart.",
+      "observed_at": "2026-10-27T05:44:19.234Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -46,23 +46,51 @@
       },
       "last_checkpoint_comment_id": 6433026366,
       "last_task_observation": {
-        "status": "Working",
-        "checkpoint_search_records": 69,
-        "checkpoint_wanted_lines": 900,
-        "new_evidence_values": 0,
-        "workers_dispatched": 41,
+        "status": "terminal",
+        "observed_at": "2026-10-27T05:44:19.234Z",
+        "workers_dispatched": 48,
         "worker_limit": 48,
-        "service_constraint": "OpenAlex HTTP 429; coordinator skipped service and continued permitted sources",
-        "observed_at": "2026-10-27T04:31:34.344Z"
-      }
+        "search_records": 103,
+        "wanted_lines": 1242,
+        "new_evidence_values": 0
+      },
+      "result": {
+        "pr_number": 37,
+        "pr_url": "https://github.com/jampotful/seen-back/pull/37",
+        "commit": "818d827b552251db507d8eaac787d5a4bfd1d8f5",
+        "draft": false,
+        "merged": false,
+        "files_scope_verified": true,
+        "changed_files": 28,
+        "desk_review": "pending",
+        "validation_reported": {
+          "candidate_checks": "nine checks; zero problems",
+          "jsonl_metadata_whitespace": "pass",
+          "evidence_check": "no evidence files changed"
+        },
+        "genus_batch_reviews": 128,
+        "review_scope": "includes partial/API-skipped protocols",
+        "search_records": 103,
+        "wanted_lines": 1242,
+        "new_evidence_values": 0,
+        "findings": 4,
+        "raw_queue_remaining": {
+          "batches": 18,
+          "genera": 557,
+          "note": "includes wanted-only and other-unit coverage; not wholly untouched genera"
+        },
+        "stopping_reason": "48-worker cap"
+      },
+      "result_comment_id": 6434465530,
+      "last_notification_signature": "result-ready:37:818d827b552251db507d8eaac787d5a4bfd1d8f5"
     },
     "29": {
       "issue": 29,
       "dispatch_key": "regards-issue-29-20261027",
-      "state": "result-ready",
+      "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
-      "observed_status": "Terminal response reconfirmed; PR #35 remains open, non-draft, unmerged with no desk disposition. No continuation or repeat notice.",
-      "observed_at": "2026-10-27T04:31:34.344Z",
+      "observed_status": "Chat remains terminal. Desk reviewed all six fixes and incorporated result; GitHub PR #35 closed/merged.",
+      "observed_at": "2026-10-27T05:44:19.234Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -75,25 +103,31 @@
         "pr_url": "https://github.com/jampotful/seen-back/pull/35",
         "commit": "6795a2fbf8c27f1b6de8c743e0130fb65be4173c",
         "draft": false,
-        "merged": false,
+        "merged": true,
         "files_scope_verified": true,
         "validation_reported": {
           "view_test_scripts": "all six pass",
           "diff_check": "pass",
           "senses_check": "nine unchanged baseline missing-source problems"
         },
-        "desk_review": "pending"
+        "desk_review": "incorporated",
+        "pr_state": "closed"
       },
       "result_comment_id": 6433076546,
-      "last_notification_signature": "result-ready:35:6795a2fbf8c27f1b6de8c743e0130fb65be4173c"
+      "last_notification_signature": "desk-reviewed:35:6433803841",
+      "desk_disposition": {
+        "comment_url": "https://github.com/jampotful/seen-back/pull/35#issuecomment-6433803841",
+        "summary": "All six fixes reviewed and incorporated; all six tests pass; desk owns gap regeneration."
+      },
+      "desk_status_comment_id": 6434739699
     },
     "30": {
       "issue": 30,
       "dispatch_key": "regards-issue-30-20261027",
-      "state": "result-ready",
+      "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
-      "observed_status": "Terminal response confirms PR #36, ready for research-desk review; open, non-draft and unmerged. Same recovered task completed; no replacement or continuation.",
-      "observed_at": "2026-10-27T04:31:34.344Z",
+      "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
+      "observed_at": "2026-10-27T05:44:19.234Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -136,19 +170,34 @@
           "proposal_checks": "pass",
           "senses_check": "nine unchanged baseline missing-source problems"
         },
-        "desk_review": "pending",
+        "desk_review": "incorporated",
         "review_qualifications": [
           "30 synonym rows need species-scope review and registry disagreements reconciled",
           "Wanted proposals require source-line review because consumer matches broad surname/year pairs",
           "Noncanonical trait fallbacks require desk confirmation"
-        ]
+        ],
+        "pr_state": "closed"
       },
       "result_comment_id": 6433362806,
-      "last_notification_signature": "result-ready:36:fec70c1df81d76d5e5e3a2405dfa4bb0a0fd2a56"
+      "last_notification_signature": "desk-reviewed:36:6434084485",
+      "desk_disposition": {
+        "comment_url": "https://github.com/jampotful/seen-back/pull/36#issuecomment-6434084485",
+        "accepted": {
+          "wanted": 210,
+          "synonyms": 85,
+          "homonyms": 26
+        },
+        "rejected": [
+          "harvest-28:6: live Ultraviolet row fits",
+          "Pisum: GBIF accepted genus"
+        ],
+        "summary": "Desk checked GBIF; incorporated through branch. Other named taxonomy cases handled separately by desk."
+      },
+      "desk_status_comment_id": 6434742982
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-10-27T04:31:34.344Z",
+    "observed_at": "2026-10-27T05:44:19.234Z",
     "eligible_open_issues": [
       28,
       29,
@@ -162,15 +211,22 @@
       30
     ],
     "decisions": {
-      "28": "no-op duplicate suppression: adopt existing Working task; no prompt sent",
-      "29": "no-op duplicate suppression: adopt completed task and existing PR #35; await desk",
-      "30": "no-op duplicate suppression: adopt completed original task and existing PR #36; result receipt already posted"
+      "28": "adopt terminal round and existing PR #37; capped round is not a failed/unstarted assignment",
+      "29": "adopt reviewed/incorporated PR #35; leave issue closure to desk",
+      "30": "adopt reviewed/partially incorporated PR #36 despite merged=false; no rerun"
     },
-    "issue_comments_posted": 0,
+    "issue_comments_posted": 2,
     "material_changes": [
-      "30: result-ready PR #36"
+      "28: result-ready PR #37",
+      "29: desk-reviewed/incorporated",
+      "30: desk-reviewed/partially incorporated"
     ],
-    "full_result_review_cycle_verified": false,
-    "documentation_note": "Current main runbook remains historical; activation documentation PR #34 is open awaiting desk review."
+    "full_result_review_cycle_verified": true,
+    "cycle_evidence": [
+      "PR #35 desk comment 6433803841",
+      "PR #36 desk comment 6434084485",
+      "Repeated delivery of issues 28–30 suppressed with zero sends"
+    ],
+    "documentation_note": "PR #34 incorporated through branch; current main contains activation runbook. Plant audit remains pending; concurrency stress testing not claimed."
   }
 }
