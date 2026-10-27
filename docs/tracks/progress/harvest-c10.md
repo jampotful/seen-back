@@ -1,5 +1,74 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker15 continuation and scope correction
+
+Authoritative handover: worker15 completed available-source screening for Cocculus and repaired the omitted original-batch traits for Hamamelis and Carpinus. This worker: 1 newly screened genus, 2 prior-genus scope corrections, 17 actual new web queries, 5 wanted lines, 0 search records, 0 evidence. Cumulative batch: 6 genera screened through Cocculus with available sources, 73 actual web queries, 48 wanted lines, 0 search records, 0 evidence; 34 untouched genera remain, starting Sagittaria, then Richardia and Veronica. The earlier worker's “live trait” exclusions below are historical, superseded by this section: harvest.targets suppression of old thin searches is not proof of a finished protocol. Apios and Clematis already have all original-trait web pairs recorded below; Nothoscordum's existing main light evidence is preserved. No completed web query was repeated.
+
+Completion boundary: scientific/common web screening and cached family/citation review are complete for those six genera at the available-source boundary. This does not claim six unrestricted full protocols or exhausted cells: missing OpenAlex common-name/repair steps were not executed after the round-wide HTTP429. The first untouched genus is Sagittaria; the first original genus with unrun service-dependent steps is Hamamelis (nonchemical trait API steps), while its chemical API step had run successfully before refusal. Apios onward also retain unrun API steps. Source refusals are skipped, not null results. No null is licensed while those missing steps or plausible unread candidates remain. Do not repeat finished available-source work solely because codex_queue still shows raw entries.
+
+Read AGENTS, round28 guide, round4-harvest, THOROUGH, BRIEF record and Round2 rules, round3-sweep and desk-screen1–10 including10(e). The cloud-environment runtime skill and networking reference were applied; environment status reports enforced unrestricted HTTP policy, no configured identities, and no VPN. No source-page/full-paper fetch, new OpenAlex request, MDPI fetch, UChicago fetch, SANBI fetch, paid API, branch/gate change, or engineering29/data30 work was performed. Original global evidence/corrected logs, searches, wanted and owner status were checked; the five new titles/DOIs had no existing wanted/status match. Unknown authors/year/DOI remain empty/0.
+
+### Hamamelis original-trait correction using saved actual results
+
+Adopted `work/harvest-c10-Hamamelis-web1.json`, `-web2.json`, `-web3.json`, original cache and candidate dispositions without running any query again. Their exact queries are already listed in the historical Hamamelis section. The old harvest19 record has only three scientific queries and no web, so it does not settle diel, eye_type or light. The existing germination wanted lead holds light/chemical; the two regulator experiments hold chemical. Added `10.3732/ajb.89.1.67`, Many to flower, few to fruit: the reproductive biology of Hamamelis virginiana (Hamamelidaceae), as a plausible diel lead: publisher and legal society PDF search results explicitly describe laboratory observation through anthesis and maturation stages. Snippets do not establish a daily hour, but that does not justify discarding an unread anthesis study. Authors remain unknown in the new wanted line.
+
+Eye disposition: cached candidate `10.56782/pps.198` reviews medicinal preparations against eye diseases, not plant eyes. Saved paired eye results concern human lens epithelium, vertebrate eye development and scale-insect ocelli; none supplies a Hamamelis eye measurement. Owner's eye_type=none reading applies. Light dispositions: `10.1136/bjo.12.6.289` is human phototherapy; `10.21273/hortsci.31.4.683e` apple, `.565f` Atlantic white cedar, `.656a` Pelargonium, `.586d` Capsicum, `.581d` Dracaena, `.578d` watercress and `10.1046/j.1469-8137.1999.00511.x` Pinguicula are other genera. `10.3389/fgene.2022.870976` is a broad tannin review with no named Hamamelis light experiment in its cached abstract. Saved general photoperiod/phototropism results similarly do not establish a named Hamamelis measurement. The germination lead stays wanted; no light null. Saved ordinary flowering pages give seasons; the anthesis paper is now held instead of calling daily timing absent. No eye/diel null while skipped API steps remain.
+
+### Carpinus original-trait correction
+
+The original queue has all four plant traits. The old harvest16 light/diel/eye record has only three scientific queries; it is thin. Added the genuinely missing paired web steps, exact queries:
+
+- `web: Carpinus flower opening time anthesis`
+- `web: hornbeam flower opening time anthesis`
+- `web: Carpinus epidermal lens cells eye type`
+- `web: hornbeam epidermal lens cells eye type`
+- `web: Carpinus photoperiod light perception phototropism`
+- `web: hornbeam photoperiod light perception phototropism`
+
+All delivered titles/snippets read; the tool groups results and does not establish20 results per individual query. Raw search responses are `work/worker15-carpweb3.json` and `work/worker15-carpweb4.json`. Original four scientific harvest queries and cached Betulaceae family/chases are listed in the historical Carpinus section. Original queue and canon checked for all four traits. Relevant light canon entries are not in hand; no evidence imported from them.
+
+Added three light leads: direct living-seedling intensity experiment `10.3389/fpls.2022.1055984`; the 2014 experimental thesis `10.5451/unibas-006617550`, Environmental control of spring phenology in mature temperate trees (Carpinus membership unconfirmed beyond harvest retrieval, explicitly priority3); and Die Erscheinungen des Phototropismus der Buche und anderer Holzarten (https://eurekamag.com/research/024/481/024481196.php), whose actual search snippet explicitly names Carpinus shoot bending/elongation and classifies tree responses to directional light. Last source's year/authors/DOI were not shown. Existing `10.1016/j.scitotenv.2024.177358` already holds ozone and stomatal light-response work on replant-1, preserved without duplication. Carpinus wanted record count uses the original queue's two species:14407+11200=25607.
+
+Diel dispositions: cached `10.1007/s13364-021-00610-6` measures wild boar nocturnal activity; `10.3390/f15030523` and `10.3390/urbansci9010014` are broad woody-plant/ALAN reviews whose abstract starts name no Carpinus daily opening measurement. Web USDA/NCSU/Forestry Commission/tree descriptions give March–May catkin development and spring pollen, not hour-of-day anthesis. The returned evening-anthesis PDF `s41598-025-21168-2` snippet names no Carpinus; no genus measurement inferred. Eye: no cached keyword candidate; web `10.3732/ajb.94.7.1061` explicitly measures epidermal leaf optics in Begonia, Citrus, Ficus, Colocasia and Impatiens, not Carpinus, and focusing belongs under light per owner10(b). Other eye results concern animal histology; fossil Carpinus epidermal cells are anatomical/taxonomic, with no focusing in snippet. No eye/diel null while skipped API steps remain.
+
+Other cached light dispositions: Quercus shade (`10.1186/s12870-025-06843-w`), Enterolobium (`10.3390/f9050266`), Betula pot (`10.17820/eri.2019.6.4.295`), Fagus/Acer (`10.1093/aob/mcr058`) and strawberry reflectance (`10.1371/journal.pone.0285912`) concern other genera; crown/LiDAR papers (`10.1007/s13595-011-0067-1`, W7208803934, `10.1111/2041-210x.70402`) are canopy geometry, `10.1016/j.apacoust.2013.10.011` traffic noise, `10.14411/eje.2012.010` moth light attraction, `10.1093/biolinnean/blx149` leaf-beetle masquerade. Canopy-light studies `10.3390/f10110951` and `10.31195/ejejfs.333089` describe understory light availability rather than controlled Carpinus light response in available abstracts. Broad sugar/phototropin/phenology reviews and LED thesis `10.12681/eadd/40472` have no named Carpinus response in the abstract starts; relevance beyond those starts stays unresolved. Positive direct light leads hold the trait; no negative claim about their unread tables.
+
+### Cocculus — available-source screening of all original four traits
+
+Real cached harvest run6, supplement15; successful queries in exact order:
+
+- `Cocculus phytochrome photoreceptor`
+- `Cocculus light perception`
+- `Cocculus phototropism`
+- `Cocculus photoperiod`
+- `Cocculus circadian rhythm`
+
+Supplement12 `Cocculus flower opening time`, `Cocculus nyctinasty` and `Cocculus volatile signalling` returned `error gave up`, not zero; not listed as executed successful queries and not retried on OpenAlex. Web covers the affected flower/circadian/chemical topics below. Citation steps citing`10.5962/p.343519` and`10.1016/s0031-9422(02)00119-x` each returned0. Cached family query `Menispermaceae photoreceptor review` returned17hits/15listed; all listed titles read. Most concern human pharmacology, Cissampelos, Nelumbo, waterlilies, Tanacetum or broad evo-devo, not a named Cocculus experiment in the available abstract starts. Cached51 displayed genus-query results including duplicates were screened by title and abstract start. Original evidence, searched, wanted, owner status and canon checked. Existing oa-12#368 partial Cocculus orbiculatus chloroplast evidence is preserved; it does not prove a C. carolinus measurement or a carry rule.
+
+Exact new web queries:
+
+- `web: Cocculus seed germination light dark`
+- `web: Cocculus germination gibberellin OR smoke OR dormancy`
+- `web: Cocculus floral scent volatiles`
+- `web: Cocculus photoperiod light perception phototropism`
+- `web: Carolina snailseed photoperiod light perception phototropism`
+- `web: Cocculus flower opening time anthesis`
+- `web: Carolina snailseed flower opening time anthesis`
+- `web: Cocculus chemical perception volatile signalling`
+- `web: Carolina snailseed chemical perception volatile signalling`
+- `web: Cocculus epidermal lens cells eye type`
+- `web: Carolina snailseed epidermal lens cells eye type`
+
+All delivered titles/snippets read, including the search tool's irrelevant generic results; no20-results-per-query claim. Raw results in `work/worker15-cocculus-web1.json`, `-web2.json`, `-cocweb3.json`, `-cocweb4.json`. Searches returned Texas A&M snailseed and Tennessee propagation-code descriptions, generic germination/smoke/phototropism reviews, and a Coscinium fenestratum light/GA germination experiment (other genus). No Cocculus measurement inferred from those. PFAF/encyclopedia/ResearchGate listings encountered incidentally were not used as evidence or fetched.
+
+Light holds: existing wanted `10.2183/pjab.92.387` and`10.1111/pce.12681` preserved, no duplicate. Added `10.12794/metadc115161`, a15-species controlled shade/flood experiment returned by Cocculus phototropism, priority3 and explicitly unconfirmed Cocculus membership. Cached W7220166853 (urban climbers) describes general skototropism and climbing habit, with no named Cocculus light experiment in its available abstract; no claimed absence beyond that. Flowering Newsletter bibliography `10.1093/jxb/erm028` is a bibliography, no primary Cocculus measurement in its abstract. With unread positive and possible leads, no light null.
+
+Diel screened candidates: `10.33545/26164485.2025.v9.i3.e.1673`, `10.53555/ajbr.v27i3s.2143`, W7217939349 and`10.33545/30809053.2026.v3.i1.b.42` concern human insomnia/homeopathy. Web Cocculus descriptions show flowering seasons, not daily timing. Jammu research-report listing https://admin.jammuuniversity.ac.in/departments/botony/Project_Namrata.pdf reports timed anthesis in an unidentified vine; neither bibliographic title nor Cocculus species is shown, so it is recorded as an unresolved lead, not an invented Cocculus citation. No diel null. Eye screened `10.7897/2277-4343.083202` (cattle ailments) and`10.2174/2210290601405010029` (human diabetic retina); web results are animal eyes and Cocculus morphology, no plant focusing measurement in snippets. Owner eye_type=none applies; skipped steps prevent a null.
+
+Chemical screened candidates: `10.23910/1.2021.2321` is human food use/taste; `10.1016/j.phrp.2014.08.009` uses extracts of other genera against mosquitoes; `10.1371/journal.pone.0179433` measures Oraesia moth olfactory genes; `10.3724/cbb-t26-380` is broad evo-devo with no named Cocculus chemical response in its abstract start. Human/animal drug and removed-tissue chemistry works were not treated as living-plant signalling. Prodiplosis papers`10.1007/s13744-026-01379-6` and`10.15446/agron.colomb.v43n1.118919` monitor insect pest injury, population and trap response in foliage crops including C. laurifolius, not plant light/chemical sensing in their available abstracts. Generic VOC web reviews contain no named Cocculus measurement in snippets. No chemical null, no source-page fetch, no evidence logged.
+
+Next clean untouched entry: Sagittaria. A fresh harvest_get/screen_candidates invocation unexpectedly printed “not in the harvest”; the earlier real batch cache still includes its harvest. This was only a scratch preflight, not a completed Sagittaria screening. Continue from cached real data and inspect fresh-cache provenance; do not count this genus. Required `screen_candidates.py --check docs/views/searched/harvest-c10.jsonl --wanted docs/views/wanted/harvest-c10.jsonl` completed with `0 problems` before this commit; `git diff --check` also passed. Empty searched file is intentional: no fabricated exhaustion to compensate for unread candidates or skipped service steps.
+
 ## 2026-10-27
 
 This worker: 1 complete live-trait screening (Hamamelis), 4 additional genera web-screened with OpenAlex steps blocked (Apios, Nothoscordum, Clematis, Carpinus), 0 evidence, 0 null search records, 43 wanted leads. Cumulative own batch: same. Remaining: Apios/Nothoscordum/Clematis/Carpinus missing API steps blocked and35 untouched genera; next untouched Cocculus. Existing globally covered work preserved. Parent relayed OpenAlex/MDPI HTTP429 source refusals; no subsequent calls to either source.
