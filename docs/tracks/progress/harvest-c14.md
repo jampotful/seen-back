@@ -553,3 +553,37 @@ Queries actually run (connected web search; every delivered title/snippet screen
 - `"Elaeagnus" "101" "171" "1976"`
 - `"Seed dormancy and germination" "Elaeagnus mollis"`
 - `"Elaeagnus" "Shafroth" "light" germination`
+
+### Geum
+
+Web-query screen completed for round; full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates and44 displayed title/abstract starts plus15 Rosaceae alternatives reviewed. Global evidence preflight adopted oa-14#15 (10.1111/nph.19425) **G. urbanum light response only**, not canadense/rivale/triflorum/macrophyllum/aleppicum. Old one/two-query searched sweeps do not complete current screen. Added5 wanted: actual urbanum daily anthesis primary, canadense seed cueing, actual-species germination-temperature title, urbanum GA response and congener reptans light/dark seed experiment. Adopted existing c14#118 DOI10.1093/aob/mcs253 for primary-confirmed rivale/urbanum light/dark germination; its earlier Matricaria/Heracleum for-list remains byte-preserved, with this additional species mapping in progress rather than a duplicate request. No congener carry. Published primary PMC snippet confirms rivale and urbanum in mcs253; source existing in another unit can be shared, no generic-genus substitution. Seed common advice and plants sold as Geum hybrids are not experimental target assignments. The smoke-triflorum experiment remains **unverified source-target pointer** (only RG target snippet): title Plant-derived smoke influences germination of native and invasive plants in the Northern Great Plains, https://www.researchgate.net/publication/267289121; not opened, not adopted or forced into metadata. Floral community harvest10.1111/1365-2435.13424 does not display a Geum species; likewise Growth and morphogenesis of sun and shade plants10.18174/206009 and shade/flood thesis10.12794/metadc115161 remain unresolved actual-species pointers. Botanical seasonal opening dates do not establish daily schedule. Extracted oils, tinctures, root chemistry, bacterial quorum-sensing tests on extracts and medicinal effects excluded10(a). Eye search hits Avens publisher/author Geum and animal corneal cultures; plant epidermal anatomy and microscope lenses do not establish focusing. Family Rosaceae review alternatives already screened; photoreceptor work on Fragaria/Pyrus cannot carry to Geum.
+
+Queries actually run (all delivered titles/snippets screened; fewer than20 whenever fewer delivered; initial broad common-name results were supplemented with specific wood-avens/quoted-genus searches):
+
+- `Geum seed germination light dark`
+- `Geum germination gibberellin OR smoke OR dormancy`
+- `Geum floral scent volatiles`
+- `Geum photoperiod phototropism light sensing`
+- `avens photoperiod phototropism light sensing`
+- `Geum flower opening time anthesis`
+- `avens flower opening time anthesis`
+- `"Geum" volatile chemical signalling`
+- `"avens" volatile chemical signalling`
+- `"Geum" epidermal lens cells eye`
+- `"avens" epidermal lens cells eye`
+- `"Geum" germination light darkness gibberellic`
+- `"Geum rivale" germination light`
+- `"Geum" "floral volatiles" community`
+- `"wood avens" flower opening anthesis`
+- `"Geum" "germination" "light" "canadense"`
+- `"Geum" "germination" "gibberellic" "urbanum"`
+- `"Geum" "Floral volatiles structure"`
+- `"Geum" "Rosaceae" photoreceptor review`
+- `"Role of dispersal date" "Geum canadense"`
+- `"Habitat specialization through germination cueing" Geum`
+- `"Geum" "triflorum" "germination" experiment`
+- `"Geum" "macrophyllum" "aleppicum" germination light`
+- `"Plant-derived smoke influences germination" Geum`
+- `"Geum urbanum" "АНТЭКОЛОГИЯ"`
+- `"Role of dispersal date" "light" Geum`
+- `"Geum rivale" "Geum urbanum" "response of germination"`
