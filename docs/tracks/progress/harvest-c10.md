@@ -1142,3 +1142,56 @@ Chemical exclusions:2024edible-weed leafSPME-GC/MS and2022wild-plant food aromas
 Diel:real1996S.longipes oscillation lead retained;daily hour in target species not found in shown starts. Month/year flowering and3wk flower cohorts,seed sheddingat cropmaturity,vernalization/photoperiodal flowering days andordinary anther anatomy are not target daily schedule. Historical BHL flowers/books and1961phototropism list remainunread species-table pointers,no whole-text absenceclaim. Pollination/biosystematic/apetaly/genome/ecologicalrange/forage surveys show no new target daily/chemical measurement in available starts;insect thrips/Nysius/moth activity,animal Gammarus/bison/rabbit work andSorghum/Arabidopsis/Phaseolus/cucumber/Rumex/tobacco/Helianthus/soybean/tomato experiments concern otherorganisms. No evidence/null logs. Normalized Unicode-title/DOI duplicate/status check passed before append;unknown bibliographicfields blank/null.
 
 Candidate/wanted precommit checker finished with exit0 and printed0problems (work/worker26/Stellaria-check.txt); whitespace check passed. Next untouched genus Typha.
+
+
+## 2026-10-27 — issue38 worker26 Typha checkpoint
+
+This checkpoint:1 newly available-source-screened genus(Typha),26actual newwebqueries,13newwanted,0searched,0evidence. Worker26 cumulative2genera(Stellaria,Typha),45queries,23newwanted. c10 now204wanted(initialmain72+previousissue38 109+worker26 23),searched0.26of40 genera available-source-screened/adopted;14eligible untouched remain:exact next Pueraria,then Thunbergia,Morus,Symphyotrichum,Melinis,Nyssa,Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. Prior first16issue28screens,Amphicarpaea,andseven priorissue38screens preserved. MissingOpenAlexscientific/common-nameAPIsteps remainunrun aftershared429;not zerohits,no null/full-protocol/exhaustionclaim.
+
+### Typha — original diel,eye_type andchemical; existingtargetlight adopted
+
+Globalqueue/evidence/auditedcorrections/wanted/searched/canon andownerpapers-status checked beforequeries,then normalizedUnicode-title/DOI duplicates checkedbeforeappend. Original T.latifolia26373records,Typhaceae/Poales,hasdiel/eye_type/sense_chemical gaps. sweep-16#6 alreadyholds species-specific light/dark seedgermination abstract DOI10.1016/S0304-3770(96)01096-0;adopt,do not repeat pairedlighttraitqueriesor claimlightabsent. Mandatory10(e)germination searches stillrunforchemicalcandidate discovery. Legacy sweep-16#26 two combinedqueries not repeatedoraccepted ascurrentfullprotocol. No preexistingproper pairedwebeye screen found. Relevant plantlight/chemical/angiospermdielcanons notinhand;AnimalEyes isMetazoa. Ownernone/focusing-to-lightreadingapplies.
+
+Official harvest_get reportsTypha innoharvestrunyet,screen_candidates reportsnotinharvest(work/worker26/first-harvest.txt,first-candidates.txt). No scientificAPI result or cachedfailedquery can beclaimed. Webfamilyalternative `Typhaceae photoreceptor review` returnedgenericplant/fungalphotoreceptor structures,evolutionreview,animalopsin/retinal/insect colourvision and ordinaryTyphaceaefloras. NoTyphaspecificexperiment identified inreturned review snippets;not awhole-text/tableabsenceclaim.2019targetgenusreview10.1007/s13157-019-01174-7 and2021germinationreview provideactualTyphaliterature pointers;family/APIprotocol remainspartial. No externalpagesfetched.
+
+Exact26executedwebqueries,inorder:
+- `web: Typha seed germination light dark`
+- `web: Typha germination gibberellin OR smoke OR dormancy`
+- `web: Typha floral scent volatiles`
+- `web: Typha flower opening time anthesis`
+- `web: broadleaf cattail flower opening time anthesis`
+- `web: Typha chemical perception volatile signalling`
+- `web: broadleaf cattail chemical perception volatile signalling`
+- `web: Typha epidermal lens cells eye type`
+- `web: broadleaf cattail epidermal lens cells eye type`
+- `web: Typhaceae photoreceptor review`
+- `web: "Typha" "gibberellic acid" germination`
+- `web: "Typha" "ethylene" growth response`
+- `web: "Typha" pollen release diurnal anthesis`
+- `web: "Typha latifolia" allelopathy germination receiver`
+- `web: "The sweet and musky scent of home" Phartyal 2022`
+- `web: "Autotoxic inhibition of seed germination by Typha" 1983`
+- `web: "The ethylene receptor regulates Typha" doi`
+- `web: "Typha" "1755-1762"`
+- `web: "Spatial–Temporal Dynamics of Adventitious Roots" Typha doi`
+- `web: "Autotoxic inhibition of seed germination" "Grace" doi`
+- `web: "Seed germination of two Everglades species" "1999"`
+- `web: "Allelopathic activities among seeds of four hydrophytes"`
+- `web: "Allelopathic activities among seeds" "2004"`
+- `web: site:pubmed.ncbi.nlm.nih.gov/31062160 "DOI"`
+- `web: "Seed germination of two Everglades species" site:usgs.gov`
+- `web: "The germination of Typha species" "Jansen" "2021"`
+
+Allactuallydelivered groupedtitles/snippets read;not20perquery. Raw Typha-web1.json through-web7.json savedinscratch. USDA/USU/NCSUconfirm broadleafcattail=T.latifolia. First germinationpair/scent ranbefore pairedtraitqueriesunder10(e). Last16queries resolve actual living hormone/allelochemicalexperiments,sourceidentities andpollenprimarytable;not an extraunknown-clearingsearch. NoOpenAlexAPIretry,MDPIrequest,source/fullpaperpagefetch,evidence,paidAPIornewservice refusal.
+
+13newwanted:2022Phartyal livingT.latifolia ethylenegermination;1968McNaughton and1983Grace target autotoxicgermination experiments;2004fourhydrophyte interseedallelopathy;2010universitycattailroot-extract seedreceivertrial;2019T.angustifolia ethylene/1-MCP/PZA;2025T.domingensis auxin/cytokinin/light-darkrootcultures;2020T.domingensis thermaltime/light-darkgermination;2000LorenzenT.domingensis controlledgermination;2021JansenTyphagerminationreview;2012T.angustifolia diurnalairbornepollencounts;unresolvedoriginaltargetcopper-sulfategermination source;andCambridgeLifeHistoryofCommonCattailgermination/seedcoat experiment(originalauthor/year/DOIunverified). Missingbibliographicfieldsblank/null,nottimestampsaspublicationyears. Jansenpublicationyear2021 verified fromoriginalcolophon,distinctfrom2026webannouncement. Unknownactualspecies-scopeofJansenreviewleftfor[Typha],records0,notassignedatargetmeasurement.
+
+Strongchemicallead10.1111/plb.13385 explicitT.latifolia ethylenetreatment islivingresponseunder10(d). SameoriginalsnippetnamesSagittariasagittifolia;parentnotifiedforsource-supportedownNEWshared-requesttargetexpansion,notwrittenwithoutauthorization. McNaughtonleafextract isdonorremovedtissue,butactual livingTyphaseedreceiver responsecounts;nointactdonoremissionclaim. Grace negativeresultis stillatreatmentcomparison,intake toreadactualcontrols.2004seedinteractionsand2010rootextractreceivertrialretainedpendingactualspecies-specifictreatments. GeneralextractedTyphavolatileoilalgae-inhibitionstudy measuresremovedoil+algaeresponse,notTyphareceiver,excluded10(a).Typha leafextractprimingother-speciesseeds similarlydoesnotmeasureTyphaperception.2018T.angustifolia aerenchymatranscriptome withendogenousethylenepathwayexpressionis amolecularpointer;2019actualhormone/blockertreatmenttrialretained,notgenehomologyalone. New2026PlantWorldrhizome-ethyleneclaimhasnoprimarycitationidentified,noextraunverifiedrequest.
+
+2025rootculturepaperindexedmethodsexplicitlyseparatecomplete seedlings,isolatedrootsandrootwithcaulinebase;culture/explantboundaryflagged. Onlyintactseedlingportioncouldjustifywholeplantresponse;noexplanttointactcarry.2020and2000T.domingensis lightgermination sourcesarecongener-only,records0,andnotborrowedtoT.latifolia.2000source'sGA3/kinetinmethodsnippetcouldalsorefertoonlyCladium;chemicalattributiontoTyphaneedsreadspecies-specificmethods. Existingtarget1997germinationsource'ssalinitymentionis notautomaticallyclaimedchemicalsignalling. Newcoppertargetexposuretrialretainedunder10(e),toxicity-versussensoryscopeunresolved. LifeHistoryseedcoatrupturealonedoesnotestablishlight/chemicalresponse,butgermination-titlecandidatewaitsunder10(e).
+
+Diel:2012originalPakJBotPDFshowsTyphaangustifolia diurnalpollengrains/m3table;requestedaspotentialemissiontrail,notdirectanthesishourmeasurement. Atmospherictransport/trapweatherconfoundingmustbechecked. GeneralGeneticmobilityinTypha sourcecomparesweeksafteranthesis/seedset,notdailytime;seasonalfloweringMay–July andspikedevelopment/bloommonthsdonotestablishdiel. Nymphaea/Agavetuberose/Typhonium floralodour,Gloriosa2025duskfloweropeningandKalanchoë2026volatileuptakemeasureothergenera;noTyphafindingsimported.2019synflorescenceanatomyshowsdevelopmentalstages,notdailyclockintheshownsnippet.
+
+Eye:2002McManus/Seago/Marsh DOI10.1093/aob/mcf211 explicitlydescribesenlargedepidermis/cuticleinT.latifolia/T.glauca andordinaryshootanatomy;nolensactioninavailablestarts.2007epidermalfocusing10.3732/ajb.94.7.1061 actuallynamesBegonia,Citrus,Ficus,Colocasia,Impatiens,notTypha. Lens-shapedleafcrosssection/algalchloroplasts,mucilageglandsvisibletohumaneye andanimalphotoreceptorlenspapersarenotTyphafocusingorplantorgans. Noeyewantedforordinarymorphology. Ownernone applies;focusingwouldbelongunderlightifactuallyfound. Existingownc10#124–125Thelypteris/Typhawastewaterremovalstudiesalreadyrequested;notduplicatedorretargetedmerelybecausegenericpollutantaccumulationmentionsTypha. Noout-of-scope/legacyedits.
+
+Stellariacommitc9f2b417checkerpassed0problems. Typhaprecommitcheckerfinishedexit0andprinted0problems(work/worker26/Typha-check.txt);whitespacecheckpassed. NextuntouchedPueraria.
