@@ -894,3 +894,42 @@ Worker46 Lobelia real required gate printed **0 problems**. harvest_get.py and s
 Shared-source handoff from c12 worker47,2026-10-27: initial forwarded scratch path omitted harvest-c12 and produced FileNotFoundError; located actual work/harvest-c12/worker47-Castilleja-web7.json with rg and inspected its stored result. The indexed Deno original Ch20p113 explicitly names Castilleja miniata and its light comparison. Expanded ONLY existing wanted#34 for/traits/why for C.miniata light, preserving book title/authors/year/DOI/URL/get and all prior target provenance. No quantities or chemical result inferred, no source fetched, no duplicate line/evidence/query added. Wanted count remains152. Existing first-supplement Modiola expansion is untouched. Rerunning mandatory real gate after shared metadata expansion before commit.
 
 Worker46 final shared-source/Lobelia validator printed **0 problems**. Final own counts:3 genera screened(Dioscorea,Vinca,Lobelia),4 search records,8 new wanted,one existing shared-book target expansion,50 successful connected web queries,0 evidence/0 measured cells. Cumulative20/40 genera,25search,152wanted,0evidence. Stop between genera with next **Foeniculum**,20 remaining in TOP/current order. No tool/quota refusal or newly refused service; source-reading and target-applicability limitations above are unresolved and are not counted as measured/exhausted. Original service refusals, prior completed provenance, Chenopodium taxonomy and sunflower donor issues preserved. No further fresh workers available under parent48-worker cap; this is a committed context checkpoint, not completion of the remaining queue.
+
+
+## 2026-10-27 — issue38 worker14 Foeniculum continuation
+
+NEW: one genus web-screened (Foeniculum), 17 successful connected web queries, 16 wanted leads, 0 searched rows, 0 evidence/0 measured cells. Current retained c11 files:70 wanted/25 searched (54 wanted/25 searched baseline). Historical152 wanted above is pre-desk incorporation and has not been refilled.21/40 genera now web-screened across rounds;19 remain, next Hypochaeris. Full protocol/exhaustion remains partial: OpenAlex skipped under coordinator's round-wide HTTP429 instruction, so no null searched rows are authorized, including eye_type. No source/fullpaper pages fetched.
+
+Adopted existing Foeniculum vulgare light coverage: recheck-6-fixed#23 corrects the prior sweep-17#6 summary of Theiler's Development of fennel and bolting. Both are partial background statements, not manipulated daylength measurements. They are preserved; new direct light experiments are upgrades, not a claim that the species lacked any record. The old sweep-17 one-query searched row is preserved and does not establish this protocol. Global wanted/evidence/corrected evidence/status checked by taxon and retained title/identifier fragments before writing; no matching prior wanted/n/a source found. Canon checked; no in-hand plant compilation resolves the open target traits.
+
+Required harvest_get.py and screen_candidates.py ran successfully. Cached context file for Foeniculum was absent; current harvest output was saved instead and all116 delivered work entries plus15 family-review titles screened. Harvest run5, supplements14/20; successful harvest queries in order:
+`Foeniculum phytochrome photoreceptor`; `Foeniculum light perception`; `Foeniculum phototropism`; citation step citing10.1111/ele.12205 naming Foeniculum (0 delivered); `Foeniculum flower opening time`; `Foeniculum nyctinasty`; `Foeniculum anthesis`; `Foeniculum pollination biology`; `Foeniculum volatile signalling`; `Foeniculum epidermal lens cells`; `Foeniculum epidermal focusing leaf optics`; family review `Apiaceae photoreceptor review`.
+
+All actually returned connected-search titles/snippets were screened; variable delivered counts, no assertion of20 hits per query. Raw responses and harvest/candidates are under /workspace/work/w14-c11/Foeniculum-*. No access/quota refusal from connected web, no service bypass. Exact web queries in executed order:
+- `web: Foeniculum seed germination light dark`
+- `web: Foeniculum germination gibberellin OR smoke OR dormancy`
+- `web: Foeniculum floral scent volatiles`
+- `web: Foeniculum flower opening time anthesis`
+- `web: fennel flower opening time anthesis`
+- `web: Foeniculum plant ocelli lens epidermal focusing eye`
+- `web: fennel plant ocelli lens epidermal focusing eye`
+- `web: Foeniculum chemical sensing volatiles`
+- `web: fennel chemical sensing volatiles`
+- `web: Foeniculum photoperiod phototropism light response`
+- `web: fennel photoperiod phototropism light response`
+- `web: Apiaceae photoreceptor review`
+- `web: Foeniculum Behavior of Pollinators reproductive system fennel grown field intercropped cotton anthesis`
+- `web: Responses florence fennel seeds light temperature gibberellin A4/7`
+- `web: "Responses of florence fennel" seeds light temperature gibberellin`
+- `web: "Light and Temperature Requirements for Germination" fennels`
+- `web: "Effects of gibberellin treatment" "Foeniculum"`
+
+Source dispositions: GA priming/germination, applied PGR experiments, Shimada's live-shoot GA trial and the direct light/dark or supplemental-light studies are retained under10(d/e). The Thomas1994 title/citation is independently returned in reference lists, but author/DOI remain unverified. The Iranian bitter-fennel light title returned only via ResearchGate; no such page was opened/used or requested, and legal primary provenance remains to be located. The1963 floral-biology article explicitly mentions germination, so its light applicability is held for reading under10(e), not invented. Seaweed biostimulant applicability is explicitly uncertain because nutrients and hormone/elicitor mechanisms must be separated.
+
+The Caatinga reproductive paper explicitly describes anthesis time/duration and is retained for original clock-hour inspection. Gross2008 flowering dynamics (10.1560/ijps.56.3.215) describes seasonal onset and days after anthesis in snippets, which alone is not diel; fruit-maturity10.1002/jsfa.2740680112/10.58993/ijh/2025.82.2.12 and thermal-time10.56093/jss.v15i2.1 are days/development rather than within-day timing. The wheat6-BAP harvest title is a different genus. Pollinator activity papers do not themselves establish fennel daily plant timing. The2012 chilli–fennel interaction10.1371/journal.pone.0037382 concerns chilli as receiver in the available abstract; no measured living fennel chemical response/emission was established, so no Foeniculum request is fabricated from donor association.
+
+Extract/seed-oil profiles, distillation/extraction, aromatherapy candles, tea vapors, roasted/aged fruits, pharmacology and rat olfaction do not measure living fennel signaling under10(a). This includes10.2298/fupct1001025r,10.1155/ianc/1248684,10.3390/antiox11122318,10.1021/acsomega.0c06188 and10.1051/bioconf/202622603001. The terpene-synthase/engineered-E.coli paper10.1016/j.plaphy.2026.111575 is biosynthesis/function, no cue-response reported in the returned abstract. Celery/Agastache/soybean and other unrelated plant responses do not supply fennel traits. Eye candidates are the Wild flowers book's Bird's-eye plant name, nanomaterials thesis word match, and carrot human-eye-health review; none establishes a plant eye. General plant-ocelli/lens essays name no Foeniculum in snippets; epidermal focusing belongs to light under10(b), while plant eye_type is none by owner reading. Family web review returned Apiaceae omics10.1093/hr/uhac076 and general photoreceptor reviews, no named target measurement establishing a daily rhythm or chemical response. API completion and source reading remain outstanding; no trait declared exhausted.
+
+Mandatory validator pending before checkpoint.
+
+Worker14 Foeniculum mandatory real gate printed **0 problems**. Checkpoint preserves all original file prefixes; next Hypochaeris.
