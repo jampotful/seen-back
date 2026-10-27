@@ -59,3 +59,37 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - `Lycopodiaceae photoreceptor review` (stored family review)
 
 Round checkpoint: 2 genera web-screened for this round, 0 full-protocol complete, 0 search rows, 5 wanted lines, 0 evidence records. Remaining unreviewed: 38; next Xanthium. OpenAlex refused at coordinator; no other service refused in this worker.
+
+### Xanthium
+
+Web screening finished for this round: five wanted leads added (daily leaf movements, CO2/stomatal sensitivity, applied auxin, CO2/flowering, applied germination regulators). Existing sense_light_nonvisual evidence adopted: recheck-1-fixed:8 Xanthium strumarium achenes collected right after maturation germinated in daily natural greenhouse light at 24 to 30 C and did not germinate in darkness; red and far-red light had little effect, and buried achenes did not develop a red-light requirement; in the field, shade intensity explained 77% of the variation in emergence and 95% shade cut emergence by 72 to 88% (partial). Light-only germination studies found by the mandatory first searches are not re-requested for this already-covered trait. Open traits remain diel, eye_type, sense_chemical. General ocelli papers do not establish a Xanthium eye; lens-like focusing would belong under sense_light_nonvisual. Harvest diel candidates on soybean/Cannabis, Phaseolus, Linum and Goniothalamus are other genera; Xanthium flowering-date/biotype studies give no daily opening hour in the stored abstract. Simulated volatile signaling preprint does not show a live cue response in its truncated stored abstract, so not used as negative evidence; chemical null is held in any event. Tissue/extract phytochemistry is excluded under owner 10(a). Family web query returned general photoreceptor reviews, not a Xanthium-specific review. Full protocol incomplete: missing OpenAlex common-name/citation/family API steps skipped; no null search record written.
+
+Queries run, word for word:
+
+- `web: Xanthium seed germination light dark`
+- `web: Xanthium germination gibberellin OR smoke OR dormancy`
+- `web: Xanthium jasmonate herbivore`
+- `web: Xanthium flower opening time anthesis`
+- `web: common cocklebur flower opening time anthesis`
+- `web: Xanthium plant ocelli lens-like epidermal cells eye`
+- `web: common cocklebur plant ocelli lens-like epidermal cells eye`
+- `web: Xanthium response to airborne volatile signals`
+- `web: common cocklebur response to airborne volatile signals`
+- `web: Asteraceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Xanthium phytochrome photoreceptor`
+- `Xanthium light perception`
+- `Xanthium phototropism`
+- `Xanthium flower opening time`
+- `Xanthium nyctinasty`
+- `Xanthium anthesis`
+- `Xanthium pollination biology`
+- `Xanthium volatile signalling`
+- `Xanthium epidermal lens cells`
+- `Xanthium epidermal focusing leaf optics`
+- stored citation step: 10.1016/j.tree.2009.09.010; 0 returned works
+- `Asteraceae photoreceptor review` (stored family review)
+
+Round checkpoint: 3 genera web-screened for round; 0 full-protocol complete; 0 search rows; 10 wanted lines; 0 evidence. Remaining unreviewed: 37; next Goodyera.
