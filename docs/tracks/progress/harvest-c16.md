@@ -377,3 +377,35 @@ Screened delivered titles/snippets/passages, without asserting 20 per query. Fou
 Diel results give June–August seasons and timing across years, not clock hours. Eye results include Spiraeeae leaf micromorphology: papillate cell text explicitly refers to Spiraea, while Holodiscus is described by trichomes/testa. No Holodiscus epidermal-focusing result displayed, and owner plant-none rule applies. Chemical queries returned essential oils, leaf extracts/flavonoids, human mononuclear-cell assays and cytotoxicity; these are removed-tissue or animal responses excluded by 10(a). OceanSpray cranberry company/products, Croton holodiscus, broomrape germination on a Holodiscus host, and Gaultheria seed-light requirements are taxon/organism mismatches. The latter light measurement cannot be assigned to its listed associate oceanspray. Family review alternative gave general plant photoreceptor reviews and Fragaria/Rosaceae omics/regeneration, without a Holodiscus-specific experiment. No source pages opened, OpenAlex skipped, no null searched rows or evidence.
 
 Worker 48 running counts: 4 new genera web-screened, 0 full protocol complete, 0 searched, 25 wanted added, 0 evidence. Cumulative batch 16 web-screened and 63 wanted; 24 remain, exact next Dasiphora.
+
+### Dasiphora — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: absent from supplied runs, no successful genus harvest queries/candidates. Checked canon/global evidence/wanted/searched and owner status under both Dasiphora and historical Potentilla fruticosa. No existing actual-species measurement/request found. Queue D. fruticosa has all four traits open; family light/chemical and family/order diel do not carry. The scientific synonym was explicitly added to paired light/chemical queries and followed with specific germination/anthesis alternatives because genus-only results missed direct older studies.
+
+Exact web queries in execution order (final three are source/citation chases for displayed candidate metadata):
+- `web: Dasiphora seed germination light dark`
+- `web: Dasiphora germination gibberellin OR smoke OR dormancy`
+- `web: Dasiphora floral scent volatiles`
+- `web: "Dasiphora" flower opening time anthesis`
+- `web: "shrubby cinquefoil" flower opening time anthesis`
+- `web: "Dasiphora" eye type epidermal lens cells`
+- `web: "shrubby cinquefoil" eye type epidermal lens cells`
+- `web: (Dasiphora OR "Potentilla fruticosa") light perception phototropism germination`
+- `web: "shrubby cinquefoil" light perception phototropism germination`
+- `web: (Dasiphora OR "Potentilla fruticosa") chemical signalling volatile response`
+- `web: "shrubby cinquefoil" chemical signalling volatile response`
+- `web: "Potentilla fruticosa" germination light gibberellin`
+- `web: "Potentilla fruticosa" flower opening time anthesis`
+- `web: "10.2478/jas-2013-0011"`
+- `web: "Technology of hydroponic growing of cinquefoil" Dasiphora`
+- `web: "Effect of Light" "Germination" "Potentilla fruticosa"`
+
+Adopted the immediately preceding Holodiscus family-review alternative `web: Rosaceae photoreceptor review` rather than repeating the identical query. It returned general plant/animal photoreceptor reviews, Rosaceae omics/regeneration and a Fragaria photoperiod pathway paper, with no direct Dasiphora measurement in the displayed passages. OpenAlex citation/supplement steps remain unrun under the round-wide 429.
+
+Screened every delivered title/snippet/passages, without claiming 20 per query. 3 wanted added: primary P. fruticosa cultivar anthesis paper (publisher metadata confirmed), named primary light-germination paper via USDA handbook reference, and Korean growth-regulator/rooting trial. The older scientific-name search was necessary: the first Dasiphora diel/common-name pair chiefly returned seasonal garden accounts, while Potentilla fruticosa revealed a primary flower-opening observation. No hours or values logged. D. floribunda / D. fruticosa subsp. floribunda records and USU auct. non nomenclature retain a species/subspecies fork rather than assumed equivalence with every global D. fruticosa population.
+
+Additional unresolved leads for later primary verification: Technology of hydroponic growing of cinquefoil (Dasiphora fruticosa (L.) Rydb.) (only ResearchGate listing and Grafiati/secondary references found; not opened, https://www.grafiati.com/en/literature-selections/dasiphora-fruticosa/journal/); The effect of gibberellic acid on woody plants (third-party listing says living P. fruticosa seedlings/rooted cuttings received GA, https://documentsdelivered.com/source/065/335/065335278.php); Studies On Introduction And Cultivation Of Five Wild Flowers (third-party thesis listing reports neutral P. fruticosa seed light response, https://globethesis.com/?t=2133360092995686); USDA nursery proceedings Table 3 seed treatments includes P. fruticosa (https://research.fs.usda.gov/download/treesearch/26652.pdf). Primary titles/authors/treatment-table attribution remain for oa readers; no fabricated metadata/request from disallowed host.
+
+Other results include USDA ARS fixed light/dark germination protocols and ecological shade preference, not a measured contrasting response; FEIS laboratory germination ranges and fire table clock times need context and were not interpreted as anthesis hours. Ethylene inhibition of Potentilla norvegica germination concerns another genus/species after the taxonomic split, not D. fruticosa. B. dasyphylla, Oenothera, Anigozanthos and generic smoke reviews supply no Dasiphora measurement. Extract antimicrobial studies and pharmacognostic leaf chemistry are excluded under 10(a). Eye hits describe epidermal cell walls, stomata/hairs and pollen morphology, not optical focusing; owner none rule applies. No pages fetched, no evidence or null rows.
+
+Worker 48 running counts: 5 new genera web-screened, 0 full protocol complete, 0 searched, 28 wanted added, 0 evidence. Cumulative batch 17 web-screened and 66 wanted; 23 remain, exact next Ampelopsis.
