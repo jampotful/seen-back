@@ -1224,3 +1224,67 @@ Chemical candidates:hydrodistilledfloral oil antibacterialstudyPMID18541324,frui
 Services: inheritedOpenAlex429,MDPI429,UChicago403,SANBI403 skipped; no newrefusal. Returned indexed snippets from these hosts are incidentalengineoutputs,not directrequests or servicebypass. No directpaperfetch,evidencelog,unauthorizedhost,proxychange,operational/gates/branch edit or permissionrequest. Currentcloud-environment-runtime network observations remain the supported environment; no newskill-drivenblock. GlobalDOI/Unicode-preservingexacttitle/URLdedupe found0existingmatches for9rows; no oldlineedited.
 
 Worker32 final validation: the required screen_candidates checker printed **0 problems** at 261 wanted / 23 searched. All JSONL parses. The original 219 wanted lines and all 23 searched lines are byte-identical to 2c770fd2. git diff --check passed. Only own wanted/progress files changed; no evidence or paper assets. Two new web screens remain protocol-partial, with 42 added wanted leads. Exact next genus: **Ligustrum**; nine genera remain.
+
+
+## 2026-10-27 — issue38 worker37: Ligustrum fresh web screen
+
+NEW: **Ligustrum only; 1 newly web-screened genus, protocol-partial; +16 wanted, +0 searched, +0 evidence. Actual c8 becomes277 wanted/23 searched.** Original261wanted and all23searched prefix preserved frome3eb1ddd. Prior first18, Pilea/Centrosema adoptions and eleven fresh screens throughNandina preserved. **8 remain; exact next Zanthoxylum**, thenGeranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Zanthoxylum external-3 diel/eye/light adoption remains; bungeanum chemical cannot carry toclava-herculis.
+
+Read AGENTS, worker guide, named protocols/BRIEF Round2/THOROUGH, audit53/54 findings and own progress. Coordinator already owns latest-main branch; no checkout/push. Applied cloud-environment-runtime skill: current connected/enforced unrestricted policy, noVPN/credential bindings. Official read-only harvest_get.py and screen_candidates.py using current supported authorized network succeeded: **Ligustrum in no harvest run yet/not in harvest**, not a successful zero-hit API search. OpenAlex429 and inheritedMDPI429/UChicago403/SANBI403 skipped without requests/fallback. No new refusal, direct source/page fetch, evidence, operational edit, proxy change or permission request. Earlier mixed network/scratch-cache refusal not retried/bypassed.
+
+Preflight used corrected-first screen_candidates.main_evidence with accepted-name mapping; **no accepted Ligustrum evidence**. Four actual queued species areL.sinense,lucidum,vulgare,obtusifolium. Global wanted/searched and owner papers-status checked; no target source owner n/a re-requested. sweep-9#17 is an older thin compound screen and explicitly left the rhythmic fragrance title unopened. Canon files include no plant eye; gene-presence compilations and other-family physiology cannot supply target physiological measurements. Mandatory uncached OpenAlex protocol steps remain incomplete, so no null searched rows/exhaustion claim.
+
+Required10(e) searches first, scientific/common four-trait pairs, family review alternative, then exact source/method/species clarifications: **39 actual connected queries**, execution order:
+- `Ligustrum seed germination light dark`
+- `Ligustrum germination gibberellin OR smoke OR dormancy`
+- `Ligustrum floral scent volatiles`
+- `Ligustrum flower opening time anthesis`
+- `privet flower opening time anthesis`
+- `Ligustrum eye type lens-like epidermal cells`
+- `privet eye type lens-like epidermal cells`
+- `Ligustrum light photoperiod phototropism`
+- `privet light photoperiod phototropism`
+- `Ligustrum volatile chemical hormone response`
+- `privet volatile chemical hormone response`
+- `Oleaceae photoreceptor review`
+- `Ligustrum sinense lucidum vulgare obtusifolium hormone jasmonate gibberellin response`
+- `"Landscape Performance and Fruiting of 12 Privet Selections"`
+- `"Further observations on rhythmic emission of fragrance" Ligustrum`
+- `"Ligustrum" "Landscape Performance" "10.21273"`
+- `"Further observations on rhythmic emission" "Ligustrum" "vulgare"`
+- `"Ligustrum sinense" jasmonic acid salicylic acid growth`
+- `"Ligustrum lucidum" gibberellin seed germination shade`
+- `"Landscape Performance and Fruiting of 12 Privet" site:journals.ashs.org`
+- `"Mountain invasions on the way" Ligustrum doi`
+- `"Further observations on rhythmic emission of fragrance in flowers" species`
+- `"Ligustrum vulgare" cytokinins abscission`
+- `"Ligustrum obtusifolium" "gibberellin"`
+- `"Ligustrum vulgare" "chemical defoliation"`
+- `"Ligustrum sinense" "growth regulators"`
+- `"Ligustrum lucidum" "salicylic acid"`
+- `"Effect of Exogenous Salicylic Acid" "Ligustrum" site:journals.ashs.org`
+- `"chemical defoliation" "Ligitstrum" site:pbsociety.org.pl`
+- `"The involvement of a floral scent in plant-honeybee interaction" doi`
+- `"Identification of floral volatiles from Ligustrum japonicum" doi`
+- `"Ligustrum" "LIGHT INTENSITY AS IT AFFECTS GROWTH"`
+- `"Landscape Performance and Fruiting of 12 Privet Selections" "2014"`
+- `"chemical defoliation" "Ligustrum" "Acta"`
+- `"Ligustrum lucidum" "Composition and germination"`
+- `"Ligustrum" "caws.org.nz" "Germination" "Kohen"`
+- `"Ligustrum" "Pre-sowing treatment for improving seed germination"`
+- `"Light regulation to chlorophyll synthesis" "doi"`
+- `"The chemical defoliation of Ligitstrum" "10."`
+
+Read every exposed title/snippet and indexed original-source passage at actual delivered extent; no20-per-query claim. No direct source fetch. Incidental search results from refused services are engine outputs only. Wikipedia,ResearchGate,Scribd,encyclopedia/library-proxy and opportunistic-copy pages unopened and not primary sources. DOI/year/authors used only when exposed; unknown metadata blank/null. Global DOI/Unicode-normalized exacttitle/URL dedupe before append found two cross-unit sources, adopted without duplication: **c14#91 The Woody Plant Seed Manual** has an indexed originalLigustrum chapter stating light not required for germination; recover exact tested taxa and original design. **c16#38 10.1093/jpe/rtv064 Mountain invasions** original indexed results identifyL.lucidum light/dark versuspermanent-dark germination, including nonsignificant light effect. Negative treatment outcomes remain leads. Coordinator notified of both target expansions; existing rows concernFraxinus andGleditsia/Pyracantha,so adoption is source reuse,not physiological carry.
+
+Added16globally absent sources. Targetlight:lucidum2007J-STAGE habitat/germination,2009lightenvironment10.7211/jjsrt.35.45,2014sinense/lucidum/japonicum germination originalUFpdf,2024sinense seasonal lightcurves,obtusifolium var.regelianumKnox dissertation. Targetgermination holds per10(e):vulgare2007presowing proceedings (ISBN978-80-86461-82-3),lucidum2012composition/germination10.4025/actascibiolsci.v34i3.10641,2003earlyinvasion and2000acidrain10.11707/j.1001-7488.20000622. Thermalstratification,seedchemistry,habitatcorrelation andfixedlightalone do not establish sensing; unresolved light/chemical manipulations held explicitly. Added2020globalLucidumreview10.1007/s12229-020-09228-w for originalgermination/light references,includingBurrows/Kohen1983originaltitle only incompletelyexposed; recover original viareview rather than invent a full citation.
+
+Targetchemical:2018lucidum appliedSA10.21273/HORTSCI12949-18 counts10(d);vulgare nursery ethephon defoliationDOAJlead must confirm rootedliving treatment versusinjury. Distinct1998vulgarecytokinin/auxin/GApetiole abscission and1985CEPAwork useisolated/cutshoots in exposed summaries; no extra request orlivingtargetclosure inferred. Obtusifolium1957gibberellin title appeared only in an opportunistic secondaryindex; retained as an unresolved title lead here (*Growth substances. Gibberellin and higher plants: XI. Responses of certain woody ornamental plants*) pending lawfuloriginal bibliographic recovery,not promoted to verifiedmeasurement. No actualsinensechemicalresponse established;essentialoils,drug/cosmeticextracts,pollen leachates andmothdigestiveglycine fail10(a). Herbicidelethality alone does not establish cueperception.
+
+Congeners kept separate:foliosum2017GA3/lightgermination10.11623/frj.2017.25.3.05;hybridvicaryi2010lightregulation10.1111/j.1744-7909.2010.00979.x (vulgareparentage isnot carry);quihouivar.aureaphylla dynamicheadspaceVOCs10.11833/j.issn.2095-0756.2012.01.023 (attachedlivingversuspickedmaterial unresolved);compactum2022floralnonanal10.1007/s00114-022-01802-z (livingcollectionmethod verify). The latterabstract's within-day nectarcorrelation belongs toSapium,notLigustrum; no diel claim. Japonicum1998butterflyattraction10.1023/A:1020750029362 usesextract/syntheticartificialflowerbioassays; no additionalplantchemicallead absent livingemission confirmation. Japonicum/ovalifolium1980/1981essentialoilconstituents are tissuechemistry10(a).
+
+Diel: originalPubMedabstract10.1007/BF00193995 namesHoya,Stephanotis,Odontoglossum,Citrus,**noLigustrum**,so the legacyunopenedtitle is resolved as anothergenus,not a missedprivetclock. Anthesisinmonths/seasons,leafretention,guava/Jatropha/Sesbania flowerhours andSetariapeakanthesis are nottargetdiel. Eye:foliosumtaxonomicmicromorphology,privetleafcrosssections andlensshapedlenticels describe anatomy,not focusing oreyes. Humancontactlenses/retina hits unrelated. Allplant eye_typenone10(b); actualepidermalfocusing belongsunderlight. Oleaceaephotoreceptorreviewquery returned generalplant/algal/insectreviewresults; no genusphysiologicalcarry.
+
+Worker37 Ligustrum validation follows; only own wanted/progress paths edited, no paper assets/evidence.
+
+Worker37 Ligustrum validation: required checker printed **0 problems** at277wanted/23searched. JSONL parses; first261wanted lines and all23searched byte-identical toe3eb1ddd; git diff --check passed. Only owned wanted/progress files changed.
