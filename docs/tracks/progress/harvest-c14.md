@@ -36,3 +36,41 @@ Queries actually run (connected web search; all available result titles/snippets
 - `strawberry flower opening time anthesis`
 - `Fragaria epidermal lens cells eye`
 - `strawberry epidermal lens cells eye`
+
+### Erythronium
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get and screen_candidates: absent from harvest, no genus evidence. Six wanted leads added, including a controlled light/dark negative germination result and primary timed flower movie. Temperature-only germination titles retained under 10(e), reader must inspect whether light/chemical trials occur. No chemical response established by underground metabolite profiles (10.1155/2022/7431151); no null claim. Trout eye papers concern fish. Elaiosome pheromone account is a hypothesis in a university extension article, not a demonstrated living plant chemical response. General photoreceptor reviews returned, no Liliaceae review. Canon catalog checked; none requested.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Erythronium seed germination light dark`
+- `Erythronium germination gibberellin OR smoke OR dormancy`
+- `Erythronium floral scent volatiles`
+- `Erythronium photoperiod phototropism light sensing`
+- `trout lily photoperiod phototropism light sensing`
+- `Erythronium flower opening time anthesis`
+- `trout lily flower opening time anthesis`
+- `Erythronium volatile chemical signalling`
+- `trout lily volatile chemical signalling`
+- `Erythronium epidermal lens cells eye`
+- `trout lily epidermal lens cells eye`
+- `Liliaceae photoreceptor review`
+
+### Anemone
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get and screen_candidates run (run 2, no traits listed); adopted two light evidence records. Two wanted chemical/germination leads. Diel result Morphology of Anemone sylvestris L. flower surfaced only as a ResearchGate listing (not opened); no secure primary URL/metadata to request, remains an unresolved title lead. Other anthesis results give dates or cut-flower handling, not measured hour. Anther-volatile tissue chemistry 10.3732/ajb.91.12.1969 does not establish a living response; cut flower phenylalanine treatment is excluded by owner chemical reading. Sea anemone animal studies excluded. Eye results animal anatomy, no plant eye measurement; no null recorded. Family search returned Ranunculales model-lineage review/general plant reviews, not a confirmed family photoreceptor review. Canon checked.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Anemone seed germination light dark`
+- `Anemone germination gibberellin OR smoke OR dormancy`
+- `Anemone floral scent volatiles`
+- `Anemone flower opening time anthesis`
+- `wood anemone flower opening time anthesis`
+- `Anemone volatile chemical signalling`
+- `wood anemone volatile chemical signalling`
+- `Anemone epidermal lens cells eye`
+- `wood anemone epidermal lens cells eye`
+- `Ranunculaceae photoreceptor review`
+
+Round checkpoint: 4 genera screened for the round, all 4 partial full protocol owing to unavailable OpenAlex; 0 searched lines, 13 wanted lines, 0 evidence lines. Next genus Carnegiea; 36 unreviewed genera.
