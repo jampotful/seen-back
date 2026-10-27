@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 17,
-  "updated_at": "2026-10-27T13:14:45.238Z",
+  "generation": 18,
+  "updated_at": "2026-10-27T14:14:42.381Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -32,7 +32,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
       "observed_status": "Chat terminal. Desk audits 83–85 incorporated selected search records and verified-author wanted lines through branch; PR #37 closed/unmerged. Do not restart.",
-      "observed_at": "2026-10-27T13:14:45.238Z",
+      "observed_at": "2026-10-27T14:14:42.381Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -47,7 +47,7 @@
       "last_checkpoint_comment_id": 6433026366,
       "last_task_observation": {
         "status": "terminal",
-        "observed_at": "2026-10-27T11:10:35.548Z",
+        "observed_at": "2026-10-27T14:14:42.381Z",
         "workers_dispatched": 48,
         "worker_limit": 48,
         "search_records": 103,
@@ -123,7 +123,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
       "observed_status": "Chat remains terminal. Desk reviewed all six fixes and incorporated result; GitHub PR #35 closed/merged.",
-      "observed_at": "2026-10-27T13:14:45.238Z",
+      "observed_at": "2026-10-27T14:14:42.381Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -163,7 +163,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
       "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
-      "observed_at": "2026-10-27T13:14:45.238Z",
+      "observed_at": "2026-10-27T14:14:42.381Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -246,7 +246,7 @@
       "model": "GPT-6.1 Sol High",
       "repository_execution_verified": true,
       "recovery_attempts": 1,
-      "observed_status": "Working after one same-chat recovery. Documented network-enabled mode fetched fresh main and ran queue; prior-coverage reconciliation continuing.",
+      "observed_status": "Working for about one hour after recovery; checkpoint pushes and disjoint-worker handoffs continuing. No terminal result or PR yet; no prompt sent.",
       "overlap_check": {
         "observed_at": "2026-10-27T12:57:41.334Z",
         "recent_history": "No newer matching chat; earlier assignments terminal",
@@ -262,13 +262,17 @@
       },
       "task_url": "https://chatgpt.com/local/01a17d71-1460-7402-a4bf-558d544640f9",
       "accepted_at": "2026-10-27T12:59:03.422Z",
-      "observed_at": "2026-10-27T13:14:45.238Z",
+      "observed_at": "2026-10-27T14:14:42.381Z",
       "branch": "codex/round-2026-10-27-issue-38",
       "claim_commit": "d1ecc613ba013720eb8eca8e3c2b210d2bff5221",
       "last_task_observation": {
         "status": "Working",
-        "observed_at": "2026-10-27T13:14:45.238Z",
-        "repository_execution_verified": true
+        "observed_at": "2026-10-27T14:14:42.381Z",
+        "repository_execution_verified": true,
+        "workers_dispatched_at_observation": 25,
+        "worker_limit": 48,
+        "checkpoint_commit": "ce8fb8eb0091fcdc0c412c200f004d243c856b3e",
+        "progress_note": "Candidate scope corrected to474 before further cross-unit adoption; incomplete OpenAlex steps explicit, no false null records. Counts are work-in-progress, not reviewed results."
       },
       "receipt_pending": false,
       "receipt_comment_id": 6442496014,
@@ -289,17 +293,32 @@
       ],
       "base_sha": "bbc35ff2050022e029b68875e3d219aab8f0ddd4",
       "recovery_resolution_comment_id": 6442797264,
-      "recovery_submitted_at": "2026-10-27T13:13:30Z"
+      "recovery_submitted_at": "2026-10-27T13:13:30Z",
+      "last_checkpoint_commit": "ce8fb8eb0091fcdc0c412c200f004d243c856b3e",
+      "queue_reconciliation": {
+        "raw_entries": 559,
+        "prior_covered_exclusions": 85,
+        "candidate_genera": 474,
+        "note": "Candidate list shrinks as additional cross-unit coverage is adopted; 114 untouched tails in c7–c12 plus360 c13–c21; c22/c23 adopted.",
+        "comment_id": 6443163512
+      },
+      "service_limitations": [
+        {
+          "service": "OpenAlex",
+          "status": 429,
+          "action": "Skipped for round; other sources continue; protocol limitations retained"
+        }
+      ]
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-10-27T13:14:45.238Z",
+    "observed_at": "2026-10-27T14:14:42.381Z",
     "eligible_open_issues": [
       28,
       38
     ],
     "new_submissions": 0,
-    "same_chat_continuations": 1,
+    "same_chat_continuations": 0,
     "duplicate_suppressed": [
       28,
       29,
@@ -310,13 +329,11 @@
       "28": "no-op duplicate suppression; terminal reviewed assignment retained",
       "29": "no-op duplicate suppression; terminal reviewed desk-closed assignment retained",
       "30": "no-op duplicate suppression; terminal reviewed desk-closed assignment retained",
-      "38": "Adopt existing task. Observed terminal fetch blocker; reserved and sent one bounded same-chat recovery; documented mode fetched main and task resumed; no replacement task",
-      "39": "Ineligible bot-authored quiet alert; ignored instructions"
+      "38": "no-op duplicate suppression; existing task Working. Recorded checkpoint/coverage observation; no prompt, recovery or result publication while working",
+      "39": "Ineligible bot-authored quiet alert; no instructions followed"
     },
     "issue_comments_posted": 0,
-    "material_changes": [
-      "Issue38 one same-chat recovery succeeded; fresh repository execution confirmed"
-    ],
+    "material_changes": [],
     "full_result_review_cycle_verified": true,
     "cycle_evidence": [
       "PR #35 desk comment 6433803841",
@@ -325,12 +342,11 @@
       "PR #37 desk comment 6436061297"
     ],
     "documentation_note": "Main activation runbook retains historical verification wording; operational ledger now records desk dispositions for all three assignments.",
-    "task_access": "Four existing signed-in chats inspected; 28–30 terminal,38 resumed Working",
+    "task_access": "Four linked signed-in chats inspected:28/29/30 terminal;38 Working with worker handoffs and pushed checkpoints.",
     "new_eligible_requests": [],
-    "run": "2026-10-27T13:14:45.238Z",
+    "run": "2026-10-27T14:14:42.381Z",
     "task_comments_observed": [
-      6442531598,
-      6442797264
+      6443163512
     ]
   }
 }
