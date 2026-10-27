@@ -605,3 +605,33 @@ Queries actually run (all delivered titles/snippets screened, fewer than20 whene
 - `heather epidermal lens cells eye`
 - `"Responses of dormant heather" seeds`
 - `"Calluna" "volatile emissions suggest"`
+
+Calluna followup verification (same web screen, no fetching): primary PMC/PubMed/publisher snippets for `"Exploring plant volatile-mediated interactions" "Calluna"` confirm actual Calluna vulgaris and Cytisus scoparius neighbours of responding Leptospermum scoparium in noncontact potted trial; **receiver response belongs to Leptospermum**, while plant volatile profiles include heather. `"Ultra-Violet Induced Biochemical Changes" "Calluna"` confirms target Calluna and95% versus20% UV attenuation experimental biochemical table. No receiver carry or additional duplicate request.
+
+### Cymbalaria
+
+Web-query screen completed for round; full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates,116 displayed title/abstract starts and15 Plantaginaceae alternatives reviewed; global canon/evidence/wanted/status has no measured target record, only old thin sweep. Added4 wanted: actual target shade avoidance primary table, negative phototropic fruiting-pedicel dispersal primary institutional record, heliotropism review tracing Schmitt1922 and actual seed-testing KNO3/light row requiring method/result distinction. Genus target is muralis; Linaria cymbalaria synonym verified in Euro+Med and vendor index, so historical sources may bear on same plant. Momordica/Pavonia/Saxifraga/Veronica/Lithophragma cymbalaria are other genera, and their germination, hormone-culture and scent results do not carry. Actual Cymbalaria extract study PMID38557394 excluded10(a); plasmolysis in peeled toadflax epidermis is physical osmosis, not demonstrated hormone/chemical-cue perception. Daily-opening hits only seasonal dates, climate-linked annual dates and other genera, no target hour established. Eye hits microscope lenses and cell anatomy, no demonstrated target focusing. Thesis Pollinator attractors: petaloidy and petal epidermal cell shape in close relatives of snapdragon http://hdl.handle.net/1808/8154 and1961 phototropism list10.5962/p.254614 remain unresolved species/focusing pointers, not target assignment; Deno first supplement and Science and the Garden Table6.2 Kinzel1926 snippets mention Cymbalaria/Linaria but actual experiment/result needs reader, no invented citation. Family alternatives largely other genera/animal visual systems, no physiological carry.
+
+Queries actually run (all delivered titles/snippets screened, fewer than20 whenever fewer delivered):
+
+- `Cymbalaria seed germination light dark`
+- `Cymbalaria germination gibberellin OR smoke OR dormancy`
+- `Cymbalaria floral scent volatiles`
+- `Cymbalaria photoperiod phototropism light sensing`
+- `ivy-leaved toadflax photoperiod phototropism light sensing`
+- `Cymbalaria flower opening time anthesis`
+- `ivy-leaved toadflax flower opening time anthesis`
+- `"Cymbalaria" volatile chemical signalling`
+- `"ivy-leaved toadflax" volatile chemical signalling`
+- `"Cymbalaria" epidermal lens cells eye`
+- `"ivy-leaved toadflax" epidermal lens cells eye`
+- `Plantaginaceae photoreceptor review`
+- `"Cymbalaria muralis" phototropism experiment`
+- `"Cymbalaria" seed germination light darkness experiment`
+- `"Cymbalaria" "Pollinator attractors"`
+- `"Aspects of dispersal in Cymbalaria muralis"`
+- `"Pollinator attractors" "petaloidy" Cymbalaria`
+- `"Reproductive efficiency and shade avoidance" "Cymbalaria"`
+- `"Pollinator attractors" "Cymbalaria muralis"`
+- `"Linaria cymbalaria" germination light nitrate`
+- `"Aspects of dispersal in Cymbalaria" schweizerbart`
