@@ -353,3 +353,42 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - `Phrymaceae photoreceptor review` (stored family review)
 
 Checkpoint: 11 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 61 wanted lines total, 0 evidence. Remaining unreviewed 29; exact next Amelanchier.
+
+### Amelanchier (2026-10-27 continuation)
+
+Web screening finished for this round with eleven new leads. Direct live-response candidates include auxin/spermidine/GA, ABA, cytokinin/light, jasmonate elicitation and GA/BA cultures, with in-vitro limitations explicit. Seed germination title retained under 10(e), without claiming a light contrast when snippet shows only fixed conditions. Diel primary Observations on shoot morphology and anthesis is held for full-text timing verification; other harvest anthesis hits report fruit-development intervals, frost injury, floral organogenesis or other genera, and web snippets mainly give seasonal bloom. No genus-specific focusing experiment surfaced; leaf epidermis anatomy is not an eye and eye_type is none under 10(b). Fruit/biscuit/yogurt aroma, phytochemical extracts and dried powders are excluded under10(a). Harvest light candidates on Vaccinium, Prunus, Kalmia, cucumber, Populus and strawberry concern other genera; human retinal and rock-art matches are irrelevant. Broad light-culture review is a potential citation route, not evidence of a named Amelanchier measurement. The Rockwool study stored abstract gives culture setup but no demonstrated contrast; not used to claim an absent response. Rosaceae web review query returned broad plant and animal photoreceptor reviews rather than a new Amelanchier experiment. No existing Amelanchier evidence or wanted request was found locally.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Amelanchier seed germination light dark`
+- `web: Amelanchier germination gibberellin OR smoke OR dormancy`
+- `web: Amelanchier floral scent volatiles`
+- `web: Amelanchier flower opening time anthesis`
+- `web: serviceberry flower opening time anthesis`
+- `web: Amelanchier plant ocelli lens-like epidermal cells eye`
+- `web: serviceberry plant ocelli lens-like epidermal cells eye`
+- `web: Amelanchier response to airborne volatile signals`
+- `web: serviceberry response to airborne volatile signals`
+- `web: Amelanchier light response photoperiod`
+- `web: serviceberry light response photoperiod`
+- `web: Rosaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Amelanchier phytochrome photoreceptor`
+- `Amelanchier light perception`
+- `Amelanchier phototropism`
+- `Amelanchier flower opening time`
+- `Amelanchier nyctinasty`
+- `Amelanchier volatile signalling`
+- `Amelanchier photoperiod`
+- `Amelanchier circadian rhythm`
+- `Amelanchier anthesis`
+- `Amelanchier pollination biology`
+- `Amelanchier epidermal lens cells`
+- `Amelanchier epidermal focusing leaf optics`
+- `Rosaceae photoreceptor review` (stored family review)
+
+Checkpoint: 12 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 72 wanted lines total, 0 evidence. Remaining unreviewed 28; exact next Orthilia.
