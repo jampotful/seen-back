@@ -2,7 +2,7 @@
 
 ## 2026-10-27 — regards-issue-28-20261027
 
-Scope: Sturnus only. Screening completed for 1/1 genus; 0 genera remain to screen. This round added 1 wanted line, 0 search records and 0 evidence records; 0 cells closed or exhausted. The two interreceptor_deg cells (Sturnus vulgaris and Sturnus unicolor) stay open pending candidate reading. No evidence was written, as desk-screen.md point 5 requires.
+Scope: Sturnus only. Screening completed for 1/1 genus; 0 genera remain to screen. After coordinating-source review this round retains 0 new wanted lines, 0 search records and 0 evidence records; 0 cells closed or exhausted. The two interreceptor_deg cells (Sturnus vulgaris and Sturnus unicolor) stay open pending candidate reading. No evidence was written, as desk-screen.md point 5 requires.
 
 Read AGENTS.md, round4-harvest.md, THOROUGH.md, BRIEF.md, round3-sweep.md and desk-screen.md. Checked the interreceptor_deg canon entries and Sturnus evidence in the compilations in hand: no sampling-angle record was found. The relevant canon entries are Caves et al. 2018 (10.1016/j.tree.2018.03.001), Caves et al. 2024 (10.1242/jeb.246063; canon metadata says 2023), and Martin 2017, The sensory ecology of birds (not in hand). Existing Sturnus records report ganglion-cell acuity and retinal specialization, not photoreceptor sampling angle.
 
@@ -21,3 +21,9 @@ Candidate dispositions: Hart 1998 remains a measurement lead; Dolan and Fernánd
 Next: the oa intake should read the Bristol chapter and the already-wanted Hart/Martin sources; log any explicit measurement under the usual quote checks, then reassess the two open sampling-angle cells. No research access blocker remains; source reading is deferred by the screening protocol.
 
 Validation: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c2.jsonl --wanted docs/views/wanted/harvest-c2.jsonl` completed with `0 problems`. No builds, servers or self-tests ran.
+
+## 2026-10-27 coordinating-source review
+
+The coordinator opened the legal Bristol author-hosted chapter at https://www.bio.bris.ac.uk/research/behavior/PDF/EmmaSmith/thesischap6.pdf and inspected printed page 162 (PDF page 11), section 6.3.2. Its exact chapter heading is “Effect of repetitive visual stimuli on behaviour and plasma corticosterone of European starlings”. The passage estimates grating resolution from cone diameter and eye diameter, citing Hart 1998 and Martin 1986. It does not measure centre-to-centre photoreceptor spacing or an interreceptor angle. The provisional chapter wanted line was removed because the accessible passage cannot supply the requested measurement; the already-wanted Hart/Martin primary sources remain held without duplication. No evidence value was inferred from cone diameter.
+
+This bird batch follows round4-harvest's source-opening instruction; desk-screen's no-fetch/no-evidence restriction is specific to the screening lane and was applied too broadly in the initial worker note. The coordinator's source check resolves that scope issue for the new lead. Current retained round counts: 1 genus screened; 0 new wanted lines; 0 search/evidence records; 0 measured/exhausted cells; 2 cells awaiting existing primary-source readings. No PDF or paper text was saved in the repository.
