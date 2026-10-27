@@ -8,15 +8,4 @@ Gate: `screen_candidates.py --check` on the 37 search records and 9 wanted lines
 
 ## Verdicts (in progress)
 
-| Line | Record | Verdict |
-|---|---|---|
-| 1 | Armoracia sense_chemical | ok (draft) |
-| 2 | Bellardia diel | ok (draft) |
-| 5 | Bellardia sense_light_nonvisual | ok (draft) |
-| 6 | Eriophorum diel | ok (draft) |
-| 8 | Eriophorum sense_chemical | ok (draft) |
-| 10 | Desmanthus diel | ok (draft) |
-| 12 | Desmanthus sense_chemical | ok (draft) |
-| 15 | Sapindus sense_chemical | ok (draft) |
-
-Audit in progress; 18 WebSearches used so far.
+First draw drafted: errors at lines 20 (Helleborus sense_light_nonvisual: Herranz Ferrer et al. 2023, Acta Physiol Plant 45: 137, light-temperature requirements of H. foetidus germination) and 36 (Oncosiphon sense_chemical: Perez-Ochoa and de la Rosa, Cal-IPC 2019 poster, smoke raised stinknet germination). The other 18 drafted ok. 2 of 20, so the extension runs: `random.seed(8115)` over the 17 undrawn lines gives 13, 26, 24, 21, 16, 4, 27, 28, 17, 19, 9, 37, 7, 14, 32. 36 WebSearches used.
