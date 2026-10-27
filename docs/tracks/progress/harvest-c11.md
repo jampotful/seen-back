@@ -1021,3 +1021,40 @@ Eye response follows owner10(b): none for plants. The scanning-electron-microsco
 Mandatory real validator pending final checkpoint. Prior sunflower donor and Chenopodium taxonomy limits, legacy Hypochaeris encyclopedia-source caveat, conditional viable-leaf cupric elicitor applicability and all previous provenance persist.
 
 Worker14 final real mandatory gate printed **0 problems**. Parent confirmed shared c18 wanted10.1002/ece3.9157 expanded for Hypochaeris radicata and Achillea millefolium in commit8f4b794d, checked0problems. Adoption now has explicit shared wanted target metadata, not merely this progress note. No duplicate c11 line. Final own current86wanted/25searched; NEW32wanted/0searched/0evidence and3web-screened protocol-partial genera.17 untouched assigned genera remain, exact next **Packera**. All original wanted54/search25 line prefixes and previous progress content are preserved; only appended issue38 content changed. Stop at clean context boundary.
+
+
+## 2026-10-27 — issue38 worker17 Packera continuation
+
+NEW Packera available-web screen, protocol-partial;1 wanted lead,0 searched/0 evidence. Current87 wanted/25 searched. Prior23 completed genera and all old file prefixes preserved.16 remaining; exact next Cortaderia, then Nasturtium,Tecoma,Cosmos,Achillea,Mahonia,Apocynum,Bromus,Marchantia,Vachellia,Poa,Parkinsonia,Panicum,Artemisia,Polystichum,Ailanthus. OpenAlex429 round skip persists; no API rerun or null searched rows. No new service refusal. Source reading/API completion remain outstanding; no exhausted claim.
+
+Pre-query coverage: global evidence/corrected/wanted/searched and owner-status searched for Packera,ragwort,Senecio aureus/glabella and candidate title/DOI/URL. No named Packera measured source found. sweep22/23 thin legacy two-query records are preserved, not current protocol completion. Existing sweep22 wanted10.1660/062.122.0311 adopted only as an uncertain legacy lead: faculty publication list confirms article identity; the complete five-species abstract returned only through excluded ResearchGate search result lists Ageratina,Rudbeckia,Solidago,Aster,Eutrochium, no Packera. That excluded result is not source evidence and no silent old-line repair made; coordinator informed to review target applicability. Legal primary Deno1.pdf search snippet explicitly reports Senecio aureus light requirement; same source already wanted c17#16. Coordinator asked to add Packera aurea target metadata; no duplicate here. UGA Extension Native Plants for Georgia III snippet independently associates Packera aurea/syn Senecio aureus with light-enhanced germination, retained as corroborating lead, no measurement extracted. Packera glabella light-sowing advice in NativePlants.info is not an experiment; no numerical or congener carry invented.
+
+Required harvest_get.py and screen_candidates.py both explicitly report Packera absent. Canon checked through catalog and prior per-trait canon list; no in-hand named Packera source settles traits. Family alternative web search returned general plant/fungal/algal photoreceptor reviews, including10.1146/annurev-arplant-042809-112259 and10.1002/wmts.36, plus Asteraceae capitulum review10.1111/nph.19590; available snippets establish no target measurement. Eye pair general ocelli/focusing essays name no Packera;10(b) plant eye_type none, epidermal focusing belongs to light. Anthesis pair mostly seasonal native-plant pages and unrelated guava/rice hours, not Packera daily timing. Chemical pair returns Jacobaea vulgaris defensive-volatiles and Solidago communication, not Packera; alkaloid/tea extract profiling fails10(a). The legal2012 Packera tomentosa thesis and2014 journal work are one germination-study lead, preserved under10(e) despite unknown light/chemical treatment. No source/paper fetch, evidence, credential/proxy/TLS change, purchase or implementation edit.
+
+19 successful exact web queries below. Delivered title/snippet sets vary, no claim of20 per query. Tool output for first three-query batch was display-truncated and its raw response was not persisted, so unseen tail is explicitly unverified; no full result-exhaustion assertion. Subsequent raw responses retained in tool session and scratch exports where available. This is an available-web screen with that result-delivery limitation, not full protocol completion.
+
+- `web: Packera seed germination light dark`
+- `web: Packera germination gibberellin OR smoke OR dormancy`
+- `web: Packera floral scent volatiles`
+- `web: Packera flower opening time anthesis`
+- `web: golden ragwort flower opening time anthesis`
+- `web: Packera plant ocelli lens epidermal focusing eye`
+- `web: golden ragwort plant ocelli lens epidermal focusing eye`
+- `web: Packera chemical sensing volatiles`
+- `web: golden ragwort chemical sensing volatiles`
+- `web: Packera photoperiod phototropism light response`
+- `web: golden ragwort photoperiod phototropism light response`
+- `web: Asteraceae photoreceptor review`
+- `web: "Packera" germination light`
+- `web: "Packera" gibberellin jasmonate`
+- `web: "Packera" anthesis volatile`
+- `web: "Packera" "germination" study light`
+- `web: "Senecio aureus" germination light`
+- `web: "Effects of light levels on germination of five Asteraceae species"`
+- `web: "Cryptic seed heteromorphism" Packera -site:researchgate.net`
+- `web: "Senecio aureus" "Deno" light germination`
+
+Mandatory validator pending checkpoint.
+
+
+Worker17 Packera mandatory real validator printed **0 problems**; raw retained batches2–6 are /workspace/work/w17-c11/Packera-web{2,3,4,5,6}.json.
