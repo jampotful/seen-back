@@ -169,3 +169,11 @@ Passiflora completed: this worker1 genus,1 eye_type search record,5 wanted lines
 Cached history and required harvest/candidate tools confirm no Passiflora harvest in runs1-17,20,23,24. Family-review alternative10.1371/journal.pone.0187905 screened from snippets; its ocelli are nectary structures, not eyes. General epidermal focusing belongs under nonvisual light. Canon, corrected-first accepted-name-aware evidence, global searched/wanted and papers-status checked; old thin sweep-16 not accepted as full protocol. No source pages fetched/evidence written; no OpenAlex/MDPI/UChicago/SANBI calls. Unknown years remain null. Eye record adds2 queued cells, cumulative64. Remaining18 genera beginning Urena. Gate result follows before commit.
 
 Passiflora checkpoint gate printed `0 problems`; `git diff --check` passed before commit.
+
+### Urena checkpoint
+
+This worker now2 genera,2 eye_type search records,9 wanted lines,0 evidence/measurements; cumulative23 genera,24 search records,249 wanted lines,0 measurements. Urena adds4 targeted GA3/CCC, NaCl/herbicide, viable bud-rooting and daily anthesis leads. Existing sweep-43:6-7 light germination evidence preserved; same-source2014 request explicitly targets unresolved chemical response only. PROSEA and patent provenance limitations explicit. Extract chemistry, pharmacology and pyrolysis screened under10(a); no live response inferred from tissue chemistry.
+
+Twelve distinct web wordings recorded verbatim, including quoted species disambiguation after generic paired queries. Required tools confirm Urena absent from cached runs1-17,20,23,24; no API queries invented. Malvaceae family-review query found general photoreceptor reviews, no family-specific one. Canon, accepted-name-aware corrected-first main evidence, global wanted/search and paper-status checked; thin old searches not completion. No source pages fetched/evidence written, no OpenAlex/MDPI/UChicago/SANBI requests. Unknown years null. Eye record adds1 queued cell, cumulative65. Remaining17 genera beginning Campsis. Gate outcome follows before commit.
+
+Urena checkpoint gate printed `0 problems`; `git diff --check` passed before commit.
