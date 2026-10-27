@@ -1340,3 +1340,72 @@ Bungeanumcoldstress10.3389/fpls.2022.847202 quantifiesendogenoushormonesaftertem
 Worker37 checkpoint is between completedZanthoxylumchemicalwebscreen andentirelyunstartedGeranium. Allscreensstillprotocol-partial;35wantedleadsawaitintake; noactualmeasurementclosure/evidence. Requiredchecker,prefixvalidationandcommitfollow.
 
 Worker37 final validation: required screen_candidates checker printed **0 problems** at 296 wanted / 23 searched. All JSONL parses. Original 261 wanted lines and all 23 searched lines are byte-identical to e3eb1ddd; git diff --check passed. Only owned wanted/progress files changed; no evidence or paper assets. New rows now use known queue record counts where the exact species matches; ailanthoides is scoped to Neighbours only. Worker37 adds 35 wanted leads across two new protocol-partial web screens. Exact next genus: **Geranium**, entirely unstarted; seven remain.
+
+
+## 2026-10-27 — issue38 worker43: Geranium
+
+NEW: **Geranium one newly web-screened genus; +24 wanted, +0 searched, +0 evidence; cumulative320 wanted/23 searched. Protocol-partial**, with mandatory uncached OpenAlex steps skipped after the round-wide429, and no null/exhaustion claim. Preserve original97wanted/23searched baseline, prior18, Pilea/Centrosema adoptions and13new throughZanthoxylum. Current issue38 new screens become14 throughGeranium. **Six remain; exact next Lepidium**, thenMelothria,Commelina,Lygodium,Ludwigia,Monotropa.
+
+Read AGENTS.md first and worker guide/protocols, own prior checkpoints, canon and actual-species queue; preflight global wanted/searched, corrected-first accepted-name evidence and owner papers-status. Geranium has11 actual target species: robertianum,maculatum,pratense,sylvaticum,molle,dissectum,sanguineum,carolinianum,lucidum,sibiricum,pyrenaicum. Adopt pyrenaicum light recheck-codex-b-fixed#19 (10.1002/pld3.66); other species do not inherit physiological light/chemical/diel traits. main_evidence also displays harvest-15#3 robertianum partial light, but audit ALL#5227 retracts its paraphrased quote. No corrected-store replacement found; notified coordinator and preserved legacy files without repairing or treating it as secure closure. Previous harvest-1/6/15 and sweep-1 searches lack current paired web/germination coverage, so no thin-sweep completion adopted. Canon chemical plant-communication compilations and plant-photoreceptor/genomic reviews checked as metadata; no target plant-eye or physiological carry inferred.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded with currently documented authorized network mode. Geranium run1 holds **42 unique titles and all full stored abstract starts** (up to700characters), read in two works_of slices, no supplement/citation/family data and no failed step. Empty official open-trait display reflects old stored descriptor, not absence of current queue gaps. Successful historical queries, copied word-for-word:
+- `Geranium phytochrome photoreceptor`
+- `Geranium light perception`
+- `Geranium phototropism`
+
+Required10(e) searches first; then all four scientific/common-name trait pairs and Geraniaceae family-review alternative. **39 actual connected queries**, execution order:
+- `Geranium seed germination light dark`
+- `Geranium germination gibberellin OR smoke OR dormancy`
+- `Geranium floral scent volatiles`
+- `Geranium flower opening time anthesis`
+- `cranesbill flower opening time anthesis`
+- `Geranium volatile chemical hormone response`
+- `cranesbill volatile chemical hormone response`
+- `Geranium eye type lens-like epidermal cells`
+- `cranesbill eye type lens-like epidermal cells`
+- `Geranium light photoperiod phototropism`
+- `cranesbill light photoperiod phototropism`
+- `Geraniaceae photoreceptor review`
+- `"Geranium" "germination" "gibberellic"`
+- `"Geranium sanguineum" "Burger" "2021"`
+- `"Pollination adaptations of group-by-group stamen movement"`
+- `"Effect of Environmental Factors" "Carolina" "doi"`
+- `"Geranium" "seed" "germination" "maculatum" "light"`
+- `"Geranium" "seed" "germination" "pratense" gibberellin`
+- `"Geranium" "seed" "germination" "molle" light`
+- `"Geranium" "Physical dormancy in Geraniaceae seeds" DOI`
+- `"Some eco-physiological aspects of seed dormancy" DOI`
+- `"Germination ecology of eleven species" DOI`
+- `"Floral Cues of Non-host Plants" "headspace"`
+- `"Geranium carolinianum" "10.1017/wsc.2019.17"`
+- `"Geranium robertianum" "jasmonate" "tpc.16.00790"`
+- `"Geranium sylvaticum" "Kallio" "Piiroinen" "1959"`
+- `"Geranium" "273" "70225"`
+- `"Effect of gibberellin on the termination of dormancy in some seeds" Nature`
+- `"A combined physical and physiological dormancy" "light"`
+- `"Geranium pratense" "Experiment on seed germination and seedling growth"`
+- `"Pollination adaptations" "close" "15" "Geranium"`
+- `"Acquisition of physical dormancy" "doi"`
+- `"The autumn effect" "doi"`
+- `"Why do so many petals have conical epidermal cells" doi`
+- `"Experiment on seed germination and seedling growth of Geranium pratense" GA3`
+- `"Investigating the effects of temperature on seed germination of cutleaf geranium" -site:researchgate.net`
+- `"Geranium sylvaticum" "spores" "germination" journal`
+- `"Seed Germination Ecology and Dormancy Release" "Geranium macrorrhizum"`
+- `"Effects of canopy light gap and early emergence" Geranium`
+
+Read exposed titles/snippets and indexed original abstract/method passages only; no20-per-query claim. Initial combined display was clipped by tool-output budget; later multi-query outputs were retained in session store and omitted stretches recovered without repeating searches. These are web-screened leads, not a complete/exhausted protocol. No direct source/paper fetch, evidence, credentials/API/model fallback, proxy change or request to skipped services. OpenAlex429,MDPI429,UChicago403,SANBI403 skipped. Incidental indexed skipped-host results are search-engine output. ResearchGate,academia.edu,Scribd,documentsdelivered,commercial copies,librarycatalog/proxy andWikipedia results left unopened and unused as primary citations. Runtime environment skill read for supported networking; policy remains enforced/unrestricted and no runtime credentials configured. The earlier rejected mixed network/scratch-cache command was not retried or bypassed.
+
+**Adoptions without duplicate requests:** c10#167 (10.1017/wsc.2019.17) already requests2019 Florida germination ecology. Original Cambridge abstract independently confirms carolinianum light/dark treatments; intake must read that species as well as c10's Eleusine scope. c11#139 already requests Native/Underutilized Germination Ecology at mdpi2077-0472/15/20/2139. Original indexed text additionally names actual sanguineum/macrorrhizum zero germination under treatment protocols. Its hormone response candidates stay held even with zero response; no repeat row.
+
+**24 new source holds:**2018 organ-specific hormone paper for previously unlogged exogenous IAA/GA responses in robertianum/pyrenaicum (same source as existing light evidence; chemistry was not logged);2017 molecular-profile methyl-JA/lowR:FR study and2016 shade thesis in both species;carolinianum2018 light/dark trial and1974 dormancy study;robertianum2010 combined dormancy;2002 35-species physical dormancy survey;2006 eleven-species germination ecology;carolinianum2010water-gap,2011acquisition,2012autumn/dissectum and2013thermal dormancy studies;pratense2026germination;1959gibberellin source for sylvaticum;2026sylvaticum,2023pratense and2004robertianum BiologicalFlora reviews;pratense2021eveningclosure;congener sessiliflorum1985flowering observations;sanguineum2021floralheadspace;dissectum2023environmental germination and separate earlier cardinal-temperature trial;sylvaticum2015mycorrhizalspore germination;maculatumcanopy-gap study referenced by USFSreview.
+
+Mandatory10(e) germination/dormancy title holds kept even where indexed methods suggest physical/thermal rather than tested chemical/light cues. Seedcoat scarification, drying, water-gap anatomy and temperature alone are not chemical/light sensing. Fixed culture lighting, soil drought, endogenous hormones, seasonal emergence and flower lifespan in elapsed hours do not establish applied-cue/light experiments or diel timing. Actual1974 carolinianum darkness preference at high temperature and2018 lack of light effect must remain distinct by conditions/population. Sylvaticum1959 summaries differ:2026review says GA alone ineffective but acid+GA effective;1961Nature reference describes stimulation. Original1959paper needed; no invented reconciliation, response values or experiment species. Years/DOIs/authors absent from primary indexed metadata left null/empty. DOI suffix never treated as publicationyear.
+
+Diel: pratense original2021indexed passages explicitly describe evening closure (10.1016/j.pld.2021.04.001). Sessiliflorum1985 quarter-hour observations/afternoon stamen movement retained as congener lead only. Sylvaticum2013nectar and2017lifespan papers mainly compare developmental floral phases or elapsed hours; no daily clock inferred from them. Maculatum2015pollinator sex-ratio discrimination andmonths-onlybloom facts are not plant diel. Chemical: sanguineum2021source collects floral headspace from potted plants or cut inflorescences; actual target collection method needs verification before living-emission eligibility. Chemotaxonomic oils/extracts (purpureum,phaeum andotherGeranium), pharmaceutical effects and cut platypetalum leaves treated with GA fail10(a). Pelargonium hortorum/graveolens/CenturyRose stock/cultivar trials, despite vernacular geranium, are another genus and are not Geranium evidence. Insect antennal/behavioral responses alone do not establish plant perception.
+
+Eye: all plant eye_type none under10(b). Dark floral eyes/petalspots, trichome/stomatal/taxonomic anatomy, seedwatergap lens, other-taxon dinoflagellate ocelloids and animal eyes do not measure Geranium eyes. Conical-petal review10.1093/aob/mcr065 pictures procurrens but experimental functional comparison is Antirrhinum; no target focusing measurement inferred, no duplicate/background request. True epidermal focusing would belong underlight. Geraniaceae family-review search returned general photoreceptor/flower-optics reviews, no family physiological carry or completed missing API step.
+
+All24rows globally absent from wanted by DOI/normalized title (and distinct original sources where review getURL reused); no owner-status match. Existing light evidence for the2018 source was explicitly adopted above, with the new request scoped to unlogged chemical treatments. Known exact target queue record counts used; genericGeranium/congener sessiliflorum remain0. Original296wanted prefix and all23searched retained. Required checker/prefix validation and commit follow.
+
+Worker43 final validation: required checker **0 problems** at320wanted/23searched. JSONL parses; original296wanted prefix and all23searched bytes identical to bd8553ff; git diff --check passed. Only owned wanted/progress files edited; no paper assets or evidence. Context checkpoint between Geranium and entirely unstarted **Lepidium**; six remain.
