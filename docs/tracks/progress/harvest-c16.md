@@ -58,3 +58,23 @@ Web queries, in execution order:
 Germination search returned multiple direct fern spore light studies and a Dryopteris fragrans methyl-jasmonate response study (10.1186/s12870-026-09723-z), but those traits already have main evidence and were adopted. The remaining diel pair returned nonflowering fern descriptions and seasonal growth, not a measured daily rhythm. The eye pair returned taxonomic epidermal anatomy (10.1016/j.micron.2018.05.008), not focusing; eye_type follows the owner's plant-none reading. Harvest diel candidate 10.1111/j.1365-294x.2006.03051.x is a general phytochrome review with no Dryopteris daily-timing measurement in the abstract; eye candidate 10.1038/s41598-022-22157-5 measures spider eyes, not fern eyes. Chemical candidates were not used to declare a null because main already holds measurements. No wanted line added. No pages fetched, including the proxy-host result returned for an unrelated Drosera paper. OpenAlex skipped; no null rows written.
 
 Cumulative counts: 2 genera web-screened, 0 full protocol complete, 0 searched rows, 1 wanted line, 0 evidence rows. Remaining 38 unreviewed, next Clintonia.
+
+### Clintonia — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: genus in no harvest run. Checked canon catalog/effective main evidence and prior wanted files: no genus evidence or prior wanted lines found. Screened returned titles and the displayed result passages; longer secondary-page text beyond the displayed passage was not reviewed. No page fetch. The scientific and common names were paired for all four open queue traits. Exact web queries, in order:
+- `web: Clintonia seed germination light dark`
+- `web: Clintonia germination gibberellin OR smoke OR dormancy`
+- `web: Clintonia floral scent volatiles`
+- `web: "Clintonia" flower opening time anthesis`
+- `web: "bluebead lily" flower opening time anthesis`
+- `web: "Clintonia" eye type epidermal lens cells`
+- `web: "bluebead lily" eye type epidermal lens cells`
+- `web: "Clintonia" light perception phototropism germination`
+- `web: "bluebead lily" light perception phototropism germination`
+- `web: "Clintonia" chemical signalling volatile response`
+- `web: "bluebead lily" chemical signalling volatile response`
+- `web: Liliaceae photoreceptor review`
+
+Added the USDA species review (Meyer 2005) to wanted: its returned passage states a controlled sunlight/shade comparison and a day-length response of C. uniflora. The same result names the primary study Germination and growth of bird-dispersed plants: effects of seed size and light on seedling vigor and biomass allocation, attributed to Piper by the review; full bibliographic metadata remains to be read there. The germination searches also returned a C. udensis germination-time-course title on ResearchGate; that host was not opened or used to supply a DOI, author or year. Deno germination-book results named Clintonia but the supplied passage did not resolve its treatment/results. Those are remaining leads for the reader, not screened negatives. Fragrance/perfumery descriptions do not establish a measured living-plant signal; steroidal glycosides isolated from rhizomes and root extracts are tissue chemistry under owner point 10(a). Flower results give seasons, not anthesis hours; eye matches concern medicinal use or flora, not image-forming organs. Family-review results were broad plant-photoreceptor reviews (including the canon overview), not a Clintonia-specific measurement. OpenAlex required supplements/citation step skipped, so no null records.
+
+Cumulative counts: 3 genera web-screened, 0 full protocol complete, 0 searched rows, 2 wanted lines, 0 evidence rows. Remaining 37 unreviewed, next Dicentra.
