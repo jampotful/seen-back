@@ -819,3 +819,56 @@ Eye_type follows10(b): none for plants; Ficus ostiole “eye” is a fruit apert
 Other cached/web hits: Opuntia ficus-indica CAM/anthesis/GA studies are cactus-genus word collisions, not Ficus; Camellia,maize,chrysanthemum,coffee and Arabidopsis clocks are other taxa. Fruit nutritional fingerprints, dried-fruit volatiles, distilled/methanol extracts, human/cancer/mouse assays fail10(a). Ficus bubu extract collection timing is tissue chemistry, not target daily flower opening. F.septica JA/isoprene, F.hispida/sur/sycomorus/semicordata living scent and pollination studies are real congener context, not F.carica measurements; direct target sources prioritized. Pollinator entry timing and seasonal syconium phenology are not inferred as flower-opening hours. Fixed incubation photoperiods alone are not responses.
 
 Checkpoint: Ficus available-source web screen complete, full protocol partial because OpenAlex is unavailable; zero new searched rows. Asparagus fully adopted. Remaining authorized research20 genera: Lespedeza,Salix,Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. Lespedeza10(e) first pair started immediately after Ficus; remaining pairs/candidate screen next. No new service or quota refusal.
+
+## 2026-10-27 — issue38 worker15: Lespedeza checkpoint
+
+This issue38 worker now2 newly web-screened genera(Ficus,Lespedeza),29 new wanted,0 searched,0 evidence; current totals16 searched/140 wanted. Prior18+new2=20/40 web-screened, plus Asparagus fully adopted=21 covered for this dispatch. Remaining authorized research19, next Salix. Available-source desk screening completed for the two new genera, but neither full protocol/exhaustion claimed because live OpenAlex remains skipped after round429. No null row is written for eye/chemical/light while mandatory API steps are unavailable or plausible leads remain.
+
+Lespedeza diel adopted from sweep-20#4(abstract review, no promotion to full text). Ran required harvest_get and screen_candidates; read105 distinct cached returned titles/abstract starts, including all15 Fabaceae-review items and both zero-hit citation chases(cites10.3389/fpls.2015.00207 and10.1016/j.tree.2009.09.010). Cached primary chemical leaf-movement titles and target Al/P and neighbour-response studies were considered even though tool chemical keywords do not match them. Scratch provenance work/w15-c12/Lespedeza.json,Lespedeza-all.txt,Lespedeza-web1..7.json. All delivered web titles/snippets read, up to first20 per query where returned; no assertion that a query returned20.
+
+Successful cached queries in order:
+- `Lespedeza phytochrome photoreceptor`
+- `Lespedeza light perception`
+- `Lespedeza phototropism`
+- `Lespedeza volatile signalling`
+- `Lespedeza photoperiod`
+- `Lespedeza circadian rhythm`
+- `Lespedeza epidermal lens cells`
+- `Lespedeza epidermal focusing leaf optics`
+- `Fabaceae photoreceptor review`
+
+Exact web queries(10e first pair precedes all other trait searches):
+- `web: Lespedeza seed germination light dark`
+- `web: Lespedeza germination gibberellin OR smoke OR dormancy`
+- `web: Lespedeza floral scent volatiles`
+- `web: bush clover floral scent volatiles`
+- `web: Lespedeza light photoperiod phototropism`
+- `web: bush clover light photoperiod phototropism`
+- `web: Lespedeza eye type epidermal focusing`
+- `web: bush clover eye type epidermal focusing`
+- `web: "Lespedeza cuneata" "lespedezate"`
+- `web: "Effects of Photoperiods on Plant Growth, Flowering, Seed Production"`
+- `web: "Plant neighbours, not consumers" "Lespedeza"`
+- `web: "Lespedeza cuneata" "germination" "light" study`
+- `web: "Lespedeza capitata" "germination" "light"`
+- `web: "Effects of smoke, heat, darkness and cold stratification"`
+- `web: "Lespedeza" "leaf-movement" "1997"`
+- `web: "Joan M. Young" "Lespedeza" germination`
+- `web: "Studies of inheritance, photoperiodic response"`
+- `web: "Lespedeza cuneata" "leaf-movement" "Tetrahedron Letters"`
+- `web: "Phosphorus Enhances Al Resistance"`
+- `web: "Young" "2000" "Sericea" "germination" thesis`
+- `web: "Studies of inheritance, photoperiodic response, and determination" Lespedeza`
+- `web: "Targeting Vulnerable Life-Stages" Lespedeza`
+
+Eleven new wanted: target L.cuneata1955 photoperiod article and1953 thesis;1997/1998 chemical leaf-movement papers and1998 enzymatic companion(living bioassay requires verification);2008 living hydroponic Al/P response;2025 L.capitata neighbour/consumer factorial study with explicit cue-attribution fork;2014 forage germination,2012 burn/germination,Young2000 thesis and newly indexed L.capitata cold-stratification paper. Germination titles are retained under10(e) even where the visible result concerns temperature/cold; no fixed lighting is called sensing. New sources normalized-title/DOI checked against global wanted/evidence/corrected/status, no duplicate/n/a. Unknown metadata blank/null. Strong source links use legal primary/institutional pages; no ResearchGate/academia/encyclopedia text fetched or used as evidence.
+
+Shared source: wanted/harvest-c8#123(title Germination Characteristics and Maturity by Production Time of Chamaecrista nomame,Lespedeza cuneata and Lespedeza bicolor Seed in Fabaceae Plant) expressly includes target L.cuneata. Exact first query returned Korean institutional citation https://koreantk.com/ktkp2014/thesis/thesis-view.view?ctrlNo=JOSMBA_2014_v27n4_359 (Kang/Yi/Song2014). Parent routed to active owner w11_c8, who confirmed expanding c8#123 to L.cuneata only. Adopted without duplicate or c8 edit; species title supports germination lead only, no light/chemical contrast visible.
+
+Verifiable legacy finding, preserved untouched: wanted/harvest-26.jsonl:4 DOI10.1104/pp.27.3.644 lists for L.cuneata/L.capitata although its own why and cached primary abstract name former L.stipulacea/L.striata. Exact queries `Lespedeza light photoperiod phototropism`/`bush clover light photoperiod phototropism` returned primary PDF https://academic.oup.com/plphys/article-pdf/27/3/644/35711012/plphys_v27_3_644.pdf whose indexed experiment description names those two species. Then `Lespedeza eye type epidermal focusing` returned https://extension.umd.edu/resource/lespedeza-identification-and-management : Japanese/common lespedeza is Kummerowia striata(formerly L.striata), Korean lespedeza is Kummerowia stipulacea(formerly L.stipulacea). Independent UGA primary extension result https://fieldreport.caes.uga.edu/publications/B1395/lespedeza-identification-and-control-in-turfgrass/ explicitly identifies common lespedeza as Kummerowia striata(syn.Lespedeza striata). These indexed snippets substantiate accepted-name/taxon mismatch; parent informed for findings, no legacy repair or misleading adoption. Cached1968/1969 Korean/annual-lespedeza studies likewise concern the renamed species, not queued cuneata/capitata.
+
+Other dispositions: tea-processing volatiles, distilled essential oils, dried/extracted metabolites, mouthwash, human hair/skin, zebrafish nanoparticle assays and ruminant methane/nutrition do not show living target plant chemical sensing10(a). Magnolia-oil rat aorta,Lamiophlomis/Mimosa/Swartzia/Desmodium/Cuscuta/Thesium studies are other taxa. L.capitata metabolomic thesis abstract gives chemistry/biosynthesis background but no manipulated living cue; not assumed a signalling measurement. L.davurica/Bicolor microbial growth work is congener context with cue attribution unresolved, not target measurement.2026 leaf-movement review focuses Samanea in its indexed abstract; direct target primary sources prioritized. General phytochrome/legume flowering reviews provide citation context only.
+
+Eye searches return leaf epidermal taxonomy/micromorphology, pubescence, morphology and metaphorical “eye”, not image-forming eyes. Lespedeza micromorphology2014 describes cuticle/stomata/hairs and gentle surfaces without focusing; no actual focusing lead identified. Owner10(b) eye_type none; any epidermal focusing would belong under light. No eye null due unavailable mandatory steps. Diel re-search was omitted because substantive sweep-20#4 is adopted.
+
+Remaining19 in authorized order: Salix,Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. Salix mandatory tool retrieval started for next entry; no Salix web query yet. No new service/quota refusal.
