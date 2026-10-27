@@ -1288,3 +1288,55 @@ Diel: originalPubMedabstract10.1007/BF00193995 namesHoya,Stephanotis,Odontogloss
 Worker37 Ligustrum validation follows; only own wanted/progress paths edited, no paper assets/evidence.
 
 Worker37 Ligustrum validation: required checker printed **0 problems** at277wanted/23searched. JSONL parses; first261wanted lines and all23searched byte-identical toe3eb1ddd; git diff --check passed. Only owned wanted/progress files changed.
+
+
+## 2026-10-27 — issue38 worker37: Zanthoxylum chemical remainder and context checkpoint
+
+NEW this entry: **Zanthoxylum chemical remainder only; +19 wanted,+0 searched,+0 evidence. Worker37 total: Ligustrum/Zanthoxylum2 newly web-screened genera,35wanted added,0searched/evidence; c8 actual296wanted/23searched.** Protocol-partial because mandatory uncachedOpenAlex steps remain skipped after round-wide429; no null searched records or exhaustion claims. **7 remain; exact next Geranium**, thenLepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Geranium entirely unstarted; stop between genera at context boundary. Prior first18,Pilea/Centrosema adoptions and eleven screens throughNandina preserved; currentnew screens become13throughZanthoxylum. Baseline97wanted/23searched, original261handoffprefix, and allprevious progress retained.
+
+Preflight re-read external-3#1–3 and corrected-first accepted-name main_evidence, globalwanted/searched, queue and ownerpapers-status. Actual target **Z.clava-herculis**. **Adopt external-3 diel/eye/light screens without repeating their pairs** as directed by coordinator. Existing external-3#1/recheck-codex-b-fixed#12chemical evidence isbungeanum ethylene,partial; physiologicalchemicaltraits cannot carry frombungeanum toclava-herculis. sweep-100#38's thin combinedscreen andoldcold-hormonepaper do not resolve targetchemical. No existingtargetchemicalevidence/globalwanted source before screen; noownern/asource re-request. CanonchemicalTable1/metaanalysis and plantgenomicschecked/adopted: no acceptedtargetcue finding orplant-eyephysiology inferred.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded using current supported authorized network: **Zanthoxylum in no harvest run yet/not inharvest**. No successfulzero-hitAPIsearch implied. SkippedOpenAlex429,MDPI429,UChicago403,SANBI403; no new refusal,requests tothese services, directpaper/pagefetch,evidence,credential/API fallback,proxychange,operationaledit orpermissionrequest. Earlier mixednetwork/scratch-cache refusal not retried/bypassed. Incidentalindexedresults fromskippedhosts belongtosearchengineoutputs.
+
+Required10(e) searches first, scientific/commonchemicalpair and family-reviewalternative, then exacttarget/synonym andsource/method clarifications: **27 actualconnectedqueries**, exactexecutionorder:
+- `Zanthoxylum seed germination light dark`
+- `Zanthoxylum germination gibberellin OR smoke OR dormancy`
+- `Zanthoxylum jasmonate herbivore`
+- `Zanthoxylum volatile chemical hormone response`
+- `prickly ash volatile chemical hormone response`
+- `Rutaceae photoreceptor review`
+- `"Zanthoxylum clava-herculis" germination gibberellin chemical`
+- `"Zanthoxylum clava-herculis" hormone ethylene jasmonate response`
+- `"Zanthoxylum clava-herculis" seed germination treatment`
+- `"Fagara clava-herculis" germination hormone`
+- `"Zanthoxylum clava-herculis" "volatile" living`
+- `"GERMINATION RESPONSE OF ZANTHOXYLUM CAPENSE" DOI`
+- `"Exogenous gibberellin weakens lipid breakdown" DOI species`
+- `"Proteomic analysis of Zanthoxylum nitidum seeds dormancy release" doi`
+- `"Influence of pre-sowing treatments" "Timroo" doi`
+- `"Transcriptome Analysis" "Zanthoxylum Seeds" "bungeanum"`
+- `"Effects of Scarification, Phytohormones" "Zanthoxylum"`
+- `"Exogenous methyl jasmonate induces CHS" "10.1016"`
+- `"Monoterpene synthases contribute" "10."`
+- `"Effects of Different Compound Treatments" "Zanthoxylum"`
+- `"Fruit and Seeds Development and Seed Germination of Andaliman Pepper"`
+- `"What is the cause of low seed germination of Zanthoxylum rhoifolium"`
+- `"Seed germination methods for native Caribbean"`
+- `"Monoterpene synthases contribute" "cultivation" "volatile"`
+- `"Effects of substrate and pre-sowing treatment on Fagara"`
+- `"Investigation on the Germination of Zanthoxylum gilletii"`
+- `"Fruit Development and Seed Physiological Maturity of Andaliman"`
+
+Read every exposed title/snippet andindexedoriginal-sourcepassage atactualdeliveredextent; no20-per-queryclaim. No directsourcefetch. Some snippets include originalabstracts/methods; these remainsearchresults,notintakeevidence. Search output included unauthorized/opportunisticcopy,ResearchGate,Scribd,Wikipedia andonelegcatlibrarymirror; all leftunopened andnotprimarysources. Unknown DOI/year/authors remainblank/null. FreshglobalDOI/Unicode-normalizedexacttitle/URLdedupe found0matchesfor19newrows andnoownerstatusmatch; existingmanualsource adoptedbelow.
+
+**Targetchemical remainsunresolved.** OriginalUSFSWoodyPlantSeedManual (existingc14#91,alreadyadoptedforLigustrum) explicitly describesclava-herculis seedcoatdormancy andsulfuricacidscarification withalternatingtemperaturegermination. This is physicalcoatremoval,notdemonstratedchemical-cueperception; keep10(e)originalrecoveryholdviatheexistingmanual,notduplicatebookrow. NewWageningen2014Caribbeangerminationreport explicitlylistsclava-herculis,coriaceum,fagara; requestedfororiginalreferences/methods,notafalsehormoneresponse. Fagaraclava-herculis synonymconfirmedbyoriginalKew/NCextensionmetadata; synonymquerysurfacednorelevanttargethormonetrial. Retailseedsoakingadvice,medicinalbarkusages,treecatalogues andtissueterms arenotexperiments. Targetleaf/barkessentialoils,seasonalGC-MSprofile,herculinisolation,MRSAandcattletoxicity all fail10(a);Papiliocresphontesantennalresponsesuseessentialoilsandexaminebutterflysensing,notlivingtargetplantemission orcueperception. Noabsenceconclusionorwholegenuschemicalclosure.
+
+**Nineteennewsourceleads:**capense2015light/darkandGA;2017shellremoval/exogenousGAand2019lipidbreakdownGA10.1016/j.plantsci.2018.08.013 (exactspeciesunresolved,notassumedbungeanum);nitidum2018GAproteomics and2023germination10.1080/15592324.2023.2251750 (the2023studyprofilesendogenoushormonesunderfixedphotoperiod,whichalonecountsneitherchemicalnortestedlightsensing);armatum2017GA/kinetin10.1016/j.jarmap.2017.06.004,2024IAAgermination and2026temperaturestratification/metabolomics;acanthopodium2026seedtreatment/germination and2023fruit/seedmaturity;piperitum1997GA/kinetin;fagara2021phytohormones10.3390/plants10081489 and2022combinedGA/IBA/acid/stratification;rhoifolium2022dormancy;zanthoxyloidespresowing/substrates;gilletii2011NaOHwashing/temperature10.1007/978-90-481-2543-2_69;Caribbean2014report; bungeanumexogenousMeJA10.1016/j.indcrop.2024.119682 (publicationyearunresolved,DOIsuffixnotyear);ailanthoides2023monoterpenes/cultivationmethods (attachedlivingemission orappliedcueversusdetachedtissue/recombinantassays unresolved). Allcongenersremainseparatefromtarget.
+
+Mandatory10(e)germination/dormancytitleholdsretainedratherthan screenedout forfixedculturelighting,seedmaturity,seedcoatoil/acidwashing,thermalstratification orendogenoushormonechemistry; noneofthosealoneisclaimedassensing. NearzerofagaragerminationafterGA/IBA stillidentifiesatestedcue/source,notanunsearchedabsence. CompanionUTRGVthesisabstractandshortergilletiiSEKUrecord535sharethepaper/chapterwork; adoptwithoutadditionalduplicatefile. Physicalscarificationitselfnotgradedchemical. HormoneMeJA,GA,IAA,kinetinresponsesmaycount10(d)onlyinactualexperimentalspeciesandlivingmaterial.
+
+Bungeanumcoldstress10.3389/fpls.2022.847202 quantifiesendogenoushormonesaftertemperature,notanappliedchemicalcue;existingthinsearchdoesnotturnthatintotargetevidence. Driedfruitflavor,pericarpoil,alkylamidehumanpungency,ratanxietyHPAaxis andelectronicnoseresponsesarenotplantchemicalperception. Ailanthoidesmonoterpenesourceheldformethodclarification,nomeasurementorheadspacecollectioninvented. FamilyreviewqueryreturnsRutaceaetaxonomy/generalplantphotoreceptorreviews,insectcolorvision andchemicalpharmacology,notatargetphysiologicalcarry.
+
+Worker37 checkpoint is between completedZanthoxylumchemicalwebscreen andentirelyunstartedGeranium. Allscreensstillprotocol-partial;35wantedleadsawaitintake; noactualmeasurementclosure/evidence. Requiredchecker,prefixvalidationandcommitfollow.
+
+Worker37 final validation: required screen_candidates checker printed **0 problems** at 296 wanted / 23 searched. All JSONL parses. Original 261 wanted lines and all 23 searched lines are byte-identical to e3eb1ddd; git diff --check passed. Only owned wanted/progress files changed; no evidence or paper assets. New rows now use known queue record counts where the exact species matches; ailanthoides is scoped to Neighbours only. Worker37 adds 35 wanted leads across two new protocol-partial web screens. Exact next genus: **Geranium**, entirely unstarted; seven remain.
