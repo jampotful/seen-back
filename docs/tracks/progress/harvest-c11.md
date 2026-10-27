@@ -2,7 +2,7 @@
 
 ## TOP/current — 2026-10-27
 
-Cumulative **18 of40 genera screened,22 search records,146 wanted,0 evidence/0 measured cells**. **22 remain; next Vinca**. Worker46 adds **1 genus,1 search,2 wanted,14 successful web queries,0 evidence**. Dioscorea screening is partial in conclusion: target germination sources await reading; chemical-study species lists and daily timing remain unresolved, with no physiological null. Prior source/taxonomy/donor limitations below persist.
+Cumulative **19 of40 genera screened,23 search records,150 wanted,0 evidence/0 measured cells**. **21 remain; next Lobelia**. Worker46 adds **2 genera,2 searches,6 wanted,34 successful web queries,0 evidence**. Dioscorea chemical/diel applicability and Vinca source/taxon applicability remain unresolved; no physiological null. Prior taxonomy/donor/service limitations below persist.
 
 ## 2026-10-27 — round 28
 
@@ -803,3 +803,51 @@ Chemical exclusions:10.1002/bmc.3019 steroidal fingerprinting,10.1021/np300603z 
 Raw successful responses: work/harvest-c11/Dioscorea-web1–5.json. No access/quota refusal. Earlier Chenopodium taxonomy, sunflower living-disk donor and all previous protocol limitations remain unchanged. Required real validator pending before commit; next Vinca.
 
 Worker46 Dioscorea real gate printed **0 problems**. All14 web queries succeeded;2 wanted/1 search added. Commit checkpoint before Vinca dispositions.
+
+## 2026-10-27 — worker46 Vinca continuation
+
+Adds1 genus screened,1 eye_type search,4 wanted,20 successful web queries,0 evidence/0 measured cells. Worker46 cumulative2 genera/2 searches/6 wanted/34 web queries. Batch19 genera/23 searches/150 wanted/0 evidence;21 remain,next Lobelia. Dioscorea checkpoint committed ed8793d0 after real gate0 problems.
+
+Required harvest_get.py and screen_candidates.py executed; both Vinca absent, no cached genus queries or works. Their shell combined command returned1 only because the final rg found no genus evidence/wanted/status match, not a failed harvest query. Existing sweep-6 thin two-query record is preserved and not used as completed protocol. Original queue V.minor and V.major have all four gaps (minor40928 records, major28461); global actual/corrected evidence/wanted/papers-status checked by genus and all four retained exact title/URL fragments, no duplicate or n/a request found. Canon catalog checked; no in-hand named Vinca plant compilation. All unknown publication years null and authors blank; no DOI invented from an unverified identifier.
+
+Exact queries in executed order:
+- `web: Vinca seed germination light dark`
+- `web: Vinca germination gibberellin OR smoke OR dormancy`
+- `web: Vinca floral scent volatiles`
+- `web: Vinca flower opening time anthesis`
+- `web: lesser periwinkle OR greater periwinkle flower opening time anthesis`
+- `web: Vinca plant ocelli lens epidermal focusing eye`
+- `web: lesser periwinkle OR greater periwinkle plant ocelli lens epidermal focusing eye`
+- `web: Vinca minor OR Vinca major chemical sensing volatiles`
+- `web: lesser periwinkle OR greater periwinkle chemical sensing volatiles`
+- `web: Vinca minor OR Vinca major photoperiod phototropism light response`
+- `web: lesser periwinkle OR greater periwinkle photoperiod phototropism light response`
+- `web: Vinca minor Vinca major seed germination light dark`
+- `web: lesser periwinkle greater periwinkle germination gibberellin OR smoke OR dormancy`
+- `web: Apocynaceae photoreceptor review`
+- `web: Vinca photoperiod phototropism light response`
+- `web: Vinca minor germination gibberellin OR smoke OR dormancy`
+- `web: lesser periwinkle methyl jasmonate growth regulator`
+- `web: Vinca minor light shade photosynthesis`
+- `web: Vinca major light shade photosynthesis`
+- `web: Vinca major auxin rooting growth regulator`
+
+The original broad Vinca/germination and common-name searches are dominated by Catharanthus roseus, historically Vinca rosea/annual vinca. Targeted minor/major germination, light intensity and hormone trait searches were therefore necessary to resolve taxonomic ambiguity, not additional generic background. Every executed query is listed. All20 succeeded; all returned result titles/snippets read, variable counts rather than assumed20 per search. No source/fullpaper page opened. No live OpenAlex/MDPI/UChicago/SANBI, paid API, evidence, gates or branch changes.
+
+Four wanted leads/provenance:
+- Optimization of Hormonal Combinations for In Vitro Regeneration of Lesser Periwinkle (Vinca minor L.) and Assessment of Genetic Homogeneity; https://agris.fao.org/search/en/providers/122535/records/65df72ce0f3e94b9e5d87e8e. Indexed abstract explicitly compares applied plant growth regulator combinations on direct regeneration of living axillary/lateral V.minor buds. Target the hormone-response experiment under10(d), rather than extracted alkaloid chemistry; verify treatment/dose and measured shoot/root response in original. Query `web: lesser periwinkle methyl jasmonate growth regulator`.
+- Xanthophyll Cycle Pigment Localization and Dynamics during Exposure to Low Temperatures and Light Stress in Vinca major; https://pmc.ncbi.nlm.nih.gov/articles/PMC59310/. Returned primary abstract compares V.major before/during/after photoinhibitory treatment and sun-grown versus low-light plants, measuring xanthophyll pigment complexes. Target the named-species acclimation and light-treatment response; field occurrence in shade alone would not suffice. Query `web: Vinca major light shade photosynthesis`.
+- Terrestrial and Floating Aquatic Plants Differ in Acclimation to Light Environment; https://pmc.ncbi.nlm.nih.gov/articles/PMC10224479/. Returned figure caption explicitly names V.major leaves in diurnal time series of incident light, photochemical use, electron transport and non-photochemical quenching. Read the species-specific sun/shade light response and daytime trajectory, checking whether the original primary studies are needed. Do not infer an endogenous circadian clock from environmental daytime variation. Query `web: Vinca major light shade photosynthesis`.
+- Response of Photosynthesis to Light; https://educons.edu.rs/wp-content/uploads/2020/05/2008-Plant-Physiological-Ecology.pdf. The indexed Plant Physiological Ecology chapter names V.minor in a comparison of zeaxanthin, violaxanthin and antheraxanthin upon acclimation to different light levels. Target that named species figure and its cited original experiment, not generic shade tolerance. Author/year/edition not verified from returned text; filename alone is not publication metadata. Query `web: lesser periwinkle OR greater periwinkle photoperiod phototropism light response`.
+
+V.minor direct bud regeneration tests applied growth regulators and is a living-response chemical candidate under10(d); do not confuse with Catharanthus cell culture or removed-tissue extraction. V.major xanthophyll studies explicitly compare illumination and recovery. The terrestrial/aquatic acclimation work contains species-specific diurnal photosynthetic measurements; it is retained for light and diel reading but does not establish an endogenous clock. V.minor book figure names pigment acclimation to illumination; read and follow its primary citation. No physiology trait is called exhausted while these candidates remain.
+
+The indoor/outdoor Vinca morphology work PMC8064346 places minor/herbacea outdoors in shade and major/variegata in a greenhouse, confounding species with environment. Its snippets do not demonstrate a controlled light-response comparison, so it is not requested as light evidence; epidermal/stomatal description is screened for eye_type. General sun/shade gardening tolerance is not a new experimental lead. USDA FEIS Vinca review explicitly reports common-periwinkle germination after acid scarification plus90-day cold stratification and cites reference110; source identity and a genuine light/hormone trial remain unverified. Chemical scarification by itself is not taken as sensing. A returned index title The Effect of Growth Stimulators on the Germination of Vinca major L. describes rooting/survival of cuttings but appears only at arxiv.universalpublishings.com, an unverified index; no reliable primary journal citation or treatment identity was returned, so no speculative wanted line or V.major chemical null. MSU extension table lists V.major rooting-hormone benefit; it is a route to experimental provenance, not a new read measurement. These limits need source-reader follow-up.
+
+Daily opening results for actual Vinca are seasonal flora/garden dates, not clock hours. Guava/grape anthesis, Vigna hypocotyl light response, waterlily-cultivar timings and Boquila leaf mimicry are other genera. Catharanthus pollination10.1080/14620316.2004.11511841, annual-vinca irradiation/GA3 seed trials, UGA commercial-vinca lighting recommendations and Catharanthus applied MeJA/auxin studies are excluded from target wanted requests. The V.major daily photosynthesis lead keeps diel out of null; V.minor daily timing is still unmeasured and no species carry is claimed.
+
+Volatile oils/n-hexane extracts of V.major hirsuta (Dergipark1685115), herbacea/soneri oil and phenolics (Dergipark464266),14 extracted V.minor alkaloids10.1002/pca.2800020206 and isolated floral anthocyanins are tissue chemistry under10(a). V.minor transporter studyPMID28478314 functionally characterizes alkaloid efflux in yeast and surface secretion; no airborne cue-response or living signal test is stated. Generic VOC/MeJA reviews and Apocynaceae phytochemistry reviews do not establish a target measurement. Family review results also include Rhazya phytochrome gene prediction, which is neither Vinca nor a measured physiological response.
+
+Raw search responses work/harvest-c11/Vinca-web1–6.json. No actual access/quota refusal. Previous Dioscorea and batch limitations preserved. Required validator pending before commit; next Lobelia.
+
+Worker46 Vinca required final gate printed **0 problems**.20 successful queries/4wanted/1eye search; no source access or quota refusal. Commit checkpoint before Lobelia dispositions.
