@@ -98,3 +98,23 @@ Ran harvest_get.py and screen_candidates.py: in no harvest run. Checked canon ca
 Added the publisher-title lead on supplemental irradiance and STS in potted Dicentra species. Its reader must resolve species identity; the title alone does not establish which current Dicentra species was measured. Year is 0 (unset), authors/journal/DOI empty because search did not supply them. The D. spectabilis GA3 and photoperiod leads concern a former Dicentra now named Lamprocapnos spectabilis (confirmed by University of Wisconsin/Vermont extension search snippets); they do not establish a measurement for current Dicentra. The Dicentra chrysantha smoke title appeared only at ResearchGate; that host was not opened or used to supply metadata. Germination-book snippets name Dicentra but do not identify a measured species or the experiment; retained as unresolved leads, not screened negatives. Dutchman's breeches also names Thamnosma texana in a Texas source, so its scent/toxicity results were excluded from Dicentra. Extract pharmacology/animal analgesic responses do not satisfy living-plant sense_chemical. Anthesis results were seasonal flowering descriptions. Papaveraceae review search returned Papaver colour/reflectance work and broad photoreceptor reviews, not a Dicentra measurement. Owner plant-eye-none reading applies. OpenAlex steps skipped; no null rows.
 
 Cumulative counts: 4 genera web-screened, 0 full protocol complete, 0 searched rows, 3 wanted lines, 0 evidence rows. Remaining 36 unreviewed, next Struthiopteris.
+
+### Struthiopteris — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: in no harvest run. Canon catalog, effective main evidence, earlier wanted and owner status checked, including Blechnum spicant spelling; no existing coverage/request located for the two leads. Exact web queries in order; returned titles/displayed passages screened, no page fetch:
+- `web: Struthiopteris seed germination light dark`
+- `web: Struthiopteris germination gibberellin OR smoke OR dormancy`
+- `web: Struthiopteris jasmonate herbivore`
+- `web: "Struthiopteris" flower opening time anthesis`
+- `web: "deer fern" flower opening time anthesis`
+- `web: "Struthiopteris" eye type epidermal lens cells`
+- `web: "deer fern" eye type epidermal lens cells`
+- `web: ("Struthiopteris" OR "Blechnum spicant") light perception phototropism`
+- `web: "deer fern" light perception phototropism`
+- `web: ("Struthiopteris" OR "Blechnum spicant") chemical signalling volatile response`
+- `web: "deer fern" chemical signalling volatile response`
+- `web: Blechnaceae photoreceptor review`
+
+The first germination searches mostly matched the epithet in Matteuccia struthiopteris, which is a different genus and does not cover Struthiopteris. Added Blechnum spicant to the required scientific-name trait pair after the deer-fern results supplied that older spelling. This located the direct light-intensity productivity experiment (10.1186/s12870-024-04782-6) and antheridiogen response experiment (10.1002/pmic.201300166); both are wanted, and both traits are held. The light paper's explicit publication year was not displayed, so year 0 is an unset sentinel, not a date estimate. A fern-volatiles composition study (10.1177/1934578X1000501028) did not expose whether it sampled living emissions or tissue extracts; the direct antheridiogen receiver test is the confirmed chemical lead. A field-gametophyte thesis snippet says B. spicant spores are photoblastic; retained as another unresolved light lead at https://era.ed.ac.uk/server/api/core/bitstreams/f655297b-360f-4ea3-8be1-3e03b5a0caa9/content without inventing author/year. Diel results show nonflowering ferns/seasonal growth; eye results provide no image-forming organ, with plant eye_type none under owner rule. Family query returned broad reviews and other Blechnum species, not an additional direct current-genus source. OpenAlex skipped; no null rows.
+
+Cumulative counts: 5 genera web-screened, 0 full protocol complete, 0 searched rows, 5 wanted lines, 0 evidence rows. Remaining 35 unreviewed, next Centranthus.
