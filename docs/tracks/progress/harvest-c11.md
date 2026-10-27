@@ -653,3 +653,57 @@ Full stored-abstract tail check also found a direct elicitor intervention in the
 Chenopodium1974 rhythm-lead year normalized to null: the title/index key indicates historical provenance but no explicit usable publication-year field was shown. Historical C.rubrum identity remains pending current taxonomic-scope verification; it is not claimed as a validated C.album/congener measurement. No evidence or legacy records changed.
 
 Final worker30 validation `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems** after the thirteenth Helianthus lead. Worker30 final **3 genera,3 search records,27 wanted leads,0 evidence/0 measured cells,33 successful web queries**. Batch cumulative **15 genera,19 searches,130 wanted,0 evidence**. Stop between genera for fresh-context continuation: **25 remain**, resume **Arundo**, then Sorghum onward in exact assignment order. No tool quota refusal or new service refusal. Skipped round-refused OpenAlex/MDPI/UChicago/SANBI throughout; no primary-paper pages fetched. No pending candidate trait called exhausted.
+
+## 2026-10-27 — worker39 continuation
+
+### Arundo
+
+Adds **1 genus screened,1 search record,5 wanted leads,0 evidence/0 measured cells**. Worker39 cumulative **1 genus,1 search,5 wanted,12 successful web queries**. Batch cumulative **16 genera,20 searches,135 wanted,0 evidence**; **24 remain**, next Sorghum. Prior worker30 completed through Helianthus; its Chenopodium C.rubrum taxonomy and sunflower flower-disk living-donor uncertainties remain unchanged.
+
+Read AGENTS.md, round28-worker-guide including service status/scope, round4-harvest, THOROUGH, full BRIEF including Round2, round3-sweep, desk-screen1–10 including10(e), and audit53/54 findings. Used cloud-environment runtime instructions and checked enforced unrestricted network readiness. No app work, branch changes, gates, evidence writes, or paper-page fetches. No OpenAlex/MDPI/UChicago/SANBI source requests. Required harvest_get/screen_candidates aids executed; cached run4 and supplements12/14/20 inspected,148 unique metadata works including15 family-review works. Titles and stored abstracts screened, including abstract tails beyond harvest_get350-character display; stored abstracts are truncated and are not full papers. No failed cached query. No actual genus response evidence in main/corrected stores. Global wanted/status checked by genus plus each retained title/DOI/URL; no duplicate request found. Unknown authors blank and unknown years null. Canon catalog checked; no in-hand plant compilation establishing an Arundo measurement.
+
+Exact cached queries in order, then live web:
+- `Arundo phytochrome photoreceptor`
+- `Arundo light perception`
+- `Arundo phototropism`
+- `Arundo flower opening time`
+- `Arundo nyctinasty`
+- `Arundo volatile signalling`
+- `Arundo photoperiod`
+- `Arundo circadian rhythm`
+- `Arundo anthesis`
+- `Arundo pollination biology`
+- `Arundo epidermal lens cells`
+- `Arundo epidermal focusing leaf optics`
+- `Poaceae photoreceptor review`
+- `web: Arundo seed germination light dark`
+- `web: Arundo germination gibberellin OR smoke OR dormancy`
+- `web: Arundo jasmonate herbivore`
+- `web: Arundo flower opening time anthesis`
+- `web: giant reed flower opening time anthesis`
+- `web: Arundo plant ocelli lens epidermal focusing eye`
+- `web: giant reed plant ocelli lens epidermal focusing eye`
+- `web: Arundo chemical sensing volatiles`
+- `web: giant reed chemical sensing volatiles`
+- `web: Arundo photoperiod phototropism light response`
+- `web: giant reed photoperiod phototropism light response`
+- `web: Poaceae photoreceptor review`
+
+Five wanted sources and provenance:
+- Response of Giant Reed (Arundo donax) to Intermittent Shading; https://www.cambridge.org/core/journals/invasive-plant-science-and-management/article/abs/response-of-giant-reed-arundo-donax-to-intermittent-shading/2CF09FCA8249D48859D9698EBDD56EF9. Controlled intermittent low-light exposure and persistence/growth of living A.donax directly target its unmeasured light response. Query `web: giant reed photoperiod phototropism light response`.
+- The photosynthetic response of C3 and C4 bioenergy grass species to fluctuating light; https://onlinelibrary.wiley.com/doi/full/10.1111/gcbb.12899. Returned methods explicitly include giant reed among seven grasses in fluctuating-light gas-exchange trials of greenhouse and field plants. Read the named A.donax dynamic response rather than carry a crop-relative result. Query `web: giant reed photoperiod phototropism light response`.
+- The Role of Native Riparian Vegetation in Resisting Invasion by Giant Reed, Arundo donax; https://escholarship.org/uc/item/6sg133ht. Cached abstract explicitly reports physiological shading treatments of A.donax, with a94% reduction of total plant mass under extreme shade. This is a living-plant growth response to illumination, beyond generic restoration background. Query `Arundo pollination biology`.
+- Root Exposure to 5-Aminolevulinic Acid (ALA) Affects Leaf Element Accumulation, Isoprene Emission, Phytohormonal Balance, and Photosynthesis of Salt-Stressed Arundo donax; https://pmc.ncbi.nlm.nih.gov/articles/PMC9028702/. The title and returned methods compare root-applied ALA, salt, combined ALA/salt and living control plants, including leaf gas exchange and methanol/isoprene emission. Target the applied chemical response; endogenous hormone concentration or stress VOC emission alone is not claimed as signaling. Query `web: Arundo chemical sensing volatiles`.
+- Real-time monitoring of Arundo donax response to saline stress through the application of in vivo sensing technology; https://doi.org/10.1038/s41598-021-97872-6. Cached abstract reports continuous in vivo stem-ion monitoring of living A.donax exposed to progressive salinity, with early stress response. This is an actual applied-chemical response lead. Continuous control records are also a specific possible within-day physiology target; a diel oscillation is NOT established by the truncated abstract or snippets and must be checked in the original time series before any diel record. Do not infer a rhythm from fixed culture photoperiod. Query `Arundo circadian rhythm`.
+
+Three light leads specifically measure the unresolved A.donax response: growth under intermittent shade, measured fluctuating-light gas exchange and a controlled extreme-shade mass reduction in a restoration thesis. The generic tissue-culture review10.3390/plants11070844 does not name an Arundo experiment in its stored abstract, so it is not requested as crop background. The rhizome-development transcriptomics PMID40833445 describes differential expression; returned text establishes neither applied hormone nor controlled light treatment, so not requested from gene annotation alone. The2016 high-C3-capacity paper reports a light-assimilation curve, but the retained dynamic-light/growth studies already target the same species more directly.
+
+ALA root-treatment and progressive salinity experiments are living chemical-response leads. The salinity sensor paper continuously records stem physiology; its possible daily control oscillation needs original time-series inspection. It is not promoted to a confirmed diel measurement. Seasonal anthesis dates in USDA/extension/flora results and10.1017/inp.2023.17 are not within-day timing. The candidate Ficus hormone/circadian study10.1111/pce.13513 is another genus; mink10.25225/fozo.v60.i1.a8.2011 is an animal; wheat/barley/cotton anthesis works10.3389/fpls.2018.01457,10.3389/fpls.2020.614334,10.1038/srep36961 do not measure Arundo. Sensor candidate keeps diel out of null search.
+
+Isoprene synthase thesis W2905271405, agricultural management10.15760/etd.1641, Arundineae thesis W2570853194 and drought emissions10.3389/fpls.2017.01016 describe emission/protective metabolism in available text, without establishing an airborne signaling test. They are not upgraded to chemical-sensing evidence; actual applied-chemical leads above are retained. Processed oil alcohol extraction at pjoes89422, rhizome/leaf extracts10.15835/nbha49312440, biomass solvent fractionation, sheep flavor10.1016/j.fochx.2026.104555 and isolated lectin10.54899/dcs.v23i89.5383 fail living donor/receiver rule10(a) for Arundo. Grass name false matches include Festuca arundinacea, Phragmites, Bambusa, sugarcane, rice and unrelated plant epidermis papers. Engineered gas sensors are not plant chemoreceptors. General ocelli/focusing sources follow owner10(b), never plant eye_type. No no-measurement conclusion is written for traits with retained candidates.
+
+All12 web queries succeeded; no quota/new service refusal. Raw search responses and cached metadata in work/harvest-c11/Arundo-*. Gate pending before commit; resume Sorghum after validation.
+
+Shared Deno source expansion, worker39: inspected work/worker37-Modiola-web7.json as directed by parent; primary indexed First Supplement p59 explicitly names Modiola caroliniana and compares living seeds in light/dark and GA3 conditions. Expanded existing c11 wanted line14 for/traits/why with this named light+chemical target and added the original PDF to get. Existing title/author/year preserved; no new wanted line, no source fetch, no numerical inference, no evidence. The5 new Arundo leads and135 cumulative wanted count are unchanged. Initial Arundo validation printed **0 problems**; rerunning after the shared-source metadata expansion before commit.
+
+Worker39 Arundo/shared-source final validation: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems**. Five new wanted and one expanded shared source; no count change from shared expansion.
