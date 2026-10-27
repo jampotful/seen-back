@@ -203,3 +203,25 @@ Exact web queries in execution order:
 Four wanted leads added: named O. arabicum dormancy/germination study, the living-cultivar vernalization/PGR trial, the Ornithogalum flowering/PGR title, and GA-linked O. umbellatum fruit epidermal growth. Species/culture details and absent metadata remain for source reading. The bulb NMR dormancy abstract uses storage temperature, not a demonstrated light/chemical manipulation; no chemical null is inferred. Cut-spike calcium/ethylene gravitropism and phenylalanine-induced fragrance of cut flowers are excluded by 10(a). Extract polysaccharides, OSW-1 cancer pharmacology and tissue metabolomics concern removed tissue/animal responses, not living plant sensing. Eye results concern ovary cuticles, lipotubuloids and taxonomic leaf anatomy, not image-forming organs; unrelated Gagea, Hippobroma, Episcia and astronomical Star-of-Bethlehem results do not cover this genus. Family web review results were broad plant/algal photoreceptor reviews rather than a direct Ornithogalum measurement. Harvest chemical candidates 10.21273/hortsci.35.3.406a (cut apples), the Origanum thesis and Eucomis LED cultures concern other taxa; aromatic-volatiles Viewpoint and nectar review did not identify a direct Ornithogalum measurement in the displayed passages. Held chemical for reading; OpenAlex supplement/citation protocol incomplete, so zero null rows.
 
 Worker 9 counts: 1 new genus web-screened, 0 full-protocol complete, 0 searched, 4 wanted added, 0 evidence. Cumulative 9 web-screened, 14 wanted; remaining 31, exact next Phlox.
+
+### Phlox — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py; checked canon catalog, effective main evidence, wanted lists and owner status. Adopted sweep-14:4 light-response evidence and existing sweep-14 primary-photoperiod request. Existing Andersson et al. 2002 butterfly-floral-scent request (sweep-20) is adopted for Phlox too; no duplicate request. Harvest queries in order: `Phlox phytochrome photoreceptor`; `Phlox light perception`; `Phlox phototropism`; supplement `Phlox photoperiod`; `Phlox circadian rhythm`; family `Polemoniaceae photoreceptor review`. No harvest citation step listed.
+
+Exact web queries, executed in order; screened delivered titles and snippets/passages only, no pages fetched:
+- `web: Phlox seed germination light dark`
+- `web: Phlox germination gibberellin OR smoke OR dormancy`
+- `web: Phlox floral scent volatiles`
+- `web: "Phlox" flower opening time anthesis`
+- `web: "garden phlox" flower opening time anthesis`
+- `web: "Phlox" eye type epidermal lens cells`
+- `web: "garden phlox" eye type epidermal lens cells`
+- `web: "Phlox" chemical signalling volatile response`
+- `web: "garden phlox" chemical signalling volatile response`
+- `web: Polemoniaceae photoreceptor review`
+
+Six wanted lines added: GA/light germination of P. pilosa, P. drummondii growth regulators, multispecies Phlox scent divergence, P. subulata volatile pathways, daily light-reversible petal colours, and in-vitro Phlox propagation (culture fork for desk). Existing genus light coverage avoids repeating paired light searches. The germination-first search additionally located The role of light during Phlox drummondii Hook. seed germination, a light-only study within adopted coverage. ResearchGate-only Timing is Everything: Temporal Variation in Floral Scent, and its Connections to Pollinator Behavior and Female Reproductive Success in Phlox divaricata remains an unresolved title lead; no DOI/year/authors obtained there and no host opened. The ant-repellence title surfaced via a secondary bibliography, not an opened primary source, so exact publisher metadata remains for oa readers.
+
+Diel pair otherwise returned seasons and flower longevity in days, not daily anthesis hours. Eye matches are floral pigment eyes/cultivar names (including Red Eyes), taxonomic cytology and non-Phlox pollinator eyes; owner none reading applies. Harvest 10.1093/jxb/eru327 is a general opening review without a Phlox timing result in its supplied abstract; RHODOPSIN7 is Drosophila, linalool review centres on Clarkia, diurnal VOC result is Ficus, scent variation result is Lilium, and cut Narcissus is both another genus and harvested material. Cut Phlox NO/ethylene/1-MCP studies are excluded under 10(a); culture propagation remains explicitly uncertain rather than screened out. Web PhLOX/Phlox2 oxylipin results are red-algal enzymes, not genus Phlox. Family search returned general plant/algal photoreceptor reviews and Polemoniaceae phylogenetics; no direct new Phlox measurement. OpenAlex skipped and no null rows.
+
+Worker 9 counts: 2 new genera web-screened, 0 full protocol complete, 0 searched, 10 wanted added, 0 evidence. Cumulative 10 web-screened, 20 wanted; remaining 30, exact next Solidago.
