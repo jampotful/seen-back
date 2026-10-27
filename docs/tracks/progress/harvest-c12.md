@@ -1380,3 +1380,30 @@ Exact actual web queries, in execution order:
 
 NEW this genus: 13 wanted,0 searched,0 evidence. Adopted existing wanted: [('Seed Germination Ecology and Dormancy Release in Some Native and Underutilized Plant Species with Agronomic Potential', 'harvest-c11'), ('Seed Germination Theory and Practice, 1st Supplement', 'harvest-c15')].
 Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Prunella-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
+
+
+## 2026-10-27 — issue38 worker34: Cichorium
+
+Adopted substantive target diel observation recheck-18-fixed#2 (corrects sweep-5#11); no repeated diel search or null. No actual target light/chemical evidence found globally despite old thin sweep-5; those paired searches newly done. Both mandatory harvest tools report no genus in cached harvest runs1–17,20,23,24. No API failure claimed as zero hits. Asteraceae photoreceptor web search returned general plant/algal/insect photoreceptor reviews,not a target physiological measurement; family-specific review Influence of Abiotic and Biotic Elicitors on Organogenesis,Biomass Accumulation,and Production of Key Secondary Metabolites in Asteraceae Plants (PMC11050642) explicitly cites target MeJA roots and supplies family reference alternative. No paper page fetched.
+
+Direct intybus germination/light/PGR/elicitor sources retained; callus,root explant and hairy-root culture scope explicitly left for desk. C.glandulosum light germination candidate retained at actual species; no carry to intybus. Spinosum vertical-farm and endivia floral-induction studies do not establish target intybus response; no congener carry. CiXTH29/LEA4 PEG water-stress work and seed-coat-colour studies are not proof of a light-cue response; target germination title sources kept10(e). Coffee/roasted-root flavour10.1021/acs.jafc.9b00776,solvent-extract metabolomics,washed fresh-cut tissue and skin cosmetics fail living-signal10(a). Pherobase is a reference lead without printed original citation; not invented target evidence. Cotton,cucumber,Iva,oak,tobacco,blueberry and Arabidopsis hormone results are different genera. Eye pair returns flora,leaf cell-wall labels and cosmetic light-reflection claims,not an eye/focusing assay. Owner eye_type none; true focusing belongs under light10(b). Remaining5,next Daucus.
+
+Exact actual web queries, in execution order:
+- `web: Cichorium seed germination light dark`
+- `web: Cichorium germination gibberellin OR smoke OR dormancy`
+- `web: Cichorium floral scent volatiles`
+- `web: Cichorium light photoperiod phototropism`
+- `web: chicory light photoperiod phototropism`
+- `web: Cichorium volatile emission herbivore induced response methyl jasmonate`
+- `web: chicory volatile emission herbivore induced response methyl jasmonate`
+- `web: Cichorium eye type epidermal focusing`
+- `web: chicory eye type epidermal focusing`
+- `web: Asteraceae photoreceptor review`
+- `web: Cichorium intybus methyl jasmonate salicylic acid response`
+- `web: "Physiological characteristics of endive, lettuce and chicory seeds" -site:researchgate.net`
+- `web: "Effect of methyl jasmonate and salicylic acid on sesquiterpene" -site:researchgate.net`
+- `web: "Effect of Methyl Jasmonate, Salicylic Acid and Their Combination" Cichoriun`
+- `web: "A STUDY OF GERMINATION AND FLOWERING" chicory`
+
+NEW this genus: 22 wanted,0 searched,0 evidence. Adopted existing wanted: [].
+Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Cichorium-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
