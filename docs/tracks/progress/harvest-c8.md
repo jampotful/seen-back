@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 12/40 genera screened here through Platanus;13 search records;135 wanted lines;0 evidence and measured closures. Euonymus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving27 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker34 stopped between Platanus and Euonymus for fresh-context continuation.
+**Current checkpoint:** 13/40 genera screened here through Euonymus;14 search records;152 wanted lines;0 evidence and measured closures. Calyptocarpus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving26 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker36 checkpoint after Euonymus.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -433,3 +433,62 @@ Added14 globally absent real target leads after DOI/normalized-title/URL and pap
 Reused existing global Woody Plant Seed Manual request (already here for Morella) rather than duplicating the book. USDA Silvics/FEIS search snippets explicitly contrast P. occidentalis light/dark germination, and manual snippet explicitly gives sycamore GA treatment, supporting its relevance. No numeric measurement logged from those snippets. Pollen transport/concentration alone is influenced by wind/turbulence; London1991 snippet itself says anthesis timing unknown, so atmospheric pollen cycles were not asserted to measure a plant clock. Seasonal canopy flowering/pollen-onset dates are not within-day timing. SPME chemistry of harvested Platanus leaves and distilled leaf constituents fail10(a); fungal culture emissions10.1111/efp.12618 belong to Ceratocystis; sycamore-lace-bug chemosensory work belongs to the insect. Sycamore maple light studies are Acer pseudoplatanus, not Platanus. Those do not suppress the actually relevant living chemical-response candidates.
 
 Only eye_type negative written under owner10(b), with explicit screened dispositions for general epidermal-lens/focusing papers, animal eye-lens differentiation/transparency and descriptive eye-catching bark. Focusing belongs under sense_light_nonvisual; known species in the Brodersen/Vogelmann comparison are other genera. No light/chemical/diel negative while target candidates await intake. Actual current screen_candidates.check using the legitimate cache printed **0 problems** before commit. Euonymus is unstarted.
+
+
+## 2026-10-27 — worker36 continuation
+
+**This worker:1 genus (Euonymus),1 eye_type search record,17 wanted lines,0 evidence/measurement closures. Cumulative harvest-c8:13/40 genera screened here,14 search records,152 wanted lines,0 evidence/measurement closures.** Pilea protocol remains covered by c4;26 genera need new work, starting Calyptocarpus,Lorinseria,Osmundastrum.
+
+Read AGENTS.md first, exact worker36 assignment, current worker guide, original batch and queue order, round4-harvest, THOROUGH, BRIEF including Round2/records/wanted, round3-sweep and desk-screen points1–10 including10(e). Audit53/54 context reviewed. Applied cloud-environment-runtime skill; current connected environment reports unrestricted network policy enforced with no secrets/identities. No branch/gate/#29/#30 edits, app checks or evidence writes.
+
+Official harvest_get.show and screen_candidates.show used legitimate serialized hg.load data from fetched ci55a1f658a687c5d355ae11d9eec65def211f4033. Read80 unique titles and entire stored abstract starts (up to700 characters), including15 Celastraceae family works. Bounded full screen: work/harvest-c8/Euonymus-full-screen.txt. No failed cached step. Successful cached queries, word for word in harvest order:
+- `Euonymus phytochrome photoreceptor`
+- `Euonymus light perception`
+- `Euonymus phototropism`
+- `Euonymus photoperiod`
+- `Euonymus circadian rhythm`
+- `Celastraceae photoreceptor review`
+
+Connected web queries, word for word in execution order:
+- `Euonymus seed germination light dark`
+- `Euonymus germination gibberellin OR smoke OR dormancy`
+- `Euonymus floral scent volatiles`
+- `Euonymus flower opening time anthesis`
+- `spindle tree flower opening time anthesis`
+- `Euonymus eye type`
+- `spindle tree eye type`
+- `Euonymus chemical sense volatile response`
+- `spindle tree chemical sense volatile response`
+- `Euonymus light photoperiod phototropism`
+- `spindle tree light photoperiod phototropism`
+- `Celastraceae photoreceptor review`
+- `Euonymus epidermal lens cells focusing light`
+- `spindle tree epidermal lens cells focusing light`
+- `"Euonymus" "anthesis" "morning"`
+- `"Euonymus" "diurnal" photosynthesis`
+- `"Euonymus latifolius" "Seed dormancy break"`
+- `"Euonymus europaeus" "Effect of Gibberellin"`
+- `"Euonymus" "mcad081" species scent`
+- `"Euonymus" "Olfactory responses of the vine weevil"`
+- `"Euonymus" "31637564"`
+- `"Euonymus" "Daily Photosynthesis, Water Relations"`
+- `"Seed dormancy break" "Euonymus latifolius" "10.1017"`
+- `"Effect of Gibberellin on Mature" "doi"`
+- `"Euonymus" "Len Effect"`
+- `"Influence of Photoperiod and Minimum Overwintering Temperature"`
+- `"Euonymus fortunei" "Effects of Shade Treatment"`
+- `"Euonymus latifolius" "Light intensity" growth limiting`
+- `"Euonymus" "Electrophysiological and Behavioral Responses" "2019"`
+- `"Euonymus europaeus" "An attempt to define"`
+
+All exposed titles/snippets and returned abstracts read; genuinely fewer than20 results per individual query were not claimed as20. Raw results: work/harvest-c8/Euonymus-web0–7.txt; queries also in Euonymus-queries.json. Initial combined display truncation was recovered from stored complete tool output; cached entries23–28 were reread explicitly. No source/fullpaper page fetched, OpenAlex/MDPI/UChicago/SANBI request or paid fallback. OpenAlex and prohibited/unauthorized-host results appeared incidentally in web results; none was directly requested, fetched or used as a primary measurement source. Spindle tree is independently identified with E. europaeus by NC State, Woodland Trust and Morton Arboretum results.
+
+Checked original gaps for E. europaeus,E. alatus,E. fortunei,E. americanus,E. verrucosus: all4 traits were considered. Corrected-first accepted-name evidence has only E. japonicus light-at-night responses (harvest-13#3, harvest-15#8,recheck-24-fixed#3), preserved without duplicated E. japonicus ALAN or background-crop requests. Congeneric light evidence does not carry under the existing rules. Old sweep-6 and harvest-13 lack current full web protocols and did not suppress work. Canon catalog inspected; in-hand Animal Eyes concerns Metazoa, and owner10(b) controls plant eye_type.
+
+Added17 real, globally absent target leads after DOI/normalized-title checks plus URL and owner-status review:2023 E. latifolius light/GA germination10.1017/S0960258523000132;1992 E. europaeus GA germination;1976 physiological stages for GA dormancy break;E. verrucosus germination tests;E. alatus/E. japonicus chilling/germination bibliography reference;2002 E. japonicus epidermal focusing;1985 E. fortunei photoperiod10.24266/0738-2898-3.1.25;E. fortunei shade/daily photosynthesis;2016 E. fortunei building-shade responses;2024 E. latifolius growth/light;2023 ten-species floral-scent10.1093/aob/mcad081;2019 E. fortunei host-volatile analysis;2014 E. japonicus daily physiology10.21273/hortsci.49.10.1292;1992 E. kiautschovicus daily xanthophyll responses;E. fortunei diurnal photosynthesis/transpiration10.11924/j.issn.1000-6850.2014-1741;2021 E. alatus hormone-dependent embryo/plant regeneration10.1038/s41598-021-94597-4;2021 E. bungeanus hormone/light regeneration10.32615/bp.2020.166. The two old seed studies share a locating bibliography URL but are distinct named works; years remain null where unverified. Cells/callus alone are not asserted as a whole-plant measurement: regeneration studies need intake to establish eligible embryo/plant response and light comparison. No species carry or numeric value inferred.
+
+Reused globally wanted Deno main book and1st Supplement (c7/c11), plus Woody Plant Seed Manual already in this batch. Deno indexed E. alatus entry explicitly reports tested light/GA and detergent washing; zero effects remain measurements. No duplicate book request. Germination trials remain mandatory10(e) leads even when exposed text does not show light/GA comparisons. No extra general biological-flora review request when named seed experiments are available.
+
+Source-rule fork: harvest-13 screened out10.1093/aob/mcad081 as floral-scent emission without plant reception. Current owner10(a) expressly includes living-plant signal emission. Legacy file preserved, current real scent lead requested; no chemical negative invented. The2019 weevil study is requested for plant VOC emission, not animal antennal sensitivity, and living/attached sampling needs intake. The2002 weevil study exposes tested cuttings; detached material would not establish10(a), so it was not requested as a confirmed living-signal source.2020 E. sanguineus SPME petal/disk chemistry and E. europaeus seed oil/methanol extracts likewise do not establish living-plant sensing by themselves. Long-term aril suspension-cell chemistry is not asserted to establish a plant response; no redundant preprint versions requested. Nectary morphology and developmental flower lifespan are not daily timing; moth,aphid,rabbit,deer rhythms belong to animals. Cached ALAN/BVOC2026 trees are Quercus,Liquidambar,Ginkgo, not Euonymus. No generic/background crop request.
+
+Only eye_type negative written; automated original eye candidates number0, and extra web epidermal-optics candidates have explicit dispositions. Target2002 lens paper is correctly retained under sense_light_nonvisual while its eye disposition follows10(b); general47-species optics survey not assumed to contain Euonymus. Family photoreceptor search returned general ALAN reviews and phytochrome-based phylogeny, not an eligible eye measurement or family-specific review. Light,chemical,diel all have plausible target leads, so no negatives for them. Actual current screen_candidates.check with legitimate cache printed **0 problems** before commit; initial scratch-script unmatched-parenthesis error was corrected before any append.
