@@ -306,3 +306,21 @@ Queries actually run (connected web search; returned titles/snippets screened, f
 - `blueberry volatile chemical signalling`
 - `Vaccinium epidermal lens cells eye`
 - `blueberry epidermal lens cells eye`
+
+### Frangula
+
+Web-query screen for round completed; full protocol partial (OpenAlex unavailable). Official harvest_get/screen_candidates run; run 2 plus supplements and Rhamnaceae family-review titles checked, no failed query reported. Existing harvest-c14 wanted #34 adopted for F. alnus/Rhamnus frangula infection-induced emissions; companion The same boat, different storm not duplicated. Nine new wanted sources include explicit alnus light/dark germination, live floral/leaf emissions, hormone shoot culture and seedling fungicide response, with culture/physical-scarification forks retained. F. sphaerosperma germination title held under 10(e) despite temperature-only snippet. Rhamnus fallax/cathartica and Hippophae studies not assigned to Frangula targets. Night-time water-flux thesis and forest-seedling LED title lack a displayed species list and remain unresolved harvest leads; do not claim a null. Photoperiod growth abstract names Rhamnus generically, not accepted Frangula species, so no carry or target claim. Diel web hits mainly months or seasonal leaf retention; title-only reproductive-biology request left for reader to inspect. Eye web hits animal lenses; petiole anatomy/retinal nutraceutical family hits do not establish focusing in Frangula. Canon checked; no pages fetched, evidence or null records.
+
+Queries actually run (connected web search; returned titles/snippets screened, fewer than 20 when fewer were delivered):
+
+- `Frangula seed germination light dark`
+- `Frangula germination gibberellin OR smoke OR dormancy`
+- `Frangula floral scent volatiles`
+- `Frangula photoperiod phototropism light sensing`
+- `glossy buckthorn photoperiod phototropism light sensing`
+- `Frangula flower opening time anthesis`
+- `glossy buckthorn flower opening time anthesis`
+- `Frangula volatile chemical signalling`
+- `glossy buckthorn volatile chemical signalling`
+- `Frangula epidermal lens cells eye`
+- `glossy buckthorn epidermal lens cells eye`
