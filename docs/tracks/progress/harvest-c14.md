@@ -357,3 +357,27 @@ Queries actually run (connected web search; returned titles/snippets screened, f
 - `prickly lettuce volatile chemical signalling`
 - `Lactuca epidermal lens cells eye`
 - `prickly lettuce epidermal lens cells eye`
+
+### Rabelera
+
+Web-query screen for round completed; full protocol partial (OpenAlex unavailable). Official harvest_get/screen_candidates: no harvest; global accepted-name-aware evidence/wanted/searched rechecked for Stellaria holostea. Taxonomy search snippets from NCBI/IPNI/EPPO/Kew confirm synonym and common name; older Stellaria species other than holostea are not assigned to Rabelera. Adopted harvest-c10 wanted #182, Environmental signals for seed germination reflect habitat adaptations in four temperate Caryophyllaceae (10.1111/j.1365-2435.2008.01385.x): snippet directly says no difference between light/dark germination in S. holostea, unlike the other tested taxa. Parent notified of added target relevance without duplicate request or editing another batch. Two distinct new light/germination wanted leads. Extract study UHPLC-MS Phytochemical Profiling and Insight into Bioactivity of Rabelera holostea is excluded under 10(a), and antimicrobial effects of extract do not establish a living target response. Floral-morphology thesis snippet names S. holostea but supplies only flower diameter/seasonal timing, no demonstrated daily-opening hour; unresolved broad title, no fabricated request metadata. Diel results mainly spring flowering and three-day lifespan of lesser stitchwort, a different taxon. Eye hits spiderwort epidermis/animal eyes and unrelated genera, no target focusing measurement established. Adopted already-run Caryophyllaceae photoreceptor review query/results under Saponaria (first worker), no repeat family search. Canon catalog checked; no fetched pages, evidence or nulls.
+
+Queries actually run (connected web search; returned titles/snippets screened, fewer than 20 when fewer were delivered):
+
+- `Rabelera seed germination light dark`
+- `Rabelera germination gibberellin OR smoke OR dormancy`
+- `Rabelera floral scent volatiles`
+- `Rabelera photoperiod phototropism light sensing`
+- `Rabelera holostea germination seed light`
+- `Rabelera holostea common name`
+- `Stellaria holostea seed germination light dark`
+- `Stellaria holostea germination gibberellin OR smoke OR dormancy`
+- `greater stitchwort photoperiod phototropism light sensing`
+- `Rabelera OR "Stellaria holostea" flower opening time anthesis`
+- `greater stitchwort flower opening time anthesis`
+- `Rabelera OR "Stellaria holostea" volatile chemical signalling`
+- `greater stitchwort volatile chemical signalling`
+- `Rabelera OR "Stellaria holostea" epidermal lens cells eye`
+- `greater stitchwort epidermal lens cells eye`
+
+Worker35 checkpoint: **6 newly web-screened genera** (Epipactis, Vaccinium, Frangula, Jacobaea, Lactuca, Rabelera); all six full protocols remain partial because OpenAlex is skipped. Added **54 wanted lines**, **0 searched**, **0 evidence**; batch total **119 wanted, 0 searched, 0 new evidence**. Earlier 14 screens and all incoming 65 wanted lines, including coordinator source #25 Fagus target, preserved. **20 genuinely unreviewed genera remain; exact next Heracleum**, then Matricaria, Trillium, Eriogonum, Cytisus, Aralia, Berteroa, Elaeagnus, Geum, Calluna, Cymbalaria, Conium, Crataegus, Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia. Do not repeat the six new web-query screens. Primula preflight still shows extensive existing plant-1 wanted/eye search plus species-specific measured cues; next worker should inspect for adoption before any search. No service beyond the inherited OpenAlex 429 was rejected. All source retrieval remains for the legal OA reader; no paper assets committed.
