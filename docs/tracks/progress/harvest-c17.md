@@ -151,3 +151,40 @@ Queries run, word for word:
 - `web: Araceae photoreceptor review`
 
 Round checkpoint: 5 genera web-screened for round (Scilla, Diphasiastrum, Xanthium, Goodyera, Lysichiton), all partial under the full protocol. 0 full-protocol complete; 0 searched rows; 18 wanted lines; 0 evidence. Remaining unreviewed: 35; exact next Calamagrostis. OpenAlex skipped for the round after coordinator HTTP 429; no additional service refusals. No pages fetched, no PDFs/full text committed.
+
+### Calamagrostis
+
+Web screening finished for this round: new leads include C. arenaria germination under light conditions, C. canadensis regrowth in light/dark, an acclimation paper with a truncated search title, a verified C. arundinacea CO2-response experiment, and a root-volatiles thesis whose host coverage remains to be verified. Common name reed grass is broad: Phalaris and Phragmites results were not treated as Calamagrostis. Mandatory germination/JA searches returned much general seed and jasmonate literature without a genus-specific hormone trial. Diel candidates mostly report seasonal anthesis or other genera, not daily flower-opening time. Epidermal morphology result 10.1360/aps050053 describes taxonomic epidermal variation, not an eye or a verified focusing measurement. Harvest chemical candidate 10.1556/1326.2022.01099 is dried-grass headspace chemistry (owner 10(a)), so not a living signal; existing replant-1 request not duplicated. Other harvested chemical candidates include botanical etymology, Cunninghamia, Ocimum, ash fluoride, sandal and studies on other genera. Family web query returned broad photoreceptor reviews and grass phytochrome sequence work; no Calamagrostis measurement visible in the snippets. Canon checked locally. Required missing OpenAlex steps skipped; full protocol remains incomplete and no null search rows written.
+
+Queries run, word for word:
+
+- `web: Calamagrostis seed germination light dark`
+- `web: Calamagrostis germination gibberellin OR smoke OR dormancy`
+- `web: Calamagrostis jasmonate herbivore`
+- `web: Calamagrostis flower opening time anthesis`
+- `web: reed grass flower opening time anthesis`
+- `web: Calamagrostis plant ocelli lens-like epidermal cells eye`
+- `web: reed grass plant ocelli lens-like epidermal cells eye`
+- `web: Calamagrostis response to airborne volatile signals`
+- `web: reed grass response to airborne volatile signals`
+- `web: Calamagrostis light response photoperiod`
+- `web: reed grass light response photoperiod`
+- `web: Poaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Calamagrostis phytochrome photoreceptor`
+- `Calamagrostis light perception`
+- `Calamagrostis phototropism`
+- `Calamagrostis flower opening time`
+- `Calamagrostis nyctinasty`
+- `Calamagrostis volatile signalling`
+- `Calamagrostis photoperiod`
+- `Calamagrostis circadian rhythm`
+- `Calamagrostis anthesis`
+- `Calamagrostis pollination biology`
+- `Calamagrostis epidermal lens cells`
+- `Calamagrostis epidermal focusing leaf optics`
+- `Poaceae photoreceptor review` (stored family review)
+
+Final checkpoint for this worker: 6 genera web-screened for the round (Scilla through Calamagrostis), all partial under the full protocol; 0 full-protocol complete, 0 searched rows, 23 wanted lines, 0 evidence. Stopped between genera for handoff. Remaining unreviewed: 34, exact next Marrubium. All 40 remain without a complete new OpenAlex protocol. Only refused service: OpenAlex, coordinator HTTP 429; skipped throughout. No page fetches or paper text committed. Gate must print 0 problems before commit.
