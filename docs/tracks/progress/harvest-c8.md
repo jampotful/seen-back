@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 10/40 genera screened here through Cephalanthus;10 search records;120 wanted lines;0 evidence and measured closures. Bignonia is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving29 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker29 continuation is current.
+**Current checkpoint:** 11/40 genera screened here through Bignonia;12 search records;121 wanted lines;0 evidence and measured closures. Platanus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving28 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker29 stopped between Bignonia and Platanus for fresh-context continuation.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -350,3 +350,42 @@ Added2 wanted after global DOI,normalized-title,URL and paper-status checks: tar
 Reused existing sweep-20 wanted source Floral scents in butterfly-pollinated plants: possible convergence in chemical composition,2002; cached source DOI10.1046/j.1095-8339.2002.00068.x. Brooklyn Botanic Garden genus bibliography explicitly lists it and independent Luculia original-journal/PMC search snippets identify C. occidentalis monoterpene scent. No duplicate wanted line. Existing Deno Seed Germination Theory and Practice2nd ed. globally wanted in c7/c11 is an especially strong light lead: indexed1993 p116 Cephalanthus entry explicitly contrasts light/dark germination. Reuse original book request, no duplicate; no evidence from the indexed quotation. USDA Woody Plant Seed Manual already globally wanted; no duplicate. Chemistry of removed tissues/oils does not establish10(a), and colleter mucilage histochemistry alone does not establish airborne signaling. Seedling/vegetation and seasonal leaf-out studies expose no manipulated light/daily comparison in the cached abstracts.
 
 Only eye_type negative written under owner10(b), individually disposing all5 official candidates. Anther epidermal remnants are not eyes; bird lenses,butterfly eyes and pollinator colour modelling are animal perception; focusing belongs under sense_light_nonvisual. Diel/chemical/light have plausible leads, so no null written for them. Actual current screen_candidates.check using the legitimate cache printed **0 problems** before commit. Continuing Bignonia next.
+
+### Bignonia completed; worker29 checkpoint
+
+**This worker total:2 genera (Cephalanthus,Bignonia),3 search records,3 wanted lines,0 evidence/measurement closures. Cumulative harvest-c8:11/40 genera screened here,12 search records,121 wanted lines,0 evidence/measurement closures.** Pilea coverage remains in c4;28 genera need new work, starting Platanus,Euonymus,Calyptocarpus. Stop between genera for fresh-context takeover.
+
+Bignonia has no genus harvest in legitimate hg.load cache; official harvest_get.show/screen_candidates.show report that honestly. Read all15 Bignoniaceae run17 family-review titles and entire stored abstracts, no failed step, family query word for word `Bignoniaceae photoreceptor review` (53hits,15stored). Family cached screen: work/harvest-c8/Bignonia-full-screen.txt. No API query invented. Original queued B. capreolata traits are diel,eye_type,sense_chemical. Accepted evidence sweep-40#15 actually measures its tendrils bending away from light; preserved without repeated light searches/null or duplicate wanted. Old sweep-40 combined protocol remains thin for the other traits. Global corrected-first accepted-name evidence,wanted,searched,canon and paper status checked.
+
+Connected web queries, word for word in execution order:
+- `Bignonia seed germination light dark`
+- `Bignonia germination gibberellin OR smoke OR dormancy`
+- `Bignonia floral scent volatiles`
+- `Bignonia flower opening time anthesis`
+- `crossvine flower opening time anthesis`
+- `Bignonia chemical sense volatile response`
+- `crossvine chemical sense volatile response`
+- `Bignonia eye type`
+- `crossvine eye type`
+- `Bignoniaceae photoreceptor review`
+- `"Bignonia capreolata" nectar anthesis scent`
+- `"Bignonia capreolata" floral scent volatiles jasmonate`
+- `"Bignonia capreolata" germination gibberellin`
+- `Bignonia epidermal lens cells focusing light`
+- `crossvine epidermal lens cells focusing light`
+- `"Bignonia" anthesis nectar secretion`
+- `"10.3389/fpls.2022.813418" Bignonia`
+- `"Bignonia capreolata" "10.3389/fnint.2015.00059"`
+- `"Bignonia" "anthesis" "morning"`
+- `"crossvine" "nectar" "day"`
+- `"Bignonia capreolata" "flower opening"`
+- `"Ontogeny, histochemistry, and structure" "Bignonia"`
+- `"Bignonia aequinoctialis" "morning" trichomes`
+
+All exposed titles/snippets and returned abstracts read; fewer than20 individual-query results were not claimed as20. Broad germination results mostly concern Tecoma,Tabebuia,Jacaranda and generic seed physiology; targeted B. capreolata result is a cultivation germination code, not an exposed chemical/light experiment. No new light/germination request needed over actual measured light response. Crossvine name confirmed by NC State/ITIS and Tennessee university results. Bignoniaceae web review10.1111/nph.15073 recapitulates B. capreolata negative phototropism already covered; classification10.3732/ajb.0900004 provides family provenance. Raw search results in Bignonia-web0–6.txt under work. No source/fullpaper-page fetched, no further OpenAlex/MDPI/UChicago/SANBI request or paid fallback.
+
+Added1 real, globally absent wanted: Maeda,Tamotsu,Yamaoka,Ozaki2015,10.3389/fnint.2015.00059, Effects of Floral Scents and Their Dietary Experiences on the Feeding Preference in the Blowfly, Phormia regina. Original Frontiers search result exposes Table1 Chemical analyses of floral scents with B. capreolata specifically listed; chemical-signal emission is a plausible measurement under10(a). Target plant sampling method needs full intake confirmation of living/attached material; animal feeding responses alone are not a plant sense. PMC4664696 legal route provided. No values or evidence logged, no chemical negative. Botanical garden fragrance observations support plausibility but were not presented as chemical assays or separately requested.
+
+Wrote eye_type and diel nulls with explicit screened dispositions. Morning anthesis in the AGRIS Singh2009 paper is Pyrostegia venusta (old Bignonia venusta), not accepted Bignonia; family florivory10.3389/fpls.2022.813418 likewise explicitly identifies Pyrostegia. Pachyptera floral maturation, Tecoma and Jacaranda seed studies are other accepted genera. Family flowering-colour phenology is seasonal and butterfly/bee diurnality belongs to animals. Nogueira2020 temporal production of new tissues/ant attendance exposes no daily plant rhythm. Institutional Museu Goeldi/UFRA Gama thesis abstracts address gland ontogeny/histochemistry in B. aequinoctialis, not a diel timing assay; morning ant visitors would describe animals. A targeted title search unexpectedly exposed extensive ResearchGate text; it was not fetched, used as a primary source, cited for a measurement or committed. Legal institutional abstracts were used for the anatomy-scope check. Anatomical epidermal-cell shape does not establish an eye; optical focusing belongs under sense_light_nonvisual10(b). B. nocturna extracted essential oils, pharmacological extracts and other removed-tissue chemistry excluded under10(a), no speculative wanted. No Bignonia daily flowering/scent/leaf rhythm was exposed by the full set of searches.
+
+Actual current screen_candidates.check with the legitimate hg.load cache printed **0 problems** before commit. No evidence,app checks,branch/gate/#29/#30 edits. Platanus is unstarted.
