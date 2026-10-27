@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 8 genera web-screened, 0 protocol-complete, 0 search records, 45 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 9 genera web-screened, 0 protocol-complete, 0 search records, 49 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -201,3 +201,29 @@ Exact web queries, in order:
 - web: blue dicks chemical response volatile signaling
 
 Continuation checkpoint: 2 newly web-screened genera (Athyrium, Dipterostemon), 8 new wanted leads; 8 genera web-screened cumulatively, 45 wanted lines, 0 searched rows, 0 evidence records. 32 genera remain unreviewed; exact next genus Arctostaphylos.
+
+
+### Arctostaphylos: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran with supported networking. Current descriptor opens sense_chemical only. All 39 printed work occurrences (including repeats) and 15 family-review titles/stored abstract starts screened. Citation step citing 10.1111/ele.12205 naming the genus succeeded in the stored harvest with zero hits; this is distinct from the now unavailable service. Chemical candidates include coffee/Apium/halophytes, microbial potato volatiles, Vaccinium root volatiles, and ecosystem-scale BEARPEX flux work. Those displayed abstracts do not establish a living Arctostaphylos chemical-response or signalling measurement. BEARPEX 2009 (10.5194/acp-14-231-2014) and the flux dissertation https://escholarship.org/uc/item/8411w668 remain species-attribution metadata leads, since aggregate forest flux does not establish an individual genus measurement from these snippets. The light/smoke review 10.3390/plants11131773 does explicitly cite A. pungens in web snippets; original trial requested instead of duplicating its review. Family review mostly gives Vaccinium genomics, phenolics, general light signalling and unrelated taxa.
+
+Web adds four wanted sources: A. pungens smoke/charcoal experiment, USFS A. glandulosa and A. patula charate/light-dark reviews identifying original germination trials, and McClain's A. manzanita/A. viscida fire-cue study. Litwinowicz's repository result at https://collected.jcu.edu/honorspapers/125/ explicitly reports acid/charate/liquid-smoke trials with A. manzanita and A. viscida; its title is truncated in results ("Heat and Chemical Cues Enhance Germination Rates in Fire-Dependent Cha"), so kept as a metadata lead rather than inventing the citation. "Aspects of the seed ecology of woody plants of the Alaskan taiga and tundra" (https://www.frames.gov/catalog/6401) names 54 species and Arctostaphylos among genera, but displayed text does not establish chemical/light treatments or particular species. No extra request from that broad title.
+
+Excluded Vaccinium arctostaphylos germination and steam-volatiles works as the wrong genus. Arctostaphylos uva-ursi leaf/tea metabolomics, essential oils and sample-preparation stress volatiles are removed-tissue chemistry under owner 10(a), not living signal response. Common name manzanita verified by USFS species reviews. Existing diel evidence in A. alpina (recheck-6-fixed / sweep-17) adopted; no existing chemical evidence/wanted or owner-status match found for the new leads. Canon checked: the two chemical compilations remain not in hand; no null record, because missing common-name OpenAlex steps remain unavailable. No pages fetched and no evidence added.
+
+Successful harvest queries, verbatim and in recorded order:
+- Arctostaphylos phytochrome photoreceptor
+- Arctostaphylos light perception
+- Arctostaphylos phototropism
+- citation: works citing 10.1111/ele.12205 that name Arctostaphylos
+- Arctostaphylos volatile signalling
+- family review: Ericaceae photoreceptor review
+
+Exact web queries, in order:
+- web: Arctostaphylos seed germination light dark
+- web: Arctostaphylos germination gibberellin OR smoke OR dormancy
+- web: Arctostaphylos floral scent volatiles
+- web: Arctostaphylos chemical response volatile signaling
+- web: manzanita chemical response volatile signaling
+
+Continuation checkpoint: 3 newly web-screened genera (Athyrium, Dipterostemon, Arctostaphylos), all protocol partial; 12 new wanted leads, 0 searched rows, 0 evidence records. Cumulative harvest-c15 totals: 9 web-screened genera and 49 wanted lines. 31 genera remain genuinely unreviewed, starting Papaver. Previous checkpoints above are historical. OpenAlex remains blocked/skipped after coordinator HTTP 429; no additional service rejection.
