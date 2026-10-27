@@ -597,3 +597,59 @@ Existing anther study10.3732/ajb.91.12.1969 is already requested in plant1; not 
 Seasonal flora/nursery blooming months and fixed flower lifespan are not daily rhythms. Staminode epidermis/lignification PMC7380458 and papillate organ-identity work PMC1867376 describe morphology/reflectance rather than eyes. Family search returned10.1093/jxb/erad492 morphological/genomic review and general photoreceptor sources; buttercup optics10.1098/rsif.2016.0933 is other genera and reflectance. General ocelli/focusing belongs under nonvisual light by owner10(b), never eye_type. All returned snippets screened; unread full reviews not claimed read.
 
 Aquilegia validation: required screen_candidates.py --check printed **0 problems** before commit. All twelve web steps retained; no pending trait declared exhausted.
+
+### Helianthus continuation, 2026-10-27
+
+Adds **1 genus,1 search,13 wanted,0 evidence**. Worker30 cumulative **3 genera,3 searches,27 wanted,0 evidence/0 measured cells**. Batch cumulative **15 genera,19 searches,130 wanted,0 evidence**; **25 remain**, next Arundo. Aquilegia gate0 problems before commit754145ad.
+
+11 successful connected web queries; worker30 total33. Required aids run and raw cached metadata inspected: run5 supplements12/20 have120 result occurrences,15 family-review titles and124 unique titles/stored abstracts. Every title and available abstract screened; cached abstracts are intrinsically truncated, not full texts. Raw metadata and web1–3 responses in work/harvest-c11. No API/source-page fetch, including prohibited OpenAlex/MDPI/UChicago/SANBI. No quota refusal. Canon catalog checked; no in-hand plant compilation. Global wanted/papers-status checked by genus and all retained title/DOI fragments; no duplicate source identified. Unknown years null; no guessed authors.
+
+Exact queries in executed cached order then live web order:
+- `Helianthus phytochrome photoreceptor`
+- `Helianthus light perception`
+- `Helianthus phototropism`
+- `Helianthus volatile signalling`
+- `Helianthus photoperiod`
+- `Helianthus circadian rhythm`
+- `Helianthus epidermal lens cells`
+- `Helianthus epidermal focusing leaf optics`
+- `Asteraceae photoreceptor review`
+- `web: Helianthus seed germination light dark`
+- `web: Helianthus germination gibberellin OR smoke OR dormancy`
+- `web: Helianthus jasmonate herbivore`
+- `web: Helianthus plant ocelli lens epidermal focusing eye`
+- `web: sunflower plant ocelli lens epidermal focusing eye`
+- `web: Helianthus chemical sensing volatiles`
+- `web: sunflower chemical sensing volatiles`
+- `web: Helianthus tuberosus photoperiod phototropism light response`
+- `web: Jerusalem artichoke photoperiod phototropism light response`
+- `web: Asteraceae photoreceptor review`
+- `web: Helianthus tuberosus chemical sensing gibberellin jasmonate`
+
+Wanted provenance:
+- Influence of photoperiod on vegetation phases and tuber development in topinambour (Helianthus tuberosus L.); http://www.doiserbia.nb.rs/ft.aspx?id=0354-46641201175T. Cached abstract compares 141 accessions in day-length response, flowering/vegetation and tuber number/mass. This targets the species-specific light gap, rather than duplicating measured H.annuus light responses.
+- Effects of photoperiod and storage temperature on inulin and fructo-oligosaccharides accumulation in In vitro microtubers of kaentawan (Helianthus tuberosus L.); cached work W2474158865, Journal of Food Science and Agricultural Technology2015. Cached abstract directly compares microtuber induction in16h light/8h dark, complete darkness and8h light/16h dark; long days and darkness produced higher fresh weight than short days. This is living tissue growth under controlled illumination, not food chemistry alone.
+- Plant development and hormonal status in the Jerusalem artichoke (Helianthus tuberosus L.); https://www.sciencedirect.com/science/article/pii/092666909290022N. Snippet explicitly reports cultivar-dependent photoperiod sensitivity, long-day leaf/stem growth and delayed stolon/tuber induction. Target the actual controlled photoperiod response; do not infer applied-hormone treatment from the title.
+- Existence d'un stimulus photopériodique non spécifique capable de provoquer la tubérisation chez Helianthus tuberosus L.; https://www.tandfonline.com/doi/abs/10.1080/00378941.1965.10838250. Grafting experiments report that interrupting the long night with one hour of weak red light prevents the tuber-forming stimulus. A direct photoperiod manipulation in the unresolved species.
+- Studies on the Photoperiodic Responses in Short-Day Plant Helianthus tubevotus; https://www.jipb.net/EN/abstract/abstract24170.shtml. Returned source title spells tubevotus, while abstract explicitly names H.tuberosus white-tuber variety and controlled4–18h daylength treatments. Six to thirteen hours induced flowering and14h or longer retained vegetative growth; verify source spelling/metadata before logging.
+- Physiological responses of sun choke’s seedlings under different wavelength LED lighting; https://www.sciencedirect.com/science/article/abs/pii/S0304423821001369. Snippet reports development, morphology and fluorescence of living Jerusalem-artichoke seedlings under natural, fluorescent, red, blue and red/blue LED treatments, with actual irradiances. This directly targets the open species light trait.
+- Response of Sunflower (Helianthus annuus L.) Leaf Surface Defenses to Exogenous Methyl Jasmonate; https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0037191&type=printable. Living sunflower accessions received exogenous MeJA to induce herbivore-defense responses. This is the unresolved chemical trait, not repeat light sensing or isolated extract chemistry.
+- Effects of methyl jasmonate on plant growth and leaf properties; https://onlinelibrary.wiley.com/doi/full/10.1002/jpln.201700373. Snippet explicitly names living sunflower treated with0–2.5mM MeJA, comparing trichome/stomatal density, cuticle, height and biomass. The hormonal treatment response qualifies under10(d).
+- INVESTIGATIONS ON AUXIN-GIBBERELLIN INTERACTION ON THE PHOTOTROPISM OF HELIANTHUS ANNUUS HYPOCOTYL; https://doi.org/10.1093/oxfordjournals.pcp.a078988. Cached abstract explicitly reports applied IAA-gibberellin and IAA-NAA mixtures increasing/decreasing phototropic response compared with IAA-water controls. Read for the applied chemical response; light alone is already measured.
+- Programmed Cell Death and Aerenchyma Formation in Water-Logged Sunflower Stems and Its Promotion by Ethylene and ROS; https://www.frontiersin.org/articles/10.3389/fpls.2018.01928/pdf. Cached abstract reports aerenchyma induction by ethylene/ROS and partial suppression with an applied NADPH-oxidase inhibitor. Living seedling chemical-treatment response, not a genomic prediction.
+- Stimulated accumulation of lectin mRNA and stress response in Helianthus tuberosus callus by methyl jasmonate; https://pubmed.ncbi.nlm.nih.gov/12951522/. Title explicitly reports an induced response in living callus after methyl-jasmonate treatment. Read to establish treatment and actual stress/lectin response; sequence annotation alone would not qualify. This specifically targets the unresolved tuberosus chemical trait.
+- Volatiles of the trap crop sunflowers: Effects on the behaviour of adult female Conogethes punctiferalis moths; https://onlinelibrary.wiley.com/doi/10.1111/jen.13185. Snippet describes headspace collection of sunflower-disk volatiles and olfactometer attraction experiments. Verify that collected flower disks were attached living donors; this is a specific signaling measurement candidate, while harvested-disk chemistry alone fails10(a).
+
+Actual main response records checked: corrected/plant-fungus-slime#65 and recheck2-fixed#1/sweep19#14 support H.annuus light; oa12#20 adds neighbor R:FR directional response; recheck6-fixed#3 supports H.annuus circadian movement. These are preserved, so no repeated model-sunflower light/diel requests or null. Original queue specifically still lacks H.tuberosus light and both species chemical; full species-directed light searches were necessary because nonvisual-light cannot carry at genus level.
+
+Six light leads for H.tuberosus include actual red night interruption, day-length flowering, LED seedling treatments and viable microtuber development. The 2012 accession phenology trial is held as a light lead pending checking experimental/environmental design; no within-day rhythm inferred from June/August flowering dates.2015 microtuber fresh-weight comparison under LD/D/SD is living growth, not storage chemistry alone. The graft trial year remains null because relative search dates conflict with historical DOI year; no date inferred.
+
+Chemical targets use actual applied MeJA, IAA/GA/NAA and ethylene/ROS/inhibitor responses. H.tuberosus callus treatment is specifically held for living tissue induction rather than untested transcript annotation. Trap-crop flower-disk signaling10.1111/jen.13185 still requires attached-living donor verification under10(a). No claim that collection alone proves signaling. Cached2006 light/hormone-level study10.1111/j.1365-3040.2006.01612.x and2000 protandry10.1093/jexbot/51.349.1403 do not establish applied treatment in the truncated abstract; stronger actual intervention sources retained instead.
+
+Roasted/cooked oils, fresh harvested pollen fingerprint, isolated secretory-disk chemistry10.3390/plants13030345 and methanolic extracts10.36948/ijfmr.2026.v08i05.86783 are not established living response. Generic VOC/crop-blue-light reviews name no additional target measurement in available abstracts and are not requested. Vigna, Raphanus, Cucumis, Hopea, Arabidopsis, Pelargonium, Vernonia, Synedrella and Lomatozona studies are distinct genera. Human retinal Tagetes lutein papers and Lens SNP work are eye keyword false matches. General focusing survey and leaf-optics thesis belong under light; owner plant eye none remains. Unmeasured light/diel crop background is not converted into a new request simply because sunflower is mentioned.
+
+Full stored-abstract tail check also found a direct elicitor intervention in the2009 Manitoba thesis MOLECULAR CHARACTERIZATION OF THE INTERACTION BETWEEN HELIANTHUS ANNUUS AND VERTICILLIUM DAHLIAE (W2791459808; http://hdl.handle.net/1993/3838), returned by `Helianthus light perception`: VdNEP was infiltrated into living sunflower plants. Added as a specific chemical-response lead, not generic pathogen sequence prediction. Helianthus now13 wanted (six light, seven chemical). Initial Helianthus gate with12 wanted printed0 problems; repeated after adding this real candidate.
+
+Chenopodium1974 rhythm-lead year normalized to null: the title/index key indicates historical provenance but no explicit usable publication-year field was shown. Historical C.rubrum identity remains pending current taxonomic-scope verification; it is not claimed as a validated C.album/congener measurement. No evidence or legacy records changed.
+
+Final worker30 validation `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems** after the thirteenth Helianthus lead. Worker30 final **3 genera,3 search records,27 wanted leads,0 evidence/0 measured cells,33 successful web queries**. Batch cumulative **15 genera,19 searches,130 wanted,0 evidence**. Stop between genera for fresh-context continuation: **25 remain**, resume **Arundo**, then Sorghum onward in exact assignment order. No tool quota refusal or new service refusal. Skipped round-refused OpenAlex/MDPI/UChicago/SANBI throughout; no primary-paper pages fetched. No pending candidate trait called exhausted.
