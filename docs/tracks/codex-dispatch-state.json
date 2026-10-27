@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 11,
-  "updated_at": "2026-10-27T10:26:22.487Z",
+  "generation": 12,
+  "updated_at": "2026-10-27T11:10:35.548Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -32,7 +32,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
       "observed_status": "Chat terminal. Desk audits 83–85 incorporated selected search records and verified-author wanted lines through branch; PR #37 closed/unmerged. Do not restart.",
-      "observed_at": "2026-10-27T10:26:22.487Z",
+      "observed_at": "2026-10-27T11:10:35.548Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -47,7 +47,7 @@
       "last_checkpoint_comment_id": 6433026366,
       "last_task_observation": {
         "status": "terminal",
-        "observed_at": "2026-10-27T10:26:22.487Z",
+        "observed_at": "2026-10-27T11:10:35.548Z",
         "workers_dispatched": 48,
         "worker_limit": 48,
         "search_records": 103,
@@ -111,7 +111,7 @@
         "desk_reported_raw_queue": 559,
         "reason": "Desk keeps existing issue open for next round, but dispatcher policy forbids resubmitting owned/completed assignments and does not accept comment-only requests.",
         "required_action": "New open jampotful-authored issue explicitly assigning @codex to docs/tracks/prompts/codex-round.md; reconcile overlap before any submission",
-        "observed_at": "2026-10-27T10:26:22.487Z",
+        "observed_at": "2026-10-27T11:10:35.548Z",
         "last_notification_signature": "new-eligible-issue-required:completed-assignment-28"
       }
     },
@@ -121,7 +121,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
       "observed_status": "Chat remains terminal. Desk reviewed all six fixes and incorporated result; GitHub PR #35 closed/merged.",
-      "observed_at": "2026-10-27T10:26:22.487Z",
+      "observed_at": "2026-10-27T11:10:35.548Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -161,7 +161,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
       "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
-      "observed_at": "2026-10-27T10:26:22.487Z",
+      "observed_at": "2026-10-27T11:10:35.548Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -234,7 +234,7 @@
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-10-27T10:26:22.487Z",
+    "observed_at": "2026-10-27T11:10:35.548Z",
     "eligible_open_issues": [
       28
     ],
@@ -246,15 +246,12 @@
       30
     ],
     "decisions": {
-      "28": "hold next-round request in comment: original task completed/reviewed; new eligible issue required; no send",
-      "29": "adopt desk closure; completed task retained",
-      "30": "adopt desk closure; completed task retained"
+      "28": "no-op duplicate suppression; existing completed/reviewed assignment retained. Unchanged next-round hold; no new eligible issue and no repeated notification",
+      "29": "adopt existing completed/reviewed task and desk-closed issue; no action",
+      "30": "adopt existing completed/reviewed task and desk-closed issue; no action"
     },
     "issue_comments_posted": 0,
-    "material_changes": [
-      "Desk closed issues #29 and #30",
-      "Desk left completed issue #28 open for next round; no eligible new assignment"
-    ],
+    "material_changes": [],
     "full_result_review_cycle_verified": true,
     "cycle_evidence": [
       "PR #35 desk comment 6433803841",
