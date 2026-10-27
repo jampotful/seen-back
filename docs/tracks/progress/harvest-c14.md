@@ -260,3 +260,8 @@ Queries actually run (connected web search; all available result titles/snippets
 - `lady's slipper orchid epidermal lens cells eye`
 
 Round checkpoint: 14 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 65 wanted, 0 evidence lines. Context checkpoint after Cypripedium; exact next genus Epipactis. 26 unreviewed: Epipactis, Vaccinium, Frangula, Jacobaea, Lactuca, Rabelera, Heracleum, Matricaria, Trillium, Eriogonum, Cytisus, Aralia, Berteroa, Elaeagnus, Geum, Calluna, Cymbalaria, Conium, Crataegus, Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia.
+
+
+## 2026-10-27 — issue38 coordinator shared hormone-title target
+
+Existing wanted line25 title explicitly names Corylus avellana and Fagus sylvatica. Added the latter target, made the former species-specific from the title, and recomputed ranking from the queue; no new line or fetched paper. This is a title-based hormone/dormancy candidate only. Methods must establish an applied-cue response before any chemical measurement is extracted. Worker20 c10 adopts the shared request without a duplicate. Wanted remains65, searched/evidence0; all14 earlier web screens and exact queries preserved.
