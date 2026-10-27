@@ -967,3 +967,61 @@ Added13 globally absent sources after exact DOI/normalized-title/URL/status chec
 Exclusions:rhizome fatty-acid methanol extraction tested on wheat,bracken extracts tested on chick embryos/toxicology,medicinal GCMS and tissue hormone/phytoecdysone content fail10(a) for living target responses. Cyanogenic enzyme/genome descriptions alone do not demonstrate chemical sensing. Other-fern Lygodium,Cyathea,Osmunda/Equisetum experiments are not Pteridium carry. Ferns have spores,not anthesis;seasonal frond emergence,third-year spore maturation and insect timing do not prove a daily plant rhythm. Epidermal anatomy/silicon deposition,microscope lenses,vessels and spermatozoid ultrastructure are not eyes;any actual focusing belongs under light10(b). No new eye/diel null while missing API protocol is held. Existing antheridiogen review10.1111/nph.16836 is already read globally and adds no duplicate;its Pteridium donor role alone is not a target receiver measurement.
 
 Pteridium validation: required current screen_candidates checker printed **0 problems**. All159 starting wanted lines byte-for-byte7efadc6c;all23 searched unchanged. c10 owner confirmed shared PPFD target expansion in commit61e72d08,without duplicate. Only owned wanted/progress files edited;no paper assets. Continuing Lonicera next.
+
+
+### Issue38 worker23 — Lonicera web screen and context checkpoint
+
+**Worker23 totals:2 newly web-screened genera (Pteridium,Lonicera),39 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:198 wanted,23 searched.** First159 starting wanted and23 searched lines preserved. Both screens are **protocol-partial**,not exhausted;uncached OpenAlex steps remain skipped after429,and Lonicera has3unrepaired failed genus-harvest queries. **12 genera remain;exact next Asplenium**,then Ipomoea,Nandina,Ligustrum,Zanthoxylum (adopt external-3 diel/eye/light;target Z.clava-herculis chemical still genuinely missing),Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Stop between completed Lonicera web screen and unstarted Asplenium at context boundary,no active partial genus. Prior adoptions/screens remain preserved.
+
+Preflight preserved accepted oa-12#322 congeneric L.macranthoides light evidence10.21203/rs.3.rs-7740322/v1 (a cited study,partial). It supplies no species light carry to original queued8Lonicera,so scientific/common light pair remained necessary. Old sweep-3 two-query compound absence is thin and not a completed protocol. Global corrected-first accepted-name evidence,searched/wanted/papers-status/canon checked;no duplicate target sources or owner n/a marks found. Eye canon covers animals;plant photoreceptor/chemical compilations are not invented target measurements.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded through supported network mode. Lonicera run2's exact failed queries are `Lonicera phytochrome photoreceptor`,`Lonicera light perception`,`Lonicera phototropism`,all"gave up";none represented as successful0hits. Reported failures to coordinator;no rerun of blocked OpenAlex. No genus works or citation chase are present. **Successful family17 query`Caprifoliaceae photoreceptor review`:43hits,15stored works**,all15titles/full stored abstract starts read via official works_of. Family contents:plant phenolics,ALAN overview,pollinator colour vision,flower-opening review,melatonin/pharmacology,Tibouchina floral colour,flower-colour overview,bee constancy,phenotypic plasticity,Campanula cues,floral evo-devo,Stevia germination,760-species light meta-analysis,horizontal transfer,Crotalaria-extract nanoparticles. No source page fetched and no broad family carry inferred. The failed genus steps independently prohibit new null rows even without the current OpenAlex skip.
+
+Mandatory10(e) searches first,then all4scientific/common trait pairs,family review,and only actual-lead metadata/method clarifications. Exact31 connected queries in execution order:
+- `Lonicera seed germination light dark`
+- `Lonicera germination gibberellin OR smoke OR dormancy`
+- `Lonicera floral scent volatiles`
+- `"Lonicera" flower opening time anthesis`
+- `"honeysuckle" flower opening time anthesis`
+- `"Lonicera" eye type lens-like epidermal cells`
+- `"honeysuckle" eye type lens-like epidermal cells`
+- `"Lonicera" light photoperiod phototropism`
+- `"honeysuckle" light photoperiod phototropism`
+- `"Lonicera" volatile chemical hormone response`
+- `"honeysuckle" volatile chemical hormone response`
+- `Caprifoliaceae photoreceptor review`
+- `"Why does the flower of Lonicera japonica" open dusk`
+- `"Dormancy-breaking and germination requirements of seeds of four Lonicera" 2000`
+- `"Missing LOX genes" honeysuckle`
+- `"Why does the flower of Lonicera japonica open at dusk" "10."`
+- `"Effect of exogenous GA" "Lonicera" "2018"`
+- `"Regulatory mechanisms and biosynthesis" "Lonicera" 2025`
+- `"Missing LOX genes help honeysuckle" "doi"`
+- `"Lonicera" "uhag078"`
+- `"Volatile Constituents from the Flowers of Japanese Honeysuckle" "headspace"`
+- `"Species-specific environmental requirements to break seed dormancy" Lonicera`
+- `"Dormancy and Germination in Lonicera involucrata"`
+- `"10.1002/ffj.2730090609" "living"`
+- `"Effect of exogenous GA" "DPC" Lonicera`
+- `"Dynamic Responses of Photosynthetic Parameters" "2026"`
+- `"De novo transcriptomic analysis of light-induced flavonoid" DOI`
+- `site:epublications.marquette.edu/liana_articles/521/ "Survival and growth"`
+- `site:epublications.marquette.edu/liana_articles/28/ "Vine photosynthesis"`
+- `"s12870-026-08373-5" "Lonicera caerulea"`
+- `"Lonicera" "30717525"`
+
+All exposed titles/snippets and indexed original abstracts read at actual delivered extent,including response tails recovered from session store;no20-results claim where fewer delivered. Some engine results automatically expose long original-source passages;these are indexed snippets,not directly fetched papers or evidence. No OpenAlex,MDPI,UChicago,SANBI request,paid/API fallback,new refusal,proxy change or permission request. No banned mirror,ResearchGate,Wikipedia,Scribd,DOKUMEN opened or used as primary source. Returned legcat.gov.ns.ca and springerlink.fh-diploma.de library mirrors were left unopened;original Oxford/Springer metadata supplied the citations. The earlier scratch-write review rejection is not repeated or bypassed.
+
+Added26globally absent candidates after unicode-normalized title,DOI,URL and owner-status checks. Ten germination/dormancy titles are retained under10(e):2000four-species Hidayati/Baskin/Baskin10.1017/S0960258500000507 (target L.japonica/L.maackii light/dark and GA3);L.insularis10.3389/fpls.2024.1484114;L.hypoglaucaPMID26767281;L.macranthoidesPMID28845639;2019four-Korean-species10.1186/s41610-019-0121-8;L.maackii LmABI5PMID42288142;L.caerulea var.emphyllocalyx;L.involucrata var.ledebourii IPPS;three-species Iberian dormancy at original Castilla-La Mancha;and original Korean L.chrytsantha title (spelling retained pending intake). Fixed culture lighting,thermal stratification and endogenous GA/ABA alone do not establish sensing;those uncertainties are explicit. Unknown species in broad multigenus/genus studies are not silently assigned to queue targets,and unknown fields stay empty/null.
+
+Strong chemical/diel leads:2023target scent/anthesis10.1111/jse.12916;1994target living-flower headspace10.1002/ffj.2730090609;1998Miyake/Yahara dusk-opening via original Kyushu;target Uzbekistan anthecology viaAGRIS;L.oblata reproductive source10.1186/s12870-022-03466-3 (diel applicability unresolved);2018target sprayedGA3/DPC10.19540/j.cnki.cjcmm.20181106.007;2026targetJA/LOX10.1093/hr/uhag078;2025target inducer/culture review10.3389/fpls.2025.1567140;target coastal-salinity phytohormone study;2026L.caerulea sprayedmelatonin10.1186/s12870-026-08373-5. Living cultures and recipient tests qualify as candidates under10(d),with scope for intake. JA-study transgenic Arabidopsis tests are distinct from target treatment;elapsed bud-opening delay alone is not diel timing. Melatonin's constant greenhouse photoperiod does not prove light-response treatment.
+
+**Resolved method fork:**1994Ikeda abstract initially showed flower-concrete extraction;targeted original Wiley indexed abstract explicitly also reports dynamic headspace from **living flowers** across the day. It must be retained for that component rather than wholly excluded10(a). Distilled oils,heated headspace vials,solvent extracts,dried-flower products and cats responding to honeysuckle tissue do not establish living target signaling. The ACS1996volatile-constituent source10.1021/jf950275b exposes constituent profiles and an extracted-tissue interpretation;no additional living-method measurement was established,so no new request for it.2022flower-volatile/metabolomics profiles have unresolved living/attached methods and do not automatically meet10(a);the direct living-emission sources above remain the substantive leads. Endogenous hormone abundance and predicted GRAS/circadian pathways alone are not a measured chemical response or plant clock.
+
+Light leads:target light-induced flavonoid study10.1007/s00468-019-01916-4 (date2019/issue unresolved);2026abrupt-light photosynthetic inductionPMID42884794;2018LED cultivation byJiang/Wang/Yuan (species unresolved);target winter-leaf photoprotectionPMC6271606;1988Carter/Teramura comparative vine photosynthesis;1996Baars/Kelly graded-irradiance growth. Original indexed Marquette full metadata verify1988/1996 and complete titles,not2020repository upload. Original PubMed verifies24Sept2026 photosynthetic induction,December2018GA3/DPC,and24Feb2026melatonin dates. Cambridge/Kentucky explicitly verify2000seed-paper issue despite misleading search age. Unverified dates remain null rather than inferred from DOI suffix or URL. Generic nutrient/soil supply and CO2substrate effects remain separate from chemical-cue interpretation;no values logged.
+
+Eye results show one-layer epidermis,stomata,trichomes,microscopy,pollen anatomy,medicinal human-eye effects and pollinator eyes;none establishes plant eyes,and actual focusing belongs under light10(b). Seasonal flowering,days-to-colour change,flower longevity and bee/hawkmoth timing alone are not diel measurements. Primary living-flower/day-night sources are preserved without assigning their results to other Lonicera species. No new negative record for eye or any other trait while protocol steps are incomplete. All39worker23wanted leads remain for authorized intake;none is evidence or a closed measurement.
+
+Worker23 executed **60connected queries** total (29Pteridium,31Lonicera;3Pteridium repetitions solely to recover truncated display). Exact next Asplenium remains entirely unstarted;its existing oa-9 chemical evidence must be adopted before fresh searches. Zanthoxylum target chemical remains species-specific as recorded above. Final checker/prefix validation follows this checkpoint.
+
+Final worker23 validation: actual required screen_candidates checker completed with **0 problems** at198wanted/23searched. AllJSONL parses;first159wanted lines are byte-for-byte7efadc6c and all23searched lines unchanged. git diff --check passed on owned files. Only owned wanted/progress paths changed;no evidence or paper assets. Context stop between Lonicera and entirely unstarted Asplenium. Asplenium oa-9 chemical includes queued A.ruta-muraria/A.scolopendrium assay-specific no-response results,plus other congeners;do not infer chemical carry to other queued Asplenium species.
