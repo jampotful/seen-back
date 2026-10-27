@@ -527,3 +527,35 @@ Chemical gap is supported by real applied-GA3, nitrate, smoke, salinity and MMS 
 Steam-distilled Shan-Tong floral oil W7220175094, flower phytochemistry10.1007/s11101-014-9376-y, dried medicinal tea tissues10.3390/antiox14030280, extracts and biorefinery/wood processing were not requested as living sensing evidence. The three cached eye candidates are substring matches inside lignocellulosic. General ocelli/epidermal focusing belongs under light; no plant eye inferred.
 
 Worker23 final combined check `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems**. No incomplete genus called complete and no wanted trait declared exhausted. Final handoff: **Chenopodium**, then Aquilegia onward; **28 remain**.
+
+## 2026-10-27 — worker30 continuation: Chenopodium
+
+Adds **1 genus,1 search,6 wanted,0 evidence/0 measured cells**. Batch cumulative **13 genera,17 searches,109 wanted,0 evidence**; **27 remain**, next Aquilegia. Read AGENTS and current guide, round4, THOROUGH, BRIEF/Round2, round3, desk-screen1–10 including10(e), audit53/54 findings. No branch/gate or issue29/30 edits.
+
+Both required aids run: Chenopodium absent from harvest runs1–17,20,23,24; no cached query/candidate omitted. Main actual light evidence sweep16#5 (Karssen1970 Pfr-dependent living germination) preserved. Old thin two-query search does not suppress chemical/diel/eye work. Canon catalog checked; no in-hand plant compilation supplies this genus. Global wanted/evidence/papers-status checked before append: no matching new sources. Unknown years remain null; unknown authors empty. Ten successful connected web queries, all returned titles/snippets screened; variable counts, no claim of twenty where fewer supplied. OpenAlex remains skipped after429; no MDPI/UChicago/SANBI or primary source page fetched. No web quota refusal.
+
+Exact queries:
+- `web: Chenopodium seed germination light dark`
+- `web: Chenopodium germination gibberellin OR smoke OR dormancy`
+- `web: Chenopodium jasmonate herbivore`
+- `web: Chenopodium flower opening time anthesis`
+- `web: lamb's quarters flower opening time anthesis`
+- `web: Chenopodium plant ocelli lens epidermal focusing eye`
+- `web: lamb's quarters plant ocelli lens epidermal focusing eye`
+- `web: Chenopodium chemical sensing volatiles`
+- `web: lamb's quarters chemical sensing volatiles`
+- `web: Amaranthaceae photoreceptor review`
+
+Wanted provenance:
+- Studies on Seed Dormancy and Germination in Chenopodium album L.; https://www.jstage.jst.go.jp/article/weed1962/1970/10/1970_10_19/_article/-char/en. Snippet reports that applied gibberellin at 1,000 ppm stimulated germination in place of light exposure. This is a living seed hormone-response experiment under plant10(d).
+- Distinct hormonal and morphological control of dormancy and germination in Chenopodium album dimorphic seeds; https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2023.1156794/full. Snippet reports release of black-seed dormancy by applied gibberellin and contrasting GA/ABA sensitivity across seed morphs and accessions. Read the actual treatment experiments, not sequence predictions.
+- Effects of Temperature and Gibberellic Acid (GA3) on seed Germination of Vicia sativa, Chenopodium album and Physalis minima; https://indianjournals.com/article/ijaeb-6-4-018. Snippet describes GA3 concentration treatments of living Chenopodium album seeds at 50, 150, 250 and 350 ppm across temperatures. Chemical response is unresolved; the existing light record is not the reason for requesting this.
+- Seed Germination in Chenopodium album L: Relationships between Nitrate and the Effects of Plant Hormones; https://academic.oup.com/plphys/article/77/4/940/6079828. Snippet describes applied ethylene, gibberellins and kinetin in seed germination experiments under different nitrate availability; this targets living chemical response.
+- Investigation of the endogenous rhythm of flowering in Chenopodium rubrum L.; https://bp.ueb.cas.cz/artkey/bpl-197405-0005_Investigation-of-the-endogenous-rhythm-of-flowering-in-Chenopodium-rubrum-L.php. The title explicitly investigates an endogenous flowering rhythm; snippet describes inductive photoperiodic-cycle experiments. Read to establish the measured clock rhythm and current taxonomic scope; days to seasonal flowering alone would not qualify.
+- Plant volatiles as cues and signals in plant communication; https://onlinelibrary.wiley.com/doi/full/10.1111%2Fpce.13910. Review snippet specifically reports exposure of living barley to Chenopodium album donor volatiles reducing aphid acceptance, citing Glinwood et al.2004 and Ninkovic and Ahman2009. Read the cited experiment and living donor setup; this is a named genus-specific signaling measurement lead, not a generic background request.
+
+No light-only germination studies requested: existing measured trait already covered. Applied GA, nitrate/ethylene/kinetin and GA-ABA germination treatments qualify under10(d); this is why the chemical sources are wanted. The flowering-rhythm study is held pending actual clock measurement, with no diel null. Quinoa pollen protocol PMC9118578 samples pollen at a fixed5h after lights-on and over days after anthesis; this alone does not show a daily rhythm and was not requested. New2026 Chenopodium album BBCH phenology10.1007/s44372-026-00861-0, PROSEA crop stages and flora/extension results give stages/seasons rather than within-day hours. Endogenous clock lead prevents treating daily physiology absent.
+
+Chemical-search returns on cooked quinoa seed volatiles, distilled oils/ascaridole and harvested culinary tissues10.3389/fnut.2022.912680 are chemistry under10(a), not living-plant response. Other-genus Nicotiana/tomato/Lolium jasmonate experiments cannot supply Chenopodium. The C.ambrosioides volatile-stress study10.3390/plants12223810 names living maize/soybean receptors; donor setup and taxonomy (Dysphania) uncertain, so no new request for queue C.album from it. General optical/ocelli reviews name no genus measurement in returned snippets and focusing belongs under light, never eye_type. Amaranthaceae review query returned general photoreceptors10.1146/annurev-arplant-042809-112259 and10.1002/wmts.36 plus family C4 phylogeny10.1086/378649, no genus eye data; none requested as background.
+
+Chenopodium validation: required screen_candidates.py --check printed **0 problems** before commit. No incomplete protocol called complete.
