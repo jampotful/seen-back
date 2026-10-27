@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 4/40 genera screened here (Albizia, Ambrosia, Diospyros, Rubus); 4 eye_type search records; 60 wanted lines; 0 evidence records; 0 cells closed by measurement. Baccharis is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving 35 genera requiring new work. Current service refusals remain OpenAlex 429, MDPI 429, UChicago 403 and SANBI 403; no further request made to these services. Worker16 completed Rubus and continues at Baccharis.
+**Current checkpoint:** 5/40 genera screened here (Albizia, Ambrosia, Diospyros, Rubus, Baccharis); 5 eye_type search records; 75 wanted lines; 0 evidence records; 0 cells closed by measurement. Morella is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving 34 genera requiring new work. Current service refusals remain OpenAlex429, MDPI429, UChicago403 and SANBI403; no further request made to these services. Worker16 stopped between Baccharis and Morella for fresh-context continuation.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -132,3 +132,31 @@ Read all exposed original-source titles/snippets and available returned abstract
 Added24 wanted candidates:10 germination/dormancy sources (including the USDA seed-handbook chapter as a route to its original trials);3 living floral/herbivore volatile candidates;2 daily anthesis/nectar timing candidates; and9 light/photoperiod experiments or plausible studies. Empty authors/years/titles remain empty where original-source snippets do not expose them. In particular, the 2019 International Journal of Chemical Studies PDF explicitly shows Table4, Time of anthesis in Rubus macilentus C., but its exact article title was not exposed by the original-source result; the journal title/volume/pages are available in that result. The Chinese journal figure snippet explicitly names Rubus setchuenensis nectar secretion rhythms; exact article title and daily values await intake. Spontaneous floral aroma leads require original methods to establish living attached emission and signalling; removed-tissue chemistry alone is excluded. The Rubus seed anatomy title describes low germination generally and was not promoted to a light/chemical experiment. Postharvest/juice/fruit-extract chemistry, human eye cosmetics and developmental days-to-anthesis studies were not mistaken for plant chemical sensing, plant eyes or daily opening time.
 
 The family query returned Rosaceae anthocyanin-review metadata/abstract (10.1002/fsn3.72269), alongside general photoreceptor and animal-eye reviews; all returned material was screened, without fetching. Its environmental signalling is a light trait, and its returned material reports no plant-eye measurement. One eye_type search record holds all12 exact queries and the owner's none reading; no null for diel, chemical or light while their candidates await intake. No measurement cell closes in desk screening.
+
+### Baccharis completed; worker16 checkpoint
+
+**This worker total: 2 genera (Rubus, Baccharis), 2 eye_type search records, 39 wanted lines, 0 evidence and 0 measured closures. Cumulative harvest-c8: 5 genera, 5 search records, 75 wanted lines, 0 evidence and 0 measured closures.** Pilea's completed c4 coverage stays preserved and is not redone; 34 genera require new work, starting Morella, Nephrolepis, Medicago.
+
+Official harvest_get.show and screen_candidates.show on the same legitimate cached ci snapshot report Baccharis in no genus harvest. The Asteraceae family-review record exists separately in run17: Asteraceae photoreceptor review returned15 works (out of581 hits); read all15 titles and complete stored abstracts, capped at700 characters each. The review Translating Flowering Time from Arabidopsis thaliana to Brassicaceae and Asteraceae Crop Species (10.3390/plants7040111) supplies the family review step at the metadata/stored-abstract level, without fetching MDPI. General animal/retinal-cell results were not plant-eye measurements. Global stores have only the thin old sweep-9 two-query compound absence, with no accepted Baccharis evidence/wanted candidates. Original queue has all4 traits for B. pilularis, B. halimifolia and B. salicifolia; they were all researched. Canon metadata checked as for Rubus.
+
+Connected web searches, word for word in execution order:
+- `Baccharis seed germination light dark`
+- `Baccharis germination gibberellin OR smoke OR dormancy`
+- `Baccharis floral scent volatiles`
+- `Baccharis flower opening time anthesis`
+- `eastern baccharis flower opening time anthesis`
+- `Baccharis eye type`
+- `eastern baccharis eye type`
+- `Baccharis chemical sense volatile response`
+- `eastern baccharis chemical sense volatile response`
+- `Baccharis light photoperiod phototropism`
+- `eastern baccharis light photoperiod phototropism`
+- `Asteraceae photoreceptor review`
+
+Read all exposed original-source titles/snippets and returned abstracts. Output files Baccharis-web0.txt through Baccharis-web3.txt under work/harvest-c8 retain complete raw results; long outputs were read in sections. Fewer than20 results were exposed per individual query where applicable; no claim of20 unseen titles. Only searches were sent: no source or fullpaper-page fetch. Asteraceae web review results were general plant/algal photoreceptor articles; the complete cached family review separately supplied the family step. No OpenAlex API/MDPI/UChicago/SANBI request, paid API, library proxy or unauthorized copy used.
+
+Added15 wanted lines after DOI/title/URL duplicate/status checks:9 seed/germination sources, 4 volatile/communication candidates, 1 capitulum/floret phenology candidate and the existing opened-source shading lead. Germination candidates include B. dracunculifolia, B. retusa, B. dracunculifolia subsp. tandilensis and B. milleflora/tridentata. B. salicifolia plant-plant experiments are direct living volatile emission/receiver leads (10.1002/ecy.2534 and10.1111/nph.14164); the Macrodactylus interaction and psyllid-induced volatile-profile title remain candidates whose intact-plant versus removed-tissue methods need intake. The latter title is a reference exposed in the original Wiley result for10.1002/cbdv.201800017: that is the citing article DOI, so the candidate DOI remains empty and its get field explicitly identifies the reference. Plain distilled essential-oil and collected-tissue volatile surveys were excluded under10(a), not treated as living chemical responses.
+
+The old sweep-9 record explicitly names Panetta1979,10.1071/AR9791053 and an opened abstract describing living B. halimifolia shaded to about14% of open-sky radiation. It excluded that experiment as not a light sense; owner reading10(d) now makes it a required light-response lead. Added a wanted line with the actual DOI and local provenance, without inventing the original title. The separate Panetta germination/seed-survival title is supported by current returned metadata and Canadian government review snippets. Baccharis aliena capitulum/floret phenology is a plausible daily-anthesis candidate; no diel null while it waits. Seasonal months of flowering in floras were not treated as time of day.
+
+One eye_type search record includes the real cached family query then all12 actual web queries and the owner's none reading. No null for chemical, light or diel. Unknown authors/years/titles remain empty. Validation used the actual current screen_candidates.check on the legitimate serialized hg.load snapshot, not a substitute checker; it returned0 problems before the Rubus commit and0 before the Baccharis commit. No gate code changed. Stop here between genera for fresh-context takeover; Morella is unstarted.
