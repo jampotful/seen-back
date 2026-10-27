@@ -843,3 +843,53 @@ Chemical exclusions:canescens essential-oil GC-MS/NMR,fruticosa honey headspace/
 Light:the PV shading study directly names A.fruticosa;Sun/partial-shade nursery recommendations and an8h germination regimen held constant in seed manuals do not alone demonstrate response. Dark-storage experiment is retained under10(e),actual manipulation to be read. Polygonum tinctorium blue-LED flowering study is another genus;Amorpha poppy is a cultivar name. No cross-genus light inference. Diel:April–June bloom,basal-to-tip inflorescence progression,predispersal seed predation,pollination syndrome and seasonal bee-visitation pages do not measure daily anthesis hours. No verified daily primary candidate identified,no diel null during missing API steps. Eye:hand lens is a viewing instrument;gold-eye lichens,vertebrate/invertebrate eye papers,Indigofera stomata and Baptisia eyewash do not establish Amorpha optical structures;no focusing measurement identified in snippets. Owner eye none retained without inventing a complete-protocol row.
 
 Candidate/wanted gate and whitespace check run before checkpoint commit. Exact next untouched genus Carica; no later genus screened at this checkpoint.
+
+
+## 2026-10-27 — issue38 worker13 Carica checkpoint
+
+This checkpoint:1 new web-screened genus(Carica),20queries,14wanted,0searched,0evidence. Worker13 cumulative:4new genera(Persicaria,Leucaena,Amorpha,Carica),71queries,48wanted;c10 now120wanted(initial72+48),0searched. Adopted17 prior genera separately(first16 plus Amphicarpaea);19 untouched eligible remain,next Thelypteris,then Fagus,Eleusine. OpenAlex missing protocol steps still skipped after shared429,no null/full-protocol/exhaustion claim.
+
+### Carica — original four traits
+
+Queue C.papaya,8885records,Caricaceae/Brassicales. Global evidence/corrected,wanted,searched,status and canon checked. Adopt sweep-43 wanted#4 Garrett2017 pollination-biology thesis,not re-requested; source may hold scent/timing. Preserve sweep-43#20 two actual queries and prior opened-source trail. No direct main evidence found. Fresh harvest_get/screen_candidates and cached descriptor consistently report no genus harvest. No successful API queries/citation step invented; performed real web family-review alternative below. Relevant plant canons not in hand; Animal Eyes covers Metazoa. Owner eye none/focusing-to-light rule applies.
+
+Exact20 new web queries,in executed order:
+
+- `web: Carica seed germination light dark`
+- `web: Carica germination gibberellin OR smoke OR dormancy`
+- `web: Carica floral scent volatiles`
+- `web: Carica flower opening time anthesis`
+- `web: papaya flower opening time anthesis`
+- `web: Carica photoperiod light perception phototropism`
+- `web: papaya photoperiod light perception phototropism`
+- `web: Carica chemical perception volatile signalling`
+- `web: papaya chemical perception volatile signalling`
+- `web: Carica epidermal lens cells eye type`
+- `web: papaya epidermal lens cells eye type`
+- `web: "Carica papaya" seed germination light dark gibberellin`
+- `web: Caricaceae photoreceptor review`
+- `web: "10.1590/S1983-40632014000300012"`
+- `web: "Carica papaya" floral scent headspace`
+- `web: "Conserved Daily Transcriptional Programs" light dark`
+- `web: "Emergência e vigor de mudas de genótipos de mamoeiro"`
+- `web: "Studies on Floral Biology of Different Carica Species" DOI`
+- `web: "Anthesis time, anthers dehiscence and stigma receptivity" papaya`
+- `web: "Carica papaya" "Germination of Papaya Seed" gibberellic`
+
+All delivered titles/snippets screened; grouped results do not establish20 per query. Raw provenance work/w13-c10/Carica-web.json. Papaya/Papaw name confirmed by primary titles and existing thesis. No source-page/paper fetch,OpenAlex/MDPI/UChicago request,evidence,paid API or legacy edits. Unknown metadata empty/null; explicitly verified UFG2014 volume preserved. No DOI inferred from article URL; Scialert floral DOI10.3923/pjbs.2004.301.304 was explicitly returned by primary publisher metadata. Global exact DOI/normalized-title/status check found no duplicate of14 new sources.
+
+Family `Caricaceae photoreceptor review` returned mostly general plant photoreceptor reviews,animal extraocular reviews,insect colour vision and vertebrate phototransduction;no named Carica experimental light measurement in those available snippets. Actual source review alternative recorded,not claimed a successful OpenAlex family query or a negative API result. Specific nearest sources from old sweep trail remain preserved,unrun new API citation steps remain blocked.
+
+Fourteen new leads:heat-shock/GA/ABA seed study;wild/cultivated comparative light/GA seed ecophysiology;Formosa CEPA/KNO3/GA;temperature/gibberellin trial;RedLady GA/NAA;aril-treated living-seed inhibition;desiccation/freezing/GA;hybrid growth-regulator seed protocol;IPB light/seed-coat thesis;Mengarda2014 irradiance/emergence;three daily-floral sources(mixed Carica species,Cartagena Roja andCartagena Amarilla);seed-treatment paper with older hormone-source trail. Donor extract composition alone does not count,while an actual living receiver germination assay can qualify;aril paper flagged to distinguish these. No values logged;chemical toxicity or growth change does not itself prove a receptor mechanism.
+
+Material legacy issue:sweep-43#20 explicitly rejected Mengarda2014(10.1590/S1983-40632014000300012) because irradiance/emergence was not a photoreceptor response. Current10(d) expressly accepts controlled-light growth/germination trials. Primary UFG abstract confirms four-genotype irradiance design;direct source now wanted,legacy unchanged. Suwarno/IPB source previously read only as abstract is newly wanted under10(e),not silently called absent. PrimaryJXB germination snippet's light-substitution sentence may cite earlier work;light endpoint cannot be extracted until methods identify which comparison belongs to that paper.
+
+Diel:primary mixed-species floral table includes papaya Shahi/Ranchi and historical C.cauliflora;their rows must be kept distinct,not transfer cauliflora morning hours to papaya. Cartagena Amarilla source sunset-linked timing is distinct from Roja paper. Stigma-receptivity sources mostly pre/post-anthesis relative periods,not daily hours;2021 primary paper supplies the Parés2002 reference trail. Ten-week floral development and seasonal bloom dates are not diel. Garrett thesis held without duplicate. Newly indexed comparative reproductive-fitness paper appeared only on ResearchGate,without primary metadata;retained as an unresolved citation pointer,not accepted measured evidence or invented exact source.
+
+Chemical exclusions:papaya flavour/consumer-panel reviews,green-fruit rubber odor,flesh/latex GC-MS,postharvest e-nose and solvent/distillation fruit-aroma work describe removed fruit or taster perception,not demonstrated living-plant chemical signalling under10(a). Ethylene-treated harvested-fruit proteomics PubMed32247445 is a scope boundary,not relabelled whole-plant perception from snippet;direct living-seed hormone studies already hold chemical. Pherobase indexes13 floral compounds but no primary reference identity appeared in snippets;no database presence treated as measurement. Ficus carica scent sources are another genus,including its2026 diurnal VOC paper;discarded for Carica.
+
+Light/diel genomic boundary:Conserved Daily Transcriptional Programs in Carica papaya10.1007/s12042-008-9020-3 describes best-blast Arabidopsis-papaya orthologs,promoter enrichment and computational comparison. Listed light schedules may be Arabidopsis reference conditions;no actual papaya light experiment or daily leaf/flower movement established in displayed methods. Not accepted as phenotypic diel. KEGG papaya phototransduction annotation is not an eye measurement. Light receptors in generic teaching texts or fruit coloration do not establish target response. Direct irradiance and seed-light sources retained.
+
+Eye:primary leaf-optics10.3732/ajb.94.7.1061 names Begonia,Citrus,Ficus,Colocasia,Impatiens,not Carica. Papaya transgenic leaf anatomy,chromoplast morphology and viewed-through-anatomical-lens text describe anatomy,not optical focusing. Others are human/mammal eye histology or art/sculpture discussion. No focusing measurement identified;would belong underlight. No eye null while required API steps remain unrun. All14 direct candidates await reading,no source fetched/evidence.
+
+Candidate/wanted gate and whitespace check run before checkpoint commit. Exact next untouched Thelypteris.
