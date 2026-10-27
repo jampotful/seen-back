@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 3,
-  "updated_at": "2026-10-27T03:35:05.189Z",
+  "generation": 4,
+  "updated_at": "2026-10-27T03:38:31.814Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -11,7 +11,7 @@
     "mode": "hourly_poll",
     "timezone": "America/New_York",
     "native_issue_webhook_supported": false,
-    "activation_note": "Enabled after initial acceptance and data network recovery; first scheduled-pass/result-review validation pending."
+    "activation_note": "Reconciliation completed with authenticated task access; issues 28–30 adopted without duplicate submission. Engineering result ready; desk review cycle still pending."
   },
   "policy": {
     "allowed_author": "jampotful",
@@ -31,8 +31,8 @@
       "dispatch_key": "regards-issue-28-20261027",
       "state": "running",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
-      "observed_status": "Exact main checked out; six workers launched; coordinator reports git fetch succeeds with network-enabled execution.",
-      "observed_at": "2026-10-27T03:30:13.391Z",
+      "observed_status": "Working; checkpoints pushed on the round branch. First screened batches have six paper leads; freed worker slots refilled. Coordinator preserves wanted-only screening despite queue limitation.",
+      "observed_at": "2026-10-27T03:38:31.814Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -43,29 +43,47 @@
       "queue": {
         "batches": 20,
         "genera": 644
-      }
+      },
+      "last_checkpoint_comment_id": 6433026366
     },
     "29": {
       "issue": 29,
       "dispatch_key": "regards-issue-29-20261027",
-      "state": "accepted",
+      "state": "result-ready",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
-      "observed_status": "Codex UI Working; no substantive repository progress exposed at last observation.",
-      "observed_at": "2026-10-27T03:35:05.189Z",
+      "observed_status": "Terminal response confirms PR #35, ready for research-desk review; open and unmerged.",
+      "observed_at": "2026-10-27T03:38:31.814Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
       "branch": "codex/eng-1",
       "receipt_comment_id": 6432913248,
-      "repository_execution_verified": false
+      "repository_execution_verified": true,
+      "base_sha": "96225855ff44ad1bdb15cc365314b3b4e06cb284",
+      "result": {
+        "pr_number": 35,
+        "pr_url": "https://github.com/jampotful/seen-back/pull/35",
+        "commit": "6795a2fbf8c27f1b6de8c743e0130fb65be4173c",
+        "draft": false,
+        "merged": false,
+        "files_scope_verified": true,
+        "validation_reported": {
+          "view_test_scripts": "all six pass",
+          "diff_check": "pass",
+          "senses_check": "nine unchanged baseline missing-source problems"
+        },
+        "desk_review": "pending"
+      },
+      "result_comment_id": 6433076546,
+      "last_notification_signature": "result-ready:35:6795a2fbf8c27f1b6de8c743e0130fb65be4173c"
     },
     "30": {
       "issue": 30,
       "dispatch_key": "regards-issue-30-20261027",
       "state": "running",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
-      "observed_status": "Fetched current main; GBIF HTTP 200 through supported network-enabled command execution; original task resumed.",
-      "observed_at": "2026-10-27T03:35:05.189Z",
+      "observed_status": "Working on codex/data-1 at verified fetched base; all 211 B1 wanted records accounted for, proposal append underway, registry verification continues.",
+      "observed_at": "2026-10-27T03:38:31.814Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -89,5 +107,26 @@
         }
       ]
     }
+  },
+  "last_reconciliation": {
+    "observed_at": "2026-10-27T03:38:31.814Z",
+    "eligible_open_issues": [
+      28,
+      29,
+      30
+    ],
+    "new_submissions": 0,
+    "same_chat_continuations": 0,
+    "duplicate_suppressed": [
+      28,
+      29,
+      30
+    ],
+    "decisions": {
+      "28": "adopt existing running task",
+      "29": "adopt existing completed task and published PR #35; await desk",
+      "30": "adopt existing running task; corrected blocker remains superseded"
+    },
+    "full_result_review_cycle_verified": false
   }
 }
