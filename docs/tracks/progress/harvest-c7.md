@@ -243,3 +243,33 @@ All64 distinct cached Ilex works including family corpus screened from every tit
 Stop between genera under the parent’s48-worker round cap and context boundary;10 remain: Gaillardia,Serenoa,Acer,Monarda,Nekemias,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Nekemias replant-1 substantive screening must be preserved when reached. No source pages fetched/evidence written; no new OpenAlex/MDPI/UChicago/SANBI calls or paid API. Web-query accounting is reconciled below; no actual web-tool refusal. Parent handles push/findings; no branch,gates,#29/#30,app startup/tests changed. Final gate outcome follows before commit.
 
 Final worker45 gate after metadata cleanup printed `0 problems`; `git diff --check` passed for all three owned paths. Five own-round uncertain publication-year assignments were normalized to null rather than inferring a year from a DOI suffix, volume, or relative posting age; real cached/reference-verified years preserved. JSONL counts31 searched/327 wanted and106 actual web queries across the five worker45 records verified. Earlier26 searched/260 wanted lines preserved byte-for-byte against the pre-worker45 revision; source provenance and all historical progress remain. This worker wrote0 evidence records;67 wanted-only leads remain unresolved until reading. Final next genus Gaillardia,10 remaining as TOP lists; no further genus started under48-worker round cap. All checkpoint commits staged and committed only harvest-c7 paths under shared flock; parent handles push/PR and findings pass. No app/build/server/test checks run.
+
+## 2026-10-27 issue38 worker10 continuation
+
+Starting main file baseline: **112 wanted and29 searched**; these byte prefixes and all historical progress above preserved. Historical issue28 screening remains30/40 genera despite desk registry-author incorporation reducing wanted counts; no old missing lines refilled. Salvia/Rhus excluded. This round skips OpenAlex after coordinator HTTP429; no failed service is called zero hits. Under conservative issue38 rule **no new null searched records** while required OpenAlex steps incomplete; eye_type remains owner-defined none, focusing belongs to nonvisual light. No sources fetched/evidence written.
+
+### Gaillardia checkpoint
+
+New web-screened genus1; full protocol remains partial. Required harvest_get/screen_candidates show genus absent from cached runs1-17,20,23,24. Canon catalog,corrected-first accepted-name evidence (none for Gaillardia),global wanted/search and paper-status checked. All actually returned titles/snippets read,without claiming20 per query. Seven new wanted leads target original queued G.pulchella/G.aristata germination/light and live GA3/nitrate/smoke response. Source spelling aristate retained as a reader flag. Hybrid G.grandiflora photoperiod and ray-corolla hormones are real but unqueued; no new congener-only request. Water-distilled oils10.1080/10412905.2008.9700078 excluded10(a); static-headspace harvested-flower study10.1080/22297928.2018.1548302 cannot establish living target emission and was not requested. Seasonal bloom pages,cut-flower harvest stages and flower lifespan are not daily timing. No diel/chemical/light/eye null. Family-review query returned general algae/insect works,no Asteraceae-specific photoreceptor review; no invented review completion.
+
+Exact executed web queries (16 distinct, mandatory germination pair first):
+- `Gaillardia seed germination light dark`
+- `Gaillardia germination gibberellin OR smoke OR dormancy`
+- `Gaillardia floral scent volatiles`
+- `Gaillardia light response photoperiod`
+- `blanket flower light response photoperiod`
+- `Gaillardia response to airborne volatile signals`
+- `blanket flower response to airborne volatile signals`
+- `Gaillardia flower opening time anthesis`
+- `blanket flower flower opening time anthesis`
+- `Gaillardia plant ocelli lens-like epidermal cells eye`
+- `blanket flower plant ocelli lens-like epidermal cells eye`
+- `Asteraceae photoreceptor review`
+- `"Gaillardia pulchella" germination light gibberellic`
+- `"Gaillardia" anthesis "morning"`
+- `"Gaillardia aristata" smoke germination Krock`
+- `"Seed ecology of some Florida ecotypes of native wildflowers"`
+
+Current round additions:1 newly web-screened genus,7 wanted,0 searched,0 evidence. Current files119 wanted/29 searched; historical screening coverage31/40 with9 still unreviewed beginning Serenoa. Gate required before commit below.
+
+Gaillardia checkpoint screening gate printed `0 problems`. Coordinator cross-unit reconciliation: Nekemias is adopted from substantive replant-1 diel/eye/light protocols and wanted54/55 chemical coverage,not new work. Original ten-name tail therefore contains nine newly eligible genera; after Gaillardia eight eligible genera remain plus Nekemias adopted0new. Historical records/flags remain untouched.
