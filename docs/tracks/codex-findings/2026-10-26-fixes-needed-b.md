@@ -403,7 +403,7 @@ The recheck-2 unit (QUEUE.md, 26 Oct) covers cells whose only lead cannot serve 
 
 ### Evidence whose DOI belongs to another work (1)
 
-- sweep-30:2, DOI 10.1016/j.visres.2019.10.003 (findings 2486, 2501)
+- sweep-30:2, DOI 10.1016/j.visres.2019.10.003 (findings 2486, 2501) — corrected by `recheck-owl-lws-2486` to DOI `10.1016/j.visres.2019.10.001`; superseded copy retired in `audit/ALL.jsonl`. Original retained for provenance; see `docs/tracks/progress/recheck-owl-lws-2486.md`.
 
 ### Evidence authors without a registry record (9)
 
