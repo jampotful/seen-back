@@ -312,3 +312,33 @@ Exact executed web queries (13 distinct,first germination pair first):
 Four new wanted leads (existing Pollination Ecology request preserved without duplication); current issue38 worker10 additions2 new web-screened genera,11 wanted,0 searched,0 evidence. Files123 wanted/29 searched; baseline112/29 preserved byte-for-byte. Adopted Nekemias0new preserved. Seven newly eligible genera remain:Acer,Monarda,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Acer. Historical screened coverage includes30 prior genera plus2 new plus1 adopted=33/40,with API/full-protocol completion not claimed for current round. No OpenAlex/MDPI/UChicago/SANBI calls or source fetches.
 
 Serenoa checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Acer checkpoint
+
+Newly web-screened genus3,full protocol partial. Required harvest_get/screen_candidates confirm absent from cached harvest runs1-17,20,23,24. Canon catalog,corrected-first accepted-name evidence,global wanted/search and owner status checked. Existing canon-3:633 A.saccharum airborne-neighbour response preserved,not treated as all13 queued species measured. All actually returned web titles/snippets read; no20-per-query claim. Thirteen new wanted leads cover actual target live GA/ABA/kinetin/auxin/MeJA,chemical and photoperiod responses,light/dark viable embryo and daily photosynthetic time courses. Endogenous dormancy hormone profiles are not called applied-cue measurements; required10(e) germination titles retained with uncertainties. Numbers never carried among Acer species.
+
+Other-genus Arabidopsis ACER-gene herbivory results excluded; aceroleira is not Acer. Confirmed two-maple light paper10.3389/fpls.2022.999026 names A.mono/A.pseudosieboldianum,neither original target,so no speculative target request. A.tegmentosum/A.acuminatum light/GA studies similarly unqueued; A.ginnala→A.tataricum synonym fork left unresolved without invented carry. Eye searches mainly general ocelli/Boquila/insect essays,no target optical measurement; focusing belongs to light. Anthesis results mainly seasonal phenology,not within-day opening. Sapindaceae photoreceptor searches returned no specific review to assess; family/citation API alternatives remain incomplete because OpenAlex429 skip. No null records for any trait,no papers fetched/evidence written.
+
+Exact executed web queries (18 distinct;germination pair first):
+- `Acer seed germination light dark`
+- `Acer germination gibberellin OR smoke OR dormancy`
+- `Acer jasmonate herbivore`
+- `Acer light response photoperiod`
+- `maple light response photoperiod`
+- `Acer response to airborne volatile signals`
+- `maple response to airborne volatile signals`
+- `Acer flower opening time anthesis`
+- `maple flower opening time anthesis`
+- `Acer plant ocelli lens-like epidermal cells eye`
+- `maple plant ocelli lens-like epidermal cells eye`
+- `Sapindaceae photoreceptor review`
+- `"Acer negundo" germination light gibberellin`
+- `"Acer platanoides" germination light gibberellin`
+- `"Acer" "flower" "anthesis" "hour"`
+- `"Effect of light intensities on the photosynthesis, growth and physiological performances of two maple species"`
+- `"Sapindaceae" "photoreceptor" review`
+- `"Acer" "diurnal" "photosynthesis"`
+
+This worker cumulative3 new web-screened genera,24 wanted additions,0 searched,0 evidence; current136 wanted/29 searched against112/29 starting baseline. Nekemias adopted0new. Six newly eligible genera remain:Monarda,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Monarda. Historical screened coverage30 prior+3 new+1 adopted=34/40; current-round full protocol completion/exhaustion remains0.
+
+Acer checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
