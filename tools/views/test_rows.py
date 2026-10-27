@@ -16,6 +16,20 @@ rows = importlib.util.module_from_spec(spec)
 sys.modules["rows"] = rows
 spec.loader.exec_module(rows)
 
+# ---- held intake files are excluded from both raw and corrected sources
+with tempfile.TemporaryDirectory() as d:
+    for folder in ("evidence", "audit/corrected"):
+        base = os.path.join(d, "docs/views", folder)
+        os.makedirs(base, exist_ok=True)
+        for name in ("intake-7", "intake-7-failed"):
+            with open(os.path.join(base, name + ".jsonl"), "w") as f:
+                f.write(json.dumps({"unit": "intake", "taxon": "Felis catus", "rank": "species", "family": "Felidae",
+                                    "order": "Carnivora", "trait": "pupil_shape", "value": "slit", "grade": "m"}) + "\n")
+    assert [unit for unit, _ in rows.evidence_files(d)] == ["intake-7"]
+    recs, _, _ = rows.load_evidence(d, rows.GAPS.Tax())
+    assert [r["_id"] for r in recs] == ["intake-7#1"]
+
+
 # ---- the number check
 assert rows.supported(60, [58.0]) and rows.supported(200, [210.0]) and rows.supported(5, [4.9])
 assert rows.supported(110, [108.0]) and not rows.supported(300, [108.0]) and not rows.supported(40, [108.0])

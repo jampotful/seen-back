@@ -277,7 +277,7 @@ def fill_family(t):
 
 
 def targets():
-    """Genera to harvest, heaviest first: open cells untouched, or half-searched without a full-protocol record."""
+    """Genera to harvest: open cells without a full-protocol harvest search and a successful genus receipt."""
     g = os.path.join(ROOT, 'docs/views/gaps')
     order_traits = set(json.load(open(os.path.join(g, 'rows.json')))['classes']['order'])
     by_trait = {}
@@ -286,14 +286,21 @@ def targets():
         for l in open(p, encoding='utf-8'):
             try: r = json.loads(l)
             except ValueError: continue
-            rec = (str(r.get('taxon', '')).lower(), cv.searched_fully(r), r.get('level') == 'family')
+            # A sweep's two queries and a chased DOI do not establish that the
+            # harvest protocol ran. Require explicit harvest provenance as well.
+            where = r.get('where') or []
+            if isinstance(where, str): where = [where]
+            has_harvest_provenance = any(re.search(r'\bharvest run\s+\d+', str(w), re.I) for w in where)
+            rec = (str(r.get('taxon', '')).lower(), has_harvest_provenance and cv.searched_fully(r), r.get('level') == 'family')
             for t in traits_in(str(r.get('trait', ''))): by_trait.setdefault(t, []).append(rec)
+    # Callers fetch ci before selection; inspect receipts locally, never query an API here.
+    receipts = harvested_before(fetch=False)
     out = {}
     for l in open(os.path.join(g, 'queue.jsonl'), encoding='utf-8'):
         if not l.strip(): continue
         c = json.loads(l); full = False
         for tax, fully, fam in by_trait.get(c['trait'], ()):
-            if not fully: continue
+            if not fully or c['genus'] not in receipts: continue
             if c['taxon'].lower() in tax or cv.word(c['genus'], tax) or ((c['trait'] in order_traits or fam) and (cv.word(c['family'], tax) or cv.word(c['order'], tax))):
                 full = True; break
         if full: continue
@@ -305,10 +312,11 @@ def targets():
     return sorted(out.values(), key=lambda t: -t['weight'])
 
 
-def harvested_before():
+def harvested_before(fetch=True):
     """Genera already in an earlier harvest run on the ci branch, so a new run does only the rest."""
     import subprocess, zlib
-    subprocess.run(['git', 'fetch', '-q', '--depth', '1', 'origin', '+refs/heads/ci:refs/remotes/origin/ci'], capture_output=True)
+    if fetch:
+        subprocess.run(['git', 'fetch', '-q', '--depth', '1', 'origin', '+refs/heads/ci:refs/remotes/origin/ci'], capture_output=True)
     names = subprocess.run(['git', 'ls-tree', '-r', '--name-only', 'origin/ci', 'runs/harvest'], capture_output=True, text=True).stdout.split()
     done = set()
     for n in names:
@@ -320,7 +328,7 @@ def harvested_before():
             try: d = json.loads(l)
             except ValueError: continue
             # a genus whose searches errored (rate limit, 'gave up') is not done; a later run tries it again
-            if d.get('type') == 'genus' and not any(q.get('error') for q in d.get('queries', [])): done.add(d['genus'])
+            if d.get('type') == 'genus' and d.get('queries') and not any(q.get('error') for q in d['queries']): done.add(d['genus'])
     return done
 
 

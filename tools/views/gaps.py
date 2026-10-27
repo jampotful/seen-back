@@ -2,14 +2,15 @@
 """The gap table (round 2): for each offered view, the species people meet most that borrow it, and how close the best
 evidence comes to each of its rows. Rerunnable: read docs/views/gaps/README.md.
 
-Inputs (all read through git, so nothing large is loaded into a conversation):
+Inputs (publication branches through git; curated inputs from the working tree):
   pub/naturalist-world  rows.tsv      records through 2024 per species worldwide, and the species' group (= view)
   pub/data-alachua      regions/us-fl-alachua/species.json   the county's species, records, ranks
-  evidence logs         docs/views/evidence/*.jsonl in the working tree (main), and on every origin/research/* branch
+  evidence logs         docs/views/evidence/*.jsonl in the working tree; research branches only with --with-branches
   audit                 docs/views/audit/ALL.jsonl   records the audit retracted are dropped
   pub/lit-table         *.jsonl   the automated extraction; unverified, so it only adds a hint (lit_hint), never a grade
   rows                  docs/views/gaps/rows.json   each row of each view mapped to trait keys and carry classes
-  taxonomy              docs/views/gaps/taxonomy-extra.tsv   genus, family, order for genera the sources above lack
+  taxonomy              docs/views/gaps/taxonomy-{gbif,extra}.tsv   genus, family, order
+  synonyms              docs/views/gaps/synonyms.tsv   optional, reviewed genus aliases scoped to a view
   carry                 docs/views/carry.jsonl   proposed exceptions (reported, never counted as allowed)
 
 Carry rules (docs/views/research/BRIEF.md, "The carry rules"): rule 1 numbers never travel; rule 2 photopigments and
@@ -17,7 +18,7 @@ receptor classes travel within an order when two or more measured families agree
 rule 3 optics, fields, acuity, flicker, tapetum and pupil travel only within a genus; rule 5 a measured disagreement in
 the range blocks the carry. The checks for agreement here are crude (see README) and are marked where they apply.
 
-Usage: python3 -I tools/views/gaps.py [--repo .] [--out docs/views/gaps] [--world 60] [--county 20]
+Usage: python3 -I tools/views/gaps.py [--repo .] [--out docs/views/gaps] [--world 60] [--county 20] [--with-branches]
 """
 import argparse
 import collections
@@ -49,26 +50,100 @@ def show(repo, ref, path):
 
 
 # ---------------------------------------------------------------- taxonomy
-class Tax:
-    """genus -> (family, order); filled from the county list, the evidence and the extra table."""
+VIEW_GROUP = {**dict.fromkeys(("bird", "hawk", "wader"), "Aves"),
+              **dict.fromkeys(("bee", "insect"), "Insecta"),
+              **dict.fromkeys(("cat", "dog", "deer", "rabbit", "squirrel"), "Mammalia"),
+              "frog": "Amphibia", "reptile": "Reptilia", "alligator": "Reptilia", "plant": "Plantae"}
+GROUP_ORDERS = {
+    "Aves": "Accipitriformes Anseriformes Apodiformes Caprimulgiformes Charadriiformes Ciconiiformes Columbiformes Coraciiformes Cuculiformes Falconiformes Galliformes Gaviiformes Gruiformes Passeriformes Pelecaniformes Piciformes Podicipediformes Procellariiformes Psittaciformes Sphenisciformes Strigiformes Suliformes Trogoniformes",
+    "Insecta": "Blattodea Coleoptera Dermaptera Diptera Ephemeroptera Hemiptera Hymenoptera Lepidoptera Mantodea Mecoptera Megaloptera Neuroptera Odonata Orthoptera Phasmatodea Plecoptera Psocodea Raphidioptera Siphonaptera Thysanoptera Trichoptera Zygentoma",
+    "Mammalia": "Artiodactyla Carnivora Cetacea Chiroptera Cingulata Didelphimorphia Diprotodontia Eulipotyphla Lagomorpha Monotremata Perissodactyla Pilosa Primates Proboscidea Rodentia Scandentia Sirenia",
+    "Amphibia": "Anura Caudata Gymnophiona", "Reptilia": "Crocodylia Rhynchocephalia Squamata Testudines"}
 
+
+class Tax:
+    """Genus plus taxonomic group: homonyms never borrow another group's placement.
+
+    Explicit view placements (county data) teach the order/family context for the
+    older TSVs, which have no view column. Ambiguous unscoped lookups stay empty.
+    """
     def __init__(self):
         self.g = {}
+        self.context = {o: group for group, orders in GROUP_ORDERS.items() for o in orders.split()}
+        self.synonyms = {}
 
-    def add(self, genus, family, order, force=False):
+    def group(self, family="", order="", view="", source=""):
+        if view in VIEW_GROUP:
+            return VIEW_GROUP[view]
+        if order in self.context:
+            return self.context[order]
+        for group in sorted(set(VIEW_GROUP.values())):
+            if group in source:
+                return group
+        if order.endswith("ales"):
+            return "Plantae"
+        return self.context.get(family, order or family)
+
+    def add(self, genus, family, order, force=False, view="", source=""):
         if not genus:
             return
-        old = self.g.get(genus, ("", ""))
-        fam = family or old[0]
-        ordr = order or old[1]
+        group = self.group(family, order, view, source)
+        if not group:
+            return
+        if view:
+            for name in (family, order):
+                if name:
+                    self.context.setdefault(name, group)
+        key = (genus, group)
+        old = self.g.get(key, ("", ""))
         if force or not old[0] or not old[1]:
-            self.g[genus] = (fam, ordr)
+            self.g[key] = (family or old[0], order or old[1])
 
-    def family(self, genus):
-        return self.g.get(genus, ("", ""))[0]
+    def canonical(self, genus, view):
+        seen = set()
+        while (genus, view) in self.synonyms and genus not in seen:
+            seen.add(genus)
+            genus = self.synonyms[genus, view]
+        return genus
 
-    def order(self, genus):
-        return self.g.get(genus, ("", ""))[1]
+    def aliases(self, name, view):
+        """Equivalent genus/species names in this view only; preserve the epithet."""
+        genus, sep, rest = name.partition(" ")
+        accepted = self.canonical(genus, view)
+        genera = {genus, accepted} | {g for g, v in self.synonyms
+                                       if v == view and self.canonical(g, view) == accepted}
+        return {g + sep + rest for g in genera}
+
+    def placement(self, genus, view=""):
+        if view:
+            accepted = self.g.get((self.canonical(genus, view), self.group(view=view)))
+            if accepted:
+                return accepted
+        names = self.aliases(genus, view) if view else {genus}
+        matches = {v for (g, group), v in self.g.items()
+                   if g in names and (not view or group == self.group(view=view))}
+        return next(iter(matches)) if len(matches) == 1 else ("", "")
+
+    def family(self, genus, view=""):
+        return self.placement(genus, view)[0]
+
+    def order(self, genus, view=""):
+        return self.placement(genus, view)[1]
+
+    def load_tables(self, repo):
+        base = os.path.join(repo, "docs/views/gaps")
+        for name in ("taxonomy-gbif.tsv", "taxonomy-extra.tsv"):
+            path = os.path.join(base, name)
+            if os.path.exists(path):
+                with open(path, encoding="utf-8") as f:
+                    for r in csv.DictReader(f, delimiter="\t"):
+                        self.add(r["genus"], r["family"], r["order"], view=r.get("view", ""), source=r.get("source", ""))
+        path = os.path.join(base, "synonyms.tsv")
+        if os.path.exists(path):
+            with open(path, encoding="utf-8") as f:
+                for r in csv.DictReader(f, delimiter="\t"):
+                    if r.get("old_genus") and r.get("current_genus") and r.get("view"):
+                        self.synonyms[r["old_genus"], r["view"]] = r["current_genus"]
 
 
 def clean_order(order, cls):
@@ -110,8 +185,8 @@ def parse_taxon(taxon, rank, family, order, tax):
 
 
 # ---------------------------------------------------------------- the evidence
-def load_evidence(repo, tax, retracted):
-    """All curated records: main's working tree and every research branch. -> list of dicts (deduplicated)."""
+def load_evidence(repo, tax, retracted, with_branches=False):
+    """Curated working-tree records; pending research branches are opt-in. -> list of dicts (deduplicated)."""
     seen = set()
     recs = []
 
@@ -124,12 +199,12 @@ def load_evidence(repo, tax, retracted):
                 r = json.loads(line)
             except ValueError:
                 continue
-            key = (r.get("unit"), n, r.get("taxon"), r.get("trait"), json.dumps(r.get("value")),
+            key = (unit, n, r.get("taxon"), r.get("trait"), json.dumps(r.get("value")),
                    (r.get("source") or {}).get("doi"), r.get("quote"))
             if key in seen:
                 continue
             seen.add(key)
-            u = r.get("unit") or unit
+            u = unit  # audit/fix ids name the file, never the record's shared unit field
             if "%s:%d" % (u, n) in retracted:
                 continue
             r["_id"] = "%s#%d" % (u, n)
@@ -150,12 +225,12 @@ def load_evidence(repo, tax, retracted):
                     fixes.setdefault(fx["id"], {}).update({k: v for k, v in fx.items() if k in ("partial",)})
     evdir = os.path.join(repo, "docs/views/evidence")
     for f in sorted(os.listdir(evdir)) if os.path.isdir(evdir) else []:
-        if f.endswith(".jsonl"):
+        if f.endswith(".jsonl") and not f.endswith("-failed.jsonl"):
             take(f[:-6], open(os.path.join(evdir, f), encoding="utf-8").read(), "main")
-    refs = git(repo, "for-each-ref", "--format=%(refname:short)", "refs/remotes/origin/research").decode().split()
+    refs = git(repo, "for-each-ref", "--format=%(refname:short)", "refs/remotes/origin/research").decode().split() if with_branches else []
     for ref in refs:
         for path in git(repo, "ls-tree", "-r", "--name-only", ref, "docs/views/evidence", check=False).decode().split():
-            if path.endswith(".jsonl"):
+            if path.endswith(".jsonl") and not path.endswith("-failed.jsonl"):
                 take(os.path.basename(path)[:-6], show(repo, ref, path), ref.replace("origin/", ""))
     index = collections.defaultdict(list)
     for r in recs:
@@ -223,18 +298,27 @@ def disagree(records, trait):
 # ---------------------------------------------------------------- one cell: species x trait
 def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
     """-> dict(state m|g|i, level, rec, rule, note). Closest evidence is reported whatever its state."""
+    view = sp.get("view", "")
     genus = sp["genus"]
     fam = sp["family"]
     order = sp["order"]
+    def lookup(lvl, key):
+        names = tax.aliases(key, view) if view and lvl in ("species", "genus") else {key}
+        return [r for name in sorted(names) for r in index.get((lvl, name, trait), [])]
+
+    def same_group(r):
+        return not view or tax.group(r.get("_family", ""), r.get("_order", "")) == tax.group(view=view)
+
+    species_names = tax.aliases(sp["sci"], view) if view else {sp["sci"]}
     found = {}
     for lvl, key in (("species", sp["sci"]), ("genus", genus), ("family", fam), ("order", order)):
-        recs = index.get((lvl, key, trait), [])
+        recs = lookup(lvl, key)
         if lvl == "species":
             recs = [r for r in recs if r["_lvl"] == "species"]
         elif lvl == "genus":
-            recs = [r for r in recs if r["_lvl"] in ("species", "genus") and sp["sci"] not in r["_names"]]
+            recs = [r for r in recs if r["_lvl"] in ("species", "genus") and not species_names.intersection(r["_names"])]
             if True:
-                recs += [r for r in index.get(("genus", genus, trait), []) if r["_lvl"] == "genus" and r not in recs]
+                recs += [r for r in lookup("genus", genus) if r["_lvl"] == "genus" and r not in recs]
         elif lvl == "family":
             fams = [r for r in index.get(("family", fam, trait), [])]
             recs = fams
@@ -245,6 +329,7 @@ def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
         if lvl == "order" and not recs:
             recs = [r for fam_recs in ord_ev.get((order, trait), {}).values() for r in fam_recs
                     if r["_family"] != fam]
+        recs = [r for r in recs if same_group(r)]
         if recs:
             found[lvl] = recs
     out = {"state": "i", "level": "none", "rec": None, "rule": "", "note": ""}
@@ -266,7 +351,8 @@ def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
             return out
     # order carry (rule 2 only)
     if cls == "order" and order:
-        fams = ord_ev.get((order, trait), {})
+        fams = {f: [r for r in rs if same_group(r)] for f, rs in ord_ev.get((order, trait), {}).items()}
+        fams = {f: rs for f, rs in fams.items() if rs}
         allrecs = [r for rs in fams.values() for r in rs]
         if len(fams) >= 2 and not disagree(allrecs, trait):
             out.update(state="g", level="order", rec=best(allrecs), rule="rule 2 (%d measured families)" % len(fams))
@@ -312,6 +398,7 @@ def main():
     ap.add_argument("--world", type=int, default=60)
     ap.add_argument("--county", type=int, default=20)
     ap.add_argument("--no-lit", action="store_true")
+    ap.add_argument("--with-branches", action="store_true", help="include pending origin/research/* evidence (not for publication)")
     a = ap.parse_args()
     repo = os.path.abspath(a.repo)
     out = os.path.join(repo, a.out)
@@ -328,10 +415,8 @@ def main():
     # taxonomy
     tax = Tax()
     for s in cj:
-        tax.add(s["genus"], s["family"], clean_order(s["order"], s["class"]))
-    extra = os.path.join(out, "taxonomy-extra.tsv")
-    for r in csv.DictReader(open(extra, encoding="utf-8"), delimiter="\t"):
-        tax.add(r["genus"], r["family"], r["order"])
+        tax.add(s["genus"], s["family"], clean_order(s["order"], s["class"]), view=s["eyes"])
+    tax.load_tables(repo)
 
     audit_path = os.path.join(repo, "docs/views/audit/ALL.jsonl")
     retracted = set()
@@ -341,14 +426,15 @@ def main():
             if v.get("verdict") == "retract":
                 retracted.add("%s:%s" % (v["unit"], v["line"]))
 
-    recs, index = load_evidence(repo, tax, retracted)
+    recs, index = load_evidence(repo, tax, retracted, with_branches=a.with_branches)
+    FAMILY_INDEX.clear()
     for r in recs:
         if r["_lvl"] in ("species", "genus") and r.get("_family"):
             FAMILY_INDEX.setdefault((r["_family"], r["_trait"]), []).append(r)
     recs = [r for r in recs if r["_lvl"]]
     ord_ev = order_evidence(recs)
     # fill the taxonomy again now that the evidence has added its genera
-    rowmap = json.load(open(os.path.join(out, "rows.json"), encoding="utf-8"))
+    rowmap = json.load(open(os.path.join(repo, "docs/views/gaps/rows.json"), encoding="utf-8"))
     cls_of = {}
     for c, ts in rowmap["classes"].items():
         for t in ts:
@@ -408,9 +494,10 @@ def main():
             e["crank"] = rank
         for e in sel.values():
             genus = e["sci"].split(" ")[0]
+            e["view"] = view
             e["genus"] = genus
-            e["family"] = tax.family(genus)
-            e["order"] = tax.order(genus)
+            e["family"] = tax.family(genus, view)
+            e["order"] = tax.order(genus, view)
             e["county"] = county[e["sci"]]["n"] if e["sci"] in county else 0
         species = sorted(sel.values(), key=lambda e: (-e["world"], e["sci"]))
         wlist = [e for e in species if "wrank" in e]
@@ -557,10 +644,10 @@ def write_readme(out, summary, nrec, nret, nq):
          "git fetch --depth 1 origin +refs/heads/pub/naturalist-world:refs/remotes/origin/pub/naturalist-world \\",
          "  +refs/heads/pub/data-alachua:refs/remotes/origin/pub/data-alachua \\",
          "  +refs/heads/pub/lit-table:refs/remotes/origin/pub/lit-table",
-         "git fetch --depth 1 origin '+refs/heads/research/*:refs/remotes/origin/research/*'",
          "python3 -I tools/views/gaps.py            # add --no-lit to skip the literature table",
          "```",
-         "It reads the evidence logs on the working tree and on every `origin/research/*` branch, drops records the "
+         "It reads the working-tree evidence logs (excluding held `*-failed.jsonl`); `--with-branches` explicitly includes "
+         "pending `origin/research/*` evidence for comparison only. It drops records the "
          "audit retracted (`docs/views/audit/ALL.jsonl`), and rewrites `docs/views/gaps/<view>.md`, `queue.jsonl`, `cells.jsonl` (every cell with its state, for the papers-wanted verdicts) and "
          "`summary.json`. Add a genus to `taxonomy-extra.tsv` when a new species has no family or order; the table "
          "marks those it filled by hand as `own`, from general knowledge, unchecked against GBIF.\n",
