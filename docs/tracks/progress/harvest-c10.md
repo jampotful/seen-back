@@ -1084,3 +1084,61 @@ Remaining cached title dispositions:tomato,Bromus,Brachypodium,Ischaemum,Arabido
 Parent routed worker23 harvest-c8's source-specific Pteridium request. Expanded prior issue38 c10wanted#123 DOI10.1007/s10265-015-0736-5 fromfor[Thelypteris dentata]toalso Pteridium aquilinum,records89441 fromqueue. Worker23's exact-title connected search read original PMC4550647 andSpringer indexed Fig4 caption:photosynthesis/stomatal conductance/intercellular CO2 againstPPFD forbothfern species atfixedambientCO2. This supports P.aquilinum light-response intake;chemicalCO2 cue eligibility remains unresolved. Existing queries/source provenance preserved,why/where supplemented,no evidence orpagefetch. c8 adopts withoutduplicate. This is the sole explicit metadata change to the earlier127wanted prefix;all other earlier rows andall historical progress remain byte-preserved. Parent authorized its ownNEW row expansion;no legacy main row orother-unit file edited.
 
 Fagus checkpoint68b0cf90 passed0problems. Final Eleusine candidate/wanted checker printed0problems before handover commit;whitespace check passed. ExactnextStellaria;do not repeat these2 available-source screens merely because rawqueue lists wanted-only genera. OpenAlex unavailable;no failedservice counted aszerohits.
+## 2026-10-27 — issue38 worker26 Stellaria checkpoint
+
+This checkpoint:1 newly available-source-screened genus(Stellaria),19 actual new web queries,10 new wanted,0 searched,0 evidence. c10 current191wanted(initial main72+previousissue38 109+worker26 10),searched remains empty. Prior first16 issue28 screens,Amphicarpaea adoption,and seven issue38 genera Persicaria/Leucaena/Amorpha/Carica/Thelypteris/Fagus/Eleusine remain preserved.25of40 genera now screened/adopted;15 eligible untouched remain,exact next Typha,then Pueraria,Thunbergia,Morus,Symphyotrichum,Melinis,Nyssa,Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. OpenAlex additions remain skipped after shared429,not zero hits;no full-protocol/exhaustion claim or null row.
+
+Read AGENTS.md first,worker guide,round protocols including desk1–10,THOROUGH/BRIEF Round2,audits53/54 and relevant prior c10 progress. Cloud-runtime skill/network reference applied:current enforced unrestricted HTTP,observations current,VPNfalse. No source-page/paper fetch,OpenAlex API request,paid API,evidence,legacy prefix or other-unit edit. Official harvest_get and screen_candidates ran with supported network permission;outputs work/worker26/first-harvest.txt and first-candidates.txt. Raw full metadata for remaining genera cached once in work/worker26/<Genus>.json through official hg.load. The absent c7–12 context cache is expected,not a failure.
+
+### Stellaria — existing eye coverage and species-specific evidence adopted
+
+Global queue/evidence/audited corrections/wanted/searched and owner papers-status checked before research and again before append. Original target species S.media32709records,S.graminea14394,S.aquatica9667,S.pubera9554. S.media sense_light_nonvisual already has sweep-7#3 green-light germination abstract;do not erase/research it as absent. Other species retain their own light gaps. plant-1 searched#4 has proper paired eye web provenance and screened sponge10.1242/jeb.067140,so adopt eye coverage without repeat queries. Owner eye_type none and focusing-to-light reading applies. Earlier sweep-7 combined query is thin for chemical/diel;do not repeat its exact string or count it as full protocol. Relevant plant light/chemical/angiosperm-diel canon not in hand;Animal Eyes covers Metazoa,not a plant experiment.
+
+Fresh cached genus run4, supplements12/14 and family run17 contain132unique works including15family review titles/starts. All132titles and available abstract starts read. Genus successful queries in printed order:
+
+- `Stellaria phytochrome photoreceptor`
+- `Stellaria light perception`
+- `Stellaria phototropism`
+- `Stellaria flower opening time`
+- `Stellaria nyctinasty`
+- `Stellaria volatile signalling`
+- `Stellaria photoperiod`
+- `Stellaria circadian rhythm`
+- `Stellaria anthesis`
+- `Stellaria pollination biology`
+
+Family review `Caryophyllaceae photoreceptor review` has72hits/15listed. No genus citation step cached. Missing common-name scientificAPI steps remain unrun after429. Family works include Arabidopsis PHYD,Colobanthus UV-B,Salix reward/fungal Taxol,moth/insect photic-environment reviews,plant MYB/copper/plasticity/flower-colour reviews and floral opening update. Other-genus experiments do not transfer to Stellaria. Existing plant-1#59 DOI10.1093/jxb/eru327 adopts flower-opening review request without duplicate. No whole-text-negative conclusion from sparse abstracts or unread tables.
+
+Exact19new web queries,in executed order:
+
+- `web: Stellaria seed germination light dark`
+- `web: Stellaria germination gibberellin OR smoke OR dormancy`
+- `web: Stellaria floral scent volatiles`
+- `web: Stellaria photoperiod light perception phototropism`
+- `web: chickweed photoperiod light perception phototropism`
+- `web: Stellaria flower opening time anthesis`
+- `web: chickweed flower opening time anthesis`
+- `web: Stellaria chemical perception volatile signalling`
+- `web: chickweed chemical perception volatile signalling`
+- `web: "Exposure to red light" "gibberellins" "Stellaria"`
+- `web: "Stellaria" "flower" "09" "opens"`
+- `web: "Exposure to red light, temperature and exogenous gibberellins" doi`
+- `web: "Environmental signals for seed germination" Vandelook 2008`
+- `web: "Promotion of germination" "green safe lamp" Baskin`
+- `web: "Stellaria" "Matsui" "2012" volatiles`
+- `web: site:academicjournals.org "AJB11.2272" "2012"`
+- `web: "Stellaria" "Light- and temperature-entrained" "1996"`
+- `web: "Stellaria media" "Matsui" "green leaf"`
+- `web: "Phenotypic plasticity of sun and shade ecotypes of Stellaria longipes" doi`
+
+All delivered grouped titles/snippets read;no claim20per query. Raw Stellaria-web1.json through-web5.json in worker scratch. NCSU/Cornell/UF establish chickweed=S.media;Cerastium chickweeds,other-genus smoke experiments and chickpea are not imported. First germination pair and scent ran before trait pairs under10(e). Later queries resolve primary red-light/GA paper metadata,circadian duplicate identity,green-lamp original and specific wound-volatile citation trail. No source page opened;incidental ResearchGate/Academia/Wikipedia/unauthorized-redistributor listings were not used as sources or opened.
+
+10newwanted:Vandelook2008 actual S.graminea/S.nemorum light/nitrate germination;Tang2012 target S.aquatica darkness/red pulse with GA3/GA4+7;Baskin1979 S.media green-safe-lamp germination;two exact-title S.media lab/buried-seed light/nitrate source leads(originalauthor/year/DOI unresolved);S.media2026 osmotic/salt/pH seed trial;Wageningen1987 S.media germination report;and3S.longipes-only sources(1996circadian enzyme/mRNA entrainment,2015lowR:FR/appliedIAA,2012cytokinin/light-quality). S.longipes targetcount0,no cue carry to queue species. Salt/pH/osmotic source retained under10(e),not a claim of chemical recognition from generic stress. Cytokinin source confirms endogenous hormone levels,not necessarily applied-hormone response;its new row is light-only pending methods. Germination-title leads retained under10(e) regardless of uncertain chemical treatment. No numbers logged.
+
+PubMed8771799/EPA original indexed metadata confirms1996circadian DOI10.1007/BF00195723;cached duplicate10.1007/BF00231399 has same title and is not a second request. Existing plant-1wanted#24 Miura2001 S.media photoperiod,#25–30 S.longipes light/hormone studies,and#31 Noronha1997 S.media light/dormancy are adopted without duplicates. Legacy#25–30 assign queue species to congener-only sources;parent notified for desk targeting correction,legacy untouched. Their actual appliedGA/ABA/ethylene trials hold congener chemical evidence only,not target chemical closure.
+
+Chemical exclusions:2024edible-weed leafSPME-GC/MS and2022wild-plant food aromas use collected material,not intact signal;medicinal root methanol/metabolomic/harvest-age surveys,tea in hypercholesterolemic rats andwild-edible phytochemical assays likewise fail10(a) forplantresponse. Tomato transgenic SmAMP tests tomato,not living Stellaria receiver. Wounded-chickweed GLV claim in2026sensor review citesMatsui2012,but exact primary source/tissue state not resolved in two searches;retain as citation pointer here,not invented source or intact-emitter measurement. GenericVOC reviews identify no target receiver experiment in returned snippets. Herbicide physiology theses with wheat/Lolium targets andrice ethylenevolatiles measureothergenera;no invented Stellaria response from mention alone.
+
+Diel:real1996S.longipes oscillation lead retained;daily hour in target species not found in shown starts. Month/year flowering and3wk flower cohorts,seed sheddingat cropmaturity,vernalization/photoperiodal flowering days andordinary anther anatomy are not target daily schedule. Historical BHL flowers/books and1961phototropism list remainunread species-table pointers,no whole-text absenceclaim. Pollination/biosystematic/apetaly/genome/ecologicalrange/forage surveys show no new target daily/chemical measurement in available starts;insect thrips/Nysius/moth activity,animal Gammarus/bison/rabbit work andSorghum/Arabidopsis/Phaseolus/cucumber/Rumex/tobacco/Helianthus/soybean/tomato experiments concern otherorganisms. No evidence/null logs. Normalized Unicode-title/DOI duplicate/status check passed before append;unknown bibliographicfields blank/null.
+
+Candidate/wanted precommit checker finished with exit0 and printed0problems (work/worker26/Stellaria-check.txt); whitespace check passed. Next untouched genus Typha.
