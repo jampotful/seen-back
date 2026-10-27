@@ -130,3 +130,24 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - `Orchidaceae photoreceptor review` (stored family review)
 
 Round checkpoint: 4 genera web-screened for round; 0 full-protocol complete; 0 search rows; 15 wanted lines; 0 evidence. Remaining unreviewed: 36; next Lysichiton.
+
+### Lysichiton
+
+Web screening finished for this round: three wanted leads (light/dark germination compilation, exact primary odor/pollination citation surfaced by WFO, and secondary source naming the Lysichiton spathe odor and beetle pollinator). Harvest_get and screen_candidates both report no stored harvest, so there are no stored harvest queries or candidates to adopt. Mandatory germination queries returned the light/dark compilation and horticultural information; no named hormone trial for this genus appeared. Common-name searches frequently returned Symplocarpus foetidus or S. renifolius (including thermogenic oscillations, PEBP genes and damaged-plant odors); those concern different genera and are excluded. Lisianthus lighting results concern Eustoma, also excluded. Diel results gave seasonal anthesis or flower/spathe description, no verified daily opening hour. Eye pair returned general ocelli work without a genus-specific focusing experiment. Family-review query returned broad plant/algal photoreceptor reviews and Araceae morphology; none supplied a Lysichiton measurement in the returned snippet. Canon checked locally. OpenAlex steps omitted after coordinator 429; no full protocol/exhaustion claim, no null search record.
+
+Queries run, word for word:
+
+- `web: Lysichiton seed germination light dark`
+- `web: Lysichiton germination gibberellin OR smoke OR dormancy`
+- `web: Lysichiton floral scent volatiles`
+- `web: Lysichiton flower opening time anthesis`
+- `web: western skunk cabbage flower opening time anthesis`
+- `web: Lysichiton plant ocelli lens-like epidermal cells eye`
+- `web: western skunk cabbage plant ocelli lens-like epidermal cells eye`
+- `web: Lysichiton response to airborne volatile signals`
+- `web: western skunk cabbage response to airborne volatile signals`
+- `web: Lysichiton light response photoperiod`
+- `web: western skunk cabbage light response photoperiod`
+- `web: Araceae photoreceptor review`
+
+Round checkpoint: 5 genera web-screened for round (Scilla, Diphasiastrum, Xanthium, Goodyera, Lysichiton), all partial under the full protocol. 0 full-protocol complete; 0 searched rows; 18 wanted lines; 0 evidence. Remaining unreviewed: 35; exact next Calamagrostis. OpenAlex skipped for the round after coordinator HTTP 429; no additional service refusals. No pages fetched, no PDFs/full text committed.
