@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 4 genera web-screened, 0 protocol-complete, 0 search records, 26 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 5 genera web-screened, 0 protocol-complete, 0 search records, 27 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -83,4 +83,24 @@ Exact web searches (in order):
 - web: fir plant ocelli lens-like epidermal cells eye
 - web: Pinaceae photoreceptor review
 
-Next genus: Fouquieria; 36 genera remain unreviewed.
+
+
+### Fouquieria: web-screened, protocol partial
+
+Required harvest_get and screen_candidates show no harvest; queue has four traits, no prior wanted found. Plant canon checked as above. Deno first-supplement germination entry retained as one light/chemical treatment lead. Other germination results are horticultural instructions and general fire reviews; no genus-specific controlled light/GA study established. Flowering/pollination results give seasons or visitor composition, no daily opening hours. Chemical results concern extracts, tissue phenolics and animal assays, excluded under owner reading 10(a). Ordinary mucilaginous epidermis/anatomical descriptions do not report focusing. Family review search gives anatomical reviews and general photoreceptor reviews, no additional genus measurement. Common name ocotillo verified by NPS and University of Arizona results. OpenAlex unavailable; no exhaustion claim.
+
+Exact web searches (in order):
+- web: Fouquieria seed germination light dark
+- web: Fouquieria germination gibberellin OR smoke OR dormancy
+- web: Fouquieria floral scent volatiles
+- web: Fouquieria photoperiod phototropism light response
+- web: ocotillo photoperiod phototropism light response
+- web: Fouquieria flower opening time anthesis
+- web: ocotillo flower opening time anthesis
+- web: Fouquieria plant ocelli lens-like epidermal cells eye
+- web: ocotillo plant ocelli lens-like epidermal cells eye
+- web: Fouquieria chemical response volatile signaling
+- web: ocotillo chemical response volatile signaling
+- web: Fouquieriaceae photoreceptor review
+
+Next genus: Epilobium; 35 genera remain unreviewed.
