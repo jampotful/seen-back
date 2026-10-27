@@ -341,3 +341,19 @@ Queries actually run (connected web search; returned titles/snippets screened, f
 - `Jacobaea epidermal lens cells eye`
 - `tansy ragwort epidermal lens cells eye`
 - `Asteraceae photoreceptor review`
+
+### Lactuca
+
+Web-query screen for round completed; full protocol partial (OpenAlex unavailable). Official harvest_get and screen_candidates: absent from harvest. Adopted target L. serriola light/photoperiod evidence sweep-14#3; cultivated L. sativa light records are not carried to target. Seventeen new wanted leads, including germination titles required by 10(e), applied smoke/GA3/ethylene responses, seedling bacterial VOC response and MeJA-induced emission. Direct target-specific sources are a lettuce-genotype abstract naming two L. serriola genotypes and the exact seed-meal herbicidal-trial title indexed in Cornell. Most other candidates are L. sativa only; records explicitly prevent carry. Flower opening and closure: a review (10.1093/jxb/erg213) already wanted in harvest-c9; adopted as a shared source route to Oltmanns 1895 Lactuca light-dependent closure, original exact species/title unresolved. No duplicate review line. PROTA/PROSEA are encyclopedia accounts and were not used as evidence. Air-dried L. tatarica microsteam-distillation VOC study 10.1002/cbdv.71736 and ready-to-use lettuce quality volatiles excluded under 10(a). Eye hits animal lenses, Ulva lactuca (different genus), and 10.3732/ajb.94.7.1061 measuring other genera; no Lactuca focusing measurement established. Adopted Asteraceae family-review query/results from preceding Jacobaea screen instead of repeating it; general reviews only. Canon checked; no fetched pages, evidence or nulls.
+
+Queries actually run (connected web search; returned titles/snippets screened, fewer than 20 when fewer were delivered):
+
+- `Lactuca seed germination light dark`
+- `Lactuca germination gibberellin OR smoke OR dormancy`
+- `Lactuca floral scent volatiles`
+- `Lactuca flower opening time anthesis`
+- `prickly lettuce flower opening time anthesis`
+- `Lactuca volatile chemical signalling`
+- `prickly lettuce volatile chemical signalling`
+- `Lactuca epidermal lens cells eye`
+- `prickly lettuce epidermal lens cells eye`
