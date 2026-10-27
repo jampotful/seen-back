@@ -273,3 +273,42 @@ Exact executed web queries (16 distinct, mandatory germination pair first):
 Current round additions:1 newly web-screened genus,7 wanted,0 searched,0 evidence. Current files119 wanted/29 searched; historical screening coverage31/40 with9 still unreviewed beginning Serenoa. Gate required before commit below.
 
 Gaillardia checkpoint screening gate printed `0 problems`. Coordinator cross-unit reconciliation: Nekemias is adopted from substantive replant-1 diel/eye/light protocols and wanted54/55 chemical coverage,not new work. Original ten-name tail therefore contains nine newly eligible genera; after Gaillardia eight eligible genera remain plus Nekemias adopted0new. Historical records/flags remain untouched.
+
+### Serenoa checkpoint
+
+Newly web-screened genus2,full protocol partial. Required harvest_get/screen_candidates run; all103 distinct cached works (family/citation included) read from every title and all available abstract text. Harvest run3 plus supplements14/20 has11 successful genus queries and family review; no failed step. Cached citation10.3375/043.038.0104 returns one work,Are Native Palms Pollinator Hogs(10.3375/043.040.0205): Angadenia reproductive response beside flowering palms,not Serenoa daily timing. Family-review alternative Twenty-five years of progress in understanding pollination mechanisms in palms(10.1093/aob/mcr192) used as snippet/cached-abstract context,no source fetch. Cached phytochrome-gene family phylogeny is not target functional measurement.
+
+Canon,corrected-first accepted-name evidence,global searched/wanted and owner status checked. Existing main scent sweep-46:10 preserved; no repeat chemical pair or duplicate scent request. New germination leads are deliberately uncertain about whether light was experimentally compared; fixed14h culture is not called a light response. Direct floral-biology titles are unresolved daily-timing candidates,no hours invented. Medical extracts,processed berries,hair-loss trials and pharmacology concern human/animal responses and fail10(a); camera lens ghost-orchid paper10.1653/024.102.0401 and human-eye review10.3389/fphar.2024.1270073 do not measure a plant eye. Owner eye_type none,focusing belongs to light; no new eye/null rows while API steps incomplete.
+
+Exact cached successful queries in source order:
+- `Serenoa phytochrome photoreceptor`
+- `Serenoa light perception`
+- `Serenoa phototropism`
+- `Serenoa flower opening time`
+- `Serenoa nyctinasty`
+- `Serenoa anthesis`
+- `Serenoa pollination biology`
+- `Serenoa photoperiod`
+- `Serenoa circadian rhythm`
+- `Serenoa epidermal lens cells`
+- `Serenoa epidermal focusing leaf optics`
+- `Arecaceae photoreceptor review`
+
+Exact executed web queries (13 distinct,first germination pair first):
+- `Serenoa seed germination light dark`
+- `Serenoa germination gibberellin OR smoke OR dormancy`
+- `Serenoa floral scent volatiles`
+- `Serenoa light response photoperiod`
+- `saw palmetto light response photoperiod`
+- `Serenoa flower opening time anthesis`
+- `saw palmetto flower opening time anthesis`
+- `Serenoa plant ocelli lens-like epidermal cells eye`
+- `saw palmetto plant ocelli lens-like epidermal cells eye`
+- `Arecaceae photoreceptor review`
+- `"Serenoa repens" light shade seedlings`
+- `"Seed germination of Serenoa repens"`
+- `"Temperature and imbibition effects" "Serenoa"`
+
+Four new wanted leads (existing Pollination Ecology request preserved without duplication); current issue38 worker10 additions2 new web-screened genera,11 wanted,0 searched,0 evidence. Files123 wanted/29 searched; baseline112/29 preserved byte-for-byte. Adopted Nekemias0new preserved. Seven newly eligible genera remain:Acer,Monarda,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Acer. Historical screened coverage includes30 prior genera plus2 new plus1 adopted=33/40,with API/full-protocol completion not claimed for current round. No OpenAlex/MDPI/UChicago/SANBI calls or source fetches.
+
+Serenoa checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
