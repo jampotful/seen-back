@@ -1,0 +1,38 @@
+# harvest-c22b (desk screening, plant genera; 26 October 2026)
+
+Branch research/harvest-c22b, cut from origin/main 823ea417. This unit takes the 26 genera that harvest-c22 left (docs/tracks/batches/harvest-c22.json, Nereocystis to Physocarpus), screened under docs/tracks/prompts/desk-screen.md points 1 to 10 and the plant paragraph of round4-harvest.md, after reading audits 79 and 80. Files: docs/views/searched/harvest-c22b.jsonl and docs/views/wanted/harvest-c22b.jsonl. No evidence records. Gate: `screen_candidates.py --check` prints 0 problems before every commit.
+
+## Method
+
+OpenAlex refused this machine (proxy 403 on api.openalex.org), so no OpenAlex step ran here. Genera in no harvest run hold web searches only and say so; genera in a harvest run list the harvest's queries word for word, then the web searches, and name every screen candidate in `screened`. Search words: diel "flower opening time anthesis" (scientific and common name; for the kelps and Huperzia, which have no flowers, the nearest timed event); eye_type "plant ocelli lens-like epidermal cells focusing light" (both names); sense_chemical "<Genus> jasmonate OR elicitor OR hormone response", plus "<Genus> floral scent volatiles" for insect-pollinated flowers; sense_light_nonvisual "<Genus> light intensity OR shade OR photoperiod growth" (point 10e). Results were judged by title (the search tool returned no snippets) and nothing was opened. A trait whose searches showed a work that may hold a measurement for a species of the genus stays out of the record and the work goes on the wanted list (point 3); hormone and elicitor responses (10d), light-intensity growth or germination trials (10d) and living volatile emission (10a) all count. A trait with evidence on main gets no record.
+
+## Genera
+
+| Genus | Records | Left out, and why |
+|---|---|---|
+| Nereocystis | diel, eye_type | sense_chemical: two lamoxirene sperm-release works (10.2307/1543327; 10.1515/znc-1984-0629) on the wanted list. sense_light_nonvisual: evidence on main (sweep-46:6). |
+| Croton | eye_type | sense_chemical: University of Johannesburg record on volatiles of African Croton species (living or distilled not seen). sense_light_nonvisual: Revista Arvore 2003 shade study (SciELO). diel: evidence on main (sweep-46:7). |
+| Scirpus | diel, eye_type, sense_chemical | sense_light_nonvisual: evidence on main (sweep-46:9). |
+| Huperzia | eye_type, sense_chemical | sense_light_nonvisual: Bulletin of Botanical Research 2009 29(4): 411 and Jishou University journal 2016 (10.3969/j.cnki.jdxb.2016.01.015). diel: Frontiers in Plant Science 10.3389/fpls.2023.1226027, returned for both diel searches. |
+| Reseda (run 7) | diel, eye_type, sense_chemical | sense_light_nonvisual: evidence on main (sweep-46:11). All 17 harvest candidates screened. |
+| Coreopsis (run 7) | eye_type | diel and sense_chemical: the Journal of Pollination Ecology study of C. lanceolata floral scent and pollination (10.26786/1920-7603(2023)740). sense_light_nonvisual: two C. grandiflora photoperiod studies (10.21273/jashs.118.4.513; 10.21273/hortsci.40.4.1100a). All three come from the harvest, so no web search was spent on those cells. |
+| Polygonum (run 7) | diel, eye_type | sense_chemical: two jasmonate-volatile studies from the harvest (P. longisetum, 10.1584/jpestics.g07-06; P. minus, 10.1016/j.jplph.2019.152994), with the fork that GBIF places both species in Persicaria. sense_light_nonvisual: evidence on main (sweep-46:12). |
+| Arctotheca (run 7) | eye_type, sense_chemical | diel: the untitled Frontiers article 10.3389/fpls.2018.01585 came back for the capeweed diel search (harvest-c22 met it for two other genera). sense_light_nonvisual: evidence on main (sweep-46:13). |
+| Eurybia (run 3) | diel, eye_type, sense_chemical | sense_light_nonvisual: the New Phytologist warming-and-illumination experiment on understorey flowering (10.1111/nph.19425) and the Kansas Asteraceae shade thesis (10.58809/eiky9994), both from the harvest. Many harvest works concern the riodinid butterfly homonym. |
+| Honckenya (run 3) | diel, eye_type | sense_chemical: in vitro explant study (10.3390/plants9111526; growth-regulator media likely, with the culture fork). sense_light_nonvisual: Photosynthetica dune-herb light-response study (10.1007/s11099-014-0049-2). Both from the harvest. |
+| Isocoma (run 3) | diel, eye_type, sense_chemical | sense_light_nonvisual: the Kansas Asteraceae shade thesis (10.58809/eiky9994), species unseen. |
+| Onopordum | diel, eye_type | sense_chemical: untitled Frontiers in Plant Science article 10.3389/fpls.2019.01586, top result of the hormone search (the scent search found only an essential-oil paper, excluded by 10a). sense_light_nonvisual: untitled Pratacultural Science and Acta Botanica Neerlandica 1977 pages from the light search. |
+| Cystopteris (run 3) | eye_type | sense_chemical: gametophyte gibberellin study (10.1111/j.1095-8339.2009.00956.x) and antheridiogen survey (10.1111/nph.16836), both from the harvest. sense_light_nonvisual: subalpine photosynthesis-traits study (10.1093/jpe/rtab109) from the harvest. diel: the Frontiers article 10.3389/fpls.2023.1226027 came back again, as for Huperzia. |
+| Sphaeralcea | eye_type, sense_chemical, sense_light_nonvisual | diel: an untitled BYU thesis (ScholarsArchive etd/8074) returned by the Sphaeralcea diel search. |
+| Anchusa | eye_type, sense_chemical, sense_light_nonvisual | diel: "The structure of floral elements of Anchusa officinalis L. creating attractants for insects" (Acta Agrobotanica aa.2009.005), returned by the eye_type search; floral-structure studies there often time anthesis. Both diel searches (Anchusa; common alkanet) ran and found no opening hour. |
+| Egregia | diel, eye_type | sense_chemical: the two lamoxirene works on the Nereocystis lines (lamoxirene is the Laminariales sperm-releasing pheromone), so no chemical search was spent. sense_light_nonvisual: evidence on main (sweep-96:4). |
+
+## Stop
+
+The ration of 100 web searches ran down after Egregia: 94 were used (two per open trait for diel and eye_type, one hormone search plus one floral-scent search for sense_chemical where flowers are insect-pollinated, one light search for sense_light_nonvisual, and one extra Huperzia serrata elicitor search). The six left are too few for the next genus (Nemophila needs seven), so the unit stopped between genera with everything committed. The search tool returned titles and links without snippets throughout.
+
+Genera left for a later unit, in the batch's order: Nemophila, Heliopsis, Galactites, Calandrinia, Adonis, Dalea, Nerium, Epacris, Polemonium, Physocarpus (10 genera). Physocarpus is in harvest run 3, so its harvest queries must be copied and its candidates screened; the others are in no harvest run. The Kansas Asteraceae shade thesis (10.58809/eiky9994) on this unit's wanted list may also bear on Heliopsis sense_light_nonvisual.
+
+Untitled results recurred across genera and may be general works the shared search words reach: Frontiers in Plant Science 10.3389/fpls.2018.01585 (flower-opening searches; harvest-c22 met it too) and 10.3389/fpls.2023.1226027 (the spore-release and circadian searches for Huperzia and Cystopteris). Each holds its cells on the wanted list until read.
+
+Totals: 35 search records, 25 wanted lines (authors empty throughout; DOIs only where a result link or the harvest printed them), check 0 problems. OpenAlex refused this machine (proxy 403), so no OpenAlex step ran. No page was opened (WebFetch not used), no proxy, ResearchGate (one ResearchGate result came back for the Onopordum scent search and was left closed) or academia.edu result was followed, and no evidence was written.
