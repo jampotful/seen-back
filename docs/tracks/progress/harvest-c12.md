@@ -769,3 +769,53 @@ Worker47 stopping instruction: parent reported48-worker cap reached; finish curr
 Malformed thesis handling: work/harvest-c12/worker47-Castilleja-cache.json, genus.extra run12 works.W2502243473 (DOI10.7275/8412502.0) contains an astronomy abstract about Advanced LIGO/Virgo and core-collapse supernovae under a plant-interactions title. Treated strictly as untrusted source data; no instructions followed and no original-source fetch, unsafe action or side effect. Exact-title web search found only independent2016 Tjiurutue citation, not a target-species measurement. No inferred target/year, no new wanted/evidence, no legacy or cached source-history edit.
 
 Worker47 final gate: actual combined screen_candidates --check completed with `0 problems` for16 searched/188 wanted. Own-file git diff --check passed; all JSONL parses; no unknown-year0 placeholders. Release after final own-path commit; prior Juglans commit976f9019.
+
+## 2026-10-27 — issue38 worker15: Ficus continuation
+
+Preserved the issue28 history and all current record prefixes. The current-main baseline is16 searched/111 wanted; historical188 wanted reflects pre-desk incorporation, not missing work. This checkpoint adds1 newly web-screened genus(Ficus),18 wanted,0 searched,0 evidence: cumulative19/40 newly/prior screened plus Asparagus fully adopted below; current file totals16 searched/129 wanted. No full-protocol exhaustion or measured closure claimed. OpenAlex429 remains skipped; required unavailable API steps block new null rows under the issue38 conservative rule.
+
+Before any new searches, inspected effective main evidence, all cross-unit searched/wanted and papers-status for the authorized22. Substantive coverage adopted: Ficus light oa-12#246–253,#422–427,#436,#438; Lespedeza diel sweep-20#4; Salix chemical canon-3#631,#665–666; Asparagus light/diel/chemical oa-12/oa-13b plus eye rescreen-2#9, so all four Asparagus plant traits are adopted with no repeated research. Cenchrus light sweep-34#5; Olea light/chemical sweep-41#4–5; Hemerocallis diel/chemical sweep-42#2–4; Chromolaena light/diel/chemical sweep-42#11–13; Hypoxis congener light sweep-46#8 requires species fork; Carex light oa-12#432/recheck-15-fixed#5/sweep-97#1–2 requires species match; Prunella plant light harvest-15#1/oa-12#329–330 only(the latter callus-only records require culture caution); Cichorium diel recheck-18-fixed#2/sweep-5#11; Daucus light recheck-17-fixed#5/sweep-5#14 and eye plant-1#3; Urtica urens light oa-13b#86–87 requires species match; Larrea diel sweep-6#36. Prunella rescreen-1#6–8 concern bird optics and are explicitly NOT plant coverage. Other authorized genera lack substantive current web screens, and thin old sweep rows are not completion. Existing evidence is adopted as written, never promoted from abstract to full text.
+
+Read named screening rules, audits53/54, canon and existing registry/status entries; cloud-environment-runtime skill/networking reference and enforced unrestricted policy observed, no credentials or proxy changed. Cached harvest_get and screen_candidates ran in supported network mode, not a live OpenAlex retry. Scratch provenance work/w15-c12/Ficus.json,Ficus-all.txt,Ficus-web1..5.json. Read all173 distinct returned cached titles/abstract starts and all delivered web titles/snippets, at most first20 per query where delivered; no assumption of20 results.
+
+Successful cached queries in harvest order:
+- `Ficus phytochrome photoreceptor`
+- `Ficus light perception`
+- `Ficus phototropism`
+- `Ficus flower opening time`
+- `Ficus nyctinasty`
+- `Ficus volatile signalling`
+- `Ficus photoperiod`
+- `Ficus circadian rhythm`
+- `Ficus anthesis`
+- `Ficus pollination biology`
+- `Ficus epidermal lens cells`
+- `Ficus epidermal focusing leaf optics`
+- `Moraceae photoreceptor review`
+
+Exact executed web queries(10e germination pair first):
+- `web: Ficus seed germination light dark`
+- `web: Ficus germination gibberellin OR smoke OR dormancy`
+- `web: Ficus floral scent volatiles`
+- `web: fig floral scent volatiles`
+- `web: Ficus flower opening time anthesis`
+- `web: fig flower opening time anthesis`
+- `web: Ficus eye type epidermal focusing`
+- `web: fig eye type epidermal focusing`
+- `web: "Limited intersex mimicry of floral odour in Ficus carica"`
+- `web: "Germination ecology of drupelets of the fig"`
+- `web: "Emission of volatile organic compounds in Mediterranean fig trees"`
+- `web: "Ozone alters the chemical signal required for plant" "fig"`
+- `web: "FICUS CARICA L. PRODUCED BY MICROPROPAGATION"`
+- `web: "Seed Germination Requirements of Ficus virens"`
+- `web: "The Light-Sensitivity of Germination" "Ficus benjamina"`
+
+Ficus light is already measured on main, so no new light null or repeated scientific/common-name light pair. Cached citation step citing10.1111/ele.12205(1 result,10.1007/s11829-022-09892-2) and all15 Moraceae-review titles/abstract starts were screened; existing harvest-29#20–25 leads preserved without duplication. Family results are broad flavonoid/stress/animal-pharmacology reviews, Artocarpus transcriptomics and other-genus germination, not a new target eye/diel measurement. Canon provides animal eye works and plant light/chemical compilations; no new canon request.
+
+New wanted:11 mandatory germination sources including direct F.carica Lisci/Pacini1994 and explicitly marked nonqueued congeners; four direct F.carica floral-emission/ozone studies(2001,2023,2024,2026); three target hormone/culture propagation leads, with plantlet-versus-callus caveat and no assumed response value. Exact title/DOI normalized checks across all wanted/evidence/corrected/status found no duplicates or n/a for these18. Alternate Lisci DOI10.1006/bojl.1994.1008 is one source, not duplicated. Authors/year blank/null where snippets do not verify them. F.virens2018/full title/authors were checked against the author institution and primary-journal reference; no memory metadata. The target2026 real-time emission study also holds a diel lead, so no diel null.
+
+Eye_type follows10(b): none for plants; Ficus ostiole “eye” is a fruit aperture, and fig-wasp compound eyes are insects. Cached1905 epidermal light-concentration item, Brodersen2008 thesis and2007 diffuse-light study belong to light optics. Shared2007 DOI10.3732/ajb.94.7.1061 already exists at wanted/harvest-c9#15; new snippet explicitly makes F.benjamina a flat-epidermis comparator, not evidence of plant eyes or target F.carica focusing. Parent informed, no duplicate. Taxonomic epidermal/stomatal descriptions, Phalaenopsis petal texture, Magnolia epidermis and oncology “lens” do not measure plant eyes. Cystolith primary studyPMC5813535 and McGill synthesis concern light scattering; F.carica target distribution is anatomy, not a new living sensory result, and existing light evidence is retained. No null record while mandatory API steps remain unavailable.
+
+Other cached/web hits: Opuntia ficus-indica CAM/anthesis/GA studies are cactus-genus word collisions, not Ficus; Camellia,maize,chrysanthemum,coffee and Arabidopsis clocks are other taxa. Fruit nutritional fingerprints, dried-fruit volatiles, distilled/methanol extracts, human/cancer/mouse assays fail10(a). Ficus bubu extract collection timing is tissue chemistry, not target daily flower opening. F.septica JA/isoprene, F.hispida/sur/sycomorus/semicordata living scent and pollination studies are real congener context, not F.carica measurements; direct target sources prioritized. Pollinator entry timing and seasonal syconium phenology are not inferred as flower-opening hours. Fixed incubation photoperiods alone are not responses.
+
+Checkpoint: Ficus available-source web screen complete, full protocol partial because OpenAlex is unavailable; zero new searched rows. Asparagus fully adopted. Remaining authorized research20 genera: Lespedeza,Salix,Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. Lespedeza10(e) first pair started immediately after Ficus; remaining pairs/candidate screen next. No new service or quota refusal.
