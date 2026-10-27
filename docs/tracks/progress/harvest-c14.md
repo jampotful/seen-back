@@ -265,3 +265,26 @@ Round checkpoint: 14 genera screened for round; all partial full protocol (OpenA
 ## 2026-10-27 — issue38 coordinator shared hormone-title target
 
 Existing wanted line25 title explicitly names Corylus avellana and Fagus sylvatica. Added the latter target, made the former species-specific from the title, and recomputed ranking from the queue; no new line or fetched paper. This is a title-based hormone/dormancy candidate only. Methods must establish an applied-cue response before any chemical measurement is extracted. Worker20 c10 adopts the shared request without a duplicate. Wanted remains65, searched/evidence0; all14 earlier web screens and exact queries preserved.
+
+## 2026-10-27 — issue38 worker35 continuation
+
+Continues after the first 14 genus screens, preserving all incoming wanted lines and coordinator source-25 target correction. Desk only: no page fetch or evidence writes; no searched nulls while mandatory OpenAlex steps remain unavailable (round-wide 429). Checked global evidence, searched and wanted records, canon catalog, queue targets and owner paper status before new requests. Species-specific physiological evidence is not carried across congeners.
+
+### Epipactis
+
+Web-query screen for round completed; full protocol remains partial (OpenAlex skipped). Official harvest_get and screen_candidates run; run 2 plus supplements contain no reported failed query. All harvested titles and genus-relevant abstract starts checked using cached descriptor as well. Existing harvest-15#2 is E. veratrifolia only, not target E. helleborine, so light pair retained. Adopted sweep-13 wanted #5, now confirmed by PubMed 18472423 and ScienceDirect primary title: Orchids Mimic Green-Leaf Volatiles to Attract Prey-Hunting Wasps for Pollination; no duplicate request. Eight new wanted leads (germination, dormancy, scent and light). Eye result 10.3732/ajb.94.7.1061 names Begonia/Citrus/Ficus/Colocasia/Impatiens, not Epipactis; other eye hits animal lenses or epidermal taxonomy. Diel results show flower lifespan in days or seasonal dates, not daily hour. Family alternative returned Physiological diversity of orchids (10.1016/j.pld.2018.06.003), a broad physiological review; no text fetched and no review-derived measurements. No searched/evidence rows.
+
+Queries actually run (connected web search; returned titles/snippets screened, fewer than 20 when fewer were delivered):
+
+- `Epipactis seed germination light dark`
+- `Epipactis germination gibberellin OR smoke OR dormancy`
+- `Epipactis floral scent volatiles`
+- `Epipactis photoperiod phototropism light sensing`
+- `broad-leaved helleborine photoperiod phototropism light sensing`
+- `Epipactis flower opening time anthesis`
+- `broad-leaved helleborine flower opening time anthesis`
+- `Epipactis volatile chemical signalling`
+- `broad-leaved helleborine volatile chemical signalling`
+- `Epipactis epidermal lens cells eye`
+- `broad-leaved helleborine epidermal lens cells eye`
+- `Orchidaceae photoreceptor review`
