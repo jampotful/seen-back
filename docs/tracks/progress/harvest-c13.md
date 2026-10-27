@@ -33,4 +33,11 @@ Main sense_light_nonvisual evidence and existing wanted 10.4236/ajps.2013.43061 
 
 Web queries (verbatim): ["Pinus seed germination light dark", "Pinus germination gibberellin OR smoke OR dormancy", "Pinus jasmonate herbivore", "Pinus response to airborne volatile signals", "pine response to airborne volatile signals", "Pinus flower opening time anthesis", "pine flower opening time anthesis", "Pinus plant ocelli lens-like epidermal cells eye", "pine plant ocelli lens-like epidermal cells eye"]
 
-Counts this round so far: 4 genera web-screened / protocol partial; 0 full-protocol genera; 0 search rows; 25 wanted lines; 0 evidence rows. Next genus: Phragmites. Remaining: 36 untouched genera.
+
+### Phragmites — web-screened, protocol partial
+
+harvest_get.py and screen_candidates.py confirm Phragmites has no harvest. No main evidence for this genus. Titles/snippets screened; germination studies compare light/dark and applied growth regulators; these are retained rather than called absent. Poaceae review search returned Structure and Function of Plant Photoreceptors (10.1146/annurev-arplant-042809-112259) and broader light-signaling reviews, without a Phragmites-specific review result. The Biological Flora review of P. australis (10.1111/1365-2745.12797) was screened in search results. Volatile-emission studies explicitly name Phragmites leaves or P. australis and one records diurnal emissions; the daily-emission candidate is distinguished from flower opening. Anthesis paired searches otherwise returned seasons and phenophases, not hours. Eye results concern general plant-ocelli essays or animal/protist eyes. Missing OpenAlex scientific/common/citation-family steps remain incomplete; no null rows. No pages fetched.
+
+Web queries (verbatim): ["Phragmites seed germination light dark", "Phragmites germination gibberellin OR smoke OR dormancy", "Phragmites jasmonate herbivore", "Phragmites light response photoperiod", "common reed light response photoperiod", "Poaceae photoreceptor review", "Phragmites response to airborne volatile signals", "common reed response to airborne volatile signals", "Phragmites flower opening time anthesis", "common reed flower opening time anthesis", "Phragmites plant ocelli lens-like epidermal cells eye", "common reed plant ocelli lens-like epidermal cells eye"]
+
+Counts this round so far: 5 genera web-screened / protocol partial; 0 full-protocol genera; 0 search rows; 33 wanted lines; 0 evidence rows. Next genus: Chelidonium. Remaining: 35 untouched genera.
