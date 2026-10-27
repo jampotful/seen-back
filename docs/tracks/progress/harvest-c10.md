@@ -1010,3 +1010,77 @@ Other cached dispositions:barley,Scutellaria,sorghum,Pinus experiments concern o
 Parent subsequently expanded own issue38 c14#25 targets to precise Corylus avellana and Fagus sylvatica in commitf2493a2d,with methods warning retained;adopt without duplicate. Legacy c8#60 remains unchanged under main-prefix preservation,with target pointer retained for desk review.
 
 Precommit screen_candidates --check printed0problems;exact next untouched Eleusine.
+
+
+## 2026-10-27 — issue38 worker20 Eleusine handover
+
+This worker:2 newly available-source-screened genera(Fagus,Eleusine),46 actual new web queries,54 new wanted,0 searched,0 evidence. This checkpoint:Eleusine,23queries,37newwanted. c10 current181wanted(initial main72+priorissue38 55+worker20 54),searched remains empty.24of40 genera now available-source-screened/adopted:prior first16,Amphicarpaea fromharvest-29,Persicaria,Leucaena,Amorpha,Carica,Thelypteris,Fagus,Eleusine.16 eligible untouched remain,exact next Stellaria,then Typha,Pueraria,Thunbergia,Morus,Symphyotrichum,Melinis,Nyssa,Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. Stop between entries at long-context boundary;Stellaria not started. Before its remaining-trait queries,adopt plant-1 eye screen;Morus rescreen-1 optics is bird homonym,not plant. Preserve all prior query/source provenance and existing completed work. OpenAlex skipped after shared429;missing common-name/scientific API steps stay unrun,not zero hits. No null rows or full-protocol/exhaustion claims.
+
+### Eleusine — all original four traits
+
+Original queue E.indica8786records,Poaceae/Poales. No genus evidence/corrected measurement found in global check. Prior sweep-43#31 one combined query and Chauhan/Johnson2008/Nishimoto/McCarty1997 citation trails preserved,not accepted as current paired protocol completion. Existing sweep-43wanted#6 Fluctuating temperature and light influence seed germination of goosegrass is adopted without duplicate. New primary light/dark andchemical studies below show why the old blanket absence is not a current null. Relevant plant light/chemical/angiosperm-diel canon entries remain not in hand;Animal Eyes covers Metazoa. Owner eye_type=none/focusing-to-light reading applies.
+
+Fresh required harvest_get/screen_candidates ran successfully with supported networking,outputs Eleusine-harvest.txt/-candidates.txt. Full cache Eleusine-cache.json. Genus run6,supplements12/14/20;155 displayed entries including repeated works,152 unique combined genus+family works. All unique titles/available abstract starts screened,including works without a trait keyword. Raw compact screening inventory Eleusine-compact.txt. Citation step citing10.1016/j.tree.2009.09.010 naming Eleusine returned0. Family run17 `Poaceae photoreceptor review` returned464hits/15listed;all titles/available starts read. Actual successful cached queries,in order:
+
+- `Eleusine phytochrome photoreceptor`
+- `Eleusine light perception`
+- `Eleusine phototropism`
+- `Eleusine flower opening time`
+- `Eleusine nyctinasty`
+- `Eleusine anthesis`
+- `Eleusine pollination biology`
+- `Eleusine volatile signalling`
+- `Eleusine photoperiod`
+- `Eleusine circadian rhythm`
+- `Eleusine epidermal lens cells`
+- `Eleusine epidermal focusing leaf optics`
+
+Family dispositions:sugarcane photoreceptor homology,rice low-light/photocontrol,tomato phytochrome andgeneric grass-carotenoid/shade/population-density/stomatal/flowering reviews identify no direct Eleusine cue-response experiment in available starts. No family carry or negative claim about unread species tables.15listed titles were actually screened,not464titles. Genus data includes no failed query;missing common-name API calls still unrun after429.
+
+Exact23 new web queries,in executed order:
+
+- `web: Eleusine seed germination light dark`
+- `web: Eleusine germination gibberellin OR smoke OR dormancy`
+- `web: Eleusine floral scent volatiles`
+- `web: Eleusine photoperiod light perception phototropism`
+- `web: goosegrass photoperiod light perception phototropism`
+- `web: Eleusine flower opening time anthesis`
+- `web: goosegrass flower opening time anthesis`
+- `web: Eleusine chemical perception volatile signalling`
+- `web: goosegrass chemical perception volatile signalling`
+- `web: Eleusine epidermal lens cells eye type`
+- `web: goosegrass epidermal lens cells eye type`
+- `web: "Eleusine indica" "Reddi" pollen shedding`
+- `web: "Seed germination in goose grass" DOI`
+- `web: "Germination ecology for Florida populations" DOI`
+- `web: "Herbicide response and germination behavior" "2023"`
+- `web: "Circadian patterns of pollen release in some species of Poaceae"`
+- `web: "The Effect of Temperature and Light on Germination" "Goosegrass" DOI`
+- `web: "Procumbent response of weeds"`
+- `web: "Seed germination in goose grass" "10."`
+- `web: "VARIABILITY IN FLORAL STRUCTURE AND FLORAL BIOLOGY OF FINGER MILLET" "1998"`
+- `web: "Influence of environmental factors" "goosegrass" "WS-08-048.1"`
+- `web: "Germination of the grass weed Eleusine indica"`
+- `web: "Procumbent response of weeds" author`
+
+All delivered titles/snippets read;grouped results do not establish20 per query. Raw Eleusine-web1.json through-web6.json. Cornell/UF/UC/PSU confirm goosegrass=E.indica;Galium aparine also called goosegrass is another genus,not imported. Germination pair/scent first under10(e). Last12 queries resolve pollen-release original source,primary light/chemical germination identities,year/author details anddirect floral paper. No source/page/paper fetch,OpenAlex/MDPI request,paidAPI,evidence,other-unit/legacy edit,branch/gate change ornew service refusal. Normalized title/DOI duplicate checks run acrosswanted/evidence/corrected andowner status;unknown fields blank/null. An initial ASCII-only normalization falsely treated the Chinese thesis title as an empty-title duplicate;Unicode title check corrected before append,with no source deletion or false adoption. Original author/year not inferred from repository upload dates;Cambridge1959/1998/2008/2019/2023 issue/reference dates andcached actual publication metadata retained.
+
+37newwanted,including actual target E.indica light/dark experiments:2023 Australian two-population light/salt/herbicide study;2019 Florida positive photoblastism;1959 Fulwider/Engel light comparison;2008 Chauhan/Johnson seed ecology;Chinese regional seed-light study;Brazilian light/temperature thesis;Pretoria light/glyphosate thesis;official Taiwan goosegrass/dragon-claw-grass germination thesis(title Chinese,authors/year unknown).1984 Kanzler/vanStaden applied-GA seed study holds chemical;africana GA3/ethrel dormancy experiment is congener-only. Taiwanese public metadata URL contains login in its routing path;no login,account access orpage fetch occurred. Germination-title candidates retained under10(e);not every such title proves a chemical orlight treatment until read.
+
+Cached live chemical-response leads include direct E.indica herbicide dose/physiology/biotype work(dinitroaniline inheritance/phenotype,glyphosate controls/fluorescence,paraquat with/without treatment andenvironment/temperature contrasts). These identify experiments on living plants,not a claim of chemical recognition from resistance orinjury alone. Isolated EPSPS-binding versus live physiological portions in10.3390/ijms24098250 require methods review. E.coracana sources include exogenous phytohormones,MeJA sprouts,SA/NO nickel-stress rescue,Si-induced defense,Annona-extract live RECEIVER response andorganic-foliar/nanoDAP/urea treatment trials;nutrition-versus-signalling scope remains explicitly unresolved. ACC-deaminase rhizobacteria candidate needs actual chemical-pathway/live-response review. Cold-plasma germination paper retained under10(e),butlight/chemical/reactive-species mechanisms not inferred from plasma alone. Congener sources imply no carry to E.indica;their target counts0. All37 are unread intake leads,not measurements.
+
+Diel/light real leads:2020 finger-millet controlled diurnal light/chloroplast-positioning/photosynthetic response;1981 induced flower opening;2026 emasculation-method paper;1998 Dodake/Dhonukshe24-strain daily anthesis study;2026 wild-rice FOT paper's explicit E.indica literature schedule. The last new experiments concern Oryza,so its Eleusine relevance is a cited measurement trail,not an Oryza-to-Eleusine carry. Reddi original1988 `Circadian patterns of pollen release in some species of poaceae`,DOI10.1016/0034-6667(88)90003-6,is already LEGACY harvest-c12wanted#77 forCynodon. Original publisher snippet confirms hourly54grass measurements;2026 primary Springer discussion names E.indica/citesReddi. Adopt existing request without duplicate. Parent informed of precise E.indica target-expansion pointer for desk verification;legacy c12#77 preserved unchanged. No dailyhour value extracted from snippet. Dawn finger-millet teaching schedules agree with real1998 source butare not an extra primary request. Seasonal bloom dates,days-to-flowering/grain maturity,24-hour general clock reviews anddefoliation AT anthesis are not target daily schedule measurements.
+
+Procumbent response of weeds explicitly describes E.indica stem elevations increasing in continuous darkness anddecreasing onreturn to light in secondary-index snippet;no primary bibliographic identity beyond exact title returned. Preserved as unresolved exact-source pointer https://line.eurekamag.com/research/002/195/002195194.php,not evidence or an invented author/year/DOI. Direct target light/germination sources already hold trait open. Earliest Toole/Toole nitrate/light seed study is a reference trail in Fulwider1959 excerpt;exact originaltitle notshown,no fabricated extra citation. No whole-paper-negative disposition for unpublished/sparse-abstract items.
+
+Chemical exclusions:removed-leaf GC-MS/ethanol/metabolite assays,medicinal methanol extracts,food cookies/flours/malting/coffee,andmouse/rat/athlete diet studies measure removed compounds orother organisms under10(a). Excised Eleusine leaves chemical-senescence10.1016/0531-5565(78)90025-6 is removed-tissue boundary,not accepted whole-plant chemical response. Clarkia sucrose postharvest cut flowers are excluded under10(a). Live Eleusine receiver exposed to another plant's extract(green-manure/Annona studies) is specifically retained as a living receiver trial;no intact emitter claim. Generic VOC reviews name no target receiver experiment in available starts. Push-pull review10.1111/nph.14274 names finger-millet cropping systems butdoes not establish plant perception rather than insect response in displayed snippet. Endophytic fungal antifungal products measure fungus,not Eleusine signal. EcbZIP17 overexpression abstract tests transgenic TOBACCO,not target Eleusine cue response. Stress-gene/QTL/genome/biochemical homology alone,ecological distribution andplain drought response are not assumed applied chemical/light experiments;unread salt/hormone tables remain unresolved.
+
+Eye:focusing candidates matched ordinary Achimenes transcriptome,Lens culinaris herbicide/salinity experiments,andOrnithogalum epidermal lipotubuloids,all other genera. Eleusine leaf Kranz/cork/microhair anatomy has no focusing in available snippet. Other results are vertebrate/insect ocular histology andfood human-eye-health summaries.10.3732/ajb.94.7.1061 actually names Begonia,Citrus,Ficus,Colocasia,Impatiens,not Eleusine. Owner none reading applies;epidermal focusing if found belongs underlight. No eye null during incomplete API protocol.
+
+Remaining cached title dispositions:tomato,Bromus,Brachypodium,Ischaemum,Arabidopsis,Lemna,Vigna,Arachis,Citrus,waterhemp,wildradish,Achimenes,Chrysanthemum,cucumber,Setaria,Digitaria andrice response papers measure other genera. Hericium is fungus;weaver-ant/ant-diversity papers measure insects. Catalogues,WorldEleusines review/index,biomass/habitat/drought/NPK/straw-quality surveys have no new target daily/eye/light measurement in available starts;notdeclared negative wholetexts.155displayed entries do not mean155distinct measurements or152fulltexts read.
+
+### Explicit parent-authorized own-NEW shared-source target expansion
+
+Parent routed worker23 harvest-c8's source-specific Pteridium request. Expanded prior issue38 c10wanted#123 DOI10.1007/s10265-015-0736-5 fromfor[Thelypteris dentata]toalso Pteridium aquilinum,records89441 fromqueue. Worker23's exact-title connected search read original PMC4550647 andSpringer indexed Fig4 caption:photosynthesis/stomatal conductance/intercellular CO2 againstPPFD forbothfern species atfixedambientCO2. This supports P.aquilinum light-response intake;chemicalCO2 cue eligibility remains unresolved. Existing queries/source provenance preserved,why/where supplemented,no evidence orpagefetch. c8 adopts withoutduplicate. This is the sole explicit metadata change to the earlier127wanted prefix;all other earlier rows andall historical progress remain byte-preserved. Parent authorized its ownNEW row expansion;no legacy main row orother-unit file edited.
+
+Fagus checkpoint68b0cf90 passed0problems. Final Eleusine candidate/wanted checker printed0problems before handover commit;whitespace check passed. ExactnextStellaria;do not repeat these2 available-source screens merely because rawqueue lists wanted-only genera. OpenAlex unavailable;no failedservice counted aszerohits.
