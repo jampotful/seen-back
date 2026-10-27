@@ -1240,3 +1240,39 @@ Raw successful results /workspace/work/w17-c11/Cosmos-web1–7.json. Mandatory v
 
 
 Worker17 final mandatory real gate printed **0 problems**. Byte-prefix verification preserved all86 incoming wanted lines; searched file byte-identical to incoming25lines. Current135wanted/25searched, NEW49wanted/0searched/0evidence across5 available-web-screened protocol-partial genera; Packera unseen-tail caveat explicitly retained. Clean context handoff:12remaining, exact next Achillea.
+
+## 2026-10-27 — issue38 worker25 Achillea
+
+NEW Achillea available-web-screened,18 successful exact connected queries,22new wanted/0searched/0evidence. Current157wanted/25searched (incoming135/25; issue38/main baseline54/25). Across rounds29of40 genera available-web-screened;11remain, exact next Mahonia, then Apocynum,Bromus,Marchantia,Vachellia,Poa,Parkinsonia,Panicum,Artemisia,Polystichum,Ailanthus. Preserve original20 and issue38 Foeniculum,Hypochaeris,Sorghastrum,Packera,Cortaderia,Nasturtium,Tecoma,Cosmos; Packera's unseen initial response-tail limitation persists. No full-protocol/exhaustion claim. OpenAlex429 remains skipped; no null searched rows while required API/source steps remain unfinished.
+
+Required harvest_get.py and screen_candidates.py executed, cached run2 reviewed; current tool shows no open traits because old thin searched records mask the original queue. Original queue explicitly has all four traits for A.millefolium,147079records. Cached3 successful scientific light queries and2zero-hit citation steps reviewed,45result occurrences and15family-review titles/abstract starts. Canon catalog checked pertrait; no named target in-hand compilation closes plant physiology. Existing harvest15#6 is abstract-only in-vitro A.gypsicola light response, with culture/no-photoreceptor limit retained; it cannot carry to A.millefolium. Old sweep2 chemical null dismissed living induced emissions, contrary to current10(a/d); preserved legacy line, retained actual sources below. Global wanted/evidence/corrected/searched/status checked for genus and retained titles/DOIs/URLs; no retained addition matches owner n/a or existing request.
+
+Adoptions before genuinely unfinished queries: c18wanted10.1002/ece3.9157 already explicitly targets A.millefolium white/amber/night-light biomass response; no duplicate. plant-screen-1wanted10.21079/11681/45961 already requests ERDC2022 report. Primary indexed ERDC publication-notice result in Achillea-web5 explicitly names A.millefolium,Panicum virgatum,Festuca rubra,Tradescantia zebrina,Arabidopsis thaliana as five tested species for VOCs under mechanical wounding and light cycles. Adopt report for source/target light and living-emission review; no duplicate or other-unit edit. Do not infer qualifying diel behavior merely from set light cycles or timed VOC sampling: reader must resolve actual daily behavior and original comparisons. Parent informed; plant-screen-1 is legacy main and unchanged. Existing c10/c13 wanted Seed germination strategies of five perennial weeds (PMID28309232) was also adopted after duplicate-title detection: primary indexed abstract explicitly names A.millefolium and future Artemisia vulgaris in factorial light/nitrate/temperature/age tests. No duplicate added, original species-specific outcomes remain unread.
+
+Twenty-two new source leads are fully identified by title/retrieval URL/query in wanted:8germination/dormancy sources, living growth-retardant hybrid trial,2015JA/aphid A.collina article,2012related aphid conference report,field floral-scent manipulation,1996target photoperiod,2005daily-integral source,congener spectrum trial,target shading,rhizome phototropism,three direct-SA studies,SA-preelicitation/infusion boundary,and forcing/photoperiod index. The2012/2013/2015induced-volatile reports may overlap; compare originals before independent extraction. Metadata absent from actual returned source is blank/null; no year inferred from DOI/PII or relative indexing age. Two weak DOI derivations from MDPI/slug structure were removed before writing; only explicitly returned DOIs retained. Germination titles retained under10(e) even when available excerpt mentions only temperature,stratification or fixed photoperiod; those are not invented light-treatment results. Hybrid Coronation Gold and A.collina/A.gypsicola data cannot supply target A.millefolium physiology by genus carry.
+
+Diel pair chiefly returns seasonal bloom dates. Alberta PlantWatch states night closure without an original cited measurement; not promoted to experimental evidence. Original daily anthesis remains unestablished by available snippets. Report light cycles alone are not diel behavior. General evening-opening s41598-025-21168-2,cultivation calendars and days-to-anthesis are not target daily clock hours. Eye_type none follows owner10(b), and focusing belongs under light; generic ocelli/focusing sources10.1111/j.1399-3054.1996.tb00674.x/PMC9824129 do not name a target focusing result in available text. Papillate petals/anatomy alone do not measure focusing. Dried/headspace oils,hydrodistilled roots,harvested flower/leaves in10.3389/fpls.2015.00111,food-sensor labels and therapeutic extracts fail living10(a). Chemotaxonomic headspace sources without living attached collection/signal evidence were not requested as sensing; actual induced in-vivo and living-SA sources retained. SA-infused-herb chemistry qualifies only if living plants were treated before harvest, explicitly held for methods reading.
+
+Exact successful connected queries, executed order:
+- `web: Achillea seed germination light dark`
+- `web: Achillea germination gibberellin OR smoke OR dormancy`
+- `web: Achillea floral scent volatiles`
+- `web: Achillea flower opening time anthesis`
+- `web: yarrow flower opening time anthesis`
+- `web: Achillea plant ocelli lens epidermal focusing eye`
+- `web: yarrow plant ocelli lens epidermal focusing eye`
+- `web: Achillea chemical sensing volatiles`
+- `web: yarrow chemical sensing volatiles`
+- `web: Achillea photoperiod phototropism light response`
+- `web: yarrow photoperiod phototropism light response`
+- `web: Asteraceae photoreceptor review`
+- `web: Achillea induced volatiles jasmonic acid aphids Manzo`
+- `web: "Achillea millefolium" "anthesis" hour`
+- `web: "Understanding plant volatiles for environmental awareness" Achillea`
+- `web: "Achillea millefolium" salicylic acid plant growth`
+- `web: "Germination of Seeds of Common Yarrow" doi`
+- `web: "Environmental Control of Flowering and Growth" "Achillea"`
+
+All actually returned titles/snippets read from retained responses in sequential slices, variable counts without claiming20each; raw Achillea-web1–6.json and required-tool outputs in /workspace/work/w25-c11. Family review alternative returns general plant/fungal photoreceptor reviews10.1146/annurev-arplant-042809-112259/10.1002/wmts.36,insect/algal reviews,and no named target daily behavior in available excerpts. Cached Asteraceae shade thesis already requested c18/c22b and no target identity established; no duplicate background. No page/paper fetch,evidence,credentials/proxy/TLS change,purchase,operational edit or new refusal. Mandatory validator pending checkpoint.
+
+Worker25 Achillea mandatory real validator printed **0 problems**. Current157wanted/25searched; searched byte-identical to incoming25lines and original135wanted prefix preserved. New22wanted, shared3source adoptions,0searched/evidence. Next Mahonia.
