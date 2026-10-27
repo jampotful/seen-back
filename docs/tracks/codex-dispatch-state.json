@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 12,
-  "updated_at": "2026-10-27T11:10:35.548Z",
+  "generation": 13,
+  "updated_at": "2026-10-27T12:57:41.334Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -32,7 +32,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
       "observed_status": "Chat terminal. Desk audits 83–85 incorporated selected search records and verified-author wanted lines through branch; PR #37 closed/unmerged. Do not restart.",
-      "observed_at": "2026-10-27T11:10:35.548Z",
+      "observed_at": "2026-10-27T12:57:41.334Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -106,13 +106,15 @@
       "issue_state": "open",
       "next_round_hold": {
         "signature": "new-eligible-issue-required:completed-assignment-28",
-        "status": "held",
+        "status": "resolved_by_new_issue",
         "desk_comment_id": 6438670441,
         "desk_reported_raw_queue": 559,
         "reason": "Desk keeps existing issue open for next round, but dispatcher policy forbids resubmitting owned/completed assignments and does not accept comment-only requests.",
         "required_action": "New open jampotful-authored issue explicitly assigning @codex to docs/tracks/prompts/codex-round.md; reconcile overlap before any submission",
         "observed_at": "2026-10-27T11:10:35.548Z",
-        "last_notification_signature": "new-eligible-issue-required:completed-assignment-28"
+        "last_notification_signature": "new-eligible-issue-required:completed-assignment-28",
+        "resolved_by_issue": 38,
+        "resolved_at": "2026-10-27T12:57:41.334Z"
       }
     },
     "29": {
@@ -121,7 +123,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
       "observed_status": "Chat remains terminal. Desk reviewed all six fixes and incorporated result; GitHub PR #35 closed/merged.",
-      "observed_at": "2026-10-27T11:10:35.548Z",
+      "observed_at": "2026-10-27T12:57:41.334Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -161,7 +163,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
       "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
-      "observed_at": "2026-10-27T11:10:35.548Z",
+      "observed_at": "2026-10-27T12:57:41.334Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -231,12 +233,40 @@
       "issue_state": "closed",
       "issue_closed_at": "2026-10-27T09:49:07Z",
       "desk_closure_comment_id": 6438669713
+    },
+    "38": {
+      "issue": 38,
+      "dispatch_key": "regards-issue-38-20261027T125741334Z",
+      "state": "submitting",
+      "owner": "Regards Codex dispatcher",
+      "run": "2026-10-27T12:57:41.334Z",
+      "claimed_at": "2026-10-27T12:57:41.334Z",
+      "prompt_path": "docs/tracks/prompts/codex-round.md",
+      "environment": "seen-back",
+      "model": "GPT-6.1 Sol High",
+      "repository_execution_verified": false,
+      "recovery_attempts": 0,
+      "observed_status": "Atomic claim prepared; no Send yet",
+      "overlap_check": {
+        "observed_at": "2026-10-27T12:57:41.334Z",
+        "recent_history": "No newer matching chat; earlier assignments terminal",
+        "archived_history": "One unrelated archived chat; no match",
+        "receipts": "Issue #38 comments empty; no prior ledger entry",
+        "prior_assignments": [
+          28,
+          29,
+          30
+        ],
+        "coverage": "PR37 desk-reviewed; preserve prior genera. Main c22/c22b/c22c and c23/c23b progress documents cross-unit coverage; raw queue is not wholly untouched. c13–21 have no progress notes on main.",
+        "scope": "Remaining plant work requested by issue 38, preserving current queue/gates/holds"
+      }
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-10-27T11:10:35.548Z",
+    "observed_at": "2026-10-27T12:57:41.334Z",
     "eligible_open_issues": [
-      28
+      28,
+      38
     ],
     "new_submissions": 0,
     "same_chat_continuations": 0,
@@ -246,12 +276,16 @@
       30
     ],
     "decisions": {
-      "28": "no-op duplicate suppression; existing completed/reviewed assignment retained. Unchanged next-round hold; no new eligible issue and no repeated notification",
-      "29": "adopt existing completed/reviewed task and desk-closed issue; no action",
-      "30": "adopt existing completed/reviewed task and desk-closed issue; no action"
+      "28": "no-op duplicate suppression; reviewed task retained. New issue38 resolves next-round request hold without restarting28",
+      "29": "no-op duplicate suppression; reviewed desk-closed assignment retained",
+      "30": "no-op duplicate suppression; reviewed desk-closed assignment retained",
+      "38": "New eligible request; reconciled history/archive/receipts/branches/PRs/coverage; acquiring atomic claim before one submission",
+      "39": "Ineligible bot-authored quiet alert; no instructions followed"
     },
     "issue_comments_posted": 0,
-    "material_changes": [],
+    "material_changes": [
+      "New eligible plant round issue38"
+    ],
     "full_result_review_cycle_verified": true,
     "cycle_evidence": [
       "PR #35 desk comment 6433803841",
@@ -260,7 +294,10 @@
       "PR #37 desk comment 6436061297"
     ],
     "documentation_note": "Main activation runbook retains historical verification wording; operational ledger now records desk dispositions for all three assignments.",
-    "task_access": "All three signed-in existing task chats inspected; terminal responses unchanged.",
-    "new_eligible_requests": []
+    "task_access": "All three existing tasks terminal; signed-in recent history and archive inspected",
+    "new_eligible_requests": [
+      38
+    ],
+    "run": "2026-10-27T12:57:41.334Z"
   }
 }
