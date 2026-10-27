@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 1 genus web-screened, 0 protocol-complete, 0 search records, 4 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 2 genera web-screened, 0 protocol-complete, 0 search records, 6 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -24,4 +24,26 @@ Exact web searches (in order):
 - web: scentless mayweed chemical response volatile signaling
 - web: Asteraceae photoreceptor review
 
-Next genus: Gaultheria; 39 genera remain unreviewed.
+
+
+### Gaultheria: web-screened, protocol partial
+
+Required harvest_get and screen_candidates show no harvest. Queue has four open traits; no existing genus evidence or prior wanted found. Applicable plant canon checked as above; no genus-specific measurement in the compilations in hand. Germination/light leads added from the US Forest Service salal review and the RAS botanical-garden trial. Germination PDF snippets from Agronomy Society NZ (SP12_11._Germination_of_NZ_Ericaceae.pdf) and a CiteseerX propagation paper report light/GA3 trials but lack verified titles/authors; these remain metadata leads, not fabricated wanted citations. The exact latter URL is https://citeseerx.ist.psu.edu/document?doi=2130130de5b5af7cc392d66b009bcae06ecf8edc&repid=rep1&type=pdf .
+
+Volatile results largely concern distilled oils/harvested berries and pharmacology. Gaultheria essential-oil elicitor studies measure Arabidopsis, not a Gaultheria receiver. No daily anthesis timing in the displayed results. General ocelli reviews and a leaf/stem anatomy survey of 123 species provide no snippet evidence of genus focusing; plant eye_type remains none under owner reading. Family review search gives broad plant photoreceptor reviews rather than a genus measurement. OpenAlex steps unavailable; no full-protocol null row. Common name wintergreen verified in NC State Extension and Burke Herbarium results.
+
+Exact web searches (in order):
+- web: Gaultheria seed germination light dark
+- web: Gaultheria germination gibberellin OR smoke OR dormancy
+- web: Gaultheria floral scent volatiles
+- web: Gaultheria photoperiod phototropism light response
+- web: wintergreen photoperiod phototropism light response
+- web: Gaultheria flower opening time anthesis
+- web: wintergreen flower opening time anthesis
+- web: Gaultheria plant ocelli lens-like epidermal cells eye
+- web: wintergreen plant ocelli lens-like epidermal cells eye
+- web: Gaultheria chemical response volatile signaling
+- web: wintergreen chemical response volatile signaling
+- web: Ericaceae photoreceptor review
+
+Next genus: Berberis; 38 genera remain unreviewed.
