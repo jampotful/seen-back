@@ -8,4 +8,4 @@ OpenAlex refused this machine (proxy 403 on api.openalex.org), so no OpenAlex st
 
 ## Progress
 
-Done so far: Nemophila, Heliopsis.
+Done so far: Nemophila, Heliopsis, Galactites, Calandrinia, Adonis, Dalea.
