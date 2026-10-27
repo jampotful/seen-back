@@ -493,3 +493,48 @@ Exact web queries, in order:
 - web: Caprifoliaceae photoreceptor review
 
 Worker47 checkpoint:2 newly web-screened genera (Encelia, Symphoricarpos), both protocol partial;12 new wanted,0 searched,0 evidence. Cumulative18 web-screened genera,143 wanted lines.22 unreviewed genera remain; exact next Malva. No new service refusal.
+
+
+### Malva: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran. Read all172 printed genus-work occurrences (147 unique titles, repeats collapsed for reading) with supplied abstract starts, all15 family-review titles/abstract starts, all candidate entries and three stored citation-step outcomes (two zero-hit and two papers from the M. sylvestris source). Actual-species evidence preflight adopts recheck-quotes-3-fixed#146/sweep-10#6 (10.3390/plants12132484) for M. sylvestris light response. Queue M. neglecta and M. moschata still need their own physiological evidence; the broad light query pair addresses them and is not a repeat claim on M. sylvestris. Old sweep-10#21 has one broad query without the paired current web steps; no completion adopted from that thin screen.
+
+Seventeen new wanted sources after global wanted/owner-status DOI/title checks: M. sylvestris hormone/nitrate seed priming, M. neglecta diaphototropism, M. moschata foliar-insecticide response, M. parviflora applied melatonin/Cd trials, attached-leaf monochromatic light and low-light growth/tracking, germination/light/dormancy papers, bacterial-gibberellin germination in M. verticillata, living fungal biopriming, floral biology with daily pollen viability, a light/nutrient thesis, a scent review route to M. moschata/Burger2021 and a low-priority applied-preparation trial. Negative light or GA effects are measured comparisons; chemical scarification may be coat damage rather than cue perception. Fungal benefits likewise need an actual elicitor mechanism, and toxicity versus cue response remains explicit for pesticides/metals. The homeopathy title is retained only to inspect formulation/controls and measured live outcomes, without endorsing claimed efficacy. No carry from M. parviflora/M. verticillata to the three queue species.
+
+The weed-dormancy review10.3389/fagro.2026.1863730 is already wanted in harvest-c12/harvest-c9 and is adopted without duplicate: its indexed table explicitly names M. neglecta with scarification/stratification and cites Adkins and Peters2001/Mondani2018; original titles are unverified. Metadata-only leads: Light quality and sun tracking in Malva neglecta appeared only on ResearchGate; Deno1.pdf displays a Malva light/GA3 entry but its bibliographic title/species details were not verified; the Beal141-year seed experiment10.1002/ajb2.16250 explicitly includes GA3/liquid smoke and possible M. rotundifolia but its article title was not displayed; Caltech Michener1937 thesis snippet names M. parviflora ethylene epinasty but only a truncated source title is shown. No invented wanted citations for those. The M. parviflora light-response source at https://documentsdelivered.com/source/030/554/030554581.php is an unverified delivery-site result, left unopened and retained only as metadata title lead.10.1007/s11738-026-03900-1 lacks a displayed species list/abstract; genus attribution remains unestablished.
+
+Lavatera cretica solar tracking/seedling phototropism papers are explicit measurements, but synonym/species reconciliation remains needed and none is carried to queue M. sylvestris/M. neglecta/M. moschata. Other diel candidates are insect/mouse/ram circadian biology, Malwa-region wheat/soybean, Hibiscus/Thespesia and general reviews. Floral-development stages alone do not establish daily hours; the retained M. sylvestris floral-biology source has explicit within-day pollen decline. The time-of-day herbicide paper10.1590/s0100-83582020380100069 has five weed species but displayed abstract truncates without identifying Malva: species-list metadata check remains, no unsupported genus attribution.
+
+Dry flower aroma/hydrodistillation, petal tea, edible-flower headspace chemistry, animal pharmacology, extracted donor biostimulants applied to Lavandula, nanoparticle/sensor fabrication and mucilage extracts excluded under10(a). Leaf/fruit epidermal anatomy and microscopy lenses do not demonstrate focusing; eye-drop and neural-culture papers measure animal systems. Plant eye_type remains none under owner reading, not a focusing claim. Family review chiefly returns other Malvaceae genera, insect vision and broad light/flower-opening syntheses, with no extra Malva physiological measurement established. Common name mallow verified in the experimental titles and RHS/NC State results; common-name Hibiscus/Alcea/Urena results are kept separate. Canon as worker47 introduction. OpenAlex missing steps remain unavailable, so no null searched rows, full-protocol completion or evidence.
+
+Successful harvest queries, verbatim in order:
+- Malva phytochrome photoreceptor
+- Malva light perception
+- Malva phototropism
+- Malva flower opening time
+- Malva nyctinasty
+- Malva volatile signalling
+- Malva photoperiod
+- Malva circadian rhythm
+- Malva anthesis
+- Malva pollination biology
+- Malva epidermal lens cells
+- Malva epidermal focusing leaf optics
+- family review: Malvaceae photoreceptor review
+
+Stored citation steps: cites10.1016/j.tree.2009.09.010 naming Malva:0; cites10.3390/plants12132484 naming Malva:2; cites10.1017/S0043174500050177 naming Malva:0.
+
+Exact web queries, in order:
+- web: "Malva" seed germination light dark
+- web: "Malva" germination gibberellin OR smoke OR dormancy
+- web: "Malva" floral scent volatiles
+- web: "Malva" photoperiod phototropism light response
+- web: "mallow" photoperiod phototropism light response
+- web: "Malva" flower opening time anthesis
+- web: "mallow" flower opening time anthesis
+- web: "Malva" plant ocelli lens-like epidermal cells eye
+- web: "mallow" plant ocelli lens-like epidermal cells eye
+- web: "Malva" chemical response volatile signaling
+- web: "mallow" chemical response volatile signaling
+
+Worker47 final checkpoint, stopping cleanly between entries after the large Encelia/Malva harvests consumed this worker context:3 newly web-screened genera (Encelia, Symphoricarpos, Malva), all protocol partial;29 new wanted lines,0 searched rows,0 evidence. Cumulative19 web-screened genera and160 wanted lines.21 genuinely unreviewed genera remain, exact next Knautia: Knautia, Anaphalis, Asimina, Sherardia, Matteuccia, Mertensia, Drosera, Sedum, Alnus, Echinocereus, Humulus, Thlaspi, Thalictrum, Arbutus, Anacamptis, Campanula, Pastinaca, Barbarea, Carduus, Tragopogon, Nicotiana. No Knautia web queries begun. Parent's adopted proper screens remain excluded (Humulus harvest-29 eye; Thlaspi rescreen-2 eye; Campanula plant-1 eye; Pastinaca replant-1 diel/rescreen-2 eye), while germination/applied-hormone chemical steps may remain. OpenAlex remains skipped after coordinator429; no additional service refusal.
