@@ -376,3 +376,29 @@ Exact executed web queries (22 distinct;germination pair first):
 This worker cumulative4 new web-screened genera,28 wanted additions,0 searched,0 evidence. Current140 wanted/29 searched vs112/29 baseline. Nekemias adopted0new,all historical flags preserved. Five newly eligible genera remain:Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Taxodium. Historical screened coverage30 prior+4 new+1 adopted=35/40; current-round complete/exhausted genera0 because API steps skipped.
 
 Monarda checkpoint gate printed `0 problems`; existing Deno first-supplement request preserved without duplication (new wanted4). Owned-path `git diff --check` passed before commit.
+
+### Taxodium checkpoint
+
+Newly web-screened genus5,full protocol partial. Required harvest_get/screen_candidates confirm absent from cached runs1-17,20,23,24. Canon,corrected-first accepted-name evidence,global wanted/search and owner statuses checked. Main partial light evidence sweep-27:1 (daylength/xylogenesis10.1029/2025JG009004) preserved; no unnecessary repeat light pair,no claim full-text measurement. Four new target leads:germination thesis,live GA/kinetin/nitrate/thiourea seed trial,GA dormancy after-effect and live salinity/daily gas exchange. Fixed germination photoperiod is not itself light comparison; uncertain methods explicit. Mucronatum light/GA studies are real but unqueued; no invented carry to distichum. Flowering-season/cone-opening pages do not establish diel. Chemical paired queries yielded general plant/Thuja/aspen work,not Taxodium measures; specific target seed/GA/gas-exchange leads retained instead. Cut wood,extracts and other-plant jasmonate studies do not count10(a). Eye results general plant/insect essays;focusing belongs to light,eye_type owner none.
+
+Family photoreceptor query returned generic reviews and family conifer morphology,no specific family photoreceptor review. API/citation step remains incomplete under OpenAlex429 skip; no new null rows. No source pages fetched,evidence written,or forbidden/refused service called.
+
+Exact executed web queries (14 distinct;germination pair first):
+- `Taxodium seed germination light dark`
+- `Taxodium germination gibberellin OR smoke OR dormancy`
+- `Taxodium jasmonate herbivore`
+- `Taxodium response to airborne volatile signals`
+- `bald cypress response to airborne volatile signals`
+- `Taxodium flower opening time anthesis`
+- `bald cypress flower opening time anthesis`
+- `Taxodium plant ocelli lens-like epidermal cells eye`
+- `bald cypress plant ocelli lens-like epidermal cells eye`
+- `Cupressaceae photoreceptor review`
+- `"Taxodium distichum" "gibberellic acid"`
+- `"Germination Promotion of Loblolly Pine and Baldcypress Seeds by Stratification and Chemical Treatments"`
+- `"Taxodium distichum" "diurnal" "photosynthesis"`
+- `"Regeneration of cypress" "Gunderson"`
+
+This worker cumulative5 new web-screened genera,32 wanted additions,0 searched,0 evidence. Current144 wanted/29 searched vs112/29 baseline. Nekemias adopted0new. Four newly eligible genera remain:Mitchella,Euphorbia,Eupatorium,Juniperus. Next Mitchella. Historical coverage30 prior+5 new+1 adopted=36/40; current full-protocol/exhaustion0.
+
+Taxodium checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
