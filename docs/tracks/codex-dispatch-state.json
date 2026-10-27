@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 16,
-  "updated_at": "2026-10-27T13:13:05.498Z",
+  "generation": 17,
+  "updated_at": "2026-10-27T13:14:45.238Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -32,7 +32,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
       "observed_status": "Chat terminal. Desk audits 83–85 incorporated selected search records and verified-author wanted lines through branch; PR #37 closed/unmerged. Do not restart.",
-      "observed_at": "2026-10-27T12:57:41.334Z",
+      "observed_at": "2026-10-27T13:14:45.238Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
@@ -123,7 +123,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
       "observed_status": "Chat remains terminal. Desk reviewed all six fixes and incorporated result; GitHub PR #35 closed/merged.",
-      "observed_at": "2026-10-27T12:57:41.334Z",
+      "observed_at": "2026-10-27T13:14:45.238Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -163,7 +163,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
       "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
-      "observed_at": "2026-10-27T12:57:41.334Z",
+      "observed_at": "2026-10-27T13:14:45.238Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -237,16 +237,16 @@
     "38": {
       "issue": 38,
       "dispatch_key": "regards-issue-38-20261027T125741334Z",
-      "state": "blocked",
+      "state": "running",
       "owner": "Regards Codex dispatcher",
       "run": "2026-10-27T12:57:41.334Z",
       "claimed_at": "2026-10-27T12:57:41.334Z",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
-      "repository_execution_verified": false,
+      "repository_execution_verified": true,
       "recovery_attempts": 1,
-      "observed_status": "Terminal after 2m49s; fetch failed three times, no research or PR. One bounded same-chat diagnostic recovery reserved.",
+      "observed_status": "Working after one same-chat recovery. Documented network-enabled mode fetched fresh main and ran queue; prior-coverage reconciliation continuing.",
       "overlap_check": {
         "observed_at": "2026-10-27T12:57:41.334Z",
         "recent_history": "No newer matching chat; earlier assignments terminal",
@@ -262,55 +262,60 @@
       },
       "task_url": "https://chatgpt.com/local/01a17d71-1460-7402-a4bf-558d544640f9",
       "accepted_at": "2026-10-27T12:59:03.422Z",
-      "observed_at": "2026-10-27T13:13:05.498Z",
+      "observed_at": "2026-10-27T13:14:45.238Z",
       "branch": "codex/round-2026-10-27-issue-38",
       "claim_commit": "d1ecc613ba013720eb8eca8e3c2b210d2bff5221",
       "last_task_observation": {
         "status": "Working",
-        "observed_at": "2026-10-27T13:00:35.396Z",
-        "repository_execution_verified": false,
-        "diagnostic": "Task reports git fetch failed twice, still gathering branch/receipt diagnostics; no recovery prompt sent"
+        "observed_at": "2026-10-27T13:14:45.238Z",
+        "repository_execution_verified": true
       },
       "receipt_pending": false,
       "receipt_comment_id": 6442496014,
-      "last_notification_signature": "accepted:regards-issue-38-20261027T125741334Z",
+      "last_notification_signature": "recovery-resumed:38:6442797264",
       "last_blocker_signature": "fetch-proxy-refused:network-mode-unverified",
-      "blocker_signature": "fetch-proxy-refused:network-mode-unverified",
+      "blocker_signature": null,
       "blocker_comment_id": 6442531598,
       "recovery_history": [
         {
           "signature": "fetch-proxy-refused:network-mode-unverified",
           "attempt": 1,
           "reserved_at": "2026-10-27T13:13:05.498Z",
-          "status": "reserved",
-          "basis": "Prior #30 correction established supported execution-mode recovery; current task must verify its own documentation and honor approval"
+          "status": "succeeded",
+          "basis": "Prior #30 correction established supported execution-mode recovery; current task must verify its own documentation and honor approval",
+          "result": "Current exec documentation supports with_additional_permissions/network.enabled; git fetch succeeded without proxy/TLS change; resumed same task",
+          "resolution_comment_id": 6442797264
         }
-      ]
+      ],
+      "base_sha": "bbc35ff2050022e029b68875e3d219aab8f0ddd4",
+      "recovery_resolution_comment_id": 6442797264,
+      "recovery_submitted_at": "2026-10-27T13:13:30Z"
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-10-27T13:00:35.396Z",
+    "observed_at": "2026-10-27T13:14:45.238Z",
     "eligible_open_issues": [
       28,
       38
     ],
-    "new_submissions": 1,
-    "same_chat_continuations": 0,
+    "new_submissions": 0,
+    "same_chat_continuations": 1,
     "duplicate_suppressed": [
       28,
       29,
-      30
+      30,
+      38
     ],
     "decisions": {
-      "28": "no-op duplicate suppression; reviewed task retained. New issue38 resolves next-round request hold without restarting28",
-      "29": "no-op duplicate suppression; reviewed desk-closed assignment retained",
-      "30": "no-op duplicate suppression; reviewed desk-closed assignment retained",
-      "38": "Atomic claim then one accepted chat and issue receipt; Working during fetch diagnosis. No interruption, recovery or duplicate.",
-      "39": "Ineligible bot-authored quiet alert; no instructions followed"
+      "28": "no-op duplicate suppression; terminal reviewed assignment retained",
+      "29": "no-op duplicate suppression; terminal reviewed desk-closed assignment retained",
+      "30": "no-op duplicate suppression; terminal reviewed desk-closed assignment retained",
+      "38": "Adopt existing task. Observed terminal fetch blocker; reserved and sent one bounded same-chat recovery; documented mode fetched main and task resumed; no replacement task",
+      "39": "Ineligible bot-authored quiet alert; ignored instructions"
     },
-    "issue_comments_posted": 1,
+    "issue_comments_posted": 0,
     "material_changes": [
-      "Issue38 accepted in one new cloud chat; Working"
+      "Issue38 one same-chat recovery succeeded; fresh repository execution confirmed"
     ],
     "full_result_review_cycle_verified": true,
     "cycle_evidence": [
@@ -320,10 +325,12 @@
       "PR #37 desk comment 6436061297"
     ],
     "documentation_note": "Main activation runbook retains historical verification wording; operational ledger now records desk dispositions for all three assignments.",
-    "task_access": "Existing28/29/30 terminal; new38 persisted and Working; no continuation prompts",
-    "new_eligible_requests": [
-      38
-    ],
-    "run": "2026-10-27T12:57:41.334Z"
+    "task_access": "Four existing signed-in chats inspected; 28–30 terminal,38 resumed Working",
+    "new_eligible_requests": [],
+    "run": "2026-10-27T13:14:45.238Z",
+    "task_comments_observed": [
+      6442531598,
+      6442797264
+    ]
   }
 }
