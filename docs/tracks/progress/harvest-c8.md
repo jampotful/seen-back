@@ -189,3 +189,48 @@ Final3 repeated initial3 solely to recover truncated initial tool output; no ext
 Added6 wanted leads after global normalized DOI/title/URL and owner-status checks: M. faya GA3 germination (10.1080/23818107.2016.1206035); M. pubescens pregermination GA3/hydrogen-peroxide and dark-incubator/greenhouse comparison; M. pubescens thesis with sun-exposure treatment; living M. cerifera seedling grass-clipping/light-competition experiment (10.1002/ecs2.2995); M. rubra living seedling UV-B response (10.1111/pce.15310) found in the family-review cache; and USDA Woody Plant Seed Manual as a route to genus germination sources cited by extension. Unknown authors/year fields remain empty. The USDA lead does not assert that a light or chemical comparison was exposed; mandatory germination/dormancy coverage under10(e) requires intake. Removed-leaf essential oil extraction studies for M. pubescens/parvifolia/pensylvanica, bayberry leaf-product drying studies and Myrica gale distillation are not living chemical response/signalling; no measurement claimed from them. Generic floral-VOC reviews expose no Morella species in their snippets and were not promoted as a genus lead. Seasonal bloom months, catkin morphology and annual phenology instructions expose no daily anthesis time.
 
 Wrote1 compound diel/eye_type null record, explicitly preserving owner10(b) plant-eye none. No chemical/light null while plausible leads wait. Actual current screen_candidates.check on legitimate cached hg.load returned **0 problems**. No evidence logged.
+
+### Nephrolepis completed; worker20 checkpoint
+
+**This worker total: 2 genera (Morella, Nephrolepis), 2 search records, 24 wanted lines, 0 evidence and 0 measured closures. Cumulative harvest-c8: 7 genera, 7 search records, 99 wanted lines, 0 evidence and 0 measured closures.** Pilea's completed c4 protocol remains preserved; 32 genera need new work, starting Medicago, Aesculus, Cephalanthus.
+
+Official harvest_get.show and screen_candidates.show on the legitimate cached hg.load snapshot report run3 with supplements12/14/20 and no failed step. Read all128 unique titles and complete stored abstracts (up to700 characters each), including all3 Nephrolepidaceae family-review works. Full cached output and untruncated stored-abstract dump are in work/harvest-c8/Nephrolepis-harvest.txt and Nephrolepis-full-screen.txt; read in bounded sections and recovered omitted portions. Citation step on10.1038/ncomms8852 completed with0 hits. Family step includes clonality review10.17520/biods.2019120 and dynamic ABA/light stomatal experiment10.1111/nph.15736.
+
+Successful cached queries, word for word in harvest order:
+- `Nephrolepis phytochrome photoreceptor`
+- `Nephrolepis light perception`
+- `Nephrolepis phototropism`
+- `Nephrolepis flower opening time`
+- `Nephrolepis nyctinasty`
+- `Nephrolepis anthesis`
+- `Nephrolepis pollination biology`
+- `Nephrolepis volatile signalling`
+- `Nephrolepis photoperiod`
+- `Nephrolepis circadian rhythm`
+- `Nephrolepis epidermal lens cells`
+- `Nephrolepis epidermal focusing leaf optics`
+- `Nephrolepidaceae photoreceptor review`
+
+Connected web searches, word for word in execution order:
+- `Nephrolepis seed germination light dark`
+- `Nephrolepis germination gibberellin OR smoke OR dormancy`
+- `Nephrolepis jasmonate herbivore`
+- `Nephrolepis flower opening time anthesis`
+- `tuberous sword fern flower opening time anthesis`
+- `Nephrolepis eye type`
+- `tuberous sword fern eye type`
+- `Nephrolepis chemical sense volatile response`
+- `tuberous sword fern chemical sense volatile response`
+- `Nephrolepis light photoperiod phototropism`
+- `tuberous sword fern light photoperiod phototropism`
+- `Nephrolepidaceae photoreceptor review`
+
+No web query repeated. All exposed titles/snippets reviewed and complete raw outputs retained in Nephrolepis-web0.txt through web3.txt; long results were read in sections. Fewer than20 exposed results for an individual query were not counted as20. Tuberous sword fern is the documented common name for original queued N. cordifolia; no harvest English name exists. No OpenAlex/MDPI/UChicago/SANBI request or source/fullpaper-page fetch, paid fallback or unauthorized copy. Returned ResearchGate, Wikipedia and third-party book hosts were not opened or used as primary sources. The family web search exposes predominantly animal photoreceptor reviews plus structural-colour figure metadata; no Nephrolepis eye measurement. Its plant optical material belongs under sense_light_nonvisual per owner10(b).
+
+Global searched/wanted/evidence/corrected and papers-status review found only thin old sweep-96 absence, plus real N. biserrata antheridiogen negative-response measurements oa-9#237/238 (10.1111/nph.16836). Preserved that chemical coverage; no chemical null written. The old sweep-96 note itself names opened Suo et al2015 review10.1007/s11515-015-1342-6 with N. auriculata gibberellin-promoted spore germination. Its absence disposition overlooked that current10(d/e) candidate; added the exact locally supplied DOI as a wanted review/reference lead, leaving title empty rather than inventing it.
+
+Added18 wanted lines after global DOI/title/URL and owner-mark checks. Direct leads include Dallas Jewel manipulated photoperiod (10.21273/hortsci.28.3.182, including its null response), daily light integral trials (10.21273/hortsci16717-22), mother-plant daylength/irradiance and cultivar photon-flux trials, Boston fern actinic-light fluorescence (10.1093/pcp/pcn174), Nephrolepidaceae ABA/light stomatal kinetics (10.1111/nph.15736), dikegulac/benzyladenine application (10.21273/hortsci.31.4.679a), living mercury/silicon responses, spore multiplication with GA3, N. falcata spore culture and N. cordifolia/undulata tuber germination. Mandatory germination/culture titles remain candidates even when a light/hormone comparison is not yet exposed; no magnitude logged. Comparative fern blue-light studies and the21-species gas-exchange/constant-light paper require species-table confirmation; their why fields explicitly say Nephrolepis inclusion is unconfirmed. The latter is retained as a diel/light lead, so no diel null is written. The herbivory-induced systemic-signal paper10.1093/jxb/erab349 shows sword fern–tobacco clusters in the original-journal result and offers signalling evidence beyond the antheridiogen assay.
+
+Initial duplicate check found10.1562/2006-02-27-ir-817 in corrected plant-fungus-slime, but inspection shows only a general Bryophyta abstract record, not a named Nephrolepis result. Retained a full-review upgrade wanted line because current Wiley snippet explicitly names N. auriculata red/blue stomatal response and no existing wanted or owner partial/n/a mark exists; authors/year/title are supplied by that existing source record. Bologna artificial-light thesis10.6092/unibo/amsdottorato/1714 is already wanted in c4; reused, no duplicate added. Unknown metadata stays empty. Tissue-extract phytochemistry, insecticidal extracts, human herbal masks and distilled-oil bioassays are not living fern responses under10(a); other-species lettuce/pepper signalling, Abies nephrolepis and W. nephrolepis bromeliad anthesis are not this fern genus. Nutrient-leachate time series do not show daily rhythm. Plant eye record individually screens all4 tool-listed eye candidates; cell shapes and hydathodes are not focusing measurements.
+
+Wrote1 eye_type record only. Actual current screen_candidates.check on the legitimate cached hg.load snapshot returned0 problems after the17 initial wanted additions, then again after retaining the full-review upgrade. No evidence, measured closure, gate change or app checks. Stop between genera for fresh-context takeover: Medicago is unstarted.
