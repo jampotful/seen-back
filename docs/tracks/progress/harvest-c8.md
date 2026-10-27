@@ -1518,3 +1518,66 @@ Read all exposed titles/snippets and indexed original metadata/abstract passages
 **Important taxonomy/diel resolution:** original university compendium has a genuine within-day anthesis statement in a chapter labelled Bankunari(Melothria), initially a plausible candidate. Targeted original indexed passage explicitly identifies **Solena amplexicaulis**, synonym **Melothria heterophylla**, before its flower timing. Thus no target/congener diel carry and no wanted row for this other genus. PubMed fruit-volatiles source likewise measures Solena, not M.pendula. General cucumber photoperiod/JA/stomatal/flower-hour results identify **Cucumis sativus**; no family physiological carry. Sphaerocarpa/Cucumeropsis, maderaspatana/Cucumis and japonica patent results also cannot silently be treated as current Melothria. Other diel hits are seasonal flowering, age to bloom, other-genus anthesis, and pollinator activity rather than target daily timing.
 
 Chemical exclusions: pendula phytochemical/antimicrobial extracts, silver nanoparticles, molluscicides, harvested fruit chemistry and animal cytotoxicity fail10(a). Virus-host susceptibility and herbicide resistance/injury alone do not show applied hormone/elicitor sensing. No target volatile signal or chemical response established; no absence claim while germination hold/protocol steps remain. Eye hits concern epidermal trichomes/cell anatomy, animal eyes and hand-lens identification; all plant eye_type none under10(b), any demonstrated focusing belongs under light. Family-review query returns broad plant photoreceptor reviews/cucurbit hormone generalities, not an original target measurement. No full-protocol completion claimed.
+
+Melothria validation: required checker printed **0 problems** at346wanted/23searched. All JSONL parses; first338wanted lines and all23searched unchanged from61aa11b6, original320wanted prefix unchanged fromd1c27393; git diff --check passed. Committedd0f6610a; only owned wanted/progress files changed.
+
+## 2026-10-27 — issue38 worker45: Commelina and context checkpoint
+
+NEW: **Commelina one newly web-screened genus; +29 wanted,+0 searched,+0 evidence. Worker45 total: Lepidium/Melothria/Commelina three genera,+55 wanted; cumulative375wanted/23searched.** All three are protocol-partial because mandatory uncached OpenAlex steps remain skipped after round-wide429; no null searched rows or exhaustion claim. Preserve original97wanted/23searched baseline, prior18, Pilea/Centrosema adoptions and14new throughGeranium. Issue38 new screens now17 throughCommelina. **Three remain; exact next Lygodium**, thenLudwigia,Monotropa. No active partially web-screened genus; stop between entries at context boundary.
+
+Preflight actual queue, global searched/wanted, owner papers-status, canon and corrected-first accepted-name main_evidence. Actual species communis/erecta. **Adopt communis light recheck-5-fixed#1/sweep-12#2 and genus diel sweep-12#3**; no redundant diel pair. Queue has erecta light and both species eye/chemical gaps. Light physiological response cannot carry communis→erecta. Older sweep-12#6 compound two-query screen is not the current complete protocol. Canon metadata checked as before; plant eye none10(b), gene/protein presence and family physiology not target measurements. Official read-only harvest_get.py and screen_candidates.py succeeded using documented authorized network: **Commelina in no harvest run yet/not in harvest**. No zero-hit API inference. No direct source/page fetch, evidence, new service refusal, operational edit, proxy change, permission request or API fallback. OpenAlex429,MDPI429,UChicago403,SANBI403 skipped; earlier mixed network/scratch-cache refusal not retried or bypassed.
+
+Required10(e) first, then scientific/common eye/light/chemical pairs and family-review alternative; exact source and species/method searches followed. **35 actual connected queries**, execution order:
+- `Commelina seed germination light dark`
+- `Commelina germination gibberellin OR smoke OR dormancy`
+- `Commelina floral scent volatiles`
+- `Commelina eye type lens-like epidermal cells`
+- `dayflower eye type lens-like epidermal cells`
+- `Commelina light photoperiod phototropism`
+- `dayflower light photoperiod phototropism`
+- `Commelina volatile chemical hormone response`
+- `dayflower volatile chemical hormone response`
+- `Commelinaceae photoreceptor review`
+- `"Commelina erecta" light germination gibberellin`
+- `"Commelina communis" abscisic acid stomatal closure living leaves`
+- `"Commelina erecta" "light" "shade"`
+- `"Commelina erecta" "ácido giberélico" dormición`
+- `"Características reproductivas de Commelina erecta"`
+- `"Características reproductivas de Commelina erecta" site:revistas.unc.edu.ar`
+- `"Fruit dehiscence mechanism and release" Commelina doi`
+- `"Stomatal Response to Abscisic Acid Is a Function of Current Plant Water Status"`
+- `"Commelina erecta" site:asacim.org.ar/wp-content/uploads/2021/09/Actas_-Malezas-2021_VF.pdf "germination"`
+- `"Características reproductivas" "Commelina erecta" "10.31047"`
+- `"Sensitivity of Stomata to Abscisic Acid" "10.1104"`
+- `"Commelina erecta" "EFECTO DEL ÁCIDO GIBERÉLICO" "2023"`
+- `"Seed germination ecology of Asiatic dayflower" DOI`
+- `"Características reproductivas" "10.31047/1668.298x.v28.n1.2784"`
+- `"Commelina benghalensis" "Effect of temperature, light" doi`
+- `"Germinação de sementes aéreas pequenas" Commelina 2009 doi`
+- `"Commelina erecta" "light" germination "2011"`
+- `"Physiological germination aspects" "Commelina"`
+- `"Seed dormancy and development pattern" "Commelina"`
+- `"ENVIRONMENTAL FACTORS AFFECTING BENGHAL DAYFLOWER" Sabila 2008`
+- `"Características reproductivas de Commelina erecta" site:revistas.unc.edu.ar/index.php/agris/article`
+- `"Commelina benghalensis" "Voll" "162-168" germinação`
+- `"The effect of chemical and heat treatments" "Commelina"`
+- `"Commelina" "The role of temperature in the germination" "1999"`
+- `"Pharmacological evidence" "Commelina" "10."`
+
+Read every exposed title/snippet and indexed original abstract/method passage at actual delivered extent; no20-per-query claim. Responses retained in session store com1–com9. No direct fetch, paper asset or full text saved to git. Some search outputs include expanded original methods; these are still indexed search results, not intake evidence. Wikipedia/ResearchGate/Scribd/encyclopedias/library mirrors and opportunistic copies left unopened and not primary sources. Source metadata recovered from original publisher, author/institution, government proceedings and legitimate bibliographic records; unknown DOI/year/authors blank/null. Global exact DOI/Unicode-normalized title/URL and owner-status dedupe before append found29 new rows absent from wanted/status. No source owner n/a re-requested.
+
+**Erecta target leads:**2011 *Características reproductivas...* original indexed abstract explicitly tests temperature/light requirements for germination; DOI full suffix appeared only in a secondary source, so kept blank.2023 original CONICET/congress abstract *Efecto del ácido giberélico sobre la dormición de semillas ovoides...* tests applied GA in fresh/dry-stored/cold-stratified seeds.2024 Protoplasma **10.1007/s00709-023-01904-z** dimorphic-seed germination/dehiscence candidate retained per10(e); original PubMed metadata distinguishes2024 print from2023-11-01 online date.2021 ASACIM p103 related abstract includes chemical scarification and GA (no GA effect on intact seed); same study lineage adopted through2024 row, not duplicate proceedings wanted.2015 original ASACIM two-population germination abstract held separately. An adjacent dose-response abstract must not be assigned as its hormone experiment. Busitema water/light distribution thesis and horticultural shade preferences are unresolved observational/citation leads, not an actual experimentally demonstrated erecta light closure.
+
+**Communis chemical leads:** eleven original sources retained for methods review:1993ABA/mesophyll **10.1104/pp.102.2.497**;1992ABA/PEG **10.1104/pp.98.2.540**;1995 *How Do Stomata Read ABA Signals?* **10.1104/pp.109.3.803**;auxin stomatal **10.1016/s0168-9452(01)00348-x**;applied labelled-ABA initiation (PMID22471592);externalpH/ABA (16396996);antitranspirantABA/fusicoccinbioassay(24493349);ABAuptake/closure(24408689);xanthoxin/ABA(24435339);apoplasticCO2/mesophyll(23560389);auxin rooting **10.1016/j.plantsci.2003.09.007**. These are living responding guard cells/epidermis, leaf pieces, detached leaves or regenerating material, unlike extracted-compound chemistry; **isolated material eligibility remains explicit, no rooted whole-plant response or evidence inferred**. The1992 field result is maize, not communis;1995 intact-leaf comparator is Phaseolus, not communis. ABA accumulation/metabolism after water or cold stress alone is not an applied cue response; pure1985metabolism and leafstressABA profiles were not separately requested. Cold-response source may contain additional ABA experiments, recover through these references rather than imply cold is chemical sensing. ApoplasticCO2 experiment needs cue-versus-substrate judgment. No chemical null for either species while leads await readers.
+
+**Communis germination upgrade:** original Cambridge **10.1017/wsc.2026.10150** tests light/temperature plus salinity/osmotic/heat/depth/residue; year leftnull unless publication field confirmed, despite DOI suffix. Existing communis light record retained; no carry toerecta. Bibliographic UQ list displayed an adjacent2025 DOI belonging to another title, which was not adopted.
+
+**Congeners:** ten benghalensis germination/dormancy source holds:2009small-aerial **10.1590/S0100-83582009000500006**;2024light/temperature/depth **10.1590/1519-6984.281402**;1985Queensland **10.1111/j.1365-3180.1985.tb00641.x**;1990chemical/heat **10.1111/j.1365-3180.1990.tb01693.x**;1999temperature **10.1080/02571862.1999.10635004**;IRRI/UPLBseed-dormancythesis;2002Voll **Aspectos fisiológicos...** (original Embrapa catalog calls itbiológicos, paper headerfisiológicos, one source);Sabila factor-germination paper (2008UGAthesis adopted as companion, not duplicate);aerial/subterraneangermination UFVsource;2004Matsuo **10.1111/j.1445-6664.2004.00135.x**. Physical scarification, seed weight/viability, temperature and fixed14/10h culture alone do not establish light or chemical perception. Mandatory10(e) holds retained. No-light-effect outcomes remain tested candidates, not unsearched absence. In2024comparison, Richardia is positivephotoblastic andbenghalensisneutral; no species-result swap.
+
+Also retained benghalensis2016 applied light/photoperiod growth **10.1155/2016/5679249**, artificial-light-gradient morphological plasticity and original chemical-library stomatal screen; actual congener only. Laterreviewmentions virginica Klein/Felippe1991photoblastism and forskalae1955sunlight-flowerfork; full original citations not recovered, so unresolved reference leads for readers via existing requested review sources, not invented metadata or targetcarry.
+
+Eye search matches morpho-anatomical epidermis/stomata, petal pigment distribution and trichomes; no optical-focusing experiment established. Retinal-binding protein presence relates to light, not plant eye_type, and is not new target physiology by itself. Allplant eye_typenone10(b). Extract chemistry, anti-inflammatory/antiviral human effects, commelinin crystals, nanoparticle synthesis and plant-medicinal-use reviews fail10(a); colored floral organs/pollinator response do not prove emitted chemical signal. Family results include Commelinaceae phylogeny/systematics, pigment/cell morphology and broad photoreceptor reviews; no genus physiological carry. Prior accepted daily opening source retained without repeating its search. No new diel or eye negative record while mandatory protocol steps remain incomplete.
+
+Context checkpoint: **three newly web-screened genera in worker45,104 connected queries total (31Lepidium+38Melothria+35Commelina),55wanted,0searched/evidence. Exact next Lygodium, unstarted.** Prior sources/prefixes and Geranium audit caveat preserved. Final checker/prefix validation and serialized commit follow.
+
+Worker45 final validation: required screen_candidates checker printed **0 problems** at375wanted/23searched. All JSONL parses; original320wanted lines and all23searched byte-identical tod1c27393, subsequent338/346prefixes preserved byte-for-byte. git diff --check passed. Only owned wanted/progress files changed, no evidence or paper assets. Stop between completed Commelina web screen and entirely unstarted Lygodium at context boundary; three remaining genera unchanged above.
