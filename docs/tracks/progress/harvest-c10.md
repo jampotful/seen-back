@@ -698,3 +698,58 @@ No OpenAlex retry after shared429. Missing common-name API steps remain blocked;
 ### This-worker handover counts and checks
 
 Five genera received screening: Hamamelis complete for its live chemical trait before the refusal; Apios, Nothoscordum, Clematis and Carpinus retain explicitly blocked OpenAlex steps and are not claimed full protocols. Own cumulative/this-worker outputs43 wanted lines,0 null records,0 evidence. Missing API steps must be repaired when service is usable; do not repeat completed web searches or duplicate these wanted leads. Next unstarted genus Cocculus, then Sagittaria and Richardia;35 unstarted genera remain. Source refusals relayed by parent: OpenAlex HTTP429 and direct MDPI HTTP429; no subsequent calls to either. Web search remained usable (56 actual queries across these5 genera); no search refused. Gate printed0 problems for each committed chunk and is rerun before final commit.
+
+
+## 2026-10-27 — issue38 worker13 Persicaria checkpoint
+
+Initial main prefix:72 wanted lines,0 searched. This issue38 worker adds1 newly web-screened genus(Persicaria),20 actual web queries,16 wanted lines,0 searched,0 evidence; c10 now88 wanted. First16 genera Hamamelis–Capsella are adopted from prior issue28 available-source screens, with their historical140 wanted leads preserved as provenance; current72 registry-incorporated subset is not missing research. Also adopt Amphicarpaea harvest-29 searched25–27(diel,eye_type,chemical) and wanted18(light review10.1111/pce.15566), with no repeat queries. Thus17 prior genera adopted,1 newly screened,22 untouched eligible genera remain; next Leucaena,then Amorpha,Carica. Existing completed coverage is adopted per trait, including Stellaria eye_type plant-1#4 when its turn comes.
+
+AGENTS, current guide, round4-harvest, desk-screen1–10, round3-sweep, THOROUGH, BRIEF Round2 and audits53/54 read; earlier c10 progress/provenance preserved. Applied cloud-environment-runtime skill and networking reference: observations current, unrestricted network enforced, VPN false. No source/page/paper fetch,evidence write,paid API,branch switch,push/PR or operational-state changes. OpenAlex shared429 remains skipped,not a zero-hit result. Required API additions remain incomplete,so no null searched rows and no full-protocol/exhaustion claim.
+
+### Persicaria — original four plant traits
+
+Original queue has7 Persicaria species,99584 records:amphibia,capitata,lapathifolia,longiseta,maculosa,sagittata,virginiana. Live target prints chemical only because thin harvest-8 suppresses other traits; original light,diel,eye scope retained. Global evidence/corrected,wanted,searched,owner-status and canon checked. No direct Persicaria evidence found. Old sweep-4 genuine two-query provenance and harvest-8 records43–45 retained. Relevant plant canons are not in hand; in-hand Animal Eyes covers Metazoa. Owner eye_type=none and focusing-to-light rule apply.
+
+Fresh harvest_get/screen_candidates outputs and full cached descriptor saved under work/w13-c10/. Cached genus run2/supplement14 has56 unique works,all titles/available abstract starts screened; Polygonaceae family run17 has15 listed works,all titles/available starts screened. Exact successful harvest queries,in order:
+
+- `Persicaria phytochrome photoreceptor`
+- `Persicaria light perception`
+- `Persicaria phototropism`
+- `Persicaria volatile signalling`
+
+Cached citation steps citing10.3897/neobiota.56.47511 and10.3390/plants11233212 return0. Family `Polygonaceae photoreceptor review` has71hits/15listed. Results chiefly human eye/cancer pharmacology,earthworms,Cornus pollinators,Fagopyrum light genes,quinoa,flavonoid assays,arctic speciation and broad plasticity/microgreen reviews; no named Persicaria daily/eye response in available starts. No claim about unread tables.
+
+Exact20 new web queries,in executed order:
+
+- `web: Persicaria seed germination light dark`
+- `web: Persicaria germination gibberellin OR smoke OR dormancy`
+- `web: Persicaria floral scent volatiles`
+- `web: Persicaria flower opening time anthesis`
+- `web: smartweed flower opening time anthesis`
+- `web: Persicaria epidermal lens cells eye type`
+- `web: smartweed epidermal lens cells eye type`
+- `web: Persicaria photoperiod light perception phototropism`
+- `web: smartweed photoperiod light perception phototropism`
+- `web: Persicaria chemical perception volatile signalling`
+- `web: smartweed chemical perception volatile signalling`
+- `web: "Effects of smoke, heat, darkness" Persicaria`
+- `web: "Persicaria capitata" "Effects of Light"`
+- `web: "Studies on the germination and dormancy of Polygonum persicaria"`
+- `web: "The effect of environmental conditions on the seasonal dormancy pattern"`
+- `web: "Persicaria" "flower opening" anthesis hour`
+- `web: "10.1111/j.1365-2435.2010.01795.x" species`
+- `web: "10.2307/2656892"`
+- `web: "Comparison of fertility and germination" Polygonum`
+- `web: "Sesquiterpene Production" Persicaria minor methyl jasmonate`
+
+All delivered titles/snippets read; grouped results do not establish20 per individual query. Raw results/queries are work/w13-c10/Persicaria-web.json. Smartweed common name confirmed by Cornell,Mississippi State and extension listings. Search followups resolve returned source identity; no open/fetch commands. Incidental ResearchGate,Wikipedia,encyclopedia,unauthorized-copy and proxy results not used as measured evidence or fetched. Unknown metadata left empty/null; no DOI/year inferred from a URL or relative indexing date.
+
+Six cached direct leads added:2023 parental/current light experiment;2005 neutral/green-shade comparison;2018 MeJA suspension culture;2020 ABA/MeJA miRNA response;2019 Fusarium-induced terpenoid response;2016 jasmonic-acid-responsive synthase. Culture extrapolation and genetic-only endpoints explicitly require desk review. Ten web leads added:capitata light/temperature germination;seven-Persicaria dormancy study;Mensah1984 light/hormone thesis;Bouwmeester seasonal-dormancy/nitrate thesis;2015 Polygonum seed-comparison;perfoliata light/dark germination;thunbergii intensity;amphibia Biological Flora scent/timing review;controlled light reaction norms;1998 persicaria dormancy/rate. Exact DOI and normalized-title global duplicate checks found no duplicate of these16; no n/a request added. Known queue counts added only for actual for[] species; congener candidates do not imply a carry rule.
+
+Material legacy issue:harvest-8#43–45 dismisses10.1111/j.1469-8137.2004.01277.x as Polygonum rather than Persicaria. Primary PubMed15760358/abstract explicitly tests Polygonum persicaria and P.hydropiper shade response; accepted-name links must be confirmed during intake. Legacy records left intact and direct light source now wanted.10.1093/aob/mcw166 is an Arabidopsis canopy-germination study citing Polygonum,not a measured Persicaria result; no off-target request.2018 cell suspension is living elicitor culture,flagged for whole-plant scope,not rejected as extract chemistry.
+
+Chemical exclusions:lanigera analgesic,hydropiper methanol pharmacology,maculosa antivirulence,salicifolia hexane,strigosa antiproliferation,odorata quercetin,distilled essential oils and animal antifeedant assays are removed-tissue chemistry or other organisms under10(a). Pmf-box1 overexpression and PmSS promoter in Arabidopsis test a different genus; drimenol synthase assays in yeast do not alone show a Persicaria cue response. Botanical sensory epithets are linguistic,not physiology. Living ABA/MeJA/Fusarium and nitrate leads hold chemical open.2006 volatile-composition work10.1021/jf0531611 and three-smartweed tissue-profile studies do not establish intact-plant emission from returned snippets; no extra chemistry request.
+
+Diel:flora/flowering-time pages give months,developmental anthesis stages or visual open-flower definitions,not measured within-day hours. P.amphibia review is retained as a cautious timing/scent trail,not a confirmed hourly measurement. Dai/Galloway dichogamy DOI10.1111/j.1365-2435.2010.01795.x lacks verified Persicaria membership in returned text; no genus assignment invented.10.2307/2656892 is Burchardia pollen quality,other genus. Eye:leaf-taxonomic studies describe epidermal outlines,stomata,cavities and trichomes,not focusing in snippets. Lens-shaped seeds are morphology; other eye results concern animals. No null while API steps are unrun and candidates remain.
+
+Precommit candidate/wanted gate and whitespace check are recorded with this checkpoint. Next untouched Leucaena.
