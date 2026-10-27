@@ -1728,3 +1728,60 @@ New wanted source provenance (originalsunread):
 Allfirst20actuallydelivered titles/snippets read foreachquery,variablecountswithout20eachclaim. Rawweb1–22,officialdescriptor/tooloutputs /workspace/work/w38-c11. No paper/source-pagefetch,evidence,proxy/TLS/credentialchange,purchase oroperationaledit. Mandatoryvalidator/prefixchecks follow.
 
 Worker38 Artemisia checkpoint mandatory real validator printed **0 problems**. Incoming298wanted remain exact byte prefix;25searched byte-identical. Current371wanted/25searched;NEW41Artemisiawanted,cumulative73newwanted. ExactnextPolystichum.
+
+
+## 2026-10-27 — issue38 worker38 Polystichum
+
+NEW **Polystichum available-web-screened**,protocol-partial; **18successful connected queries,9newwanted,0searched,0evidence/measurements**. Current**380wanted/25searched**;worker38cumulative3newgenus(Panicum,Artemisia,Polystichum),Packera narrowrepair0newgenus/0wanted,82newwanted. Acrossrounds39of40available-web-screened;**Ailanthus remains exactnext and soleuntouched genus**. No null rows/full-protocol/exhaustion claim:OpenAlex429 remains skipped,mandatoryAPI/source-reading steps incomplete.
+
+Required harvest_get.py/screen_candidates.py executed. Run2 main25unique works plus15supplement12volatile works(1duplicate),13familyreviewtitles;everyfull stored title/abstractstart read in two retainedslices. Cachedsuccessfulcitation10.1007/BF00391162 has0hits as historicaloutcome,not currentAPIresult. No cachederror/gave-up counted as zero. Canon pertrait,global evidence/audited/corrected/wanted/searched and ownerstatus checked by actualtaxon/exactsourceidentifier. Legacyharvest-6 thin nulls unchanged,not currentcompletion.
+
+TargetP.munitum chemical oa-9#255/#256,10.1111/nph.16836 adopted for thatspecies; same review includesP.setiferum/#257 andP.lonchitis/#273 but doesnot establish queuedP.acrostichoides chemicalresponse. Primary **The Antheridiogen Neighborhood of Polystichum acrostichoides (Dryopteridaceae) on a Native Substrate**,10.1086/297488 separatelyretained for actualtarget. Indexed review **Photoperiodic control of growth and reproduction in non-flowering plants**,10.1093/jxb/erae471 explicitlylists P.acrostichoides LDgrowth versus SDnongrowth. FollowupHarvey/Caponetti query didnot resolve exactoriginal sourcefor thatsentence; nearbysporangia/sugar discussion mustnot be assumeditsoriginal. Review retainedasreview, no inventedbibliography. P.munitum FEIS explicit light-dark sporegermination retainedasreviewwith references74/218,andBellevueComGen reportaspublishedprojectpointer,not inventedjournalarticle.
+
+Actualspecies safeguards: **Effects of nutrients and light pretreatment on phytochrome-mediated fern-spore germination**PubMed24249500 explicitlynames P.minutum,notP.munitum; distinctspelling maintained,no targetcarry. P.setiferum Pb×light source andP.polyblepharum herbicidecomparison retainedonlytheirnamedspecies,withtoxicity/sensingdistinction. Routinecultivationlight,nutrientuptake and endogenoushormonelevels alone donot prove appliedcue response. FernPteridium jasmonateinduction,Adiantum phototropism,Marsileadailyleafmovement andPolytrichum mossresults cannotcarry toPolystichum. P.munitumantheridiogencoverage cannotsettleP.acrostichoides.
+
+Dielcare: required flower-opening scientific/commonpair run,butPolystichum isspore-bearing,not flowering. Seasonal sori,evergreenwinterfronds anda monthslong unfurling are notdailyphase. Supplementary circadian/sporereleasequery andtarget hydraulicsidentify onlya plausible P.acrostichoides diurnalgasexchange source; original mustconfirmwithin-daymethods. Nielsen thesis recoveredexactfulltitle legally; late-autumn irreversible frondreorientation isseasonal,not asserted diel. Generalfungus/seaweedsporerelease papers and Christmasrose/cactus/Setariaanthesisdonot measurethefern.
+
+Reject **Volatiles of French ferns and fougère scent in perfumery**,10.1177/1934578X1100601138:primary abstract explicitlysolventextracts,sodonotrequest as livingPolystichum signaling. P.braunii rootextractcytotoxicity,P.lonchitismousebioassays,essentialoilsP.montevidense and driedMelpomeneheadspace fail10(a). Lipoxygenaseontogeny study10.15407/ubj89.04.005 isendogenousphenologicalenzymeactivity,notappliedchemicalreceiver experiment. Familyreviewalternative returns Dryopteridaceaephylogeny,Dryopterisphysiology andgeneralphotoreceptorreviews,notnewtargetmeasurements. Eye_typenone10(b);focusingbelongsnonvisuallight. Generalocellipapers and12-taxonstomatal/epidermalcomparison29857176 lackreportedtargetfocusing.
+
+Exactsuccessfulcachedqueryorder:
+- `Polystichum phytochrome photoreceptor`
+- `Polystichum light perception`
+- `Polystichum phototropism`
+- `Polystichum volatile signalling`
+- `Dryopteridaceae photoreceptor review`
+
+Exactsuccessfulconnectedqueryorder:
+- `web: Polystichum seed germination light dark`
+- `web: Polystichum germination gibberellin OR smoke OR dormancy`
+- `web: Polystichum jasmonate herbivore`
+- `web: Polystichum flower opening time anthesis`
+- `web: Christmas fern flower opening time anthesis`
+- `web: Polystichum photoperiod phototropism light response`
+- `web: Christmas fern photoperiod phototropism light response`
+- `web: Polystichum plant ocelli lens epidermal focusing eye`
+- `web: Christmas fern plant ocelli lens epidermal focusing eye`
+- `web: Polystichum chemical sensing volatiles`
+- `web: Christmas fern chemical sensing volatiles`
+- `web: Dryopteridaceae photoreceptor review`
+- `web: "Polystichum acrostichoides" light photoperiod antheridiogen`
+- `web: "Polystichum munitum" light dark stomata`
+- `web: Polystichum circadian diurnal spore release`
+- `web: "Polystichum acrostichoides" "Harvey" "Caponetti"`
+- `web: "HABITAT DISTRIBUTION AND FROND REORIENTATION"`
+- `web: "Polystichum munitum" "spore germination" light`
+
+Newwantedsourceprovenance(originalsunread):
+- The Antheridiogen Neighborhood of Polystichum acrostichoides (Dryopteridaceae) on a Native Substrate — https://www.journals.uchicago.edu/doi/abs/10.1086/297488; Primary exact title names queued target native-substrate antheridiogen experiment; verify actual donor and receiver response before evidence. P.munitum evidence cannot supply this fact. Desk screen only; original unread, no page fetched or evidence logged.
+- Seasonal coordination of leaf hydraulics and gas exchange in a wintergreen fern — https://pubmed.ncbi.nlm.nih.gov/33324481/; Primary abstract names actual target and diurnal/seasonal light variation with gas exchange; inspect experimental light-response curves and within-day observations, not infer diel from wintergreen habit. Desk screen only; original unread, no page fetched or evidence logged.
+- Habitat Distribution And Frond Reorientation As Photoprotection And Drought-Avoidance Mechanisms In Christmas Fern (Polystichum Acrostichoides) In The Southern Appalachian Mountains — https://libres.uncg.edu/ir/listing.aspx?id=22110; Institutional thesis exact title recovered. Original must separate imposed light response from microclimate correlation. Irreversible late-autumn frond bending is seasonal, not diel. Desk screen only; original unread, no page fetched or evidence logged.
+- Polystichum munitum, western swordfern — https://research.fs.usda.gov/feis/species-reviews/polmun; USFS review indexed text explicitly describes laboratory spore germination in light versus darkness, references74/218. Review source/underlying original identity must be checked; no physiological carry to P.acrostichoides. Desk screen only; original unread, no page fetched or evidence logged.
+- Fern Watch WA :: ComGen — https://www.bellevuecollege.edu/comgen/comgen-curricula/fern-watch-wa/; Institutional project/report abstract identifies optimal spore/gametophyte culture in full-spectrum continuous light versus other conditions. Original project title, methods and comparison need reader; not invented as journal paper. Desk screen only; original unread, no page fetched or evidence logged.
+- Effects of nutrients and light pretreatment on phytochrome-mediated fern-spore germination — https://pubmed.ncbi.nlm.nih.gov/24249500/; Primary indexed abstract explicitly identifies P.minutum red-light requirement and dark/far-red controls. Spelling/taxon is minutum, not target munitum; no silent substitution. Desk screen only; original unread, no page fetched or evidence logged.
+- Spore germination of eight homosporous ferns in a temperature gradient — https://www.sciencedirect.com/science/article/pii/S0254629913002469; Primary indexed spore-germination title and genus mention retained10(e); actual species list/light treatment unverified. Temperature effect alone would not establish light sensing. Desk screen only; original unread, no page fetched or evidence logged.
+- Morpho-Physiological Responses of Shade-Loving Fern Polystichum spp. to Single and Combined Lead and Light Stress — https://www.mdpi.com/2073-4395/14/12/2981; Primary indexed abstract identifies P.setiferum and Proliferum with factorial applied Pb and light-stress comparison. Chemical toxicity versus sensing and living light response need original, no queued-target carry. Desk screen only; original unread, no page fetched or evidence logged.
+- HERBICIDE USE IN HARDY FERNS — https://journals.ashs.org/downloadpdf/journals/hortsci/41/3/article-p510C.pdf; Cached abstract explicitly compares applied herbicides and living fern tolerance in named congener. Herbicide injury/toxicity not automatically receptor-mediated cue response; original needed. Desk screen only; original unread, no page fetched or evidence logged.
+
+First20deliveredtitles/snippetsreadforeachquery(fewerforshortsets),no20eachclaim. Rawweb1–18,officialdescriptor/tooloutputs /workspace/work/w38-c11. No paper/source-pagefetch,evidence,proxy/TLS/credentialchange,purchase oroperationaledit,ornewservicerefusal. Mandatoryvalidator/prefixchecks follow.
+
+Worker38 Polystichum checkpoint mandatory real validator printed **0 problems**. Existing shared c8#209 photoperiod review adopted without duplicate; exact P.acrostichoides indexed LD/SD pointer above for desk target metadata review. Incoming298wanted remain exact byte prefix;25searched byte-identical. Current380wanted/25searched;NEW9Polystichumwanted,cumulative82newwanted. ExactnextAilanthus.
