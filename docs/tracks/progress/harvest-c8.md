@@ -160,3 +160,32 @@ Added15 wanted lines after DOI/title/URL duplicate/status checks:9 seed/germinat
 The old sweep-9 record explicitly names Panetta1979,10.1071/AR9791053 and an opened abstract describing living B. halimifolia shaded to about14% of open-sky radiation. It excluded that experiment as not a light sense; owner reading10(d) now makes it a required light-response lead. Added a wanted line with the actual DOI and local provenance, without inventing the original title. The separate Panetta germination/seed-survival title is supported by current returned metadata and Canadian government review snippets. Baccharis aliena capitulum/floret phenology is a plausible daily-anthesis candidate; no diel null while it waits. Seasonal months of flowering in floras were not treated as time of day.
 
 One eye_type search record includes the real cached family query then all12 actual web queries and the owner's none reading. No null for chemical, light or diel. Unknown authors/years/titles remain empty. Validation used the actual current screen_candidates.check on the legitimate serialized hg.load snapshot, not a substitute checker; it returned0 problems before the Rubus commit and0 before the Baccharis commit. No gate code changed. Stop here between genera for fresh-context takeover; Morella is unstarted.
+
+## 2026-10-27 — worker20 continuation
+
+Completed Morella screening. **This worker: 1 genus, 1 compound diel/eye_type search record, 6 wanted lines, 0 evidence and 0 measured closures. Cumulative harvest-c8: 6 genera, 6 search records, 81 wanted lines, 0 evidence and 0 measured closures.** Pilea's completed c4 protocol is preserved; 33 genera require new work, starting Nephrolepis, Medicago, Aesculus.
+
+Read AGENTS.md first, exact worker20 fresh queue line, current worker guide, original batch/queue order, round4-harvest.md, THOROUGH.md, BRIEF.md Round2, round3-sweep.md and all desk-screen points1–10 including10(e), with audit53/54 context. Applied the cloud-environment-runtime skill; current environment status is connected with unrestricted network policy enforced, no configured secret/outbound identities. No app startup/check/build/server or gate/branch/#29/#30 changes. Cached official harvest_get.show and screen_candidates.show using legitimate hg.load snapshot for ci55a1f658a687c5d355ae11d9eec65def211f4033 report Morella absent from genus harvests. Read all7 stored Myricaceae family-review titles and complete stored abstracts (up to700 characters each), including UV-B response10.1111/pce.15310. Successful cached query, word for word: `Myricaceae photoreceptor review` (run17). Global searched/wanted/evidence/corrected and papers-status were checked for Morella and Myrica cerifera; only sweep-38's old two-query thin absence exists. All4 original Morella cerifera gaps were researched. Canon metadata checked, with no accepted Morella evidence in the global stores.
+
+Connected web searches, word for word in execution order:
+- `Morella seed germination light dark`
+- `Morella germination gibberellin OR smoke OR dormancy`
+- `Morella floral scent volatiles`
+- `Morella flower opening time anthesis`
+- `wax myrtle flower opening time anthesis`
+- `Morella eye type`
+- `wax myrtle eye type`
+- `Morella chemical sense volatile response`
+- `wax myrtle chemical sense volatile response`
+- `Morella light photoperiod phototropism`
+- `wax myrtle light photoperiod phototropism`
+- `Myricaceae photoreceptor review`
+- `Morella seed germination light dark`
+- `Morella germination gibberellin OR smoke OR dormancy`
+- `Morella floral scent volatiles`
+
+Final3 repeated initial3 solely to recover truncated initial tool output; no extra coverage claimed. Complete raw results saved in work/harvest-c8/Morella-web0.txt through Morella-web3.txt, then omitted portions read in sections. Reviewed all exposed result titles/snippets and available returned abstracts, without assuming20 unseen results when fewer were exposed. No source/fullpaper page fetched. No further OpenAlex/MDPI/UChicago/SANBI call, paid fallback, library proxy or unauthorized copy; returned Wikipedia/LLM-wiki/ResearchGate results not used as sources.
+
+Added6 wanted leads after global normalized DOI/title/URL and owner-status checks: M. faya GA3 germination (10.1080/23818107.2016.1206035); M. pubescens pregermination GA3/hydrogen-peroxide and dark-incubator/greenhouse comparison; M. pubescens thesis with sun-exposure treatment; living M. cerifera seedling grass-clipping/light-competition experiment (10.1002/ecs2.2995); M. rubra living seedling UV-B response (10.1111/pce.15310) found in the family-review cache; and USDA Woody Plant Seed Manual as a route to genus germination sources cited by extension. Unknown authors/year fields remain empty. The USDA lead does not assert that a light or chemical comparison was exposed; mandatory germination/dormancy coverage under10(e) requires intake. Removed-leaf essential oil extraction studies for M. pubescens/parvifolia/pensylvanica, bayberry leaf-product drying studies and Myrica gale distillation are not living chemical response/signalling; no measurement claimed from them. Generic floral-VOC reviews expose no Morella species in their snippets and were not promoted as a genus lead. Seasonal bloom months, catkin morphology and annual phenology instructions expose no daily anthesis time.
+
+Wrote1 compound diel/eye_type null record, explicitly preserving owner10(b) plant-eye none. No chemical/light null while plausible leads wait. Actual current screen_candidates.check on legitimate cached hg.load returned **0 problems**. No evidence logged.
