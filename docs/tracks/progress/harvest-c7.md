@@ -177,3 +177,11 @@ This worker now2 genera,2 eye_type search records,9 wanted lines,0 evidence/meas
 Twelve distinct web wordings recorded verbatim, including quoted species disambiguation after generic paired queries. Required tools confirm Urena absent from cached runs1-17,20,23,24; no API queries invented. Malvaceae family-review query found general photoreceptor reviews, no family-specific one. Canon, accepted-name-aware corrected-first main evidence, global wanted/search and paper-status checked; thin old searches not completion. No source pages fetched/evidence written, no OpenAlex/MDPI/UChicago/SANBI requests. Unknown years null. Eye record adds1 queued cell, cumulative65. Remaining17 genera beginning Campsis. Gate outcome follows before commit.
 
 Urena checkpoint gate printed `0 problems`; `git diff --check` passed before commit.
+
+### Campsis checkpoint
+
+This worker now3 genera,3 eye_type search records,12 wanted lines,0 evidence/measurements; cumulative24 genera,25 search records,252 wanted lines,0 measurements. Campsis adds3 direct light/dark, pH/NaCl, cytokinin and auxin response leads. One rooting source exposes an incomplete title, retained as empty title with exact provenance in why; no guessed metadata. Main diel sweep-15:3 preserved; no extra daily timing request/pair. Essential oils, methanol fractions and paper-wasp dry-extract assays excluded under10(a).
+
+Twelve executed required/target-disambiguating web wordings recorded verbatim. Required tools confirm Campsis absent from cached history1-17,20,23,24. Family-review alternative10.1111/nph.15073 discusses Bignoniaceae tendrils and Bignonia darkness seeking; no Campsis carry assumed. Canon, accepted-name-aware corrected-first evidence, global wanted/search and paper-status checked; old thin sweep-15 not completion. No source pages fetched/evidence written; no OpenAlex/MDPI/UChicago/SANBI requests. Unknown years null. Eye record adds1 queued cell, cumulative66. Remaining16 genera beginning Verbesina. Gate outcome follows before commit.
+
+Campsis checkpoint gate printed `0 problems`; `git diff --check` passed before commit.
