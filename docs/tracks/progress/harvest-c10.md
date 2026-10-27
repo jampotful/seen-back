@@ -893,3 +893,57 @@ Light/diel genomic boundary:Conserved Daily Transcriptional Programs in Carica p
 Eye:primary leaf-optics10.3732/ajb.94.7.1061 names Begonia,Citrus,Ficus,Colocasia,Impatiens,not Carica. Papaya transgenic leaf anatomy,chromoplast morphology and viewed-through-anatomical-lens text describe anatomy,not optical focusing. Others are human/mammal eye histology or art/sculpture discussion. No focusing measurement identified;would belong underlight. No eye null while required API steps remain unrun. All14 direct candidates await reading,no source fetched/evidence.
 
 Candidate/wanted gate and whitespace check run before checkpoint commit. Exact next untouched Thelypteris.
+
+
+## 2026-10-27 — issue38 worker13 Thelypteris handover
+
+This checkpoint:1 new available-source web screen(Thelypteris),20queries,7wanted,0searched,0evidence. Worker13 final cumulative:5 newly screened genera(Persicaria,Leucaena,Amorpha,Carica,Thelypteris),91 actual new web queries,55newwanted,0newsearched,0evidence. c10 current127wanted(initial main72+55),empty searched file. Prior17 genera adopted separately(first16 Hamamelis–Capsella plus Amphicarpaea harvest-29 full screen);18 eligible untouched genera remain. Exact next Fagus,then Eleusine,Stellaria,Typha,Pueraria,Thunbergia,Morus,Symphyotrichum,Melinis,Nyssa,Potentilla,Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. Skip already-adopted Amphicarpaea when its old queue position is reached. Stop between entries for fresh context;Fagus was not web-screened. No full unrestricted protocols or exhausted cells claimed:OpenAlex API additions remain unrun after shared429.
+
+### Thelypteris — original four traits,existing measurements adopted
+
+Original target T.palustris,7531records,Thelypteridaceae/Polypodiales. Preserve main oa-9#268–269 conspecific/Pteridium antheridiogen assays in T.kunthii andoa-9#286 T.ovata dark germination;preserve sweep-97#4 abstract-only T.dentata phytochrome spore germination. These substantive chemical/light records are adopted,not duplicated;species-specific palustris gaps are not assumed closed by a carry rule. Already-wanted Hornych2021(10.1111/nph.16836,sweep-97#3) is retained without re-request. Preserve prior sweep-97#9–10 query,source andchemical-communication trails. Global evidence/corrected,wanted,searched,status and canon checked. Relevant plant canon entries not in hand;in-hand Animal Eyes covers Metazoa. Owner eye none/focusing-to-light rule applies.
+
+Fresh harvest_get/screen_candidates outputs and full descriptor saved work/w13-c10/. Cached genus run16 has34 unique works,all titles/available starts screened;no supplements or citation chase. Four successful cached queries,in order:
+
+- `Thelypteris phytochrome photoreceptor`
+- `Thelypteris light perception`
+- `Thelypteris phototropism`
+
+Cached family `Thelypteridaceae photoreceptor review` has2hits/2listed:leaf-beetle damage masquerade andepiphytic-fern clonality review. Available starts do not identify a Thelypteris light,daily orchemical experiment;no unread table declarednegative. No genus citation-step execution invented where cache has none. Required API/common-name additions remain skipped,not zero hits.
+
+Exact20 new web queries,in executed order:
+
+- `web: Thelypteris seed germination light dark`
+- `web: Thelypteris germination gibberellin OR smoke OR dormancy`
+- `web: Thelypteris floral scent volatiles`
+- `web: Thelypteris flower opening time anthesis`
+- `web: marsh fern flower opening time anthesis`
+- `web: Thelypteris epidermal lens cells eye type`
+- `web: marsh fern epidermal lens cells eye type`
+- `web: Thelypteris photoperiod light perception phototropism`
+- `web: marsh fern photoperiod light perception phototropism`
+- `web: Thelypteris chemical perception volatile signalling`
+- `web: marsh fern chemical perception volatile signalling`
+- `web: "Thelypteris" circadian spore release stomatal daily`
+- `web: "Thelypteris palustris" germination light antheridiogen`
+- `web: "Photocontrol of spore germination in the fern Thelypteris kunthii"`
+- `web: "Rapid response of leaf photosynthesis in two fern species" DOI`
+- `web: "Thelypteris palustris" heavy metal wastewater`
+- `web: "Stomatal Blue Light Response" "Thelypteris"`
+- `web: "Photocontrol" "Thelypteris kunthii" "Huckaby" DOI`
+- `web: "Secrets beneath the soil" "Thelypteris"`
+- `web: "Protocolo de germinación de Thelypteris palustris"`
+
+All delivered titles/snippets read;no20-per-query claim. Raw provenance work/w13-c10/Thelypteris-web.json. Marsh fern common name verified by UGA/Chicago Botanic Garden;fern is nonflowering,so anthesis pair was supplemented with fern daily/spore/stomatal refinement.10(e) seed wording recovered real spore-germination sources rather than being interpreted as fern seeds. No source/page/paper fetch,OpenAlex/MDPI request,evidence,paidAPI,branch/gate or legacy changes. Unknown metadata empty/null;1981 Huckaby/Raghavan from primary review/Scielo reference and2015 gas-exchange bibliography retained.
+
+Seven new wanted:original T.kunthii red/far-red spore-germination source;2015 fern-spore review with explicit species table;T.dentata CO2/light-response curves;three direct T.palustris metal-exposure/uptake papers;and direct T.palustris germination/culture technical sheet. Metal uptake alone is not established cue sensing;the three sources explicitly await physiological contrast/scope review. Mesocosm paper includes real treated/untreated living plants and morphological effects,not removed-tissue chemistry. Known counts only for actual queue targetpalustris;congener sources imply no species carry. Propagation-sheet light/chemical treatments unread;held under10(e),not invented measurement.
+
+Adopt cross-unit wanted harvest-c8#47 DOI10.1104/pp.15.00134 Stomatal Blue Light Response Is Present in Early Vascular Plants,no duplicate. New primary PMC4587438/OUP snippet explicitly names T.acuminata red/blue stomatal comparisons;existing for[] currently says Nephrolepis only. Coordinator may expand requested target under own process;this worker does not edit c8. A measured absence of added-blue response is a real light experiment,not absence of sensing.2020 Marsileaceae atavistic study and2020 light-dynamics review cite that same T.acuminata result;no redundant review requests. Primary2015 spore review identifies T.kunthii light rows and original1981 reference;no DOI guessed from unrelated cited-paper metadata.
+
+Other cached dispositions:stomatal-origin/broad chloroplast-movement/fern-gametophyte reviews,pteridophyte diversity,altitude/ecological separation,DNA-content andproductivity theses do not identify a direct palustris response in available starts. Secrets beneath the soil10.1590/2175-7860202172032 is a genuine light/dark spore-bank trial but displayed results name Doryopteris;Thelypteris appears only as a reference in primary web snippets. No Thelypteris measurement inferred;species tables beyond snippet unresolved. Osmundastrum study,woody-tree herbivory,Atractylodes endophytes,Brachypodium bZIP,Carex tricin andstomatal comparisons in other taxa do not fill target traits. Stathmopoda host-transfer work measures moth larvae,not fern perception.
+
+Chemical exclusions:Thelypteris meeboldii aqueous whitefly insecticide,fern anticancer/medicinal extracts,Artemisia liqueur,endophytic fungal fuel volatiles,French fern volatile-fraction GC-MS andpolygodial isolation concern removed-tissue chemistry or other organisms under10(a). French Thelypteridaceae survey names palustris among flora but no intact-plant emission method confirmed;not turned into signal evidence. Bracken jasmonate experiment names Pteridium,Melpomene scent study uses dried specimens,so neither is Thelypteris living emission. Main antheridiogen evidence remains the actual chemical-signal anchor.
+
+Diel:nonflowering fern seasonal spore maturity,developmental germination in days,spore morphology/antherozoid release mechanisms andgeneric photoperiod reviews do not establish a measured within-day schedule. Marsilea morning/noon leaf-angle experiment concerns another genus. No diel candidate invented or null licensed. Eye:Dryopteris thelypteris sinuous-cell geometry describes epidermal shape,not focusing;hand lens is observer equipment;fern vascular/hair/spore morphology is anatomical. No measured Thelypteris optical focusing in returned snippets;owner none reading applies. No negative claim about unread full texts.
+
+Final gate before commit must print0problems;all initial72wanted bytes and previous700-line progress prefix preserved. No raw search pages/full paper assets committed. Exact next Fagus;do not repeat these5 completed available-source screens merely because raw queue still lists wanted-only genera.
