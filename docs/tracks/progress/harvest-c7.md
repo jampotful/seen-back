@@ -161,3 +161,11 @@ Broussonetia eye record adds1 queued cell, cumulative62 search-covered cells (th
 Final source-metadata spot check corrected Youngia supplement label to20 and Trifolium harvest run label to2 in this worker’s own new records; exact successful query text/order unchanged. JSONL parse/count check confirms22 search records and240 wanted lines, with no own-round year-zero placeholders.
 
 Final worker33 gate printed `0 problems`; `git diff --check` passed for all three owned paths. No failed gate bypassed. All checkpoints committed only harvest-c7 searched/wanted/progress under the shared git lock; parent handles push/findings. No app checks, builds, servers or tests run.
+
+## 2026-10-27 worker38 continuation
+
+Passiflora completed: this worker1 genus,1 eye_type search record,5 wanted lines,0 evidence/measurements; cumulative22 genera,23 search records,245 wanted lines,0 measurements. Seventeen distinct executed web wordings recorded verbatim, including targeted P. incarnata/P. lutea disambiguation because general searches mainly returned crop P. edulis. Targeted maypop light/GA3/herbicide/germination and daily floral leads retained; unrelated crop physiology and already-evidenced P. pohlii scent not requested. Original P. lutea cells stay reader-dependent within genus candidate scope; no false genus null. Main partial congener chemical/diel sweep-16:7-9 and touch evidence preserved. Diel disagreement blocks simple congener carry.
+
+Cached history and required harvest/candidate tools confirm no Passiflora harvest in runs1-17,20,23,24. Family-review alternative10.1371/journal.pone.0187905 screened from snippets; its ocelli are nectary structures, not eyes. General epidermal focusing belongs under nonvisual light. Canon, corrected-first accepted-name-aware evidence, global searched/wanted and papers-status checked; old thin sweep-16 not accepted as full protocol. No source pages fetched/evidence written; no OpenAlex/MDPI/UChicago/SANBI calls. Unknown years remain null. Eye record adds2 queued cells, cumulative64. Remaining18 genera beginning Urena. Gate result follows before commit.
+
+Passiflora checkpoint gate printed `0 problems`; `git diff --check` passed before commit.
