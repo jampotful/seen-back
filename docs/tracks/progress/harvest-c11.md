@@ -1058,3 +1058,37 @@ Mandatory validator pending checkpoint.
 
 
 Worker17 Packera mandatory real validator printed **0 problems**; raw retained batches2–6 are /workspace/work/w17-c11/Packera-web{2,3,4,5,6}.json.
+
+
+## 2026-10-27 — issue38 worker17 Cortaderia
+
+NEW Cortaderia web-screened,16 successful exact web queries,8 wanted,0 searched/0 evidence. Worker17 totals2 available-web-screened genera (Packera,Cortaderia),35 queries,9wanted/0searched/0evidence. Current95wanted/25searched;15 remaining, exact next Nasturtium. All prior work retained. Packera first-batch unseen-tail limitation remains; Cortaderia all delivered titles/snippets read with variable counts, no assumed20 results per query. OpenAlex429 skip persists; full protocol/API/source reading incomplete, no exhausted/null claim. No new service refusal.
+
+Pre-query global evidence/corrected/wanted/searched/status checked by genus/common name and new candidate titles/DOIs/URL. Existing sweep41#8 Barnes2008 Cortaderia selloana coloured-light seed response adopted; its proceedings/non-peer-reviewed limit and absent dark treatment are explicit, not repaired. Existing thin sweep41 does not establish current chemical/diel/eye protocol. Canon checked through catalog/legacy canon list; no named in-hand source resolves open traits. Mandatory harvest_get.py and screen_candidates.py both explicitly show genus absent; raw scratch named Cortaderia-harvest/candidates.txt. No genus harvest candidate omitted.
+
+Mandatory seed pair produced a primary shade/light experiment10.1016/j.actao.2007.09.004, plus target germination titles for Sardinia, South Africa,2026 stress,2023 water deficit and2024 invasion ecology. Eight leads retained after dedup/status checks. Fixed light cycles, salinity, heat, water deficit and seed viability do not themselves establish light sensing; sources need original comparison verification. Cortaderia jubata light comparison appears as citation in primary C.selloana abstract; no cross-species numerical carry and no duplicate upgrade request for it. Applied ancymidol/paclobutrazol/uniconazole potted-plant study10.21273/horttech.11.2.216 is living10(d) chemical response. Ginger/turmeric study10.3390/plants8030059 tests living C.selloana seed receiver, not donor extract composition; possible nonspecific toxicity vs cue-response remains explicit for reader. Cortaderia speciosa donor-extract paper fails target living-response requirement in available abstract; not requested as sensing. General jasmonate papers on Nicotiana, rice and Jacobaea do not carry to Cortaderia.
+
+Diel pair/follow-up returned seasonal plume/flowering pages, field cutting study10.1111/wre.12631 and grass-pollen background without a target daily hour. Setaria/Iridaceae/Jatropha anthesis timings are other genera. Microbiology textbook appears only through excluded Scribd snippet; no source evidence/adoption from it. Plant eye none follows10(b); ocelli reviews and leaf epidermal focusing belong under light, no named Cortaderia focusing experiment in delivered text. Taxonomy PMC5301984 describes leaf anatomy/bulliform cells, not demonstrated optical focusing. Family review returned general photoreceptor sources10.1146/annurev-arplant-042809-112259 and10.1111/tpj.70817, no target measurement in snippets. VOC sensor engineering, cut/drying grass10.1029/1999GL900076 and turf chemistry10.1021/es405355d establish no live target cue response; no speculative leads.
+
+Exact executed queries:
+- `web: Cortaderia seed germination light dark`
+- `web: Cortaderia germination gibberellin OR smoke OR dormancy`
+- `web: Cortaderia jasmonate herbivore`
+- `web: Cortaderia flower opening time anthesis`
+- `web: pampas grass flower opening time anthesis`
+- `web: Cortaderia plant ocelli lens epidermal focusing eye`
+- `web: pampas grass plant ocelli lens epidermal focusing eye`
+- `web: Cortaderia chemical sensing volatiles`
+- `web: pampas grass chemical sensing volatiles`
+- `web: Poaceae photoreceptor review`
+- `web: "Cortaderia" gibberellic auxin germination`
+- `web: "Cortaderia selloana seed germination under different ecological conditions" doi`
+- `web: "Cortaderia" germination Sardinian wetlands`
+- `web: "Cortaderia" pollen anthesis "time of day"`
+- `web: "Pampas grass responses to ancymidol, paclobutrazol, and uniconazole substrate drenches"`
+- `web: "Ginger and Turmeric Essential Oils for Weed Control and Food Crop Protection" Cortaderia`
+
+No source/paper pages fetched, evidence, permission/proxy/TLS changes or operational edits. Raw successful responses /workspace/work/w17-c11/Cortaderia-web1–5.json. Mandatory validator pending checkpoint.
+
+
+Worker17 mandatory Cortaderia gate printed **0 problems**. Query-count correction: Packera exact listed queries total20 (not19); worker17 cumulative36 after Cortaderia16. Parent expanded shared c17 Deno#16 to Packera aurea with explicit UTK synonym title, commitedd32b40, checked0problems; shared adoption has target metadata and no duplicate c11 request.
