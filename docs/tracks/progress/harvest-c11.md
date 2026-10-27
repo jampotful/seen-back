@@ -442,3 +442,38 @@ New wanted provenance:
 Global wanted/evidence/status checked before append. Existing1938 leaf light/gravity response10.1093/oxfordjournals.aob.a084037 is already requested in harvest26;1990 photoperiod/tuber study W1579049020/W2588713156 already requested in plant1. Preserve these requests without duplication. UV-B record has two cached DOI/year variants; one wanted copy, year null until verified. Authors absent in cache remain empty.
 
 Tropaeolum extracts/essential oils/hydrosols and floral tissues/processed juice (including10.3390/life15071053,10.1021/jf902946v,10.3389/fnut.2022.912680,10.17113/ftb.60.04.22.7667) do not establish a living sender/receiver response. Chromoplast/nectar-spur gene expression alone does not measure sensing. Rose, Brassica, Hymenaea and Chelidonium studies concern other genera. Reproductive stage/season and floral longevity alone were not converted into daily hours. Stacked-scattering paper measures collected-petal reflection; no light perception inferred. Generic plant-ocelli and focusing survey goes under light when a genus measurement is established, never eye_type. Darwin1878 manuscript search snippet contains actual leaf-orientation observation, retained as a historical corroborating lead in this note; existing1938 experimental request already targets the same open light trait. Other broad physiology books/reviews have no Tropaeolum measurement identified in available abstracts and were not requested as background.
+
+### Chasmanthium continuation, 2026-10-27
+
+Adds **1 genus,2 searches,1 wanted,0 evidence**. Worker23 totals **2 genera,3 searches,10 wanted,0 evidence/0 measured cells**. Batch cumulative **11 genera,15 searches,94 wanted,0 evidence**; **29 remain**, next Paulownia. Tropaeolum gate printed0 problems before commit14f29ef2.
+
+10 successful connected web queries here, worker23 cumulative22; no quota refusal. Cached run6 and supplements14/20 contain70 displayed result occurrences,15 family-review titles and68 unique stored abstracts/titles; all screened. Both required harvesting/screening aids run, plus cached metadata inspected. No new API, MDPI/UChicago/SANBI or source-page fetch. Global evidence/wanted/status check found no duplicate for the hormone experiment. No in-hand canon compilation supplies Chasmanthium data; relevant catalog DOI lists retained.
+
+Exact cached queries:
+- `Chasmanthium phytochrome photoreceptor`
+- `Chasmanthium light perception`
+- `Chasmanthium phototropism`
+- `Chasmanthium flower opening time`
+- `Chasmanthium nyctinasty`
+- `Chasmanthium anthesis`
+- `Chasmanthium pollination biology`
+- `Chasmanthium volatile signalling`
+- `Chasmanthium epidermal lens cells`
+- `Chasmanthium epidermal focusing leaf optics`
+- `Poaceae photoreceptor review`
+
+Exact web queries:
+- `web: Chasmanthium seed germination light dark`
+- `web: Chasmanthium germination gibberellin OR smoke OR dormancy`
+- `web: Chasmanthium floral scent volatiles`
+- `web: Chasmanthium flower opening time anthesis`
+- `web: northern sea oats flower opening time anthesis`
+- `web: Chasmanthium plant ocelli lens epidermal focusing eye`
+- `web: northern sea oats plant ocelli lens epidermal focusing eye`
+- `web: Chasmanthium chemical sensing volatiles`
+- `web: northern sea oats chemical sensing volatiles`
+- `web: Poaceae photoreceptor review`
+
+Wanted: Hormonal Effects on the Germination Response of Chasmanthium latifolium; 10.21273/hortsci.30.4.836d; https://journals.ashs.org/downloadpdf/journals/hortsci/30/4/article-p836D.pdf. Living Chasmanthium latifolium caryopses were treated with nitrate, GA3 and kinetin; germination was compared across treatment combinations. This is an applied chemical response under plant10(d). Cached harvest title/abstract screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `query "Chasmanthium light perception"`.
+
+Main holds only the partial measured light/photoperiod report sweep27#13 for this genus. No light query pair or redundant light request added. Hormonal germination qualifies under10(d), so chemical remains pending. Cached UV-B and shade studies are light-related background to an already-evidenced trait and were not requested. Diel cached candidate10.1111/j.1365-294x.2006.03051.x is general phytochrome biology, without genus-specific daily data in available abstract. All returned genus flora/nursery phenology gives flowering months, not hours. Uniola paniculata source specifically gives early-morning floret opening, but that is a distinct genus; old synonym Uniola latifolia must not be confused with Uniola paniculata. Broad oat-crossing anthesis and oat food-volatilome results concern Avena; Chimonanthus/Chrysanthemum scent results are likewise other genera. Eye candidate10.1093/aob/mct027 is inflorescence morphology, using human eyes rhetorically. General ocelli/focusing sources belong under light if a genus response is established; plant eye_type stays none by owner decision. No speculative generic source requested for missing daily timing.
