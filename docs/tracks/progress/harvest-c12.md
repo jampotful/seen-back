@@ -1089,3 +1089,34 @@ Diel: no clock-hour Cerastium opening result found. Alpine Cerastium breeding pa
 Eye: botanical trichome/stigma papillae/leaf anatomy, seed micromorphology, phytoliths and compound microscope methods do not show image-forming eyes or actual focusing. Tool-listed British grasses1917 lens word is not a Cerastium eye measurement; lens-like focusing if found belongs under light10(b). Owner eye_type none; no null while required API protocol unavailable. Family review includes Arabidopsis PHYD, fungal Taxol, insect photic evolution/moths, Salix pollination, petal optical coloration and broad plant plasticity, with no demonstrated target eye/diel/chemical measurement. No new service/quota refusal.
 
 Remaining14:Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
+
+
+## 2026-10-27 — issue38 worker21: Hemerocallis and fresh-context handoff
+
+NEW worker21 total5 web-screened genera(Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis),59 wanted,0 searched,0 evidence. Current files16 searched/213 wanted; original main111 wanted preserved, prior issue38 worker15+43 and this+59=213. Prior21+new5=26/40 web-screened, plus Asparagus fully adopted=27/40 covered.13 authorized genera remain; exact next Chromolaena. All5 new screens are full-protocol partial after skipped OpenAlex429; no null/exhaustion or measured closure claimed. Stop is between entries for fresh context. No new service/quota refusal.
+
+Hemerocallis target H.fulva diel/chemical sweep-42#2–4 adopted exactly as logged(full text), so neither trait pair repeated. Existing source10.3390/plants14131996 provides flower opening but explicitly does NOT establish the target daylength response, which remains open. Old sweep-42 search is thin, not a current eye/light completion. Both mandatory tools ran and report Hemerocallis absent from harvest, with no cached Hemerocallis titles or query/chase results claimed. Global evidence/audit/wanted/searched/papers-status and canon checked;5 new wanted have no normalized-title/DOI duplicate or owner n/a. Deno germination manual already globally wanted, not duplicated.
+
+Exact actual web queries(10e first pair):
+- `web: Hemerocallis seed germination light dark`
+- `web: Hemerocallis germination gibberellin OR smoke OR dormancy`
+- `web: Hemerocallis floral scent volatiles`
+- `web: Hemerocallis light photoperiod phototropism`
+- `web: daylily light photoperiod phototropism`
+- `web: Hemerocallis eye type epidermal focusing`
+- `web: daylily eye type epidermal focusing`
+- `web: Asphodelaceae photoreceptor review`
+- `web: "Effects of Photoperiod Treatment" "Hemerocallis"`
+- `web: "Germination of Hemerocallis Seeds as Influenced"`
+
+All delivered titles/snippets read, up to first20/query where delivered, without claiming20 when fewer. Scratch provenance work/w21-c12/Hemerocallis-web1..3.json,Hemerocallis-harvest.txt,Hemerocallis-candidates.txt. Family alternative returned broad plant/algal/insect photoreceptor reviews, animal optogenetics/nonconventional photoreception, phototoxic plant chemistry and Asphodelaceae pollen morphology, no family-specific target eye measurement. Live API unavailable is not zero hits. No source/paper fetch or evidence, no proxy/TLS/credential change. Prior source skips OpenAlex429,MDPI429,UChicago403,SANBI403 remain respected. Search-index results at those publishers were screened; no refused direct fetch retried.
+
+Five wanted: four mandatory germination/dormancy sources(2023 Koreanfour-taxon congener GA trial;2016 seed development/temperature/cultivars;Western Siberian species/seed study;Griesbach/Voth1957 original) and one direct target light lead. The primary Licheng6 source explicitly contrasts natural14/10h and shaded12/12,10/14,8/16h and reports delayed/incomplete secondary flower-bud differentiation. This is a target H.fulva cultivar light-response lead requiring original reading, not merely gene-expression association or a nursery sun-preference claim. Metadata blank/null where not verified; no DOI fabricated from journal paths.
+
+Korean2023 primary source explicitly names thunbergii,dumortieri,hakuunensis,hongdoensis and GA germination response; these are genuine10(d,e) congener chemical candidates, not H.fulva coverage.2016 primary names cultivar Stella de Oro and hongdoensis/thunbergii; cold/maturity findings are not assumed light response and cultivar taxonomy needs checking. Western Siberian germination title names minor,middendorffii,citrina,lilio-asphodelus and cultivars, not fulva. Hypoxis hemerocallidea GA trial is another genus, not Hemerocallis; leave its target-species fork to later authorized Hypoxis entry.
+
+Scent search exposed2026 Shaman petal volatilomics and2024 sixty-variety aroma surveys; these concern floral tissue chemistry/headspace with intact-living versus harvested preparation unresolved in snippets, not newly asserted chemical sensing. Existing full-text target scent measurement already adopted. Morning/evening clock transcriptomics repeats daily timing context without an actual target light perturbation from visible text; nursery claims of full sun, high light, cool shade and hybrid cultivar performance are not new target measurements. Eye/eyezone terminology is petal/sepal pigment pattern, explicitly defined by American Daylily Society, not image-forming eyes. Epidermal-anatomy study reports stomata/cell-size/palisade adaptations, no actual focusing; if focusing were measured it belongs under light10(b). Owner eye_type none; no null while required API protocol unavailable.
+
+Fresh-context exact next:Chromolaena, then Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. Do not repeat the prior18 completed screens, Ficus/Lespedeza/Salix, Asparagus full adoption, or this worker's5 screens. None of the13 remaining genera has been newly web-searched by this worker. Adopt species-matched existing trait coverage first; Chromolaena light/diel/chemical inventory sweep-42#11–13 still needs target/species check; Hypoxis/Carex/Urtica have congener/species forks; Daucus eye plant-1#3 is substantive; Prunella rescreen-1 bird optics are not plant. Preserve all old prefixes/provenance.
+
+Worker21 final validation completed before commit: combined screen_candidates --check returned `0 problems`; both JSONL files parse at16 searched/213 wanted; baseline bbc35ff2050022e029b68875e3d219aab8f0ddd4 bytes are exact prefixes of all three owned files; own-file git diff --check passed. New wanted title/status scan found no status-title match, and per-entry normalized-title/DOI scans avoided duplicates. Only own wanted/progress changed; no evidence, paper assets, other-unit files, application/operational state or old prefix edits.
