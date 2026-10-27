@@ -339,3 +339,56 @@ New wanted provenance (exact query in each JSON):
 - Genomic analyses in castor identify signatures of selection and loci associated with hypocotyl elongation differentiation over millennia: https://www.sciencedirect.com/science/article/pii/S098194282600135X. Genus hypocotyl study discusses light-inducible regulators; verify a castor light-treatment experiment rather than infer a measured response from Arabidopsis gene functions.
 
 Iris/Ricinus final validation: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems**. Both14 Iris and24 Ricinus wanted additions are genuine snippet/title leads, with unknown metadata left empty. No source text/evidence was committed.
+
+### Conopholis continuation, 2026-10-27
+
+Adds1 completed genus,1 eye_type search,8 wanted,0 evidence/0 measured cells. Worker17 totals **3 genera,3 searches,46 wanted,0 evidence**. Cumulative batch **9 genera,12 searches,84 wanted,0 evidence**; **31 remain**, next Tropaeolum. Stop between genera for fresh-context continuation.
+
+Read both cached tools after completion: run5 supplements12/14,70 displayed result occurrences and15 family-review titles, with stored abstracts reviewed from work/harvest-c11/Conopholis-metadata.json. Eye_type is hidden by old thin sweep25 but original gaps require it; all four plant traits remain without actual main measured evidence. The old statement that the other three are already measured rests on other genera, not Conopholis, and cannot complete its protocol. No global wanted/status duplicate found for the8 additions.
+
+12 successful web queries, worker17 cumulative34. Raw responses work/harvest-c11/Conopholis-web{1,2,3,4}.json. No quota refusal. No live OpenAlex request after round-wide429; no MDPI/UChicago/SANBI or any source-page fetch. Canon catalog checked; no in-hand plant compilation supplies Conopholis data. Animal eye canon named per point8. Every cached successful query, including zero-hit ones, copied in record:
+- `Conopholis phytochrome photoreceptor`
+- `Conopholis light perception`
+- `Conopholis phototropism`
+- `Conopholis flower opening time`
+- `Conopholis nyctinasty`
+- `Conopholis volatile signalling`
+- `Conopholis photoperiod`
+- `Conopholis circadian rhythm`
+- `Conopholis anthesis`
+- `Conopholis pollination biology`
+- `Orobanchaceae photoreceptor review`
+
+Exact web queries:
+- `web: Conopholis seed germination light dark`
+- `web: Conopholis germination gibberellin OR smoke OR dormancy`
+- `web: Conopholis floral scent volatiles`
+- `web: Conopholis flower opening time anthesis`
+- `web: squawroot flower opening time anthesis`
+- `web: Conopholis plant ocelli lens epidermal focusing eye`
+- `web: squawroot plant ocelli lens epidermal focusing eye`
+- `web: Conopholis chemical sensing volatiles`
+- `web: squawroot chemical sensing volatiles`
+- `web: Conopholis photoperiod phototropism light response`
+- `web: squawroot photoperiod phototropism light response`
+- `web: Orobanchaceae photoreceptor review`
+
+All three cached citation steps on10.3390/agronomy13092250,10.1603/022.038.0629 and10.1111/een.12947 returned0. Family review results include PHYA phylogeny10.3732/ajb.93.7.1039, host-interaction review10.1111/nph.17083, general photoreceptor review10.1016/j.conb.2015.01.013 and broad plant/animal gene/optics reviews. Phytochrome sequence phylogeny does not itself demonstrate a functional response in Conopholis; no null inferred from it. Plant ocelli/focusing review10.3390/plants12010061 belongs under light; no genus measurement named. Petal microsculpture10.1071/sb16028 includes Conopholis but gives no eye; optical focusing, if later read, goes to light.
+
+Web expansion often ignored the rare genus: Conophytum, Conopodium, Gymnadenia conopsea, Conogethes and conophthorin are distinct taxa/compound names and cannot supply Conopholis evidence. General smoking/germination and phototropism reviews name no Conopholis in returned text. Seasonal squawroot flora snippets give spring or May-June flowering, not daily hours; rice, guava, Setaria and Gloriosa anthesis are other genera. No timing value claimed. A book title from a suspicious-copy host was retained only as a legally obtainable ISBN lead, without fetching the copy or accepting a measurement.
+
+Cached chemical candidates: holoparasite olfactory-signal review10.3897/phytokeys.275.192014 retained wanted. The two1908 Key and Flora records10.5962/bhl.title.17342 and10.5962/bhl.title.54197 are broad identification guides; available abstract text names generic flower collection and taxonomy, not Conopholis chemical response. Non-strigolactone review retained for genus-specific experiments. Lettuce KAI2, Striga/Orobanche germination, Arnica achenes and Tibouchina floral-colour studies concern other genera; taxonomic/habitat/genome/black-bear diet titles are not sensing experiments. Conserving seeds in Mexico retained for germination species-list review; seedling/tubercle anatomy retained because snippet names germinated and attached Conopholis seedlings.
+
+New wanted provenance (all titles/metadata from cached harvest or returned web, unknown fields empty):
+- A multiverse of trophic networks and coevolutionary trajectories among holoparasitic Orobanchaceae and their animal associates: a global perspective: https://phytokeys.pensoft.net/article/192014/download/pdf/. Holoparasitic Orobanchaceae review explicitly covers olfactory signals and appears in genus queries; reader must verify actual Conopholis emission/signaling observations rather than carry from other genera. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `Conopholis volatile signalling`.
+- Architectural effects regulate resource allocation within the inflorescences with nonlinear blooming patterns: https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ajb2.16001. Blooming-pattern and flowering-sequence study is a plausible source of daily floral observations; truncated cached abstract does not establish measured genus/species or hours. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `Conopholis anthesis`.
+- Flower position within plants influences reproductive success both directly and via phenology: https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/ajb2.16405. Floral-position/phenology observations may include Conopholis daily flowering; reader must establish measured genus/species and distinguish seasonal sequence from daily hours. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `Conopholis flower opening time`.
+- Variación intrainflorescencia en caracteres florales y reproductivos de Conopholis alpina (Orobanchaceae): ¿efecto de la competencia por recursos o de la arquitectura?: http://bindani.izt.uam.mx/downloads/1831ck195. Thesis specifically studies floral/reproductive variation in Conopholis alpina; a plausible source for anthesis timing, not an established daily-hour result from the cached abstract. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `Conopholis pollination biology`.
+- Conserving seeds of useful wild plants in Mexico: main issues and recommendations: https://link.springer.com/content/pdf/10.1007%2Fs10722-016-0427-7.pdf. Seed conservation/germination study of204 useful Mexican species retained for species-list and experimental-treatment verification; actual inclusion of Conopholis and light/chemical comparisons not stated in truncated abstract. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `Conopholis photoperiod`.
+- Non-strigolactone natural products interfering with parasitic weed development: https://pubs.rsc.org/en/content/articlepdf/2026/np/d5np00077g. Review discusses chemically induced germination, haustorium formation and host tropism; returned by genus query, with Conopholis-specific experiments still to verify. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `Conopholis volatile signalling`.
+- The developmental anatomy of Conopholis americana (Orobancaceae) seedlings and tubercles: journal via library. Search title/snippet identifies germinated and attached Conopholis americana seedlings. Germination/host-attachment experiments may contain light or chemical conditions; reader must verify actual contrasts. Broker search result was not opened or used as a paper source; obtain by legal journal/library route. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `web: Conopholis seed germination light dark`.
+- Spring Wildflowers of the Northeast: A Natural History: ISBN9781400841745; publisher/library edition. Book title returned in squawroot anthesis search; possible source for genus flower-opening observations. No book copy fetched and no timing measurement inferred from an unauthorized-copy host search result. Obtain the publisher/library edition using ISBN9781400841745. Cached harvest abstract/title or connected web snippet screened2026-10-27; source not fetched/read, no evidence logged. Exact query: `web: squawroot flower opening time anthesis`.
+
+Final metadata cleanup: unknown year0 placeholders in59 c11 wanted lines changed to JSON null at parent request; observed source-verified years preserved. Iris eye disposition explicitly scoped with view plant and the two plant species, preserving mantis records. Final combined gate is rerun after metadata cleanup.
+
+Final worker17 combined validation after all annotations/year cleanup: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems**. No incomplete genus or plausible wanted trait called exhausted. Clean handoff: Tropaeolum, then Chasmanthium onward,31 remain. Prior continuation commit36ff9434.
