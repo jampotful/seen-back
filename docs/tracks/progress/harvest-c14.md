@@ -528,3 +528,28 @@ Queries actually run (connected web search; every returned title/snippet screene
 Worker41 context checkpoint: **7 newly web-screened genera**: Heracleum, Matricaria, Trillium, Eriogonum, Cytisus, Aralia, Berteroa. These are web-query screens for this round, **not full-protocol exhaustion**; OpenAlex remains skipped from the inherited429. Added **65 wanted**, **0 searched**, **0 evidence**; batch totals **184 wanted,0 searched,0 new evidence**. Verified byte-for-byte that the incoming119 wanted-line prefix at c89869c7 is preserved, including coordinator source25 Fagus expansion; all first20 earlier web screens remain intact. Adopted shared c9#227 Heracleum, c13 Trillium sunflecks, c13#36 Berteroa daily blooming, exact-species Cytisus chemical evidence and Berteroa light evidence. New c14#129 holds coordinator-confirmed Anthriscus/Aegopodium targets as well as original Heracleum sibiricum, with living/excised-headspace fork explicit.
 
 **13 genuinely unreviewed genera remain; exact next Elaeagnus**, then Geum, Calluna, Cymbalaria, Conium, Crataegus, Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia. Do not repeat the7 new screens or previous20. Primula still needs careful actual-species/trait preflight: existing plant-1 eye screen and extensive sources/evidence may support adoption, but no congener physiological carry and no thin-sweep completion. No new service rejection. No pages/papers fetched or evidence written; all retrieval belongs to legal OA reader. Checker0 before each commit.
+
+## 2026-10-27 — issue38 worker46 final allocation continuation
+
+Incoming 184 wanted-line prefix and all 27 earlier web-query screens retained. Berteroa source-target correction: c13#36 DOI10.5586/aa.2009.010 was verified from official harvest, but B. incana has not been confirmed by the c13 owner from a permissible primary snippet (only a ResearchGate hit); the earlier target-confirmed wording is **not an adopted target assignment**. Retain that source-target pointer as unverified, do not force metadata or duplicate its wanted record. OpenAlex remains skipped after coordinator429; no new service rejection. No page/paper fetches, evidence or null searched records.
+
+### Elaeagnus
+
+Web-query screen completed for round; full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates, harvest title/abstract starts through105 (including supplements), citation zero hits and five family alternatives reviewed. Canon/global evidence/wanted/status preflight finds target umbellata diel sweep-11#5 only; no congener physiology carry. Added15 wanted leads: actual target light-germination/Shafroth trial, hormone germination for both targets, floral-headspace conditional methods, oviposition response, and leaf optics. Passive reflection/structural coloration alone is not assumed to be light sensing, and the convex-lens indexing hit is left for the reader to resolve under light, never eye_type. Living versus picked floral material is explicit for headspace studies. Extracts, steam-distilled flower oils, juice fermentation, antioxidant food chemistry and animal retina/cancer experiments excluded10(a); microscopy lenses and trichome anatomy do not establish eyes. Elaeagnus rhamnoides/Hippophae sources not carried to umbellata/angustifolia. Mollis light/germination source exists in snippets but only RG/secondary title and no permissible primary method confirmation; unresolved source pointer https://ouci.dntb.gov.ua/en/works/4vobbAwl/ for reader, not target adoption. Family hits mainly Hippophae floral gene expression and medicinal chemistry, no target carry. The LED propagation hybrid is explicitly ×ebbingei only.
+
+Queries actually run (connected web search; every delivered title/snippet screened, fewer than20 whenever fewer delivered; germination pair and eye pair reissued only because combined-output truncation hid earlier results):
+
+- `Elaeagnus seed germination light dark`
+- `Elaeagnus germination gibberellin OR smoke OR dormancy`
+- `Elaeagnus floral scent volatiles`
+- `Elaeagnus photoperiod phototropism light sensing`
+- `autumn olive photoperiod phototropism light sensing`
+- `Elaeagnus volatile chemical signalling`
+- `autumn olive volatile chemical signalling`
+- `Elaeagnus epidermal lens cells eye`
+- `autumn olive epidermal lens cells eye`
+- `Elaeagnaceae photoreceptor review`
+- `"Peltate trichomes on biogenic silvery leaves of Elaeagnus umbellata"`
+- `"Elaeagnus" "101" "171" "1976"`
+- `"Seed dormancy and germination" "Elaeagnus mollis"`
+- `"Elaeagnus" "Shafroth" "light" germination`
