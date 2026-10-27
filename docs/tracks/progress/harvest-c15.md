@@ -336,3 +336,37 @@ Exact web queries, in order:
 - web: twinflower chemical response volatile signaling
 
 Worker42 checkpoint: 3 newly web-screened genera (Betula, Thuja, Linnaea), all protocol partial;24 new wanted lines,0 searched,0 evidence. Cumulative13 web-screened genera and94 wanted. 27 remain, exact next Lindera. Prior source/query provenance retained.
+
+### Lindera: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran. Read all107 printed genus work occurrences (including repeats), all15 family-review titles/stored abstract starts and the candidate list. Existing L. benzoin light evidence recheck-6-fixed#21 / sweep-17#4 (10.1371/journal.pone.0185894) adopted, so its light pair was not repeated. Nine new wanted lines retained after cross-unit wanted and owner-status DOI/title check: explicit seed-germination/dormancy studies, live ABA responses, zeatin/auxin shoot cultures, chemically induced genome doubling, controlled light gradients in L. melissifolia, a living herbivore-induced response in the queue species L. benzoin, and an uncertain VOC sender/Chrysanthemum receiver preprint. The culture stage and species attribution remain explicit. The preprint's empty abstract does not establish living Lindera material; method must distinguish intact leaf emission from removed tissue/extract. Genome doubling's stored abstract truncates at “oryza”, so no dose or full chemical name invented. Two source seeds/soil-bank titles are mandatory germination leads, not assertions of an independently contrasted light/chemical treatment.
+
+Existing harvest-c7 wanted source 10.1093/ee/nvaa080 (lanternfly host-volatile collections, explicitly spicebush in web snippets) adopted without duplicate; verify the actual Lindera species and living collection. The leaf-level emission-model review 10.5194/bg-7-1809-2010 is general scaling and does not identify a measured Lindera emission in its displayed abstract. Tissue organ-metabolomics, hydrodistilled oils, antioxidant/drug assays in animal cells, roots used as medicine, and terpenoid-biosynthesis genome work without an applied cue are excluded under10(a). Spotted-lanternfly/wasp/insect antennal measurements identify insect receivers, not plant receivers. “Volatile profile and vespicochory of spicebush achenes” has ambiguous common-name attribution and extraction methods, so no Lindera measurement inferred from it.
+
+Diel candidates are general tree light review, butterfly lighting, pondberry early fruit characteristics, Hechtia daily biology and general nocturnal pollination, no explicit Lindera daily opening in the displayed material. The six-Japan-Lindera phenology paper (10.1111/j.1756-1051.1999.tb00680.x) describes staggered February-May flowering seasons rather than daily timing. Other reproductive works concern fruit set, clone sex ratios, resources or taxonomy. Web daily searches give March-April flowering, anther flap morphology and garden calendars, no daily hour. Eye results are general ocelli, animal eyes, fossils, biomedical wound repair and a ScienceDirect Topics shade-leaf overview whose table is not a species measurement. Family review chiefly returns pharmacology, insect/pollinator work and other genera, no additional genus response established. Common name spicebush verified by NC State/Missouri/USFS results. Canon as above; OpenAlex missing steps prevent null rows. No page/paper fetched or evidence written.
+
+Successful harvest queries, verbatim and in recorded order:
+- Lindera phytochrome photoreceptor
+- Lindera light perception
+- Lindera phototropism
+- Lindera flower opening time
+- Lindera nyctinasty
+- Lindera volatile signalling
+- Lindera anthesis
+- Lindera pollination biology
+- Lindera epidermal lens cells
+- Lindera epidermal focusing leaf optics
+- family review: Lauraceae photoreceptor review
+
+Exact web queries, in order:
+- web: Lindera seed germination light dark
+- web: Lindera germination gibberellin OR smoke OR dormancy
+- web: Lindera floral scent volatiles
+- web: Lindera flower opening time anthesis
+- web: spicebush flower opening time anthesis
+- web: Lindera plant ocelli lens-like epidermal cells eye
+- web: spicebush plant ocelli lens-like epidermal cells eye
+- web: Lindera chemical response volatile signaling
+- web: spicebush chemical response volatile signaling
+
+Worker42 checkpoint: 4 newly web-screened genera (Betula, Thuja, Linnaea, Lindera), all protocol partial;33 new wanted,0 searched,0 evidence. Cumulative14 web-screened genera and103 wanted lines.26 remain, exact next Lupinus. OpenAlex still skipped after coordinator429; no additional service refusal.
