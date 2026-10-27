@@ -276,7 +276,7 @@ Gaillardia checkpoint screening gate printed `0 problems`. Coordinator cross-uni
 
 ### Serenoa checkpoint
 
-Newly web-screened genus2,full protocol partial. Required harvest_get/screen_candidates run; all103 distinct cached works (family/citation included) read from every title and all available abstract text. Harvest run3 plus supplements14/20 has11 successful genus queries and family review; no failed step. Cached citation10.3375/043.038.0104 returns one work,Are Native Palms Pollinator Hogs(10.3375/043.040.0205): Angadenia reproductive response beside flowering palms,not Serenoa daily timing. Family-review alternative Twenty-five years of progress in understanding pollination mechanisms in palms(10.1093/aob/mcr192) used as snippet/cached-abstract context,no source fetch. Cached phytochrome-gene family phylogeny is not target functional measurement.
+Newly web-screened genus2,full protocol partial. Required harvest_get/screen_candidates run; all103 distinct cached works (family/citation included) read from every title and all available abstract text. Harvest run3 plus supplements15/20 has11 successful genus queries and family review; no failed step. Cached citation10.3375/043.038.0104 returns one work,Are Native Palms Pollinator Hogs(10.3375/043.040.0205): Angadenia reproductive response beside flowering palms,not Serenoa daily timing. Family-review alternative Twenty-five years of progress in understanding pollination mechanisms in palms(10.1093/aob/mcr192) used as snippet/cached-abstract context,no source fetch. Cached phytochrome-gene family phylogeny is not target functional measurement.
 
 Canon,corrected-first accepted-name evidence,global searched/wanted and owner status checked. Existing main scent sweep-46:10 preserved; no repeat chemical pair or duplicate scent request. New germination leads are deliberately uncertain about whether light was experimentally compared; fixed14h culture is not called a light response. Direct floral-biology titles are unresolved daily-timing candidates,no hours invented. Medical extracts,processed berries,hair-loss trials and pharmacology concern human/animal responses and fail10(a); camera lens ghost-orchid paper10.1653/024.102.0401 and human-eye review10.3389/fphar.2024.1270073 do not measure a plant eye. Owner eye_type none,focusing belongs to light; no new eye/null rows while API steps incomplete.
 
@@ -443,7 +443,7 @@ Mitchella added5 wanted; this worker cumulative6 new web-screened genera,37 want
 
 ### Euphorbia checkpoint
 
-Newly web-screened genus7,full protocol partial. Required tools run;all73 distinct cached works including family/citation corpus read from every title/all available abstract text. Run2 plus successful chemical supplement12:four genus queries and family review;cached citation10.1016/j.tree.2009.09.010 returned0. Family context Divergence of flowering-related genes to control flowering in five Euphorbiaceae genomes10.3389/fpls.2022.1015114 names Ricinus,Jatropha,Vernicia,Manihot,Hevea,not target Euphorbia;no functional inference. Canon,corrected-first accepted-name evidence,global searched/wanted and statuses checked. Actual main light evidence E.pulcherrima/E.paralias is unqueued and preserves only its own species; it does not suppress original ten target species' light pairs or create genus carry.
+Newly web-screened genus7,full protocol partial. Required tools run;all73 distinct cached works including family/citation corpus read from every title/all available abstract text. Run2 plus successful chemical supplement14:four genus queries and family review;cached citation10.1016/j.tree.2009.09.010 returned0. Family context Divergence of flowering-related genes to control flowering in five Euphorbiaceae genomes10.3389/fpls.2022.1015114 names Ricinus,Jatropha,Vernicia,Manihot,Hevea,not target Euphorbia;no functional inference. Canon,corrected-first accepted-name evidence,global searched/wanted and statuses checked. Actual main light evidence E.pulcherrima/E.paralias is unqueued and preserves only its own species; it does not suppress original ten target species' light pairs or create genus carry.
 
 Eight provisional target wanted leads assembled before dedup:amygdaloides subsp.arbuscula/macultata/heterophylla light-dark germination,hirta/peplus living culture light/2,4-D,reproductive biology of three queued weeds and cyparissias floral timing. Culture viability/species forks explicit. Light-positive and light-negative heterophylla trials both retained,not combined into false uniformity. Other-genus and unqueued esula/kansui/milii/pulcherrima hormone/photoperiod trials are real but no target-specific request invented;virgultosa and virgata not equated. Steam-volatiles10.1002/ffj.1148,propolis10.3390/antibiotics13030230,latex10.2172/6124450,extract insecticide10.33545/2618060x.2022.v5.i2b.114 and mammalian pharmacology fail10(a) as target sensing evidence. Human-eye extract10.3390/ph17091193 not plant eye;animal vision/fluorescent lamp word matches similarly excluded. Eye_type owner none,epidermal focusing light. No null records while API steps incomplete,no source fetch/evidence written.
 
@@ -477,3 +477,30 @@ Exact executed web queries (18 distinct;germination pair first):
 New wanted count after dedup/cumulative counts follow below. Two newly eligible genera remain:Eupatorium,Juniperus. Next Eupatorium. Historical coverage30 prior+7 new+1 adopted=38/40; current-round full protocol/exhaustion remains0.
 
 Euphorbia added8 wanted;this worker cumulative7 new web-screened genera,45 wanted additions,0 searched,0 evidence. Current157 wanted/29 searched vs112/29 starting baseline. Gate printed `0 problems`;owned-path `git diff --check` passed before commit.
+
+### Eupatorium checkpoint
+
+Newly web-screened genus8,full protocol partial. Required tools confirm absent from cached runs1-17,20,23,24. Canon,corrected-first accepted-name evidence(none),global wanted/search and owner statuses checked. All returned titles/snippets read,no20-per-query claim. Four provisional actual-target leads:capillifolium primary light-sensitive germination,cannabinum dormancy/germination,serotinum primary light/stratification reference,and cannabinum floral-VOC database primary-source trail. Cannabinum VOC source not assumed living emission until methods checked. Perfoliatum medicinal-grinding odor is removed-tissue chemistry10(a),not living signal; targeted GA query gave no direct applied-hormone study. No chemical/diel/light/eye null because API/full protocol incomplete.
+
+Historical Eupatorium adenophorum = Ageratina adenophora and Joe Pye Eupatorium purpureum/fistulosum now Eutrochium were identified as different current genera in source snippets; their abundant light/MeJA/diurnal results do not carry to queued Eupatorium. Photoperiod thesis names only genus and may cover reclassified plant,so no speculative target request. Seasonal bloom,cut-flower stage and multi-day developmental phases do not establish within-day activity. General eye essays/animal ocelli do not measure plant eyes;eye_type none,focusing belongs to light. Asteraceae family review query again returned general algae/insect/plant photoreceptor reviews,no specific family alternative. No source pages fetched or evidence written.
+
+Exact executed web queries (15 wordings;germination pair first):
+- `Eupatorium seed germination light dark`
+- `Eupatorium germination gibberellin OR smoke OR dormancy`
+- `Eupatorium floral scent volatiles`
+- `Eupatorium light response photoperiod`
+- `boneset light response photoperiod`
+- `Eupatorium response to airborne volatile signals`
+- `boneset response to airborne volatile signals`
+- `Eupatorium flower opening time anthesis`
+- `boneset flower opening time anthesis`
+- `Eupatorium plant ocelli lens-like epidermal cells eye`
+- `boneset plant ocelli lens-like epidermal cells eye`
+- `Asteraceae photoreceptor review`
+- `"Eupatorium perfoliatum" gibberellin auxin germination`
+- `"Eupatorium serotinum" germination light`
+- `"Eupatorium cannabinum" "floral" "volatiles"`
+
+Checkpoint wanted/cumulative totals follow below. Last newly eligible genus remains Juniperus,next. Historical coverage30 prior+8 new+1 adopted=39/40; current-round full protocol/exhaustion0.
+
+Eupatorium added4 wanted;this worker cumulative8 new web-screened genera,49 wanted additions,0 searched,0 evidence. Current161 wanted/29 searched vs112/29 baseline. Own new Serenoa supplement label corrected to15 and Euphorbia to14 from actual cached descriptors;historical content unchanged. Gate printed `0 problems`;owned-path `git diff --check` passed before commit.
