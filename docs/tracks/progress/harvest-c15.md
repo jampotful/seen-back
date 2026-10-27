@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 3 genera web-screened, 0 protocol-complete, 0 search records, 22 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 4 genera web-screened, 0 protocol-complete, 0 search records, 26 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -66,4 +66,21 @@ Exact web searches (in order):
 - web: barberry chemical response volatile signaling
 - web: Berberidaceae photoreceptor review
 
-Next genus: Abies; 37 genera remain unreviewed.
+
+
+### Abies: web-screened, protocol partial
+
+Required harvest_get and screen_candidates show no harvest. Queue opens light response, diel and eye_type; chemical trait already absent from open queue and was not claimed exhausted. No prior wanted found. Main plant canon checked as above. Four wanted added: A. pinsapo light/dark germination, A. georgei seed-wing light trials, A. koreana germination study, and A. alba sun/shade response. A somatic-embryo article names culture factors but snippets do not establish which light factors were applied to Abies rather than Picea. Deno3.pdf (Pacific Bulb Society archive) snippet holds a fifteen-species Abies germination table but source title is unverified; retained as metadata lead. Numerous Picea abies results were excluded because abies is their epithet, not genus. Abies anthesis results give months, no daily hours. Eye results describe resin canals metaphorically as tiny eyes, and ordinary leaf anatomy, no focusing measurement. Pinaceae search returns broad reviews and photosynthesis/genome papers; no additional genus measurement established. Common name fir verified by conifers.org result. No flowering-scent query for this gymnosperm genus. OpenAlex steps unavailable; no full-protocol claim.
+
+Exact web searches (in order):
+- web: Abies seed germination light dark
+- web: Abies germination gibberellin OR smoke OR dormancy
+- web: Abies photoperiod phototropism light response
+- web: fir photoperiod phototropism light response
+- web: Abies flower opening time anthesis
+- web: fir flower opening time anthesis
+- web: Abies plant ocelli lens-like epidermal cells eye
+- web: fir plant ocelli lens-like epidermal cells eye
+- web: Pinaceae photoreceptor review
+
+Next genus: Fouquieria; 36 genera remain unreviewed.
