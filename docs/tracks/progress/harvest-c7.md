@@ -17,3 +17,7 @@ Remaining: 38 genera, beginning Parthenocissus, in batch order. Required screeni
 ### Parthenocissus checkpoint
 
 Added Parthenocissus: 1 eye_type search record and 5 wanted lines, bringing this round to 3 genera screened, 4 search records, 24 wanted lines, and 0 measurements. Its light, chemical and diel traits await candidates, including a direct phototropism experiment and a Virginia-creeper volatile table. Parthenocissus is absent from the same harvest runs and has no accepted-name-aware main evidence. Nine OpenAlex queries and eleven web searches completed; the Vitaceae family-review alternative was 10.3390/horticulturae5020041. Required gate printed `0 problems`. Seven queued cells are covered by search records. Remaining: 37 genera beginning Cnidoscolus. Global coverage scan preserves the existing replant-1 diel, eye_type and sense_light_nonvisual records for Nekemias and existing evidence for later genera.
+
+### Cnidoscolus checkpoint
+
+Added Cnidoscolus: 1 eye_type search record and 4 wanted lines (three germination/seed studies retained under point 10(e), and a publisher snippet reporting within-night anthesis in C. urens). This round now has 4 genera screened, 5 search records covering 8 queued cells, 28 wanted lines, and 0 measurements. Nine OpenAlex queries and eleven web searches completed. Family-review alternative: 10.3389/fpls.2022.1015114. Required gate printed `0 problems`. Remaining: 36 genera beginning Magnolia.
