@@ -42,3 +42,60 @@ The WebSearch ration was 60, shared with another audit. I ran one to three searc
 | 5 | Scirpus sense_chemical | ok. Web-only. My searches returned hormone teaching pages, Larson 1997 on six wetland Cyperaceae (Field Station Bulletin 30(1): 1-9, MINDS page opened; S. atrovirens and S. cyperinus under storage and temperature, no chemical) and Thullen and Eberts 1995 on Scirpus acutus (Wetlands 15: 298-304, Conservation Evidence page opened; chilling and scarification, no chemical, and the species now sits in Schoenoplectus). |
 
 Errors in the sample: 2 of 20, 10.0% (lines 29 and 33).
+
+## Verdicts (extension of 15, seed 8215)
+
+All 15 drawn records' non-web `queries` match the harvest word for word and in order (Coreopsis 13, Eurybia 13, Isocoma 13, Honckenya 13, Polygonum 11, Reseda 11, Arctotheca 11 lines), or hold web searches only where the genus is in no harvest run (Croton, Onopordum, Sphaeralcea, Huperzia, Nereocystis). Coreopsis prints two citation steps and its record names the first DOI; Honckenya prints none.
+
+| Line | Record | Verdict |
+|---|---|---|
+| 12 | Coreopsis eye_type | ok. Queries match (13, 2 web); chased DOI in the citation step. The retinopathy extract paper, the petal-patterning review (with the owner's wording) and the lutein review are correctly screened. My pooled petal-focusing search returned the conical-petal-cell reviews and the MIXTA origin paper (PMC9467652); nothing on Coreopsis. |
+| 28 | Sphaeralcea eye_type | ok. Web-only; the same pooled search found nothing on Sphaeralcea. |
+| 3 | Croton eye_type | ok. Web-only; nothing on Croton focusing in my pooled searches. |
+| 25 | Onopordum diel | ok. Web-only. My search (Onopordum acanthium capitulum opening time) returned Wikipedia, the Cambridge Botanic Garden, RHS and New Zealand flora pages and two Gonzaga pollinator-repository records; no opening hour. |
+| 15 | Arctotheca eye_type | ok. Queries match (11, 2 web); the stamen-collar anatomy, oak trichome, Croton trichome and lutein works are correctly screened. |
+| 18 | Eurybia eye_type | ok. Queries match; the lutein review is correctly screened. |
+| 20 | Honckenya diel | ok. Queries match (13, 2 web); the marula, phytochrome, flower-opening review and moth works are correctly screened by their abstract starts. My search returned the New Jersey heritage sheet on H. peploides var. robusta, Frier et al. 2016 on Haskap (J Pollination Ecol 19(11): 81-87, page opened; no Honckenya) and a Rhodora 114(958) paper on the seasonal growth of H. peploides, whose title is seasonal, not daily; no opening hour. |
+| 13 | Polygonum diel | ok. Queries match (11, 2 web); chased DOI in the citation step; the eleven screened works (embryo-sac "Polygonum type", days-after-anthesis counts, other genera) are correctly screened. My search returned Pladias factsheets, flora pages and a UMBS working paper on Polygala paucifolia (Deep Blue page opened); no Polygonum opening hour. |
+| 24 | Isocoma sense_chemical | ok. Queries match (13, 2 web); the gall-wasp, Stephanodoria, Andean-gradient and ice-core works are correctly screened. My search returned Friedjung et al. 2013 on desert allelochemicals (PLoS ONE 8(12): e81580, pherobase page opened; Origanum and Artemisia) and herbivory pages; no Isocoma. |
+| 23 | Isocoma eye_type | ok. Queries match; the lutein review is correctly screened. |
+| 17 | Eurybia diel | ok. Queries match (13, 2 web); the herbarium image, Byrsonima, hawk-moth and blue-light works are correctly screened. My search returned genus and garden pages and the COSEWIC report on E. divaricata (not opened); no opening hour. |
+| 21 | Honckenya eye_type | ok. Queries match; the tool lists no candidate and none was found. |
+| 11 | Reseda sense_chemical | ok. Queries match (11, 2 web); chased DOI in the citation step; all 13 candidates are screened, the constituents review and pollen chemistry under 10(a). My searches returned Antonova-Nedeltcheva et al. 2025, "Volatile Compounds Profiling of Fresh R. alba L. Blossom", Molecules 30: 3102, 10.3390/molecules30153102 (MDPI page opened), which is Rosa alba with picked blossoms, and Arabidopsis hormone cross-talk theses; no Reseda response or living-flower headspace. |
+| 8 | Huperzia eye_type | ok. Web-only; nothing on Huperzia focusing in my pooled searches. |
+| 1 | Nereocystis diel | **error**, with a fork. Amsler CD and Neushul M 1989, "Diel periodicity of spore release from the kelp Nereocystis luetkeana (Mertens) Postels et Ruprecht", J Exp Mar Biol Ecol 134: 117-127, as reference 2 of Deiman, Iken and Konar 2012 (ALGAE 27(2), KoreaScience page opened) gives it; Ulaski and Konar 2021 (ALGAE 36(2): 147-154, 10.4490/algae.2021.36.5.10, KoreaScience page opened) cites it too. The record chose spore release as the kelp's timed event and searched for exactly these words; its own results held the KoreaScience item JAKO202126758278416 (Ulaski and Konar), which it left unjudged. Fork: a kelp has no flowers, and the plant rule names flower opening and scent timing; if the owner reads a kelp's diel cell as closed to spore release, this verdict becomes ok. Spore release is a reproductive release event and differs from the CAM gas exchange that audit 80's desk ruling called metabolism, so I count it. |
+
+Errors in the extension: 1 of 15 (line 1).
+
+## Counts
+
+Errors: 3 of 35, 8.6% (sample of 20: 2 errors, 10.0%; lines 29 and 33). If the owner settles the kelp fork of line 1 against the record's finder, 2 of 35, 5.7%; if he also reads Yang et al. 2021 (line 7) as a living auxin response, 3 of 35 again. On every reading the unit is above 5% and fails. Pooled with the desk's earlier audits of desk-screen units (audits 43 to 51, 55 to 73 and 75 to 80, 20 errors in 794 records once audit 80's two errors are withdrawn by the desk ruling of 27 October; audit 80 pooled without audit 79): 23 in 829, 2.8%. Counting audit 80's two as written, 25 in 829, 3.0%.
+
+The two draws cover the whole unit, so the desk can drop the error records and merge the rest: **drop lines 1, 29 and 33** of docs/views/searched/harvest-c22b.jsonl (Nereocystis diel, Sphaeralcea sense_chemical, Anchusa sense_light_nonvisual). The 32 other records stand. The three cells then wait for the works above on a wanted list.
+
+Pattern. Both counted plant errors are germination trials, a gibberellin soak and a light-against-dark test, and both were missed because the point 10(e) phrasing ("jasmonate OR elicitor OR hormone response"; "light intensity OR shade OR photoperiod growth") returns jasmonate reviews and garden pages for small genera; my searches with "seed germination" in them found both on the first page. Three of the unit's records ran a single web search for their trait. The kelp error is a result the record's own search returned and left unread, a cost of judging untitled results by title without opening them.
+
+## Wanted lines (listed, not counted)
+
+All 25 lines leave `authors` empty, so none is counted. Checked against pages my searches returned:
+- Line 1 (10.2307/1543327): Maier I, Hertweck C, Boland W, The Biological Bulletin 201(2): 121-125, 2001 (University of Chicago Press page). The line carries year 0, which can be filled; the page names no kelp species.
+- Line 2 (10.1515/znc-1984-0629): "Lamoxirene: Structural Proof of the Spermatozoid Releasing and Attracting Pheromone of Laminariales", Z Naturforsch 39c: 689-691, 1984 (De Gruyter PDF; the fetch renders the first author as "Mamer FJ", with Müller B and Jaenicke L). The paper reports the pheromone identical across "six different Laminariales" without naming them and describes no bioassay, so by itself it cannot fill a Nereocystis or Egregia cell.
+- Line 13 (10.3389/fpls.2018.01585): Desai JS, Slabaugh E, Liebelt DJ and others, "Neural Net Classification Combined With Movement Analysis to Evaluate Setaria viridis as a Model System for Time of Day of Anther Appearance", Front Plant Sci 9: 1585, 2018 (Frontiers PDF). Only Setaria accessions are measured, so the line holds the Arctotheca diel cell on a paper that cannot fill it; the same holds for harvest-c22's lines on this DOI.
+- Line 24 (BYU etd/8074): Jefferies JAM 1972, "A revision of the genus Sphaeralcea (Malvaceae) for the state of Utah", MS thesis (ScholarsArchive page). A taxonomic revision whose abstract gives no opening time; a weak hold on the Sphaeralcea diel cell.
+- Line 25: Chwil M and Weryszko-Chmielewska E, Acta Agrobotanica 62(1): 37-47, 10.5586/aa.2009.005 (AGRIS record, which gives 2013; the DOI points to 2009). The line has year 0 and no DOI. The abstract treats floral micromorphology and gives no timing or scent.
+- Lines 7 and 18: searches for the DOIs returned other Frontiers items, so both stay unconfirmed. The other lines were not checked against a page.
+
+## Leads
+
+- Sphaeralcea sense_light_nonvisual: the Fire Effects Information System page on S. grossulariifolia says seeds germinate equally well in light and in darkness, citing its references 2 and 38, whose entries did not load. The primary work behind it would be a measurement for the genus.
+- Sphaeralcea sense_chemical: the 2019 ASHS abstract on GA3 and excised S. coccinea embryos (no results shown; excised tissue).
+- Huperzia sense_chemical: Yang et al. 2021 (Plants 10(6): 1112), the fork under line 7; and the H. selago prothallus-culture paper PMC7397083, which did not open.
+
+## Blocked pages
+
+- pmc.ncbi.nlm.nih.gov PMC7397083 (permission not answered; not retried).
+- journals.uair.arizona.edu JRM download 5401 (redirected to a publisher home page; not followed).
+
+## Searches and pages
+
+I ran 41 WebSearches (of 60) and opened 27 pages my own searches returned. No ResearchGate, academia.edu, Sci-Hub, LibGen or library proxy page was opened, and no paper text is committed.
