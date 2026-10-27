@@ -103,12 +103,12 @@ def evidence_files(root):
     out, seen = [], set()
     cdir = os.path.join(root, "docs", "views", "audit", "corrected")
     for f in sorted(os.listdir(cdir)) if os.path.isdir(cdir) else []:
-        if f.endswith(".jsonl"):
+        if f.endswith(".jsonl") and not f.endswith("-failed.jsonl"):
             out.append((f[:-6], os.path.join(cdir, f)))
             seen.add(f[:-6])
     edir = os.path.join(root, "docs", "views", "evidence")
     for f in sorted(os.listdir(edir)) if os.path.isdir(edir) else []:
-        if f.endswith(".jsonl") and f[:-6] not in seen:
+        if f.endswith(".jsonl") and not f.endswith("-failed.jsonl") and f[:-6] not in seen:
             out.append((f[:-6], os.path.join(edir, f)))
     return out
 
