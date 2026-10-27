@@ -1,5 +1,53 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker27 Veronica checkpoint
+
+This worker:1 newly available-source-screened genus (Veronica),13 actual web queries,9 wanted lines,0 search records,0 evidence. Cumulative batch:9 genera screened through Veronica at the available-source boundary,108 actual round28 web queries,74 wanted lines,0 search records,0 evidence.31 untouched genera remain, beginning Oenothera, Tridax and Momordica. Missing OpenAlex scientific/common-name API steps remain unrun after the shared429; original Hamamelis repairs still wait. These are available-source screenings, not9 unrestricted completed protocols, and no cell is called exhausted.
+
+Read AGENTS first, round28 worker guide/current service status, exact worker27 assignment, queue-lines/batch order, round4-harvest, THOROUGH, the whole BRIEF including Round2, round3-sweep and desk-screen1–10 including10(e). Applied cloud-environment-runtime and networking reference: current unrestricted HTTP policy enforced, observations current, no credentials/identities, VPN false. No OpenAlex, direct MDPI, UChicago or SANBI request, paid API, plant source/full-paper fetch, evidence write, branch/gate change or engineering29/data30 change. Parent-requested own-round correction changed Branch-Localized Induction wanted year2022 to null:2022 remains explicitly described as repository metadata, not an established journal publication year.
+
+### Veronica — all four original traits
+
+Original queue has8 species (197540 records total):V. persica, V. chamaedrys, V. officinalis, V. serpyllifolia, V. arvensis, V. longifolia, V. anagallis-aquatica and V. hederifolia; family Plantaginaceae, order Lamiales. Original gaps include sense_light_nonvisual, sense_chemical, diel and eye_type. Live harvest/candidate output has an empty open-trait list, but that thin-record filter did not suppress original traits. Global evidence, corrected copies, wanted, searched and papers-status checked. No exact Veronica taxon evidence or Lim DOI appears in the checked-out evidence/corrected stores; old sweep-2 nevertheless records the Lim2021 photoperiod source10.1007/s13580-021-00367-6 and its query/source trail, which are preserved rather than assumed absent literature or repeated. Old harvest-2 and sweep-2 lack the full web protocol. Canon checked for all four traits: relevant plant compilations not in hand; Animal Eyes covers Metazoa, no Veronica evidence inferred. Owner eye_type=none applies; epidermal focusing belongs to light.
+
+Cached genus run1 genuinely executed these3 queries, word for word and in order:
+
+- `Veronica phytochrome photoreceptor`
+- `Veronica light perception`
+- `Veronica phototropism`
+
+No cached failed query or supplement exists. Read all45 displayed genus results (44 unique works) and available abstract starts. Cached citation steps citing10.1111/een.12947 and10.4161/psb.22704 each return0 Veronica works. Family run17 `Plantaginaceae photoreceptor review` returns63hits/15listed, all titles/available abstracts screened. Rendered cache is work/worker27-Veronica-harvest.txt; fresh harvest_get and screen_candidates completed and were saved separately. Real cached API searches were not repeated; missing API steps for original traits and common names are explicitly unrun after429, not zero-hit results.
+
+Exact13 new web queries, in executed order:
+
+- `web: Veronica seed germination light dark`
+- `web: Veronica germination gibberellin OR smoke OR dormancy`
+- `web: Veronica floral scent volatiles`
+- `web: Veronica photoperiod light perception phototropism`
+- `web: speedwell photoperiod light perception phototropism`
+- `web: Veronica flower opening time anthesis`
+- `web: speedwell flower opening time anthesis`
+- `web: Veronica chemical perception volatile signalling`
+- `web: speedwell chemical perception volatile signalling`
+- `web: Veronica epidermal lens cells eye type`
+- `web: speedwell epidermal lens cells eye type`
+- `web: "Ecología de la germinación" "Veronica"`
+- `web: "Contrasting germination responses to vegetative canopies" Veronica`
+
+All delivered titles/snippets screened; grouped search results do not establish20 results for every individual query. Raw results work/worker27-Veronica-web1.json through -web4.json. Speedwell common name is independently shown by RHS/extension listings. Last2 queries chase candidate bibliography: the Spanish germination study is verified on legitimate Dialnet/Seville listings, and the canopy-germination source is explicitly Arabidopsis in the PubMed listing. No source/full-paper page opened and no ResearchGate content used as evidence.
+
+Nine wanted leads retained after global exact DOI/normalized-title/status check: cached2025 five-Veronica salinity experiment; direct queue V. officinalis KAR1/smoke-water germination study;2023 light-quality/dark germination trial; V. parnkalliana GA3/smoke trial; V. ornata light/dark germination; eight-Korean-Veronica dormancy/GA3 study; direct V. arvensis light/dark germination; daily-light-integral experiment including queue V. longifolia; and1995 Spanish11-species light/dark experiment explicitly including V. persica, V. arvensis, V. anagallis-aquatica and V. hederifolia. These are living-response targets under10(d,e), not chemical extracts or generic model-crop background. Congener leads do not establish queue-species measurements or a carry rule. Unknown years=null, unverified DOI/authors empty; known2023/2025 cache or explicit1995 bibliography preserved. Existing plant-1 wanted10.1006/anbo.1997.0520 names V. agrestis alongside other plants and is preserved without duplicate request.
+
+Light candidate dispositions: cached phytochrome/PIF3/cytokinin papers concern Arabidopsis; kiwifruit, tropical pioneer, Polygonum, Impatiens, tomato, bacteria, clover, apple and Apocynum trials concern other genera.10.1093/aob/mcw166 is explicitly Arabidopsis from the bibliographic chase, excluded for Veronica. Ficus chimera is other-genus anatomy. Historical stomatal-light paper10.1080/00378941.1958.10835187 names no Veronica in the available abstract, and1961 broad phototropism list10.5962/p.254614 has no abstract/species list; no negative assertion about unread tables. Chloroplast-motion theses, broad light/flower-production reviews,760-species meta-analysis and space-biology review do not establish named Veronica response in available starts; no broad background request added. Direct seed/DLI candidates hold light open.
+
+Chemical dispositions: Hydrosols of Veronica Species, Hydrodistillation and Microwave Extraction of21species, chemophenetic-markers study and flower essential-oil pharmacology use isolated/hydrodistilled material, not living-plant signalling under10(a). Generic VOC receptor/uptake/communication reviews and herbivore perception snippets name no Veronica experiment; no broad review wanted. Living salinity, smoke and GA3 sources above hold chemical open; no receptor recognition inferred from toxicity. Floral scent florist descriptions are cultivation/general fragrance advice, not controlled emission measurements.
+
+Diel dispositions: cut-flower conditioning/vase-life pages concern removed flowers or seasonal/within-inflorescence opening, not living daily anthesis. Speedwell flora/extension pages give seasonal bloom months and no measured daily hour. Flower opening and closure review10.1093/JXB/ERG213 is real, but returned excerpts name no Veronica; an incidental ResearchGate anthesis diagram has no confirmed Veronica taxon and was not used. Family pollination/Penstemon/Edmundoa papers concern other genera or animal visitation; no diel null while API steps are missing.
+
+Eye dispositions: family papers cover bee/pollinator perception, flower colour/reflectance, Callitriche heterophylly and other-genus plant studies, with no named Veronica focusing experiment in available starts. New eye snippets concern vertebrate lenses, embryology/histology and animal eye development; bird's-eye is a speedwell common name, not a plant eye. Seed/fruit SEM10.1006/anbo.2000.1188 is morphology and no focusing measurement in its abstract. No eye null is written during an incomplete protocol.
+
+Candidate/wanted gate printed `0 problems` and `git diff --check` passed. Next untouched genus at this checkpoint was Oenothera.
+
 ## 2026-10-27 — worker21 Richardia checkpoint and handover
 
 This worker cumulative: 2 newly available-source-screened genera (Sagittaria and Richardia), 22 actual web queries, 17 wanted lines, 0 search records, 0 evidence. This checkpoint: Richardia, 11 queries, 8 wanted. Cumulative batch: 8 genera screened through Richardia at the available-source boundary, 95 actual round28 web queries, 65 wanted lines, 0 search records, 0 evidence. 32 untouched genera remain, starting Veronica, then Oenothera and Tridax. Stop is between genera for fresh-context continuation. OpenAlex missing steps remain unrun after429, including original-genus Hamamelis repairs; this is not8 complete unrestricted protocols, and no cell is claimed exhausted. Prior genuine full protocols/evidence and thin-sweep corrections remain preserved.
