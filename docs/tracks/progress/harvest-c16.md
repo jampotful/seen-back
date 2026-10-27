@@ -275,3 +275,29 @@ Additional unresolved light leads returned: Effects of shading on growth and bio
 Anthesis pair mostly returned flowering months or hours since opening, but the direct G. sinensis flower-observation study was retained. Other harvest diel candidates measure Chrysanthemum, Aeschynanthus, apple, bean, muskmelon, raspberry, lily, peach, Macadamia, Melilotus and Swartzia, not Gleditsia. Eye searches describe the seed-coat lens/strophiole and cotyledon areoles, not optical focusing/image-forming organs; owner none reading applies. Dry-eye drug inserts concern animal eyes. Volatile oil administered to rats, steamed-seed flavour profiles, methanol-extracted insect phagostimulants and saponin pharmacology are tissue chemistry/animal responses under 10(a). Gall-midge sex pheromone measures an insect, not its host tree. Family review returned legume photoperiodic regulation/phylogenetics without a Gleditsia experiment in the displayed passages. The 0-academic-oup-com.legcat.gov.ns.ca proxy result was left unopened. OpenAlex skipped; no null search records or evidence.
 
 Worker 9 counts: 4 new genera web-screened (Ornithogalum, Phlox, Solidago, Gleditsia), 0 full protocol complete, 0 searched rows, 28 wanted added, 0 evidence. Cumulative 12 web-screened and 38 wanted lines. Remaining 28 genuinely unreviewed genera; exact next Cakile. Stopped between entries at context checkpoint; existing first eight screens and ten wanted preserved. OpenAlex supplements/citation work remains skipped for the round and source reading remains with the oa job.
+
+## 2026-10-27 — issue38 worker 48 continuation
+
+### Cakile — web screening finished; protocol partial
+
+Checked canon catalog, global evidence/wanted/searched, owner status and actual queue species/traits. Harvest currently calls only chemical open, but the actual queue also has C. maritima light/diel/eye; no congener physiological carry was adopted. C. edentula kin evidence oa-10:130–131 and harvest-19:2 leaves chemical-cue mechanism unresolved; existing Bhatt request 10.1111/j.1469-8137.2010.03548.x adopted without duplication. Ran harvest_get.py and screen_candidates.py; read supplied 54 title/abstract starts. Harvest successful query order: `Cakile phytochrome photoreceptor`; `Cakile light perception`; `Cakile phototropism`; supplement `Cakile volatile signalling`. No citation/family step supplied.
+
+Exact web queries in execution order:
+- `web: Cakile seed germination light dark`
+- `web: Cakile germination gibberellin OR smoke OR dormancy`
+- `web: Cakile floral scent volatiles`
+- `web: "Cakile" chemical signalling volatile response`
+- `web: "sea rocket" chemical signalling volatile response`
+- `web: Brassicaceae photoreceptor review`
+- `web: "Cakile" flower opening time anthesis`
+- `web: "sea rocket" flower opening time anthesis`
+- `web: "Cakile" eye type epidermal lens cells`
+- `web: "sea rocket" eye type epidermal lens cells`
+- `web: "Cakile" light perception phototropism germination`
+- `web: "sea rocket" light perception phototropism germination`
+
+Screened returned titles/snippets/passages as delivered, fewer than 20 per individual query; no paper/page opened. One combined tool display was truncated, so no claim that every underlying returned passage was visible. Nine wanted leads added: Mediterranean germination light/salinity, British biological flora GA/light, halopriming, maritime photoinhibition, C. edentula provenance/light, systemic wounding signalling (cue-mechanism fork), hormone-treated calli (culture fork), nutrient/kin thesis, and after-ripening/stratification germination (fixed-darkness/physical-dormancy fork). Germination and salt studies directly cover C. maritima; congener leads retain their own species. An additional heterotrophic-to-autotrophic C. maritima seedling-transition study appeared in the light pair, but title/complete primary metadata were not retained in the truncated display and it remains unresolved rather than a fabricated wanted record.
+
+Anthesis results chiefly give seasons, weeks from emergence and morphology, not daily opening hours. Eye hits describe epidermal anatomy/cutin or seed tissues; owner plant-none reading applies, with optical focusing reserved for light. Extract pharmacology/molecular docking, antibacterial extracts and rat/cancer-cell assays are removed-tissue/animal effects excluded under 10(a). Harvest light experiments in Arabidopsis, Beta, Cymodocea, Portulaca, Erysimum and Glechoma are other genera; review titles do not prove Cakile-specific measurements. Family search returned Brassicaceae floral phytochrome plasticity and general phytochrome reviews without a displayed Cakile experiment. No physiological carry from family/congener. OpenAlex skipped following round-wide 429; no null searched rows or evidence.
+
+Worker 48 running counts: 1 new genus web-screened, 0 full protocol complete, 0 searched, 9 wanted, 0 evidence. Cumulative batch 13 web-screened and 47 wanted; 27 remain, exact next Clinopodium.
