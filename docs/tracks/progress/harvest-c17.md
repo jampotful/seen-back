@@ -314,3 +314,42 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 
 
 Checkpoint: 10 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 58 wanted lines total, 0 evidence. Remaining unreviewed 30; exact next Diplacus.
+
+### Diplacus (2026-10-27 continuation)
+
+Web screening finished for this round with three new leads: day-length response of Mimulus douglasii (taxonomic fork explicitly held for the reader), D. aurantiacus sun/shade study, and direct SO2 fumigation response. Already-wanted Deno germination compilation in this batch has its Diplacus reading scope appended from the mandatory first query. Already-wanted light-intensity meta-analysis 10.1111/nph.15754 (harvest-c12) is adopted as a table lead; exact Diplacus species coverage remains unverified. Dipsacus, Diplachne, Diplomorpha and Diplodium search hits are different genera. Erythranthe/Mimulus guttatus, lewisii and cardinalis experiments are not assigned to Diplacus. Diel snippets mostly give seasonal flowering or stigma closure, without a daily flower-opening hour. The harvested broad CO2 review gives no Diplacus-specific diel measurement in the stored abstract. Eye candidate Hypoxis is a pollinator-vision study of another genus, and general lens papers name other plants; plant eye_type is none under 10(b). Harvest scent candidates concern Helleborus, Jaborosa, Molineria, Clarkia/hawkmoth antennae or broad yeast and monkeyflower reviews. Jaborosa web snippets mention Diplacus in relation to flower colour and pollinator identity, not a Diplacus scent assay. Family search returned broad photoreceptor reviews without a genus-specific measurement in snippets. No source page was opened; proxy-mirror OUP result skipped.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Diplacus seed germination light dark`
+- `web: Diplacus germination gibberellin OR smoke OR dormancy`
+- `web: Diplacus floral scent volatiles`
+- `web: Diplacus flower opening time anthesis`
+- `web: sticky monkeyflower flower opening time anthesis`
+- `web: Diplacus plant ocelli lens-like epidermal cells eye`
+- `web: sticky monkeyflower plant ocelli lens-like epidermal cells eye`
+- `web: Diplacus response to airborne volatile signals`
+- `web: sticky monkeyflower response to airborne volatile signals`
+- `web: Diplacus light response photoperiod`
+- `web: sticky monkeyflower light response photoperiod`
+- `web: Phrymaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Diplacus phytochrome photoreceptor`
+- `Diplacus light perception`
+- `Diplacus phototropism`
+- `Diplacus flower opening time`
+- `Diplacus nyctinasty`
+- `Diplacus volatile signalling`
+- `Diplacus photoperiod`
+- `Diplacus circadian rhythm`
+- `Diplacus anthesis`
+- `Diplacus pollination biology`
+- `Diplacus epidermal lens cells`
+- `Diplacus epidermal focusing leaf optics`
+- `Phrymaceae photoreceptor review` (stored family review)
+
+Checkpoint: 11 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 61 wanted lines total, 0 evidence. Remaining unreviewed 29; exact next Amelanchier.
