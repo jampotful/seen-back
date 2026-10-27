@@ -288,3 +288,29 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 
 
 Checkpoint: 9 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 52 wanted lines total, 0 evidence. Remaining unreviewed 31; exact next Orchis.
+
+### Orchis (2026-10-27 continuation)
+
+Web screening finished for this round with six new leads: militaris light/PGR cultures, italica germination light regimes, mascula hormone trials cited in Biological Flora, emitted scent of mascula/simia, Basilicata scent survey and anthropophora scent review. No stored harvest reported by either required tool. Existing O. mascula floral emission sweep-16#3 adopted. The already-wanted Goodyera/Orchis germination study (10.1016/j.sjbs.2017.10.021 in this batch) explicitly includes O. mascula light and exogenous-carbon cultures and is adopted without duplication. Orchis coriophora snippets involve a possible Anacamptis taxonomic fork, left unassigned rather than inventing Orchis species coverage. Bletilla, Chloraea, Phalaenopsis and Chiloglottis experiments concern other genera. Diel results describe seasons, flower longevity and sequence along inflorescences, not a verified daily opening hour. Epidermal anatomy and spur papillae do not establish focusing or an eye; eye_type is none under owner 10(b). Distilled essential oils and tissue aroma are excluded under 10(a), while live floral sampling is marked for reader verification where method context is thin. Family review search returned Physiological diversity of orchids (10.1016/j.pld.2018.06.003) and orchid genomic reviews, with no new Orchis experiment in the snippets. One proxy-mirror OUP result (0-academic-oup-com.legcat.gov.ns.ca) was not opened.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Orchis seed germination light dark`
+- `web: Orchis germination gibberellin OR smoke OR dormancy`
+- `web: Orchis floral scent volatiles`
+- `web: Orchis flower opening time anthesis`
+- `web: early purple orchid flower opening time anthesis`
+- `web: Orchis plant ocelli lens-like epidermal cells eye`
+- `web: early purple orchid plant ocelli lens-like epidermal cells eye`
+- `web: Orchis response to airborne volatile signals`
+- `web: early purple orchid response to airborne volatile signals`
+- `web: Orchis light response photoperiod`
+- `web: early purple orchid light response photoperiod`
+- `web: Orchidaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+
+Checkpoint: 10 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 58 wanted lines total, 0 evidence. Remaining unreviewed 30; exact next Diplacus.
