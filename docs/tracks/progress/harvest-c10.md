@@ -1,5 +1,57 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker43 final handover through Capsella
+
+CURRENT TOTALS:16 of40 genera reviewed through Capsella at the available-source boundary;247 actual round28 web queries;140 wanted lines,0 searched/null lines,0 evidence lines in this batch. This worker added2 genera (Taraxacum,Capsella),52 actual web queries,22 wanted lines,0 searches,0 evidence.24 untouched genera remain, exact next genus Persicaria, then Leucaena,Amorpha and Carica. Missing scientific/common-name OpenAlex and citation API steps remain explicitly unrun after shared429 where not already cached, including earlier repairs; these are partial protocols, not full-protocol completion or exhaustion. Preserve all earlier source history and wanted-only available-source screens when raw codex_queue reoffers them. Stop between genera for context/cap handover; no Persicaria work started.
+
+### Capsella — original chemical,diel and eye targets
+
+Original C. bursa-pastoris46814 records,Brassicaceae/Brassicales: open sense_chemical,diel,eye_type. Global evidence/corrected,searched,wanted and papers-status checked. Light has existing species evidence from10.1104/pp.107.102632 and oa-12#27, so no new already-covered light-only requests. Congener C. rubella floral emission is real under current10(a), but it does not carry chemical sensing to C. bursa-pastoris (queue explicitly rejects genus chemical carry); preserve corrected2022 preprint records. Old sweep-9#39 two broad web queries and Slotte citation trail preserved without accepting them as a complete paired protocol. Relevant chemical/angiosperm-diel compilations remain not in hand; in-hand Animal Eyes covers Metazoa. No inference from unread plant tables.
+
+Fresh harvest_get and screen_candidates ran successfully with network permission; no genus in harvest, saved work/worker43-Capsella-harvest.txt and -candidates.txt. hg.load current genus metadata is null (work/worker43-Capsella-genus.json). All missing genus/common-name API and citation calls remain unrun after shared429, not zero hits. Actual cached family run17 `Brassicaceae photoreceptor review` has1066hits/15listed, saved work/worker43-Capsella-family.json. All15 titles/available abstract starts screened. Direct phytochrome floral-plasticity,flavoprotein,saiginol and blue/UV-A experiments target Arabidopsis or Brassica; ruderal CRY2 work targets Cardamine; Arctic adaptation is comparative genomics; microgreen papers name arugula,broccoli,kale,cabbage,mizuna,mustard and pak-choi; low-oxygen experiment names Rorippa,Arabis,Arabidopsis,Thlaspi and Thellungiella. Broad heat/vernalization/crop/metabolic reviews identify no C. bursa-pastoris chemical or daily-opening measurement in available starts. No family carry or whole-paper absence claim.
+
+Exact27 executed web queries, in order:
+
+- `web: Capsella seed germination light dark`
+- `web: Capsella germination gibberellin OR smoke OR dormancy`
+- `web: Capsella floral scent volatiles`
+- `web: Capsella chemical perception volatile signalling`
+- `web: shepherd's purse chemical perception volatile signalling`
+- `web: Capsella flower opening time anthesis`
+- `web: shepherd's purse flower opening time anthesis`
+- `web: Capsella epidermal lens cells eye type`
+- `web: shepherd's purse epidermal lens cells eye type`
+- `web: "Effects of chemical treatments and environmental factors" Capsella doi`
+- `web: "Co-adaptation of seed dormancy and flowering time" doi`
+- `web: "Germination Promotion in Dormant Shepherdspurse" doi`
+- `web: "Capsella bursa-pastoris" "flower" "anthesis" "morning"`
+- `web: "Capsella bursa-pastoris" "jasmonic acid" response`
+- `web: "Capsella" "flower opening" "time of day"`
+- `web: "Germination ecology" "Capsella" nitrate`
+- `web: "Variability structure and heritability" Capsella nitrate`
+- `web: "29250182.pdf" jasmonic Capsella`
+- `web: "Plutella" "jasmonic acid" "Capsella bursa-pastoris" six`
+- `web: "Influence of Environmental Factors" "casb16100091"`
+- `web: "Germination ecology" "Capsella bursa-pastoris" "nitrate" "2004"`
+- `web: "Constitutive and induced resistance in crucifers" Capsella`
+- `web: "Trade-offs between constitutive and induced resistance" wild crucifers doi`
+- `web: "Lack of correlation between constitutive and induced resistance" "Capsella"`
+- `web: "Trade-offs between constitutive and induced resistance" "Capsella"`
+- `web: "00829" "Capsella"`
+- `web: "Lack of correlation between constitutive" "63" Zhang`
+
+Raw results work/worker43-Capsella-web1.json through -web9.json; all grouped returned titles/snippets screened, without claiming20 results per individual query. Cornell/PSU primary extension pages confirm shepherd's purse. No source/full-paper-page fetch; no OpenAlex/MDPI/UChicago/SANBI request,paid API,evidence,branch/gate or29/30 change. Search results mentioning restricted domains were not directly fetched; incidental ResearchGate,Wikipedia,encyclopedia,unauthorized-host and proxy-mirror snippets were not used as measured evidence. No web quota refusal. Unknown authors/DOIs stay empty and unknown year null; no relative-index date adopted as a source year.
+
+Eight new wanted lines target the unresolved C. bursa-pastoris chemical trait:2014 GA3/KNO3/salt/pH germination;2011-online nitrate/dormancy coadaptation;synthetic strigol analogs and other stimulants;2017 pH/salt/osmotic germination;1989 buried-seed seasonal dormancy;2004 high-latitude germination ecology;2024 heritable germination timing;2009 JA-induced resistance candidate. The first four explicitly show living chemical-treatment comparisons. Three seed/dormancy sources are retained under10(e) for actual methods review; temperature,uniform cultivation and genotype variation alone do not establish a chemical cue response. Strigol-paper date is null because the displayed primary page date2017 is not its publication year; do not import the JSTOR1986 bibliographic date without primary confirmation. Annals paper uses source-verified online5Dec2011,issue109(2)2012. No measured values logged.
+
+JA candidate provenance:archived CORE primary table p63 names C. bursa-pastoris control and JA-treated plants,with herbivore performance; Wiley10.1111/j.1570-7458.2009.00829.x confirms herbivory/JA treatment and primary PLOS reference gives2009,131:58-66. Matching the running header/page to that paper remains an explicit intake-confirmation target,not an established extraction.2008 sister paper10.1007/s00442-008-1060-8 is real (PubMed18491145) with induced-resistance/volatile experiments; its displayed primary abstract does not name C. bursa-pastoris. A ResearchGate index suggested that species but no extra request or species result is grounded in that host. Species relevance remains a citation pointer,not a negative.2015 constitutive salicylic-acid/Pieris study measures baseline host chemistry and insect growth,not an elicited plant chemical response in its displayed abstract. Patent promoter motifs and tobacco expression of a Capsella cold-gene do not demonstrate a Capsella cue response. RISS search-list thesis pointer lacks a specific verified title/source,so not converted into invented metadata. Popay/Roberts1970 nitrate/nitrite seed response cited by the2022 Canadian-weeds review is preserved as a real primary-reference trail awaiting exact paper identification; the existing direct seed studies already hold the chemical trait open.
+
+Floral-fragrance2024 final version,2016/2019 benzaldehyde-loss and2023 quasi-isogenic scent/pollinator work chiefly concern C. rubella/grandiflora/orientalis,with congeners already measured; no duplicate or off-target scent request for C. bursa-pastoris. DOF-gibberellin2025 study names C. rubella in light-independent comparisons,so does not supply the open C. bursa-pastoris chemical target. Global methylation/secondary dormancy paper10.1007/s00709-021-01678-2 shows dark/light transfer in displayed text,not a verified applied chemical contrast; light is already covered. Competitive-ability trial measures weeded/unweeded plants and standard germination conditions,not a chemical treatment.
+
+Diel web results give sequential inflorescence development,seasonal flowering and days-to-first-flower,not daily anthesis hours. Slotte clock-gene rhythm is not daily flower-opening measurement. Generic circadian/flower-opening review does not provide a named Capsella daily experiment in displayed snippets. Other returned hourly anthesis belongs to guava or unrelated plants. Eye results concern animal lenses,ordinary epidermal anatomy/trichomes and weed morphology; no Capsella focusing measurement identified. Owner's none/focusing-to-light rule retained; no null while required API protocol is incomplete and chemical candidates remain.
+
+Initial Capsella check finished exit0/0 problems; after normalizing the2024 author initials exactly to the primary author-lab citation, final screen_candidates --check also finished exit0 and printed0 problems (work/worker43-Capsella-check-final.txt) before commit. Taraxacum checkpoint7391bc8a passed0 before commit. Next untouched genus Persicaria;24 remain, no later genus started.
+
 ## 2026-10-27 — worker43 Taraxacum checkpoint
 
 This worker:1 newly available-source-screened genus (Taraxacum),25 actual web queries,14 wanted lines,0 search records,0 evidence. Cumulative batch:15 genera screened through Taraxacum at the available-source boundary,220 actual round28 web queries,132 wanted lines,0 search records,0 evidence.25 untouched genera remain, beginning Capsella, Persicaria and Leucaena. Missing OpenAlex steps remain unrun after shared429; no full-protocol or exhaustion claim. Earlier source history and wanted-only screens preserved.
