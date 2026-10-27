@@ -353,3 +353,27 @@ The harvest Bryophytes can recognize their neighbours through volatile organic c
 Additional unresolved light leads: Sporophyte production in the clonal moss Hylocomium splendens: the importance of shoot density (only ResearchGate listing returned; not opened/requested there), Annual production of some forest mosses as a function of light available for photosynthesis (EurekaMag listing only, https://connect.eurekamag.com/research/000/291/000291940.php), and an unidentified MEDDELANDEN volume at https://pub.epsilon.slu.se/9960/1/medd_statens_skogsforskningsinst_043_01.pdf. Titles/metadata require authorized primary verification. USDA review 10.2737/feis-species-review-hylspl states photoperiod seems not a factor in a displayed passage; its species/account source context should be checked against the earlier ecological light record. No daily clock-hour result inferred from seasonal spore/segment production. OpenAlex skipped; no null rows or evidence.
 
 Worker 48 running counts: 3 new genera web-screened, 0 full protocol complete, 0 searched, 21 wanted added, 0 evidence. Cumulative batch 15 web-screened and 59 wanted; 25 remain, exact next Holodiscus.
+
+### Holodiscus — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: no genus harvest in any supplied run, no successful harvest query history/candidates. Checked canon, global actual-species evidence/wanted/searched and owner status; no H. discolor evidence/request found. Family/order and actual four queue traits were checked; Rosaceae evidence does not carry physiologically to Holodiscus.
+
+Exact web queries in execution order:
+- `web: Holodiscus seed germination light dark`
+- `web: Holodiscus germination gibberellin OR smoke OR dormancy`
+- `web: Holodiscus floral scent volatiles`
+- `web: "Holodiscus" flower opening time anthesis`
+- `web: "oceanspray" flower opening time anthesis`
+- `web: "Holodiscus" eye type epidermal lens cells`
+- `web: "oceanspray" eye type epidermal lens cells`
+- `web: "Holodiscus" light perception phototropism germination`
+- `web: "oceanspray" light perception phototropism germination`
+- `web: "Holodiscus" chemical signalling volatile response`
+- `web: "oceanspray" chemical signalling volatile response`
+- `web: Rosaceae photoreceptor review`
+
+Screened delivered titles/snippets/passages, without asserting 20 per query. Four wanted added: USDA propagation/germination protocol, USDA thinning/light-output review with confounding controls unresolved, university living floral-scent observation (measurement/signalling fork), and USDA Woody Plant Seed Manual chapter. Adopted the existing harvest-c17 request for SEED GERMINATION (https://www.pacificbulbsociety.org/pbswiki/files/Archive/Deno1.pdf); search supplied Holodiscus in a genus list rather than its actual light/GA table, so Holodiscus treatment results remain unverified. Did not duplicate the shared manual request. The denosgarden H. discolor listing cites Seed Germination Theory and Practice but displays no treatment result. Germination-guide snippets for H. discolor var. dumosus have unresolved row alignment (nearby light-requirement text), so no measurement/species transfer inferred.
+
+Diel results give June–August seasons and timing across years, not clock hours. Eye results include Spiraeeae leaf micromorphology: papillate cell text explicitly refers to Spiraea, while Holodiscus is described by trichomes/testa. No Holodiscus epidermal-focusing result displayed, and owner plant-none rule applies. Chemical queries returned essential oils, leaf extracts/flavonoids, human mononuclear-cell assays and cytotoxicity; these are removed-tissue or animal responses excluded by 10(a). OceanSpray cranberry company/products, Croton holodiscus, broomrape germination on a Holodiscus host, and Gaultheria seed-light requirements are taxon/organism mismatches. The latter light measurement cannot be assigned to its listed associate oceanspray. Family review alternative gave general plant photoreceptor reviews and Fragaria/Rosaceae omics/regeneration, without a Holodiscus-specific experiment. No source pages opened, OpenAlex skipped, no null searched rows or evidence.
+
+Worker 48 running counts: 4 new genera web-screened, 0 full protocol complete, 0 searched, 25 wanted added, 0 evidence. Cumulative batch 16 web-screened and 63 wanted; 24 remain, exact next Dasiphora.
