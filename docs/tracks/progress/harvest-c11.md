@@ -1434,3 +1434,35 @@ Exact successful connected queries in executed order:
 
 All actually delivered titles/snippets read (variable result counts, no20-perquery claim); raw Marchantia-web1–4.json and required-tool outputs /workspace/work/w31-c11. No page/paper fetch,evidence,proxy/TLS/credential change or new service refusal.33of40available-web-screened across rounds;7remain, exact next Vachellia. Validator pending checkpoint.
 
+
+## 2026-10-27 — issue38 worker31 Vachellia
+
+NEW Vachellia available-web-screened;19successful connected queries,18new wanted/0searched/0evidence. Current263wanted/25searched; worker31sofar70new wanted,48successful queries,Bromus/Marchantia/Vachellia3new screens. Required harvest_get.py and screen_candidates.py ran: Vachellia in no harvest run yet; not API zero hits. Global canon/evidence/corrected/wanted/searched and owner status checked by genus,old Acaciafarnesiana/karroo names and retained exact titles/URLs/DOIs. oa-9#66 V.bidwillii photoperiod evidence adopted for named congener only; no carry to queued V.karroo/farnesiana. Old sweep-20/sweep-9 thin nulls not current completion. Canon family flowering review10.3389/fpls.2015.00207 not inhand; broad animal-eye catalog is not target anatomy. OpenAlex429 skipped; mandatory API steps incomplete and no null searched/full-protocol/exhaustion claims.
+
+New18wanted include direct queuedtarget germination/light/PGR studies and Karroo shade/irradiance and reproductive-biology sources. Primary sweet-acacia Seed germination biology result explicitly tests light/dark and reports no light effect: measured null remains positive lead. Scifres citation described by FEIS only as Scifres1974 lacks exact source title, so original experiment not invented; primary modern seed study retained instead. V.farnesiana somatic-embryogenesis10.1007/s44415-025-00064-7 explicitly crosses2,4-D/medium/light and treats embryosGA3/BAP: qualified living culture10(d),not intact-tree receptor evidence. PGPR/GA3/seaweed-seed treatment is direct target chemical candidate,with nutrient/cue distinction for reader. Mechanical/acid/hot-water dormancy studies remain10(e)germination leads; physical testa destruction alone is not chemical sensing. Fixed12hour culture-light schedules and temperature/morphological-stage results alone cannot establish a light response. Laser-seed study needs thermal/scarification versus photoreception interpretation. Synonyms independently supported by Kew/SANBI returned snippets; no generic Acacia evidence migrated to Vachellia. Australians A.melanoxylon/dealbata/cyclops are not queued Vachellia target treatments.
+
+Adopted Floral volatiles controlling ant behaviour10.1111/j.1365-2435.2009.01632.x from harvest-c18 wanted#6,no duplicate or legacy edit. Primary indexed text names V.seyal subspecies,etbaica,brevispica,drepanolobium,ant-response and timeddehiscence/2hour emission profiles; no physiological carry to farnesiana/karroo. Own target Karroo Phenology and Reproductive Biology10.4236/ajps.2014.513223 retained for timed observation methods; delivered multiday stigma/ovary behavior and seasonal months do not prove daily opening hours. Farnesiana floral/anatomical/flora summaries likewise have no clock hour; plant pollinators'eyes are not plant eyes. eye_type none10(b),focusing belongs nonvisual light; general ocelli/focusing sources give no returned namedtarget measurement. Perfumery cassie absolutes,honey/Robinia,tissue extracts,feed-tannin pharmacology fail10(a). Rapid chemical responses of Acaciakarroo to defoliation retained as living induced-defense boundary lead; do not equate tissue chemistry or unverified ethylene anecdotes with receiver sensing. The two poorly titled thesis/review snippets mentioning tannins/ethylene do not independently establish target-specific chemical signaling and are not invented as sources. Family review alternative10.1093/jxb/erag313 covers legume clades/crop photoperiod systems in returned abstract,not Vachellia-specific measurement; no generic review duplicate.
+
+Exact successful connected queries in executed order:
+- `web: Vachellia seed germination light dark`
+- `web: Vachellia germination gibberellin OR smoke OR dormancy`
+- `web: Vachellia floral scent volatiles`
+- `web: Vachellia flower opening time anthesis`
+- `web: sweet acacia flower opening time anthesis`
+- `web: Vachellia plant ocelli lens epidermal focusing eye`
+- `web: sweet acacia plant ocelli lens epidermal focusing eye`
+- `web: Vachellia chemical sensing volatiles`
+- `web: sweet acacia chemical sensing volatiles`
+- `web: Vachellia photoperiod phototropism light response`
+- `web: sweet acacia photoperiod phototropism light response`
+- `web: Fabaceae photoreceptor review`
+- `web: "Acacia karroo" ethylene light shade anthesis`
+- `web: "Acacia farnesiana" germination light gibberellic anthesis`
+- `web: "Vachellia karroo" germination jasmonate ethylene`
+- `web: "Acacia karroo" ethylene tannin signalling`
+- `web: "Acacia farnesiana" anthesis hour floral biology`
+- `web: sweet thorn chemical sensing volatiles`
+- `web: sweet thorn photoperiod phototropism light response`
+
+All delivered titles/snippets read,variable counts without20-perquery claim; raw Vachellia-web1–5.json and tool output /workspace/work/w31-c11. No page/paper fetch,evidence,credentials/proxy/TLS change or new refusal.34of40available-web-screened across rounds;6remain, exact next Poa. Validator pending checkpoint.
+
