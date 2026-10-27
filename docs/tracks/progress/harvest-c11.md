@@ -1,5 +1,9 @@
 # harvest-c11 progress
 
+## TOP/current — 2026-10-27
+
+Cumulative **18 of40 genera screened,22 search records,146 wanted,0 evidence/0 measured cells**. **22 remain; next Vinca**. Worker46 adds **1 genus,1 search,2 wanted,14 successful web queries,0 evidence**. Dioscorea screening is partial in conclusion: target germination sources await reading; chemical-study species lists and daily timing remain unresolved, with no physiological null. Prior source/taxonomy/donor limitations below persist.
+
 ## 2026-10-27 — round 28
 
 Prior worker chunk: **6 genera protocol-screened** (Ulmus, Malvaviscus, Carya, Pyrus, Zizia, Ptelea), **9 search records**, **38 wanted leads**, **0 evidence records**, **0 cells measured closed**. Remaining **34 genera**, next **Iris**; then Ricinus, Conopholis, Tropaeolum, Chasmanthium, Paulownia, Chenopodium, Aquilegia, Helianthus, Arundo, Sorghum, Dioscorea, Vinca, Lobelia, Foeniculum, Hypochaeris, Sorghastrum, Packera, Cortaderia, Nasturtium, Tecoma, Cosmos, Achillea, Mahonia, Apocynum, Bromus, Marchantia, Vachellia, Poa, Parkinsonia, Panicum, Artemisia, Polystichum, Ailanthus. Screening is complete for these six even where plausible measurements remain wanted; no wanted trait is called exhausted. Search dispositions are Ulmus diel/eye_type, Malvaviscus eye_type, Carya eye_type; Pyrus eye_type; Zizia diel/eye_type/sense_chemical; Ptelea eye_type.
@@ -761,3 +765,41 @@ All12 connected queries succeeded, all returned titles/snippets screened with va
 Initial Sorghum gate printed **0 problems**. The Horticultural Studies result truncates its title's taxonomic parenthetical; retained only its verified title prefix and explained this in wanted, avoiding guessed citation text. Metadata/title-prefix correction adds no source or query. Rechecking final state before commit.
 
 Worker39 final gate printed **0 problems** after the title-prefix metadata clarification. Final worker counts:2 genera,2 search records,14 new wanted,one existing shared source expanded,0 evidence/0 measured cells,24 successful connected web queries. Cumulative c11:17 of40 genera screened,21 searches,144 wanted,0 evidence;23 remain in order: Dioscorea, Vinca, Lobelia, Foeniculum, Hypochaeris, Sorghastrum, Packera, Cortaderia, Nasturtium, Tecoma, Cosmos, Achillea, Mahonia, Apocynum, Bromus, Marchantia, Vachellia, Poa, Parkinsonia, Panicum, Artemisia, Polystichum, Ailanthus. No new access/quota blocker. Original round-refused sources remain skipped. Stop between genera for fresh-context handoff; do not repeat completed Arundo or Sorghum queries because wanted-only traits are reoffered by queue tooling.
+
+## 2026-10-27 — worker46 Dioscorea continuation
+
+Adds1 genus screened,1 eye_type search,2 wanted,0 evidence/0 measured cells;14 successful connected queries, no refusal. Cumulative18 genera/22 searches/146 wanted/0 evidence;22 remain, next Vinca. This is a screening checkpoint, not an assertion that all four physiological cells are exhausted or measured.
+
+Read AGENTS.md first, the round28 guide in full including service status/important scope/wanted scope, round4-harvest, THOROUGH, full BRIEF including Round2, round3-sweep, desk-screen1–10 including10(e), and audit53/54 findings. Cloud runtime skill/networking read and current enforced unrestricted network readiness checked. No branch/gates/app/engineering29/data30 changes. No OpenAlex, MDPI, UChicago or SANBI requests, paid API, plant source/fullpaper-page fetch, or evidence writes. Required harvest_get.py and screen_candidates.py run; both explicitly report Dioscorea absent. There are no cached genus query results to silently omit. All returned live titles/snippets screened; the tool returned variable result counts and no request for20 is claimed. Source pages were not opened.
+
+Original queue target D.villosa,10337 records, four traits. Main sweep-39#4 measures D.alata photoperiod response;#5 is a grade-g cultivated-yam review claim on noon flower opening, explicitly not a D.villosa measurement. oa-12#374–375 concern D.japonica/D.septemlora chloroplast responses. Preserve all; none establishes D.villosa light/diel physiology under carry rules. Old sweep-39 queries and its already-read floral review are reused as provenance, not treated as a completed current protocol. Canon catalog checked; no in-hand plant compilation with D.villosa measurement. Global main/corrected evidence, wanted, searched and papers-status reviewed by genus and both exact retained title/URL/DOI fragments; no duplicate/n-a lead found. Unknown year remains null;2025 authors/year/DOI/pages come directly from the returned primary journal record.
+
+Exact queries, in executed order:
+- `web: Dioscorea seed germination light dark`
+- `web: Dioscorea germination gibberellin OR smoke OR dormancy`
+- `web: Dioscorea floral scent volatiles`
+- `web: Dioscorea villosa flower opening time anthesis`
+- `web: wild yam flower opening time anthesis`
+- `web: Dioscorea plant ocelli lens epidermal focusing eye`
+- `web: wild yam plant ocelli lens epidermal focusing eye`
+- `web: Dioscorea villosa chemical sensing volatiles`
+- `web: wild yam chemical sensing volatiles`
+- `web: Dioscorea villosa photoperiod phototropism light response`
+- `web: wild yam photoperiod phototropism light response`
+- `web: Dioscoreaceae photoreceptor review`
+- `web: Dioscorea villosa germination gibberellin OR smoke OR dormancy`
+- `web: wild yam germination gibberellin OR smoke OR dormancy`
+
+Wanted source provenance:
+- Seed dormancy and germination biology in Dioscorea villosa and Dioscorea deltoidea (Dioscoreaceae); https://edgccjournal.org/0006-8136/article/view/680811. The primary journal search result explicitly includes D. villosa and dormancy/germination experiments; another primary result describes moving germinating seeds into light. Retain under owner10(e) for the named target seed study; verify an actual light comparison before recording a light response. Stratification temperature and embryo development alone are not light or chemical sensing. Queries: web: Dioscorea seed germination light dark, web: Dioscorea villosa germination gibberellin OR smoke OR dormancy.
+- Seed germination and dormancy in the medicinal woodland herbs Collinsonia canadensis L. (Lamiaceae) and Dioscorea villosa L. (Dioscoreaceae); https://www.sciencedirect.com/science/article/pii/S0367253005001039. The primary journal and institutional profile explicitly name D. villosa seed germination/dormancy and a move-along germination experiment. Retain this original named-species study under owner10(e); read the experimental light conditions and any light/dark comparison. No applied hormone trial or light-response result is inferred merely from the dormancy title. Queries: web: Dioscorea villosa germination gibberellin OR smoke OR dormancy.
+
+The1977 D.tokoro/D.tenuipes GA3/light experiment10.1104/pp.60.3.360 and D.hispida/D.dregeana/D.polystachya studies are genuine responses in other named species, not D.villosa, and are not requested to duplicate already-covered congener background. The1971 Gibberellin-induced dormancy in bulbils paper10.1007/BF00387694 and1977 Generality of gibberellin-induced dormancy in asexual dormant organs (Oxford18/2/309) report hormone response in unspecified Dioscorea species (the latter ten species). Their species lists are not available in returned snippets: chemical applicability to D.villosa remains unresolved. No speculative wanted line or chemical null is added for those unspecified taxa. A reader can inspect the species lists when an authorized source is available. The two directly named D.villosa germination papers are retained under10(e), with light comparison still unverified and no hormone result invented.
+
+Daily timing: primary villosa floras give June–July or other seasonal dates, not clock hours. Cultivated-yam pollination study10.1371/journal.pone.0269670 names alata/rotundata, already-covered crop congeners. Existing sweep-39 genus diel review and its cited Segnou/Akoroda studies remain preserved; no D.villosa null is invented while that legacy grade-g statement sits on main. A search result also displayed the title Studies on reproductive and seed biology of Dioscorea villosa Linnaeus (Dioscoreaceae): a rare medicinal plant in NE India, but only through ResearchGate. That page was not opened/used as a source or requested; a legal primary citation and taxonomic identity need verification before use. No current D.villosa daily clock-hour measurement is claimed.
+
+Chemical exclusions:10.1002/bmc.3019 steroidal fingerprinting,10.1021/np300603z extracted diarylheptanoids, cooked tuber10.1002/jsfa.2740330114, Chinese-yam varieties/fresh-cut slices headspace, and10.1155/2013/943598 essential-oil glands of composita/floribunda describe removed-tissue chemistry, not a demonstrated living D.villosa cue-response/signaling test under10(a). General VOC reviews and the2026 alata hormone/photoperiod crop study are not new unresolved target measurements. Eye search dispositions follow owner10(b); general focusing would belong under nonvisual light. Family query returned general plant/algal/fungal/animal reviews, no Dioscoreaceae-specific measurement.
+
+Raw successful responses: work/harvest-c11/Dioscorea-web1–5.json. No access/quota refusal. Earlier Chenopodium taxonomy, sunflower living-disk donor and all previous protocol limitations remain unchanged. Required real validator pending before commit; next Vinca.
+
+Worker46 Dioscorea real gate printed **0 problems**. All14 web queries succeeded;2 wanted/1 search added. Commit checkpoint before Vinca dispositions.
