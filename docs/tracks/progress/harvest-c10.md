@@ -802,3 +802,44 @@ Chemical exclusions:pyrolysis,bark adhesives,polyurethane/seed-oil chemistry,tan
 Eye candidates include seed lens/strophiole/hilum anatomy10.21608/djs.2013.139574 and hilar-lens water entry,which are water-gap structures rather than optical eyes; other Lens papers concern lentils,Ipomoea/Desmanthus/Acacia seed coats or vertebrate histology. Leucaena ordinary epidermal anatomy10.33794/qjas.2024.146140.1159 describes cell walls/stomata,no focusing in snippets. Focusing would belong to light. Diel web results otherwise give seasonal flower months,definitions or guava,Quisqualis,Lagerstroemia timing; no other-genus hour assigned. Direct1997 floral source held for reading. No eye/diel null during incomplete API protocol.
 
 Candidate/wanted gate and whitespace check run before this checkpoint commit. Next untouched Amorpha; plant scope only,excluding homonymous moth Amorpha juglandis.
+
+
+## 2026-10-27 — issue38 worker13 Amorpha checkpoint
+
+This checkpoint:1 new web-screened genus(Amorpha plants),19queries,7wanted,0searched,0evidence. Worker13 cumulative:3 newly screened(Persicaria,Leucaena,Amorpha),51queries,34wanted; c10 now106wanted(initial72+34),0searched. Adopted17 prior genera separately(first16 plus Amphicarpaea);20 untouched eligible remain,next Carica,then Thelypteris,Fagus. No unrestricted full-protocol/exhaustion claim; OpenAlex missing API steps remain skipped after429.
+
+### Amorpha — plant taxa only; all four original traits
+
+Queue species A.fruticosa/A.canescens,19420records,Fabaceae/Fabales. Homonymous moth A.juglandis and its Sphingidae traits are outside this plant task. Global evidence/corrected,wanted,searched,status and canon checked; no Amorpha plant evidence or prior wanted found. Preserve sweep-17#28's genuine plant query and insect/plant homonym warning; it is thin,not paired four-trait completion. Fresh harvest_get says in no harvest run yet; screen_candidates says not in harvest,matching cached null. No successful genus API queries or citation chase invented. Fabaceae family run17 `Fabaceae photoreceptor review`440hits/15listed reused from Leucaena's real descriptor; all titles/available starts read,chiefly other legumes,animal pollinators and broad phytochrome reviews. Relevant plant canons not in hand; Animal Eyes covers Metazoa,owner eye none/focusing-to-light rule applies.
+
+Exact19 new web queries,in executed order:
+
+- `web: Amorpha seed germination light dark`
+- `web: Amorpha germination gibberellin OR smoke OR dormancy`
+- `web: Amorpha floral scent volatiles`
+- `web: Amorpha flower opening time anthesis`
+- `web: false indigo bush flower opening time anthesis`
+- `web: Amorpha photoperiod light perception phototropism`
+- `web: false indigo bush photoperiod light perception phototropism`
+- `web: Amorpha chemical perception volatile signalling`
+- `web: false indigo bush chemical perception volatile signalling`
+- `web: Amorpha epidermal lens cells eye type`
+- `web: false indigo bush epidermal lens cells eye type`
+- `web: "The effects of gibberellic acid, smoke water" Amorpha`
+- `web: "Amorpha fruticosa" light intensity shade`
+- `web: "Amorpha canescens" germination gibberellin smoke`
+- `web: "Amorpha" jasmonate salicylic acid response`
+- `web: "Amorpha fruticosa" anthesis pollination`
+- `web: "Germination of Prairie Forbs" "Churbuck"`
+- `web: "Desert Physio-Ecological Adaptation" Amorpha`
+- `web: "Effects of Smoke on Prairie Seed Germination" Forsberg`
+
+All delivered titles/snippets screened; no20-per-query claim. Raw results work/w13-c10/Amorpha-web.json. Common name false indigo bush verified by NCSU,Tallgrass and extension sources. Several false-indigo results are Baptisia,not Amorpha; discarded. Extra scientific refinements follow actual germination/source-identity leads and recover primary shade study rather than importing generic phototropism text. No web refusal,source-page/paper fetch,OpenAlex/MDPI request,evidence or legacy edits. Unknown metadata empty/null; explicit2021 university thesis bibliography and1975 university repository network citation retained. Exact DOI/normalized-title/status duplicate checks found no existing request for7 appended sources.
+
+Seven new leads:fruticosa storage/dormancy study;fruticosa NaCl seed/fruit germination;PV shade response;Tippins2021 GA/smoke/native-perennials thesis with associated university poster naming A.canescens;Forsberg/Jefferson/Havens prairie-smoke poster naming A.canescens;Churbuck1975 canescens germination thesis;laboratory/greenhouse fruticosa seed-pretreatment study.10(e) dormancy leads are held even when actual light/hormone contrasts remain unread. Physical scarification,storage darkness,sterilization and substrate differences alone are not assumed receptor sensing. Positive chemical/light candidates keep traits open,no values extracted. Tippins2025 Asclepias/Liatris thesis is a different study,not substituted for2021 source.
+
+Chemical exclusions:canescens essential-oil GC-MS/NMR,fruticosa honey headspace/solvent extracts,Ailanthus/Amorpha essential-oil reviews concern removed tissue,honey or extract bioactivity under10(a). No living floral emission inferred from floral oil or fragrant garden descriptions. Jasmonate/SA review's amorpha-4,11-diene synthase is an Artemisia enzyme,not Amorpha genus evidence. Drought-transcriptome PubMed33828914 reports SA-related DEGs but no actual applied-SA contrast in displayed abstract; gene enrichment alone is not a measured chemical-cue response. Generic VOC/KAI2 reviews,sagebrush volatile experiment and other-genus smoke tests give no named Amorpha response in displayed snippets.
+
+Light:the PV shading study directly names A.fruticosa;Sun/partial-shade nursery recommendations and an8h germination regimen held constant in seed manuals do not alone demonstrate response. Dark-storage experiment is retained under10(e),actual manipulation to be read. Polygonum tinctorium blue-LED flowering study is another genus;Amorpha poppy is a cultivar name. No cross-genus light inference. Diel:April–June bloom,basal-to-tip inflorescence progression,predispersal seed predation,pollination syndrome and seasonal bee-visitation pages do not measure daily anthesis hours. No verified daily primary candidate identified,no diel null during missing API steps. Eye:hand lens is a viewing instrument;gold-eye lichens,vertebrate/invertebrate eye papers,Indigofera stomata and Baptisia eyewash do not establish Amorpha optical structures;no focusing measurement identified in snippets. Owner eye none retained without inventing a complete-protocol row.
+
+Candidate/wanted gate and whitespace check run before checkpoint commit. Exact next untouched genus Carica; no later genus screened at this checkpoint.
