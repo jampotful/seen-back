@@ -1,5 +1,54 @@
 # harvest-c10 progress
 
+## 2026-10-27 — worker37 Modiola handover
+
+This worker cumulative:2 newly available-source-screened genera (Pluchea and Modiola),50 actual web queries,10 wanted lines,0 search records,0 evidence. This checkpoint:Modiola,26 queries,2 wanted. Cumulative batch:14 genera screened through Modiola at the available-source boundary,195 actual round28 web queries,118 wanted lines,0 search records,0 evidence.26 untouched genera remain, beginning Taraxacum, Capsella and Persicaria. Stop between genera for fresh-context continuation. Missing API steps remain explicitly unrun after shared429, including earlier Hamamelis repairs; no full-protocol/exhaustion claim. Preserve genuine earlier wanted-only screens when raw codex_queue reoffers them.
+
+### Modiola — original four open traits
+
+Original queue M. caroliniana has7924 records, Malvaceae/Malvales, with sense_light_nonvisual, sense_chemical, diel and eye_type open. Global wanted/evidence (including fixed corrections), searched and papers-status checked; no prior Modiola measurement found. Old sweep-96#26 two combined queries and real Heil/Karban2010 Table1 source trail are preserved without repeating their strings. Its broad negative and unexamined Jeju pointer do not establish completion; its statement that allelopathy is release not sensing is superseded by current owner's10(a) only when intact volatile signalling is measured. Relevant light/chemical/angiosperm-diel canons remain not in hand. In-hand Animal Eyes covers Metazoa. No plant inference from unread canon tables.
+
+Fresh harvest_get reports in no harvest run yet and screen_candidates not in the harvest; saved work/worker37-Modiola-harvest.txt and -candidates.txt. Cached genus null agrees (work/worker37-Modiola-genus.json). Genus scientific/common-name API steps and citation searches unrun after shared429, not zero hits. Cached family run17 `Malvaceae photoreceptor review` has140hits/15listed; all titles/available abstract starts screened (work/worker37-Modiola-family.json). Iliamna developmental biology, Brachychiton leaf-drop flowering, Gossypium genomics/drought target other genera; honeybee/bee-view, beetle/butterfly visitation measure animals. Mangrove generic senses, biocrystal/phototropin, microgreen, shade avoidance, ethnobotany and flower opening/closure update identify no Modiola target response in displayed starts. No unread table declared negative or background-only request appended.
+
+Exact26 new Modiola web queries, executed order:
+
+- `web: Modiola seed germination light dark`
+- `web: Modiola germination gibberellin OR smoke OR dormancy`
+- `web: Modiola floral scent volatiles`
+- `web: Modiola photoperiod light perception phototropism`
+- `web: Carolina bristlemallow photoperiod light perception phototropism`
+- `web: Modiola flower opening time anthesis`
+- `web: Carolina bristlemallow flower opening time anthesis`
+- `web: Modiola chemical perception volatile signalling`
+- `web: Carolina bristlemallow chemical perception volatile signalling`
+- `web: Modiola epidermal lens cells eye type`
+- `web: Carolina bristlemallow epidermal lens cells eye type`
+- `web: "Modiola caroliniana" germination light dormancy`
+- `web: "Modiola" allelopathy Jeju`
+- `web: "Modiola" "germination" gibberellin`
+- `web: "Modiola" allelopathic potential`
+- `web: "Modiola" germination scarification`
+- `web: "Chemical Management of Senecio madagascariensis" Modiola herbicide`
+- `web: "Germination of native and introduced plants from scats" Modiola`
+- `web: "Deno" "Modiola" "70"`
+- `web: "Chemical Management of Senecio madagascariensis" authors 2023 doi`
+- `web: "국화잎아욱의 알레로파시 효과" Modiola`
+- `web: "Germination of native and introduced plants from scats" Claridge 2016 doi`
+- `web: "Modiola caroliniana" "70D" OR "70L" OR "GA-3"`
+- `web: "Modiola caroliniana" "allelopathic" water extract`
+- `web: "Modiola caroliniana" herbicides germination "plants12061332"`
+- `web: "Modiola" "FIRST SUPPLEMENT" germination`
+
+Raw outputs work/worker37-Modiola-web1.json through -web7.json. Web4 also contains one separately counted Pluchea query; it is excluded from these26. Grouped returned titles/snippets screened; output does not prove20 per individual query. Texas flora and primary rust-pathogen abstract confirm Carolina bristlemallow. No source-page fetch, OpenAlex/MDPI/UChicago/SANBI request, paid API, evidence, branch/gate or29/30 change. No web quota refusal; initial Pluchea schema error is documented in preceding checkpoint, not a counted query.
+
+Deno's First Supplement original indexed p59 gives M. caroliniana light/dark/GA3 germination comparisons and storage effects. Source https://rmc-nargs.org/wp-content/uploads/2023/10/Deno-1996-Seed-Germination-Theory-And-Practice-1st-Supplement.pdf (web7) and CRAGS2023 GA3 index row identify the real target. Hold both open light and chemical traits for intake. No new duplicate book request:existing docs/views/wanted/harvest-c11.jsonl#14 is the same First Supplement. Parent routed exact p59 source/species/traits to current c11 owner worker39 to expand that shared request. We did not edit c11 files or infer year from PDF filename; no measurement logged from snippets. Other nearby Momordica/Monarda snippets are outside this entry and not conflated with Modiola.
+
+Two distinct new wanted leads:Claridge/Hunt/Thrall/Mills2016 scat-germination trial, identified primary PDF from Australian Alps National Parks, DOI10.1111/emr.12193; Wijayabandara etal2023 chemical-management paper, whose indexed primary table names Modiola germinable seed-bank counts across herbicide treatments/control, DOI10.3390/plants12061332. Both need methods review:seed survival/dispersal through scats or colonization/community changes alone do not establish sensory cue response. The latter is requested solely for the actual Modiola table and living-treatment comparison, not for the already-studied Senecio response. Primary PubMed/repository results explicitly supply authors/year/DOI; source pages not fetched. No unknown year0 introduced.
+
+Jeju old pointer resolved through indexed original repository abstract:국화잎아욱의 알레로파시 효과, https://oak.jejunu.ac.kr/bitstream/2020.oak/22017/2/%EA%B5%AD%ED%99%94%EC%9E%8E%EC%95%84%EC%9A%B1%EC%9D%98%20%EC%95%8C%EB%A0%88%EB%A1%9C%ED%8C%8C%EC%8B%9C%20%ED%9A%A8%EA%B3%BC.pdf. It tests Modiola water extracts on receptor-plant germination/growth and microbes plus habitat/polyphenol surveys. No living Modiola receiver response or intact emitted volatile signal is identified, so no Modiola chemical request from that extract study. This disposition follows owner's10(a), with no author/year invented from archive path. Naturalized-plant distributions, climatic range models, floras, rust host record and ordinary pollen/anatomy are not light/chemical response measurements. New Zealand pasture-management list shows Modiola but no specific response in snippet, retained as citation pointer only. Generic floral scent/phototropism/VOC reviews name other species or none, so no background requests. Diel results are seasonal bloom ranges and ordinary at-anthesis flower anatomy; unrelated Gloriosa/Aphelandra timings are not assigned to Modiola. Eye results are animal histology and ordinary Modiola morphology, no genus-specific epidermal focusing identified; owner's none/focusing-to-light reading applies. No null while paired API protocol incomplete and real candidates remain.
+
+Pluchea checkpoint committed ad2b2803. Its initial validator printed0 problems, and supplement-final validator subsequently also printed0 problems (work/worker37-Pluchea-check2.txt). The final supplement run had not yet completed when that checkpoint commit was made; this timing deviation is recorded, and the next commit waits for actual validator completion. Next untouched genus Taraxacum; no later genus started.
+
 ## 2026-10-27 — worker37 Pluchea checkpoint
 
 This worker:1 newly available-source-screened genus (Pluchea),24 actual web queries,8 wanted lines,0 search records,0 evidence. Cumulative batch:13 genera screened through Pluchea at the available-source boundary,169 actual round28 web queries,116 wanted lines,0 search records,0 evidence.27 untouched genera remain, beginning Modiola, Taraxacum and Capsella. Earlier genuine wanted-only screens remain preserved. Missing OpenAlex/common-name API steps remain unrun after shared429; no full-protocol/exhaustion claim.
