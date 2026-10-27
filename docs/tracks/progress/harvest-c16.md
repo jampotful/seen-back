@@ -136,3 +136,23 @@ Ran harvest_get.py and screen_candidates.py: in no harvest run. Checked canon ca
 Added Mattana 2010 comparative Centranthus germination study (10.1111/j.1442-1984.2010.00280.x) under point 10(e); its light/dormancy methods remain for the reader. Germination-book search snippets concatenate neighboring entries, including C. occidentalis next to Centranthus: no result for that epithet was assigned to Centranthus. A later Deno snippet explicitly names C. ruber but exposes only germination timing, not its treatment comparison. A repository result names C. ruber in Germination ecology of wild living walls for sustainable vertical garden in urban… (https://arpi.unipi.it/retrieve/e0d6c92f-86aa-fcf8-e053-d805fe0aa794/Benvenuti%20et%20al%20Scientia%20Hortic%202016%20living%20walls%20postprint.pdf); exact full title and species-specific treatment results remain unresolved. A phototropism review result illustrates C. ruber inflorescences oriented toward the sun in Environmental and Experimental Botany 147 (2018) 75–85; retained as an additional unresolved lead at https://ri.conicet.gov.ar/bitstream/handle/11336/69645/CONICET_Digital_Nro.c2590fd0-0f92-4327-9691-2909c00bad31_A.pdf?isAllowed=n&sequence=2. These were not screened negatives. Essential-oil composition of harvested roots/aerial parts is tissue chemistry under owner point 10(a). Diel results provide seasonal flowering or developmental stages, not hours; existing scent paper remains wanted for timing. Epidermal spur anatomy does not describe a plant eye; owner none reading applies. Family review returned broad photoreceptor literature, not a direct new genus source. OpenAlex skipped; no null rows.
 
 Cumulative counts: 6 genera web-screened, 0 full protocol complete, 0 searched rows, 6 wanted lines, 0 evidence rows. Remaining 34 unreviewed, next Actaea.
+
+### Actaea — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py: in no harvest run. Canon catalog/effective main evidence, prior wanted and owner statuses checked: no existing genus coverage/request for these leads. Exact queries, in execution order; returned titles/displayed passages screened, no page fetch:
+- `web: Actaea seed germination light dark`
+- `web: Actaea germination gibberellin OR smoke OR dormancy`
+- `web: Actaea floral scent volatiles`
+- `web: "Actaea" flower opening time anthesis`
+- `web: "baneberry" flower opening time anthesis`
+- `web: "Actaea" eye type epidermal lens cells`
+- `web: "baneberry" eye type epidermal lens cells`
+- `web: ("Actaea" OR "Cimicifuga") light perception phototropism germination`
+- `web: "baneberry" light perception phototropism germination`
+- `web: ("Actaea" OR "Cimicifuga") chemical signalling volatile response`
+- `web: "baneberry" chemical signalling volatile response`
+- `web: Ranunculaceae photoreceptor review`
+
+Added four wanted lines: the Actaea racemosa light/dark germination and seedling-development experiment; the 1984 A. spicata fragrance/pollinator study; floral/vegetative volatiles comparison across Actaea species (sampling/species unresolved); and the A. erythrocarpa flower-opening study. For the last, expanded the already returned PMC search-result passage to read the observation protocol: flowers were observed at multiple daytime clock hours and hourly at anthesis. It is a genuine timing lead, not flowering-season text. No page was opened to expand this passage. Year 0 means not supplied; no missing metadata was guessed. The eye pair mainly returned the common name doll's eyes and berry pigmentation, not eyes; owner plant-none reading applies. Light pair also included older Cimicifuga spelling. Pharmaceutical effects of tissue extracts do not count as plant chemical responses. Family query returned general plant-photoreceptor reviews and other ranunculaceous genera; none was assigned to Actaea. OpenAlex skipped; all three plausible-measurement traits held and no null eye row written.
+
+Cumulative counts: 7 genera web-screened, 0 full protocol complete, 0 searched rows, 10 wanted lines, 0 evidence rows. Remaining 33 unreviewed, next Lathyrus.
