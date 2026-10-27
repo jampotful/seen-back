@@ -1316,3 +1316,66 @@ Exact successful connected queries:
 All returned title/snippet text read in sequential retained-response slices, variable delivered counts without claiming20each. Family alternative Berberidaceae query returns general photoreceptor reviews10.1002/wmts.36/10.1007/s44372-025-00446-3,wood-anatomy and Berberis chemistry reviews, no named queued-target treatment in available excerpts; no generic background duplicate. Raw Mahonia-web1–6.json and required-tool outputs in /workspace/work/w25-c11. No source-page/paper fetch,evidence,credentials/proxy/TLS change,purchase,operational edit or new service refusal. Validator pending checkpoint; next Apocynum.
 
 Worker25 Mahonia mandatory real validator printed **0 problems**. Current171wanted/25searched; next Apocynum. Original135wanted prefix preserved and searched byte-identical to incoming25lines.
+
+## 2026-10-27 — issue38 worker25 Apocynum and clean context handoff
+
+NEW Apocynum available-web-screened,28successful connected queries,22new wanted/0searched/0evidence. Worker25 final total **3new available-web-screened genera Achillea,Mahonia,Apocynum;68successful queries;58new wanted;0new searched/evidence/measurements**. Current **193wanted/25searched**, incoming135/25; issue38/main baseline54/25. Across rounds **31of40genera available-web-screened;9remain; exact next Bromus**, then Marchantia,Vachellia,Poa,Parkinsonia,Panicum,Artemisia,Polystichum,Ailanthus. Context handoff stops between genera. Preserve original20 and completed issue38Foeniculum,Hypochaeris,Sorghastrum,Packera,Cortaderia,Nasturtium,Tecoma,Cosmos plus worker25three; do not repeat their screens. Packera initial display-truncated response tail remains explicitly unseen; no result-exhaustion claim there. No full-protocol/exhaustion claim for new3: OpenAlex429 skipped, all null searched rows withheld while required API/source steps remain unfinished.
+
+Required harvest_get.py and screen_candidates.py executed; Apocynum cached run4,supp12/14/20,132result occurrences and15family-title occurrences reviewed as delivered with title/abstract starts. No cached failed step/gave-up was represented as zero hits. One cached zero-hit citation step cites10.1002/ece3.71923. Original queue A.cannabinum23619records and A.androsaemifolium19658records has all four traits; no actual main/corrected Apocynum physiology/evidence found, old sweep10one-query null is thin and not current protocol coverage. Canon catalog checked pertrait, no in-hand named-target source; adjacent-family physiology does not carry. Global wanted/status/evidence/corrected/searched checked by genus and every retained exact title/DOI/URL, no retained existing source/status/n-a duplicate.
+
+New22wanted are identified individually in JSON with exact source/query/limits:3target germination sources,2006target light/wind/touch,2002target visitation/tieback,2025/2026tree-of-heaven mulch/two-light germination experiment explicitly naming A.cannabinum,venetum/pictum seedlight/salt,lancifoliumseedlight/salt,venetumsaltgermination,venetumSA,venetumMeJA,lancifoliumPGRcuttings,lancifoliumseed/GA/cuttingpropagation,pictumLi,venetumdroughtgermination,venetumAvDH1salt,venetumcallus/hairyrootmedia,and5pollination-method candidates (historical genusSyrphid paper plus4venetumfloral-dynamics studies). No species result inferred from a reference-list snippet. Cambridge primary search result independently verifies direct queued A.androsaemifoliumlight null: prolonged light neither promoted nor inhibited germination. Such measured zero effects remain positive reading leads, never literature-exhaustion records. A.cannabinumHempDogbaneGrowthAndControl primary abstract explicitly says light/scarification affects germination. Other original target seed/vegetative study needs actual methods. No DOI/year inferred from journal URL/PII/relative indexing ages. Some sources have no verified URL; get names original journal/year and legal retrieval rather than invented link. All original papers remain unread and source-specific outcomes unextracted.
+
+Direct primary Cambridge figure caption of Native perennials’ germination and growth response to decomposing tree of heaven stems10.1017/inp.2025.10034 explicitly names A.cannabinum across soil/mulch treatments under two light levels. It is a target living receiver/light/germination candidate; methods must distinguish chemical cue from physical soil/cover effects. Dead Ailanthus wood does not measure living Ailanthus emitted signaling or receiver sensing, so future Ailanthus cannot adopt it as a positive source merely from genus in title. New2006light/wind/touch primary abstract separately holds greenhouse light constant; source reader must inspect actual field light comparison and avoid treating touch-induced tissue changes as applied chemical sensing. Related2002visitation/tieback experiment explicitly names target and altered apical-meristem illumination in primary indexed text; original light mediation versus touch needs reading. No numerical inference/new evidence.
+
+Living applied SA/MeJA/PGR/callus-medium responses qualify as candidates10(d),but venetum/pictum/lancifoliumcannot supply the two queued target species by congener carry. In-vitro callus/roots remain explicitly culture rather than intact-plant receptor measures. Living regeneration cuttings are not postharvest cut-flower conditioning. Germination titles retained10(e)even when excerpt says only dark culture,temperature,osmotic stress or fixed illumination. Lithium accumulation/toxicity and drought must be separated from cue sensing in original; no positive chemical threshold asserted. Heterologous Arabidopsis/cotton genes,spinachMYB,otherApocynaceae,mouse/human sleep and rat-extract papers do not measure Apocynum plant diel/chemical/light. Whole genomes and transcriptome annotations without actual plant treatments are not photoreceptor measurements. Honey/bast/fiber oils,extractedorganHS-SPME and four-cultivar excised-flower/transcriptome chemistry lack living donor/receiver signaling in returned methods and fail10(a); no wanted request from those. The unnamed Japanese dogbane ant-mimic news item is a broad common-name hit,not a verified Apocynum species; no genus attribution or request invented from it.
+
+Diel pair returns seasonal anthesis months,fruiting dates or flower lifespan. Apocynumvenetumfloral-dynamics/stigma-receptivity studies are retained for actual daily observation methods; their displayed June–August seasons and4–6day lifespan do not establish a clock hour. Historical1920Syrphid-and-flowers title names Apocynum but exact plant species and daily floral behavior remain to resolve; insect visitation alone cannot measure plant diel. TargetNorthAmerican within-day behavior remains unestablished. Eye_type none10(b); general ocelli/focusing papers PMC9824129/10.1111/j.1399-3054.1996.tb00674.xreturn no named Apocynumfocusing result. Any focusing belongs under nonvisual light,not an eye. No null searched line despite limited available candidates.
+
+Cached successful queries,word-for-word in delivered order:
+- `Apocynum phytochrome photoreceptor`
+- `Apocynum light perception`
+- `Apocynum phototropism`
+- `Apocynum flower opening time`
+- `Apocynum nyctinasty`
+- `Apocynum volatile signalling`
+- `Apocynum photoperiod`
+- `Apocynum circadian rhythm`
+- `Apocynum anthesis`
+- `Apocynum pollination biology`
+- `Apocynum epidermal lens cells`
+- `Apocynum epidermal focusing leaf optics`
+- `Apocynaceae photoreceptor review`
+
+Exact successful connected queries,executed order:
+- `web: Apocynum seed germination light dark`
+- `web: Apocynum germination gibberellin OR smoke OR dormancy`
+- `web: Apocynum floral scent volatiles`
+- `web: Apocynum flower opening time anthesis`
+- `web: dogbane flower opening time anthesis`
+- `web: Apocynum plant ocelli lens epidermal focusing eye`
+- `web: dogbane plant ocelli lens epidermal focusing eye`
+- `web: Apocynum chemical sensing volatiles`
+- `web: dogbane chemical sensing volatiles`
+- `web: Apocynum photoperiod phototropism light response`
+- `web: dogbane photoperiod phototropism light response`
+- `web: Apocynaceae photoreceptor review`
+- `web: "Apocynum cannabinum" germination light gibberellic`
+- `web: "Apocynum androsaemifolium" germination light`
+- `web: "Apocynum" jasmonate elicitor`
+- `web: "The Syrphid Fly" "Apocynum"`
+- `web: "The Syrphid Fly, Mesogramma Marginata"`
+- `web: "Apocynum cannabinum" "light" shade experiment`
+- `web: "Apocynum androsaemifolium" anthesis hour`
+- `web: "Apocynum" "Tissue Culture and Hairy Roots"`
+- `web: "10.3732/ajb.89.9.1401"`
+- `web: "The Syrphid Fly" Apocynum 1920 marginata`
+- `web: "A Preliminary Study on Pollination Biology of Apocynum"`
+- `web: "Apocynum" "Comparative reproductive biology"`
+- `web: "Native perennials’ germination and growth response" doi`
+- `web: "Apocynum cannabinum tissue culture" auxin growth`
+- `web: "Light, Wind, and Touch Influence" light experiment`
+- `web: "Germination and Emergence Characteristics of Spreading Dogbane" DOI`
+
+All actually delivered connected titles/snippets read in retained-response slices,including displayed tails,variable counts without20each claim. Raw Apocynum-web1–8.json,harvest/candidates and deduplicated title/abstract-start slices saved in /workspace/work/w25-c11. Family-review alternative returns general plant/fungal photoreceptors,Apocynaceae phytochemistry/pollination,Catharanthus/Rhazya and unrelated animal/other-plant works; no named queuedtarget treatment in available excerpts. No source-page/paper fetch,evidence,credentials/proxy/TLS change,purchase,operational edit or new service refusal. Mandatory validator pending final checkpoint; clean next Bromus.
+
+Worker25 final mandatory real validator printed **0 problems**. Byte-prefix check preserved all incoming135wanted lines; searched byte-identical to incoming25lines. Current193wanted/25searched. NEW58wanted/0searched/0evidence across3available-web-screened protocol-partial genera,68successful connected queries. Context handoff stops cleanly before Bromus;9genuinely unreviewed remain. OpenAlex429skipped; no new service refusal. Prior Packera unseen-tail caveat preserved.
