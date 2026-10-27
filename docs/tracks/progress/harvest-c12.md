@@ -1528,3 +1528,44 @@ Exact actual web queries, in execution order:
 
 NEW this genus: 9 wanted,0 searched,0 evidence. Adopted existing wanted: [('Growth and morphogenesis of sun and shade plants', 'harvest-c7'), ('Seed enhancing treatments: comparative analysis of germination characteristics of 23 key herbaceous species used in European restoration programmes', 'harvest-c12')].
 Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Urtica-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
+
+
+## 2026-10-27 — issue38 worker34: Larrea
+
+Adopted substantive tridentata diel evidence sweep-6#36 daily leaflet movement; no repeated diel search. No substantive target light/chemical evidence found globally. Old thin sweep-6 stays unchanged,not full modern trait completion. Mandatory harvest_get/screen_candidates both report genus absent in cached runs1–17,20,23,24. No failed API claimed successful/zero hits. Web Zygophyllaceae photoreceptor review returned fungi Zygomycota,animal/insect eyes,plant photoreceptor general reviews and family taxonomy,not a family-specific measured target review; Plant volatiles in extreme terrestrial and marine environments10.1111/pce.12320 provides a relevant ecological reference trail to original target root studies,not a completed API chase. Canon checked,no new canon request.
+
+Direct target light-germination and hormone/root/VOC sources retained10(a,d,e). Historical UnitedStates divaricata collection identity marked for desk; contemporary Argentine divaricata,ameghinoi,cuneifolia/nitida germination and cuneifolia paraheliotropism remain their actual species,no congener chemical/light carry. Root inhibition is a living interaction lead but mechanism requires reading; emitting tissue chemistry alone does not prove chemical communication. WRKY sources require separation of target hormone/stress induction from heterologous barley/Arabidopsis reporter assays. Partial culture/seed-coat and fungicide-response forks remain explicit. Different moisture treatments are germination candidates10(e),not assumed cue sensing.
+
+Eye pair returns desert shrub epidermal thickness,stomata/resin anatomy,keep-an-eye-out metaphors and human skin/laser/eye optics; no target optical focusing assay found. Owner eye_type none; actual focusing belongs under light10(b). Distilled oils,tinctures,resin fractions for bacteria/hair cosmetics,fungal fermentation on harvested Larrea and leachate effects on other genera do not alone establish target living sensing10(a). Generic cotton,Iva,oak,Datura and tobacco MeJA findings do not transfer. Jojoba comparison USDA snippet lacks a complete original title and tests photoprotection under drought,not accepted target light-cue evidence. Existing diel leaf-angle observation is not automatically a light-elicited experiment. Remaining0 of assigned7; all40 batch genera now covered by preserved screens/adoptions plus current web screens,with current full protocol partial and no exhaustion/null claim.
+
+Exact actual web queries, in execution order:
+- `web: Larrea seed germination light dark`
+- `web: Larrea germination gibberellin OR smoke OR dormancy`
+- `web: Larrea floral scent volatiles`
+- `web: Larrea light photoperiod phototropism`
+- `web: creosote bush light photoperiod phototropism`
+- `web: Larrea volatile emission herbivore induced response methyl jasmonate`
+- `web: creosote bush volatile emission herbivore induced response methyl jasmonate`
+- `web: Larrea eye type epidermal focusing`
+- `web: creosote bush eye type epidermal focusing`
+- `web: Zygophyllaceae photoreceptor review`
+- `web: "Larrea tridentata" gibberellin jasmonate response`
+- `web: "Larrea" "LtWRKY21"`
+- `web: "Light osmotic stress and fungicides affect"`
+- `web: "Ecology of the creosotebush" germination thesis`
+- `web: "Biogenic volatile organic compound emissions from desert vegetation"`
+- `web: Mahall Callaway 1991 Larrea root communication`
+- `web: "An ABA inducible WRKY gene integrates"`
+- `web: "creosote bush" "jojoba" "photoprotection"`
+- `web: "Ecology of the creosotebush" Dalton`
+
+NEW this genus: 17 wanted,0 searched,0 evidence. Adopted existing wanted: [].
+Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Larrea-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
+
+## 2026-10-27 — issue38 worker34 final checkpoint
+
+NEW worker34:7 web-screened genera Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea;106 wanted(13+22+26+10+9+9+17),0 searched,0 evidence,0 measured closures. File totals398 wanted/16 searched. Prior292 wanted/16 searched and all progress through takeover793b9111 remain exact byte prefixes; original mainbbc35ff111 wanted/16 searched and progress prefixes also preserved. Existing species-matched light/diel/eye coverage adopted as documented;11 proposed shared-source wanted candidates adopted without duplicates.119 actual web queries recorded word for word. All7 are full-protocol partial because live OpenAlex429 remains skipped; Chamaenerion cached genus/citation failures also remain unrepaired. No exhaustion/null claim or placeholders.
+
+Prior33 screens/adoptions+these7=40/40 batch genera covered for this round; assigned remaining0,exact next none. Preserve prior28 first18 screens and all subsequent current screens/adoptions,including Asparagus full adoption. No repeated completed/adopted entry research. Bird Prunella optical records explicitly separated from plant vulgaris; Urtica urens results not carried to dioica/gracilis; all other congener/culture forks documented at actual species scope.
+
+Each genus checker completed with0 problems before its commit. Final combined screen_candidates --check0 problems;JSONL398/16 parse;own-file git diff --check clean;takeover/main exact prefixes verified for all3 owned paths. No paper/source-page fetches,evidence,full-paper assets,other-unit edits,branch changes,pushes,PRs or operational-state changes. Network/runtime readiness checked using cloud-environment-runtime skill;current unrestricted policy enforced,no VPN. Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected with no new refusal/retry. Raw tool provenance remains work/w34-c12 scratch,not git.
