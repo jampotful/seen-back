@@ -1407,3 +1407,30 @@ Exact successful connected queries in executed order:
 
 Raw responses Bromus-web1–4.json and required-tool outputs /workspace/work/w31-c11. Current220wanted/25searched;32of40available-web-screened across rounds;8remain, exact next Marchantia. Validator pending checkpoint.
 
+
+## 2026-10-27 — issue38 worker31 Marchantia
+
+NEW Marchantia available-web-screened;14successful connected queries,25new wanted/0searched/0evidence. Current245wanted/25searched; worker31sofar52new wanted across Bromus/Marchantia,29successful connected queries. Required harvest_get.py/screen_candidates.py executed: no harvest run yet, no cached result set to screen; not a zero-hit API result. Queue has only target M.polymorpha diel,eye_type,sense_chemical; existing sweep-29#8 direct M.polymorpha chloroplast-movement abstract adopted for nonvisual light (no new null or redundant pair), and oa-2#3866 M.paleacea var.diptera phytochrome source adopted only for its named species; no physiological carry. Old sweep-29 one-query null not completion. Canon catalog pertrait plus global evidence/corrected/wanted/searched/owner status checked by genus and retained exact source titles/URLs/DOIs; no retained duplicate or n/a source. Plant compilations pending/in-hand target source absent. OpenAlex429 skipped; API steps unfinished, all null searched withheld, no full-protocol/exhaustion or measurement claim.
+
+New25wanted include spore/gemma light/dormancy and applied-hormone experiments,JA ligand/herbivory responses,ABA/auxin/ACC/ethylene response trials,three target circadian/diel sources and two living-volatile/chemical-hypothesis leads. M.polymorpha is a liverwort: seed-word mandated searches retrieve spores and gemmae, never invent seeds or flowers. Diel pair therefore includes circadian-rhythm wording; primary10.1111/pce.14364 compares rhythmic thallus photochemistry across T cycles and10.3389/fpls.2023.1275503 tests daylength/clock mutant interaction; clock-negative results remain reading leads.10.1111/nph.17653 samples a constant-light transcriptomic time series. Circadian,forced diel and seasonal growth-phase outcomes need separation in original.10.1093/pcp/pcag071 and10.1111/nph.18815 concern gemma dormancy; endogenous expression alone is not an applied cue measurement, but explicit hormone treatments qualify10(d).2026MpILR1preprint is marked unreviewed and in-vivo versus enzyme tests unresolved. Direct ACC/ethylene studies must not label an ethylene-independent ACC effect as ethylene perception.
+
+Wounded-target C8volatile source primary abstract explicitly includes vapor-exposed thalli converting absorbed volatile; source reader must distinguish a biological cue response from absorption/metabolism, not assert receptor signaling. Paper-Based Multiplex Sensors reports stressed Marchantia emissions but indexed genus-only excerpt does not verify species; retained for Marchantia, no M.polymorpha species assignment. Artificial paper sensor response itself is not plant sensing. Chlorsulfuron source tests chemical perception and reports toxic ALS inhibition rather than detoxification-sensor induction: retain direct living test with negative result, never invent a positive cue response. Volatile paleacea HS-SPME profiling,essential oils/solvent extracts,freeze-ground oil-body ABCG metabolites,and other-liverwort chemistry fail10(a)or lack living signaling in delivered methods; no request from chemistry-only titles. General ocelli/epidermal pores/hand-lens morphology establish no target focusing; eye_type none10(b),any focusing belongs to nonvisual light. Family alternative returns target reviews10.1146/annurev-arplant-082520-094256 and PMC9516144 plus general algae/fungal/plant photoreceptors; source-specific original germination/hormone/diel leads retained rather than generic duplicate reviews. New unrelated UVR8light hits were not used to close open chemical/diel traits.
+
+Exact successful connected queries in executed order:
+- `web: Marchantia seed germination light dark`
+- `web: Marchantia germination gibberellin OR smoke OR dormancy`
+- `web: Marchantia jasmonate herbivore`
+- `web: Marchantia flower opening time anthesis circadian rhythm`
+- `web: common liverwort flower opening time anthesis circadian rhythm`
+- `web: Marchantia plant ocelli lens epidermal focusing eye`
+- `web: common liverwort plant ocelli lens epidermal focusing eye`
+- `web: Marchantia chemical sensing volatiles`
+- `web: common liverwort chemical sensing volatiles`
+- `web: Marchantiaceae photoreceptor review`
+- `web: "Marchantia" "ethylene" "2020" response`
+- `web: "Marchantia" "Jasmonate-Related MYC" doi`
+- `web: "Marchantia" "An Evolutionarily Conserved Abscisic" doi`
+- `web: "Marchantia" "MpILR1"`
+
+All actually delivered titles/snippets read (variable result counts, no20-perquery claim); raw Marchantia-web1–4.json and required-tool outputs /workspace/work/w31-c11. No page/paper fetch,evidence,proxy/TLS/credential change or new service refusal.33of40available-web-screened across rounds;7remain, exact next Vachellia. Validator pending checkpoint.
+
