@@ -629,3 +629,53 @@ Only eye_type negative written for Melilotus. Actual cached M. indicus pulvinule
 
 
 Final validation: actual required command `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c8.jsonl --wanted docs/views/wanted/harvest-c8.jsonl` completed in session21462 against current fetched ci with **0 problems** before the final commit. Independent same-tool check using the legitimate full cached harvest also printed **0 problems**; no reduced/filtered substitute or gate change. Owned diff verified as1 new search line,21 new wanted lines and current/provenance progress updates; earlier160 wanted lines preserved byte-for-byte. Stop between Melilotus and entirely unstarted Cercis under the48-worker cap. No source access or web quota blocker newly encountered.
+
+## 2026-10-27 — issue38 worker11, Cercis web screen and cross-unit adoption
+
+This continuation starts from **97 wanted lines and 23 searched lines actually present on main**, not historical 181 wanted lines. Prior record prefixes and progress sections are preserved; the main desk incorporated a registry-verified subset, and no older missing authorless line is refilled. **New so far: Cercis web-screened, 16 wanted lines, 0 searched lines, 0 evidence/measurement closures. Actual files now: 113 wanted, 23 searched.** This is a web screen for issue38, **not full-protocol exhaustion**: OpenAlex's round-wide HTTP429 remains skipped and no negative/null searched row is licensed where the required protocol is incomplete. Pilea remains adopted from harvest-c4.
+
+Read AGENTS.md first, the issue38 worker guide and named protocols (desk-screen1–10, THOROUGH, BRIEF Round2, round3/round4, audits53/54 context) before research. No branch, gate, hold, prior unit or operational state was changed. Runtime skill applied; current status is unrestricted/enforced, no VPN. No direct source/paper fetch and no evidence record was made; automatically returned indexed passages were treated as search snippets only. No banned library/proxy/copy was opened or relied on as a primary measurement. Original publisher, university, USDA, PubMed and AGRIS metadata supported the wanted leads. All exposed titles/snippets were screened; the tool supplies variable result counts and no claim of20 per query is made. No new service refusal occurred.
+
+Before searches, reviewed global searched/wanted, accepted-name corrected-first evidence, owner papers-status and canon catalog for the21 authorized genera. Cercis has no accepted in-hand measurement or wanted lead; sweep-12#9 is an old two-query thin screen and does not establish current protocol completion. **Centrosema is adopted without any fresh search**: external-2 searched lines8–10 give substantive scientific/common Europe PMC searches, available abstracts and a family review chase10.3389/fpls.2015.00207 for diel,eye_type,light; external-2#2 and recheck-codex-b-fixed#11 give assay-specific chemical evidence for C.molle,10.7554/eLife.81050. This supersedes sweep-97's old chemical-null claim; no duplicate wanted/evidence/null is added. Adopted Centrosema coverage is not counted as a newly web-screened genus. Zanthoxylum external-3 lines1–3 also provide substantive diel/eye/light coverage and will be adopted for those traits if its chemical remainder is reached. Other owned genera's existing evidence is preserved for trait-specific adoption.
+
+Official `harvest_get.py Cercis` and `screen_candidates.py Cercis` succeeded through the supported additional-network mode: Cercis is absent across runs1–24. Read-only hg.load inspected all15 Fabaceae family review titles and complete stored abstract starts (run17,`Fabaceae photoreceptor review`); no failed family step. They concern Melilotus leaf movement; Swartzia anthesis/volatiles; Diuris pollinator mimicry; Desmodium beetle host location; Lablab/Vigna crop gene studies; phytochrome evolution and legume photoperiod reviews; flavonoid oxidation/medical chemistry; Bombus visitation; rhizobial polysaccharides; biomineralization. None exposes a Cercis measurement. The current connected family query also returned10.1093/jxb/erag313 describing crop legumes, not target Cercis; no trait carry from that family review is inferred.
+
+Cercis mandatory10(e) searches ran first, then all four required scientific/common trait pairs, family review and focused metadata refinements. Actual queries in execution order:
+- `Cercis seed germination light dark`
+- `Cercis germination gibberellin OR smoke OR dormancy`
+- `Cercis floral scent volatiles`
+- `Cercis flower opening time anthesis`
+- `eastern redbud flower opening time anthesis`
+- `Cercis plant ocelli lens-like epidermal cells eye`
+- `eastern redbud plant ocelli lens-like epidermal cells eye`
+- `Cercis photoperiod phototropism phytochrome light response`
+- `eastern redbud photoperiod phototropism phytochrome light response`
+- `Cercis volatile chemical signal hormone elicitor response`
+- `eastern redbud volatile chemical signal hormone elicitor response`
+- `Fabaceae photoreceptor review`
+- `"Cercis" "anthesis" "hour"`
+- `"Germination" "Cercis" Hosokawa Jones Geneve 1975`
+- `"Leaf gas exchange of eastern redbud"`
+- `"Regulation of Seed Dormancy in Cercis canadensis"`
+- `"Genecology of Eastern Redbud" Donselman Flint`
+- `"Cercis" "Seed treatments to break dormancy and stimulate germination"`
+- `"Cercis" "kinetin" 1980`
+- `"Leaf Gas Exchange of Eastern Redbud" Norcini`
+- `"Cercis" "Regulation of Seed Dormancy" Hamilton Carpenter`
+- `"Cercis" "Effects of dormancy breaking methods"`
+- `"Cercis" "germination" "gibberellin" "1998"`
+- `"Cercis" "Breaking of Judas tree seed dormancy"`
+- `"Cercis" "Methods for breaking the dormancy of eastern"`
+
+The16 wanted leads hold chemical/light for intake: Hosokawa1977 directly reports living target seed hormone and light/dark trials; Donselman/Flint1982 directly reports target photoperiodic growth; Norcini/Knox/Andersen1991 compares whole target plants under sun/shade; direct congener GA/kinetin/dormancy studies retain their own species rather than borrowing numbers to C.canadensis. Dormancy/omics and scarification-only leads are retained under10(e) with cue eligibility explicitly unresolved. Applied GA qualifies10(d); endogenous hormone correlations, mechanical seedcoat opening, cold response or culture lighting alone do not. The new gas-exchange methods paper10.1111/nph.70949 mixes measured target leaf patches and simulated canopies, so intake must separate them. Unexposed authors/DOI/year fields stay empty/null and are never supplied from memory. Duplicate DOI/title/URL and owner n/a checks found no existing request for these16 sources.
+
+Eye results show target leaf epidermal micromorphology10.1111/j.1095-8339.2008.00877.x and seed water-gap lens terminology, without an optical eye. Any focusing belongs under light by owner10(b); eye_type remains none. Diel results give spring/month flowering dates, clusters opening sequentially and days since anthesis, without an exposed target within-day rhythm. The unrelated flower-bending paper and bee visitation timing do not establish a redbud rhythm. These are screening dispositions only: no new eye/diel negative record while the required missing API steps are skipped. Scent studies on distilled bark oil or flavonoid/removed-tissue profiles fail10(a); generic lima-bean/Arabidopsis volatile reviews do not measure Cercis. The original-source contradictory nodulation statements in Missouri and USDA botanical snippets do not establish target chemical perception.
+
+One concrete mixed command was rejected by automatic approval review; no retry, permission request or indirect execution of that command occurred. Exact rejection:
+> This action was rejected due to unacceptable risk.
+> Reason: Although the harvest lookup is relevant and read-oriented, the command also writes `/workspace/work/w11-c8/harvest.json`, outside the explicitly authorized batch files, violating the task’s file restrictions.
+> Do not bypass this rejection through a workaround or indirect execution. Continue with a safer alternative, or carry out checks to prove that the action is authorized or low risk before trying again. Complete unaffected work without asking for confirmation. Report anything that remains blocked, clarify why it was blocked by auto-review, inform the user of the risk and ask for approval.
+
+The rejected scratch cache is not needed. Continued with successful **read-only** official harvest inspection and writes confined to authorized batch files; coordinator was notified immediately. This is a narrower safe alternative; no remaining action depends on the refused cache write.
+
+Checkpoint: Cercis newly web-screened; Centrosema adopted separately. **19 authorized genera still need new screening, next Erechtites**, then Chamaecrista,Celtis,Rivina,Sphagneticola,Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum (chemical remainder only),Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. No Erechtites web search has started at this checkpoint.
