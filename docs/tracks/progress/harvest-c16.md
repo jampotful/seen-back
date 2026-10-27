@@ -156,3 +156,26 @@ Ran harvest_get.py and screen_candidates.py: in no harvest run. Canon catalog/ef
 Added four wanted lines: the Actaea racemosa light/dark germination and seedling-development experiment; the 1984 A. spicata fragrance/pollinator study; floral/vegetative volatiles comparison across Actaea species (sampling/species unresolved); and the A. erythrocarpa flower-opening study. For the last, expanded the already returned PMC search-result passage to read the observation protocol: flowers were observed at multiple daytime clock hours and hourly at anthesis. It is a genuine timing lead, not flowering-season text. No page was opened to expand this passage. Year 0 means not supplied; no missing metadata was guessed. The eye pair mainly returned the common name doll's eyes and berry pigmentation, not eyes; owner plant-none reading applies. Light pair also included older Cimicifuga spelling. Pharmaceutical effects of tissue extracts do not count as plant chemical responses. Family query returned general plant-photoreceptor reviews and other ranunculaceous genera; none was assigned to Actaea. OpenAlex skipped; all three plausible-measurement traits held and no null eye row written.
 
 Cumulative counts: 7 genera web-screened, 0 full protocol complete, 0 searched rows, 10 wanted lines, 0 evidence rows. Remaining 33 unreviewed, next Lathyrus.
+
+### Lathyrus — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py. Adopted main light-response evidence, including GBIF accepted-name Lathyrus oleraceus rows formerly filed as Pisum sativum, and chemical receiver evidence canon-3:674 for L. japonicus. These already cover both light and chemical traits, so did not duplicate paired trait searches or add requests for germination/scent studies that bear only on those covered traits. No earlier wanted line found. Canon catalog/effective main evidence checked. Harvest query order, copied verbatim:
+- `Lathyrus phytochrome photoreceptor`
+- `Lathyrus light perception`
+- `Lathyrus phototropism`
+- `Lathyrus volatile signalling`
+- citation harvest: works citing `10.3389/fpls.2015.00207` naming Lathyrus (1 result); `10.1111/ele.12205` (0); `10.1111/j.1744-7909.2007.00392.x` (0).
+- family review harvest: `Fabaceae photoreceptor review`.
+
+Exact web queries in order; returned titles/displayed passages screened, no page fetch:
+- `web: Lathyrus seed germination light dark`
+- `web: Lathyrus germination gibberellin OR smoke OR dormancy`
+- `web: Lathyrus floral scent volatiles`
+- `web: "Lathyrus" flower opening time anthesis`
+- `web: "sweet pea" flower opening time anthesis`
+- `web: "Lathyrus" eye type epidermal lens cells`
+- `web: "sweet pea" eye type epidermal lens cells`
+
+The germination-first search directly recovered light/dark studies in L. latifolius and L. aphaca, plus a smoke-solution study in L. sativus. Adopted the existing trait coverage rather than requesting more papers for it. Likewise the scent studies (10.1093/pcp/pcaa100; 10.3390/plants13233272) bear on existing chemical coverage; cut-flower ethylene work does not count under owner point 10(a). The remaining diel search returned flowering seasons, plant developmental dates and a Bruchus/L. latifolius interaction paper whose displayed passage describes insect day/night visits and flower age in days, not measured plant anthesis clock hours; the full source remains unresolved at https://horizon.documentation.ird.fr/exl-doc/pleins_textes/divers20-07/31763.pdf and was not screened as proof of absence. Main's photoperiod evidence was not relabelled as diel. The eye pair returned petal/leaf epidermal taxonomic microscopy, not image-forming organs; any focusing belongs under nonvisual light and the owner plant-none reading applies. Of the three harvest diel candidates, 10.1104/pp.84.2.318 measures Melilotus, 10.1093/aobpla/plac041 measures Swartzia, and 10.1111/j.1365-294x.2006.03051.x is a broad phytochrome review with no Lathyrus daily-timing measurement in the supplied abstract. Harvest eye candidate list was empty. OpenAlex supplements skipped; no null rows.
+
+Cumulative counts: 8 genera web-screened (Mycelis, Dryopteris, Clintonia, Dicentra, Struthiopteris, Centranthus, Actaea, Lathyrus), 0 full protocol complete, 0 searched rows, 10 wanted lines, 0 evidence rows. Remaining 32 unreviewed; exact next genus Ornithogalum. Stopped between genera at the context checkpoint; all work committed. Required OpenAlex supplements/citation steps remain skipped, and wanted sources await oa reading.
