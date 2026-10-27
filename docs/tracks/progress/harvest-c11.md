@@ -979,3 +979,45 @@ The light-signals-from-below review10.1111/pce.13886 names H.glabra in a stature
 No source/paper page fetch, evidence, API fallback, service bypass or new access refusal. Raw successful results work/w14-c11/Hypochaeris-web1–7.json; harvest/candidates there too. All actual returned titles/snippets screened, variable counts without claiming20 per query. Source reading, API completion and conditional applicability remain outstanding, no trait declared exhausted. Mandatory validator pending checkpoint.
 
 Worker14 Hypochaeris mandatory real gate printed **0 problems**. Current82wanted/25searched,28new wanted total,0new searched/evidence. Checkpoint before Sorghastrum;18 remaining.
+
+
+## 2026-10-27 — issue38 worker14 Sorghastrum continuation and context handoff
+
+NEW: one genus web-screened (Sorghastrum),19 successful connected web queries,4 wanted leads,0 searched/0 evidence/0 measured cells. Worker14 total **3 newly web-screened genera: Foeniculum,Hypochaeris,Sorghastrum;63 successful web queries;32 new wanted;0 new searched/evidence**. Retained current files **86 wanted/25 searched**, from issue38 baseline54/25. Historical152 is pre-desk count, not refilled. Across rounds23/40 genera web-screened; **17 remain; exact next Packera**, then Cortaderia,Nasturtium,Tecoma,Cosmos,Achillea,Mahonia,Apocynum,Bromus,Marchantia,Vachellia,Poa,Parkinsonia,Panicum,Artemisia,Polystichum,Ailanthus. Stop between completed genus screens for context handoff. The original TOP/current and all prior progress text remain untouched; this appended issue38 heading supersedes its remaining count.
+
+Protocol-partial remains explicit: coordinator's OpenAlex429 skip persists, no API rerun/fallback, so no null searched rows for any new genus. No newly refused service. Full source reading and API completion remain outstanding, no exhausted claim. Hypochaeris checkpoint5fdc7bb2 followed mandatory gate0problems.
+
+Pre-query adoption: Sorghastrum nutans light evidence sweep-33#3 (Rice1950,10.1086/335609) is a partial abstract/field inference of daylength response, preserved and adopted as existing coverage. Existing sweep-33 two-query null on other traits is thin and not a complete current screen. The new light germination experiment is a primary upgrade candidate, not a claim that there was no prior light record. Global wanted/evidence/corrected/status by genus and all retained titles/URL/DOI fragments found no duplicate/n/a request. Canon catalog checked; no in-hand named target source settles chemical/diel. Required harvest_get.py and screen_candidates.py both explicitly report Sorghastrum absent; no harvest queries/candidates omitted. Raw outputs /workspace/work/w14-c11/Sorghastrum-harvest.txt and candidates.txt.
+
+Exact connected searches in executed order:
+- `web: Sorghastrum seed germination light dark`
+- `web: Sorghastrum germination gibberellin OR smoke OR dormancy`
+- `web: Sorghastrum jasmonate herbivore`
+- `web: Sorghastrum flower opening time anthesis`
+- `web: Indiangrass flower opening time anthesis`
+- `web: Sorghastrum plant ocelli lens epidermal focusing eye`
+- `web: Indiangrass plant ocelli lens epidermal focusing eye`
+- `web: Sorghastrum chemical sensing volatiles`
+- `web: Indiangrass chemical sensing volatiles`
+- `web: Sorghastrum photoperiod phototropism light response`
+- `web: Indiangrass photoperiod phototropism light response`
+- `web: Poaceae photoreceptor review`
+- `web: "Sorghastrum nutans" anthesis time morning`
+- `web: "Sorghastrum" gibberellin germination`
+- `web: "Sorghastrum" volatile chemical`
+- `web: "Seed Dormancy and Germination in Indiangrass"`
+- `web: "Gibberellic acid and presowing chilling"`
+- `web: "139603" photoperiod Sorghastrum`
+- `web: "Sorghastrum nutans" "time of day" flowering`
+
+All returned titles/snippets screened, variable delivered counts rather than assumed20. Broad genus searches were dominated by Sorghum rather than Sorghastrum; quoted exact-genus/seed follow-ups resolved that taxonomic collision. The two direct hormone/germination sources are retained under10(d/e). James G.Emal1971 Seed Dormancy and Germination in Indiangrass thesis (https://digitalcommons.unl.edu/archivaltheses/867/) is a legal alternative/source-reader route if the article remains unavailable; it is not requested as a duplicate study. Source relationship to the later light/chilling/chemical article should be checked by reader. The2022 selected-seed study stays a germination candidate under10(e), without inventing light treatment from greenhouse natural-light conditions. No measured values/quotes logged.
+
+The exact time-of-day query found USDA Breeding Perennial Forage Grasses Table6 explicitly naming Sorghastrum nutans in a34-grass blooming/pollen-shedding timing table. Retained for original reading, no hour inferred. Native-garden/tallgrass manuals returned seasonal blooming/first-harvest dates, not a daily plant rhythm. Midnight-to-morning anthesis crop manuals concern Sorghum, not this genus. Photoperiod response/floral-transition/PRR37 papers, MeJA-dhurrin and aphid-induced VOC studies likewise concern Sorghum bicolor; no cross-genus carry or duplicate Sorghum request. USDA ARS139603 broad four-grass photoperiod experiment returned no species identity/title in snippets; the follow-up returned unrelated numeric-ID matches, so no speculative Sorghastrum request. Rice1950 source is already logged and not re-requested.
+
+Chemical exclusions: cyanogenesis/dhurrin concentration studies of Sorghastrum seedlings establish compound content, not a tested elicitor/signaling response in returned snippets. Karl2005 Senescing grass crops10.1029/2005JD005777 names S.nutans but laboratory VOC results concern cut/drying vegetation; no living target cue-response is established, so no chemical wanted request on that basis. Microbial-volatile sorghum work and insect olfactometer studies are not target-genus measurements. Extract, forage chemistry, senescing/drying emissions and other-species GA responses are not conflated with living Sorghastrum sensing.
+
+Eye response follows owner10(b): none for plants. The scanning-electron-microscopy leaf-epidermis survey PMID30139171 describes genus micromorphology and interspecific surface differences, not lens focusing in its returned abstract. General ocelli/lens essays name no Sorghastrum measurement, while any demonstrated epidermal focusing would belong to light. Poaceae review returns general photoreceptor reviews10.1146/annurev-arplant-042809-112259/10.1111/tpj.70817 and other organisms, no target measurement. No page/fullpaper fetch, evidence, credentials/proxy/TLS/permission change, purchase or engineering/global-state edit. All raw successful search responses are scratch /workspace/work/w14-c11/Sorghastrum-web1–5.json, not committed.
+
+Mandatory real validator pending final checkpoint. Prior sunflower donor and Chenopodium taxonomy limits, legacy Hypochaeris encyclopedia-source caveat, conditional viable-leaf cupric elicitor applicability and all previous provenance persist.
+
+Worker14 final real mandatory gate printed **0 problems**. Parent confirmed shared c18 wanted10.1002/ece3.9157 expanded for Hypochaeris radicata and Achillea millefolium in commit8f4b794d, checked0problems. Adoption now has explicit shared wanted target metadata, not merely this progress note. No duplicate c11 line. Final own current86wanted/25searched; NEW32wanted/0searched/0evidence and3web-screened protocol-partial genera.17 untouched assigned genera remain, exact next **Packera**. All original wanted54/search25 line prefixes and previous progress content are preserved; only appended issue38 content changed. Stop at clean context boundary.
