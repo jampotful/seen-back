@@ -506,3 +506,21 @@ Queries actually run (connected web search; every returned title/snippet screene
 - `Aralia nudicaulis seed germination light dark`
 - `"Temporal Patterns of Nectar and Pollen Production in Aralia"`
 - `"Diurnal fluctuations of endogenous IAA content" aralia species`
+
+### Berteroa
+
+Web-query screen completed for round; full protocol remains partial while OpenAlex skipped. Official harvest_get/screen_candidates plus all77 displayed harvest titles/abstract starts and family alternatives checked. Adopted target light response corrected recheck-codex-b-fixed#2883 (UV-B10.5586/aa.2012.059); no redundant light pair. Nine new wanted leads include explicit target GA-germination treatment, light-germination studies, laser/ALAN experiment, target-confirmed drought-induced emissions and daily blooming primary title. Adopted existing c13#36 Factors determining diurnal dynamics...; harvest DOI10.5586/aa.2009.010 matches, target incana named in web snippet; coordinator notified instead of duplicate. New thesis and seed ecophysiology may overlap, provenance flagged for reader. Fagraea berteriana, Alyssum/Lobularia species, Centella, radish distillates and crop chloroplast studies are other taxa or extracts, not target measurements. Laser ALAN study belongs light response rather than demonstrated diel activity; Potentilla/Arabis/Iberis papers name other target genera. Life-history selfing title and pollen monograph remain unresolved broad harvest leads, no null claims. Eye hits lens-shaped seeds/epidermal taxonomy and animal lenses, no target focusing measurement. Brassicaceae review alternatives in harvest screened without cross-species carry; canon/global status checked. Germination/scent3-query call was reissued once only because combined tool output was truncated; retry result retained in scratch/session and all delivered snippets screened. No paper/page fetches, null rows or evidence.
+
+Queries actually run (connected web search; every returned title/snippet screened, fewer than20 whenever fewer delivered):
+
+- `Berteroa seed germination light dark`
+- `Berteroa germination gibberellin OR smoke OR dormancy`
+- `Berteroa floral scent volatiles`
+- `Berteroa flower opening time anthesis`
+- `hoary alyssum flower opening time anthesis`
+- `Berteroa volatile chemical signalling`
+- `hoary alyssum volatile chemical signalling`
+- `Berteroa epidermal lens cells eye`
+- `hoary alyssum epidermal lens cells eye`
+- `"Drought induces moderate" "Berteroa"`
+- `"Dynamics of blooming and insect visits" Brassicaceae`
