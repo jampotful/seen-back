@@ -1025,3 +1025,81 @@ Eye results show one-layer epidermis,stomata,trichomes,microscopy,pollen anatomy
 Worker23 executed **60connected queries** total (29Pteridium,31Lonicera;3Pteridium repetitions solely to recover truncated display). Exact next Asplenium remains entirely unstarted;its existing oa-9 chemical evidence must be adopted before fresh searches. Zanthoxylum target chemical remains species-specific as recorded above. Final checker/prefix validation follows this checkpoint.
 
 Final worker23 validation: actual required screen_candidates checker completed with **0 problems** at198wanted/23searched. AllJSONL parses;first159wanted lines are byte-for-byte7efadc6c and all23searched lines unchanged. git diff --check passed on owned files. Only owned wanted/progress paths changed;no evidence or paper assets. Context stop between Lonicera and entirely unstarted Asplenium. Asplenium oa-9 chemical includes queued A.ruta-muraria/A.scolopendrium assay-specific no-response results,plus other congeners;do not infer chemical carry to other queued Asplenium species.
+
+
+## 2026-10-27 — issue38 worker29 continuation
+
+### Asplenium web screen
+
+**New this worker:1 newly web-screened genus (Asplenium),21 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:219 wanted,23 searched.** First198 wanted and all23 searched prefix lines preserved. Asplenium is web-screened-for-round,**protocol-partial**,because all required uncached OpenAlex steps remain skipped after round-wide429. No null searched record or exhaustion claim. Prior first18/Pilea/Centrosema and new8 screens remain preserved. **11 genera remain;exact next Ipomoea**,then Nandina,Ligustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa.
+
+Preflight checked corrected-first accepted-name main_evidence,original queue,global wanted/searched,owner papers-status and canon before queries. Accepted oa-9#173–181 chemical records are assay/species-specific. Queued A.ruta-muraria/A.scolopendrium no-response to Pteridium antheridiogen are adopted without repeat source or whole-genus chemical carry. Queued A.trichomanes/A.platyneuron/A.ceterach still require their own chemical leads. Sweep-5#21 is an old3query compound screen,not current paired-trait web completion. Animal-eye canon establishes no plant measurement;fern photoreceptor/transcriptome canon does not establish target physiology from gene presence.
+
+Cloud-environment-runtime skill applied;current connected network unrestricted/enforced,no VPN. Official read-only harvest_get.py and screen_candidates.py succeeded using authorized supported networking,reporting **Asplenium in no harvest run yet/not in the harvest**. Therefore no cached Asplenium query/abstract/citation result exists to adopt;not a failed query or successful0hits. No uncached OpenAlex request made. No source/page fetch,evidence,app checks,cache write,operational/gates/branch edit,proxy change or new permission request. Earlier mixed network/scratch-write review rejection respected and not retried/bypassed.
+
+Required10(e)3searches first,then scientific/common4trait pairs,family review,fern spore/diel refinements and actual-lead metadata/method clarifications. **47 connected queries**,in exact execution order:
+- `Asplenium seed germination light dark`
+- `Asplenium germination gibberellin OR smoke OR dormancy`
+- `Asplenium jasmonate herbivore`
+- `"Asplenium" flower opening time anthesis`
+- `"spleenwort" flower opening time anthesis`
+- `"Asplenium" eye type lens-like epidermal cells`
+- `"spleenwort" eye type lens-like epidermal cells`
+- `"Asplenium" light photoperiod phototropism`
+- `"spleenwort" light photoperiod phototropism`
+- `"Asplenium" volatile chemical hormone response`
+- `"spleenwort" volatile chemical hormone response`
+- `Aspleniaceae photoreceptor review`
+- `"Asplenium" spore germination growth regulators`
+- `"Asplenium" diurnal circadian stomata spore release`
+- `"Asplenium platyneuron" hormone germination`
+- `"Do fern gametophytes have the capacity for irradiance acclimation" doi`
+- `"Lipid Fatty Acid Profile of Asplenium" 2024`
+- `"Spore germination and gametophyte development in three species of Asplenium"`
+- `"Effects of Light upon the Germination of Spores of Ferns I"`
+- `"Spore Germination and Gametophyte Development" "Asplenium" DOI 1994`
+- `"Light, rather than circadian rhythm" doi 2023`
+- `"Volatile emissions of six New Zealand" 2020 doi`
+- `"Leaf physiological and structural plasticity of two Asplenium"`
+- `"Rehydration Process in Rustyback Fern" headspace samples`
+- `"Asplenioideae Species as a Reservoir" fresh leaves`
+- `"Species-specific stomatal ABA responses" "Asplenium" 2023`
+- `"Asplenium trichomanes" "antheridiogen"`
+- `"Asplenium trichomanes" hormone response germination`
+- `"Asplenium ceterach" gibberellin OR auxin OR elicitor`
+- `"Effects of Light upon the Germination" "Oohusa" 1954`
+- `"Asplenium platyneuron" "Patterson" "Freeman" 1963`
+- `"Aspects of spore release of Asplenium ruta-muraria"`
+- `"Role of Light-Induced Membrane Potential Changes" Asplenium`
+- `"Phytochrome Control of Germination" "Asplenium" 1971`
+- `site:pakbs.org "In vitro propagation of bird" "2008"`
+- `"The Role of Light-Induced Membrane" "10.1093"`
+- `"Asplenium" "Patterson" "Growth" "1963"`
+- `"ASPLENIUM AND PTERIS FERN SPORE GERMINATION"`
+- `"Standardization of spore germination technique in Asplenium nidus"`
+- `site:pmc.ncbi.nlm.nih.gov/articles/PMC8301159/ "cut" "fronds"`
+- `"In vitro propagation of bird’s nest fern" "Khan"`
+- `"Asplenium" "Patterson" "Freeman" "Effects"`
+- `"Effects of Light upon the Germination" "10.15281"`
+- `"Rehydration Process in Rustyback Fern" "fronds" "collected" "jars"`
+- `"Asplenioideae Species as a Reservoir" "solid" "cut"`
+- `"Photoperiodic control of growth and reproduction in non-flowering plants" "2025" authors`
+- `"Effect of Light Quality on the Composition" "10.1104"`
+
+All exposed returned titles/snippets and indexed original abstracts read at actual delivered extent;no20-results claim when fewer supplied. One display-truncated response section recovered from session store without repeat query. Some exact-title results automatically expose long original-source passages;these remain indexed search results,not direct paper fetches or evidence. No new service refusal;OpenAlex429,MDPI429,UChicago403,SANBI403 remain skipped. Returned OpenAlex/MDPI/UChicago/SANBI snippets are incidental engine results,not direct requests. No banned mirror,ResearchGate,Wikipedia,Scribd,Studocu,encyclopedia or unauthorized host opened/used as primary source;legcat.gov.ns.ca publisher mirror left unopened.
+
+**Cross-unit adoptions without duplicate:**harvest-c10#122,10.1007/s11515-015-1342-6,originalHEP review explicitly tables A.nidus red/far-red germination and cites A.ruta-muraria germination;harvest-c15#38,10.15281/jplantres1887.67.193,originalJ-STAGE abstract explicitly names Asplenium illuminating-period dependence (species not exposed). Coordinator notified for owner-row expansion. Existing2021antheridiogen review already read globally,no rerequest.
+
+Added21 globally absent candidates after DOI/URL/Unicode-preserving-title/owner-status checks. Target light leads:2012irradiance acclimation10.1007/s10535-012-0097-z (trichomanes/scolopendrium/Ceterach officinarum mapping);2025spectral-lipid response10.1002/cbdv.202402260 (2024online distinct);2019field sun/shade plasticity (trichomanes/ceterach);1999target light-induced membrane/guttation10.1093/oxfordjournals.pcp.a029516,with applied ion-channel/proton-pump inhibitors also a chemical candidate;2025photoperiod review10.1093/jxb/erae471 explicitly describes target platyneuron experiments,citingPatterson/Freeman1963. Original-study details unresolved rather than invented.
+
+Congener leads remain species-specific:2023A.inaequilaterale gas exchange/diel-versus-constant-light10.1093/plphys/kiad036;2020A.bulbiferum/oblongifolium JA/herbivory living emissions10.20417/nzjecol.44.5;2023target A.scolopendrium ABA10.1111/nph.19215;1971A.nidus phytochrome germination10.1104/pp.48.1.100;1985A.australasicum grown under altered light10.1104/pp.78.3.561;2010A.nidus callose inhibitor/stomatal study10.1111/j.1469-8137.2010.03206.x (intact versus excised eligibility unresolved). A.gas-exchange no-rhythm result is not carried to any queued species.
+
+Mandatory10(e)germination titles retained:1994three-target Pangua/Lindsay/Dyer10.1006/anbo.1994.1073;1976Kofranek UC Extension Asplenium/Pteris light requirement (species unresolved);A.nidus standardization (original metadata unverified);2008Khan/Raziq/Kayani PJB spore culture;Chinese A.nidus6-BA/NAA propagation10.16590/j.cnki.1001-4705.2021.05.084;CSIC A.adiantum-nigrum nanoceria germination;ActaHort Mindanao A.nidus spore cultures;Embrapa A.nidus in-vitro germination;LaPlata A.dareoides germination. Fixed culture light,temperature/nutrition/toxicity and germination observation alone are not proven sensed cues;eligibility explicit for intake. Unexposed authors/year/DOI remain empty/null,not derived from URL,DOI suffix or approximate search age.
+
+**Emission-method fork:**2021target ceterach rehydration/VOC sourcePMC8301159 is retained with explicit eligibility hold:original indexed methods describe collected dormant mature sporophytes revived in jars and frond headspace monitoring,but attachment/living-signal versus removed-frond stress chemistry is unresolved. Water response and VOC composition do not by themselves establish chemical sensing. French Asplenioideae/fern perfumery profiles expose fresh aerial-part chemistry without a living signal test;no extra request. Target extracts tested on rat gastric muscle/human estrogen/cancer and distilled/extracted preparations fail10(a). Endogenous hormone abundance is not applied-cue response.
+
+Eye results are epidermal cell/stomatal taxonomic anatomy,hand lenses/microscopy,pectic wall protuberances,iridescent structural colour and medicinal human eyes;none establishes plant eyes,and any actual focusing belongs under light10(b). Ferns have spores,not anthesis. Seasonal spore maturity,days-to-germination and long-day growth are not within-day timing. Spore-release title lacked exposed daily timing,so not requested merely from physical release. Actual congener diel/constant-light source retained without target carry. No new negative while API steps are incomplete. Target platyneuron/ceterach chemical response remains unresolved despite congenerJA/ABA;no absent-trait declaration.
+
+Routine dedupe correction before commit:first append was stopped before writing by the existing1954c15DOI. A later ASCII-only title-normalization false match on Chinese title was recognized immediately;direct DOI/Unicode-preserving exact-title/URL checks found no match,and that candidate was added correctly. No old row changed. Final checker/prefix validation follows.
+
+Worker29 Asplenium validation:current required screen_candidates checker printed **0 problems** at219wanted/23searched. All JSONL parses;first198wanted lines byte-for-byte0702f379 and all23searched unchanged;git diff --check passed. Only own wanted/progress paths edited,no evidence/paper assets. Context checkpoint between completed Asplenium web screen and entirely unstarted Ipomoea;11remain.
