@@ -1171,3 +1171,37 @@ Exact actual web queries, in execution order:
 All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Cyanthillium-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
 
 NEW this genus: 10 wanted,0 searched,0 evidence.
+
+
+## 2026-10-27 — issue38 worker27: Hexastylis
+
+No substantive target evidence/wanted under Hexastylis or Asarum arifolium; old sweep-47#21 thin screen preserved. Both mandatory tools report no harvest genus. Full scientific/common-name four-trait pairs and family review newly run,10(e) first. Family query returns general plant/fungal photoreceptors,insect colour reviews and Drosophila aristolochic-acid taste experiments; these do not measure Hexastylis perception. Primary light manipulation in target arifolia now retained without transferring heterophylla/shuttleworthii congener results.
+
+Chemical searches yielded distillation/phenol ethers/essential oils,crushed-root spicy odor and harvested volatile chemistry, not proven target living signalling10(a). Carrion/fungus-gnat pollination analogy and thrips eating flower epidermis do not establish a measured emitted signal in target; no Asarum species result silently carried. Cotton,Iva,broccoli,Nicotiana,oak and Arabidopsis MeJA findings are other taxa; culinary Zingiber ginger photoperiod/anthesis studies and Houttuynia heartleaf skincare are homonyms. Seed dormancy paper concerns heterophylla,not arifolia. Nursery shade habitat/stratification prescriptions are secondary and do not replace experimental originals.
+
+Daily flower opening remains unresolved: arifolia primary thermal paper has actual24-h/timed thermogenesis data and stays wanted; long-lived30-day anthesis alone is not daily activity. Eye searches return floral calyx openings,trichomes,ordinary leaf anatomy, mites/insect ocelli and human ginger eye products. Alabama ginger nickname owl-eye is colour pattern. Owner eye_type none; structural variegation/refraction hypothesis is not measured epidermal focusing, and any focusing belongs to light10(b). New congener variegation papers held under light without eye claim. Remaining10, exact next Hypoxis.
+
+Exact actual web queries, in execution order:
+- `web: Hexastylis seed germination light dark`
+- `web: Hexastylis germination gibberellin OR smoke OR dormancy`
+- `web: Hexastylis floral scent volatiles`
+- `web: Hexastylis light photoperiod phototropism`
+- `web: heartleaf ginger light photoperiod phototropism`
+- `web: Hexastylis volatile emission herbivore induced response methyl jasmonate`
+- `web: heartleaf ginger volatile emission herbivore induced response methyl jasmonate`
+- `web: Hexastylis flower opening time anthesis`
+- `web: heartleaf ginger flower opening time anthesis`
+- `web: Hexastylis eye type epidermal focusing`
+- `web: heartleaf ginger eye type epidermal focusing`
+- `web: Aristolochiaceae photoreceptor review`
+- `web: "Hexastylis" light shade experiment`
+- `web: "Epicotyl Dormancy" "Hexastylis"`
+- `web: "Asarum arifolium" scent germination`
+- `web: "Epicotyl dormancy in the mesic woodland herb" DOI`
+- `web: "The role of photosynthetic response to environmental variation"`
+- `web: "Hexastylis" "floral scent" pollination`
+- `web: "Hexastylis" "gibberellin"`
+
+All delivered titles/snippets read (up to20/query where delivered, no invented count). Raw results in work/w27-c12/Hexastylis-web*.json. Mandatory harvest_get and screen_candidates ran; global evidence/audit/corrected, wanted, searched, papers-status and canon preflight checked. New wanted normalized title/DOI duplicate and owner-status checks found no duplicate among appended rows. No source fetch, evidence or null searched rows; skipped OpenAlex429 leaves full protocol partial. Carried source skips MDPI429,UChicago403,SANBI403 respected; no new refusal.
+
+NEW this genus: 6 wanted,0 searched,0 evidence.
