@@ -325,3 +325,31 @@ Screened returned titles/snippets/passages as delivered (not an asserted 20 per 
 Diel hits give flowering months or bud counts, not opening clock hours. Eye hits describe taxonomic epidermis/stomata/trichomes and naked-eye microscopy; none displayed optical focusing, and owner none rule applies. Wild basil also returned Ocimum gratissimum, O. basilicum and O. campechianum; these are other genera and do not provide Clinopodium trait coverage. Cheminopodium/Chenopodium germination and Conopodium scent are likewise spelling/taxon mismatches. Essential oils, alcoholates, extract effects on neutrophils and pharmacology review are removed-tissue/animal work excluded under 10(a). Family review search returned general photoreceptor and medicinal-light reviews, with displayed measurements in Salvia, Scutellaria and other genera; no Clinopodium-specific result adopted. OpenAlex skipped; no null rows, evidence or fetched pages.
 
 Worker 48 running counts: 2 new genera web-screened, 0 full protocol complete, 0 searched, 15 wanted added, 0 evidence. Cumulative batch 14 web-screened and 53 wanted; 26 remain, exact next Hylocomium.
+
+### Hylocomium — web screening finished; protocol partial
+
+Ran harvest_get.py and screen_candidates.py and checked global evidence/wanted/searched, canon and owner status for actual H. splendens. Existing sweep-20:11 light evidence explicitly reports ecological shade preference, not an experimental light-response curve, so new direct light-upgrade leads were retained. No chemical/diel evidence found for the actual species in preflight.
+
+Harvest successful query order: `Hylocomium phytochrome photoreceptor`; `Hylocomium light perception`; `Hylocomium phototropism`; supplements `Hylocomium flower opening time`; `Hylocomium nyctinasty` (zero hits); `Hylocomium anthesis`; `Hylocomium pollination biology`; `Hylocomium volatile signalling`; `Hylocomium epidermal lens cells`; `Hylocomium epidermal focusing leaf optics`; family `Hylocomiaceae photoreceptor review`. All 92 supplied titles/abstract starts were read, including the middle range from the saved descriptor after its first display truncated. Harvest flower/anthesis/pollination words are biologically inappropriate for moss and do not constitute a relevant life-stage search.
+
+Exact web queries in execution order (spore/protonemal and spore-release/circadian alternatives replace seed/flower words because moss has neither seeds nor flowers):
+- `web: Hylocomium spore germination light dark`
+- `web: Hylocomium spore germination gibberellin OR dormancy OR protonema`
+- `web: Hylocomium jasmonate herbivore`
+- `web: "Hylocomium" diel circadian spore release photoperiod`
+- `web: "stair-step moss" diel circadian spore release photoperiod`
+- `web: "Hylocomium" eye type epidermal lens cells`
+- `web: "stair-step moss" eye type epidermal lens cells`
+- `web: "Hylocomium" chemical signalling volatile response`
+- `web: "stair-step moss" chemical signalling volatile response`
+- `web: Hylocomiaceae photoreceptor review`
+- `web: "Hylocomium" light perception phototropism spore germination`
+- `web: "stair-step moss" light perception phototropism spore germination`
+
+Screened returned titles/snippets/passages as delivered, without claiming 20 per query. 6 wanted added: moss chemical secretion recruiting Nostoc, heterocyte stimulation (living versus extract fork), species-specific subarctic VOC emission, CO2/light response, photoprotection, and isoprenoid exchange (community-attribution fork). No cue/physiology is carried from Hamatocaulis, Sphagnum, Physcomitrium/Physcomitrella, Pleurozium or other moss genera. 
+
+The harvest Bryophytes can recognize their neighbours through volatile organic compounds experiment names Hamatocaulis/Sphagnum in the supplied abstract, not Hylocomium. Seasonal nitrogen-fixation/nifH papers measure associated cyanobacteria and do not establish moss chemical sensing. Interannual and Seasonal Dynamics of Volatile Organic Compound Fluxes From the Boreal Forest Floor (10.3389/fpls.2019.00191) has a diurnal keyword but community-floor flux is not a Hylocomium diel rhythm without species attribution. Autoclaved-gametophyte fungal degradation is not a living moss response; heavy-metal biomonitoring can measure tissue accumulation without sensing; extracted moss antibacterials are excluded under 10(a). Family-review hits were general animal/fungal photoreceptors and an uninformative Acta Biologica volume, not a species measurement. Eye results were cell anatomy, taxonomy and moss photographs; owner none reading applies.
+
+Additional unresolved light leads: Sporophyte production in the clonal moss Hylocomium splendens: the importance of shoot density (only ResearchGate listing returned; not opened/requested there), Annual production of some forest mosses as a function of light available for photosynthesis (EurekaMag listing only, https://connect.eurekamag.com/research/000/291/000291940.php), and an unidentified MEDDELANDEN volume at https://pub.epsilon.slu.se/9960/1/medd_statens_skogsforskningsinst_043_01.pdf. Titles/metadata require authorized primary verification. USDA review 10.2737/feis-species-review-hylspl states photoperiod seems not a factor in a displayed passage; its species/account source context should be checked against the earlier ecological light record. No daily clock-hour result inferred from seasonal spore/segment production. OpenAlex skipped; no null rows or evidence.
+
+Worker 48 running counts: 3 new genera web-screened, 0 full protocol complete, 0 searched, 21 wanted added, 0 evidence. Cumulative batch 15 web-screened and 59 wanted; 25 remain, exact next Holodiscus.
