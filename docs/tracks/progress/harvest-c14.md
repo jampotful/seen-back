@@ -587,3 +587,21 @@ Queries actually run (all delivered titles/snippets screened; fewer than20 whene
 - `"Geum urbanum" "АНТЭКОЛОГИЯ"`
 - `"Role of dispersal date" "light" Geum`
 - `"Geum rivale" "Geum urbanum" "response of germination"`
+
+### Calluna
+
+Web-query screen completed for round, full protocol partial while OpenAlex skipped. Official harvest_get/screen_candidates,112 displayed harvest titles/abstract starts and15 Ericaceae alternatives reviewed. Global canon/evidence/wanted/status preflight adopted actual vulgaris light response sweep-15#10/its upgrade wanted2 (10.17660/ActaHortic.1987.205.32), leaving original abstract-versus-direction caveat; no redundant light pair. Added13 wanted, including target smoke/ash and GA germination, light-regime seeds, direct heather headspace emissions, herbivory×UV, long-term experimental emissions and ontogenetic volatiles primary title. Negative smoke/ash outcomes retained. Seeds2013/2023 titles retained per10(e) with incidental photoperiod versus experimental light fork explicit. Honey extracts, essential oils, medicinal tissue chemistry excluded10(a). Calluna bud-blooming closed corollas/genetic mapping are developmental phenotype, not daily timing; the many anthesis dates and meristem stage descriptions supply no daily hour. Forest-floor VOC flux10.3389/fpls.2019.00191 and soil VOC10.1007/s11104-019-04092-z remain community-source pointers, not Calluna species emission/rhythm assignments; dormant floral monograph pointer https://edepot.wur.nl/371368 shows seasonal timing only. Self-incompatibility10.1006/anbo.1999.0874 is a pollen interaction fork, no chemical perception assumed. Eye hits tapetal/anther walls, dye staining, fungal rhizoids or animal lenses; no target epidermal focusing established. Ericaceae family web alternative inherited from completed earlier Vaccinium screen, supplemented with official Calluna family titles; no Vaccinium/Erica physiological carry.
+
+Queries actually run (all delivered titles/snippets screened, fewer than20 whenever fewer delivered):
+
+- `Calluna seed germination light dark`
+- `Calluna germination gibberellin OR smoke OR dormancy`
+- `Calluna floral scent volatiles`
+- `Calluna flower opening time anthesis`
+- `heather flower opening time anthesis`
+- `Calluna volatile chemical signalling`
+- `heather volatile chemical signalling`
+- `Calluna epidermal lens cells eye`
+- `heather epidermal lens cells eye`
+- `"Responses of dormant heather" seeds`
+- `"Calluna" "volatile emissions suggest"`
