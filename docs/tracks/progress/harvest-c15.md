@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 5 genera web-screened, 0 protocol-complete, 0 search records, 27 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 6 genera web-screened, 0 protocol-complete, 0 search records, 37 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -103,4 +103,40 @@ Exact web searches (in order):
 - web: ocotillo chemical response volatile signaling
 - web: Fouquieriaceae photoreceptor review
 
-Next genus: Epilobium; 35 genera remain unreviewed.
+
+
+### Epilobium: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates read; run 4 plus supplements has 141 works. Titles and stored abstract starts screened, including the tool candidates. Existing main light record oa-13b#423 (intermittent irradiation interval, generic Epilobium) adopted; existing wanted plant-1#97 requests the same Yokohama paper for Hypericum, not duplicated. Species-level photoperiod experiments, cytokinin micropropagation, zinc response and herbicide response leads retained; reproductive ecology with no abstract retained as a diel lead. Web adds an explicit gibberellic acid experiment and glandular-activity study for method review. No source fetched.
+
+Harvest chemical false matches include Phaseolus lunatus indirect defence, Ipomopsis drought floral volatiles, Fagopyrum drought emissions, microbial nectar volatiles with bee responses, orchid isolation, general floral genes and Capparis scent. Extract/tea phytochemistry in Epilobium is excluded under 10(a); leaf gland activity is left to reader rather than assumed to measure signalling. Eye candidates are soybean anatomy, Clarkia bull's-eye floral patterns, a horticultural eye-catching title and neutrophil eyes; none reports Epilobium focusing. Diel false matches include Brassica, squash, Delphinium, bromeliad anthesis and human circadian rhythms. No null record because common-name OpenAlex step remains unavailable. Family review was already run in harvest and screened; not repeated. Plant canon as above. Common name willowherb verified by NC State Extension.
+
+Successful harvest queries, verbatim and in recorded order:
+- Epilobium phytochrome photoreceptor
+- Epilobium light perception
+- Epilobium phototropism
+- Epilobium flower opening time
+- Epilobium nyctinasty
+- Epilobium volatile signalling
+- Epilobium photoperiod
+- Epilobium circadian rhythm
+- Epilobium anthesis
+- Epilobium pollination biology
+- Epilobium epidermal lens cells
+- Epilobium epidermal focusing leaf optics
+- family review: Onagraceae photoreceptor review
+
+Exact web searches (in order):
+- web: Epilobium seed germination light dark
+- web: Epilobium germination gibberellin OR smoke OR dormancy
+- web: Epilobium floral scent volatiles
+- web: Epilobium photoperiod phototropism light response
+- web: willowherb photoperiod phototropism light response
+- web: Epilobium flower opening time anthesis
+- web: willowherb flower opening time anthesis
+- web: Epilobium plant ocelli lens-like epidermal cells eye
+- web: willowherb plant ocelli lens-like epidermal cells eye
+- web: Epilobium chemical response volatile signaling
+- web: willowherb chemical response volatile signaling
+
+Next genus: Athyrium; 34 genera remain unreviewed.
