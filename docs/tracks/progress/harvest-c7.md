@@ -402,3 +402,41 @@ Exact executed web queries (14 distinct;germination pair first):
 This worker cumulative5 new web-screened genera,32 wanted additions,0 searched,0 evidence. Current144 wanted/29 searched vs112/29 baseline. Nekemias adopted0new. Four newly eligible genera remain:Mitchella,Euphorbia,Eupatorium,Juniperus. Next Mitchella. Historical coverage30 prior+5 new+1 adopted=36/40; current full-protocol/exhaustion0.
 
 Taxodium checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Mitchella checkpoint
+
+Newly web-screened genus6,full protocol partial. Required tools run; all93 distinct cached works,including family/citation corpus,read from every title/all available abstract text (initial large display was reread in bounded sections after truncation). Harvest run4 plus supplements14/20:11 successful genus queries plus family review,no failed step; cached citation10.1590/1519-6984.281402 returned0. Family-review alternative Phylogeny and classification of the coffee family:Overview and outlook10.1002/tax.13167 used from web snippets as taxonomy context,not a target photoreceptor measurement. Canon,corrected-first accepted-name evidence,global wanted/search and statuses checked. Existing partial scent evidence recheck-5-fixed:15/sweep-11:1 preserved; no chemical pair or duplicate scent request. Nectar/floral VOC changes over1–5 days are ageing,not within-day rhythm. Partridgeberry often confuses Vaccinium/common-name cranberry and Mitchella winery,explicitly excluded.
+
+Five provisional light wanted leads assembled before global dedup:direct target light-environment/lightfleck responses,experimental-shading species table,propagation thesis and germination-book trail. No invented species-level community effect; metadata conflicts explicit and years null when uncertain. Intumescence review10.7831/ras.12.0_182 describes hypertrophied cells,not plant eyes; butterfly10.1101/2023.10.05.561098 and pollinator-vision10.1093/aob/mcae213 concern animal vision. Plant eye_type none,focusing belongs to light. No credible new within-day lead established by paired searches; no null written because API steps incomplete. No paper/source fetched/evidence written.
+
+Exact cached successful queries in source order:
+- `Mitchella phytochrome photoreceptor`
+- `Mitchella light perception`
+- `Mitchella phototropism`
+- `Mitchella flower opening time`
+- `Mitchella nyctinasty`
+- `Mitchella anthesis`
+- `Mitchella pollination biology`
+- `Mitchella photoperiod`
+- `Mitchella circadian rhythm`
+- `Mitchella epidermal lens cells`
+- `Mitchella epidermal focusing leaf optics`
+- `Rubiaceae photoreceptor review`
+
+Exact executed web queries (12 distinct;germination pair first):
+- `Mitchella seed germination light dark`
+- `Mitchella germination gibberellin OR smoke OR dormancy`
+- `Mitchella floral scent volatiles`
+- `Mitchella light response photoperiod`
+- `partridgeberry light response photoperiod`
+- `Mitchella flower opening time anthesis`
+- `partridgeberry flower opening time anthesis`
+- `Mitchella plant ocelli lens-like epidermal cells eye`
+- `partridgeberry plant ocelli lens-like epidermal cells eye`
+- `Rubiaceae photoreceptor review`
+- `"The propagation and culture of Mitchella repens"`
+- `"Mitchella repens" "light" "photosynthesis" study`
+
+Checkpoint new wanted count after dedup and cumulative counts follow below. Three newly eligible genera remain:Euphorbia,Eupatorium,Juniperus. Next Euphorbia. Historical coverage30 prior+6 new+1 adopted=37/40; full protocol remains partial for current work.
+
+Mitchella added5 wanted; this worker cumulative6 new web-screened genera,37 wanted additions,0 searched,0 evidence. Current149 wanted/29 searched vs112/29 starting baseline. Gate printed `0 problems`; owned-path `git diff --check` passed before commit.
