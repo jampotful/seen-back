@@ -6,7 +6,7 @@ Desk screening only: no pages fetched and no evidence records written. OpenAlex 
 
 ### Tripleurospermum: web-screened, protocol partial
 
-Required harvest_get and screen_candidates both report no harvest. Checked queue, main/corrected evidence and prior wanted; no existing genus measurement or wanted lead found. Canon checked: plant light compilations remain unavailable/in-hand false; plant chemical communication compilations named in canon also not in hand. No plant eye or applicable Asteraceae diel compilation found.
+Required harvest_get and screen_candidates both report no harvest. Checked queue, main/corrected evidence and prior wanted; no existing genus measurement or wanted lead found. Canon checked: plant light compilations remain unavailable/in-hand false; plant chemical communication compilations named in canon also not in hand. No plant eye compilation applies; broad angiosperm diel/photoperiod compilations are listed in canon but are not in hand.
 
 Germination searches found light/nitrate germination in Matricaria inodora (Tripleurospermum synonym), T. maritimum light/chemical trials, T. pichleri GA3/chilling, and T. hygrophilum growth regulator comparisons: four wanted leads. Tissue oil/extract profiles (insularum, conoclinium, decipiens, disciforme, parviflorum, inodorum) excluded from chemical leads under owner reading 10(a). Dry aerial-part allelopathic extract bioassay measures receiver plants rather than a living Tripleurospermum response. Ocelli review snippets concern general plant anatomy; the genus phytochemistry review describes epidermal shape, no focusing measurement. Diel results show seasonal flowering and days to anthesis, no daily opening hours. Family review search returned broad photoreceptor reviews, no Asteraceae-specific genus measurement. OpenAlex name searches remain skipped/unavailable; no null row written.
 
@@ -140,3 +140,5 @@ Exact web searches (in order):
 - web: willowherb chemical response volatile signaling
 
 Next genus: Athyrium; 34 genera remain unreviewed.
+
+Stopping cleanly between genera after the large Epilobium harvest screening consumed this worker context. Next genuinely unreviewed genus is Athyrium. Full OpenAlex protocol remains unavailable for the six web-screened genera. Final round additions: 37 wanted leads, 0 searched rows, 0 evidence records; 34 genera unreviewed. Paper-status scan found no matching owner n/a, partial or full source among newly requested lines. Known queue species record counts added to wanted ranking fields; zero denotes taxa absent from this queue.
