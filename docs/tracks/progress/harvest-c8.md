@@ -1,5 +1,69 @@
 # harvest-c8 progress
 
+
+
+### Issue38 worker18 — Sphagneticola web screen and context checkpoint
+
+**Worker18 totals:2 newly web-screened genera (Rivina,Sphagneticola),13 wanted lines,0 searched lines,0 evidence/measurement closures. Actual harvest-c8:159 wanted,23 searched.** Original146 wanted and all23 searched prefix lines preserved. Both new screens remain **protocol-partial**, with required uncached OpenAlex steps skipped after round-wide429; no null searched records or exhaustion claim. Rivina's existing Vora1989 lead adopted without duplication; Sphagneticola's accepted light evidence adopted. Prior Pilea/Centrosema adoption remains preserved. **14 genera still need new screening: Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum,Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. Exact next Pteridium,unstarted.** Stop between entries at this worker's context boundary; no active partial genus. Zanthoxylum external-3 diel/eye/light must be adopted before its chemical remainder.
+
+Before queries checked original queue,global searched/wanted,papers-status,canon and corrected-first accepted-name main_evidence. Accepted S.trilobata light response is already in recheck-1-fixed#10 and recheck-quotes-3-fixed#134,10.32615/ps.2022.051; adopted without repeat light pair or duplicate source. Original target's three residual gaps are diel,eye_type,chemical. Sweep-25#28 is a single thin combined query,not a completed research protocol; it explicitly saw PMC4111383 only by title and missed the current chemical-recipient candidate below. The official Novon taxonomic harvest10.2307/3392050 verifies Wedelia trilobata within Sphagneticola; government Queensland/NSW names Singapore daisy.
+
+Official harvest_get.py and screen_candidates.py succeeded on current ci using supported authorized networking. Read **92 unique titles and full stored abstract starts**,including15 family works,from run6 with supplements12/20 and family17. Read-only works_of slices recovered omitted official display stretches,including indices0–2. One initial read-only list/dict inspection error was corrected before records; it was not a network refusal or a failed harvest step. Harvest has no failed step; citation chase on10.1016/j.tree.2009.09.010 is successful0hits. Successful cached queries in actual order:
+- `Sphagneticola phytochrome photoreceptor`
+- `Sphagneticola light perception`
+- `Sphagneticola phototropism`
+- `Sphagneticola flower opening time`
+- `Sphagneticola nyctinasty`
+- `Sphagneticola anthesis`
+- `Sphagneticola pollination biology`
+- `Sphagneticola volatile signalling`
+- `Sphagneticola epidermal lens cells`
+- `Sphagneticola epidermal focusing leaf optics`
+- `Asteraceae photoreceptor review`
+
+Required10(e) searches first,then scientific/common diel,eye,chemical pairs and family review;targeted old-name and actual-lead metadata searches followed. Exact31 connected queries in execution order:
+- `Sphagneticola seed germination light dark`
+- `Sphagneticola germination gibberellin OR smoke OR dormancy`
+- `Sphagneticola jasmonate herbivore`
+- `"Sphagneticola" flower opening time anthesis`
+- `"Singapore daisy" flower opening time anthesis`
+- `"Sphagneticola" eye type lens-like epidermal cells`
+- `"Singapore daisy" eye type lens-like epidermal cells`
+- `"Sphagneticola" volatile chemical hormone response`
+- `"Singapore daisy" volatile chemical hormone response`
+- `Asteraceae photoreceptor review`
+- `"Sphagneticola" "seed" "germination"`
+- `"Roles of hormone signaling on defense responses"`
+- `"The Synergistic Effects of Jasmonic Acid" "Sphagneticola"`
+- `"Sphagneticola" "Atlas of pollen and plants"`
+- `"Sphagneticola" "Divergence of Phyllosphere" "sampling"`
+- `"Inhibitor treatment and subcellular localization analysis"`
+- `"Active defense strategies for invasive plants"`
+- `"Sphagneticola" "own seeds"`
+- `"Atlas of pollen and plants used by bees" Embrapa`
+- `"Sphagneticola" "germination" -"extract" -"lettuce"`
+- `"Wedelia trilobata" "seed germination"`
+- `"Atlas of pollen and plants used by bees" "2018"`
+- `"Roles of hormone signaling" "2025" DOI`
+- `"Light limitation and litter of an invasive clonal plant"`
+- `"The Synergistic Effects of Jasmonic Acid" doi`
+- `"Potential Seawater Dispersal of Cypselas"`
+- `"Atlas of pollen and plants used by bees" site:rcpol.mn.ufrj.br`
+- `"Potential Seawater Dispersal of Cypselas" site:jstage.jst.go.jp`
+- `"Pathogen resistance in Sphagneticola trilobata"`
+- `"Different Responses of an Invasive Clonal Plant Wedelia trilobata"`
+- `"Atlas of pollen and plants used by bees" "ISBN"`
+
+All exposed titles/snippets and returned indexed abstracts read;long response tails recovered from session store,no repeat web query for display recovery. No claim of20 when fewer delivered. No direct source/page fetch,evidence,app checks,new service refusal,paid/API fallback or proxy change. OpenAlex429,MDPI429,UChicago403,SANBI403 remain skipped; incidental indexed results for those hosts were not direct fetches. ResearchGate,Scribd,academia.edu,library mirrors and unauthorized hosts were not opened or used as primary sources. Only allowed wanted/progress files edited; earlier review-refused scratch-write command not repeated or bypassed.
+
+Added8 globally absent candidates after exact DOI/normalized-title/URL and owner n/a checks:2014 living target seeds responding to conspecific extract/light10.1093/aob/mcu075;2016 applied GA3 target clonal growth10.1007/s10886-016-0670-6;2025 continuous monoterpene emission/inhibitor10.1016/j.jare.2025.01.047;2025 JA/AMF/herbicide10.3390/microorganisms13122817;2025 hormone response to pathogen/herbivore10.1016/j.pmpp.2025.102722;2022 infection/recognition differential-response10.1007/s10709-021-00147-1 (chemical cue vs mechanical injury unresolved);2013 seawater-exposed cypsela germination10.18942/apg.KJ00008580364 (viability versus cue eligibility unresolved);2020 RCPol pollen/plant atlas p132 explicitly listing target diurnal anthesis. Exact original publication dates verified;2013 versus2017 J-STAGE upload and2022 versus2021 DOI suffix kept distinct. Atlas first-edition2020/ISBN confirmed from catalog and original palynological society announcement;2018 query was a hypothesis,not the date adopted. Unknown hormone/JA-source authors remain empty rather than inferred. No response values,evidence or numeric/species carry logged. All leads await intake.
+
+Important exclusions:2024 phyllosphere VOC source10.3390/genes15070955 uses powdered samples in salt solution per original indexed methods;excluded as removed-tissue chemistry10(a),not living signal emission.2024 active-defense comparison10.3389/fpls.2024.1428752 compares baseline tissue composition and animal feeding/field distribution in exposed material;no target chemical-cue response established,so no extra request.2026 stage-dependent defense source exposes mechanical wounding and donor extracts tested on lettuce/pakchoi,not a demonstrated chemical recipient response in target;no extra request. Extracts/oils,cosmetic fibroin preparations,nanoparticle synthesis,mouse asthma/human cancer work and other-species crop germination do not measure Sphagneticola chemical sensing. The2014 autotoxicity study is distinct because living target seeds themselves receive extract. Exposed fixed culture lighting,seasonal bloom and pollinator visit times are not plant daily timing. Ipomoea bahiensis anthesis is another genus; general family floral reviews supply no target carry. Eye candidates are human eye cosmetics,bee pupal eye colour and macular supplements; epidermal anatomy/papillae/microscope ocular terms are not plant eyes,any focusing belongs under light10(b). Atlas is a real diel lead,so no absence claim while it awaits intake. No null record for any trait while required API steps remain incomplete.
+
+This worker executed **53 connected queries** across the two new genera (22Rivina,31Sphagneticola),without quota refusal. Final checker/prefix validation and commit follow this checkpoint.
+
+Final worker18 validation: actual required screen_candidates checker completed with **0 problems** on159wanted/23searched. All JSONL parses. Eight new sources each match only their own global wanted line by normalized title/DOI; no owner n/a duplicate. First151 wanted lines are byte-for-byte ce8fb8eb,including the146-line handoff prefix;all23searched lines unchanged. Only owned wanted/progress files changed;no evidence or paper assets. Clean context stop between completed Sphagneticola web screen and entirely unstarted Pteridium.
+
 ## 2026-10-27
 
 **Current checkpoint:** 18/40 genera screened here through Melilotus;23 search records;181 wanted lines;0 evidence and measured closures. Worker48 final release: Cercis is next and unstarted. Pilea is complete in harvest-c4; reuse its provenance. Exactly21 genera require new work (listed at the final checkpoint below). No active partial genus. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. The48-worker stopping rule ends this continuation after the required final checker/commit.
