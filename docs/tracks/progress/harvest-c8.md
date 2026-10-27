@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 5/40 genera screened here (Albizia, Ambrosia, Diospyros, Rubus, Baccharis); 5 eye_type search records; 75 wanted lines; 0 evidence records; 0 cells closed by measurement. Morella is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving 34 genera requiring new work. Current service refusals remain OpenAlex429, MDPI429, UChicago403 and SANBI403; no further request made to these services. Worker16 stopped between Baccharis and Morella for fresh-context continuation.
+**Current checkpoint:** 8/40 genera screened here through Medicago; 8 search records; 108 wanted lines; 0 evidence and measured closures. Aesculus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving 31 genera requiring new work. OpenAlex429, MDPI429, UChicago403 and SANBI403 remain skipped. Worker24 continuing after Medicago.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -234,3 +234,39 @@ Added18 wanted lines after global DOI/title/URL and owner-mark checks. Direct le
 Initial duplicate check found10.1562/2006-02-27-ir-817 in corrected plant-fungus-slime, but inspection shows only a general Bryophyta abstract record, not a named Nephrolepis result. Retained a full-review upgrade wanted line because current Wiley snippet explicitly names N. auriculata red/blue stomatal response and no existing wanted or owner partial/n/a mark exists; authors/year/title are supplied by that existing source record. Bologna artificial-light thesis10.6092/unibo/amsdottorato/1714 is already wanted in c4; reused, no duplicate added. Unknown metadata stays empty. Tissue-extract phytochemistry, insecticidal extracts, human herbal masks and distilled-oil bioassays are not living fern responses under10(a); other-species lettuce/pepper signalling, Abies nephrolepis and W. nephrolepis bromeliad anthesis are not this fern genus. Nutrient-leachate time series do not show daily rhythm. Plant eye record individually screens all4 tool-listed eye candidates; cell shapes and hydathodes are not focusing measurements.
 
 Wrote1 eye_type record only. Actual current screen_candidates.check on the legitimate cached hg.load snapshot returned0 problems after the17 initial wanted additions, then again after retaining the full-review upgrade. No evidence, measured closure, gate change or app checks. Stop between genera for fresh-context takeover: Medicago is unstarted.
+
+## 2026-10-27 — worker24 continuation
+
+Completed Medicago screening. **This worker:1 genus,1 eye_type search record,9 wanted lines,0 evidence and measured closures. Cumulative harvest-c8:8 genera,8 search records,108 wanted lines,0 evidence and measured closures.** Pilea c4 coverage is preserved;31 genera need new work starting Aesculus,Cephalanthus,Bignonia.
+
+Read AGENTS.md first, exact worker24 assignment, current worker guide, original batch/queue order, round4-harvest.md, THOROUGH.md, BRIEF.md including Round2 and wanted/records, round3-sweep.md and all10 desk-screen points including plant10(e). Applied cloud-environment-runtime skill; environment status reports connected, unrestricted policy enforced, no configured identities/secrets. No branch/gates/#29/#30 or app checks changed. Cached official harvest_get.show and screen_candidates functions used legitimate hg.load data from coordinator-fetched ci55a1f658a687c5d355ae11d9eec65def211f4033, not a filtered thin-sweep completion shortcut. Medicago has run2,supplement12 and family-review run17, no failed steps. Read all126 unique titles and complete stored abstracts capped at700 characters, including all15 Fabaceae works. Citation steps:10.3389/fpls.2015.00207 returned35 hits/25 stored works;10.1016/j.tree.2009.09.010 returned2;10.1111/j.1744-7909.2007.00392.x returned0. Complete cached screen is work/harvest-c8/Medicago-full-screen.txt. No truncated output was treated as a complete screen; bounded subsequent reads recovered omitted portions.
+
+Successful cached queries, word for word in harvest order:
+- `Medicago phytochrome photoreceptor`
+- `Medicago light perception`
+- `Medicago phototropism`
+- `Medicago volatile signalling`
+- `Medicago photoperiod`
+- `Medicago circadian rhythm`
+- `Fabaceae photoreceptor review`
+
+Connected web searches, word for word in execution order:
+- `Medicago seed germination light dark`
+- `Medicago germination gibberellin OR smoke OR dormancy`
+- `Medicago floral scent volatiles`
+- `Medicago eye type`
+- `black medick eye type`
+- `Medicago chemical sense volatile response`
+- `black medick chemical sense volatile response`
+- `Medicago light photoperiod phototropism`
+- `black medick light photoperiod phototropism`
+- `Fabaceae photoreceptor review`
+- `Medicago epidermal lens cells focusing light`
+
+All exposed titles/snippets and returned abstracts screened, no query repeated. Complete raw results saved in Medicago-web0/1/2.txt under work; long results read in sections. Fewer than20 exposed results per individual query were not counted as20. Black medick is M. lupulina in the Ontario official identification result, the highest-weight queued species. No diel web pair was required: corrected main recheck-19-fixed already measures M. truncatula leaf-movement clock, preserved. The old sweep-4 two-query combined null and empty chased field are not completed coverage. Existing M. truncatula chemical/light evidence and M. sativa shade evidence oa-13b#126–129 were preserved and no additional wanted flood for their covered traits was made. All original unresolved species light/chemical/eye gaps were considered even though cached hg open-trait filtering drops eye_type. Global searched,wanted,status,corrected-first evidence and canon reviewed. No evidence logged.
+
+Added9 genuine leads after global DOI,normalized-title,URL/status checks. Strong targets: M. arabica/lupulina/falcata GA treatments in Improving Germination Rate of Medicago and Trifolium Species; M. polymorpha GA/nitrate treatments in annual medics; wild-medick germination light/dark treatments; M. sativa living root/seed response to extracts,pH,silicon; M. sativa salt physiological response10.3389/fpls.2016.00424; living floret photoperiod/volatile emission; M. sativa-complex Tenax floral emissions; and infection-induced volatile defense10.1002/cbdv.202501423. The1975 annual-medick photoperiod trial10.1071/ar9750831 has six species and requires table confirmation of unresolved queue members. Generic Medicago for-fields on the two comparative papers explicitly preserve that uncertainty. Floral sampling must establish attached/living material before acceptance; no result/magnitude is invented. Unknown years are null, other unknown metadata empty. M. sativa light germination/LED/sprout results were not newly requested because the species already has real light-response evidence; M. truncatula model hormone/clock/light papers similarly remain unrequested here.
+
+Existing wanted papers reused: audit-54 epidermal focusing10.1111/j.1399-3054.1989.tb05467.x; harvest-c12 focusing10.1111/j.1399-3054.1996.tb00674.x; plant-1 phototropism/photoperiod,shade and chemical-VOC papers; rescreen-2 Medicago weevil volatile source; canon legume review. Focusing belongs under sense_light_nonvisual under owner10(b), so those candidates are explicitly screened for eye_type. Removed-tissue trichome metabolomics10.3390/molecules26216473 and other isolated product/extract chemistry do not measure living response; Arabidopsis,tomato,rice,goat and other-genus family works do not support Medicago traits. Genomic associations alone and ordinary seasonal flowering dates are not response measurements. Family review10.1093/jxb/erag313 supplied real citation/review provenance without a source-page fetch.
+
+Wrote only1 eye_type negative under plant none reading; no light/chemical/diel null. No OpenAlex,MDPI,UChicago,SANBI request,source/fullpaper-page fetch,paid fallback,library mirror or unauthorized copy. Current actual screen_candidates.check, with legitimate serialized hg.load snapshot, printed **0 problems** before commit. Continuing Aesculus next.
