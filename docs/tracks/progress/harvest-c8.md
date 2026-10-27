@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-**Current checkpoint:** 8/40 genera screened here through Medicago; 8 search records; 108 wanted lines; 0 evidence and measured closures. Aesculus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving 31 genera requiring new work. OpenAlex429, MDPI429, UChicago403 and SANBI403 remain skipped. Worker24 continuing after Medicago.
+**Current checkpoint:** 9/40 genera screened here through Aesculus;9 search records;118 wanted lines;0 evidence and measured closures. Cephalanthus is next. Pilea is complete in harvest-c4 and its provenance must be reused, leaving30 genera requiring new work. OpenAlex429,MDPI429,UChicago403 and SANBI403 remain skipped. Worker24 stopped between Aesculus and Cephalanthus for fresh-context continuation.
 
 The following dated subsections retain the actual attempts and earlier counts as history; the checkpoint above is current.
 
@@ -270,3 +270,35 @@ Added9 genuine leads after global DOI,normalized-title,URL/status checks. Strong
 Existing wanted papers reused: audit-54 epidermal focusing10.1111/j.1399-3054.1989.tb05467.x; harvest-c12 focusing10.1111/j.1399-3054.1996.tb00674.x; plant-1 phototropism/photoperiod,shade and chemical-VOC papers; rescreen-2 Medicago weevil volatile source; canon legume review. Focusing belongs under sense_light_nonvisual under owner10(b), so those candidates are explicitly screened for eye_type. Removed-tissue trichome metabolomics10.3390/molecules26216473 and other isolated product/extract chemistry do not measure living response; Arabidopsis,tomato,rice,goat and other-genus family works do not support Medicago traits. Genomic associations alone and ordinary seasonal flowering dates are not response measurements. Family review10.1093/jxb/erag313 supplied real citation/review provenance without a source-page fetch.
 
 Wrote only1 eye_type negative under plant none reading; no light/chemical/diel null. No OpenAlex,MDPI,UChicago,SANBI request,source/fullpaper-page fetch,paid fallback,library mirror or unauthorized copy. Current actual screen_candidates.check, with legitimate serialized hg.load snapshot, printed **0 problems** before commit. Continuing Aesculus next.
+
+### Aesculus completed; worker24 checkpoint
+
+**This worker total:2 genera (Medicago,Aesculus),2 eye_type search records,19 wanted lines,0 evidence and measured closures. Cumulative harvest-c8:9 genera,9 search records,118 wanted lines,0 evidence and measured closures.** Pilea c4 protocol remains preserved;30 genera require new work starting Cephalanthus,Bignonia,Platanus.
+
+Official harvest_get.show and screen_candidates.show on the same legitimate cached hg.load snapshot report Aesculus in no genus harvest. No genus query or API result was invented. Original queue contains all4 traits for A. hippocastanum,A. californica,A. pavia; no accepted Aesculus measurement exists in corrected-first accepted-name evidence. The old sweep-11 two-query combined null is thin and was not treated as completion. Read all15 Sapindaceae family-review titles and complete stored abstracts (up to700 characters each), run17, no failed step. Cached query, word for word: `Sapindaceae photoreceptor review` (38hits,15stored). Reviews include10.1111/jbi.70113 (68studies/344taxa phenological responses) and10.3390/urbansci9010014 (tree artificial-night-light effects); neither is asserted to contain an Aesculus measurement from its general abstract. Other family results concern other plants, insects, pharmaceutical products or genomic phylogeny; none establishes a plant eye. Canon metadata checked.
+
+Connected web searches, word for word in execution order:
+- `Aesculus seed germination light dark`
+- `Aesculus germination gibberellin OR smoke OR dormancy`
+- `Aesculus floral scent volatiles`
+- `Aesculus flower opening time anthesis`
+- `horse chestnut flower opening time anthesis`
+- `Aesculus eye type`
+- `horse chestnut eye type`
+- `Aesculus chemical sense volatile response`
+- `horse chestnut chemical sense volatile response`
+- `Aesculus light photoperiod phototropism`
+- `horse chestnut light photoperiod phototropism`
+- `Sapindaceae photoreceptor review`
+- `Aesculus plant ocelli lens-like epidermal cells focusing light`
+- `horse chestnut plant ocelli lens-like epidermal cells focusing light`
+
+Every exposed title/snippet and returned abstract read, with long outputs saved to work/harvest-c8/Aesculus-web0/1/2/3.txt and read in bounded sections to recover truncation. No query repeated. Genuinely fewer than20 exposed individual-query results were not counted as20. Horse chestnut is A. hippocastanum in official Ohio DNR result. Broad common eye/light results include horses and their anatomical chestnuts, which are unrelated animals; focused plant optics pair additionally checked. No source/fullpaper-page opened, no further OpenAlex API,MDPI,UChicago,SANBI call or paid fallback; OpenAlex/MDPI/UChicago links returned by the search engine were not fetched. ResearchGate,Wikipedia,book redistribution sites and library mirrors were not used as primary sources or opened.
+
+Added10 wanted after global DOI,normalized-title,URL and paper-status checks. Biological Flora10.1111/1365-2745.13116 is a strong targeted review: original-journal snippets expose daily A. hippocastanum pollen presentation citing Percival1955, scent reduction after pollination citing Lex1954, darkness germination, and contrasting photoperiod/light-availability experiments. No hours or magnitudes logged as evidence. A. hippocastanum short-photoperiod sapling experiment10.1111/gcb.14599 is retained including a null photoperiod result; manipulated-light null is a measurement under10(d). Herbivore-induced volatile emissions PMID17001531 are direct living chemical-signal leads; seasonal VOC study PMC11820155 and Vienna pollination thesis62904 remain candidates needing intact/attached material and actual scent-method confirmation. Tissue-culture review PMC8839481 exposes light/dark regeneration tables and is a reference route to species and growth-regulator responses; unknown target species remain explicitly generic Aesculus until intake. Its exact DOI was not exposed, so left empty rather than derive one from the MDPI URL.
+
+Mandatory10(e) germination/dormancy leads retained: A. indica stratification (Indian Forester8874), A. hippocastanum thermal-time dormancy model (Cambridge31129559F4F89E1741BCD02E2DB1FD34), A. hippocastanum cold-induced germination10.1046/j.1469-8137.2003.00940.x, and seed-axis vacuole/water relations PMC3353218. Their snippets establish temperature/water work, not a light/hormone comparison; every why says that light/chemical relevance is unconfirmed and must be read. No thermal cell or chemical/light result is invented. USDA Woody Plant Seed Manual is already globally wanted and adds no duplicate here. New unknown years null and unknown authors/journals empty.
+
+Reused existing wanted: mature-bud daylength bagging study10.1111/nph.13510 in c12 (Fagus-only measurement in harvest-13 is not an accepted Aesculus measurement); Effects of Photoperiod on Growth of Trees10.1086/335918 in c11. No duplicate added. Aesculus chinensis bark solvent extracts, harvested-flower metals/polyphenols and chestnut food-product chemistry are excluded under10(a); Castanea sweet-chestnut clocks/culture papers are a different genus; phenological model fits alone are not manipulated light responses. New horse-chestnut bud-scale optical/photosystem observations expose no manipulated environmental response in snippets and were not claimed as light-sensing evidence. Seed hilum resembling an eye and horse leg callosities are not plant eyes. Plant-focused lens/ocelli reviews belong under sense_light_nonvisual by10(b), and none exposes Aesculus-specific focusing.
+
+Only1 eye_type null written under owner's plant-none reading. Light,chemical,diel have plausible leads and no null. Actual current screen_candidates.check using legitimate cached hg.load returned **0 problems** before commit; no substitute checker, evidence,app check,branch/gate/#29/#30 change. Stop between genera for fresh-context takeover; Cephalanthus is unstarted.
