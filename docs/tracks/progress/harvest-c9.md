@@ -1,6 +1,6 @@
 # harvest-c9
 
-Current checkpoint (worker44,2026-10-27): **23 genera available-source screened (3 full plus20 API-skipped);6 search records;235 wanted lines;0 evidence/measurement closures;262 web queries.17 genera not yet screened, next Plantago.** All later plant full protocols remain API-incomplete; source-by-source history below is preserved.
+Final checkpoint (coordinator reconciliation,2026-10-27): **23 genera available-source screened (3 full plus20 API-skipped);6 search records;234 wanted lines;0 evidence/measurement closures;264 web queries including2 metadata-verification queries.17 genera not yet screened, next Plantago.** All later plant full protocols remain API-incomplete; source-by-source history below is preserved.
 
 ## 2026-10-27
 
@@ -347,3 +347,13 @@ Exclusions/source forks: grandiflora/umbraticola/hybrid photoperiod, flower open
 All OpenAlex429/MDPI429/UChicago403/SANBI403 skips honored; no retries, paid APIs, paper/fulltext fetch, library/proxy mirror, branch/gate/#29/#30 or legacy evidence changes. No new source refusal or web quota message. Required scientific/common API steps remain unrun, so no exhausted/null record was added. Stopping between genera for context checkpoint at Plantago; the48-worker cap means no fresh takeover is presumed.
 
 Worker44 final gate: screen_candidates.py --check printed `0 problems` after all31 Portulaca additions; git diff --check passed. Actual file counts confirmed6 searched/235 wanted, including38 worker44 additions; no new numeric0 publication years. harvest_get/candidate commands completed successfully. Final commit stages and commits only c9 progress/wanted under the shared flock. Release between genera at Plantago; full-protocol service/source limits above remain explicit.
+
+## 2026-10-27 coordinator final link/identity reconciliation
+
+Final current counts:23 genera reviewed(3 completed before OpenAlex refusal,20 with documented API-incomplete work),6 search records,234 retained wanted lines,0 evidence;17 untouched genera,next Plantago. No new genus was researched during this metadata correction.
+
+The final URL validator caught two ResearchGate-only discovery links. Neither page/copy had been opened by the worker. Exact-title searches excluding ResearchGate/academia independently found the official2013 ASHS program (https://cdn.ymaws.com/ashs.org/resource/resmgr/files/2013conferencefullprogram.pdf) and its institutional copy (https://iris.unipa.it/bitstream/10447/97702/1/2013ASHSAnnualConferenceHS-1.pdf), which verify the Ostrya virginiana GA3 poster336,Juan R.Franco Coronado and Todd P.West,2013. That wanted line now uses the official source and verified metadata. Its unconfirmed light contrast was removed from the target claim; chemical-response intake remains held. No PDF/source page was fetched and no value was extracted.
+
+The other exact-title search found a Sri Lanka Ministry of Environment reference list(https://www.env.gov.lk/web/images/downloads/biodiversity_division/publications/Flower_visiting_fauna_of_Sri_Lanka.pdf) citing Rani B.U./Raju A.J.S.(2016),A study on butterfly-flower interactions,Journal of Palynology52:111–131. That independently establishes bibliography but does not establish an Antigonon measurement. The provisional Antigonon wanted line was removed; it is not used as source authority or evidence. The title/reference is recorded here only as an excluded unresolved discovery; no new negative record was added. Wanted count decreased235to234.
+
+Actual coordinator queries: `"A STUDY ON BUTTERFLY-FLOWER INTERACTIONS" -site:researchgate.net -site:academia.edu`; `"In Vitro Germination of Ostrya virginiana" -site:researchgate.net -site:academia.edu`. Only returned indexed primary/institutional/reference metadata was used. All retained current wanted URL/get fields will receive the final disallowed-host check. Research-desk source audit/application remains required.
