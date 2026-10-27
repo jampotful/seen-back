@@ -2,7 +2,7 @@
 
 ## 2026-10-27
 
-Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 9 genera web-screened, 0 protocol-complete, 0 search records, 49 wanted leads.
+Desk screening only: no pages fetched and no evidence records written. OpenAlex unavailable for the round after coordinator HTTP 429 daily IP budget failure; missing OpenAlex searches/citation steps remain unavailable. No full-protocol exhaustion claimed; searched file intentionally empty. Current totals: 10 genera web-screened, 0 protocol-complete, 0 search records, 70 wanted leads.
 
 ### Tripleurospermum: web-screened, protocol partial
 
@@ -227,3 +227,36 @@ Exact web queries, in order:
 - web: manzanita chemical response volatile signaling
 
 Continuation checkpoint: 3 newly web-screened genera (Athyrium, Dipterostemon, Arctostaphylos), all protocol partial; 12 new wanted leads, 0 searched rows, 0 evidence records. Cumulative harvest-c15 totals: 9 web-screened genera and 49 wanted lines. 31 genera remain genuinely unreviewed, starting Papaver. Previous checkpoints above are historical. OpenAlex remains blocked/skipped after coordinator HTTP 429; no additional service rejection.
+
+
+### Papaver: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran using supported networking. Current open traits are sense_chemical and sense_light_nonvisual; no repeated eye_type/diel pair. Screened all 91 printed genus/citation work occurrences (including repeats) and 15 family-review titles/stored abstract starts. Existing partial light records adopted: harvest-17#1 (P. radicatum heliotropism, 10.5962/p.343519), harvest-17#2 (P. somniferum photoperiod, 1996 conference abstract 10.21273/hortsci.31.4.681d), recheck-6-fixed#20 / sweep-17#3 (P. argemone germination, 10.1614/WS-D-15-00127.1). The latter source was found again and not requested twice. Full 1997 Annals paper is a distinct source upgrading the 1996 abstract. For related 1998 conference/1999 full accession study and 1995 abstract/1996 repository study, requested the fuller version only. Current evidence/wanted scans found no chemical record or prior Papaver wanted; new DOI/title status scan found no owner n/a/full/partial match.
+
+Wanted retains explicit germination/light/hormone trials, photoperiod experiments, peptide elicitor and methyl-jasmonate responses, and floral colour-scent measurements. Pollen self-incompatibility and elicited cell/callus culture are marked for method/scope review, without extrapolating to whole-plant behaviour. The chemical candidate tool missed several strongest living-response sources (pattern-triggered immunity, biostimulants and hormones), which were caught by screening all harvest titles and abstracts. Pollen collected from bee traps, poppy oil/flour sensory analysis, edible wild leaf chemistry and essential-oil extraction are excluded under 10(a). Human drug/circadian papers, honeybee olfaction, crab-spider sensory experiments, Arabidopsis/Turnera/Catharanthus/Magnolia responses and generic flower-colour optics do not establish Papaver sensing. Endophyte consortium paper 10.3389/fmicb.2019.00925 describes living plant-associated regulation but the displayed abstract does not isolate a chemical cue; retain as method lead, not an invented response measurement. The family-review results chiefly concern other genera, pollinator vision and flower colour. Existing stored citation steps returned zero works citing 10.1614/WS-D-15-00127.1 and one nectar/pollen-resources paper citing 10.2478/jas-2014-0009; the latter gives pollinator food resources, not a Papaver chemical/light response. No page/paper fetched, no evidence written.
+
+Canon checked against current plant entries: plant light compilations are not in hand; angiosperm chemical compilations 10.1016/j.tree.2009.09.010 and 10.1111/ele.12205 are not in hand. Common name poppy verified in the experimental paper titles and PubMed results. Missing OpenAlex common-name/API steps remain skipped after coordinator HTTP 429; therefore no null searched row or exhaustion claim.
+
+Successful harvest queries, verbatim and in recorded order:
+- Papaver phytochrome photoreceptor
+- Papaver light perception
+- Papaver phototropism
+- citation: works citing 10.1614/WS-D-15-00127.1 that name Papaver
+- citation: works citing 10.2478/jas-2014-0009 that name Papaver
+- Papaver volatile signalling
+- Papaver photoperiod
+- Papaver circadian rhythm
+- family review: Papaveraceae photoreceptor review
+
+Exact web queries, in order:
+- web: Papaver seed germination light dark
+- web: Papaver germination gibberellin OR smoke OR dormancy
+- web: Papaver floral scent volatiles
+- web: Papaver photoperiod phototropism light response
+- web: poppy photoperiod phototropism light response
+- web: Papaver chemical response volatile signaling
+- web: poppy chemical response volatile signaling
+
+Worker 7 final continuation additions: 4 newly web-screened genera (Athyrium, Dipterostemon, Arctostaphylos, Papaver), all protocol partial; 33 wanted leads, 0 searched rows and 0 evidence records. Cumulative batch: 10 web-screened genera, 70 wanted lines; 30 genera remain unreviewed, exact next Betula. Stopping cleanly between genera for fresh context after the lengthy Athyrium and Papaver harvests. Earlier checkpoints are historical. OpenAlex remains skipped; no additional service refusal.
+
+Coordinator future-scope adoption: Humulus eye_type already harvest-29 line 13; Thlaspi eye_type rescreen-2 line 7; Campanula eye_type plant-1 line 2; Pastinaca diel replant-1 line 5 and eye_type rescreen-2 line 4. Future workers should adopt these substantive completed paired-query screens and only run genuinely unfinished trait steps. Cross-unit cache /workspace/work/issue38-cross-unit-candidates.json is a guide, not exhaustive; verify taxonomic homonyms.
