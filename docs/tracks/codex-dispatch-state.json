@@ -1,16 +1,17 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 1,
-  "updated_at": "2026-10-27T03:25:56.384Z",
+  "generation": 2,
+  "updated_at": "2026-10-27T03:30:13.391Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
     "title": "Regards Codex dispatcher",
-    "enabled": true,
+    "enabled": false,
     "mode": "hourly_poll",
     "timezone": "America/New_York",
-    "native_issue_webhook_supported": false
+    "native_issue_webhook_supported": false,
+    "activation_note": "Temporarily paused while initial task recovery and verification finish; resume after recording recovery attempts."
   },
   "policy": {
     "allowed_author": "jampotful",
@@ -28,16 +29,21 @@
     "28": {
       "issue": 28,
       "dispatch_key": "regards-issue-28-20261027",
-      "state": "accepted",
+      "state": "running",
       "task_url": "https://chatgpt.com/local/01a17b61-4607-7408-a742-6cf27748a0d6",
-      "observed_status": "Working",
-      "observed_at": "2026-10-27T03:22:38.473Z",
+      "observed_status": "Exact main checked out; six workers launched; coordinator reports git fetch succeeds with network-enabled execution.",
+      "observed_at": "2026-10-27T03:30:13.391Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-round.md",
-      "branch": null,
+      "branch": "codex/round-2026-10-27-issue-28",
       "receipt_comment_id": 6432940952,
-      "repository_execution_verified": false
+      "repository_execution_verified": true,
+      "base_sha": "96225855ff44ad1bdb15cc365314b3b4e06cb284",
+      "queue": {
+        "batches": 20,
+        "genera": 644
+      }
     },
     "29": {
       "issue": 29,
@@ -56,16 +62,20 @@
     "30": {
       "issue": 30,
       "dispatch_key": "regards-issue-30-20261027",
-      "state": "accepted",
+      "state": "recovering",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
-      "observed_status": "Working",
+      "observed_status": "Initial run blocked without edits; one same-chat infrastructure recovery requested.",
       "observed_at": "2026-10-27T03:21:39.377Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
       "branch": "codex/data-1",
       "receipt_comment_id": 6432928724,
-      "repository_execution_verified": false
+      "repository_execution_verified": false,
+      "blocker_signature": "proxy-unreachable:8080",
+      "recovery_attempts": 1,
+      "recovery_submitted_at": "2026-10-27T03:30:13.391Z",
+      "blocker_comment_id": 6432950889
     }
   }
 }
