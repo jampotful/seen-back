@@ -1494,3 +1494,55 @@ Diel results are seasonal flowering/year-round seed production,grass reproductiv
 ### Parent-authorized own-NEW c10#182 actual Rabelera target
 
 Additive metadata exception authorized by parent in launch. Original Wiley indexed text/figure2 explicitly names S.holostea light/dark germination and reports no light difference;KewPOWO confirms Stellariaholostea synonym ofRabeleraholostea. Added actualR.holostea only aslight target,retainingall earlierfor/traits/queries/fields. Explicittarget_traits andwhy limit addition tolight:shared nitrate result forS.graminea/M.trinervia isnot verifiedforRabelera,noassumedchemicalresponse. NoRabelera genusscreen repeated,nomeasurement logged,main72unchanged.
+
+
+## 2026-10-27 — issue38 worker40 Nyssa checkpoint
+
+NEW this worker cumulative2web-screened genera(Melinis,Nyssa),13wanted,0searched,0evidence; now257wanted. All prior250byteprefix unchanged here. Remaining8:Potentilla(next),Populus,Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon. Available-source desk screen complete forround; fullprotocolpartial becauseOpenAlex missing steps skipped aftercoordinator429,no nullsearchedrows.
+
+### Nyssa — all four original traits; actual species retained
+
+Global evidence/audit/wanted/ownerstatus preflight found no Nyssa measurement/request. Queue N.sylvatica7369records,Nyssaceae/Cornales,no nearest measured record. Canon checked asforMelinis plusplantlight compilations; gene surveys not physiological carry. Official harvest run10/supplement15:40unique title/availableabstractstarts read;Nyssaceae familyreview6titles read. Exactsuccessfulharvestqueries:Nyssa phytochrome photoreceptor;Nyssa light perception;Nyssa phototropism;Nyssa volatile signalling;Nyssaceae photoreceptor review. Nofailedharveststep. Common-nameOpenAlex notavailable;webpairs andfamilyreview alternative do not license fullcompletion.
+
+Exactnewwebqueries executed in order:
+- `web: Nyssa seed germination light dark`
+- `web: Nyssa germination gibberellin OR smoke OR dormancy`
+- `web: Nyssa floral scent volatiles`
+- `web: Nyssa photoperiod light perception phototropism`
+- `web: black gum photoperiod light perception phototropism`
+- `web: Nyssa flower opening time anthesis`
+- `web: black gum flower opening time anthesis`
+- `web: Nyssa chemical perception volatile signalling`
+- `web: black gum chemical perception volatile signalling`
+- `web: Nyssa epidermal lens cells eye type`
+- `web: black gum epidermal lens cells eye type`
+- `web: "Nyssa sylvatica" "light" "seedlings" experiment`
+- `web: "Nyssa sylvatica" gibberellic acid auxin`
+- `web: "Nyssa" "jasmonate" herbivore`
+- `web: "Cryptic Dioecy in Nyssa"`
+- `web: "Seed Morphology and Effects" "Nyssa" authors`
+- `web: "Cryptic Dioecy in Nyssa" "10."`
+- `web: "Nyssa" "10.2307/2656796"`
+- `web: "ALTERING TAPROOT ARCHITECTURE" Nyssa`
+- `web: "Cryptic Dioecy" "Nyssa" site:bioone.org`
+- `web: "Nyssa yunnanensis" "Autotoxicity as a cause"`
+- `web: "Nyssa aquatica" "Plasticity of second-year"`
+- `web: "Nyssa sylvatica" "Ecological and metabolomic responses"`
+- `web: "Cryptic Dioecy in Nyssa" site:bioone.org/journals/annals`
+- `web: "Plasticity of second-year Nyssa" site:link.springer.com`
+- `web: "Nyssa sylvatica" "10.1002/ece3.10413" "Ramage"`
+- `web: "Nyssa" "9475" "Morrison"`
+- `web: "Cryptic Dioecy in Nyssa" "anthesis" -site:researchgate.net`
+- `web: "Plasticity of second-year" "Nyssa" DOI -site:researchgate.net`
+- `web: "Seed Morphology" "Nyssa" "351" site:integrativebiology.ac.cn`
+- `web: "10.1002/ece3.9475" authors`
+
+Read all returnedtitles/snippets actuallydelivered,eightbundles;noassertionof20perquery. Some indexed exact-primary searches delivered extended article passages as search output;noopen/fetch commands used,noevidence/value logged,andnoarticletextcommitted. NoAPIretry,includingincidentalOpenAlexsearchresultswhichwerenotopened/used.
+
+Sevennewwanted:2007N.yunnanensis light/dark/gradientpH seedtrial (alsoactualN.sinensis lyecomparison;chemicalscarificationfork);2009targetN.sylvatica intactseedlingK-IBA;1999targetNyssa livingseedling allelopathyreceiver;2023target canopy-opening lightresponse;2022target deerexclosure metabolomics (induceddefenseversusresource/tissuechemistryfork);2015N.yunnanensis seed/seedlingextractreceiverautotoxicity;2026N.aquatica simulatedshade (bibliographyfromEBSCO/OUCI,primarypublisherunretrieved,explicitintakeverification). Congener-onlysourcesrank0,nocarry. Removed donor extracts donotdisqualifytheactual living receiver response;donorcompositionaloneexcluded. Nitrate/auxin/genetichomologyfromothergeneranotborrowed. DOI/titleUnicode-normalizedglobalduplicate/ownerstatuschecks passed,includingevidence nestedsourceidentities;none markedn/a.
+
+Harvestedexclusions:GregoryofNyssa theology/light/metaphysics,IMFhousing/miningshares andpulmonaryVOCmachinelearning arenotplantmeasurements. Daucus,Dracaena,Sclerocarya,Hoya,tomato,wheat,Cornus,Capparis andBougainvillea studies concernothergenera. Zohnerleafoutthesis,subtropicalcrownasymmetry,herbshade/flood andforagegrassshade studies do notverifyactualtargetcuetreatmentindisplayedstarts. Tupelohoneyflavoriscollectedbeeproduct,notlivingplantemission;MEGAN/isopreneforestflux/wholeforestphytoremediation/dehydrationstudies donotidentifyNyssatreatment/speciesmeasurementinshownstarts. Deerpreprintsubsumedbypublishedarticle,noseparaterequest. No unreadspecies tabledeclarednegative.
+
+WaterstressregenerationN.yunnanensis DOI10.1371/journal.pone.0182012 fixesgrowth-chamberlightwhilevaryingwater;noinferredlight/chemicalsensing. SaltstressN.sylvatica coastalmesocosm measures salinity/physiology,notautomaticallychemicalcueperception. NAA-versusIBA stemcutting study shownmentionsNyssaasrelatedcomparisononly,notactualtargettreatment;intactseedlingauxinabstractaboveisverifiedseparately. TeaWRKYstudy merely includesN.sinensis sequencealignments,notNyssahormonetreatment.
+
+Diel:pairedresultsmostlyApril-June/late-springflowering,fallleafcolor andordinarymorphology. OriginalBHL/Smithsoniancitation identifies2009CrypticDioecyinN.yunnanensis (Sun,Zhang,Lowry,Wen);timedanthesisappearedonlyinincidentalRGsnippet,soitwasnotusedasmeasurementorclaimedtargetdailycoverage. RetainoriginalBHLpublicationpointer https://www.biodiversitylibrary.org/itemdetails/124659 forfutureoriginalmethodverification,notunverifiedtargetN.sylvaticadata. Exactprimarysite/anthesissearchdidnotreturntimedoriginalpassage. Eyepairsmainlyanimalhistology/humanlens,NyssaflorasandEucalyptusaggregatablackgumhomonym;noneverifiestargetfocusing. Ownerplantnoneapplies,focusingunderlight;noexhaustionclaim.
