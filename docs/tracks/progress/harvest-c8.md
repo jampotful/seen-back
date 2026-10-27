@@ -1409,3 +1409,54 @@ Eye: all plant eye_type none under10(b). Dark floral eyes/petalspots, trichome/s
 All24rows globally absent from wanted by DOI/normalized title (and distinct original sources where review getURL reused); no owner-status match. Existing light evidence for the2018 source was explicitly adopted above, with the new request scoped to unlogged chemical treatments. Known exact target queue record counts used; genericGeranium/congener sessiliflorum remain0. Original296wanted prefix and all23searched retained. Required checker/prefix validation and commit follow.
 
 Worker43 final validation: required checker **0 problems** at320wanted/23searched. JSONL parses; original296wanted prefix and all23searched bytes identical to bd8553ff; git diff --check passed. Only owned wanted/progress files edited; no paper assets or evidence. Context checkpoint between Geranium and entirely unstarted **Lepidium**; six remain.
+
+## 2026-10-27 — issue38 worker45: Lepidium
+
+NEW: **Lepidium one newly web-screened genus; +18 wanted,+0 searched,+0 evidence; cumulative338wanted/23searched. Protocol-partial**, mandatory uncachedOpenAlex steps skipped after round-wide429; no null/exhaustion claim. Prior first18,Pilea/Centrosemaadoptions,14newthroughGeranium and original97wanted/23searched baseline preserved. Current issue38 new screens become15throughLepidium. **Five remain; exact next Melothria**, thenCommelina,Lygodium,Ludwigia,Monotropa.
+
+Read AGENTS first,worker guide,all namedprotocols/BRIEF Round2/THOROUGH,audit53/54findings andownprogress. Cloudruntime connected/enforcedunrestricted,noVPN/credentialbindings. Preflight globalwanted/searched,canon,corrected-first accepted-name main_evidence,actualqueue andownerpapers-status. ActualtargetsL.virginicum/draba. Adopt draba corrected/sweep-21#6 light; accepted sativumcalluslight is a congener,notphysiologicalcarry tovirginicum. Older sweep-21 compoundtwo-queryrecord lacks currentpairedweb/germinationsteps. Canon plantchemical/genomicmetadata checked; no targeteye/genepresencemeasurement inferred.
+
+Official read-only harvest_get.py and screen_candidates.py succeeded with documented supportednetwork: **Lepidium innoharvestrun/notinharvest**. No zero-hitAPIsearch implied. No directsourcefetch,evidence,operationaledit,permissionrequest,proxychange,APIcredentialfallback ornewservicerefusal. OpenAlex429,MDPI429,UChicago403,SANBI403 skipped; incidentalindexedresultsare searchengineoutputs. Earliermixednetwork/scratch-cache refusal not retried/bypassed.
+
+Required10(e)searchesfirst,allfour scientific/commontraitpairs,familyreviewalternative,thenexactsource/targetmetadataqueries. **31actualconnectedqueries**,executionorder:
+- `Lepidium seed germination light dark`
+- `Lepidium germination gibberellin OR smoke OR dormancy`
+- `Lepidium floral scent volatiles`
+- `Lepidium flower opening time anthesis`
+- `peppergrass flower opening time anthesis`
+- `Lepidium eye type lens-like epidermal cells`
+- `peppergrass eye type lens-like epidermal cells`
+- `Lepidium light photoperiod phototropism`
+- `peppergrass light photoperiod phototropism`
+- `Lepidium volatile chemical hormone response`
+- `peppergrass volatile chemical hormone response`
+- `Brassicaceae photoreceptor review`
+- `"Lepidium virginicum" germination light gibberellin`
+- `"Cardaria draba" germination gibberellin hormone`
+- `"Different headspace profiles in wild crucifer species"`
+- `"Lepidium virginicum" "light" "germination" "10." Borthwick`
+- `"Different headspace profiles" "10.1111"`
+- `"Pericarp-mediated chemical dormancy" Lepidium`
+- `"Lepidium draba" "jasmon" OR "ethylene" OR "abscisic"`
+- `"Responses to gibberellin of light-requiring seeds" "10.1104"`
+- `"Interactions of Light and a Temperature Shift" "10.1104"`
+- `"Pericarp-mediated chemical dormancy" "10.1017"`
+- `"Cardaria draba" "770318" "2020"`
+- `"Lepidium virginicum" "germination" "1955"`
+- `"Lepidium" "Dormancy and germination in short-lived" botany`
+- `"Lepidium" "Characterization of Invasiveness" "2023"`
+- `"Lepidium virginicum" "flower" "anthesis" time`
+- `"Photocontrol of Lepidium Seed Germination" "1955"`
+- `"Interaction of Temperature and Light in Germination of Seeds" "1955"`
+- `"Seed Biology of Lepidium apetalum" "2020"`
+- `"More than Just a Shell" "2025" Lepidium`
+
+Read available returnedtitles/snippets andindexed originalabstract/methodpassages atactualdeliveredextent; no20-per-queryclaim. Initialthree-query response exceeded displaybudget,so only exposedportionread; sixintermediate entriesunseen,not claimed ascompleted20-resultscreen. Laterresultsstored insessionandrecoverable; no repeatqueryfordisplayrecovery. No sourcepagesopened. ResearchGate,Wikipedia,Scribd,documentsdelivered,opportunisticcopiesandlibraryproxyresults leftunopened/notprimarysources. Unknownmetadata blank/null,not inferredfromDOIsuffix,URLorrelativeindexdate.
+
+**Sourceadoptions:** existingharvest-c12#5 **10.1111/j.1744-7917.2009.01283.x** compares living **L.virginicum** andCardamineimpatiens volatileemissionafterherbivoryandexogenousJA. OriginalWageningenindexedabstractconfirms target; adoptwithoutduplicate even though currentwantedrowlistsCardamineonly; coordinatornotifiedforintakescope. Existingc11#98 **Quantal Response of Seed Germination in Seven Genera of Cruciferae to White Light of Varying Photon Flux Density and Photoperiod** explicitlyincludesL.sativum,notvirginicum; source reuseonly,notcarry. ExactDOI/normalizedtitle/URLandownerstatusdedupebeforeappendfound eighteennewrowsabsentfromglobalwantedandstatus; nosourcen/are-requested.
+
+**Targetleads:** virginicum1955photocontrol10.1104/pp.30.1.15;1955light/temperature10.1104/pp.30.5.473;1961GA/red/far-red10.1104/pp.36.5.663;1972light/temperature10.1104/pp.49.2.127;2023nine-invasivestudyPMC10005799. ThelastsourcealsoincludesGeranium/Plantago/othergenera; existingtargetresultnotfoundinevidence/wanted,so originalsourceheldonceforthisactualspecies. Noevidenceloggedorvaluequoted. Draba2019washwater/appliedABAdose-response10.1017/wsc.2019.33 islivingtargetseedresponse,beyonddeadpericarp/endogenoushormones;2016GA/KNO3 10.1111/1442-1984.12113;2020GAstudy10.37908/mkutbd.770318 (originalcitation2020versusdownloadheader2021distinguished).2025drought/thermalgerminationtitlesheldper10(e),butthermalstressaloneisnotchemical/lightperception.
+
+**Congeners keptseparate:** apetalum2020GA/light/dark10.3390/plants9030333;perfoliatum2010red/white/darkgermination;papillosumDOG1developmentstudy;sativumDOG1coatdormancy,GID1receptorgerminationandtwoblue/redgrowth/photosynthesisstudies;latifoliumGA3response10.4161/psb.25388. Fixedculturelighting,endogenoushormoneprofilinganddormancygenesalonearenotmeasuredlight/chemicalresponses; mandatorygerminationtitlesremainreaderholds. Existingacceptedcalluslightsourcecoversseparatemonochromaticcallusstudy,so no duplicaterequest. Garden-cressaltered-gravityphotomorphogenesisandrootphototropismtitlesexposedonlythroughResearchGate/unpublisheddatareviewremainunresolvedtitleleads,not fabricatedprimarymetadata.
+
+Dielsearchesreturnseasonalflowerdates,buddevelopmentduration0.5–2days,cropanthesistimesinothergenera,basalleaveswitheredatanthesis andpollinatorvisits; noneestablishactualtargetdailyfloweropening. Leafepidermal2007study/virginicummicromorphologydescribestomataandpapillae,noteyes; lens-poddedfruitandhandlensarefalsematches. Plant eye_typenone10(b);anyactualfocusingbelongsunderlight. Essential-oil/tissuevolatilecompositionoflatifolium,anddrabaextractsappliedtoaniseseeds,fail10(a)forlivingLepidiumresponse; virginicumlivingJAstudydoescount10(d). Brassicaceaereviewresultsincludephytochromeevolutionandflowerdiversity; Arabidopsisphysiology/genepresenceisnot targetcarry. Noabsenceclaimwhilecandidateanduncachedprotocolstepsremain.
