@@ -338,3 +338,53 @@ No chemical null:Cracking the case explicitly describes GA seed pretreatment and
 No diel null:the reproductive cytotype paper has before-anthesis and next-morning methods, enough to retain for checking native opening observations; scheduled crossing by itself would not establish daily activity. Other hits describe seasonal flowering, cultivar phenology, first anthesis dates or gayanus spikelet opening, not a gerardi daily class. Eye_type alone gets a null under owner10(b), with anatomical flora/taxonomic epidermal studies/stomatal review screened explicitly. No optical-focusing candidate found. Family metadata covers grass stomata, phytochrome signalling/shade pathways, cereal/rice and general carotenoid reviews; none identifies direct Andropogon eye measurement. No source/full-paper pages fetched and no evidence logged. OpenAlex429/MDPI429/UChicago403/SANBI403 skipped throughout; no new refusal or actual web-quota refusal. Local provenance:work/harvest-c12/Andropogon-*-worker25 and Poaceae-cache-worker25 files.
 
 Worker25 final checkpoint:combined candidate validation printed `0 problems` for all8 searched/107 wanted lines; own-file whitespace check passed. All12 this-worker sources were also checked against global main evidence by normalized title/DOI, with no matches. No unknown-year numeric0 values exist in the batch wanted file. Stop between genera for fresh-context continuation at Cynodon; preceding Botrypus commit d32c34a9, Parthenium commit03991b96.
+
+
+## 2026-10-27 — worker31 continuation: Cynodon
+
+This worker:1 genus completed,1 search record,11 new wanted,0 evidence/measurement closures. Batch cumulative:11/40 genera screened,9 search records,118 wanted,0 evidence;29 remain, next Glechoma. Prior Cardamine/Rumex wanted-only full screenings and all107 prior wanted lines preserved. The existing Parthenium anthesis request was expanded to include C.dactylon without a duplicate wanted line; its year1992 and journal Grana are verified by cached harvest metadata rather than DOI digits.
+
+Read AGENTS.md first and the round28 guide/round4-harvest/THOROUGH/BRIEF/round3-sweep/desk-screen points1–10 including10(e). Current original queue and global evidence/searched/wanted/papers-status/canon checked. Harvest_get and screen_candidates ran; genus run7, supplements15/20, citation step citing10.1016/j.tree.2009.09.010, and all15 Poaceae family-review titles/stored abstracts screened. The full cached abstract metadata for the plausible sources was inspected. Local ci cache was reconstructed from origin/ci without new OpenAlex calls; a truncated gzip shard required decompressobj, matching harvest_get, and was then parsed successfully. No failed harvest step remains. Old sweep-44 single-query combined record is thin and did not suppress current work. Main already measures C.dactylon photoperiod response through Ji2022(10.7717/peerj.14326;partial); no already-covered light-only source added.
+
+Successful cached queries followed by actual web queries, exact order:
+- `Cynodon phytochrome photoreceptor`
+- `Cynodon light perception`
+- `Cynodon phototropism`
+- `Cynodon flower opening time`
+- `Cynodon nyctinasty`
+- `Cynodon anthesis`
+- `Cynodon pollination biology`
+- `Cynodon volatile signalling`
+- `Cynodon epidermal lens cells`
+- `Cynodon epidermal focusing leaf optics`
+- `Poaceae photoreceptor review`
+- `web: Cynodon seed germination light dark`
+- `web: Cynodon germination gibberellin OR smoke OR dormancy`
+- `web: Cynodon floral scent volatiles`
+- `web: Cynodon volatile emission herbivore induced response methyl jasmonate`
+- `web: bermudagrass volatile emission herbivore induced response methyl jasmonate`
+- `web: Cynodon flower opening time anthesis`
+- `web: bermudagrass flower opening time anthesis`
+- `web: Cynodon eye type epidermal focusing`
+- `web: bermudagrass eye type epidermal focusing`
+- `web: "Cynodon dactylon" gibberellic acid salicylic acid germination`
+- `web: "Cynodon" anthesis "morning"`
+- `web: "Effect of different concentrations of gibberellic acid on seeds germination and growth in different turf grass genera" -site:researchgate.net`
+- `web: Poaceae photoreceptor review`
+- `web: "Cynodon" "epidermal" focusing lens`
+- `web: "Cynodon" "Circadian patterns of pollen release"`
+- `web: "Cynodon" "A Note on Anthesis"`
+- `web: "Cynodon" "Plant responsiveness to root" stress cues`
+- `web: "Cynodon" "Volatile and Contact Chemical Cues"`
+
+Eighteen web queries read returned titles/snippets, up to first20 where returned. The first malformed call used the unsupported search_query argument and returned empty content with isError:true; it ran no documented query and is not counted. Corrected system2_search_query syntax immediately succeeded; this was not an actual quota refusal. All successful raw tool provenance is in work/harvest-c12/worker31-Cynodon-web1..5.json, cache and harvest/candidate scratch. No source/full-paper pages fetched.
+
+Eleven new wanted candidates passed global DOI/normalized-title checks against wanted, status, evidence and corrected evidence. They target living C.dactylon responses to melatonin, root-neighbour stress cues, paclobutrazol, sulfur dioxide, Peganum extracts, wild-mango extracts, cytokinin, GA seed priming, acid pretreatment; and measured circadian pollen release, plus host-material volatile attraction requiring confirmation of living versus detached source. The hormone/germination work meets10(d,e); acid scarification needs separation from actual cue perception. Incoming extracts applied to living Cynodon seedlings/seeds are retained chemical-response candidates, distinct from extracting Cynodon for animal or test-tube assays. Cytokinin thesis must confirm cultivar/species identity, and no pooled GA numeric result was extracted. Unknown author fields stay empty; no year0 values added. No chemistry/null fork identified in main's existing light-only evidence.
+
+Diel has actual target timing leads: the1988 circadian pollen paper explicitly names C.dactylon flowering twice per circadian cycle; the1992 anthology already requested for Parthenium also explicitly names Cynodon. No diel null. Davidson's general grass anthesis note(10.5962/p.386043) has conflicting1935 cached versus1941 bibliography metadata and only a Volume7 abstract; species representation remains unverified. It was not inflated into another target request while two direct species timing studies are retained. Wheat drought-priming and rice anthesis-temperature papers name other taxa. Seasonal bloom descriptions, weeks-to-flower, floral anatomy and bee pollen-resource use do not themselves establish daily opening time.
+
+Chemical candidate dispositions:10.1093/aob/mcs045 is an unusually direct target root-communication experiment, not a review. General root-VOC review10.1007/s11104-016-2823-3 and new2023 interspecific review/cuing lead were considered against that direct source, with no extra background request. Schinus fruit anticancer extracts, Artemisia liqueur chemistry, medicinal Cynodon oils/extracts, antimicrobial compounds, rodent assays and mosquito grass infusions are not live Cynodon responses/signals under10(a). C.nlemfuensis volatile composition concerns a different species. The Carya leachate paper tests a living receiver in another genus and nonvolatile donor leachates, not direct Cynodon perception; no unsupported Cynodon chemical closure. Soil remediation/genomic surveys and endogenous hormone profiling alone do not establish cue response; direct hormone/germination sources are prioritized. Billbug olfactometer source remains wanted only until intact versus detached host-material methods are checked.
+
+Eye_type alone has the completed null under owner10(b). Explicit candidate screening covers the two screen_candidates hits(the Cynodon epidermal/stomatal taxonomy paper and Panicum anatomical thesis), plus the indexed medicinal-grass and SEM anatomy studies. No lens focusing lead was identified. Poaceae cached review metadata covers grass stomata, phytochrome/shade/carotenoid pathways, rice/sugarcane and general reviews; no Cynodon image-forming eyes. Canon has no relevant in-hand plant measurement. OpenAlex429/MDPI429/UChicago403/SANBI403 remain skipped; no new refusal, paid API, library/proxy mirror, source-page fetch, evidence extraction or app checks.
+
+Worker31 Cynodon validation:combined screen_candidates --check completed with `0 problems` before commit; global normalized-title/DOI duplicate gate passed for all11 new lines. No unknown numeric-year0 introduced.
