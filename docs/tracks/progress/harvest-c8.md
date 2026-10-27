@@ -679,3 +679,32 @@ One concrete mixed command was rejected by automatic approval review; no retry, 
 The rejected scratch cache is not needed. Continued with successful **read-only** official harvest inspection and writes confined to authorized batch files; coordinator was notified immediately. This is a narrower safe alternative; no remaining action depends on the refused cache write.
 
 Checkpoint: Cercis newly web-screened; Centrosema adopted separately. **19 authorized genera still need new screening, next Erechtites**, then Chamaecrista,Celtis,Rivina,Sphagneticola,Pteridium,Lonicera,Asplenium,Ipomoea,Nandina,Ligustrum,Zanthoxylum (chemical remainder only),Geranium,Lepidium,Melothria,Commelina,Lygodium,Ludwigia,Monotropa. No Erechtites web search has started at this checkpoint.
+
+### Issue38 worker11 — Erechtites web screen
+
+**New cumulative this worker: 2 newly web-screened genera (Cercis,Erechtites), 1 separately adopted genus (Centrosema), 19 wanted lines, 0 searched lines, 0 evidence/measurement closures. Actual c8 files:116 wanted,23 searched; prior prefixes untouched.** Erechtites screen remains protocol-partial because the required uncached OpenAlex steps are skipped after the round-wide429; no null search row is added. **18 genera still need new work, exact next Chamaecrista.**
+
+Official harvest_get and screen_candidates ran with supported networking: Erechtites is absent across runs1–24, not a zero-hit query. Read all15 Asteraceae family titles and complete cached abstract starts from actual successful run17,`Asteraceae photoreceptor review`. These cover Arabidopsis/crop flowering, Kansas shade responses, Pelargonium NIL, Vernonia culture, Synedrella germination, Lomatozona media/LED, beetle/butterfly visits, Gerbera meristems, plant light-metabolism reviews, genetic assimilation and medical retinal/flavonoid compounds. No cached abstract names target Erechtites response; no family trait carry inferred. Canon catalog and global corrected-first evidence/wanted/papers-status checked: old sweep-16#27 is thin and no target measurement/request existed. Normalized-title/DOI checks excluded duplicate or owner n/a requests before adding3 real sources.
+
+Executed mandatory10(e) first and all four scientific/common trait pairs, family review and focused original-lead metadata searches. Actual queries in execution order:
+- `Erechtites seed germination light dark`
+- `Erechtites germination gibberellin OR smoke OR dormancy`
+- `Erechtites floral scent volatiles`
+- `Erechtites flower opening time anthesis`
+- `American burnweed flower opening time anthesis`
+- `Erechtites plant ocelli lens-like epidermal cells eye`
+- `American burnweed plant ocelli lens-like epidermal cells eye`
+- `Erechtites photoperiod phototropism phytochrome light response`
+- `American burnweed photoperiod phototropism phytochrome light response`
+- `Erechtites volatile chemical signal hormone elicitor response`
+- `American burnweed volatile chemical signal hormone elicitor response`
+- `Asteraceae photoreceptor review`
+- `"Investigation of Potential Seed Dormancy Mechanisms" "Erechtites"`
+- `"Role of temperature and light" "Erechtites"`
+- `"Erechtites" "anthesis" "time"`
+- `"Investigation of Potential Seed Dormancy Mechanisms" Zhang DOI`
+- `"Erechtites" "Baskin" "1996" light DOI`
+
+All exposed result titles/snippets read, omitted display tails recovered from retained tool response; no claim of20 when fewer actually supplied. Added3 original target/congener seed sources:1997 Zayat/Ranal living E.valerianaefolia light/dark and chemical trials;2017 White/Zhang/Pruski target E.hieraciifolius GA,nitrate/light trial10.1017/wsc.2016.21 (2017 issue independently verified; DOI-year suffix is not publication date);1996 Baskin/Baskin target buried-seed light comparison10.1139/b96-240. Original university/Embrapa/publisher and EPA metadata verified citations; no remembered DOI, author or year. Species spelling is retained and no congener figure transferred. These direct living-seed results prevent chemical/light negatives. Seeds remaining dormant under specified light conditions can be an assay result; absence of germination is not absence of sensing.
+
+Distilled Erechtites leaf/bark oils and historical fireweed remedies fail owner10(a), with no living emitter/recipient result exposed. PubMed original hydrodistillation abstract and Sage title were screened without fetching. Generic corn,cowpea,Arabidopsis/Phaseolus elicitor reviews do not measure target. Eye results concern insect/mite/dinoflagellate organs or broad plant optics and expose no target eye; owner10(b) applies, focusing goes under light. Diel results give month/year-round flowering, seedbank seasonal dormancy, days after anthesis or capitulum development rather than a measured within-day target rhythm. Chamerion/Epilobium fireweed and Euonymus burning bush are different genera; neither their anthesis nor their response is carried to American burnweed. No paper/source-page fetch, evidence, fulltext asset, banned proxy, paid API or new service refusal. Existing skipped services persist. Automatic-review refusal remains the resolved scratch-cache-write case recorded above; no repeat request.
