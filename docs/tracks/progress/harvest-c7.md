@@ -440,3 +440,40 @@ Exact executed web queries (12 distinct;germination pair first):
 Checkpoint new wanted count after dedup and cumulative counts follow below. Three newly eligible genera remain:Euphorbia,Eupatorium,Juniperus. Next Euphorbia. Historical coverage30 prior+6 new+1 adopted=37/40; full protocol remains partial for current work.
 
 Mitchella added5 wanted; this worker cumulative6 new web-screened genera,37 wanted additions,0 searched,0 evidence. Current149 wanted/29 searched vs112/29 starting baseline. Gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Euphorbia checkpoint
+
+Newly web-screened genus7,full protocol partial. Required tools run;all73 distinct cached works including family/citation corpus read from every title/all available abstract text. Run2 plus successful chemical supplement12:four genus queries and family review;cached citation10.1016/j.tree.2009.09.010 returned0. Family context Divergence of flowering-related genes to control flowering in five Euphorbiaceae genomes10.3389/fpls.2022.1015114 names Ricinus,Jatropha,Vernicia,Manihot,Hevea,not target Euphorbia;no functional inference. Canon,corrected-first accepted-name evidence,global searched/wanted and statuses checked. Actual main light evidence E.pulcherrima/E.paralias is unqueued and preserves only its own species; it does not suppress original ten target species' light pairs or create genus carry.
+
+Eight provisional target wanted leads assembled before dedup:amygdaloides subsp.arbuscula/macultata/heterophylla light-dark germination,hirta/peplus living culture light/2,4-D,reproductive biology of three queued weeds and cyparissias floral timing. Culture viability/species forks explicit. Light-positive and light-negative heterophylla trials both retained,not combined into false uniformity. Other-genus and unqueued esula/kansui/milii/pulcherrima hormone/photoperiod trials are real but no target-specific request invented;virgultosa and virgata not equated. Steam-volatiles10.1002/ffj.1148,propolis10.3390/antibiotics13030230,latex10.2172/6124450,extract insecticide10.33545/2618060x.2022.v5.i2b.114 and mammalian pharmacology fail10(a) as target sensing evidence. Human-eye extract10.3390/ph17091193 not plant eye;animal vision/fluorescent lamp word matches similarly excluded. Eye_type owner none,epidermal focusing light. No null records while API steps incomplete,no source fetch/evidence written.
+
+Exact cached successful queries in source order:
+- `Euphorbia phytochrome photoreceptor`
+- `Euphorbia light perception`
+- `Euphorbia phototropism`
+- `Euphorbia volatile signalling`
+- `Euphorbiaceae photoreceptor review`
+
+Exact executed web queries (18 distinct;germination pair first):
+- `Euphorbia seed germination light dark`
+- `Euphorbia germination gibberellin OR smoke OR dormancy`
+- `Euphorbia floral scent volatiles`
+- `Euphorbia light response photoperiod`
+- `spurge light response photoperiod`
+- `Euphorbia response to airborne volatile signals`
+- `spurge response to airborne volatile signals`
+- `Euphorbia flower opening time anthesis`
+- `spurge flower opening time anthesis`
+- `Euphorbia plant ocelli lens-like epidermal cells eye`
+- `spurge plant ocelli lens-like epidermal cells eye`
+- `Euphorbiaceae photoreceptor review`
+- `"Euphorbia maculata" germination light gibberellin`
+- `"Euphorbia" "Response of four medical plants"`
+- `"Temperature and storage time" "Euphorbia" "amygdaloides"`
+- `"Reproductive biology of four weedy Euphorbia species from Ile-Ife"`
+- `"Pollen production, flowering and insect visits" "Euphorbia"`
+- `"Euphorbia heterophylla" "germination" "gibberellic"`
+
+New wanted count after dedup/cumulative counts follow below. Two newly eligible genera remain:Eupatorium,Juniperus. Next Eupatorium. Historical coverage30 prior+7 new+1 adopted=38/40; current-round full protocol/exhaustion remains0.
+
+Euphorbia added8 wanted;this worker cumulative7 new web-screened genera,45 wanted additions,0 searched,0 evidence. Current157 wanted/29 searched vs112/29 starting baseline. Gate printed `0 problems`;owned-path `git diff --check` passed before commit.
