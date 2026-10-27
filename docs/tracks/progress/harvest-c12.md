@@ -997,3 +997,36 @@ Eye_type10(b) none; tool eye matches are napiergrass genomics(ocell substring) a
 Chemical false positives: rice ethylene and maize pentyl volatiles concern other genera; botanical sensory epithets and human mechanization perceptions are language/surveys. Curcuma influenza docking, rumen microbe quorum sensing, multifloral honey and goat-lens plant extracts fail10(a) for a living Cenchrus response. Serphidium volatiles source10.3390/plants10030495 explicitly tests Amaranthus/Poa, and only cites Euphorbia oil applied to C.echinatus; source reader can chase that cited receiver assay if relevant, but it is not target setaceus measurement and not a Serphidium→Cenchrus experiment. Passive PAH accumulation and glyphosate target-site resistance are pollution/herbicide studies, not assumed chemical cue communication. Broad Poaceae photoreceptor/shade/carotenoid reviews provide citation context; none visibly establishes target eye/diel/chemical coverage. No paper/source fetch, evidence, forbidden site access or service/quota refusal.
 
 Remaining16:Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
+
+
+## 2026-10-27 — issue38 worker21: Olea
+
+NEW worker21 now3 web-screened genera(Coccoloba,Cenchrus,Olea),41 wanted,0 searched,0 evidence. Current16 searched/195 wanted. Cumulative24/40 prior/new screens plus fully adopted Asparagus=25/40 covered.15 authorized genera remain, exact next Cerastium. All3 new full protocols remain partial after skipped OpenAlex429; no null/exhaustion or measured closure claimed.
+
+Adopted target O.europaea light sweep-41#4 and chemical sweep-41#5 exactly as written, without promoting abstract to full text. Light record explicitly says gene rhythms do NOT close diel; prior thin sweep-41#5 search is not current web completion. Both mandatory tools ran and report Olea absent from harvest; no cached Olea query/chase/family return claimed. Global evidence/audit/wanted/searched/papers-status and canon checked;15 new wanted normalized-title/DOI checks found no duplicate/n/a. No page fetch, evidence, proxy/credential change or new service refusal.
+
+Exact actual web queries(10e pair first):
+- `web: Olea seed germination light dark`
+- `web: Olea germination gibberellin OR smoke OR dormancy`
+- `web: Olea floral scent volatiles`
+- `web: Olea flower opening time anthesis`
+- `web: olive flower opening time anthesis`
+- `web: Olea eye type epidermal focusing`
+- `web: olive eye type epidermal focusing`
+- `web: Oleaceae photoreceptor review`
+- `web: "Storage of pollen and properties of olive stigma"`
+- `web: "Endosperm dormancy" olive "Seed" "1983"`
+- `web: "olive" "65" "47-54" germination`
+- `web: "Influence of environment, seed tissue, and seed maturity"`
+- `web: "Manzanillo" "seed dormancy" "1983"`
+- `web: "Storage of pollen and properties" "10.5935"`
+
+Read every delivered title/snippet(up to first20/query when available, no assumed20); raw provenance work/w21-c12/Olea-web1..4.json,Olea-harvest.txt,Olea-candidates.txt. Family alternative returned general plant photoreceptor/UVR8/evolution reviews and insect/algal works, not a family-specific target eye/diel measurement; unavailable API never called zero hits. Chemical/light scientific-common pairs not repeated because substantive target evidence adopted; mandatory germination and scent search still ran10(e).
+
+Fifteen new wanted:13 target-named germination/dormancy/seedling sources, one direct daily-anthesis study and one floral-emission source. Primary1984 endosperm paper explicitly tests light/dark and ABA/GA/kinetin/zeatin/SAN/BAP; neutral/no-germination results still count10(d,e). Primary1983 Manzanillo seed/embryo light/dark study separately verified with exact title and original author list; adjacent hormone paper is a separate source. Dendrobiology2011 wild-olive cold/tegument study and European-type paper require cultivar/subspecies confirmation; cold treatment and scarification alone are not converted into light/chemical sensing. Somatic-embryo conversion study explicitly has a light-conditions table, with culture scope left to reader. Fixed16:8 incubation and extracted antioxidant content in the sprouting source do not establish sensory response. Title-named seed trials retained under10(e), full metadata left blank/null where not visible; no fabricated DOI from a journal URL.
+
+Strong new diel lead: primary journal article Storage of pollen and properties of olive stigma for breeding purposes2018,10.5935/1806-6690.20180033, explicitly gives diurnal10–11a.m. anthesis in indexed text; original work names Arbequina. No flower rhythm inferred from clock genes or merely pollen-storage experiment. Other results are seasonal floral initiation, flower positions opening on different dates, bud differentiation/fruit-set studies, flower-development Ca gradients, and eight-hours-after-opening receptivity in congener O.ferruginea; these alone are not a daily clock hour. First Look at Olive Floral Volatiles source explicitly names emissions in institutional indexing, but original intact-flower versus harvested-headspace and taxon/cultivar table must be checked10(a). Extracted leaf oils/table-olive fermentation/skin-cell antioxidant chemistry are rejected10(a); unidentified blog claims of evening fragrance are not used as values.
+
+Eye searches were dominated by olive human skin tone, laser depilation, cream/callus lysate products, eyeshadow and anatomical human eyelids. These are not eyes of an olive plant. No actual epidermal-focusing measurement found; owner10(b) eye_type none and any actual focusing belongs under light. No null while mandatory protocol unavailable. Common-name Chinese olive Canarium and Indian olive Elaeocarpus are other genera and their GA trials were not assigned to Olea.
+
+Remaining15:Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
