@@ -41,6 +41,6 @@ Ten sampled lines and a count over all wanted files (273 row labels across 14 vi
 
 A3 (needs new sourced records), A4 (needs paper text), anything in `docs/views/gaps/`, `src/`, `views/*.json`, taxonomy-extra.tsv.
 
-## Desk follow-up, 27 October 2026 (checked at 19:00 UTC)
+## Desk follow-up, 27 October 2026 (checked at 18:40 UTC)
 
 The collision noted under "Also noticed" is closed. gaps.py now takes the unit for a retraction key from the evidence file name (`take(f[:-6], ...)`), so a line of `oa-regraded.jsonl` is keyed `oa-regraded:N` and no longer matches a retraction of `oa-1:N`. A rerun of the key match over all 89 regraded lines found 58 equal to an `oa-1:N` retraction under the old rule and none under the current one. A8 (the `*-failed` intake files) is closed by the same change, since gaps.py skips them. B1 went to Codex data-1 and its 210 fixes lines are merged. A3 and A4 stay open: A3 needs new sourced records and A4 needs paper text.
