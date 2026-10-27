@@ -1030,3 +1030,62 @@ Strong new diel lead: primary journal article Storage of pollen and properties o
 Eye searches were dominated by olive human skin tone, laser depilation, cream/callus lysate products, eyeshadow and anatomical human eyelids. These are not eyes of an olive plant. No actual epidermal-focusing measurement found; owner10(b) eye_type none and any actual focusing belongs under light. No null while mandatory protocol unavailable. Common-name Chinese olive Canarium and Indian olive Elaeocarpus are other genera and their GA trials were not assigned to Olea.
 
 Remaining15:Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
+
+
+## 2026-10-27 — issue38 worker21: Cerastium
+
+NEW worker21 now4 web-screened genera(Coccoloba,Cenchrus,Olea,Cerastium),54 new wanted,0 searched,0 evidence. Current16 searched/208 wanted. Prior21+new4=25/40 web-screened plus Asparagus fully adopted=26/40 covered.14 authorized genera remain; exact next Hemerocallis. Available-source screens complete; all4 full protocols partial because OpenAlex429 remains skipped. No null/exhaustion or measured closure claimed.
+
+Mandatory harvest_get and screen_candidates ran in supported network mode. All145 distinct cached titles/available abstract starts were read, including family review; descriptors from run4/supplements saved in work/w21-c12/Cerastium.json, with deduplicated145-entry text Cerastium-unique.txt. Genus queries and family returned below; citation steps recorded in harvest output considered, no fresh API request. Global evidence/audit/wanted/searched/papers-status checked before new research; no substantive target species evidence already logged. Old thin sweep-23#38 is not current screening completion. Canon checked as prior inventory, no duplicate canon request.
+
+Successful cached queries in harvest order:
+- `Cerastium phytochrome photoreceptor`
+- `Cerastium light perception`
+- `Cerastium phototropism`
+- `Cerastium flower opening time`
+- `Cerastium nyctinasty`
+- `Cerastium volatile signalling`
+- `Cerastium photoperiod`
+- `Cerastium circadian rhythm`
+- `Cerastium anthesis`
+- `Cerastium pollination biology`
+- `Cerastium epidermal lens cells`
+- `Cerastium epidermal focusing leaf optics`
+- `Caryophyllaceae photoreceptor review`
+
+Cached citation steps(as printed):
+- `citation step: works citing 10.1046/j.1365-2435.2000.00418.x that name Cerastium: 0`
+
+Exact executed web queries(10e pair first):
+- `web: Cerastium seed germination light dark`
+- `web: Cerastium germination gibberellin OR smoke OR dormancy`
+- `web: Cerastium floral scent volatiles`
+- `web: mouse ear chickweed floral scent volatiles`
+- `web: Cerastium light photoperiod phototropism`
+- `web: mouse ear chickweed light photoperiod phototropism`
+- `web: Cerastium flower opening time anthesis`
+- `web: mouse ear chickweed flower opening time anthesis`
+- `web: Cerastium eye type epidermal focusing`
+- `web: mouse ear chickweed eye type epidermal focusing`
+- `web: "Physiology and biosynthesis of lychnose"`
+- `web: "Riding on the wind" "Cerastium"`
+- `web: "The fitness benefits of germinating later" "Cerastium"`
+- `web: "Seed dormancy and germination" "Cerastium dinaricum"`
+- `web: "Flower opening and closure" "Cerastium"`
+- `web: "Cerastium" "floral" "closure"`
+- `web: "Zur Keimungsbiologie acht"`
+- `web: "Cerastium arvense" "gibberellin"`
+
+Read all delivered titles/snippets(up to first20/query where delivered, no invented result counts). Scratch raw web provenance Cerastium-web1..5.json. Required scientific/common-name light,chemical,diel,eye pairs ran; cached Caryophyllaceae review supplies the family alternative, with all returned titles and abstract starts screened.
+
+Thirteen new wanted: strong direct target C.glomeratum light/dark germination2020,10.5660/WTS.2020.9.4.345, and enhanced UV-B fitness10.1093/jpe/rtn018; direct target C.arvense photoperiod/sugar accumulation10.1007/BF00397451; nonqueued candidissimum seed trial, dinaricum light/dormancy, dichotomum GA/nitrate and semidecandrum light germination; candidissimum/banaticum culture/PGR leads; regelii photoperiod, cultivar Columnae photoperiod, alpine33-species table and fontanum seedling VOC source. Species/cultivar/culture forks explicit. Lychnose primary PubMed abstract distinguishes living-leaf photoperiod response from cell-free synthesis; the latter alone is not a chemical-response measurement. Wild congener chemical/light sources do not automatically cover arvense/glomeratum.
+
+Existing sources adopted without duplicate: wanted/plant-1#31,10.1006/anbo.1997.0520, explicitly includes nonqueued C.fontanum, so no target closure; Deno first supplement already global wanted/harvest-c11, with indexed Cerastium germination lead;23-species treatments10.1111/plb.12937 already own c12#15, Cerastium membership unverified. No new n/a request. Original sources remain unread; no value/DOI from memory, no evidence, no page fetch, forbidden proxy or ResearchGate access.
+
+The fitness benefits of germinating later than neighbors10.1002/ajb2.1004 is focal Arabidopsis responding with C.fontanum as neighbor, not Cerastium sensing; fixed photoperiod for raising focal seedlings is not target response. Contrasting pre/post canopy paper is likewise no demonstrated target response from its printed abstract. Riding on the wind10.1093/aob/mcy190 primary indexed species table confirms C.fontanum VOC emission, not plant sniffing; no automatic target carry. Distilled candidissimum constituents and extracted-tissue flavonoid/pharmacology chemistry fail10(a). Cut Lupinus treatment, potato glycoalkaloid/light, mustard harvest vitamins, tomato phytochromes, carob Ceratonia scent, Cestrum night-jasmine and animal Cerianthus phototropism are other taxa; common chickweed Stellaria is not Cerastium. Herbicide kill/control and broad patent plant lists are not assumed living cue communication.
+
+Diel: no clock-hour Cerastium opening result found. Alpine Cerastium breeding paper explicitly samples flower stages every1–3days, not a daily hour; flower longevity, seasonal opening dates, frost/heat damage and pollen-tube development are not daily activity. Family Flower opening and closure review is citation context, not unverified species coverage. Historical flower books/catalogues/glossaries and Iceland travelogue offer no visible experimental target timing. The genus-only iNaturalist journal lists Cerastium among families, with its actual example Oxalis; no Cerastium measurement inferred.
+
+Eye: botanical trichome/stigma papillae/leaf anatomy, seed micromorphology, phytoliths and compound microscope methods do not show image-forming eyes or actual focusing. Tool-listed British grasses1917 lens word is not a Cerastium eye measurement; lens-like focusing if found belongs under light10(b). Owner eye_type none; no null while required API protocol unavailable. Family review includes Arabidopsis PHYD, fungal Taxol, insect photic evolution/moths, Salix pollination, petal optical coloration and broad plant plasticity, with no demonstrated target eye/diel/chemical measurement. No new service/quota refusal.
+
+Remaining14:Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
