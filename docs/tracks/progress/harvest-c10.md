@@ -1546,3 +1546,79 @@ Harvestedexclusions:GregoryofNyssa theology/light/metaphysics,IMFhousing/minings
 WaterstressregenerationN.yunnanensis DOI10.1371/journal.pone.0182012 fixesgrowth-chamberlightwhilevaryingwater;noinferredlight/chemicalsensing. SaltstressN.sylvatica coastalmesocosm measures salinity/physiology,notautomaticallychemicalcueperception. NAA-versusIBA stemcutting study shownmentionsNyssaasrelatedcomparisononly,notactualtargettreatment;intactseedlingauxinabstractaboveisverifiedseparately. TeaWRKYstudy merely includesN.sinensis sequencealignments,notNyssahormonetreatment.
 
 Diel:pairedresultsmostlyApril-June/late-springflowering,fallleafcolor andordinarymorphology. OriginalBHL/Smithsoniancitation identifies2009CrypticDioecyinN.yunnanensis (Sun,Zhang,Lowry,Wen);timedanthesisappearedonlyinincidentalRGsnippet,soitwasnotusedasmeasurementorclaimedtargetdailycoverage. RetainoriginalBHLpublicationpointer https://www.biodiversitylibrary.org/itemdetails/124659 forfutureoriginalmethodverification,notunverifiedtargetN.sylvaticadata. Exactprimarysite/anthesissearchdidnotreturntimedoriginalpassage. Eyepairsmainlyanimalhistology/humanlens,NyssaflorasandEucalyptusaggregatablackgumhomonym;noneverifiestargetfocusing. Ownerplantnoneapplies,focusingunderlight;noexhaustionclaim.
+
+
+## 2026-10-27 — issue38 worker40 Potentilla checkpoint
+
+NEWthisworkercumulative3web-screenedgenera(Melinis,Nyssa,Potentilla),25wanted,0searched,0evidence;now269wanted. Previous257byteprefixunchangedhere. Remaining7:Populus(next),Lolium,Agave,Verbascum,Calystegia,Tipularia,Sideroxylon;Amphicarpaeaprioradoptionnotrepeated. Allthreeavailable-sourcewebscreensforround,notfullprotocolexhaustion. OpenAlexcommon-name/missingstepsremainblockedaftercoordinator429,noretry/noconclusionofzerohits.
+
+### Potentilla — allfouroriginaltraits,actualspeciespreflight
+
+QueueactualP.indica39866,P.argentea21849,P.recta19271,P.erecta14694,P.reptans10808;Rosaceae/Rosales. Globalcanon/evidence/audit/wantedpreflightadoptsP.reptanslightoa-9#168-170andexistingharvest-12#1 DOI10.1111/j.1469-8137.2007.02301.x;no duplicationandnophysiologicalcarrytootherfour. ExistingArgentinaanserinahormonestudy c14#35 concerns renamedformercongener,notcurrentqueuePotentilla. ExistingComarumpalustreflowering/reproductionstudiesalsonotcurrentqueuephysiology. OwnerstatusandUnicode-normalizedDOI/titleidentitycheckscoverednestedsourceidentitiesandallunitsbeforenewappend.
+
+Officialharvestrun2,supplement12:60listedworkoccurrences(includingrepeats)withtitles/availableabstractstartsread,citationstepciting10.1111/ele.12205zeroresultsread,and15Rosaceaefamilyreviewtitlesread. Harvestcurrentlylistschemicalonly;originalqueuefourtraitsallwebscreened. Exactsuccessfulharvestqueries:Potentillaphytochromephotoreceptor;Potentillalightperception;Potentillaphototropism;Potentillavolatilesignalling;Rosaceaephotoreceptorreview (actualspellingsstoredonwantedqueries).
+
+Exactnewwebqueriesexecutedinorder:
+- `web: Potentilla seed germination light dark`
+- `web: Potentilla germination gibberellin OR smoke OR dormancy`
+- `web: Potentilla floral scent volatiles`
+- `web: Potentilla photoperiod light perception phototropism`
+- `web: cinquefoil photoperiod light perception phototropism`
+- `web: Potentilla flower opening time anthesis`
+- `web: cinquefoil flower opening time anthesis`
+- `web: "Potentilla" chemical perception volatile signalling`
+- `web: "cinquefoil" chemical perception volatile signalling`
+- `web: "Potentilla" epidermal lens cells eye type`
+- `web: "cinquefoil" epidermal lens cells eye type`
+- `web: "Duchesnea indica" germination light gibberellin`
+- `web: "Potentilla indica" light shade auxin`
+- `web: "Potentilla" jasmonate herbivore`
+- `web: "Dormancy, germination, and sensitivity to salinity stress"`
+- `web: "10.1139/cjb-2019-0038" Potentilla species`
+- `web: "Phenotypic plasticity of floral volatiles" Potentilla`
+- `web: "Population-specific responses of floral volatiles" Potentilla`
+- `web: "Potentilla argentea" "Potentilla erecta" germination`
+- `web: "Potentilla recta" "volatiles" "Burkle"`
+- `web: "cjb-2019-0038" "argentea"`
+- `web: "Differential effects of light quantity" "Potentilla" species`
+- `web: "The Effect of Gibberellins on Growth and Flowering" "Duchesnea"`
+- `web: "Duchesnea" "FP21253" authors`
+- `web: "Seed Germination Characteristics in Duchesnea indica" site:ijfs.org`
+- `web: "Adaptive plasticity in response to light and nutrient availability" doi`
+- `web: "Drought and leaf herbivory influence floral volatiles" "2016"`
+- `web: "Plasticity of Internodes and Petioles" "Potentilla" species`
+- `web: "Differential effects of light quantity" "reptans"`
+- `web: "Decision-making in plants under competition" "Potentilla"`
+- `web: "Potentilla" "Testing for disconnection"`
+- `web: "Potentilla erecta" methyl jasmonate elicitor`
+- `web: "Potentilla argentea" gibberellin`
+- `web: "Potentilla reptans" hormone ethylene auxin response`
+- `web: "Potentilla indica" "flower opening"`
+- `web: "Seed Germination Characteristics" "Duchesnea" "2024" gibberellic`
+- `web: "Potentilla" "Taylorson" "Photocontrol" "10."`
+- `web: "Duchesnea" "15.3.631" "1964"`
+- `web: "High frequency shoot organogenesis" "Duchesnea" hormones`
+- `web: "High frequency shoot organogenesis" "Duchesnea" "BA"`
+- `web: "cjb-2019-0038" "reptans" gibberellic`
+- `web: "Potentilla rupestris" "Drymocallis rupestris" site:powo.science.kew.org`
+- `web: "The germination characteristics of seeds" "1988" "Grime"`
+- `web: "Response of the Invasive Alien Plant Duchesnea" "2025" "10.3390"`
+- `web: "Adaptive plasticity" "Duchesnea" "Wang"`
+- `web: "Seed Germination Characteristics" "Duchesnea" "장경호"`
+- `web: "Photocontrol of Rough Cinquefoil" "1969"`
+
+Readallreturnedtitles/snippetsactuallydeliveredintwelvebundles,not20perqueryclaim. Extendedindexedprimarypassagesreturnedbysearcharenotpagefetches;nomethodsvaluesorevidencelogged. NoOpenAlexAPIfetch,incidentalOpenAlexresultsnotused. IncidentalRG,academia,Wikipedia,BookFi/unauthorizedredistributorsnotopened/used. Identity/methodverificationfromprimarypublisher,PMC/PubMed,officialinstitutionalflora,Kew,ASHS,USFSandjournalarcives.
+
+Twelvenewwanted:1990P.rectalight/darkseeds;1969P.norvegica light/KNO3;2019fiveactualspeciesseedsincludingqueueP.argentea/P.reptans;2024targetP.indica light/dark/GA3;1964targetgibberellin;2025targetshade;2022targetparentalUV-B;2022targetlight/nutrientplasticity;2012targetliveexplantBA/IAA/NAAculturefork;2016targetP.rectalivingfloralemission;1988historicalP.rupestris=Drymocallisrupestrisseedlight (Kewverified,nocurrentPotentillacarry);2015P.reptans self/non-selfrootrecognitionmechanismfork. Thelastisnotassumedchemicalcommunication;resourceintegrationcanexplainrecognitionuntiloriginaldesignread. 2019GA3indexkeyworddoesnotestablishspecies-specificchemicaloutcome;newsourcefiledlightonlypendingreading. Cut/drydonorchemistryexcluded;livinghormonetreatmentscount10(d). Cultureforkexplicit,nointactwholeplantassertion. Unknownauthors/DOIblank;noplaceholders.
+
+Sharedsourceadoption:NEWharvest-c9#35 DOI10.1111/nph.15081alreadyrequestedforHeterotheca. OriginalWileyindexedsupplementexplicitlynamesTableS4P.rectafloralemissionundercontrol/drought/CO2. AdoptactualP.rectachemicalsenderpointerwithoutduplicateorotherunitedit;parentnotifiedtosupportpossibleauthorizedmetadataexpansion. Carbonenrichment/lightfloralpigmentresponseisnotassumedsensoryvisionorplantcolourvision.
+
+Otherlightpointers:2017decision-making10.1038/s41467-017-02147-2,1998spectralquality10.1007/s004420050624,2002clonaltradeoff10.1046/j.1420-9101.2002.00435.x explicitlyactualP.reptanslight,responsealreadycovered/requestedforqueue;keptaspointers,nocontributedcarrytoP.indica/argentea/recta/erecta. 1998study'sotherplantP.anserinaisArgentina,notborrowed. 1996internode/petioleshadeplasticity10.2307/2390290actualspeciesnotverifiedinshownstart,notassignedtoqueue. Cellsize/number,genotypedensity,lightpartition,genomicvariationstudiesmostlyexistingP.reptanscoverage;genericshadeavoidance/hyponastyreviewsnotproofP.reptansethyleneexposure. 2015selfrecognitionrecordisaspecificunresolvedchemicalfork,notanewmeasurement.
+
+Unverifiedintakepointers,notnewwanted:KanazawaprimaryPDF AN00307805-51-2-177-182titleseedtestsintwoDuchesneaspeciesbutexactbibliographicidentitynotshown;Deno3bookP.malacoideslightresponseisoffqueue;commercialGlobeThesisrapidpropagationP.reptanshormoneleadlacksprimarybibliographicidentity. Secondaryindexethyleneroughcinquefoiltitleappeared,butnoprimaryidentityverified,noassumedP.reptansresponse. Thesepointersarenotnull-screenedaway.
+
+Chemicalexclusions:Potentillaextractsagainsthuman/rodentdiabetes,cataract,pain,skin,campylobacter,anthelminticassays,alcoholicrhizomeextractvolatiles,essentialoilfromAlpineP.grandiflora,rootsaponinsandsurimipowderflavorare10(a)removedmaterial,notlivingtargetcue. InducedFloralemissionofactualP.rectaiseparatelyverified. P.argutaprotocarnivoryproteinabsorptiondoesnotidentifyexternalsignalperceptioninshownabstract,andKewcurrentplacementnotverified;noqueuecarry. Leadhistory/DNA-methylationstressP.indicadoesnotautomaticallymeasurechemicalcueperception.
+
+Harvestedfloralvolatiles10.1093/aob/mcy193actuallyIpomopsisandhybrids,10.1002/ajb2.1846actualspeciesnotverifiedintheabstract,10.1002/ecs2.3254buckwheat;targetPotentillamentionsarereferencestoBurkle/Glennyoriginalsabovewhichwerechased. Rootcockchaferthesisspeciesnotshown,noassumedtargetemission. Artemisialiqueur/orangepeels/halophytefoodchemistry,QuercusLED,Myrsinelight,Trifoliumblue/PAR,ArabidopsisBR,CardaminegenesandPotamogetonforagingconcernotherplants. Soilfungalnecro/microbiota,botanicalepithet/glossaries,philosophicalcognitionandtaxonomicuncertaintieslackeligibleactualtargetresponseindisplayedstarts. Rosaceaereviewstargetpear/apple/strawberry/fungalMonilinia,notcurrentPotentillatreatments.
+
+Diel:seasonalMay-Augustfloweringandbud-to-flowerdaysdonotestablishdailyanthesis. RHSobservationalpageexplicitlydescribesP.reptansnight/cloudclosure https://www.rhs.org.uk/weeds/creeping-cinquefoil ;keptassecondarydaily/lightpointer,notanoriginalresearch-paperrequest. ShrubbyP.fruticosaflowerpaperrepresentscurrentDasiphora,notcarrytoherbaceousqueue;retainedasout-of-scopegenuspointer,notrescreened. Pollinator/anthospheremicrobiomeofP.indicaisnotfloweropeningtiming. EyequeriesreturnP.chinensisconicalpetalpapillae,P.bifurca/Conostylaeleafshape/stomata,embryonicP.niveacellsandpharmacologicalanimal-lensstudy;noshowntargetfocusingmeasurement. Conicalcellmorphologyalonenotafocusingexperiment. Ownerplantnoneapplies;anyactualfocusingunderlight. Noabsence/fullprotocolexhaustionclaim.
