@@ -342,3 +342,37 @@ Exact executed web queries (18 distinct;germination pair first):
 This worker cumulative3 new web-screened genera,24 wanted additions,0 searched,0 evidence; current136 wanted/29 searched against112/29 starting baseline. Nekemias adopted0new. Six newly eligible genera remain:Monarda,Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Monarda. Historical screened coverage30 prior+3 new+1 adopted=34/40; current-round full protocol completion/exhaustion remains0.
 
 Acer checkpoint gate printed `0 problems`; owned-path `git diff --check` passed before commit.
+
+### Monarda checkpoint
+
+Newly web-screened genus4,full protocol partial. Required harvest_get/screen_candidates confirm absent from cached harvest runs1-17,20,23,24. Canon,corrected-first accepted-name evidence (none),global searched/wanted and owner statuses checked. All returned titles/snippets read,not claimed20 each. Four new wanted lines and the existing Deno first-supplement request retain primary M.fistulosa light/dark germination,direct0800–2000 flower-opening timing,M.citriodora live foliar bio-regulator response,M.punctata germination-book trail and M.fistulosa negative smoke response. Extracts applied to living Monarda recipients qualify10(d); oils/Monarda extracts tested on bees,mammals or microbes do not10(a). Smoke-apparatus paper10.3732/apps.1300097 lists plants burned to make smoke; a donor-material list alone does not establish Monarda seed response,so not requested. Agency smoke-response statement is a separate explicit negative trial lead. Seasonal bloom/cut-flower maturity and UGA thesis10AM–2PM sampling window do not themselves establish daily rhythms; no speculative diel requests. Unsupported precise dawn figures on photography site not treated as source evidence.
+
+Family photoreceptor query returned general plant/insect reviews and medicinal light-metabolism review,no specific family photoreceptor review. General family context Integrative Perspectives on Light-Regulated Metabolism in Medicinal Plants (MDPI2218-1989/16/7/479) viewed only as snippet,not fetched. Eye returns mainly bees/general ocelli; plant eye_type none and epidermal focusing belongs to nonvisual light. No null rows while API protocol incomplete,no source fetch/evidence. Original queued targets fistulosa/citriodora/punctata distinguished from didyma/hybrids.
+
+Exact executed web queries (22 distinct;germination pair first):
+- `Monarda seed germination light dark`
+- `Monarda germination gibberellin OR smoke OR dormancy`
+- `Monarda floral scent volatiles`
+- `Monarda light response photoperiod`
+- `bee balm light response photoperiod`
+- `Monarda response to airborne volatile signals`
+- `bee balm response to airborne volatile signals`
+- `Monarda flower opening time anthesis`
+- `bee balm flower opening time anthesis`
+- `Monarda plant ocelli lens-like epidermal cells eye`
+- `bee balm plant ocelli lens-like epidermal cells eye`
+- `Lamiaceae photoreceptor review`
+- `Monarda jasmonate salicylic gibberellin growth regulator`
+- `"Monarda fistulosa" "smoke" germination`
+- `"Monarda citriodora" "anthesis"`
+- `"Monarda fistulosa" "nectar" "morning"`
+- `"Monarda citriodora" "growth regulators"`
+- `"Monarda punctata" germination light`
+- `"Monarda" "floral scent" emission headspace`
+- `"Monarda citriodora" "moringa" "pomegranate"`
+- `"An effective system to produce smoke solutions" Monarda`
+- `"Monarda fistulosa" "flower opening" nectar`
+
+This worker cumulative4 new web-screened genera,28 wanted additions,0 searched,0 evidence. Current140 wanted/29 searched vs112/29 baseline. Nekemias adopted0new,all historical flags preserved. Five newly eligible genera remain:Taxodium,Mitchella,Euphorbia,Eupatorium,Juniperus. Next Taxodium. Historical screened coverage30 prior+4 new+1 adopted=35/40; current-round complete/exhausted genera0 because API steps skipped.
+
+Monarda checkpoint gate printed `0 problems`; existing Deno first-supplement request preserved without duplication (new wanted4). Owned-path `git diff --check` passed before commit.
