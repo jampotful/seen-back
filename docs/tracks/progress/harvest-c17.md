@@ -262,3 +262,29 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - citation step: works citing 10.1016/j.isci.2022.104455 that name Lycopus: 0
 
 Checkpoint: 8 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 31 wanted lines total, 0 evidence. Remaining unreviewed 32; exact next Allium.
+
+### Allium (2026-10-27 continuation)
+
+Web screening finished for this round. Both required tools report no stored harvest. Twenty-one new leads cover seed germination, GA/ethylene responses, floral emission, herbivory-induced emissions, daily anthesis and garlic/light experiments. Existing A. cepa photoperiod evidence sweep-8#19 and A. ursinum illumination evidence oa-14#10/#12 are adopted; neither supplies all congeners. Already-wanted Herbivory-induced systemic signals are likely to be evolutionarily conserved in euphyllophytes (harvest-c8, 10.1093/jxb/erab349, spring-onion chemical cue/response experiment) and Plant volatiles as cues and signals in plant communication (harvest-c11, 10.1111/pce.13910, onion donor and potato receiver) are adopted without duplicate requests. Nothoscordum/Allium comparison already wanted under harvest-c10 is also retained for reader verification of Allium coverage. Food aroma, frying, freshly cut onion chemistry and tissue metabolomics are excluded under 10(a). Eye queries returned anatomy, fluorescent-cell chemistry and general ocelli essays without an Allium focusing experiment; plant eye_type is none under 10(b). Family-review search produced general photoreceptor reviews and an Amaryllidaceae phytochemistry review, no additional genus-specific measurement in the snippets. Common name wild onion is broad within this genus; actual species were kept when provided.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Allium seed germination light dark`
+- `web: Allium germination gibberellin OR smoke OR dormancy`
+- `web: Allium floral scent volatiles`
+- `web: Allium flower opening time anthesis`
+- `web: wild onion flower opening time anthesis`
+- `web: Allium plant ocelli lens-like epidermal cells eye`
+- `web: wild onion plant ocelli lens-like epidermal cells eye`
+- `web: Allium response to airborne volatile signals`
+- `web: wild onion response to airborne volatile signals`
+- `web: Allium light response photoperiod`
+- `web: wild onion light response photoperiod`
+- `web: Amaryllidaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+
+Checkpoint: 9 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 52 wanted lines total, 0 evidence. Remaining unreviewed 31; exact next Orchis.
