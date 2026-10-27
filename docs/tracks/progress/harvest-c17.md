@@ -188,3 +188,40 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - `Poaceae photoreceptor review` (stored family review)
 
 Final checkpoint for this worker: 6 genera web-screened for the round (Scilla through Calamagrostis), all partial under the full protocol; 0 full-protocol complete, 0 searched rows, 23 wanted lines, 0 evidence. Stopped between genera for handoff. Remaining unreviewed: 34, exact next Marrubium. All 40 remain without a complete new OpenAlex protocol. Only refused service: OpenAlex, coordinator HTTP 429; skipped throughout. No page fetches or paper text committed. Gate must print 0 problems before commit.
+
+### Marrubium (2026-10-27 continuation)
+
+Web screening finished for this round. Six new chemical-response leads added (two GA3 seed studies, GA3/nitrate species survey, nutrient-solution treatment, CO2/bacteria and lead adaptation). Existing M. vulgare light/dark germination evidence sweep-25#8 is adopted; light-only germination leads are not requested again. Diel results gave seasonal flowering and morphology, without daily opening hours. Eye results gave general ocelli discussions and medicinal histology with lens-shaped stomata, without a focusing experiment; plant eye_type is none under owner 10(b). Harvest eye candidates concern Leonurus and Derris, other genera. Chemical keyword hits on rosemary, Dracocephalum, Rosa and Salvia concern other genera; Marrubium distilled-oil and extract studies are excluded under 10(a). Family query produced broad photoreceptor and Lamiaceae reviews, without a Marrubium measurement in the snippets.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Marrubium seed germination light dark`
+- `web: Marrubium germination gibberellin OR smoke OR dormancy`
+- `web: Marrubium floral scent volatiles`
+- `web: Marrubium flower opening time anthesis`
+- `web: white horehound flower opening time anthesis`
+- `web: Marrubium plant ocelli lens-like epidermal cells eye`
+- `web: white horehound plant ocelli lens-like epidermal cells eye`
+- `web: Marrubium response to airborne volatile signals`
+- `web: white horehound response to airborne volatile signals`
+- `web: Lamiaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Marrubium phytochrome photoreceptor`
+- `Marrubium light perception`
+- `Marrubium phototropism`
+- `Marrubium flower opening time`
+- `Marrubium nyctinasty`
+- `Marrubium anthesis`
+- `Marrubium pollination biology`
+- `Marrubium volatile signalling`
+- `Marrubium epidermal lens cells`
+- `Marrubium epidermal focusing leaf optics`
+- `Lamiaceae photoreceptor review` (stored family review)
+- citation step: works citing 10.1111/een.12947 that name Marrubium: 0
+- citation step: works citing 10.1016/j.isci.2022.104455 that name Marrubium: 0
+
+Checkpoint: 7 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 29 wanted lines total, 0 evidence. Remaining unreviewed 33; exact next Lycopus.
