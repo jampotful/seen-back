@@ -1092,3 +1092,40 @@ No source/paper pages fetched, evidence, permission/proxy/TLS changes or operati
 
 
 Worker17 mandatory Cortaderia gate printed **0 problems**. Query-count correction: Packera exact listed queries total20 (not19); worker17 cumulative36 after Cortaderia16. Parent expanded shared c17 Deno#16 to Packera aurea with explicit UTK synonym title, commitedd32b40, checked0problems; shared adoption has target metadata and no duplicate c11 request.
+
+
+## 2026-10-27 — issue38 worker17 Nasturtium
+
+NEW Nasturtium web-screened,18 successful exact web queries,8wanted/0searched/0evidence. Worker17 totals3 available-web-screened genera (Packera,Cortaderia,Nasturtium),54queries,17wanted/0searched/0evidence. Current103wanted/25searched;14 remaining, exact next Tecoma. Packera first-batch unseen-tail limitation persists. OpenAlex429 skipped; protocol/source reading incomplete, no exhaustion/null claim. No new refusal.
+
+Pre-query coverage: global evidence/corrected/wanted/searched/status checked by genus/common name and titles/DOIs/URL. Existing sweep41#9/10 primary abstract light evidence (2006 photoperiod/red-far-red10.1021/jf051857o;1951 germination10.1038/168253a0) and oa12#30 review shade-tolerance10.1017/wet.2026.10096 adopted, not re-requested. Species-specific N.officinale/N.microphyllum germination disagreement remains explicit; no light-indifference generalization across genus. Thin sweep41 searches do not establish open chemical/diel/eye protocol. Canon catalog checked, no in-hand named target source resolves those traits. Mandatory harvest_get.py/screen_candidates.py both explicitly report Nasturtium absent; raw scratch Nasturtium-harvest/candidates.txt.
+
+Taxonomy safeguards: garden nasturtium is Tropaeolum majus, already screened in issue28; all its culture/light/volatilome/tissue-optics results excluded here. Watercress bioassay often means Lepidium sativum; those seaweed/algal/hormone trials are not N.officinale. Fool's watercress Apium nodiflorum is another genus. The1961 Nasturtium palustre germination paper is Rorippa palustris: exact-name check returned Kew,IPNI,NZOR/Flora NZ synonymy, not a target candidate. Conversely Rorippa nasturtium-aquaticum is N.officinale per Missouri conservation flora, so1983 watercress I/II papers count as target leads.
+
+Eight new sources retained after global title/DOI/status dedup: watercress1983 germination I and II, seven-genera white-light quantal germination, Syrian in-vitro light/GA3 seed study, living microshoot elicitors10.1007/s00253-021-11743-8, live SA phytoremediation10.3389/fpls.2022.1059175, wounded-watercress VOC nanosensor10.1002/advs.202412732, synthetic-compound/GA-positive-control seed bioassay.1983I title/author/year corroborated by legal Horticultural Science reference list; get URL is citing source, original J.Hort.Sci58:417–426 still needed. The first result for it was excluded ResearchGate, not relied on. II seed colour is not a dark-treatment measurement. Quantal germination includes light treatments/GA keywords, species alignment unresolved. Microshoot cultures count10(d) with culture scope; no whole-plant value invented. Nanosensor emission requires living attached donor/species/signal validation and sensor detection alone does not show biological perception. Applied-chemical toxicity is distinguished from cue recognition for synthetic assay. No numerical extraction.
+
+Chemical exclusions: watercress flavour/odorant surveys PMC8150828,PMC6316591, surface-wax volatiles and postharvest-storage thesis are tissue/harvest chemistry under10(a); no living signaling established. Family review10.3732/ajb.89.2.230 and10.1105/tpc.109.072280 plus general photoreceptor reviews name no target open-trait measurement in delivered snippets. Submergence paper10.1111/nph.16350 is background/conditional endogenous-hormone context; no applied chemical response asserted merely from transcriptomic modules. Diel pair and targeted morning query returned flowering months, long-day bolting and harvesting advice, no verified daily anthesis hour. Other plant/anatomy/cactus/guava/Tecoma-style time results do not carry. Eye_type none follows10(b); general ocelli/lens essays are light optics, no target demonstrated focusing in snippets; stacked-scattering10.1002/ajb2.70104 is Tropaeolum tissue optics.
+
+All delivered titles/snippets read, variable counts rather than assumed20. No page/paper fetch, evidence, proxy/TLS/credentials/access changes or operational edit. Raw successful connected responses /workspace/work/w17-c11/Nasturtium-web1–5.json. Exact executed queries:
++- `web: Nasturtium seed germination light dark`
+- `web: Nasturtium germination gibberellin OR smoke OR dormancy`
+- `web: Nasturtium jasmonate herbivore`
+- `web: Nasturtium flower opening time anthesis`
+- `web: watercress flower opening time anthesis`
+- `web: Nasturtium plant ocelli lens epidermal focusing eye`
+- `web: watercress plant ocelli lens epidermal focusing eye`
+- `web: Nasturtium chemical sensing volatiles`
+- `web: watercress chemical sensing volatiles`
+- `web: Brassicaceae photoreceptor review`
+- `web: "Nasturtium officinale" methyl jasmonate salicylic gibberellin`
+- `web: "watercress" germination gibberellic acid light`
+- `web: "Nasturtium officinale" anthesis "morning"`
+- `web: "Nasturtium palustre" Rorippa`
+- `web: "The germination of watercress" "hormones" -site:researchgate.net`
+- `web: "Salicylic acid improves Nasturtium officinale"`
+- `web: "Nasturtium officinale" "ethylene" "GA" "16350"`
+- `web: "Nasturtium officinale" "seed germination" "gibberellic"`
+
+Mandatory validator pending checkpoint.
+
+Worker17 Nasturtium mandatory real gate printed **0 problems**. Current103wanted/25searched. Next Tecoma.
