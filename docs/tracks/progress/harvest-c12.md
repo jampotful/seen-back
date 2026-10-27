@@ -872,3 +872,46 @@ Other dispositions: tea-processing volatiles, distilled essential oils, dried/ex
 Eye searches return leaf epidermal taxonomy/micromorphology, pubescence, morphology and metaphorical “eye”, not image-forming eyes. Lespedeza micromorphology2014 describes cuticle/stomata/hairs and gentle surfaces without focusing; no actual focusing lead identified. Owner10(b) eye_type none; any epidermal focusing would belong under light. No eye null due unavailable mandatory steps. Diel re-search was omitted because substantive sweep-20#4 is adopted.
 
 Remaining19 in authorized order: Salix,Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. Salix mandatory tool retrieval started for next entry; no Salix web query yet. No new service/quota refusal.
+
+## 2026-10-27 — issue38 worker15: Salix and fresh-context handoff
+
+NEW this worker:3 genera web-screened(Ficus,Lespedeza,Salix),43 wanted,0 searched,0 evidence. Current files16 searched/154 wanted; prior18+new3=21/40 web-screened; Asparagus fully adopted independently=22/40 covered for this dispatch.18 authorized genera remain, exact next Coccoloba. All3 new screens remain full-protocol partial because live OpenAlex mandatory steps are unavailable; no null/exhaustion or new measured closure claimed. No existing prefix/history rewritten. No new service/quota refusal.
+
+Salix harvest_get reports “in no harvest run yet” and screen_candidates reports “not in the harvest”; there are no cached Salix titles/citation/family results to claim screened. Both commands actually ran in supported network mode. Old sweep-20#18 is a thin combined search, not a web-complete screen. Existing canon-3#631,#665–666 concerns S.sitchensis/exigua/lemmonii, while queue targets are S.caprea/nigra. Correction to initial general genus coverage inventory above: this chemical evidence is congener context only, NOT adopted as target chemical closure. Both chemical web queries therefore ran; no family/species carry assumed. No existing complete target eye/diel screen was found.
+
+Exact executed web queries,10(e) pair first:
+- `web: Salix seed germination light dark`
+- `web: Salix germination gibberellin OR smoke OR dormancy`
+- `web: Salix floral scent volatiles`
+- `web: willow floral scent volatiles`
+- `web: Salix light photoperiod phototropism`
+- `web: willow light photoperiod phototropism`
+- `web: Salix flower opening time anthesis`
+- `web: willow flower opening time anthesis`
+- `web: Salix eye type epidermal focusing`
+- `web: willow eye type epidermal focusing`
+- `web: Salicaceae photoreceptor review`
+- `web: "Three options are better than two" Salix`
+- `web: "Water, wind and willows"`
+- `web: "1,4-Dimethoxybenzene, a floral scent compound in willows"`
+- `web: "Diel fragrance pattern correlates"`
+- `web: "Fluctuation of oxidative stress indicators in Salix nigra seeds during priming"`
+- `web: "Salix nigra" "photoperiod" light`
+- `web: "Salix caprea" "light" photoperiod`
+- `web: "Salix nigra" "regeneration" "growth regulators"`
+- `web: "In Vitro Propagation of Salix caprea"`
+- `web: "Three options are better than two" "doi"`
+
+All delivered titles/snippets were read, up to first20 per query where returned, without inventing20-result counts. Scratch provenance work/w15-c12/Salix-harvest.txt,Salix-candidates.txt,Salix-web1..6.json,Salix-queries.json. Family alternative `Salicaceae photoreceptor review` returned general photoreceptor structure/multimodal/evolution reviews, Populus chemical review and unrelated wind/water results, but no family-specific review showing a target eye/diel measurement. No live OpenAlex request or source-page fetch; failed/skipped API is not zero hits. Canon plant light/chemical and animal eye lists were checked as in prior checkpoints, not newly requested.
+
+Fourteen new wanted sources globally normalized-title/DOI checked against wanted/evidence/corrected/papers-status, none duplicates/n/a: direct target S.caprea germination(light/dark) via Water,wind and willows; S.nigra photo-oxidized seed/priming; congener S.variegata and xerophila/maximowiczii/koreensis seed studies for10(e)/methods checks; S.caprea2005 dynamic-headspace floral scent;2014 diel fragrance;2021 daily anthesis;2007 multi-species floral scent with species table membership explicitly unverified; nonqueued S.pentandra GA/bud/photoperiod and S.viminalis photoperiod studies; S.caprea×viminalis hybrid light/rooting with hybrid fork; review primary-reference lead for S.nigra UV-B response; direct S.nigra TDZ/BAP regeneration. Species-specific target findings were prioritized; congener/hybrid sources cannot close caprea/nigra cells.
+
+The direct publisher2021 DOI10.26786/1920-7603(2021)627 identifies Ohashi/Jürgens and explicitly says S.caprea flower-opening anthesis peaked at sunset in four field populations. This is a genuine plant daily-timing lead, not merely a day/night pollinator-exclusion schedule, so no diel null. Primary2014 DOI10.1111/boj.12183 is separately resolved by an exact-title search; no title/DOI/year copied from memory or an encyclopedia.2005 DOI10.1007/s10886-005-9152-y measures scent from S.caprea/S.atrocinerea by headspace; bee electrophysiology does not itself become plant sensing. The nigra regeneration primary indexed PubMed abstract10.1093/treephys/26.7.969 explicitly supplies PGR treatment/plant bud formation; culture interpretation remains for reader.
+
+Light leads distinguish actual contrasts from fixed16/8h or12/12h culture conditions. Direct S.caprea germination source compares light/dark; nigra review states UV-B root response and names reference31, which the source reader must chase. Hybrid root-formation study10.1111/j.1399-3054.1980.tb03252.x explicitly concerns caprea×viminalis, not pure caprea. Seed storage/cryotolerance/desiccation alone is not photoreception; retained methods/citation leads stay unmeasured. Moisture/salt/temperature responsiveness is not silently converted into another trait. Secondary woody-seed manual points to older Densmore/Zasada sources but no unverified source title or DOI was invented.
+
+Other results: smoke-water made FROM white willow is tested on cucumber,tomato,marigold,gladiolus, so not a living Salix response. American-willow male flowers extracted48h in hexane fail10(a). Extract/skin, cosmetics/eyelash “Willow”, animal corneal epidermis, and word-collision human fragrance results do not measure plant eyes. Salix/Chosenia stomatal SEM and epidermal anatomy concern taxonomy, not lenses/focusing; no actual focusing lead found. Owner10(b) eye_type none; no eye null while mandatory API steps unavailable. Potted ABA response in S.viminalis and applied-GA studies in S.pentandra are legitimate10(d) congener context, not target-species evidence. Seasonal catkin dates, woody growth cessation, gas exchange and visitor schedules alone are not daily anthesis.
+
+Fresh-context handoff after completing Salix: do not repeat Ficus/Lespedeza/Salix web screens or the earlier18 genus screens. Asparagus is fully adopted without searches. Continue18 in exact authorized order: Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. None of these18 has been newly web-searched by this worker. Reuse the initial per-trait adoption inventory but match species for chemical/light, preserve Daucus eye plant-1#3 and exclude Prunella bird-homonym rescreen rows. Shared c8#123 L.cuneata expansion confirmed by owner w11_c8; no local duplicate. Parent owns legacy Kummerowia finding, PR/push/audit.
+
+Worker15 final gate: actual combined screen_candidates --check prints `0 problems` for16 searched/154 wanted. Both JSONL files parse; git diff --check passes; baseline bbc35ff2050022e029b68875e3d219aab8f0ddd4 bytes are exact prefixes of all three owned files. Only wanted/progress changed; no evidence, full paper asset, application/operational or other-unit edit. Final commit follows this gate.
