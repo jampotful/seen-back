@@ -1407,3 +1407,26 @@ Exact actual web queries, in execution order:
 
 NEW this genus: 22 wanted,0 searched,0 evidence. Adopted existing wanted: [].
 Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Cichorium-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
+
+
+## 2026-10-27 — issue38 worker34: Daucus
+
+Adopted target carota light evidence recheck-17-fixed#5 and substantive eye_type screen plant-1#3; neither paired search repeated. Old sweep-5 thin summary preserved. Mandatory tools:cached run4 and supplements12/14,109 printed occurrences and entire stored abstract starts,15 family-review titles read. Exact cached queries: Daucus phytochrome photoreceptor; Daucus light perception; Daucus phototropism; Daucus flower opening time; Daucus nyctinasty; Daucus volatile signalling; Daucus anthesis; Daucus pollination biology; Apiaceae photoreceptor review. Citation step citing10.1111/ele.12205 returned0 printed works. Available family review alternative and prior target light evidence adopted; no live OpenAlex request.
+
+Direct target ABA,MeJA,JA,PSK,melatonin and growth-regulator leads retained10(d); target germination titles held10(e) even where a true light/chemical comparison is unverified. Glochidiatus light experiment stays congener,no target carry. Existing plant-1 target nodding and root VOC wanted adopted. New dissertation clock-hour lead is secondary bibliography needing original reference28,not measured evidence. Pollinator visits,seed development days after anthesis,flower maturation and hygroscopic dry umbel closure are not automatic daily-clock plant activity. Lilium cut-flower chemical treatment,poinsettia,maize,rice,Arabidopsis,cucumber,cotton,Iva and oak results do not establish target traits. Carrot food flavour10.21273/hortsci.34.4.625,BetaSweet composition,soil fertilization/yield optimization,antitumour extracts,crinitus hydrodistillation/HS-SPME of extracted organs and cooked-carrot aroma fail living chemical-signal10(a) without a living treatment. True induced psyllid/MeJA headspace experiment retained despite essential-oil wording. Floral nectar headspace source retained for collection-method check. Microscopy,nuclear autofluorescence,phylogenomics and human-eye nutrition are not target eye/focusing findings; substantive prior plant eye screen adopted under owner10(b). Remaining4,next Chamaenerion.
+
+Exact actual web queries, in execution order:
+- `web: Daucus seed germination light dark`
+- `web: Daucus germination gibberellin OR smoke OR dormancy`
+- `web: Daucus floral scent volatiles`
+- `web: Daucus volatile emission herbivore induced response methyl jasmonate`
+- `web: wild carrot volatile emission herbivore induced response methyl jasmonate`
+- `web: Daucus flower opening time anthesis`
+- `web: wild carrot flower opening time anthesis`
+- `web: "Factors Influencing Petaloidy Expression" carrot`
+- `web: "Isolation and identification of floral attractants" "Daucus"`
+- `web: "Daucus" "germination" "salinity" "nantes" -site:researchgate.net`
+- `web: "carrot" "anthesis" "time" flowering nectar`
+
+NEW this genus: 26 wanted,0 searched,0 evidence. Adopted existing wanted: [('Variable seed bed microsite conditions and light influence germination in Australian winter annuals', 'harvest-c11'), ('The Diurnal Nodding of the Wild Carrot and Other Plants', 'plant-1'), ('Root-Emitted Volatile Organic Compounds from Daucus carota Modulate Chemotaxis in Phasmarhabditis and Oscheius Nematodes', 'plant-1'), ('Effect of Light on Germination of Light-Sensitive Seeds', 'harvest-c9'), ('Seed Germination Theory and Practice, 2nd ed.', 'harvest-c7')].
+Mandatory harvest_get/screen_candidates ran; global actual species/trait evidence, searched, wanted, canon and papers-status preflight checked. Read all delivered titles/snippets (up to20/query where delivered; no invented result count). Source skips OpenAlex429,MDPI429,UChicago403,SANBI403 respected; no refusal retried. No null searched rows while mandatory API steps incomplete; full protocol remains partial. Raw provenance scratch work/w34-c12/Daucus-web*.json and -harvest.txt; no paper text or assets committed. Prior owned-file prefixes preserved.
