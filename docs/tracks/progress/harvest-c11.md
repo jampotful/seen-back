@@ -2,7 +2,7 @@
 
 ## 2026-10-27 — round 28
 
-This worker and cumulative batch: **3 genera protocol-screened** (Ulmus, Malvaviscus, Carya), **4 search records**, **21 wanted leads**, **0 evidence records**, **0 cells measured closed**. Remaining **37 genera**, next **Pyrus**; then Zizia, Ptelea, Iris, Ricinus, Conopholis, Tropaeolum, Chasmanthium, Paulownia, Chenopodium, Aquilegia, Helianthus, Arundo, Sorghum, Dioscorea, Vinca, Lobelia, Foeniculum, Hypochaeris, Sorghastrum, Packera, Cortaderia, Nasturtium, Tecoma, Cosmos, Achillea, Mahonia, Apocynum, Bromus, Marchantia, Vachellia, Poa, Parkinsonia, Panicum, Artemisia, Polystichum, Ailanthus. Screening is complete for these three even where plausible measurements remain wanted; no wanted trait is called exhausted. Search dispositions are Ulmus diel/eye_type, Malvaviscus eye_type, Carya eye_type.
+This worker and cumulative batch: **6 genera protocol-screened** (Ulmus, Malvaviscus, Carya, Pyrus, Zizia, Ptelea), **9 search records**, **38 wanted leads**, **0 evidence records**, **0 cells measured closed**. Remaining **34 genera**, next **Iris**; then Ricinus, Conopholis, Tropaeolum, Chasmanthium, Paulownia, Chenopodium, Aquilegia, Helianthus, Arundo, Sorghum, Dioscorea, Vinca, Lobelia, Foeniculum, Hypochaeris, Sorghastrum, Packera, Cortaderia, Nasturtium, Tecoma, Cosmos, Achillea, Mahonia, Apocynum, Bromus, Marchantia, Vachellia, Poa, Parkinsonia, Panicum, Artemisia, Polystichum, Ailanthus. Screening is complete for these six even where plausible measurements remain wanted; no wanted trait is called exhausted. Search dispositions are Ulmus diel/eye_type, Malvaviscus eye_type, Carya eye_type; Pyrus eye_type; Zizia diel/eye_type/sense_chemical; Ptelea eye_type.
 
 Read AGENTS.md, the round28 guide, round4-harvest, THOROUGH, BRIEF including Round 2, round3-sweep, desk-screen points 1–10 including plant10(e), and audit 53/54 findings. No app startup, build, server, test or global-state modification. Main's existing sweep-13 Ulmus light/chemical records and old sweep-13/sweep-16 search records remain untouched. Global wanted/status lookup found no duplicates for the new leads. Canon catalog checked: no in-hand plant compilation covering these genera; relevant trait canon DOIs are retained in search records, without pretending source text was read. Owner eye_type decision followed; epidermal focusing is a nonvisual-light topic.
 
@@ -10,7 +10,7 @@ Read AGENTS.md, the round28 guide, round4-harvest, THOROUGH, BRIEF including Rou
 
 harvest_get.py and screen_candidates.py explicitly report Ulmus, Malvaviscus and Carya absent from runs 1–17,20,23,24. Thus no harvest queries or candidates were silently omitted. Ulmus direct OpenAlex requests returned all nine queries at per-page=20 (or all results when fewer); titles and the available abstracts were screened. On the first Malvaviscus query, OpenAlex returned **HTTP429**. No later OpenAlex API request was made. Per the source-refusal rule, the complete scientific/common-name pairs and family searches for Malvaviscus and Carya were executed with connected web search; they are recorded as `web:` queries only. The failed API query is not called executed in a search record. Parent was informed of the refusal and continuation through usable web search.
 
-**35 successful connected web queries**: Ulmus11, Malvaviscus12, Carya12. One initial call with an unsupported argument returned an empty tool error and is not counted as successful. No quota refusal from connected web. Search tool returns variable numbers of results; all returned titles/snippets were screened, never claiming twenty where fewer returned. Raw tool responses and direct OpenAlex metadata are scratch files under work/harvest-c11, not committed. No primary-source page fetched or paper text/evidence committed, per desk-screen point3.
+**71 successful connected web queries**: Ulmus11, Malvaviscus12, Carya12, Pyrus12, Zizia12, Ptelea12. One initial call with an unsupported argument returned an empty tool error and is not counted as successful. No quota refusal from connected web. Search tool returns variable numbers of results; all returned titles/snippets were screened, never claiming twenty where fewer returned. Raw tool responses and direct OpenAlex metadata are scratch files under work/harvest-c11, not committed. No primary-source page fetched or paper text/evidence committed, per desk-screen point3.
 
 Ulmus: scientific/common searches found seasonal flowering dates, not a daily opening hour. Biological Flora Ulmus glabra (10.1111/1365-2745.12994) and USDA American/Cedar Elm snippets were screened out for diel because their dates are seasonal. Existing sweep-13 already holds Ulmus pumila light and Ulmus minor chemical evidence, so neither gets a null. New wanted leads include three living-tissue hormone responses, five seed-germination studies, the GA3 red-elm report and photoperiodic American-elm growth. They are leads pending source reading, not new evidence. Ulmaceae review query returned five titles, including 10.1111/jbi.70113 and 10.3390/urbansci9010014: seasonal tree phenology, not a direct Ulmus within-day anthesis measurement. Other returned titles concerned introgression, Cannabis and natural-products chemistry.
 
@@ -119,4 +119,126 @@ Carya:
 
 ### Validation and next step
 
-First two-genera gate: `screen_candidates.py --check` printed **0 problems**. Three-genera gate: **0 problems** before commit. Resume at Pyrus in exact batch order. OpenAlex remains skipped after429; use cached harvest where present and connected web for scientific/common/family protocol. No uncompleted protocol is counted done.
+First two-genera gate: `screen_candidates.py --check` printed **0 problems**. Three-genera gate: **0 problems** before commit. Resume at Iris in exact batch order. OpenAlex remains skipped after 429; use cached harvest where present and connected web for scientific/common/family protocol. No uncompleted protocol is counted done.
+
+### Pyrus and Zizia continuation, 2026-10-27
+
+This continuation adds 2 screened genera,4 search records and13 wanted lines (12 Pyrus; one new Deno second-edition book for Zizia, while the existing first-supplement line is extended to Zizia aptera instead of duplicated). Pyrus eye_type is the only new null for that genus; main already has pear photoperiod evidence and new light/chemical/diel candidates remain wanted. Particularly useful leads are the2014 Japanese-pear red/far-red photoperiod trial (PMID24876291; OUP tpu033 PDF) and2023 photoperiod/diurnal-transcriptome study (10.1111/ppl.13893). They refine the existing dormancy-specific finding; no blanket claim of pear light insensitivity is made. Nut/fruit storage and aroma-profile chemistry was screened out under10(a). Pyrus lens-shaped stomata (PMC3845256) are anatomy, not a visual organ. Rosaceae review queries returned general photoreceptor reviews plus10.1002/fsn3.72269 on Rosaceae pigment regulation, with no Pyrus eye measurement in returned text.
+
+Zizia light held for original Deno germination entries indexed on denosgarden.com; original conditions remain to verify. Diel, eye_type and chemical null dispositions follow full name pairs, germination/GA/scent searches and Apiaceae review. Results naming Ziziphus, Zizyphus, Ziziphora, Zizania or Vetiveria zizanioides concern other genera. Zizia horticultural pages report flowering seasons, not daily hours, and cold/moist stratification with endogenous chemistry, not an applied hormone or airborne signal. Review10.1093/hr/uhac076 returned no Zizia measurement in its available abstract/excerpts; unread tables are not claimed searched in full. Neither genus was in cached harvest; no harvest query was omitted. Pyrus and Zizia checks each printed0 problems.
+
+Exact Pyrus queries:
+
+- web: Pyrus seed germination light dark
+- web: Pyrus germination gibberellin OR smoke OR dormancy
+- web: Pyrus floral scent volatiles
+- web: Pyrus flower opening time anthesis
+- web: pear flower opening time anthesis
+- web: Pyrus plant ocelli lens epidermal focusing eye
+- web: pear plant ocelli lens epidermal focusing eye
+- web: Pyrus chemical sensing volatiles
+- web: pear chemical sensing volatiles
+- web: Pyrus photoperiod phototropism light response
+- web: pear photoperiod phototropism light response
+- web: Rosaceae photoreceptor review
+
+Exact Zizia queries:
+
+- web: Zizia seed germination light dark
+- web: Zizia germination gibberellin OR smoke OR dormancy
+- web: Zizia floral scent volatiles
+- web: Zizia flower opening time anthesis
+- web: golden alexanders flower opening time anthesis
+- web: Zizia plant ocelli lens epidermal focusing eye
+- web: golden alexanders plant ocelli lens epidermal focusing eye
+- web: Zizia chemical sensing volatiles
+- web: golden alexanders chemical sensing volatiles
+- web: Zizia photoperiod phototropism light response
+- web: golden alexanders photoperiod phototropism light response
+- web: Apiaceae photoreceptor review
+
+Continuation wanted provenance:
+
+22. Ascorbic acid releases dormancy and promotes germination by an integrated regulation of abscisic acid and gibberellin in Pyrus betulifolia seeds — https://onlinelibrary.wiley.com/doi/10.1111/ppl.14271; query `web: Pyrus germination gibberellin OR smoke OR dormancy`. Snippet states germination tests after exogenous AsA and lycorine, qualifying living chemical responses. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+23. Seed coat-derived ABA regulates seed dormancy of Pyrus betulaefolia by modulating ABA and GA balance — https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2025.1667946/full; query `web: Pyrus germination gibberellin OR smoke OR dormancy`. Snippet reports exogenous ABA and fluridone germination assays. A fixed 16/8h culture photoperiod alone is not a light-treatment measurement. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+24. Endemik Pyrus serikensis (Rosaceae) türünün tohum çimlenmesi üzerine araştırmalar — https://dergipark.org.tr/en/pub/akdenizfderg/article/267393; query `web: Pyrus seed germination light dark`. Snippet reports an 18h light/6h darkness germination treatment as the best combination; verify comparison against darkness and species name. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+25. Seed germination response of Indian wild pear (Pyrus pashia) to gibberellic acid treatment and cold storage — https://notulaebiologicae.ro/index.php/nsb/article/view/11044; query `web: Pyrus germination gibberellin OR smoke OR dormancy`. Title explicitly reports seed germination under applied GA, a living hormone-response lead. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+26. Flowers of European pear release common and uncommon volatiles that can be detected by honey bee pollinators — https://link.springer.com/article/10.1007/s00049-019-00289-x; query `web: Pyrus floral scent volatiles`. Snippet reports floral emission rates and pollinator antennal activity. Verify living-flower collection rather than harvested-tissue chemistry. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+27. Volatile Emission of Pear Tree (Pyrus communis) and Olfactory Perception of Pear Psyllids (Cacopsylla pyri and C. pyrisuga) are Affected by Elevated Tropospheric Ozone Concentration — https://link.springer.com/article/10.1007/s10886-025-01642-x; query `web: Pyrus chemical sensing volatiles`. Tree volatile emissions under ozone exposure plausibly measure a living chemical response and emitted signals. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+28. Dual biotic stressors shape volatile organic compound emission patterns in pome fruit trees — https://pubmed.ncbi.nlm.nih.gov/42424400/; query `web: Pyrus chemical sensing volatiles`. Snippet names pear trees, herbivore-induced emissions and pear-decline pathogen effects. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+29. Diurnal transcriptome dynamics reveal the photoperiod response of Pyrus — https://onlinelibrary.wiley.com/doi/10.1111/ppl.13893; query `web: Pyrus photoperiod phototropism light response`. Snippet reports plants grown under long and short days and samples every4h for2days. Verify measured species and distinguish rhythmic gene expression from flower-opening behaviour. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+30. Effect of extending the photoperiod with low-intensity red or far-red light on the timing of shoot elongation and flower-bud formation of 1-year-old Japanese pear (Pyrus pyrifolia) — https://academic.oup.com/treephys/article-pdf/34/5/534/17432724/tpu033.pdf; query `web: Pyrus photoperiod phototropism light response`. Snippet explicitly reports flowering regulation by red:far-red ratio. This concerns flower induction rather than daily anthesis and does not contradict the older dormant-growth experiment. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+31. Genome-wide analysis of the CCT gene family in Chinese white pear (Pyrus bretschneideri Rehd.) and characterization of PbPRR2 in response to varying light signals — https://link.springer.com/article/10.1186/s12870-022-03476-1; query `web: Pyrus photoperiod phototropism light response`. Snippet reports gene-expression responses under enhanced red illumination; verify plants and light-treatment comparison in methods. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+32. Monochromic Radiations Provided by Light Emitted Diode (LED) Modulate Infection and Defense Response to Fire Blight in Pear Trees — https://pmc.ncbi.nlm.nih.gov/articles/PMC8465259/; query `web: Pyrus photoperiod phototropism light response`. Title and snippet describe monochromatic light treatments and plantlet defense-expression rhythms; reader must establish the named pear species. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+33. Pollen Compatibility Studies of Some Commercially Important Pear Varieties (Pyrus communis L.) — https://krishikosh.egranth.ac.in/server/api/core/bitstreams/94731ab3-d396-4c3a-b715-b5f55ae69e20/content; query `web: Pyrus flower opening time anthesis`. Returned thesis section is Flower anthesis and anther dehiscence, a candidate source for daily timing. No time is inferred from generic flowering stages. Connected web title/snippet lead, 2026-10-27; source not fetched/read, no evidence logged.
+
+34. Seed Germination Theory and Practice, 2nd ed. — https://denosgarden.com/s/zizia-aurea/; query `web: Zizia seed germination light dark`. Indexed Zizia aurea germination entry gives a darkness regime; verify original experiment and whether it compares light/dark. Genus germination lead under10(e); original source not fetched/read, no evidence logged.
+
+
+### Ptelea continuation, 2026-10-27
+
+Adds 1 screened genus, 1 null search disposition and4 wanted studies; existing Deno second-edition wanted line extended to Ptelea species instead of duplicated. Total this worker/cumulative 6 genera, 9 search records, 38 wanted lines,0 evidence,0 measured cells. Stops between genera for fresh-context takeover;34 remain from Iris in batch order. No uncompleted genus counted. OpenAlex remains skipped after 429; connected web had no refusal.
+
+Ptelea cached harvest run6 and supplements14/20 were reviewed once its asynchronous tool completed. Scientific/common-name trait pairs, plant10(e) and Rutaceae review were screened. Anthesis results provide seasons, not within-day timing. General ocelli/focusing results do not name Ptelea; any focusing belongs to sense_light_nonvisual. Floral Aromatics of Ptelea (10.21273/JASHS05119-21,2022) is a chemical lead, with attached/living collection still to verify; essential-oil leaf/flower distillation alone was screened out. Deno's original germination entry explicitly names P. isophylla and P. trifoliata; reader must verify actual light or chemical treatment rather than infer a response from a fixed temperature. Other GA/smoke studies returned in the genus search concern Pimelea, not Ptelea. Rutaceae review search returned general photoreceptor reviews10.1002/wmts.36 and10.1387/ijdb.051989kf plus Kew and Watson/Dallwitz family morphology; no Ptelea daily-hour or eye measurement in returned text. First six-genus gate failed1 on an unaddressed human eye review (10.3390/life13010077); screened as human disease, then rerun required. The late Ptelea harvest also corrected the preliminary absence statement before commit; every successful cached query is now present. Diel null was removed because the reproductive-biology work is a plausible lead and is now wanted.
+
+Exact Ptelea queries:
+
+- web: Ptelea seed germination light dark
+- web: Ptelea germination gibberellin OR smoke OR dormancy
+- web: Ptelea floral scent volatiles
+- web: Ptelea flower opening time anthesis
+- web: hoptree flower opening time anthesis
+- web: Ptelea plant ocelli lens epidermal focusing eye
+- web: hoptree plant ocelli lens epidermal focusing eye
+- web: Ptelea chemical sensing volatiles
+- web: hoptree chemical sensing volatiles
+- web: Ptelea photoperiod phototropism light response
+- web: hoptree photoperiod phototropism light response
+- web: Rutaceae photoreceptor review
+
+Wanted35. Floral Aromatics of Ptelea: Chemical Identification and Human Response — https://journals.ashs.org/downloadpdf/view/journals/jashs/147/1/article-p25.pdf; query `web: Ptelea floral scent volatiles`. Returned abstract describes volatiles emitted by flowers of P. trifoliata and P. crenulata and human fragrance response. Verify living attached flower collection under10(a); essential-oil distillation alone would not qualify. Connected web lead on2026-10-27; source not fetched/read, no evidence logged.
+
+Deno wanted lines34 and14 were extended, respectively, with Ptelea and Zizia aptera provenance; source URLs and exact queries remain in their JSON why/queries. Raw search responses: work/harvest-c11/{Ulmus,Malvaviscus,Carya,Pyrus,Zizia,Ptelea}-web*.json and family JSON; Ulmus OA metadata in Ulmus-oa.json. Scratch metadata is not committed. No source full text was saved in tracked files.
+
+### Ptelea late harvest reconciliation
+
+The first five genera were absent from harvest; Ptelea is present in run6/supp14/20. Its asynchronous tools had not finished when the provisional note was prepared, and no commit of that claim was made. Final Ptelea record copies every successful cached query, including zero-hit queries, before web queries. Citation step on10.1016/j.plantsci.2024.112264 returned zero. All102 displayed result occurrences and family-review titles plus stored abstract starts screened; among them, three additional plausible sources were retained, bringing batch wanted count38. No direct light/chemical/diel null was written for Ptelea.
+
+Cached query list:
+
+- Ptelea phytochrome photoreceptor
+- Ptelea light perception
+- Ptelea phototropism
+- Ptelea flower opening time
+- Ptelea nyctinasty
+- Ptelea anthesis
+- Ptelea pollination biology
+- Ptelea volatile signalling
+- Ptelea photoperiod
+- Ptelea circadian rhythm
+- Ptelea epidermal lens cells
+- Ptelea epidermal focusing leaf optics
+- Rutaceae photoreceptor review
+
+Additional wanted provenance:
+
+36. Cold Stratification and Pericarp Removal Improve Seed Germination of Ptelea trifoliata and Ptelea crenulata — https://journals.ashs.org/downloadpdf/journals/hortsci/55/4/article-p503.pdf; cached query `Ptelea pollination biology`. Genus germination title is a mandatory10(e) lead; abstract specifically tests cold stratification/pericarp, so original methods must establish any light comparison. Cached harvest title/abstract lead screened2026-10-27; source not fetched/read, no evidence logged.
+
+37. CONSERVATION OF THE DIVERSITY OF BOTANICAL GARDEN COLLECTION WITH THE USE OF IN VITRO TECHNIQUES WITH EXAMPLE OF PTELEA TRIFOLIATA L. (RUTACEAE JUSS.) — https://journal.kdpu.edu.ua/ecolog/article/download/8343/7909; cached query `Ptelea photoperiod`. Stored abstract compares propagation media in living cultured tissue; reader should establish which hormones/nutrient formulations and measured response qualify under10(d). Cached harvest title/abstract lead screened2026-10-27; source not fetched/read, no evidence logged.
+
+38. Hop tree (Ptelea trifoliata) in Canada: population and reproductive biology of a rare species — https://doi.org/10.1139/b85-272; cached query `Ptelea pollination biology`. Population/reproductive biology includes direct floral observations and insect visitation; plausible source for daily floral timing, which truncated abstract does not settle. Cached harvest title/abstract lead screened2026-10-27; source not fetched/read, no evidence logged.
+
+Other cached Ptelea dispositions: spectral flower characteristics10.26565/2075-5457-2026-46-8 are physical flower optics, not an eye. The nursery catalogs contain shade recommendations, not a measured living light response. Phototoxicity10.3390/life14081019 and medical review10.3390/life13010077 concern effects on humans. The Papilio volatile paper10.1007/s10886-023-01433-2 measures butterfly antennae, not a Ptelea plant response; the other chemical candidate palynology10.1603/ice.2016.113858 reports beetle pollen-feeding, not plant chemoreception. Reviews on elicitors/oil yield are retained as background, without mistaking generic plants for genus-specific evidence. The positive culture/germination/floral candidates keep those traits out of null records.
+
+Final six-genus gate after Ptelea harvest reconciliation: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/harvest-c11.jsonl --wanted docs/views/wanted/harvest-c11.jsonl` printed **0 problems**. All 38 wanted lines were checked against other wanted units and papers-status with no DOI/title duplicate or owner status match. Previous committed chunk: a2a9c42f. Final chunk stops cleanly before Iris for fresh-context takeover.
