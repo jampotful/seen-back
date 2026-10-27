@@ -915,3 +915,37 @@ Other results: smoke-water made FROM white willow is tested on cucumber,tomato,m
 Fresh-context handoff after completing Salix: do not repeat Ficus/Lespedeza/Salix web screens or the earlier18 genus screens. Asparagus is fully adopted without searches. Continue18 in exact authorized order: Coccoloba,Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea. None of these18 has been newly web-searched by this worker. Reuse the initial per-trait adoption inventory but match species for chemical/light, preserve Daucus eye plant-1#3 and exclude Prunella bird-homonym rescreen rows. Shared c8#123 L.cuneata expansion confirmed by owner w11_c8; no local duplicate. Parent owns legacy Kummerowia finding, PR/push/audit.
 
 Worker15 final gate: actual combined screen_candidates --check prints `0 problems` for16 searched/154 wanted. Both JSONL files parse; git diff --check passes; baseline bbc35ff2050022e029b68875e3d219aab8f0ddd4 bytes are exact prefixes of all three owned files. Only wanted/progress changed; no evidence, full paper asset, application/operational or other-unit edit. Final commit follows this gate.
+
+
+## 2026-10-27 — issue38 worker21: Coccoloba
+
+NEW this worker:1 genus web-screened(Coccoloba),6 wanted,0 searched,0 evidence. Current totals16 searched/160 wanted. Prior21 screens plus this1=22/40 web-screened, plus fully adopted Asparagus=23/40 covered.17 authorized genera remain; exact next Cenchrus. Available-source screen complete, full protocol partial because OpenAlex429 remains skipped. No null/exhaustion or measured closure claimed. Existing prefixes and prior issue28/38 screens preserved.
+
+Read AGENTS/worker guide and named research protocols including desk-screen10(a-e), audits53/54 and existing c12 history/adoption inventory. Cloud runtime skill/networking reference and current status confirm unrestricted enforced policy, no VPN. No credentials/proxy changed. harvest_get and screen_candidates actually ran in supported network mode and both report Coccoloba absent from all cached harvest runs; no cached query, citation or family titles claimed. Global evidence/audit/searched/wanted/papers-status checked, target C.uvifera has only an old thin sweep-36 row, not a completed current screen. Canon plant light/chemical and animal eye sources inspected as prior inventory; no duplicate canon request. No service refusal this worker.
+
+Exact executed web queries(10e pair first):
+- `web: Coccoloba seed germination light dark`
+- `web: Coccoloba germination gibberellin OR smoke OR dormancy`
+- `web: Coccoloba floral scent volatiles`
+- `web: sea grape floral scent volatiles`
+- `web: Coccoloba light photoperiod phototropism`
+- `web: sea grape light photoperiod phototropism`
+- `web: Coccoloba flower opening time anthesis`
+- `web: sea grape flower opening time anthesis`
+- `web: Coccoloba eye type epidermal focusing`
+- `web: sea grape eye type epidermal focusing`
+- `web: Polygonaceae photoreceptor review`
+- `web: "Coccoloba uvifera" germination scarification gibberellic`
+- `web: "Coccoloba uvifera" light shade experiment`
+- `web: "Biología reproductiva de Coccoloba uvifera"`
+- `web: "Micropropagation of sea grape" "light"`
+- `web: "Efecto de dos condiciones de almacenamiento" "Coccoloba"`
+- `web: "Trioecy in Coccoloba cereifera"`
+
+Read all delivered titles/snippets(up to first20 per query where returned, without claiming20 if fewer); scratch provenance work/w21-c12/Coccoloba-web1..5.json, Coccoloba-harvest.txt,Coccoloba-candidates.txt. Family alternative returned broad plant/algal photoreceptor reviews, insect vision and Polygonaceae taxonomic lists, not a family-specific target measurement; no unavailable API result called zero hits.
+
+Six new wanted sources passed normalized-title/DOI global checks. Primary target micropropagation indexed abstract explicitly reports BAP/explant bud development10(d); living plantlet versus callus remains for reader, and fixed16/8h culture alone is not a light response. Target2010 storage/germination paper is mandatory10(e), with light/GA not asserted. ResearchGate snippets appended Ormosia scarification/GA and other species abstracts to this title: these are not evidence that C.uvifera was treated with GA. No ResearchGate or academia source fetched or used as measurement. Nonqueued C.gigantifolia2021/2023 germination titles are retained under10(e), not target chemical/light coverage. No salt response is silently converted into chemical cue perception.
+
+Direct target reproductive-biology source at UCR is retained for daily-anthesis check; its visible title/abstract does not establish an hour. C.cereifera2008 primary indexed text explicitly gives morning anthesis and is a separate genus-diel lead, not a target measurement. Sea-grape homonyms Caulerpa algae, Ephedra, Vitis grapes, and Byrsonima coccolobifolia are other genera. Extracted C.uvifera pulp volatiles003194229283714A and polyphenol/antioxidant human-cell assays fail10(a). Turtle-nest shade temperatures are a shade effect on nests, not a living Coccoloba light response. Thermotolerance of excised leaf discs measures heat damage, not light sensing. Nursery sun/shade preferences and seasonal flowering/fruit dates do not establish experimental light response or daily timing. Eye searches returned taxonomy, horticulture, skin/eye cosmetics, human epidermal/extract assays and deep-sea animal vision; none shows plant image-forming eyes or actual focusing. Owner10(b) eye_type none; epidermal focusing would belong to light. No eye null while required protocol incomplete.
+
+Remaining17:Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
