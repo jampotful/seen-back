@@ -388,3 +388,56 @@ Chemical candidate dispositions:10.1093/aob/mcs045 is an unusually direct target
 Eye_type alone has the completed null under owner10(b). Explicit candidate screening covers the two screen_candidates hits(the Cynodon epidermal/stomatal taxonomy paper and Panicum anatomical thesis), plus the indexed medicinal-grass and SEM anatomy studies. No lens focusing lead was identified. Poaceae cached review metadata covers grass stomata, phytochrome/shade/carotenoid pathways, rice/sugarcane and general reviews; no Cynodon image-forming eyes. Canon has no relevant in-hand plant measurement. OpenAlex429/MDPI429/UChicago403/SANBI403 remain skipped; no new refusal, paid API, library/proxy mirror, source-page fetch, evidence extraction or app checks.
 
 Worker31 Cynodon validation:combined screen_candidates --check completed with `0 problems` before commit; global normalized-title/DOI duplicate gate passed for all11 new lines. No unknown numeric-year0 introduced.
+
+
+## 2026-10-27 — worker31 continuation: Glechoma
+
+This worker cumulative:2 genera completed(Cynodon,Glechoma),2 search records,19 new wanted,0 evidence/measurement closures. Batch cumulative:12/40 genera screened,10 search records,126 wanted,0 evidence;28 remain, next Senecio. Cynodon commit63941286. No prior wanted-only screening repeated. No existing evidence or legacy nulls altered.
+
+Original queue targets G.hederacea; cached genus run2 plus supplementary volatile query has many G.longituba studies and actual G.hederacea root-recognition and extract studies. Cached titles and stored abstracts were screened for all returned works, with all15 family-review stored abstracts. Two completed citation filters(cites10.1111/een.12947 and10.1016/j.isci.2022.104455 naming Glechoma) returned zero. Global evidence/corrected evidence/searched/wanted/papers-status checked; no main Glechoma measurement was found. Thin harvest-8 and sweep-4 nulls do not satisfy the full protocol and remain untouched. Canon has no relevant in-hand plant measurement.
+
+Exact successful cached queries then executed web searches, in order:
+- `Glechoma phytochrome photoreceptor`
+- `Glechoma light perception`
+- `Glechoma phototropism`
+- `Glechoma volatile signalling`
+- `Lamiaceae photoreceptor review`
+- `web: Glechoma seed germination light dark`
+- `web: Glechoma germination gibberellin OR smoke OR dormancy`
+- `web: Glechoma floral scent volatiles`
+- `web: Glechoma light photoperiod phototropism`
+- `web: ground ivy light photoperiod phototropism`
+- `web: Glechoma volatile emission herbivore induced response methyl jasmonate`
+- `web: ground ivy volatile emission herbivore induced response methyl jasmonate`
+- `web: Glechoma flower opening time anthesis`
+- `web: ground ivy flower opening time anthesis`
+- `web: Glechoma eye type epidermal focusing`
+- `web: ground ivy eye type epidermal focusing`
+- `web: "Glechoma hederacea" gibberellin ethylene auxin salicylic jasmonate`
+- `web: "The Response of Petioles of Glechoma hederacea to a Dynamic Light Climate" -site:researchgate.net`
+- `web: "Clonal integration and plasticity in foraging behaviour in Glechoma hederacea" -site:researchgate.net`
+- `web: "Glechoma hederacea" seed germination light dark experiment`
+- `web: "Glechoma" "gibberellin" "corolla"`
+- `web: "Glechoma hederacea" "Dynamic Light Climate" Plant Biology`
+- `web: "Glechoma" "Clonal integration and plasticity" 1987 1023 DOI`
+- `web: "POLLINATION AND FLORAL ECOLOGY OF GLECHOMA"`
+- `web: "Effect of gibberellic acid on corolla size"`
+- `web: "Glechoma" "Dynamic Light Climate" doi`
+- `web: "Glechoma hederacea" "effects of light intensity" 1987 doi`
+- `web: "10.1111/j.1438-8677.1999.tb00281.x"`
+- `web: "The effects of light intensity on foraging" Glechoma doi`
+- `web: "Effect of Gibberellic Acid on Corolla Size" Plack Nature`
+
+Twenty-five web searches screened returned titles/snippets, up to first20 where returned. Follow-ups resolve named primary studies and target-species identity instead of inventing source titles or DOI metadata. Raw results in work/harvest-c12/worker31-Glechoma-web1..7.json; original ci metadata in worker31-Glechoma-cache.json. No source/full-paper page fetched, no API retry. In the first printed combined tool response some output was display-truncated; the omitted search-result tail and relevant full stored abstracts were read separately from scratch before disposition.
+
+Eight target-specific wanted sources:2020 root-kin-recognition experiment; Plack1958 GA/corolla-size experiment; two1987 Slade/Hutchings light/foraging studies; legal-repository spectral growth experiment explicitly including G.hederacea; publisher floral-ecology study explicitly indexed for morning flower opening; Biological-Flora account holding seed germination stages/light observations and primary citations; NARO target-species germination-characteristics entry retained under10(e). All8 passed global normalized-title/DOI duplicate comparison against wanted,status,evidence and corrected evidence. Every target is G.hederacea. Plack author's full name/year/title verified by Nature issue and DOI by legal review bibliography; attached buds versus cut flowers still needs primary methods checking10(a). Root-recognition source needs exudate/physical-contact/resource controls before calling the mechanism chemical. No measurements logged, and year remains null for the spectral, floral-ecology and NARO entries whose exact publication year was not verified. No year inferred from DOI digits or PDF filenames.
+
+The1987 integration paper's light/nutrient factors are described explicitly by indexed bibliographic abstract; light-intensity primary source has a separately verified title/authors/year/DOI in USDA and legal Springer/Wiley citations. The1999 Biological-Flora request targets actual germination/light data and references, not medicinal background. NARO's species page is an unread germination lead under10(e); its title is retained as indexed, without inventing response values. Grime1981 germination compilation was encountered in discovery, but a G.hederacea row/chemical/light result was not verified and no speculative request was added. Another legal dissertation synopsis mentions species germination(chilling) but the named direct species entries are prioritized. No light/diel/chemical null while direct target measurements await reading.
+
+Other dispositions: G.longituba colored-film, UV-B/methylation, shade-touch, kin-recognition and alkaline-stress experiments are real but not the queued species, and were not requested merely for volume; G.grandis neighbour-channel work and G.hirsuta shade work likewise cannot silently settle hederacea. Potentilla/Trifolium/Portulaca/Arabidopsis/Valeriana/Artemisia/pea experiments and generic ROS/transduction reviews are other taxa or general context. Cached medicinal G.hederacea extraction(10.3390/plants11060819;10.3390/plants11172217), human-cell/plasma assays(10.3390/nu15071671), oral-health review(10.3390/plants15152396), isolated glycosides, distilled oils and botanical-name etymology do not show the living target response under10(a). Family results cover Lamiaceae industrial-compound/light reviews, Teucrium germination, Hyptis light responses and human/animal pharmacology, with no target eye measurement. No duplicate background wanted from those reviews.
+
+The petiole dynamic-light study was discovered, but its candidate DOI10.1111/j.1438-8677.1999.tb00281.x/author/date returned only ResearchGate metadata in follow-ups, with conflicting1999 versus2008 indexing. ResearchGate was never opened or used as measurement/source authority. Legal Wiley citation independently confirms the title/Plant Biology pages; it remains a named unrequested bibliographic lead while three independently sourced direct target light experiments are retained, without a light-null claim. Secondary generic phytochemical/infusion results do not establish signalling by living Glechoma. A direct2,4-D population rate-response source also appeared; the GA/root-cue experiments were prioritized without claiming the herbicide source disproves a response.
+
+Eye_type alone gets a completed null under owner10(b). Web eye searches returned a Korean taxonomic leaf-epidermis/stomata/trichome comparison and ordinary botanical identification, not image-forming eyes. Biological-Flora's cross-hair eye-piece is a microscope instrument; no optical focusing lead found. Diel lead's Russian publisher snippet explicitly says flowers open in the morning; seasonal March-June bloom or continuous12h growth-room lighting is not used as a daily activity measurement. Old13Oct/16Oct nulls remain unchanged and no source-rule conflict in legacy evidence was identified. OpenAlex429/MDPI429/UChicago403/SANBI403 skipped; no new refusal or web quota refusal. No paper text committed and no app tests/builds/servers run.
+
+Worker31 Glechoma checkpoint:combined screen_candidates --check completed with `0 problems` before commit for all10 searched/126 wanted; own additions passed global duplicate and metadata checks. No unknown numeric-year0 added.
