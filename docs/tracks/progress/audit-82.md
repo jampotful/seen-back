@@ -69,7 +69,7 @@ Errors in the extension: 1 of 15 (line 1).
 
 ## Counts
 
-Errors: 3 of 35, 8.6% (sample of 20: 2 errors, 10.0%; lines 29 and 33). If the owner settles the kelp fork of line 1 against the record's finder, 2 of 35, 5.7%; if he also reads Yang et al. 2021 (line 7) as a living auxin response, 3 of 35 again. On every reading the unit is above 5% and fails. Pooled with the desk's earlier audits of desk-screen units (audits 43 to 51, 55 to 73 and 75 to 80, 20 errors in 794 records once audit 80's two errors are withdrawn by the desk ruling of 27 October; audit 80 pooled without audit 79): 23 in 829, 2.8%. Counting audit 80's two as written, 25 in 829, 3.0%.
+Errors: 3 of 35, 8.6% (sample of 20: 2 errors, 10.0%; lines 29 and 33). If the owner settles the kelp fork of line 1 against the record's finder, 2 of 35, 5.7%; if he reads the explant cultures of Yang et al. 2021 (line 7, Huperzia sense_chemical) as a living auxin response, one more error is added to either count. On every reading the unit is above 5% and fails. Pooled with the desk's earlier audits of desk-screen units (audits 43 to 51, 55 to 73 and 75 to 80, 20 errors in 794 records once audit 80's two errors are withdrawn by the desk ruling of 27 October; audit 80 pooled without audit 79): 23 in 829, 2.8%. Counting audit 80's two as written, 25 in 829, 3.0%.
 
 The two draws cover the whole unit, so the desk can drop the error records and merge the rest: **drop lines 1, 29 and 33** of docs/views/searched/harvest-c22b.jsonl (Nereocystis diel, Sphaeralcea sense_chemical, Anchusa sense_light_nonvisual). The 32 other records stand. The three cells then wait for the works above on a wanted list.
 
@@ -98,4 +98,4 @@ All 25 lines leave `authors` empty, so none is counted. Checked against pages my
 
 ## Searches and pages
 
-I ran 41 WebSearches (of 60) and opened 27 pages my own searches returned. No ResearchGate, academia.edu, Sci-Hub, LibGen or library proxy page was opened, and no paper text is committed.
+I ran 38 WebSearches (of 60) and opened 28 pages my own searches returned. No ResearchGate, academia.edu, Sci-Hub, LibGen or library proxy page was opened, and no paper text is committed.
