@@ -221,3 +221,42 @@ Queries actually run (connected web search; all available result titles/snippets
 - `Japanese knotweed epidermal lens cells eye`
 
 Round checkpoint: 12 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 43 wanted, 0 evidence lines. Next Chimaphila; 28 unreviewed.
+
+### Chimaphila
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates: absent from harvest; no genus evidence. One new Pyroloideae germination study with Chimaphila keyword and light/gibberellin treatment summary. Other germination results horticultural propagation advice. Chemical results mainly animal signalling/general reviews and historical extracted/distilled chimaphilin, excluded under owner reading. Diel results bloom months and botanical morphology, no daily time measurement established. Eye results mammalian lenses, no genus focusing lead. Family query returned general photoreceptor reviews, no Ericaceae-specific review. Canon checked; no null rows.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Chimaphila seed germination light dark`
+- `Chimaphila germination gibberellin OR smoke OR dormancy`
+- `Chimaphila floral scent volatiles`
+- `Chimaphila photoperiod phototropism light sensing`
+- `pipsissewa photoperiod phototropism light sensing`
+- `Chimaphila flower opening time anthesis`
+- `pipsissewa flower opening time anthesis`
+- `Chimaphila volatile chemical signalling`
+- `pipsissewa volatile chemical signalling`
+- `Chimaphila epidermal lens cells eye`
+- `pipsissewa epidermal lens cells eye`
+- `Ericaceae photoreceptor review`
+
+### Cypripedium
+
+Web screen complete for round; full protocol partial because OpenAlex unavailable. harvest_get/screen_candidates run: run 4 genus with Orchidaceae photoreceptor review; harvested titles and genus-relevant abstract starts screened. No genus evidence. Twenty-one new wanted leads: eight propagation/germination studies including explicit light/dark and cytokinin trials; nine floral volatile/mimicry studies including the exact-title Pherobase reference; four light physiology studies. Chemical emission and applied hormone responses count under owner reading. Diel candidate phenology abstracts give flower lifespan/dates or post-anthesis changes; no daily time value established, no null claim. Common-name hits Phragmipedium and Paphiopedilum are other genera. Eye hits leaf epidermal thickness and anther elongation do not establish a plant eye; any focusing belongs to light sensing. Canon checked; no pages fetched, no evidence written.
+
+Queries actually run (connected web search; all available result titles/snippets screened, fewer than 20 when the service returned fewer):
+
+- `Cypripedium seed germination light dark`
+- `Cypripedium germination gibberellin OR smoke OR dormancy`
+- `Cypripedium floral scent volatiles`
+- `Cypripedium photoperiod phototropism light sensing`
+- `lady's slipper orchid photoperiod phototropism light sensing`
+- `Cypripedium flower opening time anthesis`
+- `lady's slipper orchid flower opening time anthesis`
+- `Cypripedium volatile chemical signalling`
+- `lady's slipper orchid volatile chemical signalling`
+- `Cypripedium epidermal lens cells eye`
+- `lady's slipper orchid epidermal lens cells eye`
+
+Round checkpoint: 14 genera screened for round; all partial full protocol (OpenAlex unavailable). 0 searched, 65 wanted, 0 evidence lines. Context checkpoint after Cypripedium; exact next genus Epipactis. 26 unreviewed: Epipactis, Vaccinium, Frangula, Jacobaea, Lactuca, Rabelera, Heracleum, Matricaria, Trillium, Eriogonum, Cytisus, Aralia, Berteroa, Elaeagnus, Geum, Calluna, Cymbalaria, Conium, Crataegus, Pilosella, Celastrus, Heteromeles, Lapsana, Primula, Dactylorhiza, Kalmia.
