@@ -324,3 +324,20 @@ Queries actually run (connected web search; returned titles/snippets screened, f
 - `glossy buckthorn volatile chemical signalling`
 - `Frangula epidermal lens cells eye`
 - `glossy buckthorn epidermal lens cells eye`
+
+### Jacobaea
+
+Web-query screen for round completed; full protocol partial (OpenAlex unavailable). Official harvest_get and screen_candidates: no harvest. Adopted target-specific sweep-14#1 light/dark germination measurement for J. vulgaris (= Senecio jacobaea), so no redundant light pair or duplicate light-paper request. Massey thesis A study of the factors influencing the emergence and establishment of ragwort seedlings in pasture appears to be the same Beskow light experiment as that evidence source and is preserved as a legal upgrade route (https://mro.massey.ac.nz/items/95c2a83f-840e-4930-bf5b-0b7e6013eb4a), not another request. Four new wanted sources: two achene germination/dormancy titles, litter/emergence and direct living volatile defense study. Tanacetum vulgare chemical studies are another genus, not J. vulgaris. Diel results mostly flowering years/months and management; guava anthesis hours are another genus. Eye result animal lenses/historical eye remedies, no target focusing measurement established. Asteraceae family alternative returned general photoreceptor and capitulum-development reviews, not a confirmed family photoreceptor review. Canon checked; no pages fetched, searched nulls or evidence.
+
+Queries actually run (connected web search; returned titles/snippets screened, fewer than 20 when fewer were delivered):
+
+- `Jacobaea seed germination light dark`
+- `Jacobaea germination gibberellin OR smoke OR dormancy`
+- `Jacobaea floral scent volatiles`
+- `Jacobaea flower opening time anthesis`
+- `tansy ragwort flower opening time anthesis`
+- `Jacobaea volatile chemical signalling`
+- `tansy ragwort volatile chemical signalling`
+- `Jacobaea epidermal lens cells eye`
+- `tansy ragwort epidermal lens cells eye`
+- `Asteraceae photoreceptor review`
