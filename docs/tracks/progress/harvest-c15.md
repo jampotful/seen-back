@@ -308,3 +308,31 @@ Exact web queries, in order:
 - web: Cupressaceae photoreceptor review
 
 Worker42 checkpoint: 2 newly web-screened genera (Betula, Thuja), both protocol partial; 23 wanted, 0 searched and 0 evidence added. Cumulative12 web-screened genera,93 wanted lines. 28 remain, exact next Linnaea. Its required harvest tools have run, but no new web queries yet. Old Linnaea harvest-17 screens lack paired web queries and do not establish current completion; all four traits need the current web pairs despite the narrower descriptor.
+
+### Linnaea: web-screened and harvest screened, protocol partial
+
+Required harvest_get and screen_candidates ran. Screened all32 printed work occurrences and15 family-review titles/stored abstract starts. Older harvest-17#5/#6 have only API queries, no paired web searches, so those are not adopted as a current completed web screen. All four trait pairs were completed despite the current descriptor opening only chemical. Germination queries returned propagation advice and broad seed physiology, not a titled Linnaea germination experiment. Added one new wanted source, Bergström2018 (10.1111/njb.01732), whose snippets identify emitted floral bouquets of L. borealis and L. amabilis. Collection of living versus removed flowers needs method review; pollinator-guiding roles are explicitly proposed for future work, not measured in the displayed text. No prior wanted or owner-status DOI/title match found.
+
+Harvest's forest-floor emission sources (10.3389/fpls.2019.00191 and the UEF wildfire thesis W7215594172) are ecosystem/soil fluxes; snippets do not attribute emissions to an individual Linnaea species. Chemical ecology overview, honeybee brood chemistry, Campanula scent, tomato mycorrhiza, Lychnis hormonal cultures, Betonica and Varronia extracts, potato disease and Arnica metabolomics are different organisms or removed-tissue work, not Linnaea living response. Language/human health and mushroom phototropism titles are homonym/irrelevant matches. Family review returns broad flower opening, light-response synthesis, endozoochory, colour vision and other genera; no displayed additional Linnaea measurement. Self-incompatibility/fragmentation studies report pollination success and bagging through anthesis, not daily opening hours or an explicit applied chemical cue. Seasonal twinflower pages give months, not daily times. Eye results give general ocelli essays and animal optical anatomy, no Linnaea focusing. Florida twinflower results concern a different plant and are not used for species evidence. Common name twinflower verified for L. borealis in USFS, PlantWatch and Plantlife. Canon as continuation introduction; no null searched row while OpenAlex missing steps remain unavailable.
+
+Successful harvest queries, verbatim and in recorded order:
+- Linnaea phytochrome photoreceptor
+- Linnaea light perception
+- Linnaea phototropism
+- Linnaea volatile signalling
+- family review: Caprifoliaceae photoreceptor review
+
+Exact web queries, in order:
+- web: Linnaea seed germination light dark
+- web: Linnaea germination gibberellin OR smoke OR dormancy
+- web: Linnaea floral scent volatiles
+- web: Linnaea photoperiod phototropism light response
+- web: twinflower photoperiod phototropism light response
+- web: Linnaea flower opening time anthesis
+- web: twinflower flower opening time anthesis
+- web: Linnaea plant ocelli lens-like epidermal cells eye
+- web: twinflower plant ocelli lens-like epidermal cells eye
+- web: Linnaea chemical response volatile signaling
+- web: twinflower chemical response volatile signaling
+
+Worker42 checkpoint: 3 newly web-screened genera (Betula, Thuja, Linnaea), all protocol partial;24 new wanted lines,0 searched,0 evidence. Cumulative13 web-screened genera and94 wanted. 27 remain, exact next Lindera. Prior source/query provenance retained.
