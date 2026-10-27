@@ -949,3 +949,51 @@ Six new wanted sources passed normalized-title/DOI global checks. Primary target
 Direct target reproductive-biology source at UCR is retained for daily-anthesis check; its visible title/abstract does not establish an hour. C.cereifera2008 primary indexed text explicitly gives morning anthesis and is a separate genus-diel lead, not a target measurement. Sea-grape homonyms Caulerpa algae, Ephedra, Vitis grapes, and Byrsonima coccolobifolia are other genera. Extracted C.uvifera pulp volatiles003194229283714A and polyphenol/antioxidant human-cell assays fail10(a). Turtle-nest shade temperatures are a shade effect on nests, not a living Coccoloba light response. Thermotolerance of excised leaf discs measures heat damage, not light sensing. Nursery sun/shade preferences and seasonal flowering/fruit dates do not establish experimental light response or daily timing. Eye searches returned taxonomy, horticulture, skin/eye cosmetics, human epidermal/extract assays and deep-sea animal vision; none shows plant image-forming eyes or actual focusing. Owner10(b) eye_type none; epidermal focusing would belong to light. No eye null while required protocol incomplete.
 
 Remaining17:Cenchrus,Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
+
+
+## 2026-10-27 — issue38 worker21: Cenchrus
+
+NEW this worker now2 web-screened genera(Coccoloba,Cenchrus),26 wanted,0 searched,0 evidence. Current16 searched/180 wanted. Cumulative23/40 prior/new web-screened plus Asparagus fully adopted=24/40 covered.16 authorized genera remain; exact next Olea. Both new available-source screens remain full-protocol partial because OpenAlex429 skipped; no null/exhaustion or measurement closure.
+
+Cenchrus target is C.setaceus. Adopted substantive target light sweep-34#5, an abstract-only light/dark germination measurement, without promotion to full text. Old thin sweep-34#11 combined query is not web completion. Global evidence/audit/wanted/searched and papers-status inspected; no source duplicate/n/a among20 new leads. Mandatory harvest_get/screen_candidates ran, cached run3/supplements15/20,113 printed result entries including repeated works were all screened by title/available abstract start. All15 Poaceae review titles and stored abstract starts(700chars where available) were read separately from descriptor; citation chase10.1016/j.tree.2009.09.010 had0 cached hits. Failed/unavailable live API not called zero hits. Scratch work/w21-c12/Cenchrus.json, Cenchrus-harvest.txt,Cenchrus-candidates.txt,Cenchrus-web1..4.json.
+
+Successful cached queries in harvest order:
+- `Cenchrus phytochrome photoreceptor`
+- `Cenchrus light perception`
+- `Cenchrus phototropism`
+- `Cenchrus flower opening time`
+- `Cenchrus nyctinasty`
+- `Cenchrus anthesis`
+- `Cenchrus pollination biology`
+- `Cenchrus volatile signalling`
+- `Cenchrus epidermal lens cells`
+- `Cenchrus epidermal focusing leaf optics`
+- `Poaceae photoreceptor review`
+
+Exact executed web queries(10e first pair):
+- `web: Cenchrus seed germination light dark`
+- `web: Cenchrus germination gibberellin OR smoke OR dormancy`
+- `web: Cenchrus floral scent volatiles`
+- `web: fountain grass floral scent volatiles`
+- `web: Cenchrus flower opening time anthesis`
+- `web: fountain grass flower opening time anthesis`
+- `web: Cenchrus eye type epidermal focusing`
+- `web: fountain grass eye type epidermal focusing`
+- `web: "Pennisetum setaceum" "gibberellic"`
+- `web: "Cenchrus setaceus" hormone jasmonate`
+- `web: "Allelopathic Effect of Serphidium kaschgaricum" "Cenchrus"`
+- `web: "Environmental cues for germination" "Pennisetum"`
+- `web: "Direct Regeneration of Pennisetum setaceum"`
+- `web: "Increased Photosynthesis Contributes" "Cenchrus"`
+
+All delivered titles/snippets read, up to first20 per query when delivered, no assumed20-result count. Twenty new wanted:13 germination/dormancy sources(required10e, mostly nonqueued congeners),three foliar IAA/phytohormone/promoter sources, one phytogenic-product living seedling response, two buffelgrass pollination/receptivity studies and target-named Rubrum regeneration abstract. C.ciliaris/longispinus/biflorus/spinifex experiments do NOT close target C.setaceus light/chemical cells. Setaceus light already measured; mandatory germination leads retained without rerunning scientific/common light pair. Source species/table forks explicit.
+
+Direct regeneration primary ASHS indexed abstract reports BA/NAA and regenerated shoots/plantlets10(d), but Rubrum may belong to Pennisetum×advena: reader must verify taxonomy before target assignment. The adjacent gibberellic treatment belongs to another conference abstract, not Rubrum. Cached growth-promoter DOI10.59797/ija.v61i2.4356 has year2001 conflicting with2011–13 experiments in abstract; wanted leaves year null for registry/source check. Living C.ciliaris receiver exposed to phytogenic solution counts10(d) even when the product was plant-derived; this is distinct from extracting dead Cenchrus tissue. Negative GA/light/smoke effects remain measurements to inspect, never screened out.
+
+Diel held for two ciliaris pollination/receptivity candidates: early manual pollination or hours-after-anthesis alone does not establish clock-time activity. Other cached diel hits are forage chemical/digestibility samples at an anthesis developmental stage, seasonal fodder/yield, apomixis, Arabidopsis clocks, cassava gynogenesis, walnut or carnation flowering; these provide no demonstrated target daily-opening hour. Horticultural bloom months and flower spikes glowing in backlight are not daily timing.
+
+Eye_type10(b) none; tool eye matches are napiergrass genomics(ocell substring) and C.purpureus hydroalcoholic extract tested on isolated goat lenses10.25258/ijddt.16.88s.13, not plant eyes. Epidermal anatomy, phytoliths, leaf plasmodesmata, YOLO stomata classification and ecological remote sensing show no focusing measurement; actual focusing would belong under light. No null while mandatory protocol incomplete.
+
+Chemical false positives: rice ethylene and maize pentyl volatiles concern other genera; botanical sensory epithets and human mechanization perceptions are language/surveys. Curcuma influenza docking, rumen microbe quorum sensing, multifloral honey and goat-lens plant extracts fail10(a) for a living Cenchrus response. Serphidium volatiles source10.3390/plants10030495 explicitly tests Amaranthus/Poa, and only cites Euphorbia oil applied to C.echinatus; source reader can chase that cited receiver assay if relevant, but it is not target setaceus measurement and not a Serphidium→Cenchrus experiment. Passive PAH accumulation and glyphosate target-site resistance are pollution/herbicide studies, not assumed chemical cue communication. Broad Poaceae photoreceptor/shade/carotenoid reviews provide citation context; none visibly establishes target eye/diel/chemical coverage. No paper/source fetch, evidence, forbidden site access or service/quota refusal.
+
+Remaining16:Olea,Cerastium,Hemerocallis,Chromolaena,Cyanthillium,Hexastylis,Hypoxis,Carex,Alliaria,Prunella,Cichorium,Daucus,Chamaenerion,Ficaria,Urtica,Larrea.
