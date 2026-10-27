@@ -12,4 +12,11 @@ Desk screen only: no pages fetched and no evidence records. OpenAlex skipped thr
 - Harvest queries (verbatim, in output order): ["Tussilago phytochrome photoreceptor", "Tussilago light perception", "Tussilago phototropism", "Tussilago volatile signalling", "Tussilago photoperiod", "Tussilago circadian rhythm", "Asteraceae photoreceptor review"]
 - Web queries (verbatim): ["Tussilago seed germination light dark", "Tussilago germination gibberellin OR smoke OR dormancy", "Tussilago floral scent volatiles", "Tussilago light response photoperiod", "coltsfoot light response photoperiod", "Tussilago response to airborne volatile signals", "coltsfoot response to airborne volatile signals", "Tussilago plant ocelli lens-like epidermal cells eye", "coltsfoot plant ocelli lens-like epidermal cells eye"]
 
-Counts this round so far: 1 genus web-screened / protocol partial; 0 full-protocol genera; 0 search rows; 2 wanted lines; 0 evidence rows. Next genus: Lotus. Remaining: 39 untouched genera.
+
+### Lotus — web-screened, protocol partial
+
+No harvest run for Lotus; harvest_get.py and screen_candidates.py both confirmed absence. Main diel evidence adopted. All returned titles/snippets screened; many results concern Nelumbo nucifera, Nymphaea or Diospyros lotus and were excluded because they are different genera. Fabaceae family-review web search returned Beyond the CO–FT regulatory module: E1 and PHYA emerge as players in photoperiodic regulation of flowering in legumes (10.1093/jxb/erag313); review search screened, no page fetched. Lotus seed light/dark, L. japonicus LED growth, birdsfoot trefoil photoperiod, and L. japonicus methyl-jasmonate nodulation studies retained as four wanted leads. Missing OpenAlex work remains; no null search rows.
+
+Web queries (verbatim): ["Lotus seed germination light dark", "Lotus germination gibberellin OR smoke OR dormancy", "Lotus floral scent volatiles", "Lotus light response photoperiod", "birdsfoot trefoil light response photoperiod", "Fabaceae photoreceptor review", "Lotus response to airborne volatile signals", "birdsfoot trefoil response to airborne volatile signals", "Lotus plant ocelli lens-like epidermal cells eye", "birdsfoot trefoil plant ocelli lens-like epidermal cells eye", "Lotus jasmonate herbivore", "birdsfoot trefoil floral scent volatiles"]
+
+Counts this round so far: 2 genera web-screened / protocol partial; 0 full-protocol genera; 0 search rows; 6 wanted lines; 0 evidence rows. Next genus: Lythrum. Remaining: 38 untouched genera.
