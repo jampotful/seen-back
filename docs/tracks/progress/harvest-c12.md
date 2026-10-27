@@ -143,3 +143,48 @@ Other returned results:smoke/GA studies on Nicotiana, Anigozanthos, Avena and le
 Eye searches returned Ratibida taxonomy/morphology, flora and horticultural descriptions; no optical focusing lead. Other coneflower results explicitly name Echinacea or Rudbeckia and bee UV vision, not Ratibida eyes. Eye_type null alone follows owner10(b). All candidate sources stayed at title/snippet level under desk-screen3; no full text or evidence written. Raw tool responses preserved in work/harvest-c12/Ratibida-web1–4-worker13.json. Source skips remain OpenAlex429,MDPI429,UChicago403,SANBI403 with no further requests.
 
 Worker13 final cumulative validator completed before commit: `0 problems`; own-file `git diff --check` passed. Existing supplement wanted in harvest-c11 was detected and not duplicated; Ratibida adds1 wanted, worker13 adds17, cumulative34.
+
+## 2026-10-27 — worker18 Fraxinus continuation
+
+This worker:1 genus screened (Fraxinus),1 null search record,46 wanted lines,0 evidence/measurement closures. Cumulative:6/40 genera screened;5 null search records;80 wanted lines;0 evidence. Remaining34, next Adiantum, then Botrypus, then Parthenium. Earlier completed wanted-only Cardamine/Rumex screenings remain complete and are not repeated.
+
+Read AGENTS.md first and all round28/round4/THOROUGH/BRIEF/round3/desk-screen instructions, including plant10(e). The cloud runtime skill and networking reference were read; current unrestricted policy is enforced, no VPN configured. No branch/gate changes, application startup, tests or build. No source-page/full-paper fetch or evidence write. OpenAlex429, MDPI429, UChicago403 and SANBI403 remain skips; no direct retries. Initial web call used an unsupported argument shape and returned `{content:[],isError:true}`; it executed no documented query. After reading the tool declaration, all12 actual protocol queries below succeeded. No quota-limit refusal occurred.
+
+harvest_get and screen_candidates completed. Fraxinus has cached successful genus queries/supplements and three citation steps:10.1603/022.038.0629 (22 returned works),10.1111/een.12947 (zero) and10.3390/ijms26010361 (zero). All179 unique genus/supplement/citation titles and stored abstract excerpts were screened, plus15 Oleaceae family-review titles and stored abstracts. Missing stored abstracts remain unknown, not invented. The raw cache is work/harvest-c12/Fraxinus-cache-worker18.json. No live OpenAlex query was executed or claimed. Exact successful cached queries, followed by actual web queries in execution order:
+- `Fraxinus phytochrome photoreceptor`
+- `Fraxinus light perception`
+- `Fraxinus phototropism`
+- `Fraxinus flower opening time`
+- `Fraxinus nyctinasty`
+- `Fraxinus volatile signalling`
+- `Fraxinus photoperiod`
+- `Fraxinus circadian rhythm`
+- `Fraxinus anthesis`
+- `Fraxinus pollination biology`
+- `Fraxinus epidermal lens cells`
+- `Fraxinus epidermal focusing leaf optics`
+- `Oleaceae photoreceptor review`
+- `web: Fraxinus seed germination light dark`
+- `web: Fraxinus germination gibberellin OR smoke OR dormancy`
+- `web: Fraxinus floral scent volatiles`
+- `web: Fraxinus light photoperiod phototropism`
+- `web: ash tree light photoperiod phototropism`
+- `web: Fraxinus flower opening time anthesis`
+- `web: ash tree flower opening time anthesis`
+- `web: Fraxinus eye type epidermal focusing`
+- `web: ash tree eye type epidermal focusing`
+- `web: Oleaceae photoreceptor review`
+- `web: Fraxinus volatile emission herbivore induced response methyl jasmonate`
+- `web: ash tree volatile emission herbivore induced response methyl jasmonate`
+
+Global normal/corrected main evidence, searches, wanted and papers-status were checked. Main recheck-5-fixed#2 corrects the green-ash leaf-volatiles result, so no chemical null or repeat request for Chen/Poland2009. This congener record does not establish species-level chemical response in every original-batch ash species. The old thin sweep-12 stays unchanged and did not hide actual open light/diel/chemical needs. Canon checked; no relevant plant compilation is marked in hand. Broad animal eye canon is not a plant eye measurement; no new canon request.
+
+Forty-six new wanted records preserve actual cache/search titles and source URLs. Unknown authors, years and DOIs remain empty/null; no DOI was guessed from MDPI issue/article URLs. Cached GA3 germination (F.hupehensis), daylength-dependent periderm/xylem (F.pennsylvanica), phototropic stem bending (F.americana), light-gradient leaf costs, light-pollution/budburst, photoperiod spring phenology and the review's explicit green-ash branching citation are real light/chemical leads. Broad light-intensity meta-analysis, UV-B review and leaf-optical/surface-phenotype studies require species-table confirmation. Epidermal focusing belongs under sense_light_nonvisual, never eye_type; Vogelmann1996 is retained as a possible species-table lead, not a Fraxinus measurement claim.
+
+The germination searches returned species-named dormancy trials, the Thomas2016 review, recent rapid germination methods and explicit GA/ABA/kinetin/exogenous-hormone treatments. These stay wanted under10(d,e), including studies whose excerpt does not yet reveal a tested light or hormone contrast. The indexed Deno second-supplement description of F.anomala dark germination is an additional provenance lead; Seed Germination Theory and Practice supplement is already globally wanted (harvest-c11) and was not duplicated. Nursery/USFS field germination and stratification descriptions do not replace reading these trial sources. The phloem-MeJA work, MJ/SNP hybrid experiment, native hormone-expression assays, foliar-melatonin seedlings, living-ash paclobutrazol trials, induced Manchurian-ash volatiles and living regeneration cultures remain chemical candidates. Culture studies require reader confirmation of living response scope; no response measurement is inferred from extracted tissue chemistry alone. FmNAC11 preprint was not separately requested alongside the related published NAC1 work pending identity resolution. Leaf glycoside/extract/coumarin pharmacology, fresh-cut lemons treated with extracted manna, and constitutive phenolic chemistry alone do not count10(a). Pangenome/genomic tolerance and rhizobiome records do not establish chemical cue response from their printed metadata alone.
+
+No diel null: continuous day/night green-ash sap flow, the six-month sap-flow study and daily/intradiurnal Fraxinus pollen counts are retained for full timing/transport interpretation. Their relevance must be decided from the source; no daily activity class is extracted. Other cached diel matches concern rose cut flowers, Osmanthus fragrance, general ABA clock regulation, hares/lynx, sunflower, wheat, Cupressus, lilies, nocturnal pollinators or seasonal tree budburst, not a directly demonstrated Fraxinus daily opening schedule. Fertilization after days of anthesis, annual flowering variation, floral-sex systems and seasonal bloom dates do not alone establish diel activity.
+
+Eye searches returned taxonomic leaflet/epidermal SEM, organ microscopy, stomatal ridges resembling eyes, pollen morphology, tree identification and horticultural anatomy; these do not measure image-forming eyes. The sole tool-listed eye candidate is Halopteris thallus development, a different genus of brown algae; it is explicitly screened. The single eye_type null follows owner10(b). Returned generic plant-photoreceptor reviews and cached Oleaceae review results add no Fraxinus eyes; no new null is written for light, chemical or diel while candidates remain unread. Source excerpts stay at search/cache level. Raw web responses:work/harvest-c12/Fraxinus-web1–4-worker18.json. Cross-file exact DOI/title duplicate check found0 matches among the46 candidates before appending; no n/a source re-requested.
+
+Next:Adiantum, then Botrypus, original genus order. Required candidate validation completed before commit: `0 problems`. Own-file whitespace check passed.
