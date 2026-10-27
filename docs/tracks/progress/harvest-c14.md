@@ -425,3 +425,21 @@ Queries actually run (connected web search; every returned title/snippet screene
 - `Matricaria discoidea seed germination light dark`
 - `Matricaria discoidea germination gibberellin dormancy`
 - `Matricaria jasmonate herbivore`
+
+### Trillium
+
+Web-query screen completed for round; full protocol remains partial while OpenAlex skipped. Official harvest_get/screen_candidates and cached run2/supplements screened: source output labels only chemical open, but current queue/evidence preflight still requires all four traits. Legacy harvest-8 light null contradicted by displayed grandiflorum light/GA3/heliotropism titles; preserved legacy and notified coordinator, no null adoption. No genus measured evidence found. Thirteen new wanted leads include target grandiflorum experiments, genus-scope titles requiring reader species assignment, and congener-only germination/reproduction. Floral chemistry2024 explicitly includes cut/cold-stored2012/2016 flowers in search snippet, so retained as mixed-method fork for remaining years only;2023 petal SPME and2026 preprint also need living/picked checks. Ant responses to isolated elaiosome signals are not automatically living plant emission. Corydalis/Ricinus/maize and volcano/health/social titles are not target measurements; rhizobacterial potential alone does not establish measured plant cue reception. Eye results animal lenses, no target focusing measurement. Diel snippets mostly seasonal/lifespan rather than daily opening hour. Citation queries in harvest returned0; harvested Melanthiaceae family alternative contains pollinator-vision titles, not target plant photoreception; no full text read. Canon checked, no fetched pages/nulls/evidence.
+
+Queries actually run (connected web search; every returned title/snippet screened, fewer than20 whenever fewer delivered):
+
+- `Trillium seed germination light dark`
+- `Trillium germination gibberellin OR smoke OR dormancy`
+- `Trillium floral scent volatiles`
+- `Trillium photoperiod phototropism light sensing`
+- `wakerobin photoperiod phototropism light sensing`
+- `Trillium flower opening time anthesis`
+- `wakerobin flower opening time anthesis`
+- `Trillium volatile chemical signalling`
+- `wakerobin volatile chemical signalling`
+- `Trillium epidermal lens cells eye`
+- `wakerobin epidermal lens cells eye`
