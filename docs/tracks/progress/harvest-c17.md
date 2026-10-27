@@ -225,3 +225,40 @@ Successful stored harvest queries reviewed, in stored order (not rerun):
 - citation step: works citing 10.1016/j.isci.2022.104455 that name Marrubium: 0
 
 Checkpoint: 7 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 29 wanted lines total, 0 evidence. Remaining unreviewed 33; exact next Lycopus.
+
+### Lycopus (2026-10-27 continuation)
+
+Web screening for this round completed with two new hormone/germination reading leads. Existing L. europaeus light/dark germination evidence sweep-25#10 is adopted; light-only germination papers are not re-requested. Gypsywort was chosen as a specific common name to avoid Ajuga bugleweed ambiguity. Diel snippets gave seasonal flowering; harvested Disguises in Bud Arrangement concerns architecture, and the interval-camera paper concerns pollinator monitoring with no Lycopus daily-opening result in the stored abstract. Harvest eye candidates are Sorbarieae and Leonurus anatomy in other genera. No genus-specific focusing experiment emerged; plant eye_type is none under 10(b). The chemical harvest hits are broad reviews, soil/vegetation surveys, animal biofilm/cancer work or extracts of other genera; none establishes a living Lycopus volatile-response result. Essential-oil composition of harvested Lycopus material is excluded under 10(a). Family review query supplied broad photoreceptor reviews and Lamiaceae material without a Lycopus measurement visible in snippets.
+
+All delivered web result titles/snippets were read (up to 20 per query when delivered; the service can return fewer). Canon, existing evidence, wanted and owner papers-status checked locally. OpenAlex missing API steps skipped after coordinator HTTP 429; full protocol incomplete, no null searched rows. No evidence or paper assets written.
+
+Queries run, word for word:
+
+- `web: Lycopus seed germination light dark`
+- `web: Lycopus germination gibberellin OR smoke OR dormancy`
+- `web: Lycopus floral scent volatiles`
+- `web: Lycopus flower opening time anthesis`
+- `web: gypsywort flower opening time anthesis`
+- `web: Lycopus plant ocelli lens-like epidermal cells eye`
+- `web: gypsywort plant ocelli lens-like epidermal cells eye`
+- `web: Lycopus response to airborne volatile signals`
+- `web: gypsywort response to airborne volatile signals`
+- `web: Lamiaceae photoreceptor review`
+
+Successful stored harvest queries reviewed, in stored order (not rerun):
+
+- `Lycopus phytochrome photoreceptor`
+- `Lycopus light perception`
+- `Lycopus phototropism`
+- `Lycopus flower opening time`
+- `Lycopus nyctinasty`
+- `Lycopus anthesis`
+- `Lycopus pollination biology`
+- `Lycopus volatile signalling`
+- `Lycopus epidermal lens cells`
+- `Lycopus epidermal focusing leaf optics`
+- `Lamiaceae photoreceptor review` (stored family review)
+- citation step: works citing 10.1111/een.12947 that name Lycopus: 0
+- citation step: works citing 10.1016/j.isci.2022.104455 that name Lycopus: 0
+
+Checkpoint: 8 genera web-screened for the round, all protocol-partial; 0 new full-protocol completions, 0 searched rows, 31 wanted lines total, 0 evidence. Remaining unreviewed 32; exact next Allium.
