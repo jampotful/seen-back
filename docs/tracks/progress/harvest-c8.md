@@ -1460,3 +1460,61 @@ Read available returnedtitles/snippets andindexed originalabstract/methodpassage
 **Congeners keptseparate:** apetalum2020GA/light/dark10.3390/plants9030333;perfoliatum2010red/white/darkgermination;papillosumDOG1developmentstudy;sativumDOG1coatdormancy,GID1receptorgerminationandtwoblue/redgrowth/photosynthesisstudies;latifoliumGA3response10.4161/psb.25388. Fixedculturelighting,endogenoushormoneprofilinganddormancygenesalonearenotmeasuredlight/chemicalresponses; mandatorygerminationtitlesremainreaderholds. Existingacceptedcalluslightsourcecoversseparatemonochromaticcallusstudy,so no duplicaterequest. Garden-cressaltered-gravityphotomorphogenesisandrootphototropismtitlesexposedonlythroughResearchGate/unpublisheddatareviewremainunresolvedtitleleads,not fabricatedprimarymetadata.
 
 Dielsearchesreturnseasonalflowerdates,buddevelopmentduration0.5–2days,cropanthesistimesinothergenera,basalleaveswitheredatanthesis andpollinatorvisits; noneestablishactualtargetdailyfloweropening. Leafepidermal2007study/virginicummicromorphologydescribestomataandpapillae,noteyes; lens-poddedfruitandhandlensarefalsematches. Plant eye_typenone10(b);anyactualfocusingbelongsunderlight. Essential-oil/tissuevolatilecompositionoflatifolium,anddrabaextractsappliedtoaniseseeds,fail10(a)forlivingLepidiumresponse; virginicumlivingJAstudydoescount10(d). Brassicaceaereviewresultsincludephytochromeevolutionandflowerdiversity; Arabidopsisphysiology/genepresenceisnot targetcarry. Noabsenceclaimwhilecandidateanduncachedprotocolstepsremain.
+
+Lepidium validation: required screen_candidates checker printed **0 problems** at338wanted/23searched. JSONL parsed, first320wanted/all23searched byte-identical tod1c27393, git diff --check passed. Committed61aa11b6; only owned wanted/progress paths changed.
+
+## 2026-10-27 — issue38 worker45: Melothria
+
+NEW: **Melothria one newly web-screened genus; +8 wanted, +0 searched, +0 evidence. Worker45 totals: Lepidium/Melothria two genera, +26 wanted; cumulative346wanted/23searched.** Both screens remain protocol-partial because mandatory uncached OpenAlex steps are skipped after the round-wide429. No null searched rows or exhaustion claims. Preserve original97wanted/23searched baseline, prior18, Pilea/Centrosema adoptions and14new throughGeranium; current issue38 new screens become16throughMelothria. **Four remain; exact next Commelina**, thenLygodium,Ludwigia,Monotropa.
+
+Preflight actual queue, global searched/wanted, owner papers-status, canon and corrected-first accepted-name main_evidence: actual target **M.pendula**, all four plant traits open, no accepted genus evidence. Old sweep-100#25 is a thin two-query screen and expressly did not open the cited cucurbit scent review. No earlier complete web protocol adopted. Canon entries checked as above; no target physiological or plant-eye carry inferred from family/genomic sources. Official read-only harvest_get.py and screen_candidates.py succeeded using currently documented authorized network mode: **Melothria in no harvest run yet/not in harvest**. No failed request/zero-hit conflation. No direct page/paper fetch, evidence, service refusal, operational edit, proxy change, new permission or API fallback. OpenAlex429, MDPI429, UChicago403 and SANBI403 remain skipped; earlier refused mixed network/scratch-cache command not retried or bypassed.
+
+Required10(e) searches first, then all four scientific/common-name trait pairs, family-review alternative and exact target/source/taxonomic clarification. **38 actual connected queries**, exact execution order:
+- `Melothria seed germination light dark`
+- `Melothria germination gibberellin OR smoke OR dormancy`
+- `Melothria floral scent volatiles`
+- `Melothria flower opening time anthesis`
+- `creeping cucumber flower opening time anthesis`
+- `Melothria eye type lens-like epidermal cells`
+- `creeping cucumber eye type lens-like epidermal cells`
+- `Melothria light photoperiod phototropism`
+- `creeping cucumber light photoperiod phototropism`
+- `Melothria volatile chemical hormone response`
+- `creeping cucumber volatile chemical hormone response`
+- `Cucurbitaceae photoreceptor review`
+- `"Studies on the Seed Germination and Growth Characteristics of Melothria pendula" `
+- `"Melothria pendula" jasmonate gibberellin ethylene`
+- `"Melothria pendula" anthesis morning flower opening`
+- `"Melothria" "germination" "10.1590"`
+- `"Melothria pendula" "hormone" OR "ethylene" OR "salicylic"`
+- `"Melothria" "anthesis" "morning"`
+- `"Melothria scabra" "germination" "gibberellin"`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Melothria" "Anthesis"`
+- `"VIABILIDADE DE SEMENTES" "MELOTHRIA CUCUMIS"`
+- `"Melothria scabra" "floral" "biology"`
+- `"Melothria pendula" "volatile" "living"`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Bankunari" "Melothria"`
+- `"Melothria cucumis" accepted Kew`
+- `"Avaliação da emergência de plântulas de pepininho-silvestre" `
+- `"Melothria scabra" "Provides New Opportunities" journal`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Melothria heterophylla"`
+- `site:rlbcau.ac.in/pdf/compendium.pdf "Bankunari" "species"`
+- `"Melothria scabra" "germination" "light" study`
+- `"Melothria pendula" "chemical" "response"`
+- `"Effect of light intensity on the gas exchange characteristics of Melothria pendula"`
+- `"Melothria scabra" "sodium nitroprusside"`
+- `"Melothria scabra" "germination" polyploidization 2024`
+- `"10.1088/1755-1315/269/1/012021" -site:researchgate.net`
+- `"Effects of Sodium Nitroprusside on the Growth and Development of Melothria scabra"`
+- `"Efecto de compuestos de Aluminio, Bismuto, Hierro" Melothria -site:researchgate.net`
+- `"Artificial Polyploidization" Melothria "2024" germination`
+
+Read all exposed titles/snippets and indexed original metadata/abstract passages at actual returned extent, without a20-per-query claim. Most responses are saved in session store mel1–mel10. Search engine sometimes expands an indexed snippet to original methods; this remains desk screening, not a direct fetched or intake-verified text. No Wikipedia, ResearchGate, Scribd, DOKUMEN.PUB, academia.edu, Studocu, unauthorized copies or library mirrors opened or used as primary evidence. Some results expose ResearchGate abstracts; original metadata was recovered independently through original author portals/review references before requesting sources. Unknown DOI/year/authors remain blank/null. Global DOI/Unicode-normalized exact-title/URL and owner-status check found eight new sources absent from wanted/status; no owner n/a source requested.
+
+**Target light leads:** Wu Ming-Tse2025 National Chiayi University thesis,132pages, original Taiwan national thesis abstract explicitly compares light quality during M.pendula germination and reports inhibition under far-red/dark. Publication year2025 and author verified from original indexed metadata, not inferred from degree-year113. The same work tests pH/salinity/herbicides; these can represent tolerance/toxicity, so no target chemical-cue perception claimed. Idris/Linatoc/Bin Abu Bakar2019 **10.1088/1755-1315/269/1/012021** explicitly tests target gas exchange/light-response curves; original UTHM author portal and2024 original review bibliography confirm source metadata. No light/CO2 values logged, and CO2 as photosynthetic substrate is not automatically chemical sensing.
+
+**Congener germination holds:** campestris2016 **10.1590/1983-21252016v29n416rc** tests substrates/temperature; no manipulated light inferred from its general introduction. Cucumis2023 seed-viability/fruit-chemistry paper and2013 four-substrate emergence proceedings retained for10(e) method recovery. Kew original metadata confirms **Melothria cucumis is an accepted congener**, not target pendula. UERGS2020 Aline Marques thesis is the study lineage behind the2023 paper, adopted through the paper's note without a second wanted row. Scabra2023 detergent-germination **10.61117/ipsumtec.v6i2.182** and metal-germination journal paper retained per10(e); toxicity/nutritional effects alone are not established cue perception. Scabra2025 Yibing Yan proceedings tests applied sodium nitroprusside irrigation/spray of living seedlings versus water control, a chemical growth-regulator candidate under10(d), kept separate from pendula. Scabra2024 oryzalin polyploidization **10.3390/horticulturae10010022** exposes fixed photoperiod and induced chromosome changes, not a light response or demonstrated chemical sensing; no extra request for mutagenic manipulation alone.
+
+**Important taxonomy/diel resolution:** original university compendium has a genuine within-day anthesis statement in a chapter labelled Bankunari(Melothria), initially a plausible candidate. Targeted original indexed passage explicitly identifies **Solena amplexicaulis**, synonym **Melothria heterophylla**, before its flower timing. Thus no target/congener diel carry and no wanted row for this other genus. PubMed fruit-volatiles source likewise measures Solena, not M.pendula. General cucumber photoperiod/JA/stomatal/flower-hour results identify **Cucumis sativus**; no family physiological carry. Sphaerocarpa/Cucumeropsis, maderaspatana/Cucumis and japonica patent results also cannot silently be treated as current Melothria. Other diel hits are seasonal flowering, age to bloom, other-genus anthesis, and pollinator activity rather than target daily timing.
+
+Chemical exclusions: pendula phytochemical/antimicrobial extracts, silver nanoparticles, molluscicides, harvested fruit chemistry and animal cytotoxicity fail10(a). Virus-host susceptibility and herbicide resistance/injury alone do not show applied hormone/elicitor sensing. No target volatile signal or chemical response established; no absence claim while germination hold/protocol steps remain. Eye hits concern epidermal trichomes/cell anatomy, animal eyes and hand-lens identification; all plant eye_type none under10(b), any demonstrated focusing belongs under light. Family-review query returns broad plant photoreceptor reviews/cucurbit hormone generalities, not an original target measurement. No full-protocol completion claimed.
