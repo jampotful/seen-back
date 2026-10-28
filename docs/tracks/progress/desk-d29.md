@@ -7,3 +7,9 @@ Evidence: 1 (Jacobaea vulgaris sense_chemical, methyl jasmonate on living tissue
 Wanted: 4 (Lactuca serriola diel, preprint 10.1101/2020.07.16.206953 with an afternoon-opening sentence; Lactuca serriola sense_chemical, Small and Gutterman 1992; Frangula alnus GA3 and KNO3 seed dormancy, magiran page without DOI or authors; Berteroa incana diel, Denisow's blooming-dynamics paper).
 Search records: see docs/views/searched/desk-d29.jsonl. Pooled eye_type searches, one merged scientific-or-common-name query per trait.
 Refused fetches (permission unanswered): link.springer.com 10.1007/s10886-018-1020-7, doi.org 10.5586/aa.2009.010, its pbsociety PDF, onlinelibrary.wiley.com pdfdirect 10.1111/1365-2435.13424, biorxiv v1 page.
+
+Batch 22 (partial, budget): done Pilosella (eye_type, sense_chemical records; diel on wanted; light closed by evidence), Heteromeles, Lapsana, Gaultheria (diel, eye_type, sense_chemical records), Kalmia (diel, eye_type records; light and chemical closed by evidence), Celastrus (diel, eye_type, sense_chemical).
+Evidence added: Pilosella aurantiaca light (Bear et al. 2012, abstract), Kalmia latifolia light (Malek et al. 1989, full text), Kalmia latifolia gibberellic acid (Taylor, Conev and Harris 2009 conference abstract).
+Wanted added: Pilosella diel (Flower opening and closure: an update, 10.1093/jxb/eru327).
+Light trait records for Heteromeles, Lapsana and Gaultheria not written (no photoperiod/shade search run).
+Not reached: Cymbalaria, Conium, Crataegus, Primula (leads on main), Dactylorhiza, Tripleurospermum, Berberis, Abies, Calluna (leads on main).
