@@ -80,11 +80,9 @@ Evidence errors: **0 of 3**.
 - Evidence: 0 of 3.
 - Unit: 1 of 9, 11.1%.
 
-Pooled from audit 115's figures (search records 49 in 1032; with evidence 56 in 1118):
+Pooled from audit 116's figures (search records 49 in 1032; with evidence 56 in 1120):
 - Search records: 50 in 1038, 4.82%.
-- With evidence included: 57 in 1127, 5.06%.
-
-Audit 116, if it was committed in the meantime, should be added before these figures.
+- With evidence included: 57 in 1129, 5.05%.
 
 Fork that would change the count. Line 4's chased is supported only if the desk accepts the record's word that one of its Dactylis searches returned Fenske 2016. My three word-for-word runs did not. If the desk accepts it, the unit has 0 errors and passes.
 
