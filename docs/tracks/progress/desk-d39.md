@@ -1,0 +1,11 @@
+# desk-d39 (batches 31 and 32, partial)
+
+Evidence (6): Petasites pyrenaicus sense_chemical (paper names P. fragrans, a POWO synonym), Lilium longiflorum sense_light_nonvisual (photoperiod, Heins et al. 1982), Schinus molle and Schinus terebinthifolia sense_light_nonvisual, Lobularia maritima sense_chemical (KNO3 priming).
+Wanted (2): Agrimonia eupatoria GA3 (Asaadi 2022), Torilis japonica light (Vandelook et al. 2008); no whole quotable sentence confirmed for either.
+Search records: none written. The protocol (per-trait scientific and common-name searches, citation step, every listed candidate named in `screened`) was not completed for any genus, so no null was filed.
+Searched without a usable measurement: Calypso (jukuri paper behind Anubis; Proctor and Harder 1995 gives no time of day), Eutrochium (FHSU thesis names no species), Oemleria, Cocos (no hours given), Daphne, Sequoia, Mercurialis, Anthoxanthum, Microstegium (light cell not open), Cynoglossum (Stabell et al. 1998: no GA/light result), Comptonia, Parnassia (Holloway 2011 note lists P. palustris under GA promotes germination, no measurement), Valeriana, Paris (Liao et al. 2019 cites GA effects only), Melampyrum, Pulmonaria, Epigaea, Chelone, Betonica, Sitobolium (hay-scented fern paper measures the ash, not the fern).
+Skipped: Scutellaria (main already holds the same JA and MeJA papers), Phalaris, Briza, Comarum, Agrimonia/Torilis beyond wanted lines.
+Not reached in depth: Calypso diel/eye, Epigaea, Agrimonia, Oemleria, Eutrochium, Sequoia, Paris, Comarum, Daphne, Microstegium, Sitobolium, Pulmonaria, Phalaris, Melampyrum, Anthoxanthum, Betonica, Comptonia, Cocos, Valeriana, Cynoglossum, Parnassia, Mercurialis, Briza, Chelone.
+
+## Desk disposition after audit 129
+Audit 129 passed the unit (5 evidence records judged, 0 errors; no search records). Merged whole. Genera of batches 31 and 32 left unscreened by this unit are re-queued for d41.
