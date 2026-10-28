@@ -48,6 +48,10 @@ The engine is a WebGL shader over the phone's camera, and a separate agent is ex
 
 One JSON object per line, one measurement per object. Append with `python3 -I tools/senses/addlog.py <unit> < records.jsonl`, which checks each record first; `python3 -I tools/senses/check.py` checks every log.
 
+**Quote length is measured in words, not characters.** `tools/senses/check.py` permits at most 40 whitespace-separated words (`len(quote.split())`); there is no 125-character evidence limit. A whole sentence longer than 125 characters remains eligible when it meets that word limit and all scientific and quotation checks. The 125-character cap reported in early audits was a WebFetch summariser output constraint, not a rule for scientific records or publication. If a tool cannot return the passage faithfully, obtain a legal source text (including the OA workflow in `docs/tracks/prompts/oa-read.md`) or leave a retrieval gap. Do not treat a tool's output limit as evidence that a measurement is absent, and do not evade a tool's restrictions by soliciting pieces.
+
+Copy a whole sentence or table row; mark every omission with " … " and retain the subject, value, units and qualifications needed for the claim. Never rewrite punctuation, capitalise a clause into a new sentence, or remove a null result or experimental condition to shorten a quote. Check against the actual source text with `quotecheck.py`; a mechanical match does not by itself establish scientific support. Source access, taxon, conditions, grades, partial flags and provenance requirements still apply.
+
 ```
 {"unit": "<unit>", "taxon": "Phidippus audax", "rank": "species", "family": "Salticidae", "order": "Araneae",
  "trait": "acuity_cpd", "value": 0.0, "units": "cycles/degree", "eye": "AME",
