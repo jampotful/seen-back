@@ -77,6 +77,12 @@ The research desk keeps its work queue here so it survives a recycled session. E
 44. Physocarpus Dittrichia Sidalcea Cochemiea Antennaria Lagurus Genista Pulicaria Nonea Hylodesmum Pelecyphora Cota Calendula Cephalanthera Armoracia
 45. Bellardia Eriophorum Desmanthus Sapindus Helleborus Dermatophyllum Himantoglossum Sesuvium Themeda Mentha Oncosiphon Stylophorum Cyclamen Delphinium
 
+## Yield log, 28 October 2026 (units kept after audit; evidence / search / wanted)
+- d12 (batch 13 start) 10 / 8 / 1, audit 102 clean. d13 8 / 2 / 0, audit 103 dropped 4 lines (chased DOI with no supporting search, two repeats of main).
+- d14 (batch 14) 5 / 0 / 0, audit 104 dropped 1 line (hybrid synonym); 7 of 9 genera skipped because main already holds leads.
+- d15 (batch 15 start) 1 / 2 / 4, audit 105 dropped 2 lines. d16 9 / 1 / 0, audit 108 clean. d17 0 / 2 / 1, audit 106 dropped 2 lines (Hexastylis is Asarum). d18 (re-screen of dropped leads) 8 / 0 / 0, audit 107 clean.
+- Yield per unit has fallen: most open cells now carry a wanted lead on main, and a lead means no null. Batches 16 onward (from Cerastium on) and the leads themselves are the remaining work; prefer a unit that reads open-access text for held leads over a genus sweep.
+
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
 - An issue is a work request, not a confirmed Codex launch. Follow [CODEX-DISPATCH.md](CODEX-DISPATCH.md): reconcile existing Codex tasks, submit through a verified authenticated interface only when unstarted, and record the returned task URL/ID in the issue. Until that receipt and status exist, execution is unknown; silence is not permission to retry. The chat still follows `docs/tracks/prompts/codex-round.md` and opens a PR titled "Codex round ..." or "Codex findings ...".
