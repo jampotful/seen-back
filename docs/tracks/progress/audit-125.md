@@ -18,9 +18,9 @@ Each record covers one genus and several traits. Where my own searches did not r
 I judged against desk-audit.md, desk-screen.md points 1 to 10 (owner's readings 10(a) to 10(e) included), the counting rule of audit 39, and the rulings of audits 84, 86, 87 and 90. Audit 90 served as the format.
 
 Queries. `harvest_get.py` ran without the network (it reads origin/ci). A script compared each record's unprefixed `queries` with every `query` and `family review` line the harvest prints.
-- All 14 harvested genera match word for word and in order, with their "web: " lines after them: Phlox, Solidago, Gleditsia, Hylocomium, Phleum, Ferocactus, Galanthus, Angelica, Echinocystis, Silybum, Leonurus, Buddleja and Viscum.
+- All 13 harvested genera match word for word and in order, with their "web: " lines after them: Phlox, Solidago, Gleditsia, Hylocomium, Phleum, Ferocactus, Galanthus, Angelica, Echinocystis, Silybum, Leonurus, Buddleja and Viscum.
 - None shows "gave up".
-- The 10 genera in no harvest run (Clinopodium, Holodiscus, Dasiphora, Ampelopsis, Spiraea, Sarracenia, Spinulum, Houstonia, Verbena, Hepatica, Medeola) list "web: " lines only, and no unlabelled line appears.
+- The 11 genera in no harvest run (Clinopodium, Holodiscus, Dasiphora, Ampelopsis, Spiraea, Sarracenia, Spinulum, Houstonia, Verbena, Hepatica, Medeola) list "web: " lines only, and no unlabelled line appears.
 
 Chased.
 - Lines 4, 6, 7, 8, 10, 13, 17, 18, 21, 22 and 23 name 10.1007/s10265-016-0785-4. My run of the pooled family search "Lamiaceae OR Rosaceae OR Vitaceae OR Rubiaceae OR Ranunculaceae OR Verbenaceae OR Sarraceniaceae OR Lycopodiaceae photoreceptor review" returned nutrition-evidence.com article 249643. I opened it: Li and Mathews 2016, J Plant Res 129(2): 115-22, with that DOI. These lines are supported, as in audits 86 and 87.
