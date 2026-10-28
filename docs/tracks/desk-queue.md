@@ -92,6 +92,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d35 4 / 18 / 4 (audit 125 dropped 6 search records, all missed measurements found by title-only screening; 24 of 30 genera of batches 26 and 27). Six leads are listed in its disposition note for a lead-reading unit.
 - d36 3 / 36 / 5 (audit 126: no missed measurement; 5 search records flagged only for an omitted zero-hit citation-step DOI, ruled cosmetic, merged whole). Batch 29 not reached: Galinsoga, Anthyllis, Polypodium, Maclura, Armeria, Hesperoyucca, Ericameria, Yucca, Arum, Asarum, Corydalis.
 - d37 2 / 0 / 0 (audit 127 clean: Sarracenia purpurea germination in darkness, Ampelopsis glandulosa var. brevipedunculata light levels). Gleditsia, Hylocomium and Dasiphora leads have only sentences over 125 characters.
+- d38 7 / 55 / 9 (audit 128 failed: 3 search lines and 1 evidence line dropped; Larix olgensis was a synonym). Closed cells: Galinsoga light, Armeria GA3/KNO3, Yucca volatiles, Ericameria light, Larix MeJA, Cylindropuntia GA3.
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
