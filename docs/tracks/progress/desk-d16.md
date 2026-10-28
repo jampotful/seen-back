@@ -1,6 +1,6 @@
 # desk-d16 (plant genera: Ranunculus, Datura, Lunaria, Juglans, Castilleja, Ficus, Lespedeza, Salix, Asparagus)
 
-Branch research/desk-d16. 11 evidence records, 1 search record, no wanted lines.
+Branch research/desk-d16. 9 evidence records, 1 search record, no wanted lines.
 
 ## Method note
 WebFetch opened only URLs that WebSearch returned (other URLs raised a permission wait); the fetch tool's summariser returns abstract text in pieces, so quotes are joined whole sentences and every record carries "partial": true. eye_type skipped for all genera (null records already on main, owner reading 10(b)).
