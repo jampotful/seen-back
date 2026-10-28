@@ -15,7 +15,7 @@ Ballota, Dodonaea, Heliotropium, Coptis, Borago, Amaranthus, Osteospermum, Ribes
 - Zantedeschia (genus, grade g) sense_chemical (GA3; Naor et al. 2004)
 - Sanguisorba officinalis sense_chemical (GA 200 mg/L; Jiang et al. 2008)
 
-## Search records: 31 (genus level, one per genus and trait), wanted lines: 14
+## Search records: 31 (genus level, one per genus and trait), wanted lines: 12
 Traits left out of a genus's record sit on the wanted list (Heliotropium, Coptis, Borago, Ribes, Hippophae, Shepherdia light or chemical or diel). Wanted leads where the quote limit (125 characters) blocked a record: Borago microgreens PPFD (10.15544/rd.2013.2.057), Hippophae salicifolia light colours (10.36808/if/2013/v139i5/33520), Borago GA thesis (Solis Fuentes 2006). Ribes nigrum rhythmic floral volatiles (10.1111/j.1365-3040.1994.tb02030.x) is a diel lead from the harvest abstract only.
 
 ## Not reached (17 genera)
