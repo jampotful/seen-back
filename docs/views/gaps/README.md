@@ -22,11 +22,11 @@ A species is `m` for a trait when a record of grade `m` names the species. It is
 
 ## Run summary
 
-Records read: 20512 (after dropping 4293 the audit retracted); queue lines: 49453.
+Records read: 20515 (after dropping 4293 the audit retracted); queue lines: 49452.
 
 | View | species in the world rows | records | share covered by the listed species | county records | share covered by the county's 20 | records of listed species with a gap | gap row-records (records x rows in state i) |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| plant | 141,468 | 44,079,457 | 50.5% | 56,850 | 23.1% | 22,273,484 | 64,369,756 |
+| plant | 141,468 | 44,079,457 | 50.5% | 56,850 | 23.1% | 22,273,484 | 64,360,728 |
 | bird | 9,190 | 18,548,533 | 90.3% | 20,542 | 50.5% | 16,743,425 | 55,929,344 |
 | insect | 158,004 | 24,749,927 | 54.3% | 55,748 | 19.2% | 13,449,285 | 28,644,578 |
 | wader | 852 | 3,172,323 | 100.0% | 12,583 | 96.0% | 3,172,323 | 15,539,589 |
