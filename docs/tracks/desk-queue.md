@@ -88,6 +88,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d30 3 / 32 / 4 (audit 121 clean; 19 of 22 genera in batches 22 and 23; Fouquieria and the Bowers 2005 and Lindera 1999 leads still unread).
 - d32 4 / 0 / 0 (audit 122 dropped 1: Platanus orientalis quote was a Background statement). Kept: Pteridium aquilinum jasmonic acid, Poa pratensis night light, Sarcopoterium spinosum and Stachys cretica karrikinolide. Not filed: Epacris tasmanica, Melilotus suaveolens and Scilla paui (every usable sentence over 125 characters), Onopordum caricum (POWO unconfirmed), Toxicodendron vernicifluum (fetch refused).
 - d34 1 / 0 / 0 (audit 123 dropped 1: Apocynum venetum repeated desk-c11; Apocynum pictum kept). Lead reading of remaining wanted leads is largely blocked (PMC, Wiley, Springer, BioOne refuse fetches); Lonicera insularis needs a POWO check.
+- d33 7 / 48 / 17 (audit 124 dropped 5 search records; 25 genera of batches 24 and 25; Campanula not searched; Mycelis, Matteuccia and Struthiopteris are POWO synonyms; Dicentra spectabilis is Lamprocapnos).
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
