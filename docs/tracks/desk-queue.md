@@ -98,6 +98,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d41 3 / 4 / 6 (audit 131 failed: 18 of 22 search records dropped, mostly `chased` naming the web DOI for harvest genera; the dropped genera are re-queued to d43). Closed: Parnassia light, Comptonia GA3, Eutrochium light.
 - d42 4 / 30 / 8 (audit 132 failed: 5 search lines and 1 evidence line dropped). Closed: Campanulastrum light, Chamaedaphne GA3, Mimosa light, Schizachyrium KNO3.
 - d43 2 / 15 / 9 (audit 133 failed: 2 search and 1 evidence line dropped). Closed: Mercurialis annua MeJA, Daphne mucronata GA3.
+- d44 5 / 14 / 7 (audit 134 failed: 2 search and 1 evidence line dropped). Closed: Tribulus diel, Carpobrotus light, Helenium light, Pistacia khinjuk GA3, Alisma diel.
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
