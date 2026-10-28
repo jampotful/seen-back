@@ -95,6 +95,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d38 7 / 55 / 9 (audit 128 failed: 3 search lines and 1 evidence line dropped; Larix olgensis was a synonym). Closed cells: Galinsoga light, Armeria GA3/KNO3, Yucca volatiles, Ericameria light, Larix MeJA, Cylindropuntia GA3.
 - d39 5 / 0 / 2 (audit 129 clean: Petasites pyrenaicus chemical, Lilium longiflorum photoperiod, Schinus molle and S. terebinthifolia light, Lobularia maritima KNO3 priming). Most of batches 31 and 32 left unscreened; re-queued to d41.
 - d40 6 / 25 / 12 (audit 130 failed: 6 search and 2 evidence lines dropped; part-sentence quotes, missed GA3/KNO3/photoperiod results). Gibberellin cells closed for Heliotropium, Amaranthus, Coptis, Hippophae, Fritillaria, Zantedeschia, Sanguisorba; Dodonaea light.
+- d41 3 / 4 / 6 (audit 131 failed: 18 of 22 search records dropped, mostly `chased` naming the web DOI for harvest genera; the dropped genera are re-queued to d43). Closed: Parnassia light, Comptonia GA3, Eutrochium light.
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
