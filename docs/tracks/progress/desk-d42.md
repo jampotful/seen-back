@@ -5,7 +5,7 @@ Branch research/desk-d42. WebSearch and WebFetch only (OpenAlex 403; pmc, pubmed
 ## Genera done (14)
 Campanulastrum, Hieracium, Castanea, Sanicula, Eriophyllum, Chamaedaphne, Tiarella, Menyanthes, Corallorhiza, Mimosa, Tribulus, Schizachyrium, Tellima, Echinochloa.
 
-## Evidence (6 lines, all abstract-only, partial)
+## Evidence (5 lines, all abstract-only, partial)
 - Campanulastrum americanum sense_light_nonvisual (Etterson and Galloway 2002, two light levels; paper uses Campanula americana)
 - Hieracium sense_chemical, grade g (GA3 germination of three Hieracium taxa, Di Gristina et al. 2020)
 - Chamaedaphne calyculata sense_chemical (GA3, Korean conference abstract, Korean quote)
