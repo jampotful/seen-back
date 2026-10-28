@@ -7,7 +7,7 @@ Batch 28 (Ulex to Viola) and the first four genera of batch 29 (Anemonastrum, Op
 - Viola: skipped. The harvest lists sense_chemical only as open, and main holds Viola odorata sense_chemical evidence, Viola sense_light_nonvisual evidence and a wanted lead.
 - Arctium: diel record only. The sense_chemical cell has two read germination pages (GA3 500 ppm, KNO3 1 percent; jms.guilan.ac.ir article 5224, magiran 1211641) that show no authors, year or journal, so they could not be logged or listed; eye_type not searched.
 
-## Evidence (4 records)
+## Evidence (3 records)
 Scilla siberica diel (Zuraw 2011), Allium fistulosum sense_chemical (Fazeli Kakhki and Beikzadeh 2022, GA3), Rhododendron viscosum diel (Koksheeva et al. 2018, abstract only).
 
 ## Wanted lines (5)
