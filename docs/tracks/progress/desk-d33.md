@@ -2,7 +2,7 @@
 
 Genera screened: queue batches 24 and 25, all but the skips below.
 
-Batch 24: Knautia, Anaphalis, Asimina, Sherardia, Mertensia, Drosera, Sedum, Alnus, Echinocereus, Humulus, Thalictrum, Arbutus, Anacamptis. Batch 25: Campanula, Pastinaca, Barbarea, Carduus, Tragopogon, Nicotiana, Mycelis, Dryopteris, Clintonia, Dicentra, Centranthus, Actaea, Lathyrus, Ornithogalum (records or wanted leads for each open cell I could reach).
+Batch 24: Knautia, Anaphalis, Asimina, Sherardia, Mertensia, Drosera, Sedum, Alnus, Echinocereus, Humulus, Thalictrum, Arbutus, Anacamptis. Batch 25: Pastinaca, Barbarea, Carduus, Tragopogon, Nicotiana, Dryopteris, Clintonia, Dicentra, Centranthus, Actaea, Lathyrus, Ornithogalum (records or wanted leads for the open cells I could reach). Campanula and Mycelis (Matteuccia/Mycelis are POWO synonyms) have no search record from this unit: not finished.
 
 Evidence (7 lines, evidence/desk-d33.jsonl): Asimina triloba and Alnus glutinosa shade/light trials, Thalictrum rochebruneanum light vs dark and GA3 abstract, Tragopogon pratensis red/far-red germination.
 
