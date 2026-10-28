@@ -100,6 +100,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d43 2 / 15 / 9 (audit 133 failed: 2 search and 1 evidence line dropped). Closed: Mercurialis annua MeJA, Daphne mucronata GA3.
 - d44 5 / 14 / 7 (audit 134 failed: 2 search and 1 evidence line dropped). Closed: Tribulus diel, Carpobrotus light, Helenium light, Pistacia khinjuk GA3, Alisma diel.
 - d45 1 / 18 / 3 (audit 135: 0 of 18 search errors, 1 evidence line dropped). Closed: Nuphar variegata GA3. Hieracium chemical re-queued at species level.
+- d46 3 / 2 / 3 (audit 136: 1 evidence line dropped; skipped genera of batches 36 to 45 verified as covered on main). Closed: Hieracium terraccianoi and Pilosella hoppeana subsp. sicula GA3, Succisa diel.
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
