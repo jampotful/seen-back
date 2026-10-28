@@ -1,2 +1,11 @@
 # desk-d43 (re-screen of the 18 genera dropped after audit 131)
-In progress. See the final report for the genera done.
+
+All 18 genera done, in the order given.
+
+Evidence (3): Mercurialis annua sense_chemical (Villamil et al. 2022, methyl jasmonate spray), Daphne mucronata sense_chemical (Alavi Bougar et al. 2025, GA3 1000 ppm), Cynoglossum officinale sense_light_nonvisual (van Breemen 1984, light response differed between populations; direction not stated).
+Search records (17, one line per genus with its open traits that no evidence or wanted line covers): Mercurialis, Paris, Daphne, Anthoxanthum, Betonica, Calypso, Chelone, Cocos, Melampyrum, Comarum, Epigaea, Oemleria, Pulmonaria, Phalaris, Sequoia, Comptonia, Eutrochium. Cynoglossum has no search record (both open cells are covered by evidence or a wanted line).
+Wanted (10): Mercurialis perennis light (Vandelook et al. 2019) and M. annua anthesis (1994); Paris polyphylla GA3/GA4 (Zheng et al. 2023, the only sentence with percentages is 330 characters); Cynoglossum officinale MeJA (Runyon and Birdsall 2016) and Eigenbrode et al. 2008 (abstract unread); Chelone glabra diurnal reward (Richardson and Irwin 2015); Cocos nucifera (Magdalita et al. 2010, and the GA3 in vitro embryo paper 10.1007/s11627-006-9018-1, page blocked); Comptonia peregrina total-dark germination (del Tredici and Torrey 1976).
+Skipped cells (closed on main): Epigaea sense_chemical, Eutrochium sense_light_nonvisual, Phalaris sense_light_nonvisual and sense_chemical.
+Chased: no genus of the unit has a citation step except Paris (10.1111/ele.12205, 10.1016/j.cub.2026.03.002) and Cynoglossum (10.1111/j.1600-079x.2011.00947.x). For the others `chased` is a DOI printed in the harvest's own family-review list for the genus's family (named in each note); Daphne is in no harvest run, so it names the web-found family review 10.1007/s44372-025-00446-3.
+Blocked or unread: pmc PMC5654834 (Betonica lead, bot check, no DOI found), archive.org biostor-137766 (grass anthesis, denied by the permission classifier), biostor-78738 (Anthoxanthum flowers, permission unanswered), bioone s11627-006-9018-1 (bot check), Frontiers 10.3389/fpls.2022.812558 direct fetch (provenance), PMC5681607 and open.library.ubc.ca (provenance).
+Unconfirmed: Daphne arbuscula and D. cneorum GA3 (Di Sacco et al. 2021, 10.1007/s12224-021-09389-5) not logged; its only quotable result sentence gives no value.
