@@ -1,0 +1,29 @@
+# audit-174: desk-d84 (4 evidence records, no search records, no wanted lines)
+
+Audited 29 October 2026 from the desk-d84 files copied untracked into the worktree (progress note and 4 evidence lines; neither is committed here). Mechanical gate: `screen_candidates.py --check` with empty searched and wanted files prints "0 problems". Quote lengths counted here: 96, 91, 108 and 115 characters; each is one whole sentence, and each was confirmed word for word by the WebFetch summariser on a yes/no request. 1 WebSearch used.
+
+Duplicates: git grep on origin/main (9600c4a9) finds no evidence or search record for Thamniopsis, Acrostichum, Adiantum flabellulatum or Werauhia, and none of the three DOIs or the Thamniopsis PDF URL in any evidence file. Adiantum on main is only A. capillus-veneris (plant-fungus-slime 161-162, sweep-13:7, other species). The Adiantum flabellulatum paper (10.3389/fpls.2023.1222414) sits on main only as a wanted line (wanted/harvest-c12.jsonl line 62, wanted-merged.csv row 471), so line 3 fills a wanted paper and repeats no evidence.
+
+Sources opened: sciencepress.mnhn.fr article page and PDF cryptogamie-bryologie2009v30f2a2.pdf (Maciel da Silva AS, Pôrto KC, Simabukuro EA, Cryptogamie Bryologie 30(2): 243-257, 2009; no DOI on either; a Crossref title query returned only unrelated works and a second Crossref query failed, so no DOI was found); ps.ueb.cas.cz article page and api.crossref.org/works/10.1007/s11099-014-0006-0 (Randi, Freitas, Rodrigues, Maraschin, Torres, Photosynthetica 52(1): 50-56, 2014); frontiersin.org article page for 10.3389/fpls.2023.1222414 (Cai, Wang, Xie, Wen, Yu, Xu, Su, Luo, Front. Plant Sci. 14: 1222414); kimuk.conare.ac.cr repository record and api.crossref.org/works/10.1055/s-2005-837584 (Cascante-Marín, Oostermeijer, Wolf, den Nijs, Plant Biology 7(2): 203-209, 2005); GBIF species 2669815, 2651707, 7412206, 2700524 (all ACCEPTED, each the record's named species).
+
+| line | taxon / trait | verdict | reason |
+|---|---|---|---|
+| 1 | Thamniopsis incurva / sense_light_nonvisual | ERROR | Doubt (c). Quote verbatim in the abstract, but it states only that germination occurred in light and in darkness, with no direction or magnitude. The PDF the record opened is the whole open paper, and its Results state "Spore germination was significantly higher under light conditions (97%) than under darkness (6%)" (Z = 2.88, p = 0.0039), and that protonemal cell number and growth rate fell with irradiance (higher at 14.4 to 7.20 than at 4.32 and 1.44 umol m-2 s-1). The value reads as equal germination in light and dark and "did not inhibit protonemal growth", so the main light result is omitted and the value misstates it (audits 162, 164, 172). "partial": true and "Abstract only" misdescribe a full PDF that was opened. Bibliographic fields, no-DOI and GBIF 2669815 (ACCEPTED) confirmed. Refile with the 97% against 6% sentence (it is under 125 characters) and partial false |
+| 2 | Acrostichum danaeifolium / sense_light_nonvisual | OK | Doubt (d). Quote verbatim; the abstract's four results (more starch and better-organised grana, chlorophyll a down and b up after 34 days, lutein and zeaxanthin down and trans-beta-carotene up, phenolics up) are all in the value; 30 min UV-B daily for 34 days confirmed; only A. danaeifolium named. Photosynthetica 52(1): 50-56, author order and DOI match Crossref. GBIF 2651707 ACCEPTED |
+| 3 | Adiantum flabellulatum / sense_light_nonvisual | OK (fault noted) | Doubt (a). Gametophytes grown at set PPFD (0, 0.1, 1.4, 7.1, 14.4, 73.6, 145.3 umol m-2 s-1); the quote reports down-regulation of 3 PHYB and 5 CRY1 genes at 0.1, a direction measured in the living gametophyte under a set-light-intensity trial, which the owner's reading admits; trait not mismatched. The abstract's other results (10,995 DEGs, 927 photosynthesis and 210 flavonoid DEGs with no direction, 34 TF families) carry no light direction, so nothing is omitted from an abstract-only record; the abstract words are "high sensitivity to low light", which the value paraphrases. Authors, order, volume and article number confirmed. GBIF 7412206 ACCEPTED |
+| 4 | Werauhia gladioliflora / diel | OK | Doubt (b). Quote verbatim and names the species' own flowers opening at night; trait label "diel" is the one used on main (2161 diel lines) and flower opening is the owner's plant diel. The abstract's other results (fruit set about half, autonomous selfing, seed dispersal Feb to Apr) are not flower timing; October to early December flowering confirmed; no hour in the abstract, as conditions say. Plant Biology 7(2): 203-209 and author order (A. Cascante-Marín, J. G. B. Oostermeijer, J. H. D. Wolf, J. C. M. den Nijs) match Crossref; `where` names the repository page actually opened. GBIF 2700524 ACCEPTED |
+
+Faults noted, not counted:
+- Line 3: access is "open" and the record read only the abstract; the Results (section 3.1, Fig. 1) give gametophyte perimeter and projected area rising to a maximum at 7.1 umol m-2 s-1 and falling significantly at 145.3. A morphological light-intensity value could be filed from the full text.
+- Line 3: "highly sensitive" in the value is the record's paraphrase of "high sensitivity to low light".
+
+Evidence errors: 1 of 4 (25.0%). Error lines: 1.
+Search records: none in the unit (0 of 0). Wanted lines: none.
+
+Pooled with audits 169 to 173: 4 of 32 evidence records (12.5%; audit 169 0 of 2, audit 170 0 of 6, audit 171 0 of 8, audit 172 3 of 7, audit 173 0 of 5, audit 174 1 of 4).
+
+Verdict: fail on line 1. Lines 2, 3 and 4 can be merged. Line 1 should be refiled from the full text with the light against dark percentages and partial false.
+
+Blocked or left alone: one Crossref query (client error). No library proxy, ResearchGate, academia.edu or Sci-Hub page opened; no paper text committed.
+
+Stray files: none committed; the desk-d84 copies stay untracked.
