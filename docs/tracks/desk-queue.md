@@ -117,6 +117,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d59 3 / 0 / 0 (audit 149 clean)
 - d60 18 / 0 / 0 (audit 150: 1 of 19 dropped, Colocasia author order)
 - d61 16 / 0 / 0 (audit 151: 2 of 18 dropped, volume error and a repeat of d54)
+- d62 11 / 0 / 0 (audit 152: 2 of 13 dropped, a missing volume and a paraphrased title)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
