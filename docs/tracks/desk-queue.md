@@ -128,6 +128,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d70 2 / 0 / 0 (audit 160 clean; Marginatocereus marginatus anthesis and Basella alba red/far-red germination; no wanted lines)
 - d71 4 / 0 / 0 (audit 161 clean; SciELO-indexed Latin American native species: Campomanesia aurea, Copaifera oblongifolia, Grona barbata, Paubrasilia echinata; no wanted lines)
 - d72 1 / 0 / 0 (audit 162: 1 error dropped, Hosta yingeri omitted the later flowering result; Aster hayatae photoperiod merged; no wanted lines)
+- d73 1 / 0 / 0 (audit 163: 2 errors dropped, Pimelea ciliata omitted the printed issue and Acacia pycnantha cited a synonym's WFO id; Trachyandra divaricata red-light germination merged; no wanted lines)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
