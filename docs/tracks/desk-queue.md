@@ -115,6 +115,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d57 9 / 0 / 0 (lead reading; audit 147 clean: Cirsium vulgare, Vicia villosa, Aesculus hippocastanum chemical; Conium maculatum, Synedrella nodiflora, Hesperis matronalis, Tripleurospermum inodorum, Potentilla recta, Oenothera biennis light).
 - d58 3 / 0 / 0 (audit 148 clean; Pontederia thesis record held out, not peer-reviewed)
 - d59 3 / 0 / 0 (audit 149 clean)
+- d60 18 / 0 / 0 (audit 150: 1 of 19 dropped, Colocasia author order)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
