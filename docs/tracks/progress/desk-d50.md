@@ -27,3 +27,6 @@ Started 29 October 2026. Branch research/desk-d50.
 - Berberis lycium (Verma et al. 2021): opening time-of-day sentences exceed 125 characters; the short one gives a duration.
 - Lonicera (Park et al. 2019), Bidens floral volatiles (Ye et al. 2025), Aquilegia formosa photoperiod (Ballerini and Kramer 2011, day neutral sentence about 149 characters), Phytolacca acinosa (Magray et al. 2025), Diospyros sericea, Lonicera oblata, Melilotus sulcatus, Viburnum lantanoides, Pilea melatonin/AVG, Himantoglossum robertianum scent, Mentha spectra (peppermint, hybrid), Dipsacus asper MeJA (129-character sentence), Salvia abrotanoides, Lindera ABA, Taraxacum coreanum, Solanum nigrum: no qualifying whole sentence.
 - Blocked: PMC pages (captcha page), informahealthcare.com Richardia page, katalog.lib.cas.cz (bot check), zendy.io (empty).
+- Later reads with no qualifying sentence: Phytolacca acinosa (Frontiers 2025, no seed germination trial), Cerastium candidissimum (Horticulturae 2025), Orchis militaris (Nabieva 2021; light and darkness sentences are 132 and 140 characters), Frangula sphaerosperma (Floram 2026), Syringa (variety and cultivar), Oenothera nocturnal species (Antoń and Denisow 2018; sentences over 125 characters), Ranunculaceae abstract (Denisow et al. 2016; Aquilegia sentence 129 characters).
+
+No wanted lines written. WebSearch used: about 90.
