@@ -118,6 +118,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d60 18 / 0 / 0 (audit 150: 1 of 19 dropped, Colocasia author order)
 - d61 16 / 0 / 0 (audit 151: 2 of 18 dropped, volume error and a repeat of d54)
 - d62 11 / 0 / 0 (audit 152: 2 of 13 dropped, a missing volume and a paraphrased title)
+- d63 21 / 0 / 0 (audit 154 clean; 2 dropped on unconfirmed issue and a mis-cited WFO id; 3 wanted lines)
 - d64 15 / 0 / 0 (audit 153 clean; 1 dropped for method wording the abstract does not support)
 
 ## Codex lane (26 October 2026)
