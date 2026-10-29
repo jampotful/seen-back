@@ -105,6 +105,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d48 2 / 0 / 1 (recheck of 49 early nulls under the widened readings; audit 138 clean: Thunbergia grandiflora shade, Lespedeza cuneata ABA/GA at grade g). 47 early nulls unchanged.
 - 29 Oct 03:30 UTC: the desk sat idle from 16:00 UTC 28 Oct while waiting on PR 42 and checking issue 25; the live quiet alert is issue 43. Hold mode ended. Lead-reading unit d49 launched under the 125-character rule in force (records within 125 characters are valid under the 40-word rule too).
 - d49 9 / 0 / 0 (lead reading; audit 139 clean: Panicum capillare, Minthostachys mollis, Lathyrus aphaca and Foeniculum vulgare light; Minthostachys mollis GA3; diel for Hepatica nobilis, Arabis procurrens, Iberis sempervirens, Melissa officinalis). Eranthis hyemalis diel and Rhus chinensis unfiled.
+- d50 7 / 0 / 0 (lead reading; audit 140 clean: Eranthis hyemalis diel, Bidens pilosa and B. subalternans light, Frangula alnus light, Potentilla indica shade, Zanthoxylum fagara and Rumex confertus chemical). Rhus chinensis unfiled.
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
