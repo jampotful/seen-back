@@ -135,6 +135,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d77 2 / 0 / 0 (audit 167: 0 errors; Lagerstroemia speciosa flower opening and Spathodea campanulata shade versus sun merged; no wanted lines)
 - d78 5 / 0 / 1 (audit 168: 0 errors; Enhalus acoroides shading, Stratiotes aloides PAR, Rumex palustris ethylene and GA3, Salicornia fruticosa darkness germination, Sarracenia alata gibberellin germination merged; 1 wanted line, Hydrocharis morsus-ranae shading, authors empty)
 - d79 2 / 0 / 0 (audit 169: 0 errors; Polymnia canadensis light and Artemisia tridentata volatile signalling merged; no wanted lines)
+- d80 6 / 0 / 0 (audit 170: 0 errors; Anethum graveolens light and photoperiod, Scolymus hispanicus germination light, Centaurea nigra aphid headspace, Fraxinus mandshurica beetle and MeJA volatiles, Atropa acuminata herbivore-induced alkaloids merged; Atropa flagged for the owner as a tissue assay; no wanted lines)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
