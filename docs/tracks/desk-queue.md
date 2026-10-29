@@ -114,6 +114,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d56 10 / 0 / 0 (name-fork retries plus lead reading; audit 146 clean: Azolla pinnata, Dolichomitriopsis diversiformis, Hemionitis concolor, Handroanthus impetiginosus, Cereus jamacaru x2, Jacobaea maritima, Suaeda aralocaspica, Picea abies, Digitaria insularis). Blechnum brasiliense and Crotalaria sericea unfiled (authorities conflict).
 - d57 9 / 0 / 0 (lead reading; audit 147 clean: Cirsium vulgare, Vicia villosa, Aesculus hippocastanum chemical; Conium maculatum, Synedrella nodiflora, Hesperis matronalis, Tripleurospermum inodorum, Potentilla recta, Oenothera biennis light).
 - d58 3 / 0 / 0 (audit 148 clean; Pontederia thesis record held out, not peer-reviewed)
+- d59 3 / 0 / 0 (audit 149 clean)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
