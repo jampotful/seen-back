@@ -120,6 +120,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d62 11 / 0 / 0 (audit 152: 2 of 13 dropped, a missing volume and a paraphrased title)
 - d63 21 / 0 / 0 (audit 154 clean; 2 dropped on unconfirmed issue and a mis-cited WFO id; 3 wanted lines)
 - d64 15 / 0 / 0 (audit 153 clean; 1 dropped for method wording the abstract does not support)
+- d65 4 / 0 / 0 (audit 155 clean; 2 pooled Aristida records dropped, value omitted the dark-only condition)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
