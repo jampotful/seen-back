@@ -123,6 +123,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d65 4 / 0 / 0 (audit 155 clean; 2 pooled Aristida records dropped, value omitted the dark-only condition)
 - d66 11 / 0 / 1 (audit 156: 1 error, 1 dropped for an omitted exception; 1 of 5 wanted lines merged)
 - d67 2 / 0 / 3 (audit 157: 1 error dropped, a field light gradient; 3 wanted lines merged, Eucalyptus year set to 2018)
+- d68 5 / 0 / 5 (audit 158 clean; smoke, karrikin, GA3 and light/dark germination of named fire-prone species; 2 taxa held out for unconfirmed names)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
