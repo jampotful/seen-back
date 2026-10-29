@@ -125,6 +125,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d67 2 / 0 / 3 (audit 157: 1 error dropped, a field light gradient; 3 wanted lines merged, Eucalyptus year set to 2018)
 - d68 5 / 0 / 5 (audit 158 clean; smoke, karrikin, GA3 and light/dark germination of named fire-prone species; 2 taxa held out for unconfirmed names)
 - d69 3 / 0 / 2 (audit 159 clean; alpine and arctic named species, Galax urceolata twice from one paper and Poa alpina; 2 wanted lines merged)
+- d70 2 / 0 / 0 (audit 160 clean; Marginatocereus marginatus anthesis and Basella alba red/far-red germination; no wanted lines)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
