@@ -140,6 +140,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d82 4 / 0 / 0 (audit 172: 3 errors dropped, Asynthema gracile omitted a significant smoke-water result and both Minthostachys mollis lines repeated desk-d49; Glaucium flavum, Sideritis chamaedryfolia, Nicotiana linearis smoke and KAR1, Gentiana boissieri merged; no wanted lines)
 - d83 5 / 0 / 0 (audit 173: 0 errors; Heliocarpus appendiculatus light-quality null, Crescentia alata light, Vachellia tortilis light-exclusion null, Handroanthus chrysanthus shade, Ochradenus baccatus GA3 merged; journal name of one and conditions of another corrected; no wanted lines)
 - d84 3 / 0 / 0 (audit 174: 1 error dropped, Thamniopsis incurva omitted the full-text light 97% and dark 6% result and carried a wrong partial flag; Acrostichum danaeifolium UV-B, Adiantum flabellulatum low light gene expression, Werauhia gladioliflora night flower opening merged; no wanted lines)
+- d85 3 / 0 / 0 (audit 175: 0 errors; Eragrostis lehmanniana red light germination, Lolium arundinaceum photoperiod germination, Cenchrus ciliaris KNO3 null merged; no wanted lines)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
