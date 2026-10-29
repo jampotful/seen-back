@@ -22,7 +22,7 @@ A species is `m` for a trait when a record of grade `m` names the species. It is
 
 ## Run summary
 
-Records read: 20784 (after dropping 4293 the audit retracted); queue lines: 49383.
+Records read: 20788 (after dropping 4293 the audit retracted); queue lines: 49383.
 
 | View | species in the world rows | records | share covered by the listed species | county records | share covered by the county's 20 | records of listed species with a gap | gap row-records (records x rows in state i) |
 |---|---:|---:|---:|---:|---:|---:|---:|
