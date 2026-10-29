@@ -9,7 +9,7 @@ Started 29 October 2026. Branch research/desk-d55. Groups aimed at: trees and sh
 - Elodea naias sense_light_nonvisual, refiled without the irradiance unit that sank desk-d53's line (Tavechio and Thomaz 2003, 10.1590/S1516-89132003000200011; WFO accepts)
 - Cassia fistula diel, anthesis 8:30-10:30 a.m. (Konyak and Wani 2019, J Pharmacogn Phytochem 8(5); POWO accepts)
 - Euphorbia heterophylla sense_light_nonvisual, a measured null under light types and straw (Marques et al. 2012, Semina, 10.5433/1679-0359.2012v33n3p867; WFO accepts, no POWO page surfaced)
-- Bidens gardneri sense_light_nonvisual, low-fluence light response (Rondon et al. 2013 file dated 2012, Rev Arvore 36(6); the floraoftheworld.org page citing POWO labels it accepted, no POWO page opened)
+- Bidens gardneri sense_light_nonvisual, low-fluence light response (Rondon et al. 2012, Rev Arvore 36(6); the floraoftheworld.org page citing POWO labels it accepted, no POWO page opened)
 
 ## Leads read, nothing filed
 - Azolla pinnata light intensity (Int J Aquat Biol 2024, 10.22034/ijab.v12i3.2290): WFO accepts the species but the POWO pages that opened treat A. pinnata subsp. asiatica and var. imbricata as synonyms of Azolla imbricata, so the accepted name is unsettled (the same fork as Blechnum brasiliense). Left unfiled.
