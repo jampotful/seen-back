@@ -145,6 +145,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d87 6 / 0 / 0 (audit 177: 3 errors dropped, Prunus armeniaca Salak omitted significant full-text reductions and both Ferula records omitted the GA-chilling results; Liquidambar orientalis GA3/KAR1, Asphodelus ramosus darkness, Suaeda heterophylla photoperiod merged; no wanted lines)
 - d88 6 / 0 / 0 (audit 178: 3 errors dropped, both Laggera light records misstated or omitted the 1.53-day red-light delay and Laggera alata smoke/KNO3 omitted the null KNO3-alone result and interactions; Impatiens walleriana, Mitragyna rubrostipulata, Nauclea latifolia light dependence merged; no wanted lines)
 - d89 1 / 0 / 0 (audit 179: 1 error dropped, Aristotelia chilensis GA3/BAP/fluridone omitted the later fluridone onset and the control's equal onset; nothing merged; no wanted lines)
+- d90 6 / 0 / 0 (audit 180: 4 errors dropped, Astilboides tabularis light and chemical records omitted full-text speed and KNO3 results, Catolobus pendulus uniformity direction reversed, Hydrangea petiolaris GA3/kinetin omitted kinetin, KNO3 and KCl reductions; Hydrangea petiolaris light and Kadsura coccinea GA3 merged; no wanted lines)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
