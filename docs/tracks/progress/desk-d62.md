@@ -1,0 +1,31 @@
+# desk-d62 progress (family-targeted strategy)
+
+Started 29 October 2026. Branch research/desk-d62. WebSearch used: about 96 of 100. Families were chosen from the family counts over docs/views/evidence/*.jsonl on main (Gentianaceae 0, Cistaceae 0, Proteaceae 0, Melastomataceae 0, Gesneriaceae 0, Zingiberaceae 0, Chenopodiaceae 0, Juncaceae 2, Lauraceae 2, Crassulaceae 3, Aizoaceae 3, Myrtaceae 4, Arecaceae 5, Bromeliaceae 6, Primulaceae 7, Cyperaceae 9). Every record is abstract-only (partial true); each quote was read on the page named in the record and is one whole abstract sentence of at most 125 characters. Units were copied as printed (ppm, h, hours). WebFetch returns at most 125 characters of quotation, so only abstracts with short result sentences could be used.
+
+## Families and species tried
+- Melastomataceae, Gesneriaceae: Tibouchina (Pleroma) mutabilis, Streptocarpus rexii, Sinningia lineata, S. leucotricha, S. speciosa, Achimenes.
+- Gentianaceae, Primulaceae: Gentiana boissieri, Eustoma, Gentianopsis paludosa, Swertia (three species), Primula florindae, P. secundiflora and P. sikkimensis.
+- Cistaceae, Proteaceae, Myrtaceae, Lauraceae: Cistus (eight species), Cistus ladanifer, Helianthemum, Banksia coccinea and B. hookeriana, Leucadendron, Persoonia, Eucalyptus (ten species), Melaleuca quinquenervia, Leptospermum scoparium, Psidium guineense, Ocotea pulchella, Laurus nobilis.
+- Zingiberaceae, Arecaceae, Bromeliaceae: Alpinia malaccensis, A. galanga, Etlingera elatior, Zingiber mioga, Curcuma alismatifolia, Hedychium coronarium, Euterpe edulis, Areca, Elaeis, Aechmea nudicaulis.
+- Cyperaceae, Juncaceae, Amaranthaceae: Cyperus difformis, Carex (eight species, C. paysonis, C. elongata), Juncus subulatus, Suaeda, Amaranthus, Bassia and Chenopodium.
+- Ericaceae, Rosaceae: Vaccinium arctostaphylos, Calluna vulgaris, Gaultheria miqueliana, Erica vagans, Arbutus unedo, Cotoneaster horizontalis, Crataegus, Sarcopoterium.
+- Fire ephemerals and karrikin: Anigozanthos flavidus, Blancoa canescens, Conostylis, Gyrostemon.
+- Others: Utricularia vulgaris, Cyclamen, Aquilegia, Ranunculaceae and Papaveraceae arable weeds, Persea americana.
+
+## Filed (13 records, docs/views/evidence/desk-d62.jsonl)
+Pleroma mutabile (paper's Tibouchina mutabilis; light needed), Streptocarpus rexii (photoblastic), Cotoneaster horizontalis (GA3 2000 ppm), Anigozanthos flavidus (nitrate), Primula florindae (cold stratification reduced the light requirement), Cyperus difformis (cold stratification overcame the light requirement), Utricularia vulgaris (ethylene), Vaccinium arctostaphylos (positive photoblastic), Zingiber mioga (critical daylength 12 to 14 hours), Curcuma alismatifolia (long against short days), Eustoma russellianum (paper's E. grandiflorum is a POWO synonym; flowers open in the morning and close in the evening), Gentianopsis paludosa (endogenous rhythm of flower closure), Gaultheria pyroloides (paper's G. miqueliana is a WFO synonym; seeds need light).
+
+## Read, not filed
+- Already on main or on another desk: Carex brevior and C. stipata (sweep-97), Suaeda aralocaspica (same quote), Calluna vulgaris photoperiod (same DOI), Sarcopoterium spinosum (same paper), Euterpe edulis (screened by an earlier unit), Leptospermum (oa-9).
+- No DOI or authors printed: Sinningia lineata (positive photoblastic, Hort Bras 28(2): 236-240, no authors or DOI on the pages opened), Sinningia leucotricha shading (authors found, no DOI), Erica vagans light and heat (Orsis 11, no DOI), Melaleuca quinquenervia (no DOI), Hass avocado flower opening (cultivar, no DOI), Leucadendron short-day plants (no DOI), Gentiana boissieri (no DOI, and the result sentences run past 125 characters).
+- Sentence over 125 characters or no direction: Cistus eight-species light paper (Luna et al. 2022), Ocotea pulchella (field comparison; lab null over 125), Banksia coccinea daylength (no direction), Carex paysonis, Cyclamen persicum (Heo et al.), Ranunculaceae and Papaveraceae arable weed papers (synonym fork: Consolida is now under Delphinium), Lonicera japonica scent peak (Caprifoliaceae, no short result sentence), Sileneae diel scent (no species).
+- Name or authority fork: Blancoa canescens KAR1 (Downes et al. 2014, sentence read, but no accepted-name page for the species surfaced in a search; the one POWO hit was Heracleum canescens), Anigozanthos flavidus 25 to 300 uM (page prints micro-m, authors absent).
+- Blocked: pmc.ncbi.nlm.nih.gov (permission unanswered), oasisbr (browser check), hal and Frankfurt repository (Anubis), doaj for one record, aminer.
+
+No wanted lines written: no unreadable lead carried a DOI copied from a result that the desk does not already hold.
+
+## Advice on yield
+Acta Horticulturae (ishs.org) photoperiod and light papers on ornamentals gave the cleanest sentences (daylength thresholds, long against short days) and print authors and DOI, and the pages open without a login; set photoperiod trials fall under sense_light_nonvisual. Horticulture Journal (jstage) flower-opening abstracts gave a diel record. Fire-ephemeral karrikin papers on CSIRO and Cambridge pages work, but most result sentences exceed 125 characters, so each needs a sentence-by-sentence check. Germination papers returned by generic searches (Cyperaceae, Carex, Suaeda, Euterpe, Calluna) are mostly on main already, so grep docs/views/evidence for the species before fetching. Many Brazilian scielo pages lack authors or DOI on the abstract view. Synonym traps were common in these families: Tibouchina to Pleroma, Eustoma grandiflorum to E. russellianum, Gaultheria miqueliana to G. pyroloides, Consolida into Delphinium.
+
+## Desk disposition after audit 152
+Audit 152 found 2 errors in 13 records (15.4%): line 6, Cyperus difformis (volume and issue missing; the SciELO page prints 31(4): 823-832), and line 9, Zingiber mioga (title paraphrased). The audit covered the whole unit, so the desk dropped both and merged the other 11. Gentianopsis paludosa failed to open on POWO for the auditor; a desk search then surfaced POWO, WFO and GBIF pages for it, so it was kept. Streptocarpus rexii and Vaccinium arctostaphylos are confirmed on WFO only and were kept with that caveat.

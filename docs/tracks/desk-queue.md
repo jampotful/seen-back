@@ -103,6 +103,64 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d46 3 / 2 / 3 (audit 136: 1 evidence line dropped; skipped genera of batches 36 to 45 verified as covered on main). Closed: Hieracium terraccianoi and Pilosella hoppeana subsp. sicula GA3, Succisa diel.
 - d47 4 / 0 / 0 (lead reading of 67 wanted leads; audit 137 clean: Drosera rotundifolia light, Lactuca serriola diel, Tiarella polyphylla GA3, Borago officinalis light). About 40 leads had no qualifying sentence; about 12 unreadable.
 - d48 2 / 0 / 1 (recheck of 49 early nulls under the widened readings; audit 138 clean: Thunbergia grandiflora shade, Lespedeza cuneata ABA/GA at grade g). 47 early nulls unchanged.
+- 29 Oct 03:30 UTC: the desk sat idle from 16:00 UTC 28 Oct while waiting on PR 42 and checking issue 25; the live quiet alert is issue 43. Hold mode ended. Lead-reading unit d49 launched under the 125-character rule in force (records within 125 characters are valid under the 40-word rule too).
+- d49 9 / 0 / 0 (lead reading; audit 139 clean: Panicum capillare, Minthostachys mollis, Lathyrus aphaca and Foeniculum vulgare light; Minthostachys mollis GA3; diel for Hepatica nobilis, Arabis procurrens, Iberis sempervirens, Melissa officinalis). Eranthis hyemalis diel and Rhus chinensis unfiled.
+- d50 7 / 0 / 0 (lead reading; audit 140 clean: Eranthis hyemalis diel, Bidens pilosa and B. subalternans light, Frangula alnus light, Potentilla indica shade, Zanthoxylum fagara and Rumex confertus chemical). Rhus chinensis unfiled.
+- d51 10 / 0 / 0 (lead reading; audit 141 clean: Capsella bursa-pastoris chemical; light for Broussonetia papyrifera, Platanus orientalis, Liquidambar orientalis, Alnus incana (g), Smilax brasiliensis; diel for Salvia arborescens, Passiflora foetida, Aconitum lycoctonum, A. carmichaelii).
+- d52 13 / 0 / 0 (lead reading; audit 142 clean: Tecoma stans, Micromeles alnifolia, five Cerrado grasses (g), Coreopsis grandiflora and C. lanceolata (g), Antirrhinum majus, Apocynum venetum x2, Cypripedium subtropicum).
+- d53 7 / 0 / 0 (lead reading; audit 143 dropped 1: Elodea naias dose unit mis-copied. Kept: Solanum tuberosum chemical, Oenothera biennis and Lotus pedunculatus night light, Dicksonia sellowiana, Pleopeltis pleopeltifolia light and chemical, Spirodela polyrhiza). Bryum argenteum, Dolichomitriopsis diversiformis, Cheilanthes concolor and Blechnum brasiliense held for name checks (d54).
+- d54 7 / 0 / 0 (held name checks plus lead reading; audit 144 clean; Blechnum brasiliense held out pending a POWO check. Kept: Bryum argenteum, Cyathea delgadii (g), Geranium carolinianum, Taraxacum coreanum, Euphorbia esula, Ipomoea lacunosa, Erechtites hieraciifolius). Dolichomitriopsis diversiformis and Doryopteris concolor unfiled.
+- d55 7 / 0 / 0 (lead reading; audit 145 dropped 2: Pinus sylvestris MeJA part-sentence quote, Rhizophora mangle no direction. Kept: Lemna minor and Spirodela polyrhiza (g), Avicennia germinans, Elodea naias, Cassia fistula diel, Euphorbia heterophylla, Bidens gardneri). Azolla pinnata and Crotalaria sericea unfiled.
+- d56 10 / 0 / 0 (name-fork retries plus lead reading; audit 146 clean: Azolla pinnata, Dolichomitriopsis diversiformis, Hemionitis concolor, Handroanthus impetiginosus, Cereus jamacaru x2, Jacobaea maritima, Suaeda aralocaspica, Picea abies, Digitaria insularis). Blechnum brasiliense and Crotalaria sericea unfiled (authorities conflict).
+- d57 9 / 0 / 0 (lead reading; audit 147 clean: Cirsium vulgare, Vicia villosa, Aesculus hippocastanum chemical; Conium maculatum, Synedrella nodiflora, Hesperis matronalis, Tripleurospermum inodorum, Potentilla recta, Oenothera biennis light).
+- d58 3 / 0 / 0 (audit 148 clean; Pontederia thesis record held out, not peer-reviewed)
+- d59 3 / 0 / 0 (audit 149 clean)
+- d60 18 / 0 / 0 (audit 150: 1 of 19 dropped, Colocasia author order)
+- d61 16 / 0 / 0 (audit 151: 2 of 18 dropped, volume error and a repeat of d54)
+- d62 11 / 0 / 0 (audit 152: 2 of 13 dropped, a missing volume and a paraphrased title)
+- d63 21 / 0 / 0 (audit 154 clean; 2 dropped on unconfirmed issue and a mis-cited WFO id; 3 wanted lines)
+- d64 15 / 0 / 0 (audit 153 clean; 1 dropped for method wording the abstract does not support)
+- d65 4 / 0 / 0 (audit 155 clean; 2 pooled Aristida records dropped, value omitted the dark-only condition)
+- d66 11 / 0 / 1 (audit 156: 1 error, 1 dropped for an omitted exception; 1 of 5 wanted lines merged)
+- d67 2 / 0 / 3 (audit 157: 1 error dropped, a field light gradient; 3 wanted lines merged, Eucalyptus year set to 2018)
+- d68 5 / 0 / 5 (audit 158 clean; smoke, karrikin, GA3 and light/dark germination of named fire-prone species; 2 taxa held out for unconfirmed names)
+- d69 3 / 0 / 2 (audit 159 clean; alpine and arctic named species, Galax urceolata twice from one paper and Poa alpina; 2 wanted lines merged)
+- d70 2 / 0 / 0 (audit 160 clean; Marginatocereus marginatus anthesis and Basella alba red/far-red germination; no wanted lines)
+- d71 4 / 0 / 0 (audit 161 clean; SciELO-indexed Latin American native species: Campomanesia aurea, Copaifera oblongifolia, Grona barbata, Paubrasilia echinata; no wanted lines)
+- d72 1 / 0 / 0 (audit 162: 1 error dropped, Hosta yingeri omitted the later flowering result; Aster hayatae photoperiod merged; no wanted lines)
+- d73 1 / 0 / 0 (audit 163: 2 errors dropped, Pimelea ciliata omitted the printed issue and Acacia pycnantha cited a synonym's WFO id; Trachyandra divaricata red-light germination merged; no wanted lines)
+- d74 3 / 0 / 1 (audit 164: 2 errors dropped, Thlaspi arvense left out the GA3-alone result and Centaurium erythraea overstated an ABA reversal; Thlaspi germination, Avena fatua ethephon and Centaurium light merged; 1 wanted line, Balanites aegyptiaca GA3)
+- d75 4 / 0 / 0 (audit 165: 0 errors; Richardia scabra ethephon or hormone germination, Stachys floridana photoperiod, Hydrilla verticillata photoperiod tubers, Dipsacus fullonum GA/ABA germination; no wanted lines)
+- d76 4 / 0 / 1 (audit 166: 0 errors; Rhododendron catawbiense germination light, Amaranthus pumilus gibberellin germination in two traits, Cycas revoluta germination merged; 1 wanted line, Echinacea purpurea, authors left empty)
+- d77 2 / 0 / 0 (audit 167: 0 errors; Lagerstroemia speciosa flower opening and Spathodea campanulata shade versus sun merged; no wanted lines)
+- d78 5 / 0 / 1 (audit 168: 0 errors; Enhalus acoroides shading, Stratiotes aloides PAR, Rumex palustris ethylene and GA3, Salicornia fruticosa darkness germination, Sarracenia alata gibberellin germination merged; 1 wanted line, Hydrocharis morsus-ranae shading, authors empty)
+- d79 2 / 0 / 0 (audit 169: 0 errors; Polymnia canadensis light and Artemisia tridentata volatile signalling merged; no wanted lines)
+- d80 6 / 0 / 0 (audit 170: 0 errors; Anethum graveolens light and photoperiod, Scolymus hispanicus germination light, Centaurea nigra aphid headspace, Fraxinus mandshurica beetle and MeJA volatiles, Atropa acuminata herbivore-induced alkaloids merged; Atropa flagged for the owner as a tissue assay; no wanted lines)
+- d81 8 / 0 / 0 (audit 171: 0 errors; eight Flora Mediterranea germination-report light/dark records merged: Lythrum hyssopifolia, Lythrum borysthenicum, Myosotis sicula, Antinoria insularis, Dianthus graminifolius, Senecio leucanthemifolius, Silene nefelites, Dianthus borbonicus; where field of two corrected to iris.unipa.it; no wanted lines)
+- d82 4 / 0 / 0 (audit 172: 3 errors dropped, Asynthema gracile omitted a significant smoke-water result and both Minthostachys mollis lines repeated desk-d49; Glaucium flavum, Sideritis chamaedryfolia, Nicotiana linearis smoke and KAR1, Gentiana boissieri merged; no wanted lines)
+- d83 5 / 0 / 0 (audit 173: 0 errors; Heliocarpus appendiculatus light-quality null, Crescentia alata light, Vachellia tortilis light-exclusion null, Handroanthus chrysanthus shade, Ochradenus baccatus GA3 merged; journal name of one and conditions of another corrected; no wanted lines)
+- d84 3 / 0 / 0 (audit 174: 1 error dropped, Thamniopsis incurva omitted the full-text light 97% and dark 6% result and carried a wrong partial flag; Acrostichum danaeifolium UV-B, Adiantum flabellulatum low light gene expression, Werauhia gladioliflora night flower opening merged; no wanted lines)
+- d85 3 / 0 / 0 (audit 175: 0 errors; Eragrostis lehmanniana red light germination, Lolium arundinaceum photoperiod germination, Cenchrus ciliaris KNO3 null merged; no wanted lines)
+- d86 4 / 0 / 0 (audit 176: 2 errors dropped, Tetraena coccinea filed under a POWO/WFO synonym and Leucostele pasacana flower opening filed abstract-only with the full text open; Turbinicarpus alonsoi GA3 and Astrophytum asterias LED merged; no wanted lines)
+- d87 6 / 0 / 0 (audit 177: 3 errors dropped, Prunus armeniaca Salak omitted significant full-text reductions and both Ferula records omitted the GA-chilling results; Liquidambar orientalis GA3/KAR1, Asphodelus ramosus darkness, Suaeda heterophylla photoperiod merged; no wanted lines)
+- d88 6 / 0 / 0 (audit 178: 3 errors dropped, both Laggera light records misstated or omitted the 1.53-day red-light delay and Laggera alata smoke/KNO3 omitted the null KNO3-alone result and interactions; Impatiens walleriana, Mitragyna rubrostipulata, Nauclea latifolia light dependence merged; no wanted lines)
+- d89 1 / 0 / 0 (audit 179: 1 error dropped, Aristotelia chilensis GA3/BAP/fluridone omitted the later fluridone onset and the control's equal onset; nothing merged; no wanted lines)
+- d90 6 / 0 / 0 (audit 180: 4 errors dropped, Astilboides tabularis light and chemical records omitted full-text speed and KNO3 results, Catolobus pendulus uniformity direction reversed, Hydrangea petiolaris GA3/kinetin omitted kinetin, KNO3 and KCl reductions; Hydrangea petiolaris light and Kadsura coccinea GA3 merged; no wanted lines)
+- d91 4 / 0 / 0 (audit 181: 2 errors dropped, Maesa japonica misstated the abstract's dose series as unread and Androsace septentrionalis called a non-significant mean germination time shorter; Euphorbia jolkinii and Pinus pumila GA3 merged; no wanted lines)
+- d92 3 / 0 / 3 (audit 182: 1 error dropped, Arabis alpina scent diel null omitted the composition test and the authors' no-rhythm conclusion; Gentiana leucomelaena flower opening and light merged; 3 wanted lines merged)
+- d93 7 / 0 / 0 (audit 183: 2 errors dropped, Ilex embelioides GA3 headline held for one dose of six and Barleria prionitis omitted the 100% at 300 days; Ophiorrhiza caudata held out as an unconfirmed accepted name; Salacia fruticosa, Andrographis paniculata, Rhinacanthus polonnaruwensis, Baccaurea courtallensis merged; no wanted lines)
+- d94 7 / 0 / 1 (audit 184: 2 errors dropped, Agarista buxifolia GA3 omitted the five-species smoke null and Brighamia rockii light omitted the green-light promotion; Gardenia remyi held out as an unconfirmed name; Erica reunionensis light/GA3/smoke and Agarista buxifolia light merged; 1 wanted line merged)
+- d95 6 / 0 / 1 (audit 185: 3 errors dropped, Tulipa iliensis omitted the cold-stratification test, Amorphophallus muelleri omitted the flowering and bulbil abortion results and Spiranthes ochroleuca omitted the significant 16/8 h root length result; Muscari comosum, Eranthis hyemalis, Lapiedra martinezii merged; 1 wanted line merged)
+- d96 5 / 0 / 3 (audit 186: 4 errors dropped, Citrullus colocynthis, Linum usitatissimum, Satureja montana and Chenopodium quinoa omitted significant or contrary results, and the Linum quote was half a sentence; Ocimum basilicum light merged; 3 wanted lines merged)
+- d97 5 / 0 / 0 (audit 187: 1 error dropped, Striga lutea; Viscum coloratum cited under the accepted WFO id)
+- d98 3 / 0 / 1 (audit 188: 3 errors dropped, Rheum alexandrae held out unconfirmed; 1 wanted line)
+- d99 2 / 0 / 3 (audit 189: 3 errors dropped or held, Phaius tankervilleae held out on POWO/WFO disagreement; 3 wanted lines)
+- d100 4 / 0 / 0 (audit 190: 0 errors)
+- d101 2 / 0 / 1 (audit 191: 1 error dropped, Guettarda scabra; Lonicera wanted line dropped as already on main; 1 wanted line)
+- d102 3 / 0 / 0 (audit 192: 1 error dropped, Zostera marina GA3 to refile from full text)
+- d103 2 / 0 / 1 (audit 193: 4 errors dropped; 1 wanted line)
+- d104 0 / 0 / 0 (audit 194: 3 errors dropped; nothing merged)
+- d105 1 / 0 / 0 (audit 195: 1 error, missing DOI; DOI added from Crossref before merge)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
