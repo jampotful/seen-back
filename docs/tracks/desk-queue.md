@@ -221,6 +221,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d163 8 / 0 / 0 (audit 248: 3 of 8 errors, all fixable and corrected: Pinus NSC not significant at every shade level, 3-year-old root biomass, soybean far-red height at normal PAR only)
 - d164 11 / 0 / 0 (audit 249: 4 of 11 errors, all fixable and corrected: mayfly ERG intact-adult preparation, template-fit peaks, UV flicker intensity)
 - d165 5 / 0 / 0 (audit 250: 0 of 5 errors; uncounted fixes applied; new trait key pupil_lens_ratio is an owner question)
+- d166 8 / 0 / 0 (armadillo ABR, zebra finch magnetic, monk seal in-air hearing)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
