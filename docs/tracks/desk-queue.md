@@ -186,6 +186,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d128 3 / 0 / 0 (audit 216: 0 errors; held out: Oryza sativa Zhao 2018, wheat, Passiflora caerulea, Populus, Pinus, Cuscuta for access or licence)
 - d129 0 / 0 / 0 (no WFO species page surfaced for Oryza sativa, Solanum tuberosum, Alyssum montanum, Reynoutria japonica, Rhodothamnus, Drosera spatulata)
 - d130 4 / 0 / 0 (audit 217: 1 of 5 errors, Colobanthus quercetin line dropped; held out: Kobresia humilis for WFO, Salix polaris, Bennie night light, Montagnoli, Albert, Gommers)
+- d131 2 / 0 / 0 (audit 218: 0 errors; held out: Gentianopsis paludosa for POWO/WFO, Nelumbo, Magnolia denudata, Magnolia ovata, Philodendron selloum, Adonis amurensis)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
