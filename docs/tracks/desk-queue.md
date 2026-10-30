@@ -157,6 +157,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d99 2 / 0 / 3 (audit 189: 3 errors dropped or held, Phaius tankervilleae held out on POWO/WFO disagreement; 3 wanted lines)
 - d100 4 / 0 / 0 (audit 190: 0 errors)
 - d101 2 / 0 / 1 (audit 191: 1 error dropped, Guettarda scabra; Lonicera wanted line dropped as already on main; 1 wanted line)
+- d102 3 / 0 / 0 (audit 192: 1 error dropped, Zostera marina GA3 to refile from full text)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
