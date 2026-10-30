@@ -163,6 +163,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d105 1 / 0 / 0 (audit 195: 1 error, missing DOI; DOI added from Crossref before merge)
 - d106 0 / 0 / 0 (audit 196: 3 errors dropped; nothing merged)
 - d107 0 / 0 / 0 (audit 197: 3 errors dropped; refile unit, nothing merged)
+- d108 2 / 0 / 1 (audit 198: 4 errors dropped; refile unit; 1 wanted line)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
