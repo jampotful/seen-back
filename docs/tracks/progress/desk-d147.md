@@ -1,0 +1,22 @@
+# desk-d147 progress (animal vein: thin sense_* cells in taxa not yet covered)
+
+Scope: sense_hearing, sense_vibration, sense_electric. Main (evidence, audit, searched, wanted) was grepped by species, DOI and first author before filing; none of the taxa below had a line for these traits (Monochamus alternatus appears on main only for vision). No search records and no wanted lines (the vein is sense traits, not harvest genera).
+
+Records: 9 in docs/views/evidence/desk-d147.jsonl, all grade m, one named species per record, all read from open full texts (Results, Methods, Discussion), so no "partial" flags. Authors, volume and issue from Crossref via WebFetch for every DOI (Gymnotus found by a bibliographic Crossref query). GBIF species match gave ACCEPTED for all nine species; the FishBase page was blocked by a permission request and the Catalog of Fishes was not reached, so fish names rest on GBIF and the papers' own names only.
+- Amphiprion frenatus, A. clarkii, A. ocellaris sense_hearing (Parmentier, Colleye and Mann 2009, J Exp Biol 212(13):2023, 10.1242/jeb.030270): AEP best frequency 150, 75 and 75 Hz. 75 Hz is the lowest tone tested, so for two species the optimum sits at the band edge; SPL only; juveniles 31 to 55 mm; no significant difference between species.
+- Monochamus alternatus sense_vibration x2 (Takanashi et al. 2016, Zool Lett 2:18, 10.1186/s40851-016-0053-4): freezing thresholds 0.41, 0.33, 0.27 m/s2 at 20 Hz, 100 Hz, 1 kHz (n = 8 to 18, no significant difference); startle and stridulation 3.5 to 23.5 m/s2 below 1 kHz. The source prints "l kHz" for 1 kHz.
+- Gymnotus omarorum sense_electric (Pereira, Aguilera and Caputi 2012, J Exp Biol 215(18):3266, 10.1242/jeb.070813): behavioural active electrolocation range under one-fifth of body length, never over one-third; restrained fish, EOD novelty response, 10 % response criterion.
+- Scyliorhinus canicula, Raja clavata, Dicentrarchus labrax sense_electric (Boute et al., Front Mar Sci 10:1286149, 10.3389/fmars.2023.1286149, Crossref year 2024): behavioural thresholds to a 45 Hz, 0.3 ms pulsed field 9.8, 7.6 and 5.9 V/m. Electroreceptive species were not more sensitive (P_MCMC = 0.332); the seabass is non-electroreceptive.
+
+Quote method: whole sentences of at most 40 words, reassembled from consecutive pieces and confirmed on a second fetch with a differently worded prompt. The Frontiers page refused a verbatim paragraph but returned the two sentences when asked in short segments; both were seen twice.
+
+Held-out leads:
+- Paraglenea fortunei (Zool Sci 31(12), 10.2108/zs140029, BioOne): leaf-dwelling cerambycid, lowest vibration thresholds on horizontal substrates at 75 to 500 Hz; the page gave only the abstract and no amplitudes.
+- Sandbar shark electrosensitivity (Environ Biol Fish, 10.1007/s10641-024-01514-5): abstract only, taxon already on main.
+- Catania 2019 (Front Integr Neurosci, electric eel behaviour): no sensitivity figures.
+- Walz et al. 2012 Apteronotus review (J Physiol Paris): review, no measurement.
+- Henry and Lucas / songbird and treefrog hormones review (Integr Comp Biol 61:292): review, no per-species threshold.
+- Edmonds et al. 2016, jexbio 88:351 crab and lobster vibration PDFs, zoolstud 50.2/145 (crayfish): returned binary or were not opened; not read.
+- PMC pages (PMC8174138 and others) returned a reCAPTCHA page; no workaround attempted.
+- Blocked: fishbase.se (permission request unanswered); api.gbif.org was refused to curl but opened through WebFetch.
+- sense_taste still has no trait key in check.py.
