@@ -172,6 +172,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d114 2 / 0 / 0 (audit 203: 0 errors; Parthenium shading refile, 60/90% and 30% levels)
 - d115 0 / 0 / 0 (WFO pages refused; Cyathea delgadii pair passed to d117)
 - d116 5 / 0 / 0 (audit 204: 0 errors; volatile reception, Zea mays x3, Arabidopsis thaliana, Phaseolus lunatus; Solanum lycopersicum and Vicia faba held out)
+- d117 2 / 0 / 0 (audit 205: 1 error corrected before merge, pigment sampling at 2 months; Cyathea delgadii light quality; Azolla filiculoides, Polypodium lepidopteris held out)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
