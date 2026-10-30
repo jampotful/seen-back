@@ -218,6 +218,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d160 12 / 0 / 0 (audit 245: 2 of 12 errors, fixable and corrected: common carp tested frequencies, stimulus-level limit on the 7 to 9 kHz null)
 - d161 8 / 0 / 0 (audit 246: 2 of 8 errors, fixable and corrected: 10 uT bat roosting random for first three days, eel bearing relative to displacement direction)
 - d162 8 / 0 / 0 (audit 247: 0 of 8 errors; uncounted fixes applied: evoked n unit, ABR threshold rule, authors umlaut)
+- d163 8 / 0 / 0 (audit 248: 3 of 8 errors, all fixable and corrected: Pinus NSC not significant at every shade level, 3-year-old root biomass, soybean far-red height at normal PAR only)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
