@@ -152,6 +152,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d94 7 / 0 / 1 (audit 184: 2 errors dropped, Agarista buxifolia GA3 omitted the five-species smoke null and Brighamia rockii light omitted the green-light promotion; Gardenia remyi held out as an unconfirmed name; Erica reunionensis light/GA3/smoke and Agarista buxifolia light merged; 1 wanted line merged)
 - d95 6 / 0 / 1 (audit 185: 3 errors dropped, Tulipa iliensis omitted the cold-stratification test, Amorphophallus muelleri omitted the flowering and bulbil abortion results and Spiranthes ochroleuca omitted the significant 16/8 h root length result; Muscari comosum, Eranthis hyemalis, Lapiedra martinezii merged; 1 wanted line merged)
 - d96 5 / 0 / 3 (audit 186: 4 errors dropped, Citrullus colocynthis, Linum usitatissimum, Satureja montana and Chenopodium quinoa omitted significant or contrary results, and the Linum quote was half a sentence; Ocimum basilicum light merged; 3 wanted lines merged)
+- d97 5 / 0 / 0 (audit 187: 1 error dropped, Striga lutea; Viscum coloratum cited under the accepted WFO id)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
