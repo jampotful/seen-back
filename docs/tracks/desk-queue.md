@@ -175,6 +175,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d117 2 / 0 / 0 (audit 205: 1 error corrected before merge, pigment sampling at 2 months; Cyathea delgadii light quality; Azolla filiculoides, Polypodium lepidopteris held out)
 - d118 4 / 0 / 0 (audit 206: 0 errors; Ambrosia confertiflora light, Pinus koraiensis ABA, Heliotropium europaeum GA3, Maianthemum dilatatum GA3 null; Reynoutria, Solanum lycopersicum, Alyssum montanum held out)
 - d119 5 / 0 / 0 (audit 207: 0 errors; plant diel, Cestrum nocturnum scent, Selenicereus undatus opening and odour onset, Cereus jamacaru, Pereskia aculeata; Cestrum petal-phase lead unfiled)
+- d121 4 / 0 / 0 (audit 208: 0 errors; Cestrum nocturnum petal phases, Paeonia peregrina GA3, Pyrus pashia GA3 abstract-only, Primula florindae GA3; Alyssum montanum, Reynoutria and others held out)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
