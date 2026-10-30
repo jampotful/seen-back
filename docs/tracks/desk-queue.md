@@ -214,6 +214,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d156 7 / 0 / 0 (audit 241: 4 of 7 errors, all fixable and corrected: Chandel 2024 IR-only assay design, source area, mutant nulls, Anopheles 27 C ambient)
 - d157 7 / 0 / 0 (audit 242: 5 of 7 errors, all fixable and corrected: vibration amplitude and airborne sound, volatile percentages, cultivars, residual-field control, contrary tomato and lettuce results)
 - d158 7 / 0 / 0 (audit 243: 6 of 7 errors, all fixable and corrected: slow-ramp protocol, TT-neuron transient coding, honeybee non-differing structures, no test above 1000 Hz, baseline n)
+- d159 10 / 0 / 0 (audit 244: 1 of 10 error, fixable and corrected: Amphiprion single-cone 400 nm is captive-fish co-expression)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
