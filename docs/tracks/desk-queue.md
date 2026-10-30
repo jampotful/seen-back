@@ -223,6 +223,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d165 5 / 0 / 0 (audit 250: 0 of 5 errors; uncounted fixes applied; new trait key pupil_lens_ratio is an owner question)
 - d166 8 / 0 / 0 (armadillo ABR, zebra finch magnetic, monk seal in-air hearing)
 - d167 7 / 0 / 0 (Xiphophorus optomotor acuity, budgerigar target acuity, Ischnura elegans LWS opsins, Electrogena female cff)
+- d168 7 / 0 / 0 (Xenopus cold response, Apteronotus contrast threshold, goldfish startle)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
