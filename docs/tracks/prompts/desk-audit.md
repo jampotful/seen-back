@@ -1,5 +1,7 @@
 # Audit of a desk screening unit (desk-screen.md rules, 18 October 2026)
 
+When the unit includes evidence records, audit them under the scientific-context and counting section of `oa-audit.md` (29 October 2026), in addition to the evidence rules the unit was written under. Report evidence and search-record counts separately; the search and wanted-line counting rules below do not exempt scientifically consequential omissions in evidence.
+
 You audit search records and wanted lines you did not write. The launch prompt names the unit (`harvest-N`) and its branch. Work in a worktree made from `origin/main` and read the unit with `git show <branch>:<path>`. Read `docs/tracks/progress/audit-39.md` for the counting rule (audit 42's report was never committed; the faults of audits 40 to 42 are the opening paragraph of `desk-screen.md`), and `docs/tracks/prompts/desk-screen.md` for the rules the unit was written under.
 
 When an assignment also includes evidence or skipped leads, use BRIEF's 40-word quote limit and the quotation-integrity rules in `oa-read.md`. There is no 125-character evidence limit. Historical audit decisions based solely on that length do not establish that a lead lacks usable evidence. Reopen the source and check scientific support, taxon, conditions, provenance and faithful quotation; never reinstate a record solely because its length passes. A tool output cap calls for legal source retrieval or an explicit retrieval gap, not a negative search finding.
