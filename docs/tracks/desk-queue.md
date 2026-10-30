@@ -206,6 +206,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d148 2 / 0 / 0 (audit 233: 0 of 2 error; Gadus morhua hearing, Rhodnius prolixus in-vitro channel thermal)
 - d149 3 / 0 / 0 (audit 234: 0 of 3 error; Ophiomastix wendtii behaviour_vision x2, Euperipatoides rowelli acuity_cpd 0.11 computed, first Onychophora vision record)
 - d150 13 / 0 / 0 (audit 235: 9 of 13 error, all fixable and corrected: Streptocephalus mackini opsin doubt misattributed from notostracans, Platynereis eye field empty; Triops longicaudatus and Streptocephalus mackini lambda_max_nm x12, Platynereis dumerilii behaviour_vision)
+- d151 0 / 0 / 0 (audit 236: 6 of 6 error, no open licence found for the author-deposited Egri 2022 copy; Ephoron virgo lambda_max_nm x6 not merged; content faults also listed for a refile)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
