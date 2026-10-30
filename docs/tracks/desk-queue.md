@@ -183,6 +183,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d125 0 / 0 / 0 (audit 213: 6 of 6 errors, none merged; Veits already on main as sense_hearing; Brito is physics)
 - d126 1 / 0 / 0 (audit 214: 1 of 2 errors, Rosa rugosa dropped; held out: Nelumbo thermal refile, Nymphaea colorata, Clerodendrum inerme, Nicotiana attenuata, Ipomoea)
 - d127 2 / 0 / 0 (audit 215: 1 of 3 errors, Arabidopsis line dropped; held out: Oryza sativa, Solanum tuberosum for WFO, Brassica rapa, Solanum lycopersicum, Camellia, Gossypium)
+- d128 3 / 0 / 0 (audit 216: 0 errors; held out: Oryza sativa Zhao 2018, wheat, Passiflora caerulea, Populus, Pinus, Cuscuta for access or licence)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
