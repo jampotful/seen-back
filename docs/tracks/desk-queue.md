@@ -181,6 +181,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d123 3 / 0 / 0 (audit 211: 0 errors; Pyrus pashia full text not reached; held out: Miconia chamissois, Solanum tabacifolium, Primula secundiflora, Salsola ferganica)
 - d124 1 / 0 / 0 (audit 212: 1 of 2 errors, Nelumbo line dropped; held out: Arum, Symplocarpus, Sauromatum, Crocus, Tulipa for licence or access)
 - d125 0 / 0 / 0 (audit 213: 6 of 6 errors, none merged; Veits already on main as sense_hearing; Brito is physics)
+- d126 1 / 0 / 0 (audit 214: 1 of 2 errors, Rosa rugosa dropped; held out: Nelumbo thermal refile, Nymphaea colorata, Clerodendrum inerme, Nicotiana attenuata, Ipomoea)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
