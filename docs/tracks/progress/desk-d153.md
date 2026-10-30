@@ -1,0 +1,19 @@
+# desk-d153 progress (animal vein: thin vision cells, second pass)
+
+Scope: Euprymna, Chiton, Dolomedes, Tegenaria, Lithobius, Dytiscus, Aurelia, Centruroides, Doryteuthis, Loligo, Haliotis, Idiosepia, Placopecten, Hermissenda, Pyrrhocoris, Eptatretus stoutii eye. Grepped main (evidence, audit/corrected, audit/ALL, searched, wanted) by genus first. Licence rule applied before reading: Crossref licence entry, or a publisher file of the version of record that states the licence.
+
+Records: 3 in docs/views/evidence/desk-d153.jsonl, all grade m, one paper: Chung and Marshall 2017, Frontiers in Physiology 8, 10.3389/fphys.2017.00105. Species printed as Idiosepius notoides; GBIF match is a SYNONYM (usageKey 2289185) of Xipholeptos notoides (S.S.Berry, 1921), Idiosepiidae, Idiosepida, so the records use the accepted name. Records: rhabdom_um 4 to 7 um; fovea (dorso-posterior patch of thin 4 um, long 200 um rhabdoms, high resolution only if photoreceptors are uncoupled; the "foveal regions in fish" comparison and predation use are the authors' supposition); acuity_cpd 1.61 cycles/degree, calculated from 92.5 cycles per radian (one individual, the highest-voxel-resolution animal; p inferred to be the 4 um receptor diameter; the printed angular image size 0.00086 rad does not follow from Equation 2 with the Table 3 aperture, about 0.00105 by my arithmetic, flagged in the note).
+
+Licence caveat for the auditor: the Crossref record (read through WebFetch) showed no licence entry for this DOI. The CC BY 4.0 statement comes from the Frontiers version-of-record XML file (public-pages-files-2025.frontiersin.org/.../10.3389/fphys.2017.00105/xml), which was the copy read. Quotes were reassembled from consecutive WebFetch segments and confirmed on a second fetch (the 4 to 7 um and acuity sentences twice, the patch sentence twice). If the auditor will not accept a publisher-file licence without a Crossref entry, drop all three. Other Chung and Marshall data on this paper (the second coastal squid species, mid-water squids, Table 3 for other species) not logged.
+
+Checked and rejected on licence or taxon:
+- Tong et al. 2009 PNAS, Euprymna scolopes light organ (10.1073/pnas.0904571106): Crossref has no licence entry; the bobtailsquid.ink copy states none. Not read.
+- Lehmann and Melzer 2013, Front Zool 10:40 (10.1186/1742-9994-10-40): species are Euscorpius italicus and E. hadzii, not Centruroides; Crossref and the Springer page state no CC licence. Not read.
+- Dong and Allison 2021 hagfish eye (10.1098/rspb.2020.2187): Crossref licence entries are the Royal Society licence to publish and a text-mining policy, no Creative Commons licence. Held out.
+
+Held-out leads: Doryteuthis pealeii photoreceptor classes (PMC4564192, already on main in the corrected file; PMC blocked by a browser check here); Chiton tuberculatus (Kingston 2018, on main); Aurelia (Garm 2022 is Tripedalia); Dytiscus search returned only other diving beetles; Dolomedes/Tegenaria searches returned Parasteatoda and Leucorchestris papers; Haliotis, Hermissenda, Placopecten, Pyrrhocoris, Lithobius and Euprymna eye data found no open source in the searches made. curl to Crossref and Frontiers hosts was refused by the sandbox and not worked around; WebFetch was used instead. Europe PMC was rate limited and not retried.
+
+No search records and no wanted lines.
+
+## Desk disposition after audit 238
+Audit 238 judged 3 records: 1 error (line 3, acuity_cpd 1.61, fixable). Line 3 eye and note corrected with the auditor's replacement text (patch dimensions, 0.92 cpd at 7 um, hyperopic defocus caveat, receptor sampling wording). Units on line 1 set to µm and article number 105 added to the journal field. Merged 3 records. Licence stands on the publisher's CC BY.
