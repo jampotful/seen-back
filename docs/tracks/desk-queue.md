@@ -197,6 +197,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d139 0 / 0 / 0 (no audit; held out for a missing name authority: Drosera rotundifolia Ivesic 2022 for WFO, Loasaceae thigmonastic stamens for POWO, Utricularia gibba Westermeier 2017; Phaseolus Wiley licence, Berberis no licence, Mimulus preprint)
 - d140 2 / 0 / 0 (audit 225: 1 of 2 error, fixable and corrected: Harris 2009 conditions; Paponov 2021 where; Arabidopsis thaliana sense_magnetic x2)
 - d141 0 / 0 / 0 (audit 226: 3 wanted lines not merged; Appel and Cocroft already on main, Brito and Nunes are floral physics, not a plant response)
+- d142 0 / 0 / 0 (audit 227: 1 of 1 error, Anolis sagrei acuity 1.21 repeats herps:174 on main; held out: Passer domesticus Ensminger 2014 for quote length)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
