@@ -168,7 +168,10 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d110 3 / 0 / 0 (audit 200: 0 errors; refile unit under the 40-word rule; notes added to conditions before merge)
 - d111 4 / 0 / 1 (audit 201: 1 error dropped, Parthenium shading to refile; 1 wanted line, Ageratina adenophora)
 - d112 1 / 0 / 0 (audit 202: 0 errors; vein mostly covered on main; Gyrostemon, Brassica tournefortii and several Lamiaceae held out)
+- d113 0 / 0 / 0 (WFO pages refused; six leads read and filed by d116)
 - d114 2 / 0 / 0 (audit 203: 0 errors; Parthenium shading refile, 60/90% and 30% levels)
+- d115 0 / 0 / 0 (WFO pages refused; Cyathea delgadii pair passed to d117)
+- d116 5 / 0 / 0 (audit 204: 0 errors; volatile reception, Zea mays x3, Arabidopsis thaliana, Phaseolus lunatus; Solanum lycopersicum and Vicia faba held out)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
