@@ -192,6 +192,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d134 0 / 0 / 0 (audit 221: 3 of 3 errors, none merged; Artemisia omitted the 2012 non-repeat, Pinus lines misread cause; held out: Picea abies and Fagus sylvatica for WFO, Brassica nigra synonym, Quercus robur licence)
 - d135 2 / 0 / 0 (audit 222: 1 of 2 errors, a method sentence corrected before merge; held out: Gentianopsis paludosa, Triphysaria versicolor)
 - d136 0 / 0 / 0 (no WFO species page surfaced on second attempt for Picea abies, Fagus sylvatica, Kobresia humilis, Solanum tuberosum, Alyssum montanum, Oryza sativa)
+- d137 3 / 0 / 0 (audit 223: 2 of 3 errors, both omitted the authors' own explanation of a null and were corrected before merge; held out: Cistus salviifolius, Gyrostemon, Conostylis, Leucadendron, Motta 2024)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
