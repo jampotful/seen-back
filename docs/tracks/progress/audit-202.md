@@ -26,7 +26,7 @@ Faults noted, not counted:
 Evidence errors: 0 of 1 (0.0%). Error lines: none.
 Search records: none in the unit (0 of 0).
 
-Pooled with audits 172 to 200: 59 of 133 evidence records (44.4%; audits 172 to 200 59 of 132 as audit 200 gives it, audit 202 0 of 1). Audit 201 is not on main and is not pooled.
+Pooled with audits 172 to 201: 60 of 138 evidence records (43.5%; audits 172 to 201 60 of 137 as audit 201 gives it, audit 202 0 of 1).
 
 Verdict: pass for this unit; line 1 can be merged. Lines to drop: none. Before merge, the "little room for stimulation" clause should be marked as the desk's reading, and "mean ± SE; binomial GLM, p < 0.01" added to conditions.
 
