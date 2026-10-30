@@ -1,6 +1,6 @@
 # desk-d168 progress (animal senses on thin cells: sense_thermal, sense_electric, sense_hearing)
 
-Records filed: 7, in docs/views/evidence/desk-d168.jsonl (check.py: 0 problems). Three open papers, all CC BY 4.0 in Crossref; none of the three DOIs, and none of these species on these traits, was on main at 7fe0 fetch time (searched docs/views evidence, audit/corrected and audit/ALL by species and DOI).
+Records filed: 7, in docs/views/evidence/desk-d168.jsonl (check.py: 0 problems). Three open papers, all CC BY 4.0 in Crossref; none of the three DOIs, and none of these species on these traits, was on main when checked (searched docs/views evidence, audit/corrected and audit/ALL by species and DOI).
 
 - Malik HR, Bertolesi GE, McFarlane S 2023, Communications Biology 6: 127: Xenopus laevis tadpoles, 3 sense_thermal records (skin-lightening response 24 to 6 °C; TRPM8 agonist/antagonist pharmacology with the AITC and CBA nulls in the note; reduced locomotion at 6 °C). Whole-animal responses, no thermoreceptor recording. The nature.com page text carries no licence line; the licence rests on Crossref.
 - Metzen MG, Huang CG, Chacron MJ 2018, PLoS Biology 16(6): e2005239: Apteronotus leptorhynchus, 2 sense_electric records (behavioural contrast-detection threshold 8.8 % in curarized fish, n = 35; 34.2 % after lidocaine inactivation of descending feedback). Contrast of the fish's own field, not mV/cm.
