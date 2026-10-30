@@ -166,6 +166,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d108 2 / 0 / 1 (audit 198: 4 errors dropped; refile unit; 1 wanted line)
 - d109 2 / 0 / 0 (audit 199: 2 errors dropped)
 - d110 3 / 0 / 0 (audit 200: 0 errors; refile unit under the 40-word rule; notes added to conditions before merge)
+- d111 4 / 0 / 1 (audit 201: 1 error dropped, Parthenium shading to refile; 1 wanted line, Ageratina adenophora)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
