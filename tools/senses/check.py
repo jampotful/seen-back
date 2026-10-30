@@ -16,6 +16,8 @@ TRAITS = {
     "sense_vibration", "sense_airflow", "sense_hearing", "sense_echolocation", "sense_electric", "sense_magnetic",
     "sense_infrared", "sense_thermal", "sense_chemical", "sense_touch", "sense_light_nonvisual", "behaviour_vision",
 }
+# Evidence length is a word count, not a WebFetch output/character limit.
+# Scientific support and faithful quotation also require source review (BRIEF.md).
 MAX_QUOTE_WORDS = 40
 
 
