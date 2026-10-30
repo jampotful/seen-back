@@ -532,7 +532,7 @@ Rows and their traits:
 | 516 | Bandicota bengalensis (Lesser Bandicoot-rat) | 17 | 0 | Muridae / Rodentia | i | i | i |
 | 517 | Dicrostonyx torquatus (Arctic Lemming) | 17 | 0 | Cricetidae / Rodentia | i | i | i |
 | 518 | Heliosciurus punctatus (Small Sun Squirrel) | 17 | 0 | Sciuridae / Rodentia | i | i | i |
-| 519 | Heterocephalus glaber (Naked Mole Rat) | 17 | 0 | ? / Rodentia | i | i | i |
+| 519 | Heterocephalus glaber (Naked Mole Rat) | 17 | 0 | Heterocephalidae / Rodentia | i | i | i |
 | 520 | Hylopetes alboniger (Particolored Flying Squirrel) | 17 | 0 | Sciuridae / Rodentia | i | i | i |
 | 521 | Hylopetes spadiceus (Red-cheeked Flying Squirrel) | 17 | 0 | Sciuridae / Rodentia | i | i | i |
 | 522 | Lophiomys imhausi (Crested Rat) | 17 | 0 | Cricetidae / Rodentia | i | i | i |
