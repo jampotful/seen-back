@@ -1,5 +1,7 @@
 # Desk screening round (18 October 2026, after audits 40 to 42)
 
+For fresh plant light-evidence screening after integration, apply [LIGHT-RESPONSE.md](../../views/research/LIGHT-RESPONSE.md). Explicit natural light-exposure comparisons remain candidates, with observational qualifications; population-origin differences under common light or an untested photoperiodic interpretation alone do not establish a light response. Inspect the design before deciding: natural-light studies can contain blackout or shade treatments. If source access cannot settle the design, retain a reading lead and state the gap. The original screening-only output restrictions below remain in force.
+
 Audits 40, 41 and 42 failed the desk's screening batches harvest-26, -27 and -28 at 9 errors in 57 records pooled. Six of the nine errors were measurements the record called absent: three sat in the harvest output under a title the agent passed over (Digby and Firn 2002 on Tradescantia; Olsson et al. 2021 on Cuculus, on the record's own wanted list and already on main), and three were absent from the harvest output (Munir 2015, Desai 2018, Mann 1942). This round closes both gaps.
 
 For each genus in your launch prompt:

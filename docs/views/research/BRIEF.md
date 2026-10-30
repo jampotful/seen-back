@@ -69,6 +69,8 @@ Copy a whole sentence or table row; mark every omission with " … " and retain 
 
 Trait keys (use these; add a new key only when none fits, and write "new trait" and the reason in `note`):
 
+For new plant `sense_light_nonvisual` evidence, apply [LIGHT-RESPONSE.md](LIGHT-RESPONSE.md). Classify the actual light comparison as experimental, observational, or a directly measured light-related function. Keep observational qualifications in `value`; population origin or an author's proposed photoperiodic explanation alone does not establish a measured light response. Taxonomic grade and partial provenance are separate from causal support.
+
 | Key | What it records | Units or values |
 |---|---|---|
 | `eyes_count` | number of eyes or eye pairs | integer; say which in `note` |

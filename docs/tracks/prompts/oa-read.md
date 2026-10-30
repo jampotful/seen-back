@@ -11,6 +11,8 @@ The texts are fetched again for you, encrypted to a key that only your machine h
 3. `ci/oa/sources-r1.jsonl` holds, for each paper read, the `source` object to copy into every record from it: the full author list, year, title, and the journal string with volume, issue and pages, all from Crossref. Where `metadata_gaps` names something missing (often pages), take it from the paper's own first page and fill it in. Where the text itself says it is an author manuscript, accepted manuscript or preprint, say so in `note`; a PubMed Central or Europe PMC copy of a published paper is the published version whatever `copy` says.
 
 ## Reading
+For fresh plant `sense_light_nonvisual` records, apply [LIGHT-RESPONSE.md](../../views/research/LIGHT-RESPONSE.md). State the evidence basis in `method`, keep observational wording in `value`, and distinguish measured comparisons from author interpretations. A common-garden provenance difference alone cannot establish a light response. Reuse the ordinary source reconciliation; this adds no second receipt or verification pass.
+
 Read each paper whole, with its tables, figure captions and appendices, in the order your launch prompt gives. The text file holds the plain text first and, for PDFs, the same pages again after `=== LAYOUT ===` with columns kept, which is where tables are easiest to read. Log every measurement of a trait in BRIEF's list for every species in the paper, on the owner's lists or not, one record a value, with `python3 -I tools/senses/addlog.py <batch> < records.jsonl` (unit = the batch, e.g. `oa-9`).
 
 The rules the audits enforce:
