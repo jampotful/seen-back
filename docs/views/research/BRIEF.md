@@ -99,6 +99,9 @@ Trait keys (use these; add a new key only when none fits, and write "new trait" 
 | `sense_echolocation` | call frequencies, rate, range | string with figures |
 | `sense_electric`, `sense_magnetic`, `sense_infrared`, `sense_thermal`, `sense_chemical`, `sense_touch`, `sense_light_nonvisual` | other senses | string with figures |
 | `behaviour_vision` | a behaviour that shows what is seen (distance prey is detected or attacked, colour choice) | string with figures |
+| `physiology_volatile_emission` | measured volatile release or assay non-detection; a physiological observation, not sensory capability | string with assay/conditions; `note` says `new trait` and why |
+
+For chemical evidence, apply [CHEMICAL-EVIDENCE.md](CHEMICAL-EVIDENCE.md): separate chemical reception and treatment responses from emission and demonstrated emitter/receiver interactions. The physiology key does not settle `sense_chemical` coverage or authorize an app effect; source/taxon checks and the usual independent audit still govern admission.
 
 ## The sheet: `docs/views/drafts/<unit>.md`
 
