@@ -177,6 +177,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d119 5 / 0 / 0 (audit 207: 0 errors; plant diel, Cestrum nocturnum scent, Selenicereus undatus opening and odour onset, Cereus jamacaru, Pereskia aculeata; Cestrum petal-phase lead unfiled)
 - d120 3 / 0 / 0 (audit 209: 0 errors; sense_touch, Aldrovanda vesiculosa, Drosera allantostigma, Mimosa pudica)
 - d121 4 / 0 / 0 (audit 208: 0 errors; Cestrum nocturnum petal phases, Paeonia peregrina GA3, Pyrus pashia GA3 abstract-only, Primula florindae GA3; Alyssum montanum, Reynoutria and others held out)
+- d122 2 / 0 / 0 (audit 210: 1 of 3 errors, Ghosh line dropped; held out: Drosera spatulata, Utricularia)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
