@@ -210,6 +210,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d152 5 / 0 / 0 (audit 237: 3 of 5 error, all fixable and corrected: Ciona two-species Methods, phototaxis refiled at genus; Ciona eye_role x2, Lymnaea stagnalis eyes_count and behaviour_vision)
 - d153 3 / 0 / 0 (audit 238: 1 of 3 error, fixable and corrected: acuity_cpd eye/note, best-case patch value with hyperopic defocus caveat)
 - d154 8 / 0 / 0 (audit 239: 5 of 8 errors, all fixable and corrected: tested-frequency edges, DPOAE primary-frequency spans, 40 C heat-limit context)
+- d155 10 / 0 / 0 (audit 240: 9 of 11 errors, 8 fixable and corrected, Gryllus airflow line dropped: humidity design, sample size, caste pairing, null delays)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
