@@ -199,6 +199,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d141 0 / 0 / 0 (audit 226: 3 wanted lines not merged; Appel and Cocroft already on main, Brito and Nunes are floral physics, not a plant response)
 - d142 0 / 0 / 0 (audit 227: 1 of 1 error, Anolis sagrei acuity 1.21 repeats herps:174 on main; held out: Passer domesticus Ensminger 2014 for quote length)
 - d143 13 / 0 / 0 (audit 228: 4 of 13 error, all fixable and corrected: Etroplus synonym renamed Pseudetroplus, Pipistrellus 120 degree limiting result, Tursiops one animal at 5 and 25 Hz, Caretta prior light; hearing, magnetic, electric, infrared, airflow)
+- d144 8 / 0 / 0 (audit 229: 1 of 8 error, fixable and corrected: Panulirus argus size effect misread as unconfirmed; Aedes aegypti thermal x2, Merimna atrata infrared x2, Dicentrarchus labrax hearing, Bufo bufo magnetic x2)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
