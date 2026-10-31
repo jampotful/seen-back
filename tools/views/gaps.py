@@ -23,11 +23,16 @@ Usage: python3 -I tools/views/gaps.py [--repo .] [--out docs/views/gaps] [--worl
 import argparse
 import collections
 import csv
+import importlib.util
 import json
 import os
 import re
 import subprocess
 import sys
+
+_scope_spec = importlib.util.spec_from_file_location("evidence_scope", os.path.join(os.path.dirname(__file__), "../senses/evidence_scope.py"))
+SCOPE = importlib.util.module_from_spec(_scope_spec)
+_scope_spec.loader.exec_module(SCOPE)
 
 VIEWS = ("alligator bee bird cat deer dog frog hawk insect plant rabbit reptile squirrel wader").split()
 ALIAS = {"pupil": "pupil_shape", "optical_sensitivity": "absolute_sensitivity",
@@ -189,6 +194,7 @@ def load_evidence(repo, tax, retracted, with_branches=False):
     """Curated working-tree records; pending research branches are opt-in. -> list of dicts (deduplicated)."""
     seen = set()
     recs = []
+    limits = SCOPE.load_limits(repo)
 
     def take(unit, text, origin):
         for n, line in enumerate(text.splitlines(), 1):
@@ -209,6 +215,7 @@ def load_evidence(repo, tax, retracted, with_branches=False):
                 continue
             r["_id"] = "%s#%d" % (u, n)
             r.update(fixes.get("%s:%d" % (u, n), {}))
+            r = SCOPE.apply_limit(r, limits)
             r["_origin"] = origin
             recs.append(r)
 
@@ -298,6 +305,8 @@ def disagree(records, trait):
 # ---------------------------------------------------------------- one cell: species x trait
 def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
     """-> dict(state m|g|i, level, rec, rule, note). Closest evidence is reported whatever its state."""
+    if trait == SCOPE.ANATOMY:
+        cls = "none"  # no automatic transfer of anatomical counts or structures
     view = sp.get("view", "")
     genus = sp["genus"]
     fam = sp["family"]
@@ -329,7 +338,7 @@ def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
         if lvl == "order" and not recs:
             recs = [r for fam_recs in ord_ev.get((order, trait), {}).values() for r in fam_recs
                     if r["_family"] != fam]
-        recs = [r for r in recs if same_group(r)]
+        recs = [r for r in recs if same_group(r) and SCOPE.supports_trait(r, trait)]
         if recs:
             found[lvl] = recs
     out = {"state": "i", "level": "none", "rec": None, "rule": "", "note": ""}
@@ -351,7 +360,7 @@ def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
             return out
     # order carry (rule 2 only)
     if cls == "order" and order:
-        fams = {f: [r for r in rs if same_group(r)] for f, rs in ord_ev.get((order, trait), {}).items()}
+        fams = {f: [r for r in rs if same_group(r) and SCOPE.supports_trait(r, trait)] for f, rs in ord_ev.get((order, trait), {}).items()}
         fams = {f: rs for f, rs in fams.items() if rs}
         allrecs = [r for rs in fams.values() for r in rs]
         if len(fams) >= 2 and not disagree(allrecs, trait):

@@ -2,9 +2,13 @@
 """Check evidence logs: python3 -I tools/senses/check.py [docs/views/evidence/<unit>.jsonl ...]
 
 With no arguments, checks every log in docs/views/evidence/. Prints one line per problem and a count per file;
-exits 1 if any record has a problem. addlog.py runs the same checks on each record before appending it.
+exits 1 if any record has a problem. Use --require-evidence-kind for new functional logs. addlog.py runs the same checks on each record before appending it.
 """
-import glob, json, os, sys
+import glob, importlib.util, json, os, sys
+
+_scope_spec = importlib.util.spec_from_file_location("evidence_scope", os.path.join(os.path.dirname(__file__), "evidence_scope.py"))
+SCOPE = importlib.util.module_from_spec(_scope_spec)
+_scope_spec.loader.exec_module(SCOPE)
 
 NEED = ("taxon", "trait", "value", "source", "where", "quote", "grade")
 GRADES = ("m", "g", "i", "x")
@@ -13,7 +17,7 @@ TRAITS = {
     "interommatidial_deg", "acceptance_deg", "fovea", "eye_movement", "receptor_classes", "lambda_max_nm",
     "spectral_range_nm", "colour_vision", "oil_droplets", "filter_pigments", "cff_hz", "corner_hz", "f_number",
     "rhabdom_um", "tapetum", "diel", "absolute_sensitivity", "polarization", "depth_cue", "motion",
-    "sense_vibration", "sense_airflow", "sense_hearing", "sense_echolocation", "sense_electric", "sense_magnetic",
+    "sensory_anatomy", "sense_vibration", "sense_airflow", "sense_hearing", "sense_echolocation", "sense_electric", "sense_magnetic",
     "sense_infrared", "sense_thermal", "sense_chemical", "sense_touch", "sense_light_nonvisual", "behaviour_vision",
 }
 # Evidence length is a word count, not a WebFetch output/character limit.
@@ -21,7 +25,7 @@ TRAITS = {
 MAX_QUOTE_WORDS = 40
 
 
-def problems(r):
+def problems(r, require_evidence_kind=False):
     out = []
     miss = [k for k in NEED if k not in r]
     if miss:
@@ -48,10 +52,15 @@ def problems(r):
         out.append("quote is %d words (at most %d)" % (len(q.split()), MAX_QUOTE_WORDS))
     if r.get("opened") is not True and r.get("grade") != "i":
         out.append("opened must be true unless the record is a guess (grade i)")
+    if require_evidence_kind and SCOPE.functional_trait(t) and not r.get("evidence_kind"):
+        out.append("new functional records require evidence_kind")
+    out.extend(SCOPE.problems(r))
     return out
 
 
 def main(paths):
+    strict = "--require-evidence-kind" in paths
+    paths = [p for p in paths if p != "--require-evidence-kind"]
     root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     paths = paths or sorted(glob.glob(os.path.join(root, "docs", "views", "evidence", "*.jsonl")))
     bad_total = 0
@@ -65,7 +74,7 @@ def main(paths):
                 r = json.loads(line)
             except ValueError as e:
                 print("%s:%d not JSON: %s" % (p, i, e)); bad += 1; continue
-            for pr in problems(r):
+            for pr in problems(r, require_evidence_kind=strict):
                 print("%s:%d %s" % (p, i, pr)); bad += 1
         print("%s: %d records, %d problems" % (os.path.relpath(p, root), n, bad))
         bad_total += bad

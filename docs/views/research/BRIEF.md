@@ -93,12 +93,32 @@ Trait keys (use these; add a new key only when none fits, and write "new trait" 
 | `polarization` | polarization sensitivity, where in the eye, what for | string |
 | `depth_cue` | stereopsis, image defocus, motion parallax, accommodation, peering | string |
 | `motion` | motion detection features (looming, small-target detectors, optomotor speeds) | string with figures |
-| `sense_vibration` | substrate or web vibration: organs, frequency range, threshold | string with figures |
-| `sense_airflow` | trichobothria, filiform hairs, lateral line | string with figures |
+| `sensory_anatomy` | sensory structures and their measured anatomy, without assigning a specific function | number/string; `structure`, `measurement`, `evidence_kind`, `method`, `conditions`; units for quantities |
+| `sense_vibration` | responses to substrate or web vibration: stimulus, frequency range, threshold | string with figures; distinguish mechanical response, transduction and behaviour |
+| `sense_airflow` | responses to air or water flow (legacy key includes lateral-line water-flow responses) | string with figures; name medium and evidence kind, not just an organ |
 | `sense_hearing` | hearing range and best frequency | `[low, high]` Hz with best frequency in `note` |
 | `sense_echolocation` | call frequencies, rate, range | string with figures |
 | `sense_electric`, `sense_magnetic`, `sense_infrared`, `sense_thermal`, `sense_chemical`, `sense_touch`, `sense_light_nonvisual` | other senses | string with figures |
 | `behaviour_vision` | a behaviour that shows what is seen (distance prey is detected or attacked, colour choice) | string with figures |
+
+## Sensory anatomy and function (audit 292 follow-up, 31 October 2026)
+
+Follow [SENSORY-ANATOMY.md](SENSORY-ANATOMY.md). Measured anatomy is retained under
+`sensory_anatomy` when no existing anatomical key fits. It can be graded `m` for
+its own taxon without establishing hearing, airflow, vibration or another
+function. Name `structure` and `measurement`; distinguish anatomical presence,
+structural measurement, mechanical response, transduction, behavioural response
+and inferred function with `evidence_kind`. New `sense_*` and `behaviour_vision`
+records need this field; `addlog.py` enforces it, and direct-written new logs use
+`python3 -I tools/senses/check.py --require-evidence-kind <file>`.
+
+Do not infer a modality from the organ's name or a relative's ability. Anatomy,
+passive deflection and functional inference cannot close functional gaps or
+justify measured engine settings. A depiction inspired by anatomy stays a
+separately marked invention. Existing exact anatomical vision traits remain
+valid. Preserve nulls, experimental conditions, source completeness and audit
+history. Legacy records require source review; a newly added field cannot
+resolve an older unverifiable or scientifically unsupported finding.
 
 ## The sheet: `docs/views/drafts/<unit>.md`
 

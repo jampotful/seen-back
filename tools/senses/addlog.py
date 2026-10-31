@@ -31,7 +31,7 @@ def main():
             sys.exit("line %d is not JSON: %s" % (n, e))
         r.setdefault("unit", unit)
         r.setdefault("opened", True)
-        bad = check.problems(r)
+        bad = check.problems(r, require_evidence_kind=True)
         if bad:
             sys.exit("line %d: %s\n%s" % (n, "; ".join(bad), line[:200]))
         rows.append(r)
