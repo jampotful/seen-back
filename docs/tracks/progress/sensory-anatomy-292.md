@@ -133,3 +133,37 @@ The owner still decides whether anatomy-only evidence should have visible rows,
 which explicitly speculative sensory views to offer, and how their visual or
 haptic language should work. The scientific question of how these wasp organs
 actually respond remains open to direct experiments.
+## PR #50 compatibility follow-up (31 October 2026)
+
+The eight candidate Mélotte 2018 audiograms in
+[PR #50](https://github.com/jampotful/seen-back/pull/50) initially lacked
+`evidence_kind`. Its follow-up adds `transduction` after checking the primary
+Methods' neural AEP protocol against this ontology. The 107 thresholds, source
+quotations, conditions, six proposed `m` grades and two identity-restricted `g`
+grades remain unchanged. This is classification work, not independent audit.
+
+Testing those records exposed lost scientific context in the writer inputs:
+`rows.record_line` omitted conditions and notes and truncated methods/quotes;
+`compile.record_line` truncated notes at 200 characters. The two modern-species
+restrictions occur later in the notes. This branch now preserves full typed
+sensory context (including source locator, curve and restrictions) and makes the
+neural-versus-behavioural rule explicit. Untyped legacy serialization retains its
+previous compact format. No eligibility, carry, audit disposition or app setting
+is changed by this follow-up.
+
+Two new scope regressions fail before and pass after the change (15 total).
+The companion `test_melotte_2018.py --require-classification` in PR #50 passes all
+eight actual-record checks on the combined tree: strict validation, exact
+scientific-payload preservation, atomic append rejection, raw/corrected loading,
+no identity upgrade or hearing carry, full writer context and retained
+`not audited` status. Existing gap (5), quote/append (4), and compiler tests pass;
+strict validation and numerical lint report eight records and zero problems.
+Full-corpus row tests and API generation were not run in the scoped snapshot.
+
+Merge/admission coordination: review the two compatibility commits together;
+the research desk must still independently dispose of PR #50's eight records,
+including both identity restrictions, before accepted-main integration. Raw-log
+loaders are not an acceptance gate, and the compiler's `not audited` label does
+not exclude a record. No historic audit, legacy aggregate, accepted evidence,
+published gap output or representation was updated. Full context still needs
+source review before generating any behavioural or species-specific claim.

@@ -104,6 +104,14 @@ The checks do not prove arbitrary generated prose true. Source review still has
 to confirm that a row makes only the claim its cited record supports. No live
 view, offered flag, compiled draft, published gap table or build is regenerated.
 
+Typed sensory records also retain their full method, conditions, note and source
+locator in writer inputs. A note can contain a complete response curve followed
+by a taxonomic restriction; shortening it to an arbitrary character boundary
+can remove the qualification. The row writer retains the complete normalized
+quotation too. This preserves claim context, not scientific acceptance. Neural
+thresholds must not be narrated as behavioural detection. These fields can make
+requests longer; review request size when planning generation.
+
 ## Alternatives considered
 
 | Alternative | Evaluation |

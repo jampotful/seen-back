@@ -350,11 +350,23 @@ def record_line(rid, r):
     part = " | PARTIAL (read from a compilation, table, appendix, review or abstract)" if r.get("partial") else ""
     v = json.dumps(r.get("value"), ensure_ascii=False)
     q = " ".join(str(r.get("quote") or "").split())
+    method = r.get("method") or ""
+    typed_sensory = r.get("evidence_kind") in GAPS.SCOPE.KINDS and (
+        GAPS.SCOPE.functional_trait(r.get("_trait", r.get("trait", "")))
+        or r.get("trait") == GAPS.SCOPE.ANATOMY)
     part += " | evidence_kind=" + str(r.get("evidence_kind", "legacy_untyped"))
     if r.get("sensory_use_limit"):
         part += " | use limit: " + r["sensory_use_limit"]
+    if typed_sensory:
+        # A note may contain the whole measured curve and a late taxonomic
+        # restriction. Do not strip scientific qualifications from writer input.
+        for field in ("units", "structure", "measurement", "conditions", "where", "note"):
+            if r.get(field) not in (None, ""):
+                part += " | %s: %s" % (field, r[field])
+    else:
+        v, method, q = v[:80], method[:60], q[:220]
     return "%s | %s | %s | value %s | eye %s | grade %s | %s | \"%s\" | %s%s" % (
-        rid, r.get("taxon"), r.get("_trait"), v[:80], r.get("eye") or "-", r.get("grade"), (r.get("method") or "")[:60], q[:220], short_source(r), part)
+        rid, r.get("taxon"), r.get("_trait"), v, r.get("eye") or "-", r.get("grade"), method, q, short_source(r), part)
 
 
 def rule_text(c):

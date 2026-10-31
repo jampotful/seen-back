@@ -17,6 +17,8 @@ deflection and inferred function do not establish hearing, airflow, vibration or
 other detection. Transduction establishes the recorded physiological response;
 behaviour establishes the tested response, including nulls, not subjective
 experience. Never transfer a modality from an organ's name or a related species.
+Neural thresholds do not establish behavioural detection. Retain experimental
+conditions, source-column context and taxonomic restrictions when stating a claim.
 An anatomy-grounded drawing is an invention: grade i, invented true, with the
 anatomical basis and the untested functional assumption stated separately.
 Read evidence_kind and sensory_use_limit even when a record is graded m.

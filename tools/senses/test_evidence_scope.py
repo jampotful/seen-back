@@ -143,6 +143,30 @@ class EvidenceScopeTests(unittest.TestCase):
         self.assertTrue(S.supports_trait(r, "interommatidial_deg"))
         self.assertFalse(S.supports_trait(r, "sense_hearing"))
 
+    def test_typed_sensory_row_keeps_full_scientific_context(self):
+        # Qualifications can follow a long curve; neither a character limit nor
+        # a method prefix is a safe boundary for a scientific claim.
+        for kind in ("transduction", "physiological_response", "behavioural_response"):
+            r = dict(WASP[0], trait="sense_hearing", _trait="sense_hearing", evidence_kind=kind,
+                     method="Experimental protocol. " * 8 + "No behavioural task was tested.",
+                     conditions="Underwater pressure; particle motion was not quantified.",
+                     note="Reported curve and sample counts. " * 20 + "Historic species identity is unresolved.",
+                     where="Table 1, specified species column; Methods.",
+                     quote=("A complete qualifying sentence. " * 10).strip())
+            line = R.record_line("R1", r)
+            for field in ("method", "conditions", "note", "where", "quote"):
+                self.assertIn(r[field], line, (kind, field))
+
+    def test_typed_sensory_compiler_keeps_full_note_and_locator(self):
+        r = dict(WASP[0], trait="sense_hearing", evidence_kind="transduction",
+                 _id="R1", _inside=True, _audit="not audited",
+                 note="Curve, dispersion and frequency-specific N. " * 20 + "No modern-species assignment.",
+                 where="Table 1, specified species column; Methods.")
+        line = json.loads(C.record_line(r))
+        for field in ("method", "conditions", "note", "where", "quote", "evidence_kind"):
+            self.assertEqual(line[field], r[field])
+        self.assertEqual(line["check"], "not audited")
+
     def test_compiler_preserves_structure_identity_and_legacy_limits(self):
         a = dict(WASP[0], _inside=True, _from="log", _audit="test")
         b = dict(a, structure="central antennal chordotonal organ")

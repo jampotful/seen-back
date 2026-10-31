@@ -407,6 +407,8 @@ def choose(cand):
 
 def record_line(r):
     d = collections.OrderedDict()
+    typed_sensory = r.get("evidence_kind") in SCOPE.KINDS and (
+        SCOPE.functional_trait(r.get("trait", "")) or r.get("trait") == SCOPE.ANATOMY)
     d["id"] = r["_id"]
     d["taxon"] = r.get("taxon")
     d["scope"] = "inside" if r["_inside"] else "wider"
@@ -415,7 +417,9 @@ def record_line(r):
             d[k] = r[k]
     d["quote"] = r.get("quote", "")
     if r.get("note"):
-        d["note"] = r["note"][:200]
+        d["note"] = r["note"] if typed_sensory else r["note"][:200]
+    if typed_sensory and r.get("where"):
+        d["where"] = r["where"]
     if r.get("trait") in SHARP_TRAITS:
         n, how = as_cpd(r)
         if n is None:
