@@ -14,7 +14,7 @@ Unit d229, 31 October 2026. Branch research/desk-d229. Evidence: docs/views/evid
 | Emblemasoma auditrix (hearing tuned to 5 kHz, both sexes) | sense_hearing | Lakes-Harlan et al. 2014, 9(1): e87211 | Crossref CC BY 4.0 vor |
 
 Notes for the auditor:
-- Anguilla marmorata: the abstract sentence is the only place the 508 and 517 nm cone values appear; the Results say a single cone class was seen only in cultured and wild yellow eels. The abstract's "yellow" is read as the cultured yellow eels (Methods and Results use "cultured yellow"). n = 9, 4 and 2 eyes' donors by stage.
+- Anguilla marmorata: the abstract sentence is the only place the 508 and 517 nm cone values appear; the Results say a single cone class was seen only in cultured and wild yellow eels. The abstract's "yellow" is read as the cultured yellow eels (Methods and Results use "cultured yellow"). n = 9 glass, 4 cultured yellow and 2 wild yellow eels.
 - Careproctus: family and order from the Fig 1A caption; fish number not stated; the 410 nm component (P414) is recorded in conditions.
 - Magallana gigas: name used in the paper and on main's try-species list. Owner question below.
 - Porichthys: abstract threshold range (140-150 dB) differs from the Results' 133-151 dB at best frequency; both are in conditions. Larval stage.
