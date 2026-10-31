@@ -234,6 +234,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d176 6 / 0 / 0 (Calanus polarotaxis, Meganyctiphanes, Talitrus polarized light, Tripneustes, Strongylocentrotus intermedius x2)
 - d177 2 / 0 / 0 (Neohelice granulata noise-exposure responses; 6 held for name checks and owner ruling)
 - d178 6 / 0 / 0 (Drosophila larva thermal sensitivity, Nilaparvata lugens magnetic, Anopheles coluzzii heat with odour)
+- d179 7 / 0 / 0 (noise-exposure re-files: Neocaridina davidi, Crassostrea virginica, Acartia tonsa; Lycoriella ingenua ERG and behaviour)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
