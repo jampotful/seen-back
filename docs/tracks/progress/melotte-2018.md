@@ -1,0 +1,82 @@
+# Mélotte et al. 2018: Table 1 recovery and scientific-audit submission
+
+31 October 2026. Status: **eight candidate audiogram records submitted for independent scientific audit, not an acceptance decision**. Six propose grade `m`; two propose grade `g` because the measured historical taxon concepts cannot yet be resolved to current species. All 107 published thresholds, their standard deviations and frequency-specific responding counts are recovered. No existing evidence, audit, taxonomy mapping, gap output or app code is changed.
+
+## Files and record granularity
+
+- [Evidence log](../../views/evidence/melotte-2018.jsonl): eight `sense_hearing` records, one per source-labelled species; no new trait, no cell-by-cell proliferation.
+- [Supporting audiograms](../../views/sources/melotte-2018-audiograms.json): the same data as arrays of frequency, mean pressure threshold, SD and responding N, with source attribution, missing-value semantics and identity restrictions. It is not an independently accepted evidence stream.
+- [Source-read receipt](../../views/sources/melotte-2018.jsonl): records the extent of reading and the inaccessible supplement.
+- [Representation handoff](../../views/drafts/melotte-2018.md): interpretable contrasts and limits of the present fish/sound interface.
+
+The existing schema defines `sense_hearing` as a frequency range with best-frequency detail in `note`. Each record therefore uses `[50, highest tabulated responding frequency]`, units Hz, with explicit tested-response rather than universal hearing-limit semantics. The complete curve is preserved in the existing `note` field and in the supporting JSON; an importer that ignores extra data files still retains the science. No nested values, new grade, or unrecognised evidence field is introduced. Direct tabulated response endpoints are not a converted or invented estimate. Lowest-mean sample points are labelled descriptive summaries of the tested grid, not fitted tuning peaks.
+
+## Source access and independent numerical checks
+
+Primary source: Geoffrey Mélotte, Eric Parmentier, Christian Michel, Anthony Herrel and Kelly Boyle. *Hearing capacities and morphology of the auditory system in Serrasalmidae (Teleostei: Otophysi).* Scientific Reports 8(1), 1281 (2018), [doi:10.1038/s41598-018-19812-1](https://doi.org/10.1038/s41598-018-19812-1), published 19 January 2018.
+
+Read the [PMC version of record](https://pmc.ncbi.nlm.nih.gov/articles/PMC5775314/), including Table 1, its caption, Results, Discussion, fish collection, stimulus generation, threshold definition, controls and statistical methods. Independently extracted Table 1 from the [published PDF on Fish Morphology and Behavior](https://www.fishmorphandbehavior.org/uploads/8/4/7/1/84711046/m-lotte_et_al-2018-scientific_reports.pdf), p. 5. Its title, DOI, five authors and explicit CC BY 4.0 licence on p. 11 match the PMC article. Both copies explicitly carry the open licence; this is not an inference from a repository tag. Attribution and a [licence link](https://creativecommons.org/licenses/by/4.0/) accompany the transposed data. Full article text and PDFs remain outside the repository.
+
+The two independently parsed tables agree in every one of the 112 frequency-by-species positions: 107 reported mean/SD/N triples and five printed dash positions. The fourteen tabulated frequencies are 50, 150, 300, 600, 900, 1200, 1500, 1800, 2100, 2400, 2700, 3000, 3300 and 3600 Hz. The columns were checked in their printed species order. A search snippet gave Myloplus rubripinnis at 150 Hz as 92.7; both opened versions give **97.2 ± 6.8, N=3**, which is the retained value. Search snippets are not the extraction source.
+
+Quoted evidence consists of two complete numeric Table 1 rows, separated by a marked omission; `where` identifies each record's species column pair, frequency column, units caption and context. Each quote has 35 whitespace-separated words and passes the repository's 40-word limit. Source checking uses text returned from the PDF, with tool line/page labels removed and line breaks flattened without changing numeric tokens or punctuation. This flattening is necessary because `quotecheck.py`'s line-end hyphen normalization otherwise consumes a table's trailing missing-value dash. The unflattened source retrieval was retained locally for comparison; the quoted numeric rows exactly match it. The tool's screenshot responses exposed text placeholders rather than viewable page pixels, so no visual screenshot inspection is claimed.
+
+Access limits: Nature's article/PDF route redirected to its identity service; PMC delivered the main article. The PMC supplementary PDF returned a browser challenge and the Springer supplementary CDN URL was unavailable. Table S1's full pairwise matrix, S2's regressions and other supplement contents were **not** independently read. The seven-frequency Pygocentrus–Piaractus significance statement is verified in the main Results, not reconstructed from the inaccessible supplement. Individual-fish raw observations are not published in Table 1; the main article makes the datasets available from the corresponding author on request. No raw-data reanalysis, independent replication or complete supplementary audit is claimed.
+
+## The recovered species-labelled findings
+
+Threshold units throughout are **dB re 1 µPa**; dispersion is **SD**, not SEM. N is the number responding at that frequency. Total cohorts and standard lengths come from Methods, Fish collection, not from the separate CT specimens.
+
+| Record | Species as printed | Total N | SL (mm) | Tabulated responding band (Hz) | Mean ± SD at highest tabulated response; N | Lowest sampled mean (Hz; dB re 1 µPa) | Proposed grade |
+|---|---|---:|---|---|---|---|---|
+| 1 | Piaractus brachypomus | 10 | 69–95 | 50–3600 | 120.5; SD not reported; 1 | 600; 90.4 ± 3.9 | g: modern identity unresolved |
+| 2 | Metynnis lippincottianus | 10 | 76–87 | 50–3600 | 118 ± 0; 2 | 150; 90.9 ± 3.5 | m |
+| 3 | Myloplus rubripinnis | 3 | 98–108 | 50–3000 | 111.5; SD not reported; 1 | 600; 84.0 ± 6.0 | m |
+| 4 | Myleus schomburgkii | 8 | 55–61 | 50–3600 | 112 ± 1; 5 | 600; 87.3 ± 2.1 | g: modern identity unresolved |
+| 5 | Serrasalmus elongatus | 5 | 66–79 | 50–3300 | 122.4 ± 5; 5 | 600; 85.2 ± 7.0 | m |
+| 6 | Serrasalmus spilopleura | 7 | 75–105 | 50–3600 | 113 ± 0; 4 | 600; 81.3 ± 4.5 | m |
+| 7 | Pygocentrus nattereri | 10 | 64–70 | 50–3600 | 113.5 ± 3; 4 | 600; 79.3 ± 6.2 | m |
+| 8 | Pygocentrus piraya | 5 | 96–112 | 50–3000 | 110.5 ± 4.9; 2 | 300; 84.6 ± 7.9 | m |
+
+At 1200 Hz the source-labelled Piaractus cohort has 120.0 ± 4.2 dB, N=10, and Pygocentrus nattereri has 92.4 ± 4.0 dB, N=10. Subtracting the published means gives **120.0 − 92.4 = 27.6 dB**. This derived comparison is documented here, not added as another measured evidence record. The main Results reports Pygocentrus nattereri significantly more sensitive at 300, 900, 1200, 1500, 1800, 2100 and 2400 Hz (Tukey HSD, P ≤ 0.001), but explicitly denies a clear separation of species across the whole band. Do not drop the unresolved Piaractus identity or turn the comparison into a species-wide loudness advantage.
+
+## Experimental meaning and limitations
+
+These are summed neural AEP responses, not behavioural detection, recognition, attention, loudness, directional hearing or auditory scene analysis. Fish were unanaesthetised, restrained in a harness, and stimulated underwater by 50 ms Hanning-windowed tone bursts; phase alternated, with 500 presentations per frequency/level. FFT peaks at twice the stimulus frequency had to be at least 3 dB above background; threshold was the lowest presented sound level meeting that criterion. Dead-fish controls gave no responses.
+
+The experiment tested fifteen frequencies through 4000 Hz at levels up to 164 dB re 1 µPa, stepping down by 6 dB. Table 1 contains only fourteen frequencies, through 3600 Hz. It does not establish hearing outside the tested grid, an exact lower bound at 50 Hz, or an invariant upper cutoff. A missing threshold is not zero sensitivity; no 4000 Hz numeric threshold or N was invented. An absent SD for N=1 is null, while printed SD=0 remains zero.
+
+A hydrophone calibrated sound pressure at the fish-head position in a narrow, vertical steel tube. Particle motion was not quantified. The numbers therefore characterize this sound field and method; they do not isolate all physical inputs to fish hearing or calibrate an airborne phone microphone. Most subjects were juveniles/subadults and some cohorts were small. N varies with frequency, so means near the upper edge may describe a selected responsive subset. An apparent high-frequency recovery in the mean cannot be assumed to describe every individual.
+
+The paper's broad low-frequency sensitivity and overlap across vocal/non-vocal and herbivorous/carnivorous groups limit functional interpretations. A high threshold at 2100/2400 Hz is poorer sensitivity, not a sensitivity peak. The behavioural findings cited from Stabentheiner (1988) in the Discussion are not new behavioural measurements by Mélotte and have not been silently added as primary records. All eight recovered records are `partial:false` because their numeric measurements are this paper's own table, not digitized curves or secondary citations; the inaccessible supplement is separately disclosed.
+
+## Taxonomy and identity handling
+
+The eight column headings are unambiguous in both copies. Family Serrasalmidae and order Characiformes follow the study and current fish catalogues. Existing `gbif-names.tsv`, `taxonomy-gbif.tsv`, `taxonomy-extra.tsv` and `synonyms.tsv` contain no matching target genus/species entries at the baseline checked. No duplicate taxon entry, broad alias or speculative placement is added.
+
+Current catalogue searches corroborate the unchanged names Metynnis lippincottianus, Myloplus rubripinnis, Serrasalmus elongatus, S. spilopleura, Pygocentrus nattereri and P. piraya. [Eschmeyer's Metynnis record](https://researcharchive.calacademy.org/research/ichthyology/catalog/fishcatget.asp?spid=29734), [WoRMS' Serrasalmus list](https://www.marinespecies.org/aphia.php?p=taxlist&tName=Serrasalmus), [ITIS' spilopleura record](https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value=163272) and [GBIF's piraya record](https://www.gbif.org/taxon/4QP48) were opened. ITIS retains an older family placement; it was not used to override Serrasalmidae. Several other direct catalogue pages returned 403/429, so their search-index status is supplementary corroboration, not a claim to have read those pages. Grade m means measurement in the study's identified species, not that this recovery re-examined its specimens.
+
+Two source names need more than a spelling update:
+
+1. **Piaractus brachypomus:** [Escobar L. et al. 2019, doi:10.1111/jfb.13990](https://pubmed.ncbi.nlm.nih.gov/31017302/) describes P. orinoquensis and restricts P. brachypomus to the Amazon basin. The retrieved primary abstract establishes the split. The 2018 AEP cohort has no collection locality, diagnostic meristics, molecular identification or voucher-to-AEP crosswalk in the accessible main article. The later split does not prove misidentification; it prevents an unconditional claim that these fish were modern, narrowly defined P. brachypomus. Record 1 is conservatively g and explicitly limited to the historical cohort. No quantitative carry to either modern species is authorised.
+2. **Myleus schomburgkii:** [Eschmeyer's record](https://researcharchive.calacademy.org/research/ichthyology/catalog/fishcatget.asp?spid=4088) gives Myloplus schomburgkii. More consequentially, [Machado et al. 2024, doi:10.1590/1982-0224-2023-0095](https://www.scielo.br/j/ni/a/fFG9HTqKTjCs4Z4W3MxwSLJ/?format=html) redescribes that species and separates M. sauron and M. aylan from fish previously identified as M. schomburgkii. Read its abstract and taxonomic discussion. The 2018 source label is retained and record 4 is g; no Myleus-to-Myloplus genus alias is added. The old label must not become direct evidence for any of the three modern species without specimen-level resolution.
+
+These two g grades document a known taxonomic applicability problem; they are not a newly invented confidence scale and do not downgrade the existence of the neural measurements. To promote either to m for a modern species, obtain a diagnostic specimen/photo/locality/molecular record linked specifically to the hearing cohort and reconcile it with the revisions. A CT specimen of a different size is not by itself that link. Pending that, use the curves only with their historical source labels and restrictions, or hold them out of species presentation.
+
+## Duplication, family record and current-head reconciliation
+
+Read baseline main `785f8504a8e78fb0e5caac6365ebc29e7dacb3bd` through the authorized GitHub connector. Scanned all **395 evidence files (26,332 nonempty lines, including held/failed material)**, all 20 corrected audit files, `docs/views/audit/ALL.jsonl`, 34 source logs and the four taxonomy tables. Searches covered the DOI fragment 19812, Mélotte/Melotte, all six genera, Serrasalmidae, piranha and pacu, across every field. GitHub code search returned incomplete empty results even for known records, so it was not used as the negative-coverage basis. Six evidence files and ALL exceeded the contents endpoint's inline threshold and were actually read through the blob endpoint; empty contents responses were not mistaken for empty files.
+
+Only the original hearing record `desk-d206:3` and three unrelated Pygocentrus nattereri behavioural-vision records in desk-d208 match. No duplicate species audiogram or prior retraction of this study was found. Corrected audit and source logs have no target match. No branch named for Mélotte or issue/pull-request search hit for the DOI/name was found; the four open PRs inspected concern unrelated audits. This is not a claim to have inspected every unpublished private worktree or unlabelled remote branch.
+
+Main advanced to `d36034122838b46757b8e9fb5bb7d690e8b54e1e` during the work. The one new commit adds desk-d224's nine records and audits 312/313 and updates the desk queue and gap README. Its new evidence has no target match; the family-carry rule is unchanged. The submission is based on this newer commit. Recheck intervening evidence again at integration if main has moved.
+
+**Retain `desk-d206:3` byte-for-byte.** It remains an aggregate account of the eight-species experiment, including group overlap and broad response range; it is not eight independent species observations or independent replication of this paper. Its historical note that Table 1 was not returned describes the earlier retrieval and is superseded by this separate recovery, not rewritten as if the earlier auditor had seen it. Audit 290 refers to the original candidate's line 5; the accepted file's record is line 3. No row carry or blanket family equivalence is added.
+
+## Validation and required desk disposition
+
+Completed: two-source Table 1 tuple equality, all eight sample-size/length associations, explicit null-versus-zero handling, quote provenance and 35-word counts, `tools/senses/check.py` (8 records, 0 problems), and `tools/views/quotecheck.py` (8 verbatim, 0 failed). These are author checks, not an independent scientific audit. No app build or live deployment is needed for this data submission.
+
+The desk should audit all eight records under `oa-audit.md`'s scientific-context rule and the evidence portions of `desk-audit.md`, with explicit decisions on records 1 and 4's historic taxon concepts. Review the whole curve, not only its endpoint quote. Confirm the sample-count changes, the omitted 4000 Hz row, primary AEP scope, and the inability to inspect the supplement. Record verdicts in a new desk-assigned audit; do not alter audit 290's historic count. Integrate only after that independent disposition, retain g/identity restrictions or keep those two rows held, and record the unit in the desk-owned yield log. A PR merge is not itself a scientific audit.
+
+After evidence acceptance, any hearing row or sound weighting needs the normal species/view review and an explicit invented label for the visual translation. The current fish spec and gap mappings do not contain a hearing row, so this recovery alone makes no claim of closed published gap-table cells or a changed live representation.
