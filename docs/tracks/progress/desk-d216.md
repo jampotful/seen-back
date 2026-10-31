@@ -7,6 +7,8 @@ Scope: animal sensory-trait records from open full text (PeerJ CC BY, PLOS ONE C
 - Trabala vishnou (subspecies gigantina), PeerJ 13: e20124, sense_chemical: Table 3 row, female relative EAG response to hexyl 2-methyl butyrate 0.33 to 2.53 across five concentrations.
 - Ateles geoffroyi (spider monkey), PLoS ONE 8(11): e80621, sense_chemical: predator-odour thresholds at or below 1 ppb gas phase (group threshold, four animals).
 - Platydoras armatulus (striped Raphael catfish), PLoS ONE 6(10): e26479, sense_hearing: best hearing at 0.5 and 1 kHz at 22 and 30 C (thresholds sit in Table 3, not read).
+- Cyprinella venusta (blacktail shiner), PLoS ONE 10(9): e0137290, sense_hearing: control AEP thresholds 85 dB at 300 Hz and 82 dB at 400 Hz. The page summary printed no licence line; Crossref registers CC BY 4.0 (flagged in the note).
+- Megalechis thoracata (armoured catfish), PLoS ONE 10(3): e0121219, sense_hearing: best sensitivities 0.2 to 1 kHz in both sexes; sex difference (females better 0.1 to 1 kHz) recorded in conditions.
 
 ## How the search went
 - Crossref free-text queries returned mostly noise (human audiology) and were often rate limited; WebSearch with allowed_domains (peerj.com, journals.plos.org, mdpi.com, biomedcentral.com) surfaced real animal papers and worked better.
@@ -17,7 +19,7 @@ Scope: animal sensory-trait records from open full text (PeerJ CC BY, PLOS ONE C
 - Grass carp and common carp pulsed DC (PeerJ 12: e17962, Miller et al.): only short usable sentence ('At field strengths higher than 0.4 V/cm both cyprinid species exhibited unvolitional tetany') covers two species together; pooled, not filed.
 - PeerJ 3595 (ERG model selection): velvet worm Principapillatus hitoyensis lambda_max 484 nm is a reanalysis of Beckmann 2015 data with two model values (481 and 484) and no animal numbers; method paper, not filed.
 - Tigriopus japonicus phototaxis (JEMBE 518: 151183): repository copy is CC-BY-NC-ND.
-- Not opened for rate limits at the end: Megalechis thoracata hearing (PLoS ONE 10(3): e0121219, Hadjiaghai and Ladich 2015; Crossref licence CC BY), Cyprinella venusta road noise (pone.0137290; Cyprinella venusta not on main), Asian and African cichlid swim bladder and hearing (pone.0042292).
+- Not opened (PLOS fetches rate limited repeatedly): Asian and African cichlid swim bladder and hearing (pone.0042292), Intermittent noise stress in a coastal marine fish (pone.0139157, not a sensory trait lead).
 - Already on main, skipped: Betta splendens, Dicentrarchus labrax, Tiliqua rugosa, Xiphophorus hellerii, Euxesta eluta, Epinephelus awoara, Amblyomma americanum ticks (PLoS ONE 14: e0221659, in audit/corrected), Electrogena lateralis, Canis familiaris magnet (peerj.6117), Sminthopsis, walleye (Keyler 2026, still unfiled in evidence).
 
 ## Owner questions
