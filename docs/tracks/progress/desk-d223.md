@@ -22,11 +22,12 @@ Scope: animal sensory-trait records from open full text (PLOS ONE and PLOS NTDs 
 - Rheophilic fish visual cues (minnow and trout, PLoS ONE 18(3): e0281741): two species, key sentences over the limit.
 - Hissing cockroach habituation (PeerJ 13: e19805): learning of tactile response, no sensory-trait value; stickleback flow refuge (PeerJ 5: e3121): key sentence truncated.
 - Carp/eel pulsed-DC paper (PeerJ 12: e17962): previously held out and no V/cm values in the text.
-- Not reached because journals.plos.org returned rate-limit errors for about 10 minutes: Florida manatee boat-noise detection (PLoS ONE 17: e0268513), harp seal vibrissae frequency response (PLoS ONE 8: e0054876), tsetse odour baits (PLoS Negl. Trop. Dis. 4: e0000632), Dastarcus-type EAG already on main. These are not on main by DOI.
+- Florida manatee boat-noise detection (PLoS ONE 17(5): e0268513): detection is estimated from a prior audiogram of captive manatees and field background noise, no new hearing measurement; Results text has no dB thresholds.
+- Not reached because journals.plos.org returned rate-limit errors for about 10 minutes: harp seal vibrissae frequency response (PLoS ONE 8: e0054876) and tsetse odour baits (PLoS Negl. Trop. Dis. 4: e0000632). Neither is on main by DOI.
 - Already on main by species or DOI: Trabala vishnou gigantina EAG (PeerJ 13: e20124), Electrogena lateralis, octopus plumes, Lymnaea, Culex, many carp, catfish and cichlid hearing papers.
 
 ## Owner questions
 - Gnorimus nobilis: is the publisher page without a licence sentence plus Crossref CC BY 4.0 (vor) enough, as the audit licence rule now says? Records are filed on that basis.
-- Several PLOS papers have Crossref licence content-version "unspecified" (Diaprepes, Triatoma, Nesidiocoris-style older items) while the page states "Creative Commons Attribution License"; filed as CC BY on the page statement.
+- Several PLOS papers have Crossref licence content-version "unspecified" (Diaprepes, Triatoma, Nesidiocoris, Anopheles, Spheniscus, Chiloscyllium) while the page states "Creative Commons Attribution License"; filed as CC BY on the page statement.
 - Anopheles gambiae colony origin and strain are not stated in the parts read; say if a mosquito lab strain should be flagged differently.
 - Chiloscyllium punctatum electric value is the lowest tested intensity (0.4 uV/cm), not a threshold floor; stated in conditions.
