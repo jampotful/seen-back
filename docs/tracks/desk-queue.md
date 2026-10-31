@@ -242,6 +242,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d184 8 / 0 / 0 (doradid catfish hearing, Silurus glanis and Cyprinus carpio temperature effect; two penguin repeats dropped)
 - d185 9 / 0 / 0 (spookfish eyes, Astyanax mexicanus non-visual light responses, Rattus norvegicus airflow turning)
 - d186 7 / 0 / 0 (Xenopus laevis tadpole magnetic response, mole-rat burrow orientation, Salamandra salamandra larval vision)
+- d187 7 / 0 / 0 (Astyanax mexicanus cave-morph light/dark activity, Trachemys scripta elegans ABR, Halichoerus grypus underwater audiogram, Alytes obstetricans vibration)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
