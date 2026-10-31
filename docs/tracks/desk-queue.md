@@ -260,6 +260,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d202 1 / 0 / 0 (Kogia breviceps hearing, Houser 2022)
 - d203 7 / 0 / 0 (Eucryptorrhynchus x4, Cacopsylla chinensis x2, Asiophrida polarization; one repeat dropped)
 - d204 4 / 0 / 0 (Sebastes schlegelii hearing, Dendrobaena veneta CO2 x2, Anoplophora glabripennis EAG)
+- d205 4 / 0 / 0 (Tiliqua adelaidensis scent, Echinotriton chinhaiensis larvae x3; 2 Dendrobaena repeats of d204 dropped)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
