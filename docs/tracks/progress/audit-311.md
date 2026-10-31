@@ -13,3 +13,4 @@ This report is model output and carries no authority.
 - Lines 10, 11 (Anopheles): colony origin printed in Methods (Wageningen colony from Suakoko, Liberia, 1987); record says not stated; treatment order randomised (changed every five mosquitoes). Error each.
 - Line 14 (Spheniscus): kin and non-kin donors were both unfamiliar (r = 0.125 to 0.5); record's "preference is for unfamiliar odour" misstates the design; all but one bird took the kin test first. Error.
 - Lines 12, 13: PLOS pages rate-limited; pmc pages reCAPTCHA / permission timeout. Pending.
+- Line 12 (Chiloscyllium): PLOS page opened; sentence ends "(Fig. 3I)." which the quote drops unmarked; field strength calculated from a dipole equation, captive-bred eggs, habituation and graded response durations omitted. Error.
