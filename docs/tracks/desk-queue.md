@@ -293,6 +293,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d235 5 / 0 / 0 (Metellina segmentata, Hydrophis major, Spodoptera frugiperda, Lycorma delicatula, Procambarus clarkii)
 - d236 8 / 0 / 0 (Cyclopterus lumpus x2, Matsumurasca onukii x2, Deilephila elpenor, Macroglossum stellatarum, Cymodoce japonica x2)
 - d237 4 / 0 / 0 (Poecilia parae x3, Gasterosteus aculeatus)
+- d238 6 / 0 / 0 (Agalychnis callidryas, Xenopus laevis, Apis mellifera x2, Gryllus bimaculatus x2)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
