@@ -275,6 +275,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d217 12 / 0 / 0 (Blattella germanica, Drosophila suzukii, Cyprinus carpio magnetic, Larimichthys crocea, Hyphantria cunea, Triatoma rubida x2, Cimex lectularius, Lobesia botrana, Dastarcus helophoroides, Eptesicus fuscus magnetic, Sclomina erinacea)
 - d218 3 / 0 / 0 (Neophoca cinerea hearing, Astyanax mexicanus chemical, Anas platyrhynchos touch; Equus caballus hearing dropped as review-sourced)
 - d219 4 / 0 / 0 (Lymantria xylina x2, Culex tarsalis, Culex quinquefasciatus; Odocoileus virginianus dropped as a repeat of main)
+- d220 3 / 0 / 0 (Trichogramma japonicum, Orius maxidentex, Papilio polytes; Trialeurodes vaporariorum held out as unchecked)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
