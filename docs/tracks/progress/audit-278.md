@@ -1,0 +1,138 @@
+# audit-278: desk-d194 (8 evidence records, no search records, no wanted lines)
+
+Audited 31 October 2026 from the desk-d194 files present untracked in the worktree (docs/tracks/progress/desk-d194.md and 8 evidence lines in docs/views/evidence/desk-d194.jsonl; neither committed here, neither edited). `tools/senses/check.py` on the evidence file: 8 records, 0 problems. Quote lengths (`len(q.split())`), lines 1 to 8: 21, 18, 15, 30, 25, 15, 19, 29; all within 40. No searched or wanted file, so all eight records were judged. Rules applied: oa-audit.md "Scientific context and counting (29 October 2026)", oa-read.md (grade and `partial`), BRIEF quote rules, the publisher-copy licence rule and the name rule, in the form of audits 270 to 277. Duplicates checked with git grep on origin/main (2f46ef14) under docs/views/evidence, docs/views/audit (corrected, ALL.jsonl and unit audit files), docs/views/searched and docs/views/wanted for Austruca, "Uca lactea", fiddler, Carcinus, "shore crab", Lycorma, lanternfl, Schizothorax, Schizopygopsis, Sebastiscus, rockfish, "Canis familiaris", "Canis lupus familiaris", staircase, the first and last authors (Joo, Kasiouras, Faal, Cooperband, Qi, Guérineau/Guerineau) and all six DOIs. 7 WebSearch and 17 WebFetch calls used.
+
+Sources opened: api.crossref.org/works/ 10.3390/BIOLOGY14080962, 10.3390/BIOLOGY13110851, 10.3390/INSECTS15030162, 10.3390/FISHES11040200, 10.3390/ANI14111701, 10.3390/VETSCI11020067 (all answered in uppercase); the record URLs www.mdpi.com/2079-7737/14/8/962, /2079-7737/13/11/851, /2075-4450/15/3/162, /2410-3888/11/4/200, /2076-2615/14/11/1701 (two passes), /2306-7381/11/2/67 (one pass each otherwise); Catalog of Fishes (researcharchive.calacademy.org) species entry spid=42370, reference 15036 and genus 1470; obis.org taxon 282738 and 1018667; fishbase.se summary 14462; species-bioatlas.bioportal.hr species 2363681 (GBIF Backbone); catalogueoflife.org taxon 7DDQH. All were returned by my WebSearches or are record or Crossref URLs. Nothing was refused. No library proxy, ResearchGate, academia.edu, Sci-Hub or LibGen page was opened. WebFetch returns model summaries, so quotes were checked as MATCH/MISMATCH; points marked "(tool summary)" were not returned verbatim. No paper text is committed beyond single sentences and fragments quoted for verification.
+
+## Bibliographic and licence
+
+- Joo et al. 2025 (line 1), fresh Crossref: Soobin Joo, Jaemin Cho, Taewon Kim; title as recorded; Biology 14, issue 8, article 962; issued and published-online 2025-07-31; CC BY 4.0 (vor); relation empty; no update-to. As recorded. Page metadata CC BY 3.0 with MDPI's CC BY reuse sentence. Met.
+- Kasiouras et al. 2024 (line 2): Eleftherios Kasiouras, Peter C. Hubbard, Albin Gräns, Lynne U. Sneddon; title as recorded; Biology 13, issue 11, article 851; issued 2024-10-22; CC BY 4.0 (vor); relation empty; no update-to. As recorded. Page metadata CC BY 3.0, no licence sentence in the body returned (tool summary). Publisher's own free full text; met, as in audits 270 and 277.
+- Faal and Cooperband 2024 (line 3): Hajar Faal, Miriam F. Cooperband; title as recorded; Insects 15, issue 3, article 162; issued 2024-02-28; CC BY 4.0 (vor); relation empty; no update-to. As recorded. Page footer: "distributed under the terms and conditions of the Creative Commons Attribution (CC BY) license" linking CC BY 4.0; metadata CC BY 3.0. Met.
+- Wang et al. 2026 (line 4): nine authors, Zhe Wang to Xiaogang Wang, in the recorded order; title as recorded; Fishes 11, issue 4, article 200; issued and published-online 2026-03-26, journal issue online 2026-04; CC BY 4.0 (vor, from 2026-03-26); relation empty; no update-to. As recorded. Page metadata CC BY 3.0. Met.
+- Qi et al. 2024 (lines 5 to 7): ten authors, Yulu Qi to Xiumei Zhang, in the recorded order (Näslund fifth); title as recorded; Animals 14, issue 11, article 1701; issued 2024-06-05; CC BY 4.0 (vor); relation empty; no update-to. As recorded. Page metadata CC BY 3.0. Met.
+- Guérineau et al. 2024 (line 8): Cécile Guérineau, Anna Broseghini, Miina Lõoke, Giulio Dehesh, Paolo Mongillo, Lieta Marinelli; title as recorded; Veterinary Sciences 11, issue 2, article 67; issued 2024-02-02; CC BY 4.0 (vor); relation empty; no update-to. As recorded. Page metadata CC BY 3.0. Met.
+
+Bibliographic faults 0; licence faults 0.
+
+## Names
+
+- Austruca lactea (line 1): gbif-names.tsv "Austruca lactea EXACT ACCEPTED" (9399267). Catalogue of Life 7DDQH lists "Uca (Austruca) lactea (De Haan, 1835)" as "Synonym Species", i.e. the subgeneric combination is the synonym. Accepted.
+- Carcinus maenas (line 2): gbif-names.tsv EXACT ACCEPTED (5178595). Accepted.
+- Lycorma delicatula (line 3): gbif-names.tsv EXACT ACCEPTED (5157899). Accepted.
+- Schizothorax kozlovi (line 4): the unit's FishBase check is weak, as the progress note admits; fishbase.se 14462 again gave "Schizothorax kozlovi Nikolskii, 1903", Cyprinidae > Schizothoracinae, with no validity line, and Catalog of Fishes returned only the genus ("Valid as Schizothorax Heckel 1838") and the original description reference ("Schizothorax kozlovi sp. n."), no species status. OBIS 1018667 gives the name and authority with no status. The GBIF Backbone Taxonomy page served by species-bioatlas.bioportal.hr (key 2363681) gives "Schizothorax kozlovi Nikolskii, 1903", "Accepted". Accepted on GBIF; Catalog of Fishes species status not reached.
+- Sebastiscus marmoratus (lines 5 to 7): Catalog of Fishes spid=42370: "Current status: Valid as Sebastiscus marmoratus (Cuvier 1829). Scorpaenidae: Sebastinae." OBIS 282738 places it in Sebastidae, Perciformes, as the record does. Accepted. Uncounted: the family differs between authorities (Catalog of Fishes Scorpaenidae: Sebastinae; WoRMS/OBIS Sebastidae); the record's Sebastidae follows OBIS.
+- Canis familiaris (line 8): the paper prints no Latin name in its body ("dog", "dogs"; tool summary); "Canis familiaris" appears only in reference titles. The unit brief (/tmp/desk/unit_brief.md) says nothing about the dog; its name rule is about a genus filed under a synonym genus, and Canis is accepted. gbif-names.tsv on main gives "Canis familiaris EXACT SYNONYM Canis lupus" (5219200) and "Canis lupus familiaris EXACT ACCEPTED" (6164210). On main the dog stands as Canis lupus familiaris in views/dog.json and in about 170 evidence and corrected rows across 29 traits, against 18 rows as Canis familiaris (acuity_cpd, cff_hz, colour_vision, lambda_max_nm); tools/eval/pets.py reads both names, and tools/species/EVERYDAY.md records the two names splitting the dog in the species list. The note's "named Canis familiaris as elsewhere in the log" is true of the minority form only. Not counted (the brief's rule is at genus rank, main holds the form, and the app reads both), but the record should be filed as Canis lupus familiaris, rank subspecies (owner question 1).
+
+Name faults 0 (one uncounted).
+
+## Duplicates
+
+- Austruca and Uca lactea on main: Austruca lactea acuity_cpd (Feller et al. 2021, 10.1016/j.asd.2020.101002); Uca lactea annulipes acuity_cpd, interommatidial_deg and fovea (Zeil and Al-Mutairi 1996). No vibration row; Joo's only main hit is an unrelated harvest-15 plant record (Cirsium setidens). Not a repeat.
+- Carcinus maenas on main: polarization (Venables et al. 2022), motion (Drerup et al. 2025; Horridge and Sandeman 1964), eye_movement (Horridge and Sandeman 1964), acuity_cpd (Feller et al. 2021). No touch, nociception or chemical row; Kasiouras absent. Not a repeat.
+- Lycorma delicatula on main: sweep-13 spectral_range_nm (Jang et al. 2013, a phototaxis preference) and a sweep-13 genus null search record for acuity_cpd, cff_hz, corner_hz, interommatidial_deg and spectral_range_nm. Cooperband's only hit is a harvest-c7 wanted line for Derstine et al. 2020 (10.1093/ee/nvaa080, host-plant volatiles), a different paper. No EAG or sense_chemical row. Not a repeat and not covered by the null record's traits.
+- Schizothorax, Schizopygopsis, Sebastiscus, rockfish: no hits anywhere. The "Qi Y" hits are plant wanted lines and one plant corrected row, unrelated.
+- Canis on main: no sense_hearing row under either dog name. Guérineau's only hits are the cat-dog unit's Lõoke et al. 2020 motion rows (10.1093/cz/zoaa044), a different paper and trait. The genus null record for Canis covers depth_cue and fovea only. The six DOIs are absent from main. Not a repeat.
+
+Duplicates 0.
+
+## Per-paper findings
+
+### Joo et al. 2025 (line 1)
+
+Quote MATCH (Abstract), whole sentence; the sentence before it: "At 120 Hz, ATP and lactate levels in the leg muscle did not differ significantly between the exposure and control groups." Results (verbatim chunks): 120 Hz lactate "significantly lower than that of the control group" "U = 9, n1 = 7, n2 = 8, p = 0.043"; 120 Hz ATP "(U = 21, n1 = 8, n2 = 7, p = 0.209"; 250 Hz lactate "significantly higher than that of the control group" "(U = 15, n1, = n2 = 8, p = 0.043"; ATP "exposed to 240 Hz vibration was significantly lower than that of the controls" "(independent t-test; t = 2.41, df = 14, p = 0.015". The Results' 120 Hz lactate drop and "240 Hz" typo are as the note says. Methods: "Lactate and ATP concentrations were measured in the soft tissue of the walking legs."; "N = 8 per frequency group"; adult males hand-collected near Yeongjong Bridge, Korea, August and September 2024 (tool summary); "Vibrations at either 120 Hz or 250 Hz were then generated using a function generator for a duration of 30 min."; "The vibration amplitude was maintained at 107.22 ± 0.62 dB re 1 µm/s2 (mean ± standard deviation) across all trials." The abstract gives about 100 dB (tool summary).
+
+Line 1. Counted (scientific context, fixable). The record carries neither the stimulus level (107.22 dB re 1 µm/s², Methods; about 100 dB in the abstract) nor the 30 min exposure, so the practical scale of a vibration response cannot be read from it; audit 242 counted the same omission (stimulus amplitude not carried) for a sense_vibration record. The 120 Hz conflict is carried unambiguously in the note and is not counted separately. Uncounted: the note's "which shows the crab registers it" goes beyond the paper, which measured tissue metabolites and gene expression, not a sensory response; say "an exposure response in leg tissue" instead. Add adult males and the collection site.
+
+### Kasiouras et al. 2024 (line 2)
+
+Quote MATCH (Abstract), whole sentence. Method (tool summary and chunks): in vivo extracellular recordings "from different regions of the brain ganglion and the circumesophageal connective ganglion"; mechanical stimuli "von Frey hairs of 1.0 g, 0.16 g, 0.04 g, and 0.008 g."; n = 20 crabs, "Not all areas were stimulated in the same animal due to difficulties in maintaining the animals for prolonged periods."; crabs immobilised with neuromuscular blockers, "Anesthetics were not used". Section 3.4: "However, there was no response to mechanical stimuli in these areas." Discussion: "The lack of response in our study might be due to these areas having higher mechanical thresholds" "than those used in the present study."; "Alternatively, they may be mechanically insensitive and perform a largely chemosensory function."; "in some animals, acetic acid was introduced before mechanical stimuli, potentially damaging the receptors" "and rendering them unresponsive to further stimuli." (chunks).
+
+Line 2. Counted (scientific context, fixable). The value states a null for touch on the antennae and antennules, but the record omits what limits it: the stimuli went only up to a 1.0 g von Frey hair, the response was neural activity recorded in the brain and circumesophageal ganglia (the method field says only "response amplitude and duration"), and in some animals acetic acid was applied first and may have damaged the receptors, which the authors give as an alternative explanation. These change the applicability and causal reading of the null (insensitive organs versus a threshold above 1 g or receptor damage). Uncounted: "Table 1 reports 20 crabs" should read "20 crabs in total; not all areas stimulated in each crab".
+
+### Faal and Cooperband 2024 (line 3)
+
+Quote MATCH (Section 3.1.2, Dose–Response), whole sentence. The sentence before: "Dose responses for a subset of compounds by each stage and sex are shown in Figure 4 and Table 1." Six compounds in the dose-response test: 1-heptanol, sulcatone, benzyl acetate, 2-ethyl-hexanol, 2-nonanone and nonanal (tool summary). The Figure 4 caption: "The lowest dose all resulted in zero amplitudes"; the next sentence of the Results begins "EAG amplitudes in response to 5 to 50 or 100 ng chemical doses ranged from 0 to 13.6 mV in fourth-instar males," (chunk). Methods: "Antennal responses were recorded from male and female fourth instars (n = 4) and male and female adults (n = 5)."; each test followed by a methyl salicylate control "to ensure the antenna was still alive." The Methods list doses from 0.05 ng, Figure 4 from 0.5 ng (tool summary).
+
+Line 3. Counted (scientific context, fixable). The value reports only the null at 0.5 ng; the next sentence and Figure 4 show responses from 5 ng upward, so the finding is a detection limit between 0.5 and 5 ng for these six compounds, which the record does not say. The conditions' "the sentence does not name the compound" leaves it unclear that the null held for every one of the six compounds tested; the compounds are named in the paper. Uncounted: the Methods' 0.05 ng dose versus Figure 4's 0.5 ng lowest dose should be noted.
+
+### Wang et al. 2026 (line 4)
+
+Quote MATCH (Abstract), whole sentence (30 tokens). Results: hydrostatic "For Scht. kozlovi, hydrostatic conditions yielded the following hierarchy: green (27.8 ± 0.5%)" and flow "the preference pattern was green (30.4 ± 0.3%) > white (26.9 ± 1.3%)" (chunks); green "dominant by a significant margin" at 30 min in still water, green and white "co-dominant" at 30 min under flow (tool summary). No species-level p-values in the text; Methods name one-way ANOVA with nonparametric tests (tool summary). "calibrated to 500 ± 20 lux using a UNI-T UT381 photometer."; "Two hydraulic conditions were tested: hydrostatic (0 m/s) and weakly flowing water (0.2 m/s)."; 30 fish per trial, three repeats; adult fish held "in hatchery flumes with river water" (fragment); total fish and size not in the text (Table 1). Intensity test: "For Scht. kozlovi, hydrostatic trials showed medium-green > low-yellow."
+
+Line 4. Confirm. Green leads in both flow conditions, so the authors' "minimal flow impact" stands as their summary, and the value follows it. Uncounted: add to conditions that green and white were co-dominant at 30 min under flow (30.4 vs 26.9%), that the text gives no species-level statistics, and that colours were matched in lux, a photometric unit weighted to human vision; replace "Fish counts per species are not stated" with "30 fish per trial, three repeats; total and origin not stated beyond adult fish held in hatchery flumes".
+
+### Qi et al. 2024 (lines 5 to 7)
+
+Line 5 quote MATCH (Section 3.2.1), whole sentence. Line 6 quote MATCH, but the sentence continues: "No significant color preference was detected for hatchery-reared fish" "(all contrasts with p > 0.066); the largest difference was found" "between red and green areas." (verbatim chunks). The next sentence says "the majority of the hatchery-reared fish spent more than 25% in the red area." (fragment). Section 3.2.1 also reports "significant interaction effects between light color and origin." (ORIG * COL p = 0.033; the paper prints the same χ2 for three terms, tool summary). Abstract: "hatchery-reared individuals showed a similar but weaker response." Line 7 quote MATCH (Abstract), whole sentence; the Conclusions add "but not in red or green ambient light." Section 3.2.2 (colour versus dark, origins pooled): "Hence, the paired contrasts focused on the main effect of treatment (fish from different origins pooled)."; treatment by origin dropped (p = 0.556), "there was no effect of origin" "(χ2 = 0.604, p = 0.437)."; "It is also clear that dark areas are generally preferred over blue-light areas."; yellow: "The same is likely the case when paired with yellow-light areas, but the preference for dark appears slightly lower in this case," "and for hatchery fish, the confidence interval slightly" "overlaps with the 50% line," "making the conclusion uncertain." Blue vs red t = 3.36, p = 0.007; yellow vs red t = −2.38, p = 0.092 (tool summary). Methods: "Ten fish were randomly selected from both wild and hatchery-reared groups"; "Four light colors were paired with darkness and arranged" "across the four regions, with the light of the same color placed diagonally."; "The light intensity in each compartment was maintained consistently at 50 lux."; total lengths about 10.2 and 10.4 cm (tool summary).
+
+Line 5. Confirm. The pairwise result is for wild fish as the value says, and the arena design in conditions matches the Methods. Uncounted: add 50 lux per compartment and the colour by origin interaction (p = 0.033).
+
+Line 6. Counted (quote form, fixable). Unmarked cut: the quote ends at the semicolon of a longer sentence and is filed as whole. The whole sentence is 25 tokens. The abstract's "similar but weaker" conflict is carried in the note, so the value is not counted separately. Uncounted: add the next sentence (most hatchery fish spent more than 25% in the red area; the authors say a larger sample might detect a preference).
+
+Line 7. Counted (scientific context, fixable). The value says wild and hatchery-reared juveniles "both" showed negative phototaxis in yellow and blue. The test behind it pooled origins (no origin effect, p = 0.437), so it did not show the effect in each group separately, and only the blue result is called clear: for yellow the authors call the conclusion "uncertain", with the hatchery confidence interval overlapping 50%. The record carries neither the pooling nor the yellow uncertainty, and its conditions describe the preference test rather than the colour-versus-dark analysis.
+
+### Guérineau et al. 2024 (line 8)
+
+Quote MATCH (Section 3, Results), whole sentence; the abstract gives "14.0 ± 4.5 dB SPL at 4.0 kHz" (fragment), as the note says; Table 3 averages 14.5 (tool summary). "The sample consisted of nine pet dogs (six females and three males)"; five dogs per frequency (Table 1). 20 kHz: "the other four succeeded at the minimum intensity sent by our equipment (mean intensity ± SD = −2.8 ± 0.8 dB SPL)." (chunk); the Methods give the minimum as "2 dB SPL at 20.0 kHz." Room "equipped to reduce sound reflection and attenuate outside noise"; ambient noise 17 dB SPL at 0.5 kHz, 4 at 4.0 kHz and 2 at 20.0 kHz, and "the ambient noise in our study had a lower intensity than the thresholds found at both 4 and 20 kHz." (tool summary and chunk). Comparison: "Only the thresholds we obtained at 0.5 kHz and 4.0 kHz are directly comparable with the only other study employing a behavioral approach [26]."; Table 2 gives that study's 20 dB at 0.5 kHz and 4 dB at 4 kHz, so this paper's 4 kHz value is about 11 dB higher (tool summary).
+
+Line 8. Confirm. The value matches the Results sentence; the 20 kHz floor effect is stated unambiguously in the note ("the other four succeeded at the lowest intensity the equipment could send"). Uncounted: add to conditions that ambient noise at 0.5 kHz was 17 dB SPL, about 2.5 dB under the threshold (the authors claim noise below threshold only at 4 and 20 kHz), that the 4 kHz threshold is about 11 dB above the earlier behavioural study's, and that the Methods' 2 dB SPL floor and the Results' −2.8 dB SPL disagree. File the record as Canis lupus familiaris, rank subspecies (Names, owner question 1).
+
+## Verdicts
+
+| line | taxon / value | verdict | fields | reason |
+|---|---|---|---|---|
+| 1 | Austruca lactea, 250 Hz: ATP lower, lactate higher | correct | conditions | Quote MATCH; stimulus level (107.22 dB re 1 µm/s²) and 30 min exposure not carried (audit 242 precedent); 120 Hz conflict carried in note |
+| 2 | Carcinus maenas, antennae and antennules no response to mechanical stimuli | correct | value, method, conditions | Quote MATCH; null limited by 1.0 g maximum von Frey hair, neural recording, and acid-first order that may have damaged receptors (authors' alternatives) |
+| 3 | Lycorma delicatula, no EAG response at 0.5 ng | correct | value, conditions | Quote MATCH; responses from 5 ng omitted (detection limit 0.5 to 5 ng); six named compounds described as unnamed |
+| 4 | Schizothorax kozlovi, green preferred, minimal flow effect | confirm | (conditions; uncounted) | Quote MATCH; green leads in both flows; white co-dominant at 30 min under flow and lux matching to add |
+| 5 | Sebastiscus marmoratus, wild fish prefer red | confirm | (conditions; uncounted) | Quote MATCH; design matches Methods |
+| 6 | Sebastiscus marmoratus, hatchery fish no significant preference | requote | quote | Unmarked cut at the semicolon of a 25-token sentence; abstract conflict carried in note |
+| 7 | Sebastiscus marmoratus, negative phototaxis in yellow and blue | correct | value, conditions | Quote MATCH; test pooled origins, so "both" is not shown per group; yellow result called uncertain by the authors |
+| 8 | Canis familiaris, 19.5 / 14.5 / 8.5 dB SPL | confirm | (taxon, conditions; uncounted) | Quote MATCH; floor effect in note; taxon should be Canis lupus familiaris (uncounted, owner question 1) |
+
+Evidence errors: 5 of 8 (62.5%): scientific-context faults 4 (lines 1, 2, 3, 7); quote-form 1 (line 6); name 0 (one uncounted); duplicates 0; licence 0; bibliographic 0; abstract-access grading 0. Unfixable records: none.
+
+Pooled with audits 172 to 277: 245 of 583 evidence records (42.0%; audit 275's 227 of 558, plus audit 276's 9 of 10 and audit 277's 4 of 7, which both pooled from audit 275 because they ran concurrently, plus 5 of 8 here). No search records, so nothing to pool with audits 83 to 90.
+
+## Replacement text
+
+Counted (line 1):
+- `conditions`: "laboratory exposure of adult males (hand-collected, upper intertidal near Yeongjong Bridge, Korea, August and September 2024) to 120 or 250 Hz substrate-borne vibration for 30 min at 107.22 ± 0.62 dB re 1 µm/s² (Methods; the abstract says about 100 dB); 8 crabs per frequency group (Methods); ATP and lactate in walking-leg soft tissue; 250 Hz ATP t = 2.41, df = 14, p = 0.015, lactate Mann-Whitney U = 15, n = 8 and 8, p = 0.043"
+- `note`: replace "A stress physiology response to vibration, which shows the crab registers it." with "A metabolic exposure response in leg tissue; the paper does not measure a sensory response."
+
+Counted (line 2):
+- `value`: "no neural response to mechanical stimuli (von Frey hairs up to 1.0 g) from the antennae and antennules, while acetic acid triggered responses in all areas; the authors say the thresholds may exceed 1.0 g or receptors may have been damaged where acid was applied first"
+- `method`: "in vivo extracellular recording from the brain ganglion and circumesophageal connective ganglion of immobilised (neuromuscular block, no anaesthetic) crabs; von Frey hairs of 1.0, 0.16, 0.04 and 0.008 g and acetic acid applied to eyes, legs, claws, antennae and antennules"
+- `conditions`: "20 crabs in total; not all areas stimulated in each crab; in some animals acetic acid was applied before mechanical stimuli (Discussion)"
+
+Counted (line 3):
+- `value`: "no antennal response at 0.5 ng for any sex or stage; responses appeared from 5 ng (EAG amplitudes 0 to 13.6 mV at 5 to 50 or 100 ng in fourth-instar males), so the detection limit lies between 0.5 and 5 ng"
+- `conditions`: "dose-response experiment with six compounds (1-heptanol, sulcatone, benzyl acetate, 2-ethyl-hexanol, 2-nonanone, nonanal); the null held for all six (Figure 4 caption: the lowest dose all resulted in zero amplitudes); n = 4 fourth instars and n = 5 adults per sex; methyl salicylate control after each test; the Methods list 0.05 ng among doses, Figure 4 starts at 0.5 ng"
+
+Counted (line 6):
+- `quote`: "No significant color preference was detected for hatchery-reared fish (all contrasts with p > 0.066); the largest difference was found between red and green areas." (whole sentence, Section 3.2.1, 25 tokens)
+- `note`: add "The next sentence says most hatchery-reared fish spent more than 25% of the time in the red area; colour by origin interaction p = 0.033."
+
+Counted (line 7):
+- `value`: "dark preferred over blue light (clear) and probably over yellow light (the authors call it uncertain; the hatchery confidence interval overlaps 50%); not over red or green light; wild and hatchery fish pooled, no origin effect (p = 0.437)"
+- `conditions`: "colour versus dark test (each colour paired with a dark area, 50 lux), linear mixed model on time in the dark area, origins pooled because treatment by origin had no effect (p = 0.556); 10 wild and 10 hatchery-reared juveniles, 1 h trials; blue vs red t = 3.36, p = 0.007; yellow vs red t = -2.38, p = 0.092"
+- `where`: "Abstract; the supporting test is Results 3.2.2"
+
+Uncounted:
+- Line 4 `conditions`: add "under flow green and white were co-dominant at 30 min (30.4 ± 0.3% and 26.9 ± 1.3%); no species-level statistics in the text; colours matched at 500 lux, a photometric unit"; `note`: replace "Fish counts per species are not stated in the Methods text read" with "30 fish per trial, three repeats; adult fish held in hatchery flumes; total and origin not stated".
+- Line 5 `conditions`: add "50 lux per compartment; colour by origin interaction p = 0.033".
+- Line 8 `taxon`: "Canis lupus familiaris", `rank`: "subspecies" (if the owner agrees); `conditions`: add "ambient noise 17 dB SPL at 0.5 kHz, 4 at 4 kHz, 2 at 20 kHz (the authors claim noise below threshold only at 4 and 20 kHz); the 4 kHz threshold is about 11 dB above the earlier behavioural study's (Table 2); the Methods give a 2 dB SPL floor at 20 kHz, the Results -2.8 dB SPL".
+- Lines 5 to 7 `family`: Sebastidae follows WoRMS/OBIS; Catalog of Fishes gives Scorpaenidae: Sebastinae.
+
+## Owner questions
+
+1. Domestic dog: gbif-names.tsv marks "Canis familiaris" a synonym and "Canis lupus familiaris" accepted; views/dog.json and about 170 main rows use the latter, 18 rows the former. Should desk units file dogs as Canis lupus familiaris (rank subspecies) only, and should the 18 main rows be moved? Line 8 is left uncounted pending this.
+2. Schizothorax kozlovi: Catalog of Fishes' species entry was not reached and FishBase shows no validity line; the GBIF Backbone (via a GBIF-hosted portal page) says "Accepted". Is GBIF Backbone enough for Schizothoracinae, or should the desk wait for a Catalog of Fishes species line?
+3. Joo et al. 2025 is filed under sense_vibration though it measures leg-tissue metabolites, not a sensory response. Should exposure-physiology results go under the sense trait, or be held?
+
+Progress note: accurate on sources, DOIs, licences and refusals. It says the 250 Hz abstract sentence is the only Joo sentence filed, which is true; it does not mention that the Kasiouras null, the Faal null and the yellow phototaxis rest on limits the records omit, and its "hatchery-reared null (abstract says weaker response, Results says none)" quotes a clause of the Results sentence, not the whole sentence.
+
+Verdict: 5 errors in 8 (62.5%), above the 5% bar; pooled 42.0%. Error lines: 1, 2, 3, 6, 7. No unfixable records; lines 1, 2, 3, 6 and 7 can merge with the counted text, and lines 4, 5 and 8 as they stand or with the uncounted fixes.
+
+This report is model output and carries no authority.
