@@ -251,6 +251,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d193 7 / 0 / 0 (Eretmochelys imbricata and Chelonia mydas balloon colour choice, Procambarus clarkii and Cherax quadricarinatus, Arctocephalus forsteri audiogram, Siganus guttatus, Bactrocera dorsalis)
 - d194 8 / 0 / 0 (Austruca lactea vibration exposure, Carcinus maenas touch null, Lycorma delicatula EAG null, Schizothorax kozlovi and Sebastiscus marmoratus colour choice, Canis lupus familiaris audiogram)
 - d195 6 / 0 / 0 (Coloeus monedula colour discrimination, Astyanax mexicanus hearing and ERG null, Culex territans CO2 null)
+- d196 1 / 0 / 0 (Tropilaelaps mercedesae thermal gradient choice)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
