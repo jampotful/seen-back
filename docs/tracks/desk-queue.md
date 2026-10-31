@@ -245,6 +245,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d187 7 / 0 / 0 (Astyanax mexicanus cave-morph light/dark activity, Trachemys scripta elegans ABR, Halichoerus grypus underwater audiogram, Alytes obstetricans vibration)
 - d188 7 / 0 / 0 (Nannospalax ehrenbergi burrow-orientation null, Branta canadensis and Molothrus ater light avoidance, Leptophobia aripa colour choice)
 - d189 7 / 0 / 0 (Protaetia brevitarsis, Spodoptera frugiperda and Encarsia formosa colour choice)
+- d190 7 / 0 / 0 (Acrocephalus scirpaceus magnetic alignment, Eptesicus fuscus ageing hearing null, Grammostola pulchra leg vibration)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
