@@ -9,7 +9,7 @@
 - [Source-read receipt](../../views/sources/melotte-2018.jsonl): records the extent of reading and the inaccessible supplement.
 - [Representation handoff](../../views/drafts/melotte-2018.md): interpretable contrasts and limits of the present fish/sound interface.
 
-The existing schema defines `sense_hearing` as a frequency range with best-frequency detail in `note`. Each record therefore uses `[50, highest tabulated responding frequency]`, units Hz, with explicit tested-response rather than universal hearing-limit semantics. The complete curve is preserved in the existing `note` field and in the supporting JSON; an importer that ignores extra data files still retains the science. No nested values, new grade, or unrecognised evidence field is introduced. Direct tabulated response endpoints are not a converted or invented estimate. Lowest-mean sample points are labelled descriptive summaries of the tested grid, not fitted tuning peaks.
+The existing schema defines `sense_hearing` as a frequency range with best-frequency detail in `note`. Each record therefore uses `[50, highest tabulated responding frequency]`, units Hz, with explicit tested-response rather than universal hearing-limit semantics. The complete curve is preserved in the existing `note` field and in the supporting JSON; an importer that ignores extra data files still retains the science. No nested values or new grade is introduced; the compatibility follow-up below adds PR #49's recognised `evidence_kind` field. Direct tabulated response endpoints are not a converted or invented estimate. Lowest-mean sample points are labelled descriptive summaries of the tested grid, not fitted tuning peaks.
 
 ## Source access and independent numerical checks
 
@@ -80,3 +80,74 @@ Completed: two-source Table 1 tuple equality, all eight sample-size/length assoc
 The desk should audit all eight records under `oa-audit.md`'s scientific-context rule and the evidence portions of `desk-audit.md`, with explicit decisions on records 1 and 4's historic taxon concepts. Review the whole curve, not only its endpoint quote. Confirm the sample-count changes, the omitted 4000 Hz row, primary AEP scope, and the inability to inspect the supplement. Record verdicts in a new desk-assigned audit; do not alter audit 290's historic count. Integrate only after that independent disposition, retain g/identity restrictions or keep those two rows held, and record the unit in the desk-owned yield log. A PR merge is not itself a scientific audit.
 
 After evidence acceptance, any hearing row or sound weighting needs the normal species/view review and an explicit invented label for the visual translation. The current fish spec and gap mappings do not contain a hearing row, so this recovery alone makes no claim of closed published gap-table cells or a changed live representation.
+
+## PR #49 compatibility reconciliation (31 October 2026)
+
+All eight candidate records now carry `evidence_kind: transduction`, using the
+definition in [PR #49](https://github.com/jampotful/seen-back/pull/49). The published
+[Methods, p. 8](https://www.fishmorphandbehavior.org/uploads/8/4/7/1/84711046/m-lotte_et_al-2018-scientific_reports.pdf)
+was reopened for this classification: AEP measures summed stimulus-evoked neural
+activity along auditory pathways, recorded with subdermal electrodes. This is
+the ontology's neural-response category, more specific than its other
+physiological-response category. It establishes neither behavioural detection
+nor a particular molecular transduction mechanism or anatomical generator.
+The existing acoustic-field and taxonomic limitations still govern every claim.
+No repeat numerical extraction, taxonomy investigation or independent scientific
+audit is represented by this compatibility work.
+
+The evidence edit consists of eight field insertions. Removing those insertions
+restores blob `03f1362ceb26f1b4ba0412e00e015ba995856aac` from PR #50 at
+`6c4b7468847c6f5342730ebe70102f5b23243750` byte for byte. Every original value,
+quotation, note, method, condition, proposed grade, partial flag and record order
+is unchanged. The structured 107-threshold companion, source receipt and
+representation handoff are unchanged; so are `desk-d206:3` and historical audits.
+
+The combined check used PR #49 at `7e383d8d3169ac9ad9168d353ef2dac138ac78ff`,
+PR #50 at the revision above, and the compatibility changes described here.
+It found and corrected a consumer interaction in PR #49: the row writer omitted
+conditions/notes and shortened methods/quotes; the compiler retained only the
+first 200 note characters. Both therefore lost the late identity restrictions
+and the full curves. Typed sensory writer inputs now preserve those fields and
+the source locator. Full context can increase request size; no API generation
+was run. The consumer change belongs to PR #49; the evidence and actual-record
+regressions belong to PR #50.
+
+Validation in the combined, connector-fetched snapshot:
+
+```sh
+python3 -I tools/senses/check.py --require-evidence-kind docs/views/evidence/melotte-2018.jsonl
+python3 -I tools/senses/test_melotte_2018.py --require-classification
+python3 -I tools/senses/test_evidence_scope.py
+python3 -I tools/senses/test_quote_limit.py
+python3 -I tools/views/test_gaps.py
+python3 -I tools/views/test_compile.py
+python3 -I tools/views/oa_lint.py docs/views/evidence/melotte-2018.jsonl
+```
+
+Results: strict validation changes from eight missing-kind errors to zero;
+eight actual-record compatibility tests, 15 scope tests, four quote/append tests
+and five gap tests pass; compiler checks report zero failures and numerical lint
+reports eight records with zero faults. The new consumer regression tests failed
+before the serialization fix. Full-corpus `test_rows.py` was not run in this
+scoped snapshot; actual raw/corrected row loading and writer inputs are covered
+by the new tests. The original source-quote verification was not repeated because
+the quotes are byte-identical. No published outputs were regenerated.
+
+**Desk coordination and admission boundary:** review this update together with
+PR #49, then independently audit the eight records under the already requested
+scientific-context process before admitting them. Schema validity, neural
+classification and `partial:false` are not acceptance. The loaders can ingest
+raw unaudited logs; the compiler labels them `not audited` but still selects
+them. Consequently do not merge this candidate log into accepted main or run
+publication generation on the combined test tree before the new desk disposition.
+No accepted audit, queue, yield count, taxonomy alias or live view is changed here.
+
+The two proposed `g` records remain `g` in the evidence; the core gap calculator
+with hearing carry disabled leaves their species cells `i`, rather than treating
+that grade as measured modern-species coverage. No hearing-number carry to other
+species is added. Writer context preservation does not prove generated prose or
+column-specific numerical attribution: existing numeric guards are not a full
+curve interpreter. Any later row or engine mapping needs source review, both
+identity decisions, and explicit separation of neural thresholds from behaviour
+and invented phone/sound translations. The family aggregate is the same
+experiment, not independent corroboration.
