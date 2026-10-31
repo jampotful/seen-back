@@ -248,6 +248,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d190 7 / 0 / 0 (Acrocephalus scirpaceus magnetic alignment, Eptesicus fuscus ageing hearing null, Grammostola pulchra leg vibration)
 - d191 8 / 0 / 0 (Megalopta genalis light-intensity nulls, larval Danio rerio UV avoidance)
 - d192 9 / 0 / 0 (Asiophrida xanthospilota ERG, Exolontha castanea and Anoplophora glabripennis phototaxis, Endebius florensis, Octopus vulgaris visual choice; 1 repeat dropped)
+- d193 7 / 0 / 0 (Eretmochelys imbricata and Chelonia mydas balloon colour choice, Procambarus clarkii and Cherax quadricarinatus, Arctocephalus forsteri audiogram, Siganus guttatus, Bactrocera dorsalis)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
