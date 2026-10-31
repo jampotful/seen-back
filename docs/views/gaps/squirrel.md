@@ -471,7 +471,7 @@ Rows and their traits:
 | 455 | Chaetodipus intermedius (Rock Pocket Mouse) | 23 | 0 | Heteromyidae / Rodentia | i | i | i |
 | 456 | Chaetodipus nelsoni (Nelson's Pocket Mouse) | 23 | 0 | Heteromyidae / Rodentia | i | i | i |
 | 457 | Dendromus melanotis (Grey Climbing Mouse) | 23 | 0 | Nesomyidae / Rodentia | i | i | i |
-| 458 | Fukomys damarensis (Damara Mole Rat) | 23 | 0 | ? / Rodentia | i | i | i |
+| 458 | Fukomys damarensis (Damara Mole Rat) | 23 | 0 | Bathyergidae / Rodentia | i | i | i |
 | 459 | Microtus duodecimcostatus (Mediterranean Pine Vole) | 23 | 0 | Cricetidae / Rodentia | i | i | i |
 | 460 | Thomomys monticolus (Mountain Pocket Gopher) | 23 | 0 | Geomyidae / Rodentia | g | i | i |
 | 461 | Thrichomys laurentius (Rabudo) | 23 | 0 | Echimyidae / Rodentia | i | i | i |
@@ -886,7 +886,7 @@ Rows and their traits:
 | 870 | Echimys chrysurus (White-faced Tree Rat) | 3 | 0 | Echimyidae / Rodentia | i | i | i |
 | 871 | Eoglaucomys fimbriatus (Small Kashmir Flying Squirrel) | 3 | 0 | Sciuridae / Rodentia | i | i | i |
 | 872 | Eothenomys melanogaster (Père David's Vole) | 3 | 0 | Cricetidae / Rodentia | i | i | i |
-| 873 | Fukomys mechowii (Mechow's Molerat) | 3 | 0 | ? / Rodentia | i | i | i |
+| 873 | Fukomys mechowii (Mechow's Molerat) | 3 | 0 | Bathyergidae / Rodentia | i | i | i |
 | 874 | Geomys tropicalis (Tropical Pocket Gopher) | 3 | 0 | Geomyidae / Rodentia | i | i | i |
 | 875 | Gerbilliscus brantsii (Highveld Gerbil) | 3 | 0 | Muridae / Rodentia | i | i | i |
 | 876 | Gerbillus henleyi (Pygmy Gerbil) | 3 | 0 | Muridae / Rodentia | i | i | i |

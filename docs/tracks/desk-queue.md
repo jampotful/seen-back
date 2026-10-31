@@ -269,6 +269,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d211 5 / 0 / 0 (Phoca vitulina vibrissa sensing x5; vibrissae-covered control row dropped)
 - d212 3 / 0 / 0 (Hipposideros pratti Doppler shift compensation, Chrysochloris asiatica ossicle resonance, Lophiobagrus cyclurus hearing)
 - d213 2 / 0 / 0 (Ophiomastix wendtii looming, Brevoortia tyrannus neuromast block; Doryteuthis hearing dropped as a repeat of main)
+- d214 12 / 0 / 0 (Epidalea calamita x2, Eurycea lucifuga x2, Gyrinophilus porphyriticus, Fukomys darlingi, Heterocephalus glaber, Spalacopus cyanus, Fratercula arctica, Loxosceles laeta x3; octopus and Conomurex dropped as repeats)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
