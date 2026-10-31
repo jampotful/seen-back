@@ -279,6 +279,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d221 11 / 0 / 0 (Serangium japonicum, Anomalops katoptron x3, Xenopus laevis, Melipona eburnea, Huia cavitympanum x2, Pieris rapae, Chrysomela populi x2)
 - d222 3 / 0 / 0 (Stygoparnus comalensis, Podarcis lilfordi null, Pimephales promelas)
 - d223 14 / 0 / 0 (Gekko subpalmatus, Diaprepes abbreviatus x2, Triatoma dimidiata, Diaphorina citri, Nesidiocoris tenuis, Phlebotomus perniciosus, Gnorimus nobilis x2, Anopheles gambiae x2, Chiloscyllium punctatum, Anguilla anguilla, Spheniscus humboldti)
+- d224 9 / 0 / 0 (Frankliniella occidentalis x3, Danio rerio larval acuity, Xyleborus affinis, Xyleborus ferrugineus, Fopius arisanus, Aedes albopictus x2)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
