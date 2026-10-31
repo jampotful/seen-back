@@ -254,6 +254,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d196 1 / 0 / 0 (Tropilaelaps mercedesae thermal gradient choice)
 - d197 6 / 0 / 0 (Portunus trituberculatus shelter colour, Bombus terrestris and Aphis gossypii EAG and Y-tube)
 - d198 4 / 0 / 0 (Gallus gallus ABR audiogram, Callosobruchus maculatus thermal preference x2, Tripterygion delaisi fluorescence)
+- d199 6 / 0 / 0 (Tetranychus urticae repellence and electrotarsal detection, Varroa destructor sensory pit and physical cues, Anoeconeossa bundoorensis grey choice)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
