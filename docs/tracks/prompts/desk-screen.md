@@ -25,6 +25,7 @@ endpoint: retain catch-only results as ecological outcomes; retain controlled
 behavioural or physiological findings for the claims their controls support.
 Keep the existing search effort and useful leads. This prospective clarification
 does not rewrite past screening decisions or automatically reclassify old records.
+If a separate launch assigns evidence/lead reading, it must name [scientific-preflight.md](scientific-preflight.md) and BRIEF in addition to the applicable reading prompt. `screen_candidates.py --check` checks searched/wanted files only; zero problems on empty files says nothing about evidence. The new preflight applies to fresh evidence launches after integration, not to a screening-only unit or an already-running unit.
 6. A genus whose harvest shows a failed step ("gave up") gets no search record until a rerun repairs it; `--check` fails such a record (audit 44). Leave a wanted line's author field empty when no source shows the authors: placeholder text in it reaches the owner's page.
 
 Proxy mirrors count as library proxies: never open a result whose host is a library's proxy or mirror (a host holding "ezproxy", "libproxy", "elogim", "idm.oclc.org", "proxy." or a university library's name before a publisher's domain), even when it opens without a login (audit 43 reached springerlink.bibliotecabuap.elogim.com once).

@@ -36,6 +36,7 @@ The rules the audits enforce:
 For each paper, also write one line in `docs/views/sources/<batch>.jsonl`: `{"doi": "...", "title": "<title exactly as the batch file gives it>", "url": "<the url from sources-r1>", "records": N, "read": "<batch> 2026-10-18", "note": "Full text read (control-room oa job run 1)<, accepted manuscript>"}`, with `"records": 0` when the paper holds no measurement of a BRIEF trait.
 
 ## Before every commit
+- For newly launched units, complete [scientific-preflight.md](scientific-preflight.md) before submission. It supplements this whole-paper reading procedure: reconcile source results before drafting, then bind the review to the final candidates. It does not replace the quote, grade, source or partial rules above.
 - `python3 -I tools/senses/check.py docs/views/evidence/<batch>.jsonl` passes.
 - `python3 -I tools/senses/check.py --require-evidence-kind /tmp/new-records.jsonl`
   passes for the new input before append. Do not strict-check the historical corpus.

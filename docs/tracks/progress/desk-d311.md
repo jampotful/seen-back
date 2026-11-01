@@ -1,0 +1,44 @@
+# desk-d311: eye states and ommatidia counts of 50 new beetle, salamander and shrew species (mostly Pselaphinae), 50 records
+
+Branch research/desk-d311 from origin/main (merged origin/main once). About 47 WebSearches (many restricted to pensoft, peerj, mdpi and EJT domains); WebFetch only on URLs returned by searches (Pensoft article_preview.php pages, PeerJ article and PDF pages, MDPI pages) and Crossref single-DOI lookups (api.crossref.org/v1/works/ or /works/) for all 12 DOIs filed. `python3 -I tools/senses/check.py | grep desk-d311`: 50 records, 0 problems. Traits: ommatidia_count (key already on main, notes say so) and eye_type; no new key.
+
+Repeat check: every species grepped over origin/main docs/ and over the evidence files of origin/main and of unmerged origin/research/desk-d305 to d311 branches (taxon index built once, then single greps) before each record; a final pass over origin/main and the remaining audit-400 to 408 branches found no hit for any filed species. Species already on main were dropped (list below).
+
+Filed (docs/views/evidence/desk-d311.jsonl):
+1. Metopiellus guanano (Colombia), male holotype, compound eyes of 12 ommatidia (per eye or both not stated), ZooKeys 1108.
+2-3. Syrbatus obsidian (19 right, 20 left) and S. superciliata (10 right, 9 left), cave troglophile Pselaphinae from Minas Gerais, PeerJ 12: e17783.
+4-5. Oedipina villamizariorum (eyes moderate, dorsolateral, extend beyond head margins; female holotype) and O. ecuatoriana (eyes relatively small; male holotype), fossorial salamanders, PeerJ 8: e9934.
+6. Chodsigoa dabieshanensis, "Eyes are very small.", ZooKeys 1083.
+7-9. Batrisceniola nanlingensis (about 30), Physomerinus clavipes (about 35), both Insects 13(2): 119; Trisiniotus taoismus (about 35), ZooKeys 1095.
+10-13. Pseudophanias furcilobus (about 30), P. leigong (about 18), P. mulun (about 16), ZooKeys 1179; Pengzhongiella daicongchaoi female (about 32 facets), ZooKeys 326.
+14-20. Bryaxis grandinodus, uljinensis, fabaiformis, girinensis, nemorosus (23-26, 32-34, 31-32, 34, 9 facets), ZooKeys 1182; Linan qiniangmontis female (about 18 facets), ZooKeys 859; Tangius indicus male (about 35 facets), ZooKeys 346.
+21-33. ZooKeys 251: Labomimus cognatus, dabashanus, mirus, paratorus, sarculus, schuelkei, vespertilio; Pselaphodes distincticornis, erlangshanus, flexus, tibialis, venustus (male facet counts 20 to 45); plus Pselaphodes wanchaoshanus (about 55 ommatidia), ZooKeys 1206.
+34-44. ZooKeys 275: Labomimus fimbriatus, jizuensis, simplicipalpus; Pselaphodes anhuianus, daii, grebennikovi, hainanensis, kuankuoshuiensis, longilobus, tiantongensis, wrasei (male facet counts 25 to 50).
+45-50. ZooKeys 694: Batrisodes grossus, qiului, simianshanus, tianmuensis, xuhaoi, zethus (male facet counts 50 to 60).
+(The numbering follows batches b1 to b7; file order is the same.)
+
+Dropped candidates:
+- Already on main: Euroscaptor darwini (desk-d304), Agasicles hygrophila, Geopselaphus bullonorum, Domene lizeyui, Nocticola gonzalezi (3-4 facets nymphs), Linan tendothorax female, Dayao emeiensis, Batrisodes zhouchaoi, Cacopsylla chinensis, Scythris sinensis, Lymantria xylina, Arge similis, Asiophrida xanthospilota, Eucryptorrhynchus pair, Ceratosolen gravelyi, Histia flabellicornis, Tomicus yunnanensis; Zorotypus komatsui and Phasmon typhlops noted in earlier desks.
+- Telegraphic clause only, the eye statement sits inside a longer sentence: Caecilia pulchraserrana (eye diameter 4 % HL, semicolon sentence; type counts inconsistent), Arthromelodes choui, Euconnus megalops and the other Cladoconnus species, Horaeomorphus species, Bibrax (twelve Ecuador species, Diagnosis clauses), Ancystrocerus lueliangi and A. philippinus, Tribasodites spinacaritus, Megatyrus schuelkei and M. tengchongensis, Pseudophanias yaimensis, nakanoi, excavatus (ZooKeys 987), Brachycephalus dacnis, Achalinus nanshanensis ("Eyes small, ED 1.11 mm." fragment), Scincella truongi.
+- Typo or sic in the printed sentence: Pselaphodes zhongdianus ("HL 00.73"); Pselaphodes monoceros male eye count sits in a long sentence; P. pengi description cut off in the text returned; Labomimus (ZooKeys 251) female sentences were not filed separately (female counts are in conditions).
+- No usable sentence or no eye text: Indotyphlops (ZooKeys 1292), Soriculus beibengensis, Uropsilus huanggangensis, Fukomys livingstoni and F. hanangensis, Ctenomys bidaui, contrerasi, thalesi, Epictia (PeerJ 7411; authors and licence not on the page, eye clause only), Spinanycta alabamensis, Spelaeobates coriniensis (clause), Coframalaxius bletteryi, Quasitagalis afonsoi, Australosagola and Porongurup (relational eye sentences only), Peronia revision (224 pages, species text not reached).
+- Not an eye-state value: Viatkogorgon ivakhnenkoi (PeerJ 4954, sclerotic ring 23 mm and orbit 28 mm in a sentence of about 50 words; no existing key fits an orbit diameter); Sinomacrops bondei (orbit 7.5 mm estimated).
+- Not reached: bats, golden moles, Notoryctes, marine invertebrates (cirrate octopods, pteropods, heteropods, chitons), Branchiopoda, Ostracoda, euphausiids and stomatopods with an open-licensed species-level eye sentence; searches returned Zootaxa, Wikipedia, Plazi, Springer or closed papers. Herpetological searches (blindsnakes, Dibamus, amphisbaenians) returned Zootaxa, Plazi and Zenodo records.
+
+Weak spots for the auditor:
+- Telegraphic sentences without a finite verb: all Pselaphinae records ("Each eye composed of about 50 facets.", "Eyes composed of 19 (right side) and 20 (left side) ommatidia ...", head-dimension sentences of ZooKeys 251/275). Treated as whole printed sentences in the descriptive style of these papers (d307 to d309 filed the same style). Records with a finite verb: Oedipina (2), Chodsigoa.
+- Male sentences from ZooKeys 251 and 275 begin with head dimensions ("Head longer than wide, HL 0.59-0.60, HW 0.58-0.59; eyes each composed of about 40 facets."); the dimensions were returned by the tool in the same piece on two or three passes, but WebFetch is a summarising tool and does not guarantee character-level identity; zhongdianus was dropped for its printed typo.
+- Counts are "about" or "approximately" values and ranges, per eye as printed; Metopiellus guanano (12) and Bryaxis girinensis (34), nemorosus (9) do not say per eye or both eyes; Bryaxis ranges do not say whether they span specimens or the two eyes.
+- Bryaxis: the Description carries no sex label; the sentence is read as the male by layout (male holotype, separate "Sexual dimorphism" paragraph for females); said in each note.
+- Paratype counts: Labomimus dabashanus (type series 4 males, 5 females; the tool's two passes disagreed on paratype males, resolved from the itemised localities), Tangius indicus (paper's totals 6 males, 3 females do not match its list of 5 males, 4 females; recorded in conditions), Oedipina and Chodsigoa details as stated; Chodsigoa's Figure 4 caption gives a different holotype number.
+- Higher taxa: class left blank except Chodsigoa (title prints Mammalia); order and family from titles for Pselaphinae papers; Pengzhongiella order left blank (not read as printed); Oedipina order and class blank. Syrbatus order only from the title.
+- Authors: "Reyes-Puig C, Wake DB, ..." (PeerJ page shows only the first author; list per Crossref, with accents kept). Syrbatus authors from the PDF byline and Crossref. Crossref lookups for peerj.17783 worked only through the /works/ form.
+- Licences: PeerJ 17783 and 9934 Crossref "unspecified" with page/PDF CC BY sentences; Insects 13(2): 119 page footer prints CC BY 4.0 (the tool noted metadata with CC BY 3.0), Crossref CC BY 4.0 vor; ZooKeys 251, 275, 326 and 346 print CC BY 3.0 with Crossref CC BY 3.0 vor.
+- Several records are in the same two or three papers (ZooKeys 251, 275, 694, 1182); the auditor may sample.
+
+Questions:
+1. Do facet counts of beetle eyes count as ommatidia_count (as on main for Dayao emeiensis, Linan tendothorax, Batrisodes zhouchaoi)? Done on that precedent.
+2. Should female counts, filed only inside conditions here, get their own records (about 25 more lines)?
+
+## Desk disposition after audits 409-415
+Seven audits covered all 50 lines (409: 1-7, 410: 8-14, 411: 15-21, 412: 22-28, 413: 29-35, 414: 36-42, 415: 43-50). Counted errors: 409 two, 410 two, 411 three, 412 none, 413 three, 414 none, 415 none; 10 in 50 (20%), all fixable and all fixed with the auditors' replacement text (lines 5, 7, 13, 14, 17, 18, 21, 29, 30, 34). Optional fixes applied where clear. No line held out or dropped. The audit-413 report was pushed only in part; the full report was taken from the auditor's worktree. The repeat check for lines 29-35 against every other origin branch found no hits. Open owner questions unchanged (see earlier d3xx progress files).
