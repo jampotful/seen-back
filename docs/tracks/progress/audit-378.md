@@ -27,7 +27,9 @@ Name faults 0.
 
 ## Duplicates
 
-git grep on origin/main (faedc72f) across the whole docs/ tree for Glyphiulus, longus, Paracortina, kyrang, Hyleoglomeris, halang, translucida, Trichoniscoides, castanheirensis, the five DOIs and the article ids (71395, 99651, 85423): only unrelated matches ("longus" in Acanthophis praelongus rows of oa-2.jsonl, gbif-names and a Florida view; "halang" inside "Phalangium" in audit-353 and desk-d207; 71395 and 85423 as numbers inside eval and view files). Remote desk-* and audit-* branches: see the Duplicates addendum below.
+git grep on origin/main (faedc72f) across the whole docs/ tree for Glyphiulus, longus, Paracortina, kyrang, Hyleoglomeris, halang, translucida, Trichoniscoides, castanheirensis, the five DOIs and the article ids (71395, 99651, 85423): only unrelated matches ("longus" in Acanthophis praelongus rows of oa-2.jsonl, gbif-names and a Florida view; "halang" inside "Phalangium" in audit-353 and desk-d207; 71395 and 85423 as numbers inside eval and view files). All 671 remote research/desk-* and research/audit-* branches, grepped under docs/views/evidence/, docs/views/audit/ and docs/tracks/progress/desk-* for the same genera, DOIs and article ids: hits only in research/desk-d289 itself (its two files).
+
+Duplicates 0.
 
 ## Per-record findings
 
