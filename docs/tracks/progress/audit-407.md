@@ -22,7 +22,7 @@ Bibliographic faults counted 0; licence faults 0; source.access "open" right thr
 
 ## Repeats
 
-`git grep -il` on origin/main (d87091c8f) over the whole docs/ tree for tuxtlaensis, Asymmetrione, 2023.861.2073, Abyssomysis, ejt.2020.628, "Mesembrius arcuatus", zookeys.1046.57052, "Protanilla gengma", gengma, 2025.987.2867, and at genus level Mesembrius, Protanilla, Abyssomysis, Asymmetrione: no hits. Unmerged origin/research/desk-d* branches (309) grepped in docs/ for the same species and DOIs: see the line below the verdict table.
+`git grep -il` on origin/main (d87091c8f) over the whole docs/ tree for tuxtlaensis, Asymmetrione, 2023.861.2073, Abyssomysis, ejt.2020.628, "Mesembrius arcuatus", zookeys.1046.57052, "Protanilla gengma", gengma, 2025.987.2867, and at genus level Mesembrius, Protanilla, Abyssomysis, Asymmetrione: no hits. Unmerged origin/research/desk-d* branches other than d309 (308) grepped in one `git grep -il` over docs/views/evidence and docs/tracks/progress for the same species and DOIs: completed, exit 1, no hits.
 
 Shape statements under eye_type: main files such statements under eye_type ("large eye, cornea globular and well pigmented", Palaumysis jetama; "small eye, round pupil", Toxicocalamus longhagen; "divided compound eye; dorsal division as large as the ventral division (male)", Blepharicera balangshana; "round eyes with star-shaped eye pigment", Flaccisagitta enflata). Line 20 ("large ... and oval") and line 18 (holoptic) fit that use; line 17 (rudiments) fits the reduced-eye rows.
 
