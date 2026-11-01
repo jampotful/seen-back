@@ -356,6 +356,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d298 4 / 0 / 0 (eye_type: Yirrkala nkust, Microcaecilia dermatophaga, Amphisbaena amethysta, Toxicocalamus longhagen; audit 390: 1 fixable error in 4)
 - d299 6 / 0 / 0 (amphipod, millipede eye counts: Synurella odessana, Hyleoglomeris erecta and rukouqu, Gammarus sezgini, Caucaseuma strasseri, Phoxirostus longicarpus; audit 391: 3 fixable errors in 6)
 - d300 7 / 0 / 0 (flatworm eye states: Girardia multidiverticulata, Dugesia bifida, Pasipha ferrariaphila, Stylochus marimarensis and erytheius, Emprosthopharynx hartei, Dendrocoelum obstinatum; audit 392: 3 fixable errors in 7)
+- d301 6 / 1 / 0 (meiofauna eyespots: Cephalodella binoculata, Milnesium minutum and sandrae, Microstomum laurae and edmondi, Macrostomum littorale; Pectinereis strickrotti held out, page unopenable; audit 393: 5 errors in 7, 4 fixable)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
