@@ -332,6 +332,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d274 7 / 0 / 0 (MDPI Biology/Insects eye morphology: Tomicus yunnanensis x5, Cacopsylla chinensis x2; fixed after audit 366)
 - d275 1 / 0 / 0 (Okanagana rimosa sense_vibration leg-nerve threshold; fixed after audit 367; non-visual-sense vein saturated)
 - d276 1 / 0 / 0 (held-lead retry: Phalacrocorax carbo in-air hearing threshold; fixed after audit 368; other leads held)
+- d277 1 / 0 / 0 (aquatic sweep: Carcharhinus limbatus sound-avoidance with estimated received levels; fixed after audit 369)
 - d278 0 / 0 / 0 (2026-recency sweep; its 4 Scythris sinensis ommatidia_count records repeat d271, not merged)
 
 ## Codex lane (26 October 2026)
