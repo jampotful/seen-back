@@ -23,7 +23,7 @@ Bibliographic faults 0; licence faults 0; source.access "open" right throughout.
 
 ## Repeats
 
-`git grep -il` on origin/main (095e055d8) over the whole docs/ tree for each species, each genus or epithet alone (Metopiellus, Syrbatus, Batrisceniola, dabieshanensis, villamizariorum, ecuatoriana) and each DOI (zookeys.1108.76077, peerj.17783, peerj.9934, zookeys.1083.78233, insects13020119): no hit except "ecuatoriana" as Phyllomedusa ecuatoriana in oa-2.jsonl (another species) and docs/views/gaps/gbif-names.tsv. Unmerged origin/research/ branches: see the last section.
+`git grep -il` on origin/main (095e055d8) over the whole docs/ tree for each species, each genus or epithet alone (Metopiellus, Syrbatus, Batrisceniola, dabieshanensis, villamizariorum, ecuatoriana) and each DOI (zookeys.1108.76077, peerj.17783, peerj.9934, zookeys.1083.78233, insects13020119): no hit except "ecuatoriana" as Phyllomedusa ecuatoriana in oa-2.jsonl (another species) and docs/views/gaps/gbif-names.tsv. Unmerged branches: every docs/ file that each of the 310 origin/research/desk-d* branches other than d311 changes against origin/main (704 files, from `git diff --name-only origin/main...<branch> -- docs/`) was searched for the seven species and five DOIs (case-insensitive): no hit. Lines 1 to 7 repeat nothing.
 
 ## Per line
 
