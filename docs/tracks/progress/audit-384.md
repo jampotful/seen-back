@@ -23,7 +23,7 @@ eyes_count is on main. Values 5 (lines 1-2) and 0 (lines 3-7). No new key.
 
 ## Duplicates
 
-`git grep -i` on origin/main under docs/ (evidence, audit/corrected, audit/ALL, sheets, searched/ included) for the seven epithets, "Coecobrya" and the four DOI suffixes: no hit (one false hit, "Jobellisiales" in docs/views/world-orders.csv). Remote desk-* and audit-* branches (docs/views/evidence, docs/tracks) for the same patterns, d293 excluded: see the branch note at the end. Duplicate faults 0.
+`git grep -i` on origin/main under docs/ (evidence, audit/corrected, audit/ALL, sheets, searched/ included) for the seven epithets, "Coecobrya" and the four DOI suffixes: no hit (one false hit, "Jobellisiales" in docs/views/world-orders.csv). Remote desk-* and audit-* branches (docs/views/evidence, docs/tracks) for the same patterns, d293 excluded (1463 remote branches listed): no hit. Duplicate faults 0.
 
 ## Per line
 
