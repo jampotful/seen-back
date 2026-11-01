@@ -365,6 +365,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d307 6 / 1 / 0 (amber insects, mole cricket, flea beetle and moth eye states; audit 403: 1 repeat dropped, 4 fixable errors in 7)
 - d308 5 / 0 / 0 (owl axial length, caecilian, ant, mayfly and dobsonfly eye states; audit 404: 1 fixable error in 5)
 - d309 20 / 0 / 0 (mysid, amphipod, fish, tabanid, flatworm, isopod, hoverfly and ant eye states; audits 405-407: 12 fixable errors in 20)
+- d310 5 / 0 / 0 (flower beetle, ant ommatidia/facet/rhabdom and leiodid larva eye states; audit 408: 2 fixable errors in 5)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
