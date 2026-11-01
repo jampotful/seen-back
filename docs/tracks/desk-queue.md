@@ -326,6 +326,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d268 0 / 0 / 0 (extended-search harvest of other traits; PMC reCAPTCHA, hosts blocked; progress note only)
 - d269 4 / 0 / 0 (Giglio et al. 2022 Life 12(5):741 interommatidial_deg x4; all fixed after audit 361)
 - d270 8 / 1 / 0 (MDPI Insects ommatidia_count and facet_diameter_um: Arge similis x4, Ceratosolen gravelyi, Histia flabellicornis x3; Histia interommatidial_deg repeats d215; audits 362, 363)
+- d271 6 / 0 / 0 (MDPI Insects ommatidia_count: Asiophrida xanthospilota x2, Scythris sinensis x4; Scythris fixed after audit 364)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
