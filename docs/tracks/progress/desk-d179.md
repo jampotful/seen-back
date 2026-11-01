@@ -1,0 +1,16 @@
+# desk-d179
+
+Evidence file: docs/views/evidence/desk-d179.jsonl (7 records, check.py 0 problems).
+
+## Part A (re-files)
+- Fields et al. 2012 (Calanus finmarchicus, 10.1371/journal.pone.0039594): NOT filed. Crossref confirms title, authors, 7(6) e39594, CC BY 4.0. The PLOS article page was rate limited three times (no copy read); a printable-file URL returned a different article (not used); PMC (search-surfaced) was not retried; IMR repository and DOAJ pages hold only the abstract (no 'median value' sentence, no licence). The d176 record stays unread for quote, apparatus and light levels.
+- Re-filed with the audit-262 label ("noise-exposure response, not a hearing measure: ", units ""): lines 1-2 Neocaridina davidi (Azarm-Karnagh 2023), line 3 Crassostrea virginica (Ledoux 2023; value narrowed to the quote, 12 h null moved to note), line 4 Acartia tonsa (Kuhn 2023; audit's corrected value, note, conditions). Quotes re-read on the Frontiers full text and PDF (title, sentence, section, CC BY line on the PDFs; Crossref CC BY 4.0 vor for all three DOIs). Azarm-Karnagh: the 110.40/96.54 dB values carry no reference in Methods 2.3 (2.4 gives dB ref 1 uPa); conditions say so; control null P = 0.391 and revisits added.
+- Names: Acartia tonsa accepted in WoRMS (AphiaID 104262) via obis.org/taxon/104262. Crassostrea virginica accepted, Ostreidae, Ostreida, in the GBIF Backbone (gbif.org/es/species/2286079; WoRMS/MolluscaBase pages not surfaced). Neocaridina davidi: valid per DecaNet editors 2025 as quoted in the USFWS ecological risk screening summary (June 2025), accepted in the GBIF Backbone via natuurdata.inbo.be (N. heteropoda synonym), ITIS TSN 1174366 lists it; filed under davidi; Yang et al. 2024 (10.3390/cimb46110729) proposal to use N. denticulata noted in the notes, owner has not ruled. GBIF pages for 4309727 and 11689892 returned client errors; not worked around.
+- Not re-filed (await owner ruling): Mytilus edulis and Eurytemora herdmani nulls.
+
+## Part B
+- Kecskemeti et al. 2021, Sci Rep 11(1): 12770, Lycoriella ingenua (Sciaridae): lambda_max_nm 370 and 526 (ERG), behaviour_vision (intensity-dependent wavelength attraction). Crossref CC BY 4.0 vor; nature.com refused (not retried); text read on link.springer.com; licence line seen on the author repository page real.mtak.hu/126961 (labels CC BY, link to 3.0). Not on main (desk-d165 held it out for licence). Name accepted in Catalogue of Life via GBIF 1485806.
+- No other Part B paper reached. No search or wanted files.
+
+## Desk disposition after audit 264
+Audit 264 found 0 of 7 records in error (0%); pooled audits 172 to 264 stand at 188 of 465 (40.4%). All seven merge with the auditor's uncounted fixes applied: the benthic-invertebrate sentence in lines 1 and 2, the GBIF mirror named in line 3, ingestion versus clearance model and table numbers in line 4, the Springer URL and licence sentence in lines 5 to 7, the template wording in lines 5 and 6, and the experiment 1 scope of "no adjustment" in line 7. Owner questions: noise-disturbance under sense_hearing; GBIF mirror versus WoRMS for marine taxa (Crassostrea virginica); Neocaridina davidi versus N. denticulata (DecaNet still accepts davidi); Lycoriella agraria listed as a synonym of L. ingenua in the Catalogue of Life while the paper counts it separately.

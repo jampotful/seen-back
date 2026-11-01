@@ -1,5 +1,7 @@
 # Round 3: a genus sweep (Sonnet, medium effort, run as a local agent because it needs the web)
 
+For fresh evidence-writing launches, follow `docs/views/research/EVIDENCE-INTAKE.md`: record the accepted-main `intake_base` and `evidence-kind-v2` in the existing progress note; classify each new functional endpoint from its source; strict-check new input before `addlog.py`; and run `check_submission.py --base-ref <intake_base>` on the final logs. This includes direct JSONL writes. Unchanged accepted records remain grandfathered; returning old-format units finish without interruption and receive desk classification before admission. Follow the assignment’s existing file and branch boundaries.
+
 Read `docs/views/research/THOROUGH.md` (the protocol) and the Round 2 section of `docs/views/research/BRIEF.md` (records, grades and carry rules). Your launch prompt gives a batch file made by `tools/views/sweep_batches.py`: about 40 genera, each with its open traits, species and nearest measured record. Your branch is `research/sweep-<n>`. Push at least every 15 minutes.
 
 For each genus, in the batch's order, run the protocol once for all its open traits:
