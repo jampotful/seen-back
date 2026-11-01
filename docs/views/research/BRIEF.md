@@ -100,6 +100,13 @@ Trait keys (use these; add a new key only when none fits, and write "new trait" 
 | `sense_echolocation` | call frequencies, rate, range | string with figures |
 | `sense_electric`, `sense_magnetic`, `sense_infrared`, `sense_thermal`, `sense_chemical`, `sense_touch`, `sense_light_nonvisual` | other senses | string with figures |
 | `behaviour_vision` | a behaviour that shows what is seen (distance prey is detected or attacked, colour choice) | string with figures |
+| `ecological_intervention_outcome` | measured catch, survey detection or other ecological endpoint under an intervention; no sensory mechanism established by this classification | string with figures |
+
+For intervention studies, apply [Ecological outcomes and sensory claims](ECOLOGICAL-OUTCOMES.md).
+Use `evidence_kind: ecological_outcome` with the measured endpoint, experimental
+unit, intervention, comparator and mechanism limit. A measured ecological result
+retains its grade without establishing avoidance, detection or sensitivity.
+Controlled group behavioural assays remain eligible for their actual claims.
 
 ## Sensory anatomy and function (audit 292 follow-up, 31 October 2026)
 

@@ -17,7 +17,7 @@ TRAITS = {
     "interommatidial_deg", "acceptance_deg", "fovea", "eye_movement", "receptor_classes", "lambda_max_nm",
     "spectral_range_nm", "colour_vision", "oil_droplets", "filter_pigments", "cff_hz", "corner_hz", "f_number",
     "rhabdom_um", "tapetum", "diel", "absolute_sensitivity", "polarization", "depth_cue", "motion",
-    "sensory_anatomy", "sense_vibration", "sense_airflow", "sense_hearing", "sense_echolocation", "sense_electric", "sense_magnetic",
+    "sensory_anatomy", "ecological_intervention_outcome", "sense_vibration", "sense_airflow", "sense_hearing", "sense_echolocation", "sense_electric", "sense_magnetic",
     "sense_infrared", "sense_thermal", "sense_chemical", "sense_touch", "sense_light_nonvisual", "behaviour_vision",
 }
 # Evidence length is a word count, not a WebFetch output/character limit.

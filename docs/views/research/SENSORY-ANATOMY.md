@@ -28,6 +28,7 @@ correctly measured anatomical count an invented number.
 | `physiological_response` | A measured physiological or developmental response to the specified stimulus | A particular receptor or molecular transduction mechanism; behavioural detection |
 | `behavioural_response` | The tested organism's response, discrimination or null under stated controls | The receptor responsible without causal evidence; unrestricted ability or inability |
 | `inferred_function` | An explicitly attributed functional hypothesis or model | Experimentally demonstrated detection |
+| `ecological_outcome` | A measured ecological or survey endpoint under an intervention | A particular sensory response or mechanism; see [ECOLOGICAL-OUTCOMES.md](ECOLOGICAL-OUTCOMES.md) |
 
 These are claim types, not a ladder of quality. A behavioural experiment can
 establish detection without identifying the receptor; anatomy can be measured

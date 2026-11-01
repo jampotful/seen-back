@@ -408,11 +408,12 @@ def choose(cand):
 def record_line(r):
     d = collections.OrderedDict()
     typed_sensory = r.get("evidence_kind") in SCOPE.KINDS and (
-        SCOPE.functional_trait(r.get("trait", "")) or r.get("trait") == SCOPE.ANATOMY)
+        SCOPE.functional_trait(r.get("trait", "")) or r.get("trait") in (SCOPE.ANATOMY, SCOPE.OUTCOME))
+    typed_sensory = typed_sensory or SCOPE.ecological(r)
     d["id"] = r["_id"]
     d["taxon"] = r.get("taxon")
     d["scope"] = "inside" if r["_inside"] else "wider"
-    for k in ("trait", "value", "units", "eye", "conditions", "grade", "method", "evidence_kind", "structure", "measurement", "sensory_use_limit"):
+    for k in ("trait", "value", "units", "eye", "conditions", "grade", "method", "evidence_kind", "structure", "measurement", "sensory_use_limit", "sensory_use_scope", "measured_endpoint", "experimental_unit", "intervention", "comparator", "mechanism_limit"):
         if r.get(k) not in (None, ""):
             d[k] = r[k]
     d["quote"] = r.get("quote", "")
@@ -989,6 +990,9 @@ def check_reply(job, F, records, reply, like_spec, floor):
                 if o.get("invented") is not True:
                     errs.append("%s: reached by a calculation, so invented must be true" % path)
             traits = TRAIT_MAP.get(name)
+            if any(SCOPE.ecological(r) for r in recs):
+                errs.append("%s: ecological outcomes cannot establish a measured engine parameter or its calculation; use grade i" % path)
+                continue
             fit = [r for r in recs if not SCOPE.restricted(r) and (not traits or r.get("trait") in traits)]
             if recs and all(SCOPE.restricted(r) for r in recs):
                 errs.append("%s: anatomy, mechanics or inferred function cannot establish a measured engine parameter; use grade i" % path)
@@ -1054,6 +1058,9 @@ def check_reply(job, F, records, reply, like_spec, floor):
         if not (isinstance(r, list) and len(r) >= 3):
             continue
         errs += plain_errors(str(r[1]) + ". " + str(r[2]), "row %r" % r[1])
+        row_cites = [records[i] for i in ids_in(r[3] if len(r) > 3 else []) if i in records]
+        if any(SCOPE.ecological(x) for x in row_cites):
+            errs.append("row %r: ecological outcome needs the explicitly scoped outcome-row path and scientific review" % r[1])
         if r[0] == "m":
             cited = [records[i] for i in ids_in(r[3] if len(r) > 3 else []) if i in records]
             if not any(x.get("grade") == "m" for x in cited):

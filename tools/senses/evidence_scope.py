@@ -8,8 +8,9 @@ import json
 from pathlib import Path
 
 ANATOMY = "sensory_anatomy"
+OUTCOME = "ecological_intervention_outcome"
 ANATOMICAL = frozenset(("anatomical_presence", "anatomical_measurement"))
-NONFUNCTIONAL = ANATOMICAL | {"mechanical_response", "inferred_function"}
+NONFUNCTIONAL = ANATOMICAL | {"mechanical_response", "inferred_function", "ecological_outcome"}
 KINDS = NONFUNCTIONAL | {"transduction", "physiological_response", "behavioural_response"}
 RULES = """Sensory evidence has a claim scope separate from m/g/i/x. sensory_anatomy
 records support only the named structure and measurement. Organ counts, passive
@@ -22,6 +23,16 @@ conditions, source-column context and taxonomic restrictions when stating a clai
 An anatomy-grounded drawing is an invention: grade i, invented true, with the
 anatomical basis and the untested functional assumption stated separately.
 Read evidence_kind and sensory_use_limit even when a record is graded m.
+Ecological intervention outcomes establish the measured endpoint under that
+comparison, not a sensory mechanism. Catch, survey detection and abundance are
+not individual detection thresholds, avoidance probabilities or spectral tuning.
+An ecological null is not sensory absence. Preserve endpoint, experimental unit,
+intervention, comparator and mechanism_limit. Behaviour may be measured in a
+controlled group assay; individual tracking and receptor identification are not
+universal requirements. The measured endpoint and controls decide claim scope.
+Ecological outcomes may support explicitly scoped outcome rows, never measured
+or calculated sensory engine parameters. Generic compiler rows have no endpoint
+scope; use the explicitly typed outcome-row path and scientific review instead.
 """
 
 
@@ -37,15 +48,16 @@ def fingerprint(record):
 
 
 def load_limits(root):
-    path = Path(root) / "docs/views/sensory-use-limits.jsonl"
-    if not path.exists():
-        return {}
     limits = {}
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
+    for name in ("sensory-use-limits.jsonl", "ecological-use-limits.jsonl"):
+        path = Path(root) / "docs/views" / name
+        if not path.exists():
             continue
-        entry = json.loads(line)
-        limits[entry["fingerprint"]] = entry
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            entry = json.loads(line)
+            limits[entry["fingerprint"]] = entry
     return limits
 
 
@@ -54,12 +66,20 @@ def apply_limit(record, limits):
     entry = limits.get(fingerprint(record))
     if entry:
         record = dict(record, sensory_use_limit=entry["reason"])
+        if entry.get("scope") == "ecological_outcome":
+            record["sensory_use_scope"] = entry["scope"]
     return record
+
+
+def ecological(record):
+    return (record.get("trait") == OUTCOME
+            or record.get("evidence_kind") == "ecological_outcome"
+            or record.get("sensory_use_scope") == "ecological_outcome")
 
 
 def restricted(record):
     kind = record.get("evidence_kind")
-    return (record.get("trait") == ANATOMY or bool(record.get("sensory_use_limit"))
+    return (ecological(record) or record.get("trait") == ANATOMY or bool(record.get("sensory_use_limit"))
             or kind in {"mechanical_response", "inferred_function"}
             or (functional_trait(record.get("trait", "")) and kind in ANATOMICAL)
             or (kind is not None and kind not in KINDS))
@@ -68,6 +88,8 @@ def restricted(record):
 def supports_trait(record, trait):
     """Legacy untyped records retain their status unless a reviewed limit applies."""
     actual = record.get("_trait", record.get("trait"))
+    if ecological(record):
+        return actual == trait == OUTCOME
     return actual == trait and not (functional_trait(trait) and restricted(record))
 
 
@@ -87,4 +109,12 @@ def problems(record):
             out.append("anatomical_measurement needs units")
     if functional_trait(trait) and kind in ANATOMICAL:
         out.append("anatomy belongs in sensory_anatomy, not a functional trait")
+    if trait == OUTCOME:
+        if kind != "ecological_outcome":
+            out.append("ecological_intervention_outcome requires ecological_outcome")
+        for field in ("measured_endpoint", "experimental_unit", "intervention", "comparator", "mechanism_limit", "method", "conditions", "units"):
+            if not isinstance(record.get(field), str) or not record[field].strip():
+                out.append("ecological_intervention_outcome needs %s" % field)
+    elif kind == "ecological_outcome":
+        out.append("ecological_outcome belongs in ecological_intervention_outcome")
     return out

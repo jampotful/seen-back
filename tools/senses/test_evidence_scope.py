@@ -103,6 +103,7 @@ class EvidenceScopeTests(unittest.TestCase):
 
     def test_legacy_limits_match_content_and_preserve_original(self):
         limits = S.load_limits(ROOT)
+        limits = {k: v for k, v in limits.items() if v.get("scope") != "ecological_outcome"}
         self.assertEqual(len(limits), 9)
         for entry in limits.values():
             n = int(entry["id"].split(":")[-1])
