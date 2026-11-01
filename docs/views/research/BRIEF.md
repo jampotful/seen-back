@@ -44,6 +44,10 @@ The engine is a WebGL shader over the phone's camera, and a separate agent is ex
 - Print only the tails of long outputs. If your context passes about 100,000 tokens, update your progress note, push and stop: a fresh agent continues from the note for less than a long context costs.
 - A prompt file in `docs/tracks/prompts/` may narrow this brief for a burst; where it does, follow it.
 
+### Scientific preflight for newly launched evidence units
+
+Before drafting and submitting new evidence, follow [scientific-preflight.md](../../tracks/prompts/scientific-preflight.md). Reconcile the accessible Methods, Results, tables and captions with the abstract; a matching quote does not establish the interpretation of `value`, `method` or `conditions`. The protocol requires one compact reconciliation per paper and a read-only check binding it to the final candidate records. It supplements the existing source/quote checks and independent audit. New launches may also write `docs/views/progress/<unit>-scientific-review.jsonl`; record the launch's repository commit and prompt paths in the usual progress note. Apply on the next fresh launch after integration; do not interrupt running units or backfill accepted logs.
+
 ## The evidence log: `docs/views/evidence/<unit>.jsonl`
 
 One JSON object per line, one measurement per object. Append with `python3 -I tools/senses/addlog.py <unit> < records.jsonl`, which checks each record first; `python3 -I tools/senses/check.py` checks every log.
@@ -77,6 +81,8 @@ Copy a whole sentence or table row; mark every omission with " … " and retain 
 - `access` is `closed` for a paper from the owner's Drive, `book` for a book.
 
 Trait keys (use these; add a new key only when none fits, and write "new trait" and the reason in `note`):
+
+For new plant `sense_light_nonvisual` evidence, apply [LIGHT-RESPONSE.md](LIGHT-RESPONSE.md). Classify the actual light comparison as experimental, observational, or a directly measured light-related function. Keep observational qualifications in `value`; population origin or an author's proposed photoperiodic explanation alone does not establish a measured light response. Taxonomic grade and partial provenance are separate from causal support.
 
 | Key | What it records | Units or values |
 |---|---|---|
