@@ -26,6 +26,7 @@ QUOTE = ("GA3 treatment promoted seed germination (7.8 ± 5.0%), but the germina
 def record(quote=QUOTE):
     return dict(taxon="Toxicodendron vernicifluum", trait="sense_chemical",
                 value="GA3 not significantly different from mock", grade="m", opened=True,
+                evidence_kind="physiological_response",
                 source=dict(authors="Nemoto K, Watanabe A, Yoshida C, Nishihara M",
                             year=2022, doi="10.1371/journal.pone.0272665", access="open"),
                 where="Results", quote=quote)
@@ -58,7 +59,7 @@ class QuoteLimitTests(unittest.TestCase):
             root = Path(tmp)
             dest = root / "tools" / "senses"
             dest.mkdir(parents=True)
-            for name in ("check.py", "addlog.py"):
+            for name in ("check.py", "addlog.py", "evidence_scope.py"):
                 shutil.copyfile(HERE / name, dest / name)
             def append(rec):
                 return subprocess.run([sys.executable, "-I", str(dest / "addlog.py"), "regression"],
@@ -71,6 +72,11 @@ class QuoteLimitTests(unittest.TestCase):
             result = subprocess.run([sys.executable, "-I", str(dest / "check.py"), str(log)],
                                     text=True, capture_output=True)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            untyped = record(); untyped.pop("evidence_kind")
+            result = append(untyped)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("new functional records require evidence_kind", result.stderr)
+            self.assertEqual(log.read_bytes(), before)
             result = append(record(" ".join(["measurement"] * 41)))
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("quote is 41 words", result.stderr)

@@ -48,6 +48,15 @@ The engine is a WebGL shader over the phone's camera, and a separate agent is ex
 
 One JSON object per line, one measurement per object. Append with `python3 -I tools/senses/addlog.py <unit> < records.jsonl`, which checks each record first; `python3 -I tools/senses/check.py` checks every log.
 
+**New evidence intake:** read [EVIDENCE-INTAKE.md](EVIDENCE-INTAKE.md) before
+writing. New `sense_*` and `behaviour_vision` records require an endpoint-specific
+`evidence_kind`; anatomy has its own requirements. The optical example below is
+not a functional-record template. Use the policy's worked examples, strict check
+on new input, and baseline-aware submission check on mixed old/new logs. Record
+the accepted-main `intake_base` and `evidence-kind-v2` in the existing progress
+note. Unchanged accepted records remain grandfathered; running units finish
+under their original launch and receive desk classification before new admission.
+
 **Quote length is measured in words, not characters.** `tools/senses/check.py` permits at most 40 whitespace-separated words (`len(quote.split())`); there is no 125-character evidence limit. A whole sentence longer than 125 characters remains eligible when it meets that word limit and all scientific and quotation checks. The 125-character cap reported in early audits was a WebFetch summariser output constraint, not a rule for scientific records or publication. If a tool cannot return the passage faithfully, obtain a legal source text (including the OA workflow in `docs/tracks/prompts/oa-read.md`) or leave a retrieval gap. Do not treat a tool's output limit as evidence that a measurement is absent, and do not evade a tool's restrictions by soliciting pieces.
 
 Copy a whole sentence or table row; mark every omission with " … " and retain the subject, value, units and qualifications needed for the claim. Never rewrite punctuation, capitalise a clause into a new sentence, or remove a null result or experimental condition to shorten a quote. Check against the actual source text with `quotecheck.py`; a mechanical match does not by itself establish scientific support. Source access, taxon, conditions, grades, partial flags and provenance requirements still apply.
@@ -93,12 +102,39 @@ Trait keys (use these; add a new key only when none fits, and write "new trait" 
 | `polarization` | polarization sensitivity, where in the eye, what for | string |
 | `depth_cue` | stereopsis, image defocus, motion parallax, accommodation, peering | string |
 | `motion` | motion detection features (looming, small-target detectors, optomotor speeds) | string with figures |
-| `sense_vibration` | substrate or web vibration: organs, frequency range, threshold | string with figures |
-| `sense_airflow` | trichobothria, filiform hairs, lateral line | string with figures |
+| `sensory_anatomy` | sensory structures and their measured anatomy, without assigning a specific function | number/string; `structure`, `measurement`, `evidence_kind`, `method`, `conditions`; units for quantities |
+| `sense_vibration` | responses to substrate or web vibration: stimulus, frequency range, threshold | string with figures; distinguish mechanical response, transduction and behaviour |
+| `sense_airflow` | responses to air or water flow (legacy key includes lateral-line water-flow responses) | string with figures; name medium and evidence kind, not just an organ |
 | `sense_hearing` | hearing range and best frequency | `[low, high]` Hz with best frequency in `note` |
 | `sense_echolocation` | call frequencies, rate, range | string with figures |
 | `sense_electric`, `sense_magnetic`, `sense_infrared`, `sense_thermal`, `sense_chemical`, `sense_touch`, `sense_light_nonvisual` | other senses | string with figures |
 | `behaviour_vision` | a behaviour that shows what is seen (distance prey is detected or attacked, colour choice) | string with figures |
+| `ecological_intervention_outcome` | measured catch, survey detection or other ecological endpoint under an intervention; no sensory mechanism established by this classification | string with figures |
+
+For intervention studies, apply [Ecological outcomes and sensory claims](ECOLOGICAL-OUTCOMES.md).
+Use `evidence_kind: ecological_outcome` with the measured endpoint, experimental
+unit, intervention, comparator and mechanism limit. A measured ecological result
+retains its grade without establishing avoidance, detection or sensitivity.
+Controlled group behavioural assays remain eligible for their actual claims.
+
+## Sensory anatomy and function (audit 292 follow-up, 31 October 2026)
+
+Follow [SENSORY-ANATOMY.md](SENSORY-ANATOMY.md). Measured anatomy is retained under
+`sensory_anatomy` when no existing anatomical key fits. It can be graded `m` for
+its own taxon without establishing hearing, airflow, vibration or another
+function. Name `structure` and `measurement`; distinguish anatomical presence,
+structural measurement, mechanical response, transduction, behavioural response
+and inferred function with `evidence_kind`. New `sense_*` and `behaviour_vision`
+records need this field; `addlog.py` enforces it, and direct-written new logs use
+`python3 -I tools/senses/check.py --require-evidence-kind <file>`.
+
+Do not infer a modality from the organ's name or a relative's ability. Anatomy,
+passive deflection and functional inference cannot close functional gaps or
+justify measured engine settings. A depiction inspired by anatomy stays a
+separately marked invention. Existing exact anatomical vision traits remain
+valid. Preserve nulls, experimental conditions, source completeness and audit
+history. Legacy records require source review; a newly added field cannot
+resolve an older unverifiable or scientifically unsupported finding.
 
 ## The sheet: `docs/views/drafts/<unit>.md`
 
