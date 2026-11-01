@@ -1,0 +1,17 @@
+# desk-d107 (30 October 2026): refile unit
+
+Filed (3, all grade m, partial false, checker 0 problems):
+- Cyathea multiflora, sense_chemical (Harrington, Blake-Mahmud, Watkins 2022, Am J Bot 109(8): 1313-1325, 10.1002/ajb2.16040; par.nsf.gov copy prints CC BY). Carries the negative Colony 3 asexual association (Fig 5F), the null among-colony G-test (G = 4.21, P = 0.377), and flags the 98 vs 95 count conflict. Names: POWO accepted (Kew record 327598-2 via ColPlantA; powo.science.kew.org errored), WFO wfo-0001112522 accepted (read through the synonym page wfo-0001121464).
+- Rheum nobile, sense_chemical GA3 null (Peng et al. 2017, Plant Diversity 39(4): 180-186), one population (RnobPY), 100 mg/L, DAR seeds, 15/5 and 25/15 C. POWO 696766-1 accepted; no WFO page reached.
+- Primula secundiflora, sense_light_nonvisual (Peng et al. 2021, Front Plant Sci 12: 582536, CC BY), species-own figures, dark after-ripening null, stratified seeds, GA3 Discussion sentence. WFO wfo-0001106041 accepted; POWO accepts via synonym page 702777-1.
+
+Held out:
+- Zostera marina GA3 (Physiol Plant 177(2): e70137): full text read (VLIZ copy, CC BY-NC-ND), but no whole sentence of 125 characters or fewer reports a dose or timing result; the Results sentence on red light plus 500 mg/L is 135 characters; the only short sentence on the topic is the abstract's "50 and 500 mg/L reduced time-to-germination", which the full text contradicts (50 mg/L had no significant timing effect). Facts to carry if a short sentence is found: doses 10/50/500/1000 plus 0, 375 seeds, 15 per treatment; 1000 mg/L p = 0.011, 500 p = 0.376, 50 p = 0.063, 10 mg/L z = 3.33 p = 1.29e-06, 26.7% in darkness; red light + 500 mg/L time to germination p = 0.033.
+- Rheum alexandrae (GA3 null and light): POWO 696710-1 failed again, no WFO page found.
+- Penstemon palmeri GA3 ethylcellulose (Larson et al. 2023, Plants 12(24): 4139; CC BY 3.0 on the page): WFO wfo-0001137092 accepted, POWO 808221-1 would not open; abstract sentence 6 whole at 113 characters. Held.
+- Aconitum spicatum (J Ecol Environ 48(4): 494-503, 10.5141/jee.24.077; accesson page no licence statement, the PDF prints CC BY): POWO 707833-1 says "synonym of Aconitum lethale". Held on name; light abstract sentence is also 155 characters.
+Web fetches only; WFO list pages for wfo-0001112522 and wfo-0001106041 and colplanta/beta.ipni permission requests were not answered in places.
+
+## Desk disposition after audit 197
+
+Audit 197 found 3 errors in 3 records; nothing merged and no evidence file is kept. Cyathea multiflora (audit 194 faults fixed, but the quadrat result for asexual gametophytes was dropped, P = 0.052 in Colony 1, and the Ripley K association with females was stated with the chi-squared statistics of the male-clustering test), Rheum nobile GA3 null (content sound; name confirmed on POWO only, merge unchanged once a WFO page accepting Rheum nobile is opened), Primula secundiflora (four years of dry cold storage did not reduce the light requirement, a significant light main effect in Table 2 chi2 = 108.31, and two nulls on stratification are missing). Owner flags: the Rheum nobile light line already on main (d98) was accepted on POWO alone, which audit 188 allowed and later audits would not, and a Plant Diversity paper of 30 Sep 2026 (10.1016/j.pld.2026.05.002) splits Rheum nobile into four species, which may move the RnobPY and RnobHLH populations to another name. Zostera marina GA3 and Penstemon palmeri are wanted-line candidates.

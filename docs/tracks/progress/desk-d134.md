@@ -1,0 +1,21 @@
+# desk-d134: sense_chemical in intact woody and wild plants
+
+3 evidence records (plant sense_chemical, grade m, partial false), no search records, no wanted lines. `tools/senses/check.py`: 3 records, 0 problems.
+
+Records
+- Artemisia tridentata, Shiojiri, Ishizaki, Ozawa and Karban 2015 (Plant Signaling & Behavior 10(12): e1095416): 1,8-cineole exposure for 24 h, about half the damage level of controls (P = 0.01); beta-caryophyllene (P = 0.08), alpha-pinene (P = 0.43) and borneol (P = 0.48) carried in conditions.
+- Pinus sylvestris, Faiola et al. 2018 (Scientific Reports 8(1): 3053), two lines: monoterpene and sesquiterpene emission rise during weevil (Hylobius abietis) feeding; control values, post-treatment values, the 4 experiments with one treatment and one control plant each, and the pre-treatment null in conditions.
+
+Duplicate check (git grep of docs/views/evidence and docs/views/audit/corrected, any trait): Artemisia tridentata is on main under Karban 2006, Grof-Tisza 2022 and reviews, not this paper; Pinus sylvestris sense_chemical is on main only under Lundborg 2016; no line carries either DOI.
+
+Held out
+- Brassica nigra (Brosset et al. 2021, Sci Rep 11, (Z)-11-hexadecenal exposure): POWO 279422-1 says "This name is a synonym of Mutarda nigra". No Mutarda nigra WFO page was sought. The paper prints Brassica nigra.
+- Picea abies and Fagus sylvatica, Meischner et al. 2025 (Physiologia Plantarum 177(4): e70432, 10.1111/ppl.70432, CC BY, PMC12311559; shoot JA raised total terpenoid emissions p = 0.010 and p = 0.020, no change in indirectly treated branches): POWO accepts both, but within 3 searches each no WFO species page of snapshot 2022-06 or later surfaced (Fagus sylvatica: only 2021-12; Picea abies: only the var. abies page and Picea glauca). Good lead for a unit that can surface WFO.
+- Quercus robur, Molleman et al. 2024 (J Chem Ecol 50: 250-261, methyl jasmonate on field saplings): the Springer copy carries an exclusive-licence line, no open licence.
+- Solidago altissima, Yip et al. 2019 (BMC Plant Biology 19: 209): priming with a crude fly-emission extract on septa, interaction with insecticide, page shows no Creative Commons statement; WFO accepted (list.worldfloraonline.org/wfo-0000082215). Held for the extract reading and licence.
+- Gossypium herbaceum and Ricinus communis, Wäckers et al. 2001 (Annals of Botany 87(3): 365-370, herbivore-induced foliar nectar, 2.5-fold and 12-fold): repository copy (doc.rero.ch) has no licence or open-access statement.
+- Betula pubescens birch volatile priming (PubMed 25352241) and Blande et al. 2010 (Tree Physiology 30(3): 404-416, Betula pendula and Alnus glutinosa methyl salicylate): no open full text found. Nicotiana attenuata eLife papers (Schuman et al. 2012, 2015): 2012 page not reachable (permission prompt unanswered), 2015 results are about transgenic lines. Salix fragilis (Mezzomo et al. 2023, Ecol Evol 13(5): e10123): not checked on POWO or WFO (possible hybrid status).
+- Artemisia and other PMC pages returned a reCAPTCHA page at times (PMC4854343, PMC8329535, PMC6528222); not worked around.
+
+## Desk disposition after audit 221
+Audit 221 found errors in all 3 records, so none were merged. Artemisia tridentata (Shiojiri et al. 2015): the record omits the Discussion's statement that the result did not repeat in 2012 (over 70% of leaves damaged); the conditions misquote the abstract (it says "tended to get less damage than controls"); damage was counted once, on 4 October 2011, not through the season. Pinus sylvestris x2 (Faiola et al. 2018): the paper attributes the emission rise to weevils mechanically damaging bark and exposing stored terpene pools (alternatively resin flow to wounds), not to an induced response, so "herbivore-induced" is the causal reading the paper does not give; the sesquiterpene line also omits that the control plants' fall (23.1 to 11.2) was blamed on poor laboratory enclosure conditions and drives most of the contrast; measurement counts (20, 15, 18) were not given. Pine lines are refile candidates only if the owner counts emission from wound-exposed terpene pools as sense_chemical. Artemisia can be refiled with the 2012 non-repeat. Held-out leads: Picea abies and Fagus sylvatica (Meischner 2025, POWO accepted, no WFO page surfaced), others per the list above.

@@ -10,6 +10,19 @@ For each genus in your launch prompt:
 4. A search record for a trait names every candidate the tool listed for that trait in `"screened": {"<doi or OpenAlex id>": "<why it holds no measurement of the trait>"}`. A trait with evidence already on main gets no search record.
 5. Before every commit: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/<unit>.jsonl --wanted docs/views/wanted/<unit>.jsonl` must print "0 problems".
 Write no evidence records in this round; readers log evidence from the oa job's texts with `quotecheck.py`.
+When a launch explicitly authorizes evidence as well (including the harvest-c
+queue override), follow `docs/views/research/EVIDENCE-INTAKE.md`: type each new
+functional endpoint, record the accepted-main base and policy version, append
+through `addlog.py`, and run strict new-input and baseline-aware submission checks.
+This does not turn a search-only assignment into an evidence-writing assignment.
+For fresh evidence after the `evidence-kind-v2` cutover, the lamp-comparison
+search leads in points 9 and 10(c) below do not by themselves establish spectral
+sensitivity or visually mediated behaviour. Apply
+[ECOLOGICAL-OUTCOMES.md](../../views/research/ECOLOGICAL-OUTCOMES.md) to the actual
+endpoint: retain catch-only results as ecological outcomes; retain controlled
+behavioural or physiological findings for the claims their controls support.
+Keep the existing search effort and useful leads. This prospective clarification
+does not rewrite past screening decisions or automatically reclassify old records.
 If a separate launch assigns evidence/lead reading, it must name [scientific-preflight.md](scientific-preflight.md) and BRIEF in addition to the applicable reading prompt. `screen_candidates.py --check` checks searched/wanted files only; zero problems on empty files says nothing about evidence. The new preflight applies to fresh evidence launches after integration, not to a screening-only unit or an already-running unit.
 6. A genus whose harvest shows a failed step ("gave up") gets no search record until a rerun repairs it; `--check` fails such a record (audit 44). Leave a wanted line's author field empty when no source shows the authors: placeholder text in it reaches the owner's page.
 

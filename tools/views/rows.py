@@ -148,6 +148,7 @@ def read_retracted(root):
 def load_evidence(root, tax):
     recs = []
     fixes = read_fixes(root)
+    limits = GAPS.SCOPE.load_limits(root)
     retracted = read_retracted(root)
     for unit, path in evidence_files(root):
         raw = os.sep + os.path.join("audit", "corrected") + os.sep not in path
@@ -165,7 +166,7 @@ def load_evidence(root, tax):
                 continue
             r["_id"] = "%s#%d" % (unit, n)
             r.update(fixes.get("%s:%d" % (unit, n), {}))
-            recs.append(r)
+            recs.append(GAPS.SCOPE.apply_limit(r, limits))
     index = collections.defaultdict(list)
     for r in recs:
         trait = GAPS.ALIAS.get(r.get("trait"), r.get("trait"))
@@ -349,8 +350,24 @@ def record_line(rid, r):
     part = " | PARTIAL (read from a compilation, table, appendix, review or abstract)" if r.get("partial") else ""
     v = json.dumps(r.get("value"), ensure_ascii=False)
     q = " ".join(str(r.get("quote") or "").split())
+    method = r.get("method") or ""
+    typed_sensory = r.get("evidence_kind") in GAPS.SCOPE.KINDS and (
+        GAPS.SCOPE.functional_trait(r.get("_trait", r.get("trait", "")))
+        or r.get("trait") in (GAPS.SCOPE.ANATOMY, GAPS.SCOPE.OUTCOME))
+    typed_sensory = typed_sensory or GAPS.SCOPE.ecological(r)
+    part += " | evidence_kind=" + str(r.get("evidence_kind", "legacy_untyped"))
+    if r.get("sensory_use_limit"):
+        part += " | use limit: " + r["sensory_use_limit"]
+    if typed_sensory:
+        # A note may contain the whole measured curve and a late taxonomic
+        # restriction. Do not strip scientific qualifications from writer input.
+        for field in ("units", "structure", "measurement", "conditions", "where", "note", "measured_endpoint", "experimental_unit", "intervention", "comparator", "mechanism_limit", "sensory_use_scope"):
+            if r.get(field) not in (None, ""):
+                part += " | %s: %s" % (field, r[field])
+    else:
+        v, method, q = v[:80], method[:60], q[:220]
     return "%s | %s | %s | value %s | eye %s | grade %s | %s | \"%s\" | %s%s" % (
-        rid, r.get("taxon"), r.get("_trait"), v[:80], r.get("eye") or "-", r.get("grade"), (r.get("method") or "")[:60], q[:220], short_source(r), part)
+        rid, r.get("taxon"), r.get("_trait"), v, r.get("eye") or "-", r.get("grade"), method, q, short_source(r), part)
 
 
 def rule_text(c):
@@ -418,6 +435,9 @@ TOOL = {"name": "submit_row", "description": "Submit the drafted row.",
             "cites": {"type": "array", "items": {"type": "string"}, "description": "Ids of the records the text rests on, such as R3."},
             "note": {"type": "string", "description": "One short line for the owner, or an empty string."}},
             "required": ["text", "cites"]}}
+
+
+SYSTEM_RULES += "\n" + GAPS.SCOPE.RULES
 
 
 def system_text():
@@ -497,6 +517,10 @@ def check_draft(draft, row, ids):
         errs.append("voice check %s: %s" % (rule, detail))
     pool = []
     for r in cited:
+        if GAPS.SCOPE.ecological(r) and row.get("traits") != [GAPS.SCOPE.OUTCOME]:
+            errs.append("ecological outcome requires an explicitly scoped outcome row")
+        if any(GAPS.SCOPE.functional_trait(t) for t in row.get("traits", [])) and GAPS.SCOPE.restricted(r):
+            errs.append("anatomy, mechanics or inferred function cannot support a functional row")
         numbers_of(r.get("value"), pool)
         numbers_of(r.get("quote"), pool)
     human = re.search(r"\bhumans?\b", text, re.I)
