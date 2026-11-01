@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 130,
-  "updated_at": "2026-11-01T07:40:00Z",
+  "generation": 131,
+  "updated_at": "2026-11-01T08:54:48Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -117,8 +117,14 @@
         "resolved_at": "2026-10-27T12:57:41.334Z"
       },
       "last_visibility_check": {
-        "status": "terminal",
-        "observed_at": "2026-11-01T07:40:00Z"
+        "status": "unknown",
+        "observed_at": "2026-11-01T08:54:48Z",
+        "blocker_signature": "browser-read-timeout:issue28",
+        "reason": "DOMSnapshot.captureSnapshot timed out on existing task and one fresh-tab recovery in the same signed-in browser. No current task-status inference; prior verified terminal result and desk disposition preserved.",
+        "recovery_attempts": 1,
+        "recovery_result": "Fresh-tab read also timed out; no task continuation attempted.",
+        "last_verified_terminal_at": "2026-11-01T07:40:00Z",
+        "owner_action_required": false
       },
       "visibility_history": [
         {
@@ -142,6 +148,16 @@
           "owner_action_required": false,
           "resolved_at": "2026-11-01T01:46:53Z",
           "resolution": "Existing signed-in chat read successfully; terminal result unchanged. No recovery prompt or replacement task."
+        },
+        {
+          "status": "unknown",
+          "observed_at": "2026-11-01T08:54:48Z",
+          "blocker_signature": "browser-read-timeout:issue28",
+          "reason": "DOMSnapshot.captureSnapshot timed out on existing task and one fresh-tab recovery in the same signed-in browser. No current task-status inference; prior verified terminal result and desk disposition preserved.",
+          "recovery_attempts": 1,
+          "recovery_result": "Fresh-tab read also timed out; no task continuation attempted.",
+          "last_verified_terminal_at": "2026-11-01T07:40:00Z",
+          "owner_action_required": false
         }
       ]
     },
@@ -151,7 +167,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-39c8-7350-b5b6-c4fefaa9b0c8",
       "observed_status": "Chat remains terminal. Desk reviewed all six fixes and incorporated result; GitHub PR #35 closed/merged.",
-      "observed_at": "2026-11-01T07:40:00Z",
+      "observed_at": "2026-11-01T08:54:48Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-eng-1.md",
@@ -186,7 +202,7 @@
       "desk_closure_comment_id": 6438668973,
       "last_visibility_check": {
         "status": "terminal",
-        "observed_at": "2026-11-01T07:40:00Z"
+        "observed_at": "2026-11-01T08:54:48Z"
       },
       "visibility_history": [
         {
@@ -208,7 +224,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
       "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
-      "observed_at": "2026-11-01T07:40:00Z",
+      "observed_at": "2026-11-01T08:54:48Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -280,7 +296,7 @@
       "desk_closure_comment_id": 6438669713,
       "last_visibility_check": {
         "status": "terminal",
-        "observed_at": "2026-11-01T07:40:00Z"
+        "observed_at": "2026-11-01T08:54:48Z"
       },
       "visibility_history": [
         {
@@ -324,12 +340,12 @@
       },
       "task_url": "https://chatgpt.com/local/01a17d71-1460-7402-a4bf-558d544640f9",
       "accepted_at": "2026-10-27T12:59:03.422Z",
-      "observed_at": "2026-11-01T07:40:00Z",
+      "observed_at": "2026-11-01T08:54:48Z",
       "branch": "codex/round-2026-10-27-issue-38",
       "claim_commit": "d1ecc613ba013720eb8eca8e3c2b210d2bff5221",
       "last_task_observation": {
         "status": "terminal",
-        "observed_at": "2026-11-01T07:40:00Z",
+        "observed_at": "2026-11-01T08:54:48Z",
         "workers_dispatched": 48,
         "worker_limit": 48,
         "partial_genus_screens": 233,
@@ -426,7 +442,7 @@
       "issue_state": "open",
       "last_visibility_check": {
         "status": "terminal",
-        "observed_at": "2026-11-01T07:40:00Z"
+        "observed_at": "2026-11-01T08:54:48Z"
       },
       "visibility_history": [
         {
@@ -444,7 +460,7 @@
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-11-01T07:40:00Z",
+    "observed_at": "2026-11-01T08:54:48Z",
     "eligible_open_issues": [
       28,
       38
@@ -458,7 +474,7 @@
       38
     ],
     "decisions": {
-      "28": "no-op duplicate suppression; terminal reviewed assignment retained",
+      "28": "no-op duplicate suppression; existing reviewed assignment retained. Current browser status unknown after bounded visibility recovery; prior terminal evidence preserved, no new task or continuation.",
       "29": "no-op duplicate suppression; terminal reviewed desk-closed assignment retained",
       "30": "no-op duplicate suppression; terminal reviewed desk-closed assignment retained",
       "38": "no-op duplicate suppression; terminal reviewed assignment adopted. Existing desk disposition already posted on issue, so no repeated comment. Do not restart.",
@@ -488,10 +504,19 @@
       "PR #40 desk comment6447754258 and issue38 disposition6448341657"
     ],
     "documentation_note": "Main activation runbook retains historical verification wording; operational ledger now records desk dispositions for all three assignments.",
-    "task_access": "All four existing signed-in chats inspected successfully; actual terminal responses and desk dispositions unchanged. No task recovery, prompts or submissions.",
+    "task_access": "Chats29/30/38 inspected successfully: actual terminal responses unchanged. Chat28 visibility unknown after DOM snapshot timeout and one failed fresh-tab recovery; prior terminal result and desk review preserved. No task prompts, continuation or submissions.",
     "new_eligible_requests": [],
-    "run": "2026-11-01T07:40:00Z",
+    "run": "2026-11-01T08:54:48Z",
     "task_comments_observed": [],
-    "access_limitations": []
+    "access_limitations": [
+      {
+        "issue": 28,
+        "signature": "browser-read-timeout:issue28",
+        "status": "unknown",
+        "recovery_attempts": 1,
+        "owner_action_required": false
+      }
+    ],
+    "main_sha": "16530c425e96b3a467f1fb2f7a15c61a49bebcc0"
   }
 }
