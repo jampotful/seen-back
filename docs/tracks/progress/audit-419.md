@@ -21,7 +21,7 @@ Order and family as printed: Phasmatodea, Phylliidae (ZooKeys 1256 title and cla
 
 ## Repeats
 
-`git grep -il -F` on origin/main (f1569e4f4) over the whole docs/ tree for cayabyabi, crapulatum, "Xenos yangi", lancangensis, "Baenothrips cuneatus", tenuisetosa, tiputini, each full DOI and each Pensoft article number (162609, 76484, 14616, 10706, 57451, 117952). Hits: "tiputini" only in desk-d293.md and desk-d304.md skip lists ("Oroperipatus tiputini: no eye count"), not a filed record; the bare numbers 14616 and 57451 only as record counts / a decimal in unrelated rows. No repeat on main. Unmerged branches: grep of the 728 origin/research/desk-d* and audit-* branches still running at this commit; see the final version.
+`git grep -il -F` on origin/main (f1569e4f4) over the whole docs/ tree for cayabyabi, crapulatum, "Xenos yangi", lancangensis, "Baenothrips cuneatus", tenuisetosa, tiputini, each full DOI and each Pensoft article number (162609, 76484, 14616, 10706, 57451, 117952). Hits: "tiputini" only in desk-d293.md and desk-d304.md skip lists ("Oroperipatus tiputini: no eye count"), not a filed record; the bare numbers 14616 and 57451 only as record counts / a decimal in unrelated rows. No repeat on main. Unmerged branches: the 312 origin/research/desk-d* branches not merged into origin/main (desk-d313 excluded), each grepped over the docs/ files it changes against main for the seven species and six DOIs: hits only in desk-d293.md and desk-d304.md, the same Oroperipatus tiputini skip-list lines already on main. No repeat.
 
 ## Per line
 
@@ -90,7 +90,7 @@ Fault: **specimen dates and stage misstated.** Conditions say "paratypes 5 adult
 | 15 | Coniopteryx tenuisetosa, compound eyes large | MATCH | | whole three-word Description sentence |
 | 16 | Oroperipatus tiputini, eye position and surface | FIXABLE | conditions | male paratype dates 2018 to 2023, not 2017; "adult" not printed |
 
-Errors: 2 of 8 records (25%); 2 fixable (lines 13, 16), 0 held out, 0 unfixable; no line to drop. Repeats: none on main; unmerged branches as above. Verdict for lines 9 to 16 of desk-d313: **ACCEPT AFTER REPLACEMENT** (lines 9, 10, 11, 12, 14, 15 as filed; lines 13 and 16 with the replacements below, or dropped if they are not applied). Pooled with the other auditor's lines 1 to 8 when that audit lands.
+Errors: 2 of 8 records (25%); 2 fixable (lines 13, 16), 0 held out, 0 unfixable; no line to drop. Repeats: none on main or on unmerged desk branches. Verdict for lines 9 to 16 of desk-d313: **ACCEPT AFTER REPLACEMENT** (lines 9, 10, 11, 12, 14, 15 as filed; lines 13 and 16 with the replacements below, or dropped if they are not applied). Pooled with the other auditor's lines 1 to 8 when that audit lands.
 
 ## Replacement
 
