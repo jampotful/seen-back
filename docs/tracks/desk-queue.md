@@ -350,6 +350,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d292 15 / 0 / 0 (spider eye states/counts and eye_diameter_mm: Pinelema x8, Dysderocrates kibrisensis, Harpactea kalavachiana, Troglocoelotes sinanensis, Typhlonesticus angelicus and santinellii; audits 382 and 383: 3 fixable errors in 15)
 - d293 7 / 0 / 0 (Collembola eye statements: Pseudosinella hartnerae and altamirensis, Coecobrya sirindhornae, whitteni, troglobia, ellisi, phitsanulokensis; audit 384: 1 fixable error in 7)
 - d294 7 / 0 / 0 (non-arthropod invertebrate eyes: Tetranemertes bifrost, Tetrastemma album and shohoense, Placobdelloides sirikanchanae, Oerstedia pseudoculata, Leitoscoloplos olei, Iranobelgrandia persica; audit 385: 3 fixable errors in 7)
+- d295 8 / 0 / 0 (cave and surface fishes eye_type: Sinocyclocheilus wanlanensis and guiyang, Triplophysa anshuiensis and dafangensis, Troglonectes canlinensis, Lucifuga gibarensis, Oreonectes qinae, Protocobitis longibarba; audit 386: 3 fixable errors in 8)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
