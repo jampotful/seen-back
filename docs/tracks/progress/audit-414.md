@@ -19,7 +19,7 @@ Order, family and subfamily printed in the title (Coleoptera, Staphylinidae, Pse
 
 ## Repeats
 
-`git grep -il` on origin/main (095e055d8) over the whole docs/ tree for "Labomimus simplicipalpus", simplicipalpus, "Pselaphodes anhuianus", anhuianus, "Pselaphodes daii", daii, grebennikovi, hainanensis, kuankuoshuiensis, longilobus, zookeys.275.4571, zookeys.275. The only hits are for the DOI: desk-d302 line 1 (Dayao emeiensis female, ommatidia_count), its progress file and audit-394; a different species, as the notes say. No species hit. Unmerged origin/research/desk-d* and audit-* branches (717, d311 excluded): one `git grep -il -E` per branch over docs/views/evidence, audit and sheets for the seven species and the DOI, d302 copies excluded; result given in the grep line below.
+`git grep -il` on origin/main (095e055d8) over the whole docs/ tree for "Labomimus simplicipalpus", simplicipalpus, "Pselaphodes anhuianus", anhuianus, "Pselaphodes daii", daii, grebennikovi, hainanensis, kuankuoshuiensis, longilobus, zookeys.275.4571, zookeys.275. The only hits are for the DOI: desk-d302 line 1 (Dayao emeiensis female, ommatidia_count), its progress file and audit-394; a different species, as the notes say. No species hit. Unmerged origin/research/desk-d* and audit-* branches (717, d311 excluded): one `git grep -il -E` per branch over docs/views/evidence, audit and sheets for the seven species and the DOI, d302 copies excluded: completed, no hits.
 
 ## Per line
 
