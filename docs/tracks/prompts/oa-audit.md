@@ -21,6 +21,17 @@ For fresh plant light-evidence units after integration, also apply [LIGHT-RESPON
 3. Fetch the sampled papers' texts: from `main`, make a branch `run/oa/audit-1018` whose only change is `ci/oa/pub.pem` replaced by your `/tmp/oa/pub.pem` and `ci/oa/list.jsonl` cut to the sampled papers (match each record's DOI or title to the list's lines). Push it; the `oa` workflow returns `runs/oa/<run>-<batch>/` to the `ci` branch in 5 to 15 minutes (`git fetch --depth 1 origin ci && git show origin/ci:INDEX.txt | grep audit-1018`). Decrypt with `python3 ci/oa/decrypt.py /tmp/oa/priv.pem <dir>/enc /tmp/oa/txt`. Keep texts and the key out of the repository.
 
 ## Checking
+For evidence-kind-v2 submissions, follow `docs/views/research/EVIDENCE-INTAKE.md`.
+Check `evidence_kind` against the actual endpoint, controls and source location,
+not just its spelling. A valid kind neither proves a sensory mechanism nor
+admits a record. Use the ordinary checker for unchanged historical material and
+`check_submission.py --base-ref <accepted-main-sha>` on final new/changed logs.
+Retain the approved kind and all qualifications in replacement records and
+recheck after applying corrections. Returning old-format units finish their
+original task; the desk resolves new functional classifications before admission.
+Keep old audit decisions intact and do not count missing historical metadata as
+a newly discovered scientific-meaning error.
+
 For each sampled record: run `python3 -I tools/views/quotecheck.py /tmp/oa/txt/<batch>-<entry>.txt` on it; read the sentence or table row around the quote in the text; then give one verdict: `confirm`, `requote` (quote faulty, value right), `correct` (value, taxon, grade or partial wrong; give the right one), `retract` (nothing in the paper supports it). Write the verdicts as a table in `docs/tracks/progress/audit-oa-1018.md` with a one-line reason each, the error count and rate (requote, correct and retract count as errors), the metadata faults as uncounted rows, and the fault patterns you see. Write corrections as JSON lines in `docs/views/recheck/recheck-oa-1018.jsonl` (the recheck-5 schema: the record's id, the field, the old and new value, the reason). Do not edit any evidence file.
 
 Commit to a branch `agent/oa-audit-1018`, push, and reply in at most 120 words: sample size, errors and rate, the main fault pattern, last commit. Stop within 90 minutes.
