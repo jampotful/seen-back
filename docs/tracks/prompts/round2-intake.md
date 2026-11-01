@@ -1,5 +1,7 @@
 # Round 2: the Drive intake (Sonnet)
 
+For fresh evidence-writing launches, follow `docs/views/research/EVIDENCE-INTAKE.md`: record the accepted-main `intake_base` and `evidence-kind-v2` in the existing progress note; classify each new functional endpoint from its source; strict-check new input before `addlog.py`; and run `check_submission.py --base-ref <intake_base>` on the final logs. This includes direct JSONL writes. Unchanged accepted records remain grandfathered; returning old-format units finish without interruption and receive desk classification before admission. Follow the assignment’s existing file and branch boundaries.
+
 Start with `burst2-common.md`, then `docs/views/research/BRIEF.md` (the evidence log, the rules and "Round 2"). Your branch is `research/intake`. Your launch prompt gives the papers folder's Drive id; never write a Drive id into the repository. Stop after 75 minutes or when every new file is read.
 
 1. List every file under the papers folder, subfolders included. A file is new when `docs/views/sources/drive.jsonl` on `main` and on your branch has no line whose `key` is the first 12 hexadecimal digits of the SHA-1 of its Drive id.

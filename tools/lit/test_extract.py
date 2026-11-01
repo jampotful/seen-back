@@ -93,6 +93,49 @@ class T(unittest.TestCase):
         self.assertEqual(len(E.parse_reply('Here you go: [{"a":1}] done')[0]), 1)
         self.assertIsNotNone(E.parse_reply("nothing")[1])
 
+    def test_scope_metadata_survives_collection_without_typing_cached_records(self):
+        good = {"taxon": "Lycosa leuckartii", "trait": "interreceptor_deg", "value": 2.45,
+                "units": "degrees", "where": "abstract", "grade": "m",
+                "quote": "The inter-receptor angle of the AL eyes was 2.45°"}
+        typed = dict(good, evidence_kind="anatomical_measurement", structure="AL retina",
+                     measurement="inter-receptor angle", method="anatomical", conditions="as in source")
+        (out, _, _), _ = self.run_mock([json.dumps([typed]), "[]"])
+        for field in ("evidence_kind", "structure", "measurement"):
+            self.assertEqual(out["topic"][0][field], typed[field])
+        (out, _, _), _ = self.run_mock([json.dumps([good]), "[]"])
+        self.assertNotIn("evidence_kind", out["topic"][0])
+
+    def test_collector_does_not_strip_invalid_kind_into_legacy_pass(self):
+        bad = {"taxon": "Lycosa leuckartii", "trait": "interreceptor_deg", "value": 2.45,
+               "units": "degrees", "where": "abstract", "grade": "m", "evidence_kind": "unknown",
+               "quote": "The inter-receptor angle of the AL eyes was 2.45°"}
+        (out, stats, _), _ = self.run_mock([json.dumps([bad]), "[]"])
+        self.assertEqual(out["topic"], [])
+        self.assertEqual(stats["dropped_check_py"], 1)
+
+    def test_ecological_scope_survives_collection_and_reaches_strict_intake(self):
+        # Format-only mock: this is not a classification of the spider source.
+        raw = {"taxon": "Lycosa leuckartii", "trait": "ecological_intervention_outcome",
+               "value": "synthetic encounter outcome", "units": "events per survey",
+               "where": "abstract", "grade": "m", "evidence_kind": "ecological_outcome",
+               "quote": "Eyes of the wolf spider Lycosa leuckartii were examined.",
+               "method": "Synthetic paired survey", "conditions": "Synthetic protocol",
+               "measured_endpoint": "camera encounter rate", "experimental_unit": "station pair",
+               "intervention": "light on", "comparator": "light off",
+               "mechanism_limit": "No sensory mechanism was isolated."}
+        (out, _, _), _ = self.run_mock([json.dumps([raw]), "[]"])
+        self.assertEqual(len(out["topic"]), 1)
+        collected = out["topic"][0]
+        for field in ("evidence_kind", "measured_endpoint", "experimental_unit", "intervention",
+                      "comparator", "mechanism_limit"):
+            self.assertEqual(collected[field], raw[field])
+        self.assertEqual(self.check.problems(collected, require_evidence_kind=True), [])
+        for field in ("measured_endpoint", "experimental_unit", "intervention", "comparator", "mechanism_limit"):
+            missing = dict(raw); missing.pop(field)
+            (out, stats, _), _ = self.run_mock([json.dumps([missing]), "[]"])
+            self.assertEqual(out["topic"], [], field)
+            self.assertEqual(stats["dropped_check_py"], 1, field)
+
     def test_cut_off_reply_is_salvaged(self):
         recs, err = E.parse_reply('[{"a": 1}, {"b": "two"}, {"c": "thr')
         self.assertEqual(recs, [{"a": 1}, {"b": "two"}])
