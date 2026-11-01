@@ -339,6 +339,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d281 8 / 0 / 0 (eye absence/reduction in new cave species: Domene lizeyui, Triplophysa zhijinensis, Odontostreptus fadriquei, Iandumoema smeagol, Iansaoniscus x2, Schaefferia x2; 3 fixed after audit 371)
 - d282 7 / 0 / 0 (eye absence/reduction in new cave species: Ochyrocera x2, Geopselaphus, Caridina, Triplophysa xiuwenensis, Ptomaphaginus troglodytes, Acherontiella; fixed after audit 372)
 - d283 7 / 0 / 0 (eyes_count and eye_type in taxonomic descriptions: Leptonetela x2, Selachochthonius naledi, Pseudocrangonyx wonkimi, Gammarus tumaf, Lithobius x2; audit 373 found 0 errors)
+- d284 7 / 0 / 0 (eye states in marine and groundwater invertebrates: Gyorome guttatum, Nereis tricirrata, Caridina incolor, Vitropyrgus lillianae, Phreatodrobia bulla, Paladilhiopsis x2; audit 374 found 0 errors)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
