@@ -40,7 +40,7 @@ def recent_bytes(number):
         result = subprocess.run(["git", "-C", str(ROOT), "show", f"{RECENT['commit']}:{path}"],
                                 capture_output=True)
         if result.returncode:
-            raise RuntimeError("Recent fixture missing: fetch origin main with history; " + path)
+            raise RuntimeError(f"Recent fixture missing: git fetch --depth=1 origin {RECENT['commit']}; {path}")
         data = result.stdout
     if blob_sha(data) != RECENT["blobs"][path]:
         raise RuntimeError("Recent fixture hash mismatch: " + path)
