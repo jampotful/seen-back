@@ -27,7 +27,7 @@ Bibliographic faults 0; licence faults 0; source.access "open" right throughout.
 
 `git grep -n -i -E` on origin/main (2bb4cdea5) over the whole docs/ tree for Calogalesus, "Monelata truncata", "Nocticola baiguensis", baiguensis, "Mesodiplatys falcifer", "Rhagovelia depressa", "Rhagovelia tantilloides", tantilloides, Steinovelia, Ekpagloderma and the six DOIs. Hits: desk-d297.jsonl lines 3 and 4 (Nocticola appendiculata and N. cordiformis, same DOI, different species, eye_type), desk-d297.md line 17 (N. baiguensis listed as a dropped candidate, no value filed) and audit-388.md (a grep list naming the sister species). None repeats a line here. Unmerged origin/research/desk-d* branches other than d315: see the closing paragraph of this section.
 
-Branch grep: running at the time of this partial commit; result below when complete.
+Unmerged branches: the 314 origin/research/desk-d* branches other than d315 that are not merged into origin/main, grepping with the same pattern only the docs/ files each branch changes against origin/main (a full-tree loop over every branch first returned only copies of desk-d297.jsonl, desk-d297.md and audit-388.md inherited from main). Hits: origin/research/desk-d297 (desk-d297.md and desk-d297.jsonl, the same Nocticola sister-species records and dropped-candidate note that are on main). No other branch carries any of the eight species or six DOIs.
 
 ## Per line
 
