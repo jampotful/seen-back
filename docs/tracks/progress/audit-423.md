@@ -22,7 +22,7 @@ Bibliographic faults 0; licence faults 0; source.access "open" right throughout;
 
 ## Repeats
 
-`git grep -il -E` on origin/main (2bb4cdea5) over the whole docs/ tree (evidence, audit/corrected, audit/ALL, sheets, searched, tracks) for Cranopygia, kongqueshana, lisu (as "Cranopygia lisu"), liuhuaishana, longibifurcata, shidianensis, 175635, sahyadriensis, zookeys.1088.79416, Didymocorypha, libaii, zookeys.922.47987, muscoamicta, zookeys.1028.62347: no hits. Unmerged origin/research/desk-d* branches other than d315: see the closing line of this section.
+`git grep -il -E` on origin/main (2bb4cdea5) over the whole docs/ tree (evidence, audit/corrected, audit/ALL, sheets, searched, tracks) for Cranopygia, kongqueshana, lisu (as "Cranopygia lisu"), liuhuaishana, longibifurcata, shidianensis, 175635, sahyadriensis, zookeys.1088.79416, Didymocorypha, libaii, zookeys.922.47987, muscoamicta, zookeys.1028.62347: no hits. Unmerged origin/research/desk-d* branches other than d315 (314 branches) grepped with the same pattern over docs/, gaps copies excluded: completed, no hits.
 
 ## Per line
 
