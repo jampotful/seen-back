@@ -29,7 +29,7 @@ git grep on origin/main (6c4d6091) across the whole docs/ tree (evidence, audit 
 
 - No DOI or genus of this unit is on main or on any other branch except research/desk-d257 itself; Asproparthenis appears only in desk-d226's "Not opened" list (main and its branch), a different paper (Insects 17(8)) not filed. No audit-3* hold-out names any of these DOIs.
 - Frankliniella occidentalis on main: behaviour_vision (insects11070423, 3 rows), lambda_max_nm (annurev-ento-061720-071644 and fevo.2021.776827); the one "sense_chemical" hit is a Capsicum annuum plant row (desk-d127:1) that mentions the thrips. No F. occidentalis sense_chemical row; no duplicate.
-- Main's sense_magnetic rows: 49 taxa, including Emberiza bruniceps (one row, ani11061541, desk-d156, audited in audit 241); no Formicidae, no ant genus, and neither ant row repeats a main magnetic row by DOI or species. Chionoecetes absent from main (the "opilio" hits are Phalangium opilio, Opiliones).
+- Main's sense_magnetic rows: 47 distinct taxon strings, including Emberiza bruniceps (one row, ani11061541, desk-d156, audited in audit 241); no Formicidae, no ant genus, and neither ant row repeats a main magnetic row by DOI or species. Chionoecetes absent from main (the "opilio" hits are Phalangium opilio, Opiliones).
 
 Duplicates 0.
 
