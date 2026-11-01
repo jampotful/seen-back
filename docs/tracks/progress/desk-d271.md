@@ -14,3 +14,9 @@ Records filed so far: 6 (docs/views/evidence/desk-d271.jsonl), MDPI Insects, omm
 
 ## Queries that worked
 - Crossref list via WebFetch: api.crossref.org/works?filter=prefix:10.3390,from-pub-date:2022-01-01&query.container-title=Insects&query.bibliographic=compound+eye+ommatidia+ultrastructure&rows=30 (listed 5 of 39 hits; Scythris came from it). Web searches for spider acuity, ABR, Tpref and fish retina returned non-open or non-MDPI hosts.
+
+## Further held leads (final)
+- Siganus luridus eye histology (Front Vet Sci 11: 1417278): no licence sentence seen, no trait key for eye diameter.
+- Poecilia sphenops retina (Animals 14(6): 939): ornamental molly stock, cone/rod density table not a short sentence; held.
+- Bombus terrestris dorsal rim area (Insects 14(8): 670): commercial colonies likely, no ommatidia counts in abstract.
+- Final: 6 records, ~22 searches used (5 extended).
