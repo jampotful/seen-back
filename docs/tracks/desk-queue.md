@@ -372,6 +372,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d314 7 / 0 / 0 (huntsman spider, earwig, fish, polychaete, amphipod and eunicid eye states; audit 420: 2 fixable errors in 7)
 - d315 23 / 0 / 1 (cockroach, earwigs, water striders, fossil beetles, wood roaches, Diapriidae and Cranopygia eye states; audits 421-423: 4 fixable errors fixed, 1 synonym record dropped)
 - d316 12 / 0 / 0 (gall midges, fungus gnat, keroplatid and cave cricket eye states; audits 424-425: 3 fixable errors in 12)
+- d317 16 / 0 / 0 (cave and soil beetles, harvestman, fairyfly and others; audits 426-427: 5 fixable errors in 16)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
