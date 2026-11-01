@@ -323,6 +323,8 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d265 0 / 0 / 0 (no candidate passed; held leads in desk-d265.md; Podarcis muralis acuity jeb.249422 not reachable by search)
 - d266 0 / 0 / 0 (discovery-channel test: only single-DOI Crossref works; OpenAlex, DOAJ, Semantic Scholar and publisher URLs from Crossref output refused PROVENANCE_REQUIRED)
 - d267 3 / 1 / 0 (gradient Tpref: Iberolacerta galani, Podarcis bocagei, P. siculus Menorca; Craugastor loki pooled mean held out; audit 360)
+- d268 0 / 0 / 0 (extended-search harvest of other traits; PMC reCAPTCHA, hosts blocked; progress note only)
+- d269 4 / 0 / 0 (Giglio et al. 2022 Life 12(5):741 interommatidial_deg x4; all fixed after audit 361)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
