@@ -96,8 +96,9 @@ TRAIT_HELP = [
     ("polarization", "polarization sensitivity, where in the eye, what for; string"),
     ("depth_cue", "stereopsis, image defocus, motion parallax, accommodation, peering; string"),
     ("motion", "motion detection features (looming, small-target detectors, optomotor speeds); string with figures"),
-    ("sense_vibration", "substrate or web vibration: organs, frequency range, threshold; string with figures"),
-    ("sense_airflow", "trichobothria, filiform hairs, lateral line; string with figures"),
+    ("sensory_anatomy", "named structure and measurement, not an inferred sensory modality; requires anatomical kind and scope fields"),
+    ("sense_vibration", "responses to substrate or web vibration: stimulus, frequency range, threshold; distinguish mechanics, transduction and behaviour"),
+    ("sense_airflow", "responses to air or water flow; name the medium and measured response, not just an organ"),
     ("sense_hearing", "hearing range and best frequency; [low, high] in Hz, best frequency in note"),
     ("sense_echolocation", "call frequencies, rate, range; string with figures"),
     ("sense_electric", "electroreception; string with figures"),
@@ -108,6 +109,7 @@ TRAIT_HELP = [
     ("sense_touch", "touch and mechanoreception on the body surface; string with figures"),
     ("sense_light_nonvisual", "light sensing without an image (skin, brain, plant photoreceptors); string with figures"),
     ("behaviour_vision", "a behaviour that shows what is seen (distance at which prey is detected or attacked, colour choice); string with figures"),
+    ("ecological_intervention_outcome", "measured ecological endpoint under an intervention; requires ecological_outcome kind and scope fields; no sensory mechanism established"),
 ]
 
 EXAMPLES = r'''
@@ -159,6 +161,19 @@ SYSTEM_PROMPT = (
     "group, in the passage's words). Never fill in a species the passage does not name.\n"
     "- trait: one key from the trait list. If a measurement fits no key, you may use a short snake_case key of your own "
     "and begin note with 'new trait:' and a reason.\n"
+    "- evidence_kind: required for sense_* and behaviour_vision. Classify this endpoint, not the paper or trait: "
+    "anatomical_presence, anatomical_measurement, mechanical_response, transduction, physiological_response, "
+    "behavioural_response, inferred_function, or ecological_outcome. Organ-only findings belong in sensory_anatomy (or an existing "
+    "precise anatomy trait); sensory_anatomy also needs structure, measurement, method, conditions and units for "
+    "quantities. Passive motion is mechanical_response; receptor/neural recordings are transduction; other "
+    "physiology/development is physiological_response; tested choice/movement/null is behavioural_response. "
+    "An explicitly attributed functional hypothesis is inferred_function. Preserve controls and uncertainty in note. "
+    "Do not infer visual avoidance from net catches or a sensory mechanism from an intervention outcome alone. "
+    "File a measured intervention outcome as ecological_intervention_outcome with evidence_kind ecological_outcome; "
+    "include measured_endpoint, experimental_unit, intervention, comparator, mechanism_limit, method, conditions and units. "
+    "Preserve its measured value and nulls without claiming a sensory mechanism. "
+    "Do not label a measured ecological outcome inferred_function to make it fit. If the passage cannot establish "
+    "the claim type, omit that sensory claim for source review. Read docs/views/research/EVIDENCE-INTAKE.md for intake.\n"
     "- value: a number, a [low, high] range of numbers, or a short string where the trait is categorical. Give the value "
     "as the passage gives it. If you convert units, put the arithmetic in note (inter-receptor angle to cycles per degree "
     "is 1 / (2 x angle in degrees)).\n"
@@ -190,7 +205,9 @@ SYSTEM_PROMPT = (
     + "\n".join("- %s: %s" % (k, d) for k, d in TRAIT_HELP)
     + "\n\nLOG FORMAT (the table's records are later completed with the citation, so you do not write it):\n"
     '{"taxon": "...", "trait": "...", "value": 0, "units": "...", "eye": "...", "method": "...", "conditions": "", '
-    '"where": "...", "quote": "...", "grade": "m", "note": ""}\n\n'
+    '"where": "...", "quote": "...", "grade": "m", "note": ""}\n'
+    'For a functional record also include, for example, "evidence_kind": "behavioural_response" only when '
+    'the recorded endpoint is the tested organism response. Anatomical counts need their anatomical kind.\n\n'
     "WORKED EXAMPLES (the passages are shortened)\n" + EXAMPLES
 )
 
@@ -617,6 +634,10 @@ def finish_record(raw, item, passage, check, stats, tsq):
     """Add the citation and checks to one model record. Returns the record, or None with the reason counted."""
     r = {k: raw.get(k, "") for k in ("taxon", "trait", "value", "units", "eye", "method", "conditions", "where",
                                        "quote", "grade", "note")}
+    # Keep supplied scope metadata. Old cached batches remain collectable without
+    # invented kinds; strict intake is required before filing their candidates.
+    r.update({k: raw[k] for k in ("evidence_kind", "structure", "measurement", "measured_endpoint",
+                                "experimental_unit", "intervention", "comparator", "mechanism_limit") if k in raw})
     if not isinstance(r["quote"], str) or not r["quote"].strip():
         stats["dropped_no_quote"] += 1; return None
     if r["grade"] not in ("m", "g"):

@@ -353,14 +353,15 @@ def record_line(rid, r):
     method = r.get("method") or ""
     typed_sensory = r.get("evidence_kind") in GAPS.SCOPE.KINDS and (
         GAPS.SCOPE.functional_trait(r.get("_trait", r.get("trait", "")))
-        or r.get("trait") == GAPS.SCOPE.ANATOMY)
+        or r.get("trait") in (GAPS.SCOPE.ANATOMY, GAPS.SCOPE.OUTCOME))
+    typed_sensory = typed_sensory or GAPS.SCOPE.ecological(r)
     part += " | evidence_kind=" + str(r.get("evidence_kind", "legacy_untyped"))
     if r.get("sensory_use_limit"):
         part += " | use limit: " + r["sensory_use_limit"]
     if typed_sensory:
         # A note may contain the whole measured curve and a late taxonomic
         # restriction. Do not strip scientific qualifications from writer input.
-        for field in ("units", "structure", "measurement", "conditions", "where", "note"):
+        for field in ("units", "structure", "measurement", "conditions", "where", "note", "measured_endpoint", "experimental_unit", "intervention", "comparator", "mechanism_limit", "sensory_use_scope"):
             if r.get(field) not in (None, ""):
                 part += " | %s: %s" % (field, r[field])
     else:
@@ -516,6 +517,8 @@ def check_draft(draft, row, ids):
         errs.append("voice check %s: %s" % (rule, detail))
     pool = []
     for r in cited:
+        if GAPS.SCOPE.ecological(r) and row.get("traits") != [GAPS.SCOPE.OUTCOME]:
+            errs.append("ecological outcome requires an explicitly scoped outcome row")
         if any(GAPS.SCOPE.functional_trait(t) for t in row.get("traits", [])) and GAPS.SCOPE.restricted(r):
             errs.append("anatomy, mechanics or inferred function cannot support a functional row")
         numbers_of(r.get("value"), pool)

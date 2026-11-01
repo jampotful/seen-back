@@ -305,8 +305,8 @@ def disagree(records, trait):
 # ---------------------------------------------------------------- one cell: species x trait
 def cell(sp, trait, cls, index, ord_ev, tax, carry_exc):
     """-> dict(state m|g|i, level, rec, rule, note). Closest evidence is reported whatever its state."""
-    if trait == SCOPE.ANATOMY:
-        cls = "none"  # no automatic transfer of anatomical counts or structures
+    if trait in (SCOPE.ANATOMY, SCOPE.OUTCOME):
+        cls = "none"  # structures and intervention outcomes have no automatic carry
     view = sp.get("view", "")
     genus = sp["genus"]
     fam = sp["family"]

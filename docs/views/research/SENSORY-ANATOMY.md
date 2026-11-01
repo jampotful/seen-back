@@ -2,7 +2,9 @@
 
 Classification rule proposed and implemented on `codex/sensory-anatomy-292`,
 31 October 2026, in response to the owner's instruction after audit 292.
-The research desk reviews and applies the branch; the app thread merges main.
+Code and instructions integrate separately from candidate evidence. The four
+proposed anatomy records remain subject to independent research-desk disposition;
+their copies under `tools/senses/fixtures/` are regression inputs only.
 
 ## Decision
 
@@ -28,6 +30,7 @@ correctly measured anatomical count an invented number.
 | `physiological_response` | A measured physiological or developmental response to the specified stimulus | A particular receptor or molecular transduction mechanism; behavioural detection |
 | `behavioural_response` | The tested organism's response, discrimination or null under stated controls | The receptor responsible without causal evidence; unrestricted ability or inability |
 | `inferred_function` | An explicitly attributed functional hypothesis or model | Experimentally demonstrated detection |
+| `ecological_outcome` | A measured ecological or survey endpoint under an intervention | A particular sensory response or mechanism; see [ECOLOGICAL-OUTCOMES.md](ECOLOGICAL-OUTCOMES.md) |
 
 These are claim types, not a ladder of quality. A behavioural experiment can
 establish detection without identifying the receptor; anatomy can be measured
