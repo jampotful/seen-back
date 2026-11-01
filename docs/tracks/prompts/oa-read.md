@@ -18,6 +18,7 @@ source, using the eight kinds in `SENSORY-ANATOMY.md`; retain the rationale and
 source location in `note`/`where`. Do not infer a kind from the trait or method
 label. If it cannot be justified, hold that claim. The intake policy also governs
 direct JSONL writes and returning units launched under the old instructions.
+For fresh plant `sense_light_nonvisual` records, apply [LIGHT-RESPONSE.md](../../views/research/LIGHT-RESPONSE.md). State the evidence basis in `method`, keep observational wording in `value`, and distinguish measured comparisons from author interpretations. A common-garden provenance difference alone cannot establish a light response. Reuse the ordinary source reconciliation; this adds no second receipt or verification pass.
 
 Read each paper whole, with its tables, figure captions and appendices, in the order your launch prompt gives. The text file holds the plain text first and, for PDFs, the same pages again after `=== LAYOUT ===` with columns kept, which is where tables are easiest to read. Log every measurement of a trait in BRIEF's list for every species in the paper, on the owner's lists or not, one record a value, with `python3 -I tools/senses/addlog.py <batch> < records.jsonl` (unit = the batch, e.g. `oa-9`).
 

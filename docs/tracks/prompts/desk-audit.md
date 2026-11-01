@@ -1,5 +1,7 @@
 # Audit of a desk screening unit (desk-screen.md rules, 18 October 2026)
 
+For fresh plant light-evidence units after integration, audit trait fit under [LIGHT-RESPONSE.md](../../views/research/LIGHT-RESPONSE.md), including observational qualifications and the distinction between exposure and provenance. An unresolved design is a reading gap; an author explanation alone cannot close the light-response cell. This does not change historical audit decisions or the separate search-record counting rules.
+
 When the unit includes evidence records, audit them under the scientific-context and counting section of `oa-audit.md` (29 October 2026), in addition to the evidence rules the unit was written under. Report evidence and search-record counts separately; the search and wanted-line counting rules below do not exempt scientifically consequential omissions in evidence.
 
 Also follow `docs/views/research/EVIDENCE-INTAKE.md` for the unit's launch version,
