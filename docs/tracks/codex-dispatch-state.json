@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "jampotful/seen-back",
-  "generation": 135,
-  "updated_at": "2026-11-01T12:31:38Z",
+  "generation": 136,
+  "updated_at": "2026-11-01T13:14:38Z",
   "owner": "Regards Codex dispatcher",
   "scheduler": {
     "id": "6ae019b909948191bbec1fb4febd83dc",
@@ -118,7 +118,7 @@
       },
       "last_visibility_check": {
         "status": "unknown",
-        "observed_at": "2026-11-01T12:31:38Z",
+        "observed_at": "2026-11-01T13:14:38Z",
         "blocker_signature": "browser-read-timeout:issue28",
         "reason": "Current task read still times out. Prior bounded recovery already attempted for unchanged signature; no further recovery or task continuation. Prior terminal result and desk disposition preserved.",
         "recovery_attempts": 1,
@@ -202,7 +202,7 @@
       "desk_closure_comment_id": 6438668973,
       "last_visibility_check": {
         "status": "unknown",
-        "observed_at": "2026-11-01T12:31:38Z",
+        "observed_at": "2026-11-01T13:14:38Z",
         "blocker_signature": "browser-read-timeout:issue29",
         "reason": "Current task read still times out. Prior bounded recovery already attempted for unchanged signature; no further recovery or task continuation. Prior terminal result and desk disposition preserved.",
         "recovery_attempts": 1,
@@ -240,7 +240,7 @@
       "state": "reviewed",
       "task_url": "https://chatgpt.com/local/01a17b5f-fede-72d7-9d94-ae0affff10f4",
       "observed_status": "Chat remains terminal. Desk incorporated selected proposals through branch and closed PR #36 without merging; no rerun.",
-      "observed_at": "2026-11-01T10:55:12Z",
+      "observed_at": "2026-11-01T13:14:38Z",
       "environment": "seen-back",
       "model": "GPT-6.1 Sol High",
       "prompt_path": "docs/tracks/prompts/codex-data-1.md",
@@ -311,14 +311,8 @@
       "issue_closed_at": "2026-10-27T09:49:07Z",
       "desk_closure_comment_id": 6438669713,
       "last_visibility_check": {
-        "status": "unknown",
-        "observed_at": "2026-11-01T12:31:38Z",
-        "blocker_signature": "browser-read-timeout:issue30",
-        "reason": "Current task read still times out. Prior bounded recovery already attempted for unchanged signature; no further recovery or task continuation. Prior terminal result and desk disposition preserved.",
-        "recovery_attempts": 1,
-        "recovery_attempts_this_run": 0,
-        "last_verified_terminal_at": "2026-11-01T10:55:12Z",
-        "owner_action_required": false
+        "status": "terminal",
+        "observed_at": "2026-11-01T13:14:38Z"
       },
       "visibility_history": [
         {
@@ -352,7 +346,9 @@
           "recovery_attempts": 1,
           "recovery_attempts_this_run": 0,
           "last_verified_terminal_at": "2026-11-01T10:55:12Z",
-          "owner_action_required": false
+          "owner_action_required": false,
+          "resolved_at": "2026-11-01T13:14:38Z",
+          "resolution": "Existing signed-in chat read successfully; terminal result unchanged. No task prompt or replacement."
         }
       ]
     },
@@ -485,8 +481,13 @@
       "desk_status_comment_id": 6448341657,
       "issue_state": "open",
       "last_visibility_check": {
-        "status": "terminal",
-        "observed_at": "2026-11-01T12:31:38Z"
+        "status": "unknown",
+        "observed_at": "2026-11-01T13:14:38Z",
+        "blocker_signature": "browser-read-timeout:issue38",
+        "reason": "Page.getFrameTree timed out while inspecting the existing chat. Prior verified terminal result and freshly checked desk disposition preserved; no task-status inference or continuation.",
+        "recovery_attempts": 0,
+        "last_verified_terminal_at": "2026-11-01T12:31:38Z",
+        "owner_action_required": false
       },
       "visibility_history": [
         {
@@ -499,12 +500,21 @@
           "owner_action_required": false,
           "resolved_at": "2026-11-01T01:46:53Z",
           "resolution": "Existing signed-in chat read successfully; terminal result unchanged. No recovery prompt or replacement task."
+        },
+        {
+          "status": "unknown",
+          "observed_at": "2026-11-01T13:14:38Z",
+          "blocker_signature": "browser-read-timeout:issue38",
+          "reason": "Page.getFrameTree timed out while inspecting the existing chat. Prior verified terminal result and freshly checked desk disposition preserved; no task-status inference or continuation.",
+          "recovery_attempts": 0,
+          "last_verified_terminal_at": "2026-11-01T12:31:38Z",
+          "owner_action_required": false
         }
       ]
     }
   },
   "last_reconciliation": {
-    "observed_at": "2026-11-01T12:31:38Z",
+    "observed_at": "2026-11-01T13:14:38Z",
     "eligible_open_issues": [
       28,
       38
@@ -520,8 +530,8 @@
     "decisions": {
       "28": "no-op duplicate suppression; reviewed assignment retained. Current task visibility unknown after browser read timeout; prior terminal evidence preserved. No new task or continuation.",
       "29": "no-op duplicate suppression; reviewed assignment retained. Current task visibility unknown after browser read timeout; prior terminal evidence preserved. No new task or continuation.",
-      "30": "no-op duplicate suppression; reviewed assignment retained. Current task visibility unknown after browser timeout; prior terminal evidence preserved, no new task or continuation.",
-      "38": "no-op duplicate suppression; terminal reviewed assignment retained. Existing receipt and desk disposition preserved; no task or continuation.",
+      "30": "no-op duplicate suppression; terminal reviewed assignment retained. No task or continuation.",
+      "38": "no-op duplicate suppression; reviewed assignment retained. Current task visibility unknown after browser timeout; prior terminal evidence preserved. No new task or continuation.",
       "39": "Ineligible bot-authored quiet alert; no instructions followed",
       "40": "Desk-incorporated through branch; closed merged=false is not missing work.",
       "41": "Previously ineligible bot-authored quiet alert is no longer in the open-issue listing. No task instructions followed; no inference about Codex execution from repository activity.",
@@ -548,9 +558,9 @@
       "PR #40 desk comment6447754258 and issue38 disposition6448341657"
     ],
     "documentation_note": "Main activation runbook retains historical verification wording; operational ledger now records desk dispositions for all three assignments.",
-    "task_access": "Chat38 verified terminal and unchanged. Chats28/29/30 current visibility remains unknown after browser snapshot timeouts; prior terminal results and freshly checked desk dispositions preserved. No task prompts or submissions.",
+    "task_access": "Chat30 verified terminal and unchanged; prior visibility gap resolved. Chats28/29/38 current visibility unknown after browser timeouts; prior terminal results and freshly checked desk dispositions preserved. No task prompts or submissions.",
     "new_eligible_requests": [],
-    "run": "2026-11-01T12:31:38Z",
+    "run": "2026-11-01T13:14:38Z",
     "task_comments_observed": [],
     "access_limitations": [
       {
@@ -568,13 +578,13 @@
         "owner_action_required": false
       },
       {
-        "issue": 30,
-        "signature": "browser-read-timeout:issue30",
+        "issue": 38,
+        "signature": "browser-read-timeout:issue38",
         "status": "unknown",
-        "recovery_attempts": 1,
+        "recovery_attempts": 0,
         "owner_action_required": false
       }
     ],
-    "main_sha": "3f27de4118792865b543e89a0be552bb7928f91e"
+    "main_sha": "a85bc4efbf9a68ac2da1e2c46204e39c8b8ee928"
   }
 }
