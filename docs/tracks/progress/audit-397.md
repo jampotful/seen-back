@@ -27,7 +27,7 @@ Searches for "Nymphon lituus", "Callipallene californiensis" and "Exogone (Exogo
 
 ## Duplicates
 
-`git grep -i` on origin/main (5f4bde4d) over the whole docs/ tree for lituus, californiensis, halanychi, annewintersae, rybaki, kristenseni, "Exogone ... dispar" and the five DOI strings: hits only for other species named californiensis (Hippolyte, Hemisquilla, Theatops), desk-d285's Eurycyde bamberi from the same ZooKeys 530 paper (a different species, as the notes say) and audit-375's list of opened DOIs. The grep of the other unmerged origin/research/desk-d* branches did not finish within the tool's time limit; branches not cleared by this audit. Duplicate faults 0 on main.
+`git grep -i` on origin/main (5f4bde4d) over the whole docs/ tree for lituus, californiensis, halanychi, annewintersae, rybaki, kristenseni, "Exogone ... dispar" and the five DOI strings: hits only for other species named californiensis (Hippolyte, Hemisquilla, Theatops), desk-d285's Eurycyde bamberi from the same ZooKeys 530 paper (a different species, as the notes say) and audit-375's list of opened DOIs. Every other origin/research/desk-d* branch grepped for the same species and DOI patterns in the evidence and progress files that differ from origin/main: no hits. Duplicate faults 0.
 
 ## Per line
 
