@@ -282,3 +282,13 @@ How strongly sound lights the picture (k), how dark the picture rests, how long 
 ### haptic.pattern
 ### haptic.edge
 What sets the vibration off (`onset` of a sound, a `knock`, a `shock` of darkening), the pattern in milliseconds, and the strength of the pulse of light drawn at the edge where the phone cannot vibrate.
+
+## Sensory anatomy is not a stimulus response
+
+`sensory_anatomy` supports the named structure and its measurement. Counts and
+passive mechanical responses supply no hearing band, airflow threshold or
+vibration sensitivity. The engine has no count-to-sensitivity model. An effect
+inspired by such anatomy uses `i` and `invented: true`, with its anatomical basis
+and untested functional assumption stated separately. See
+`docs/views/research/SENSORY-ANATOMY.md`; `m` on an organ count is not `m` on an
+engine effect. Existing measured optical-geometry traits retain their meanings.
