@@ -21,7 +21,7 @@ Order and family as printed: ZooKeys 275 prints "(Coleoptera, Staphylinidae, Pse
 
 ## Repeats
 
-`git grep -il -E` on origin/main (095e055d8) over the whole docs/ tree for the eight epithets (tiantongensis, wrasei, "Batrisodes grossus", qiului, simianshanus, tianmuensis, xuhaoi, zethus) and both DOIs. Hits: docs/views/evidence/desk-d302.jsonl carries both DOIs, but for other species only (Dayao emeiensis from ZooKeys 275, Batrisodes zhouchaoi from ZooKeys 694), as the notes say; "zethus" hits are the wasp genus Zethus (gaps, queue, sweep-59, codex-findings), a different taxon. No filed species is on main under any trait. Unmerged origin/research/desk-d* and audit-* branches (all except desk-d311) were grepped over docs/views/evidence, docs/views/audit and docs/views/sheets for the eight binomials: REPEAT_RESULT.
+`git grep -il -E` on origin/main (095e055d8) over the whole docs/ tree for the eight epithets (tiantongensis, wrasei, "Batrisodes grossus", qiului, simianshanus, tianmuensis, xuhaoi, zethus) and both DOIs. Hits: docs/views/evidence/desk-d302.jsonl carries both DOIs, but for other species only (Dayao emeiensis from ZooKeys 275, Batrisodes zhouchaoi from ZooKeys 694), as the notes say; "zethus" hits are the wasp genus Zethus (gaps, queue, sweep-59, codex-findings), a different taxon. No filed species is on main under any trait. Unmerged origin/research/desk-d* and audit-* branches (all except desk-d311) were grepped over docs/views/evidence, docs/views/audit and docs/views/sheets for the eight binomials in one `git grep -il -E`: completed, no hits.
 
 ## Per line
 
