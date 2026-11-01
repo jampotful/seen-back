@@ -116,6 +116,9 @@ For new plant `sense_light_nonvisual` evidence, apply [LIGHT-RESPONSE.md](LIGHT-
 | `sense_electric`, `sense_magnetic`, `sense_infrared`, `sense_thermal`, `sense_chemical`, `sense_touch`, `sense_light_nonvisual` | other senses | string with figures |
 | `behaviour_vision` | a behaviour that shows what is seen (distance prey is detected or attacked, colour choice) | string with figures |
 | `ecological_intervention_outcome` | measured catch, survey detection or other ecological endpoint under an intervention; no sensory mechanism established by this classification | string with figures |
+| `physiology_volatile_emission` | measured volatile release or assay non-detection; a physiological observation, not sensory capability | string with assay/conditions; `note` says `new trait` and why |
+
+For chemical evidence, apply [CHEMICAL-EVIDENCE.md](CHEMICAL-EVIDENCE.md): separate chemical reception and treatment responses from emission and demonstrated emitter/receiver interactions. The physiology key does not settle `sense_chemical` coverage or authorize an app effect; source/taxon checks and the usual independent audit still govern admission.
 
 For intervention studies, apply [Ecological outcomes and sensory claims](ECOLOGICAL-OUTCOMES.md).
 Use `evidence_kind: ecological_outcome` with the measured endpoint, experimental
