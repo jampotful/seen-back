@@ -1,8 +1,8 @@
-# desk-d315: eye states of parasitoid wasps, cockroaches, earwigs, stick insects, water striders and two Mesozoic fossils, 22 records
+# desk-d315: eye states of parasitoid wasps, cockroaches, earwigs, stick insects, water striders, mantises and two Mesozoic fossils, 24 records
 
-Branch research/desk-d315 from origin/main. About 45 WebSearches and WebFetch only on URLs returned by searches, plus Pensoft article XML (`/article/ID/download/xml/`) for IDs that appeared in a Pensoft taxon browse page or a Crossref list query. `python3 -I tools/senses/check.py | grep d315`: 22 records, 0 problems. Trait: eye_type only (key on main). Crossref single-DOI lookups answered for every DOI filed (two Pensoft DOIs through a list query).
+Branch research/desk-d315 from origin/main. About 45 WebSearches and WebFetch only on URLs returned by searches, plus Pensoft article XML (`/article/ID/download/xml/`) for IDs that appeared in a Pensoft taxon browse page or a Crossref list query. `python3 -I tools/senses/check.py | grep d315`: 24 records, 0 problems. Trait: eye_type only (key on main). Crossref single-DOI lookups answered for every DOI filed (two Pensoft DOIs through a list query).
 
-Repeat check: a text index of origin/main docs/ plus the evidence, progress, searched and audit files of every unmerged desk and audit branch was built once; every species and DOI was grepped before filing (no hit for any of the 22).
+Repeat check: a text index of origin/main docs/ plus the evidence, progress, searched and audit files of every unmerged desk and audit branch was built once; every species and DOI was grepped before filing (no hit for any of the 24 beyond the desk-d297 DOI and a dropped-candidate note for Nocticola baiguensis).
 
 Filed (docs/views/evidence/desk-d315.jsonl):
 1-2. Calogalesus sinicus (female, ZooKeys 626) and Monelata truncata (female holotype, ZooKeys 574), Diapriidae.
@@ -16,6 +16,8 @@ Filed (docs/views/evidence/desk-d315.jsonl):
 14-16. Cnipsomorpha yunnanensis (female), C. yuxiensis (female, male) (ZooKeys 1176).
 17-21. Cranopygia kongqueshana, lisu, liuhuaishana, longibifurcata, shidianensis, identical male Head sentence (ZooKeys 1262).
 22. Diplatys sahyadriensis, male holotype (ZooKeys 1088).
+23. Didymocorypha libaii, male holotype of a high-altitude wingless mantis (ZooKeys 922).
+24. Arria muscoamicta, male holotype (ZooKeys 1028; classification block prints Mantidae, title and text Haaniidae, Haaniidae used).
 
 Dropped candidates:
 - Licence: Cindarella eucalla (Sci Rep 3: 2751, over 2,000 ommatidia per eye, lens 60-140 um) is CC BY-NC-ND; the radiodont compound-eye paper (Disparate compound eyes of Cambrian radiodonts) surfaced only as repository copies.
