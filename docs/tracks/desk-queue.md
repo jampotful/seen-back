@@ -329,6 +329,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d271 6 / 0 / 0 (MDPI Insects ommatidia_count: Asiophrida xanthospilota x2, Scythris sinensis x4; Scythris fixed after audit 364)
 - d272 4 / 0 / 0 (Grapholita molesta Front Physiol 15:1343702: ommatidia_count x2, facet_diameter_um, rhabdom_um; all fixed after audit 365)
 - d273 0 / 0 / 0 (gap-queue vertebrate/bumblebee/butterfly search; every open paper already on main)
+- d274 7 / 0 / 0 (MDPI Biology/Insects eye morphology: Tomicus yunnanensis x5, Cacopsylla chinensis x2; fixed after audit 366)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
