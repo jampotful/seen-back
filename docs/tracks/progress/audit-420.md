@@ -31,7 +31,7 @@ eye_type fits all seven (presence/absence, development and colour of eyes).
 
 ## Repeats
 
-`git grep -i -E` on origin/main (46aeaadd7) over the whole docs/ tree for the seven genera/epithets and the seven DOIs. No evidence, audit/corrected, audit/ALL, sheets or searched hits. Only progress-note mentions: desk-d293.md, desk-d297.md and desk-d310.md each set Cylindrogaster cavernicola aside ("no state or count"); that is a screening judgement, not a filed value, so line 2 is not a repeat (see line 2). "cavernicola" otherwise hits other species (Hendea myersi cavernicola, Litoria cavernicola). Unmerged origin/research/desk-d* and audit-* branches: see the branch line in the Verdict section.
+`git grep -i -E` on origin/main (46aeaadd7) over the whole docs/ tree for the seven genera/epithets and the seven DOIs. No evidence, audit/corrected, audit/ALL, sheets or searched hits. Only progress-note mentions: desk-d293.md, desk-d297.md and desk-d310.md each set Cylindrogaster cavernicola aside ("no state or count"); that is a screening judgement, not a filed value, so line 2 is not a repeat (see line 2). "cavernicola" otherwise hits other species (Hendea myersi cavernicola, Litoria cavernicola). Unmerged origin/research/desk-d* branches: no hits (see Verdict section).
 
 ## Per line
 
@@ -93,7 +93,7 @@ Description: "Eyes dark, lateral to ceratophores of lateral antennae (Fig. 2G)."
 | 6 | Orchomenella compressa, no trace of eyes in ethanol | MATCH | | preservation limit kept; shared catalogue number disclosed |
 | 7 | Eunice siphoninsidiator, eyes dark | MATCH | | type-series basis is an inference (optional fix) |
 
-Errors: 2 of 7 records (28.6%); 2 fixable (lines 1, 2), 0 held out, 0 unfixable; no line to drop. Repeats on main: none. Unmerged-branch grep still running at this commit. Verdict for desk-d314: **ACCEPT AFTER REPLACEMENT** (lines 3 to 7 as filed; lines 1 and 2 with the replacements below, or dropped if they are not applied).
+Errors: 2 of 7 records (28.6%); 2 fixable (lines 1, 2), 0 held out, 0 unfixable; no line to drop. Repeats on main: none. Unmerged origin/research/desk-d* branches (all except d314): every file each branch changes under docs/views relative to origin/main (397 files) grepped for the seven species and DOIs: no hits. Verdict for desk-d314: **ACCEPT AFTER REPLACEMENT** (lines 3 to 7 as filed; lines 1 and 2 with the replacements below, or dropped if they are not applied).
 
 ## Replacement
 
