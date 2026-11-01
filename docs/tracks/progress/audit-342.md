@@ -24,7 +24,7 @@ git grep on origin/main (57f0b435) across the whole docs/ tree for "pone.0028572
 
 - Leptograpsus variegatus. pone.0028572 appears only in desk-d228.md and desk-d230.md (lead lists); the "0028572" hit in docs/eval/shipped-alachua-pre2025-by-tinyclip-39m-16.json is an unrelated number. Main holds L. variegatus (and genus Leptograpsus) only as eye rows: interreceptor_deg 1.5 (sea-invertebrates:32), acuity_cpd 0.332 and optical_sensitivity 0.5 (methods:132, 1067; Land and Nilsson 2012) and acuity_cpd 0.67 and 0.74 (canon-4, Feller et al. 2021). No sense_hearing or other sound row. Not a repeat. Hemigrapsus on main is H. sanguineus (Varunidae) only; no H. sexdentatus or Cyclograpsus row, so the unfiled clauses repeat nothing either.
 - Allobathynella bangokensis. No hit for the name, the genus, Bathynellacea or the DOI on main. Not a repeat.
-- Unmerged branches: see the branch-scan line under Unchecked.
+- Unmerged branches: one git grep over all 1,371 non-main remote refs (docs/views and docs/tracks/progress) for pone.0028572, pone.0170424, bangokensis and Allobathynella finds only research/desk-d247 (these two records and the desk note) and this audit's branch, apart from the desk-d228/d230 lead lists. No other filing. ("Leptograpsus variegatus" was dropped from the branch scan because main's Land and Nilsson eye rows appear on every branch; main itself holds no sound row for it.)
 
 Duplicate faults 0.
 
@@ -75,7 +75,6 @@ Pooled rate: not computed (no pooled evidence figure carried since audit 324).
 - Line 1: how sound levels were measured in the treatment tanks (the desk's "measured with a calibrated hydrophone in the tanks, not calculated"; only the Silent-tank hydrophone check was returned) and whether particle motion was measured or discussed; the fourth page pass was rate-limited twice. The collection and control descriptions are tool summaries.
 - Line 1: the 135 dB and 100 dB pairwise results individually (supplementary tables; text gives only the Discussion summary).
 - Line 2: the end of the sentence before the quote ("...peropsins and neuropsins [35]."); how the 15 pooled animals were identified, given a sympatric congener (A. hongcheonensis) near the collection area; WoRMS and GBIF status of the species.
-- Unmerged-branch scan for both DOIs, "bangokensis" and "Leptograpsus variegatus": BRANCHSCAN
 
 ## Replacement text
 
