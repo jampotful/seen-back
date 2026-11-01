@@ -353,6 +353,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d295 8 / 0 / 0 (cave and surface fishes eye_type: Sinocyclocheilus wanlanensis and guiyang, Triplophysa anshuiensis and dafangensis, Troglonectes canlinensis, Lucifuga gibarensis, Oreonectes qinae, Protocobitis longibarba; audit 386: 3 fixable errors in 8)
 - d296 5 / 0 / 0 (Strumigenys subterranea, Leptanilla voldemort, Blepharicera gengdica, balangshana, kongsica; audit 387: 1 fixable error in 5)
 - d297 9 / 0 / 0 (cave and soil insects: Cixius theseus and palmirandus, Nocticola appendiculata, cordiformis, gonzalezi, Iuiuia caeca, Valenciolenda fadaforesta, Spelaeometra hypogea, Camptochaeta prolixa; audits 388 and 389: 1 fixable error in 9)
+- d298 4 / 0 / 0 (eye_type: Yirrkala nkust, Microcaecilia dermatophaga, Amphisbaena amethysta, Toxicocalamus longhagen; audit 390: 1 fixable error in 4)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
