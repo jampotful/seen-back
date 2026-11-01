@@ -11,6 +11,14 @@ The texts are fetched again for you, encrypted to a key that only your machine h
 3. `ci/oa/sources-r1.jsonl` holds, for each paper read, the `source` object to copy into every record from it: the full author list, year, title, and the journal string with volume, issue and pages, all from Crossref. Where `metadata_gaps` names something missing (often pages), take it from the paper's own first page and fill it in. Where the text itself says it is an author manuscript, accepted manuscript or preprint, say so in `note`; a PubMed Central or Europe PMC copy of a published paper is the published version whatever `copy` says.
 
 ## Reading
+For new launches, read `docs/views/research/EVIDENCE-INTAKE.md` and record
+`evidence_intake: evidence-kind-v1` plus the full accepted-main `intake_base` SHA
+in the unit's progress note. Classify each new functional endpoint from the
+source, using the seven kinds in `SENSORY-ANATOMY.md`; retain the rationale and
+source location in `note`/`where`. Do not infer a kind from the trait or method
+label. If it cannot be justified, hold that claim. The intake policy also governs
+direct JSONL writes and returning units launched under the old instructions.
+
 Read each paper whole, with its tables, figure captions and appendices, in the order your launch prompt gives. The text file holds the plain text first and, for PDFs, the same pages again after `=== LAYOUT ===` with columns kept, which is where tables are easiest to read. Log every measurement of a trait in BRIEF's list for every species in the paper, on the owner's lists or not, one record a value, with `python3 -I tools/senses/addlog.py <batch> < records.jsonl` (unit = the batch, e.g. `oa-9`).
 
 The rules the audits enforce:
@@ -28,6 +36,10 @@ For each paper, also write one line in `docs/views/sources/<batch>.jsonl`: `{"do
 
 ## Before every commit
 - `python3 -I tools/senses/check.py docs/views/evidence/<batch>.jsonl` passes.
+- `python3 -I tools/senses/check.py --require-evidence-kind /tmp/new-records.jsonl`
+  passes for the new input before append. Do not strict-check the historical corpus.
+- `python3 -I tools/senses/check_submission.py --base-ref <intake_base> docs/views/evidence/<batch>.jsonl`
+  passes for the final submission, including direct writes and corrections.
 - Every new record's quote passed `quotecheck.py` against its text.
 - `git status` shows no `.txt`, `.pdf`, `.xml`, `.bin` or `.pem` file staged. Paper text and the key never enter the repository.
 Commit and push your branch at least every 15 minutes, between papers. Do not merge into `main` and do not open a pull request: the control room audits a seeded sample against the same texts and merges.

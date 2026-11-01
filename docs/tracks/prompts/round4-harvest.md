@@ -1,5 +1,7 @@
 # Round 4: finish the protocol from a harvest (Sonnet, medium effort, local agent with web access)
 
+For fresh evidence-writing launches, follow `docs/views/research/EVIDENCE-INTAKE.md`: record the accepted-main `intake_base` and `evidence-kind-v1` in the existing progress note; classify each new functional endpoint from its source; strict-check new input before `addlog.py`; and run `check_submission.py --base-ref <intake_base>` on the final logs. This includes direct JSONL writes. Unchanged accepted records remain grandfathered; returning old-format units finish without interruption and receive desk classification before admission. Follow the assignment’s existing file and branch boundaries.
+
 Build machines have already sent most of the protocol's searches to OpenAlex for every genus whose open cells lack a full search (`.github/workflows/harvest.yml`). Your job is to screen what they found, open what may hold a measurement, and write the records, so that each genus ends with the full protocol on record. Do not repeat the searches they sent; add only the steps they left out (step 2).
 
 Read first: `docs/views/research/THOROUGH.md` (the protocol), the Round 2 section of `docs/views/research/BRIEF.md` (records, grades, carry rules) and `docs/tracks/prompts/round3-sweep.md` (how a sweep logs). Your launch prompt gives about 40 genera and your branch, `research/harvest-<n>`. Push at least every 15 minutes.

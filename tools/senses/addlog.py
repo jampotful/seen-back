@@ -4,6 +4,8 @@
     python3 -I tools/senses/addlog.py <unit> < records.jsonl
 
 Each input line is one JSON object, one measurement (docs/views/research/BRIEF.md gives the fields and trait keys).
+New sense_* and behaviour_vision records need evidence_kind; see docs/views/research/EVIDENCE-INTAKE.md.
+Existing untyped lines in the destination are not rewritten or reclassified.
 Lines are appended to docs/views/evidence/<unit>.jsonl, found from this file's place in the repository.
 A record that fails a check stops the run before anything is written, with the reason.
 """

@@ -1,5 +1,7 @@
 # Outside worker: free copies of the papers on the owner's list (Codex cloud task, or any agent with a shell and internet access)
 
+For fresh evidence-writing launches, follow `docs/views/research/EVIDENCE-INTAKE.md`: record the accepted-main `intake_base` and `evidence-kind-v1` in the existing progress note; classify each new functional endpoint from its source; strict-check new input before `addlog.py`; and run `check_submission.py --base-ref <intake_base>` on the final logs. This includes direct JSONL writes. Unchanged accepted records remain grandfathered; returning old-format units finish without interruption and receive desk classification before admission. Follow the assignment’s existing file and branch boundaries.
+
 You are helping research which animals, plants and fungi see what, for a phone app. The repository is github.com/jampotful/seen-back. The owner downloads the papers on the research's wanted list by hand. Your job is to find each paper in your batch that has a free, legal copy online, read it, and log what it measures, so the owner never has to fetch it. Your task message names a batch number, k (1 to 8). Work only on that batch and write only the files named below with that k, so that eight tasks can run at once without touching each other's files.
 
 ## Read first

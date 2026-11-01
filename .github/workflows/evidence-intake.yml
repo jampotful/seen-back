@@ -1,0 +1,33 @@
+name: evidence-intake
+on:
+  pull_request:
+    paths:
+      - 'docs/views/evidence/**'
+      - 'docs/views/audit/corrected/**'
+      - 'docs/views/research/**'
+      - 'docs/tracks/prompts/**'
+      - 'tools/senses/**'
+      - 'tools/lit/**'
+      - 'tools/views/codex_queue.py'
+      - '.github/workflows/evidence-intake.yml'
+permissions:
+  contents: read
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Offline intake and producer regressions
+        run: |
+          python3 -I tools/senses/test_intake.py
+          python3 -I tools/senses/test_quote_limit.py
+          python3 -I tools/lit/test_extract.py
+          python3 -I tools/views/test_apply_audit.py
+      - name: New and changed records against the PR base
+        env:
+          INTAKE_BASE: ${{ github.event.pull_request.base.sha }}
+        run: python3 -I tools/senses/check_submission.py --base-ref "$INTAKE_BASE"

@@ -126,7 +126,9 @@ def main():
         how = (f" as unit {it['item']}: write docs/views/searched/{it['item']}.jsonl, docs/views/wanted/{it['item']}.jsonl and evidence"
                f" through tools/senses/addlog.py with unit {it['item']}; commit instead of pushing, since the round opens the pull request,"
                f" and fetch pages with your own tools") if it['item'].startswith('harvest-c') else ''
-        print(f"{it['item']}: {it['count']} of {it['of']} left. Follow {it['prompt']}{how} for {it['batch']}, doing only {what}.")
+        print(f"{it['item']}: {it['count']} of {it['of']} left. Follow {it['prompt']}{how} for {it['batch']}, doing only {what}. "
+              "For any new evidence, read docs/views/research/EVIDENCE-INTAKE.md; record the accepted-main intake_base "
+              "and evidence-kind-v1 in the progress note, type functional endpoints, and run strict submission checks.")
 
 if __name__ == '__main__':
     main()

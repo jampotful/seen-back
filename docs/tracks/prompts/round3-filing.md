@@ -1,5 +1,7 @@
 # Round 3: filing the UNPROCESSED folder (Sonnet, local)
 
+For fresh evidence-writing launches, follow `docs/views/research/EVIDENCE-INTAKE.md`: record the accepted-main `intake_base` and `evidence-kind-v1` in the existing progress note; classify each new functional endpoint from its source; strict-check new input before `addlog.py`; and run `check_submission.py --base-ref <intake_base>` on the final logs. This includes direct JSONL writes. Unchanged accepted records remain grandfathered; returning old-format units finish without interruption and receive desk classification before admission. Follow the assignment’s existing file and branch boundaries.
+
 Your launch prompt gives the Drive ids of the UNPROCESSED folder, the papers folder and its subfolders, the page's address and the scratch directory. Never write a Drive id into the repository or into any file under it. You write no repository files; your record is the manifest in the scratch directory.
 
 For every file in UNPROCESSED (list with `search_files` and `parentId`, `pageSize` 100, following `nextPageToken` until it ends):
