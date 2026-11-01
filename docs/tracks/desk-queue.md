@@ -368,6 +368,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d310 5 / 0 / 0 (flower beetle, ant ommatidia/facet/rhabdom and leiodid larva eye states; audit 408: 2 fixable errors in 5)
 - d311 50 / 0 / 0 (Pselaphinae eye facet counts, Oedipina, Chodsigoa and Linan; audits 409-415: 10 fixable errors in 50, all fixed)
 - d312 12 / 0 / 0 (Tachycines cave crickets, planthopper, ant, scale insect and aphid eye states; audits 416-417: 3 fixable errors in 12; Crossref refused, page citation lines used)
+- d313 16 / 0 / 0 (leaf insects, twisted-wing parasite, thrips, lacewing and velvet worm eye states; audits 418-419: 6 fixable errors in 16)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
