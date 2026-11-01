@@ -25,7 +25,7 @@ Pterosagitta draco, Flaccisagitta enflata, Krohnitta subtilis and Parasagitta el
 
 ## Repeats
 
-`git grep -i` on origin/main (49380a17) over the whole docs/ tree for Pterosagitta, Flaccisagitta, Krohnitta, "Parasagitta elegans", "Sagitta elegans", "Sagitta enflata", "Sarax timorensis", "Charinus israelensis", "Charinus taboa" and the four DOI strings: one hit, docs/tracks/progress/desk-d285.md line 15, which records that d285 dropped Sarax timorensis (no filed record). Every origin/research/desk-d* branch grepped for the same patterns under docs/: see the result line at the end of this section. The two Charinus taboa records are separate traits of one paper (median eyes, line 15; lateral eyes, line 16), each from its own sentence, and neither repeats the other or anything on main. Repeat faults 0.
+`git grep -i` on origin/main (49380a17) over the whole docs/ tree for Pterosagitta, Flaccisagitta, Krohnitta, "Parasagitta elegans", "Sagitta elegans", "Sagitta enflata", "Sarax timorensis", "Charinus israelensis", "Charinus taboa" and the four DOI strings: one hit, docs/tracks/progress/desk-d285.md line 15, which records that d285 dropped Sarax timorensis (no filed record). Every origin/research/desk-d* branch (305) grepped for the same patterns in the docs/ files that differ from origin/main: hits only in desk-d285's progress note (the same dropped-Sarax line) and in desk-d305 itself. The two Charinus taboa records are separate traits of one paper (median eyes, line 15; lateral eyes, line 16), each from its own sentence, and neither repeats the other or anything on main. Repeat faults 0.
 
 ## Per line
 
