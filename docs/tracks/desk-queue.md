@@ -336,6 +336,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d278 0 / 0 / 0 (2026-recency sweep; its 4 Scythris sinensis ommatidia_count records repeat d271, not merged)
 - d279 0 / 0 / 0 (small OA society/taxonomic journals; no licence sentences, reviews, lab stock; progress note only)
 - d280 5 / 0 / 0 (eye absence/reduction in cave and subterranean taxa: Gegeneophis carnosus, Erhaia dijiang, Otilioleptes marcelae, Astyanax mexicanus Chiquitita, Sinocyclocheilus longicornus; 3 fixed after audit 370)
+- d281 8 / 0 / 0 (eye absence/reduction in new cave species: Domene lizeyui, Triplophysa zhijinensis, Odontostreptus fadriquei, Iandumoema smeagol, Iansaoniscus x2, Schaefferia x2; 3 fixed after audit 371)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
