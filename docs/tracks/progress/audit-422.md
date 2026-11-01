@@ -106,3 +106,7 @@ Line 10:
 Optional, not counted:
 - Line 12 `conditions`: "The sentence concerns the ocelli only; compound eyes of the female are not described." -> "The sentence concerns the ocelli only; compound-eye form of the female is not described (the female Coloration says only 'Vertex, eyes, space between ocelli and post-clypeus black.')."
 - Line 14 `conditions`: "The sister species C. yuxiensis has large, spherical, protruding eyes." -> "The other species described here, C. yuxiensis, has 'Compound eyes large, spherical, and protruding.' (female)."
+
+## Branch note (repeats on unmerged desk branches)
+
+All 314 remote research/desk-d* branches other than desk-d315: each branch's own docs/views/evidence/desk-dN.jsonl and docs/tracks/progress/desk-dN.md read with `git cat-file --batch` (614 blobs found, 14 absent) and grepped for Pseudoparamenexenus, beiliuensis, d17090637, Prolucanus, beipiaoensis, insects13030272, Pseudoeupolyphaga, menglianensis, zookeys.1261.168015, Cnipsomorpha, yuxiensis, zookeys.1176.75490, Neoparamenexenus, "Prosceles balteatus": 0 hits (control: "Nocticola" found in desk-d297.md). A whole-tree `git grep` over all branches at once timed out and was not used. No repeats.
