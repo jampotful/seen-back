@@ -360,6 +360,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d302 6 / 0 / 0 (beetle eye states: Dayao emeiensis, Linan tendothorax, Batrisodes zhouchaoi, Duvalius gejzadunayi, Wanoblemus huangshanicus, Protopholeuon ponoricum; audit 394: 2 fixable errors in 6)
 - d303 8 / 0 / 0 (stygobiont and marine crustacean eye states; audit 395: 1 fixable error in 8)
 - d304 22 / 0 / 0 (polychaete, sea spider, tardigrade and mole eye states; audits 396-398: 8 fixable errors in 22)
+- d305 16 / 0 / 0 (scorpion, pseudoscorpion, eel, chaetognath, schizomid and amblypygid eye states; audits 399-400: 11 fixable errors in 16)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
