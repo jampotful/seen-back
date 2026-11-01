@@ -2,7 +2,9 @@
 
 Classification rule proposed and implemented on `codex/sensory-anatomy-292`,
 31 October 2026, in response to the owner's instruction after audit 292.
-The research desk reviews and applies the branch; the app thread merges main.
+Code and instructions integrate separately from candidate evidence. The four
+proposed anatomy records remain subject to independent research-desk disposition;
+their copies under `tools/senses/fixtures/` are regression inputs only.
 
 ## Decision
 

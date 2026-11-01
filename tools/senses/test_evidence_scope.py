@@ -24,7 +24,8 @@ S = CHECK.SCOPE
 G = load("scope_gaps", "tools/views/gaps.py")
 R = load("scope_rows", "tools/views/rows.py")
 C = load("scope_compile", "tools/views/compile.py")
-WASP = [json.loads(line) for line in (ROOT / "docs/views/evidence/anatomy-d208.jsonl").read_text().splitlines()]
+# Pending PR #49 candidates are test fixtures, never an accepted evidence log.
+WASP = [json.loads(line) for line in (ROOT / "tools/senses/fixtures/anatomy-d208.jsonl").read_text().splitlines()]
 SPECIES = dict(sci="Megaphragma viggianii", genus="Megaphragma", family="Trichogrammatidae",
                order="Hymenoptera", view="insect", en="microwasp", records=1)
 

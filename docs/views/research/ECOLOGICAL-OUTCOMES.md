@@ -3,7 +3,9 @@
 Proposed 1 November 2026 after the owner's reassessment request for audit 350.
 This extends [PR #49](https://github.com/jampotful/seen-back/pull/49)'s claim-scope
 machinery; it does not replace its anatomical classification or acceptance rules.
-Research-desk review and disposition precede accepted-main integration.
+Independent research-desk disposition precedes admission of the five proposed
+corrections. Integrating this policy, code and conservative use restrictions
+does not apply the correction ledger or admit its replacement records.
 
 ## Classification
 
@@ -45,7 +47,9 @@ locator and quote. A correctly measured species endpoint can retain `m`; a genus
 mixture does not become species evidence. `partial` retains its source-access role.
 
 For historical corrections use the existing audit ledger and `apply_audit.py`;
-the accompanying proposal is `docs/views/recheck/recheck-ecological-350.jsonl`.
+the proposal on PR #52 is `docs/views/recheck/recheck-ecological-350.jsonl`.
+The code integration keeps only a test fixture under `tools/senses/fixtures/`;
+it neither installs nor applies that proposal as a disposition.
 It carries complete `corrected_record` objects, original field deltas, fingerprints,
 the inspected main commit and historical audit links. Never append these as new
 independent observations. The raw records and historical decisions remain intact.

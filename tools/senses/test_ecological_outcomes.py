@@ -32,7 +32,7 @@ S = CHECK.SCOPE
 G = load("ecology_gaps", "tools/views/gaps.py")
 R = load("ecology_rows", "tools/views/rows.py")
 C = load("ecology_compile", "tools/views/compile.py")
-LEDGER_PATH = "docs/views/recheck/recheck-ecological-350.jsonl"
+LEDGER_PATH = "tools/senses/fixtures/recheck-ecological-350.jsonl"
 LEDGER = [json.loads(x) for x in (ROOT / LEDGER_PATH).read_text().splitlines()]
 LIMITS = S.load_limits(ROOT)
 
