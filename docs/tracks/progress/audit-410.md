@@ -21,9 +21,9 @@ Bibliographic faults 0; licence faults 0; source.access "open" right throughout.
 
 ## Repeats
 
-`git grep -il` on origin/main over the whole docs/ tree for "Physomerinus clavipes", clavipes, insects13020119, Trisiniotus, taoismus, 1095.81076, Pseudophanias, furcilobus, leigong, mulun, 1179.110478, Pengzhongiella, daicongchaoi, 326.5933, "Bryaxis grandinodus", grandinodus, 1182.97346. Hits: "clavipes" only as Cucujus clavipes, Nephila clavipes and Leptopilina clavipes (other species); "leigong" only as Formosatettix leigongshanensis (desk-d307 progress, a different species). No other hit. Unmerged origin/research/desk-d* branches other than d311 grepped over docs/views/evidence, audit and sheets for the five species and five DOIs: see the closing line of this section.
+`git grep -il` on origin/main over the whole docs/ tree for "Physomerinus clavipes", clavipes, insects13020119, Trisiniotus, taoismus, 1095.81076, Pseudophanias, furcilobus, leigong, mulun, 1179.110478, Pengzhongiella, daicongchaoi, 326.5933, "Bryaxis grandinodus", grandinodus, 1182.97346. Hits: "clavipes" only as Cucujus clavipes, Nephila clavipes and Leptopilina clavipes (other species); "leigong" only as Formosatettix leigongshanensis (desk-d307 progress, a different species). No other hit. Unmerged origin/research/desk-d* branches other than d311 grepped over docs/views/evidence, audit and sheets for the five species and five DOIs (result below).
 
-BRANCHGREP
+All 310 origin/research/desk-d* branches other than d311 grepped in one `git grep -il -E` per branch over docs/views/evidence, docs/views/audit and docs/views/sheets for the five species and five DOIs: completed, no hits.
 
 ## Per line
 
