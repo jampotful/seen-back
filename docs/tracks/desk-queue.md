@@ -345,6 +345,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d287 7 / 0 / 0 (invertebrate eye states: Graeconiscus gevi, Alpioniscus onnisi, Horatia ozimeci, Cylindroiulus villumi, Typhlonesticus gocmeni, Tritomurus veles, Oncopodura moghanensis; audit 376 0 errors)
 - d288 6 / 0 / 0 (eyes_count: Troglobentosminthurus luridus, Trogolaphysa reneaui, Lithobius sinuispineus, minuticornis, tetraspinus, zhangi; audit 377 1 fixable error)
 - d289 6 / 0 / 0 (ocelli: Glyphiulus longus, Paracortina kyrang, Hyleoglomeris alba, halang, translucida, Trichoniscoides castanheirensis; audit 378 1 fixable error)
+- d290 7 / 0 / 0 (eye_type, crustaceans: Asellus ismailsezarii, Caridina tashanica, Spelaeocaris electa, Siamcyclops isanus, Mixtacandona thessalica, Pseudocandona sulphurella, Tuberocandona leonidasi; audit 379 0 errors)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
