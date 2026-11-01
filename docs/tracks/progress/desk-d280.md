@@ -17,5 +17,5 @@ Checked and not filed:
 - Bogidiella pingxiangensis (ZooKeys 790): only the fragment "Head. (Figure 3A): eyes absent."
 - Reticulitermes speratus eye development (Zoological Science): bioone page returned no text.
 - zookeys.pensoft.net/article/91501 returned PROVENANCE_REQUIRED (not retried; the article_preview page opened).
-- Triplophysa wulongensis (ZooKeys 1141-era vol, id 61570): eyes present, only a description fragment; Stygiocaris (PLOS ONE 2008): eye statement cited from reference [38]; Opisthoproctidae (Frontiers 2022): no licence sentence on page and no absence claims.
+- Triplophysa wulongensis (ZooKeys 1026, 10.3897/zookeys.1026.61570): eyes present, only a description fragment; Stygiocaris (PLOS ONE 2008): eye statement cited from reference [38]; Opisthoproctidae (Frontiers 2022): no licence sentence on page and no absence claims.
 - About 24 WebSearches (4 extended), no blind snake, Spalax, Dorylus/Eciton, hagfish or golden mole open sentence found (Spalax sentence only in a Sci Rep paper on other rodents and cited; hagfish Proc B refused).
