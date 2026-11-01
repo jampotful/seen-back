@@ -303,6 +303,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d245 4 / 0 / 0 (Cerdocyon thous, Micaelamys namaquensis x2, Apteryx mantelli)
 - d246 5 / 0 / 0 (Acanthaster planci x3, Neogonodactylus oerstedii, Amphiura filiformis)
 - d247 2 / 0 / 0 (Leptograpsus variegatus, Allobathynella bangokensis)
+- d248 3 / 0 / 0 (Faxonius virilis x2, Triakis semifasciata)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
