@@ -13,7 +13,8 @@ Filed (docs/views/evidence/desk-d295.jsonl), all Actinopterygii, whole-sentence 
 8. Protocobitis longibarba, "Eyeless.", ZooKeys 1228; holotype male, paratypes 3 females and 4 males.
 
 Dropped:
-- On main already: Triplophysa xiuwenensis, T. zhijinensis (d281/d282), Triplophysa ziyunensis and T. yaluwang (only in other desk notes via abstracts; XML returned front matter only, no Description).
+- On main already: Triplophysa xiuwenensis, T. zhijinensis (d281/d282).
+- Triplophysa ziyunensis and T. yaluwang (ZooKeys 1214): XML returned front matter and abstract only, no Description sentence.
 - Arrived in pieces (tool could not return the sentence whole): Caecilia pulchraserrana (ZooKeys 884, "its eyes are not covered by bone and it has tentacles ...", 32 words, returned as two quotes twice), Sinocyclocheilus longicornus (ZooKeys 1141, 22-word eye sentence), Neolissochilus pnar (Vertebrate Zoology 73, long sentence), Triplophysa wulongensis (Diagnosis, long), Triplophysa zhijinensis sentence.
 - Text not reached: Indotyphlops gyirongensis (ZooKeys 1292, PROVENANCE_REQUIRED, no search result carried a Pensoft URL), Amphisbaena elbakyanae (Vertebrate Zoology 71, XML ends before the Description), Balitora tiandengensis (ZooKeys 1267, XML has no Description), Paranemachilus (ZooKeys 1269) and Oreonectes (ZooKeys 1196) species (no fetchable URL in results), Sinocyclocheilus xingrenensis (abstract page only), Microcaecilia dermatophaga (PLoS ONE, rate limited).
 - Eye sentence not a degeneration/state statement: Sinocyclocheilus panzhouensis (large eyes, sentence over the tool limit), S. sp. ZooKeys 1238 ("Eye large, rounded.", Beipan-Jiang species, a non-cave state; not filed as low value).
