@@ -1,9 +1,10 @@
 # desk-d280 (absence and reduction of senses: cave, subterranean, fossorial animals)
 
-Records so far: 4 (docs/views/evidence/desk-d280.jsonl), all CC BY 4.0 (page sentence plus Crossref vor):
+Records so far: 5 (docs/views/evidence/desk-d280.jsonl), all CC BY 4.0 (page sentence plus Crossref vor):
 - Gegeneophis carnosus (caecilian), eyes small and covered by maxillopalatines, orbits closed (Vertebrate Zoology 72).
 - Erhaia dijiang (cave snail), eyes absent (Subterranean Biology 56).
 - Otilioleptes marcelae (cave harvestman), corneas extremely reduced (PLOS ONE 14(10)).
+- Astyanax mexicanus, wild-collected Chiquitita Cave population, eye phenotypes small to mostly absent (Subterranean Biology 26).
 - Sinocyclocheilus longicornus (cave fish), eye diameter 0-1.6 mm, mean 1.1 mm, N = 15 (ZooKeys 1141), new trait eye_diameter_mm.
 
 Checked and not filed:
@@ -16,3 +17,5 @@ Checked and not filed:
 - Bogidiella pingxiangensis (ZooKeys 790): only the fragment "Head. (Figure 3A): eyes absent."
 - Reticulitermes speratus eye development (Zoological Science): bioone page returned no text.
 - zookeys.pensoft.net/article/91501 returned PROVENANCE_REQUIRED (not retried; the article_preview page opened).
+- Triplophysa wulongensis (ZooKeys 1141-era vol, id 61570): eyes present, only a description fragment; Stygiocaris (PLOS ONE 2008): eye statement cited from reference [38]; Opisthoproctidae (Frontiers 2022): no licence sentence on page and no absence claims.
+- About 24 WebSearches (4 extended), no blind snake, Spalax, Dorylus/Eciton, hagfish or golden mole open sentence found (Spalax sentence only in a Sci Rep paper on other rodents and cited; hagfish Proc B refused).
