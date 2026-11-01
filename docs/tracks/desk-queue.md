@@ -314,6 +314,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d256 7 / 0 / 0 (Monochamus galloprovincialis x2, Anthonomus pomorum x2, Lasioglossum villosulum x2, Paracentrotus lividus)
 - d257 6 / 0 / 0 (Ectatomma brunneum, Neoponera inversa, Frankliniella occidentalis, Chionoecetes opilio, Asproparthenis punctiventris x2)
 - d258 7 / 1 / 0 (Bombus terrestris, Trissolcus basalis, Linepithema humile, Listronotus bonariensis, Salvator merianae, Parus major, Passer domesticus; Leptoglossus zonatus held out)
+- d259 7 / 1 / 0 (Lasius niger, Oxycarenus hyalinipennis, Rivomarginella morrisoni, Odontothrips loti, Ctenarytaina eucalypti, C. bipartita, Anoeconeossa bundoorensis; Rivomarginella behaviour_vision held out)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
