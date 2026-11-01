@@ -357,6 +357,18 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d299 6 / 0 / 0 (amphipod, millipede eye counts: Synurella odessana, Hyleoglomeris erecta and rukouqu, Gammarus sezgini, Caucaseuma strasseri, Phoxirostus longicarpus; audit 391: 3 fixable errors in 6)
 - d300 7 / 0 / 0 (flatworm eye states: Girardia multidiverticulata, Dugesia bifida, Pasipha ferrariaphila, Stylochus marimarensis and erytheius, Emprosthopharynx hartei, Dendrocoelum obstinatum; audit 392: 3 fixable errors in 7)
 - d301 6 / 1 / 0 (meiofauna eyespots: Cephalodella binoculata, Milnesium minutum and sandrae, Microstomum laurae and edmondi, Macrostomum littorale; Pectinereis strickrotti held out, page unopenable; audit 393: 5 errors in 7, 4 fixable)
+- d302 6 / 0 / 0 (beetle eye states: Dayao emeiensis, Linan tendothorax, Batrisodes zhouchaoi, Duvalius gejzadunayi, Wanoblemus huangshanicus, Protopholeuon ponoricum; audit 394: 2 fixable errors in 6)
+- d303 8 / 0 / 0 (stygobiont and marine crustacean eye states; audit 395: 1 fixable error in 8)
+- d304 22 / 0 / 0 (polychaete, sea spider, tardigrade and mole eye states; audits 396-398: 8 fixable errors in 22)
+- d305 16 / 0 / 0 (scorpion, pseudoscorpion, eel, chaetognath, schizomid and amblypygid eye states; audits 399-400: 11 fixable errors in 16)
+- d306 12 / 0 / 0 (spider, larval, fossil, deep-sea fish and Pholis eye states; audits 401-402: 9 fixable errors in 12)
+- d307 6 / 1 / 0 (amber insects, mole cricket, flea beetle and moth eye states; audit 403: 1 repeat dropped, 4 fixable errors in 7)
+- d308 5 / 0 / 0 (owl axial length, caecilian, ant, mayfly and dobsonfly eye states; audit 404: 1 fixable error in 5)
+- d309 20 / 0 / 0 (mysid, amphipod, fish, tabanid, flatworm, isopod, hoverfly and ant eye states; audits 405-407: 12 fixable errors in 20)
+- d310 5 / 0 / 0 (flower beetle, ant ommatidia/facet/rhabdom and leiodid larva eye states; audit 408: 2 fixable errors in 5)
+- d311 50 / 0 / 0 (Pselaphinae eye facet counts, Oedipina, Chodsigoa and Linan; audits 409-415: 10 fixable errors in 50, all fixed)
+- d312 12 / 0 / 0 (Tachycines cave crickets, planthopper, ant, scale insect and aphid eye states; audits 416-417: 3 fixable errors in 12; Crossref refused, page citation lines used)
+- d313 16 / 0 / 0 (leaf insects, twisted-wing parasite, thrips, lacewing and velvet worm eye states; audits 418-419: 6 fixable errors in 16)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.

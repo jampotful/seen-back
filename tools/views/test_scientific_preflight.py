@@ -14,6 +14,12 @@ spec = importlib.util.spec_from_file_location("preflight", HERE / "scientific_pr
 preflight = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(preflight)
 
+intake_spec = importlib.util.spec_from_file_location(
+    "intake_gate", HERE.parent / "senses" / "check_submission.py")
+intake = importlib.util.module_from_spec(intake_spec)
+intake_spec.loader.exec_module(intake)
+EXAMPLES = json.loads((HERE.parents[1] / "docs/views/research/evidence-intake-examples.json").read_text())
+
 
 def candidate():
     # Synthetic record: no scientific assertion about a real taxon or paper.
@@ -59,6 +65,44 @@ class PreflightTests(unittest.TestCase):
     def test_edit_to_conditions_invalidates_receipt(self):
         self.records[1]["conditions"] = "Onset was faster"
         self.assertIn("stale record", self.errors())
+
+    def test_eight_kinds_share_one_receipt_without_replacing_intake(self):
+        records = {i: deepcopy(row) for i, row in enumerate(EXAMPLES, 1)}
+        for row in records.values():
+            row["source"] = deepcopy(EXAMPLES[0]["source"])
+        self.assertEqual({row["evidence_kind"] for row in records.values()},
+                         set(intake.CHECK.SCOPE.KINDS))
+        receipts = review(records)
+        self.assertEqual(len(receipts), 1)
+        self.assertEqual(preflight.problems(records, receipts), [])
+        self.assertEqual(intake.compare(list(records.items()), [])[0], [])
+        line = next(i for i, row in records.items() if row["trait"].startswith("sense_"))
+        del records[line]["evidence_kind"]
+        self.assertIn("stale record", "\n".join(preflight.problems(records, receipts)))
+        receipts = review(records)
+        self.assertEqual(preflight.problems(records, receipts), [])
+        self.assertTrue(intake.compare(list(records.items()), [])[0])
+
+    def test_classification_and_scope_edits_require_new_receipts(self):
+        for field, value in (("evidence_kind", "behavioural_response"),
+                             ("mechanism_limit", "Changed causal limitation"),
+                             ("value", "Associated with light exposure; not a causal test")):
+            with self.subTest(field=field):
+                records = {1: deepcopy(EXAMPLES[-1])}
+                receipts = review(records)
+                records[1][field] = value
+                self.assertIn("stale record", "\n".join(preflight.problems(records, receipts)))
+
+    def test_policy_labels_do_not_create_kinds_or_chemical_coverage(self):
+        emission = deepcopy(EXAMPLES[4])
+        emission.update(trait="physiology_volatile_emission",
+                        note="Synthetic fixture; new trait for emission-only assay")
+        emission.pop("evidence_kind")
+        self.assertEqual(intake.CHECK.problems(emission, require_evidence_kind=True), [])
+        self.assertFalse(intake.CHECK.SCOPE.supports_trait(emission, "sense_chemical"))
+        for kind in ("physiology_volatile_emission", "observational light association"):
+            row = dict(emission, evidence_kind=kind)
+            self.assertTrue(intake.CHECK.SCOPE.problems(row))
 
     def test_coverage_cannot_be_skipped_or_duplicated(self):
         self.records[3] = candidate()

@@ -36,12 +36,16 @@ One JSON object per paper, with these fields:
 
 Decisions: `ready` means this author completed the reconciliation, not independently verified science. `limited` means a narrower claim is supported by the accessible material: explain exactly what remains unverified in `limitation` and copy that text into the record's `note` or `conditions`. Abstract-only records retain `source.access: abstract` and `partial: true`. For incomplete full text, retain the reading prompt's partial rules (including review/figure provenance); the `partial` flag is not a substitute for explaining a missing table. `hold` means the claim cannot safely be submitted; remove it from the submission set, retain the lead/reason in the usual progress note, and regenerate/check receipts for the actual set. Never downgrade access simply to avoid reconciling a known conflict.
 
+Apply [EVIDENCE-INTAKE.md](../../views/research/EVIDENCE-INTAKE.md) alongside this receipt: source reconciliation, endpoint classification and independent audit are separate checks. Choose the kind from the eight supported kinds before generating final hashes. A later change to `evidence_kind`, an observational qualification or an ecological scope field invalidates the receipt just like a change to the measured value. Reuse this one paper-level review across its different endpoints; do not add a second review form.
+
 Run on the final submission file (after addlog if addlog supplies fields):
 
 ```sh
 python3 -I tools/senses/check.py candidates.jsonl
 python3 -I tools/views/scientific_preflight.py candidates.jsonl --review review.jsonl
 ```
+
+Also run the intake policy's strict check on the new-record input and its delta check against the trusted accepted-main `intake_base`. A complete preflight receipt cannot make an untyped functional record admissible; a valid kind cannot certify the scientific interpretation. Do not strict-check or generate receipts for unchanged historical logs.
 
 Keep running `quotecheck.py` against each paper's own source text and its record subset as required by the existing reading prompt. If source text needed for quote verification cannot be obtained, record that gap and hold the candidate; a summary/yes-no answer is not a successful `quotecheck.py` run. A restricted but directly inspected abstract can support a limited record when existing quote checks pass. Do not bypass retrieval restrictions.
 
