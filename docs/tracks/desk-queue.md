@@ -510,6 +510,7 @@ for the unresolved d325/d326 launch evidence.
 - d442 52 / 52 / 0 (ZooKeys 1034: 199-236 Eriovixia x4; ZooKeys 1233: 139-193 Selenobrachys x2; PeerJ 12: e16781 Dolomedes bedjanic, D. hydatostella male)
 - d443 36 / 36 / 0 (ZooKeys 1265: 103-127 Latouchia x4; ZooKeys 1278: 201-213 Calommata yueluensis male)
 - d444 20 / 20 / 0 (ZooKeys 1232: 285-310 Pholcus hebei, P. huludao, P. jinzhou, P. liaoning, P. qin)
+- d445 32 / 32 / 0 (ZooKeys 1173: 243-273 Araneus yuboi, A. shii, A. wanghuai, A. yangchuandongi)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
