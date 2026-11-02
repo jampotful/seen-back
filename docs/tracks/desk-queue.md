@@ -403,6 +403,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d346 5 / 5 / 0 (antennal and mouthpart sensilla counts; audit 461 found 1 fixable error in 5)
 - d347 4 / 4 / 0 (bat and shrew holotype ear and tragus lengths; audit 462 found 0 errors)
 - d348 4 / 4 / 0 (amphipod and shrimp eye absence/presence; audit 463 found 2 fixable errors in 4)
+- d349 5 / 8 / 2 (spider, pseudoscorpion eyes; hei split into four per-eye records; 2 fixable errors)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
