@@ -19,7 +19,7 @@ Angle: eye-size records, wider net, twenty-seventh round. 32 records from three 
 - ZooKeys 626 Mimetus lamellaris, M. wangi (2016): outside the 2018-2026 window.
 - ZooKeys 1247 Satyrex (10.3897/zookeys.1247.162886) and Phlogiellus khampheng: only figure pages and PMC/aggregator copies reached; Phlogiellus is on the avoid list. ZooKeys 1130 Anapistula: no eye sizes printed.
 - Australian Journal of Taxonomy 43, 102, 115, 109 (Proshermacha, Bungulla, Miturgopelma personatum): relative eye sizes or none, no per-eye millimetre values. Austrarchaea (AJT 64): the filesusr PDF redirect was not answered, so unread.
-- Arachnologische Mitteilungen 71 Panamomops luteus: no AME/ALE/PME/PLE values and no licence printed on the copy read. Zoodiversity 60(3) Hahnia kovblyuki: CC BY-NC-ND, no eye values. JoTT 18(1) and 16(7): no new species, no eye values. ZooKeys 1282, 1260-adjacent Turkish paper: figure page only.
+- Arachnologische Mitteilungen 71 Panamomops luteus: no AME/ALE/PME/PLE values and no licence printed on the copy read. Zoodiversity 60(3) Hahnia kovblyuki: CC BY-NC-ND, no eye values. JoTT 18(1) and 16(7): no new species, no eye values. ZooKeys 1282 Turkish paper (Leptonetela ayvaensis): figure page only (also on the avoid list).
 - Not reached to a publisher page: Ctenus igatu (bioone page returned only meta tags), Raveniola two new species Arachnology 20(1): 45 (bioone page returned only meta tags), Myrmarachne daweishan and M. dujuan (Zoological Research: Diversity and Conservation, 10.24272/j.issn.2097-3772.2025.037: page prints abstract only; the full-text HTML link and PDF are not in my search results).
 
 ## Leads
