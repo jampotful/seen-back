@@ -504,6 +504,7 @@ for the unresolved d325/d326 launch evidence.
 - d436 36 / 36 / 0 (ZooKeys 1239 Houcosa zhaoi; ZooKeys 1173 Araneus chenjingi, A. lihaiboi; ZooKeys 1160 A. fenzhi, A. mayanghe)
 - d437 56 / 56 / 8 (ZooKeys 1160: 169-190 Araneus zhoui, A. mayanghe female; ZooKeys 1137 A. arcuatus corrected to A. xiang (preoccupied name, 8 counted); Insects 16(10): 992 Megaraneus gabonensis; ZooKeys 1257 Phrynarachne x4; ZooKeys 1160: 75-87 Ebelingia spirala, Lysiteles longensis)
 - d438 8 / 8 / 0 (Australian Journal of Taxonomy 5: 1-8 Euoplos eungellaensis; trait move only, not counted)
+- d439 20 / 20 / 0 (ZooKeys 1072: 49-81 Mangora baii, M. cephala, Hypsosinga pulla, Deione cheni; ZooKeys 1160: 169-190 Araneus shiwandashan)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
