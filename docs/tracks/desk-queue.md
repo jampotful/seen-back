@@ -405,6 +405,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d348 4 / 4 / 0 (amphipod and shrimp eye absence/presence; audit 463 found 2 fixable errors in 4)
 - d349 5 / 8 / 2 (spider, pseudoscorpion eyes; hei split into four per-eye records; 2 fixable errors)
 - d350 2 / 2 / 0 (Gryllotalpa xinjiangica ocelli, eyes, tympanum; most Orthoptera/Blattodea leads already on main)
+- d351 4 / 4 / 4 (lungfish photoreceptor types, one paper; order Ceratodontiformes; contrary result added)
 - d352 0 / 0 / 0 (birds and mammals physiology; page tool returned no usable licence or text; leads: Oreoryzomys jumandi/hesperus PeerJ 20515, Enhydra lutris vibrissae)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
