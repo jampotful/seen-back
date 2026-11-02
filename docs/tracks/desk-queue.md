@@ -421,6 +421,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d364 10 / 10 / 2 (Collembola eyes 8+8, Parobisium eye spots, Acherontiella eyes absent; 2 quote-form errors fixed)
 - d365 10 / 10 / 10 (frog tympanum and eye diameters: Nectophrynoides table means, Pristimantis holotypes; note-only errors, family added)
 - d366 4 / 4 / 1 (Choerophryne ED/SUL and TyD/ED, ZSE 93(2); subadult female caveat added)
+- d367 5 / 3 / 5 (small-mammal ear and tragus; 3 fixed, 2 Kerivoula lines dropped as unfixable)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
