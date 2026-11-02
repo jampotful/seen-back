@@ -465,6 +465,7 @@ for the unresolved d325/d326 launch evidence.
 - d397 42 / 42 / 0 (ZooKeys 1192 Stertinius liqingae, Synagelides tianquan, Yaginumaella erlang; ZooKeys 1148 Chinattus crewsae, C. logunovi, Eupoa maidinhyeni, E. maddisoni; faults in text only)
 - d398 39 / 39 / 4 (ZooKeys 1148 Eupoa ninhbinh, E. zabkai, Indopadilla cuc, Synagelides ani, S. mii, S. pengi, S. sancha, Yaginumaella hagiang; 4 lines said female holotype, each holotype is male)
 - d399 48 / 48 / 13 (BDJ 12 e138400 Phintella hongkan, P. liae; BDJ 13 e156957 Jerzego qiuhangi; ZooKeys 1257 Chuanattus, Dianattus, Yaginumaella x4; 5 lines wrong paratype counts, 8 lines wrong heading path)
+- d400 36 / 36 / 16 (ZooKeys 1210 Altimella nedong, A. ngamring, eye_diameter_mm; ZooKeys 1123 Himalaphantes arcuatus, lingulatus, uncatus; 16 lines wrong heading path or missing paratype lead-in; heading paths between auditors not reconciled)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
