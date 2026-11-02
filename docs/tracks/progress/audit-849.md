@@ -16,7 +16,7 @@ Publisher XML https://zookeys.pensoft.net/article/60411/download/xml/ and WSC ht
 - Licence on the copy read (XML, three pieces rejoined): 'This is an open access article distributed under the terms of the Creative Commons Attribution License (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.' Matches.
 - Bibliographic: authors Xiaoqi Mi, Shuqiang Li in that order (Mi X, Li S), year 2021, title verbatim, ZooKeys 1034: 199-236 (no issue number printed), DOI matches. access open.
 - WSC 65758 opened: Eriovixia tangi Mi & Li, 2021, ACCEPTED, Araneidae Clerck, 1757, original description ZooKeys 1034: 199-236, p. 208, no synonyms. Confirmed.
-- Repeats of main: git grep of origin/main docs/ for 'eriovixia' and '1034.60411' (case-insensitive) returned no hit. unit field reads desk-d440.
+- Repeats of main: git grep of origin/main docs/ for 'eriovixia' and '1034.60411' (case-insensitive) returned no hit; the same grep over docs/views/evidence/ on the 444 other research/desk-* remote branches also returned no hit (git grep exit 1). unit field reads desk-d440.
 
 ## Verdicts
 
