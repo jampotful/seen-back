@@ -1,6 +1,6 @@
 # Audit 665: desk-d402 lines 1 to 8
 
-Auditor: Opus, fresh. Scope: lines 1 to 8 of docs/views/evidence/desk-d402.jsonl (file order) only. Lines 1-4 Heteropoda bawanglingensis female holotype (EJT 947: 109–129, 10.5852/ejt.2024.947.2623); lines 5-8 Asiopisinus anfu female holotype HNU817 (BDJ 13: e144222, 10.3897/bdj.13.e144222). All pages opened came from my own WebSearch results (EJT PDF download/2623/12043 and article view/2623; BDJ article/144222/download/xml and article_preview.php?id=144222; WSC spec-data/70052 and 71238). Nine WebSearch-equivalent steps used (5 searches).
+Auditor: Opus, fresh. Scope: lines 1 to 8 of docs/views/evidence/desk-d402.jsonl (file order) only. Lines 1-4 Heteropoda bawanglingensis female holotype (EJT 947: 109–129, 10.5852/ejt.2024.947.2623); lines 5-8 Asiopisinus anfu female holotype HNU817 (BDJ 13: e144222, 10.3897/bdj.13.e144222). All pages opened came from my own WebSearch results (EJT PDF download/2623/12043 and article view/2623; BDJ article/144222/download/xml and article_preview.php?id=144222; WSC spec-data/70052 and 71238). Five WebSearches used.
 
 ## Methods read whole
 - EJT 947 Material and methods (subheadings Taxonomic description, Abbreviations used in text, Repository institution, Somatic morphology): no eye-dimension definition; the word "diameter" does not occur. Only eye text: "AME = anterior median eyes" etc. Unit sentence: "All measurements are in millimetres." NO DIAMETER DEFINITION PRINTED: sensory_anatomy stands for lines 1-4.
