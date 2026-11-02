@@ -2,6 +2,18 @@
 
 You are auditing evidence records you did not write. Five reading agents logged them from free copies of papers fetched by the `oa` job (`docs/tracks/prompts/oa-read.md` says how). The branch to audit is named in your launch prompt. The rules are the ones the research desk's audits enforce: read `docs/tracks/progress/audit-31.md` and `audit-39.md` for the verdicts and the counting rule, and `docs/views/research/BRIEF.md` for grades and fields. A record counts as an error when any of these is wrong: the quote (not in the paper exactly, cut with no mark, starting mid-sentence), the value or scientifically consequential context (unsupported by the source or materially misleading under the rule below), the taxon, the grade (`m` only for one named species measured in this paper), or the partial flag (true for anything from a review, a compilation, a cited study or a figure). Non-consequential metadata faults (journal, authors, pages) are written down separately and do not count, as in audit 31.
 
+## Source access and retained content
+
+Apply [EVIDENCE-ACCESS.md](../../views/research/EVIDENCE-ACCESS.md) after its desk
+integration. Assess the exact copy's provenance, permitted retrieval route,
+inspection coverage and reuse restrictions separately. Absence of an open-reuse
+licence alone is not a rejection reason for an authorized free copy. The legacy
+`source.access: open` label does not license redistribution. Require truthful
+version/rights notes and all existing source, quote and scientific checks.
+Keep unresolved access/verification holds explicit and preserve historical
+audits. The new rule supersedes audits 223/236's blanket repository-licence
+requirement without admitting their held records or changing past counts.
+
 ## Scientific context and counting (29 October 2026)
 
 This clarification governs evidence audits, including evidence filed by desk screening units. It supersedes audit 16's blanket exclusion of `method` and `conditions` changes from the error count; historical reports retain their original decisions.
@@ -14,11 +26,24 @@ This clarification governs evidence audits, including evidence filed by desk scr
 For calibration, see `docs/tracks/progress/reassessment-158-159.md`: both targeted records require `correct`; preserving a printed title typo is harmless. An audit note alone does not repair the accepted record.
 
 ## Setup: your own key and texts
+For fresh plant light-evidence units after integration, also apply [LIGHT-RESPONSE.md](../../views/research/LIGHT-RESPONSE.md). Identify the actual exposure comparison and distinguish experimental response, observational association and author interpretation. An absent contrast or causal overstatement is a scientific-meaning fault under the counting rule above; grade/partial flags cannot repair it. Preserve historical audits and use new targeted reassessments for legacy records.
+
 1. Clone `https://github.com/jampotful/seen-back`, check out the branch to audit. `pip install cryptography`. Make a key that never leaves your machine: `mkdir -p /tmp/oa && openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:3072 -out /tmp/oa/priv.pem && openssl pkey -in /tmp/oa/priv.pem -pubout -out /tmp/oa/pub.pem`.
 2. Draw the sample first, before reading anything: all evidence lines the branch adds to `docs/views/evidence/oa-*.jsonl` (diff against `main`), then `random.seed(1018)` and `random.sample(lines, 40)` (all of them if fewer). Write the 40 ids (file:line) into your report before checking any.
 3. Fetch the sampled papers' texts: from `main`, make a branch `run/oa/audit-1018` whose only change is `ci/oa/pub.pem` replaced by your `/tmp/oa/pub.pem` and `ci/oa/list.jsonl` cut to the sampled papers (match each record's DOI or title to the list's lines). Push it; the `oa` workflow returns `runs/oa/<run>-<batch>/` to the `ci` branch in 5 to 15 minutes (`git fetch --depth 1 origin ci && git show origin/ci:INDEX.txt | grep audit-1018`). Decrypt with `python3 ci/oa/decrypt.py /tmp/oa/priv.pem <dir>/enc /tmp/oa/txt`. Keep texts and the key out of the repository.
 
 ## Checking
+For evidence-kind-v2 submissions, follow `docs/views/research/EVIDENCE-INTAKE.md`.
+Check `evidence_kind` against the actual endpoint, controls and source location,
+not just its spelling. A valid kind neither proves a sensory mechanism nor
+admits a record. Use the ordinary checker for unchanged historical material and
+`check_submission.py --base-ref <accepted-main-sha>` on final new/changed logs.
+Retain the approved kind and all qualifications in replacement records and
+recheck after applying corrections. Returning old-format units finish their
+original task; the desk resolves new functional classifications before admission.
+Keep old audit decisions intact and do not count missing historical metadata as
+a newly discovered scientific-meaning error.
+
 For each sampled record: run `python3 -I tools/views/quotecheck.py /tmp/oa/txt/<batch>-<entry>.txt` on it; read the sentence or table row around the quote in the text; then give one verdict: `confirm`, `requote` (quote faulty, value right), `correct` (value, taxon, grade or partial wrong; give the right one), `retract` (nothing in the paper supports it). Write the verdicts as a table in `docs/tracks/progress/audit-oa-1018.md` with a one-line reason each, the error count and rate (requote, correct and retract count as errors), the metadata faults as uncounted rows, and the fault patterns you see. Write corrections as JSON lines in `docs/views/recheck/recheck-oa-1018.jsonl` (the recheck-5 schema: the record's id, the field, the old and new value, the reason). Do not edit any evidence file.
 
 Commit to a branch `agent/oa-audit-1018`, push, and reply in at most 120 words: sample size, errors and rate, the main fault pattern, last commit. Stop within 90 minutes.

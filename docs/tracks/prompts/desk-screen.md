@@ -1,5 +1,7 @@
 # Desk screening round (18 October 2026, after audits 40 to 42)
 
+For fresh plant light-evidence screening after integration, apply [LIGHT-RESPONSE.md](../../views/research/LIGHT-RESPONSE.md). Explicit natural light-exposure comparisons remain candidates, with observational qualifications; population-origin differences under common light or an untested photoperiodic interpretation alone do not establish a light response. Inspect the design before deciding: natural-light studies can contain blackout or shade treatments. If source access cannot settle the design, retain a reading lead and state the gap. The original screening-only output restrictions below remain in force.
+
 Audits 40, 41 and 42 failed the desk's screening batches harvest-26, -27 and -28 at 9 errors in 57 records pooled. Six of the nine errors were measurements the record called absent: three sat in the harvest output under a title the agent passed over (Digby and Firn 2002 on Tradescantia; Olsson et al. 2021 on Cuculus, on the record's own wanted list and already on main), and three were absent from the harvest output (Munir 2015, Desai 2018, Mann 1942). This round closes both gaps.
 
 For each genus in your launch prompt:
@@ -10,6 +12,20 @@ For each genus in your launch prompt:
 4. A search record for a trait names every candidate the tool listed for that trait in `"screened": {"<doi or OpenAlex id>": "<why it holds no measurement of the trait>"}`. A trait with evidence already on main gets no search record.
 5. Before every commit: `python3 -I tools/views/screen_candidates.py --check docs/views/searched/<unit>.jsonl --wanted docs/views/wanted/<unit>.jsonl` must print "0 problems".
 Write no evidence records in this round; readers log evidence from the oa job's texts with `quotecheck.py`.
+When a launch explicitly authorizes evidence as well (including the harvest-c
+queue override), follow `docs/views/research/EVIDENCE-INTAKE.md`: type each new
+functional endpoint, record the accepted-main base and policy version, append
+through `addlog.py`, and run strict new-input and baseline-aware submission checks.
+This does not turn a search-only assignment into an evidence-writing assignment.
+For fresh evidence after the `evidence-kind-v2` cutover, the lamp-comparison
+search leads in points 9 and 10(c) below do not by themselves establish spectral
+sensitivity or visually mediated behaviour. Apply
+[ECOLOGICAL-OUTCOMES.md](../../views/research/ECOLOGICAL-OUTCOMES.md) to the actual
+endpoint: retain catch-only results as ecological outcomes; retain controlled
+behavioural or physiological findings for the claims their controls support.
+Keep the existing search effort and useful leads. This prospective clarification
+does not rewrite past screening decisions or automatically reclassify old records.
+If a separate launch assigns evidence/lead reading, it must name [scientific-preflight.md](scientific-preflight.md) and BRIEF in addition to the applicable reading prompt. `screen_candidates.py --check` checks searched/wanted files only; zero problems on empty files says nothing about evidence. The new preflight applies to fresh evidence launches after integration, not to a screening-only unit or an already-running unit.
 6. A genus whose harvest shows a failed step ("gave up") gets no search record until a rerun repairs it; `--check` fails such a record (audit 44). Leave a wanted line's author field empty when no source shows the authors: placeholder text in it reaches the owner's page.
 
 Proxy mirrors count as library proxies: never open a result whose host is a library's proxy or mirror (a host holding "ezproxy", "libproxy", "elogim", "idm.oclc.org", "proxy." or a university library's name before a publisher's domain), even when it opens without a login (audit 43 reached springerlink.bibliotecabuap.elogim.com once).
@@ -22,3 +38,5 @@ Proxy mirrors count as library proxies: never open a result whose host is a libr
    (c) An activity comparison under lamps of different spectra (for example Briolat et al. 2026) is a behaviour finding and does not count under spectral_range_nm; point 9's light-trap catch tables still count.
    (d) A living plant's response to an applied hormone, growth regulator or elicitor (methyl jasmonate, salicylic acid, ethylene, gibberellin, abscisic acid, auxin) counts under sense_chemical, as main already logs; so does a growth or germination trial under set light intensities under sense_light_nonvisual. Audits 78 and 79 failed records that screened such works out.
    (e) Plant searches (audits 79 and 81): for each plant genus, search "<Genus> seed germination light dark" and "<Genus> germination gibberellin OR smoke OR dormancy" first, then "<Genus> floral scent volatiles" or "<Genus> jasmonate herbivore" where flowers or herbivores are involved. Germination ecology and dormancy studies (light against darkness, photoperiod, GA3, smoke, nitrate) are the commonest measurements of plant sense_light_nonvisual and sense_chemical: audit 81 found eight of nine misses among them, on the first page of a genus-plus-germination search. A result whose title names germination, dormancy or light requirements for a species of the genus goes on the wanted list (or, when the snippet states the light or chemical result, it closes the cell as a lead), never in `screened`.
+
+11. Chemical classification clarification (30 October 2026): apply [CHEMICAL-EVIDENCE.md](../../views/research/CHEMICAL-EVIDENCE.md) with 10(a)/(d). An emission inventory alone is physiology, not a chemical-response or signalling finding. Screen it out of `sense_chemical` with that precise reason, without treating it as evidence that the species lacks chemical sensing; preserve a useful physiology lead for an appropriately assigned reader. A study with a qualifying living chemical response or supported emitter/receiver interaction remains a candidate. Keep positive emissions, assay non-detections and controlled response nulls distinct. The Danum Valley table remains withheld pending its specimen/table provenance resolution; see [the investigation and recovered candidates](../progress/oa-14-classification.md). No other trait's eligibility or historical audit disposition changes here.

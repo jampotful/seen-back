@@ -1,0 +1,48 @@
+name: evidence-intake
+on:
+  pull_request:
+    paths:
+      - 'docs/views/evidence/**'
+      - 'docs/views/audit/corrected/**'
+      - 'docs/views/recheck/**'
+      - 'docs/views/*-use-limits.jsonl'
+      - 'docs/views/research/**'
+      - 'docs/tracks/prompts/**'
+      - 'tools/senses/**'
+      - 'tools/lit/**'
+      - 'tools/views/**'
+      - 'views/**'
+      - 'src/cam.a.js'
+      - '.github/workflows/evidence-intake.yml'
+permissions:
+  contents: read
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Fetch only the comparison and immutable fixture commits
+        env:
+          INTAKE_BASE: ${{ github.event.pull_request.base.sha }}
+        run: git fetch --no-tags --depth=1 origin "$INTAKE_BASE" 832884366160e258cbc7b3c30e61e807927b4e7d
+      - name: Combined classification, intake and consumer regressions
+        run: |
+          python3 -I tools/senses/test_evidence_scope.py
+          python3 -I tools/senses/test_ecological_outcomes.py --corpus
+          python3 -I tools/senses/test_intake.py
+          python3 -I tools/senses/test_melotte_2018.py --require-classification
+          python3 -I tools/senses/test_quote_limit.py
+          python3 -I tools/lit/test_extract.py
+          python3 -I tools/views/test_apply_audit.py
+          python3 -I tools/views/test_scientific_preflight.py
+          python3 -I tools/views/test_gaps.py
+          python3 -I tools/views/test_compile.py
+          python3 -I tools/views/test_rows.py
+      - name: New and changed records against the PR base
+        env:
+          INTAKE_BASE: ${{ github.event.pull_request.base.sha }}
+        run: python3 -I tools/senses/check_submission.py --base-ref "$INTAKE_BASE"

@@ -44,9 +44,22 @@ The engine is a WebGL shader over the phone's camera, and a separate agent is ex
 - Print only the tails of long outputs. If your context passes about 100,000 tokens, update your progress note, push and stop: a fresh agent continues from the note for less than a long context costs.
 - A prompt file in `docs/tracks/prompts/` may narrow this brief for a burst; where it does, follow it.
 
+### Scientific preflight for newly launched evidence units
+
+Before drafting and submitting new evidence, follow [scientific-preflight.md](../../tracks/prompts/scientific-preflight.md). Reconcile the accessible Methods, Results, tables and captions with the abstract; a matching quote does not establish the interpretation of `value`, `method` or `conditions`. The protocol requires one compact reconciliation per paper and a read-only check binding it to the final candidate records. It supplements the existing source/quote checks and independent audit. New launches may also write `docs/views/progress/<unit>-scientific-review.jsonl`; record the launch's repository commit and prompt paths in the usual progress note. Apply on the next fresh launch after integration; do not interrupt running units or backfill accepted logs.
+
 ## The evidence log: `docs/views/evidence/<unit>.jsonl`
 
 One JSON object per line, one measurement per object. Append with `python3 -I tools/senses/addlog.py <unit> < records.jsonl`, which checks each record first; `python3 -I tools/senses/check.py` checks every log.
+
+**New evidence intake:** read [EVIDENCE-INTAKE.md](EVIDENCE-INTAKE.md) before
+writing. New `sense_*` and `behaviour_vision` records require an endpoint-specific
+`evidence_kind`; anatomy has its own requirements. The optical example below is
+not a functional-record template. Use the policy's worked examples, strict check
+on new input, and baseline-aware submission check on mixed old/new logs. Record
+the accepted-main `intake_base` and `evidence-kind-v2` in the existing progress
+note. Unchanged accepted records remain grandfathered; running units finish
+under their original launch and receive desk classification before new admission.
 
 **Quote length is measured in words, not characters.** `tools/senses/check.py` permits at most 40 whitespace-separated words (`len(quote.split())`); there is no 125-character evidence limit. A whole sentence longer than 125 characters remains eligible when it meets that word limit and all scientific and quotation checks. The 125-character cap reported in early audits was a WebFetch summariser output constraint, not a rule for scientific records or publication. If a tool cannot return the passage faithfully, obtain a legal source text (including the OA workflow in `docs/tracks/prompts/oa-read.md`) or leave a retrieval gap. Do not treat a tool's output limit as evidence that a measurement is absent, and do not evade a tool's restrictions by soliciting pieces.
 
@@ -65,9 +78,11 @@ Copy a whole sentence or table row; mark every omission with " … " and retain 
 - `taxon` is the species (or higher taxon) actually measured, which may differ from the unit's commonest members; `grade` records that difference.
 - `opened` is true only if you read the paper itself, its abstract on a publisher, PubMed, PMC, bioRxiv or repository page, or a review that states the value (name the review in `note` and grade by what the review reports). A search snippet does not count.
 - One line per value: a paper giving λmax for three receptor classes gives three lines.
-- `access` is `closed` for a paper from the owner's Drive, `book` for a book.
+- `source.access` describes the reading route, not a reuse licence. Under [EVIDENCE-ACCESS.md](EVIDENCE-ACCESS.md), `open` includes authorized free full text without an open-reuse licence; record its exact copy, version, provenance, rights and reading limits. `abstract` means abstract-only support with `partial: true`; `closed` remains a paper from the owner's Drive and `book` a book. A PMCID or free URL alone cannot establish that the source was read.
 
 Trait keys (use these; add a new key only when none fits, and write "new trait" and the reason in `note`):
+
+For new plant `sense_light_nonvisual` evidence, apply [LIGHT-RESPONSE.md](LIGHT-RESPONSE.md). Classify the actual light comparison as experimental, observational, or a directly measured light-related function. Keep observational qualifications in `value`; population origin or an author's proposed photoperiodic explanation alone does not establish a measured light response. Taxonomic grade and partial provenance are separate from causal support.
 
 | Key | What it records | Units or values |
 |---|---|---|
@@ -93,12 +108,42 @@ Trait keys (use these; add a new key only when none fits, and write "new trait" 
 | `polarization` | polarization sensitivity, where in the eye, what for | string |
 | `depth_cue` | stereopsis, image defocus, motion parallax, accommodation, peering | string |
 | `motion` | motion detection features (looming, small-target detectors, optomotor speeds) | string with figures |
-| `sense_vibration` | substrate or web vibration: organs, frequency range, threshold | string with figures |
-| `sense_airflow` | trichobothria, filiform hairs, lateral line | string with figures |
+| `sensory_anatomy` | sensory structures and their measured anatomy, without assigning a specific function | number/string; `structure`, `measurement`, `evidence_kind`, `method`, `conditions`; units for quantities |
+| `sense_vibration` | responses to substrate or web vibration: stimulus, frequency range, threshold | string with figures; distinguish mechanical response, transduction and behaviour |
+| `sense_airflow` | responses to air or water flow (legacy key includes lateral-line water-flow responses) | string with figures; name medium and evidence kind, not just an organ |
 | `sense_hearing` | hearing range and best frequency | `[low, high]` Hz with best frequency in `note` |
 | `sense_echolocation` | call frequencies, rate, range | string with figures |
 | `sense_electric`, `sense_magnetic`, `sense_infrared`, `sense_thermal`, `sense_chemical`, `sense_touch`, `sense_light_nonvisual` | other senses | string with figures |
 | `behaviour_vision` | a behaviour that shows what is seen (distance prey is detected or attacked, colour choice) | string with figures |
+| `ecological_intervention_outcome` | measured catch, survey detection or other ecological endpoint under an intervention; no sensory mechanism established by this classification | string with figures |
+| `physiology_volatile_emission` | measured volatile release or assay non-detection; a physiological observation, not sensory capability | string with assay/conditions; `note` says `new trait` and why |
+
+For chemical evidence, apply [CHEMICAL-EVIDENCE.md](CHEMICAL-EVIDENCE.md): separate chemical reception and treatment responses from emission and demonstrated emitter/receiver interactions. The physiology key does not settle `sense_chemical` coverage or authorize an app effect; source/taxon checks and the usual independent audit still govern admission.
+
+For intervention studies, apply [Ecological outcomes and sensory claims](ECOLOGICAL-OUTCOMES.md).
+Use `evidence_kind: ecological_outcome` with the measured endpoint, experimental
+unit, intervention, comparator and mechanism limit. A measured ecological result
+retains its grade without establishing avoidance, detection or sensitivity.
+Controlled group behavioural assays remain eligible for their actual claims.
+
+## Sensory anatomy and function (audit 292 follow-up, 31 October 2026)
+
+Follow [SENSORY-ANATOMY.md](SENSORY-ANATOMY.md). Measured anatomy is retained under
+`sensory_anatomy` when no existing anatomical key fits. It can be graded `m` for
+its own taxon without establishing hearing, airflow, vibration or another
+function. Name `structure` and `measurement`; distinguish anatomical presence,
+structural measurement, mechanical response, transduction, behavioural response
+and inferred function with `evidence_kind`. New `sense_*` and `behaviour_vision`
+records need this field; `addlog.py` enforces it, and direct-written new logs use
+`python3 -I tools/senses/check.py --require-evidence-kind <file>`.
+
+Do not infer a modality from the organ's name or a relative's ability. Anatomy,
+passive deflection and functional inference cannot close functional gaps or
+justify measured engine settings. A depiction inspired by anatomy stays a
+separately marked invention. Existing exact anatomical vision traits remain
+valid. Preserve nulls, experimental conditions, source completeness and audit
+history. Legacy records require source review; a newly added field cannot
+resolve an older unverifiable or scientifically unsupported finding.
 
 ## The sheet: `docs/views/drafts/<unit>.md`
 
@@ -144,7 +189,7 @@ The rows in build 22 (`EYES` in `src/cam.a.js`) were rewritten to this standard 
 
 - **Every number and every row has a source you opened in this session.** Never write a citation from memory without opening it. A fabricated or misattributed citation is the worst possible outcome of this work, far worse than a thin log. When a value comes from a review, say so in the log line and grade by what the review reports.
 - Search widely, in the order of "Where to look", and follow citation trails through the reference lists of the reviews you find. Prefer measurements in the commonly photographed members, and name the species measured.
-- Open access only, by legal routes. Do not use shadow libraries or any site that redistributes paywalled papers without permission. A paper you cannot open goes on the wanted list.
+- Use authorized source-access routes under [EVIDENCE-ACCESS.md](EVIDENCE-ACCESS.md). Free reading and open reuse are separate; absence of a CC licence alone is not a rejection reason. Do not use shadow libraries or unauthorized copies. Preserve the existing explicit owner-supplied-paper authorization and AGENTS.md's prohibited routes. A paper you cannot open goes on the wanted list under the assignment’s existing rules; do not claim that its findings were verified.
 - Go as deep as the time allows. Your prompt sets a time limit (75 minutes if it sets none). Run `date` at the start and every so often. Ten minutes before the limit, make sure all the files are complete and well formed (`python3 -I tools/senses/check.py` passes), mark anything unfinished in the sheet and the progress note, and push.
 - Your final message: at most 300 words, giving the views you propose, the number of log lines, the strongest and weakest evidence, the wanted papers that would change the most, and the commit you pushed last.
 

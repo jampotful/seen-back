@@ -1,0 +1,25 @@
+# desk-d437 progress
+
+Angle: eye-size records, wider net, thirty-second round. 56 records from five open papers (log docs/views/evidence/desk-d437.jsonl). check.py and check.py --require-evidence-kind: 0 problems for this file. About 33 WebSearches. Pages were reached through the fetch tool, which summarises long pages, so type lines and Methods came back in pieces and are said so in each record.
+
+## Filed
+- ZooKeys 1160: 169-190 (10.3897/zookeys.1160.101594; Wu YB et al., 2023; Araneidae): Araneus zhoui male holotype and A. mayanghe female paratype, 8 records, sensory_anatomy ('Eye sizes'; no diameter definition returned). WSC 67984 accepted.
+- ZooKeys 1137: 75-108 (10.3897/zookeys.1137.96306; Mi X, Li S, 2022; Araneidae): Araneus arcuatus male holotype and female paratype, 8 records, sensory_anatomy. WSC species page for A. arcuatus NOT reached (UNCHECKED; WSC reference 16915 lists no taxa; GBIF page lists it as accepted, which is not WSC).
+- Insects 16(10): 992 (10.3390/insects16100992; Čandek K et al., 2025; Araneidae): Megaraneus gabonensis female (WAM T170877) and male (WAM T170875), 8 records, sensory_anatomy (printed line 'Eyes:'; Methods say eyes were measured to 0.01 mm, no diameter definition). Redescription of a valid species, not a new species. WSC 11170 accepted. CC BY.
+- ZooKeys 1257: 55-70 (10.3897/zookeys.1257.165973; Omelko MM, 2025; Thomisidae): Phrynarachne gorochovi, P. storozhenkoi (new, female holotypes), P. ceylonica and P. decipiens (new records from Laos, redescribed, single females), 16 records, sensory_anatomy. WSC 72887, 72888, 48010, 48014 accepted.
+- ZooKeys 1160: 75-87 (10.3897/zookeys.1160.103644; Zhang R, Zhang F, 2023; Thomisidae): Ebelingia spirala and Lysiteles longensis, male holotype and female each, 16 records, eye_diameter_mm (Methods: 'Eye sizes were measured as the maximum diameter in dorsal view.'). WSC 67967, 67968 accepted.
+
+## Weak spots
+- The female eye sentences of Ebelingia spirala and Lysiteles longensis are printed with identical values; both read on the publisher preview page, so filed as printed; the auditor may want to confirm against the PDF.
+- The ZooKeys 1160 and 1137 Methods came back as fetch-tool pieces; the first-listed Methods sentences were quoted as returned. Neighbour sentences are tool-returned.
+- Female specimens of the Ebelingia/Lysiteles records are not identified in the paper (no code in the lead-in); said in each record.
+- Crossref was not read for any paper (UNCHECKED). Megaraneus DOI is the one WSC prints.
+
+## Not filed, leads
+- ZooKeys 1173 Araneus yuboi, shii, wanghuai, yangchuandongi: only Plazi pages and figure pages reached; no publisher text. ZooKeys 1160 Araneus shiwandashan already on main (desk-d396).
+- PeerJ 12: e16781 Dolomedes gregoric, D. bedjanic, D. hydatostella (Pisauridae; 'Diameters of AME ...' male and female): the page reached prints no licence sentence, so held out. Re-try if a page with the CC BY line appears in a search.
+- ZooKeys 1209 Belisana (PME only), ZooKeys 1255 Qianlingula (avoid list), ZooKeys 1254 Hahnia/Sinahahnia and BDJ 11 e113400 Hahnia jiangkou (already on main), ZooKeys 1161 (avoid list), ZooKeys 1108 (avoid list), BDJ 11 e103265 Troglocoelotes (no eye numbers), EJT 997 Hatitia (only the abstract reached), Taprobanica 12(1) Steatoda erigoniformis (no licence sentence on the PDF; skipped), ZooKeys 1286 Paratropis (desk-d426).
+- Evolutionary Systematics site was under maintenance.
+
+## Desk disposition after audits 836-842 (2 November 2026)
+All 56 records merged, none dropped. Counted error: lines 9-16 were filed as Araneus arcuatus (ZooKeys 1137: 75-108); audit 837 found the name preoccupied by Araneus arcuatus Clerck, 1757 (now Evarcha arcuata), and the current WSC page (spec-data/67553) gives the replacement name Araneus xiang Mi & Li, 2023 in Araneidae. The eight records are corrected to Araneus xiang (wrong taxon: 8 counted errors; nothing else in the unit was counted). Audits 836, 838-842: values, quotes, eye order, units (mm), licences and WSC status were confirmed; trait readings stand (sensory_anatomy for ZooKeys 1160: 169-190, ZooKeys 1137, Insects 16(10): 992 and ZooKeys 1257; eye_diameter_mm for ZooKeys 1160: 75-87, whose Methods define eye size as the maximum dorsal diameter, with the new-trait note). Faults were text only: missing "Mi & Wang," in species headings, an unmarked licence cut in the Insects paper, a false claim that interdistances and MOA values are printed (Megaraneus, Phrynarachne), the fieldwork specimen counts, paratype lists cut to a first group, notes that claimed WSC pages were read, "0.1" for the printed "0.10" (lines 23, 38, 48, 56), and Taxonomy headings. The female eye values of Ebelingia spirala and Lysiteles longensis are printed identically; confirmed digit for digit by two auditors. WSC prints page 91 for Lysiteles longensis, outside the paper's pages 75-87 (noted, not changed). Insects 16(10) is a redescription of a valid species (Megaraneus gabonensis), not a new species.
