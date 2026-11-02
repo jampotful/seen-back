@@ -419,6 +419,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d362 16 / 16 / 10 (Pholcus PME/AME diameters, ZooKeys 1240 and 1264; note-only errors; female values added)
 - d363 16 / 16 / 16 (Tapinocyba eye diameters, ZooKeys 1219; note-only errors, values and quotes all correct)
 - d364 10 / 10 / 2 (Collembola eyes 8+8, Parobisium eye spots, Acherontiella eyes absent; 2 quote-form errors fixed)
+- d365 10 / 10 / 10 (frog tympanum and eye diameters: Nectophrynoides table means, Pristimantis holotypes; note-only errors, family added)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
