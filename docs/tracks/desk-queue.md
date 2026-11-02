@@ -427,6 +427,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d370 32 / 32 / 32 (Weintrauboa ZooKeys 1236; Hippasosa and Mutatus ZooKeys 1226; all faults in note and conditions text, fixed)
 - d371 8 / 8 / 3 (Collembola ZooKeys 1282, mite ZooKeys 1284, scorpion ZSE 101(3), centipede BDJ 14; Collembola notes fixed)
 - d372 2 / 2 / 1 (Paranemachilus, ZSE 100(4); liui conditions fixed)
+- d373 56 / 56 / 55 (ZooKeys 1232 Salticidae notes fixed; EJT 997 Paratropis: interdistances filed as eye sizes, values replaced)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
