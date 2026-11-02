@@ -471,6 +471,7 @@ for the unresolved d325/d326 launch evidence.
 - d403 60 / 60 / 16 (ZooKeys 1218 Maimuna antalyensis, Tegenaria ballarini, beyazcika, egrisiana, hoeferi; ZooKeys 1224 Clubiona longyangensis, multiprocessa, eye_diameter_mm; ZooKeys 1183 Grandilithus chongzuo; 16 Clubiona lines missing the printed Clubiona corticalis group heading; false Crossref claims removed)
 - d404 44 / 44 / 0 (ZooKeys 1183 Grandilithus xiaohuangshan, lanxi; BDJ 13 e144804 Otacilia tongboshan; ZooKeys 1181 Sinocranum menghai, Xantharia baizilongi, X. cucphuong; faults in text only; Xantharia family Systariidae per WSC)
 - d405 32 / 32 / 0 (ZooKeys 1175 Euryeidon dian, Mallinella banna, M. mengla; ZooKeys 1169 Sinoamaurobius guangwushanensis, wulongdongensis (printed Amaurobius); faults in text only; Koppe ninger is a synonym, not filed)
+- d406 48 / 48 / 0 (ZooKeys 1261 Shuqiangius chuan; BDJ 10 e94853 Eresus da, E. yukuni; BDJ 12 e142805 Hersilia lelabah; ZooKeys 1116 Sinopoda muyuensis, S. wuyiensis; Subterranean Biology 52 Orphnaecus libmanan, O. tangcongvaca)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
