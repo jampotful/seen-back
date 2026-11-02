@@ -431,6 +431,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d374 32 / 32 / 8 (Neischnocolus EJT 1022; Hunan Linyphiidae ZooKeys 1253; all values right, quote faults fixed)
 - d375 40 / 40 / 24 (Sinartoria ZooKeys 1244; Hamataliwa ZooKeys 1282; values right, Hamataliwa conditions fixed)
 - d376 44 / 44 / 36 (Phrynarachne ZooKeys 1085; Pseudopoda ZSE 101(1); values right, conditions fixed)
+- d377 52 / 52 / 44 (Phrynarachne ZooKeys 1085; Yinanyphaena ZooKeys 1196; Atypus ZooKeys 1229 moved to eye_diameter_mm; values right, conditions fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
