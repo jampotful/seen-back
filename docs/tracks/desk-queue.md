@@ -2,6 +2,17 @@
 
 The research desk keeps its work queue here so it survives a recycled session. Every check-in reads it, launches the next item when fewer than 3 units run, and appends a yield line when a unit returns. Order: audits of returned units, then plant screening, then re-screens and rechecks, then oa reading units.
 
+Before the next fresh evidence launch, the existing desk follows
+[desk-launch.md](prompts/desk-launch.md) to record the actual launch time,
+accepted-main base, supplied instruction versions and acknowledgment in the
+unit's usual progress note. Inventory running units from the live session logs;
+leave their pinned instructions and tools unchanged. The dated Running section
+below is historical, not proof of current runtime state. Link final strict,
+baseline-aware and scientific-preflight results and immutable audit commits on
+return. This adds provenance to the existing workflow, not another dispatcher or
+another research assignment. See the [adoption investigation](progress/desk-intake-adoption-2026-11-02.md)
+for the unresolved d325/d326 launch evidence.
+
 ## Pacing (Max plan; nothing beyond it)
 - Week runs from Sun 25 Oct 21:59 EDT (26 Oct 01:59 UTC) to Sun 1 Nov 21:59 EST (2 Nov 02:59 UTC), 169 hours because clocks fall back on 1 Nov.
 - Even pace: target % used = hours since 26 Oct 01:59 UTC / 169 x 100 (about 0.6% an hour, 14% a day).
