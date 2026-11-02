@@ -399,6 +399,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d341 11 / 11 / 0 (deep-sea sergestid shrimp eye diameters, Schweikert 2022; audits 456/457 found 11 fixable quote-cut errors in 11)
 - d343 8 / 8 / 0 (fish, gecko and frog eye diameters from taxonomy tables; audit 458 found 2 fixable errors in 8)
 - d344 8 / 8 / 0 (PeerJ frog holotype eye and tympanum diameters; audit 459 found 1 fixable error in 8)
+- d345 3 / 3 / 0 (Bagarius eye ratios, Murina ear length; audit 460 found 2 fixable errors in 3)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
