@@ -507,6 +507,7 @@ for the unresolved d325/d326 launch evidence.
 - d439 20 / 20 / 0 (ZooKeys 1072: 49-81 Mangora baii, M. cephala, Hypsosinga pulla, Deione cheni; ZooKeys 1160: 169-190 Araneus shiwandashan)
 - d440 36 / 24 / 12 (ZooKeys 1034: 199-236 Eriovixia ganae, E. liuhongi, E. tangi merged; ZooKeys 1223: 169-184 Yaginumia medog, Y. qiong dropped: WSC species page not reached)
 - d441 40 / 40 / 0 (ZooKeys 1191: 75-88 Gea jingdong; ZooKeys 1157: 163-176 Clubiona x3; BDJ 12: e137014 Otacilia subshanxi)
+- d442 52 / 52 / 0 (ZooKeys 1034: 199-236 Eriovixia x4; ZooKeys 1233: 139-193 Selenobrachys x2; PeerJ 12: e16781 Dolomedes bedjanic, D. hydatostella male)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
