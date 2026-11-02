@@ -389,6 +389,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d331 2 / 0 / 0 (cephalopod eye range, flashlight-fish dummy response; audit 445 found 2 fixable errors in 2)
 - d332 12 / 12 / 0 (tympanum ratios, ant and isopod eye counts; audits 446/447 found 10 errors in 12, all fixed)
 - d333 4 / 4 / 0 (Collembola eyes_count; audit 448 found 0 errors)
+- d335 4 / 4 / 0 (millipede ocelli/ommatidia, scorpion eyes; audit 450 found 1 fixable error in 4)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
