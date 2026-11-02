@@ -489,6 +489,7 @@ for the unresolved d325/d326 launch evidence.
 - d421 24 / 24 / 0 (ASP 83 Euathlus basalticus, E. kupal, E. susanae; all 24 lines had wrong pages, corrected to 713-736 from the publisher XML)
 - d422 20 / 20 / 0 (Evolutionary Systematics 9(2) Platnickina debu, P. adamsoni, P. fritilla)
 - d423 16 / 16 / 0 (Evolutionary Systematics 9(2) Platnickina harapan; ZooKeys 1278 Ilocomba yotoco; auditors moved all lines to sensory_anatomy, desk kept eye_diameter_mm, owner question)
+- d424 48 / 48 / 0 (EJT 1081 Psechrus luopingensis, P. mingshengi, P. cornutus, P. cordatus (kept eye_diameter_mm, owner question; lab-reared sentence flagged); Evolutionary Systematics 10(1) Acanthogonatus monicae; Evolutionary Systematics 9(1) Gephyrellula condeuba)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
