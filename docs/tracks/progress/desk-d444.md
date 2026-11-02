@@ -1,0 +1,20 @@
+# desk-d444 progress
+
+Angle: eye-size records, wider net, thirty-ninth round. 20 records from one open Pensoft paper (log docs/views/evidence/desk-d444.jsonl).
+
+## Filed
+- ZooKeys 1232: 285-310 (10.3897/zookeys.1232.145622; Li J, He Q, Li S, Yao Z, 2025; Pholcidae): Pholcus hebei, P. huludao, P. jinzhou, P. liaoning, P. qin; male holotype and female paratype each, AME and PME (the sentence 'Eye interdistances and diameters' lists no ALE), 20 records, trait eye_diameter_mm (same sentence form and trait as Pholcus chaoyang, desk-d322, same paper). WSC species pages opened for all five (accepted).
+
+## Weak spots
+- The Methods print no eye definition; the trait follows the printed heading 'Eye interdistances and diameters' (precedent desk-d322). If the auditors rule that the heading does not meet the label rule, the fallback is sensory_anatomy.
+- Type lines and neighbouring sentences came back from the fetch tool in pieces of at most 125 characters, rejoined; the P. huludao female pre-eye sentence was abbreviated by the tool and is marked in brackets.
+- Crossref not opened (no Crossref URL in my search results): vor licence unchecked; publisher page prints CC BY 4.0.
+
+## Not filed and why
+- Gongylidioides heimifengensis, Gongylidium subbifurcatum, G. trapezium, Nippononeta anchorata (ZooKeys 1253: 243-254): already on main (desk-d374).
+- Hahnia dabashan, Sinahahnia chengkou (ZooKeys 1254: 217-224): already on main (desk-d428); the H. dabashan sentence prints PLE as '0.0.05'.
+- Khorata qianlei (ZooKeys 1244: 281-291, 10.3897/zookeys.1244.154422): the eye sentence prints PME only (earlier units skipped PME-only Khorata); not filed.
+- Belisana wangchengi (BDJ 12 e125111): PME only, no AME, skip. Zangaraneus zhishengi, Pholcus yajiyagama, Scytodes tanjiashui: already on main.
+- Ctenus igatu (J. Arachnology 50(1), BioOne): page returned only metadata; Uroctea chenyui (Lin & Li 2024) and Pholcoides erebus (Zoological Systematics 47(3), not open): no publisher page reached.
+- ZooKeys 1276 Leptopilos hajarensis and ZooKeys 1282 Leptonetela ayvaensis: listed earlier as no eye values.
+- Dolomedes gregoric and ZooKeys 1173 Araneus (yuboi, shii, wanghuai, yangchuandongi): searches again returned only Plazi pages; no publisher page.
