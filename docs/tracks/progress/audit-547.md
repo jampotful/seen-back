@@ -43,7 +43,7 @@ Printed 0.15 after 'PLE'. As line 49: conditions fault. Corrected.
 | 51 | S. zhengi female paratype | PME | 0.17 | 0.17 | error, corrected | conditions false count and omission |
 | 52 | S. zhengi female paratype | PLE | 0.15 | 0.15 | error, corrected | conditions false count and omission |
 
-Errors on 4 of 4 records (100%), with 4 faults in all. By kind: conditions 4; note/registry fact 0; quote 0; scientific meaning (value) 0; trait 0; taxon 0; grade 0; licence 0; bibliographic 0; duplicates 0. Uncounted: unprinted unit not disclosed. No trait or taxon change; no line dropped. Lines 37 to 48 (S. metyr and the S. zhengi male) share the '8 females'-type paratype wording risk: whoever audits them should recount (the S. zhengi male lines 45 to 48 likely carry the same conditions text).
+Errors on 4 of 4 records (100%), with 4 faults in all. By kind: conditions 4; note/registry fact 0; quote 0; scientific meaning (value) 0; trait 0; taxon 0; grade 0; licence 0; bibliographic 0; duplicates 0. Uncounted: unprinted unit not disclosed. No trait or taxon change; no line dropped. For the auditor of lines 45 to 48 (S. zhengi male holotype): those lines do not carry the '8 females' count, but omit the male carapace colour sentence and paratype elevations quoted above.
 
 ## Replacement
 
