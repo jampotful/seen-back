@@ -441,6 +441,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d384 48 / 48 / 48 (ZooKeys 1269 Tetragnatha tricuspidata, hirashimai; ZooKeys 1200 Cheiracanthium bannaensis, bifurcatum; ZooKeys 1255 Qianlingula jiafu, turbinata; values right, conditions fixed)
 - d385 36 / 36 / 36 (ZooKeys 1278 Sudesna chayu, mii, medog, flavipes, linzhiensis; values right, conditions fixed)
 - d386 40 / 40 / 40 (ZooKeys 1217 Thomisidae Camaricus medog, Monaeses xizang, Sinothomisus beibeng, S. dawai, Spilosynema motuo; values right, conditions and where fixed; non-spider angle found nothing usable)
+- d387 24 / 24 / 24 (ZooKeys 1240 Acantholycosa zang, zhangi; ZooKeys 1217 Thomisus yarang)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
