@@ -386,6 +386,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d328 8 / 0 / 0 (antennal glomeruli and sensilla counts; audit 441 found 5-8 errors in 8, all fixed incl. a synonym refile)
 - d329 6 / 0 / 5 (light and moon effects on behaviour; audits 442/443 found 10 errors in 11; five moon-correlate records held out pending a trait-key ruling)
 - d330 5 / 0 / 1 (bat echolocation, pit-organ papillae; audit 444 held Philaenus out unverifiable and found 11 errors in 5, all fixed)
+- d331 2 / 0 / 0 (cephalopod eye range, flashlight-fish dummy response; audit 445 found 2 fixable errors in 2)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
