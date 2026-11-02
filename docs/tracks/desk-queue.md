@@ -455,6 +455,7 @@ for the unresolved d325/d326 launch evidence.
 - d387 24 / 24 / 24 (ZooKeys 1240 Acantholycosa zang, zhangi; ZooKeys 1217 Thomisus yarang)
 - d388 60 / 60 / 22 (ZooKeys 1146 Dysdera, 14 new Iranian species; faults in where/conditions only)
 - d389 57 / 57 / 28 (ZooKeys 1247 Leptonetela zhaoruii, Pararana x3; ZooKeys 1189 Leptonetela, Longileptoneta, Pararana mingxuani; PLE values 0.0 corrected)
+- d390 34 / 34 / 16 (ZooKeys 1161 Zhuaraneus, Araneus liami, Wangaraneus ryani; ZooKeys 1213 Micropholcus; values right, faults in where/conditions)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
