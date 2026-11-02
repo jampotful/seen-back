@@ -476,6 +476,7 @@ for the unresolved d325/d326 launch evidence.
 - d408 30 / 30 / 0 (BDJ 14 e178451 Philodromus uljin; ZooKeys 1265 Latouchia jihe; BDJ 13 e143433 Falcileptoneta taoqii; BDJ 13 e157512 Hellamalthonica kazdagensis)
 - d409 36 / 36 / 0 (ZooKeys 1290 Hexura vandal; BDJ 10 e85436 Arabelia xizang; BDJ 10 e82406 Selenocosmia zhangzhengi; BDJ 13 e153724 Thelcticopis lini, Olios sericeus)
 - d410 56 / 56 / 40 (ZooKeys 1052 Vacrothele emei, Spinathele hanfeii, S. nanning, Gigathele hungae, G. limenghuai [genus corrected from Macrothele per WSC]; EJT 932 Macrothele nullispine, M. auriculata)
+- d411 60 / 60 / 0 (Evolutionary Systematics 10(2) Yunka suenos, Y. guasaganda, Y. baboso, Homoeomma josti; BDJ 10 e91350 Anahita menglun, Bowie haiphong, B. mengla, B. zhengi, Sinoctenus zhui [24 lines moved to sensory_anatomy]; BDJ 10 e90967 Orientothele washanensis)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
