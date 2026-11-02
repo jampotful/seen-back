@@ -501,6 +501,7 @@ for the unresolved d325/d326 launch evidence.
 - d433 60 / 60 / 0 (ZooKeys 1137 Araneus corrugis, Qianaraneus cucullatus, A. tetracanthus, A. minisculus, A. ovoideus, A. pseudodigitatus, A. semiorbiculatus; ZooKeys 1072 Chorizopesoides guoi, Deione yangi, Milonia gemella)
 - d434 36 / 36 / 0 (BDJ 11 e103298 Asceua haocongi, A. zijin; BDJ 10 e96467 Chilobrachys qishuoi; ZooKeys 1081 C. dominus, C. jinchengi; Diversity 18(1): 54 Herennia tone)
 - d435 20 / 20 / 0 (JoTT 12(4) Icius alboterminus; JoTT 17(8) Pellenes iva, Thyene bivittata; JoTT 18(1) Sonoita lightfooti; JoTT 18(7) Steatoda albomaculata)
+- d436 36 / 36 / 0 (ZooKeys 1239 Houcosa zhaoi; ZooKeys 1173 Araneus chenjingi, A. lihaiboi; ZooKeys 1160 A. fenzhi, A. mayanghe)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
