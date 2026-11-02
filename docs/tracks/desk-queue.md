@@ -467,6 +467,7 @@ for the unresolved d325/d326 launch evidence.
 - d399 48 / 48 / 13 (BDJ 12 e138400 Phintella hongkan, P. liae; BDJ 13 e156957 Jerzego qiuhangi; ZooKeys 1257 Chuanattus, Dianattus, Yaginumaella x4; 5 lines wrong paratype counts, 8 lines wrong heading path)
 - d400 36 / 36 / 16 (ZooKeys 1210 Altimella nedong, A. ngamring, eye_diameter_mm; ZooKeys 1123 Himalaphantes arcuatus, lingulatus, uncatus; 16 lines wrong heading path or missing paratype lead-in; heading paths between auditors not reconciled)
 - d401 60 / 60 / 16 (EJT 917 Spinirta hongyui, liuae, simianshan, yintiaoling, aviformis, quadrata, eye_diameter_mm; EJT 947 Heteropoda dulongensis, longa, vaginalis; 16 lines: copied male fetch note, where-path missing printed headings; 16 cut quotes completed)
+- d402 40 / 40 / 20 (EJT 947 Heteropoda bawanglingensis; BDJ 13 e144222 Asiopisinus anfu, implicatus, pseudonubilus; EJT 968 Meotipa lingulata, pseudomultuma, tortuosa; where-paths missing printed Class and Order headings, A. anfu wrong next sentence; Meotipa family is Theridiidae)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
