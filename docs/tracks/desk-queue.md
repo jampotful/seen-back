@@ -408,6 +408,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d351 4 / 4 / 4 (lungfish photoreceptor types, one paper; order Ceratodontiformes; contrary result added)
 - d352 0 / 0 / 0 (birds and mammals physiology; page tool returned no usable licence or text; leads: Oreoryzomys jumandi/hesperus PeerJ 20515, Enhydra lutris vibrissae)
 - d353 8 / 8 / 2 (Pensoft fish and gecko eye ratios; 2 fixable errors)
+- d354 3 / 3 / 1 (frog tympanum and pupil statements, ZooKeys; 1 fixable note error)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
