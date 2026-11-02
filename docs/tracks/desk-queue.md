@@ -483,6 +483,7 @@ for the unresolved d325/d326 launch evidence.
 - d415 59 / 59 / 4 (ZooKeys 1248 Hamus qingming, Tekellina zhangziqingi; BDJ 11 e102450 Siamspinops yejiei; BDJ 10 e82682 Haplocosmia sherwoodae [quote corrected]; ZooKeys 1080 Taksinus bambus; BDJ 12 e137852 Latouchia calcicola, L. linmufu, L. wenchuan)
 - d416 40 / 40 / 4 (BDJ 13 e160680 Selenops ab; ZooKeys 1159 Sinopoda guiyang, S. xishui, S. horizontalis; ZooKeys 1260 Pseudopoda rongxianensis, P. spiralis; ZooKeys 1116 Sinopoda wuyiensis female; ZooKeys 1117 Edelithus puer, E. shenmiguo)
 - d417 36 / 36 / 0 (ZooKeys 1241: 205-246 Rangkayo hitam, R. perkaso, Ibana svarnadvipa, Crockeria neofelis, Pharta roseomaculata)
+- d418 32 / 32 / 0 (BDJ 14 e182063 Theridion ganjiangyuan; BDJ 14 e178386 Coelotes fani; BDJ 13 e176953 Otacilia baimashan, O. wulong)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
