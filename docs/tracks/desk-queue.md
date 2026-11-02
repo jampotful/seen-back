@@ -435,6 +435,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d378 40 / 40 / 36 (Uaica EJT 989 eye order confirmed; Heteropoda EJT 1022; values right, conditions fixed)
 - d379 43 / 43 / 35 (ZooKeys 1200 Asceua chayu and Cydrela; ZooKeys 1254 Hahnia and Sinahahnia chengkou; BDJ 13 Neoantistea; ZooKeys 1197 Sinahahnia; values right, conditions fixed)
 - d380 52 / 52 / 52 (BDJ 14 Zangaraneus and Drapetisca; ZooKeys 1245 Sinoamaurobius and Spiricoelotes; values right, conditions fixed; Spiricoelotes units inferred from scale bars)
+- d381 40 / 40 / 40 (ZooKeys 1283 Pholcus baegamsan, hongcheon, namhae, yeongcheon; ZooKeys 1275 Pholcus alashan, chifeng; values right, conditions fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
