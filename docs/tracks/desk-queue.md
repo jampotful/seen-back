@@ -442,7 +442,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d385 36 / 36 / 36 (ZooKeys 1278 Sudesna chayu, mii, medog, flavipes, linzhiensis; values right, conditions fixed)
 - d386 40 / 40 / 40 (ZooKeys 1217 Thomisidae Camaricus medog, Monaeses xizang, Sinothomisus beibeng, S. dawai, Spilosynema motuo; values right, conditions and where fixed; non-spider angle found nothing usable)
 - d387 24 / 24 / 24 (ZooKeys 1240 Acantholycosa zang, zhangi; ZooKeys 1217 Thomisus yarang)
-- d388 60 / 60 / 14 (ZooKeys 1146 Dysdera, 14 new Iranian species; faults in where/conditions only)
+- d388 60 / 60 / 22 (ZooKeys 1146 Dysdera, 14 new Iranian species; faults in where/conditions only)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
