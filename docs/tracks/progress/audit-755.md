@@ -35,7 +35,7 @@ The unit's conditions left the type line cut after "elev. 65 m;" and said no par
 
 ## Counts
 
-Lines judged 4. Errors (wrong value, taxon, trait, sex, specimen, repeat or source): 0. Faults: 5 per line, 20 in all (heading path: genus heading and "Results" missing, Class/Order said not returned instead of not printed; type line cut and paratype statement hedged; licence paraphrase; unconfirmed epub/accepted dates; straight apostrophe in the printed heading counted with the heading fault). All fixed below. Nothing dropped or held out. Replacement validated with check.py and --require-evidence-kind on a scratch copy: 4 records, 0 problems.
+Lines judged 4. Errors (wrong value, taxon, trait, sex, specimen, repeat or source): 0. Faults: 4 per line, 16 in all (1 heading path: genus heading and "Results" missing, Class/Order said not returned instead of not printed, straight apostrophe in the printed heading; 2 type line cut and paratype statement hedged; 3 licence paraphrase; 4 unconfirmed epub/accepted dates). All fixed below. Nothing dropped or held out. Replacement validated with check.py and --require-evidence-kind on a scratch copy: 4 records, 0 problems.
 
 ## Replacement
 
