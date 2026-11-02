@@ -377,6 +377,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d319 8 / 0 / 0 (open-access new-species descriptions and Tridacna eye counts; audit 430 found 2 fixable errors)
 - d320 10 / 0 / 0 (eye length and diameter tables; audits 431/432 found 5 fixable errors in 10)
 - d321 0 / 0 / 0 (threshold papers; everything open-licence already on main or held out)
+- d322 10 / 0 / 0 (centipede ocelli, spider and mysid eyes from ZooKeys; audits 433/434 found 4 fixable errors in 10)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
