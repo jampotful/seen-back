@@ -401,6 +401,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d344 8 / 8 / 0 (PeerJ frog holotype eye and tympanum diameters; audit 459 found 1 fixable error in 8)
 - d345 3 / 3 / 0 (Bagarius eye ratios, Murina ear length; audit 460 found 2 fixable errors in 3)
 - d346 5 / 5 / 0 (antennal and mouthpart sensilla counts; audit 461 found 1 fixable error in 5)
+- d347 4 / 4 / 0 (bat and shrew holotype ear and tragus lengths; audit 462 found 0 errors)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
