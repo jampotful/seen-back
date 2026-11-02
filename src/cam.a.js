@@ -141,7 +141,10 @@
   }
   function drawOf(d) {
     var o = {}, c; if (!d) return o;
-    for (c in d) { var names = d[c].map(function (x) { return x.name; }); o[c] = names.indexOf(TUNE.draw) >= 0 ? TUNE.draw : names[0]; }
+    for (c in d) {
+      var options = d[c], chosen = options.filter(function (x) { return x.name === TUNE.draw; })[0] || options[0];
+      o[c] = chosen ? chosen.mode || chosen.name : undefined;   // one option can join existing modules; e.g. a web drawn and felt at the same knock
+    }
     return o;
   }
   function paramsOf(m, named) {
