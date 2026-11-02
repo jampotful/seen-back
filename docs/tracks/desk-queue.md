@@ -438,6 +438,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d381 40 / 40 / 40 (ZooKeys 1283 Pholcus baegamsan, hongcheon, namhae, yeongcheon; ZooKeys 1275 Pholcus alashan, chifeng; values right, conditions fixed)
 - d382 44 / 4 / 44 (BDJ 14 Pholcus yajiyagama merged; ZooKeys 1292 Pseudopoda and ZooKeys 1296 Poeciloneta, 40 records, held out: publisher pages not reachable by the auditors, fetched by the unit from non-search URLs)
 - d383 34 / 34 / 34 (BDJ 14 Scytodes tanjiashui; ZooKeys 1280 Sinopoda honghe, kuan; ZooKeys 1269 Parazygiella jianxini, yanghongae; values right, conditions and unit field fixed)
+- d384 48 / 48 / 48 (ZooKeys 1269 Tetragnatha tricuspidata, hirashimai; ZooKeys 1200 Cheiracanthium bannaensis, bifurcatum; ZooKeys 1255 Qianlingula jiafu, turbinata; values right, conditions fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
