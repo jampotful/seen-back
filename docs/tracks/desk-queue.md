@@ -461,6 +461,7 @@ for the unresolved d325/d326 launch evidence.
 - d393 33 / 33 / 0 (ZooKeys 1216 and 1202 Belisana PME diameters, 17 species; faults in notes only; eye_diameter_mm kept, owner question on the label)
 - d394 35 / 35 / 13 (ZooKeys 1125 Tetragnatha x3; ZooKeys 1108 Haplodrassus yinae, Hitobia xiaoxi; sensory_anatomy)
 - d395 42 / 42 / 0 (ZooKeys 1221 Salticidae: Dendroicius, Icius, Irura x2, Myrmarachne, Nandicius, Pancorius; faults in text only; lead: Wang et al. 2024 may define eye size)
+- d396 45 / 41 / 6 (ZooKeys 1221 Cheliceroides, Protaeus (ex Mintonia) shiwandashan, Pancorius medog; ZooKeys 1192 Attulus, Colaxes, Epeus, Evarcha, Icius, Pancorius; 4 held out)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
