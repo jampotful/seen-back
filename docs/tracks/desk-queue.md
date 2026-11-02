@@ -468,6 +468,7 @@ for the unresolved d325/d326 launch evidence.
 - d400 36 / 36 / 16 (ZooKeys 1210 Altimella nedong, A. ngamring, eye_diameter_mm; ZooKeys 1123 Himalaphantes arcuatus, lingulatus, uncatus; 16 lines wrong heading path or missing paratype lead-in; heading paths between auditors not reconciled)
 - d401 60 / 60 / 16 (EJT 917 Spinirta hongyui, liuae, simianshan, yintiaoling, aviformis, quadrata, eye_diameter_mm; EJT 947 Heteropoda dulongensis, longa, vaginalis; 16 lines: copied male fetch note, where-path missing printed headings; 16 cut quotes completed)
 - d402 40 / 40 / 20 (EJT 947 Heteropoda bawanglingensis; BDJ 13 e144222 Asiopisinus anfu, implicatus, pseudonubilus; EJT 968 Meotipa lingulata, pseudomultuma, tortuosa; where-paths missing printed Class and Order headings, A. anfu wrong next sentence; Meotipa family is Theridiidae)
+- d403 60 / 60 / 16 (ZooKeys 1218 Maimuna antalyensis, Tegenaria ballarini, beyazcika, egrisiana, hoeferi; ZooKeys 1224 Clubiona longyangensis, multiprocessa, eye_diameter_mm; ZooKeys 1183 Grandilithus chongzuo; 16 Clubiona lines missing the printed Clubiona corticalis group heading; false Crossref claims removed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
