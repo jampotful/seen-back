@@ -411,6 +411,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d354 3 / 3 / 1 (frog tympanum and pupil statements, ZooKeys; 1 fixable note error)
 - d355 3 / 3 / 3 (behaviour findings in MDPI papers; context and contrary-result omissions, all fixable)
 - d356 1 / 1 / 1 (Paleotoca diminas eyes absent; author form and note fixed)
+- d357 11 / 11 / 7 (spider PME sizes, three ZooKeys papers; ZooKeys 1174 lines moved to eye_diameter_mm)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
