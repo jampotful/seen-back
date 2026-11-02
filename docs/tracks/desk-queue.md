@@ -389,6 +389,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d331 2 / 0 / 0 (cephalopod eye range, flashlight-fish dummy response; audit 445 found 2 fixable errors in 2)
 - d332 12 / 12 / 0 (tympanum ratios, ant and isopod eye counts; audits 446/447 found 10 errors in 12, all fixed)
 - d333 4 / 4 / 0 (Collembola eyes_count; audit 448 found 0 errors)
+- d334 6 / 6 / 0 (cavefish/loach eye-diameter ratios, Gekko eye diameter; audit 449 found 2 fixable errors in 6)
 - d335 4 / 4 / 0 (millipede ocelli/ommatidia, scorpion eyes; audit 450 found 1 fixable error in 4)
 
 ## Codex lane (26 October 2026)
