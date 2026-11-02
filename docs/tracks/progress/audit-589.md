@@ -21,7 +21,7 @@ Headings (publisher page, tool summary of the heading list, two group headings r
 
 ## Repeats
 
-Working tree = origin/main: `grep -rl` over docs/ for Dysdera and zookeys.1146.97517 finds only the two untracked desk-d388 files. No repeats on main for either species or the DOI under any trait.
+Working tree = origin/main: `grep -rl` over docs/ for Dysdera and zookeys.1146.97517 finds only the two untracked desk-d388 files. No repeats on main for either species or the DOI under any trait. `git grep -il -E "tapuria|genoensis|zookeys\.1146\.97517"` over docs/ on all 386 other origin/research/desk-d* branches, and `git grep` for Dysdera and the DOI on origin/main: completed, no hits.
 
 ## Per line
 
