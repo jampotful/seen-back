@@ -474,6 +474,7 @@ for the unresolved d325/d326 launch evidence.
 - d406 48 / 48 / 0 (ZooKeys 1261 Shuqiangius chuan; BDJ 10 e94853 Eresus da, E. yukuni; BDJ 12 e142805 Hersilia lelabah; ZooKeys 1116 Sinopoda muyuensis, S. wuyiensis; Subterranean Biology 52 Orphnaecus libmanan, O. tangcongvaca)
 - d407 44 / 44 / 0 (ZSE 101(2) Mimetus guiyang, M. lanmeiae, M. caudatus; BDJ 13 e153747 Aculithus languan, A. ruijin; BDJ 12 e133875 Anyphaena leidashi; BDJ 14 e182804 Planochelas jingda)
 - d408 30 / 30 / 0 (BDJ 14 e178451 Philodromus uljin; ZooKeys 1265 Latouchia jihe; BDJ 13 e143433 Falcileptoneta taoqii; BDJ 13 e157512 Hellamalthonica kazdagensis)
+- d409 36 / 36 / 0 (ZooKeys 1290 Hexura vandal; BDJ 10 e85436 Arabelia xizang; BDJ 10 e82406 Selenocosmia zhangzhengi; BDJ 13 e153724 Thelcticopis lini, Olios sericeus)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
