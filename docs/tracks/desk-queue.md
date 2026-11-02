@@ -458,6 +458,7 @@ for the unresolved d325/d326 launch evidence.
 - d390 34 / 34 / 16 (ZooKeys 1161 Zhuaraneus, Araneus liami, Wangaraneus ryani; ZooKeys 1213 Micropholcus; values right, faults in where/conditions)
 - d391 45 / 45 / 12 (ZooKeys 1187 Hahniidae: Goblinia, Myahnia, Troglohnia x4, Typhlohnia banlaksao; eye_diameter_mm)
 - d392 20 / 20 / 0 (ZooKeys 1236 Agelenidae: Ageleradix dulong, jinfoshan, nangunhe; faults in notes only)
+- d393 33 / 33 / 0 (ZooKeys 1216 and 1202 Belisana PME diameters, 17 species; faults in notes only; eye_diameter_mm kept, owner question on the label)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
