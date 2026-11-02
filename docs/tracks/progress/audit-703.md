@@ -37,7 +37,7 @@ Materials block, label "Holotype:" G5, individualCount 1, male, ZMUU; label "Par
 4. Type count left unchecked (lines 25-30): Methods "one female and 11 male specimens" vs 10 males listed; now stated exactly.
 5. Methods incomplete (lines 25-30): only the measurement sentence and eye abbreviations given; the whole section is now summarised with the exact sentences that bear on measurement.
 
-Faults: 5 kinds, 5 on lines 25-26, 4 on lines 27-30 (fault 1 male only, fault 2 female only): 26 line-faults in all. Errors (counted, record must be dropped): 0. Trait, value, eye, sex, DOI, licence, validity and repeat check all hold.
+Faults: 5 kinds; 4 on each of lines 25-26 (faults 1, 3, 4, 5) and 4 on each of lines 27-30 (faults 2, 3, 4, 5): 24 line-faults in all. Errors (counted, record must be dropped): 0. Trait, value, eye, sex, DOI, licence, validity and repeat check all hold.
 
 ## Verdicts
 
