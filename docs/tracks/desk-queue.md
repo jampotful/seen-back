@@ -491,6 +491,7 @@ for the unresolved d325/d326 launch evidence.
 - d423 16 / 16 / 0 (Evolutionary Systematics 9(2) Platnickina harapan; ZooKeys 1278 Ilocomba yotoco; auditors moved all lines to sensory_anatomy, desk kept eye_diameter_mm, owner question)
 - d424 48 / 48 / 0 (EJT 1081 Psechrus luopingensis, P. mingshengi, P. cornutus, P. cordatus (kept eye_diameter_mm, owner question; lab-reared sentence flagged); Evolutionary Systematics 10(1) Acanthogonatus monicae; Evolutionary Systematics 9(1) Gephyrellula condeuba)
 - d425 24 / 24 / 0 (ZooKeys 1266 Megama decimaculata, Meotipa cordata, M. vittiforma; ZooKeys 1248 Draposa zhanjiangensis; unit read a Crossref list query, reported in the progress note)
+- d426 12 / 12 / 0 (ZooKeys 1286 Paratropis barragani, P. intag male)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
