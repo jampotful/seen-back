@@ -424,6 +424,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d367 5 / 3 / 5 (small-mammal ear and tragus; 3 fixed, 2 Kerivoula lines dropped as unfixable)
 - d368 24 / 24 / 4 (Clubiona eye diameters, ZooKeys 1248; best audit result of the multi-species spider papers)
 - d369 24 / 24 / 12 (Sudesna, ZooKeys 1234; all faults in note text, fixed)
+- d370 32 / 32 / 32 (Weintrauboa ZooKeys 1236; Hippasosa and Mutatus ZooKeys 1226; all faults in note and conditions text, fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
