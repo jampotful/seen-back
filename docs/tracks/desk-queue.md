@@ -498,6 +498,7 @@ for the unresolved d325/d326 launch evidence.
 - d430 8 / 8 / 0 (Australian Journal of Taxonomy 49: 1-6 Artoriopsis dubia)
 - d431 51 / 48 / 3 (ZooKeys 1137 Araneus x3; ZooKeys 1072 Acusilas tongi, Chorizopes yui; ZSE 99(2) Anatextrix monstrabilis merged; EJT 1067 Dysdera asaahil, D. sidimaafa held out: publisher PDF unreachable)
 - d432 32 / 24 / 8 (ZooKeys 1197 Sinahahnia yintiaoling; ZooKeys 1233 Chilocosmia dichromata; Diversity 18(1): 54 Herennia eva, H. maj, H. tsoi merged; ZooKeys 1233 Selenobrachys x2 held out: publisher text unreachable past Results)
+- d433 60 / 60 / 0 (ZooKeys 1137 Araneus corrugis, Qianaraneus cucullatus, A. tetracanthus, A. minisculus, A. ovoideus, A. pseudodigitatus, A. semiorbiculatus; ZooKeys 1072 Chorizopesoides guoi, Deione yangi, Milonia gemella)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
