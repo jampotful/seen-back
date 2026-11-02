@@ -1,0 +1,23 @@
+# desk-d386 progress
+
+Angle: non-spider arthropods with per-species eye measurements, then (after about 25 calls found nothing usable) spider families. 40 records from one open Pensoft paper (unit desk-d386; log docs/views/evidence/desk-d386.jsonl). check.py: 0 problems.
+
+## Filed
+- ZooKeys 1217: 195-213 (10.3897/zookeys.1217.127555; Wang L-Y, Mu Y-N, Lu Q-L, Xu Y-Q, Bu H-T, Zhang F, Zhang Z-S, 2024; fetch tool returned the CC BY 4.0 licence sentence; WSC refincluded/18025 lists the species, all Thomisidae): Camaricus medog, Monaeses xizang, Sinothomisus beibeng, Sinothomisus dawai, Spilosynema motuo; male (holotype) and female (paratype) each; AME/ALE/PME/PLE, eye_diameter_mm (Methods: eye sizes are the maximum dorsal diameter, per fetch-tool summary).
+
+## Weak spots
+- WebFetch refuses to print sentences over 125 characters; the eye sentence was joined from two consecutive pieces, Methods and neighbouring sentences are summaries, not verbatim.
+- Camaricus medog female: description tied to paratype SWUC-T-THO-01-02 only by the fetch tool; the type list does not assign sexes to 01-02~06.
+- Spilosynema motuo male description carries no code (heading 'Male holotype'); Figure 2 legend reportedly says 'Spilosynema xizang' for the female.
+- Monaeses xizang female interdistance printed 'PME-PLE 041' (no decimal point); it sits in the quote, not in any filed value. Some female lines print 'PLE, 0.xx' with a comma, kept.
+- Crossref vor and per-species WSC validity pages not opened (UNCHECKED).
+- Monaeses xizang is a lead in desk-d359.md ('paper not opened'); no evidence record on main.
+
+## Not filed and why
+- Thomisus yarang and Pharta xizang (same paper): Thomisus female paratype code conflicts between type list (-06-02-03) and description (-06-03); Pharta xizang has no holotype and no code tied to the measured males/females. Left for a unit that can read the page whole.
+- Xizangiana plankton (BDJ 12: e116569, 2024): the fetch tool found no eye-size definition in Methods, so the trait key is unsupported; 8 records dropped. WSC spec-data/69200 shows it accepted.
+- Brachyponera (ZooKeys 1230) ants: already on main (desk-d291). Tyrannochthonius (EJT 1058, 2026): only eye counts in clauses, no whole sentences returned by the tool, and the genus is on main from other papers. Androctonus najdensis (ZooKeys 1262), Mesomexovis caxcan (ZooKeys 1243), Caridina zhaoi (ZSE 102), Alluropus/Rhysida Vietnam (ZSE 101): no per-species eye measurement or count printed (checked). Harvestmen, isopods, amphipods, fireflies, bees, millipedes, centipedes, Collembola: searches returned only Plazi/Zenodo/aggregator copies or papers with no eye values; Collembola and centipede eye counts are already heavily filed on main. Pensoft CSV tables (ZooKeys 100001, ~2022: wasp 'Max. diameter eye' rows) were seen but the paper page was not reachable from search results, so not filed.
+
+## Desk disposition after audits 575-579 (2 November 2026)
+All 40 records merged with the auditors' replacement lines. 40 of 40 in error (100%), all in conditions and the "where" field; no value, quote, trait or taxon changed, no record repeats main, and no line was dropped or held out. The publisher page was reached from the auditors' own search results. Every line's "where" read "Taxonomic account" and is now "Taxonomy" (the printed heading; the page has no Male/Female subheadings). Audit 575 (Camaricus medog 1-8): type line miscopied, clypeus, chelicera and labium sentences missing, Diagnosis never read; the female code the unit called unconfirmed is printed in the Description as "Female paratype (SWUC-T-THO-01-02...". Audit 576 (Monaeses xizang 9-16, male holotype SWUC-T-THO-02-01, female paratype SWUC-T-THO-02-02): conditions incomplete; the printed 'PLE, 0.19' and 'PME–PLE 041' confirmed; Methods sentence on maximum dorsal diameter read verbatim; WSC spec-data/70630 accepted. Audit 577 (Sinothomisus beibeng 17-24): Diagnosis, clypeus, chelicerae, labium and other-sex eye sentences omitted. Audit 578 (S. dawai 25-32): Variation, Diagnosis, clypeus and other description sentences omitted, female paratype locality misstated; WSC species/64159 accepted. Audit 579 (Spilosynema motuo 33-40, female paratype SWUC-T-THO-05-02): clypeus and other Description sentences, Diagnosis, Variation and the other sex omitted; the Figure 3 I and J legend misprints "Spilosynema xizang" alongside Figure 2D; WSC spec-data/70633 accepted. Crossref vor was not checked by any auditor (no Crossref URL in their search results). Not filed by the unit and still open: Thomisus yarang and Pharta xizang (same paper; code conflicts), Xizangiana plankton (BDJ 12: e116569; no eye-size definition).
+Owner question: none new.
