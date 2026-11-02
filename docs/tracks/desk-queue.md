@@ -414,6 +414,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d357 11 / 11 / 7 (spider PME sizes, three ZooKeys papers; ZooKeys 1174 lines moved to eye_diameter_mm)
 - d358 3 / 3 / 2 (Collembola eyes 8+8, millipede ommatidia; P. canastra refiled as P. ambuatinga)
 - d359 16 / 16 / 16 (Asceua, Mallinella eye diameters, ZooKeys 1200; note-only errors plus female values; quotes and values all correct)
+- d360 16 / 16 / 12 (Synagelides eye sizes, ZooKeys 1245; note-only errors; S. wuyuan name unchecked)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
