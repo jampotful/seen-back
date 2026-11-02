@@ -1,6 +1,6 @@
 # desk-d385 progress
 
-Angle: new papers in families not yet on main. 36 records from one open Pensoma-free Pensoft paper (unit desk-d385; log docs/views/evidence/desk-d385.jsonl). check.py: 0 problems.
+Angle: new papers in families not yet on main. 36 records from one open Pensoft paper (unit desk-d385; log docs/views/evidence/desk-d385.jsonl). check.py: 0 problems.
 
 ## Filed
 - ZooKeys 1278: 287-304 (10.3897/zookeys.1278.187037; Wang L-Y, Zhang Z-S, Xu Y-Q, 2026; page prints CC BY 4.0; Crossref CC BY 4.0 vor, no issue; WSC spec-data 73640, 73641, 73642, 15743, 15766 opened, all Dictynidae, accepted): Sudesna chayu (male, female), S. mii (male holotype, female paratype SWUC-T-DI-21-02), S. medog (male holotype), S. flavipes (male first described, female), S. linzhiensis comb. nov. (male, female). AME/ALE/PME/PLE per sex, eye_diameter_mm (Methods: 'Eye sizes were measured as the maximum dorsal diameter.'; sentence label 'Eye sizes and interdistances').
