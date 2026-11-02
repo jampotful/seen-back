@@ -60,6 +60,11 @@ At a fresh unit's launch, record `evidence_intake: evidence-kind-v2` and the
 full accepted `origin/main` SHA as `intake_base` in its existing progress note.
 The launcher must actually supply this policy, BRIEF and the task prompt. An
 updated file on GitHub alone is not proof that a private/ad-hoc launcher read it.
+Use the existing desk's [launch-recording procedure](../../tracks/prompts/desk-launch.md)
+for the actual timestamp, dispatch/acknowledgment locator and supplied instruction
+blob versions, and link final validation and audit evidence in the same progress
+note. A candidate's Git parent establishes its submitted base, not its launch time
+or the contents of a private prompt. Missing historical provenance stays unknown.
 
 1. Draft the new records in a scratch JSONL file, using the worked examples in
    [evidence-intake-examples.json](evidence-intake-examples.json) as format-only
