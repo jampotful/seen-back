@@ -486,6 +486,7 @@ for the unresolved d325/d326 launch evidence.
 - d418 32 / 32 / 0 (BDJ 14 e182063 Theridion ganjiangyuan; BDJ 14 e178386 Coelotes fani; BDJ 13 e176953 Otacilia baimashan, O. wulong)
 - d419 52 / 52 / 0 (ZSE 102(4) Metashinobius daweishan, M. dulongjiang; ZSE 101(1) Pimoa shimian; ZSE 100(3) Pamirosa kudratbekovi; ZSE 102(3) Ovia chayu, O. dawai, O. dulong)
 - d420 57 / 57 / 0 (ZSE 102(3) Ovia medog, O. separata; ZSE 101(4) Bogdocosa yunshani; BDJ 12 e130526 Xilithus qizimeishanensis; ZSE 102(1) Pikelinia floydmuraria (moved to sensory_anatomy); EJT 976 Vacrothele fuyuanensis, V. jiangkouensis, V. baiseensis male; ZooKeys 1203 Shinobius cona)
+- d421 24 / 24 / 0 (ASP 83 Euathlus basalticus, E. kupal, E. susanae; all 24 lines had wrong pages, corrected to 713-736 from the publisher XML)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
