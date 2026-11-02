@@ -27,12 +27,12 @@ Auditor: Opus 861, 2 November 2026. Lines judged: 33 to 40 of docs/views/evidenc
 | 34 | S. ustromsupasius ♂ holotype, ALE | 0.78 | pass with faults F1, F3, F4; fixed |
 | 35 | S. ustromsupasius ♂ holotype, PME | 0.44 | pass with faults F1, F3, F4; fixed |
 | 36 | S. ustromsupasius ♂ holotype, PLE | 0.47 | pass with faults F1, F3, F4; fixed |
-| 37 | S. philippinus ♂ PASI ara0006, AME | 0.61 | pass with faults F1, F2, F4, F5; fixed |
-| 38 | S. philippinus ♂ PASI ara0006, ALE | 0.76 | pass with faults F1, F2, F4, F5; fixed |
-| 39 | S. philippinus ♂ PASI ara0006, PME | 0.51 | pass with faults F1, F2, F4, F5; fixed |
-| 40 | S. philippinus ♂ PASI ara0006, PLE | 0.51 | pass with faults F1, F2, F4, F5; fixed |
+| 37 | S. philippinus ♂ PASI ara0006, AME | 0.61 | pass with faults F1, F2, F4; fixed |
+| 38 | S. philippinus ♂ PASI ara0006, ALE | 0.76 | pass with faults F1, F2, F4; fixed |
+| 39 | S. philippinus ♂ PASI ara0006, PME | 0.51 | pass with faults F1, F2, F4; fixed |
+| 40 | S. philippinus ♂ PASI ara0006, PLE | 0.51 | pass with faults F1, F2, F4; fixed |
 
-F1 (33-40): heading path in 'where' and conditions omits the printed 'Family Theraphosidae Thorell, 1869' and 'Subfamily Selenocosmiinae Simon, 1889' headings. F2 (37-40): type-material line not as printed ('Prov. • holotype' for printed 'Prov.• holotype'); the measured male is labelled '(not a type)' in measurement and note, an inference the brief forbids (now recorded as printed, under Other material examined, no type status inferred); note says 'the shape words in brackets are not in this record' although this quote has none. F3 (33-36): Description lead-in quoted without its trailing 'Figs 11A, 12–14, 15B–D.' and without a cut mark; the following interocular sentence left cut (now given whole). F4 (33-40): stale main commit (e17c5489e) in the not-on-main note; current origin/main is 1dddbe256 and the result is unchanged. F5 (37-40): none beyond F2 in content; listed so the four philippinus lines carry the same fix set.
+F1 (33-40): heading path in 'where' and conditions omits the printed 'Family Theraphosidae Thorell, 1869' and 'Subfamily Selenocosmiinae Simon, 1889' headings. F2 (37-40): type-material line not as printed ('Prov. • holotype' for printed 'Prov.• holotype'); the measured male is labelled '(not a type)' in measurement and note, an inference the brief forbids (now recorded as printed, under Other material examined, no type status inferred); note says 'the shape words in brackets are not in this record' although this quote has none. F3 (33-36): Description lead-in quoted without its trailing 'Figs 11A, 12–14, 15B–D.' and without a cut mark; the following interocular sentence left cut (now given whole). F4 (33-40): stale main commit (e17c5489e) in the not-on-main note; current origin/main is 1dddbe256 and the result is unchanged.
 
 ## Counts
 Lines judged 8. Counted errors 0 (no wrong value, eye label, sex, specimen code, trait, taxon, family, DOI, author, title, pages, licence or repeat). Faults: F1 8, F2 4, F3 4, F4 8 (24). Dropped: none.
