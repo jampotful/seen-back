@@ -381,6 +381,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d323 7 / 0 / 0 (non-arthropod invertebrate eyes; audit 435 found 3 fixable errors in 7)
 - d324 0 / 0 / 0 (vertebrate eye anatomy; open-licence papers already on main or fail licence/quote rules)
 - d325 8 / 0 / 1 (bat echolocation, mole cochlear nerve, bat vomeronasal organs; audits 436/437 found 4 errors in 9, one unfixable dropped)
+- d326 2 / 0 / 0 (Pipistrellus terminal frequency, Sorex cochlear nerve; audit 438 found 3 fixable errors in 2)
 
 ## Codex lane (26 October 2026)
 - Codex runs on the owner's separate ChatGPT allowance, so it takes the plant screening (batches harvest-c7 to c23, 668 genera, 40 a unit, released 26 Oct 04:15 UTC; the free harvest run found nothing to add) and the findings pass. The desk audits and merges; it screens no more plant batches itself.
