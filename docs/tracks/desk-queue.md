@@ -417,6 +417,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d360 16 / 16 / 12 (Synagelides eye sizes, ZooKeys 1245; note-only errors; S. wuyuan name unchecked)
 - d361 5 / 5 / 1 (Myrmecina worker ommatidia counts, DEZ 72(2); 1 fixable conditions fault)
 - d362 16 / 16 / 10 (Pholcus PME/AME diameters, ZooKeys 1240 and 1264; note-only errors; female values added)
+- d363 16 / 16 / 16 (Tapinocyba eye diameters, ZooKeys 1219; note-only errors, values and quotes all correct)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
