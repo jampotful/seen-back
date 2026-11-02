@@ -392,6 +392,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d334 6 / 6 / 0 (cavefish/loach eye-diameter ratios, Gekko eye diameter; audit 449 found 2 fixable errors in 6)
 - d335 4 / 4 / 0 (millipede ocelli/ommatidia, scorpion eyes; audit 450 found 1 fixable error in 4)
 - d336 3 / 3 / 0 (ganglion cell densities, cave catfish eye size; audit 451 found 0 errors)
+- d337 6 / 6 / 0 (antennal sensilla in Megaphragma, Bactericera antenna; audit 452 found 6 fixable errors in 6)
 - d338 4 / 4 / 0 (shark saccular hair cells, ground-squirrel stapes; audit 453 found 4 fixable errors in 4)
 
 ## Codex lane (26 October 2026)
