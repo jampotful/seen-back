@@ -1,6 +1,6 @@
-# desk-d320: measured eye values from comparative tables and Results sentences, 11 records
+# desk-d320: measured eye values from comparative tables and Results sentences, 10 records
 
-Branch research/desk-d320 from origin/main. About 52 WebSearches; WebFetch only on URLs returned by searches, plus Crossref list queries (prefix + month filter + title query; single-DOI /works/ URLs were refused with client_error and not worked around). `python3 -I tools/senses/check.py | grep d320`: 11 records, 0 problems. Traits: eye_axial_length_mm (2), eye_diameter_mm (9); all carry "new trait" in the note as check.py requires (keys already on main).
+Branch research/desk-d320 from origin/main. About 52 WebSearches; WebFetch only on URLs returned by searches, plus Crossref list queries (prefix + month filter + title query; single-DOI /works/ URLs were refused with client_error and not worked around). `python3 -I tools/senses/check.py | grep d320`: 10 records, 0 problems. Traits: eye_axial_length_mm (2), eye_diameter_mm (9); all carry "new trait" in the note as check.py requires (keys already on main).
 
 Repeat check: text index of origin/main docs/ (evidence, audit, sheets, searched, recheck, progress) plus evidence and progress files of all unmerged desk and audit branches, built 1 Nov 2026; species and DOI grepped before filing.
 
