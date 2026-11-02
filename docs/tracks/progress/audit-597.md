@@ -29,7 +29,7 @@ Eye sentences match the publisher page character for character (en dashes in int
 ## Counts
 - Lines judged: 7. Errors: 3 (lines 45, 48, 49), all fixable; 0 dropped, 0 held out.
 - Faults (listed, not counted): hedged paratype statement (46, 47, 48); two-sentence neighbour (46, 47, 48); WSC "unchecked" without genus check and paraphrased licence (all 7); Methods described "as returned by the fetch tool" rather than read whole (all 7).
-- Note for the desk: check.py passes the original lines 45 and 48 with value 0.0; the value-against-quote mismatch is not caught mechanically. Other PLE lines in the unit should be scanned for the same 0.0 slip.
+- Note for the desk: check.py passes the original lines 45 and 48 with value 0.0; the value-against-quote mismatch is not caught mechanically. A scan of the whole unit finds value 0.0 on every PLE line from ZooKeys 1189: lines 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57 (outside my scope except 45 and 48; other auditors should expect the same error).
 
 ## Replacement
 Lines 44-50 corrected, file order, validated with tools/senses/check.py on a scratch copy (7 records, 0 problems).
