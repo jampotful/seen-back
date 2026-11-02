@@ -462,6 +462,7 @@ for the unresolved d325/d326 launch evidence.
 - d394 35 / 35 / 13 (ZooKeys 1125 Tetragnatha x3; ZooKeys 1108 Haplodrassus yinae, Hitobia xiaoxi; sensory_anatomy)
 - d395 42 / 42 / 0 (ZooKeys 1221 Salticidae: Dendroicius, Icius, Irura x2, Myrmarachne, Nandicius, Pancorius; faults in text only; lead: Wang et al. 2024 may define eye size)
 - d396 45 / 41 / 6 (ZooKeys 1221 Cheliceroides, Protaeus (ex Mintonia) shiwandashan, Pancorius medog; ZooKeys 1192 Attulus, Colaxes, Epeus, Evarcha, Icius, Pancorius; 4 held out)
+- d397 42 / 42 / 0 (ZooKeys 1192 Stertinius liqingae, Synagelides tianquan, Yaginumaella erlang; ZooKeys 1148 Chinattus crewsae, C. logunovi, Eupoa maidinhyeni, E. maddisoni; faults in text only)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
