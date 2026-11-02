@@ -480,6 +480,7 @@ for the unresolved d325/d326 launch evidence.
 - d412 34 / 34 / 0 (BDJ 13 e153601 Metashinobius hikariae; ZSE 99(1) Drymusa huberi; BDJ 11 e109714 Paracedicus turcicus [18 lines moved to sensory_anatomy]; ZSE 100(2) Bifurcia kangding, B. luding)
 - d413 36 / 28 / 8 (ZSE 100(2) Bifurcia labahe, B. shuangqiao; ASP 84 Kiskalla ignacioi; BDJ 13 e142264 Raveniola fuzhouensis; ZooKeys 1285 Nesticus yamabushi dropped: no printed unit)
 - d414 31 / 31 / 0 (ZSE 100(2) Bifurcia xiaojin; ASP 84 Kiskalla yeisoni, K. zukuapasanka; ZooKeys 1215 Trachelas kavanaughi, T. ventriosus; ZooKeys 1226 Siskiyu armilla, Cybaeozyga furtiva [7 lines moved to sensory_anatomy])
+- d415 59 / 59 / 4 (ZooKeys 1248 Hamus qingming, Tekellina zhangziqingi; BDJ 11 e102450 Siamspinops yejiei; BDJ 10 e82682 Haplocosmia sherwoodae [quote corrected]; ZooKeys 1080 Taksinus bambus; BDJ 12 e137852 Latouchia calcicola, L. linmufu, L. wenchuan)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
