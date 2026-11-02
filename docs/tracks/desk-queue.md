@@ -495,6 +495,7 @@ for the unresolved d325/d326 launch evidence.
 - d427 12 / 12 / 0 (Evolutionary Systematics 10(2): 217-261 Romopelma chirapa; Taprobanica 14(1): 39-47 Heligmomerus australis)
 - d428 36 / 36 / 0 (ZooKeys 1219: 61-72 Cicurina chengkou, C. dabashan, Longicicurina longihamata; BDJ 12 e124006 Otacilia wuxi; BDJ 12 e116569 Xizangiana plankton)
 - d429 10 / 2 / 8 (ASP 84: 95-121 Caipira mineira merged; Acta Zoologica Mexicana 42: 1-7 Filistatinella bacanora held out: trait, header-tag licence, WSC page unread)
+- d430 8 / 8 / 0 (Australian Journal of Taxonomy 49: 1-6 Artoriopsis dubia)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
