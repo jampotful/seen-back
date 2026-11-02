@@ -387,6 +387,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d329 6 / 0 / 5 (light and moon effects on behaviour; audits 442/443 found 10 errors in 11; five moon-correlate records held out pending a trait-key ruling)
 - d330 5 / 0 / 1 (bat echolocation, pit-organ papillae; audit 444 held Philaenus out unverifiable and found 11 errors in 5, all fixed)
 - d331 2 / 0 / 0 (cephalopod eye range, flashlight-fish dummy response; audit 445 found 2 fixable errors in 2)
+- d332 12 / 12 / 0 (tympanum ratios, ant and isopod eye counts; audits 446/447 found 10 errors in 12, all fixed)
 - d333 4 / 4 / 0 (Collembola eyes_count; audit 448 found 0 errors)
 
 ## Codex lane (26 October 2026)
