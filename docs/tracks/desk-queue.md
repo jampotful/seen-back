@@ -428,6 +428,7 @@ The research desk keeps its work queue here so it survives a recycled session. E
 - d371 8 / 8 / 3 (Collembola ZooKeys 1282, mite ZooKeys 1284, scorpion ZSE 101(3), centipede BDJ 14; Collembola notes fixed)
 - d372 2 / 2 / 1 (Paranemachilus, ZSE 100(4); liui conditions fixed)
 - d373 56 / 56 / 55 (ZooKeys 1232 Salticidae notes fixed; EJT 997 Paratropis: interdistances filed as eye sizes, values replaced)
+- d374 32 / 32 / 8 (Neischnocolus EJT 1022; Hunan Linyphiidae ZooKeys 1253; all values right, quote faults fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
