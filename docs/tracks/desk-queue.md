@@ -511,6 +511,7 @@ for the unresolved d325/d326 launch evidence.
 - d443 36 / 36 / 0 (ZooKeys 1265: 103-127 Latouchia x4; ZooKeys 1278: 201-213 Calommata yueluensis male)
 - d444 20 / 20 / 0 (ZooKeys 1232: 285-310 Pholcus hebei, P. huludao, P. jinzhou, P. liaoning, P. qin)
 - d445 32 / 32 / 0 (ZooKeys 1173: 243-273 Araneus yuboi, A. shii, A. wanghuai, A. yangchuandongi)
+- d446 8 / 8 / 0 (BDJ 13: e137852 Latouchia jinyun; trait kept eye_diameter_mm to match d415)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
