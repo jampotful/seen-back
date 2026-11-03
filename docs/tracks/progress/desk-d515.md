@@ -1,6 +1,6 @@
 # desk-d515 progress
 
-Angle (override): pool change away from reptile/amphibian eye diameter; bat echolocation emission parameters (sense_echolocation, physiological_response), sensilla and ommatidia counts. No spiders, no eye_diameter_mm. 9 records (docs/views/evidence/desk-d515.jsonl). check.py: 0 problems (plain and --require-evidence-kind). About 30 WebSearches; WebFetch only on URLs from search results.
+Angle (override): pool change away from reptile/amphibian eye diameter; bat echolocation emission parameters (sense_echolocation, physiological_response), sensilla and ommatidia counts. No spiders, no eye_diameter_mm. 9 records (docs/views/evidence/desk-d515.jsonl). check.py: 0 problems (plain and --require-evidence-kind). About 34 WebSearches; WebFetch only on URLs from search results.
 
 ## Filed
 - Rhinolophus hilli (Biodiversity Data Journal 10: e83546, 10.3897/BDJ.10.e83546): Figure 4 caption sentence, mean peak frequency 35.4 kHz and call duration 49.5 ms (2 records). n, variance not stated; Methods say resting calls were recorded in hand. MDD taxon 1004691.
@@ -21,3 +21,4 @@ Angle (override): pool change away from reptile/amphibian eye diameter; bat echo
 - Cuc Phuong bats (BDJ 12: e119704): no call values in text. Myotis cf. davidii/aurascens (ZooKeys 1262): not a settled species; Plecotus/Barbastella figure captions only.
 - Mouthpart palp sensilla of Trichoptera (DEZ 70): lengths, no counts. Parnara/Pelopidas skippers (ZooKeys 399): pooled over four species/counts only paraphrasable.
 - Euscorpiops/Graeconiscus-type eye-state pool: nothing new found.
+- Ooceraea joshii and O. decamera (ZooKeys 1010): on main (d291). Last four searches (Wang and Abduriyim bats, first-record bat calls, Collembola/Diplura ommatidia, ant ommatidia) gave nothing new.
