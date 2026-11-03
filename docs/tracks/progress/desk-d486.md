@@ -1,0 +1,24 @@
+# desk-d486 progress
+
+Angle: non-spider unit. Reptiles and amphibians with a Reptile Database or Amphibian Species of the World page reached from my own search results; fish and mammals tried. 14 records (log docs/views/evidence/desk-d486.jsonl), 6 species. About 55 WebSearches. check.py: 0 problems for my file (plain and --require-evidence-kind); the repository-wide run still lists the older intake-4/intake-5 failed files, which are not mine.
+
+## Filed
+- Herpetozoa 37: 95-105 (10.3897/herpetozoa.37.e116071) Ablepharus eremchenkoi (Scincidae), new record for China: Table 3 ED column for 4 adults (XND0808001, 002, 005, 007), eye_diameter_mm. Reached through the Pensoft XML download only; the article_preview page for the same id returns an Ingerophrynus paper. One reader pass put the MW column in the ED slot; three later passes give the row cell by cell with ED the 9th cell (1.6, 1.4, 1.3, 1.5), and the first-row sentence confirms it. Table 3 text is cut in the XML after the second header row, so more specimens may exist.
+- Herpetozoa 35: 51-58 (10.3897/herpetozoa.35.e80151) Lygosoma siamense (Scincidae), first record for China: Table 3 ED for SYS r002573 (male) and CIB 118520-118522 (subadults), eye_diameter_mm ('ED: at widest point').
+- JoTT 16(5): 25268-25272 (10.11609/jott.8910.16.5.25268-25272) Trimeresurus uetzi (Viperidae), first record for India: horizontal eye diameter 3.79 for MZMU 3333, sensory_anatomy (no Methods eye definition). Reptile Database lists a later subspecies treatment (Malhotra et al. 2025) in the synonymy; the heading keeps the species. Recorded in the note.
+- JoTT 16(6): 25385-25399 (10.11609/jott.8935.16.6.25385-25399) Bungarus suzhenae (WII-ADR1241, ED 2.3) and Ovophis zayuensis (WII-ADR3491 2.6, WII-ADR3316 2.5), sensory_anatomy. The Bungarus row also prints Chen et al. (2021) cells 9.3-10.5 and 14.6 (not filed; the note records that they are four to six times the voucher's value). Reptile Database comment records old subspecies treatments of O. zayuensis; the heading keeps the species.
+- JoTT 12(8): 15951-15954 (10.11609/jott.5999.12.8.15951-15954) Leptobrachella tamdil (Megophryidae): ED 4.3 for MZMU 1631 only (the holotype and paratype cells are not filed because the paper does not say whether they were re-measured), eye_diameter_mm ('ED - eye diameter (horizontal diameter of the eyes)').
+- Amphibian & Reptile Conservation 13(1): 230-234 (e179) Euprepiophis mandarinus (Colubridae), new state record for Mizoram: EYED 3.2 for female MZMU-1135, eye_diameter_mm. No DOI printed in the text read (PDF url given); author order follows the PDF, BHL lists the first author as 'Ashaharraza Khan'.
+
+## Weak spots
+- All text came through the WebFetch page reader (Pensoft XML, JoTT and ARC PDFs). JoTT licence is given as the copyright line plus the journal's reuse sentence (the reader paraphrased parts), so an auditor should re-read the JoTT licence wording.
+- Crossref not read for any paper.
+- Euprepiophis mandarinus 'adult' not stated; the sex (female) and cause of death (dead roadside specimen) are in the record.
+
+## Not filed and why
+- Xenophrys zunhebotoensis (Reptiles & Amphibians 28(2): 280-284, 10.17161/randa.v28i2.15546, CC BY-NC 4.0): EL row for MZUHC 20035-20037 (4.2, 4.2, 4.3), but no unit is printed in the caption, header or text near the table; records were written, then withdrawn before commit. Lead if an auditor finds a unit on the page.
+- Scincella gigas, Plagiopholis yangi, Sphenomorphus puhoatensis (EL 2.2 only), Ablepharus tuolinensis (Asian Herpetological Research 16(3), 10.3724/ahr.2095-0357.2025.0011; the Reptile Database page exists but I reached no open article page): no Reptile Database page for gigas/yangi/puhoatensis in my searches; tuolinensis not opened beyond the Reptile Database page.
+- Cyrtodactylus makwanpurgadhiensis (ZooKeys 1253, 161933) already on main (d451); Table 2 in the XML cut before ED anyway. C. chuyangsinensis (Zootaxa) and Dibamus annae, Riopa deccanensis (Zootaxa): not open. Sphenomorphus lingnanensis: no ED. Tylototriton vietnamirabilis: EL only, table cut (d345). Andrias yaoluopingensis, Leptobrachella deocaensis, Scincella verecunda: already filed (d473, d457, d477).
+- Cyrtodactylus dimaensis (JoTT), Gehyra astrosyzygia, Sphenomorphus tophus (on main as oa-13a): only news pages or no article page reached. Montivipera xanthina, Afghanistan herpetofauna (Herpetozoa), JoTT Dendrelaphis and Rajasthan notes: no ED. Trimeresurus (JoTT 8910 sibling) Leptobrachella tamdil in R&A 28(2) 295-297: Table 1 rows not returned and licence CC BY-NC; ED not read.
+- Fish: ZooKeys 153155 (a Balitora or similar, KIZ 2025000165) prints eye diameter as % HL only. Mammals: only Plazi pages of Crocidura (2021) surfaced, no article page.
+- Crossref list queries via WebFetch were refused (permission not answered).
