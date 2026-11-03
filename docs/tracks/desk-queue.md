@@ -570,6 +570,7 @@ for the unresolved d325/d326 launch evidence.
 - d511 12 / 12 / 0 (Cnemaspis vangoghi, C. sathuragiriensis)
 - d512 13 / 13 / 0 (Rhacophorus dulongensis, Odorrana nagao, Leptobrachella kungfu)
 - d513 10 / 10 / 0 (Amolops gudao, Zhangixalus thaoae, Calamaria berezowskii)
+- d514 0 / 0 / 0 (no filable record: authority pages unreachable, fish tables in % only)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
