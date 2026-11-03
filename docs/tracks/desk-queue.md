@@ -541,6 +541,7 @@ for the unresolved d325/d326 launch evidence.
 - d477 23 / 23 / 7 (seven reptile papers; family and table-row quote errors on 7 lines corrected)
 - d478 20 / 20 / 0 (Trimeresurus lii ZSE 102(1), Hemiphyllodactylus venkatadri Herpetozoa 38; note and heading faults corrected)
 - d479 14 / 14 / 0 (Gekko tesselatus ZSE 101(4); heading-path faults corrected)
+- d480 17 / 17 / 10 (Occidozyga nishikawai 15 records, Vietnamophryne abscondita 2; audits 963-965; fixable errors corrected, two lines moved to sensory_anatomy)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
