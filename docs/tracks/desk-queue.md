@@ -624,6 +624,7 @@ for the unresolved d325/d326 launch evidence.
 - d565 9 / 9 / 8 (diel, mammals; all fixable, corrected by audits 1112-1113)
 - d566 5 / 5 / 3 (diel, mammals; all fixable, corrected by audit 1114)
 - d567 3 / 3 / 3 (diel, mammals; all fixable, corrected by audit 1115)
+- d568 4 / 3 / 0 (diel, mammals; line 4 Moschus chrysogaster held out, licence sentence unconfirmed by audit 1116)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
