@@ -607,6 +607,7 @@ for the unresolved d325/d326 launch evidence.
 - d548 2 / 1 / 1 (Vulpes vulpes merged; Petromyzon marinus held out, no Catalog of Fishes species page)
 - d549 2 / 1 / 0 (Wallabia bicolor merged; Bombus rufocinctus held out, no insect authority host)
 - d550 1 / 1 / 0 (Halichoeres garnoti; sense_chemical)
+- d551 0 / 0 / 0 (vertebrate sense_chemical, new species: nothing fileable; pool appears exhausted)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
