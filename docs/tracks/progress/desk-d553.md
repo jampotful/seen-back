@@ -16,3 +16,13 @@ Angle: sense_hearing as behavioural_response in wild vertebrates (playback and f
 
 ## Weak spots
 Text came through the WebFetch reader, which returns about 125 characters per quoted sentence; short whole sentences and table rows were used and cuts are marked. Full-sentence verification against the page was not possible beyond the reader output.
+
+## Risk flagged for the desk
+Audits 317, 344, 345, 350 held out behavioural hearing responses where the stimulus at the animal is not defined (level only at 1 m from the source). Melo (75 dB, speaker about 1 m from the male) is closest to defined; giraffe (85 dB, point of measurement not stated), Nile crocodile (63 dB at 1 m, animals 10 to 30 m away) and vervet (no level seen) carry that limit, stated in each record's conditions.
+
+## More leads not filed
+- Soltis et al. 2014 PLoS ONE (African elephant, Samburu voices vs bee sounds): complete short Results sentences usable ("Distance moved in response to Samburu voices and bee sounds was similar (U = 102, n1 = 14, n2 = 13, p = 0.914)."), but the reader returned only a paraphrase of the licence sentence, so held out; Mammal Diversity Database page for Loxodonta africana not opened.
+- Shannon et al. 2022 Animals 12(4): 495 (elephants, one vs three lions): MDPI page prints no Creative Commons sentence.
+- Chabert et al. captive crocodile experiments, Chapuis et al. 2019 shark paper (white shark already held out by audit 345).
+- A Springer copy host (biomedcentral...saludcastillayleon.es) was refused by the classifier and not retried.
+About 38 WebSearches used.
