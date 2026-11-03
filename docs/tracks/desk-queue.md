@@ -600,6 +600,7 @@ for the unresolved d325/d326 launch evidence.
 - d541 2 / 2 / 3 (animal sense_chemical: Vulpes vulpes Sci Rep 6:30078, Varanus gouldii J Chem Ecol 48:401; errors fixed)
 - d542 2 / 2 / 2 (Pomacentrus amboinensis, Canis lupus; sense_chemical)
 - d543 0 / 0 / 0 (thin senses electric, infrared, airflow, gravity, hearing: nothing fileable)
+- d544 2 / 2 / 2 (Pleurodema thaul, Vulpes vulpes; sense_chemical)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
