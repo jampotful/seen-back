@@ -3,7 +3,7 @@
 Angle: reptiles (lizards, geckos, snakes, turtles) with a Reptile Database species page reached from my own search results, plus fish with millimetre eye diameter; no spiders. 9 records (log docs/views/evidence/desk-d482.jsonl), trait eye_diameter_mm, evidence_kind anatomical_measurement. check.py: 0 problems for desk-d482 (plain and --require-evidence-kind). About 40 WebSearches.
 
 ## Filed
-- ZooKeys 1268: 75-94 (10.3897/zookeys.1268.174678) Hemiphyllodactylus ziegleri (Gekkonidae): holotype HUS.2025.06 and 8 paratypes (5 males, 4 females incl. holotype grouping as printed), whole Table 2 EyeD row; Methods define EyeD as the greatest horizontal diameter of the eyeball; caliper 0.1 mm; Reptile Database page opened (Pham et al. 2026, cites this paper).
+- ZooKeys 1268: 75-94 (10.3897/zookeys.1268.174678) Hemiphyllodactylus ziegleri (Gekkonidae): holotype HUS.2025.06 and 8 paratypes (5 males including the holotype, 4 females), whole Table 2 EyeD row; Methods define EyeD as the greatest horizontal diameter of the eyeball; caliper 0.1 mm; Reptile Database page opened (Pham et al. 2026, cites this paper).
 
 ## Weak spots
 - All text came through the WebFetch page reader on the Pensoft article_preview page; the column-to-code mapping is the reader's cell-by-cell reading (header row and EyeD row each read twice, 11 cells each). The licence sentence came back in pieces (opening clause and 'which permits unrestricted use, distribution, and reproduction in any medium'). Crossref not checked.
