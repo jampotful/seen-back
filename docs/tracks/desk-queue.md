@@ -558,6 +558,7 @@ for the unresolved d325/d326 launch evidence.
 - d497 21 / 21 / 11 (Cnemaspis enneaporus, Leptobrachella shimentaina, Gloydius lateralis, Hebius citrinoventer, Acanthosaura liui ED; audits 986-989)
 - d498 23 / 18 / 16 (Cyrtodactylus makwanpurgadhiensis paratypes, C. arnei OD, Achalinus nanshanensis; 5 Gekko fengshanensis paratype lines dropped as repeats of d334 conditions; audits 990-992)
 - d499 11 / 11 / 0 (Calamaria synergis holotype, Boulenophrys dalaolingensis ED; audits 993-994)
+- d500 17 / 16 / 1 (Hemiphyllodactylus lungcuensis and Cyrtodactylus peninsularis paratypes, Hypselotriton oolong ED; one peninsularis line dropped as a repeat of d343 conditions; audits 995-997)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
