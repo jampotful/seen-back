@@ -533,6 +533,7 @@ for the unresolved d325/d326 launch evidence.
 - d465 4 / 4 / 4 (Vappolotes tianjiayu male, BDJ 11 e114147; conditions and heading faults corrected)
 - d466 16 / 16 / 16 (Argiope beibeng, A. caesarea, BDJ 12 e125601; all lines carried fixable licence and conditions faults)
 - d467 12 / 12 / 4 (Euprosthenops insperatus ZooKeys 1065, Pax leila ZooKeys 1035; lines 1-4 specimen and method wording errors, trait kept eye_diameter_mm pending owner ruling)
+- d469 4 / 4 / 4 (Zoica oculata male, ZooKeys 1249; heading and material faults corrected)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
