@@ -587,6 +587,8 @@ for the unresolved d325/d326 launch evidence.
 - d528 2 / 2 / 1 (Weinbeer 2013 Macrophyllum macrophyllum; error fixed; sense_echolocation)
 - d529 3 / 3 / 3 (de Framond 2023 Plecotus auritus medians; errors fixed; sense_echolocation)
 - d530 10 / 10 / 10 (Redgwell 2009 ten European bat species Emax, mean +/- s.e.m.; errors fixed, plus 15 faults; sense_echolocation)
+- d531 10 / 10 / 10 (Thong, Limbert and Limbert 2022 Son Doong Cave three species; errors fixed, plus 38 faults; sense_echolocation)
+- d532 0 / 0 / 0 (cff_hz angle; Alexander 2024 Front Cell Neurosci and Myrmecia iScience 2022 are leads awaiting a readable licence sentence)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
