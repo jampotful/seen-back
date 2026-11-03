@@ -596,6 +596,7 @@ for the unresolved d325/d326 launch evidence.
 - d537 1 / 1 / 3 (animal sense_chemical: Cyprinodon rubrofluviatilis alarm cue merged; lead: Astyanax mexicanus EvoDevo 4:25 needs a full byline)
 - d538 2 / 2 / 0 (animal sense_chemical: Astyanax mexicanus EvoDevo 4:25, Rana aurora PeerJ 12:e17307; 3 note faults fixed; open question Rana vs Amerana)
 - d539 2 / 1 / 5 (animal sense_chemical: Petromyzon marinus Sci Rep 12:17400 merged; Haemorhous mexicanus held out because no IOC page could be opened; 5 faults fixed)
+- d540 2 / 1 / 3 (animal sense_chemical: Clethrionomys glareolus merged; Parus major (a null) held out because no IOC page could be opened; nulls confirmed valid by EVIDENCE-INTAKE.md)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
