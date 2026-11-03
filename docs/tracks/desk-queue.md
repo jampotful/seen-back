@@ -619,6 +619,7 @@ for the unresolved d325/d326 launch evidence.
 - d560 0 / 0 / 0 (sense_hearing wild vertebrates, level at the animal, new taxa/journals: nothing fileable; angle exhausted under current rules)
 - d561 0 / 0 / 0 (eye traits fov/orbit/binocular/tapetum/eye_movement, wild non-bird vertebrates: nothing fileable; lead: Casares-Hidalgo et al. J Anat 234(5):622 carnivoran orbit convergence Table 1 if a licensed copy is reached)
 - d562 13 / 13 / 11 (diel, wild mammals; all errors fixable, corrected by audits 1106-1108)
+- d563 6 / 6 / 5 (diel, JoTT mammals; all fixable, corrected by audits 1109-1110; flags d562 DOI prefix question)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
