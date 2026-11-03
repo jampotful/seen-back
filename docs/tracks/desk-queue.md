@@ -549,6 +549,7 @@ for the unresolved d325/d326 launch evidence.
 - d485 7 / 7 / 0 (Plagiopholis pluvialis ED; audit 970; holotype-vs-paratype spread disclosed)
 - d486 14 / 14 / 4 (Ablepharus eremchenkoi 4, Lygosoma siamense 4, Trimeresurus uetzi 1, Bungarus suzhenae 1, Ovophis zayuensis 2, Leptobrachella tamdil 1, Euprepiophis mandarinus 1; audits 971-974)
 - d487 4 / 3 / 1 (Rhinophis siruvaniensis 3 merged; Trimeresurus pretiosus dropped for unconfirmed licence; audit 975)
+- d488 19 / 19 / 1 (Cyrtodactylus teraiensis 1, C. nebulosus 18; audits 976-978; teraiensis paratype ED 2.9 unfiled)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
