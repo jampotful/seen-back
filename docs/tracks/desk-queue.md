@@ -553,6 +553,7 @@ for the unresolved d325/d326 launch evidence.
 - d489 8 / 8 / 0 (Scincella tenuistriata ED; audit 979)
 - d490 13 / 13 / 0 (Cyrtodactylus teraiensis paratype 1, Trimeresurus ciliaris 5, Balitora tiandengensis 1, Hebius gilhodesi 5, Herpetoreas davidi 1; audits 980-981; citation and transcription faults only)
 - d493 1 / 1 / 1 (Trimeresurus nujiang holotype ED; audit 982; trait moved to eye_diameter_mm). d491 and d492 filed 0.
+- d494 12 / 7 / 5 (Boulenophrys calciphila 7 merged; Ichnotropis robusta 5 dropped because the table could not be reached by the auditor; audits 983-984)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
