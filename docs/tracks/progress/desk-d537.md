@@ -3,7 +3,7 @@
 Angle: NEW ANGLE only (animal sense_chemical in vertebrates and non-insect invertebrates; the OLD-ANGLE reptile/fish eye-diameter paragraph was not followed). evidence_intake: evidence-kind-v2; intake_base 2e8a8c995 (main at launch). 1 record (docs/views/evidence/desk-d537.jsonl), sense_chemical, evidence_kind behavioural_response. About 40 WebSearches; no Crossref in any form. check.py: 0 problems (plain and --require-evidence-kind).
 
 ## Filed
-- Cyprinodon rubrofluviatilis (Fishes 8(6): 315, 10.3390/fishes8060315): conspecific skin alarm cue reduced post-stimulus water column position against a water control (Cue F1,140 = 21.170, p < 0.001; Population effects not significant). Whole Results sentence, 37 words. Wild-sourced females from five Red River sites. Catalog of Fishes page (fishcatget spid=13686) reached from my own search: valid, Fowler 1916.
+- Cyprinodon rubrofluviatilis (Fishes 8(6): 315, 10.3390/fishes8060315): conspecific skin alarm cue reduced post-stimulus water column position against a water control (Cue F1,140 = 21.170, p < 0.001; Population effects not significant). Whole Results sentence, 36 words by check.py count. Wild-sourced females from five Red River sites. Catalog of Fishes page (fishcatget spid=13686) reached from my own search: valid, Fowler 1916.
 
 ## Weak spots
 - Sentence assembled from three WebFetch reader chunks (the reader returns about 125 characters per sentence); needs a check against the page.
