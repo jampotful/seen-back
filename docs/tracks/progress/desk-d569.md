@@ -1,0 +1,17 @@
+# desk-d569 progress
+
+Angle: trait diel broadened beyond mammals (reptiles, amphibians, fish, uncovered mammals), new papers and species not already on main, one record per species with its own n (the OLD-ANGLE paragraph was ignored). 2 records (log docs/views/evidence/desk-d569.jsonl). check.py plain and --require-evidence-kind: 0 problems for this file. About 38 WebSearches.
+evidence_intake: evidence-kind-v2; intake_base: origin/main 5a889347b (Merge desk-d567). Diel rows on main carry no evidence_kind, so none is set.
+
+## Filed (2)
+- Spaseni et al. 2024, PeerJ 12:e17168 (10.7717/peerj.17168): Natrix natrix (Reptile Database page opened), 127 night-time records (94 nocturnal, 33 crepuscular), citizen-science plus personal records; the split is among selected night records, stated in conditions. Search: "nocturnal activity snake OR lizard OR frog OR salamander citizen science OR camera trap new record "nocturnal" species traditionally considered diurnal PeerJ OR "Herpetozoa" OR "Frontiers"" (peerj.com/articles/17168 and .pdf).
+- Drenske et al. 2024, Front Ecol Evol 12:1455142 (10.3389/fevo.2024.1455142): Sciurus vulgaris (MDD page opened), diurnal, 1,335 pictures from 170 stations, urban Berlin gardens. The sentence also classes cats and martens; the record takes the squirrel clause. Paper's station counts are inconsistent (346 vs 170), noted in the record. Search: "squirrel OR chipmunk OR vole OR gerbil OR hamster OR mole-rat OR porcupine free-living activity pattern "diurnal" OR "nocturnal" radiotracking OR camera trap PeerJ OR "Scientific Reports" OR "Ecology and Evolution" open access" (frontiersin.org fevo.2024.1455142 pdf).
+
+## Not filed and why
+- Bessesen and Gonzalez-Suarez 2022, Ecol Evol (10.1002/ece3.8436) Hydrophis platurus xanthos (crepuscular-nocturnal surfacing, 358 sightings in 120 h; CC sentence read, not on main): only a University of Reading repository PDF, PMC (redirect) and aggregators reached, no Wiley page. Lead if a Wiley page is reached; subspecies xanthos would need a species-level note.
+- Fournier et al. 2023 Animals 13(11):1819 lesula (diurnal, 598 events): MDPI page prints no Creative Commons sentence.
+- Homonota uruguayensis (Iheringia Ser Zool, gecko active day and night, n 1,541 records): page text gave no byline, DOI or CC sentence; a second URL on new.scielo.br was denied by the classifier and not retried. Lead.
+- Caravaggi et al. 2018 PeerJ 5827: six species already on main (d562, d565); hares and squirrels grouped. Alligator mississippiensis (PLoS ONE 2014): species already on main. Crotalus durissus (Acta Amazonica/An Acad Bras Cienc): species on main, page had no CC line. Melanophryniscus rubriventris: on main.
+- Fernandez-Betelu 2019 Sci Rep 9:2548 Tursiops: site-specific patterns (diurnal, nocturnal, crepuscular by site), not one value. Sol 2024 Front Mar Sci: pooled dolphins, no per-species n.
+- Barnes and Knierim JoTT Trimeresurus albolabris (n 4): no category word, only "most frequently observed at night". Reinhardt 2019 Sci Rep Nycticebus javanicus: page read had no CC sentence. Garrote 2020 Lontra: no CC sentence, 13 records. Lemur PMC12917331, Anguilla japonica PMC7766186, Congo/PMC items: PMC redirects, not followed.
+- Fish: no Catalog of Fishes page was reached and no open paper with a per-species category was found; bats, marine mammals, crocodilians, turtles: searches returned only repository copies, closed or non-CC pages.
