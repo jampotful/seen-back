@@ -1,0 +1,29 @@
+# desk-d565 progress
+
+Angle: trait diel for wild free-ranging mammals, new papers and species not already on main, one record per species with its own n (the OLD-ANGLE paragraph was ignored). 9 records (log docs/views/evidence/desk-d565.jsonl). check.py plain and --require-evidence-kind: 0 problems for this file. About 38 WebSearches. No evidence_kind field (diel rows on main carry none, as in d564).
+intake_base: origin/main d1b84b825 (Merge desk-d564).
+
+## Filed (9)
+- Mukherjee et al. 2019, J Threat Taxa 11(4):13432-13447 (10.11609/jot.4662.11.4.13432-13447), Abstract sentence with one category per species, n from Results: Neofelis nebulosa (n 61, largely crepuscular and nocturnal), Catopuma temminckii (63, strongly diurnal), Pardofelis marmorata (71, strongly diurnal), Prionailurus bengalensis (588, largely nocturnal). Search: "Journal of Threatened Taxa camera trap activity pattern leopard cat OR civet OR porcupine OR badger OR otter nocturnal "Creative Commons Attribution 4.0" 2020 OR 2021 OR 2022" led to 5950/7013 and the paper's PDF came from "Journal of Threatened Taxa camera trap mammals ... sloth bear OR dhole OR fishing cat" family results; the PDF URL threatenedtaxa.org/.../download/4662/6194/22675 appeared in the Canis-aureus/porcupine searches below.
+- Caravaggi et al. 2018, PeerJ 6:e5827 (10.7717/peerj.5827): Vulpes vulpes (645 detections, nocturnal) and Oryctolagus cuniculus (1,175, crepuscular). Other species of this paper are on main from d562. Search: "PeerJ camera traps activity patterns wild mammals nocturnal "independent events" species-specific overlap Creative Commons Attribution License peerj.com" (peerj.com/articles/5827 in results).
+- Li et al. 2020, ZooKeys 992:139-155 (10.3897/zookeys.992.57028): Apodemus peninsulae, nocturnal, 5618 video records at seed-baited stations. Search: "Zoological Research OR "Integrative Zoology" OR "Nature Conservation" OR ZooKeys wild mammal activity rhythm infrared camera nocturnal diurnal species Creative Commons Attribution".
+- Macas-Pogo et al. 2023, Neotropical Biol Conserv 18(1):1-11 (10.3897/neotropical.18.e95027): Leopardus pardalis, mainly night and early morning (86.6% of records), 22 independent records at mineral licks. Search: "Global Ecology and Conservation OR "Journal of Mammalogy" OR "Mammal Research" activity pattern camera trap sun bear OR clouded leopard OR tapir OR peccary OR coati OR ocelot nocturnal Creative Commons Attribution 4.0 full text".
+- Debata 2021, J Threat Taxa 13(9):19363-19366 (10.11609/jot.5747.13.9.19363-19366): Canis aureus, mostly nocturnal and crepuscular, 552 independent photographs. Search: "Journal of Threatened Taxa golden jackal OR jungle cat OR Indian porcupine OR Indian hare OR mongoose OR langur "activity pattern" camera trap Tiger Reserve OR National Park nocturnal diurnal "photo-captures" Creative Commons Attribution 4.0".
+MDD pages opened from my own search results for all nine species.
+
+## Weak spots
+- All text read through the WebFetch summariser (125-character pieces); quotes are the pieces joined. Sentence ends of the ocelot, jackal and Mukherjee sentences are the reader's (ocelot and jackal cut-marked; Mukherjee Abstract sentence boundaries confirmed from numbered pieces).
+- Caravaggi byline taken from the same DOI's d562 records; the PeerJ page text lists only "Caravaggi et al."
+- Li et al.: animals not stated to be free-ranging in those words ("in its natural environment"); seed-baited cameras.
+- Ocelot at mineral licks (attractant) and n only 22. Mukherjee data pooled from several studies (stated).
+
+## Not filed and why
+- Nakabayashi 2021 Sci Rep 11:19819 (Borneo carnivores: Viverra tangalunga, Hemigalus derbyanus, Pardofelis marmorata n 10, Martes flavigula, Mydaus javanensis): the Springer page read carries only an "Open access" label and no Creative Commons sentence; full byline truncated. Lead if a publisher copy with the sentence is reached.
+- Marler 2019 JoTT 11(13) Hystrix pumila (n 134) and Paradoxurus philippinensis (n 129): whole sentences could not be read (long sentences, ligature loss); 36 of 39 sites baited.
+- Yu 2026 BDJ 14:e208779 (Xianxialing NRAI) and Zhao 2026 BDJ 14:e184017: classifications without per-species n (Zhao also a d555 paper).
+- Moreno 2023 Therya Notes 4:210-218 Darien: CC BY-NC-ND. Jeffers 2019 JoTT 11(4):13478 small cats: no n for Prionailurus planiceps or marbled cat statements. Wangyel 2020 JoTT 12(2) golden cat Bhutan (12 events, 8 day, 4 night): mixed result and sentence boundaries not verifiable. Dash 2021 (n 1), Majumder (no pattern for jungle cat), Mridula 2024 (no activity analysis), Queckenstedt ACA (garden dormouse, d562), Jeon BDJ (no per-species classification), Horion Oryx (no licence or DOI reached), serow rhythm paper (MDPI Animals, no CC sentence).
+
+## Desk disposition after audits 1112, 1113 (3 November 2026)
+All 9 lines merged with the auditors' replacement text. Errors: lines 1-4 (DOI prefix "jot." corrected to "jott."; the unit's no-ligature-loss note was false), lines 5-6 (body-mass column logged as detection rates; significant seasonal results left out), line 8 (cut dropped the morning-activity qualifier), line 9 (DOI prefix). Line 7 passed (seed-baited wild mice ruled free-ranging). 8 of 9 records counted as errors, all fixed.
+
+Open owner question (from d563, confirmed by audit 1112): desk-d562 on main carries the "jot." DOI prefix on four lines (Marler, Selvan x2, Jefers); the page-printed form is "jott.". The desk does not edit evidence files already on main.

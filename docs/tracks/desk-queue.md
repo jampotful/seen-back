@@ -621,6 +621,7 @@ for the unresolved d325/d326 launch evidence.
 - d562 13 / 13 / 11 (diel, wild mammals; all errors fixable, corrected by audits 1106-1108)
 - d563 6 / 6 / 5 (diel, JoTT mammals; all fixable, corrected by audits 1109-1110; flags d562 DOI prefix question)
 - d564 3 / 3 / 3 (diel, mammals; all fixable, corrected by audit 1111)
+- d565 9 / 9 / 8 (diel, mammals; all fixable, corrected by audits 1112-1113)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
