@@ -520,6 +520,7 @@ for the unresolved d325/d326 launch evidence.
 - d452 40 / 40 / 0 (Hortophora x4 and Mangrovia albida, eye_diameter_mm on the label precedent; open owner question on label-only evidence)
 - d453 36 / 36 / 0 (Pholcus x9 species, ZSE 100(1), AME and PME, eye_diameter_mm)
 - d454 24 / 16 / 8 (Neostasina x3 merged; Hortophora porongurup x8 dropped, page not reached)
+- d455 10 / 9 / 3 (non-spider: Osornophryne, Pristimantis paganus, Calamaria x2; C. incredibilis dropped, no Reptile Database page)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
