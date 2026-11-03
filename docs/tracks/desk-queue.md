@@ -518,6 +518,7 @@ for the unresolved d325/d326 launch evidence.
 - d450 8 / 8 / 0 (Sudesna wangi, ZooKeys 1278)
 - d451 21 / 18 / 4 (frogs and geckos, eye_diameter_mm; 3 pooled means dropped, 1 quote cut)
 - d452 40 / 40 / 0 (Hortophora x4 and Mangrovia albida, eye_diameter_mm on the label precedent; open owner question on label-only evidence)
+- d453 36 / 36 / 0 (Pholcus x9 species, ZSE 100(1), AME and PME, eye_diameter_mm)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
