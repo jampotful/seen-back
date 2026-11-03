@@ -608,6 +608,7 @@ for the unresolved d325/d326 launch evidence.
 - d549 2 / 1 / 0 (Wallabia bicolor merged; Bombus rufocinctus held out, no insect authority host)
 - d550 1 / 1 / 0 (Halichoeres garnoti; sense_chemical)
 - d551 0 / 0 / 0 (vertebrate sense_chemical, new species: nothing fileable; pool appears exhausted)
+- d552 2 / 0 / 0 (Engystomops pustulosus, Gehyra dubia; animal light responses filed under sense_light_nonvisual: held out by the desk without audit because image-forming eyes mediate them, owner question; snapshot kept at /tmp/m311/desk-d552.snapshot.jsonl)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
