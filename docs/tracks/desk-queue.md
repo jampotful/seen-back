@@ -598,6 +598,8 @@ for the unresolved d325/d326 launch evidence.
 - d539 2 / 1 / 5 (animal sense_chemical: Petromyzon marinus Sci Rep 12:17400 merged; Haemorhous mexicanus held out because no IOC page could be opened; 5 faults fixed)
 - d540 2 / 1 / 3 (animal sense_chemical: Clethrionomys glareolus merged; Parus major (a null) held out because no IOC page could be opened; nulls confirmed valid by EVIDENCE-INTAKE.md)
 - d541 2 / 2 / 3 (animal sense_chemical: Vulpes vulpes Sci Rep 6:30078, Varanus gouldii J Chem Ecol 48:401; errors fixed)
+- d542 2 / 2 / 2 (Pomacentrus amboinensis, Canis lupus; sense_chemical)
+- d543 0 / 0 / 0 (thin senses electric, infrared, airflow, gravity, hearing: nothing fileable)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
