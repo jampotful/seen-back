@@ -1,0 +1,18 @@
+# desk-d478 progress
+
+Angle: reptiles (Reptile Database species page from my own search results) and fish (Catalog of Fishes), non-spider. 20 records (log docs/views/evidence/desk-d478.jsonl), trait eye_diameter_mm, evidence_kind anatomical_measurement. check.py: 0 problems for desk-d478 (plain and --require-evidence-kind; problems reported only in other units' files). About 42 WebSearches.
+
+## Filed
+- ZSE 102(1): 285-302 (10.3897/zse.102.178601) Trimeresurus lii (Viperidae): holotype CIB 122871 and 14 paratypes, 15 records from the Table 2 ED row (caption 'Morphometric data (in mm) ...'; Methods define ED as 'horizontal diameter of the eye', digital caliper 0.1 mm). Reptile Database page opened from a search result.
+- Herpetozoa 38: 333-343 (10.3897/herpetozoa.38.e167113) Hemiphyllodactylus venkatadri (Gekkonidae): holotype and 4 paratypes, 5 records from the Table 4 ED row (caption '(mm)'). Methods only list 'eye diameter (ED)' with no wording on how it is taken: filed as eye_diameter_mm in the d459 manner; the auditor may move it to sensory_anatomy. Reptile Database page opened from a search result.
+
+## Weak spots
+- All text came through the WebFetch page reader on Pensoft article_preview pages; column-to-code mappings are the reader's cell-by-cell reading (for T. lii two reads agree across the ED, Sex and type-status rows). Licence sentences are standard Pensoft text assembled from the reader's opening and closing pieces. Author list for T. lii is from the Reptile Database reference line (the preview returned no byline). Crossref not checked (Crossref queries were refused by the fetch tool).
+- The Pensoft article_preview for ZooKeys ids 175455, 177040, 160425 all returned the Johnius javaensis paper (stale or wrong text), and ZSE 175246 returned Scincella (10.3897/zse.101.157713), so those papers could not be read.
+
+## Not filed and why
+- Gekko tesselatus (ZSE 101(4): 2221-2242): Reptile Database page reached, but the preview returned Scincella and the XML (87920 chars) held only sampling, molecular methods and the GenBank table: no Methods ED definition, caption or licence for the exact copy read. Plazi treatment pages return only a redirect.
+- Gekko wuzhengjuni: no Reptile Database page (only Goniurosaurus wuzhengjuni); Scincella gigas (ZSE 102(4), holotype ED 3.7 mm, Methods 'ED (eye diameter)', Table 1 'All measurements are in mm', CC BY 4.0 read in full): no Reptile Database page in four searches. Trimeresurus liqibini: no Reptile Database page.
+- Calotes thailandensis (ZooKeys 1281: 69-104) and Hemiphyllodactylus pakhaensis / H. ziegleri (ZooKeys 1268): Reptile Database page reached for Calotes only; article text unreachable (preview polluted, XML refused). Leads for a later unit.
+- Scincella dabieshanensis (ZSE 102(4): 1005-1022): eye width EW 1.88 mm (holotype AHU 25079) only, no ED, no Reptile Database page. Sphenomorphus puhoatensis: eye length 2.2 mm, no Reptile Database page. Rhynchocalamus hejazicus, Oligodon ornatus (ZSE 102(1)): no ED values.
+- Johnius javaensis and Hemidactylus kalinga, Eublepharis jhuma: already on main. Opistognathus cryos: eye diameter only as % SL and % HL. Cyrtodactylus tayninhensis (Zootaxa), Hebius ngoclinhensis (Zootaxa), Dibamus irregularis (Zootaxa), Ptyctolaemus tongbiguanensis (MDPI Taxonomy): not in an accepted open venue for this desk or not reached.
