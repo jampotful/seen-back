@@ -572,6 +572,7 @@ for the unresolved d325/d326 launch evidence.
 - d513 10 / 10 / 0 (Amolops gudao, Zhangixalus thaoae, Calamaria berezowskii)
 - d514 0 / 0 / 0 (no filable record: authority pages unreachable, fish tables in % only)
 - d515 9 / 9 / 6 (Rhinolophus hilli, Pharotis imogene, Barbastella caspica; sense_echolocation)
+- d516 32 / 31 / 29 (Neophocaena asiaeorientalis; Duco et al. 2023 Philippine bats; sense_echolocation)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
