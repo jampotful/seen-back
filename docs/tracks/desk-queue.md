@@ -551,6 +551,7 @@ for the unresolved d325/d326 launch evidence.
 - d487 4 / 3 / 1 (Rhinophis siruvaniensis 3 merged; Trimeresurus pretiosus dropped for unconfirmed licence; audit 975)
 - d488 19 / 19 / 1 (Cyrtodactylus teraiensis 1, C. nebulosus 18; audits 976-978; teraiensis paratype ED 2.9 unfiled)
 - d489 8 / 8 / 0 (Scincella tenuistriata ED; audit 979)
+- d490 13 / 13 / 0 (Cyrtodactylus teraiensis paratype 1, Trimeresurus ciliaris 5, Balitora tiandengensis 1, Hebius gilhodesi 5, Herpetoreas davidi 1; audits 980-981; citation and transcription faults only)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
