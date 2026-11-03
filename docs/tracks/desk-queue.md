@@ -560,6 +560,7 @@ for the unresolved d325/d326 launch evidence.
 - d499 11 / 11 / 0 (Calamaria synergis holotype, Boulenophrys dalaolingensis ED; audits 993-994)
 - d500 17 / 16 / 1 (Hemiphyllodactylus lungcuensis and Cyrtodactylus peninsularis paratypes, Hypselotriton oolong ED; one peninsularis line dropped as a repeat of d343 conditions; audits 995-997)
 - d501 7 / 6 / 7 (Scincella truongi eye length moved to sensory_anatomy; Sillago nigrofasciata held out for want of a Catalog of Fishes species page; audit 998)
+- d502 0 / 0 / 0 (eye_diameter_mm pool exhausted; ZooKeys 1129 Cyrtodactylus lead dead). d503 0 / 0 / 0 (invertebrates, birds, mammals, salamanders, turtles: nothing met the rules). d504 1 / 1 / 0 (Euscorpiops doiphukha eye_type; cave invertebrate eye-state pool near exhausted; audit 999)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
