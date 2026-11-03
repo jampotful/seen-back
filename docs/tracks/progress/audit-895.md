@@ -17,6 +17,9 @@ Auditor: Opus 895. Scope: lines 17-24 of docs/views/evidence/desk-d452.jsonl (fi
 - Citation: title verbatim, authors in printed order (Volker W. Framenau, Renner L. C. Baptista, Francisca Sâmia M. Oliveira, Pedro de S. Castanheira), 5(2): 275-334, 2021, DOI correct; unit field desk-d452 correct.
 - Repeats of main: git grep of origin/main docs/ for 'lodicula' and 'evolsyst.5.72474'/'72474': no hits; 'Hortophora' only Hortophora biapicata sense_light_nonvisual (docs/views/audit/ALL.jsonl, audit/spider.jsonl, audit/corrected/spider.jsonl) and gbif-names.tsv. Unit claim confirmed; not a repeat.
 
+- Re-verification (second pass, same page from a fresh WebSearch, 2 more fetches): Methods 'They were taken with an accuracy of one tenths of a millimetre,' confirmed; male end 'two retromarginal teeth (apical larger and on a ridge).' and female end 'and third largest) and three retromarginal teeth (similar size) (Fig. 13B).' confirmed; male eye sentence ends 'PLE ... 2.20.'; no 'Eye diameters as ...' sentence in the Methods. The HTML page renders inline expansions such as 'AME (anterior median eyes)' and 'QM (Queensland Museum, Brisbane, Australia)'; these are Pensoft's abbreviation markup (the museum expansion inside a specimen code shows it), so the quotes keep the bare abbreviations. If the desk reads the HTML expansions as printed text, the quotes stay under 40 words either way (about 31 words with expansions). WebSearches used in total: 4.
+- check.py on a scratch copy of the 8 replacement lines (.scratch895/chk/, untracked): 8 records, 0 problems.
+
 ## Verdicts (file order)
 | Line | Specimen | Eye | Value | Verdict |
 |---|---|---|---|---|
