@@ -567,6 +567,7 @@ for the unresolved d325/d326 launch evidence.
 - d508 15 / 1 / 14 (Colubroelaps adleri merged; Trimeresurus lanna, Cnemaspis auriventralis, Gekko paucituberculatus, Hemiphyllodactylus gengmaensis held out: no auditor reached the publisher full text in four attempts; audits 1016-1019)
 - d509 22 / 7 / 15 (Colubroelaps nguyenvansangi and Bungarus sagittatus merged; Cyrtodactylus santana, Cnemaspis umashaankeri, Lycodon truongi held out for unreachable full text; audits 1020-1022)
 - d510 32 / 24 / 8 (C. khlonghatensis, Cnemaspis samui merged; C. kampingpoiensis held out for unreachable full text)
+- d511 12 / 12 / 0 (Cnemaspis vangoghi, C. sathuragiriensis)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
