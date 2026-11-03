@@ -603,6 +603,7 @@ for the unresolved d325/d326 launch evidence.
 - d544 2 / 2 / 2 (Pleurodema thaul, Vulpes vulpes; sense_chemical)
 - d545 1 / 1 / 2 (Vipera ammodytes; sense_chemical)
 - d546 0 / 0 / 0 (Pensoft journals, animal sense_chemical: nothing fileable)
+- d547 2 / 2 / 2 (Nyctereutes procyonoides, Vulpes vulpes; sense_chemical, one paper)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
