@@ -1,6 +1,6 @@
 # desk-d512 progress
 
-Angle: reptile, amphibian and fish eye_diameter_mm (no spiders). Open-licence Pensoft papers that print eye diameter in millimetres per named specimen. 13 records so far (log docs/views/evidence/desk-d512.jsonl), trait eye_diameter_mm, evidence_kind anatomical_measurement. check.py: 0 problems (plain and --require-evidence-kind). About 30 WebSearches so far.
+Angle: reptile, amphibian and fish eye_diameter_mm (no spiders). Open-licence Pensoft papers that print eye diameter in millimetres per named specimen. 13 records so far (log docs/views/evidence/desk-d512.jsonl), trait eye_diameter_mm, evidence_kind anatomical_measurement. check.py: 0 problems (plain and --require-evidence-kind). About 37 WebSearches.
 
 ## Filed
 - ZSE 100(3): 851-862 (10.3897/zse.100.120224) Rhacophorus dulongensis: holotype ANU010645 (3.5) and paratype ANU010646 (3.4), Table 3 ED row. The syntype column (BMNH1940.6.1.30, 3.5) and the R. turpes paratype (3.0) are not filed.
@@ -19,3 +19,5 @@ Angle: reptile, amphibian and fish eye_diameter_mm (no spiders). Open-licence Pe
 - Cyrtodactylus luci (ED = ear length), C. phamiensis (ED in supplement), Oligodon churahensis (one text diameter, no table), Hemidactylus kalinga (no Methods text), Rhacophorus/Leptobrachella darongshanensis and Gracixalus liusanjieae (holotype only in text or summary tables), Leptobrachella guinanensis (ranges only): held out.
 - Fish: Claea dafangensis, Triplophysa (ZSE 102(2) 443-456), Pseudophoxinus galilaeus print eye as % HL only.
 - Already on main or other units: Hemiphyllodactylus laowozhenensis, H. lungcuensis, Scincella qianica, Sphenomorphus lingnanensis, Bac Kan amphibian records.
+- Zhangixalus matsuii (ZooKeys 1294: 109-130, 10.3897/zookeys.1294.203393; Table 3 ED holotype IB A.6585 4.3, paratypes IB A.6586/6587/6596/6597 4.5/4.2/4.6/4.6; the header spans IB A.6606 and A.6598 under matsuii while Table 1 lists them as Z. duboisi) and Z. thaoae (ZooKeys 1197: 93-113, 10.3897/zookeys.1197.104851; Table 3 ED IEBR A 5136 holotype 4.2, A 5137 3.4, A 5138 3.9): both read in full and not on main, but no Amphibian Species of the World species page appeared in my searches and the genus page reader returned an empty species list, so validity is unchecked. Leads for a unit that reaches an ASW page.
+- Johnius medidentatus, Lefua and Yunnanilus fish papers: eye as % HL (Johnius) or not opened.
