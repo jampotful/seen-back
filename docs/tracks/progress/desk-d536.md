@@ -23,4 +23,7 @@ Conventions copied from the most recent animal sense_chemical records (desk-d355
 - Amblyomma sculptum (pathogens 14: 926): laboratory-reared nymphs. Acheta domesticus (peerj.4923): commercially bred. Hypophthalmichthys molitrix (Fishes 4: 27): hatchery-origin juveniles, methyltestosterone-treated, and the genus is on main. Pre-seismic H2O2 (Animals 5: 206): origin unstated, Lumbricus terrestris and Daphnia pulex.
 - Insect EAG leads (Aromia bungii, Bagrada hilaris, Phthonoloba, Agriotes obscurus, Fire-ant alarm responders): already on main (desk-d227, d233).
 
-Searches: about 30 WebSearch calls.
+- Osteopilus septentrionalis, Hyla cinerea, H. squirella (Diversity 10: 78, residue-refuge avoidance nulls, wild-caught): the Results sentences give 49 words for the Cuban treefrog and pool the native species, so no whole sentence of 40 words or fewer fits one species; Hyla cinerea and H. squirella are also on main under other traits. Lead for a unit that can cut within the quote rule.
+- Lithobates sphenocephalus (peerj.1472): caged live predators, no stated chemical stimulus or dose.
+
+Searches: about 35 WebSearch calls.
