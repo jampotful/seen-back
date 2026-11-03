@@ -594,6 +594,7 @@ for the unresolved d325/d326 launch evidence.
 - d535 3 / 1 / 8 (sense_magnetic: Erithacus rubecula merged; Periplaneta americana and Apis mellifera held out for no licence sentence read; replacement text saved)
 - d536 4 / 1 / 11 (animal sense_chemical: Metanephrops challengeri merged; Perca fluviatilis, Cynops ensicauda and Liolaemus tenuis held out because authors or licence came from Crossref, which breaks the access rule; replacement text saved)
 - d537 1 / 1 / 3 (animal sense_chemical: Cyprinodon rubrofluviatilis alarm cue merged; lead: Astyanax mexicanus EvoDevo 4:25 needs a full byline)
+- d538 2 / 2 / 0 (animal sense_chemical: Astyanax mexicanus EvoDevo 4:25, Rana aurora PeerJ 12:e17307; 3 note faults fixed; open question Rana vs Amerana)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
