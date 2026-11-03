@@ -592,6 +592,7 @@ for the unresolved d325/d326 launch evidence.
 - d533 2 / 0 / 2 (eye_axial_length_mm: Python bivittatus held out as a repeat under another trait and for an unlisted NC-SA licence; Alexander 2024 dropped; lead: sea turtles Acta Vet Scand 62:52)
 - d534 0 / 0 / 0 (eye_axial_length_mm for reptiles, fish, amphibians, cephalopods; leads: Ișler 2020 Kafkas Univ Vet Fak Derg 26(4): 521-524 sea turtle polar axis, no units or definition, NC licence on abstract page only; Acta Vet Scand 62:52 table not readable)
 - d535 3 / 1 / 8 (sense_magnetic: Erithacus rubecula merged; Periplaneta americana and Apis mellifera held out for no licence sentence read; replacement text saved)
+- d536 4 / 1 / 11 (animal sense_chemical: Metanephrops challengeri merged; Perca fluviatilis, Cynops ensicauda and Liolaemus tenuis held out because authors or licence came from Crossref, which breaks the access rule; replacement text saved)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
