@@ -527,6 +527,7 @@ for the unresolved d325/d326 launch evidence.
 - d459 24 / 24 / 6 (Paramesotriton, Tylototriton, Gracixalus, Leptobrachella, Achalinus; ZSE 101(4)-102(4); type-list and unit-caption faults fixed)
 - d460 2 / 2 / 2 (Kambiwa neotropica, EJT 1054, sensory_anatomy in micrometres; heading, WSC citation and conditions faults fixed)
 - d461 24 / 24 / 16 (Corinnidae x5 species, ZooKeys 1165; Methods-heading and inferred female code faults fixed)
+- d462 53 / 33 / 24 (Salticidae Hainan ZooKeys 1118, Chinattus BDJ 13, Stemmops BDJ 11; 20 dropped for unreachable WSC/publisher pages, 4 specimen-code errors)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
