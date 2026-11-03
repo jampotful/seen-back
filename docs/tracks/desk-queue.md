@@ -628,6 +628,7 @@ for the unresolved d325/d326 launch evidence.
 - d569 2 / 1 / 1 (diel; Natrix natrix dropped, night-selected citizen-science records cannot define a diel category; audit 1117)
 - d570 1 / 0 / 1 (sense_thermal Tpref; Tarentola mauritanica dropped, abstract-only, capture and holding unknown; audit 1118)
 - d571 1 / 1 / 1 (pupil_shape, Pensoft holotype description; fixable, corrected by audit 1119)
+- d572 9 / 9 / 9 (pupil_shape, Pensoft holotype descriptions; all fixable, corrected by audits 1120-1121)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
