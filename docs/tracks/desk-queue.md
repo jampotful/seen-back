@@ -583,6 +583,7 @@ for the unresolved d325/d326 launch evidence.
 - d524 10 / 10 / 22 (Rhinolophus andamanensis; Vu 2025 four species; all faults fixable and fixed; sense_echolocation)
 - d525 10 / 10 / 26 (Salsamendi 2012 two species; Vu 2025 four species; all faults fixable and fixed; sense_echolocation)
 - d526 3 / 3 / 19 (Dai 2023 three Rhinolophus peak frequencies; one refiled as R. nippon; all fixable and fixed; sense_echolocation)
+- d527 13 / 13 / 12 (Dai 2023 R. osgoodi; Thong 2022 three species; Caruso 2022 Neophocaena phocaenoides; all errors fixable and fixed, plus about 40 faults; sense_echolocation)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
