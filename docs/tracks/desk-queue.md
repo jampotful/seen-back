@@ -590,6 +590,7 @@ for the unresolved d325/d326 launch evidence.
 - d531 10 / 10 / 10 (Thong, Limbert and Limbert 2022 Son Doong Cave three species; errors fixed, plus 38 faults; sense_echolocation)
 - d532 0 / 0 / 0 (cff_hz angle; Alexander 2024 Front Cell Neurosci and Myrmecia iScience 2022 are leads awaiting a readable licence sentence)
 - d533 2 / 0 / 2 (eye_axial_length_mm: Python bivittatus held out as a repeat under another trait and for an unlisted NC-SA licence; Alexander 2024 dropped; lead: sea turtles Acta Vet Scand 62:52)
+- d534 0 / 0 / 0 (eye_axial_length_mm for reptiles, fish, amphibians, cephalopods; leads: Ișler 2020 Kafkas Univ Vet Fak Derg 26(4): 521-524 sea turtle polar axis, no units or definition, NC licence on abstract page only; Acta Vet Scand 62:52 table not readable)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
