@@ -581,6 +581,7 @@ for the unresolved d325/d326 launch evidence.
 - d522 9 / 9 / 10 (Rhinolophus capensis, Odendaal 2014 populations; all errors fixable and fixed; sense_echolocation)
 - d523 0 / 0 / 0 (no publisher-reachable open paper found; sense_echolocation)
 - d524 10 / 10 / 22 (Rhinolophus andamanensis; Vu 2025 four species; all faults fixable and fixed; sense_echolocation)
+- d525 10 / 10 / 26 (Salsamendi 2012 two species; Vu 2025 four species; all faults fixable and fixed; sense_echolocation)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
