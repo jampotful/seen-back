@@ -586,6 +586,7 @@ for the unresolved d325/d326 launch evidence.
 - d527 13 / 13 / 12 (Dai 2023 R. osgoodi; Thong 2022 three species; Caruso 2022 Neophocaena phocaenoides; all errors fixable and fixed, plus about 40 faults; sense_echolocation)
 - d528 2 / 2 / 1 (Weinbeer 2013 Macrophyllum macrophyllum; error fixed; sense_echolocation)
 - d529 3 / 3 / 3 (de Framond 2023 Plecotus auritus medians; errors fixed; sense_echolocation)
+- d530 10 / 10 / 10 (Redgwell 2009 ten European bat species Emax, mean +/- s.e.m.; errors fixed, plus 15 faults; sense_echolocation)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
