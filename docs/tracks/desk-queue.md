@@ -613,6 +613,7 @@ for the unresolved d325/d326 launch evidence.
 - d554 6 / 3 / 6 (Boana marginata 3 merged; Boana bischoffi, B. leptolineata, Aspidoscelis neotesselatus held out)
 - d555 6 / 6 / 11 (Amolops torrentis x2, Microhyla fissipes, Polypedates megacephalus, Phocoena phocoena x2; sense_hearing)
 - d556 1 / 1 / 1 (Engystomops pustulosus null; sense_hearing)
+- d557 4 / 0 / 4 (Astyanax mexicanus x3 held out for no amplitude; Loxodonta africana held out for repository-only licence)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
