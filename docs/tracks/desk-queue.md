@@ -543,6 +543,7 @@ for the unresolved d325/d326 launch evidence.
 - d479 14 / 14 / 0 (Gekko tesselatus ZSE 101(4); heading-path faults corrected)
 - d480 17 / 17 / 10 (Occidozyga nishikawai 15 records, Vietnamophryne abscondita 2; audits 963-965; fixable errors corrected, two lines moved to sensory_anatomy)
 - d481 5 / 5 / 5 (Cyrtodactylus jayadityai OD; audit 966; moved to sensory_anatomy)
+- d482 9 / 9 / 9 (Hemiphyllodactylus ziegleri EyeD; audit 967; sex conflict between type list and Table 2 noted)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
