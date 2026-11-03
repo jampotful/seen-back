@@ -577,6 +577,7 @@ for the unresolved d325/d326 launch evidence.
 - d518 27 / 24 / 27 (Jung et al. 2014 molossids: five species; sense_echolocation)
 - d519 64 / 25 / 64 (Jung et al. 2014 molossids, Bittencourt et al. 2025 Pontoporia; sense_echolocation; 32 lines held out for third-party copy only)
 - d520 0 / 0 / 0 (followed the exhausted reptile/fish angle; nothing filable)
+- d521 8 / 4 / 4 (Rhinolophus hipposideros merged; R. capensis held out for third-party copy only; sense_echolocation)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
