@@ -523,6 +523,7 @@ for the unresolved d325/d326 launch evidence.
 - d455 10 / 9 / 3 (non-spider: Osornophryne, Pristimantis paganus, Calamaria x2; C. incredibilis dropped, no Reptile Database page)
 - d456 32 / 32 / 16 (Salticidae: Stenaelurillus x2, Phintella x3; 16 Methods-unit quote errors fixed)
 - d457 28 / 28 / 15 (frogs: Odorrana yangi, Brachytarsophrys wui, Boulenophrys x2, Leptobrachella x2; quote and conditions faults fixed)
+- d458 16 / 16 / 12 (Phintella handersoni x8 eye_diameter_mm, Langelurillus tertius x8 sensory_anatomy; inferred female code and author-name faults fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
