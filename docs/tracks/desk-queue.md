@@ -555,6 +555,7 @@ for the unresolved d325/d326 launch evidence.
 - d493 1 / 1 / 1 (Trimeresurus nujiang holotype ED; audit 982; trait moved to eye_diameter_mm). d491 and d492 filed 0.
 - d494 12 / 7 / 5 (Boulenophrys calciphila 7 merged; Ichnotropis robusta 5 dropped because the table could not be reached by the auditor; audits 983-984)
 - d495 6 / 6 / 6 (Hemidactylus kalinga ED; audit 985)
+- d497 21 / 21 / 11 (Cnemaspis enneaporus, Leptobrachella shimentaina, Gloydius lateralis, Hebius citrinoventer, Acanthosaura liui ED; audits 986-989)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
