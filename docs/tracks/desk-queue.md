@@ -563,6 +563,7 @@ for the unresolved d325/d326 launch evidence.
 - d502 0 / 0 / 0 (eye_diameter_mm pool exhausted; ZooKeys 1129 Cyrtodactylus lead dead). d503 0 / 0 / 0 (invertebrates, birds, mammals, salamanders, turtles: nothing met the rules). d504 1 / 1 / 0 (Euscorpiops doiphukha eye_type; cave invertebrate eye-state pool near exhausted; audit 999)
 - d505 7 / 4 / 7 (Otomops harrisoni echolocation by site kept; Creobroter nebulosa bristle counts held out for want of an authority page; Cyrtorhinus lividipennis pooled; audits 1000-1001)
 - d506 55 / 55 / 31 (Vertebrate Zoology geckos: Cnemaspis pakkamalaiensis, cavernicola, azhagu, mundanthuraiensis, jayaweerai, nanayakkarai; Hemidactylus easai, pakkamalaiensis; Cyrtodactylus irulaorum, relictus; audits 1002-1009)
+- d507 34 / 34 / 34 (Cnemaspis salimalii, agayagangai; Hemidactylus quartziticolus; Cyrtodactylus raglai, monilatus; Oligodon speleoserpens ED; faults were mostly the eye side and provenance, values all matched; audits 1010, 1012-1015, 1011 replaced by re-audit 1015)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
