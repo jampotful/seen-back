@@ -578,6 +578,8 @@ for the unresolved d325/d326 launch evidence.
 - d519 64 / 25 / 64 (Jung et al. 2014 molossids, Bittencourt et al. 2025 Pontoporia; sense_echolocation; 32 lines held out for third-party copy only)
 - d520 0 / 0 / 0 (followed the exhausted reptile/fish angle; nothing filable)
 - d521 8 / 4 / 4 (Rhinolophus hipposideros merged; R. capensis held out for third-party copy only; sense_echolocation)
+- d522 9 / 9 / 10 (Rhinolophus capensis, Odendaal 2014 populations; all errors fixable and fixed; sense_echolocation)
+- d523 0 / 0 / 0 (no publisher-reachable open paper found; sense_echolocation)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
