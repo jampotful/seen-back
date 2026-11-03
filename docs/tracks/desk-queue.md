@@ -537,6 +537,7 @@ for the unresolved d325/d326 launch evidence.
 - d473 5 / 5 / 5 (Andrias yaoluopingensis ZSE 102(2), Boulenophrys daxuemontis paratypes BDJ 13 e153987; Methods heading, quote and licence faults corrected)
 - d474 2 / 1 / 2 (Oreonectes damingshanensis ZooKeys 1180 kept; Monomorium brachypterum mean of N=20 dropped as pooled)
 - d475 4 / 4 / 4 (Hebius shantianfangi EDH, ZooKeys 1254; licence, type block and table header faults corrected)
+- d476 21 / 18 / 3 (Cyrtodactylus nebulicola ZooKeys 1278, Sphenomorphus tamchucensis ZooKeys 1266; 3 Eublepharis jhuma lines already carried in desk-d353 conditions dropped)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
