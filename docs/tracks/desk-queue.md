@@ -611,6 +611,7 @@ for the unresolved d325/d326 launch evidence.
 - d552 2 / 0 / 0 (Engystomops pustulosus, Gehyra dubia; animal light responses filed under sense_light_nonvisual: held out by the desk without audit because image-forming eyes mediate them, owner question; snapshot kept at /tmp/m311/desk-d552.snapshot.jsonl)
 - d553 9 / 2 / 7 (Physalaemus cuvieri 2 merged; Chlorocebus, Giraffa, Crocodylus 7 held out for undefined stimulus level at the animal)
 - d554 6 / 3 / 6 (Boana marginata 3 merged; Boana bischoffi, B. leptolineata, Aspidoscelis neotesselatus held out)
+- d555 6 / 6 / 11 (Amolops torrentis x2, Microhyla fissipes, Polypedates megacephalus, Phocoena phocoena x2; sense_hearing)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
