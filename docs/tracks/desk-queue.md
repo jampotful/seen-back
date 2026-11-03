@@ -545,6 +545,7 @@ for the unresolved d325/d326 launch evidence.
 - d481 5 / 5 / 5 (Cyrtodactylus jayadityai OD; audit 966; moved to sensory_anatomy)
 - d482 9 / 9 / 9 (Hemiphyllodactylus ziegleri EyeD; audit 967; sex conflict between type list and Table 2 noted)
 - d483 4 / 4 / 0 (Lycodon irwini 1, Hemiphyllodactylus laowozhenensis 3; audit 968)
+- d484 9 / 9 / 0 (Ingerophrynus chrysolophus ED; audit 969)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
