@@ -540,6 +540,7 @@ for the unresolved d325/d326 launch evidence.
 - d476 21 / 18 / 3 (Cyrtodactylus nebulicola ZooKeys 1278, Sphenomorphus tamchucensis ZooKeys 1266; 3 Eublepharis jhuma lines already carried in desk-d353 conditions dropped)
 - d477 23 / 23 / 7 (seven reptile papers; family and table-row quote errors on 7 lines corrected)
 - d478 20 / 20 / 0 (Trimeresurus lii ZSE 102(1), Hemiphyllodactylus venkatadri Herpetozoa 38; note and heading faults corrected)
+- d479 14 / 14 / 0 (Gekko tesselatus ZSE 101(4); heading-path faults corrected)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
