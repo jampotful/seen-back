@@ -512,6 +512,7 @@ for the unresolved d325/d326 launch evidence.
 - d444 20 / 20 / 0 (ZooKeys 1232: 285-310 Pholcus hebei, P. huludao, P. jinzhou, P. liaoning, P. qin)
 - d445 32 / 32 / 0 (ZooKeys 1173: 243-273 Araneus yuboi, A. shii, A. wanghuai, A. yangchuandongi)
 - d446 8 / 8 / 0 (BDJ 13: e137852 Latouchia jinyun; trait kept eye_diameter_mm to match d415)
+- d447 57 / 21 / 36 (EJT 861 Ammonius, EJT 856 Cuiambuca, EJT 821 Neostasina maisi merged; EJT 921 Loxosceles and Neostasina aceitillar, N. bani dropped: WSC species page not reached; Cuiambuca vacabrava male and borborema PME/PLE dropped: publisher text not reached by auditor)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
