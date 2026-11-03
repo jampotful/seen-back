@@ -1,1 +1,20 @@
-# desk-d490 progress (in progress)
+# desk-d490 progress
+
+Angle: lizards, geckos, snakes, turtles (Reptile Database page opened from my own search results) and fish (Catalog of Fishes page); no spiders. 13 records (log docs/views/evidence/desk-d490.jsonl): 12 trait eye_diameter_mm and 1 sensory_anatomy (Balitora, no eye definition printed), all evidence_kind anatomical_measurement. check.py: 0 problems for this file (plain; the strict run lists problems only in other units' files). About 45 WebSearches.
+
+## Filed
+- ZooKeys 1275: 15-42 (10.3897/zookeys.1275.178507, CC BY 4.0 on the preview copy) Cyrtodactylus teraiensis: paratype NHM 2025/391 ED 2.9 (1 record; whole paratype Mensural data sentence read, quote cut with marked omissions; holotype is on main from d488). Unit comes from the caliper sentence and the abstract's "SVL up to at least 45.5 mm"; the paratype paragraph itself prints no unit.
+- Vertebrate Zoology 73: 697-716 (10.3897/vz.73.e109854, CC BY 4.0) Trimeresurus ciliaris (Viperidae): holotype ZMMU Re-17661 and 4 paratypes, Table 4 ED (mm) row; Methods define "ED, horizontal eye diameter" and caliper precision; type series read in full. Reptile Database page opened from results. Only the article preview carried the Methods and tables (XML and CSV links did not).
+- ZooKeys 1267: 373-390 (10.3897/zookeys.1267.166354, CC BY 4.0) Balitora tiandengensis (Balitoridae, fish): holotype WGY2024121901 eye diameter 1.1 mm from Table 2 (caption "(mm)"), filed as sensory_anatomy because Methods print no eye definition (they defer to Tang et al. 2012). Catalog of Fishes reference page (getref id=42766) and FishBase page opened from results. Paratype columns not filed: the reader returned four specimen codes over five data columns; the holotype column was fixed by its SL 38.8 matching the type text.
+- Journal of Threatened Taxa 18(3): 28479-28494 (10.11609/jott.10309.18.3.28479-28494, CC BY 4.0, printed with typos in the licence line) new-record paper: Hebius gilhodesi (5 specimens WII-ADR1793, 3320, 1800, 1792, 3303) and Herpetoreas davidi (WII-ADR1051), Table 1 ED row; Methods define "eye diameter (ED): horizontal diameter". Reptile Database pages for both opened from results.
+
+## Weak spots
+- All text through the WebFetch page reader; Table rows and column-to-specimen mappings are the reader's. JoTT Table 1 is garbled and prints no unit: mm is inferred from "Mitutoyo digital callipers (accuracy 0.01 mm)", and the column order was fixed by agreement of the Sex and SVL rows with the Materials examined sentences. Three further columns in that row are literature ranges and are not filed.
+- Licence sentences are returned in pieces by the reader and joined in the notes. Crossref not checked (a Crossref query was blocked as not from search results).
+- Ciliaris cell for ZMMU Re-17662 is printed "3" without a decimal.
+
+## Not filed and why
+- Sphenomorphus puhoatensis (ZooKeys 1279: 167-186, 10.3897/zookeys.1279.188050, CC BY 4.0): holotype EL (eye length, defined as distance between eyelid corners) 2.2 mm in Table 2, but two searches found no Reptile Database page. Lead if one is reached.
+- Calotes thailandensis and C. maehongsonensis (ZooKeys 1281: 69-104): preview finally returned the right paper; Methods list no eye diameter or eye length.
+- Calamaria incredibilis (d455 holotype ED 0.8 in text; no RDB page), Scincella jinchuanensis / S. maerkangensis (ZSE 102(2): 575-588, no ED), Sphenomorphus lingnanensis, Gekko wuzhengjuni, Dasypeltis albigularis (Herpetozoa 39, no ED), Trachischium lalremsangai, Formosania tangi (ED only as % HL), Rhinophis siruvaniensis (d487), Plagiopholis yangi (no RDB page in two more searches), Hemiphyllodactylus puncak / jeraiensis (VZ 76: preview 96152 characters, taxonomic accounts absent), Oligodon ornatus (ZSE 102: redescription, EyeD defined; not read further), Gitchak nakana, Hongshuia (not reached), Cyrtodactylus dimaensis, Gehyra astrosyzygia, Sphenomorphus tophus (no open text reached), other JoTT hits (no ED).
+- article_preview.php for Herpetozoa 205043 returned the Ablepharus eremchenkoi paper once; title and DOI were checked on every read.
