@@ -531,6 +531,7 @@ for the unresolved d325/d326 launch evidence.
 - d463 34 / 27 / 7 (Amaurobius ZooKeys 1245, Zoica ZooKeys 1249; 7 male/female Zoica lines already carried in main conditions)
 - d464 18 / 6 / 12 (Moneta ZooKeys 1251, Zoica oculata ZooKeys 1249; 8 lines repeat main's conditions text, 4 dropped for no WSC page)
 - d465 4 / 4 / 4 (Vappolotes tianjiayu male, BDJ 11 e114147; conditions and heading faults corrected)
+- d466 16 / 16 / 16 (Argiope beibeng, A. caesarea, BDJ 12 e125601; all lines carried fixable licence and conditions faults)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
