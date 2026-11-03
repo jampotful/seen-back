@@ -1,0 +1,16 @@
+# desk-d492 progress
+
+Angle: reptiles (Reptile Database page needed) plus fish with eye diameter in millimetres, with at least half of the searches outside amphibians and reptiles (arthropod ommatidia and facet counts, fossil eyes, polychaete and other eye counts, mammal and bird eye size). No spiders. Result: 0 records filed (no evidence file written). About 36 WebSearches. Method followed d455/d459 (eye_diameter_mm, anatomical_measurement, addlog.py), but nothing passed the checks.
+
+## Checked and not filed
+- Hemiphyllodactylus pakhaensis (ZooKeys 1268.177040): preview re-read (CC BY 4.0; ED "the greatest horizontal diameter of the eyeball"; Table 3 ED 1.95 holotype VNUF R.2025.32, paratypes 1.83, 2.38, 1.92). Searches ("Reptile Database", exact name) returned no Reptile Database page, only Wikipedia genus pages, PMC, optimap, Pensoft figures and a blog. No authority page, so held out.
+- Plagiopholis yangi (Evolutionary Systematics 10(1) 188735): two searches, no Reptile Database page (only the genus on Wikipedia/Wikispecies, Pensoft preview/figures, Plazi). Held out.
+- Stolephorus diabolus and S. eclipsis (ZooKeys 1121.84171, CC BY 4.0, FishBase page for S. diabolus reached): Table 6 prints eye diameter as % SL (holotypes 6.5 and 6.8 under "As % SL"), not mm; Methods define no eye diameter. Not filed. This confirms the earlier note that these tables are % SL.
+- Johnius javaensis (ZooKeys 1259.160425), Cyrtodactylus makwanpurgadhiensis (Reptile Database page reached, ZooKeys 1253.161933), Cyrtodactylus nebulicola (ZooKeys 1278.186655), Nereis tricirrata (ZooKeys 1134.94198, eyes absent) and Geopselaphus bullonorum (Subterranean Biology 43, three ommatidia): all already on main (d343, d451, d476, d284, d282).
+- Pensoft table CSVs read for fish: 160425 (Johnius, on main), 153155, 195486, 160089, 146027 (all eye diameter as % HL or % SL), 146077 (% of head length). No mm eye table with individually labelled specimens found.
+- Balitora tiandengensis paratypes: not re-opened; the holotype record on main notes the paratype column labels sit irregularly in Table 2, so the paratype mapping stays unfiled.
+- Scorpion Mesomexovis (ZooKeys 1243.146978): "Three lateral eyes" is a species-level description sentence, not a labelled specimen. Mysidella hoshinoi, Heteromysoides (ZSE 95), Palau amphipods (ZooKeys 193): eyes described qualitatively only, no counts. Elateroid amber beetle (Sci Rep s41598-021-01398-w): no facet count.
+- Blocked or unopened: nature.com s41598-020-69219-0 (permission request unanswered), PMC pages (reCAPTCHA), dez.pensoft.net 74174 (permission unanswered); Cambrian/trilobite lens-count papers surfaced only as PMC, Nature PDFs or university copies, not reachable.
+
+## Desk note
+The Pensoft reptile and fish pool reachable with an authority page is exhausted for the leads in the brief; the arthropod count veins mostly return species-level or qualitative eye text. Next things a fresh unit could try: Journal of Crustacean Biology and PeerJ open papers on single-specimen facet counts (search by taxon rather than phrase), BDJ and ZooKeys scorpion/centipede papers that print ocelli for a labelled holotype with a WoRMS/GBIF page in search results.
