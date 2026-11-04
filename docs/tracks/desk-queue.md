@@ -704,6 +704,7 @@ for the unresolved d325/d326 launch evidence.
 - d648 0 / 0 / 0 (gap-driven pupil_shape for the most-recorded reptiles, frogs and crocodilians: only reviews, guides or papers without a per-species pupil statement)
 - d649 0 / 0 / 0 (lit-table-driven gap cells; all on main or no readable licence page)
 - d650 3 / 3 / 1 (genus-by-genus new species: Pareas orientalis, P. dabieshanensis, Odorrana calciphila)
+- d651 6 / 6 / 0 (eye_diameter_mm, Odorrana calciphila holotype and 5 paratypes; 18 fixable faults)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
