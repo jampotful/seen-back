@@ -678,6 +678,7 @@ for the unresolved d325/d326 launch evidence.
 - d620 0 / 0 / 0 (mammals and fish; nothing fileable)
 - d622 0 / 0 / 0 (salamanders, caecilians, turtles, Old World frogs; nothing fileable)
 - d623 69 / 69 / 44 (sensory_anatomy tympanum diameter TD rows of audited frog papers: R. qiongica, Platypelis laetus and tsaratananaensis, Stumpffia bishopi, Guibemantis albomaculatus and woosteri, Pristimantis flavus and fouqueti, Adenomera guarani, Raorchestes hekouensis and rezakhani, Xenophrys yingjiangensis; wording faults only, fixed)
+- d624 122 / 122 / 0 (Nidirana guangxiensis TD x19 and ED x19; tympanum rows of 18 audited frog papers: Gephyromantis angano and tahotra, Leptobrachella aspera, kungfu, deocaensis, xinshaoensis, weixinensis, tamdil, Amolops dafangensis, Odorrana nagao and yangi, Zhangixalus thaoae, Boulenophrys dalaolingensis, changyangensis, nebulosa, calciphila, Rhacophorus dulongensis, Cophixalus rajampatensis; wording faults only, fixed)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
