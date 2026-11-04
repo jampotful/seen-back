@@ -673,6 +673,8 @@ for the unresolved d325/d326 launch evidence.
 - d616 4 / 4 / 0 (Trioceros wolfgangboehmei eye_diameter_mm, ZSE 97)
 - d617 7 / 7 / 1 (Trimeresurus kraensis EJT 930, Pareas kaduri EJT 729)
 - d618 2 / 2 / 0 (Brookesia tedi ZSE 95)
+- d619 39 / 19 / 34 (B. hengshanensis 20 dropped as B. gutu split; R. kumanday 9, R. qiongica 8 merged with wording fixes)
+- d621 0 / 0 / 0 (Asian and Neotropical lizards; nothing fileable)
 - d620 0 / 0 / 0 (mammals and fish; nothing fileable)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
