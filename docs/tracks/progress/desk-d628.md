@@ -1,6 +1,6 @@
 # desk-d628 progress
 
-Angle: amphibian papers already audited on main (eye diameter filed, no tympanum row) re-reached through own unfiltered WebSearch; file the tympanum measurement (sensory_anatomy, anatomical_measurement) or the printed absence/visibility statement (anatomical_presence). The OLD-ANGLE paragraph (reptiles, fish) was not followed. Log: docs/views/evidence/desk-d628.jsonl, unit desk-d628. 17 records. check.py: 0 problems for this file (plain and --require-evidence-kind). About 40 WebSearches. Crossref not used; no proxy host opened; no URL typed (every WebFetch URL came from my own results; ASW pages opened for every species).
+Angle: amphibian papers already audited on main (eye diameter filed, no tympanum row) re-reached through own unfiltered WebSearch; file the tympanum measurement (sensory_anatomy, anatomical_measurement) or the printed absence/visibility statement (anatomical_presence). The OLD-ANGLE paragraph (reptiles, fish) was not followed. Log: docs/views/evidence/desk-d628.jsonl, unit desk-d628. 15 records. check.py: 0 problems for this file (plain and --require-evidence-kind). About 40 WebSearches. Crossref not used; no proxy host opened; no URL typed (every WebFetch URL came from my own results; ASW pages opened for every species).
 
 ## Filed
 - Leptobrachella shimentaina, ZSE 98(1): 165-180 (10.3897/zse.98.73162): Table 2 TMP row, holotype SYS a007684 (1.5) and females SYS a004711 (1.5) and a004712 (1.8) (3 records; whole table row quotes).
