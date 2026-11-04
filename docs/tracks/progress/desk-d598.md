@@ -11,3 +11,10 @@ Angle: taxa and journals not yet worked (salamanders, caecilians, lizard ear ope
 - Cyrtodactylus arunachalensis (Evol Syst 5(1)): held out earlier (OD label, sex conflict).
 - Trimeresurus ciliaris (VZ 109854): on main (d490).
 - Nyctophilus holtorum (Rec Aust Mus): only Plazi redirect pages reached, no publisher text. Chalinolobus orarius is Zootaxa (dead).
+- Lepidophyma jasonjonesi (Herpetozoa 36): ED label vs 'orbit diameter' definition, held out earlier (d585).
+- Hypselotriton oolong / Hakkatriton orphicus (ZSE 100: 127268): on main (d500). Tylototriton vietnamirabilis (ZooKeys 1276): eye length only.
+- Palawanosorex ater (ZooKeys 1137): no ear length printed, no measurement table.
+- CSV hits that returned only abbreviation tables (ZSE 189932, ZooKeys 73659 and 97624, Herpetozoa 86751): papers not identified or no ED/EL data rows; not pursued.
+
+## Totals
+3 records (2 Tylototriton gaowangjienensis, 1 Ichthyophis benjii). About 41 WebSearches. check.py: 0 problems with and without --require-evidence-kind. Pool of Pensoft salamander, lizard and mammal ear/eye rows is nearly exhausted; no open-licence bat tragus, shrew or rodent ear paper was reachable as publisher text this unit (Nyctophilus holtorum reached only Plazi redirect pages; Chalinolobus orarius is Zootaxa).
