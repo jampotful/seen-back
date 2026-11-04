@@ -731,6 +731,7 @@ for the unresolved d325/d326 launch evidence.
 - d675 1 / 0 / 1 (wild reptile diel pass 4; basking-peak timing is not a diel category, dropped)
 - d676 1 / 1 / 1 (wild mammal diel pass 2; unprinted pooling claim removed from conditions)
 - d677 5 / 5 / 5 (wild mammal diel pass 3; Animal Biodiversity and Conservation route; all fixable wording)
+- d678 1 / 1 / 1 (wild mammal diel pass 4; new journal jwls.in; fixable wording)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
