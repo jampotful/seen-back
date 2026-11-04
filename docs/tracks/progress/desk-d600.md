@@ -1,6 +1,6 @@
 # desk-d600 progress
 
-Angle: new-species descriptions with defined ED, TD or eye-diameter measures in open journals (Vertebrate Zoology, Biodiversity Data Journal), reached by exact-title and phrase searches. 13 records (log docs/views/evidence/desk-d600.jsonl), evidence_kind anatomical_measurement. About 41 WebSearches. check.py: 0 problems for this file (plain and --require-evidence-kind).
+Angle: new-species descriptions with defined ED, TD or eye-diameter measures in open journals (Vertebrate Zoology, Biodiversity Data Journal), reached by exact-title and phrase searches. 12 records (log docs/views/evidence/desk-d600.jsonl), evidence_kind anatomical_measurement. About 41 WebSearches. check.py: 0 problems for this file (plain and --require-evidence-kind).
 
 ## Filed
 - Vertebrate Zoology 73: 153-159 (10.3897/vz.73.e94207) Oreophryne chlorops: holotype ED 4.8, Table 1 row. Search: 'Oreophryne chlorops Günther Iskandar Richards 2023 Vertebrate Zoology new species'.
