@@ -691,6 +691,7 @@ for the unresolved d325/d326 launch evidence.
 - d634 2 / 2 / 0 (reptile pupil_shape: Hemidactylus easai, Cnemaspis azhagu; unit stopped after ~5 searches on a classifier denial of one WebSearch, not retried)
 - d635 8 / 8 / 0 (reptile pupil_shape: six geckos, one viper, one more gecko; CC0 paper accepted by audit 1323; unit did not read rules.md because of a desk launch-string fault)
 - d636 12 / 12 / 0 (reptile pupil_shape: snakes, geckos, a viper; T. loong light-dependence moved to conditions; C. berezowskii pupil possibly read from type photographs)
+- d637 17 / 17 / 0 (reptile pupil_shape; Hebius, Herpetoreas, Trimeresurus, Achalinus, Cnemaspis, Cyrtodactylus, Oligodon, Euprepiophis, Protobothrops, Lycodon)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
