@@ -714,6 +714,7 @@ for the unresolved d325/d326 launch evidence.
 - d658 3 / 3 / 3 (crop plants: Hordeum magnetic, Triticum and Solanum lycopersicum thermal, previously held for WFO)
 - d659 1 / 1 / 1 (plants: Posidonia oceanica thermal, pooled sites replaced by EU-only row)
 - d660 0 / 0 / 0 (plants, forage/fruit/wild herbs/climbers; pooled genotypes, cultivars, no licence sentence)
+- d661 3 / 0 / 3 (mammal gap cells: Psammomys obesus eye anatomy, all dropped, captive animals)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
