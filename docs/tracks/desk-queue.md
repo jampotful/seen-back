@@ -689,6 +689,7 @@ for the unresolved d325/d326 launch evidence.
 - d632 0 / 0 / 0 (pupil_shape, New Guinea/Australasian: Papuan microhylid and most Litoria papers print no pupil clause; Theloderma khoii EJT 794 lead left unfiled after a permission-classifier denial on the second fetch, not worked around)
 - d633 2 / 2 / 0 (pupil_shape of two Microhyla; value 'oval, horizontal' with the paper's other pupil statements in conditions; unit wrote a scratch file under /tmp outside its worktree)
 - d634 2 / 2 / 0 (reptile pupil_shape: Hemidactylus easai, Cnemaspis azhagu; unit stopped after ~5 searches on a classifier denial of one WebSearch, not retried)
+- d635 8 / 8 / 0 (reptile pupil_shape: six geckos, one viper, one more gecko; CC0 paper accepted by audit 1323; unit did not read rules.md because of a desk launch-string fault)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
