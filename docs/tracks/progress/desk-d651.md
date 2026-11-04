@@ -22,3 +22,5 @@ Pool computed from main: pupil_shape rows (any unit, non-dataset sources) for sp
 
 ## Desk disposition after audits (4 November 2026)
 Six Odorrana calciphila eye_diameter_mm lines audited by one fresh Opus agent (1359): 0 counted errors, 18 fixable faults (3 per line: paraphrased licence sentence replaced by the whole printed sentence, ASW comment added, Variation heading path completed); all six merged. Raw fault rate far above 5%, a standing owner question. No unit slip and no classifier denial; the unit stopped at about 14 searches because the pupil-vetted pool without an ED row is used up. Not fileable: Pareas orientalis and P. dabieshanensis (Table 2 gives only ranges), Theloderma woltersi (NUS copyright line, no Creative Commons sentence), Phyllodytes gravata (ED undefined beyond the abbreviation, garbled table header), Scutiger kanjiroba and Boulenophrys youran (mm tables supplementary).
+
+Correction: the first merge commit pushed the unit's uncorrected lines because the merge script failed (desk fault, caught the same hour); the audited replacement lines were applied in a follow-up commit.
