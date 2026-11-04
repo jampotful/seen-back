@@ -641,6 +641,7 @@ for the unresolved d325/d326 launch evidence.
 - d582 13 / 11 / 6 (Scincella, Boulenophrys, Cyrtodactylus, Rhacophorus; 2 pupil rows moved to pupil_shape, 2 iris-colour rows dropped)
 - d583 14 / 14 / 4 (tympanum, eyelid and nostril-region measurements from table rows; structure labels and ranges corrected by audit)
 - d584 5 / 5 / 0 (nostril, tympanum, tympanic annulus whole sentences; wording faults only)
+- d585 1 / 1 / 0 (Pristimantis milpe tympanum diameter, Table 2; wording faults only)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
