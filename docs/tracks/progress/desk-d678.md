@@ -4,7 +4,7 @@ Unit: desk-d678. Angle: diel activity of wild mammals, fourth camera-trap pass.
 evidence_intake: evidence-kind-v2
 intake_base: ca71d555d741c6e39824f587a18d17f96f90a855
 
-## Status: in progress (about 30 WebSearches so far; no denial, no PROVENANCE_REQUIRED)
+## Status: finished (about 40 WebSearches, each naming a species; no denial, no PROVENANCE_REQUIRED; 1 record filed)
 
 ## Filed
 - Hyaena hyaena, Amanna A, Lyngdoh S, Journal of Wildlife Science 2(3) (2025), 10.63033/JWLS.DOWL1544, Kappathagudda Wildlife Sanctuary, Karnataka: "crepuscular and nocturnal" (Results sentence, both sessions; session 1 n = 160 peaks at dawn and dusk, session 2 n = 97 night-spread). CC BY 4.0 sentence read on the PDF; MDD 1006072 opened. Search: 'striped hyena Hyaena hyaena activity pattern camera traps nocturnal open access'.
@@ -19,3 +19,9 @@ intake_base: ca71d555d741c6e39824f587a18d17f96f90a855
 - Anteaters Paraguay (Iheringia 110): pooled sentence, already skipped in d664.
 - Egyptian mongoose Jordan (Nepal J Zool): CC BY-NC and no camera design retrievable; not filed.
 - Dhole East Java (Ecology and Evolution 2024): only repository/DOAJ pages reached; sloth bear, Andean bear, lowland tapir, peccary, giant armadillo, genet, ibex/mouflon, stone marten, Barbary macaque, tayra, kinkajou, Eurasian lynx: no fileable open publisher page reached.
+- Leopard Kuno Wildlife Sanctuary (Pawar et al., JoTT 11(5): 13531-13544, 10.11609/jott.4774 series): the only activity statement is 'All the Leopards except one were captured nocturnally.' with no stated method for assigning night, and the paper's dates and photograph counts disagree between text and Table 5; held as too weak for a whole-day category.
+- Red and gray brocket, Maciço do Urucum (Oecologia Australis 23(3), 2019): no Creative Commons sentence on the article page or PDF (rights field empty); not filed.
+- Nine-banded armadillo (Wildlife Research, CSIRO page): licence and byline not readable on the page; not filed.
+- Yellow-throated marten Far East Russia (Mammalia 87(6)): only the biosoil.ru repository copy reached, no licence sentence; not filed. Striped hyena Ramnagar (JoTT 2018): capture times only, no category.
+- Asian species searches (gaur, masked palm civet, ferret badger, otter, polecat, sun bear, Malayan tapir, sambar, chital): Endau Rompin (JoTT 10(2)) already on main (d563, d567); the rest returned only repository, PMC or MDPI pages.
+- Process note: the JoTT Journal of Threatened Taxa pool for Asian camera-trap papers is largely mined by d562-d567; the one new open journal found is the Journal of Wildlife Science (jwls.in, CC BY 4.0), which may hold further mammal papers.
