@@ -13,3 +13,12 @@ Main (at launch) has fish diel rows for Scarus psittacus, Pterois miles (d667) a
 - Megalops atlanticus, Thunnus albacares, Prionace glauca, Rhincodon typus, Xiphias gladius species-page searches: only synonym pages (1138, 19271, 19272, 19277, 26410, 25207, 21779, 19290); held out.
 - Tracey et al. 2023 Sci Rep 13:11812 (Xiphias gladius, Pacific; CC BY 4.0 read; 'normal diel vertical migration'): no valid CoF page; held out.
 - Murray cod (PLoS ONE 2018), lake sturgeon, bull trout, barramundi searches: only PMC, repository, USGS or non-OA results; not followed.
+- Nunes et al. 2023 Neotropical Ichthyology (Abudefduf saxatilis; CC BY sentence on ni.bio.br; abstract null is substrate use by diel period, not an activity pattern): CoF species-page search returned only synonym pages (36840, 39191, 39189, 39188, 19960); held out.
+- Honda et al. 2016 Aquatic Biology 24:163-174 (Lethrinus harak, Lutjanus argentimaculatus, Siganus guttatus, Philippines MPA; day/night habitat use): the int-res abstract page prints no Creative Commons sentence; held out.
+- Duffing Romero et al. 2021 Animal Biotelemetry (juvenile Megalops atlanticus, Brewers Bay; 'Activity was greater during day compared to night, with peaks during crepuscular periods'): springer page truncates the author list and no valid CoF page for Megalops atlanticus (only 1138, 27560 synonyms); held out.
+- Kadar et al. 2019 Ecol Evol (Heterodontus portusjacksoni accelerometry): only PMC, repository and aggregator pages reached; held out.
+- Epinephelus itajara search reached a Nassau grouper Frontiers 2023 paper only (d667 territory).
+- Arctic char, Nile perch, golden perch, burbot, eel, whale shark, billfish/mako, cichlid and generic video searches: only PMC, repository, paywalled or preprint results.
+
+## Counts
+40 WebSearches. No classifier denial, no PROVENANCE_REQUIRED, no PMC/Plazi/zenodo fetch. Pattern: Catalog of Fishes search returns synonym pages for species with many synonyms; the valid page opened only for Lethrinus miniatus.
