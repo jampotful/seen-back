@@ -721,6 +721,7 @@ for the unresolved d325/d326 launch evidence.
 - d665 2 / 2 / 1 (wild reptile diel; Liolaemus line lacked the printed DOI, fixed)
 - d666 0 / 0 / 0 (classifier denial on an MDPI fetch; stopped)
 - d667 3 / 2 / 3 (wild fish diel; one dropped as space use)
+- d668 1 / 1 / 1 (wild fish diel pass 2; abstract-only access fixed)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
