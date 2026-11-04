@@ -665,6 +665,7 @@ for the unresolved d325/d326 launch evidence.
 - d607 14 / 14 / 5 (eye_diameter_mm; Platypelis ando, Rhombophryne longicrus, Platypelis tsaratananaensis, Gephyromantis angano, Rhombophryne ellae)
 - d608 4 / 4 / 3 (2 sensory_anatomy after move, 2 eye_diameter_mm; Bolitoglossa muisca, Pristimantis donnelsoni, P. gretathunbergae, Bolitoglossa chinanteca)
 - d609 30 / 27 / 30 (eye_diameter_mm; Platypelis tsaratananaensis, Gephyromantis tahotra, G. lomorina, Raorchestes hekouensis; Platypelis laetus x3 held out)
+- d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
