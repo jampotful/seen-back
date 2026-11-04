@@ -34,9 +34,9 @@ Pages opened, all from my own WebSearch results (4 searches): the publisher XML 
 | 10 | paratype SAMA R69441 | 0.5 | fixable (faults 1-5); value, specimen, trait correct |
 | 11 | paratype SAMA R69442 | 0.4 | fixable (faults 1-5); value, specimen, trait correct |
 | 12 | paratype ZMB 84336 | 0.7 | fixable (faults 1-5); value, specimen, trait correct |
-| 13 | holotype SAMA R69448 | 0.6 | fixable (faults 1-4 and the ASW/heading part of 5); value, specimen, trait correct |
+| 13 | holotype SAMA R69448 | 0.6 | fixable (faults 1-5; its Description of the holotype path is right); value, specimen, trait correct |
 
-Counts: 5 lines judged, 5 lines with errors (all fixable), 24 fault instances (5 per paratype line, 4 for line 13). Lines to drop: none. Lines held out: none.
+Counts: 5 lines judged, 5 lines with errors (all fixable), 25 fault instances (5 per line). Lines to drop: none. Lines held out: none.
 
 ## Replacement
 
