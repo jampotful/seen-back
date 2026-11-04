@@ -727,6 +727,7 @@ for the unresolved d325/d326 launch evidence.
 - d671 0 / 0 / 0 (plant diel; PROVENANCE_REQUIRED stop on a redirect URL)
 - d672 0 / 0 / 0 (plant diel pass 2; WFO and licence gaps)
 - d673 1 / 1 / 1 (wild reptile diel pass 2; stopped on a scielo classifier denial)
+- d674 1 / 1 / 1 (wild reptile diel pass 3; library-mirror fetch slip, redirect not followed)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
