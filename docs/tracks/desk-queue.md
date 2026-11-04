@@ -707,6 +707,7 @@ for the unresolved d325/d326 launch evidence.
 - d651 6 / 6 / 0 (eye_diameter_mm, Odorrana calciphila holotype and 5 paratypes; 18 fixable faults)
 - d652 0 / 0 / 0 (genus-by-genus new species, new genera; all on main or no pupil text reachable)
 - d653 2 / 1 / 1 (plants: Fagopyrum esculentum light merged; Urtica dioica touch dropped, authors not obtainable)
+- d654 2 / 2 / 2 (gap-driven plants: Acer negundo shade, Trifolium repens volatiles, both corrected)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
