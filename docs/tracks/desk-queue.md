@@ -650,6 +650,7 @@ for the unresolved d325/d326 launch evidence.
 - d591 45 / 45 / 29 (Kurixalus lenquanensis, Gracixalus yunnanensis tympanum and eye diameter, Micryletta menglienica holotype tympanum; wording faults only)
 - d592 22 / 22 / 0 (Blommersia nataliae paratype TD and ED, Table 1 rows; wording faults only, fixed)
 - d593 19 / 19 / 0 (Natalus E x2, Micryletta hekouensis TMP and EL x4, Gekko tesselatus EL ear opening x13; wording faults only, fixed)
+- d594 15 / 15 / 9 (Pristimantis similaris ED x9, Quasipaa taoi TD and ED x6; wording faults only, fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
