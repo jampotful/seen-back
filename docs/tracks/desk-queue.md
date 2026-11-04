@@ -637,6 +637,7 @@ for the unresolved d325/d326 launch evidence.
 - d578 5 / 4 / 5 (sensory_anatomy tympanum, Pensoft; P. pulchridormientes dropped, holotype figures conflict; audits 1130-1131)
 - d579 6 / 5 / 6 (sensory_anatomy external/skull structures, Pensoft; Ichthyophis nostril dropped; audits 1132-1133)
 - d580 9 / 9 / 9 (external sensory_anatomy from Pensoft descriptions; all lines corrected by audit)
+- d581 9 / 9 / 0 (skink ear opening, tympanum, palpebral disc and nostril from ZSE descriptions; wording faults only)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
