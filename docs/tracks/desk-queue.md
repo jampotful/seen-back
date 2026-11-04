@@ -631,6 +631,7 @@ for the unresolved d325/d326 launch evidence.
 - d572 9 / 9 / 9 (pupil_shape, Pensoft holotype descriptions; all fixable, corrected by audits 1120-1121)
 - d573 1 / 1 / 1 (pupil_shape, Pensoft holotype description; fixable, corrected by audit 1122)
 - d574 8 / 8 / 8 (sensory_anatomy tympanum/ear, Pensoft descriptions; all fixable, corrected by audits 1123-1124)
+- d575 10 / 9 / 10 (sensory_anatomy tympanum, Pensoft; Litoria hastula table-row duplicate dropped, rest fixable; audits 1125-1126)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
