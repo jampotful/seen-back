@@ -653,6 +653,7 @@ for the unresolved d325/d326 launch evidence.
 - d594 15 / 15 / 9 (Pristimantis similaris ED x9, Quasipaa taoi TD and ED x6; wording faults only, fixed)
 - d595 22 / 16 / 14 (Cyrtodactylus luci ear length x5, Scincella fansipanensis ED and EL x8, Achalinus sheni ED x3; dropped luci OrbD x5 and the albino Achalinus line)
 - d596 16 / 16 / 16 (Oligodon sublineatus ED x2, Rhacophorus napoensis ED x5, Zhangixalus yunnanensis ED x9; wording faults only, fixed)
+- d597 52 / 48 / 28 (Raorchestes malipoensis EHD and TD x22, Leucostethus siapida x4, Boulenophrys jiangi and daxuemontis x22; dropped Pristimantis andinogigas x4; unit URL breach disclosed in the note)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
