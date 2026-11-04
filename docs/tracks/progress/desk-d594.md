@@ -1,9 +1,11 @@
 # desk-d594 progress
 
-Angle: per-specimen table rows (frog tympanum/eye, lizard ear opening, bat/rodent ear length) in open-licence Pensoft papers. The OLD-ANGLE paragraph in the brief was ignored as superseded. About 35 WebSearches so far.
+Angle: per-specimen table rows (frog tympanum/eye, lizard ear opening, bat/rodent ear length) in open-licence Pensoft papers. The OLD-ANGLE paragraph in the brief was ignored as superseded. About 40 WebSearches.
 
 ## Filed (log docs/views/evidence/desk-d594.jsonl; check.py plain and --require-evidence-kind: 0 problems for this file)
 - ZooKeys 1187: 1-29 (10.3897/zookeys.1187.104536) Pristimantis similaris: 9 paratypes, Table 2 row ED (horizontal eye diameter), trait eye_diameter_mm, anatomical_measurement. ED row agrees with Table 3 ED ranges. Reached with the WebSearch 'new species frog tympanum diameter eye diameter type series measurements table' (allowed_domains zookeys.pensoft.net).
+
+- ZooKeys 1124: 23-42 (10.3897/zookeys.1124.89282) Quasipaa taoi: holotype IEBR A.4997 and male paratypes IEBR A.4999, A.4998, Table 3 rows TD (tympanum diameter, sensory_anatomy) and ED (eye diameter, eye_diameter_mm); 6 records. Holotype ED 9.7 and TYD 4.1 agree with the Description of holotype text. Reached with the WebSearch 'pensoft article download csv Quasipaa Ngoc Linh Holotype Paratype SVL HL TD ED measurements'. Female paratypes not filed (column alignment under the six-entry Sex row uncertain).
 
 ## Not filed
 - Pristimantis similaris TY (tympanum) row: Table 2 values (0.9 for MUSM 41028) disagree with the Table 3 range read as 1.0-1.1. Holotype ED 2.3 sits in a list over 40 words.
