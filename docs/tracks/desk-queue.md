@@ -718,6 +718,7 @@ for the unresolved d325/d326 launch evidence.
 - d662 1 / 1 / 0 (wild mammals: Cervus canadensis diel, camera traps)
 - d663 3 / 3 / 4 (wild-mammal diel: Prionailurus javanensis, Bos javanicus, Lepus europaeus)
 - d664 1 / 0 / 1 (wild-mammal diel batch 2: Lynx pardinus, held out: lure at every camera)
+- d665 2 / 2 / 1 (wild reptile diel; Liolaemus line lacked the printed DOI, fixed)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
