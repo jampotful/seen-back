@@ -11,3 +11,8 @@ Angle: 2010-2021 Pensoft/open-licence per-specimen tympanum, lizard ear-opening 
 - ZooKeys article 8295 (Peru frog CSV): row labels look shifted (eye diameter 0.8 vs tympanum 3.0), implausible, skipped.
 - Raorchestes dulongensis: Zootaxa. R. hekouensis (ZooKeys 1192, 2024) and Leptobrachella shimentaina (ZSE 98, 2022), Pelophylax Herpetozoa 36 (2023): outside 2010-2021 / synonym treatment.
 - Plazi tb pages return only a redirect notice; zenodo PDFs return binary to the reader.
+- Natalus lanatus (ZSE 96(2): 411-429, 10.3897/zse.96.51059, CC BY 4.0, zobodat PDF): Table 3 'E' row gives TCWC 10992 = 15 and TCWC 11008 = 14 mm, but the PDF reader scrambles columns, the sex-to-specimen mapping is read from a header it could not show, the Methods print 'ear length (E)' with no definition, the account heading is 'N. lanatus ... and N. mexicanus' and no MDD page was opened. Lead only, not filed.
+- ZooKeys 1084 Cyrtodactylus menglianensis (2022, already a d591 non-file), ZooKeys 48671 and 8507 CSV tables (range or mean tables, no per-specimen rows).
+- Plazi/zenodo/PMC routes unusable in this session (redirect pages, binary PDFs, refusals).
+
+About 43 WebSearches. 22 records filed in total, 0 check.py problems.
