@@ -9,7 +9,7 @@ Scope: lines 22 to 29 (file order) of docs/views/evidence/desk-d625.jsonl, all A
 - Methods read on the same page (Materials and methods > Morphological data and analyses): precision sentence, list opener, VTD, HTD and ED entries, and a check that 'TD' alone is never defined.
 - ASW page opened from my own WebSearch result.
 - Repeat check: git grep of species and DOI over docs/ on origin/main.
-- 2 WebSearches.
+- 2 WebSearches; 9 WebFetches (4 returned content, 5 the maintenance notice).
 
 ## Findings
 
@@ -43,7 +43,7 @@ Fault count: 2 note faults on each of 8 lines (16 in all, both kinds fixable). T
 
 ## Not independently verified (publisher page went to 'Site under maintenance' after the Table and Methods reads)
 
-STATUS_PLACEHOLDER
+After the Table 1 and Methods reads, the publisher page returned 'Site under maintenance' on five more fetches over about 20 minutes. The XML route showed the same notice. I did not work around it. That leaves these record strings unchecked by me: the whole licence sentence (my first read of the page said the article is published under CC BY 4.0, but that is the reader's summary, not the printed sentence); the holotype and paratype paragraphs; the printed byline (the ASW author list matches the record's order); the Results sentence 'smaller eyes and tympana (ED and HTD, respectively)'; and the claim in `where` that Table 1 is cited again under Variation. Recommendation: keep lines 22 to 29. The page was opened, and the value, column, row, sex, Methods definition, taxon and repeat checks all passed on it. The owner or the next pass should read the licence sentence and paratype paragraph once the page is back before merging. If that read is impossible, hold out all 8 under the licence rule.
 
 ## Replacement
 
