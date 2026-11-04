@@ -711,6 +711,7 @@ for the unresolved d325/d326 launch evidence.
 - d655 0 / 0 / 0 (gap-driven plants ranks 25-80; stopped: PMC fetch denied by classifier, unit slip)
 - d656 0 / 0 / 0 (gap-driven plants, no-row species first; no open primary paper readable)
 - d657 2 / 1 / 2 (crop plants: Capsicum annuum night light merged; Zea mays sound held out, stimulus undefined at seed; 3 lines held for WFO)
+- d658 3 / 3 / 3 (crop plants: Hordeum magnetic, Triticum and Solanum lycopersicum thermal, previously held for WFO)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
