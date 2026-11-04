@@ -639,6 +639,7 @@ for the unresolved d325/d326 launch evidence.
 - d580 9 / 9 / 9 (external sensory_anatomy from Pensoft descriptions; all lines corrected by audit)
 - d581 9 / 9 / 0 (skink ear opening, tympanum, palpebral disc and nostril from ZSE descriptions; wording faults only)
 - d582 13 / 11 / 6 (Scincella, Boulenophrys, Cyrtodactylus, Rhacophorus; 2 pupil rows moved to pupil_shape, 2 iris-colour rows dropped)
+- d583 14 / 14 / 4 (tympanum, eyelid and nostril-region measurements from table rows; structure labels and ranges corrected by audit)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
