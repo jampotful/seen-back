@@ -644,6 +644,7 @@ for the unresolved d325/d326 launch evidence.
 - d585 1 / 1 / 0 (Pristimantis milpe tympanum diameter, Table 2; wording faults only)
 - d586 9 / 9 / 6 (Murina ear and tragus, Spinomantis tympanum diameters; conflicts disclosed by audit)
 - d587 12 / 11 / 1 (non-bat mammal ear lengths; Eozapus ear-height range dropped)
+- d588 31 / 31 / 10 (amphibian tympanum diameter and eye diameter table rows; wording faults only)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
