@@ -4,7 +4,7 @@ Unit: desk-d679. Angle: diel activity of wild mammals, fifth camera-trap pass.
 evidence_intake: evidence-kind-v2
 intake_base: f47e70d33f555401020eb365b4a32fc195e7e3f0
 
-## Status: in progress (about 36 searches so far)
+## Status: finished (about 40 WebSearches, each naming a species; no denial, no PROVENANCE_REQUIRED; 3 records filed)
 
 ## Filed
 - Ailuropoda melanoleuca and Ursus thibetanus, Li J, Li D, Dong W, Frontiers in Conservation Science 4:1029447 (2023), 10.3389/fcosc.2023.1029447, Changqing NNR, China. Panda: mainly diurnal and crepuscular in spring and winter (autumn and summer in conditions); bear: mainly diurnal across seasons. CC BY sentence read on PDF; MDD 1005930 and 1005937 opened. Search: 'giant panda Ailuropoda melanoleuca camera trap activity rhythm crepuscular wild Global Ecology and Conservation'.
@@ -21,3 +21,6 @@ intake_base: f47e70d33f555401020eb365b4a32fc195e7e3f0
 - Badger Darwin Reserve (Nature Conservation Research 3(2)): page prints no CC sentence; badger already on main. Urban red fox Milan (Nat Hist Sci 9(1)): no CC sentence.
 - Aardwolf and aardvark Serengeti (Ecology and Evolution 2023): only DOAJ summary and PMC reached; not filed. Brushtail possum (Mammal Research 2023): repository copy only.
 - Snow leopard Qilian (Animals 2024), eastern grey kangaroo (Animals 2022), red panda captive: MDPI/captive, skipped.
+- Leopard Alldays (McKaughan et al., Sci Rep 2024, s41598-024-61013-6): density paper, no activity category stated.
+- Final searches (Koedoe/SAJS leopard-caracal, Namibian Cape fox/jackal, JWLS porcupine/sloth bear, Neotropical ocelot/tayra): no new fileable page; Frontiers fcosc.2022.850309 reached only as an xml URL, not opened.
+- Open-journal leads left: Koedoe and South African Journal of Science (CC BY, AOSIS) camera-trap papers; Frontiers in Conservation Science; Mammal Study pages sit behind Incapsula.
