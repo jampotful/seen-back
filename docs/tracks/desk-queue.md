@@ -683,6 +683,7 @@ for the unresolved d325/d326 launch evidence.
 - d626 45 / 44 / 0 (tympanum/ear columns of older frog papers; C. multisyllaba holotype dropped as a repeat of the d366 row; wording faults only)
 - d627 9 / 9 / 1 (tympanum measurements and absence statements for audited frog papers; hengshanensis holotype carried Kuang 2025 conflict; family fixed on ruidus)
 - d628 15 / 14 / 1 (tympanum measurements and absence statements for audited frog papers; O. backshalli 'auditory structures' dropped as naming no structure)
+- d629 10 / 10 / 0 (pupil_shape of audited frog papers; holotype Description clauses; wording faults only)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
