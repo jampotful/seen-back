@@ -696,6 +696,7 @@ for the unresolved d325/d326 launch evidence.
 - d639 4 / 4 / 4 (reptile pupil_shape; wording faults only, fixed by replacement text; Cyrtodactylus arnei, C. jayadityai, Bungarus suzhenae, Lycodon walli)
 - d641 3 / 3 / 2 (amphibian pupil_shape; ED-definition wording faults fixed; Kurixalus yangi, Leptobrachella deocaensis, Boulenophrys calciphila)
 - d642 4 / 4 / 4 (amphibian pupil_shape; wording and heading-path faults fixed; L. dayaoshanensis, B. hengshanensis, G. liusanjieae, L. tamdil)
+- d643 7 / 7 / 4 (amphibian pupil_shape; wording, heading-path and cut-mark faults fixed; S. kanjiroba, R. qiongica, T. khoii, S. khumbu, V. abscondita, O. toledoi, P. gravata)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
