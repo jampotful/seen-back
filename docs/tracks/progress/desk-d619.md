@@ -6,3 +6,13 @@ Angle: Asian and Neotropical snakes and amphibians, eye diameter (ED) in mm per 
 - Vertebrate Zoology 73: 915-930 (10.3897/vz.73.e100889) Boulenophrys hengshanensis: 22 type specimens, Table 2 ED column, one record per specimen (22 lines).
 - ZooKeys 1196: 149-175 (10.3897/zookeys.1196.114861) Rhinella kumanday: 9 specimens, Table 2 ED row (specimens as columns; 3 of the 9 are outside the type series, stated in each record). 9 lines.
 - ZSE 100(2): 625-643 (10.3897/zse.100.118879) Rhacophorus qiongica: 8 paratypes, Table 3 rows. The holotype row is not filed: the holotype description prints ED 4.4 mm and Table 3 prints 4.7 mm. 8 lines.
+
+Total: 39 records (3 papers), check.py 0 problems for desk-d619.jsonl (plain and --require-evidence-kind). About 40 WebSearches. Each paper was reached by an unfiltered title search after a filtered discovery search; authority pages (ASW) opened from my own results for B. hengshanensis, R. kumanday and R. qiongica.
+
+## Not filed and why
+- Hypselotriton huanggangensis (ZooKeys 1208: 331-346; holotype ED 3.63, Methods define ED): ASW page returned robots_disallowed on my fetch; not retried or worked around. Same as d608/d610/d612.
+- Nidirana guibeiensis (ZooKeys 1135): only a male range plus one female cell in a summary row; no ASW page reached. Already rejected by d603/d605.
+- Theloderma hekouense (ZooKeys 1099): named on main as covered; Table 2 ED row cut off in the XML read.
+- Gracixalus huaping (ZSE 101: 369-388) and Gracixalus patkaiensis (Vertebrate Zoology 73: 557-574): no per-specimen ED (EL only for patkaiensis; no table for huaping).
+- Pareas temporalis, Kalophrynus minutus, Microhyla sundaica/peninsularis, Gonyosoma coeruleum, Naja fuxi, Achalinus sheni female, Opisthotropis hungtai, Hyloscirtus and Dendropsophus papers: no ED definition or no per-specimen ED table in what the publisher pages returned; several publisher article pages return headings only.
+- Rhacophorus qiongica holotype YU000691: left out because the holotype description (4.4 mm) and Table 3 (4.7 mm) disagree.
