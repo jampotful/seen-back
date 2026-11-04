@@ -10,3 +10,8 @@ Angle: eye_diameter_mm for amphibian and reptile species with a pupil_shape row 
 ## Skipped
 - Boulenophrys youran (ZSE 102(1): 53-70): only ED/SVL ratios in text and a p-value table; mm table is in a supplement not on the page.
 - Goniurosaurus wuzhengjuni (ZSE 102(2): 611-620): no ED measurement defined or tabulated (SE and EE only).
+- Indirana chiravasi (JoTT 6(10): 6293-6312, 10.11609/JoTT.o4068.6293-312): Methods define EL (eye length), not ED; the measurements table is on a separate page. Skipped.
+- Boana marginata and Polypedates megacephalus: their only pupil_shape rows on main are from the dataset paper (10.5519/4q5uvvpa), not primary descriptions; skipped without searching.
+- Remaining pupil_shape species without an ED row on main (computed over docs/**/*.jsonl): all are the d646-settled set, dataset or review-sourced rows, captive animals (Python bivittatus), or Zootaxa (Liuixalus feii); none searched further.
+
+About 17 WebSearches in total (pool exhausted before the budget). No fetch or search was denied. No Crossref, no proxy hosts, no typed URLs. Scratch folder deleted.
