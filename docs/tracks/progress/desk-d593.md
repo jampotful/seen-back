@@ -13,9 +13,11 @@ Angle: per-specimen table rows (frogs, lizard ear opening, bat/rodent ear length
 
 ## Not filed
 - Raorchestes (PeerJ 9 e10791): per-specimen data only in supplementary Table S2.
+- Chiromyscus thomasi (ZooKeys 451): publisher XML has no tables; Methods do not define ear length.
+- Tonatia bakeri/maresi holotype 'Length of ear from notch' (ZooKeys 915, CSV): values 14.00 and 30.00 look implausible together, species are synonym-level (Tonatia saurophila paper); not filed.
+- Hyperolius ZooKeys 546 (tadpoles), Trinycteris ZooKeys 787 (no ear row), Artibeus and Mimon ZooKeys CSVs (series means), Raorchestes dulongensis (Zootaxa), ZooKeys 103713 Hemiphyllodactylus lungcuensis (ED on main d343/d500; ear only as ratios).
+- Trimeresurus liqibini (ZSE 102(1) 303-314): still no Reptile Database page after one more search; table prints no ear.
 - Cnemaspis adangrawi/tarutaoensis (ZooKeys 858, CC0): the XML page reader stops before the descriptions and measurement tables; ED and ear-opening definitions are in the Methods. Lead only.
 
-## Next three
-1. Search Natalus lanatus ZSE 96(2) full text and MDD species page.
-2. Search open-licence frog/lizard/bat table papers.
-3. File, validate with check.py, commit and push.
+## Status at end
+19 records, check.py 0 problems for desk-d593 (plain and --require-evidence-kind). About 39 WebSearches. Crossref not used. Natalus taxon is a judgment call (MDD lists lanatus as a synonym of mexicanus; filed under the MDD name with the paper's name in the measurement). Scientific-preflight receipt not generated (prompt did not require it).
