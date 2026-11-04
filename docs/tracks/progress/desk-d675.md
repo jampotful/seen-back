@@ -4,7 +4,7 @@ Unit: desk-d675. Angle: diel activity of wild reptiles, fourth pass (Pensoft/Zoo
 evidence_intake: evidence-kind-v2
 intake_base: 4782a28ca9862058c2df2f3f38ae7ac92a8719da
 
-## Status: in progress (about 33 WebSearches used; no classifier denial, no PROVENANCE_REQUIRED)
+## Status: finished (about 40 WebSearches used; no classifier denial, no PROVENANCE_REQUIRED; 1 record filed)
 check.py and check.py --require-evidence-kind: 0 problems for docs/views/evidence/desk-d675.jsonl (the only problem printed repo-wide is in sweep-98, not mine).
 
 ## Filed (1)
@@ -22,3 +22,8 @@ check.py and check.py --require-evidence-kind: 0 problems for docs/views/evidenc
 - Crocodylus intermedius (Moreno-Arias and Ardila-Robayo, Animal Biotelemetry 2020): reintroduced population; excluded.
 - Vipera ammodytes (Herpetozoa 33): settled earlier.
 - Biota Neotropica lizard community item: redirect to scielo not followed; pooled community anyway.
+- Natrix natrix (Spaseni et al., PeerJ 2024): range-wide records, settled by d674; Liolaemus lutzae, Mabuya/Brasiliscincus, Ameivula, Lygodactylus, Podarcis, Zamenis, Acanthodactylus, Bothrops searches reached only already-settled, repository-only, scielo-only or non-open items; Liolaemus lutzae Reptile Database page reached but no open paper with a diel sentence.
+- Last Neotropical Biology and Conservation search returned no article page with a licence sentence (Tropidurus hispidus remains blocked on that).
+
+## Follow-up
+Tropidurus hispidus (Santana et al. 2014, abstract: 'Lizards were active throughout the day, with a peak between 8h e 11h', Serra de Itabaiana National Park, April 2008 to March 2009): fileable if a publisher page printing the licence sentence and the Reptile Database page are reached.
