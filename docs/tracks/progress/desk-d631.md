@@ -13,3 +13,6 @@ Spinomantis lakolosy/lavabato (Evol. Syst. 9(2)), Nectophrynoides luhomeroensis/
 
 ## Process fault to report
 One WebFetch (zookeys.pensoft.net/article/71488/download/xml/, Pristimantis maryanneae) used a URL I composed myself and not one from my search results; it returned no 'pupil' text and nothing from it is used in any record.
+
+## Final tally (4 November 2026)
+2 records filed, both pupil_shape, check.py 0 problems (plain and --require-evidence-kind) for docs/views/evidence/desk-d631.jsonl. About 41 WebSearches. Also read with no pupil sentence: Pristimantis achupalla (PeerJ 9: e11878). Leads with no publisher text page in my own search results (Plazi/PMC/zenodo/zobodat only, or Zootaxa): Litoria lisae, naispela, gracilis (VZ 73), Litoria skeliphros and stellarum (Zootaxa), Leptopelis shebellensis/xeniae, Osornophryne backshalli, Pristimantis paganus, Pristimantis milpe, Brachycephalus herculeus, Leptodactylus apepyta, Amnihyla grinpela (reader text truncated before its description), the d630 Asian leads (not searched again). Madagascar (Spinomantis, Platypelis, Gephyromantis, Stumpffia) and Neotropical papers read print pupil only inside iris-colour clauses or not at all.
