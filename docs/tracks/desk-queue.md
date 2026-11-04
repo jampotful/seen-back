@@ -700,6 +700,7 @@ for the unresolved d325/d326 launch evidence.
 - d644 4 / 4 / 3 (amphibian pupil_shape; type-material, heading and cut faults fixed; A. guarani, L. bashaensis, K. lenquanensis, O. backshalli)
 - d645 3 / 3 / 3 (amphibian pupil_shape; tooltip-expansion and preservation faults fixed; O. leishanensis, N. guangxiensis, L. aspera)
 - d646 16 / 15 / 16 (NEW trait eye_diameter_mm for pupil-vetted species; wording and citation faults fixed, one line dropped: Nidirana SWU0001435 not in printed type material)
+- d647 19 / 19 / 19 (eye_diameter_mm; wording faults fixed; O. leishanensis, R. medogensis, C. viruela)
 - d640 0 / 0 / 0 (new-species pupil_shape; stopped by classifier denial of a broad search)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
