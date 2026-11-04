@@ -671,6 +671,7 @@ for the unresolved d325/d326 launch evidence.
 - d614 14 / 14 / 2 (eye_diameter_mm; Dendropsophus bilobatus, Brachycephalus herculeus, Hemiphyllodactylus hongkongensis x12)
 - d615 48 / 44 / 4 (eye_diameter_mm; Guibemantis albomaculatus, G. woosteri, Scutiger khumbu; 4 tentatively assigned G. woosteri rows held out)
 - d616 4 / 4 / 0 (Trioceros wolfgangboehmei eye_diameter_mm, ZSE 97)
+- d617 7 / 7 / 1 (Trimeresurus kraensis EJT 930, Pareas kaduri EJT 729)
 - d611 0 / 0 / 0 (reptiles: Pensoft tables unreachable or ratio-only; Cyrtodactylus meersi/myintkyawthurai PeerJ 6:e5575 has ED rows but the reader returned no byline or licence sentence; zero-yield)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
