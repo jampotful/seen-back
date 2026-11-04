@@ -658,6 +658,7 @@ for the unresolved d325/d326 launch evidence.
 - d599 0 / 0 / 0 (per-species sensory measurements in other open journals: nothing passed the chain; snake eye diameter paper already on main d339/d340)
 - d600 12 / 12 / 6 (Oreophryne chlorops ED, Calamaria arcana ED, Leptobrachella huynhi ED x4, Amnihyla kikori ED and TYM x4, A. grinpela ED and TYM; wording faults only, fixed)
 - d601 4 / 4 / 0 (Chimerella mira ED x2, Phalotris shawnella eye diameter, Ansonia karen ED; wording faults only, fixed)
+- d602 15 / 15 / 15 (Pristimantis nebulosus ED x4, P. mallii, Cophixalus rajampatensis ED x8, P. cajanuma, P. quintanai; wording faults only, fixed)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
