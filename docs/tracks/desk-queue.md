@@ -634,6 +634,7 @@ for the unresolved d325/d326 launch evidence.
 - d575 10 / 9 / 10 (sensory_anatomy tympanum, Pensoft; Litoria hastula table-row duplicate dropped, rest fixable; audits 1125-1126)
 - d576 6 / 6 / 4 (sensory_anatomy tympanum, Pensoft; all fixable; Noblella madreselva text/table conflict is an owner question; audits 1127-1128)
 - d577 3 / 2 / 3 (sensory_anatomy tympanum, Pensoft; P. burtoniorum dropped, conflicting figures; audit 1129)
+- d578 5 / 4 / 5 (sensory_anatomy tympanum, Pensoft; P. pulchridormientes dropped, holotype figures conflict; audits 1130-1131)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
