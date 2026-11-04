@@ -663,6 +663,7 @@ for the unresolved d325/d326 launch evidence.
 - d604 16 / 16 / 13 (eye_diameter_mm; Amolops dafangensis, Brachytarsophrys guilinensis, Xenophrys yingjiangensis)
 - d605 4 / 4 / 1 (eye_diameter_mm; Stumpffia bishopi, S. lynnae)
 - d607 14 / 14 / 5 (eye_diameter_mm; Platypelis ando, Rhombophryne longicrus, Platypelis tsaratananaensis, Gephyromantis angano, Rhombophryne ellae)
+- d608 4 / 4 / 3 (2 sensory_anatomy after move, 2 eye_diameter_mm; Bolitoglossa muisca, Pristimantis donnelsoni, P. gretathunbergae, Bolitoglossa chinanteca)
 - d606 0 / 0 / 0 (mammals and fish in Pensoft journals: Johnius javaensis and Sillago nigrofasciata already on main, Opistognathus cryos value is % SL, all other fish print % SL/HL only; zero-yield)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
