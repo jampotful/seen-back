@@ -655,6 +655,7 @@ for the unresolved d325/d326 launch evidence.
 - d596 16 / 16 / 16 (Oligodon sublineatus ED x2, Rhacophorus napoensis ED x5, Zhangixalus yunnanensis ED x9; wording faults only, fixed)
 - d597 52 / 48 / 28 (Raorchestes malipoensis EHD and TD x22, Leucostethus siapida x4, Boulenophrys jiangi and daxuemontis x22; dropped Pristimantis andinogigas x4; unit URL breach disclosed in the note)
 - d598 3 / 2 / 1 (Tylototriton gaowangjienensis ED x2; dropped Ichthyophis benjii E, dimension undefined)
+- d599 0 / 0 / 0 (per-species sensory measurements in other open journals: nothing passed the chain; snake eye diameter paper already on main d339/d340)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
