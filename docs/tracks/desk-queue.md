@@ -660,6 +660,7 @@ for the unresolved d325/d326 launch evidence.
 - d601 4 / 4 / 0 (Chimerella mira ED x2, Phalotris shawnella eye diameter, Ansonia karen ED; wording faults only, fixed)
 - d602 15 / 15 / 15 (Pristimantis nebulosus ED x4, P. mallii, Cophixalus rajampatensis ED x8, P. cajanuma, P. quintanai; wording faults only, fixed)
 - d603 38 / 38 / 7 (tympanum and ear rows: Rhacophorus napoensis x5, Amolops gudao x4, A. truongi x4, Scinax pyroinguinis x2, Cyrtodactylus zhenkangensis x5 and menglianensis x4 ear diameter, Nidirana chongqingensis x2, Sphenomorphus tamchucensis x11, Hemiphyllodactylus ziegleri x1; wording faults only, fixed)
+- d604 16 / 16 / 13 (eye_diameter_mm; Amolops dafangensis, Brachytarsophrys guilinensis, Xenophrys yingjiangensis)
 - d342 0 / 0 / 0 (behavioural and physiological thresholds; main holds nearly every open lead; Akashi 2021 pooled means held out)
 
 ## Codex lane (26 October 2026)
