@@ -285,6 +285,8 @@ What sets the vibration off (`onset` of a sound, a `knock`, a `shock` of darkeni
 
 ## Sensory anatomy is not a stimulus response
 
+Drawing options may give `mode` as the name of a direct option in the same category. The URL and tuning menu select `name`; the engine runs `mode` (or `name` when omitted). This lets one choice combine existing modules without adding biological parameters. For example, the experimental spider's `web` choice selects the web overlay and the existing `buzz` haptic mode together. Defaults remain the first option in each category. A mode alias cannot point to another alias.
+
 `sensory_anatomy` supports the named structure and its measurement. Counts and
 passive mechanical responses supply no hearing band, airflow threshold or
 vibration sensitivity. The engine has no count-to-sensitivity model. An effect
