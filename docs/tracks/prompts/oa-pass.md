@@ -7,6 +7,7 @@ You are helping research which animals, plants and fungi see what, for a phone a
 ## Read first
 1. `docs/views/research/BRIEF.md`, the sections on the evidence log: the record fields, the trait keys, the grades `m`, `g`, `i`, and the rule that `opened` means you read the source yourself in this task.
 2. `docs/tracks/prompts/round2-intake.md`, which says how a paper is read. You read papers the same way, from a free copy instead of the owner's folder.
+3. [EVIDENCE-ACCESS.md](../../views/research/EVIDENCE-ACCESS.md): verify the exact copy's provenance and permitted retrieval route; record free-reading access separately from reuse rights. Missing CC alone does not disqualify an authorized copy. Preserve all source, quote and independent-audit checks.
 
 ## Your batch
 `docs/tracks/batches/oa-k.json` lists about 80 papers in the order of the owner's page, most useful first. When your instructions name entries (positions in its list, counting from 1), do only those: earlier rounds settled the rest. Each entry gives what is known of the paper: title, authors, year, journal, DOI or link, why it was wanted, and the species and views it bears on.
@@ -16,13 +17,19 @@ Do the lookups with one script before you read anything: write a short Python sc
 
 The sources, by paper:
 - OpenAlex, by DOI: `https://api.openalex.org/works/doi:<doi>?select=id,doi,display_name,publication_year,open_access,best_oa_location,locations`. Use `best_oa_location`, or any location with `is_oa` true, and its `pdf_url` (or its `landing_page_url` when that page carries the full text).
-- Europe PMC: `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:"<doi>"&resultType=core&format=json`. A result with a `pmcid` and `isOpenAccess` "Y" (or `inPMC` "Y") has its full text at `https://www.ebi.ac.uk/europepmc/webservices/rest/<PMCID>/fullTextXML`.
+- Europe PMC: `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:"<doi>"&resultType=core&format=json`. A `pmcid`, `inPMC: Y` or `isOpenAccess: Y` is a discovery lead. Check the exact copy and current service eligibility; these flags do not guarantee that `https://www.ebi.ac.uk/europepmc/webservices/rest/<PMCID>/fullTextXML` is available or that automated retrieval/reuse is permitted. Respect the host's approved services and restrictions.
 - Semantic Scholar: `https://api.semanticscholar.org/graph/v1/paper/DOI:<doi>?fields=title,openAccessPdf,externalIds`, at about one request a second.
 - A paper without a DOI: search OpenAlex by title (`https://api.openalex.org/works?filter=title.search:<words of the title>&select=id,doi,display_name,publication_year,authorships,open_access,best_oa_location`) and accept a match only when its title, first author and year agree with the batch entry. Then check it as above.
 
 A free copy is the publisher's own free version, an open-access journal, PubMed Central or Europe PMC, a university or subject repository (often the author's accepted manuscript), or a preprint server. Never use a library login, a university proxy, Sci-Hub, LibGen, or uploads to ResearchGate or Academia.edu. A book or a book chapter almost never has a free copy, so one OpenAlex check is enough for it.
 
 Keep downloaded files outside the repository, for example in `/tmp/oa`. Confirm that each file is the paper by finding its title on the first page. An accepted manuscript counts as the paper; say "accepted manuscript" in the `note` of each record taken from one.
+
+The routes above are candidates, not automatic authorization for every deposit.
+Follow EVIDENCE-ACCESS for copy identity, repository provenance, version, rights,
+inspection coverage and retrieval restrictions. `access: open` below means the
+legacy free-reading category, not permission to republish the article. If source
+retrieval fails, do not file a full-read completion line or infer a licence.
 
 ## Writing what you find
 - Read the whole paper, with its tables, and its supplements when they are free too. Log every measurement of a trait in BRIEF's list for every species in the paper, on the owner's lists or not, one record a value, with `python3 -I tools/senses/addlog.py oa-k < records.jsonl`. The record's `source` carries the DOI and, in `url`, the free copy you read, with `"access": "open"`. `opened` is true, and `quote` is copied exactly from that copy. Grade as `oa-read.md` does (BRIEF, "The evidence log" (`taxon` and `opened` bullets), `docs/views/audit/SAMPLE.md`, "The rule decided", adopted 18 October): `m` for a value on the record's own taxon, its own or cited from another study (a cited value is also `partial`), whether that taxon is one species or the group the record names, when the statement is about that group as a whole. `g` for a taxon mismatch (a wider or narrower group, one species or a few standing for a group, a relative) and for a value the paper predicts or presumes rather than measures. `i` only for a value you derive yourself; the measured value goes in as its own record.

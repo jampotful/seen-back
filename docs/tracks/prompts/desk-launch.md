@@ -21,8 +21,8 @@ For each fresh unit authorized to write evidence:
    running unit. Pin its full SHA as `intake_base` and the unit's actual checkout
    SHA separately. Verify that the base was accepted main, not a candidate
    commit or a baseline made from the candidate's records.
-2. Actually supply BRIEF, EVIDENCE-INTAKE, scientific-preflight and the applicable
-   task/reading prompt from that checkout. Include SENSORY-ANATOMY and
+2. Actually supply BRIEF, EVIDENCE-INTAKE, EVIDENCE-ACCESS, scientific-preflight
+   and the applicable task/reading prompt from that checkout. Include SENSORY-ANATOMY and
    ECOLOGICAL-OUTCOMES, plus LIGHT-RESPONSE/CHEMICAL-EVIDENCE when applicable.
    Record each supplied file's path and Git blob SHA. For a private prompt such
    as `rules.md`, record its version/content digest and a stable private log
@@ -42,6 +42,7 @@ unit's already-established progress path), not a second queue:
 
 ```yaml
 evidence_intake: evidence-kind-v2
+evidence_access: evidence-access-v1
 launch_status: prepared # change to acknowledged only on actual evidence
 launched_at_utc: unknown
 launch_record: unknown # existing session/unit/log locator; no secrets
@@ -49,6 +50,8 @@ intake_base: unknown # full accepted-main commit
 checkout_commit: unknown # actual unit checkout
 supplied_instructions:
   - path: docs/views/research/BRIEF.md
+    git_blob: unknown
+  - path: docs/views/research/EVIDENCE-ACCESS.md
     git_blob: unknown
   # Include every instruction actually supplied, including the task prompt.
 private_instruction_versions: [] # private path/version or digest/log locator

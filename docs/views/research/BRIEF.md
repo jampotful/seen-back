@@ -78,7 +78,7 @@ Copy a whole sentence or table row; mark every omission with " … " and retain 
 - `taxon` is the species (or higher taxon) actually measured, which may differ from the unit's commonest members; `grade` records that difference.
 - `opened` is true only if you read the paper itself, its abstract on a publisher, PubMed, PMC, bioRxiv or repository page, or a review that states the value (name the review in `note` and grade by what the review reports). A search snippet does not count.
 - One line per value: a paper giving λmax for three receptor classes gives three lines.
-- `access` is `closed` for a paper from the owner's Drive, `book` for a book.
+- `source.access` describes the reading route, not a reuse licence. Under [EVIDENCE-ACCESS.md](EVIDENCE-ACCESS.md), `open` includes authorized free full text without an open-reuse licence; record its exact copy, version, provenance, rights and reading limits. `abstract` means abstract-only support with `partial: true`; `closed` remains a paper from the owner's Drive and `book` a book. A PMCID or free URL alone cannot establish that the source was read.
 
 Trait keys (use these; add a new key only when none fits, and write "new trait" and the reason in `note`):
 
@@ -189,7 +189,7 @@ The rows in build 22 (`EYES` in `src/cam.a.js`) were rewritten to this standard 
 
 - **Every number and every row has a source you opened in this session.** Never write a citation from memory without opening it. A fabricated or misattributed citation is the worst possible outcome of this work, far worse than a thin log. When a value comes from a review, say so in the log line and grade by what the review reports.
 - Search widely, in the order of "Where to look", and follow citation trails through the reference lists of the reviews you find. Prefer measurements in the commonly photographed members, and name the species measured.
-- Open access only, by legal routes. Do not use shadow libraries or any site that redistributes paywalled papers without permission. A paper you cannot open goes on the wanted list.
+- Use authorized source-access routes under [EVIDENCE-ACCESS.md](EVIDENCE-ACCESS.md). Free reading and open reuse are separate; absence of a CC licence alone is not a rejection reason. Do not use shadow libraries or unauthorized copies. Preserve the existing explicit owner-supplied-paper authorization and AGENTS.md's prohibited routes. A paper you cannot open goes on the wanted list under the assignment’s existing rules; do not claim that its findings were verified.
 - Go as deep as the time allows. Your prompt sets a time limit (75 minutes if it sets none). Run `date` at the start and every so often. Ten minutes before the limit, make sure all the files are complete and well formed (`python3 -I tools/senses/check.py` passes), mark anything unfinished in the sheet and the progress note, and push.
 - Your final message: at most 300 words, giving the views you propose, the number of log lines, the strongest and weakest evidence, the wanted papers that would change the most, and the commit you pushed last.
 

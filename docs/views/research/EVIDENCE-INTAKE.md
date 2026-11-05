@@ -56,6 +56,12 @@ receipt or replacement audit is required.
 
 ## Write and submit
 
+Apply [EVIDENCE-ACCESS.md](EVIDENCE-ACCESS.md) to each new source decision.
+Record the exact copy, version, authorized route, rights status and reading gaps
+in existing record notes and the paper reconciliation. A free-reading access
+label cannot establish scientific verification or permission to redistribute.
+Keep source-access review separate from endpoint classification and admission.
+
 At a fresh unit's launch, record `evidence_intake: evidence-kind-v2` and the
 full accepted `origin/main` SHA as `intake_base` in its existing progress note.
 The launcher must actually supply this policy, BRIEF and the task prompt. An
