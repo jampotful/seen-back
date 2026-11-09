@@ -7,4 +7,10 @@ Order: CC, 3 Nov 2026 (see claude/regards-desk-handoff.md section 2a in the proj
 - Quota: 35 units; daily cap 7; two agents at once; three check-ins a day.
 - Launch counts: not recorded by the desk before 3 Nov. Merge commits mentioning a desk unit since the reset: about 272 (to 4 Nov 08:00 Eastern).
 - Check-in 4 Nov 08:10 Eastern: main moved from d571 (merged 3 Nov 18:23) to d635 (merged 4 Nov 07:59) after the order. About 63 more commits merged overnight, so some process outside this ledger kept launching, auditing and merging. The two pending check-ins found on 3 Nov were cancelled by CC's order. Launched by this check-in: nothing.
-- Next check-in: Sun 8 Nov, 22:10 Eastern. Launch nothing before then.
+- Check-in 4 Nov 08:14 Eastern: cancelled the desk's three pending check-ins; the Mac session's loop then stopped. Last merge before the pause: desk-d679 (4 Nov 16:13 Eastern). Nothing merged 4 to 8 Nov.
+
+## Week from Sun 8 Nov 2026, 21:59 Eastern reset
+- Quota 35 units (estimate, uncalibrated; no meter reading from CC yet); daily cap 7; two agents at once; check-ins 08:10, 14:10, 20:10 Eastern.
+- Launched so far: 0 units, 0 audits.
+- Check-in 8 Nov 22:12 Eastern: launched nothing. Reason: this session's copy of the desk tooling is stale (merge scripts, current prompts and the m311 audit tail live on the Mac session). Unmerged on origin: desk-d680 and audit branches 1340 to 1381 from the earlier week. Main's last desk merge is d679.
+- Next check-in: Mon 9 Nov, 08:10 Eastern.
