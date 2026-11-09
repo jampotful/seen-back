@@ -1,11 +1,13 @@
-"""Tells the owner when the research goes quiet, so a used-up Claude allowance gets its reset while they are away.
+"""Reports quiet research activity without authorizing allowance resets or session restarts.
 
 Run by .github/workflows/quiet-alert.yml every 15 minutes. It uses the GitHub API (GITHUB_TOKEN) and none of the Claude
 allowance, because a Claude session that has hit its limit cannot send anything itself.
 
-docs/tracks/watch.json arms it. Inside the daily window, on days up to and including "through", when no branch has
+docs/tracks/watch.json arms it. An explicit pause or the daily window suppresses all alert writes, including tests
+and recovery notices. pause_review_at is informational and never resumes monitoring or research. The legacy
+optional "through" cutoff remains supported. When no eligible (non-codex/) branch has
 received a commit for quiet_minutes, it opens one issue labelled "quiet" that mentions the owner (GitHub notifies
-them, by email unless they turned that off) and, when the repository secret NTFY_TOPIC is set, sends a phone push
+them according to their notification settings) and, when the repository secret NTFY_TOPIC is set, sends a phone push
 through ntfy.sh. One quiet spell gets one issue. While the issue stays open and the repository stays quiet, the alert
 repeats every remind_minutes, at most "reminders" times. When commits resume, the issue closes with a note and a second
 push says so. Closing the issue by hand silences that spell. Over the 30 hours of steady work before this was written,
@@ -13,7 +15,7 @@ the longest gap between commits was 46 minutes.
 
 By hand: Actions > quiet-alert > Run workflow, with "test" ticked, sends one test alert and closes it at once. A new value
 of "test" in watch.json does the same at the next scheduled run, once."""
-import datetime, json, os, urllib.error, urllib.request
+import datetime, json, os, re, urllib.error, urllib.request
 from zoneinfo import ZoneInfo
 
 API = 'https://api.github.com'
@@ -78,87 +80,179 @@ def push(title, message, priority, tags, click=None):
         print('ntfy push failed:', type(e).__name__)
 
 
-def armed(cfg, local):
+
+class AlertSuppressed(Exception):
+    """The notification window closed while an evaluation was in progress."""
+
+
+def validate_config(cfg):
+    """Reject ambiguous policy rather than silently widening notification hours."""
+    if not isinstance(cfg, dict) or type(cfg.get('paused')) is not bool:
+        raise ValueError('paused must be an explicit boolean')
+    if not isinstance(cfg.get('tz'), str) or not cfg['tz']:
+        raise ValueError('tz must be explicit')
+    tz = ZoneInfo(cfg['tz'])
+    for key in ('daily_from', 'daily_until'):
+        value = cfg.get(key)
+        if not isinstance(value, str) or not (re.fullmatch(r'(?:[01][0-9]|2[0-3]):[0-5][0-9]', value)
+                                              or (key == 'daily_until' and value == '24:00')):
+            raise ValueError(f'{key} must be HH:MM')
+    if cfg['daily_from'] >= cfg['daily_until']:
+        raise ValueError('daily hours must be a nonempty same-day window')
+    for key, minimum in (('quiet_minutes', 1), ('remind_minutes', 1), ('reminders', 0)):
+        if type(cfg.get(key)) is not int or cfg[key] < minimum:
+            raise ValueError(f'{key} must be an integer >= {minimum}')
+    for key in ('test', 'pause_reason', 'pause_review_at', 'through'):
+        if key in cfg and not isinstance(cfg[key], str):
+            raise ValueError(f'{key} must be a string')
+    if cfg.get('through'):
+        if datetime.date.fromisoformat(cfg['through']).isoformat() != cfg['through']:
+            raise ValueError('through must be YYYY-MM-DD')
+    if cfg.get('pause_review_at') and when(cfg['pause_review_at']).utcoffset() is None:
+        raise ValueError('pause_review_at must include a timezone')
+    return tz
+
+
+def all_items(path):
+    """Bounded, complete history or a visible failure; never infer absence from truncation."""
+    items = []
+    separator = '&' if '?' in path else '?'
+    for page in range(1, 11):
+        batch = gh('GET', f'{path}{separator}per_page=100&page={page}')
+        if not isinstance(batch, list):
+            raise ValueError('incomplete issue/comment history')
+        items.extend(batch)
+        if len(batch) < 100:
+            return items
+    raise ValueError('history limit reached; refusing an alert with incomplete deduplication')
+
+
+def spell_time(issue):
+    """Only a valid alert marker can establish an earlier quiet spell."""
+    if 'pull_request' in issue or (issue.get('user') or {}).get('login') != 'github-actions[bot]':
+        return None
+    match = re.search(r'<!-- since ([^<>\n]+) -->', issue.get('body') or '')
+    if match:
+        try:
+            stamp = when(match[1])
+            if stamp.utcoffset() is not None:
+                return stamp
+        except ValueError:
+            pass
+    return None
+
+
+def suppression_reason(cfg, local):
     if cfg.get('paused'):
-        return False
+        reason = cfg.get('pause_reason') or 'owner pause (reason not recorded)'
+        review = cfg.get('pause_review_at') or 'not set'
+        return f'intentional pause: {reason}; review at {review}; manual re-arm only'
     if cfg.get('through') and local.date().isoformat() > cfg['through']:
-        return False
-    return cfg.get('daily_from', '00:00') <= local.strftime('%H:%M') < cfg.get('daily_until', '24:00')
+        return f'expired through date: {cfg["through"]}'
+    if not (cfg.get('daily_from', '00:00') <= local.strftime('%H:%M') < cfg.get('daily_until', '24:00')):
+        return f'outside daily hours in {cfg.get("tz", "UTC")}'
+    return None
 
 
 def main():
     cfg = json.load(open(os.path.join(HERE, '..', '..', 'docs', 'tracks', 'watch.json'), encoding='utf-8'))
-    tz = ZoneInfo(cfg.get('tz', 'UTC'))
+    tz = validate_config(cfg)
     now = datetime.datetime.now(datetime.timezone.utc)
     clock = lambda t: t.astimezone(tz).strftime('%I:%M %p').lstrip('0').lower()
+    reason = suppression_reason(cfg, now.astimezone(tz))
+    if reason:
+        print(f'alerts suppressed: {reason}')
+        return  # no GitHub or ntfy writes, including tests or recovery notices
+    def require_armed():
+        # Recheck before each mutation: API reads can cross the daily cutoff.
+        reason = suppression_reason(cfg, datetime.datetime.now(datetime.timezone.utc).astimezone(tz))
+        if reason:
+            raise AlertSuppressed(reason)
+
+    def write(method, path, body):
+        require_armed()
+        return gh(method, path, body)
+
+    def notify(*args):
+        if TOPIC:
+            require_armed()
+            push(*args)
+
     issues_url = f'/repos/{REPO}/issues'
-    gh('POST', f'/repos/{REPO}/labels', {'name': LABEL, 'color': 'd93f0b',
+    write('POST', f'/repos/{REPO}/labels', {'name': LABEL, 'color': 'd93f0b',
                                          'description': 'The research went quiet (tools/watch/quiet.py)'})
     test_id = str(cfg.get('test') or '').strip()  # a new value in watch.json sends one test alert, without the Actions page
     if test_id and not TEST:
-        done = gh('GET', f'{issues_url}?state=all&sort=created&direction=desc&per_page=30') or []
+        done = all_items(f'{issues_url}?state=all&sort=created&direction=desc')
         TEST_TITLE = f'Test of the quiet alert ({test_id})'
         if not any(i.get('title') == TEST_TITLE for i in done):
-            i = gh('POST', issues_url, {'title': TEST_TITLE, 'body':
+            i = write('POST', issues_url, {'title': TEST_TITLE, 'body':
                    f'@{OWNER} This is a test of the alert that tells you when the research goes quiet. '
                    'If it reached you, alerts work. Nothing to do.'})
-            push('Regards: test alert', 'If this reached your phone, the quiet alert works. Nothing to do.',
+            notify('Regards: test alert', 'If this reached your phone, the quiet alert works. Nothing to do.',
                  'default', 'white_check_mark', i['html_url'])
-            gh('PATCH', f'{issues_url}/{i["number"]}', {'state': 'closed', 'state_reason': 'completed'})
+            write('PATCH', f'{issues_url}/{i["number"]}', {'state': 'closed', 'state_reason': 'completed'})
             print('test alert sent:', i['html_url'], '| phone push:', 'yes' if TOPIC else 'no NTFY_TOPIC secret')
     if TEST:
-        i = gh('POST', issues_url, {'title': 'Test of the quiet alert', 'body':
+        i = write('POST', issues_url, {'title': 'Test of the quiet alert', 'body':
                f'@{OWNER} This is a test of the alert that tells you when the research goes quiet. '
                'If it reached you, alerts work. Nothing to do.'})
-        push('Regards: test alert', 'If this reached your phone, the quiet alert works. Nothing to do.',
+        notify('Regards: test alert', 'If this reached your phone, the quiet alert works. Nothing to do.',
              'default', 'white_check_mark', i['html_url'])
-        gh('PATCH', f'{issues_url}/{i["number"]}', {'state': 'closed', 'state_reason': 'completed'})
+        write('PATCH', f'{issues_url}/{i["number"]}', {'state': 'closed', 'state_reason': 'completed'})
         print('test alert sent:', i['html_url'], '| phone push:', 'yes' if TOPIC else 'no NTFY_TOPIC secret')
         return
     last, branch = newest_commit()
+    if last is None or last.utcoffset() is None or last > now:
+        raise ValueError('unknown activity: no eligible commit or invalid/future commit time')
     quiet = (now - last).total_seconds() / 60
     marker = f'<!-- since {last.isoformat()} -->'
-    issues = gh('GET', f'{issues_url}?labels={LABEL}&state=all&sort=created&direction=desc&per_page=10') or []
-    spell = next((i for i in issues if marker in (i.get('body') or '')), None)
-    for i in issues:  # an open alert from an earlier spell means commits have resumed since it opened
-        if i['state'] == 'open' and i is not spell:
-            gh('POST', f'{issues_url}/{i["number"]}/comments',
-               {'body': f'Commits resumed: the newest is from {clock(last)} on `{branch}`. Closing.'})
-            gh('PATCH', f'{issues_url}/{i["number"]}', {'state': 'closed', 'state_reason': 'completed'})
-            push('Regards: running again', f'A commit landed at {clock(last)}. Nothing to do.',
+    issues = all_items(f'{issues_url}?labels={LABEL}&state=all&sort=created&direction=desc')
+    matches = [i for i in issues if spell_time(i) == last]
+    # If duplicates already exist, respect a manual closure rather than notify again.
+    spell = next((i for i in matches if i['state'] != 'open'), next(iter(matches), None))
+    for i in issues:
+        previous = spell_time(i)
+        if i['state'] == 'open' and previous is not None and previous < last:
+            recovery_marker = f'<!-- recovered since {last.isoformat()} -->'
+            history = all_items(i['comments_url'])
+            if not any(recovery_marker in (c.get('body') or '') for c in history):
+                write('POST', f'{issues_url}/{i["number"]}/comments',
+                   {'body': f'Commit activity resumed: the newest is from {clock(last)} on `{branch}`. '
+                            f'This does not confirm research-session health. Closing.\n\n{recovery_marker}'})
+            write('PATCH', f'{issues_url}/{i["number"]}', {'state': 'closed', 'state_reason': 'completed'})
+            notify('Regards: commit activity resumed', f'A commit landed at {clock(last)}. Research-session health is unverified.',
                  'default', 'white_check_mark', i['html_url'])
             print('closed', i['html_url'])
     if quiet < cfg.get('quiet_minutes', 50):
         print(f'busy: newest commit {quiet:.0f} minutes ago on {branch}')
         return
-    if not armed(cfg, now.astimezone(tz)):
-        print(f'quiet for {quiet:.0f} minutes, outside the alert window')
-        return
     if spell is None:
-        body = (f'@{OWNER} No branch has received a commit for {quiet:.0f} minutes. '
+        body = (f'@{OWNER} No monitored branch (excluding codex/) has received a commit for {quiet:.0f} minutes. '
                 f'The newest is from {clock(last)} on `{branch}`.\n\n'
-                "The usual cause is a used-up Claude allowance. Open Claude's usage page, and if a meter is full, "
-                'press the reset. Then open the research desk thread and send: continue\n\n'
-                'If no meter is full, the desk stopped for another reason, and the same message restarts it. '
+                'This is a commit-activity signal, not proof of a failed research session. '
+                'Check owner pause instructions, desk status and usage before deciding what to do. '
+                'Do not reset allowance or restart research without owner approval.\n\n'
                 'This issue closes itself when commits resume. Close it yourself to silence this quiet spell.\n\n'
                 + marker)
-        i = gh('POST', issues_url, {'title': f'Research quiet since {clock(last)}', 'body': body, 'labels': [LABEL]})
-        push(f'Regards: quiet for {quiet:.0f} min',
-             'Check Claude usage. If a meter is full, press reset, then send "continue" to the research desk.',
+        i = write('POST', issues_url, {'title': f'Research quiet since {clock(last)}', 'body': body, 'labels': [LABEL]})
+        notify(f'Regards: quiet for {quiet:.0f} min',
+             'Check pause instructions, desk status and usage. No restart without owner approval.',
              'high', 'warning', i['html_url'])
         print('alert opened:', i['html_url'])
         return
     if spell['state'] != 'open':
         print('quiet; this spell was already closed by hand')
         return
-    comments = gh('GET', spell['comments_url'] + '?per_page=100') or []
+    comments = all_items(spell['comments_url'])
     reminders = [c for c in comments if (c.get('body') or '').startswith('Still quiet')]
-    since_alert = (now - when(reminders[-1]['created_at'] if reminders else spell['created_at'])).total_seconds() / 60
+    latest_alert = max([when(spell['created_at'])] + [when(c['created_at']) for c in reminders])
+    since_alert = (now - latest_alert).total_seconds() / 60
     if len(reminders) < cfg.get('reminders', 2) and since_alert >= cfg.get('remind_minutes', 120):
-        gh('POST', f'{issues_url}/{spell["number"]}/comments',
+        write('POST', f'{issues_url}/{spell["number"]}/comments',
            {'body': f'Still quiet: {quiet:.0f} minutes since the last commit. @{OWNER}'})
-        push(f'Regards: still quiet, {quiet:.0f} min',
-             'Check Claude usage. If a meter is full, press reset, then send "continue" to the research desk.',
+        notify(f'Regards: still quiet, {quiet:.0f} min',
+             'Check pause instructions, desk status and usage. No restart without owner approval.',
              'high', 'warning', spell['html_url'])
         print('reminder sent')
     else:
@@ -166,4 +260,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except AlertSuppressed as e:
+        print(f'alerts suppressed: {e}')
