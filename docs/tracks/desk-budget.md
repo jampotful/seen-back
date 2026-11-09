@@ -14,3 +14,4 @@ Order: CC, 3 Nov 2026 (see claude/regards-desk-handoff.md section 2a in the proj
 - Launched so far: 0 units, 0 audits.
 - Check-in 8 Nov 22:12 Eastern: launched nothing. Reason: this session's copy of the desk tooling is stale (merge scripts, current prompts and the m311 audit tail live on the Mac session). Unmerged on origin: desk-d680 and audit branches 1340 to 1381 from the earlier week. Main's last desk merge is d679.
 - Next check-in: Mon 9 Nov, 08:10 Eastern.
+- Check-in 9 Nov 08:20 Eastern: launched nothing; main unchanged since 8 Nov; no pending check-ins from any session. Drive note sent explaining the pause and asking CC to choose between resuming the Mac session or rebuilding the tooling here. Next check-in: Tue 10 Nov, 08:10 Eastern (skipping 14:10 and 20:10 while nothing can change without CC).
