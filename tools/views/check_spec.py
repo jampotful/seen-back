@@ -77,6 +77,10 @@ def merged(a, b):
 
 def check_obj(s):
     errs, notes = [], []
+    for category, options in (s.get("draw") or {}).items():
+        for option in options:
+            if "mode" in option and not any(target.get("name") == option["mode"] and "mode" not in target for target in options):
+                errs.append("draw.%s.%s: mode must name a direct option in the same category" % (category, option.get("name")))
     for f in ("who", "rows", "params"):
         if f not in s:
             errs.append("no %s" % f)
