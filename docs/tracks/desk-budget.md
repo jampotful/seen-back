@@ -16,3 +16,4 @@ Order: CC, 3 Nov 2026 (see claude/regards-desk-handoff.md section 2a in the proj
 - Next check-in: Mon 9 Nov, 08:10 Eastern.
 - Check-in 9 Nov 08:20 Eastern: launched nothing; main unchanged since 8 Nov; no pending check-ins from any session. Drive note sent explaining the pause and asking CC to choose between resuming the Mac session or rebuilding the tooling here. Next check-in: Tue 10 Nov, 08:10 Eastern (skipping 14:10 and 20:10 while nothing can change without CC).
 - Check-in 10 Nov 08:20 Eastern: no reply from CC (project docs, Drive folder, repo all unchanged); launched nothing; main unchanged since 8 Nov. Next check-in: Wed 11 Nov, 08:10 Eastern.
+- Check-in 11 Nov 08:17 Eastern: no reply from CC; nothing launched; main unchanged. Check-ins reduced to the weekly reset while the desk waits for CC: next Sun 15 Nov, 22:10 Eastern. CC can wake the desk any time by replying.
