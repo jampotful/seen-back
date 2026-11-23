@@ -21,3 +21,7 @@ Order: CC, 3 Nov 2026 (see claude/regards-desk-handoff.md section 2a in the proj
 ## Week from Sun 15 Nov 2026, 21:59 Eastern reset
 - Launched: 0 units, 0 audits. No reply from CC since the 9 Nov note; main unchanged since 8 Nov (last desk merge d679, 4 Nov). The desk is paused awaiting CC's choice (resume the Mac session, or rebuild the tooling in the cloud session).
 - Check-in 15 Nov 22:12 Eastern: nothing launched. Next check-in: Sun 22 Nov, 22:10 Eastern.
+
+## Week from Sun 22 Nov 2026, 21:59 Eastern reset
+- Launched: 0 units, 0 audits. No reply from CC; main unchanged since 8 Nov (last desk merge d679, 4 Nov). Desk paused awaiting CC.
+- Check-in 22 Nov 22:11 Eastern: nothing launched. Next check-in: Sun 29 Nov, 22:10 Eastern.
